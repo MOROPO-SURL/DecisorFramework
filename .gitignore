@@ -396,3 +396,7 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+#macOS Finder config file
+.DS_Store
+/UseCase.Web.BackOffice/dpkeys
