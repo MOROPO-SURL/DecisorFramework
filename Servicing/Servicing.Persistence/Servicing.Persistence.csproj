@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Servicing.Persistence</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Servicing.Persistence</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Remove="Entities\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Entities\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Core\Core.Persistence\Core.Persistence.csproj" />
+	</ItemGroup>
+</Project>

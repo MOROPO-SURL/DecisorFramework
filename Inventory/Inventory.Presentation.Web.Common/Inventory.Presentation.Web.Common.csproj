@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Inventory.Persistence.ORM.EF\Inventory.Persistence.ORM.EF.csproj" />
+	</ItemGroup>
+</Project>

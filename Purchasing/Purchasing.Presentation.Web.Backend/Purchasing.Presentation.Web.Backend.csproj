@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Purchasing.Interop.API.Common\Purchasing.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Purchasing.Presentation.Web.Common\Purchasing.Presentation.Web.Common.csproj" />
+		<ProjectReference Include="..\..\Inventory\Inventory.Presentation.Web.Backend\Inventory.Presentation.Web.Backend.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Constants\" />
+	  <None Remove="Controllers\" />
+	  <None Remove="Extensions\" />
+	  <None Remove="Helpers\" />
+	  <None Remove="Models\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Constants\" />
+	  <Folder Include="Controllers\" />
+	  <Folder Include="Extensions\" />
+	  <Folder Include="Helpers\" />
+	  <Folder Include="Models\" />
+	</ItemGroup>
+</Project>

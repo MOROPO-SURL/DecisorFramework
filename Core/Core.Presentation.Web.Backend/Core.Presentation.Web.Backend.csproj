@@ -13,12 +13,6 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Core.Presentation.Web.Common\Core.Presentation.Web.Common.csproj" />
-	  <ProjectReference Include="..\Web.API.Common\Core.Web.API.Common.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Controllers\Globals\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Controllers\Globals\" />
+	  <ProjectReference Include="..\Core.Interop.API.Common\Core.Interop.API.Common.csproj" />
 	</ItemGroup>
 </Project>

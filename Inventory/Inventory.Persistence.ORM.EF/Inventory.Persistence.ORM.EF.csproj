@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Inventory.Persistence\Inventory.Persistence.csproj" />
+		<ProjectReference Include="..\..\Financial\Financial.Persistence.ORM.EF\Financial.Persistence.ORM.EF.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Context\" />
+	  <None Remove="Context\Contract\" />
+	  <None Remove="Repositories\" />
+	  <None Remove="Providers\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Context\" />
+	  <Folder Include="Context\Contract\" />
+	  <Folder Include="Repositories\" />
+	  <Folder Include="Providers\" />
+	</ItemGroup>
+</Project>

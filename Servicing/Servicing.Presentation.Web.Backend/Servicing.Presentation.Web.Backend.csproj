@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Servicing.Presentation.Web.Backend</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Servicing.Presentation.Web.Backend</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Servicing.Presentation.Web.Common\Servicing.Presentation.Web.Common.csproj" />
+		<ProjectReference Include="..\..\Financial\Financial.Presentation.Web.Backend\Financial.Presentation.Web.Backend.csproj" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Inventory.Persistence</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Inventory.Persistence</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<None Remove="Entities\" />
+		<None Remove="Entities\Contract\" />
+		<None Remove="Enumerations\" />
+	</ItemGroup>
+	<ItemGroup>
+		<Folder Include="Entities\" />
+		<Folder Include="Entities\Contract\" />
+		<Folder Include="Enumerations\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\Financial\Financial.Persistence\Financial.Persistence.csproj" />
+	</ItemGroup>
+</Project>

@@ -22,7 +22,263 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.Employee", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.LegalBusinessKind", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_legalbusinesskinds");
+
+                    b.ToTable("legalbusinesskinds");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalBusinessKind", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_naturalbusinesskinds");
+
+                    b.ToTable("naturalbusinesskinds");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAccount", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("BranchId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("branchid");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Holder")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("holder");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("number");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_bankaccounts");
+
+                    b.HasIndex("BranchId")
+                        .HasDatabaseName("ix_bankaccounts_branchid");
+
+                    b.ToTable("bankaccounts");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAgency", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("About")
+                        .HasColumnType("text")
+                        .HasColumnName("about");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid?>("ImageId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("imageid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_bankagencies");
+
+                    b.HasIndex("ImageId")
+                        .HasDatabaseName("ix_bankagencies_imageid");
+
+                    b.ToTable("bankagencies");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankBranch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("AgencyId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("agencyid");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid?>("LocationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("locationid");
+
+                    b.Property<int>("Number")
+                        .HasColumnType("integer")
+                        .HasColumnName("number");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_bankbranches");
+
+                    b.HasIndex("AgencyId")
+                        .HasDatabaseName("ix_bankbranches_agencyid");
+
+                    b.HasIndex("LocationId")
+                        .HasDatabaseName("ix_bankbranches_locationid");
+
+                    b.ToTable("bankbranches");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Colaborator", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid>("IdentityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("identityid");
+
+                    b.Property<string>("PersonalIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("personalidentificationnumber");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_colaborators");
+
+                    b.HasIndex("IdentityId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_colaborators_identityid");
+
+                    b.ToTable("colaborators");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -64,7 +320,66 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.ToTable("employees");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.LegalBusinessKind", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.EmploymentContract", b =>
+                {
+                    b.Property<int>("Number")
+                        .HasColumnType("integer")
+                        .HasColumnName("number");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("DefaultBankAccountId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("defaultbankaccountid");
+
+                    b.Property<TimeSpan?>("Duration")
+                        .HasColumnType("interval")
+                        .HasColumnName("duration");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("employeeid");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Objective")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("objective");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<DateTime>("StarAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("starat");
+
+                    b.HasKey("Number", "Year")
+                        .HasName("pk_employmentcontracts");
+
+                    b.HasIndex("DefaultBankAccountId")
+                        .HasDatabaseName("ix_employmentcontracts_defaultbankaccountid");
+
+                    b.HasIndex("EmployeeId")
+                        .HasDatabaseName("ix_employmentcontracts_employeeid");
+
+                    b.ToTable("employmentcontracts");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -97,12 +412,233 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnName("priority");
 
                     b.HasKey("Id")
-                        .HasName("pk_legalbusinesskinds");
+                        .HasName("pk_unitmeasurements");
 
-                    b.ToTable("legalbusinesskinds");
+                    b.ToTable("unitmeasurements");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.LegalClient", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurementConversionBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Convertion")
+                        .HasColumnType("numeric")
+                        .HasColumnName("convertion");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_unitmeasurementconversionbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_unitmeasurementconversionbridges_sternid");
+
+                    b.ToTable("unitmeasurementconversionbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Contract.AbstractCashAdvance", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
+                    b.Property<Guid>("ResponsibleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("responsibleid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_advances");
+
+                    b.HasIndex("ResponsibleId")
+                        .HasDatabaseName("ix_advances_responsibleid");
+
+                    b.ToTable("advances");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractCashAdvance");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("About")
+                        .HasColumnType("text")
+                        .HasColumnName("about");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_costcenters");
+
+                    b.ToTable("costcenters");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Batch", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("CostCenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("costcenterid");
+
+                    b.Property<string>("ExternalReference")
+                        .HasColumnType("text")
+                        .HasColumnName("externalreference");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("productid");
+
+                    b.Property<Guid>("ReceptionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("receptionid");
+
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("warehouseid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_batches");
+
+                    b.HasIndex("CostCenterId")
+                        .HasDatabaseName("ix_batches_costcenterid");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_batches_productid");
+
+                    b.HasIndex("ReceptionId")
+                        .HasDatabaseName("ix_batches_receptionid");
+
+                    b.HasIndex("WarehouseId")
+                        .HasDatabaseName("ix_batches_warehouseid");
+
+                    b.ToTable("batches");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
+                    b.Property<Guid>("ResponsibleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("responsibleid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_departures");
+
+                    b.HasIndex("ResponsibleId")
+                        .HasDatabaseName("ix_departures_responsibleid");
+
+                    b.ToTable("departures");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractDeparture");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
+                    b.Property<Guid>("ResponsibleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("responsibleid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_receptions");
+
+                    b.HasIndex("ResponsibleId")
+                        .HasDatabaseName("ix_receptions_responsibleid");
+
+                    b.ToTable("receptions");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractReception");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.CustomAttribute", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -117,41 +653,189 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
-                    b.Property<Guid>("BusinessKindId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("businesskindid");
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
-                    b.Property<Guid>("IdentityId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("identityid");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
 
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
-                    b.Property<string>("TaxIdentificationNumber")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("taxidentificationnumber");
-
                     b.HasKey("Id")
-                        .HasName("pk_legalclients");
+                        .HasName("pk_customattributes");
 
-                    b.HasIndex("BusinessKindId")
-                        .HasDatabaseName("ix_legalclients_businesskindid");
-
-                    b.HasIndex("IdentityId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_legalclients_identityid");
-
-                    b.ToTable("legalclients");
+                    b.ToTable("customattributes");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.LegalProvider", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.DepartureBatchBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_departurebatchbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_departurebatchbridges_sternid");
+
+                    b.ToTable("departurebatchbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("DefaultUnitMeasurementId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("defaultunitmeasurementid");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid?>("FeatureImageId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("featureimageid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_products");
+
+                    b.HasIndex("DefaultUnitMeasurementId")
+                        .HasDatabaseName("ix_products_defaultunitmeasurementid");
+
+                    b.HasIndex("FeatureImageId")
+                        .HasDatabaseName("ix_products_featureimageid");
+
+                    b.ToTable("products");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.ProductCustomAttributeBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<string>("Value")
+                        .HasColumnType("text")
+                        .HasColumnName("value");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_productcustomattributebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_productcustomattributebridges_sternid");
+
+                    b.ToTable("productcustomattributebridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.ProductWarehousingDecreaseKindBridge", b =>
+                {
+                    b.Property<int>("Kind")
+                        .HasColumnType("integer")
+                        .HasColumnName("kind");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("productid");
+
+                    b.Property<decimal>("MaxDecrease")
+                        .HasColumnType("numeric")
+                        .HasColumnName("maxdecrease");
+
+                    b.Property<decimal>("MinDecrease")
+                        .HasColumnType("numeric")
+                        .HasColumnName("mindecrease");
+
+                    b.HasKey("Kind", "ProductId")
+                        .HasName("pk_productwarehousingdecreasekindbridges");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_productwarehousingdecreasekindbridges_productid");
+
+                    b.ToTable("productwarehousingdecreasekindbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Warehouse", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_warehouses");
+
+                    b.ToTable("warehouses");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -200,7 +884,641 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.ToTable("legalproviders");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalBusinessKind", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProviderPurchaseZoneBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_legalproviderpurchasezonebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_legalproviderpurchasezonebridges_sternid");
+
+                    b.ToTable("legalproviderpurchasezonebridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProviderPurchasingContract", b =>
+                {
+                    b.Property<int>("Number")
+                        .HasColumnType("integer")
+                        .HasColumnName("number");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("DefaultBankAccountId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("defaultbankaccountid");
+
+                    b.Property<TimeSpan?>("Duration")
+                        .HasColumnType("interval")
+                        .HasColumnName("duration");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Objective")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("objective");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("ProviderId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("providerid");
+
+                    b.Property<DateTime>("StarAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("starat");
+
+                    b.HasKey("Number", "Year")
+                        .HasName("pk_legalproviderpurchasingcontracts");
+
+                    b.HasIndex("DefaultBankAccountId")
+                        .HasDatabaseName("ix_legalproviderpurchasingcontracts_defaultbankaccountid");
+
+                    b.HasIndex("ProviderId")
+                        .HasDatabaseName("ix_legalproviderpurchasingcontracts_providerid");
+
+                    b.ToTable("legalproviderpurchasingcontracts");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProvider", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("BusinessKindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("businesskindid");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid>("IdentityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("identityid");
+
+                    b.Property<string>("PersonalIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("personalidentificationnumber");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_naturalproviders");
+
+                    b.HasIndex("BusinessKindId")
+                        .HasDatabaseName("ix_naturalproviders_businesskindid");
+
+                    b.HasIndex("IdentityId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_naturalproviders_identityid");
+
+                    b.ToTable("naturalproviders");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProviderPurchaseZoneBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_naturalproviderpurchasezonebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_naturalproviderpurchasezonebridges_sternid");
+
+                    b.ToTable("naturalproviderpurchasezonebridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProviderPurchasingContract", b =>
+                {
+                    b.Property<int>("Number")
+                        .HasColumnType("integer")
+                        .HasColumnName("number");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("DefaultBankAccountId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("defaultbankaccountid");
+
+                    b.Property<TimeSpan?>("Duration")
+                        .HasColumnType("interval")
+                        .HasColumnName("duration");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Objective")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("objective");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("ProviderId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("providerid");
+
+                    b.Property<DateTime>("StarAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("starat");
+
+                    b.HasKey("Number", "Year")
+                        .HasName("pk_naturalproviderpurchasingcontracts");
+
+                    b.HasIndex("DefaultBankAccountId")
+                        .HasDatabaseName("ix_naturalproviderpurchasingcontracts_defaultbankaccountid");
+
+                    b.HasIndex("ProviderId")
+                        .HasDatabaseName("ix_naturalproviderpurchasingcontracts_providerid");
+
+                    b.ToTable("naturalproviderpurchasingcontracts");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid?>("PlanId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("planid");
+
+                    b.Property<Guid>("PurchaserId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("purchaserid");
+
+                    b.Property<Guid?>("ZoneId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("zoneid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_purchases");
+
+                    b.HasIndex("PlanId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_purchases_planid");
+
+                    b.HasIndex("PurchaserId")
+                        .HasDatabaseName("ix_purchases_purchaserid");
+
+                    b.HasIndex("ZoneId")
+                        .HasDatabaseName("ix_purchases_zoneid");
+
+                    b.ToTable("purchases");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseColaboratorBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("roleid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_purchasecolaboratorbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_purchasecolaboratorbridges_sternid");
+
+                    b.ToTable("purchasecolaboratorbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseEmployeeBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("roleid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_purchaseemployeebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_purchaseemployeebridges_sternid");
+
+                    b.ToTable("purchaseemployeebridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime?>("ApprovedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("approvedat");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("DecisorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("decisorid");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<DateTime>("PlannedFor")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("plannedfor");
+
+                    b.Property<Guid>("PlannerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("plannerid");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("ResponsibleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("responsibleid");
+
+                    b.Property<Guid>("ZoneId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("zoneid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_purchaseplans");
+
+                    b.HasIndex("DecisorId")
+                        .HasDatabaseName("ix_purchaseplans_decisorid");
+
+                    b.HasIndex("PlannerId")
+                        .HasDatabaseName("ix_purchaseplans_plannerid");
+
+                    b.HasIndex("ResponsibleId")
+                        .HasDatabaseName("ix_purchaseplans_responsibleid");
+
+                    b.HasIndex("ZoneId")
+                        .HasDatabaseName("ix_purchaseplans_zoneid");
+
+                    b.ToTable("purchaseplans");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanInputProductBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.Property<Guid>("UnitMeasurementId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("unitmeasurementid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_purchaseplaninputproductbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_purchaseplaninputproductbridges_sternid");
+
+                    b.HasIndex("UnitMeasurementId")
+                        .HasDatabaseName("ix_purchaseplaninputproductbridges_unitmeasurementid");
+
+                    b.ToTable("purchaseplaninputproductbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanLegalProviderBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Debt")
+                        .HasColumnType("numeric")
+                        .HasColumnName("debt");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_purchaseplanlegalproviderbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_purchaseplanlegalproviderbridges_sternid");
+
+                    b.ToTable("purchaseplanlegalproviderbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanNaturalProviderBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Debt")
+                        .HasColumnType("numeric")
+                        .HasColumnName("debt");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_purchaseplannaturalproviderbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_purchaseplannaturalproviderbridges_sternid");
+
+                    b.ToTable("purchaseplannaturalproviderbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanOutputProductBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.Property<Guid>("UnitMeasurementId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("unitmeasurementid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_purchaseplanoutputproductbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_purchaseplanoutputproductbridges_sternid");
+
+                    b.HasIndex("UnitMeasurementId")
+                        .HasDatabaseName("ix_purchaseplanoutputproductbridges_unitmeasurementid");
+
+                    b.ToTable("purchaseplanoutputproductbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseProductLegalProviderBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("numeric")
+                        .HasColumnName("cost");
+
+                    b.Property<Guid>("ProviderId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("providerid");
+
+                    b.Property<Guid>("UnitMeasurementId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("unitmeasurementid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_purchaseproductlegalproviderbridges");
+
+                    b.HasIndex("ProviderId")
+                        .HasDatabaseName("ix_purchaseproductlegalproviderbridges_providerid");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_purchaseproductlegalproviderbridges_sternid");
+
+                    b.HasIndex("UnitMeasurementId")
+                        .HasDatabaseName("ix_purchaseproductlegalproviderbridges_unitmeasurementid");
+
+                    b.ToTable("purchaseproductlegalproviderbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseProductNaturalProviderBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("numeric")
+                        .HasColumnName("cost");
+
+                    b.Property<bool>("IsContextual")
+                        .HasColumnType("boolean")
+                        .HasColumnName("iscontextual");
+
+                    b.Property<Guid>("ProviderId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("providerid");
+
+                    b.Property<Guid>("UnitMeasurementId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("unitmeasurementid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_purchaseproductnaturalproviderbridges");
+
+                    b.HasIndex("ProviderId")
+                        .HasDatabaseName("ix_purchaseproductnaturalproviderbridges_providerid");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_purchaseproductnaturalproviderbridges_sternid");
+
+                    b.HasIndex("UnitMeasurementId")
+                        .HasDatabaseName("ix_purchaseproductnaturalproviderbridges_unitmeasurementid");
+
+                    b.ToTable("purchaseproductnaturalproviderbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePurchaseSpentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.Property<decimal>("Cost")
+                        .HasColumnType("numeric")
+                        .HasColumnName("cost");
+
+                    b.Property<Guid>("CostCenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("costcenterid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_purchasepurchasespentbridges");
+
+                    b.HasIndex("CostCenterId")
+                        .HasDatabaseName("ix_purchasepurchasespentbridges_costcenterid");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_purchasepurchasespentbridges_sternid");
+
+                    b.ToTable("purchasepurchasespentbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReceptionProductWeightBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.Property<Guid>("CostCenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("costcenterid");
+
+                    b.Property<decimal>("Decrease")
+                        .HasColumnType("numeric")
+                        .HasColumnName("decrease");
+
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("warehouseid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_purchasereceptionproductweightbridges");
+
+                    b.HasIndex("CostCenterId")
+                        .HasDatabaseName("ix_purchasereceptionproductweightbridges_costcenterid");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_purchasereceptionproductweightbridges_sternid");
+
+                    b.HasIndex("WarehouseId")
+                        .HasDatabaseName("ix_purchasereceptionproductweightbridges_warehouseid");
+
+                    b.ToTable("purchasereceptionproductweightbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -233,12 +1551,362 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnName("priority");
 
                     b.HasKey("Id")
-                        .HasName("pk_naturalbusinesskinds");
+                        .HasName("pk_purchasespents");
 
-                    b.ToTable("naturalbusinesskinds");
+                    b.ToTable("purchasespents");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalClient", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZone", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_purchasezones");
+
+                    b.ToTable("purchasezones");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZoneSpentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_zoneschedulebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_zoneschedulebridges_sternid");
+
+                    b.ToTable("zoneschedulebridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.BudgetProductBridge", b =>
+                {
+                    b.Property<int>("BudgetNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetnumber");
+
+                    b.Property<int>("BudgetYear")
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetyear");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("productid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.Property<Guid?>("UnitMeasurementId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("unitmeasurementid");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("numeric")
+                        .HasColumnName("unitprice");
+
+                    b.HasKey("BudgetNumber", "BudgetYear", "ProductId")
+                        .HasName("pk_budgetproductbridges");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_budgetproductbridges_productid");
+
+                    b.HasIndex("UnitMeasurementId")
+                        .HasDatabaseName("ix_budgetproductbridges_unitmeasurementid");
+
+                    b.ToTable("budgetproductbridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.BudgetServiceBridge", b =>
+                {
+                    b.Property<int>("BudgetNumber")
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetnumber");
+
+                    b.Property<int>("BudgetYear")
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetyear");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("serviceid");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("integer")
+                        .HasColumnName("count");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<decimal>("UnitPrice")
+                        .HasColumnType("numeric")
+                        .HasColumnName("unitprice");
+
+                    b.HasKey("BudgetNumber", "BudgetYear", "ServiceId")
+                        .HasName("pk_budgetservicebridges");
+
+                    b.HasIndex("ServiceId")
+                        .HasDatabaseName("ix_budgetservicebridges_serviceid");
+
+                    b.ToTable("budgetservicebridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractBudget", b =>
+                {
+                    b.Property<int>("Number")
+                        .HasColumnType("integer")
+                        .HasColumnName("number");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("CommercialId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("commercialid");
+
+                    b.Property<DateTime?>("ConfirmedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("confirmedat");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<DateTime?>("SharedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("sharedat");
+
+                    b.HasKey("Number", "Year")
+                        .HasName("pk_budgets");
+
+                    b.HasIndex("CommercialId")
+                        .HasDatabaseName("ix_budgets_commercialid");
+
+                    b.ToTable("budgets");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractBudget");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractSale", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("SellerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sellerid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_sales");
+
+                    b.HasIndex("SellerId")
+                        .HasDatabaseName("ix_sales_sellerid");
+
+                    b.ToTable("sales");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractSale");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClient", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("BusinessKindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("businesskindid");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid>("IdentityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("identityid");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<string>("TaxIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("taxidentificationnumber");
+
+                    b.HasKey("Id")
+                        .HasName("pk_legalclients");
+
+                    b.HasIndex("BusinessKindId")
+                        .HasDatabaseName("ix_legalclients_businesskindid");
+
+                    b.HasIndex("IdentityId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_legalclients_identityid");
+
+                    b.ToTable("legalclients");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientSaleContract", b =>
+                {
+                    b.Property<int>("Number")
+                        .HasColumnType("integer")
+                        .HasColumnName("number");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("clientid");
+
+                    b.Property<Guid>("DefaultBankAccountId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("defaultbankaccountid");
+
+                    b.Property<TimeSpan?>("Duration")
+                        .HasColumnType("interval")
+                        .HasColumnName("duration");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Objective")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("objective");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<DateTime>("StarAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("starat");
+
+                    b.HasKey("Number", "Year")
+                        .HasName("pk_legalclientsalecontracts");
+
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_legalclientsalecontracts_clientid");
+
+                    b.HasIndex("DefaultBankAccountId")
+                        .HasDatabaseName("ix_legalclientsalecontracts_defaultbankaccountid");
+
+                    b.ToTable("legalclientsalecontracts");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClient", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -287,7 +1955,66 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.ToTable("naturalclients");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalProvider", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClientSaleContract", b =>
+                {
+                    b.Property<int>("Number")
+                        .HasColumnType("integer")
+                        .HasColumnName("number");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("ClientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("clientid");
+
+                    b.Property<Guid>("DefaultBankAccountId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("defaultbankaccountid");
+
+                    b.Property<TimeSpan?>("Duration")
+                        .HasColumnType("interval")
+                        .HasColumnName("duration");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Objective")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("objective");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<DateTime>("StarAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("starat");
+
+                    b.HasKey("Number", "Year")
+                        .HasName("pk_naturalclientsalecontracts");
+
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_naturalclientsalecontracts_clientid");
+
+                    b.HasIndex("DefaultBankAccountId")
+                        .HasDatabaseName("ix_naturalclientsalecontracts_defaultbankaccountid");
+
+                    b.ToTable("naturalclientsalecontracts");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Servicing.Persistence.Entities.Service", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -302,38 +2029,34 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
-                    b.Property<Guid>("BusinessKindId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("businesskindid");
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
-                    b.Property<Guid>("IdentityId")
+                    b.Property<Guid?>("FeatureImageId")
                         .HasColumnType("uuid")
-                        .HasColumnName("identityid");
+                        .HasColumnName("featureimageid");
 
-                    b.Property<string>("PersonalIdentificationNumber")
+                    b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("personalidentificationnumber");
+                        .HasColumnName("name");
 
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
                     b.HasKey("Id")
-                        .HasName("pk_naturalproviders");
+                        .HasName("pk_services");
 
-                    b.HasIndex("BusinessKindId")
-                        .HasDatabaseName("ix_naturalproviders_businesskindid");
+                    b.HasIndex("FeatureImageId")
+                        .HasDatabaseName("ix_services_featureimageid");
 
-                    b.HasIndex("IdentityId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_naturalproviders_identityid");
-
-                    b.ToTable("naturalproviders");
+                    b.ToTable("services");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Guama.Core.Persistence.ORM.EF.Entities.Trace", b =>
@@ -1315,6 +3038,175 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.ToTable("userrolebridges", "guamaframework_security_personal");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseCashAdvance", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Contract.AbstractCashAdvance");
+
+                    b.Property<Guid?>("PurchaseId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("purchaseid");
+
+                    b.HasIndex("PurchaseId")
+                        .HasDatabaseName("ix_advances_purchaseid");
+
+                    b.ToTable("advances");
+
+                    b.HasDiscriminator().HasValue("PurchaseCashAdvance");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanDeparture", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture");
+
+                    b.Property<Guid?>("PurchasePlanId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("purchaseplanid");
+
+                    b.HasIndex("PurchasePlanId")
+                        .HasDatabaseName("ix_departures_purchaseplanid");
+
+                    b.ToTable("departures");
+
+                    b.HasDiscriminator().HasValue("PurchasePlanDeparture");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception");
+
+                    b.Property<Guid?>("PurchaseId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("purchaseid");
+
+                    b.HasIndex("PurchaseId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_receptions_purchaseid");
+
+                    b.ToTable("receptions");
+
+                    b.HasDiscriminator().HasValue("PurchaseReception");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientBudget", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractBudget");
+
+                    b.Property<Guid?>("ClientId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("clientid");
+
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_budgets_clientid");
+
+                    b.ToTable("budgets");
+
+                    b.HasDiscriminator().HasValue("LegalClientBudget");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClientBudget", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractBudget");
+
+                    b.Property<Guid?>("ClientId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("clientid");
+
+                    b.HasIndex("ClientId")
+                        .HasDatabaseName("ix_budgets_clientid");
+
+                    b.ToTable("budgets");
+
+                    b.HasDiscriminator().HasValue("NaturalClientBudget");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientWholesaleSale", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractSale");
+
+                    b.Property<int>("BudgetNumber")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetnumber");
+
+                    b.Property<int>("BudgetYear")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetyear");
+
+                    b.Property<int?>("ContractNumber")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("contractnumber");
+
+                    b.Property<int?>("ContractYear")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("contractyear");
+
+                    b.HasIndex("BudgetNumber", "BudgetYear")
+                        .HasDatabaseName("ix_sales_budgetnumber_budgetyear");
+
+                    b.HasIndex("ContractNumber", "ContractYear")
+                        .HasDatabaseName("ix_sales_contractnumber_contractyear");
+
+                    b.ToTable("sales");
+
+                    b.HasDiscriminator().HasValue("LegalClientWholesaleSale");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClientWholesaleSale", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractSale");
+
+                    b.Property<int>("BudgetNumber")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetnumber");
+
+                    b.Property<int>("BudgetYear")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetyear");
+
+                    b.Property<int?>("ContractNumber")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("contractnumber");
+
+                    b.Property<int?>("ContractYear")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("contractyear");
+
+                    b.HasIndex("BudgetNumber", "BudgetYear")
+                        .HasDatabaseName("ix_sales_budgetnumber_budgetyear");
+
+                    b.HasIndex("ContractNumber", "ContractYear")
+                        .HasDatabaseName("ix_sales_contractnumber_contractyear");
+
+                    b.ToTable("sales");
+
+                    b.HasDiscriminator().HasValue("NaturalClientWholesaleSale");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.RetailSale", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractSale");
+
+                    b.Property<Guid?>("IdentityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("identityid");
+
+                    b.HasIndex("IdentityId")
+                        .HasDatabaseName("ix_sales_identityid");
+
+                    b.ToTable("sales");
+
+                    b.HasDiscriminator().HasValue("RetailSale");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Guama.Location.Persistence.Entities.LocalityLocation", b =>
                 {
                     b.HasBaseType("MOROPO.Framework.Guama.Location.Persistence.Entities.Location");
@@ -1363,11 +3255,64 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasDiscriminator().HasValue("StateLocation");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.Employee", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAccount", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankBranch", "Branch")
+                        .WithMany()
+                        .HasForeignKey("BranchId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_bankaccounts_bankbranches_branchid");
+
+                    b.Navigation("Branch");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAgency", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId")
+                        .HasConstraintName("fk_bankagencies_images_imageid");
+
+                    b.Navigation("Image");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankBranch", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAgency", "Agency")
+                        .WithMany()
+                        .HasForeignKey("AgencyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_bankbranches_bankagencies_agencyid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PostalContactItem", "Location")
+                        .WithMany()
+                        .HasForeignKey("LocationId")
+                        .HasConstraintName("fk_bankbranches_postalcontactitems_locationid");
+
+                    b.Navigation("Agency");
+
+                    b.Navigation("Location");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Colaborator", b =>
                 {
                     b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PersonIdentity", "Identity")
                         .WithOne()
-                        .HasForeignKey("MOROPO.Framework.Decisor.Core.Persistence.Entities.Employee", "IdentityId")
+                        .HasForeignKey("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Colaborator", "IdentityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_colaborators_personidentities_identityid");
+
+                    b.Navigation("Identity");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PersonIdentity", "Identity")
+                        .WithOne()
+                        .HasForeignKey("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "IdentityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_employees_personidentities_identityid");
@@ -1375,28 +3320,197 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.Navigation("Identity");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.LegalClient", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.EmploymentContract", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Core.Persistence.Entities.LegalBusinessKind", "BusinessKind")
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAccount", "DefaultBankAccount")
                         .WithMany()
-                        .HasForeignKey("BusinessKindId")
+                        .HasForeignKey("DefaultBankAccountId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_legalclients_legalbusinesskinds_businesskindid");
+                        .HasConstraintName("fk_employmentcontracts_bankaccounts_defaultbankaccountid");
 
-                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.OrganizationIdentity", "Identity")
-                        .WithOne()
-                        .HasForeignKey("MOROPO.Framework.Decisor.Core.Persistence.Entities.LegalClient", "IdentityId")
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_legalclients_organizationidentities_identityid");
+                        .HasConstraintName("fk_employmentcontracts_employees_employeeid");
 
-                    b.Navigation("BusinessKind");
+                    b.Navigation("DefaultBankAccount");
 
-                    b.Navigation("Identity");
+                    b.Navigation("Employee");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.LegalProvider", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurementConversionBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", "Prow")
+                        .WithMany("ConversionBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_unitmeasurementconversionbridges_unitmeasurements_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_unitmeasurementconversionbridges_unitmeasurements_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Contract.AbstractCashAdvance", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_advances_employees_responsibleid");
+
+                    b.Navigation("Responsible");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Batch", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", "CostCenter")
+                        .WithMany()
+                        .HasForeignKey("CostCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_batches_costcenters_costcenterid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_batches_products_productid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception", "Reception")
+                        .WithMany()
+                        .HasForeignKey("ReceptionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_batches_receptions_receptionid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Warehouse", "Warehouse")
+                        .WithMany()
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_batches_warehouses_warehouseid");
+
+                    b.Navigation("CostCenter");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("Reception");
+
+                    b.Navigation("Warehouse");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_departures_employees_responsibleid");
+
+                    b.Navigation("Responsible");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_receptions_employees_responsibleid");
+
+                    b.Navigation("Responsible");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.DepartureBatchBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", "Prow")
+                        .WithMany("BatchBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_departurebatchbridges_departures_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Batch", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_departurebatchbridges_batches_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
+                        .WithMany()
+                        .HasForeignKey("DefaultUnitMeasurementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_products_unitmeasurements_defaultunitmeasurementid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Image", "FeatureImage")
+                        .WithMany()
+                        .HasForeignKey("FeatureImageId")
+                        .HasConstraintName("fk_products_images_featureimageid");
+
+                    b.Navigation("FeatureImage");
+
+                    b.Navigation("UnitMeasurement");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.ProductCustomAttributeBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Prow")
+                        .WithMany("CustomAttributeBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productcustomattributebridges_products_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.CustomAttribute", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productcustomattributebridges_customattributes_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.ProductWarehousingDecreaseKindBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Product")
+                        .WithMany("WarehousingDecreaseKindBridges")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productwarehousingdecreasekindbridges_products_productid");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Core.Persistence.Entities.LegalBusinessKind", "BusinessKind")
                         .WithMany()
@@ -1407,7 +3521,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
                     b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.OrganizationIdentity", "Identity")
                         .WithOne()
-                        .HasForeignKey("MOROPO.Framework.Decisor.Core.Persistence.Entities.LegalProvider", "IdentityId")
+                        .HasForeignKey("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", "IdentityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_legalproviders_organizationidentities_identityid");
@@ -1417,28 +3531,49 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.Navigation("Identity");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalClient", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProviderPurchaseZoneBridge", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
-                        .WithMany()
-                        .HasForeignKey("BusinessKindId")
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", "Prow")
+                        .WithMany("ZoneBridges")
+                        .HasForeignKey("ProwId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_naturalclients_naturalbusinesskinds_businesskindid");
+                        .HasConstraintName("fk_legalproviderpurchasezonebridges_legalproviders_prowid");
 
-                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PersonIdentity", "Identity")
-                        .WithOne()
-                        .HasForeignKey("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalClient", "IdentityId")
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZone", "Stern")
+                        .WithMany("LegalProviderBridges")
+                        .HasForeignKey("SternId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_naturalclients_personidentities_identityid");
+                        .HasConstraintName("fk_legalproviderpurchasezonebridges_purchasezones_sternid");
 
-                    b.Navigation("BusinessKind");
+                    b.Navigation("Prow");
 
-                    b.Navigation("Identity");
+                    b.Navigation("Stern");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalProvider", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProviderPurchasingContract", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAccount", "DefaultBankAccount")
+                        .WithMany()
+                        .HasForeignKey("DefaultBankAccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalproviderpurchasingcontracts_bankaccounts_defaultbankac~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", "Provider")
+                        .WithMany()
+                        .HasForeignKey("ProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalproviderpurchasingcontracts_legalproviders_providerid");
+
+                    b.Navigation("DefaultBankAccount");
+
+                    b.Navigation("Provider");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProvider", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
                         .WithMany()
@@ -1449,7 +3584,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
                     b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PersonIdentity", "Identity")
                         .WithOne()
-                        .HasForeignKey("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalProvider", "IdentityId")
+                        .HasForeignKey("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProvider", "IdentityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_naturalproviders_personidentities_identityid");
@@ -1457,6 +3592,592 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.Navigation("BusinessKind");
 
                     b.Navigation("Identity");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProviderPurchaseZoneBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProvider", "Prow")
+                        .WithMany("ZoneBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalproviderpurchasezonebridges_naturalproviders_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZone", "Stern")
+                        .WithMany("NaturalProviderBridges")
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalproviderpurchasezonebridges_purchasezones_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProviderPurchasingContract", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAccount", "DefaultBankAccount")
+                        .WithMany()
+                        .HasForeignKey("DefaultBankAccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalproviderpurchasingcontracts_bankaccounts_defaultbank~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProvider", "Provider")
+                        .WithMany()
+                        .HasForeignKey("ProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalproviderpurchasingcontracts_naturalproviders_provide~");
+
+                    b.Navigation("DefaultBankAccount");
+
+                    b.Navigation("Provider");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", "Plan")
+                        .WithOne("Purchase")
+                        .HasForeignKey("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "PlanId")
+                        .HasConstraintName("fk_purchases_purchaseplans_planid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Purchaser")
+                        .WithMany()
+                        .HasForeignKey("PurchaserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchases_employees_purchaserid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZone", "Zone")
+                        .WithMany()
+                        .HasForeignKey("ZoneId")
+                        .HasConstraintName("fk_purchases_purchasezones_zoneid");
+
+                    b.Navigation("Plan");
+
+                    b.Navigation("Purchaser");
+
+                    b.Navigation("Zone");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseColaboratorBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Prow")
+                        .WithMany("ColaboratorBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasecolaboratorbridges_purchases_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Colaborator", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasecolaboratorbridges_colaborators_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseEmployeeBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Prow")
+                        .WithMany("EmployeeBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseemployeebridges_purchases_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseemployeebridges_employees_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Decisor")
+                        .WithMany()
+                        .HasForeignKey("DecisorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplans_employees_decisorid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Planner")
+                        .WithMany()
+                        .HasForeignKey("PlannerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplans_employees_plannerid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplans_employees_responsibleid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZone", "Zone")
+                        .WithMany()
+                        .HasForeignKey("ZoneId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplans_purchasezones_zoneid");
+
+                    b.Navigation("Decisor");
+
+                    b.Navigation("Planner");
+
+                    b.Navigation("Responsible");
+
+                    b.Navigation("Zone");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanInputProductBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", "Prow")
+                        .WithMany("InputProductBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplaninputproductbridges_purchaseplans_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplaninputproductbridges_products_sternid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
+                        .WithMany()
+                        .HasForeignKey("UnitMeasurementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplaninputproductbridges_unitmeasurements_unitmeasur~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+
+                    b.Navigation("UnitMeasurement");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanLegalProviderBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", "Prow")
+                        .WithMany("LegalProviderBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplanlegalproviderbridges_purchaseplans_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplanlegalproviderbridges_legalproviders_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanNaturalProviderBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", "Prow")
+                        .WithMany("NaturalProviderBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplannaturalproviderbridges_purchaseplans_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProvider", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplannaturalproviderbridges_naturalproviders_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanOutputProductBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", "Prow")
+                        .WithMany("OutputProductBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplanoutputproductbridges_purchaseplans_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplanoutputproductbridges_products_sternid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
+                        .WithMany()
+                        .HasForeignKey("UnitMeasurementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseplanoutputproductbridges_unitmeasurements_unitmeasu~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+
+                    b.Navigation("UnitMeasurement");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseProductLegalProviderBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", "Provider")
+                        .WithMany()
+                        .HasForeignKey("ProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseproductlegalproviderbridges_legalproviders_provider~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Prow")
+                        .WithMany("LegalProviderProductBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseproductlegalproviderbridges_purchases_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseproductlegalproviderbridges_products_sternid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
+                        .WithMany()
+                        .HasForeignKey("UnitMeasurementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseproductlegalproviderbridges_unitmeasurements_unitme~");
+
+                    b.Navigation("Provider");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+
+                    b.Navigation("UnitMeasurement");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseProductNaturalProviderBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProvider", "Provider")
+                        .WithMany()
+                        .HasForeignKey("ProviderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseproductnaturalproviderbridges_naturalproviders_prov~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Prow")
+                        .WithMany("NaturalProviderProductBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseproductnaturalproviderbridges_purchases_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseproductnaturalproviderbridges_products_sternid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
+                        .WithMany()
+                        .HasForeignKey("UnitMeasurementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseproductnaturalproviderbridges_unitmeasurements_unit~");
+
+                    b.Navigation("Provider");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+
+                    b.Navigation("UnitMeasurement");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePurchaseSpentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", "CostCenter")
+                        .WithMany()
+                        .HasForeignKey("CostCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasepurchasespentbridges_costcenters_costcenterid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Prow")
+                        .WithMany("SpentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasepurchasespentbridges_purchases_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasepurchasespentbridges_purchasespents_sternid");
+
+                    b.Navigation("CostCenter");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReceptionProductWeightBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", "CostCenter")
+                        .WithMany()
+                        .HasForeignKey("CostCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasereceptionproductweightbridges_costcenters_costcente~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", "Prow")
+                        .WithMany("ProductWeightBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasereceptionproductweightbridges_receptions_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasereceptionproductweightbridges_products_sternid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Warehouse", "Warehouse")
+                        .WithMany()
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasereceptionproductweightbridges_warehouses_warehouseid");
+
+                    b.Navigation("CostCenter");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+
+                    b.Navigation("Warehouse");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZoneSpentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZone", "Prow")
+                        .WithMany("SpentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_zoneschedulebridges_purchasezones_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_zoneschedulebridges_purchasespents_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.BudgetProductBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_budgetproductbridges_products_productid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
+                        .WithMany()
+                        .HasForeignKey("UnitMeasurementId")
+                        .HasConstraintName("fk_budgetproductbridges_unitmeasurements_unitmeasurementid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractBudget", "Budget")
+                        .WithMany("ProductBridges")
+                        .HasForeignKey("BudgetNumber", "BudgetYear")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_budgetproductbridges_budgets_budgetnumber_budgetyear");
+
+                    b.Navigation("Budget");
+
+                    b.Navigation("Product");
+
+                    b.Navigation("UnitMeasurement");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.BudgetServiceBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Servicing.Persistence.Entities.Service", "Service")
+                        .WithMany()
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_budgetservicebridges_services_serviceid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractBudget", "Budget")
+                        .WithMany("ServiceBridges")
+                        .HasForeignKey("BudgetNumber", "BudgetYear")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_budgetservicebridges_budgets_budgetnumber_budgetyear");
+
+                    b.Navigation("Budget");
+
+                    b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractBudget", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Commercial")
+                        .WithMany()
+                        .HasForeignKey("CommercialId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_budgets_employees_commercialid");
+
+                    b.Navigation("Commercial");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractSale", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Seller")
+                        .WithMany()
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sales_employees_sellerid");
+
+                    b.Navigation("Seller");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClient", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Core.Persistence.Entities.LegalBusinessKind", "BusinessKind")
+                        .WithMany()
+                        .HasForeignKey("BusinessKindId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclients_legalbusinesskinds_businesskindid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.OrganizationIdentity", "Identity")
+                        .WithOne()
+                        .HasForeignKey("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClient", "IdentityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclients_organizationidentities_identityid");
+
+                    b.Navigation("BusinessKind");
+
+                    b.Navigation("Identity");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientSaleContract", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientsalecontracts_legalclients_clientid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAccount", "DefaultBankAccount")
+                        .WithMany()
+                        .HasForeignKey("DefaultBankAccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientsalecontracts_bankaccounts_defaultbankaccountid");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("DefaultBankAccount");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClient", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
+                        .WithMany()
+                        .HasForeignKey("BusinessKindId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclients_naturalbusinesskinds_businesskindid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PersonIdentity", "Identity")
+                        .WithOne()
+                        .HasForeignKey("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClient", "IdentityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclients_personidentities_identityid");
+
+                    b.Navigation("BusinessKind");
+
+                    b.Navigation("Identity");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClientSaleContract", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientsalecontracts_naturalclients_clientid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAccount", "DefaultBankAccount")
+                        .WithMany()
+                        .HasForeignKey("DefaultBankAccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientsalecontracts_bankaccounts_defaultbankaccountid");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("DefaultBankAccount");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Servicing.Persistence.Entities.Service", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Image", "FeatureImage")
+                        .WithMany()
+                        .HasForeignKey("FeatureImageId")
+                        .HasConstraintName("fk_services_images_featureimageid");
+
+                    b.Navigation("FeatureImage");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Guama.Core.Security.Common.Persistence.Entities.RolePermissionBridge", b =>
@@ -1859,6 +4580,104 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseCashAdvance", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Purchase")
+                        .WithMany()
+                        .HasForeignKey("PurchaseId")
+                        .HasConstraintName("fk_advances_purchases_purchaseid");
+
+                    b.Navigation("Purchase");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanDeparture", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", "PurchasePlan")
+                        .WithMany()
+                        .HasForeignKey("PurchasePlanId")
+                        .HasConstraintName("fk_departures_purchaseplans_purchaseplanid");
+
+                    b.Navigation("PurchasePlan");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Purchase")
+                        .WithOne("Reception")
+                        .HasForeignKey("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", "PurchaseId")
+                        .HasConstraintName("fk_receptions_purchases_purchaseid");
+
+                    b.Navigation("Purchase");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientBudget", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .HasConstraintName("fk_budgets_legalclients_clientid");
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClientBudget", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .HasConstraintName("fk_budgets_naturalclients_clientid");
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientWholesaleSale", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractBudget", "Budget")
+                        .WithMany()
+                        .HasForeignKey("BudgetNumber", "BudgetYear")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sales_budgets_budgetnumber_budgetyear");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientSaleContract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractNumber", "ContractYear")
+                        .HasConstraintName("fk_sales_legalclientsalecontracts_contractnumber_contractyear");
+
+                    b.Navigation("Budget");
+
+                    b.Navigation("Contract");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClientWholesaleSale", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractBudget", "Budget")
+                        .WithMany()
+                        .HasForeignKey("BudgetNumber", "BudgetYear")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sales_budgets_budgetnumber_budgetyear");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClientSaleContract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractNumber", "ContractYear")
+                        .HasConstraintName("fk_sales_naturalclientsalecontracts_contractnumber_contractyear");
+
+                    b.Navigation("Budget");
+
+                    b.Navigation("Contract");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.RetailSale", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PersonIdentity", "Identity")
+                        .WithMany()
+                        .HasForeignKey("IdentityId")
+                        .HasConstraintName("fk_sales_personidentities_identityid");
+
+                    b.Navigation("Identity");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Guama.Location.Persistence.Entities.LocalityLocation", b =>
                 {
                     b.HasOne("MOROPO.Framework.Guama.Location.Persistence.Entities.Locality", "Locality")
@@ -1890,6 +4709,77 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasConstraintName("fk_locations_states_stateid");
 
                     b.Navigation("State");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", b =>
+                {
+                    b.Navigation("ConversionBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", b =>
+                {
+                    b.Navigation("BatchBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", b =>
+                {
+                    b.Navigation("CustomAttributeBridges");
+
+                    b.Navigation("WarehousingDecreaseKindBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", b =>
+                {
+                    b.Navigation("ZoneBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProvider", b =>
+                {
+                    b.Navigation("ZoneBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", b =>
+                {
+                    b.Navigation("ColaboratorBridges");
+
+                    b.Navigation("EmployeeBridges");
+
+                    b.Navigation("LegalProviderProductBridges");
+
+                    b.Navigation("NaturalProviderProductBridges");
+
+                    b.Navigation("Reception");
+
+                    b.Navigation("SpentBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", b =>
+                {
+                    b.Navigation("InputProductBridges");
+
+                    b.Navigation("LegalProviderBridges");
+
+                    b.Navigation("NaturalProviderBridges");
+
+                    b.Navigation("OutputProductBridges");
+
+                    b.Navigation("Purchase");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZone", b =>
+                {
+                    b.Navigation("LegalProviderBridges");
+
+                    b.Navigation("NaturalProviderBridges");
+
+                    b.Navigation("SpentBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractBudget", b =>
+                {
+                    b.Navigation("ProductBridges");
+
+                    b.Navigation("ServiceBridges");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Guama.Core.Security.Common.Persistence.Entities.Permission", b =>
@@ -1935,6 +4825,11 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
             modelBuilder.Entity("MOROPO.Framework.Guama.Security.Personal.Persistence.Entities.User", b =>
                 {
                     b.Navigation("RoleBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", b =>
+                {
+                    b.Navigation("ProductWeightBridges");
                 });
 #pragma warning restore 612, 618
         }

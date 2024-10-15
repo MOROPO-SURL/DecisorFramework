@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Financial.Presentation.Web.Common</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Financial.Presentation.Web.Common</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Financial.Persistence.ORM.EF\Financial.Persistence.ORM.EF.csproj" />
+	</ItemGroup>
+</Project>

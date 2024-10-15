@@ -12,6 +12,16 @@ using MOROPO.Framework.Guama.Location.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Core.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Core.Presentation.Web.Backend.Extensions;
+using MOROPO.Framework.Decisor.Essential.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Essential.Presentation.Web.Backend.Extensions;
+using MOROPO.Framework.Decisor.Financial.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend.Extensions;
+using MOROPO.Framework.Decisor.Servicing.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Servicing.Presentation.Web.Backend.Extensions;
+using MOROPO.Framework.Decisor.Sales.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Sales.Presentation.Web.Backend.Extensions;
 using Serilog;
 using System.Linq;
 using MOROPO.Framework.Guama.Security.Personal.Presentation.Web.Backend.Extensions;
@@ -45,14 +55,23 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice
             services.PerformMediaWebCommonRelativePathFileManagementServiceRegistration();
             services.PerformLocationWebCommonServiceRegistration();
 
-            services.AddDecisorPresentationWebCommonEssential();
-            services.AddDecisorPresentationWebCommonBusinessRelationship();
-            services.AddDecisorPresentationWebCommonPurchasing();
-            services.AddDecisorPresentationWebCommonSales();
-            services.AddDecisorPresentationWebBackendEssential();
-            services.AddDecisorPresentationWebBackendBusinessRelationship();
-            services.AddDecisorPresentationWebBackendPurchasing();
-            services.AddDecisorPresentationWebBackendSales();
+            services.AddDecisorCorePresentationWebCommon();
+            services.AddDecisorCorePresentationWebBackend();
+            services.AddDecisorEssentialPresentationWebCommon();
+            services.AddDecisorEssentialContractualPresentationWebCommon();
+            services.AddDecisorEssentialPresentationWebBackend();
+            services.AddDecisorFinancialPresentationWebCommon();
+            //services.AddDecisorFinancialPresentationWebBackend
+            services.AddDecisorInventoryPresentationWebCommon();
+            //services.AddDecisorInventoryPresentationWebBackend
+            services.AddDecisorPurchasingPresentationWebCommon();
+            services.AddDecisorPurchasingContractualPresentationWebCommon();
+            services.AddDecisorPurchasingPresentationWebBackend();
+            services.AddDecisorServicingPresentationWebCommon();
+            services.AddDecisorServicingPresentationWebBackend();
+            services.AddDecisorSalesPresentationWebCommon();
+            services.AddDecisorSalesContractualPresentationWebCommon();
+            services.AddDecisorSalesPresentationWebBackend();
 
             services.AddScoped<IEntityRepository<Guama.Core.Persistence.ORM.EF.Entities.Trace, long>, Guama.Core.Persistence.ORM.EF.Repositories.TraceRepository>();
 

@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Core.Presentation.Web.Backend.Models.View.Display
 {
-    public class NaturalBusinessKindDisplayViewModel : Core.Web.API.Common.Models.Display.NaturalBusinessKindDisplayModel
+    public class NaturalBusinessKindDisplayViewModel : Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel
     {
         public bool Enabled { get; set; }
 

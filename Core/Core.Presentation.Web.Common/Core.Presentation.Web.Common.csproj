@@ -6,6 +6,6 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Core.Presentation.Web.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\Persistence.ORM.EF\Core.Persistence.ORM.EF.csproj" />
+		<ProjectReference Include="..\Core.Persistence.ORM.EF\Core.Persistence.ORM.EF.csproj" />
 	</ItemGroup>
-</Project>
+</Project> 

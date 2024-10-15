@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Sales.Interop.API.Common</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Sales.Interop.API.Common</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Sales.Persistence\Sales.Persistence.csproj" />
+		<ProjectReference Include="..\..\Inventory\Inventory.Interop.API.Common\Inventory.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\..\Servicing\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj" />
+	</ItemGroup>
+</Project>

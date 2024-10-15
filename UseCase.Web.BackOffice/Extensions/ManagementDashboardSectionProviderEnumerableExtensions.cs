@@ -70,7 +70,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "employees",
                 Action = "Index",
                 Area = "HHRR",
-                Role = Core.Presentation.Web.Backend.Constants.Security.Authorization.EmployeeViewerPermission
+                Role = Essential.Presentation.Web.Backend.Constants.Security.Authorization.EmployeeViewerPermission
             });
 
             purchaseSection.Add(new ManagementDashboardSectionViewModel
@@ -79,7 +79,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "legalproviders",
                 Action = "Index",
                 Area = "purchasing",
-                Role = Core.Presentation.Web.Backend.Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = Purchasing.Presentation.Web.Backend.Constants.Security.Authorization.LegalProviderViewerPermission
             });
             purchaseSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -87,7 +87,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "naturalproviders",
                 Action = "Index",
                 Area = "purchasing",
-                Role = Core.Presentation.Web.Backend.Constants.Security.Authorization.NaturalProviderViewerPermission
+                Role = Purchasing.Presentation.Web.Backend.Constants.Security.Authorization.NaturalProviderViewerPermission
             });
 
             saleSection.Add(new ManagementDashboardSectionViewModel
@@ -96,7 +96,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "legalclients",
                 Action = "Index",
                 Area = "sales",
-                Role = Core.Presentation.Web.Backend.Constants.Security.Authorization.LegalClientViewerPermission
+                Role = Sales.Presentation.Web.Backend.Constants.Security.Authorization.LegalClientViewerPermission
             });
             saleSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -104,7 +104,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "naturalclients",
                 Action = "Index",
                 Area = "sales",
-                Role = Core.Presentation.Web.Backend.Constants.Security.Authorization.NaturalClientViewerPermission
+                Role = Sales.Presentation.Web.Backend.Constants.Security.Authorization.NaturalClientViewerPermission
             });
 
             globalsSection.Add(new ManagementDashboardSectionViewModel

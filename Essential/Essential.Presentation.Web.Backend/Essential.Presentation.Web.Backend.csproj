@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Essential.Presentation.Web.Backend</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Essential.Presentation.Web.Backend</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Essential.Interop.API.Common\Essential.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Essential.Presentation.Web.Common\Essential.Presentation.Web.Common.csproj" />
+		<ProjectReference Include="..\..\Core\Core.Presentation.Web.Backend\Core.Presentation.Web.Backend.csproj" />
+	</ItemGroup>
+</Project>

@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Essential.Persistence</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Essential.Persistence</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Core\Core.Persistence\Core.Persistence.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Entities\Contract\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Entities\Contract\" />
+	</ItemGroup>
+</Project>

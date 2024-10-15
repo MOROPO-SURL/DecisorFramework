@@ -51,7 +51,10 @@
 		<PackageReference Include="SkiaSharp" Version="2.88.8" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\Core\Core.Presentation.Web.Backend\Core.Presentation.Web.Backend.csproj">
+	  <ProjectReference Include="..\Sales\Sales.Presentation.Web.Backend\Sales.Presentation.Web.Backend.csproj">
+	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+	  </ProjectReference>
+	  <ProjectReference Include="..\Purchasing\Purchasing.Presentation.Web.Backend\Purchasing.Presentation.Web.Backend.csproj">
 	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
 	  </ProjectReference>
 	</ItemGroup>
