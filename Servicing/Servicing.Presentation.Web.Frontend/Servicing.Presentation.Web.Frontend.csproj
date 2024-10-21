@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Servicing.Presentation.Web.Frontend</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Servicing.Presentation.Web.Frontend</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Financial\Financial.Presentation.Web.Frontend\Financial.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Controllers\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Controllers\" />
+	</ItemGroup>
+</Project>

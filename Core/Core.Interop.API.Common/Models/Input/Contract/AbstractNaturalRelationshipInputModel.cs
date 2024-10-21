@@ -10,8 +10,6 @@ namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
-        public System.DateTime? BornDate { get; set; }
-
         public string About { get; set; }
 
         public int Priority { get; set; }
@@ -28,6 +26,8 @@ namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract
 
         public string LastName { get; set; }
 
+        public string Alias { get; set; }
+
 		public Guama.Identity.Persistence.Enumerations.Sex Sex { get; set; }
 
         public Guama.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
@@ -38,7 +38,7 @@ namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract
 
         public TEntity Export()
         {
-            var entity = new TEntity { Id = Id, Enabled = true };
+            var entity = new TEntity { Id = Id, Enabled = true, Identity = new Guama.Identity.Persistence.Entities.PersonIdentity() };
 
             Mergue(entity);
 
@@ -53,10 +53,10 @@ namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract
         public virtual void Mergue(TEntity entity)
         {
             entity.Identity.Name = Name;
-            entity.Identity.BornDate = BornDate;
             entity.Identity.About = About;
             entity.Priority = Priority;
             entity.Identity.LastName = LastName;
+            entity.Identity.Alias = Alias;
             entity.Identity.Sex = Sex;
             entity.Identity.CivilStatus = CivilStatus;
             entity.PersonalIdentificationNumber = PersonalIdentificationNumber;

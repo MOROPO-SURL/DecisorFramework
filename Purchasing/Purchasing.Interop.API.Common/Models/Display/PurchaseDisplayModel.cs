@@ -1,0 +1,146 @@
+﻿using System.Collections.Generic;
+using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
+
+namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
+{
+    public class PurchaseDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Purchase, System.Guid>
+    {
+        public System.Guid Id { get; set; }
+
+        public System.DateTime At { get; set; }
+
+        public PurchasePlanDisplayModel Plan { get; set; }
+
+        public PurchaseZoneDisplayModel Zone { get; set; }
+
+        public Essential.Interop.API.Common.Models.Display.EmployeeDisplayModel Purchaser { get; set; }
+
+        public string Description { get; set; }
+
+        public List<PurchaseProductLegalProviderBridgeModel> LegalProviderProductBridges { get; set; } = new List<PurchaseProductLegalProviderBridgeModel>();
+
+        public List<PurchaseProductNaturalProviderBridgeModel> NaturalProviderProductBridges { get; set; } = new List<PurchaseProductNaturalProviderBridgeModel>();
+
+        public List<PurchasePurchaseSpentBridgeModel> SpentBridges { get; set; } = new List<PurchasePurchaseSpentBridgeModel>();
+
+        public List<PurchaseEmployeeBridgeModel> EmployeeBridges { get; set; } = new List<PurchaseEmployeeBridgeModel>();
+
+        public List<PurchaseColaboratorBridgeModel> ColaboratorBridges { get; set; } = new List<PurchaseColaboratorBridgeModel>();
+
+        public void Import(Persistence.Entities.Purchase entity)
+        {
+            Id = entity.Id;
+            At = entity.At;
+            Description = entity.Description;
+
+            if (entity.Plan != null)
+            {
+                Plan = new PurchasePlanDisplayModel();
+                Plan.Import(entity.Plan);
+            }
+
+            if (entity.Zone != null)
+            {
+                Zone = new PurchaseZoneDisplayModel();
+                Zone.Import(entity.Zone);
+            }
+
+            if (entity.Purchaser != null)
+            {
+                Purchaser = new Essential.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Purchaser.Import(entity.Purchaser);
+            }
+
+            foreach (var bridge in entity.LegalProviderProductBridges)
+            {
+                var model = new PurchaseProductLegalProviderBridgeModel
+                {
+                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
+                    UnitMeasurement = new Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    Amount = bridge.Amount,
+                    Cost = bridge.Cost,
+                    Provider = new LegalProviderDisplayModel()
+                };
+
+                model.Product.Import(bridge.Stern);
+                model.UnitMeasurement.Import(bridge.UnitMeasurement);
+                model.Provider.Import(bridge.Provider);
+
+                LegalProviderProductBridges.Add(model);
+            }
+
+            foreach (var bridge in entity.NaturalProviderProductBridges)
+            {
+                var model = new PurchaseProductNaturalProviderBridgeModel
+                {
+                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
+                    UnitMeasurement = new Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    Amount = bridge.Amount,
+                    Cost = bridge.Cost,
+                    Provider = new NaturalProviderDisplayModel()
+                };
+
+                if (bridge.CostCenter != null)
+                {
+                    model.CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel();
+
+                    model.CostCenter.Import(bridge.CostCenter);
+                }
+
+                model.Product.Import(bridge.Stern);
+                model.UnitMeasurement.Import(bridge.UnitMeasurement);
+                model.Provider.Import(bridge.Provider);
+                model.UnitMeasurement.Import(bridge.UnitMeasurement);
+
+                NaturalProviderProductBridges.Add(model);
+            }
+
+            foreach (var bridge in entity.SpentBridges)
+            {
+                var model = new PurchasePurchaseSpentBridgeModel
+                {
+                    Spent = new PurchaseSpentDisplayModel(),
+                    Amount = bridge.Amount,
+                    Cost = bridge.Cost
+                };
+
+                if (bridge.CostCenter != null)
+                {
+                    model.CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel();
+
+                    model.CostCenter.Import(bridge.CostCenter);
+                }
+
+                model.Spent.Import(bridge.Stern);
+
+                SpentBridges.Add(model);
+            }
+
+            foreach (var bridge in entity.EmployeeBridges)
+            {
+                var model = new PurchaseEmployeeBridgeModel
+                {
+                    Employee = new Essential.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
+                    Role = bridge.Role
+                };
+
+                model.Employee.Import(bridge.Stern);
+
+                EmployeeBridges.Add(model);
+            }
+
+            foreach (var bridge in entity.ColaboratorBridges)
+            {
+                var model = new PurchaseColaboratorBridgeModel
+                {
+                    Colaborator = new Essential.Interop.API.Common.Models.Display.ColaboratorDisplayModel(),
+                    Role = bridge.Role
+                };
+
+                model.Colaborator.Import(bridge.Stern);
+
+                ColaboratorBridges.Add(model);
+            }
+        }
+    }
+}

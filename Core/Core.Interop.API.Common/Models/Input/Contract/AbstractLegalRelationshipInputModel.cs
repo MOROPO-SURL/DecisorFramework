@@ -34,7 +34,7 @@ namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract
 
         public TEntity Export()
         {
-            var entity = new TEntity { Id = Id, Enabled = true };
+            var entity = new TEntity { Id = Id, Enabled = true, Identity = new Guama.Identity.Persistence.Entities.OrganizationIdentity() };
 
             Mergue(entity);
 

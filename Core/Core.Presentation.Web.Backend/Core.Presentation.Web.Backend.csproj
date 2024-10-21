@@ -8,8 +8,6 @@
 	<ItemGroup>
 		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.0.31" />
 		<PackageReference Include="GuamaFramework.Location.Presentation.Web.Backend" Version="6.0.0.31" />
-		<PackageReference Include="GuamaFramework.Identity.Presentation.Web.Common" Version="6.0.0.31" />
-		<PackageReference Include="SkiaSharp" Version="2.88.8" />
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\Core.Presentation.Web.Common\Core.Presentation.Web.Common.csproj" />

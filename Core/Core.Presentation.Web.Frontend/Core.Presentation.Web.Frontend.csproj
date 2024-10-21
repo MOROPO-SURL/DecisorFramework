@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Core.Presentation.Web.Frontend</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Core.Presentation.Web.Frontend</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.0.31" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.0.31" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Core.Presentation.Web.Common\Core.Presentation.Web.Common.csproj" />
+		<ProjectReference Include="..\Core.Interop.API.Common\Core.Interop.API.Common.csproj" />
+	</ItemGroup>
+</Project>

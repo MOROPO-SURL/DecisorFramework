@@ -9,4 +9,11 @@
 	  <ProjectReference Include="..\..\Essential\Essential.Interop.API.Common\Essential.Interop.API.Common.csproj" />
 	  <ProjectReference Include="..\Financial.Persistence\Financial.Persistence.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Models\Input\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Models\Input\" />
+	  <Folder Include="Models\Input\" />
+	</ItemGroup>
 </Project>

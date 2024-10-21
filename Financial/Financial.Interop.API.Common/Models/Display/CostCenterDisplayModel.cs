@@ -4,9 +4,21 @@
 	{
 		public System.Guid Id { get; set; }
 
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public int Priority { get; set; }
+
+        public System.DateTime At { get; set; }
+
         public void Import(Persistence.Entities.CostCenter entity)
         {
-            throw new System.NotImplementedException();
+            Id = entity.Id;
+            Name = entity.Name;
+            Description = entity.About;
+            Priority = entity.Priority;
+            At = entity.At;
         }
     }
 }

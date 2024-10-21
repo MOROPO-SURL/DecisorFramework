@@ -57,6 +57,9 @@
 	  <ProjectReference Include="..\Purchasing\Purchasing.Presentation.Web.Backend\Purchasing.Presentation.Web.Backend.csproj">
 	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
 	  </ProjectReference>
+	  <ProjectReference Include="..\Essential\Essential.Presentation.Web.Frontend\Essential.Presentation.Web.Frontend.csproj">
+	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+	  </ProjectReference>
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Areas\Globals\" />

@@ -9,8 +9,6 @@ namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display.Contra
 
         public string Name { get; set; }
 
-        public System.DateTime? BornDate { get; set; }
-
         public string About { get; set; }
 
         public ImageDisplayModel Image { get; set; }
@@ -41,7 +39,6 @@ namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display.Contra
         {
             Id = entity.Id;
             Name = entity.Identity.Name;
-            BornDate = entity.Identity.BornDate;
             About = entity.Identity.About;
             Priority = entity.Priority;
             LastName = entity.Identity.LastName;

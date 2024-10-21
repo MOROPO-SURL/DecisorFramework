@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Core.Persistence.Entities.Contract
 {
-    public abstract class AbstractGoods : IFullFeatureEntity<System.Guid>
+    public abstract class AbstractGoods : Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>, IFullFeatureEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; } = System.Guid.NewGuid();

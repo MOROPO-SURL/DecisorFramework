@@ -20,6 +20,8 @@
         public NaturalProvider Provider { get; set; }
         public System.Guid ProviderId { get; set; }
 
-        public bool IsContextual { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CostCenterId))]
+        public Financial.Persistence.Entities.CostCenter CostCenter { get; set; }
+        public System.Guid CostCenterId { get; set; }
     }
 }

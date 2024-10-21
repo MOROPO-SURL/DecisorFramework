@@ -9,4 +9,12 @@
 		<ProjectReference Include="..\..\Financial\Financial.Interop.API.Common\Financial.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Servicing.Persistence\Servicing.Persistence.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Models\Input\" />
+	  <None Remove="Models\Filter\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Models\Input\" />
+	  <Folder Include="Models\Filter\" />
+	</ItemGroup>
 </Project>

@@ -45,6 +45,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<Guama.Media.Presentation.Web.Common.Options.RelativeMediaFileManagementOptions>(configuration.GetSection("FileManagement"));
+            services.Configure<Core.Presentation.Web.Options.JwtOptions>(configuration.GetSection("JWT"));
 
             services.AddDbContext<Persistence.ORM.EF.Context.ApplicationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 

@@ -1,0 +1,21 @@
+﻿using Microsoft.Extensions.Logging;
+using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
+using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+
+namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controllers.API
+{
+    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.ApiController]
+    public class CostCentersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<CostCenter, System.Guid, Interop.API.Common.Models.Input.CostCenterInputModel, Interop.API.Common.Models.Display.CostCenterDisplayModel>
+    {
+        public CostCentersController(IEntityRepository<CostCenter, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<CostCentersController> localizer, ILogger<CostCentersController> logger) : base(repository, localizer, logger)
+        {
+        }
+
+        protected override System.Linq.Expressions.Expression<System.Func<CostCenter, bool>> GetGlobalSelector()
+        {
+            return entity => !entity.Archived && entity.Enabled;
+        }
+    }
+}
+

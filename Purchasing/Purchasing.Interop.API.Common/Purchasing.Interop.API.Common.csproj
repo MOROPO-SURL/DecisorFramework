@@ -6,17 +6,7 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Purchasing.Interop.API.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Inventory\Inventory.Interop.API.Common\Inventory.Interop.API.Common.csproj" />
-	  <ProjectReference Include="..\Purchasing.Persistence\Purchasing.Persistence.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Models\" />
-	  <None Remove="Models\Display\" />
-	  <None Remove="Models\Input\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Models\" />
-	  <Folder Include="Models\Display\" />
-	  <Folder Include="Models\Input\" />
+		<ProjectReference Include="..\..\Inventory\Inventory.Interop.API.Common\Inventory.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Purchasing.Persistence\Purchasing.Persistence.csproj" />
 	</ItemGroup>
 </Project>

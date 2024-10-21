@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<caneyframework_mvvm_pages:BindingContextedContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_page_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page"
+    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Page.DefaultUserAuthenticationPage"
+    x:TypeArguments="local_page_models:UserAuthenticationPageModel"
+    x:DataType="local_page_models:UserAuthenticationPageModel"
+    Title="Iniciar sesión">
+    <ContentPage.Resources>
+        <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+    </ContentPage.Resources>
+    <ContentPage.Content>
+        <Grid>
+            <ScrollView
+                HorizontalOptions="Center"
+                Orientation="Vertical">
+                <Grid>
+                    <VerticalStackLayout 
+                        HorizontalOptions="Center" VerticalOptions="Center"
+                        WidthRequest="280"
+                        Spacing="16">
+                        <Entry
+                            Text="{Binding Path=UserName}"
+                            Placeholder="usuario" />
+                        <Entry
+                            Text="{Binding Path=Password}"
+                            Placeholder="contraseña"
+                            IsPassword="true" />
+                        <Button
+                            IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                            HorizontalOptions="Center"
+                            Text="Iniciar"
+                            Clicked="SignInButton_Clicked" />
+                    </VerticalStackLayout>
+                </Grid>
+            </ScrollView>
+            <caneyframework_presentation_views:BusyView
+                BackgroundColor="#A7FFFFFF"
+                IsVisible="{Binding IsBusy}"/>
+        </Grid>       
+    </ContentPage.Content>
+</caneyframework_mvvm_pages:BindingContextedContentPage>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Essential\Essential.Presentation.Web.Frontend\Essential.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\Financial.Interop.API.Common\Financial.Interop.API.Common.csproj" />
+	</ItemGroup>
+</Project>

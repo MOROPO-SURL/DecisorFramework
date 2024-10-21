@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Essential.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Essential.Interop.API.Common"
+    xmlns:core_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.Framework.Decisor.Essential.Presentation.Terminal.MAUI.UI.Views.Card.ColaboratorDefaultCardView"
+    x:DataType="interop_common_display_models:ColaboratorDisplayModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <core_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame Margin="5" Padding="0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0" Grid.RowSpan="3"
+                Aspect="AspectFill"
+                WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                Source="{Binding Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+            <StackLayout 
+                Grid.Column="1"
+                Padding="10">
+                <Label FontAttributes="Bold">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Name}" />
+                            <Span Text=" " />
+                            <Span Text="{Binding LastName}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label 
+                    Margin="0,6,0,0"
+                    Text="Descripción"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label
+                    VerticalOptions="FillAndExpand"
+                    LineBreakMode="TailTruncation"
+                    MaxLines="2"
+                    Text="{Binding About, TargetNullValue='---'}" />
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentView>
