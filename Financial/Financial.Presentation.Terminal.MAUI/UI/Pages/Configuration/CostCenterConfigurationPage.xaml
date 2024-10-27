@@ -63,11 +63,13 @@
             <VerticalStackLayout
                 Padding="20"
                 Spacing="16">
-                <VerticalStackLayout 
-                    HorizontalOptions="FillAndExpand"
-                    Spacing="6">
+                <VerticalStackLayout Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                     <Entry Text="{Binding Name}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
+                    <Editor Text="{Binding Description}" HeightRequest="120" BackgroundColor="#F8F9FA" />
                 </VerticalStackLayout>
                 <BoxView 
                     Margin="0,8,0,0"

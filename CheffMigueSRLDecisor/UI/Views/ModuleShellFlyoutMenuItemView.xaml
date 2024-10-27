@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Views.ModuleShellFlyoutMenuItemView"
+    x:DataType="MenuFlyoutItem">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <VerticalStackLayout Padding="12" Spacing="8">
+        <Label
+            Text="{Binding Text}"
+            FontSize="Large"
+            FontAttributes="Bold" />
+        <BoxView
+            IsVisible="{Binding Text, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+            Color="LightGray"
+            HeightRequest="1" />
+    </VerticalStackLayout>
+</ContentView>
+

@@ -3,7 +3,5 @@
     public class PurchaseProductNaturalProviderBridgeModel : Contract.AbstractProviderPurchaseProductBridgeModel
     {
         public Display.NaturalProviderDisplayModel Provider { get; set; }
-
-        public Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel CostCenter { get; set; }
     }
 }

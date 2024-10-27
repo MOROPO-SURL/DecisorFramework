@@ -89,7 +89,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                         ProviderId = item.Provider.Id, 
                         UnitMeasurementId = item.UnitMeasurement.Id,
                         Amount = item.Amount,
-                        Cost = item.Cost
+                        Cost = item.Cost,
+                        CostCenterId = item.CostCenter.Id
                     });
                 }
             }

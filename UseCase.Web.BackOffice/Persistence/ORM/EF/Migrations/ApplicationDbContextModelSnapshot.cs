@@ -1376,6 +1376,10 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("numeric")
                         .HasColumnName("cost");
 
+                    b.Property<Guid>("CostCenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("costcenterid");
+
                     b.Property<Guid>("ProviderId")
                         .HasColumnType("uuid")
                         .HasColumnName("providerid");
@@ -1386,6 +1390,9 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_purchaseproductlegalproviderbridges");
+
+                    b.HasIndex("CostCenterId")
+                        .HasDatabaseName("ix_purchaseproductlegalproviderbridges_costcenterid");
 
                     b.HasIndex("ProviderId")
                         .HasDatabaseName("ix_purchaseproductlegalproviderbridges_providerid");
@@ -3851,6 +3858,13 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseProductLegalProviderBridge", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", "CostCenter")
+                        .WithMany()
+                        .HasForeignKey("CostCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseproductlegalproviderbridges_costcenters_costcenterid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", "Provider")
                         .WithMany()
                         .HasForeignKey("ProviderId")
@@ -3878,6 +3892,8 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_purchaseproductlegalproviderbridges_unitmeasurements_unitme~");
+
+                    b.Navigation("CostCenter");
 
                     b.Navigation("Provider");
 

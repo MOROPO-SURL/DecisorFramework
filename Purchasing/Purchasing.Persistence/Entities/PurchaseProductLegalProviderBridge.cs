@@ -19,5 +19,9 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProviderId))]
         public LegalProvider Provider { get; set; }
         public System.Guid ProviderId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CostCenterId))]
+        public Financial.Persistence.Entities.CostCenter CostCenter { get; set; }
+        public System.Guid CostCenterId { get; set; }
     }
 }

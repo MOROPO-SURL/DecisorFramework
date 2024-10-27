@@ -123,9 +123,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Presentation.Terminal.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essential.Presentation.Terminal.MAUI", "Essential\Essential.Presentation.Terminal.MAUI.Terminal\Essential.Presentation.Terminal.MAUI.csproj", "{67DF9C9A-7384-4A33-AAB6-FDA087F864D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCase.Terminal.MAUI", "UseCase.Terminal.MAUI.Terminal\UseCase.Terminal.MAUI.csproj", "{A0F8D209-EABB-4197-A7AE-3F4F19436E42}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheffMigueSRLDecisor", "CheffMigueSRLDecisor\CheffMigueSRLDecisor.csproj", "{A1C595AA-D594-436A-ABCD-DD1826D2E117}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Presentation.Terminal.MAUI", "Inventory\Inventory.Persistence.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj", "{4BFF452B-6460-4BD4-9963-6DD8F6395A2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Presentation.Terminal.MAUI", "Purchasing\Purchasing.Presentation.Terminal.MAUI\Purchasing.Presentation.Terminal.MAUI.csproj", "{B494DBD9-B056-473A-8318-EE94D43D02BF}"
+EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "UseCase.Terminal.MAUI", "UseCase.Terminal.MAUI.Terminal\UseCase.Terminal.MAUI.csproj", "{C2014EBA-EB2C-4ACB-98B9-394F62EB4355}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -345,14 +349,22 @@ Global
 		{67DF9C9A-7384-4A33-AAB6-FDA087F864D2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67DF9C9A-7384-4A33-AAB6-FDA087F864D2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67DF9C9A-7384-4A33-AAB6-FDA087F864D2}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0F8D209-EABB-4197-A7AE-3F4F19436E42}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0F8D209-EABB-4197-A7AE-3F4F19436E42}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0F8D209-EABB-4197-A7AE-3F4F19436E42}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0F8D209-EABB-4197-A7AE-3F4F19436E42}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1C595AA-D594-436A-ABCD-DD1826D2E117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1C595AA-D594-436A-ABCD-DD1826D2E117}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A1C595AA-D594-436A-ABCD-DD1826D2E117}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1C595AA-D594-436A-ABCD-DD1826D2E117}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4BFF452B-6460-4BD4-9963-6DD8F6395A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4BFF452B-6460-4BD4-9963-6DD8F6395A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4BFF452B-6460-4BD4-9963-6DD8F6395A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4BFF452B-6460-4BD4-9963-6DD8F6395A2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B494DBD9-B056-473A-8318-EE94D43D02BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B494DBD9-B056-473A-8318-EE94D43D02BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B494DBD9-B056-473A-8318-EE94D43D02BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B494DBD9-B056-473A-8318-EE94D43D02BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2014EBA-EB2C-4ACB-98B9-394F62EB4355}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2014EBA-EB2C-4ACB-98B9-394F62EB4355}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2014EBA-EB2C-4ACB-98B9-394F62EB4355}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2014EBA-EB2C-4ACB-98B9-394F62EB4355}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -413,5 +425,7 @@ Global
 		{2194D6C5-28D6-434E-BE34-D9AD49D4C4DE} = {D66F51C2-8D15-4E45-A45D-16EBCD562661}
 		{EB02C950-6AFE-4FBF-870E-E06E6BBE365E} = {4B302E6F-8583-413E-B28D-9661DFC93A25}
 		{67DF9C9A-7384-4A33-AAB6-FDA087F864D2} = {B0FD6E63-6D1A-44E0-9B47-450F4DD8B714}
+		{4BFF452B-6460-4BD4-9963-6DD8F6395A2A} = {4FCFD797-BAA8-4FCC-913F-199722D2585E}
+		{B494DBD9-B056-473A-8318-EE94D43D02BF} = {21429BE1-DBFB-4FA6-BAD2-4734BA04A7B5}
 	EndGlobalSection
 EndGlobal

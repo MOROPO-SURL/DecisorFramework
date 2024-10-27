@@ -204,6 +204,9 @@
                     </Grid>
                 </Frame>
                 <Frame Style="{StaticResource SectionCardFrameStyle}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="FinancialSectionCardFrameTapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
                     <Grid>
                         <Image Style="{StaticResource SectionCardBackgroudImageStyle}" Source="cash.jpg" />
                         <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />

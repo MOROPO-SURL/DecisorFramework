@@ -11,6 +11,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions
         {
             services.AddScoped<IEntityRepository<LegalProvider, System.Guid>, LegalProviderRepository>();
             services.AddScoped<IEntityRepository<NaturalProvider, System.Guid>, NaturalProviderRepository>();
+            services.AddScoped<IEntityRepository<PurchasePlan, System.Guid>, PurchasePlanRepository>();
+            services.AddScoped<IEntityRepository<PurchaseReception, System.Guid>, PurchaseReceptionRepository>();
+            services.AddScoped<IEntityRepository<Purchase, System.Guid>, PurchaseRepository>();
+            services.AddScoped<IEntityRepository<PurchaseSpent, System.Guid>, PurchaseSpentRepository>();
+            services.AddScoped<IEntityRepository<PurchaseZone, System.Guid>, PurchaseZoneRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.PurchasingDbSchemaConfigurationProvider>();
         }

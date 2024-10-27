@@ -10,7 +10,7 @@
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Pages.Manage.CostCentersManagePage"
     x:DataType="local_manage_page_models:CostCentersManagePageModel"
-    Title="Centros de Costo">
+    Title="Gestión de Centros de Costo">
     <ContentPage.Resources>
         <ResourceDictionary>
             <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="280" AbsoluteHorizontalSeparation="20" />
@@ -72,17 +72,20 @@
                             <DataTemplate x:DataType="interop_common_display_models:CostCenterDisplayModel">
                                 <Frame
                                     Margin="5"
-                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}">
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
+                                    HeightRequest="148">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </Frame.GestureRecognizers>
-                                    <StackLayout>
+                                    <StackLayout IsClippedToBounds="True">
                                         <Label 
                                             Text="{Binding Name}"
                                             LineBreakMode="TailTruncation"
                                             FontSize="Medium" />
                                         <Label 
                                             Margin="0,6,0,0"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="3"
                                             Text="Descripción"
                                             TextColor="DimGray"
                                             FontSize="Caption"

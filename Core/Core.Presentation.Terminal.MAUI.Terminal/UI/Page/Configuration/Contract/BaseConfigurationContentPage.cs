@@ -102,7 +102,7 @@ public class BaseConfigurationContentPage<TModel> : Caney.MVVM.Core.Pages.Conten
             return;
         }
 
-        DisplayAlert("Confirmar", "Está seguro que desea regresar sin guardar los cambios?", "Regresar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea regresar sin guardar los cambios?", "Regresar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 

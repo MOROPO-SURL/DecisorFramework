@@ -88,6 +88,13 @@ namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display.Contra
                 return model;
             }).ToArray();
         }
+
+        public override string ToString()
+        {
+            if (string.IsNullOrEmpty(LastName)) return Name;
+
+            return $"{Name} {LastName}";
+        }
     }
 }
 

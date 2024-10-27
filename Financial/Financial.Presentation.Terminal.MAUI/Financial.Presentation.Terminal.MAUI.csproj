@@ -29,24 +29,4 @@
 		<ProjectReference Include="..\Financial.Interop.API.Connect\Financial.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\..\Essential\Essential.Presentation.Terminal.MAUI.Terminal\Essential.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Models\" />
-	  <None Remove="UI\" />
-	  <None Remove="UI\Pages\" />
-	  <None Remove="UI\Pages\Manage\" />
-	  <None Remove="UI\Pages\Configuration\" />
-	  <None Remove="Models\Page\" />
-	  <None Remove="Models\Page\Configuration\" />
-	  <None Remove="Models\Page\Manage\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Models\" />
-	  <Folder Include="UI\" />
-	  <Folder Include="UI\Pages\" />
-	  <Folder Include="UI\Pages\Manage\" />
-	  <Folder Include="UI\Pages\Configuration\" />
-	  <Folder Include="Models\Page\" />
-	  <Folder Include="Models\Page\Configuration\" />
-	  <Folder Include="Models\Page\Manage\" />
-	</ItemGroup>
 </Project>

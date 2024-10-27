@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:core_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    x:Class="MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.UI.Views.Card.ProductDefaultCardView"
+    x:DataType="interop_common_display_models:ProductDisplayModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <core_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            
+            <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame 
+        Margin="5" Padding="0"
+        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
+        <StackLayout>
+            <Image
+                Aspect="AspectFill"
+                HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=1.777777777777778}"
+                Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+            <StackLayout
+                IsClippedToBounds="True"
+                Padding="10">
+                <Label
+                    LineBreakMode="TailTruncation"
+                    FontAttributes="Bold"
+                    Text="{Binding Name}" />
+                <Label 
+                    Margin="0,6,0,0"
+                    Text="Descripción"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label
+                    VerticalOptions="FillAndExpand"
+                    LineBreakMode="TailTruncation"
+                    MaxLines="2"
+                    Text="{Binding Description, TargetNullValue='---'}" />
+            </StackLayout>
+        </StackLayout>
+    </Frame>
+</ContentView>

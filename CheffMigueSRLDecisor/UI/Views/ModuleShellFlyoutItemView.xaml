@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Grid
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Views.ModuleShellFlyoutItemView"
+    x:DataType="FlyoutItem"
+    Padding="12" ColumnSpacing="12">
+    <VisualStateManager.VisualStateGroups>
+        <VisualStateGroupList>
+            <VisualStateGroup x:Name="LayoutStates">
+                <VisualState x:Name="Normal" />
+                <VisualState x:Name="Selected">
+                    <VisualState.Setters>
+                        <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+                    </VisualState.Setters>
+                </VisualState>
+            </VisualStateGroup>
+        </VisualStateGroupList>
+    </VisualStateManager.VisualStateGroups>
+    <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition />
+    </Grid.ColumnDefinitions>
+    <Image
+        Grid.Column="0"
+        Source="{Binding Icon}" />
+    <Label
+        Grid.Column="1"
+        Text="{Binding Title}"
+        VerticalTextAlignment="Center">
+        <VisualStateManager.VisualStateGroups>
+            <VisualStateGroupList>
+                <VisualStateGroup x:Name="CommonStates">
+                    <VisualState x:Name="Normal" />
+                    <VisualState x:Name="Selected">
+                        <VisualState.Setters>
+                            <Setter Property="TextColor" Value="White" />
+                        </VisualState.Setters>
+                    </VisualState>
+                </VisualStateGroup>
+            </VisualStateGroupList>
+        </VisualStateManager.VisualStateGroups>
+    </Label>
+</Grid>
+

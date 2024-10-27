@@ -7,5 +7,10 @@
         }
 
         protected override string TargetController => "api/unitmeasurements";
+
+        public virtual System.Threading.Tasks.Task<Common.Models.Display.UnitMeasurementDisplayModel[]> GetReleatedsAsync(System.Guid key)
+        {
+            return httpClientHelperProvider.HttpClientHelper.GetAsync<Common.Models.Display.UnitMeasurementDisplayModel[]>($"{TargetController}/releateds/{key}");
+        }
     }
 }

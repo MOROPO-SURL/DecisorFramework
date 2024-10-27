@@ -9,5 +9,7 @@
         public decimal Amount { get; set; }
 
         public decimal Cost { get; set; }
+
+        public Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel CostCenter { get; set; }
     }
 }

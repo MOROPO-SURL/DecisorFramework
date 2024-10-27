@@ -49,7 +49,7 @@
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Financial\Financial.Presentation.Terminal.MAUI\Financial.Presentation.Terminal.MAUI.csproj" />
+		<ProjectReference Include="..\Purchasing\Purchasing.Presentation.Terminal.MAUI\Purchasing.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
@@ -64,8 +64,8 @@
 	  <None Remove="Resources\Images\rr_hh.jpg" />
 	  <None Remove="Resources\Images\sales.jpg" />
 	  <None Remove="Resources\Images\warehousing.jpg" />
-	  <None Remove="UI\Pages\Flyout\" />
-	  <None Remove="UI\Pages\Detail\" />
+	  <None Remove="UI\Shells\" />
+	  <None Remove="UI\Views\" />
 	</ItemGroup>
 	<ItemGroup>
 	  <BundleResource Include="Resources\Fonts\materialdesignicons-webfont.ttf" />
@@ -82,7 +82,7 @@
 	  <BundleResource Include="Resources\Images\warehousing.jpg" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="UI\Pages\Flyout\" />
-	  <Folder Include="UI\Pages\Detail\" />
+	  <Folder Include="UI\Shells\" />
+	  <Folder Include="UI\Views\" />
 	</ItemGroup>
 </Project>
