@@ -1,0 +1,9 @@
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card;
+
+public partial class PurchaseDefaultCardView : Microsoft.Maui.Controls.ContentView
+{
+	public PurchaseDefaultCardView()
+	{
+		InitializeComponent();
+	}
+}

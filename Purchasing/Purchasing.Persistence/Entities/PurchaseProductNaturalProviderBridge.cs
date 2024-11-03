@@ -1,12 +1,18 @@
 ﻿namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
 {
-    public class PurchaseProductNaturalProviderBridge : Guama.Core.Persistence.Entities.Contract.IBridge<Purchase, System.Guid, Inventory.Persistence.Entities.Product, System.Guid>
+    public class PurchaseProductNaturalProviderBridge
     {
-        public System.Guid ProwId { get; set; }
-        public Purchase Prow { get; set; }
+        public System.Guid PurchaseId { get; set; }
+        public Purchase Purchase { get; set; }
 
-        public System.Guid SternId { get; set; }
-        public Inventory.Persistence.Entities.Product Stern { get; set; }
+        public System.Guid ProductId { get; set; }
+        public Inventory.Persistence.Entities.Product Product { get; set; }
+
+        public System.Guid CostCenterId { get; set; }
+        public Financial.Persistence.Entities.CostCenter CostCenter { get; set; }
+
+        public System.Guid ProviderId { get; set; }
+        public NaturalProvider Provider { get; set; }
 
         public decimal Amount { get; set; }
 
@@ -15,13 +21,5 @@
         public System.Guid UnitMeasurementId { get; set; }
 
         public decimal Cost { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProviderId))]
-        public NaturalProvider Provider { get; set; }
-        public System.Guid ProviderId { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CostCenterId))]
-        public Financial.Persistence.Entities.CostCenter CostCenter { get; set; }
-        public System.Guid CostCenterId { get; set; }
     }
 }

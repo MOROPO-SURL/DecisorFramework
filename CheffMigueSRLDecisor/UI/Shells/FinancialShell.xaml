@@ -3,9 +3,10 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_pages="clr-namespace:MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Pages"
-    xmlns:decisorframework_financial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Pages.Manage;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI"
+    xmlns:decisorframework_financial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Shells.FinancialShell"
-    FlyoutBehavior="Locked">
+    FlyoutBehavior="Locked"
+    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Gray050}, Dark={StaticResource Gray900}}">
     <Shell.FlyoutHeader>
         <Grid HeightRequest="180">
             <Image 

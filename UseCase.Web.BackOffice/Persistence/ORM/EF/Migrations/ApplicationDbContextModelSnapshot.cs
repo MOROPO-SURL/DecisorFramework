@@ -1360,13 +1360,21 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseProductLegalProviderBridge", b =>
                 {
-                    b.Property<Guid>("ProwId")
+                    b.Property<Guid>("PurchaseId")
                         .HasColumnType("uuid")
-                        .HasColumnName("prowid");
+                        .HasColumnName("purchaseid");
 
-                    b.Property<Guid>("SternId")
+                    b.Property<Guid>("ProviderId")
                         .HasColumnType("uuid")
-                        .HasColumnName("sternid");
+                        .HasColumnName("providerid");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("productid");
+
+                    b.Property<Guid>("CostCenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("costcenterid");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric")
@@ -1376,29 +1384,21 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("numeric")
                         .HasColumnName("cost");
 
-                    b.Property<Guid>("CostCenterId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("costcenterid");
-
-                    b.Property<Guid>("ProviderId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("providerid");
-
                     b.Property<Guid>("UnitMeasurementId")
                         .HasColumnType("uuid")
                         .HasColumnName("unitmeasurementid");
 
-                    b.HasKey("ProwId", "SternId")
+                    b.HasKey("PurchaseId", "ProviderId", "ProductId", "CostCenterId")
                         .HasName("pk_purchaseproductlegalproviderbridges");
 
                     b.HasIndex("CostCenterId")
                         .HasDatabaseName("ix_purchaseproductlegalproviderbridges_costcenterid");
 
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_purchaseproductlegalproviderbridges_productid");
+
                     b.HasIndex("ProviderId")
                         .HasDatabaseName("ix_purchaseproductlegalproviderbridges_providerid");
-
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_purchaseproductlegalproviderbridges_sternid");
 
                     b.HasIndex("UnitMeasurementId")
                         .HasDatabaseName("ix_purchaseproductlegalproviderbridges_unitmeasurementid");
@@ -1408,13 +1408,21 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseProductNaturalProviderBridge", b =>
                 {
-                    b.Property<Guid>("ProwId")
+                    b.Property<Guid>("PurchaseId")
                         .HasColumnType("uuid")
-                        .HasColumnName("prowid");
+                        .HasColumnName("purchaseid");
 
-                    b.Property<Guid>("SternId")
+                    b.Property<Guid>("ProviderId")
                         .HasColumnType("uuid")
-                        .HasColumnName("sternid");
+                        .HasColumnName("providerid");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("productid");
+
+                    b.Property<Guid>("CostCenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("costcenterid");
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric")
@@ -1424,29 +1432,21 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("numeric")
                         .HasColumnName("cost");
 
-                    b.Property<Guid>("CostCenterId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("costcenterid");
-
-                    b.Property<Guid>("ProviderId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("providerid");
-
                     b.Property<Guid>("UnitMeasurementId")
                         .HasColumnType("uuid")
                         .HasColumnName("unitmeasurementid");
 
-                    b.HasKey("ProwId", "SternId")
+                    b.HasKey("PurchaseId", "ProviderId", "ProductId", "CostCenterId")
                         .HasName("pk_purchaseproductnaturalproviderbridges");
 
                     b.HasIndex("CostCenterId")
                         .HasDatabaseName("ix_purchaseproductnaturalproviderbridges_costcenterid");
 
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_purchaseproductnaturalproviderbridges_productid");
+
                     b.HasIndex("ProviderId")
                         .HasDatabaseName("ix_purchaseproductnaturalproviderbridges_providerid");
-
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_purchaseproductnaturalproviderbridges_sternid");
 
                     b.HasIndex("UnitMeasurementId")
                         .HasDatabaseName("ix_purchaseproductnaturalproviderbridges_unitmeasurementid");
@@ -3865,6 +3865,13 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsRequired()
                         .HasConstraintName("fk_purchaseproductlegalproviderbridges_costcenters_costcenterid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseproductlegalproviderbridges_products_productid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", "Provider")
                         .WithMany()
                         .HasForeignKey("ProviderId")
@@ -3872,19 +3879,12 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsRequired()
                         .HasConstraintName("fk_purchaseproductlegalproviderbridges_legalproviders_provider~");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Prow")
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Purchase")
                         .WithMany("LegalProviderProductBridges")
-                        .HasForeignKey("ProwId")
+                        .HasForeignKey("PurchaseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_purchaseproductlegalproviderbridges_purchases_prowid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_purchaseproductlegalproviderbridges_products_sternid");
+                        .HasConstraintName("fk_purchaseproductlegalproviderbridges_purchases_purchaseid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
                         .WithMany()
@@ -3895,11 +3895,11 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
                     b.Navigation("CostCenter");
 
+                    b.Navigation("Product");
+
                     b.Navigation("Provider");
 
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
+                    b.Navigation("Purchase");
 
                     b.Navigation("UnitMeasurement");
                 });
@@ -3913,6 +3913,13 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsRequired()
                         .HasConstraintName("fk_purchaseproductnaturalproviderbridges_costcenters_costcente~");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseproductnaturalproviderbridges_products_productid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProvider", "Provider")
                         .WithMany()
                         .HasForeignKey("ProviderId")
@@ -3920,19 +3927,12 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsRequired()
                         .HasConstraintName("fk_purchaseproductnaturalproviderbridges_naturalproviders_prov~");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Prow")
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Purchase")
                         .WithMany("NaturalProviderProductBridges")
-                        .HasForeignKey("ProwId")
+                        .HasForeignKey("PurchaseId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_purchaseproductnaturalproviderbridges_purchases_prowid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_purchaseproductnaturalproviderbridges_products_sternid");
+                        .HasConstraintName("fk_purchaseproductnaturalproviderbridges_purchases_purchaseid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
                         .WithMany()
@@ -3943,11 +3943,11 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
                     b.Navigation("CostCenter");
 
+                    b.Navigation("Product");
+
                     b.Navigation("Provider");
 
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
+                    b.Navigation("Purchase");
 
                     b.Navigation("UnitMeasurement");
                 });

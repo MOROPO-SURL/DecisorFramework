@@ -1,5 +1,7 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 using MOROPO.Framework.Decisor.Essential.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
 
@@ -20,11 +22,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
                 Purchase = model.Purchase;
                 Responsible = model.Responsible;
 
-                foreach (var item in model.WeightBridges) RegularWeights.Add(new View.PurchaseReceptionProductCommonWeightBridgeViewModel
+                var universe = model.WeightBridges.GroupBy(_model => _model.CostCenter);
+
+                foreach (var item in universe) Weights.Add(new System.Collections.Generic.KeyValuePair<CostCenterDisplayModel, View.PurchaseReceptionProductCommonWeightBridgeViewModel[]>(item.Key, item.Select(_model => new View.PurchaseReceptionProductCommonWeightBridgeViewModel
                 {
-                    Product = item.Product,
-                    Amount = item.Amount
-                });
+                    Product = _model.Product,
+                    Amount = _model.Amount
+                }).ToArray()));
             }
         }
 
@@ -38,9 +42,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
 
         public WarehouseDisplayModel Warehouse { get => warehouse; set => SetProperty(ref warehouse, value); }
 
-        public ObservableCollection<View.PurchaseReceptionProductCommonWeightBridgeViewModel> RegularWeights { get; set; } = new ObservableCollection<View.PurchaseReceptionProductCommonWeightBridgeViewModel>();
-
-        public ObservableCollection<View.PurchaseReceptionProductCommonWeightBridgeViewModel> ContextualWeights { get; set; } = new ObservableCollection<View.PurchaseReceptionProductCommonWeightBridgeViewModel>();
+        public ObservableCollection<System.Collections.Generic.KeyValuePair<CostCenterDisplayModel, View.PurchaseReceptionProductCommonWeightBridgeViewModel[]>> Weights { get; set; } = new ObservableCollection<System.Collections.Generic.KeyValuePair<CostCenterDisplayModel, View.PurchaseReceptionProductCommonWeightBridgeViewModel[]>>();
 
         public EmployeeDisplayModel[] AvailableResponsibles { get; set; }
 

@@ -31,12 +31,4 @@
 		<ProjectReference Include="..\..\Inventory\Inventory.Persistence.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj" />
 		<ProjectReference Include="..\Purchasing.Interop.API.Connect\Purchasing.Interop.API.Connect.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Models\Page\Configuration\Contract\" />
-	  <None Remove="Models\View\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Models\Page\Configuration\Contract\" />
-	  <Folder Include="Models\View\" />
-	</ItemGroup>
 </Project>

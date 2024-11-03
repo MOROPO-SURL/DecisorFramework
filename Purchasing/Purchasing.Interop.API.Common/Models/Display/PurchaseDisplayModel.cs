@@ -56,15 +56,17 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 var model = new PurchaseProductLegalProviderBridgeModel
                 {
                     Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    UnitMeasurement = new Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    Provider = new LegalProviderDisplayModel(),
+                    CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
-                    Cost = bridge.Cost,
-                    Provider = new LegalProviderDisplayModel()
+                    UnitMeasurement = new Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    Cost = bridge.Cost
                 };
 
-                model.Product.Import(bridge.Stern);
-                model.UnitMeasurement.Import(bridge.UnitMeasurement);
+                model.Product.Import(bridge.Product);
                 model.Provider.Import(bridge.Provider);
+                model.CostCenter.Import(bridge.CostCenter);
+                model.UnitMeasurement.Import(bridge.UnitMeasurement);
 
                 LegalProviderProductBridges.Add(model);
             }
@@ -74,22 +76,16 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 var model = new PurchaseProductNaturalProviderBridgeModel
                 {
                     Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    UnitMeasurement = new Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    Provider = new NaturalProviderDisplayModel(),
+                    CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
-                    Cost = bridge.Cost,
-                    Provider = new NaturalProviderDisplayModel()
+                    UnitMeasurement = new Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    Cost = bridge.Cost
                 };
 
-                if (bridge.CostCenter != null)
-                {
-                    model.CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel();
-
-                    model.CostCenter.Import(bridge.CostCenter);
-                }
-
-                model.Product.Import(bridge.Stern);
-                model.UnitMeasurement.Import(bridge.UnitMeasurement);
+                model.Product.Import(bridge.Product);
                 model.Provider.Import(bridge.Provider);
+                model.CostCenter.Import(bridge.CostCenter);
                 model.UnitMeasurement.Import(bridge.UnitMeasurement);
 
                 NaturalProviderProductBridges.Add(model);

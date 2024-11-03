@@ -33,12 +33,12 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             {
                 if (item.Product.FeatureImage != null)
                 {
-                    item.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.SternId == item.Product.Id).Stern.FeatureImage.ContentType);
+                    item.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProductId == item.Product.Id).Product.FeatureImage.ContentType);
                 }
 
                 if (item.Provider.Image != null)
                 {
-                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Stern.FeatureImage.ContentType);
+                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Identity.Image.ContentType);
                 }
             }
 
@@ -46,12 +46,12 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             {
                 if (item.Product.FeatureImage != null)
                 {
-                    item.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.SternId == item.Product.Id).Stern.FeatureImage.ContentType);
+                    item.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.ProductId == item.Product.Id).Product.FeatureImage.ContentType);
                 }
 
                 if (item.Provider.Image != null)
                 {
-                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Stern.FeatureImage.ContentType);
+                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Identity.Image.ContentType);
                 }
             }
 
@@ -84,13 +84,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 {
                     entity.LegalProviderProductBridges.Add(new PurchaseProductLegalProviderBridge 
                     { 
-                        ProwId = entity.Id, 
-                        SternId = item.Product.Id, 
-                        ProviderId = item.Provider.Id, 
+                        PurchaseId = entity.Id, 
+                        ProductId = item.Product.Id, 
+                        ProviderId = item.Provider.Id,
+                        CostCenterId = item.CostCenter.Id, 
                         UnitMeasurementId = item.UnitMeasurement.Id,
                         Amount = item.Amount,
-                        Cost = item.Cost,
-                        CostCenterId = item.CostCenter.Id
+                        Cost = item.Cost
                     });
                 }
             }
@@ -101,13 +101,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 {
                     entity.NaturalProviderProductBridges.Add(new PurchaseProductNaturalProviderBridge
                     {
-                        ProwId = entity.Id,
-                        SternId = item.Product.Id,
+                        PurchaseId = entity.Id,
+                        ProductId = item.Product.Id,
                         ProviderId = item.Provider.Id,
+                        CostCenterId = item.CostCenter.Id,
                         UnitMeasurementId = item.UnitMeasurement.Id,
                         Amount = item.Amount,
-                        Cost = item.Cost,
-                        CostCenterId = item.CostCenter.Id
+                        Cost = item.Cost
                     });
                 }
             }

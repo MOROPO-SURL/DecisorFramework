@@ -20,7 +20,7 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
 
         if (BindingContextPageModel.User == null)
         {
-            this.NavigationPushModalPageAsync(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Page.DefaultUserAuthenticationPage());
+            this.NavigationPushModalPageAsync(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.DefaultUserAuthenticationPage());
         }
     }
 

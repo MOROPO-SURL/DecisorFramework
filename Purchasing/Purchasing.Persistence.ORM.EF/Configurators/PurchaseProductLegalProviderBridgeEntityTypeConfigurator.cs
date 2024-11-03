@@ -1,10 +1,17 @@
 ﻿namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Configurators
 {
-    public class PurchaseProductLegalProviderBridgeEntityTypeConfigurator : Guama.Core.Persistence.ORM.EF.Configurators.Contract.AbstractBridgeEntityTypeConfigurator<Entities.PurchaseProductLegalProviderBridge, Entities.Purchase, System.Guid, Inventory.Persistence.Entities.Product, System.Guid>
+    public class PurchaseProductLegalProviderBridgeEntityTypeConfigurator : Guama.Core.Persistence.ORM.EF.Configurators.Contract.AbstractEntityTypeConfigurator<Entities.PurchaseProductLegalProviderBridge>
     {
-        public PurchaseProductLegalProviderBridgeEntityTypeConfigurator()
+        protected override void ApplayRules(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Entities.PurchaseProductLegalProviderBridge> entityTypeBuilder)
         {
-            prowNavigationExpression = entity => entity.LegalProviderProductBridges;
+            base.ApplayRules(entityTypeBuilder);
+
+            entityTypeBuilder.HasKey(bridge => new { bridge.PurchaseId, bridge.ProviderId, bridge.ProductId, bridge.CostCenterId });
+
+            entityTypeBuilder.HasOne(bridge => bridge.Purchase).WithMany(entity => entity.LegalProviderProductBridges).HasForeignKey(bridge => bridge.PurchaseId);
+            entityTypeBuilder.HasOne(bridge => bridge.Product).WithMany().HasForeignKey(bridge => bridge.ProductId);
+            entityTypeBuilder.HasOne(bridge => bridge.Provider).WithMany().HasForeignKey(bridge => bridge.ProviderId);
+            entityTypeBuilder.HasOne(bridge => bridge.CostCenter).WithMany().HasForeignKey(bridge => bridge.CostCenterId);
         }
     }
 }
