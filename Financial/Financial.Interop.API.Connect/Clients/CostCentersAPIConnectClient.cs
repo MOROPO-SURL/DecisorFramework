@@ -6,7 +6,7 @@
         {
         }
 
-        protected override string TargetController => "api/costcenters";
+        protected override string TargetController => "api/financial/costcenters";
     }
 }
 

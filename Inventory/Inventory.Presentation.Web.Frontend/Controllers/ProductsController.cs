@@ -1,4 +1,5 @@
-﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+﻿using System.Linq;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
@@ -7,16 +8,20 @@ using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/inventory/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class ProductsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Product, System.Guid, ProductInputModel, ProductDisplayModel>
     {
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
+        private readonly IEntityRepository<Category, int> categoryRepository;
+        private readonly IEntityRepository<Classification, System.Guid> classificationRepository;
         private readonly IImageFileManagerFacade imageFileManager;
 
-        public ProductsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Product, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProductsController> localizer, Microsoft.Extensions.Logging.ILogger<ProductsController> logger) : base(repository, localizer, logger)
+        public ProductsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Classification, System.Guid> classificationRepository, IEntityRepository<Category, int> categoryRepository, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Product, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProductsController> localizer, Microsoft.Extensions.Logging.ILogger<ProductsController> logger) : base(repository, localizer, logger)
         {
             this.imageRepository = imageRepository;
+            this.categoryRepository = categoryRepository;
+            this.classificationRepository = classificationRepository;
             this.imageFileManager = imageFileManager;
         }
 
@@ -38,6 +43,26 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
             {
                 model.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.FeatureImage.ContentType);
             }
+
+            if (entity.CategoryId != null)
+            {
+                entity.Category = categoryRepository.Get(entity.CategoryId.Value);
+
+                FillParent(entity.Category);
+
+                model.Category = new CategoryDisplayModel();
+
+                model.Category.Import(entity.Category);
+            }
+
+            model.Classifications = classificationRepository.FindBy(_entity => _entity.ProductId == entity.Id).ToArray().Select(_entity =>
+            {
+                var _model = new ClassificationDisplayModel();
+
+                _model.Import(_entity);
+
+                return _model;
+            }).ToArray();
 
             return model;
         }
@@ -64,6 +89,15 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
                 }, User.Identity.Name, false);
 
                 imageFileManager.SaveImageFileContent(entity.FeatureImage.Id, model.FeatureImage.ContentData, model.FeatureImage.ContentType);
+            }
+
+            foreach (var _model in model.Classifications)
+            {
+                var _entity = _model.Export();
+
+                _entity.ProductId = entity.Id;
+
+                classificationRepository.Add(_entity, User.Identity.Name, false);
             }
         }
 
@@ -104,6 +138,15 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
 
                 imageFileManager.DeleteImageFile(oldLogoImage);
             }
+        }
+
+        private void FillParent(Category entity)
+        {
+            if (entity.ParentId == null) return;
+
+            entity.Parent = categoryRepository.Get(entity.ParentId.Value);
+
+            FillParent(entity.Parent);
         }
     }
 }

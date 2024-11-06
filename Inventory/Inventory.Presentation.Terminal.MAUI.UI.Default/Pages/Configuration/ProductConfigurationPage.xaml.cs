@@ -29,6 +29,21 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
                 break;
             }
         }
+
+        if (model.Category != null)
+        {
+            for (int i = 0; i < model.AvailableCategories.Length; i++)
+            {
+                var current = model.AvailableCategories[i];
+
+                if (model.Category.Id != current.Id) continue;
+
+                CategoryPicker.SelectedIndex = i;
+                CategoryPicker.SelectedItem = current;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Producto";
@@ -48,12 +63,21 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
         var model = new Interop.API.Common.Models.Input.ProductInputModel
         {
-            Id = System.Guid.NewGuid(),
+            Id = concreteBindingContext.Id,
             Name = concreteBindingContext.Name,
             Description = concreteBindingContext.Description,
             Priority = concreteBindingContext.Priority,
             DefaultMetricUnityId = concreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
-            WarehousingDecreases = concreteBindingContext.WarehousingDecreases.ToList()
+            CategoryId = CategoryPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
+            WarehousingDecreases = concreteBindingContext.WarehousingDecreases.ToList(),
+            Classifications = concreteBindingContext.Classifications.Select(item => new Interop.API.Common.Models.Input.ClassificationInputModel
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Description = item.Description,
+                Priority = item.Priority,
+                ProductId = concreteBindingContext.Id
+            }).ToList()
         };
 
         if (imagePickedData != null)
@@ -85,6 +109,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
             Description = concreteBindingContext.Description,
             Priority = concreteBindingContext.Priority,
             DefaultMetricUnityId = concreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
+            CategoryId = CategoryPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
             WarehousingDecreases = concreteBindingContext.WarehousingDecreases.ToList()
         };
 
@@ -153,6 +178,51 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
         {
             PresentForImagePick();
         }
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
+    }
+
+    private void AddClassificationButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationCreateSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel((Models.Page.Configuration.ProductConfigurationPageModel)BindingContext, null)));
+    }
+
+    private void EditClassificationButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationEditSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel((Models.Page.Configuration.ProductConfigurationPageModel)BindingContext, ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ClassificationDisplayModel)));
+    }
+
+    private void ClassificationRemoveButton_Clicked(object sender, System.EventArgs e)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta clasificación?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            hasChangesFlag = true;
+
+            Dispatcher.Dispatch(() => ((Models.Page.Configuration.ProductConfigurationPageModel)BindingContext).Classifications.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ClassificationDisplayModel));
+        });
+    }
+
+    private void ClassificationCreateSuccess_Callback(Interop.API.Common.Models.Display.ClassificationDisplayModel model)
+    {
+        ((Models.Page.Configuration.ProductConfigurationPageModel)BindingContext).Classifications.Add(model);
+    }
+
+    private void ClassificationEditSuccess_Callback(Interop.API.Common.Models.Display.ClassificationDisplayModel model)
+    {
+        var concreteBindingContext = (Models.Page.Configuration.ProductConfigurationPageModel)BindingContext;
+
+        var reference = concreteBindingContext.Classifications.First(item => item.Id == model.Id);
+
+        var index = concreteBindingContext.Classifications.IndexOf(reference);
+
+        concreteBindingContext.Classifications[index] = model;
+
+        hasChangesFlag = true;
     }
 
     private void PickedImageCroppingComplete_Callback(SkiaSharp.SKBitmap result)

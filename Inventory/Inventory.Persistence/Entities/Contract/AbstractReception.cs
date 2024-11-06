@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract
+﻿using System.Collections.Generic;
+
+namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract
 {
     public abstract class AbstractReception : Guama.Core.Persistence.Entities.Contract.IEntity<System.Guid>
     {
@@ -11,5 +13,7 @@
         public System.Guid ResponsibleId { get; set; }
 
         public string Description { get; set; }
+
+        public List<ReceptionBatchBridge> BatchBridges { get; set; } = new List<ReceptionBatchBridge>();
     }
 }

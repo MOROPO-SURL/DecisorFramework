@@ -10,6 +10,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Connect.Clients
         {
         }
 
-        protected override string TargetController => "api/purchases";
+        protected override string TargetController => "api/purchasing/purchases";
     }
 }

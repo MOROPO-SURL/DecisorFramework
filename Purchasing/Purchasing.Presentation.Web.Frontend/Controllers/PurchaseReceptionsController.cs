@@ -7,7 +7,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/purchasing/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class PurchaseReceptionsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<PurchaseReception, System.Guid, PurchaseReceptionInputModel, PurchaseReceptionDisplayModel>
     {
@@ -27,17 +27,20 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
         {
             base.PreCreate(entity, model);
 
-            foreach (var item in model.WeightBridges)
+            foreach (var bridge in model.WeightBridges)
             {
-                batchRepository.Add(new Batch
+                foreach (var _model in bridge.Batches)
                 {
-                    ExternalReference = System.Guid.NewGuid().ToString(),
-                    Amount = item.Amount,
-                    ProductId = item.Product.Id,
-                    WarehouseId = model.WarehouseId,
-                    ReceptionId = entity.Id,
-                    CostCenterId = item.CostCenter.Id
-                }, User.Identity.Name, false);
+                    var _entity = _model.Export();
+
+                    _entity.ProductId = bridge.Product.Id;
+                    _entity.CostCenterId = bridge.CostCenter.Id;
+                    _entity.ReceptionId = entity.Id;
+
+                    var batch = batchRepository.Add(_entity, User.Identity.Name, false);
+
+                    entity.BatchBridges.Add(new ReceptionBatchBridge { ProwId = entity.Id, SternId = batch.Id });
+                }
             }
         }
     }

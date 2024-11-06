@@ -33,8 +33,8 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-        Text="Aplicar"
-        Clicked="ApplyClickableControl_Clicked">
+            Text="Aplicar"
+            Clicked="ApplyClickableControl_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;">
                     <FontImageSource.Color>
@@ -46,8 +46,8 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
-        Text="Cancelar"
-        Clicked="CancelClickableControl_Clicked">
+            Text="Cancelar"
+            Clicked="CancelClickableControl_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;">
                     <FontImageSource.Color>
@@ -139,6 +139,7 @@
                                 Color="{StaticResource Gray050}" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
+                                VerticalOptions="Start"
                                 ItemsSource="{Binding LegalProviderBridges}">
                                 <CollectionView.ItemsLayout>
                                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />

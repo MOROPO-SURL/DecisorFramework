@@ -90,7 +90,7 @@ namespace MOROPO.Framework.Decisor.Sales.Presentation.Web.Frontend.Controllers.A
 
                         foreach (var _item in purchase.LegalProviderProductBridges)
                         {
-                            if (_item.SternId != key) continue;
+                            if (_item.ProductId != key) continue;
 
                             costIterationCount++;
 
@@ -99,7 +99,7 @@ namespace MOROPO.Framework.Decisor.Sales.Presentation.Web.Frontend.Controllers.A
 
                         foreach (var _item in purchase.NaturalProviderProductBridges)
                         {
-                            if (_item.SternId != key) continue;
+                            if (_item.ProductId != key) continue;
 
                             costIterationCount++;
 

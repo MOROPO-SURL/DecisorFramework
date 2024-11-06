@@ -6,7 +6,7 @@ using MOROPO.Framework.Decisor.Essential.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Essential.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/[controller]")]
+    [Route("api/essential/[controller]")]
     [ApiController]
     public class UnitMeasurementsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<UnitMeasurement, System.Guid, UnitMeasurementInputModel, UnitMeasurementDisplayModel>
     {

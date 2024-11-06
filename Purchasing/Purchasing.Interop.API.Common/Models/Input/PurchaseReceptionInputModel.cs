@@ -13,8 +13,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
 
         public System.Guid ResponsibleId { get; set; }
 
-        public System.Guid WarehouseId { get; set; }
-
         public string Description { get; set; }
 
         public List<PurchaseReceptionProductWeightBridgeModel> WeightBridges { get; set; } = new List<PurchaseReceptionProductWeightBridgeModel>();
@@ -51,8 +49,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
 
             entity.ProductWeightBridges = WeightBridges.Select(model => new PurchaseReceptionProductWeightBridge
             {
-                ProwId = entity.Id,
-                SternId = model.Product.Id,
+                ReceptionId = entity.Id,
+                ProductId = model.Product.Id,
                 Amount = model.Amount,
                 Decrease = model.Decrease,
                 CostCenterId = model.CostCenter.Id

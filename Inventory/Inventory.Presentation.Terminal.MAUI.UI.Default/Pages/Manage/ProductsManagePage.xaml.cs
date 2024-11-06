@@ -36,14 +36,18 @@ public partial class ProductsManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             try
             {
-                var unitMeasurementsAPIConnectClient = new Essential.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
+
+                var unitMeasurementsAPIConnectClient = new Essential.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
+                var categoriesAPIConnectClient = new Interop.API.Connect.Clients.CategoriesAPIConnectClient(httpClientHelperProvider);
 
                 // TODO complete fallow behavior
                 //var warehousingDecreasesAPIConnectClient = new Web.API.Connect.Clients.WarehousingDecreasesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.ProductConfigurationPageModel(null)
                 {
-                    AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync()
+                    AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync(),
+                    AvailableCategories = await categoriesAPIConnectClient.GetAsync()
                 };
 
                 Dispatcher.Dispatch(() =>
@@ -92,14 +96,18 @@ public partial class ProductsManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             try
             {
-                var unitMeasurementsAPIConnectClient = new Essential.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
+
+                var unitMeasurementsAPIConnectClient = new Essential.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
+                var categoriesAPIConnectClient = new Interop.API.Connect.Clients.CategoriesAPIConnectClient(httpClientHelperProvider);
 
                 // TODO complete fallow behavior
                 //var warehousingDecreasesAPIConnectClient = new Web.API.Connect.Clients.WarehousingDecreasesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.ProductConfigurationPageModel(concreteBindingContext.PresentedItem)
                 {
-                    AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync()
+                    AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync(),
+                    AvailableCategories = await categoriesAPIConnectClient.GetAsync()
                 };
 
                 Dispatcher.Dispatch(() =>

@@ -4,7 +4,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/financial/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class CostCentersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<CostCenter, System.Guid, Interop.API.Common.Models.Input.CostCenterInputModel, Interop.API.Common.Models.Display.CostCenterDisplayModel>
     {

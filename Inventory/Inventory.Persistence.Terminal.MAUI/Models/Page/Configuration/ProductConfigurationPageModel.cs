@@ -8,6 +8,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
         private string description;
         private int priority = 1;
         private Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel defaultUnitMeasurement;
+        private Interop.API.Common.Models.Display.CategoryDisplayModel category;
         private Microsoft.Maui.Controls.ImageSource featureImageSource;
 
         public ProductConfigurationPageModel(Interop.API.Common.Models.Display.ProductDisplayModel model) : base(model)
@@ -19,6 +20,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
                 Description = model.Description;
                 Priority = model.Priority;
                 DefaultUnitMeasurement = model.DefaultUnitMeasurement;
+                Category = model.Category;
 
                 if (model.FeatureImage != null)
                 {
@@ -40,10 +42,16 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
 
         public Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel DefaultUnitMeasurement { get => defaultUnitMeasurement; set => SetProperty(ref defaultUnitMeasurement, value); }
 
+        public Interop.API.Common.Models.Display.CategoryDisplayModel Category { get => category; set => SetProperty(ref category, value); }
+
         public Microsoft.Maui.Controls.ImageSource FeatureImageSource { get => featureImageSource; set => SetProperty(ref featureImageSource, value); }
+
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ClassificationDisplayModel> Classifications { get; set; } = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ClassificationDisplayModel>();
 
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.WarehousingDecreaseModel> WarehousingDecreases { get; set; } = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.WarehousingDecreaseModel>();
 
         public Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
+
+        public Interop.API.Common.Models.Display.CategoryDisplayModel[] AvailableCategories { get; set; }
     }
 }

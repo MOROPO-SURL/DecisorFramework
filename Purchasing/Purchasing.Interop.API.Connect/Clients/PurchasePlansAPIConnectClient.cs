@@ -15,6 +15,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Connect.Clients
             await httpClientHelperProvider.HttpClientHelper.PutAsync($"{TargetController}/approve/{key}");
         }
 
-        protected override string TargetController => "api/purchaseplans";
+        protected override string TargetController => "api/purchasing/purchaseplans";
     }
 }

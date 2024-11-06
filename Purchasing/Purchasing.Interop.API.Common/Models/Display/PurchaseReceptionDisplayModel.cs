@@ -42,11 +42,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                     Decrease = bridge.Decrease
                 };
 
-                if (bridge.Stern != null)
+                if (bridge.Product != null)
                 {
                     model.Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel();
 
-                    model.Product.Import(bridge.Stern);
+                    model.Product.Import(bridge.Product);
                 }
 
                 if (bridge.CostCenter != null)

@@ -59,7 +59,7 @@ public partial class WarehousesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
     private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)
     {
-        DisplayAlert("Confirmar", "Esta seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 

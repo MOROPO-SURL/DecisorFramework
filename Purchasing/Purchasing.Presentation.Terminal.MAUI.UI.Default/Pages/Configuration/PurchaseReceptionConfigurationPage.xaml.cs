@@ -30,7 +30,6 @@ public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Term
             Id = System.Guid.NewGuid(),
             PurchaseId = concreteBindingContext.Purchase.Id,
             ResponsibleId = concreteBindingContext.AvailableResponsibles[ResponsiblePicker.SelectedIndex].Id,
-            WarehouseId = concreteBindingContext.AvailableWarehouses[WarehousePicker.SelectedIndex].Id,
             Description = concreteBindingContext.Description
         };
 
@@ -44,6 +43,13 @@ public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Term
                     Amount = _item.Amount,
                     CostCenter = item.Key,
                     // TODO Set Decrease
+                    Batches = _item.Batchs.Select(__item => new Inventory.Interop.API.Common.Models.Input.BatchInputModel
+                    {
+                        ExternalReference = __item.ExternalReference,
+                        Amount = __item.Amount,
+                        WarehouseId = __item.Warehouse.Id,
+                        ClassificationId = __item.Classification?.Id 
+                    }).ToList()
                 });
             }
         }
@@ -145,11 +151,19 @@ public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Term
                     amount += bridge.Amount;
                 }
 
-                models.Add(new Models.View.PurchaseReceptionProductCommonWeightBridgeViewModel
+                var _model = new Models.View.PurchaseReceptionProductCommonWeightBridgeViewModel
                 {
                     Amount = amount,
                     Product = product
+                };
+
+                _model.Batchs.Add(new Models.View.BatchSpecificationViewModel
+                {
+                    ExternalReference = System.Guid.NewGuid().ToString().Substring(0, 6),
+                    Amount = amount
                 });
+
+                models.Add(_model);
             }
 
             concreteBindingContext.Weights.Add(new KeyValuePair<Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel, Models.View.PurchaseReceptionProductCommonWeightBridgeViewModel[]>(costCenter, models.ToArray()));

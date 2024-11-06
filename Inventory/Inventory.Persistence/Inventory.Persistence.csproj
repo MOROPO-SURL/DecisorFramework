@@ -6,16 +6,12 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Inventory.Persistence</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<None Remove="Entities\" />
-		<None Remove="Entities\Contract\" />
-		<None Remove="Enumerations\" />
+		<ProjectReference Include="..\..\Financial\Financial.Persistence\Financial.Persistence.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="Entities\" />
-		<Folder Include="Entities\Contract\" />
-		<Folder Include="Enumerations\" />
+	  <None Remove="Extensions\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\Financial\Financial.Persistence\Financial.Persistence.csproj" />
+	  <Folder Include="Extensions\" />
 	</ItemGroup>
 </Project>

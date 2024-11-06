@@ -10,7 +10,7 @@ using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/purchasing/[controller]")]
     [ApiController]
     public class LegalProvidersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<LegalProvider, System.Guid, LegalProviderInputModel, LegalProviderDisplayModel>
     {

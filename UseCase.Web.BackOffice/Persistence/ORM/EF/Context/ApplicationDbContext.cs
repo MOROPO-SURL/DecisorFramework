@@ -112,7 +112,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Con
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<PurchaseSpent> PurchaseSpents { get; set; }
         public DbSet<PurchaseZone> PurchaseZones { get; set; }
-        public DbSet<PurchaseZoneSpentBridge> ZoneScheduleBridges { get; set; }
+        public DbSet<PurchaseZoneSpentBridge> PurchaseZoneSpentBridges { get; set; }
         public DbSet<LegalProviderPurchaseZoneBridge> LegalProviderPurchaseZoneBridges { get; set; }
         public DbSet<NaturalProviderPurchaseZoneBridge> NaturalProviderPurchaseZoneBridges { get; set; }
         public DbSet<Purchase> Purchases { get; set; }
@@ -136,6 +136,11 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Con
         public DbSet<AbstractReception> Receptions { get; set; }
         public DbSet<AbstractDeparture> Departures { get; set; }
         public DbSet<DepartureBatchBridge> DepartureBatchBridges { get; set; }
+        public DbSet<ReceptionBatchBridge> ReceptionBatchBridges { get; set; }
+        public DbSet<Classification> Classifications { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }
+
     }
 }
 

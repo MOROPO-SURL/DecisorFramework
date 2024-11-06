@@ -6,9 +6,11 @@
 
         public string ExternalReference { get; set; }
 
-        public System.Guid ProductId { get; set; }
-
         public decimal Amount { get; set; }
+
+        public System.Guid WarehouseId { get; set; }
+
+        public System.Guid? ClassificationId { get; set; }
 
         public Persistence.Entities.Batch Export()
         {
@@ -28,6 +30,8 @@
         {
             entity.ExternalReference = ExternalReference;
             entity.Amount = Amount;
+            entity.WarehouseId = WarehouseId;
+            entity.ClassificationId = ClassificationId;
         }
     }
 }

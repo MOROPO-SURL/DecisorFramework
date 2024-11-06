@@ -7,5 +7,7 @@
         public Inventory.Interop.API.Common.Models.Display.ProductDisplayModel Product { get; set; }
 
         public decimal Amount { get => amount; set => SetProperty(ref amount, value); }
+
+        public System.Collections.ObjectModel.ObservableCollection<BatchSpecificationViewModel> Batchs { get; set; } = new System.Collections.ObjectModel.ObservableCollection<BatchSpecificationViewModel>();
     }
 }

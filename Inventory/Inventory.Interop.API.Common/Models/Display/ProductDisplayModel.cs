@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
+﻿using System.Linq;
+
+namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
 {
     public class ProductDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Product, System.Guid>
     {
@@ -16,6 +18,10 @@
 
         public Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel DefaultUnitMeasurement { get; set; }
 
+        public CategoryDisplayModel Category { get; set; }
+
+        public ClassificationDisplayModel[] Classifications { get; set; }
+
         public WarehousingDecreaseModel[] WarehousingDecreases { get; set; }
 
         public virtual void Import(Persistence.Entities.Product entity)
@@ -26,7 +32,7 @@
             At = entity.At;
             Priority = entity.Priority;
             DefaultUnitMeasurement = new Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel();
-
+            
             DefaultUnitMeasurement.Import(entity.UnitMeasurement);
 
             if (entity.FeatureImage != null)

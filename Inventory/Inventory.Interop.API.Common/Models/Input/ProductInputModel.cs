@@ -15,7 +15,11 @@
 
         public System.Guid DefaultMetricUnityId { get; set; }
 
-        public System.Collections.Generic.List<WarehousingDecreaseModel> WarehousingDecreases { get; set; }
+        public int? CategoryId { get; set; }
+
+        public System.Collections.Generic.List<WarehousingDecreaseModel> WarehousingDecreases { get; set; } = new System.Collections.Generic.List<WarehousingDecreaseModel>();
+
+        public System.Collections.Generic.List<ClassificationInputModel> Classifications { get; set; } = new System.Collections.Generic.List<ClassificationInputModel>();
 
         public Persistence.Entities.Product Export()
         {
@@ -45,6 +49,12 @@
             {
                 entity.UnitMeasurement = null;
                 entity.DefaultUnitMeasurementId = DefaultMetricUnityId;
+            }
+
+            if (entity.CategoryId != CategoryId)
+            {
+                entity.Category = null;
+                entity.CategoryId = CategoryId;
             }
 
             entity.WarehousingDecreaseKindBridges.Clear();

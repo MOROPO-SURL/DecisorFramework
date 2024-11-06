@@ -5,7 +5,7 @@
     xmlns:core_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
-    x:Class="MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.UI.Default.Views.Card.ProductDefaultCardView"
+    x:Class="MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Views.Card.ProductDefaultCardView"
     x:DataType="interop_common_display_models:ProductDisplayModel">
     <ContentView.Resources>
         <ResourceDictionary>

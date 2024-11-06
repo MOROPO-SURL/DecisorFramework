@@ -82,6 +82,16 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
+        Title="Unidades de Medida"
+        ContentTemplate="{DataTemplate decisorframework_essential_manage_pages:UnitMeasurementsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF472;"
+                Color="Black" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
         Title="Productos"
         ContentTemplate="{DataTemplate decisorframework_inventory_manage_pages:ProductsManagePage}">
         <ShellContent.Icon>
@@ -92,12 +102,12 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Unidades de Medida"
-        ContentTemplate="{DataTemplate decisorframework_essential_manage_pages:UnitMeasurementsManagePage}">
+        Title="Categorías"
+        ContentTemplate="{DataTemplate decisorframework_inventory_manage_pages:CategoriesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF472;"
+                Glyph="&#xF3D7;"
                 Color="Black" />
         </ShellContent.Icon>
     </ShellContent>

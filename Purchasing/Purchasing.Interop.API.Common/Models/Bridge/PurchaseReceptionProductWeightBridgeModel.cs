@@ -9,5 +9,7 @@
         public decimal Decrease { get; set; }
 
         public Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel CostCenter { get; set; }
+
+        public System.Collections.Generic.List<Inventory.Interop.API.Common.Models.Input.BatchInputModel> Batches { get; set; } = new System.Collections.Generic.List<Inventory.Interop.API.Common.Models.Input.BatchInputModel>();
     }
 }

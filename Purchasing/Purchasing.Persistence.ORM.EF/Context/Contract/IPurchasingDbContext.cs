@@ -5,11 +5,12 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Context.Contrac
 {
     public interface IPurchasingDbContext : Financial.Persistence.ORM.EF.Context.Contract.IFinancialDbContext
     {
+        public DbSet<Role> PurchasingRoles { get; set; }
         public DbSet<LegalProvider> LegalProviders { get; set; }
         public DbSet<NaturalProvider> NaturalProviders { get; set; }
         public DbSet<PurchaseSpent> PurchaseSpents { get; set; }
         public DbSet<PurchaseZone> PurchaseZones { get; set; }
-        public DbSet<PurchaseZoneSpentBridge> ZoneScheduleBridges { get; set; }
+        public DbSet<PurchaseZoneSpentBridge> PurchaseZoneSpentBridges { get; set; }
         public DbSet<LegalProviderPurchaseZoneBridge> LegalProviderPurchaseZoneBridges { get; set; }
         public DbSet<NaturalProviderPurchaseZoneBridge> NaturalProviderPurchaseZoneBridges { get; set; }
         public DbSet<Purchase> Purchases { get; set; }

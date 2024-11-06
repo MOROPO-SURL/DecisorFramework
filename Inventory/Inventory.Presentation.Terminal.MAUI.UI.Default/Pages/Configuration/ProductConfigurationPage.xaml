@@ -78,13 +78,12 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <Frame
-                    Grid.Column="0" Grid.Row="0" Grid.RowSpan="2"
+                    Grid.Column="0" Grid.Row="0"
+                    HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=1.777777777777778}"
                     VerticalOptions="Start"
-                    Padding="0"
-                    HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=1.777777777777778}">
+                    Padding="0">
                     <Grid>
                         <Image 
                             Aspect="AspectFill"
@@ -102,22 +101,101 @@
                         </Grid>
                     </Grid>
                 </Frame>
-                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="0">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
-                    <Entry Text="{Binding Name}" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" VerticalOptions="Start">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad de Medida por defecto" />
-                    <Picker 
-                        x:Name="DefaultUnitMeasurementPicker"
-                        ItemsSource="{Binding Path=AvailableUnitMeasurements}" 
-                        ItemDisplayBinding="{Binding Name}" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="4" Grid.Row="2">
+                <Grid
+                    Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0"
+                    VerticalOptions="Start"
+                    ColumnSpacing="16" RowSpacing="16">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="0">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                        <Entry Text="{Binding Name}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="1">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Categoría" />
+                        <Picker 
+                            x:Name="CategoryPicker"
+                            ItemsSource="{Binding AvailableCategories}" 
+                            ItemDisplayBinding="{Binding TreeName}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="2">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad de Medida por defecto" />
+                        <Picker 
+                            x:Name="DefaultUnitMeasurementPicker"
+                            ItemsSource="{Binding AvailableUnitMeasurements}" 
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    </VerticalStackLayout>
+                </Grid>
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="4" Grid.Row="1">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="200" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3">
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Clasificaciones" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="AddClassificationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Margin="4"
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding Classifications}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:ClassificationDisplayModel">
+                                        <Frame Padding="8">
+                                            <StackLayout Spacing="8" Orientation="Horizontal">
+                                                <Label 
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    Text="{Binding Name}"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Button
+                                                    VerticalOptions="Start"
+                                                    FontFamily="MaterialDesignIcons" Text="&#xF90B;"
+                                                    Clicked="EditClassificationButton_Clicked" />
+                                                <Button
+                                                    VerticalOptions="Start"
+                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
+                                                    Clicked="ClassificationRemoveButton_Clicked" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <!--<VerticalStackLayout Spacing="6" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Mermas de Almacenamiento" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
@@ -139,20 +217,21 @@
                                 Color="{StaticResource Gray050}" />
                             <CollectionView
                                 Margin="4"
-                                Grid.ColumnSpan="2" Grid.Row="2">
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                HeightRequest="30">
                                 <CollectionView.EmptyView>
                                     <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
                                 </CollectionView.EmptyView>
                             </CollectionView>
                         </Grid>
                     </Frame>
-                </VerticalStackLayout>
+                </VerticalStackLayout>-->
                 <BoxView 
-                    Grid.ColumnSpan="4" Grid.Row="4" 
+                    Grid.ColumnSpan="4" Grid.Row="3" 
                     Margin="0,8,0,0"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="5">
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="4">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
                     <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
                 </VerticalStackLayout>

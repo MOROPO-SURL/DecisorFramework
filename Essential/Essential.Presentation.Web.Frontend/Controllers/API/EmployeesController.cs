@@ -9,7 +9,7 @@ using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Essential.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/essential/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class EmployeesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Employee, System.Guid, EmployeeInputModel, EmployeeDisplayModel>
     {

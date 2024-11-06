@@ -4,7 +4,7 @@ using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/purchasing/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class PurchaseSpentsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<PurchaseSpent, System.Guid, PurchaseSpentInputModel, PurchaseSpentDisplayModel>
     {

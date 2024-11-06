@@ -14,7 +14,7 @@
             }
         }
 
-        public string DefaultPersistenceSchema => null;
+        public string DefaultPersistenceSchema => "decisorframework_purchasing";
     }
 }
 

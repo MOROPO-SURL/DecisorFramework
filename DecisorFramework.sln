@@ -131,8 +131,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Presentation.Ter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Presentation.Terminal.MAUI.UI.Default", "Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj", "{80C2B00E-83E5-4103-AC3C-E2C7EB276BEE}"
 EndProject
-Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "UseCase.Terminal.MAUI", "UseCase.Terminal.MAUI.Terminal\UseCase.Terminal.MAUI.csproj", "{18389139-5555-4D54-82F3-13A2E65617E6}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essential.Presentation.Terminal.MAUI.UI.Default", "Essential\Essential.Presentation.Terminal.MAUI.UI.Default\Essential.Presentation.Terminal.MAUI.UI.Default.csproj", "{F7789964-611C-42CB-A1F3-73CBA8A0CC4D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Presentation.Terminal.MAUI.UI.Default", "Financial\Financial.Presentation.Terminal.MAUI.UI.Default\Financial.Presentation.Terminal.MAUI.UI.Default.csproj", "{E44EFB76-EE3A-4EF0-A2A7-5F04141D1AB2}"
@@ -140,6 +138,12 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Presentation.Terminal.MAUI.UI.Default", "Inventory\Inventory.Presentation.Terminal.MAUI.UI.Default\Inventory.Presentation.Terminal.MAUI.UI.Default.csproj", "{8D89816F-267D-4864-9339-002DF97AAC8A}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Presentation.Terminal.MAUI.UI.Default", "Purchasing\Purchasing.Presentation.Terminal.MAUI.UI.Default\Purchasing.Presentation.Terminal.MAUI.UI.Default.csproj", "{093898AA-0E68-4AA4-89C6-80E13DE8B2C9}"
+EndProject
+Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "UseCase.Terminal.MAUI", "UseCase.Terminal.MAUI.Terminal\UseCase.Terminal.MAUI.csproj", "{8D02F535-5366-4D27-945E-E4A29A2F89AC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Production", "Production", "{4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Production.Persistence", "Production\Production.Persistence\Production.Persistence.csproj", "{36287A74-6D40-4C7B-BAA4-F244EB75A1F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -375,10 +379,6 @@ Global
 		{80C2B00E-83E5-4103-AC3C-E2C7EB276BEE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{80C2B00E-83E5-4103-AC3C-E2C7EB276BEE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{80C2B00E-83E5-4103-AC3C-E2C7EB276BEE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18389139-5555-4D54-82F3-13A2E65617E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18389139-5555-4D54-82F3-13A2E65617E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18389139-5555-4D54-82F3-13A2E65617E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18389139-5555-4D54-82F3-13A2E65617E6}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F7789964-611C-42CB-A1F3-73CBA8A0CC4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F7789964-611C-42CB-A1F3-73CBA8A0CC4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F7789964-611C-42CB-A1F3-73CBA8A0CC4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -395,6 +395,14 @@ Global
 		{093898AA-0E68-4AA4-89C6-80E13DE8B2C9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{093898AA-0E68-4AA4-89C6-80E13DE8B2C9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{093898AA-0E68-4AA4-89C6-80E13DE8B2C9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D02F535-5366-4D27-945E-E4A29A2F89AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D02F535-5366-4D27-945E-E4A29A2F89AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D02F535-5366-4D27-945E-E4A29A2F89AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D02F535-5366-4D27-945E-E4A29A2F89AC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36287A74-6D40-4C7B-BAA4-F244EB75A1F9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36287A74-6D40-4C7B-BAA4-F244EB75A1F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36287A74-6D40-4C7B-BAA4-F244EB75A1F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36287A74-6D40-4C7B-BAA4-F244EB75A1F9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -462,5 +470,6 @@ Global
 		{E44EFB76-EE3A-4EF0-A2A7-5F04141D1AB2} = {D66F51C2-8D15-4E45-A45D-16EBCD562661}
 		{8D89816F-267D-4864-9339-002DF97AAC8A} = {4FCFD797-BAA8-4FCC-913F-199722D2585E}
 		{093898AA-0E68-4AA4-89C6-80E13DE8B2C9} = {21429BE1-DBFB-4FA6-BAD2-4734BA04A7B5}
+		{36287A74-6D40-4C7B-BAA4-F244EB75A1F9} = {4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}
 	EndGlobalSection
 EndGlobal

@@ -9,4 +9,10 @@
 		<ProjectReference Include="..\..\Essential\Essential.Persistence.ORM.EF\Essential.Persistence.ORM.EF.csproj" />
 		<ProjectReference Include="..\Financial.Persistence\Financial.Persistence.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Providers\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Providers\" />
+	</ItemGroup>
 </Project>

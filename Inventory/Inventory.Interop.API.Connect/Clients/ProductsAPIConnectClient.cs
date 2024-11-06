@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/products";
+        protected override string TargetController => "api/inventory/products";
     }
 }

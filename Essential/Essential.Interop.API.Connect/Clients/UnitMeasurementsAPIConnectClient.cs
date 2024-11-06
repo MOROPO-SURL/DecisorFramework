@@ -6,7 +6,7 @@
         {
         }
 
-        protected override string TargetController => "api/unitmeasurements";
+        protected override string TargetController => "api/essential/unitmeasurements";
 
         public virtual System.Threading.Tasks.Task<Common.Models.Display.UnitMeasurementDisplayModel[]> GetReleatedsAsync(System.Guid key)
         {

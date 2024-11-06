@@ -57,7 +57,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("Id")
                         .HasName("pk_legalbusinesskinds");
 
-                    b.ToTable("legalbusinesskinds");
+                    b.ToTable("legalbusinesskinds", "decisorframework_core");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Core.Persistence.Entities.NaturalBusinessKind", b =>
@@ -95,7 +95,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("Id")
                         .HasName("pk_naturalbusinesskinds");
 
-                    b.ToTable("naturalbusinesskinds");
+                    b.ToTable("naturalbusinesskinds", "decisorframework_core");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAccount", b =>
@@ -141,7 +141,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("BranchId")
                         .HasDatabaseName("ix_bankaccounts_branchid");
 
-                    b.ToTable("bankaccounts");
+                    b.ToTable("bankaccounts", "decisorframework_essential");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankAgency", b =>
@@ -186,7 +186,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ImageId")
                         .HasDatabaseName("ix_bankagencies_imageid");
 
-                    b.ToTable("bankagencies");
+                    b.ToTable("bankagencies", "decisorframework_essential");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.BankBranch", b =>
@@ -233,7 +233,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("LocationId")
                         .HasDatabaseName("ix_bankbranches_locationid");
 
-                    b.ToTable("bankbranches");
+                    b.ToTable("bankbranches", "decisorframework_essential");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Colaborator", b =>
@@ -275,7 +275,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsUnique()
                         .HasDatabaseName("ix_colaborators_identityid");
 
-                    b.ToTable("colaborators");
+                    b.ToTable("colaborators", "decisorframework_essential");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", b =>
@@ -317,7 +317,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsUnique()
                         .HasDatabaseName("ix_employees_identityid");
 
-                    b.ToTable("employees");
+                    b.ToTable("employees", "decisorframework_essential");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.EmploymentContract", b =>
@@ -376,7 +376,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("EmployeeId")
                         .HasDatabaseName("ix_employmentcontracts_employeeid");
 
-                    b.ToTable("employmentcontracts");
+                    b.ToTable("employmentcontracts", "decisorframework_essential");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", b =>
@@ -415,7 +415,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("Id")
                         .HasName("pk_unitmeasurements");
 
-                    b.ToTable("unitmeasurements");
+                    b.ToTable("unitmeasurements", "decisorframework_essential");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurementConversionBridge", b =>
@@ -438,7 +438,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_unitmeasurementconversionbridges_sternid");
 
-                    b.ToTable("unitmeasurementconversionbridges");
+                    b.ToTable("unitmeasurementconversionbridges", "decisorframework_essential");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Contract.AbstractCashAdvance", b =>
@@ -456,11 +456,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("discriminator");
-
                     b.Property<Guid>("ResponsibleId")
                         .HasColumnType("uuid")
                         .HasColumnName("responsibleid");
@@ -471,11 +466,9 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ResponsibleId")
                         .HasDatabaseName("ix_advances_responsibleid");
 
-                    b.ToTable("advances");
+                    b.ToTable("advances", "decisorframework_finantial");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractCashAdvance");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", b =>
@@ -513,7 +506,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("Id")
                         .HasName("pk_costcenters");
 
-                    b.ToTable("costcenters");
+                    b.ToTable("costcenters", "decisorframework_finantial");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Batch", b =>
@@ -530,6 +523,10 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.Property<DateTime>("At")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
+
+                    b.Property<Guid?>("ClassificationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("classificationid");
 
                     b.Property<Guid>("CostCenterId")
                         .HasColumnType("uuid")
@@ -554,6 +551,9 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("Id")
                         .HasName("pk_batches");
 
+                    b.HasIndex("ClassificationId")
+                        .HasDatabaseName("ix_batches_classificationid");
+
                     b.HasIndex("CostCenterId")
                         .HasDatabaseName("ix_batches_costcenterid");
 
@@ -566,7 +566,99 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("WarehouseId")
                         .HasDatabaseName("ix_batches_warehouseid");
 
-                    b.ToTable("batches");
+                    b.ToTable("batches", "decisorframework_inventory");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("integer")
+                        .HasColumnName("parentid");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_categories");
+
+                    b.HasIndex("ParentId")
+                        .HasDatabaseName("ix_categories_parentid");
+
+                    b.ToTable("categories", "decisorframework_inventory");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Classification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("productid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_classifications");
+
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_classifications_productid");
+
+                    b.ToTable("classifications", "decisorframework_inventory");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", b =>
@@ -580,11 +672,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("discriminator");
-
                     b.Property<Guid>("ResponsibleId")
                         .HasColumnType("uuid")
                         .HasColumnName("responsibleid");
@@ -595,11 +682,9 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ResponsibleId")
                         .HasDatabaseName("ix_departures_responsibleid");
 
-                    b.ToTable("departures");
+                    b.ToTable("departures", "decisorframework_inventory");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractDeparture");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception", b =>
@@ -617,11 +702,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("text")
                         .HasColumnName("description");
 
-                    b.Property<string>("Discriminator")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("discriminator");
-
                     b.Property<Guid>("ResponsibleId")
                         .HasColumnType("uuid")
                         .HasColumnName("responsibleid");
@@ -632,11 +712,9 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ResponsibleId")
                         .HasDatabaseName("ix_receptions_responsibleid");
 
-                    b.ToTable("receptions");
+                    b.ToTable("receptions", "decisorframework_inventory");
 
-                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractReception");
-
-                    b.UseTphMappingStrategy();
+                    b.UseTptMappingStrategy();
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.CustomAttribute", b =>
@@ -674,7 +752,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("Id")
                         .HasName("pk_customattributes");
 
-                    b.ToTable("customattributes");
+                    b.ToTable("customattributes", "decisorframework_inventory");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.DepartureBatchBridge", b =>
@@ -693,7 +771,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_departurebatchbridges_sternid");
 
-                    b.ToTable("departurebatchbridges");
+                    b.ToTable("departurebatchbridges", "decisorframework_inventory");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", b =>
@@ -710,6 +788,10 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.Property<DateTime>("At")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
+
+                    b.Property<int?>("CategoryId")
+                        .HasColumnType("integer")
+                        .HasColumnName("categoryid");
 
                     b.Property<Guid>("DefaultUnitMeasurementId")
                         .HasColumnType("uuid")
@@ -739,13 +821,16 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("Id")
                         .HasName("pk_products");
 
+                    b.HasIndex("CategoryId")
+                        .HasDatabaseName("ix_products_categoryid");
+
                     b.HasIndex("DefaultUnitMeasurementId")
                         .HasDatabaseName("ix_products_defaultunitmeasurementid");
 
                     b.HasIndex("FeatureImageId")
                         .HasDatabaseName("ix_products_featureimageid");
 
-                    b.ToTable("products");
+                    b.ToTable("products", "decisorframework_inventory");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.ProductCustomAttributeBridge", b =>
@@ -768,7 +853,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_productcustomattributebridges_sternid");
 
-                    b.ToTable("productcustomattributebridges");
+                    b.ToTable("productcustomattributebridges", "decisorframework_inventory");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.ProductWarehousingDecreaseKindBridge", b =>
@@ -795,7 +880,26 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ProductId")
                         .HasDatabaseName("ix_productwarehousingdecreasekindbridges_productid");
 
-                    b.ToTable("productwarehousingdecreasekindbridges");
+                    b.ToTable("productwarehousingdecreasekindbridges", "decisorframework_inventory");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.ReceptionBatchBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_receptionbatchbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_receptionbatchbridges_sternid");
+
+                    b.ToTable("receptionbatchbridges", "decisorframework_inventory");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Warehouse", b =>
@@ -833,7 +937,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("Id")
                         .HasName("pk_warehouses");
 
-                    b.ToTable("warehouses");
+                    b.ToTable("warehouses", "decisorframework_inventory");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", b =>
@@ -882,7 +986,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsUnique()
                         .HasDatabaseName("ix_legalproviders_identityid");
 
-                    b.ToTable("legalproviders");
+                    b.ToTable("legalproviders", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProviderPurchaseZoneBridge", b =>
@@ -901,7 +1005,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_legalproviderpurchasezonebridges_sternid");
 
-                    b.ToTable("legalproviderpurchasezonebridges");
+                    b.ToTable("legalproviderpurchasezonebridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProviderPurchasingContract", b =>
@@ -960,7 +1064,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ProviderId")
                         .HasDatabaseName("ix_legalproviderpurchasingcontracts_providerid");
 
-                    b.ToTable("legalproviderpurchasingcontracts");
+                    b.ToTable("legalproviderpurchasingcontracts", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProvider", b =>
@@ -1009,7 +1113,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsUnique()
                         .HasDatabaseName("ix_naturalproviders_identityid");
 
-                    b.ToTable("naturalproviders");
+                    b.ToTable("naturalproviders", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProviderPurchaseZoneBridge", b =>
@@ -1028,7 +1132,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_naturalproviderpurchasezonebridges_sternid");
 
-                    b.ToTable("naturalproviderpurchasezonebridges");
+                    b.ToTable("naturalproviderpurchasezonebridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.NaturalProviderPurchasingContract", b =>
@@ -1087,7 +1191,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ProviderId")
                         .HasDatabaseName("ix_naturalproviderpurchasingcontracts_providerid");
 
-                    b.ToTable("naturalproviderpurchasingcontracts");
+                    b.ToTable("naturalproviderpurchasingcontracts", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", b =>
@@ -1134,7 +1238,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ZoneId")
                         .HasDatabaseName("ix_purchases_zoneid");
 
-                    b.ToTable("purchases");
+                    b.ToTable("purchases", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseColaboratorBridge", b =>
@@ -1154,10 +1258,13 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_purchasecolaboratorbridges");
 
+                    b.HasIndex("RoleId")
+                        .HasDatabaseName("ix_purchasecolaboratorbridges_roleid");
+
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_purchasecolaboratorbridges_sternid");
 
-                    b.ToTable("purchasecolaboratorbridges");
+                    b.ToTable("purchasecolaboratorbridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseEmployeeBridge", b =>
@@ -1177,10 +1284,13 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_purchaseemployeebridges");
 
+                    b.HasIndex("RoleId")
+                        .HasDatabaseName("ix_purchaseemployeebridges_roleid");
+
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_purchaseemployeebridges_sternid");
 
-                    b.ToTable("purchaseemployeebridges");
+                    b.ToTable("purchaseemployeebridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", b =>
@@ -1249,7 +1359,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ZoneId")
                         .HasDatabaseName("ix_purchaseplans_zoneid");
 
-                    b.ToTable("purchaseplans");
+                    b.ToTable("purchaseplans", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanInputProductBridge", b =>
@@ -1279,7 +1389,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("UnitMeasurementId")
                         .HasDatabaseName("ix_purchaseplaninputproductbridges_unitmeasurementid");
 
-                    b.ToTable("purchaseplaninputproductbridges");
+                    b.ToTable("purchaseplaninputproductbridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanLegalProviderBridge", b =>
@@ -1302,7 +1412,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_purchaseplanlegalproviderbridges_sternid");
 
-                    b.ToTable("purchaseplanlegalproviderbridges");
+                    b.ToTable("purchaseplanlegalproviderbridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanNaturalProviderBridge", b =>
@@ -1325,7 +1435,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_purchaseplannaturalproviderbridges_sternid");
 
-                    b.ToTable("purchaseplannaturalproviderbridges");
+                    b.ToTable("purchaseplannaturalproviderbridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanOutputProductBridge", b =>
@@ -1355,7 +1465,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("UnitMeasurementId")
                         .HasDatabaseName("ix_purchaseplanoutputproductbridges_unitmeasurementid");
 
-                    b.ToTable("purchaseplanoutputproductbridges");
+                    b.ToTable("purchaseplanoutputproductbridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseProductLegalProviderBridge", b =>
@@ -1403,7 +1513,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("UnitMeasurementId")
                         .HasDatabaseName("ix_purchaseproductlegalproviderbridges_unitmeasurementid");
 
-                    b.ToTable("purchaseproductlegalproviderbridges");
+                    b.ToTable("purchaseproductlegalproviderbridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseProductNaturalProviderBridge", b =>
@@ -1451,7 +1561,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("UnitMeasurementId")
                         .HasDatabaseName("ix_purchaseproductnaturalproviderbridges_unitmeasurementid");
 
-                    b.ToTable("purchaseproductnaturalproviderbridges");
+                    b.ToTable("purchaseproductnaturalproviderbridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePurchaseSpentBridge", b =>
@@ -1485,48 +1595,41 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_purchasepurchasespentbridges_sternid");
 
-                    b.ToTable("purchasepurchasespentbridges");
+                    b.ToTable("purchasepurchasespentbridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReceptionProductWeightBridge", b =>
                 {
-                    b.Property<Guid>("ProwId")
+                    b.Property<Guid>("ReceptionId")
                         .HasColumnType("uuid")
-                        .HasColumnName("prowid");
+                        .HasColumnName("receptionid");
 
-                    b.Property<Guid>("SternId")
+                    b.Property<Guid>("ProductId")
                         .HasColumnType("uuid")
-                        .HasColumnName("sternid");
-
-                    b.Property<decimal>("Amount")
-                        .HasColumnType("numeric")
-                        .HasColumnName("amount");
+                        .HasColumnName("productid");
 
                     b.Property<Guid>("CostCenterId")
                         .HasColumnType("uuid")
                         .HasColumnName("costcenterid");
 
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
                     b.Property<decimal>("Decrease")
                         .HasColumnType("numeric")
                         .HasColumnName("decrease");
 
-                    b.Property<Guid>("WarehouseId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("warehouseid");
-
-                    b.HasKey("ProwId", "SternId")
+                    b.HasKey("ReceptionId", "ProductId", "CostCenterId")
                         .HasName("pk_purchasereceptionproductweightbridges");
 
                     b.HasIndex("CostCenterId")
                         .HasDatabaseName("ix_purchasereceptionproductweightbridges_costcenterid");
 
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_purchasereceptionproductweightbridges_sternid");
+                    b.HasIndex("ProductId")
+                        .HasDatabaseName("ix_purchasereceptionproductweightbridges_productid");
 
-                    b.HasIndex("WarehouseId")
-                        .HasDatabaseName("ix_purchasereceptionproductweightbridges_warehouseid");
-
-                    b.ToTable("purchasereceptionproductweightbridges");
+                    b.ToTable("purchasereceptionproductweightbridges", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent", b =>
@@ -1564,7 +1667,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("Id")
                         .HasName("pk_purchasespents");
 
-                    b.ToTable("purchasespents");
+                    b.ToTable("purchasespents", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZone", b =>
@@ -1602,7 +1705,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasKey("Id")
                         .HasName("pk_purchasezones");
 
-                    b.ToTable("purchasezones");
+                    b.ToTable("purchasezones", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZoneSpentBridge", b =>
@@ -1620,12 +1723,50 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnName("amount");
 
                     b.HasKey("ProwId", "SternId")
-                        .HasName("pk_zoneschedulebridges");
+                        .HasName("pk_purchasezonespentbridges");
 
                     b.HasIndex("SternId")
-                        .HasDatabaseName("ix_zoneschedulebridges_sternid");
+                        .HasDatabaseName("ix_purchasezonespentbridges_sternid");
 
-                    b.ToTable("zoneschedulebridges");
+                    b.ToTable("purchasezonespentbridges", "decisorframework_purchasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Role", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_purchasingroles");
+
+                    b.ToTable("purchasingroles", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.BudgetProductBridge", b =>
@@ -1663,7 +1804,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("UnitMeasurementId")
                         .HasDatabaseName("ix_budgetproductbridges_unitmeasurementid");
 
-                    b.ToTable("budgetproductbridges");
+                    b.ToTable("budgetproductbridges", "decisorframework_sales");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.BudgetServiceBridge", b =>
@@ -1699,7 +1840,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ServiceId")
                         .HasDatabaseName("ix_budgetservicebridges_serviceid");
 
-                    b.ToTable("budgetservicebridges");
+                    b.ToTable("budgetservicebridges", "decisorframework_sales");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractBudget", b =>
@@ -1755,7 +1896,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("CommercialId")
                         .HasDatabaseName("ix_budgets_commercialid");
 
-                    b.ToTable("budgets");
+                    b.ToTable("budgets", "decisorframework_sales");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("AbstractBudget");
 
@@ -1802,7 +1943,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("SellerId")
                         .HasDatabaseName("ix_sales_sellerid");
 
-                    b.ToTable("sales");
+                    b.ToTable("sales", "decisorframework_sales");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("AbstractSale");
 
@@ -1855,7 +1996,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsUnique()
                         .HasDatabaseName("ix_legalclients_identityid");
 
-                    b.ToTable("legalclients");
+                    b.ToTable("legalclients", "decisorframework_sales");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientSaleContract", b =>
@@ -1914,7 +2055,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("DefaultBankAccountId")
                         .HasDatabaseName("ix_legalclientsalecontracts_defaultbankaccountid");
 
-                    b.ToTable("legalclientsalecontracts");
+                    b.ToTable("legalclientsalecontracts", "decisorframework_sales");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClient", b =>
@@ -1963,7 +2104,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsUnique()
                         .HasDatabaseName("ix_naturalclients_identityid");
 
-                    b.ToTable("naturalclients");
+                    b.ToTable("naturalclients", "decisorframework_sales");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClientSaleContract", b =>
@@ -2022,7 +2163,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("DefaultBankAccountId")
                         .HasDatabaseName("ix_naturalclientsalecontracts_defaultbankaccountid");
 
-                    b.ToTable("naturalclientsalecontracts");
+                    b.ToTable("naturalclientsalecontracts", "decisorframework_sales");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Servicing.Persistence.Entities.Service", b =>
@@ -2067,7 +2208,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("FeatureImageId")
                         .HasDatabaseName("ix_services_featureimageid");
 
-                    b.ToTable("services");
+                    b.ToTable("services", "decisorframework_servicing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Guama.Core.Persistence.ORM.EF.Entities.Trace", b =>
@@ -3060,9 +3201,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("PurchaseId")
                         .HasDatabaseName("ix_advances_purchaseid");
 
-                    b.ToTable("advances");
-
-                    b.HasDiscriminator().HasValue("PurchaseCashAdvance");
+                    b.ToTable("advances", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanDeparture", b =>
@@ -3076,9 +3215,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("PurchasePlanId")
                         .HasDatabaseName("ix_departures_purchaseplanid");
 
-                    b.ToTable("departures");
-
-                    b.HasDiscriminator().HasValue("PurchasePlanDeparture");
+                    b.ToTable("departures", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", b =>
@@ -3093,9 +3230,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsUnique()
                         .HasDatabaseName("ix_receptions_purchaseid");
 
-                    b.ToTable("receptions");
-
-                    b.HasDiscriminator().HasValue("PurchaseReception");
+                    b.ToTable("receptions", "decisorframework_purchasing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientBudget", b =>
@@ -3110,7 +3245,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ClientId")
                         .HasDatabaseName("ix_budgets_clientid");
 
-                    b.ToTable("budgets");
+                    b.ToTable("budgets", "decisorframework_sales");
 
                     b.HasDiscriminator().HasValue("LegalClientBudget");
                 });
@@ -3127,7 +3262,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ClientId")
                         .HasDatabaseName("ix_budgets_clientid");
 
-                    b.ToTable("budgets");
+                    b.ToTable("budgets", "decisorframework_sales");
 
                     b.HasDiscriminator().HasValue("NaturalClientBudget");
                 });
@@ -3162,7 +3297,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ContractNumber", "ContractYear")
                         .HasDatabaseName("ix_sales_contractnumber_contractyear");
 
-                    b.ToTable("sales");
+                    b.ToTable("sales", "decisorframework_sales");
 
                     b.HasDiscriminator().HasValue("LegalClientWholesaleSale");
                 });
@@ -3197,7 +3332,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("ContractNumber", "ContractYear")
                         .HasDatabaseName("ix_sales_contractnumber_contractyear");
 
-                    b.ToTable("sales");
+                    b.ToTable("sales", "decisorframework_sales");
 
                     b.HasDiscriminator().HasValue("NaturalClientWholesaleSale");
                 });
@@ -3213,7 +3348,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("IdentityId")
                         .HasDatabaseName("ix_sales_identityid");
 
-                    b.ToTable("sales");
+                    b.ToTable("sales", "decisorframework_sales");
 
                     b.HasDiscriminator().HasValue("RetailSale");
                 });
@@ -3387,6 +3522,11 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Batch", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Classification", "Classification")
+                        .WithMany()
+                        .HasForeignKey("ClassificationId")
+                        .HasConstraintName("fk_batches_classifications_classificationid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", "CostCenter")
                         .WithMany()
                         .HasForeignKey("CostCenterId")
@@ -3415,6 +3555,8 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsRequired()
                         .HasConstraintName("fk_batches_warehouses_warehouseid");
 
+                    b.Navigation("Classification");
+
                     b.Navigation("CostCenter");
 
                     b.Navigation("Product");
@@ -3422,6 +3564,28 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.Navigation("Reception");
 
                     b.Navigation("Warehouse");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Category", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Category", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .HasConstraintName("fk_categories_categories_parentid");
+
+                    b.Navigation("Parent");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Classification", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Product")
+                        .WithMany("Classifications")
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_classifications_products_productid");
+
+                    b.Navigation("Product");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", b =>
@@ -3471,6 +3635,11 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .HasConstraintName("fk_products_categories_categoryid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
                         .WithMany()
                         .HasForeignKey("DefaultUnitMeasurementId")
@@ -3482,6 +3651,8 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .WithMany()
                         .HasForeignKey("FeatureImageId")
                         .HasConstraintName("fk_products_images_featureimageid");
+
+                    b.Navigation("Category");
 
                     b.Navigation("FeatureImage");
 
@@ -3519,6 +3690,27 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasConstraintName("fk_productwarehousingdecreasekindbridges_products_productid");
 
                     b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.ReceptionBatchBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception", "Prow")
+                        .WithMany("BatchBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_receptionbatchbridges_receptions_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Batch", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_receptionbatchbridges_batches_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.LegalProvider", b =>
@@ -3682,6 +3874,13 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsRequired()
                         .HasConstraintName("fk_purchasecolaboratorbridges_purchases_prowid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasecolaboratorbridges_purchasingroles_roleid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Colaborator", "Stern")
                         .WithMany()
                         .HasForeignKey("SternId")
@@ -3690,6 +3889,8 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasConstraintName("fk_purchasecolaboratorbridges_colaborators_sternid");
 
                     b.Navigation("Prow");
+
+                    b.Navigation("Role");
 
                     b.Navigation("Stern");
                 });
@@ -3703,6 +3904,13 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsRequired()
                         .HasConstraintName("fk_purchaseemployeebridges_purchases_prowid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchaseemployeebridges_purchasingroles_roleid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Employee", "Stern")
                         .WithMany()
                         .HasForeignKey("SternId")
@@ -3711,6 +3919,8 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasConstraintName("fk_purchaseemployeebridges_employees_sternid");
 
                     b.Navigation("Prow");
+
+                    b.Navigation("Role");
 
                     b.Navigation("Stern");
                 });
@@ -3991,34 +4201,25 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsRequired()
                         .HasConstraintName("fk_purchasereceptionproductweightbridges_costcenters_costcente~");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", "Prow")
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Product")
+                        .WithMany()
+                        .HasForeignKey("ProductId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasereceptionproductweightbridges_products_productid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", "Reception")
                         .WithMany("ProductWeightBridges")
-                        .HasForeignKey("ProwId")
+                        .HasForeignKey("ReceptionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_purchasereceptionproductweightbridges_receptions_prowid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_purchasereceptionproductweightbridges_products_sternid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Warehouse", "Warehouse")
-                        .WithMany()
-                        .HasForeignKey("WarehouseId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_purchasereceptionproductweightbridges_warehouses_warehouseid");
+                        .HasConstraintName("fk_purchasereceptionproductweightbridges_receptions_receptionid");
 
                     b.Navigation("CostCenter");
 
-                    b.Navigation("Prow");
+                    b.Navigation("Product");
 
-                    b.Navigation("Stern");
-
-                    b.Navigation("Warehouse");
+                    b.Navigation("Reception");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZoneSpentBridge", b =>
@@ -4028,14 +4229,14 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasForeignKey("ProwId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_zoneschedulebridges_purchasezones_prowid");
+                        .HasConstraintName("fk_purchasezonespentbridges_purchasezones_prowid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent", "Stern")
                         .WithMany()
                         .HasForeignKey("SternId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_zoneschedulebridges_purchasespents_sternid");
+                        .HasConstraintName("fk_purchasezonespentbridges_purchasespents_sternid");
 
                     b.Navigation("Prow");
 
@@ -4611,6 +4812,12 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseCashAdvance", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Contract.AbstractCashAdvance", null)
+                        .WithOne()
+                        .HasForeignKey("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseCashAdvance", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Purchase")
                         .WithMany()
                         .HasForeignKey("PurchaseId")
@@ -4621,6 +4828,12 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanDeparture", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", null)
+                        .WithOne()
+                        .HasForeignKey("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanDeparture", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", "PurchasePlan")
                         .WithMany()
                         .HasForeignKey("PurchasePlanId")
@@ -4631,6 +4844,12 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception", null)
+                        .WithOne()
+                        .HasForeignKey("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", "Id")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Purchase")
                         .WithOne("Reception")
                         .HasForeignKey("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", "PurchaseId")
@@ -4750,8 +4969,15 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.Navigation("BatchBridges");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception", b =>
+                {
+                    b.Navigation("BatchBridges");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", b =>
                 {
+                    b.Navigation("Classifications");
+
                     b.Navigation("CustomAttributeBridges");
 
                     b.Navigation("WarehousingDecreaseKindBridges");
