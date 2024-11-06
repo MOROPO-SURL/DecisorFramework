@@ -2,6 +2,7 @@
 <core_contract_configuration_pages:BaseConfigurationContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_converters="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Converters"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI"
     xmlns:core_contract_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
@@ -29,6 +30,8 @@
                 <x:Int32>9</x:Int32>
                 <x:Int32>10</x:Int32>
             </Array>
+
+            <local_converters:CategoryToTreeNameConverter x:Key="CategoryToTreeNameConverter" />
 
             <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
         </ResourceDictionary>
@@ -123,7 +126,7 @@
                         <Picker 
                             x:Name="CategoryPicker"
                             ItemsSource="{Binding AvailableCategories}" 
-                            ItemDisplayBinding="{Binding TreeName}"
+                            ItemDisplayBinding="{Binding Converter={StaticResource CategoryToTreeNameConverter}}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
                     </VerticalStackLayout>
                     <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="2">

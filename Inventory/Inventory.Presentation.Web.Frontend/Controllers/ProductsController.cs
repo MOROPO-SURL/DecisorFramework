@@ -55,7 +55,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
                 model.Category.Import(entity.Category);
             }
 
-            model.Classifications = classificationRepository.FindBy(_entity => _entity.ProductId == entity.Id).ToArray().Select(_entity =>
+            model.Classifications = classificationRepository.FindBy(_entity => _entity.ProductId == entity.Id && !_entity.Archived && _entity.Enabled).ToArray().Select(_entity =>
             {
                 var _model = new ClassificationDisplayModel();
 
@@ -90,14 +90,19 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
 
                 imageFileManager.SaveImageFileContent(entity.FeatureImage.Id, model.FeatureImage.ContentData, model.FeatureImage.ContentType);
             }
+        }
 
-            foreach (var _model in model.Classifications)
+        protected override void PostCreate(Product entity, ProductInputModel model)
+        {
+            base.PostCreate(entity, model);
+
+            for (int i = 0; i < model.Classifications.Count; i++)
             {
-                var _entity = _model.Export();
+                var _entity = model.Classifications[i].Export();
 
                 _entity.ProductId = entity.Id;
 
-                classificationRepository.Add(_entity, User.Identity.Name, false);
+                classificationRepository.Add(_entity, User.Identity.Name, i == model.Classifications.Count -1);
             }
         }
 

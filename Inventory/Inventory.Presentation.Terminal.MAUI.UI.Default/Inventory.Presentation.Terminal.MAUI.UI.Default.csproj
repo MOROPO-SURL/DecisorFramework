@@ -31,4 +31,12 @@
 		<ProjectReference Include="..\..\Financial\Financial.Presentation.Terminal.MAUI.UI.Default\Financial.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Inventory.Persistence.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Converters\" />
+	  <None Remove="Extensions\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Converters\" />
+	  <Folder Include="Extensions\" />
+	</ItemGroup>
 </Project>

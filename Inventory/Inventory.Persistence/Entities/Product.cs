@@ -12,7 +12,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities
         public Category Category { get; set; }
         public int? CategoryId { get; set; }
 
-        public virtual Classification[] Classifications { get; set; }
+        public virtual ICollection<Classification> Classifications { get; set; }
 
         public List<ProductCustomAttributeBridge> CustomAttributeBridges { get; set; } = new List<ProductCustomAttributeBridge>();
 

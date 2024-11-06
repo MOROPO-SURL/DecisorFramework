@@ -24,7 +24,6 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
                 if (model.DefaultUnitMeasurement.Id != current.Id) continue;
 
                 DefaultUnitMeasurementPicker.SelectedIndex = i;
-                DefaultUnitMeasurementPicker.SelectedItem = current;
 
                 break;
             }
@@ -39,7 +38,6 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
                 if (model.Category.Id != current.Id) continue;
 
                 CategoryPicker.SelectedIndex = i;
-                CategoryPicker.SelectedItem = current;
 
                 break;
             }

@@ -21,6 +21,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
                 Priority = model.Priority;
                 DefaultUnitMeasurement = model.DefaultUnitMeasurement;
                 Category = model.Category;
+                Classifications = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ClassificationDisplayModel>(model.Classifications);
 
                 if (model.FeatureImage != null)
                 {
