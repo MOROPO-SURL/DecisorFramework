@@ -105,13 +105,13 @@
                 <Label
                     HorizontalOptions="Center"
                     Text="&#xF09E;"
-                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Black}}"
                     FontFamily="MaterialDesignIcons"
                     FontSize="Header" />
                 <Label
                     HorizontalOptions="Center"
                     Text="Avisos"
-                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Black}}"
                     FontSize="Medium" />
             </VerticalStackLayout>
             <BoxView
@@ -125,13 +125,13 @@
                 <Label
                     HorizontalOptions="Center"
                     Text="&#xF78A;"
-                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Black}}"
                     FontFamily="MaterialDesignIcons"
                     FontSize="Header" />
                 <Label
                     HorizontalOptions="Center"
                     Text="Ayuda"
-                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Black}}"
                     FontSize="Medium" />
             </VerticalStackLayout>
         </Grid>

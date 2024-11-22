@@ -1,13 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 25.0.1706.12
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Persistence", "Core\Core.Persistence\Core.Persistence.csproj", "{C188A26E-7558-4E77-AF86-0E5BAA3B6103}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Persistence", "Core\Core.Persistence\Core.Persistence.csproj", "{C188A26E-7558-4E77-AF86-0E5BAA3B6103}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Persistence.ORM.EF", "Core\Core.Persistence.ORM.EF\Core.Persistence.ORM.EF.csproj", "{564D599F-AD86-4D03-842A-2809BD96189C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Persistence.ORM.EF", "Core\Core.Persistence.ORM.EF\Core.Persistence.ORM.EF.csproj", "{564D599F-AD86-4D03-842A-2809BD96189C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Persistence", "Sales\Sales.Persistence\Sales.Persistence.csproj", "{D542020E-A41E-4BF6-8B1B-88294C36B4FC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sales.Persistence", "Sales\Sales.Persistence\Sales.Persistence.csproj", "{D542020E-A41E-4BF6-8B1B-88294C36B4FC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Core", "Core", "{4B302E6F-8583-413E-B28D-9661DFC93A25}"
 EndProject
@@ -21,129 +21,129 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Essential", "Essential", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servicing", "Servicing", "{4A16D853-DC54-4CDF-9598-9BF53200EADA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Persistence", "Inventory\Inventory.Persistence\Inventory.Persistence.csproj", "{6AD9EE1C-F3E8-4EB5-82F4-F96844E29E8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Persistence", "Inventory\Inventory.Persistence\Inventory.Persistence.csproj", "{6AD9EE1C-F3E8-4EB5-82F4-F96844E29E8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essential.Persistence", "Essential\Essential.Persistence\Essential.Persistence.csproj", "{79F5BE37-E909-4645-88FC-BB84B110A8B5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essential.Persistence", "Essential\Essential.Persistence\Essential.Persistence.csproj", "{79F5BE37-E909-4645-88FC-BB84B110A8B5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Persistence", "Purchasing\Purchasing.Persistence\Purchasing.Persistence.csproj", "{17CFA146-D8E6-453F-BEA8-4236AF740717}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchasing.Persistence", "Purchasing\Purchasing.Persistence\Purchasing.Persistence.csproj", "{17CFA146-D8E6-453F-BEA8-4236AF740717}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Persistence", "Servicing\Servicing.Persistence\Servicing.Persistence.csproj", "{33F588D4-BA30-43F4-A1BA-E8234AE7434C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Persistence", "Servicing\Servicing.Persistence\Servicing.Persistence.csproj", "{33F588D4-BA30-43F4-A1BA-E8234AE7434C}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Financial", "Financial", "{D66F51C2-8D15-4E45-A45D-16EBCD562661}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Persistence", "Financial\Financial.Persistence\Financial.Persistence.csproj", "{A6B88A8B-0D77-4FEF-91D5-BAF967D41C0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Persistence", "Financial\Financial.Persistence\Financial.Persistence.csproj", "{A6B88A8B-0D77-4FEF-91D5-BAF967D41C0B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essential.Persistence.ORM.EF", "Essential\Essential.Persistence.ORM.EF\Essential.Persistence.ORM.EF.csproj", "{B43D6933-3DD3-426A-AA76-98D587ED937C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essential.Persistence.ORM.EF", "Essential\Essential.Persistence.ORM.EF\Essential.Persistence.ORM.EF.csproj", "{B43D6933-3DD3-426A-AA76-98D587ED937C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Persistence.ORM.EF", "Financial\Financial.Persistence.ORM.EF\Financial.Persistence.ORM.EF.csproj", "{7A8671A7-2416-4C6A-B264-497E01B36E6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Persistence.ORM.EF", "Financial\Financial.Persistence.ORM.EF\Financial.Persistence.ORM.EF.csproj", "{7A8671A7-2416-4C6A-B264-497E01B36E6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Persistence.ORM.EF", "Inventory\Inventory.Persistence.ORM.EF\Inventory.Persistence.ORM.EF.csproj", "{89D67184-4C3A-4FE1-8B20-BA592F9CCCA9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Persistence.ORM.EF", "Inventory\Inventory.Persistence.ORM.EF\Inventory.Persistence.ORM.EF.csproj", "{89D67184-4C3A-4FE1-8B20-BA592F9CCCA9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Persistence.ORM.EF", "Purchasing\Purchasing.Persistence.ORM.EF\Purchasing.Persistence.ORM.EF.csproj", "{8E28CFF5-72CC-4579-A315-3C070DB48573}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchasing.Persistence.ORM.EF", "Purchasing\Purchasing.Persistence.ORM.EF\Purchasing.Persistence.ORM.EF.csproj", "{8E28CFF5-72CC-4579-A315-3C070DB48573}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Persistence.ORM.EF", "Servicing\Servicing.Persistence.ORM.EF\Servicing.Persistence.ORM.EF.csproj", "{5ECFF245-9217-4486-8805-1B366B6CFDAC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Persistence.ORM.EF", "Servicing\Servicing.Persistence.ORM.EF\Servicing.Persistence.ORM.EF.csproj", "{5ECFF245-9217-4486-8805-1B366B6CFDAC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Interop.API.Common", "Core\Core.Interop.API.Common\Core.Interop.API.Common.csproj", "{5F508F59-148D-43E5-AF4F-404314D61135}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Interop.API.Common", "Core\Core.Interop.API.Common\Core.Interop.API.Common.csproj", "{5F508F59-148D-43E5-AF4F-404314D61135}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Presentation.Web.Common", "Core\Core.Presentation.Web.Common\Core.Presentation.Web.Common.csproj", "{6728E3B9-0359-4B10-A8AE-979D42F1CB85}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Presentation.Web.Common", "Core\Core.Presentation.Web.Common\Core.Presentation.Web.Common.csproj", "{6728E3B9-0359-4B10-A8AE-979D42F1CB85}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Persistence.ORM.EF", "Sales\Sales.Persistence.ORM.EF\Sales.Persistence.ORM.EF.csproj", "{2FD4A53D-E9E8-42CE-8A27-920F9739186F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sales.Persistence.ORM.EF", "Sales\Sales.Persistence.ORM.EF\Sales.Persistence.ORM.EF.csproj", "{2FD4A53D-E9E8-42CE-8A27-920F9739186F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Presentation.Web.Common", "Sales\Sales.Presentation.Web.Common\Sales.Presentation.Web.Common.csproj", "{0C9BFA79-830E-4940-B157-1F24D8572B23}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sales.Presentation.Web.Common", "Sales\Sales.Presentation.Web.Common\Sales.Presentation.Web.Common.csproj", "{0C9BFA79-830E-4940-B157-1F24D8572B23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Presentation.Web.Common", "Financial\Financial.Presentation.Web.Common\Financial.Presentation.Web.Common.csproj", "{26074DEE-99F0-493C-96D9-9220F93FE483}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Presentation.Web.Common", "Financial\Financial.Presentation.Web.Common\Financial.Presentation.Web.Common.csproj", "{26074DEE-99F0-493C-96D9-9220F93FE483}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Presentation.Web.Common", "Servicing\Servicing.Presentation.Web.Common\Servicing.Presentation.Web.Common.csproj", "{C7281F20-C381-4524-A65F-FF13795913F4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Presentation.Web.Common", "Servicing\Servicing.Presentation.Web.Common\Servicing.Presentation.Web.Common.csproj", "{C7281F20-C381-4524-A65F-FF13795913F4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Presentation.Web.Common", "Inventory\Inventory.Presentation.Web.Common\Inventory.Presentation.Web.Common.csproj", "{EDFAB4A7-8ABA-4120-B6BB-024DC125F1CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Presentation.Web.Common", "Inventory\Inventory.Presentation.Web.Common\Inventory.Presentation.Web.Common.csproj", "{EDFAB4A7-8ABA-4120-B6BB-024DC125F1CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Presentation.Web.Common", "Purchasing\Purchasing.Presentation.Web.Common\Purchasing.Presentation.Web.Common.csproj", "{5942A30E-356D-4542-A544-6619C99E0D9D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchasing.Presentation.Web.Common", "Purchasing\Purchasing.Presentation.Web.Common\Purchasing.Presentation.Web.Common.csproj", "{5942A30E-356D-4542-A544-6619C99E0D9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essential.Interop.API.Common", "Essential\Essential.Interop.API.Common\Essential.Interop.API.Common.csproj", "{A946A09A-251E-4219-A07E-52AFB486AC59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essential.Interop.API.Common", "Essential\Essential.Interop.API.Common\Essential.Interop.API.Common.csproj", "{A946A09A-251E-4219-A07E-52AFB486AC59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Interop.API.Common", "Sales\Sales.Interop.API.Common\Sales.Interop.API.Common.csproj", "{9EC5EC0E-28C4-4E1C-887E-A3D915DAEBAF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sales.Interop.API.Common", "Sales\Sales.Interop.API.Common\Sales.Interop.API.Common.csproj", "{9EC5EC0E-28C4-4E1C-887E-A3D915DAEBAF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Interop.API.Common", "Financial\Financial.Interop.API.Common\Financial.Interop.API.Common.csproj", "{AF2429E6-F60D-46A0-B621-C6CA3DD39EBD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Interop.API.Common", "Financial\Financial.Interop.API.Common\Financial.Interop.API.Common.csproj", "{AF2429E6-F60D-46A0-B621-C6CA3DD39EBD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Interop.API.Common", "Inventory\Inventory.Interop.API.Common\Inventory.Interop.API.Common.csproj", "{AA459644-7171-4687-870E-05A1F56DD2B0}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Interop.API.Common", "Inventory\Inventory.Interop.API.Common\Inventory.Interop.API.Common.csproj", "{AA459644-7171-4687-870E-05A1F56DD2B0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Interop.API.Common", "Purchasing\Purchasing.Interop.API.Common\Purchasing.Interop.API.Common.csproj", "{FA7486F8-B500-48A5-B955-11D395A86FCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchasing.Interop.API.Common", "Purchasing\Purchasing.Interop.API.Common\Purchasing.Interop.API.Common.csproj", "{FA7486F8-B500-48A5-B955-11D395A86FCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Interop.API.Common", "Servicing\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj", "{B934F4AC-389A-4850-ABF8-756E70952830}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Interop.API.Common", "Servicing\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj", "{B934F4AC-389A-4850-ABF8-756E70952830}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Presentation.Web.Backend", "Core\Core.Presentation.Web.Backend\Core.Presentation.Web.Backend.csproj", "{9715FFE1-BE69-4709-B63C-974EA7C8D94C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Presentation.Web.Backend", "Core\Core.Presentation.Web.Backend\Core.Presentation.Web.Backend.csproj", "{9715FFE1-BE69-4709-B63C-974EA7C8D94C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Presentation.Web.Backend", "Sales\Sales.Presentation.Web.Backend\Sales.Presentation.Web.Backend.csproj", "{FA3A5BC6-4292-4F9D-B5CB-59E62E59426D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sales.Presentation.Web.Backend", "Sales\Sales.Presentation.Web.Backend\Sales.Presentation.Web.Backend.csproj", "{FA3A5BC6-4292-4F9D-B5CB-59E62E59426D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essential.Presentation.Web.Common", "Essential\Essential.Presentation.Web.Common\Essential.Presentation.Web.Common.csproj", "{671A0203-DA7A-4ECA-B5F4-B33AB58EC50D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essential.Presentation.Web.Common", "Essential\Essential.Presentation.Web.Common\Essential.Presentation.Web.Common.csproj", "{671A0203-DA7A-4ECA-B5F4-B33AB58EC50D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essential.Presentation.Web.Backend", "Essential\Essential.Presentation.Web.Backend\Essential.Presentation.Web.Backend.csproj", "{B26D0299-0D55-4277-B1FF-A230BA82F772}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essential.Presentation.Web.Backend", "Essential\Essential.Presentation.Web.Backend\Essential.Presentation.Web.Backend.csproj", "{B26D0299-0D55-4277-B1FF-A230BA82F772}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Presentation.Web.Backend", "Financial\Financial.Presentation.Web.Backend\Financial.Presentation.Web.Backend.csproj", "{F8DE8A03-F32F-45FB-ACD6-E4BB19C21879}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Presentation.Web.Backend", "Financial\Financial.Presentation.Web.Backend\Financial.Presentation.Web.Backend.csproj", "{F8DE8A03-F32F-45FB-ACD6-E4BB19C21879}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UseCase.Web.BackOffice", "UseCase.Web.BackOffice\UseCase.Web.BackOffice.csproj", "{CC56D999-A409-49E6-ACBB-8AF530E0849D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UseCase.Web.BackOffice", "UseCase.Web.BackOffice\UseCase.Web.BackOffice.csproj", "{CC56D999-A409-49E6-ACBB-8AF530E0849D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Presentation.Web.Backend", "Inventory\Inventory.Presentation.Web.Backend\Inventory.Presentation.Web.Backend.csproj", "{ED4C2484-5F4A-41D2-AF3C-D825C4B19D1E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Presentation.Web.Backend", "Inventory\Inventory.Presentation.Web.Backend\Inventory.Presentation.Web.Backend.csproj", "{ED4C2484-5F4A-41D2-AF3C-D825C4B19D1E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Presentation.Web.Backend", "Purchasing\Purchasing.Presentation.Web.Backend\Purchasing.Presentation.Web.Backend.csproj", "{53B3E96D-D376-4D65-B319-819C6B3FD1BB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchasing.Presentation.Web.Backend", "Purchasing\Purchasing.Presentation.Web.Backend\Purchasing.Presentation.Web.Backend.csproj", "{53B3E96D-D376-4D65-B319-819C6B3FD1BB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Presentation.Web.Backend", "Servicing\Servicing.Presentation.Web.Backend\Servicing.Presentation.Web.Backend.csproj", "{39176ECE-8E96-4D5A-AD62-B618D9E02807}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Presentation.Web.Backend", "Servicing\Servicing.Presentation.Web.Backend\Servicing.Presentation.Web.Backend.csproj", "{39176ECE-8E96-4D5A-AD62-B618D9E02807}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Presentation.Web.Frontend", "Core\Core.Presentation.Web.Frontend\Core.Presentation.Web.Frontend.csproj", "{DF8864F0-8A5F-42B1-B5E3-AD8F4468B006}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Presentation.Web.Frontend", "Core\Core.Presentation.Web.Frontend\Core.Presentation.Web.Frontend.csproj", "{DF8864F0-8A5F-42B1-B5E3-AD8F4468B006}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essential.Presentation.Web.Frontend", "Essential\Essential.Presentation.Web.Frontend\Essential.Presentation.Web.Frontend.csproj", "{DCEF2F0E-B76F-4DC8-97B8-D37E33526A80}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essential.Presentation.Web.Frontend", "Essential\Essential.Presentation.Web.Frontend\Essential.Presentation.Web.Frontend.csproj", "{DCEF2F0E-B76F-4DC8-97B8-D37E33526A80}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Presentation.Web.Frontend", "Financial\Financial.Presentation.Web.Frontend\Financial.Presentation.Web.Frontend.csproj", "{EEF47BD1-648B-4A86-9330-D67E0DDED00E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Presentation.Web.Frontend", "Financial\Financial.Presentation.Web.Frontend\Financial.Presentation.Web.Frontend.csproj", "{EEF47BD1-648B-4A86-9330-D67E0DDED00E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Presentation.Web.Frontend", "Inventory\Inventory.Presentation.Web.Frontend\Inventory.Presentation.Web.Frontend.csproj", "{9987F3A7-76AD-4F60-B3FD-86045B47BC3C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Presentation.Web.Frontend", "Inventory\Inventory.Presentation.Web.Frontend\Inventory.Presentation.Web.Frontend.csproj", "{9987F3A7-76AD-4F60-B3FD-86045B47BC3C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Presentation.Web.Frontend", "Sales\Sales.Presentation.Web.Frontend\Sales.Presentation.Web.Frontend.csproj", "{DC141C7A-F31B-40C8-AA44-AD97572ADA39}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sales.Presentation.Web.Frontend", "Sales\Sales.Presentation.Web.Frontend\Sales.Presentation.Web.Frontend.csproj", "{DC141C7A-F31B-40C8-AA44-AD97572ADA39}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Presentation.Web.Frontend", "Purchasing\Purchasing.Presentation.Web.Frontend\Purchasing.Presentation.Web.Frontend.csproj", "{ACE5991C-73E7-48BA-ABD2-5D347C9042C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchasing.Presentation.Web.Frontend", "Purchasing\Purchasing.Presentation.Web.Frontend\Purchasing.Presentation.Web.Frontend.csproj", "{ACE5991C-73E7-48BA-ABD2-5D347C9042C5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Presentation.Web.Frontend", "Servicing\Servicing.Presentation.Web.Frontend\Servicing.Presentation.Web.Frontend.csproj", "{64316DAE-7E32-4159-BED0-3B07F6A56A94}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Presentation.Web.Frontend", "Servicing\Servicing.Presentation.Web.Frontend\Servicing.Presentation.Web.Frontend.csproj", "{64316DAE-7E32-4159-BED0-3B07F6A56A94}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Interop.API.Connect", "Core\Core.Interop.API.Connect\Core.Interop.API.Connect.csproj", "{7E1788B4-C258-4389-AC42-E4FC49974045}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Interop.API.Connect", "Core\Core.Interop.API.Connect\Core.Interop.API.Connect.csproj", "{7E1788B4-C258-4389-AC42-E4FC49974045}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essential.Interop.API.Connect", "Essential\Essential.Interop.API.Connect\Essential.Interop.API.Connect.csproj", "{90D4D0EE-EFF5-4E05-B8B8-DAC276A7E393}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essential.Interop.API.Connect", "Essential\Essential.Interop.API.Connect\Essential.Interop.API.Connect.csproj", "{90D4D0EE-EFF5-4E05-B8B8-DAC276A7E393}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Interop.API.Connect", "Inventory\Inventory.Interop.API.Connect\Inventory.Interop.API.Connect.csproj", "{AC2A6E9A-21A3-4B10-BA62-EF66E6501D1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Interop.API.Connect", "Inventory\Inventory.Interop.API.Connect\Inventory.Interop.API.Connect.csproj", "{AC2A6E9A-21A3-4B10-BA62-EF66E6501D1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Interop.API.Connect", "Purchasing\Purchasing.Interop.API.Connect\Purchasing.Interop.API.Connect.csproj", "{FAE99C3B-69D0-4B96-9E13-047B9B8DF287}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchasing.Interop.API.Connect", "Purchasing\Purchasing.Interop.API.Connect\Purchasing.Interop.API.Connect.csproj", "{FAE99C3B-69D0-4B96-9E13-047B9B8DF287}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Interop.API.Connect", "Sales\Sales.Interop.API.Connect\Sales.Interop.API.Connect.csproj", "{7569FA54-39F0-41DE-A115-7260FB3C94A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sales.Interop.API.Connect", "Sales\Sales.Interop.API.Connect\Sales.Interop.API.Connect.csproj", "{7569FA54-39F0-41DE-A115-7260FB3C94A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Interop.API.Connect", "Servicing\Servicing.Interop.API.Connect\Servicing.Interop.API.Connect.csproj", "{1E5A3C68-3413-4A0B-A547-1AC1F67F9D7B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Interop.API.Connect", "Servicing\Servicing.Interop.API.Connect\Servicing.Interop.API.Connect.csproj", "{1E5A3C68-3413-4A0B-A547-1AC1F67F9D7B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Interop.API.Connect", "Financial\Financial.Interop.API.Connect\Financial.Interop.API.Connect.csproj", "{86C11F18-E872-4EAF-9ACB-DD06A055059C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Interop.API.Connect", "Financial\Financial.Interop.API.Connect\Financial.Interop.API.Connect.csproj", "{86C11F18-E872-4EAF-9ACB-DD06A055059C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Presentation.Terminal.MAUI", "Financial\Financial.Presentation.Terminal.MAUI\Financial.Presentation.Terminal.MAUI.csproj", "{2194D6C5-28D6-434E-BE34-D9AD49D4C4DE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Presentation.Terminal.MAUI", "Financial\Financial.Presentation.Terminal.MAUI\Financial.Presentation.Terminal.MAUI.csproj", "{2194D6C5-28D6-434E-BE34-D9AD49D4C4DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Presentation.Terminal.MAUI", "Core\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj", "{EB02C950-6AFE-4FBF-870E-E06E6BBE365E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Presentation.Terminal.MAUI", "Core\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj", "{EB02C950-6AFE-4FBF-870E-E06E6BBE365E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essential.Presentation.Terminal.MAUI", "Essential\Essential.Presentation.Terminal.MAUI.Terminal\Essential.Presentation.Terminal.MAUI.csproj", "{67DF9C9A-7384-4A33-AAB6-FDA087F864D2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essential.Presentation.Terminal.MAUI", "Essential\Essential.Presentation.Terminal.MAUI.Terminal\Essential.Presentation.Terminal.MAUI.csproj", "{67DF9C9A-7384-4A33-AAB6-FDA087F864D2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheffMigueSRLDecisor", "CheffMigueSRLDecisor\CheffMigueSRLDecisor.csproj", "{A1C595AA-D594-436A-ABCD-DD1826D2E117}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheffMigueSRLDecisor", "CheffMigueSRLDecisor\CheffMigueSRLDecisor.csproj", "{A1C595AA-D594-436A-ABCD-DD1826D2E117}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Presentation.Terminal.MAUI", "Inventory\Inventory.Persistence.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj", "{4BFF452B-6460-4BD4-9963-6DD8F6395A2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Presentation.Terminal.MAUI", "Inventory\Inventory.Persistence.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj", "{4BFF452B-6460-4BD4-9963-6DD8F6395A2A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Presentation.Terminal.MAUI", "Purchasing\Purchasing.Presentation.Terminal.MAUI\Purchasing.Presentation.Terminal.MAUI.csproj", "{B494DBD9-B056-473A-8318-EE94D43D02BF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchasing.Presentation.Terminal.MAUI", "Purchasing\Purchasing.Presentation.Terminal.MAUI\Purchasing.Presentation.Terminal.MAUI.csproj", "{B494DBD9-B056-473A-8318-EE94D43D02BF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Presentation.Terminal.MAUI.UI.Default", "Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj", "{80C2B00E-83E5-4103-AC3C-E2C7EB276BEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Presentation.Terminal.MAUI.UI.Default", "Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj", "{80C2B00E-83E5-4103-AC3C-E2C7EB276BEE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Essential.Presentation.Terminal.MAUI.UI.Default", "Essential\Essential.Presentation.Terminal.MAUI.UI.Default\Essential.Presentation.Terminal.MAUI.UI.Default.csproj", "{F7789964-611C-42CB-A1F3-73CBA8A0CC4D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essential.Presentation.Terminal.MAUI.UI.Default", "Essential\Essential.Presentation.Terminal.MAUI.UI.Default\Essential.Presentation.Terminal.MAUI.UI.Default.csproj", "{F7789964-611C-42CB-A1F3-73CBA8A0CC4D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Financial.Presentation.Terminal.MAUI.UI.Default", "Financial\Financial.Presentation.Terminal.MAUI.UI.Default\Financial.Presentation.Terminal.MAUI.UI.Default.csproj", "{E44EFB76-EE3A-4EF0-A2A7-5F04141D1AB2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Financial.Presentation.Terminal.MAUI.UI.Default", "Financial\Financial.Presentation.Terminal.MAUI.UI.Default\Financial.Presentation.Terminal.MAUI.UI.Default.csproj", "{E44EFB76-EE3A-4EF0-A2A7-5F04141D1AB2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Inventory.Presentation.Terminal.MAUI.UI.Default", "Inventory\Inventory.Presentation.Terminal.MAUI.UI.Default\Inventory.Presentation.Terminal.MAUI.UI.Default.csproj", "{8D89816F-267D-4864-9339-002DF97AAC8A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Presentation.Terminal.MAUI.UI.Default", "Inventory\Inventory.Presentation.Terminal.MAUI.UI.Default\Inventory.Presentation.Terminal.MAUI.UI.Default.csproj", "{8D89816F-267D-4864-9339-002DF97AAC8A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Purchasing.Presentation.Terminal.MAUI.UI.Default", "Purchasing\Purchasing.Presentation.Terminal.MAUI.UI.Default\Purchasing.Presentation.Terminal.MAUI.UI.Default.csproj", "{093898AA-0E68-4AA4-89C6-80E13DE8B2C9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchasing.Presentation.Terminal.MAUI.UI.Default", "Purchasing\Purchasing.Presentation.Terminal.MAUI.UI.Default\Purchasing.Presentation.Terminal.MAUI.UI.Default.csproj", "{093898AA-0E68-4AA4-89C6-80E13DE8B2C9}"
 EndProject
 Project("{9344BDBB-3E7F-41FC-A0DD-8665D75EE146}") = "UseCase.Terminal.MAUI", "UseCase.Terminal.MAUI.Terminal\UseCase.Terminal.MAUI.csproj", "{8D02F535-5366-4D27-945E-E4A29A2F89AC}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Production", "Production", "{4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Production.Persistence", "Production\Production.Persistence\Production.Persistence.csproj", "{36287A74-6D40-4C7B-BAA4-F244EB75A1F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Production.Persistence", "Production\Production.Persistence\Production.Persistence.csproj", "{36287A74-6D40-4C7B-BAA4-F244EB75A1F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -365,6 +365,7 @@ Global
 		{67DF9C9A-7384-4A33-AAB6-FDA087F864D2}.Release|Any CPU.Build.0 = Release|Any CPU
 		{A1C595AA-D594-436A-ABCD-DD1826D2E117}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{A1C595AA-D594-436A-ABCD-DD1826D2E117}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A1C595AA-D594-436A-ABCD-DD1826D2E117}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{A1C595AA-D594-436A-ABCD-DD1826D2E117}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A1C595AA-D594-436A-ABCD-DD1826D2E117}.Release|Any CPU.Build.0 = Release|Any CPU
 		{4BFF452B-6460-4BD4-9963-6DD8F6395A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -407,13 +408,10 @@ Global
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
-	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {747B719B-EA48-4793-98E6-ECCB62300F19}
-	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{D542020E-A41E-4BF6-8B1B-88294C36B4FC} = {B7E83318-E239-4E9A-B866-65C3B41B8C92}
 		{C188A26E-7558-4E77-AF86-0E5BAA3B6103} = {4B302E6F-8583-413E-B28D-9661DFC93A25}
 		{564D599F-AD86-4D03-842A-2809BD96189C} = {4B302E6F-8583-413E-B28D-9661DFC93A25}
+		{D542020E-A41E-4BF6-8B1B-88294C36B4FC} = {B7E83318-E239-4E9A-B866-65C3B41B8C92}
 		{6AD9EE1C-F3E8-4EB5-82F4-F96844E29E8F} = {4FCFD797-BAA8-4FCC-913F-199722D2585E}
 		{79F5BE37-E909-4645-88FC-BB84B110A8B5} = {B0FD6E63-6D1A-44E0-9B47-450F4DD8B714}
 		{17CFA146-D8E6-453F-BEA8-4236AF740717} = {21429BE1-DBFB-4FA6-BAD2-4734BA04A7B5}
@@ -471,5 +469,8 @@ Global
 		{8D89816F-267D-4864-9339-002DF97AAC8A} = {4FCFD797-BAA8-4FCC-913F-199722D2585E}
 		{093898AA-0E68-4AA4-89C6-80E13DE8B2C9} = {21429BE1-DBFB-4FA6-BAD2-4734BA04A7B5}
 		{36287A74-6D40-4C7B-BAA4-F244EB75A1F9} = {4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {747B719B-EA48-4793-98E6-ECCB62300F19}
 	EndGlobalSection
 EndGlobal
