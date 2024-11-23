@@ -13,7 +13,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public PurchaseZoneDisplayModel Zone { get; set; }
 
-        public Essential.Interop.API.Common.Models.Display.EmployeeDisplayModel Purchaser { get; set; }
+        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Purchaser { get; set; }
 
         public string Description { get; set; }
 
@@ -47,7 +47,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
             if (entity.Purchaser != null)
             {
-                Purchaser = new Essential.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Purchaser = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
                 Purchaser.Import(entity.Purchaser);
             }
 
@@ -59,7 +59,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                     Provider = new LegalProviderDisplayModel(),
                     CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
-                    UnitMeasurement = new Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    UnitMeasurement = new Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
                     Cost = bridge.Cost
                 };
 
@@ -79,7 +79,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                     Provider = new NaturalProviderDisplayModel(),
                     CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
-                    UnitMeasurement = new Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    UnitMeasurement = new Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
                     Cost = bridge.Cost
                 };
 
@@ -116,7 +116,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             {
                 var model = new PurchaseEmployeeBridgeModel
                 {
-                    Employee = new Essential.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
+                    Employee = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
                     Role = bridge.Role
                 };
 

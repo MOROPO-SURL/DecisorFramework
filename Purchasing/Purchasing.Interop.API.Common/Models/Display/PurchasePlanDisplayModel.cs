@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using MOROPO.Framework.Decisor.Essential.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display

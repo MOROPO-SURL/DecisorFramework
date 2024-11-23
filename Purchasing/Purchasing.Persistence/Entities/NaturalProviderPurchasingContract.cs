@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
 {
-	public class NaturalProviderPurchasingContract : Essential.Persistence.Entities.Contract.AbstractContract
+	public class NaturalProviderPurchasingContract : Legal.Persistence.Entities.Contract.AbstractContract
     {
 		[System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProviderId))]
 		public NaturalProvider Provider { get; set; }

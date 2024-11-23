@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
+﻿using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
+
+namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
 {
     public class PurchasePlanOutputProductBridge : Guama.Core.Persistence.Entities.Contract.IBridge<PurchasePlan, System.Guid, Inventory.Persistence.Entities.Product, System.Guid>
     {
@@ -11,7 +13,7 @@
         public decimal Amount { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(UnitMeasurementId))]
-        public Essential.Persistence.Entities.UnitMeasurement UnitMeasurement { get; set; }
+        public UnitMeasurement UnitMeasurement { get; set; }
         public System.Guid UnitMeasurementId { get; set; }
     }
 }

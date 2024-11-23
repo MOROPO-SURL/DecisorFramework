@@ -15,6 +15,8 @@ using MOROPO.Framework.Decisor.Core.Presentation.Web.Backend.Extensions;
 using MOROPO.Framework.Decisor.Essential.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Essential.Presentation.Web.Backend.Extensions;
 using MOROPO.Framework.Decisor.Financial.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Backend.Extensions;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend.Extensions;
@@ -59,10 +61,11 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice
             services.AddDecisorCorePresentationWebCommon();
             services.AddDecisorCorePresentationWebBackend();
             services.AddDecisorEssentialPresentationWebCommon();
-            services.AddDecisorEssentialContractualPresentationWebCommon();
             services.AddDecisorEssentialPresentationWebBackend();
             services.AddDecisorFinancialPresentationWebCommon();
             //services.AddDecisorFinancialPresentationWebBackend
+            services.AddDecisorHumanResourcesPresentationWebCommon();
+            services.AddDecisorHumanResourcesPresentationWebBackend();
             services.AddDecisorInventoryPresentationWebCommon();
             //services.AddDecisorInventoryPresentationWebBackend
             services.AddDecisorPurchasingPresentationWebCommon();

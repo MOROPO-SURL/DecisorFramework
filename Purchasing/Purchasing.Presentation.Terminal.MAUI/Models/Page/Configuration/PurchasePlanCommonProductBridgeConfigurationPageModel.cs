@@ -1,10 +1,12 @@
-﻿namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration
+﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class PurchasePlanCommonProductBridgeConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Bridge.PurchasePlanCommonProductBridgeModel>
     {
         private Inventory.Interop.API.Common.Models.Display.ProductDisplayModel product;
         private decimal amount;
-        private Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel unitMeasurement;
+        private UnitMeasurementDisplayModel unitMeasurement;
 
         public PurchasePlanCommonProductBridgeConfigurationPageModel(Interop.API.Common.Models.Bridge.PurchasePlanCommonProductBridgeModel model = null) : base(model)
         {
@@ -20,8 +22,8 @@
 
         public decimal Amount { get => amount; set => SetProperty(ref amount, value); }
 
-        public Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get => unitMeasurement; set => SetProperty(ref unitMeasurement, value); }
+        public UnitMeasurementDisplayModel UnitMeasurement { get => unitMeasurement; set => SetProperty(ref unitMeasurement, value); }
 
-        public Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
+        public UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
     }
 }

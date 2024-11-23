@@ -70,7 +70,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "employees",
                 Action = "Index",
                 Area = "HHRR",
-                Role = Essential.Presentation.Web.Backend.Constants.Security.Authorization.EmployeeViewerPermission
+                Role = HumanResources.Presentation.Web.Backend.Constants.Security.Authorization.EmployeeViewerPermission
             });
 
             purchaseSection.Add(new ManagementDashboardSectionViewModel

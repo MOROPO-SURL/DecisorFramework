@@ -11,7 +11,4 @@
 	<ItemGroup>
 	  <None Remove="Entities\Contract\" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Entities\Contract\" />
-	</ItemGroup>
 </Project>

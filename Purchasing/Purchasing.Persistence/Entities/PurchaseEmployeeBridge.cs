@@ -1,12 +1,12 @@
 ﻿namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
 {
-    public class PurchaseEmployeeBridge : Guama.Core.Persistence.Entities.Contract.IBridge<Purchase, System.Guid, Essential.Persistence.Entities.Employee, System.Guid>
+    public class PurchaseEmployeeBridge : Guama.Core.Persistence.Entities.Contract.IBridge<Purchase, System.Guid, HumanResources.Persistence.Entities.Employee, System.Guid>
     {
         public System.Guid ProwId { get; set; }
         public Purchase Prow { get; set; }
 
         public System.Guid SternId { get; set; }
-        public Essential.Persistence.Entities.Employee Stern { get; set; }
+        public HumanResources.Persistence.Entities.Employee Stern { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(RoleId))]
         public Role Role { get; set; }

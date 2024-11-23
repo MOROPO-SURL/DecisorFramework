@@ -38,7 +38,7 @@ public partial class ProductsManagePage : Caney.MVVM.Core.Pages.ContentPage
             {
                 var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
 
-                var unitMeasurementsAPIConnectClient = new Essential.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
+                var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
                 var categoriesAPIConnectClient = new Interop.API.Connect.Clients.CategoriesAPIConnectClient(httpClientHelperProvider);
 
                 // TODO complete fallow behavior
@@ -98,7 +98,7 @@ public partial class ProductsManagePage : Caney.MVVM.Core.Pages.ContentPage
             {
                 var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
 
-                var unitMeasurementsAPIConnectClient = new Essential.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
+                var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
                 var categoriesAPIConnectClient = new Interop.API.Connect.Clients.CategoriesAPIConnectClient(httpClientHelperProvider);
 
                 // TODO complete fallow behavior

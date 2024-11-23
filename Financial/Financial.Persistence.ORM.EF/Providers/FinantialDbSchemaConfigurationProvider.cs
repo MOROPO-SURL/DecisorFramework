@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Financial.Persistence.ORM.EF.Providers
+﻿using MOROPO.Framework.Decisor.Core.Persistence.ORM.EF.Configurators.Base;
+
+namespace MOROPO.Framework.Decisor.Financial.Persistence.ORM.EF.Providers
 {
 	public class FinantialDbSchemaConfigurationProvider : Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade
     {
@@ -8,8 +10,11 @@
             {
                 return new System.Collections.Generic.List<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
                 {
-                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.Contract.AbstractCashAdvance>(),
-                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.CostCenter>()
+                    new BaseEntityTypeConfigurator<Entities.BankAccount>(),
+                    new BaseEntityTypeConfigurator<Entities.BankAgency>(),
+                    new BaseEntityTypeConfigurator<Entities.BankBranch>(),
+                    new BaseEntityTypeConfigurator<Entities.Contract.AbstractCashAdvance>(),
+                    new BaseEntityTypeConfigurator<Entities.CostCenter>()
                 };
             }
         }

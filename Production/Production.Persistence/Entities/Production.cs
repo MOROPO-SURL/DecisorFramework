@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
+using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Production.Persistence.Entities
 {
@@ -21,7 +22,7 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.Entities
 
         public decimal Amount { get; set; }
 
-        public Essential.Persistence.Entities.UnitMeasurement UnitMeasurement { get; set; }
+        public UnitMeasurement UnitMeasurement { get; set; }
 
         public List<ProductionProductBridge> ProductBridges { get; set; } = new List<ProductionProductBridge>();
 

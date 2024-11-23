@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Sales.Persistence.ORM.EF.Context.Contract
 {
-	public interface ISaleContractualDbContext : ISalesDbContext, Essential.Persistence.ORM.EF.Context.Contract.IEssentialContractualDbContext
+	public interface ISaleContractualDbContext : ISalesDbContext, Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext
     {
         public DbSet<Entities.LegalClientSaleContract> LegalClientSaleContracts { get; set; }
         public DbSet<Entities.NaturalClientSaleContract> NaturalClientSaleContracts { get; set; }

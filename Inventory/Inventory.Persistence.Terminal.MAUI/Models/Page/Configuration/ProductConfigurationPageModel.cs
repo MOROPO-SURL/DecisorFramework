@@ -1,4 +1,5 @@
 ﻿using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Extensions;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -7,7 +8,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
         private string name;
         private string description;
         private int priority = 1;
-        private Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel defaultUnitMeasurement;
+        private UnitMeasurementDisplayModel defaultUnitMeasurement;
         private Interop.API.Common.Models.Display.CategoryDisplayModel category;
         private Microsoft.Maui.Controls.ImageSource featureImageSource;
 
@@ -41,7 +42,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel DefaultUnitMeasurement { get => defaultUnitMeasurement; set => SetProperty(ref defaultUnitMeasurement, value); }
+        public UnitMeasurementDisplayModel DefaultUnitMeasurement { get => defaultUnitMeasurement; set => SetProperty(ref defaultUnitMeasurement, value); }
 
         public Interop.API.Common.Models.Display.CategoryDisplayModel Category { get => category; set => SetProperty(ref category, value); }
 
@@ -51,7 +52,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
 
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.WarehousingDecreaseModel> WarehousingDecreases { get; set; } = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.WarehousingDecreaseModel>();
 
-        public Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
+        public UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
 
         public Interop.API.Common.Models.Display.CategoryDisplayModel[] AvailableCategories { get; set; }
     }

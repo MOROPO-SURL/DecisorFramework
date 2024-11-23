@@ -21,7 +21,7 @@
         public string Description { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CommercialId))]
-        public Essential.Persistence.Entities.Employee Commercial { get; set; }
+        public HumanResources.Persistence.Entities.Employee Commercial { get; set; }
         public System.Guid CommercialId { get; set; }
 
         public System.Collections.Generic.List<BudgetServiceBridge> ServiceBridges { get; set; } = new System.Collections.Generic.List<BudgetServiceBridge>();

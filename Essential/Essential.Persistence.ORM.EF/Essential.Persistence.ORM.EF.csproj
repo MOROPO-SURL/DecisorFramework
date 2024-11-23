@@ -9,10 +9,4 @@
 		<ProjectReference Include="..\..\Core\Core.Persistence.ORM.EF\Core.Persistence.ORM.EF.csproj" />
 		<ProjectReference Include="..\Essential.Persistence\Essential.Persistence.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Context\Contract\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Context\Contract\" />
-	</ItemGroup>
 </Project>

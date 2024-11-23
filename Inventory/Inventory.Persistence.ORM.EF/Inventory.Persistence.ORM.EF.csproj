@@ -6,8 +6,8 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\HumanResources\HumanResources.Persistence.ORM.EF\HumanResources.Persistence.ORM.EF.csproj" />
 		<ProjectReference Include="..\Inventory.Persistence\Inventory.Persistence.csproj" />
-		<ProjectReference Include="..\..\Financial\Financial.Persistence.ORM.EF\Financial.Persistence.ORM.EF.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Context\" />
@@ -18,7 +18,6 @@
 	<ItemGroup>
 	  <Folder Include="Context\" />
 	  <Folder Include="Context\Contract\" />
-	  <Folder Include="Repositories\" />
 	  <Folder Include="Providers\" />
 	</ItemGroup>
 </Project>

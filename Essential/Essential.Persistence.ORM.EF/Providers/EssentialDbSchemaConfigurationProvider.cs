@@ -1,8 +1,6 @@
-﻿using MOROPO.Framework.Decisor.Core.Persistence.ORM.EF.Configurators.Base;
-
-namespace MOROPO.Framework.Decisor.Essential.Persistence.ORM.EF.Providers
+﻿namespace MOROPO.Framework.Decisor.Essential.Persistence.ORM.EF.Providers
 {
-	public class EssentialDbSchemaConfigurationProvider : Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade
+    public class EssentialDbSchemaConfigurationProvider : Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade
     {
         public System.Collections.Generic.ICollection<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator> EntityTypeConfigurators
         {
@@ -10,13 +8,7 @@ namespace MOROPO.Framework.Decisor.Essential.Persistence.ORM.EF.Providers
             {
                 return new System.Collections.Generic.List<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
                 {
-                    new BaseEntityTypeConfigurator<Entities.BankAccount>(),
-                    new BaseEntityTypeConfigurator<Entities.BankAgency>(),
-                    new BaseEntityTypeConfigurator<Entities.BankBranch>(),
-                    new Configurators.EmployeeEntityTypeConfigurator(),
-                    new Configurators.ColaboratorEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.UnitMeasurement>(),
-                    new Configurators.UnitMeasurementConversionBridgeEntityTypeConfigurator()
+                    new Configurators.ColaboratorEntityTypeConfigurator()
                 };
             }
         }

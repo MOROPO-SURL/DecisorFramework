@@ -1,8 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using MOROPO.Framework.Decisor.Core.Persistence.Entities;
-using MOROPO.Framework.Decisor.Essential.Persistence.Entities;
-using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
+using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 using MOROPO.Framework.Decisor.Servicing.Persistence.Entities;
 using MOROPO.Framework.Decisor.Sales.Persistence.Entities;
@@ -13,6 +12,8 @@ using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Security.Personal.Persistence.Entities;
 using MOROPO.Framework.Decisor.Financial.Persistence.Entities.Contract;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract;
+using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
+using MOROPO.Framework.Decisor.Essential.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Context
 {
@@ -24,8 +25,8 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Con
         Guama.Security.Personal.Persistence.ORM.EF.Contract.IPersistenceDbContext,
         Core.Persistence.ORM.EF.Context.Contract.ICoreDbContext,
         Essential.Persistence.ORM.EF.Context.Contract.IEssentialDbContext,
-        Essential.Persistence.ORM.EF.Context.Contract.IEssentialContractualDbContext,
         Financial.Persistence.ORM.EF.Context.Contract.IFinancialDbContext,
+        HumanResources.Persistence.ORM.EF.Context.Contract.IHumanResourcesDbContext,
         Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext,
         Purchasing.Persistence.ORM.EF.Context.Contract.IPurchasingDbContext,
         Purchasing.Persistence.ORM.EF.Context.Contract.IPurchasingContractualDbContext,

@@ -2,13 +2,13 @@
 {
     public static class Authorization
     {
-        #region Employee
-        public const string EmployeeManagementPermissionGroup = "employee-management-permission-group";
+        #region Colaborator
+        public const string ColaboratorManagementPermissionGroup = "colaborator-management-permission-group";
 
-        public const string EmployeeViewerPermission = "employee-viewer-permission";
-        public const string EmployeeCreatorPermission = "employee-creator-permission";
-        public const string EmployeeEditorPermission = "employee-editor-permission";
-        public const string EmployeeRemoverPermission = "employee-remover-permission";
+        public const string ColaboratorViewerPermission = "colaborator-viewer-permission";
+        public const string ColaboratorCreatorPermission = "colaborator-creator-permission";
+        public const string ColaboratorEditorPermission = "colaborator-editor-permission";
+        public const string ColaboratorRemoverPermission = "colaborator-remover-permission";
         #endregion
     }
 }

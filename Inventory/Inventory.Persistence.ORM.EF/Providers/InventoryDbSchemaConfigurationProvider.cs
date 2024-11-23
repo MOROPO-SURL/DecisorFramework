@@ -21,7 +21,9 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.Contract.AbstractDeparture>(),
                     new Configurators.DepartureBatchBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Contract.AbstractReception>(),
-                    new Configurators.ReceptionBatchBridgeEntityTypeConfigurator()
+                    new Configurators.ReceptionBatchBridgeEntityTypeConfigurator(),
+                    new BaseEntityTypeConfigurator<Entities.UnitMeasurement>(),
+                    new Configurators.UnitMeasurementConversionBridgeEntityTypeConfigurator()
                 };
             }
         }

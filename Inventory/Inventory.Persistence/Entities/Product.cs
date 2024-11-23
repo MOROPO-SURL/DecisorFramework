@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities
     public class Product : Core.Persistence.Entities.Contract.AbstractGoods
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DefaultUnitMeasurementId))]
-        public Essential.Persistence.Entities.UnitMeasurement UnitMeasurement { get; set; }
+        public UnitMeasurement UnitMeasurement { get; set; }
         public System.Guid DefaultUnitMeasurementId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CategoryId))]

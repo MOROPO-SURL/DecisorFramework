@@ -16,6 +16,8 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Context.Contract
 		public DbSet<Entities.Contract.AbstractDeparture> Departures { get; set; }
 		public DbSet<Entities.DepartureBatchBridge> DepartureBatchBridges { get; set; }
         public DbSet<Entities.ReceptionBatchBridge> ReceptionBatchBridges { get; set; }
+        public DbSet<Entities.UnitMeasurement> UnitMeasurements { get; set; }
+        public DbSet<Entities.UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
     }
 }
 

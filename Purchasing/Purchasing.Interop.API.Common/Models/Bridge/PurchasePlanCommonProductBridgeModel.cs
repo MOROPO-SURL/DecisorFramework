@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge
+﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+
+namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge
 {
     public class PurchasePlanCommonProductBridgeModel
     {
@@ -6,6 +8,6 @@
 
         public decimal Amount { get; set; }
 
-        public Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get; set; }
+        public UnitMeasurementDisplayModel UnitMeasurement { get; set; }
     }
 }

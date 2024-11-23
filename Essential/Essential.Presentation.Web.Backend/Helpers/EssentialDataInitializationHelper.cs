@@ -10,22 +10,22 @@ namespace MOROPO.Framework.Decisor.Essential.Presentation.Web.Backend.Helpers
         {
             var permissionDbSet = dbContext.Set<Guama.Core.Security.Common.Persistence.Entities.Permission>();
 
-            #region Employee
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.EmployeeViewerPermission)))
+            #region Colaborator
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ColaboratorViewerPermission)))
             {
-                permissionDbSet.Add(Authorization.EmployeeViewerPermission.ToPermissionEntity(Authorization.EmployeeManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.ColaboratorViewerPermission.ToPermissionEntity(Authorization.ColaboratorManagementPermissionGroup));
             }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.EmployeeCreatorPermission)))
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ColaboratorCreatorPermission)))
             {
-                permissionDbSet.Add(Authorization.EmployeeCreatorPermission.ToPermissionEntity(Authorization.EmployeeManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.ColaboratorCreatorPermission.ToPermissionEntity(Authorization.ColaboratorManagementPermissionGroup));
             }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.EmployeeEditorPermission)))
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ColaboratorEditorPermission)))
             {
-                permissionDbSet.Add(Authorization.EmployeeEditorPermission.ToPermissionEntity(Authorization.EmployeeManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.ColaboratorEditorPermission.ToPermissionEntity(Authorization.ColaboratorManagementPermissionGroup));
             }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.EmployeeRemoverPermission)))
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ColaboratorRemoverPermission)))
             {
-                permissionDbSet.Add(Authorization.EmployeeRemoverPermission.ToPermissionEntity(Authorization.EmployeeManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.ColaboratorRemoverPermission.ToPermissionEntity(Authorization.ColaboratorManagementPermissionGroup));
             }
             #endregion
 
