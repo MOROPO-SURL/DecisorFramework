@@ -12,8 +12,4 @@
 	<ItemGroup>
 	  <None Remove="Models\Input\" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Models\Input\" />
-	  <Folder Include="Models\Input\" />
-	</ItemGroup>
 </Project>

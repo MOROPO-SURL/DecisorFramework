@@ -298,11 +298,25 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
             if (model.Image != null)
             {
-                var oldLogoImage = imageRepository.Get(model.Image.Id);
+                var oldImage = imageRepository.Get(model.Image.Id);
 
-                imageRepository.Delete(oldLogoImage, User.Identity.Name);
+                imageRepository.Delete(oldImage, User.Identity.Name);
 
-                imageFileManager.DeleteImageFile(oldLogoImage);
+                imageFileManager.DeleteImageFile(oldImage);
+            }
+        }
+
+        protected override void PostDelete(Employee entity)
+        {
+            base.PostDelete(entity);
+
+            if (entity.Identity.ImageId != null)
+            {
+                var oldImage = imageRepository.Get(entity.Identity.ImageId.Value);
+
+                imageRepository.Delete(oldImage, User.Identity.Name);
+
+                imageFileManager.DeleteImageFile(oldImage);
             }
         }
     }

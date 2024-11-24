@@ -23,6 +23,10 @@
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Holder { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CurrencyId))]
+        public Currency Currency { get; set; }
+        public System.Guid CurrencyId { get; set; }
     }
 }
 

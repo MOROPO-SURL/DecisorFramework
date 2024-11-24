@@ -47,6 +47,13 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Remove="cache\**" />
+	  <EmbeddedResource Remove="cache\**" />
+	  <MauiCss Remove="cache\**" />
+	  <MauiXaml Remove="cache\**" />
+	  <None Remove="cache\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />

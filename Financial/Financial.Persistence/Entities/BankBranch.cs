@@ -19,9 +19,9 @@
 
         public int Number { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(LocationId))]
-        public Guama.Identity.Persistence.Entities.PostalContactItem Location { get; set; }
-        public System.Guid? LocationId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(PostalContactId))]
+        public Guama.Identity.Persistence.Entities.PostalContactItem PostalContact { get; set; }
+        public System.Guid? PostalContactId { get; set; }
     }
 }
 

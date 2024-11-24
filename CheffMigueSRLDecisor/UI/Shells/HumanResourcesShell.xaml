@@ -21,7 +21,7 @@
                     HorizontalOptions="Start" VerticalOptions="Start"
                     Text="&#xF2DE;"
                     FontFamily="MaterialDesignIcons"
-                    FontSize="Large"
+                    FontSize="Medium"
                     Padding="4"
                     BackgroundColor="#60FFFFFF"
                     Clicked="BackHomeButton_Clicked" />
@@ -45,7 +45,6 @@
                 Color="Black" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutSeparator />
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
         Title="Empleados"

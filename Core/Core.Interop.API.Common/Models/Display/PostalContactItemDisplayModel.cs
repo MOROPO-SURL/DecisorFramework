@@ -6,7 +6,6 @@
 
         public string Label { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
         public string Address { get; set; }
 
         public int ZipCode { get; set; }

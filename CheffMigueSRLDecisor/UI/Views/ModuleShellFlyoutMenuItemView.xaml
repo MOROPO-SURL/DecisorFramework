@@ -13,7 +13,7 @@
     <VerticalStackLayout Padding="12" Spacing="8">
         <Label
             Text="{Binding Text}"
-            FontSize="Large"
+            FontSize="Medium"
             FontAttributes="Bold" />
         <BoxView
             IsVisible="{Binding Text, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"

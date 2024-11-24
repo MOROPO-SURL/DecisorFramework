@@ -100,16 +100,20 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Con
         public DbSet<RetailSale> RetailSales { get; set; }
         public DbSet<LegalClientWholesaleSale> LegalClientWholesaleSales { get; set; }
         public DbSet<NaturalClientWholesaleSale> NaturalClientWholesaleSales { get; set; }
-        public DbSet<BankAgency> BankAgencies { get; set; }
-        public DbSet<BankBranch> BankBranches { get; set; }
-        public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<EmploymentContract> EmploymentContracts { get; set; }
         public DbSet<LegalProviderPurchasingContract> LegalProviderPurchasingContracts { get; set; }
         public DbSet<NaturalProviderPurchasingContract> NaturalProviderPurchasingContracts { get; set; }
         public DbSet<LegalClientSaleContract> LegalClientSaleContracts { get; set; }
         public DbSet<NaturalClientSaleContract> NaturalClientSaleContracts { get; set; }
+        
+        public DbSet<Currency> Currencies { get; set; }
+        public DbSet<BankAgency> BankAgencies { get; set; }
+        public DbSet<BankBranch> BankBranches { get; set; }
+        public DbSet<BankAccount> BankAccounts { get; set; }
+        public DbSet<BankDebitCard> BankDebitCards { get; set; }
         public DbSet<CostCenter> CostCenters { get; set; }
         public DbSet<AbstractCashAdvance> Advances { get; set; }
+
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<PurchaseSpent> PurchaseSpents { get; set; }
         public DbSet<PurchaseZone> PurchaseZones { get; set; }

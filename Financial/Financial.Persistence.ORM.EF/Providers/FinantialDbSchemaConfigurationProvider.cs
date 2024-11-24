@@ -10,9 +10,11 @@ namespace MOROPO.Framework.Decisor.Financial.Persistence.ORM.EF.Providers
             {
                 return new System.Collections.Generic.List<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
                 {
+                    new BaseEntityTypeConfigurator<Entities.Currency>(),
                     new BaseEntityTypeConfigurator<Entities.BankAccount>(),
                     new BaseEntityTypeConfigurator<Entities.BankAgency>(),
                     new BaseEntityTypeConfigurator<Entities.BankBranch>(),
+                    new BaseEntityTypeConfigurator<Entities.BankDebitCard>(),
                     new BaseEntityTypeConfigurator<Entities.Contract.AbstractCashAdvance>(),
                     new BaseEntityTypeConfigurator<Entities.CostCenter>()
                 };

@@ -17,6 +17,10 @@
         public string Name { get; set; }
 
         public string About { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DefaultBankAccountId))]
+        public BankAccount DefaultBankAccount { get; set; }
+        public System.Guid DefaultBankAccountId { get; set; }
     }
 }
 
