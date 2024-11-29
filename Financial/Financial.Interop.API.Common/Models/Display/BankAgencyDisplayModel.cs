@@ -1,6 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
-
-namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display
+﻿namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display
 {
     public class BankAgencyDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.BankAgency, System.Guid>
     {
@@ -26,7 +24,7 @@ namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display
 
             if (entity.Image != null)
             {
-                Image = new ImageDisplayModel();
+                Image = new Core.Interop.API.Common.Models.Display.ImageDisplayModel();
 
                 Image.Import(entity.Image);
             }

@@ -17,9 +17,11 @@
 
         public System.Guid CurrencyId { get; set; }
 
+        public bool IsExternal { get; set; }
+
         public Persistence.Entities.BankAccount Export()
         {
-            var entity = new Persistence.Entities.BankAccount { Id = Id, Enabled = true };
+            var entity = new Persistence.Entities.BankAccount { Id = Id, Enabled = true, External = IsExternal };
 
             Mergue(entity);
 

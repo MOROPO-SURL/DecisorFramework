@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_contract_configuration_pages:BaseConfigurationContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI"
+    xmlns:core_contract_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Financial.Interop.API.Common"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_behaviors="clr-namespace:CommunityToolkit.Maui.Behaviors;assembly=CommunityToolkit.Maui"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.BankDebitCardConfigurationPage"
+    x:TypeArguments="interop_common_display_models:BankDebitCardDisplayModel"
+    x:DataType="presentation_configuration_page_models:BankDebitCardConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+
+            <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+            </Style>
+
+            <Array Type="{x:Type x:Int32}" x:Key="PriorityValues">
+                <x:Int32>1</x:Int32>
+                <x:Int32>2</x:Int32>
+                <x:Int32>3</x:Int32>
+                <x:Int32>4</x:Int32>
+                <x:Int32>5</x:Int32>
+                <x:Int32>6</x:Int32>
+                <x:Int32>7</x:Int32>
+                <x:Int32>8</x:Int32>
+                <x:Int32>9</x:Int32>
+                <x:Int32>10</x:Int32>
+            </Array>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+        Text="Aplicar"
+        Clicked="ApplyClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                </FontImageSource>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+        Text="Cancelar"
+        Clicked="CancelClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                </FontImageSource>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <Grid 
+                Padding="20"
+                ColumnSpacing="16" RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Número" />
+                    <Entry Text="{Binding Number}" Keyboard="Numeric">
+                        <Entry.Behaviors>
+                            <communitytoolkit_behaviors:MaskedBehavior Mask="XXXX-XXXX-XXXX-XXXX" />
+                        </Entry.Behaviors>
+                    </Entry>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Mes que Expira" />
+                    <Entry Text="{Binding ExpirationMonth}" Keyboard="Numeric" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="3" Grid.Row="0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Año que Expira" />
+                    <Entry Text="{Binding ExpirationYear}" Keyboard="Numeric" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="1">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cuenta Bancaria" />
+                    <ContentView                        
+                        IsVisible="{Binding Account, Converter={StaticResource IsNotNullConverter}}">
+                        <local_card_views:BankAccountDefaultCardView BindingContext="{Binding Account}" />
+                    </ContentView>
+                    <Button
+                        HorizontalOptions="Start"
+                        Text="Seleccionar ..."
+                        Clicked="BankAccountPickButton_Clicked" />
+                </VerticalStackLayout>
+                <BoxView 
+                    Grid.ColumnSpan="4" Grid.Row="2" 
+                    Margin="0,8,0,0"
+                    HeightRequest="1" 
+                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="3">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView
+            BackgroundColor="#A7FFFFFF"
+            IsVisible="{Binding IsBusy}" />
+    </Grid>
+</core_contract_configuration_pages:BaseConfigurationContentPage>

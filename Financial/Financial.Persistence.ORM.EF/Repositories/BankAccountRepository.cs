@@ -12,7 +12,9 @@ namespace MOROPO.Framework.Decisor.Financial.Persistence.ORM.EF.Repositories
 
         protected override IQueryable<BankAccount> GetQueryableDbSet()
         {
-            return base.GetQueryableDbSet().Include(entity => entity.Branch).ThenInclude(entity => entity.Agency).ThenInclude(entity => entity.Image);
+            return base.GetQueryableDbSet()
+                .Include(entity => entity.Branch).ThenInclude(entity => entity.Agency).ThenInclude(entity => entity.Image)
+                .Include(entity => entity.Currency);
         }
     }
 }

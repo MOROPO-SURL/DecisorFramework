@@ -12,7 +12,7 @@
 
         public int Number { get; set; }
 
-        public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel Location { get; set; }
+        public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel PostalContact { get; set; }
 
         public void Import(Persistence.Entities.BankBranch entity)
         {
@@ -30,10 +30,15 @@
 
             if (entity.PostalContact != null)
             {
-                Location = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
+                PostalContact = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
 
-                Location.Import(entity.PostalContact);
+                PostalContact.Import(entity.PostalContact);
             }
+        }
+
+        public override string ToString()
+        {
+            return $"{Agency.Name}, {Number}";
         }
     }
 }

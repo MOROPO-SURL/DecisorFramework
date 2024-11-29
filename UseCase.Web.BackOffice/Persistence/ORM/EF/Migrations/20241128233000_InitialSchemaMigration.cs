@@ -19,13 +19,13 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 name: "decisorframework_purchasing");
 
             migrationBuilder.EnsureSchema(
-                name: "decisorframework_essential");
-
-            migrationBuilder.EnsureSchema(
                 name: "decisorframework_inventory");
 
             migrationBuilder.EnsureSchema(
                 name: "decisorframework_sales");
+
+            migrationBuilder.EnsureSchema(
+                name: "decisorframework_essential");
 
             migrationBuilder.EnsureSchema(
                 name: "guamaframework_location");
@@ -35,6 +35,9 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             migrationBuilder.EnsureSchema(
                 name: "guamaframework_identity");
+
+            migrationBuilder.EnsureSchema(
+                name: "decisorframework_humanresources");
 
             migrationBuilder.EnsureSchema(
                 name: "decisorframework_core");
@@ -47,6 +50,20 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             migrationBuilder.EnsureSchema(
                 name: "guamaframework_security_personal");
+
+            migrationBuilder.CreateTable(
+                name: "advances",
+                schema: "decisorframework_finantial",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    amount = table.Column<decimal>(type: "numeric", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_advances", x => x.id);
+                });
 
             migrationBuilder.CreateTable(
                 name: "categories",
@@ -75,24 +92,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 });
 
             migrationBuilder.CreateTable(
-                name: "costcenters",
-                schema: "decisorframework_finantial",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    about = table.Column<string>(type: "text", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_costcenters", x => x.id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "countries",
                 schema: "guamaframework_location",
                 columns: table => new
@@ -104,6 +103,24 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_countries", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "currencies",
+                schema: "decisorframework_finantial",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    symbol = table.Column<string>(type: "text", nullable: false),
+                    useendsymbolpresentation = table.Column<bool>(type: "boolean", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_currencies", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -324,7 +341,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             migrationBuilder.CreateTable(
                 name: "unitmeasurements",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_inventory",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -528,7 +545,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             migrationBuilder.CreateTable(
                 name: "unitmeasurementconversionbridges",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_inventory",
                 columns: table => new
                 {
                     prowid = table.Column<Guid>(type: "uuid", nullable: false),
@@ -541,14 +558,14 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_unitmeasurementconversionbridges_unitmeasurements_prowid",
                         column: x => x.prowid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_inventory",
                         principalTable: "unitmeasurements",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_unitmeasurementconversionbridges_unitmeasurements_sternid",
                         column: x => x.sternid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_inventory",
                         principalTable: "unitmeasurements",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -577,7 +594,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             migrationBuilder.CreateTable(
                 name: "bankagencies",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_finantial",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -689,7 +706,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_products_unitmeasurements_defaultunitmeasurementid",
                         column: x => x.defaultunitmeasurementid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_inventory",
                         principalTable: "unitmeasurements",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -942,7 +959,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             migrationBuilder.CreateTable(
                 name: "employees",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_humanresources",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -1320,28 +1337,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 });
 
             migrationBuilder.CreateTable(
-                name: "advances",
-                schema: "decisorframework_finantial",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    responsibleid = table.Column<Guid>(type: "uuid", nullable: false),
-                    amount = table.Column<decimal>(type: "numeric", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_advances", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_advances_employees_responsibleid",
-                        column: x => x.responsibleid,
-                        principalSchema: "decisorframework_essential",
-                        principalTable: "employees",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "departures",
                 schema: "decisorframework_inventory",
                 columns: table => new
@@ -1356,7 +1351,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_departures_employees_responsibleid",
                         column: x => x.responsibleid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_humanresources",
                         principalTable: "employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1386,21 +1381,21 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_purchaseplans_employees_decisorid",
                         column: x => x.decisorid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_humanresources",
                         principalTable: "employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_purchaseplans_employees_plannerid",
                         column: x => x.plannerid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_humanresources",
                         principalTable: "employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_purchaseplans_employees_responsibleid",
                         column: x => x.responsibleid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_humanresources",
                         principalTable: "employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1429,7 +1424,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_receptions_employees_responsibleid",
                         column: x => x.responsibleid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_humanresources",
                         principalTable: "employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1459,7 +1454,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_budgets_employees_commercialid",
                         column: x => x.commercialid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_humanresources",
                         principalTable: "employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1625,7 +1620,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_purchaseplaninputproductbridges_unitmeasurements_unitmeasur~",
                         column: x => x.unitmeasurementid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_inventory",
                         principalTable: "unitmeasurements",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1717,7 +1712,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_purchaseplanoutputproductbridges_unitmeasurements_unitmeasu~",
                         column: x => x.unitmeasurementid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_inventory",
                         principalTable: "unitmeasurements",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1742,7 +1737,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_purchases_employees_purchaserid",
                         column: x => x.purchaserid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_humanresources",
                         principalTable: "employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1758,53 +1753,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         principalSchema: "decisorframework_purchasing",
                         principalTable: "purchasezones",
                         principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "batches",
-                schema: "decisorframework_inventory",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    externalreference = table.Column<string>(type: "text", nullable: true),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    warehouseid = table.Column<Guid>(type: "uuid", nullable: false),
-                    productid = table.Column<Guid>(type: "uuid", nullable: false),
-                    amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    receptionid = table.Column<Guid>(type: "uuid", nullable: false),
-                    costcenterid = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_batches", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_batches_costcenters_costcenterid",
-                        column: x => x.costcenterid,
-                        principalSchema: "decisorframework_finantial",
-                        principalTable: "costcenters",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_batches_products_productid",
-                        column: x => x.productid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "products",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_batches_receptions_receptionid",
-                        column: x => x.receptionid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "receptions",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_batches_warehouses_warehouseid",
-                        column: x => x.warehouseid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "warehouses",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -1839,7 +1787,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_budgetproductbridges_unitmeasurements_unitmeasurementid",
                         column: x => x.unitmeasurementid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_inventory",
                         principalTable: "unitmeasurements",
                         principalColumn: "id");
                 });
@@ -1905,7 +1853,8 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    purchaseid = table.Column<Guid>(type: "uuid", nullable: true)
+                    purchaseid = table.Column<Guid>(type: "uuid", nullable: true),
+                    responsibleid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -1915,6 +1864,13 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         column: x => x.id,
                         principalSchema: "decisorframework_finantial",
                         principalTable: "advances",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_advances_employees_responsibleid",
+                        column: x => x.responsibleid,
+                        principalSchema: "decisorframework_humanresources",
+                        principalTable: "employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
@@ -1975,7 +1931,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_purchaseemployeebridges_employees_sternid",
                         column: x => x.sternid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_humanresources",
                         principalTable: "employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1991,149 +1947,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         column: x => x.roleid,
                         principalSchema: "decisorframework_purchasing",
                         principalTable: "purchasingroles",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "purchaseproductlegalproviderbridges",
-                schema: "decisorframework_purchasing",
-                columns: table => new
-                {
-                    purchaseid = table.Column<Guid>(type: "uuid", nullable: false),
-                    productid = table.Column<Guid>(type: "uuid", nullable: false),
-                    costcenterid = table.Column<Guid>(type: "uuid", nullable: false),
-                    providerid = table.Column<Guid>(type: "uuid", nullable: false),
-                    amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    unitmeasurementid = table.Column<Guid>(type: "uuid", nullable: false),
-                    cost = table.Column<decimal>(type: "numeric", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_purchaseproductlegalproviderbridges", x => new { x.purchaseid, x.providerid, x.productid, x.costcenterid });
-                    table.ForeignKey(
-                        name: "fk_purchaseproductlegalproviderbridges_costcenters_costcenterid",
-                        column: x => x.costcenterid,
-                        principalSchema: "decisorframework_finantial",
-                        principalTable: "costcenters",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchaseproductlegalproviderbridges_legalproviders_provider~",
-                        column: x => x.providerid,
-                        principalSchema: "decisorframework_purchasing",
-                        principalTable: "legalproviders",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchaseproductlegalproviderbridges_products_productid",
-                        column: x => x.productid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "products",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchaseproductlegalproviderbridges_purchases_purchaseid",
-                        column: x => x.purchaseid,
-                        principalSchema: "decisorframework_purchasing",
-                        principalTable: "purchases",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchaseproductlegalproviderbridges_unitmeasurements_unitme~",
-                        column: x => x.unitmeasurementid,
-                        principalSchema: "decisorframework_essential",
-                        principalTable: "unitmeasurements",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "purchaseproductnaturalproviderbridges",
-                schema: "decisorframework_purchasing",
-                columns: table => new
-                {
-                    purchaseid = table.Column<Guid>(type: "uuid", nullable: false),
-                    productid = table.Column<Guid>(type: "uuid", nullable: false),
-                    costcenterid = table.Column<Guid>(type: "uuid", nullable: false),
-                    providerid = table.Column<Guid>(type: "uuid", nullable: false),
-                    amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    unitmeasurementid = table.Column<Guid>(type: "uuid", nullable: false),
-                    cost = table.Column<decimal>(type: "numeric", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_purchaseproductnaturalproviderbridges", x => new { x.purchaseid, x.providerid, x.productid, x.costcenterid });
-                    table.ForeignKey(
-                        name: "fk_purchaseproductnaturalproviderbridges_costcenters_costcente~",
-                        column: x => x.costcenterid,
-                        principalSchema: "decisorframework_finantial",
-                        principalTable: "costcenters",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchaseproductnaturalproviderbridges_naturalproviders_prov~",
-                        column: x => x.providerid,
-                        principalSchema: "decisorframework_purchasing",
-                        principalTable: "naturalproviders",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchaseproductnaturalproviderbridges_products_productid",
-                        column: x => x.productid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "products",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchaseproductnaturalproviderbridges_purchases_purchaseid",
-                        column: x => x.purchaseid,
-                        principalSchema: "decisorframework_purchasing",
-                        principalTable: "purchases",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchaseproductnaturalproviderbridges_unitmeasurements_unit~",
-                        column: x => x.unitmeasurementid,
-                        principalSchema: "decisorframework_essential",
-                        principalTable: "unitmeasurements",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "purchasepurchasespentbridges",
-                schema: "decisorframework_purchasing",
-                columns: table => new
-                {
-                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
-                    sternid = table.Column<Guid>(type: "uuid", nullable: false),
-                    amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    cost = table.Column<decimal>(type: "numeric", nullable: false),
-                    costcenterid = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_purchasepurchasespentbridges", x => new { x.prowid, x.sternid });
-                    table.ForeignKey(
-                        name: "fk_purchasepurchasespentbridges_costcenters_costcenterid",
-                        column: x => x.costcenterid,
-                        principalSchema: "decisorframework_finantial",
-                        principalTable: "costcenters",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchasepurchasespentbridges_purchases_prowid",
-                        column: x => x.prowid,
-                        principalSchema: "decisorframework_purchasing",
-                        principalTable: "purchases",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchasepurchasespentbridges_purchasespents_sternid",
-                        column: x => x.sternid,
-                        principalSchema: "decisorframework_purchasing",
-                        principalTable: "purchasespents",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -2165,62 +1978,8 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 });
 
             migrationBuilder.CreateTable(
-                name: "departurebatchbridges",
-                schema: "decisorframework_inventory",
-                columns: table => new
-                {
-                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
-                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_departurebatchbridges", x => new { x.prowid, x.sternid });
-                    table.ForeignKey(
-                        name: "fk_departurebatchbridges_batches_sternid",
-                        column: x => x.sternid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "batches",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_departurebatchbridges_departures_prowid",
-                        column: x => x.prowid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "departures",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "receptionbatchbridges",
-                schema: "decisorframework_inventory",
-                columns: table => new
-                {
-                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
-                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_receptionbatchbridges", x => new { x.prowid, x.sternid });
-                    table.ForeignKey(
-                        name: "fk_receptionbatchbridges_batches_sternid",
-                        column: x => x.sternid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "batches",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_receptionbatchbridges_receptions_prowid",
-                        column: x => x.prowid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "receptions",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "bankbranches",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_finantial",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -2230,7 +1989,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     agencyid = table.Column<Guid>(type: "uuid", nullable: false),
                     number = table.Column<int>(type: "integer", nullable: false),
-                    locationid = table.Column<Guid>(type: "uuid", nullable: true)
+                    postalcontactid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -2238,13 +1997,13 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_bankbranches_bankagencies_agencyid",
                         column: x => x.agencyid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_finantial",
                         principalTable: "bankagencies",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_bankbranches_postalcontactitems_locationid",
-                        column: x => x.locationid,
+                        name: "fk_bankbranches_postalcontactitems_postalcontactid",
+                        column: x => x.postalcontactid,
                         principalSchema: "guamaframework_identity",
                         principalTable: "postalcontactitems",
                         principalColumn: "id");
@@ -2305,6 +2064,469 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 });
 
             migrationBuilder.CreateTable(
+                name: "bankaccounts",
+                schema: "decisorframework_finantial",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    branchid = table.Column<Guid>(type: "uuid", nullable: false),
+                    number = table.Column<string>(type: "text", nullable: false),
+                    holder = table.Column<string>(type: "text", nullable: false),
+                    currencyid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_bankaccounts", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_bankaccounts_bankbranches_branchid",
+                        column: x => x.branchid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "bankbranches",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_bankaccounts_currencies_currencyid",
+                        column: x => x.currencyid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "currencies",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "bankdebitcards",
+                schema: "decisorframework_finantial",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    number = table.Column<string>(type: "text", nullable: false),
+                    bankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
+                    expireon = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_bankdebitcards", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_bankdebitcards_bankaccounts_bankaccountid",
+                        column: x => x.bankaccountid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "bankaccounts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "costcenters",
+                schema: "decisorframework_finantial",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    about = table.Column<string>(type: "text", nullable: true),
+                    defaultbankaccountid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_costcenters", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_costcenters_bankaccounts_defaultbankaccountid",
+                        column: x => x.defaultbankaccountid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "bankaccounts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "employmentcontracts",
+                schema: "decisorframework_humanresources",
+                columns: table => new
+                {
+                    number = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
+                    employeeid = table.Column<Guid>(type: "uuid", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    defaultbankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
+                    objective = table.Column<string>(type: "text", nullable: false),
+                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    duration = table.Column<TimeSpan>(type: "interval", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_employmentcontracts", x => new { x.number, x.year });
+                    table.ForeignKey(
+                        name: "fk_employmentcontracts_bankaccounts_defaultbankaccountid",
+                        column: x => x.defaultbankaccountid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "bankaccounts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_employmentcontracts_employees_employeeid",
+                        column: x => x.employeeid,
+                        principalSchema: "decisorframework_humanresources",
+                        principalTable: "employees",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legalclientsalecontracts",
+                schema: "decisorframework_sales",
+                columns: table => new
+                {
+                    number = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
+                    clientid = table.Column<Guid>(type: "uuid", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    defaultbankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
+                    objective = table.Column<string>(type: "text", nullable: false),
+                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    duration = table.Column<TimeSpan>(type: "interval", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legalclientsalecontracts", x => new { x.number, x.year });
+                    table.ForeignKey(
+                        name: "fk_legalclientsalecontracts_bankaccounts_defaultbankaccountid",
+                        column: x => x.defaultbankaccountid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "bankaccounts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legalclientsalecontracts_legalclients_clientid",
+                        column: x => x.clientid,
+                        principalSchema: "decisorframework_sales",
+                        principalTable: "legalclients",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legalproviderpurchasingcontracts",
+                schema: "decisorframework_purchasing",
+                columns: table => new
+                {
+                    number = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
+                    providerid = table.Column<Guid>(type: "uuid", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    defaultbankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
+                    objective = table.Column<string>(type: "text", nullable: false),
+                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    duration = table.Column<TimeSpan>(type: "interval", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legalproviderpurchasingcontracts", x => new { x.number, x.year });
+                    table.ForeignKey(
+                        name: "fk_legalproviderpurchasingcontracts_bankaccounts_defaultbankac~",
+                        column: x => x.defaultbankaccountid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "bankaccounts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legalproviderpurchasingcontracts_legalproviders_providerid",
+                        column: x => x.providerid,
+                        principalSchema: "decisorframework_purchasing",
+                        principalTable: "legalproviders",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "naturalclientsalecontracts",
+                schema: "decisorframework_sales",
+                columns: table => new
+                {
+                    number = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
+                    clientid = table.Column<Guid>(type: "uuid", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    defaultbankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
+                    objective = table.Column<string>(type: "text", nullable: false),
+                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    duration = table.Column<TimeSpan>(type: "interval", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_naturalclientsalecontracts", x => new { x.number, x.year });
+                    table.ForeignKey(
+                        name: "fk_naturalclientsalecontracts_bankaccounts_defaultbankaccountid",
+                        column: x => x.defaultbankaccountid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "bankaccounts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_naturalclientsalecontracts_naturalclients_clientid",
+                        column: x => x.clientid,
+                        principalSchema: "decisorframework_sales",
+                        principalTable: "naturalclients",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "naturalproviderpurchasingcontracts",
+                schema: "decisorframework_purchasing",
+                columns: table => new
+                {
+                    number = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
+                    providerid = table.Column<Guid>(type: "uuid", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    defaultbankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
+                    objective = table.Column<string>(type: "text", nullable: false),
+                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    duration = table.Column<TimeSpan>(type: "interval", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_naturalproviderpurchasingcontracts", x => new { x.number, x.year });
+                    table.ForeignKey(
+                        name: "fk_naturalproviderpurchasingcontracts_bankaccounts_defaultbank~",
+                        column: x => x.defaultbankaccountid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "bankaccounts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_naturalproviderpurchasingcontracts_naturalproviders_provide~",
+                        column: x => x.providerid,
+                        principalSchema: "decisorframework_purchasing",
+                        principalTable: "naturalproviders",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "batches",
+                schema: "decisorframework_inventory",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    externalreference = table.Column<string>(type: "text", nullable: true),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    warehouseid = table.Column<Guid>(type: "uuid", nullable: false),
+                    productid = table.Column<Guid>(type: "uuid", nullable: false),
+                    classificationid = table.Column<Guid>(type: "uuid", nullable: true),
+                    amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    receptionid = table.Column<Guid>(type: "uuid", nullable: false),
+                    costcenterid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_batches", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_batches_classifications_classificationid",
+                        column: x => x.classificationid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "classifications",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_batches_costcenters_costcenterid",
+                        column: x => x.costcenterid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "costcenters",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_batches_products_productid",
+                        column: x => x.productid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "products",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_batches_receptions_receptionid",
+                        column: x => x.receptionid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "receptions",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_batches_warehouses_warehouseid",
+                        column: x => x.warehouseid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "warehouses",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "purchaseproductlegalproviderbridges",
+                schema: "decisorframework_purchasing",
+                columns: table => new
+                {
+                    purchaseid = table.Column<Guid>(type: "uuid", nullable: false),
+                    productid = table.Column<Guid>(type: "uuid", nullable: false),
+                    costcenterid = table.Column<Guid>(type: "uuid", nullable: false),
+                    providerid = table.Column<Guid>(type: "uuid", nullable: false),
+                    amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    unitmeasurementid = table.Column<Guid>(type: "uuid", nullable: false),
+                    cost = table.Column<decimal>(type: "numeric", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_purchaseproductlegalproviderbridges", x => new { x.purchaseid, x.providerid, x.productid, x.costcenterid });
+                    table.ForeignKey(
+                        name: "fk_purchaseproductlegalproviderbridges_costcenters_costcenterid",
+                        column: x => x.costcenterid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "costcenters",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchaseproductlegalproviderbridges_legalproviders_provider~",
+                        column: x => x.providerid,
+                        principalSchema: "decisorframework_purchasing",
+                        principalTable: "legalproviders",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchaseproductlegalproviderbridges_products_productid",
+                        column: x => x.productid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "products",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchaseproductlegalproviderbridges_purchases_purchaseid",
+                        column: x => x.purchaseid,
+                        principalSchema: "decisorframework_purchasing",
+                        principalTable: "purchases",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchaseproductlegalproviderbridges_unitmeasurements_unitme~",
+                        column: x => x.unitmeasurementid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "unitmeasurements",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "purchaseproductnaturalproviderbridges",
+                schema: "decisorframework_purchasing",
+                columns: table => new
+                {
+                    purchaseid = table.Column<Guid>(type: "uuid", nullable: false),
+                    productid = table.Column<Guid>(type: "uuid", nullable: false),
+                    costcenterid = table.Column<Guid>(type: "uuid", nullable: false),
+                    providerid = table.Column<Guid>(type: "uuid", nullable: false),
+                    amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    unitmeasurementid = table.Column<Guid>(type: "uuid", nullable: false),
+                    cost = table.Column<decimal>(type: "numeric", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_purchaseproductnaturalproviderbridges", x => new { x.purchaseid, x.providerid, x.productid, x.costcenterid });
+                    table.ForeignKey(
+                        name: "fk_purchaseproductnaturalproviderbridges_costcenters_costcente~",
+                        column: x => x.costcenterid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "costcenters",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchaseproductnaturalproviderbridges_naturalproviders_prov~",
+                        column: x => x.providerid,
+                        principalSchema: "decisorframework_purchasing",
+                        principalTable: "naturalproviders",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchaseproductnaturalproviderbridges_products_productid",
+                        column: x => x.productid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "products",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchaseproductnaturalproviderbridges_purchases_purchaseid",
+                        column: x => x.purchaseid,
+                        principalSchema: "decisorframework_purchasing",
+                        principalTable: "purchases",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchaseproductnaturalproviderbridges_unitmeasurements_unit~",
+                        column: x => x.unitmeasurementid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "unitmeasurements",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "purchasepurchasespentbridges",
+                schema: "decisorframework_purchasing",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false),
+                    amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    cost = table.Column<decimal>(type: "numeric", nullable: false),
+                    costcenterid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_purchasepurchasespentbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_purchasepurchasespentbridges_costcenters_costcenterid",
+                        column: x => x.costcenterid,
+                        principalSchema: "decisorframework_finantial",
+                        principalTable: "costcenters",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchasepurchasespentbridges_purchases_prowid",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_purchasing",
+                        principalTable: "purchases",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchasepurchasespentbridges_purchasespents_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "decisorframework_purchasing",
+                        principalTable: "purchasespents",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "purchasereceptionproductweightbridges",
                 schema: "decisorframework_purchasing",
                 columns: table => new
@@ -2342,212 +2564,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 });
 
             migrationBuilder.CreateTable(
-                name: "bankaccounts",
-                schema: "decisorframework_essential",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    branchid = table.Column<Guid>(type: "uuid", nullable: false),
-                    number = table.Column<string>(type: "text", nullable: false),
-                    holder = table.Column<string>(type: "text", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_bankaccounts", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_bankaccounts_bankbranches_branchid",
-                        column: x => x.branchid,
-                        principalSchema: "decisorframework_essential",
-                        principalTable: "bankbranches",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "employmentcontracts",
-                schema: "decisorframework_essential",
-                columns: table => new
-                {
-                    number = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
-                    employeeid = table.Column<Guid>(type: "uuid", nullable: false),
-                    enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    defaultbankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
-                    objective = table.Column<string>(type: "text", nullable: false),
-                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    duration = table.Column<TimeSpan>(type: "interval", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_employmentcontracts", x => new { x.number, x.year });
-                    table.ForeignKey(
-                        name: "fk_employmentcontracts_bankaccounts_defaultbankaccountid",
-                        column: x => x.defaultbankaccountid,
-                        principalSchema: "decisorframework_essential",
-                        principalTable: "bankaccounts",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_employmentcontracts_employees_employeeid",
-                        column: x => x.employeeid,
-                        principalSchema: "decisorframework_essential",
-                        principalTable: "employees",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "legalclientsalecontracts",
-                schema: "decisorframework_sales",
-                columns: table => new
-                {
-                    number = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
-                    clientid = table.Column<Guid>(type: "uuid", nullable: false),
-                    enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    defaultbankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
-                    objective = table.Column<string>(type: "text", nullable: false),
-                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    duration = table.Column<TimeSpan>(type: "interval", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_legalclientsalecontracts", x => new { x.number, x.year });
-                    table.ForeignKey(
-                        name: "fk_legalclientsalecontracts_bankaccounts_defaultbankaccountid",
-                        column: x => x.defaultbankaccountid,
-                        principalSchema: "decisorframework_essential",
-                        principalTable: "bankaccounts",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_legalclientsalecontracts_legalclients_clientid",
-                        column: x => x.clientid,
-                        principalSchema: "decisorframework_sales",
-                        principalTable: "legalclients",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "legalproviderpurchasingcontracts",
-                schema: "decisorframework_purchasing",
-                columns: table => new
-                {
-                    number = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
-                    providerid = table.Column<Guid>(type: "uuid", nullable: false),
-                    enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    defaultbankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
-                    objective = table.Column<string>(type: "text", nullable: false),
-                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    duration = table.Column<TimeSpan>(type: "interval", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_legalproviderpurchasingcontracts", x => new { x.number, x.year });
-                    table.ForeignKey(
-                        name: "fk_legalproviderpurchasingcontracts_bankaccounts_defaultbankac~",
-                        column: x => x.defaultbankaccountid,
-                        principalSchema: "decisorframework_essential",
-                        principalTable: "bankaccounts",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_legalproviderpurchasingcontracts_legalproviders_providerid",
-                        column: x => x.providerid,
-                        principalSchema: "decisorframework_purchasing",
-                        principalTable: "legalproviders",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "naturalclientsalecontracts",
-                schema: "decisorframework_sales",
-                columns: table => new
-                {
-                    number = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
-                    clientid = table.Column<Guid>(type: "uuid", nullable: false),
-                    enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    defaultbankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
-                    objective = table.Column<string>(type: "text", nullable: false),
-                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    duration = table.Column<TimeSpan>(type: "interval", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_naturalclientsalecontracts", x => new { x.number, x.year });
-                    table.ForeignKey(
-                        name: "fk_naturalclientsalecontracts_bankaccounts_defaultbankaccountid",
-                        column: x => x.defaultbankaccountid,
-                        principalSchema: "decisorframework_essential",
-                        principalTable: "bankaccounts",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_naturalclientsalecontracts_naturalclients_clientid",
-                        column: x => x.clientid,
-                        principalSchema: "decisorframework_sales",
-                        principalTable: "naturalclients",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "naturalproviderpurchasingcontracts",
-                schema: "decisorframework_purchasing",
-                columns: table => new
-                {
-                    number = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
-                    providerid = table.Column<Guid>(type: "uuid", nullable: false),
-                    enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    defaultbankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
-                    objective = table.Column<string>(type: "text", nullable: false),
-                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    duration = table.Column<TimeSpan>(type: "interval", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_naturalproviderpurchasingcontracts", x => new { x.number, x.year });
-                    table.ForeignKey(
-                        name: "fk_naturalproviderpurchasingcontracts_bankaccounts_defaultbank~",
-                        column: x => x.defaultbankaccountid,
-                        principalSchema: "decisorframework_essential",
-                        principalTable: "bankaccounts",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_naturalproviderpurchasingcontracts_naturalproviders_provide~",
-                        column: x => x.providerid,
-                        principalSchema: "decisorframework_purchasing",
-                        principalTable: "naturalproviders",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "sales",
                 schema: "decisorframework_sales",
                 columns: table => new
@@ -2579,7 +2595,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     table.ForeignKey(
                         name: "fk_sales_employees_sellerid",
                         column: x => x.sellerid,
-                        principalSchema: "decisorframework_essential",
+                        principalSchema: "decisorframework_humanresources",
                         principalTable: "employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -2603,11 +2619,59 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         principalColumn: "id");
                 });
 
-            migrationBuilder.CreateIndex(
-                name: "ix_advances_responsibleid",
-                schema: "decisorframework_finantial",
-                table: "advances",
-                column: "responsibleid");
+            migrationBuilder.CreateTable(
+                name: "departurebatchbridges",
+                schema: "decisorframework_inventory",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_departurebatchbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_departurebatchbridges_batches_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "batches",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_departurebatchbridges_departures_prowid",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "departures",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "receptionbatchbridges",
+                schema: "decisorframework_inventory",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_receptionbatchbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_receptionbatchbridges_batches_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "batches",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_receptionbatchbridges_receptions_prowid",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "receptions",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
 
             migrationBuilder.CreateIndex(
                 name: "ix_advances_purchaseid",
@@ -2616,28 +2680,52 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 column: "purchaseid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_advances_responsibleid",
+                schema: "decisorframework_purchasing",
+                table: "advances",
+                column: "responsibleid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_bankaccounts_branchid",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_finantial",
                 table: "bankaccounts",
                 column: "branchid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_bankaccounts_currencyid",
+                schema: "decisorframework_finantial",
+                table: "bankaccounts",
+                column: "currencyid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_bankagencies_imageid",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_finantial",
                 table: "bankagencies",
                 column: "imageid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_bankbranches_agencyid",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_finantial",
                 table: "bankbranches",
                 column: "agencyid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_bankbranches_locationid",
-                schema: "decisorframework_essential",
+                name: "ix_bankbranches_postalcontactid",
+                schema: "decisorframework_finantial",
                 table: "bankbranches",
-                column: "locationid");
+                column: "postalcontactid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_bankdebitcards_bankaccountid",
+                schema: "decisorframework_finantial",
+                table: "bankdebitcards",
+                column: "bankaccountid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_batches_classificationid",
+                schema: "decisorframework_inventory",
+                table: "batches",
+                column: "classificationid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_batches_costcenterid",
@@ -2713,6 +2801,12 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "ix_costcenters_defaultbankaccountid",
+                schema: "decisorframework_finantial",
+                table: "costcenters",
+                column: "defaultbankaccountid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_countries_isocode",
                 schema: "guamaframework_location",
                 table: "countries",
@@ -2752,20 +2846,20 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             migrationBuilder.CreateIndex(
                 name: "ix_employees_identityid",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_humanresources",
                 table: "employees",
                 column: "identityid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_employmentcontracts_defaultbankaccountid",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_humanresources",
                 table: "employmentcontracts",
                 column: "defaultbankaccountid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_employmentcontracts_employeeid",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_humanresources",
                 table: "employmentcontracts",
                 column: "employeeid");
 
@@ -3301,7 +3395,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             migrationBuilder.CreateIndex(
                 name: "ix_unitmeasurementconversionbridges_sternid",
-                schema: "decisorframework_essential",
+                schema: "decisorframework_inventory",
                 table: "unitmeasurementconversionbridges",
                 column: "sternid");
 
@@ -3333,16 +3427,16 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
+                name: "bankdebitcards",
+                schema: "decisorframework_finantial");
+
+            migrationBuilder.DropTable(
                 name: "budgetproductbridges",
                 schema: "decisorframework_sales");
 
             migrationBuilder.DropTable(
                 name: "budgetservicebridges",
                 schema: "decisorframework_sales");
-
-            migrationBuilder.DropTable(
-                name: "classifications",
-                schema: "decisorframework_inventory");
 
             migrationBuilder.DropTable(
                 name: "departurebatchbridges",
@@ -3358,7 +3452,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             migrationBuilder.DropTable(
                 name: "employmentcontracts",
-                schema: "decisorframework_essential");
+                schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
                 name: "legalproviderpurchasezonebridges",
@@ -3489,7 +3583,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             migrationBuilder.DropTable(
                 name: "unitmeasurementconversionbridges",
-                schema: "decisorframework_essential");
+                schema: "decisorframework_inventory");
 
             migrationBuilder.DropTable(
                 name: "userrolebridges",
@@ -3588,12 +3682,12 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
-                name: "costcenters",
-                schema: "decisorframework_finantial");
+                name: "classifications",
+                schema: "decisorframework_inventory");
 
             migrationBuilder.DropTable(
-                name: "products",
-                schema: "decisorframework_inventory");
+                name: "costcenters",
+                schema: "decisorframework_finantial");
 
             migrationBuilder.DropTable(
                 name: "receptions",
@@ -3608,10 +3702,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 schema: "decisorframework_sales");
 
             migrationBuilder.DropTable(
-                name: "bankaccounts",
-                schema: "decisorframework_essential");
-
-            migrationBuilder.DropTable(
                 name: "naturalclients",
                 schema: "decisorframework_sales");
 
@@ -3620,12 +3710,12 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
-                name: "categories",
+                name: "products",
                 schema: "decisorframework_inventory");
 
             migrationBuilder.DropTable(
-                name: "unitmeasurements",
-                schema: "decisorframework_essential");
+                name: "bankaccounts",
+                schema: "decisorframework_finantial");
 
             migrationBuilder.DropTable(
                 name: "legalbusinesskinds",
@@ -3636,48 +3726,60 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 schema: "guamaframework_identity");
 
             migrationBuilder.DropTable(
-                name: "bankbranches",
-                schema: "decisorframework_essential");
-
-            migrationBuilder.DropTable(
                 name: "naturalbusinesskinds",
                 schema: "decisorframework_core");
 
             migrationBuilder.DropTable(
                 name: "employees",
-                schema: "decisorframework_essential");
+                schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
                 name: "purchasezones",
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
-                name: "bankagencies",
-                schema: "decisorframework_essential");
+                name: "categories",
+                schema: "decisorframework_inventory");
 
             migrationBuilder.DropTable(
-                name: "postalcontactitems",
-                schema: "guamaframework_identity");
+                name: "unitmeasurements",
+                schema: "decisorframework_inventory");
+
+            migrationBuilder.DropTable(
+                name: "bankbranches",
+                schema: "decisorframework_finantial");
+
+            migrationBuilder.DropTable(
+                name: "currencies",
+                schema: "decisorframework_finantial");
 
             migrationBuilder.DropTable(
                 name: "personidentities",
                 schema: "guamaframework_identity");
 
             migrationBuilder.DropTable(
-                name: "locations",
-                schema: "guamaframework_location");
+                name: "bankagencies",
+                schema: "decisorframework_finantial");
+
+            migrationBuilder.DropTable(
+                name: "postalcontactitems",
+                schema: "guamaframework_identity");
 
             migrationBuilder.DropTable(
                 name: "images",
                 schema: "guamaframework_media");
 
             migrationBuilder.DropTable(
-                name: "localities",
+                name: "locations",
                 schema: "guamaframework_location");
 
             migrationBuilder.DropTable(
                 name: "thumbnails",
                 schema: "guamaframework_media");
+
+            migrationBuilder.DropTable(
+                name: "localities",
+                schema: "guamaframework_location");
 
             migrationBuilder.DropTable(
                 name: "municipalities",

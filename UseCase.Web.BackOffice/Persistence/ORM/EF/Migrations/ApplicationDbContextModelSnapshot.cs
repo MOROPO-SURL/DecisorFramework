@@ -167,6 +167,10 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
+                    b.Property<bool>("External")
+                        .HasColumnType("boolean")
+                        .HasColumnName("external");
+
                     b.Property<string>("Holder")
                         .IsRequired()
                         .HasColumnType("text")
@@ -261,13 +265,13 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
-                    b.Property<Guid?>("LocationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("locationid");
-
                     b.Property<int>("Number")
                         .HasColumnType("integer")
                         .HasColumnName("number");
+
+                    b.Property<Guid?>("PostalContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("postalcontactid");
 
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
@@ -279,16 +283,17 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.HasIndex("AgencyId")
                         .HasDatabaseName("ix_bankbranches_agencyid");
 
-                    b.HasIndex("LocationId")
-                        .HasDatabaseName("ix_bankbranches_locationid");
+                    b.HasIndex("PostalContactId")
+                        .HasDatabaseName("ix_bankbranches_postalcontactid");
 
                     b.ToTable("bankbranches", "decisorframework_finantial");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Financial.Persistence.Entities.BankDebitCard", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("text")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
 
                     b.Property<bool>("Archived")
@@ -310,6 +315,11 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                     b.Property<DateTime>("ExpireOn")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("expireon");
+
+                    b.Property<string>("Number")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("number");
 
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
@@ -3545,14 +3555,14 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsRequired()
                         .HasConstraintName("fk_bankbranches_bankagencies_agencyid");
 
-                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PostalContactItem", "Location")
+                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PostalContactItem", "PostalContact")
                         .WithMany()
-                        .HasForeignKey("LocationId")
-                        .HasConstraintName("fk_bankbranches_postalcontactitems_locationid");
+                        .HasForeignKey("PostalContactId")
+                        .HasConstraintName("fk_bankbranches_postalcontactitems_postalcontactid");
 
                     b.Navigation("Agency");
 
-                    b.Navigation("Location");
+                    b.Navigation("PostalContact");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Financial.Persistence.Entities.BankDebitCard", b =>

@@ -29,4 +29,42 @@
 		<ProjectReference Include="..\..\Essential\Essential.Presentation.Terminal.MAUI.UI.Default\Essential.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Financial.Presentation.Terminal.MAUI\Financial.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\BankAccountConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\BankAgencyConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\BankBranchConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\BankDebitCardConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\CurrencyConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\BankAccountsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\BankAgenciesManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\BankBranchesManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\BankDebitCardsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\CurrenciesManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\InternalBankAccountPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\BankAccountDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>

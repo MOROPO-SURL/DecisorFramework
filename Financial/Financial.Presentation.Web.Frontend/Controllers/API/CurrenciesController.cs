@@ -8,7 +8,7 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controlle
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class CurrenciesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<Currency, System.Guid, Interop.API.Common.Models.Input.CurrencyInputModel, Interop.API.Common.Models.Display.CurrencyDisplayModel>
     {
-        public CurrenciesController(IEntityRepository<CostCenter, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<CurrenciesController> localizer, ILogger<CurrenciesController> logger) : base(repository, localizer, logger)
+        public CurrenciesController(IEntityRepository<Currency, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<CurrenciesController> localizer, ILogger<CurrenciesController> logger) : base(repository, localizer, logger)
         {
         }
 

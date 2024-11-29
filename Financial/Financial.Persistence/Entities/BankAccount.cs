@@ -27,6 +27,8 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CurrencyId))]
         public Currency Currency { get; set; }
         public System.Guid CurrencyId { get; set; }
+
+        public bool External { get; set; }
     }
 }
 

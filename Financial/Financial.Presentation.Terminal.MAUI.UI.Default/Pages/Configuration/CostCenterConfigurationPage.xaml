@@ -2,15 +2,19 @@
 <core_contract_configuration_pages:BaseConfigurationContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI"
     xmlns:core_contract_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Financial.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.CostCenterConfigurationPage"
     x:TypeArguments="interop_common_display_models:CostCenterDisplayModel"
     x:DataType="presentation_configuration_page_models:CostCenterConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+
             <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
                 <Setter Property="FontAttributes" Value="Bold" />
                 <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
@@ -60,26 +64,50 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <VerticalStackLayout
+            <Grid
                 Padding="20"
-                Spacing="16">
-                <VerticalStackLayout Spacing="6">
+                RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="0">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                     <Entry Text="{Binding Name}" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6">
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="1">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
-                    <Editor Text="{Binding Description}" HeightRequest="120" BackgroundColor="#F8F9FA" />
+                    <Editor Text="{Binding Description}" HeightRequest="120" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="2">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cuenta Bancaria por Defecto" />
+                    <ContentView                        
+                        IsVisible="{Binding DefaultBankAccount, Converter={StaticResource IsNotNullConverter}}">
+                        <local_card_views:BankAccountDefaultCardView BindingContext="{Binding DefaultBankAccount}" />
+                    </ContentView>
+                    <Button
+                        HorizontalOptions="Start"
+                        Text="Seleccionar ..."
+                        Clicked="DefaultBankAccountPickButton_Clicked" />
                 </VerticalStackLayout>
                 <BoxView 
+                    Grid.ColumnSpan="3" Grid.Row="3"
                     Margin="0,8,0,0"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6">
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="4">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
                     <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
                 </VerticalStackLayout>
-            </VerticalStackLayout>
+            </Grid>
         </ScrollView>
         <caneyframework_presentation_views:BusyView
             BackgroundColor="#A7FFFFFF"

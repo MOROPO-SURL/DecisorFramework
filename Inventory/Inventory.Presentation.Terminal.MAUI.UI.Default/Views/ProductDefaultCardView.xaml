@@ -15,7 +15,7 @@
         </ResourceDictionary>
     </ContentView.Resources>
     <Frame 
-        Margin="5" Padding="0"
+        Padding="0"
         HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
         <StackLayout>
             <Image

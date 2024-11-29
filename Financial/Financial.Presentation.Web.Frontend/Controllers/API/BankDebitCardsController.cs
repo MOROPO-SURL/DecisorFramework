@@ -7,11 +7,11 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controlle
 {
     [Microsoft.AspNetCore.Mvc.Route("api/financial/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class BankDebitCardsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<BankDebitCard, string, BankDebitCardInputModel, Interop.API.Common.Models.Display.BankDebitCardDisplayModel>
+    public class BankDebitCardsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<BankDebitCard, System.Guid, BankDebitCardInputModel, Interop.API.Common.Models.Display.BankDebitCardDisplayModel>
     {
         private readonly IEntityRepository<BankAccount, System.Guid> bankAccountRepository;
 
-        public BankDebitCardsController(IEntityRepository<BankAccount, System.Guid> bankAccountRepository, IEntityRepository<BankDebitCard, string> repository, Microsoft.Extensions.Localization.IStringLocalizer<BankDebitCardsController> localizer, ILogger<BankDebitCardsController> logger) : base(repository, localizer, logger)
+        public BankDebitCardsController(IEntityRepository<BankAccount, System.Guid> bankAccountRepository, IEntityRepository<BankDebitCard, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<BankDebitCardsController> localizer, ILogger<BankDebitCardsController> logger) : base(repository, localizer, logger)
         {
             this.bankAccountRepository = bankAccountRepository;
         }
@@ -19,21 +19,6 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controlle
         protected override System.Linq.Expressions.Expression<System.Func<BankDebitCard, bool>> GetGlobalSelector()
         {
             return entity => !entity.Archived && entity.Enabled;
-        }
-
-        protected override void PreCreate(BankDebitCard entity, BankDebitCardInputModel model)
-        {
-            base.PreCreate(entity, model);
-
-            entity.BankAccountId = model.BankAccount.Id;
-            entity.BankAccount = bankAccountRepository.Add(model.BankAccount.Export(), User.Identity.Name, false);
-        }
-
-        protected override void PreEdit(BankDebitCard entity, BankDebitCardInputModel model)
-        {
-            base.PreEdit(entity, model);
-
-            model.BankAccount.Mergue(entity.BankAccount);
         }
     }
 }

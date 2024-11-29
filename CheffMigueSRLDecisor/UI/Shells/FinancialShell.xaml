@@ -55,4 +55,54 @@
                 Color="Black" />
         </ShellContent.Icon>
     </ShellContent>
+    <ShellContent
+        Title="Agencias Bancarias"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankAgenciesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF070;"
+                Color="Black" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Sucursales Bancarias"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankBranchesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA26;"
+                Color="Black" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Cuentas Bancarias"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankAccountsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF8AE;"
+                Color="Black" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tarjetas Bancarias de Débito"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankDebitCardsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF19B;"
+                Color="Black" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Monedas"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:CurrenciesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF4CB;"
+                Color="Black" />
+        </ShellContent.Icon>
+    </ShellContent>
 </Shell>

@@ -104,7 +104,7 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF3D7;"
+                Glyph="&#xF0C0;"
                 Color="Black" />
         </ShellContent.Icon>
     </ShellContent>
