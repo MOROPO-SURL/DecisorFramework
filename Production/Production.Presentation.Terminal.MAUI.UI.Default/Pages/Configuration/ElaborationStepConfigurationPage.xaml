@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_contract_configuration_pages:BaseConfigurationContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI"
+    xmlns:core_contract_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
+    xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ElaborationStepConfigurationPage"
+    x:TypeArguments="interop_common_display_models:ElaborationStepDisplayModel"
+    x:DataType="presentation_configuration_page_models:ElaborationStepConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:BoolToObjectConverter x:Key="LinkedToObjectConverter" TrueObject="%" FalseObject="CUP" />
+
+            <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+            </Style>
+
+            <Array Type="{x:Type x:Int32}" x:Key="PriorityValues">
+                <x:Int32>1</x:Int32>
+                <x:Int32>2</x:Int32>
+                <x:Int32>3</x:Int32>
+                <x:Int32>4</x:Int32>
+                <x:Int32>5</x:Int32>
+                <x:Int32>6</x:Int32>
+                <x:Int32>7</x:Int32>
+                <x:Int32>8</x:Int32>
+                <x:Int32>9</x:Int32>
+                <x:Int32>10</x:Int32>
+            </Array>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                </FontImageSource>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;">
+                    <FontImageSource.Color>
+                        <OnPlatform x:TypeArguments="Color">
+                            <On Platform="UWP" Value="Black" />
+                        </OnPlatform>
+                    </FontImageSource.Color>
+                </FontImageSource>
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <Grid 
+            Padding="20"
+            ColumnSpacing="16" RowSpacing="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="0" VerticalOptions="Start">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                <Entry Text="{Binding Name}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="1" VerticalOptions="Start">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición" />
+                <Editor Text="{Binding Description}" HeightRequest="120" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="2" VerticalOptions="Start">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="% Merma Mínima" />
+                <Entry Text="{Binding MinDecrease, StringFormat='{0:F2}'}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="2" VerticalOptions="Start">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="% de Merma Máxima" />
+                <Entry Text="{Binding MaxDecrease, StringFormat='{0:F2}'}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="3">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Roles de Producción" />
+                <Frame Padding="8">
+                    <Grid RowSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="2" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Button
+                            Grid.Column="1" Grid.Row="0"
+                            HorizontalOptions="End"
+                            Text="Agregar"
+                            Clicked="AddRoleButton_Clicked" />
+                        <BoxView
+                            Grid.ColumnSpan="2" Grid.Row="1"
+                            Color="{StaticResource Gray050}" />
+                        <CollectionView
+                            Grid.ColumnSpan="2" Grid.Row="2"
+                            ItemsSource="{Binding Path=Roles}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.EmptyView>
+                                <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="interop_common_bridge_models:ElaborationStepProductionRoleBridgeModel">
+                                    <Frame Padding="8">
+                                        <Grid ColumnSpacing="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <VerticalStackLayout Grid.Column="0">
+                                                <Label 
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    Text="{Binding Role.Name}"
+                                                    FontSize="Medium"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Label>
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="Remuneración: " FontAttributes="Bold" TextColor="DimGray" />
+                                                            <Span Text="{Binding Participation}" />
+                                                            <Span Text=" " />
+                                                            <Span Text="{Binding Linked, Converter={StaticResource LinkedToObjectConverter}}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label 
+                                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                                    FontSize="Caption"
+                                                    Margin="0,8,0,0"
+                                                    Text="Descripción" />
+                                                <Label
+                                                    Style="{StaticResource ValueFieldLabelStyle}"
+                                                    Text="{Binding Description, TargetNullValue='---'}" />
+                                            </VerticalStackLayout>
+                                            <VerticalStackLayout Grid.Column="1" Spacing="8">
+                                                <Button
+                                                    FontFamily="MaterialDesignIcons" Text="&#xF90B;"
+                                                    Clicked="EditRoleButton_Clicked" />
+                                                <Button
+                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
+                                                    Clicked="RoleRemoveButton_Clicked" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Frame>
+            </VerticalStackLayout>
+            <BoxView 
+                Grid.ColumnSpan="2" Grid.Row="4" 
+                Margin="0,8,0,0"
+                HeightRequest="1" 
+                Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+            <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="5">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+            </VerticalStackLayout>
+            <caneyframework_presentation_views:BusyView
+                Grid.ColumnSpan="2" Grid.RowSpan="6"
+                BackgroundColor="#A7FFFFFF"
+                IsVisible="{Binding IsBusy}" />
+        </Grid>
+    </ScrollView>
+</core_contract_configuration_pages:BaseConfigurationContentPage>

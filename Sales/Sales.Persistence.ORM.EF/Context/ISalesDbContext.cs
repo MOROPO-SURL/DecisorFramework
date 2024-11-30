@@ -1,8 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace MOROPO.Framework.Decisor.Sales.Persistence.ORM.EF.Context.Contract
+namespace MOROPO.Framework.Decisor.Sales.Persistence.ORM.EF.Context
 {
-	public interface ISalesDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext, Servicing.Persistence.ORM.EF.Context.Contract.IServicingDbContext
+    public interface ISalesDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext, Servicing.Persistence.ORM.EF.Context.Contract.IServicingDbContext
     {
         public DbSet<Entities.LegalClient> LegalClients { get; set; }
         public DbSet<Entities.NaturalClient> NaturalClients { get; set; }

@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Production.Presentation.Web.Backend</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Production.Presentation.Web.Backend</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Inventory\Inventory.Presentation.Web.Backend\Inventory.Presentation.Web.Backend.csproj" />
+		<ProjectReference Include="..\Production.Interop.API.Common\Production.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Production.Presentation.Web.Common\Production.Presentation.Web.Common.csproj" />
+	</ItemGroup>
+</Project>

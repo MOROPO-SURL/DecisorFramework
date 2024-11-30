@@ -8,11 +8,11 @@ using MOROPO.Framework.Guama.Location.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
-namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Controllers.Frontend.API
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/purchasing/[controller]")]
-    [Microsoft.AspNetCore.Mvc.ApiController]
-    public class NaturalProvidersController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<NaturalProvider, System.Guid, NaturalProviderInputModel, NaturalProviderDisplayModel>
+    [Route("api/purchasing/[controller]")]
+    [ApiController]
+    public class NaturalProvidersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<NaturalProvider, System.Guid, NaturalProviderInputModel, NaturalProviderDisplayModel>
     {
         private readonly IEntityRepository<EmailContactItem, System.Guid> emailContactRepository;
         private readonly IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository;

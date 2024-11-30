@@ -1,0 +1,46 @@
+﻿using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge;
+using System.Linq;
+
+namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
+{
+    public class ElaborationStepDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.ElaborationStep, System.Guid>
+    {
+        public System.Guid Id { get; set; }
+
+        public string Name { get; set; }
+
+        public int Priority { get; set; }
+
+        public string Description { get; set; }
+
+        public decimal MinDecrease { get; set; }
+
+        public decimal MaxDecrease { get; set; }
+
+        public ElaborationStepProductionRoleBridgeModel[] ProductionRoles { get; set; }
+
+        public void Import(Persistence.Entities.ElaborationStep entity)
+        {
+            Id = entity.Id;
+            Name = entity.Name;
+            Priority = entity.Priority;
+            Description = entity.Description;
+            MinDecrease = entity.MinDecrease;
+            MaxDecrease = entity.MaxDecrease;
+            ProductionRoles = entity.ProductionRoleBridges.Select(bridge =>
+            {
+                var model = new ElaborationStepProductionRoleBridgeModel
+                {
+                    Role = new ProductionRoleDisplayModel(),
+                    Participation = bridge.Participation,
+                    Linked = bridge.Linked,
+                    Description = bridge.Description
+                };
+
+                model.Role.Import(bridge.Stern);
+
+                return model;
+            }).ToArray();
+        }
+    }
+}

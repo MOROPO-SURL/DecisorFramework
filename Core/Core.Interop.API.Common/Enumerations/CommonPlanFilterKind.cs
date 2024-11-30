@@ -1,4 +1,4 @@
-﻿namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Enumerations
+﻿namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Enumerations
 {
     public enum CommonPlanFilterKind
     {

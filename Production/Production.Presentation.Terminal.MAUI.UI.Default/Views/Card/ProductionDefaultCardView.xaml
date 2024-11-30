@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
+    x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Views.Card.ProductionDefaultCardView"
+    x:DataType="interop_common_display_models:ProductionDisplayModel">
+    <Frame Padding="10">
+        <StackLayout>
+            <Label 
+                FontAttributes="Bold"
+                FontSize="Medium"
+                Text="{Binding Path=At, StringFormat='{0:D}'}" />
+            <Label Text="{Binding Plan.Elaboration.Product.Name}" />
+            <Label 
+                Margin="0,8,0,0"
+                Text="Responsable"
+                TextColor="DimGray"
+                FontSize="Caption"
+                FontAttributes="Bold" />
+            <Label
+                LineBreakMode="TailTruncation"
+                Text="{Binding Plan.Responsible}" />
+            <Label 
+                Margin="0,8,0,0"
+                Text="Observaciones"
+                TextColor="DimGray"
+                FontSize="Caption"
+                FontAttributes="Bold" />
+            <Label
+                VerticalOptions="FillAndExpand"
+                LineBreakMode="TailTruncation"
+                MaxLines="2"
+                Text="{Binding Description, TargetNullValue='---'}" />
+        </StackLayout>
+    </Frame>
+</ContentView>

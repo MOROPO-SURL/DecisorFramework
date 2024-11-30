@@ -125,7 +125,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Essential.Presentation.Term
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CheffMigueSRLDecisor", "CheffMigueSRLDecisor\CheffMigueSRLDecisor.csproj", "{A1C595AA-D594-436A-ABCD-DD1826D2E117}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Presentation.Terminal.MAUI", "Inventory\Inventory.Persistence.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj", "{4BFF452B-6460-4BD4-9963-6DD8F6395A2A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Inventory.Presentation.Terminal.MAUI", "Inventory\Inventory.Presentation.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj", "{4BFF452B-6460-4BD4-9963-6DD8F6395A2A}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Purchasing.Presentation.Terminal.MAUI", "Purchasing\Purchasing.Presentation.Terminal.MAUI\Purchasing.Presentation.Terminal.MAUI.csproj", "{B494DBD9-B056-473A-8318-EE94D43D02BF}"
 EndProject
@@ -149,35 +149,53 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "HumanResources", "HumanReso
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Legal", "Legal", "{BA49F6D7-E332-43E1-9BE0-44CFAFE70D36}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legal.Persistence", "Legal\Legal.Persistence\Legal.Persistence.csproj", "{47456084-7C28-4149-AEC9-E95F53FD4291}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Legal.Persistence", "Legal\Legal.Persistence\Legal.Persistence.csproj", "{47456084-7C28-4149-AEC9-E95F53FD4291}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Persistence", "HumanResources\HumanResources.Persistence\HumanResources.Persistence.csproj", "{38C39091-5B71-4701-8927-C2F05EB8CFBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Persistence", "HumanResources\HumanResources.Persistence\HumanResources.Persistence.csproj", "{38C39091-5B71-4701-8927-C2F05EB8CFBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Persistence.ORM.EF", "HumanResources\HumanResources.Persistence.ORM.EF\HumanResources.Persistence.ORM.EF.csproj", "{90EE844C-4A5D-4878-9C93-343CB2413069}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Persistence.ORM.EF", "HumanResources\HumanResources.Persistence.ORM.EF\HumanResources.Persistence.ORM.EF.csproj", "{90EE844C-4A5D-4878-9C93-343CB2413069}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legal.Persistence.ORM.EF", "Legal\Legal.Persistence.ORM.EF\Legal.Persistence.ORM.EF.csproj", "{9485BB89-943F-41A5-80A7-C2BBD129B397}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Legal.Persistence.ORM.EF", "Legal\Legal.Persistence.ORM.EF\Legal.Persistence.ORM.EF.csproj", "{9485BB89-943F-41A5-80A7-C2BBD129B397}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Presentation.Web.Common", "HumanResources\HumanResources.Presentation.Web.Common\HumanResources.Presentation.Web.Common.csproj", "{AD0DA0D0-65FB-4AED-8441-E9862ABF152A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Presentation.Web.Common", "HumanResources\HumanResources.Presentation.Web.Common\HumanResources.Presentation.Web.Common.csproj", "{AD0DA0D0-65FB-4AED-8441-E9862ABF152A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legal.Presentation.Web.Common", "Legal\Legal.Presentation.Web.Common\Legal.Presentation.Web.Common.csproj", "{2A91F6E9-766E-4A45-BF19-3E23FC41E167}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Legal.Presentation.Web.Common", "Legal\Legal.Presentation.Web.Common\Legal.Presentation.Web.Common.csproj", "{2A91F6E9-766E-4A45-BF19-3E23FC41E167}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Interop.API.Common", "HumanResources\HumanResources.Interop.API.Common\HumanResources.Interop.API.Common.csproj", "{99CA0BCF-F04F-4074-9B28-ED3E80C196D1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Interop.API.Common", "HumanResources\HumanResources.Interop.API.Common\HumanResources.Interop.API.Common.csproj", "{99CA0BCF-F04F-4074-9B28-ED3E80C196D1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legal.Interop.API.Common", "Legal\Legal.Interop.API.Common\Legal.Interop.API.Common.csproj", "{F7C76029-1DC5-466D-A2E1-6462C94CF1B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Legal.Interop.API.Common", "Legal\Legal.Interop.API.Common\Legal.Interop.API.Common.csproj", "{F7C76029-1DC5-466D-A2E1-6462C94CF1B1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Presentation.Web.Backend", "HumanResources\HumanResources.Presentation.Web.Backend\HumanResources.Presentation.Web.Backend.csproj", "{ECAB4AD0-A9A5-4032-94A8-9899666F01D9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Presentation.Web.Backend", "HumanResources\HumanResources.Presentation.Web.Backend\HumanResources.Presentation.Web.Backend.csproj", "{ECAB4AD0-A9A5-4032-94A8-9899666F01D9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legal.Presentation.Web.Backend", "Legal\Legal.Presentation.Web.Backend\Legal.Presentation.Web.Backend.csproj", "{DA5282A1-B82F-4CAF-B9FE-D1C9291C3766}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Legal.Presentation.Web.Backend", "Legal\Legal.Presentation.Web.Backend\Legal.Presentation.Web.Backend.csproj", "{DA5282A1-B82F-4CAF-B9FE-D1C9291C3766}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legal.Presentation.Web.Frontend", "Legal\Legal.Presentation.Web.Frontend\Legal.Presentation.Web.Frontend.csproj", "{F666727D-78F7-4D97-92AE-1477724A09C3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Legal.Presentation.Web.Frontend", "Legal\Legal.Presentation.Web.Frontend\Legal.Presentation.Web.Frontend.csproj", "{F666727D-78F7-4D97-92AE-1477724A09C3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Presentation.Web.Frontend", "HumanResources\HumanResources.Presentation.Web.Frontend\HumanResources.Presentation.Web.Frontend.csproj", "{D5D6BCBE-1E49-49DB-B3CE-13F95221C938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Presentation.Web.Frontend", "HumanResources\HumanResources.Presentation.Web.Frontend\HumanResources.Presentation.Web.Frontend.csproj", "{D5D6BCBE-1E49-49DB-B3CE-13F95221C938}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Interop.API.Connect", "HumanResources\HumanResources.Interop.API.Connect\HumanResources.Interop.API.Connect.csproj", "{4FC003B9-2EC9-4B48-A4B2-A1BC6BE451A6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Interop.API.Connect", "HumanResources\HumanResources.Interop.API.Connect\HumanResources.Interop.API.Connect.csproj", "{4FC003B9-2EC9-4B48-A4B2-A1BC6BE451A6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Presentation.Terminal.MAUI", "HumanResources\HumanResources.Presentation.Terminal.MAUI\HumanResources.Presentation.Terminal.MAUI.csproj", "{DE77F174-8051-45A3-A3E3-ADA65683E79B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Presentation.Terminal.MAUI", "HumanResources\HumanResources.Presentation.Terminal.MAUI\HumanResources.Presentation.Terminal.MAUI.csproj", "{DE77F174-8051-45A3-A3E3-ADA65683E79B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HumanResources.Presentation.Terminal.MAUI.UI.Default", "HumanResources\HumanResources.Presentation.Terminal.MAUI.UI.Default\HumanResources.Presentation.Terminal.MAUI.UI.Default.csproj", "{FBEF889A-C6D9-4D30-8182-BC710B170803}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HumanResources.Presentation.Terminal.MAUI.UI.Default", "HumanResources\HumanResources.Presentation.Terminal.MAUI.UI.Default\HumanResources.Presentation.Terminal.MAUI.UI.Default.csproj", "{FBEF889A-C6D9-4D30-8182-BC710B170803}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Production.Persistence.ORM.EF", "Production\Production.Persistence.ORM.EF\Production.Persistence.ORM.EF.csproj", "{D7485DE4-1500-4696-9844-A347B76F85B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Production.Presentation.Web.Common", "Production\Production.Presentation.Web.Common\Production.Presentation.Web.Common.csproj", "{8CF269DE-A205-4BE4-9E49-106C4547B61B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Production.Presentation.Web.Frontend", "Production\Production.Presentation.Web.Frontend\Production.Presentation.Web.Frontend.csproj", "{1508158A-8201-4223-80C0-5484CFCBF90D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Production.Interop.API.Common", "Production\Production.Interop.API.Common\Production.Interop.API.Common.csproj", "{5C7C4B60-DF68-44D3-8DBF-B67CCAE91C8D}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Production.Interop.API.Connect", "Production\Production.Interop.API.Connect\Production.Interop.API.Connect.csproj", "{0AB747BC-5870-4B10-802E-55D29F584D21}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Production.Presentation.Terminal.MAUI", "Production\Production.Presentation.Terminal.MAUI\Production.Presentation.Terminal.MAUI.csproj", "{051B2231-CAC2-402B-9842-4E20948A141C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Production.Presentation.Terminal.MAUI.UI.Default", "Production\Production.Presentation.Terminal.MAUI.UI.Default\Production.Presentation.Terminal.MAUI.UI.Default.csproj", "{7E371834-DB16-4D0D-ACA9-16DB7E17FA18}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Production.Presentation.Web.Backend", "Production\Production.Presentation.Web.Backend\Production.Presentation.Web.Backend.csproj", "{48B0962F-755B-4CBD-94D2-16B8258A8245}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sales.Presentation.Terminal.MAUI.UI.Default", "Sales\Sales.Presentation.Terminal.MAUI.UI.Default\Sales.Presentation.Terminal.MAUI.UI.Default.csproj", "{E508E87F-9770-4542-91D3-7EA57A49FDDC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -498,6 +516,42 @@ Global
 		{FBEF889A-C6D9-4D30-8182-BC710B170803}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FBEF889A-C6D9-4D30-8182-BC710B170803}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FBEF889A-C6D9-4D30-8182-BC710B170803}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7485DE4-1500-4696-9844-A347B76F85B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7485DE4-1500-4696-9844-A347B76F85B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7485DE4-1500-4696-9844-A347B76F85B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7485DE4-1500-4696-9844-A347B76F85B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8CF269DE-A205-4BE4-9E49-106C4547B61B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8CF269DE-A205-4BE4-9E49-106C4547B61B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8CF269DE-A205-4BE4-9E49-106C4547B61B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8CF269DE-A205-4BE4-9E49-106C4547B61B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1508158A-8201-4223-80C0-5484CFCBF90D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1508158A-8201-4223-80C0-5484CFCBF90D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1508158A-8201-4223-80C0-5484CFCBF90D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1508158A-8201-4223-80C0-5484CFCBF90D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C7C4B60-DF68-44D3-8DBF-B67CCAE91C8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C7C4B60-DF68-44D3-8DBF-B67CCAE91C8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C7C4B60-DF68-44D3-8DBF-B67CCAE91C8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C7C4B60-DF68-44D3-8DBF-B67CCAE91C8D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0AB747BC-5870-4B10-802E-55D29F584D21}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0AB747BC-5870-4B10-802E-55D29F584D21}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0AB747BC-5870-4B10-802E-55D29F584D21}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0AB747BC-5870-4B10-802E-55D29F584D21}.Release|Any CPU.Build.0 = Release|Any CPU
+		{051B2231-CAC2-402B-9842-4E20948A141C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{051B2231-CAC2-402B-9842-4E20948A141C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{051B2231-CAC2-402B-9842-4E20948A141C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{051B2231-CAC2-402B-9842-4E20948A141C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7E371834-DB16-4D0D-ACA9-16DB7E17FA18}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7E371834-DB16-4D0D-ACA9-16DB7E17FA18}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7E371834-DB16-4D0D-ACA9-16DB7E17FA18}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7E371834-DB16-4D0D-ACA9-16DB7E17FA18}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48B0962F-755B-4CBD-94D2-16B8258A8245}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48B0962F-755B-4CBD-94D2-16B8258A8245}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48B0962F-755B-4CBD-94D2-16B8258A8245}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48B0962F-755B-4CBD-94D2-16B8258A8245}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E508E87F-9770-4542-91D3-7EA57A49FDDC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E508E87F-9770-4542-91D3-7EA57A49FDDC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E508E87F-9770-4542-91D3-7EA57A49FDDC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E508E87F-9770-4542-91D3-7EA57A49FDDC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -578,6 +632,15 @@ Global
 		{4FC003B9-2EC9-4B48-A4B2-A1BC6BE451A6} = {6105C9B9-F22D-4466-96E0-2E1896AEB041}
 		{DE77F174-8051-45A3-A3E3-ADA65683E79B} = {6105C9B9-F22D-4466-96E0-2E1896AEB041}
 		{FBEF889A-C6D9-4D30-8182-BC710B170803} = {6105C9B9-F22D-4466-96E0-2E1896AEB041}
+		{D7485DE4-1500-4696-9844-A347B76F85B3} = {4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}
+		{8CF269DE-A205-4BE4-9E49-106C4547B61B} = {4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}
+		{1508158A-8201-4223-80C0-5484CFCBF90D} = {4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}
+		{5C7C4B60-DF68-44D3-8DBF-B67CCAE91C8D} = {4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}
+		{0AB747BC-5870-4B10-802E-55D29F584D21} = {4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}
+		{051B2231-CAC2-402B-9842-4E20948A141C} = {4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}
+		{7E371834-DB16-4D0D-ACA9-16DB7E17FA18} = {4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}
+		{48B0962F-755B-4CBD-94D2-16B8258A8245} = {4A9D7747-6E26-4CC7-AE5B-AEE9869C2BCE}
+		{E508E87F-9770-4542-91D3-7EA57A49FDDC} = {B7E83318-E239-4E9A-B866-65C3B41B8C92}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {747B719B-EA48-4793-98E6-ECCB62300F19}

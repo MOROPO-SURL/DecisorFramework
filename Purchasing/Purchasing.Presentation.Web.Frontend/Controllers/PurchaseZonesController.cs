@@ -2,13 +2,13 @@
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 
-namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/purchasing/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class PurchaseZonesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<PurchaseZone, System.Guid, PurchaseZoneInputModel, PurchaseZoneDisplayModel>
     {
-        public PurchaseZonesController(Framework.Guama.Core.Persistence.Repositories.IEntityRepository<PurchaseZone, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchaseZonesController> localizer, Microsoft.Extensions.Logging.ILogger<PurchaseZonesController> logger)
+        public PurchaseZonesController(Guama.Core.Persistence.Repositories.IEntityRepository<PurchaseZone, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchaseZonesController> localizer, Microsoft.Extensions.Logging.ILogger<PurchaseZonesController> logger)
             : base(repository, localizer, logger)
         {
         }

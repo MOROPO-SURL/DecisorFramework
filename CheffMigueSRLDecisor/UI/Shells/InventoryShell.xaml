@@ -42,7 +42,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF9E7;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
@@ -52,7 +52,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF3D4;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
             Title="Compras"
@@ -64,7 +64,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF3D5;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
@@ -75,7 +75,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xFFBB;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
@@ -85,7 +85,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF472;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
@@ -95,7 +95,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF3D7;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
@@ -105,7 +105,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF0C0;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
 </Shell>

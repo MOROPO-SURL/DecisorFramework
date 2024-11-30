@@ -22,7 +22,11 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.Entities
 
         public decimal Amount { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(UnitMeasurementId))]
         public UnitMeasurement UnitMeasurement { get; set; }
+        public System.Guid UnitMeasurementId { get; set; }
+
+        public string Description { get; set; }
 
         public List<ProductionProductBridge> ProductBridges { get; set; } = new List<ProductionProductBridge>();
 

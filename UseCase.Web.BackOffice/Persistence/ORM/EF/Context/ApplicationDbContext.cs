@@ -14,6 +14,8 @@ using MOROPO.Framework.Decisor.Financial.Persistence.Entities.Contract;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
 using MOROPO.Framework.Decisor.Essential.Persistence.Entities;
+using MOROPO.Framework.Decisor.Sales.Persistence.ORM.EF.Context;
+using MOROPO.Framework.Decisor.Production.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Context
 {
@@ -28,11 +30,12 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Con
         Financial.Persistence.ORM.EF.Context.Contract.IFinancialDbContext,
         HumanResources.Persistence.ORM.EF.Context.Contract.IHumanResourcesDbContext,
         Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext,
+        Production.Persistence.ORM.EF.Context.Contract.IProductionDbContext,
         Purchasing.Persistence.ORM.EF.Context.Contract.IPurchasingDbContext,
         Purchasing.Persistence.ORM.EF.Context.Contract.IPurchasingContractualDbContext,
         Servicing.Persistence.ORM.EF.Context.Contract.IServicingDbContext,
-        Sales.Persistence.ORM.EF.Context.Contract.ISalesDbContext,
-        Sales.Persistence.ORM.EF.Context.Contract.ISaleContractualDbContext
+        ISalesDbContext,
+        ISaleContractualDbContext
     {
         public ApplicationDbContext(System.Collections.Generic.IEnumerable<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
         {
@@ -146,6 +149,19 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Con
         public DbSet<Category> Categories { get; set; }
         public DbSet<Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }
 
+        public DbSet<Elaboration> Elaborations { get; set; }
+        public DbSet<ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
+        public DbSet<   ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
+        public DbSet<ElaborationStep> ElaborationSteps { get; set; }
+        public DbSet<ElaborationStepProductionRoleBridge> ElaborationStepProductionRoleBridges { get; set; }
+        public DbSet<Production.Persistence.Entities.Production> Productions { get; set; }
+        public DbSet<ProductionColaboratorBridge> ProductionColaboratorBridges { get; set; }
+        public DbSet<ProductionEmployeeBridge> ProductionEmployeeBridges { get; set; }
+        public DbSet<ProductionPlan> ProductionPlans { get; set; }
+        public DbSet<ProductionPlanDeparture> ProductionPlanDepartures { get; set; }
+        public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
+        public DbSet<ProductionReception> ProductionReceptions { get; set; }
+        public DbSet<ProductionRole> ProductionRoles { get; set; }
     }
 }
 

@@ -41,7 +41,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF9E7;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
@@ -51,7 +51,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF787;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
             Title="Por Aprobar"
@@ -70,7 +70,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xFCB0;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
@@ -80,7 +80,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF6D8;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
             Title="Jurídicos"
@@ -96,7 +96,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xFEBB;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
@@ -106,7 +106,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF117;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
 </Shell>

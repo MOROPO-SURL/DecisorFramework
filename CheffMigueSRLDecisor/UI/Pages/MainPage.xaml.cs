@@ -36,7 +36,7 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
 
     private void ProductionSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        //this.NavigationPushModalPageAsync(new ProductionPage());
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.ProductionShell();
     }
 
     private void HumanResourcesSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
@@ -47,5 +47,10 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
     private void FinancialSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.FinancialShell();
+    }
+
+    private void SalesSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.SalesShell();
     }
 }

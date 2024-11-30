@@ -2,7 +2,7 @@
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
 
-namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/inventory/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]

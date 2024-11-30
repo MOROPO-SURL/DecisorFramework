@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Backend.Helpers;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Backend.Extensions
 {
@@ -7,7 +6,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Backend.Exten
     {
         public static void AddDecisorHumanResourcesPresentationWebBackend(this IServiceCollection services)
         {
-            services.AddSingleton<Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, HumanResourcesDataInitializationHelper>();
+            services.AddSingleton<Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, Helpers.HumanResourcesDataInitializationHelper>();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models;
+using MOROPO.Framework.Decisor.Core.Presentation.Web.Frontend.Options;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Providers.Facade;
 using MOROPO.Framework.Guama.Security.Personal.Persistence.Entities;
@@ -11,11 +12,11 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Web.Frontend.Controllers.AP
     [ApiController]
     public class SecurityController : Guama.Core.Presentation.Web.Common.Controllers.BaseWebController
     {
-        private readonly Microsoft.Extensions.Options.IOptions<Options.JwtOptions> jwtOptions;
+        private readonly Microsoft.Extensions.Options.IOptions<JwtOptions> jwtOptions;
         private readonly IIdentityProviderFacade identityProvider;
         private readonly IEntityRepository<User, string> userRepository;
 
-        public SecurityController(IEntityRepository<User, string> userRepository, IIdentityProviderFacade identityProvider, Microsoft.Extensions.Options.IOptions<Options.JwtOptions> jwtOptions, Microsoft.Extensions.Localization.IStringLocalizer<SecurityController> localizer, ILogger<SecurityController> logger) : base(localizer, logger)
+        public SecurityController(IEntityRepository<User, string> userRepository, IIdentityProviderFacade identityProvider, Microsoft.Extensions.Options.IOptions<JwtOptions> jwtOptions, Microsoft.Extensions.Localization.IStringLocalizer<SecurityController> localizer, ILogger<SecurityController> logger) : base(localizer, logger)
         {
             this.jwtOptions = jwtOptions;
             this.identityProvider = identityProvider;

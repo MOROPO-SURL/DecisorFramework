@@ -42,7 +42,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF9E7;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
@@ -53,7 +53,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xFDF0;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
@@ -63,7 +63,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF898;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
 </Shell>

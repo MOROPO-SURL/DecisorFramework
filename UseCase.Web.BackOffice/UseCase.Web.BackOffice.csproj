@@ -51,6 +51,8 @@
 		<PackageReference Include="SkiaSharp" Version="2.88.8" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\Production\Production.Presentation.Web.Backend\Production.Presentation.Web.Backend.csproj" />
+	  <ProjectReference Include="..\Production\Production.Presentation.Web.Frontend\Production.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\Sales\Sales.Presentation.Web.Backend\Sales.Presentation.Web.Backend.csproj">
 	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
 	  </ProjectReference>
@@ -66,5 +68,13 @@
 	  <Folder Include="Areas\Globals\Views\" />
 	  <Folder Include="Areas\Globals\Views\LegalBusinessKinds\" />
 	  <Folder Include="Areas\Globals\Views\NaturalBusinessKinds\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <None Include="Areas\Production\Views\Elaborations\Index.cshtml" />
+	  <None Include="Areas\Production\Views\ProductionPlans\Index.cshtml" />
+	  <None Include="Areas\Production\Views\ProductionRoles\Create.cshtml" />
+	  <None Include="Areas\Production\Views\ProductionRoles\Edit.cshtml" />
+	  <None Include="Areas\Production\Views\ProductionRoles\Index.cshtml" />
+	  <None Include="Areas\Production\Views\Productions\Index.cshtml" />
 	</ItemGroup>
 </Project>

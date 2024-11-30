@@ -5,7 +5,7 @@ using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using System.Linq;
 
-namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/purchasing/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
@@ -82,12 +82,12 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             {
                 foreach (var item in model.LegalProviderProductBridges)
                 {
-                    entity.LegalProviderProductBridges.Add(new PurchaseProductLegalProviderBridge 
-                    { 
-                        PurchaseId = entity.Id, 
-                        ProductId = item.Product.Id, 
+                    entity.LegalProviderProductBridges.Add(new PurchaseProductLegalProviderBridge
+                    {
+                        PurchaseId = entity.Id,
+                        ProductId = item.Product.Id,
                         ProviderId = item.Provider.Id,
-                        CostCenterId = item.CostCenter.Id, 
+                        CostCenterId = item.CostCenter.Id,
                         UnitMeasurementId = item.UnitMeasurement.Id,
                         Amount = item.Amount,
                         Cost = item.Cost
@@ -132,13 +132,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             {
                 foreach (var item in model.SpentBridges)
                 {
-                    entity.SpentBridges.Add(new PurchasePurchaseSpentBridge 
-                    { 
-                        ProwId = entity.Id, 
-                        SternId = item.Spent.Id, 
-                        Amount = item.Amount, 
-                        Cost = item.Cost, 
-                        CostCenterId = item.CostCenter.Id 
+                    entity.SpentBridges.Add(new PurchasePurchaseSpentBridge
+                    {
+                        ProwId = entity.Id,
+                        SternId = item.Spent.Id,
+                        Amount = item.Amount,
+                        Cost = item.Cost,
+                        CostCenterId = item.CostCenter.Id
                     });
                 }
             }

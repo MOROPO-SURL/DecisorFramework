@@ -8,7 +8,7 @@ using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
-namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend.Controllers.Backend
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend.Controllers
 {
     [Microsoft.AspNetCore.Authorization.Authorize]
     [RequirePermissions(Guama.Core.Security.Presentation.Constants.Permissions.ShellManager)]

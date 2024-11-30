@@ -6,13 +6,13 @@ using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using System.Linq;
 
-namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/purchasing/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class PurchasePlansController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<PurchasePlan, System.Guid, PurchasePlanInputModel, PurchasePlanDisplayModel, PurchasePlanFilterModel>
     {
-        public PurchasePlansController(IEntityRepository<PurchasePlan, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchasePlansController> localizer, Microsoft.Extensions.Logging.ILogger<PurchasePlansController> logger) : base(repository, localizer, logger)
+        public PurchasePlansController(IEntityRepository<PurchasePlan, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchasePlansController> localizer, ILogger<PurchasePlansController> logger) : base(repository, localizer, logger)
         {
         }
 

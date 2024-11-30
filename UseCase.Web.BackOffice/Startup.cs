@@ -18,6 +18,8 @@ using MOROPO.Framework.Decisor.Financial.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Backend.Extensions;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Production.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Extensions;
 using MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend.Extensions;
 using MOROPO.Framework.Decisor.Servicing.Presentation.Web.Common.Extensions;
@@ -28,6 +30,7 @@ using Serilog;
 using System.Linq;
 using MOROPO.Framework.Guama.Security.Personal.Presentation.Web.Backend.Extensions;
 using MOROPO.Framework.Guama.Security.Personal.Persistence.ORM.EF.Extensions;
+using MOROPO.Framework.Decisor.Core.Presentation.Web.Frontend.Options;
 
 namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice
 {
@@ -47,7 +50,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice
         public void ConfigureServices(IServiceCollection services)
         {
             services.Configure<Guama.Media.Presentation.Web.Common.Options.RelativeMediaFileManagementOptions>(configuration.GetSection("FileManagement"));
-            services.Configure<Core.Presentation.Web.Options.JwtOptions>(configuration.GetSection("JWT"));
+            services.Configure<JwtOptions>(configuration.GetSection("JWT"));
 
             services.AddDbContext<Persistence.ORM.EF.Context.ApplicationDbContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
@@ -68,6 +71,8 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice
             services.AddDecisorHumanResourcesPresentationWebBackend();
             services.AddDecisorInventoryPresentationWebCommon();
             //services.AddDecisorInventoryPresentationWebBackend
+            services.AddDecisorProductionPresentationWebCommon();
+            services.AddDecisorProductionPresentationWebBackend();
             services.AddDecisorPurchasingPresentationWebCommon();
             services.AddDecisorPurchasingContractualPresentationWebCommon();
             services.AddDecisorPurchasingPresentationWebBackend();

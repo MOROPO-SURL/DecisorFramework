@@ -1,0 +1,82 @@
+﻿@model MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Models.View.Input.ProductionRoleInputViewModel
+
+@{
+    const string TITLE = "Modificar Especialid de Producción";
+    const string HEADER = "Administración de Especialidades de Producción";
+
+    ViewData["TITLE"] = TITLE;
+    ViewData["HEADER"] = HEADER;
+
+    ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] = new List<BreadcrumbViewModel>
+    {
+        new BreadcrumbViewModel
+        {
+            Caption = "<i class=\"mdi mdi-desktop-mac-dashboard\"></i> Panel de Control",
+            Url = Url.Action("Index", "Dashboard", new { Area = "management" })
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = HEADER,
+            Url = Url.Action("index")
+        },
+        new BreadcrumbViewModel
+        {
+            Caption = TITLE
+        }
+    };
+
+    Layout = "_BackendLayout";
+
+    var prioritySelectListItems = new List<SelectListItem>();
+
+    for (int i = 1; i <= 10; i++)
+    {
+        prioritySelectListItems.Add(new SelectListItem { Text = i.ToString(), Value = i.ToString() });
+    }
+}
+
+<hr class="mt-0 mb-4" />
+
+@using (Html.BeginForm("edit", "productionroles", new { Area = "production", key = string.Empty }, FormMethod.Post, true, null))
+{
+    @Html.ValidationSummary(true)
+
+    @Html.HiddenFor(model => model.Id)
+
+    <div class="card mb-4">
+        <div class="card-header"><h5 class="mb-0 font-weight-bold text-primary">@TITLE</h5></div>
+
+        <div class="card-body">
+            <div class="mb-3">
+                @Html.LabelFor(model => model.Name, new { @class = "control-label" })
+                @Html.TextBoxFor(model => model.Name, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Name, null, new { @class = "text-danger" })
+            </div>
+            <div class="row">
+                <div class="col-sm-6 mb-3">
+                    <div class="checkbox">
+                        <label>
+                            @Html.EditorFor(model => model.Enabled) Habilitar?
+                            @Html.ValidationMessageFor(model => model.Enabled)
+                        </label>
+                    </div>
+                </div>
+                <div class="col-sm-6 mb-3">
+                    @Html.LabelFor(model => model.Priority, new { @class = "control-label" })
+                    @Html.DropDownListFor(model => model.Priority, prioritySelectListItems, new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.Priority, null, new { @class = "text-danger" })
+                </div>
+            </div>
+            <div>
+                @Html.LabelFor(model => model.Description, new { @class = "control-label" })
+                @Html.TextAreaFor(model => model.Description, 8, 0, new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Modificar</button>
+            <a class="btn btn-secondary" href="@Url.Action("index")">Regresar al listado</a>
+        </div>
+    </div>
+}

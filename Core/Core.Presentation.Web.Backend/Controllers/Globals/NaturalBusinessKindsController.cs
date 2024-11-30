@@ -6,14 +6,14 @@ using MOROPO.Framework.Decisor.Core.Presentation.Web.Backend.Models.View.Display
 using MOROPO.Framework.Decisor.Core.Presentation.Web.Backend.Models.View.Input;
 using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
 
-namespace MOROPO.Framework.Decisor.Core.Presentation.Web.Backend.Controllers.Backend.Global
+namespace MOROPO.Framework.Decisor.Core.Presentation.Web.Backend.Controllers.Globals
 {
     [Microsoft.AspNetCore.Authorization.Authorize]
     [RequirePermissions(Guama.Core.Security.Presentation.Constants.Permissions.ShellManager)]
     [Area("globals")]
-    public class NaturalBusinessKindsController : Guama.Core.Presentation.Web.Backend.Controllers.Contract.AbstractArchivableEnableableEntityManagementController<NaturalBusinessKind, System.Guid, NaturalBusinessKindInputViewModel, NaturalBusinessKindDisplayViewModel>
+    public class NaturalBusinessKindsController : Guama.Core.Presentation.Web.Backend.Controllers.Contract.AbstractArchivableEnableableEntityManagementController<NaturalBusinessKind, Guid, NaturalBusinessKindInputViewModel, NaturalBusinessKindDisplayViewModel>
     {
-        public NaturalBusinessKindsController(Guama.Core.Persistence.Repositories.IEntityRepository<NaturalBusinessKind, System.Guid> repository, IStringLocalizer<NaturalBusinessKindsController> localizer, Microsoft.Extensions.Logging.ILogger<NaturalBusinessKindsController> logger) : base(repository, localizer, logger)
+        public NaturalBusinessKindsController(Guama.Core.Persistence.Repositories.IEntityRepository<NaturalBusinessKind, Guid> repository, IStringLocalizer<NaturalBusinessKindsController> localizer, Microsoft.Extensions.Logging.ILogger<NaturalBusinessKindsController> logger) : base(repository, localizer, logger)
         {
         }
 
@@ -36,7 +36,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Web.Backend.Controllers.Bac
         }
 
         [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindEditorPermission)]
-        public override IActionResult Edit(System.Guid key)
+        public override IActionResult Edit(Guid key)
         {
             return base.Edit(key);
         }
@@ -48,13 +48,13 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Web.Backend.Controllers.Bac
         }
 
         [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindEditorPermission)]
-        public override IActionResult Enable(System.Guid key)
+        public override IActionResult Enable(Guid key)
         {
             return base.Enable(key);
         }
 
         [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindEditorPermission)]
-        public override IActionResult Disable(System.Guid key)
+        public override IActionResult Disable(Guid key)
         {
             return base.Disable(key);
         }
@@ -72,7 +72,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Web.Backend.Controllers.Bac
         }
 
         [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindRemoverPermission)]
-        public override IActionResult Delete(System.Guid key)
+        public override IActionResult Delete(Guid key)
         {
             return base.Delete(key);
         }

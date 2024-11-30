@@ -29,30 +29,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\HumanResources\HumanResources.Presentation.Terminal.MAUI.UI.Default\HumanResources.Presentation.Terminal.MAUI.UI.Default.csproj" />
-		<ProjectReference Include="..\Inventory.Persistence.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Converters\" />
-	  <None Remove="Extensions\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Converters\" />
-	  <Folder Include="Extensions\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Compile Update="Pages\Configuration\UnitMeasurementConfigurationPage.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	  <Compile Update="Pages\Manage\UnitMeasurementsManagePage.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-	<ItemGroup>
-	  <MauiXaml Update="Pages\Configuration\UnitMeasurementConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\Manage\UnitMeasurementsManagePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<ProjectReference Include="..\Inventory.Presentation.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 </Project>

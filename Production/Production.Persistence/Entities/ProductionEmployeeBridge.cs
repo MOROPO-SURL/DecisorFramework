@@ -8,8 +8,12 @@
         public System.Guid SternId { get; set; }
         public HumanResources.Persistence.Entities.Employee Stern { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(StepId))]
         public ElaborationStep Step { get; set; }
+        public System.Guid StepId { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(RoleId))]
         public ProductionRole Role { get; set; }
+        public System.Guid RoleId { get; set; }
     }
 }

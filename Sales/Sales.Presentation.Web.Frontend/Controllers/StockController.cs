@@ -7,7 +7,7 @@ using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 using MOROPO.Framework.Decisor.Sales.Interop.API.Common.Models;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
-namespace MOROPO.Framework.Decisor.Sales.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Sales.Presentation.Web.Frontend.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
@@ -57,11 +57,11 @@ namespace MOROPO.Framework.Decisor.Sales.Presentation.Web.Frontend.Controllers.A
             var universe = batchRepository.FindBy(entity => entity.Amount > 0 && entity.ProductId == key)
                 .Include(entity => entity.Reception)
                 .ToArray();
-            
+
             var groups = universe.GroupBy(entity => entity.Warehouse);
 
-            var model = new StockDetailsModel 
-            { 
+            var model = new StockDetailsModel
+            {
                 Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
                 Existences = new List<WarehouseExistenseModel>()
             };
@@ -110,7 +110,7 @@ namespace MOROPO.Framework.Decisor.Sales.Presentation.Web.Frontend.Controllers.A
                     }
                     //else if (item.Reception is ProductionReception)
                     //{
-                        // TODO Implment spected behavior!!
+                    // TODO Implment spected behavior!!
                     //}
                 }
 

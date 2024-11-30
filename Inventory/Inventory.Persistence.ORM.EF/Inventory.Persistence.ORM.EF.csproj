@@ -9,15 +9,4 @@
 		<ProjectReference Include="..\..\HumanResources\HumanResources.Persistence.ORM.EF\HumanResources.Persistence.ORM.EF.csproj" />
 		<ProjectReference Include="..\Inventory.Persistence\Inventory.Persistence.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Context\" />
-	  <None Remove="Context\Contract\" />
-	  <None Remove="Repositories\" />
-	  <None Remove="Providers\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Context\" />
-	  <Folder Include="Context\Contract\" />
-	  <Folder Include="Providers\" />
-	</ItemGroup>
 </Project>
