@@ -76,6 +76,7 @@
 	  <None Remove="Resources\Images\default_organization_picture.png" />
 	  <None Remove="Resources\Images\default_person_picture.jpg" />
 	  <None Remove="Resources\Images\elaboration.jpg" />
+	  <None Remove="Resources\Images\logo_chef_nuevo.png" />
 	  <None Remove="Resources\Images\monitorization.jpg" />
 	  <None Remove="Resources\Images\purchasing.jpg" />
 	  <None Remove="Resources\Images\rr_hh.jpg" />

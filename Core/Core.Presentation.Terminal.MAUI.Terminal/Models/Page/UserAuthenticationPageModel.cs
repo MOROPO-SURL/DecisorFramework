@@ -17,5 +17,7 @@
             get => password;
             set => SetProperty(ref password, value);
         }
+
+        public View.OwnerInformationViewModel OwnerInformation { get; set; }
     }
 }
