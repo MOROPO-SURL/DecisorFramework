@@ -171,7 +171,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -205,7 +205,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -239,7 +239,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -273,7 +273,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });

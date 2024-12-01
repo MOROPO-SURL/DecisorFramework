@@ -4,20 +4,20 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
-using MOROPO.Framework.Decisor.Sales.Interop.API.Common.Models;
+using MOROPO.Framework.Decisor.Supervision.Interop.API.Common.Models;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
-namespace MOROPO.Framework.Decisor.Sales.Presentation.Web.Frontend.Controllers
+namespace MOROPO.Framework.Decisor.Supervision.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/supervision/stock/inventory")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class StockController : Guama.Core.Presentation.Web.Common.Controllers.BaseWebController
+    public class InventoryStockController : Guama.Core.Presentation.Web.Common.Controllers.BaseWebController
     {
         private readonly IEntityRepository<Batch, System.Guid> batchRepository;
         private readonly IEntityRepository<Product, System.Guid> productRepository;
         private readonly IEntityRepository<Purchase, System.Guid> purchaseRepository;
 
-        public StockController(IEntityRepository<Purchase, System.Guid> purchaseRepository, IEntityRepository<Product, System.Guid> productRepository, IEntityRepository<Batch, System.Guid> batchRepository, Microsoft.Extensions.Localization.IStringLocalizer<StockController> localizer, ILogger<StockController> logger) : base(localizer, logger)
+        public InventoryStockController(IEntityRepository<Purchase, System.Guid> purchaseRepository, IEntityRepository<Product, System.Guid> productRepository, IEntityRepository<Batch, System.Guid> batchRepository, Microsoft.Extensions.Localization.IStringLocalizer<InventoryStockController> localizer, ILogger<InventoryStockController> logger) : base(localizer, logger)
         {
             this.batchRepository = batchRepository;
             this.productRepository = productRepository;
@@ -25,15 +25,15 @@ namespace MOROPO.Framework.Decisor.Sales.Presentation.Web.Frontend.Controllers
         }
 
         [Microsoft.AspNetCore.Mvc.HttpGet("overviews")]
-        public virtual Microsoft.AspNetCore.Mvc.ActionResult<StockOverviewModel[]> GetOverviews()
+        public virtual Microsoft.AspNetCore.Mvc.ActionResult<InventoryStockOverviewModel[]> GetOverviews()
         {
             var universe = batchRepository.FindBy(entity => entity.Amount > 0).ToArray().GroupBy(entity => entity.ProductId);
 
-            var models = new List<StockOverviewModel>();
+            var models = new List<InventoryStockOverviewModel>();
 
             foreach (var group in universe)
             {
-                var model = new StockOverviewModel
+                var model = new InventoryStockOverviewModel
                 {
                     Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel()
                 };
@@ -52,7 +52,7 @@ namespace MOROPO.Framework.Decisor.Sales.Presentation.Web.Frontend.Controllers
         }
 
         [Microsoft.AspNetCore.Mvc.HttpGet("details/{key}")]
-        public Microsoft.AspNetCore.Mvc.ActionResult<StockDetailsModel> GetDetails(System.Guid key)
+        public Microsoft.AspNetCore.Mvc.ActionResult<InventoryStockDetailsModel> GetDetails(System.Guid key)
         {
             var universe = batchRepository.FindBy(entity => entity.Amount > 0 && entity.ProductId == key)
                 .Include(entity => entity.Reception)
@@ -60,7 +60,7 @@ namespace MOROPO.Framework.Decisor.Sales.Presentation.Web.Frontend.Controllers
 
             var groups = universe.GroupBy(entity => entity.Warehouse);
 
-            var model = new StockDetailsModel
+            var model = new InventoryStockDetailsModel
             {
                 Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
                 Existences = new List<WarehouseExistenseModel>()

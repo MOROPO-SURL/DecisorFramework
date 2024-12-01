@@ -58,7 +58,7 @@ public partial class PurchaseReceptionsManagePage : Caney.MVVM.Core.Pages.Conten
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });

@@ -73,13 +73,6 @@ public partial class DefaultUserAuthenticationPage : Caney.MVVM.Core.Pages.Bindi
                                 message = "Servicio no disponible en este momento.";
                             }
                         }
-                        // TODO Handle native exceptions
-                        //else
-                        //{
-                        //    var nativeMessage = Xamarin.Forms.DependencyService.Get<IApplicationManagerFacade>().GetUnhandleExceptionMessage(targetException);
-
-                        //    if (nativeMessage != null) message = nativeMessage;
-                        //}
                     }
 
                     BindingContextPageModel.IsBusy = false;

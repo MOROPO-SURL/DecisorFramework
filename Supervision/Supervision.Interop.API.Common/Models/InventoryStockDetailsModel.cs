@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 
-namespace MOROPO.Framework.Decisor.Sales.Interop.API.Common.Models
+namespace MOROPO.Framework.Decisor.Supervision.Interop.API.Common.Models
 {
-    public class StockDetailsModel : StockOverviewModel
+    public class InventoryStockDetailsModel : InventoryStockOverviewModel
     {
         public List<WarehouseExistenseModel> Existences { get; set; }
 

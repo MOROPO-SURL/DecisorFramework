@@ -56,7 +56,7 @@ public partial class BankAccountsManagePage : Caney.MVVM.Core.Pages.ContentPage
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -111,7 +111,7 @@ public partial class BankAccountsManagePage : Caney.MVVM.Core.Pages.ContentPage
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -173,7 +173,7 @@ public partial class BankAccountsManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                 if (task.Exception != null || task.IsCanceled)
                 {
-                    DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                 }
                 else
                 {

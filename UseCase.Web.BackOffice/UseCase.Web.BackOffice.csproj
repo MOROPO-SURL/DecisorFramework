@@ -62,6 +62,7 @@
 	  <ProjectReference Include="..\Purchasing\Purchasing.Presentation.Web.Frontend\Purchasing.Presentation.Web.Frontend.csproj">
 	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
 	  </ProjectReference>
+	  <ProjectReference Include="..\Supervision\Supervision.Presentation.Web.Frontend\Supervision.Presentation.Web.Frontend.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Areas\Globals\" />

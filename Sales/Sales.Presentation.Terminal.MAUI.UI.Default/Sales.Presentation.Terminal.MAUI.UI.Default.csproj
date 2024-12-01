@@ -27,23 +27,4 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Compile Update="Pages\Manage\ShiftOpeningsManagePage.xaml.cs">
-	    <DependentUpon>ShiftOpeningsManagePage.xaml</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-	<ItemGroup>
-	  <MauiXaml Update="Pages\Manage\SaleTeamsManagePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\Manage\ShiftClosingsManagePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\Manage\ShopsManagePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\Manage\ShiftOpeningsManagePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-﻿namespace MOROPO.Framework.Decisor.Sales.Interop.API.Common.Models
+﻿namespace MOROPO.Framework.Decisor.Supervision.Interop.API.Common.Models
 {
     public class WarehouseExistenseModel
     {

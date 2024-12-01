@@ -60,11 +60,13 @@
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Production\Production.Presentation.Terminal.MAUI.UI.Default\Production.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Purchasing\Purchasing.Presentation.Terminal.MAUI.UI.Default\Purchasing.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Sales\Sales.Presentation.Terminal.MAUI.UI.Default\Sales.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\Supervision\Supervision.Presentation.Terminal.MAUI.UI.Default\Supervision.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
@@ -95,28 +97,5 @@
 	  <BundleResource Include="Resources\Images\rr_hh.jpg" />
 	  <BundleResource Include="Resources\Images\sales.jpg" />
 	  <BundleResource Include="Resources\Images\warehousing.jpg" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="UI\Views\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <MauiXaml Update="UI\Pages\ProductionDashboardPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\SalesDashboardPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\TempIncomesPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\TempPaymentsPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Shells\ProductionShell.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Shells\SalesShell.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 </Project>

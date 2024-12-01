@@ -1,6 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Sales.Interop.API.Common.Models
+﻿namespace MOROPO.Framework.Decisor.Supervision.Interop.API.Common.Models
 {
-    public class StockOverviewModel
+    public class InventoryStockOverviewModel
     {
         public System.Guid Id { get; set; }
 

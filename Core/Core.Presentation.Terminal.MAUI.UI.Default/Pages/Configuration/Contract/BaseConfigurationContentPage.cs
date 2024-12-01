@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract;
@@ -112,6 +113,6 @@ public class BaseConfigurationContentPage<TModel> : Caney.MVVM.Core.Pages.Conten
 
     protected virtual void HandleException(System.Exception exception)
     {
-        DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
     }
 }
