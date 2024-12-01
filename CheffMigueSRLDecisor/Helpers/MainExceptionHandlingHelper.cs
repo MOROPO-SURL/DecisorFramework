@@ -53,7 +53,11 @@
                 }
                 else
                 {
+#if DEBUG
+                    page.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, string.Format("Respuesta del proveedor del sistema no esperada.{1}{1}Código del error: {2}{1}{1}{0}", SUPPORT_ORIENTATION_MESSAGE, System.Environment.NewLine, concreteException.HttpStatusCode), OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
+#else
                     page.DisplayAlert(ADVICE_ALERT_DIALOG_TITLE, UNSPECTED_API_RESPONSE_EXCEPTION_MESSAGE, OK_ACTION).ContinueWith(_ => { callbackAction?.Invoke(exception); });
+#endif
                 }
             }
             else if (exception.InnerException is System.Net.Http.HttpRequestException || exception.InnerException?.InnerException is System.Net.Sockets.SocketException)

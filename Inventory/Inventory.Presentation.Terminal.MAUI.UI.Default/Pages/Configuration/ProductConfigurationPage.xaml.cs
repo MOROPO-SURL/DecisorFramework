@@ -61,7 +61,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
         var model = new Interop.API.Common.Models.Input.ProductInputModel
         {
-            Id = concreteBindingContext.Id,
+            Id = System.Guid.NewGuid(),
             Name = concreteBindingContext.Name,
             Description = concreteBindingContext.Description,
             Priority = concreteBindingContext.Priority,

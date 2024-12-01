@@ -3,7 +3,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/production/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class ProductionRolesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultController<Persistence.Entities.ProductionRole, System.Guid, Interop.API.Common.Models.Display.ProductionRoleDisplayModel>
     {
