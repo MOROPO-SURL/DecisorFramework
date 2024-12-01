@@ -13,6 +13,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Repositories
             return base.GetQueryableDbSet()
                 .Include(entity => entity.UnitMeasurement)
                 .Include(entity => entity.FeatureImage)
+                .Include(entity => entity.Classifications)
                 .Include(entity => entity.WarehousingDecreaseKindBridges);
         }
 

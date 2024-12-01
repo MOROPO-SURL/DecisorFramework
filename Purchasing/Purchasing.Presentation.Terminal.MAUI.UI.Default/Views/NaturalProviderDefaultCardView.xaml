@@ -14,7 +14,7 @@
             <communitytoolkit_converters:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <Frame Margin="5" Padding="0">
+    <Frame Padding="0">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />

@@ -4,13 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
     x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card.PurchaseDefaultCardView"
-    x:DataType="interop_common_display_models:PurchaseDisplayModel"
-    Margin="5">
+    x:DataType="interop_common_display_models:PurchaseDisplayModel">
     <Frame Padding="10">
         <StackLayout>
             <Label 
                 FontAttributes="Bold"
                 FontSize="Medium"
+                LineBreakMode="TailTruncation"
                 Text="{Binding Path=At, StringFormat='{0:D}'}" />
             <Label Text="{Binding Plan.Zone.Name}" />
             <Label 

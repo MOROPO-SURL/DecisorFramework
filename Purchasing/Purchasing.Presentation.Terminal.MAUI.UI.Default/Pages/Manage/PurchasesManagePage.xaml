@@ -13,7 +13,7 @@
     Title="Operaciones de Compra">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="280" AbsoluteHorizontalSeparation="20" />
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="384" AbsoluteHorizontalSeparation="20" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
 
@@ -71,8 +71,9 @@
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <local_card_views:PurchaseDefaultCardView
+                                    Margin="5"
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
-                                    HeightRequest="140">
+                                    HeightRequest="180">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </ContentView.GestureRecognizers>

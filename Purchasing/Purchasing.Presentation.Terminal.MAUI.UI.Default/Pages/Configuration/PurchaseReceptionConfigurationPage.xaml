@@ -98,20 +98,20 @@
                                 <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                             </CollectionView.ItemsLayout>
                             <CollectionView.EmptyView>
-                                <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                <Label Padding="0,16,0,0" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate x:DataType="presentation_view_models:PurchaseReceptionWeightsByCostCenterViewModel">
                                     <VerticalStackLayout Padding="0,16,0,8">
                                         <Label Text="Centro de costo:" />
                                         <Label
-                                            Text="{Binding Key.Name}"
-                                            FontSize="Large"
+                                            Text="{Binding CostCenter.Name}"
+                                            FontSize="Medium"
                                             FontAttributes="Bold" />
                                         <VerticalStackLayout
-                                            BindableLayout.ItemsSource="{Binding Value}">
+                                            BindableLayout.ItemsSource="{Binding ProductWeights}">
                                             <BindableLayout.ItemTemplate>
-                                                <DataTemplate x:DataType="presentation_view_models:PurchaseReceptionProductCommonWeightBridgeViewModel">
+                                                <DataTemplate x:DataType="presentation_view_models:PurchaseReceptionProductWeightBridgeViewModel">
                                                     <Frame x:Name="WrapFrame" Padding="16" Margin="0,4">
                                                         <Grid ColumnSpacing="8">
                                                             <Grid.ColumnDefinitions>
@@ -145,7 +145,7 @@
                                                             <BoxView
                                                                 Grid.ColumnSpan="3" Grid.Row="2"
                                                                 Margin="0,12,0,16"
-                                                                HeightRequest="2"
+                                                                HeightRequest="1"
                                                                 Color="{AppThemeBinding Light=DimGray, Dark=LightGray}" />
                                                             <Label
                                                                 Grid.ColumnSpan="2" Grid.Row="3"
@@ -203,7 +203,7 @@
                                                                                     Grid.Column="2" Grid.Row="1"
                                                                                     SelectedItem="{Binding Classification}"
                                                                                     ItemsSource="{Binding Source={Reference WrapFrame}, Path=BindingContext.Product.Classifications}"
-                                                                                    ItemDisplayBinding="{Binding Name}" />
+                                                                                    ItemDisplayBinding="{Binding Path=Name}" />
                                                                                 <Label
                                                                                     Grid.Column="3" Grid.Row="0"
                                                                                     Text="Almacen:"

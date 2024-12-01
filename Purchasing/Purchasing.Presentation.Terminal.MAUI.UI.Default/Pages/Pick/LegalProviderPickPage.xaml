@@ -61,6 +61,7 @@
                         <BindableLayout.ItemTemplate>
                             <DataTemplate>
                                 <local_card_views:LegalProviderDefaultCardView
+                                    Margin="5"
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
                                     HeightRequest="140">
                                     <ContentView.GestureRecognizers>

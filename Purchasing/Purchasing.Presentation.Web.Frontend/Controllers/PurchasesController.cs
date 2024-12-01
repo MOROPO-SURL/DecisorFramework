@@ -1,4 +1,6 @@
-﻿using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
+﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
+using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
@@ -11,8 +13,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class PurchasesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementFilteredController<Purchase, System.Guid, PurchaseInputModel, PurchaseDisplayModel, PurchaseFilterModel>
     {
-        public PurchasesController(IEntityRepository<Purchase, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchasesController> localizer, Microsoft.Extensions.Logging.ILogger<PurchasesController> logger) : base(repository, localizer, logger)
+        private readonly IEntityRepository<Classification, System.Guid> classificationRepository;
+
+        public PurchasesController(IEntityRepository<Classification, System.Guid> classificationRepository, IEntityRepository<Purchase, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchasesController> localizer, Microsoft.Extensions.Logging.ILogger<PurchasesController> logger) : base(repository, localizer, logger)
         {
+            this.classificationRepository = classificationRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<Purchase, bool>> GetGlobalSelector()
@@ -36,6 +41,15 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                     item.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProductId == item.Product.Id).Product.FeatureImage.ContentType);
                 }
 
+                item.Product.Classifications = classificationRepository.FindBy(_entity => _entity.ProductId == item.Product.Id && !_entity.Archived && _entity.Enabled).ToArray().Select(_entity =>
+                {
+                    var _model = new ClassificationDisplayModel();
+
+                    _model.Import(_entity);
+
+                    return _model;
+                }).ToArray();
+
                 if (item.Provider.Image != null)
                 {
                     item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Identity.Image.ContentType);
@@ -48,6 +62,15 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 {
                     item.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.ProductId == item.Product.Id).Product.FeatureImage.ContentType);
                 }
+
+                item.Product.Classifications = classificationRepository.FindBy(_entity => _entity.ProductId == item.Product.Id && !_entity.Archived && _entity.Enabled).ToArray().Select(_entity =>
+                {
+                    var _model = new ClassificationDisplayModel();
+
+                    _model.Import(_entity);
+
+                    return _model;
+                }).ToArray();
 
                 if (item.Provider.Image != null)
                 {

@@ -74,6 +74,7 @@ public partial class ForReceptionPurchasePickPage : Caney.MVVM.Core.Pages.Conten
 
                 if (task.Exception != null || task.IsCanceled)
                 {
+                    // TODO Handle Exception !!!
                     DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
                 }
                 else

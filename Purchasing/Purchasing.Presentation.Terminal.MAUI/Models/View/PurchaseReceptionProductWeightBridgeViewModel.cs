@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.View
 {
-    public class PurchaseReceptionProductCommonWeightBridgeViewModel : Caney.MVVM.Core.Models.BaseBindableModel
+    public class PurchaseReceptionProductWeightBridgeViewModel : Caney.MVVM.Core.Models.BaseBindableModel
     {
         private decimal amount;
 
