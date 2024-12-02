@@ -5,8 +5,7 @@
     xmlns:local_pages="clr-namespace:MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Pages"
     xmlns:decisorframework_sales_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Sales.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Sales.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Shells.SalesShell"
-    FlyoutBehavior="Locked"
-    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Gray050}, Dark={StaticResource Gray900}}">
+    FlyoutBehavior="Locked">
     <Shell.FlyoutHeader>
         <Grid HeightRequest="180">
             <Image 

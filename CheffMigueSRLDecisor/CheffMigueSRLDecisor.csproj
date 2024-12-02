@@ -99,4 +99,9 @@
 	  <BundleResource Include="Resources\Images\sales.jpg" />
 	  <BundleResource Include="Resources\Images\warehousing.jpg" />
 	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Resources\Styles\Values.xaml">
+	    <Generator></Generator>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>

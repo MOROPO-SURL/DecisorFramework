@@ -5,7 +5,10 @@ namespace MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Pages;
 
 public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContextedContentPage<Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.MainPageModel>
 {
-	public MainPage() : base(new Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.MainPageModel())
+	public MainPage() : base(new Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.MainPageModel
+    {
+        OwnerInformation = Providers.SingleRuntimeContextProvider.OWNER_INFORMATION
+    })
 	{
 		InitializeComponent();
 	}

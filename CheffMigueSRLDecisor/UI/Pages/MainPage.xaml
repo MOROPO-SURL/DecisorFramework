@@ -37,110 +37,119 @@
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
-        <BoxView
-            HeightRequest="1"
-            Color="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}" />
-        <Grid
-            BackgroundColor="{AppThemeBinding Light={StaticResource Gray050}, Dark={StaticResource Gray900}}"
-            Padding="20"
-            ColumnSpacing="10">
+        <Grid 
+            BackgroundColor="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}"
+            HeightRequest="168">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
-                <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="2" />
-                <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <Border
-                Grid.Column="0" Grid.RowSpan="3"
-                WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
-                StrokeThickness="4"
-                StrokeLineJoin="Bevel">
-                <Border.StrokeShape>
-                    <RoundRectangle CornerRadius="0,40,40,0" />
-                </Border.StrokeShape>
+            <Grid
+                Grid.Column="0"
+                BackgroundColor="{StaticResource Primary}"
+                MinimumWidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}">
                 <Image
-                    WidthRequest="120" HeightRequest="120"
-                    Source="default_person_picture.jpg" />
-            </Border>
-            <Label
-                Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
-                LineBreakMode="TailTruncation" 
-                Text="{Binding User.Id}"
-                FontSize="Medium"
-                FontAttributes="Bold" />
-            <Label
-                Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
-                LineBreakMode="TailTruncation"
-                TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}"
-                FontSize="Default">
-                <Label.FormattedText>
-                    <FormattedString>
-                        <Span Text="{Binding User.Identity.Name}" />
-                        <Span Text=" " />
-                        <Span Text="{Binding User.Identity.LastName}" />
-                    </FormattedString>
-                </Label.FormattedText>
-            </Label>
-            <Button
-                Grid.Column="1" Grid.Row="2"
-                Margin="0, 10"
-                Text="Perfil de Usuario" />
-            <Button
-                Grid.Column="2" Grid.Row="2"
-                Margin="0, 10"
-                HorizontalOptions="Start"
-                Text="Cerrar Sesión" />
-            <VerticalStackLayout
-                Grid.Column="3" Grid.RowSpan="3"
-                MinimumWidthRequest="124"
-                VerticalOptions="Center"
-                Padding="20" Spacing="4">
+                    Margin="16"
+                    HorizontalOptions="Center" VerticalOptions="Center"
+                    Source="{Binding OwnerInformation.DefaultLogoImageSource}" />
+            </Grid>
+            <Grid
+                Grid.Column="1"
+                Padding="20"
+                ColumnSpacing="10">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="2" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Border
+                    Grid.Column="0" Grid.RowSpan="3"
+                    WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                    StrokeThickness="4"
+                    StrokeLineJoin="Bevel">
+                    <Border.StrokeShape>
+                        <RoundRectangle CornerRadius="0,40,40,0" />
+                    </Border.StrokeShape>
+                    <Image
+                        WidthRequest="120" HeightRequest="120"
+                        Source="default_person_picture.jpg" />
+                </Border>
                 <Label
-                    HorizontalOptions="Center"
-                    Text="&#xF09E;"
-                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Black}}"
-                    FontFamily="MaterialDesignIcons"
-                    FontSize="Header" />
+                    Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
+                    LineBreakMode="TailTruncation" 
+                    Text="{Binding User.Id}"
+                    FontSize="Medium"
+                    FontAttributes="Bold" />
                 <Label
-                    HorizontalOptions="Center"
-                    Text="Avisos"
-                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Black}}"
-                    FontSize="Medium" />
-            </VerticalStackLayout>
-            <BoxView
-                Grid.Column="4" Grid.RowSpan="3"
-                Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
-            <VerticalStackLayout
-                Grid.Column="5" Grid.RowSpan="3"
-                MinimumWidthRequest="124"
-                VerticalOptions="Center"
-                Padding="20" Spacing="4">
-                <Label
-                    HorizontalOptions="Center"
-                    Text="&#xF78A;"
-                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Black}}"
-                    FontFamily="MaterialDesignIcons"
-                    FontSize="Header" />
-                <Label
-                    HorizontalOptions="Center"
-                    Text="Ayuda"
-                    TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource Black}}"
-                    FontSize="Medium" />
-            </VerticalStackLayout>
+                    Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
+                    LineBreakMode="TailTruncation"
+                    TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}"
+                    FontSize="Default">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding User.Identity.Name}" />
+                            <Span Text=" " />
+                            <Span Text="{Binding User.Identity.LastName}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Button
+                    Grid.Column="1" Grid.Row="2"
+                    Margin="0, 10"
+                    Text="Perfil de Usuario" />
+                <Button
+                    Grid.Column="2" Grid.Row="2"
+                    Margin="0, 10"
+                    HorizontalOptions="Start"
+                    Text="Cerrar Sesión" />
+                <VerticalStackLayout
+                    Grid.Column="3" Grid.RowSpan="3"
+                    MinimumWidthRequest="124"
+                    VerticalOptions="Center"
+                    Padding="20" Spacing="4">
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="&#xF09E;"
+                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                        FontFamily="MaterialDesignIcons"
+                        FontSize="Header" />
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="Avisos"
+                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                        FontSize="Medium" />
+                </VerticalStackLayout>
+                <BoxView
+                    Grid.Column="4" Grid.RowSpan="3"
+                    Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
+                <VerticalStackLayout
+                    Grid.Column="5" Grid.RowSpan="3"
+                    MinimumWidthRequest="124"
+                    VerticalOptions="Center"
+                    Padding="20" Spacing="4">
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="&#xF78A;"
+                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                        FontFamily="MaterialDesignIcons"
+                        FontSize="Header" />
+                    <Label
+                        HorizontalOptions="Center"
+                        Text="Ayuda"
+                        TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                        FontSize="Medium" />
+                </VerticalStackLayout>
+            </Grid>
         </Grid>
-        <BoxView
-            HeightRequest="1"
-            Color="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}" />
-        <ScrollView 
-            BackgroundColor="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Gray400}}"
-            VerticalOptions="FillAndExpand">
+        <ScrollView VerticalOptions="FillAndExpand">
             <FlexLayout
                 MaximumWidthRequest="1440"
                 Margin="10"
