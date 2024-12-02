@@ -33,216 +33,215 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <ScrollView Orientation="Vertical">
-        <Grid 
-            Padding="20"
-            ColumnSpacing="16" RowSpacing="16">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Producto" />
-                <ContentView IsVisible="{Binding Product, Converter={StaticResource IsNotNullConverter}}">
-                    <inventory_card_views:ProductDefaultCardView BindingContext="{Binding Path=Product}" />
-                </ContentView>
-                <Button 
-                    HorizontalOptions="Start"
-                    Text="Selecionar ..." 
-                    Clicked="ProductChangeButton_Clicked" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" VerticalOptions="Start">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición" />
-                <Editor Text="{Binding Description}" HeightRequest="320" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="1" VerticalOptions="Start">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="% Mínimo de Rendimiento" />
-                <Entry Text="{Binding MinPerformanceCoefficient, StringFormat='{0:F2}'}" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="1" VerticalOptions="Start">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="% Máximo de Rendimiento" />
-                <Entry Text="{Binding MaxPerformanceCoefficient, StringFormat='{0:F2}'}" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="3">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Insumos" />
-                <Frame Padding="8">
-                    <Grid RowSpacing="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="2" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Button
-                            Grid.Column="1" Grid.Row="0"
-                            HorizontalOptions="End"
-                            Text="Agregar"
-                            Clicked="AddInputProductButton_Clicked" />
-                        <BoxView
-                            Grid.ColumnSpan="2" Grid.Row="1"
-                            Color="{StaticResource Gray050}" />
-                        <CollectionView
-                            Grid.ColumnSpan="2" Grid.Row="2"
-                            ItemsSource="{Binding InputProducts}">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.EmptyView>
-                                <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
-                            </CollectionView.EmptyView>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="inventory_interop_common_display_models:ProductDisplayModel">
-                                    <Frame Padding="8">
-                                        <StackLayout Spacing="8" Orientation="Horizontal">
-                                            <Label 
-                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                                Text="{Binding Name}"
-                                                FontAttributes="Bold"
-                                                LineBreakMode="TailTruncation" />
-                                            <Button
-                                                VerticalOptions="Start"
-                                                FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
-                                                Clicked="InputProductRemoveButton_Clicked" />
-                                        </StackLayout>
-                                    </Frame>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </Grid>
-                </Frame>
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="4">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sub-Productos" />
-                <Frame Padding="8">
-                    <Grid RowSpacing="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="2" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Button
-                            Grid.Column="1" Grid.Row="0"
-                            HorizontalOptions="End"
-                            Text="Agregar"
-                            Clicked="AddOutputProductButton_Clicked" />
-                        <BoxView
-                            Grid.ColumnSpan="2" Grid.Row="1"
-                            Color="{StaticResource Gray050}" />
-                        <CollectionView
-                            Grid.ColumnSpan="2" Grid.Row="2"
-                            ItemsSource="{Binding OutputProducts}">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.EmptyView>
-                                <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
-                            </CollectionView.EmptyView>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="inventory_interop_common_display_models:ProductDisplayModel">
-                                    <Frame Padding="8">
-                                        <StackLayout Spacing="8" Orientation="Horizontal">
-                                            <Label 
-                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                                Text="{Binding Name}"
-                                                FontAttributes="Bold"
-                                                LineBreakMode="TailTruncation" />
-                                            <Button
-                                                VerticalOptions="Start"
-                                                FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
-                                                Clicked="OutputProductRemoveButton_Clicked" />
-                                        </StackLayout>
-                                    </Frame>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </Grid>
-                </Frame>
-            </VerticalStackLayout><VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="5">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Etapas" />
-                <Frame Padding="8">
-                    <Grid RowSpacing="8">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition />
-                            <ColumnDefinition />
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="2" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-                        <Button
-                            Grid.Column="1" Grid.Row="0"
-                            HorizontalOptions="End"
-                            Text="Agregar"
-                            Clicked="AddStepButton_Clicked" />
-                        <BoxView
-                            Grid.ColumnSpan="2" Grid.Row="1"
-                            Color="{StaticResource Gray050}" />
-                        <CollectionView
-                            Grid.ColumnSpan="2" Grid.Row="2"
-                            ItemsSource="{Binding Steps}">
-                            <CollectionView.ItemsLayout>
-                                <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
-                            </CollectionView.ItemsLayout>
-                            <CollectionView.EmptyView>
-                                <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
-                            </CollectionView.EmptyView>
-                            <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="interop_common_display_models:ElaborationStepDisplayModel">
-                                    <Frame Padding="8">
-                                        <StackLayout Spacing="8" Orientation="Horizontal">
-                                            <Label 
-                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                                Text="{Binding Name}"
-                                                FontAttributes="Bold"
-                                                LineBreakMode="TailTruncation" />
-                                            <Button
-                                                VerticalOptions="Start"
-                                                FontFamily="MaterialDesignIcons" Text="&#xF90B;"
-                                                Clicked="EditStepButton_Clicked" />
-                                            <Button
-                                                VerticalOptions="Start"
-                                                FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
-                                                Clicked="RemoveStepButton_Clicked" />
-                                        </StackLayout>
-                                    </Frame>
-                                </DataTemplate>
-                            </CollectionView.ItemTemplate>
-                        </CollectionView>
-                    </Grid>
-                </Frame>
-            </VerticalStackLayout>
-            <BoxView 
-                Grid.ColumnSpan="3" Grid.Row="6" 
-                Margin="0,8,0,0"
-                HeightRequest="1" 
-                Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-            <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="7">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-            </VerticalStackLayout>
-            <caneyframework_presentation_views:BusyView
-                Grid.ColumnSpan="3" Grid.RowSpan="8"
-                BackgroundColor="#A7FFFFFF"
-                IsVisible="{Binding IsBusy}" />
-        </Grid>
-    </ScrollView>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <Grid 
+                Padding="20"
+                ColumnSpacing="16" RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Producto" />
+                    <ContentView IsVisible="{Binding Product, Converter={StaticResource IsNotNullConverter}}">
+                        <inventory_card_views:ProductDefaultCardView BindingContext="{Binding Path=Product}" />
+                    </ContentView>
+                    <Button 
+                        HorizontalOptions="Start"
+                        Text="Selecionar ..." 
+                        Clicked="ProductChangeButton_Clicked" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" VerticalOptions="Start">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición" />
+                    <Editor Text="{Binding Description}" HeightRequest="320" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="1" VerticalOptions="Start">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="% Mínimo de Rendimiento" />
+                    <Entry Text="{Binding MinPerformanceCoefficient, StringFormat='{0:F2}'}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="1" VerticalOptions="Start">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="% Máximo de Rendimiento" />
+                    <Entry Text="{Binding MaxPerformanceCoefficient, StringFormat='{0:F2}'}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="3">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Insumos" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="AddInputProductButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding InputProducts}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="inventory_interop_common_display_models:ProductDisplayModel">
+                                        <Frame Padding="8">
+                                            <StackLayout Spacing="8" Orientation="Horizontal">
+                                                <Label 
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    Text="{Binding Name}"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Button
+                                                    VerticalOptions="Start"
+                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
+                                                    Clicked="InputProductRemoveButton_Clicked" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="4">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sub-Productos" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="AddOutputProductButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding OutputProducts}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="inventory_interop_common_display_models:ProductDisplayModel">
+                                        <Frame Padding="8">
+                                            <StackLayout Spacing="8" Orientation="Horizontal">
+                                                <Label 
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    Text="{Binding Name}"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Button
+                                                    VerticalOptions="Start"
+                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
+                                                    Clicked="OutputProductRemoveButton_Clicked" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout><VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="5">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Etapas" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="AddStepButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding Steps}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:ElaborationStepDisplayModel">
+                                        <Frame Padding="8">
+                                            <StackLayout Spacing="8" Orientation="Horizontal">
+                                                <Label 
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    Text="{Binding Name}"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Button
+                                                    VerticalOptions="Start"
+                                                    FontFamily="MaterialDesignIcons" Text="&#xF90B;"
+                                                    Clicked="EditStepButton_Clicked" />
+                                                <Button
+                                                    VerticalOptions="Start"
+                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
+                                                    Clicked="RemoveStepButton_Clicked" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <BoxView 
+                    Grid.ColumnSpan="3" Grid.Row="6" 
+                    Margin="0,8,0,0"
+                    HeightRequest="1" 
+                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="7">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
 </core_contract_configuration_pages:BaseConfigurationContentPage>

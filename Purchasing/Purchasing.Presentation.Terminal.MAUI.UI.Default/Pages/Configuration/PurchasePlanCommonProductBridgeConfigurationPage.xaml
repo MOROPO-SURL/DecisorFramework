@@ -64,9 +64,6 @@
                 </VerticalStackLayout>
             </Grid>
         </ScrollView>
-        <caneyframework_presentation_views:BusyView
-            Grid.ColumnSpan="3" Grid.RowSpan="2"
-            BackgroundColor="#A7FFFFFF"
-            IsVisible="{Binding IsBusy}" />
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>
 </core_contract_configuration_pages:BaseConfigurationContentPage>

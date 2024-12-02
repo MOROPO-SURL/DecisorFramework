@@ -132,9 +132,7 @@
                     </Grid>
                 </ScrollView>
             </ContentView>
-            <caneyframework_presentation_views:BusyView 
-                BackgroundColor="#A7FFFFFF"
-                IsVisible="{Binding Path=IsBusy}" />
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
 </caneyframework_mvvm_pages:ContentPage>

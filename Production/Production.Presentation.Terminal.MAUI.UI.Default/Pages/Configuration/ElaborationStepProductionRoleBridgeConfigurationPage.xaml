@@ -32,43 +32,42 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <ScrollView Orientation="Vertical">
-        <Grid 
-            Padding="20"
-            ColumnSpacing="16" RowSpacing="16">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Proveedor" />
-                <Picker
-                   x:Name="RolePicker"
-                   ItemsSource="{Binding Path=AvailableRoles}"
-                   ItemDisplayBinding="{Binding Name}"
-                   SelectedIndexChanged="Picker_SelectedIndexChanged" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="0">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Remuneración" />
-                <Entry Text="{Binding Participation, StringFormat='{0:F2}'}" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="0">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Relativa?" />
-                <Switch IsToggled="{Binding Linked}" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="1">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción" />
-                <Editor Text="{Binding Description}" HeightRequest="120" />
-            </VerticalStackLayout>            
-            <caneyframework_presentation_views:BusyView
-                Grid.ColumnSpan="3" Grid.RowSpan="2"
-                BackgroundColor="#A7FFFFFF"
-                IsVisible="{Binding IsBusy}" />
-        </Grid>
-    </ScrollView>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <Grid 
+                Padding="20"
+                ColumnSpacing="16" RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Proveedor" />
+                    <Picker
+                       x:Name="RolePicker"
+                       ItemsSource="{Binding Path=AvailableRoles}"
+                       ItemDisplayBinding="{Binding Name}"
+                       SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Remuneración" />
+                    <Entry Text="{Binding Participation, StringFormat='{0:F2}'}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Relativa?" />
+                    <Switch IsToggled="{Binding Linked}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="1">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción" />
+                    <Editor Text="{Binding Description}" HeightRequest="120" />
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
 </core_contract_configuration_pages:BaseConfigurationContentPage>

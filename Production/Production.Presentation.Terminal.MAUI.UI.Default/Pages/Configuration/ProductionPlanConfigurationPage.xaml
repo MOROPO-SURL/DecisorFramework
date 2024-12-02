@@ -32,89 +32,88 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <ScrollView Orientation="Vertical">
-        <Grid 
-            Padding="20"
-            ColumnSpacing="16" RowSpacing="16">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition />
-                <ColumnDefinition />
-                <ColumnDefinition />
-            </Grid.ColumnDefinitions>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="Auto" />
-            </Grid.RowDefinitions>
-            <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" VerticalOptions="Start">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Elaboración" />
-                <ContentView IsVisible="{Binding Elaboration, Converter={StaticResource IsNotNullConverter}}">
-                    <local_card_views:ElaborationDefaultCardView BindingContext="{Binding Elaboration}" />
-                </ContentView>
-                <Button 
-                    HorizontalOptions="Start"
-                    Text="Selecionar ..."
-                    Clicked="ElaborationChangeButton_Clicked" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="0" VerticalOptions="Start">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cantidad" />
-                <StackLayout Orientation="Horizontal" Spacing="8">
-                    <Entry 
-                        HorizontalOptions="FillAndExpand"
-                        HorizontalTextAlignment="End"
-                        Text="{Binding Amount, StringFormat='{0:F2}'}" />
-                    <Label 
-                        VerticalOptions="Center"
-                        Text="{Binding Elaboration.Product.DefaultUnitMeasurement.Symbol}"
-                        FontAttributes="Bold" />
-                </StackLayout>
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="0" VerticalOptions="Start">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha Prevista" />
-                <DatePicker 
-                    Date="{Binding PlannedFor}" MinimumDate="{Binding PlannerForMinDate}" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" VerticalOptions="Start">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
-                <Editor Text="{Binding Description}" HeightRequest="280" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="3">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Planificador" />
-                <Picker 
-                    x:Name="PlannerPicker" 
-                    ItemsSource="{Binding AvailablePlanners}"
-                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="3">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Responsable" />
-                <Picker 
-                    x:Name="ResponsiblePicker" 
-                    ItemsSource="{Binding AvailableResponsibles}"
-                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
-            </VerticalStackLayout>
-            <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="3">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Aprueba" />
-                <Picker 
-                    x:Name="DecisorPicker" 
-                    ItemsSource="{Binding AvailableDecisors}"
-                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
-            </VerticalStackLayout>
-            <BoxView 
-                Grid.ColumnSpan="3" Grid.Row="4" 
-                Margin="0,8,0,0"
-                HeightRequest="1" 
-                Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-            <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="5">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-            </VerticalStackLayout>
-            <caneyframework_presentation_views:BusyView
-                Grid.ColumnSpan="3" Grid.RowSpan="6"
-                BackgroundColor="#A7FFFFFF"
-                IsVisible="{Binding IsBusy}" />
-        </Grid>
-    </ScrollView>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <Grid 
+                Padding="20"
+                ColumnSpacing="16" RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3" VerticalOptions="Start">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Elaboración" />
+                    <ContentView IsVisible="{Binding Elaboration, Converter={StaticResource IsNotNullConverter}}">
+                        <local_card_views:ElaborationDefaultCardView BindingContext="{Binding Elaboration}" />
+                    </ContentView>
+                    <Button 
+                        HorizontalOptions="Start"
+                        Text="Selecionar ..."
+                        Clicked="ElaborationChangeButton_Clicked" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="0" VerticalOptions="Start">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cantidad" />
+                    <StackLayout Orientation="Horizontal" Spacing="8">
+                        <Entry 
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="End"
+                            Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                        <Label 
+                            VerticalOptions="Center"
+                            Text="{Binding Elaboration.Product.DefaultUnitMeasurement.Symbol}"
+                            FontAttributes="Bold" />
+                    </StackLayout>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="0" VerticalOptions="Start">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha Prevista" />
+                    <DatePicker 
+                        Date="{Binding PlannedFor}" MinimumDate="{Binding PlannerForMinDate}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1" VerticalOptions="Start">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
+                    <Editor Text="{Binding Description}" HeightRequest="280" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="3">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Planificador" />
+                    <Picker 
+                        x:Name="PlannerPicker" 
+                        ItemsSource="{Binding AvailablePlanners}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="3">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Responsable" />
+                    <Picker 
+                        x:Name="ResponsiblePicker" 
+                        ItemsSource="{Binding AvailableResponsibles}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="3">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Aprueba" />
+                    <Picker 
+                        x:Name="DecisorPicker" 
+                        ItemsSource="{Binding AvailableDecisors}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout>
+                <BoxView 
+                    Grid.ColumnSpan="3" Grid.Row="4" 
+                    Margin="0,8,0,0"
+                    HeightRequest="1" 
+                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="5">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
 </core_contract_configuration_pages:BaseConfigurationContentPage>
