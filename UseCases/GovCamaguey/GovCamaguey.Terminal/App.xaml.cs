@@ -13,7 +13,7 @@
         {
             base.OnStart();
 
-            Windows[0].Title = $"{Providers.SingleRuntimeContextProvider.OWNER_INFORMATION.Name} - Decisor";
+            Windows[0].Title = "Gobierno de Camagüey - Decisor";
         }
     }
 }
