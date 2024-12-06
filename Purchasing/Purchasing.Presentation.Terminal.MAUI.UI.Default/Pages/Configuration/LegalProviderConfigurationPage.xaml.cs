@@ -24,7 +24,7 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
                 if (model.BusinessKind.Id != current.Id) continue;
 
                 BusinessKindPicker.SelectedIndex = i;
-                BusinessKindPicker.SelectedItem = current;
+                //BusinessKindPicker.SelectedItem = current;
 
                 break;
             }
