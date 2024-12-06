@@ -14,6 +14,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
         private EmployeeDisplayModel planner;
         private EmployeeDisplayModel responsible;
         private EmployeeDisplayModel decisor;
+        private decimal estimatedAdvance;
 
         public PurchasePlanConfigurationPageModel(PurchasePlanDisplayModel model = null) : base(model)
         {
@@ -27,6 +28,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
                 Planner = model.Planner;
                 Responsible = model.Responsible;
                 Decisor = model.Decisor;
+                EstimatedAdvance = model.EstimatedAdvance;
 
                 foreach (var item in model.LegalProviderBridges) LegalProviderBridges.Add(item);
 
@@ -59,6 +61,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
         public EmployeeDisplayModel Responsible { get => responsible; set => SetProperty(ref responsible, value); }
 
         public EmployeeDisplayModel Decisor { get => decisor; set => SetProperty(ref decisor, value); }
+
+        public decimal EstimatedAdvance { get => estimatedAdvance; set => SetProperty(ref estimatedAdvance, value); }
 
         public ObservableCollection<PurchasePlanLegalProviderBridgeModel> LegalProviderBridges { get; set; } = new ObservableCollection<PurchasePlanLegalProviderBridgeModel>();
 

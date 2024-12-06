@@ -105,14 +105,13 @@
             </StackLayout>
             <ContentView 
                 IsVisible="{Binding PresentedDetails, Converter={StaticResource IsNotNullConverter}}"
-                BackgroundColor="#A9000000">
+                Style="{StaticResource ModalFrameWrapContentViewStyle}">
                 <ScrollView Orientation="Vertical">
                     <Grid>
                         <Frame
                             VerticalOptions="Center" HorizontalOptions="Center"
                             Padding="0" Margin="20"
-                            WidthRequest="960"
-                            BackgroundColor="White">
+                            WidthRequest="960">
                             <Grid>
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="Auto" />
@@ -207,7 +206,7 @@
                                     Padding="10"
                                     BackgroundColor="Transparent"
                                     Text="&#xf5ad;"
-                                    TextColor="Black"
+                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                     FontSize="Medium"
                                     FontFamily="MaterialDesignIcons"
                                     BorderWidth="0"

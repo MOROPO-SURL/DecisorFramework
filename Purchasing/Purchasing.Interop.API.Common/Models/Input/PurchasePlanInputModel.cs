@@ -22,6 +22,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
 
         public string Description { get; set; }
 
+        public decimal EstimatedAdvance { get; set; }
+
         public List<PurchasePlanCommonProductBridgeModel> OutputProductBridges { get; set; } = new List<PurchasePlanCommonProductBridgeModel>();
 
         public List<PurchasePlanCommonProductBridgeModel> InputProductBridges { get; set; } = new List<PurchasePlanCommonProductBridgeModel>();
@@ -49,6 +51,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
             entity.PlannedFor = PlannedFor;
             entity.Priority = Priority;
             entity.Description = Description;
+            entity.EstimatedAdvance = EstimatedAdvance;
 
             if (entity.ZoneId != ZoneId)
             {

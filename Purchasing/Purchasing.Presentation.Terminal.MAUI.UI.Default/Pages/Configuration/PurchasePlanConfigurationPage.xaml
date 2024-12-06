@@ -46,6 +46,7 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Zona" />
@@ -347,12 +348,16 @@
                         </Grid>
                     </Frame>
                 </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Anticipo Estimado" />
+                    <Entry Text="{Binding EstimatedAdvance, StringFormat='{0:F2}'}" />
+                </VerticalStackLayout>
                 <BoxView 
-                    Grid.ColumnSpan="4" Grid.Row="6" 
+                    Grid.ColumnSpan="4" Grid.Row="7" 
                     Margin="0,8,0,0"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="7">
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="8">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
                     <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
                 </VerticalStackLayout>

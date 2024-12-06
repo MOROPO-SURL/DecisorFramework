@@ -1840,6 +1840,10 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
+                    b.Property<decimal>("EstimatedAdvance")
+                        .HasColumnType("numeric")
+                        .HasColumnName("estimatedadvance");
+
                     b.Property<DateTime>("PlannedFor")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("plannedfor");
@@ -3710,16 +3714,17 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 {
                     b.HasBaseType("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Contract.AbstractCashAdvance");
 
-                    b.Property<Guid?>("PurchaseId")
+                    b.Property<Guid?>("PurchasePlanId")
                         .HasColumnType("uuid")
-                        .HasColumnName("purchaseid");
+                        .HasColumnName("purchaseplanid");
 
                     b.Property<Guid>("ResponsibleId")
                         .HasColumnType("uuid")
                         .HasColumnName("responsibleid");
 
-                    b.HasIndex("PurchaseId")
-                        .HasDatabaseName("ix_advances_purchaseid");
+                    b.HasIndex("PurchasePlanId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_advances_purchaseplanid");
 
                     b.HasIndex("ResponsibleId")
                         .HasDatabaseName("ix_advances_responsibleid");
@@ -5645,10 +5650,10 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Purchase")
-                        .WithMany()
-                        .HasForeignKey("PurchaseId")
-                        .HasConstraintName("fk_advances_purchases_purchaseid");
+                    b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", "PurchasePlan")
+                        .WithOne("Advance")
+                        .HasForeignKey("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseCashAdvance", "PurchasePlanId")
+                        .HasConstraintName("fk_advances_purchaseplans_purchaseplanid");
 
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Responsible")
                         .WithMany()
@@ -5657,7 +5662,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .IsRequired()
                         .HasConstraintName("fk_advances_employees_responsibleid");
 
-                    b.Navigation("Purchase");
+                    b.Navigation("PurchasePlan");
 
                     b.Navigation("Responsible");
                 });
@@ -5906,6 +5911,8 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan", b =>
                 {
+                    b.Navigation("Advance");
+
                     b.Navigation("InputProductBridges");
 
                     b.Navigation("LegalProviderBridges");

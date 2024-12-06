@@ -132,13 +132,40 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
         }
 
         [Microsoft.AspNetCore.Mvc.HttpPut("approve/{key}")]
-        public virtual Microsoft.AspNetCore.Mvc.ActionResult Edit(System.Guid key)
+        public virtual Microsoft.AspNetCore.Mvc.ActionResult Approve(System.Guid key)
         {
             try
             {
                 var entity = Repository.Get(key);
 
                 entity.ApprovedAt = System.DateTime.Now;
+
+                Repository.Update(entity, User.Identity.Name);
+
+                return Ok();
+            }
+            catch (System.InvalidOperationException e)
+            {
+                logger.LogError(e.InnerException, e.Message);
+
+                return NoContent();
+            }
+            catch (System.Exception e)
+            {
+                logger.LogError(e.InnerException, e.Message);
+
+                return Conflict();
+            }
+        }
+
+        [Microsoft.AspNetCore.Mvc.HttpPut("invalidate/{key}")]
+        public virtual Microsoft.AspNetCore.Mvc.ActionResult Invalidate(System.Guid key)
+        {
+            try
+            {
+                var entity = Repository.Get(key);
+
+                entity.ApprovedAt = null;
 
                 Repository.Update(entity, User.Identity.Name);
 

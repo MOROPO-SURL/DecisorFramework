@@ -37,6 +37,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
         public PurchaseZone Zone { get; set; }
         public System.Guid ZoneId { get; set; }
 
+        public decimal EstimatedAdvance { get; set; }
+
+        public PurchaseCashAdvance Advance { get; set; }
+
         public Purchase Purchase { get; set; }
 
         public List<PurchasePlanOutputProductBridge> OutputProductBridges { get; set; } = new List<PurchasePlanOutputProductBridge>();

@@ -7,9 +7,15 @@
     xmlns:core_contract_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
     xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PurchasePlanCommonProductBridgeConfigurationPage"
     x:TypeArguments="interop_common_bridge_models:PurchasePlanCommonProductBridgeModel"
     x:DataType="presentation_configuration_page_models:PurchasePlanCommonProductBridgeConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
         Text="Aplicar"
@@ -22,13 +28,7 @@
         Text="Cancelar"
         Clicked="CancelClickableControl_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -48,12 +48,18 @@
                 </Grid.RowDefinitions>
                 <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0" Grid.RowSpan="2" VerticalOptions="Start">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Producto" />
-                    <inventory_card_views:ProductDefaultCardView BindingContext="{Binding Product}" />
-                    <Button Text="Cambiar" Clicked="ProductChangeButton_Clicked" />
+                    <ContentView                        
+                        IsVisible="{Binding Product, Converter={StaticResource IsNotNullConverter}}">
+                        <inventory_card_views:ProductDefaultCardView BindingContext="{Binding Product}" />
+                    </ContentView>
+                    <Button 
+                        HorizontalOptions="Start"
+                        Text="Selecionar ..."  
+                        Clicked="ProductChangeButton_Clicked" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="0">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cantidad" />
-                    <Entry Text="{Binding Amount}" />
+                    <Entry Text="{Binding Amount, StringFormat='{0:F2}'}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="0" VerticalOptions="Start">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad de Medida" />

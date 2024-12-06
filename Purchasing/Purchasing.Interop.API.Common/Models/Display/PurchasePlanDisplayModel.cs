@@ -27,6 +27,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public System.DateTime? ApprovedAt { get; set; }
 
+        public decimal EstimatedAdvance { get; set; }
+
         public List<PurchasePlanCommonProductBridgeModel> OutputProductBridges { get; set; } = new List<PurchasePlanCommonProductBridgeModel>();
 
         public List<PurchasePlanCommonProductBridgeModel> InputProductBridges { get; set; } = new List<PurchasePlanCommonProductBridgeModel>();
@@ -40,8 +42,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             Id = entity.Id;
             At = entity.At;
             PlannedFor = entity.PlannedFor;
+            ApprovedAt = entity.ApprovedAt;
             Priority = entity.Priority;
             Description = entity.Description;
+            EstimatedAdvance = entity.EstimatedAdvance;
 
             Zone = new PurchaseZoneDisplayModel();
             Zone.Import(entity.Zone);

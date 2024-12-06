@@ -100,8 +100,19 @@
 	  <BundleResource Include="Resources\Images\warehousing.jpg" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="UI\Views\ModuleFlyoutSectionSubtitleContentView.xaml.cs">
+	    <DependentUpon>ModuleFlyoutSectionSubtitleContentView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
 	  <MauiXaml Update="Resources\Styles\Values.xaml">
 	    <Generator></Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\ModuleFlyoutSectionTitleContentView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\ModuleFlyoutSectionSubtitleContentView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 </Project>

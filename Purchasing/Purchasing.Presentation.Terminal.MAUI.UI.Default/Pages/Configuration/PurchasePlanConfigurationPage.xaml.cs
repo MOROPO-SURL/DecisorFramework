@@ -93,7 +93,8 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             LegalProviderBridges = concreteBindingContext.LegalProviderBridges.ToList(),
             NaturalProviderBridges = concreteBindingContext.NaturalProviderBridges.ToList(),
             InputProductBridges = concreteBindingContext.InputProductBridges.ToList(),
-            OutputProductBridges = concreteBindingContext.OutputProductBridges.ToList()
+            OutputProductBridges = concreteBindingContext.OutputProductBridges.ToList(),
+            EstimatedAdvance = concreteBindingContext.EstimatedAdvance
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -120,7 +121,8 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             LegalProviderBridges = concreteBindingContext.LegalProviderBridges.ToList(),
             NaturalProviderBridges = concreteBindingContext.NaturalProviderBridges.ToList(),
             InputProductBridges = concreteBindingContext.InputProductBridges.ToList(),
-            OutputProductBridges = concreteBindingContext.OutputProductBridges.ToList()
+            OutputProductBridges = concreteBindingContext.OutputProductBridges.ToList(),
+            EstimatedAdvance = concreteBindingContext.EstimatedAdvance
         };
 
         await apiConnectClient.EditAsync(model);

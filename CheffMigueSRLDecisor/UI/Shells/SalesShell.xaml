@@ -32,7 +32,7 @@
             </Grid>
         </Grid>
     </Shell.FlyoutHeader>
-    <MenuFlyoutItem Text="Inicio" />
+    <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
     <ShellContent
         Title="Panel de Control"
         ContentTemplate="{DataTemplate local_pages:SalesDashboardPage}">
@@ -43,7 +43,8 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Operaciones" />
+    <MenuFlyoutItem Text="Operaciones" IsEnabled="False" />
+    <MenuFlyoutItem Text="Minoristas" IsEnabled="False" />
     <ShellContent
         Title="Inicios de Turno"
         ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:ShiftOpeningsManagePage}">
@@ -64,7 +65,48 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <MenuFlyoutSeparator Text="Mayoristas" />
+    <FlyoutItem
+        Title="Ofertas">
+        <FlyoutItem.Icon>
+            <FontImageSource
+            FontFamily="MaterialDesignIcons"
+            Glyph="&#xFDA6;"
+            Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Clientes Jurídicos"
+            ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:LegalClientBudgetsManagePage}" />
+        <ShellContent
+            Title="Clientes Naturales"
+            ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:NaturalClientBudgetsManagePage}" />
+    </FlyoutItem>
+    <ShellContent
+        Title="Órdenes"
+        ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:OrdersManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+            FontFamily="MaterialDesignIcons"
+            Glyph="&#xF216;"
+            Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
+    <FlyoutItem
+        Title="Clientes">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFAC0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:LegalClientsManagePage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:NaturalClientsManagePage}" />
+    </FlyoutItem>
     <ShellContent
         Title="Puntos de Venta"
         ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:ShopsManagePage}">

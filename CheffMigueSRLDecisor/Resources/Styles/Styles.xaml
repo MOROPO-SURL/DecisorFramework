@@ -417,8 +417,8 @@
     </Style>
 
     <Style TargetType="NavigationPage">
-        <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray900}}" />
-        <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource SecondaryDarkText}}" />
+        <Setter Property="BarBackgroundColor" Value="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}" />
+        <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
         <Setter Property="IconColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource White}}" />
     </Style>
 
@@ -432,6 +432,10 @@
     <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+    </Style>
+
+    <Style TargetType="ContentView" x:Key="ModalFrameWrapContentViewStyle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#A9000000, Dark=#A9333333}" />
     </Style>
 
     <Style TargetType="caneyframework_presentation_views:BusyView">

@@ -50,8 +50,9 @@
                     <BindableLayout.ItemTemplate>
                         <DataTemplate>
                             <local_card_views:PurchasePlanToCompleteDefaultCardView
+                                Margin="5"
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
-                                HeightRequest="180">
+                                HeightRequest="240">
                                 <ContentView.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                 </ContentView.GestureRecognizers>
@@ -70,14 +71,13 @@
             </ScrollView>
             <ContentView 
                 IsVisible="{Binding PresentedItem, Converter={StaticResource IsNotNullConverter}}"
-                BackgroundColor="#A9000000">
+                Style="{StaticResource ModalFrameWrapContentViewStyle}">
                 <ScrollView Orientation="Vertical">
                     <Grid>
                         <Frame
                             VerticalOptions="Center" HorizontalOptions="Center"
                             Padding="0" Margin="20"
-                            WidthRequest="400"
-                            BackgroundColor="White">
+                            WidthRequest="400">
                             <Grid>
                                 <StackLayout Margin="20" Spacing="20">
                                     <StackLayout>
@@ -106,17 +106,25 @@
                                             Style="{StaticResource ValueFieldLabelStyle}"
                                             Text="{Binding PresentedItem.Description, TargetNullValue='---'}" />
                                     </StackLayout>
-                                    <Button 
-                                        HorizontalOptions="Center"
-                                        Text="Eliminar"
-                                        Clicked="PresentedItemRemoveButton_Clicked" />
+                                    <StackLayout
+                                        Orientation="Horizontal"
+                                        Spacing="20">
+                                        <Button 
+                                            HorizontalOptions="FillAndExpand"
+                                            Text="Re-Evaluar"
+                                            Clicked="PresentedItemInvalidateButton_Clicked" />
+                                        <Button 
+                                            HorizontalOptions="FillAndExpand"
+                                            Text="Eliminar"
+                                            Clicked="PresentedItemRemoveButton_Clicked" />
+                                    </StackLayout>
                                 </StackLayout>
                                 <Button
                                     HorizontalOptions="End" VerticalOptions="Start"
                                     Padding="10"
                                     BackgroundColor="Transparent"
                                     Text="&#xf5ad;"
-                                    TextColor="Black"
+                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                     FontSize="Medium"
                                     FontFamily="MaterialDesignIcons"
                                     BorderWidth="0"

@@ -43,6 +43,39 @@ public partial class ToCompletePurchasePlansManagePage : Caney.MVVM.Core.Pages.C
         ((Models.Page.Manage.PurchasePlansManagePageModel)BindingContext).PresentedItem = null;
     }
 
+    private void PresentedItemInvalidateButton_Clicked(object sender, System.EventArgs e)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea re-evaluar este elemento?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            var concreteBindingContext = (Models.Page.Manage.PurchasePlansManagePageModel)BindingContext;
+
+            var apiConnectClient = new Interop.API.Connect.Clients.PurchasePlansAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+            apiConnectClient.InvalidateAsync(concreteBindingContext.PresentedItem.Id).ContinueWith(_task =>
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    concreteBindingContext.IsBusy = false;
+
+                    if (_task.Exception != null || _task.IsCanceled)
+                    {
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                    }
+                    else
+                    {
+                        concreteBindingContext.PresentedItem = null;
+
+                        DisplayAlert("Aviso", "Elemento aprobado con éxito.", "Aceptar");
+
+                        LoadItems();
+                    }
+                });
+            });
+        });
+    }
+
     private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)
     {
         DisplayAlert("Confirmar", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
@@ -61,7 +94,7 @@ public partial class ToCompletePurchasePlansManagePage : Caney.MVVM.Core.Pages.C
 
                     if (_task.Exception != null || _task.IsCanceled)
                     {
-                        DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                     }
                     else
                     {
@@ -94,7 +127,7 @@ public partial class ToCompletePurchasePlansManagePage : Caney.MVVM.Core.Pages.C
 
                 if (task.Exception != null || task.IsCanceled)
                 {
-                    DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                 }
                 else
                 {
