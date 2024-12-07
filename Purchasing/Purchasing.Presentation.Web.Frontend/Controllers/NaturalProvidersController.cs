@@ -306,5 +306,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 imageFileManager.DeleteImageFile(oldLogoImage);
             }
         }
+
+        [Microsoft.AspNetCore.Mvc.HttpGet("[action]")]
+        public Microsoft.AspNetCore.Mvc.ActionResult<long> Count()
+        {
+            return Ok(Repository.Count());
+        }
     }
 }

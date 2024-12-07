@@ -31,10 +31,10 @@
 		<WarningLevel>4</WarningLevel>
 	</PropertyGroup>
 	<PropertyGroup>
-	  <TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.22621.0</TargetFrameworks>
-	  <DefaultLanguage>en-US</DefaultLanguage>
-	  <PackageCertificateThumbprint>7FE7AC2F6608635F21D621D1F5E868DB05508127</PackageCertificateThumbprint>
-	  <AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
+		<DefaultLanguage>en-US</DefaultLanguage>
+		<PackageCertificateThumbprint>7FE7AC2F6608635F21D621D1F5E868DB05508127</PackageCertificateThumbprint>
+		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
@@ -50,17 +50,17 @@
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Compile Remove="cache\**" />
-	  <EmbeddedResource Remove="cache\**" />
-	  <MauiCss Remove="cache\**" />
-	  <MauiXaml Remove="cache\**" />
-	  <None Remove="cache\**" />
+		<Compile Remove="cache\**" />
+		<EmbeddedResource Remove="cache\**" />
+		<MauiCss Remove="cache\**" />
+		<MauiXaml Remove="cache\**" />
+		<None Remove="cache\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
-		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
+		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.9" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Production\Production.Presentation.Terminal.MAUI.UI.Default\Production.Presentation.Terminal.MAUI.UI.Default.csproj" />
@@ -69,50 +69,50 @@
 		<ProjectReference Include="..\Supervision\Supervision.Presentation.Terminal.MAUI.UI.Default\Supervision.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
-	  <None Remove="Resources\Images\accounting.jpg" />
-	  <None Remove="Resources\Images\cash.jpg" />
-	  <None Remove="Resources\Images\cheff_migue_shop.jpg" />
-	  <None Remove="Resources\Images\default_organization_picture.png" />
-	  <None Remove="Resources\Images\default_person_picture.jpg" />
-	  <None Remove="Resources\Images\elaboration.jpg" />
-	  <None Remove="Resources\Images\logo_chef_nuevo.png" />
-	  <None Remove="Resources\Images\monitorization.jpg" />
-	  <None Remove="Resources\Images\purchasing.jpg" />
-	  <None Remove="Resources\Images\rr_hh.jpg" />
-	  <None Remove="Resources\Images\sales.jpg" />
-	  <None Remove="Resources\Images\warehousing.jpg" />
-	  <None Remove="UI\Shells\" />
-	  <None Remove="UI\Views\" />
+		<None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
+		<None Remove="Resources\Images\accounting.jpg" />
+		<None Remove="Resources\Images\cash.jpg" />
+		<None Remove="Resources\Images\cheff_migue_shop.jpg" />
+		<None Remove="Resources\Images\default_organization_picture.png" />
+		<None Remove="Resources\Images\default_person_picture.jpg" />
+		<None Remove="Resources\Images\elaboration.jpg" />
+		<None Remove="Resources\Images\logo_chef_nuevo.png" />
+		<None Remove="Resources\Images\monitorization.jpg" />
+		<None Remove="Resources\Images\purchasing.jpg" />
+		<None Remove="Resources\Images\rr_hh.jpg" />
+		<None Remove="Resources\Images\sales.jpg" />
+		<None Remove="Resources\Images\warehousing.jpg" />
+		<None Remove="UI\Shells\" />
+		<None Remove="UI\Views\" />
 	</ItemGroup>
 	<ItemGroup>
-	  <BundleResource Include="Resources\Fonts\materialdesignicons-webfont.ttf" />
-	  <BundleResource Include="Resources\Images\accounting.jpg" />
-	  <BundleResource Include="Resources\Images\cash.jpg" />
-	  <BundleResource Include="Resources\Images\cheff_migue_shop.jpg" />
-	  <BundleResource Include="Resources\Images\default_organization_picture.png" />
-	  <BundleResource Include="Resources\Images\default_person_picture.jpg" />
-	  <BundleResource Include="Resources\Images\elaboration.jpg" />
-	  <BundleResource Include="Resources\Images\monitorization.jpg" />
-	  <BundleResource Include="Resources\Images\purchasing.jpg" />
-	  <BundleResource Include="Resources\Images\rr_hh.jpg" />
-	  <BundleResource Include="Resources\Images\sales.jpg" />
-	  <BundleResource Include="Resources\Images\warehousing.jpg" />
+		<BundleResource Include="Resources\Fonts\materialdesignicons-webfont.ttf" />
+		<BundleResource Include="Resources\Images\accounting.jpg" />
+		<BundleResource Include="Resources\Images\cash.jpg" />
+		<BundleResource Include="Resources\Images\cheff_migue_shop.jpg" />
+		<BundleResource Include="Resources\Images\default_organization_picture.png" />
+		<BundleResource Include="Resources\Images\default_person_picture.jpg" />
+		<BundleResource Include="Resources\Images\elaboration.jpg" />
+		<BundleResource Include="Resources\Images\monitorization.jpg" />
+		<BundleResource Include="Resources\Images\purchasing.jpg" />
+		<BundleResource Include="Resources\Images\rr_hh.jpg" />
+		<BundleResource Include="Resources\Images\sales.jpg" />
+		<BundleResource Include="Resources\Images\warehousing.jpg" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Compile Update="UI\Views\ModuleFlyoutSectionSubtitleContentView.xaml.cs">
-	    <DependentUpon>ModuleFlyoutSectionSubtitleContentView.xaml</DependentUpon>
-	  </Compile>
+		<Compile Update="UI\Views\ModuleFlyoutSectionSubtitleContentView.xaml.cs">
+			<DependentUpon>ModuleFlyoutSectionSubtitleContentView.xaml</DependentUpon>
+		</Compile>
 	</ItemGroup>
 	<ItemGroup>
-	  <MauiXaml Update="Resources\Styles\Values.xaml">
-	    <Generator></Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\ModuleFlyoutSectionTitleContentView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\ModuleFlyoutSectionSubtitleContentView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
+		<MauiXaml Update="Resources\Styles\Values.xaml">
+			<Generator></Generator>
+		</MauiXaml>
+		<MauiXaml Update="UI\Views\ModuleFlyoutSectionTitleContentView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
+		<MauiXaml Update="UI\Views\ModuleFlyoutSectionSubtitleContentView.xaml">
+			<Generator>MSBuild:Compile</Generator>
+		</MauiXaml>
 	</ItemGroup>
 </Project>

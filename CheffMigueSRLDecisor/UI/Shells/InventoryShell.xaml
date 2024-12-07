@@ -37,7 +37,7 @@
     <MenuFlyoutItem Text="Inicio" />
     <ShellContent
         Title="Panel de Control"
-        ContentTemplate="{DataTemplate local_pages:InventoryDashboardPage}">
+        ContentTemplate="{DataTemplate decisorframework_supervision_manage_pages:InventoryDashboardPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

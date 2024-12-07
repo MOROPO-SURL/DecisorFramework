@@ -7,5 +7,10 @@
         }
 
         protected override string TargetController => "api/inventory/warehouses";
+
+        public async System.Threading.Tasks.Task<long> CountAsync()
+        {
+            return await httpClientHelperProvider.HttpClientHelper.GetAsync<long>($"{TargetController}/count");
+        }
     }
 }

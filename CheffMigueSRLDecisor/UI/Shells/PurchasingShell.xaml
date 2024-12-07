@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_pages="clr-namespace:MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Pages"
     xmlns:decisorframework_purchasing_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_supervision_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Shells.PurchasingShell"
     FlyoutBehavior="Locked">
     <Shell.FlyoutHeader>
@@ -35,7 +36,7 @@
     <MenuFlyoutItem Text="Inicio" />
     <ShellContent
         Title="Panel de Control"
-        ContentTemplate="{DataTemplate local_pages:PurchasingDashboardPage}">
+        ContentTemplate="{DataTemplate decisorframework_supervision_manage_pages:PurchasingDashboardPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -53,14 +54,14 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
-            Title="Por Aprobar"
-            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:ToApprovePurchasePlansManagePage}" />
+            Title="Realizados"
+            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:FilledPurchasePlansManagePage}" />
         <ShellContent
             Title="Por Completar"
             ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:ToCompletePurchasePlansManagePage}" />
         <ShellContent
-            Title="Realizado"
-            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:FilledPurchasePlansManagePage}" />
+            Title="Por Aprobar"
+            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:ToApprovePurchasePlansManagePage}" />
     </FlyoutItem>
     <ShellContent
         Title="Compras"
@@ -94,7 +95,7 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFEBB;"
+                Glyph="&#xF352;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

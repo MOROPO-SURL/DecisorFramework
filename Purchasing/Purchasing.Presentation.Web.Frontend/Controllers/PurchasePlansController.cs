@@ -131,8 +131,14 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             }
         }
 
+        [Microsoft.AspNetCore.Mvc.HttpGet("[action]")]
+        public Microsoft.AspNetCore.Mvc.ActionResult<long> Count()
+        {
+            return Ok(Repository.Count());
+        }
+
         [Microsoft.AspNetCore.Mvc.HttpPut("approve/{key}")]
-        public virtual Microsoft.AspNetCore.Mvc.ActionResult Approve(System.Guid key)
+        public Microsoft.AspNetCore.Mvc.ActionResult Approve(System.Guid key)
         {
             try
             {

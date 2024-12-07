@@ -30,6 +30,16 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\..\Inventory\Inventory.Interop.API.Connect\Inventory.Interop.API.Connect.csproj" />
+		<ProjectReference Include="..\..\Purchasing\Purchasing.Interop.API.Connect\Purchasing.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\Supervision.Presentation.Terminal.MAUI\Supervision.Presentation.Terminal.MAUI.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Pages\InventoryDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\PurchasingDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>

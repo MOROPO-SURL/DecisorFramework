@@ -253,5 +253,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
 
             throw new System.InvalidOperationException();
         }
+
+        [Microsoft.AspNetCore.Mvc.HttpGet("[action]")]
+        public Microsoft.AspNetCore.Mvc.ActionResult<long> Count()
+        {
+            return Ok(Repository.Count());
+        }
     }
 }

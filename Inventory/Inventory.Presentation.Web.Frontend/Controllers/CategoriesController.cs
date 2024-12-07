@@ -22,6 +22,12 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
         {
             return NotFound();
         }
+
+        [Microsoft.AspNetCore.Mvc.HttpGet("[action]")]
+        public Microsoft.AspNetCore.Mvc.ActionResult<long> Count()
+        {
+            return Ok(Repository.Count());
+        }
     }
 }
 

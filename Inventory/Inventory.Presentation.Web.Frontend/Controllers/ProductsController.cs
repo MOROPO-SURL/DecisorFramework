@@ -145,6 +145,12 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
             }
         }
 
+        [Microsoft.AspNetCore.Mvc.HttpGet("[action]")]
+        public Microsoft.AspNetCore.Mvc.ActionResult<long> Count()
+        {
+            return Ok(Repository.Count());
+        }
+
         private void FillParent(Category entity)
         {
             if (entity.ParentId == null) return;

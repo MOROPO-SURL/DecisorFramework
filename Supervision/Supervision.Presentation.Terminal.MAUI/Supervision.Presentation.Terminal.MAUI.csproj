@@ -24,6 +24,7 @@
 		<MtouchLink>None</MtouchLink>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="LiveChartsCore" Version="2.0.0-rc3.3" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
 	</ItemGroup>
