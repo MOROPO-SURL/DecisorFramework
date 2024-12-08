@@ -1,4 +1,7 @@
-﻿namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration
+﻿using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
+using System.Collections.ObjectModel;
+
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class PurchaseZoneConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel>
     {
@@ -14,6 +17,8 @@
                 Name = model.Name;
                 Description = model.Description;
                 Priority = model.Priority;
+
+                foreach (var item in model.SpentBridges) SpentBridges.Add(item);
             }
         }
 
@@ -24,5 +29,7 @@
         public string Description { get => description; set => SetProperty(ref description, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
+
+        public ObservableCollection<PurchaseZoneSpentBridgeModel> SpentBridges { get; set; } = new ObservableCollection<PurchaseZoneSpentBridgeModel>();
     }
 }

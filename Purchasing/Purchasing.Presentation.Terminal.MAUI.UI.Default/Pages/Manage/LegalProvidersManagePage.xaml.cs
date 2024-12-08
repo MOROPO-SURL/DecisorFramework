@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using System;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -122,7 +123,7 @@ public partial class LegalProvidersManagePage : Caney.MVVM.Core.Pages.ContentPag
 
     private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)
     {
-        DisplayAlert("Confirmar", "Esta seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
@@ -138,13 +139,13 @@ public partial class LegalProvidersManagePage : Caney.MVVM.Core.Pages.ContentPag
 
                     if (_task.Exception != null || _task.IsCanceled)
                     {
-                        DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                     }
                     else
                     {
                         concreteBindingContext.PresentedItem = null;
 
-                        DisplayAlert("Aviso", "Elemento eliminado con �xito.", "Aceptar");
+                        DisplayAlert("Aviso", "Elemento eliminado con éxito.", "Aceptar");
 
                         LoadItems();
                     }
@@ -176,7 +177,7 @@ public partial class LegalProvidersManagePage : Caney.MVVM.Core.Pages.ContentPag
 
                 if (task.Exception != null || task.IsCanceled)
                 {
-                    DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                 }
                 else
                 {

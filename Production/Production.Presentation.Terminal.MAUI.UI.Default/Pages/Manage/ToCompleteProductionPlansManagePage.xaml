@@ -10,7 +10,7 @@
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.ToCompleteProductionPlansManagePage"
     x:DataType="presentation_manage_page_models:ProductionPlansManagePageModel"
-    Title="Por Realizar">
+    Title="Planes de Producción por Realizar">
     <ContentPage.Resources>
         <ResourceDictionary>
             <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="384" AbsoluteHorizontalSeparation="20" />

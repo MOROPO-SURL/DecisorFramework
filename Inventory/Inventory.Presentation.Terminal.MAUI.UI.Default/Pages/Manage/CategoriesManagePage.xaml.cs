@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -138,13 +137,13 @@ public partial class CategoriesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                     if (_task.Exception != null || _task.IsCanceled)
                     {
-                        DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                     }
                     else
                     {
                         concreteBindingContext.PresentedItem = null;
 
-                        DisplayAlert("Aviso", "Elemento eliminado con �xito.", "Aceptar");
+                        DisplayAlert("Aviso", "Elemento eliminado con éxito.", "Aceptar");
 
                         LoadItems();
                     }
@@ -176,7 +175,7 @@ public partial class CategoriesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                 if (task.Exception != null || task.IsCanceled)
                 {
-                    DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                 }
                 else
                 {

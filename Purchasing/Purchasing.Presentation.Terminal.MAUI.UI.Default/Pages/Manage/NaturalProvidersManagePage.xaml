@@ -81,14 +81,13 @@
             </StackLayout>
             <ContentView 
                 IsVisible="{Binding PresentedItem, Converter={StaticResource IsNotNullConverter}}"
-                BackgroundColor="#A9000000">
+                Style="{StaticResource ModalFrameWrapContentViewStyle}">
                 <ScrollView Orientation="Vertical">
                     <Grid>
                         <Frame
                             VerticalOptions="Center" HorizontalOptions="Center"
                             Padding="0" Margin="20"
-                            WidthRequest="400"
-                            BackgroundColor="White">
+                            WidthRequest="400">
                             <Grid>
                                 <StackLayout Margin="20" Spacing="20">
                                     <StackLayout>
@@ -135,7 +134,7 @@
                                     Padding="10"
                                     BackgroundColor="Transparent"
                                     Text="&#xf5ad;"
-                                    TextColor="Black"
+                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                     FontSize="Medium"
                                     FontFamily="MaterialDesignIcons"
                                     BorderWidth="0"

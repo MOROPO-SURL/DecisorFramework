@@ -36,14 +36,17 @@ public partial class PurchasesManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             try
             {
-                var zonesAPIConnectClient = new Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var httpClientProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
 
-                var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var zonesAPIConnectClient = new Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(httpClientProvider);
+                var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(httpClientProvider);
+                var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientProvider);
 
                 var model = new Models.Page.Configuration.PurchaseConfigurationPageModel(null)
                 {
                     AvailablePurchasers = await employeesAPIConnectClient.GetAsync(),
-                    AvailableZones = await zonesAPIConnectClient.GetAsync()
+                    AvailableZones = await zonesAPIConnectClient.GetAsync(),
+                    AvailableCostCenters = await costCentersAPIConnectClient.GetAsync()
                 };
 
                 Dispatcher.Dispatch(() =>
@@ -92,14 +95,17 @@ public partial class PurchasesManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             try
             {
-                var zonesAPIConnectClient = new Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var httpClientProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
 
-                var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var zonesAPIConnectClient = new Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(httpClientProvider);
+                var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(httpClientProvider);
+                var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientProvider);
 
                 var model = new Models.Page.Configuration.PurchaseConfigurationPageModel(concreteBindingContext.PresentedItem)
                 {
                     AvailablePurchasers = await employeesAPIConnectClient.GetAsync(),
-                    AvailableZones = await zonesAPIConnectClient.GetAsync()
+                    AvailableZones = await zonesAPIConnectClient.GetAsync(),
+                    AvailableCostCenters = await costCentersAPIConnectClient.GetAsync()
                 };
 
                 Dispatcher.Dispatch(() =>
@@ -123,7 +129,7 @@ public partial class PurchasesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
     private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)
     {
-        DisplayAlert("Confirmar", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
@@ -139,13 +145,13 @@ public partial class PurchasesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                     if (_task.Exception != null || _task.IsCanceled)
                     {
-                        DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                     }
                     else
                     {
                         concreteBindingContext.PresentedItem = null;
 
-                        DisplayAlert("Aviso", "Elemento eliminado con �xito.", "Aceptar");
+                        DisplayAlert("Aviso", "Elemento eliminado con éxito.", "Aceptar");
 
                         LoadItems();
                     }
@@ -177,7 +183,7 @@ public partial class PurchasesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                 if (task.Exception != null || task.IsCanceled)
                 {
-                    DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                 }
                 else
                 {

@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
 {
     public class PurchasePlanCommonProductBridgeConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Bridge.PurchasePlanCommonProductBridgeModel>
     {
-        private Inventory.Interop.API.Common.Models.Display.ProductDisplayModel product;
+        private ProductDisplayModel product;
         private decimal amount;
         private UnitMeasurementDisplayModel unitMeasurement;
 
@@ -18,7 +18,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
             }
         }
 
-        public Inventory.Interop.API.Common.Models.Display.ProductDisplayModel Product { get => product; set => SetProperty(ref product, value); }
+        public ProductDisplayModel Product { get => product; set => SetProperty(ref product, value); }
 
         public decimal Amount { get => amount; set => SetProperty(ref amount, value); }
 

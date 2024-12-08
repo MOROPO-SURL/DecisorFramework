@@ -151,16 +151,33 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 }
             }
 
-            if (model.SpentBridges != null)
+            if (model.RegularSpentBridges != null)
             {
-                foreach (var item in model.SpentBridges)
+                foreach (var item in model.RegularSpentBridges)
                 {
                     entity.SpentBridges.Add(new PurchasePurchaseSpentBridge
                     {
                         ProwId = entity.Id,
                         SternId = item.Spent.Id,
                         Amount = item.Amount,
-                        Cost = item.Cost,
+                        Count = item.Count,
+                        IsRegular =true,
+                        CostCenterId = item.CostCenter.Id
+                    });
+                }
+            }
+
+            if (model.ExtraSpentBridges != null)
+            {
+                foreach (var item in model.ExtraSpentBridges)
+                {
+                    entity.SpentBridges.Add(new PurchasePurchaseSpentBridge
+                    {
+                        ProwId = entity.Id,
+                        SternId = item.Spent.Id,
+                        Amount = item.Amount,
+                        Count = item.Count,
+                        IsRegular = false,
                         CostCenterId = item.CostCenter.Id
                     });
                 }

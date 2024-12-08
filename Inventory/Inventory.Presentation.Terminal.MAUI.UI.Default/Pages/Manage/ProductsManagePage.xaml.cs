@@ -131,7 +131,7 @@ public partial class ProductsManagePage : Caney.MVVM.Core.Pages.ContentPage
 
     private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)
     {
-        DisplayAlert("Confirmar", "Esta seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
@@ -147,13 +147,13 @@ public partial class ProductsManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                     if (_task.Exception != null || _task.IsCanceled)
                     {
-                        DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                     }
                     else
                     {
                         concreteBindingContext.PresentedItem = null;
 
-                        DisplayAlert("Aviso", "Elemento eliminado con �xito.", "Aceptar");
+                        DisplayAlert("Aviso", "Elemento eliminado con éxito.", "Aceptar");
 
                         LoadItems();
                     }
@@ -185,7 +185,7 @@ public partial class ProductsManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                 if (task.Exception != null || task.IsCanceled)
                 {
-                    DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                 }
                 else
                 {

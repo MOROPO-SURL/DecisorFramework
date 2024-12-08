@@ -2098,13 +2098,17 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         .HasColumnType("numeric")
                         .HasColumnName("amount");
 
-                    b.Property<decimal>("Cost")
-                        .HasColumnType("numeric")
-                        .HasColumnName("cost");
-
                     b.Property<Guid>("CostCenterId")
                         .HasColumnType("uuid")
                         .HasColumnName("costcenterid");
+
+                    b.Property<int>("Count")
+                        .HasColumnType("integer")
+                        .HasColumnName("count");
+
+                    b.Property<bool>("IsRegular")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isregular");
 
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_purchasepurchasespentbridges");

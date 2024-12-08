@@ -21,7 +21,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public List<PurchaseProductNaturalProviderBridgeModel> NaturalProviderProductBridges { get; set; } = new List<PurchaseProductNaturalProviderBridgeModel>();
 
-        public List<PurchasePurchaseSpentBridgeModel> SpentBridges { get; set; } = new List<PurchasePurchaseSpentBridgeModel>();
+        public List<PurchasePurchaseSpentBridgeModel> RegularSpentBridges { get; set; } = new List<PurchasePurchaseSpentBridgeModel>();
+
+        public List<PurchasePurchaseSpentBridgeModel> ExtraSpentBridges { get; set; } = new List<PurchasePurchaseSpentBridgeModel>();
 
         public List<PurchaseEmployeeBridgeModel> EmployeeBridges { get; set; } = new List<PurchaseEmployeeBridgeModel>();
 
@@ -97,7 +99,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 {
                     Spent = new PurchaseSpentDisplayModel(),
                     Amount = bridge.Amount,
-                    Cost = bridge.Cost
+                    Count = bridge.Count
                 };
 
                 if (bridge.CostCenter != null)
@@ -109,7 +111,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
                 model.Spent.Import(bridge.Stern);
 
-                SpentBridges.Add(model);
+                if (bridge.IsRegular)
+                    RegularSpentBridges.Add(model);
+                else
+                    ExtraSpentBridges.Add(model);
             }
 
             foreach (var bridge in entity.EmployeeBridges)

@@ -8,9 +8,11 @@
         public System.Guid SternId { get; set; }
         public PurchaseSpent Stern { get; set; }
 
-        public decimal Amount { get; set; }
+        public decimal Amount { get; set; } // Unitario
 
-        public decimal Cost { get; set; } // Unitario
+        public int Count { get; set; }
+
+        public bool IsRegular { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CostCenterId))]
         public Financial.Persistence.Entities.CostCenter CostCenter { get; set; }

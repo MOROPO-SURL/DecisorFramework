@@ -20,7 +20,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
 
         public List<PurchaseProductNaturalProviderBridgeModel> NaturalProviderProductBridges { get; set; } = new List<PurchaseProductNaturalProviderBridgeModel>();
 
-        public List<PurchasePurchaseSpentBridgeModel> SpentBridges { get; set; } = new List<PurchasePurchaseSpentBridgeModel>();
+        public List<PurchasePurchaseSpentBridgeModel> RegularSpentBridges { get; set; } = new List<PurchasePurchaseSpentBridgeModel>();
+
+        public List<PurchasePurchaseSpentBridgeModel> ExtraSpentBridges { get; set; } = new List<PurchasePurchaseSpentBridgeModel>();
 
         public List<PurchaseEmployeeBridgeModel> EmployeeBridges { get; set; } = new List<PurchaseEmployeeBridgeModel>();
 

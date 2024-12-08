@@ -13,7 +13,7 @@
     Title="Operaciones de Compra">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="384" AbsoluteHorizontalSeparation="20" />
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="400" AbsoluteHorizontalSeparation="20" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
 
@@ -61,7 +61,7 @@
                                 <local_card_views:PurchaseDefaultCardView
                                     Margin="5"
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
-                                    HeightRequest="180">
+                                    HeightRequest="240">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </ContentView.GestureRecognizers>
@@ -81,14 +81,13 @@
             </StackLayout>
             <ContentView 
                 IsVisible="{Binding PresentedItem, Converter={StaticResource IsNotNullConverter}}"
-                BackgroundColor="#A9000000">
+                Style="{StaticResource ModalFrameWrapContentViewStyle}">
                 <ScrollView Orientation="Vertical">
                     <Grid>
                         <Frame
                             VerticalOptions="Center" HorizontalOptions="Center"
                             Padding="0" Margin="20"
-                            WidthRequest="400"
-                            BackgroundColor="White">
+                            WidthRequest="400">
                             <Grid>
                                 <StackLayout Margin="20">
                                     <Label 
@@ -121,7 +120,7 @@
                                     Padding="10"
                                     BackgroundColor="Transparent"
                                     Text="&#xf5ad;"
-                                    TextColor="Black"
+                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                     FontSize="Medium"
                                     FontFamily="MaterialDesignIcons"
                                     BorderWidth="0"

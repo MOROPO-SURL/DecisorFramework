@@ -23,6 +23,34 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             return NotFound();
         }
 
+        protected override void PreCreate(PurchaseZone entity, PurchaseZoneInputModel model)
+        {
+            base.PreCreate(entity, model);
+
+            if (model.SpentBridges != null)
+            {
+                foreach (var item in model.SpentBridges)
+                {
+                    entity.SpentBridges.Add(new PurchaseZoneSpentBridge { ProwId = entity.Id, SternId = item.Spent.Id, Amount = item.Amount });
+                }
+            }
+        }
+
+        protected override void PreEdit(PurchaseZone entity, PurchaseZoneInputModel model)
+        {
+            base.PreEdit(entity, model);
+
+            if (model.SpentBridges != null)
+            {
+                entity.SpentBridges.Clear();
+
+                foreach (var item in model.SpentBridges)
+                {
+                    entity.SpentBridges.Add(new PurchaseZoneSpentBridge { ProwId = entity.Id, SternId = item.Spent.Id, Amount = item.Amount });
+                }
+            }
+        }
+
         [Microsoft.AspNetCore.Mvc.HttpGet("[action]")]
         public Microsoft.AspNetCore.Mvc.ActionResult<long> Count()
         {

@@ -59,7 +59,20 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
             PurchaserId = concreteBindingContext.AvailablePurchasers[PurchaserPicker.SelectedIndex].Id,
             LegalProviderProductBridges = concreteBindingContext.LegalProviderProductBridges.ToList(),
             NaturalProviderProductBridges = concreteBindingContext.NaturalProviderProductBridges.ToList(),
-            SpentBridges = concreteBindingContext.SpentBridges.ToList(),
+            RegularSpentBridges = concreteBindingContext.RegularSpentBridges.Where(item => item.Count > 0).Select(item => new Interop.API.Common.Models.Bridge.PurchasePurchaseSpentBridgeModel
+            {
+                Spent = item.Spent,
+                Amount = item.Amount,
+                Count = item.Count,
+                CostCenter = item.CostCenter
+            }).ToList(),
+            ExtraSpentBridges = concreteBindingContext.ExtraSpentBridges.Where(item => item.Count > 0).Select(item => new Interop.API.Common.Models.Bridge.PurchasePurchaseSpentBridgeModel
+            {
+                Spent = item.Spent,
+                Amount = item.Amount,
+                Count = item.Count,
+                CostCenter = item.CostCenter
+            }).ToList(),
             EmployeeBridges = concreteBindingContext.EmployeeBridges.ToList(),
             ColaboratorBridges = concreteBindingContext.ColaboratorBridges.ToList()
         };
@@ -79,6 +92,30 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
         hasChangesFlag = true;
     }
 
+    private void ZonePicker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        if (ZonePicker.SelectedItem != null)
+        {
+            var concreteBindingContext = (Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext;
+
+            concreteBindingContext.RegularSpentBridges.Clear();
+
+            var purchasaZone = ZonePicker.SelectedItem as Interop.API.Common.Models.Display.PurchaseZoneDisplayModel;
+
+            foreach (var item in purchasaZone.SpentBridges)
+            {
+                concreteBindingContext.RegularSpentBridges.Add(new Models.View.PurchasePurchaseSpentBridgeViewModel
+                {
+                    Spent = item.Spent,
+                    Amount = item.Amount,
+                    Count = 1
+                });
+            }
+        }
+
+        hasChangesFlag = true;
+    }
+
     private void PlanPickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PurchasePlanToCompletePickPage(PlanPickComplete_Callback)));
@@ -86,10 +123,24 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
 
     private void PlanPickComplete_Callback(Interop.API.Common.Models.Display.PurchasePlanDisplayModel model)
     {
-        ((Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext).Plan = model;
+        var concreteBindingContext = (Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext;
+
+        concreteBindingContext.Plan = model;
 
         ZonePicker.SelectedIndex = -1;
         ZonePicker.IsEnabled = false;
+
+        concreteBindingContext.RegularSpentBridges.Clear();
+
+        foreach (var item in model.Zone.SpentBridges)
+        {
+            concreteBindingContext.RegularSpentBridges.Add(new Models.View.PurchasePurchaseSpentBridgeViewModel
+            {
+                Spent = item.Spent,
+                Amount = item.Amount,
+                Count = 1
+            });
+        }
     }
 
     private void AddLegalProviderPurchaseButton_Clicked(object sender, System.EventArgs e)
@@ -160,7 +211,7 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
         });
     }
 
-    private void AddSpentButton_Clicked(object sender, System.EventArgs e)
+    private void AddExtraSpentButton_Clicked(object sender, System.EventArgs e)
     {
         var concreteBindingContext = (Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext;
 
@@ -302,7 +353,7 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
 
             hasChangesFlag = true;
 
-            Dispatcher.Dispatch(() => ((Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext).SpentBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchasePurchaseSpentBridgeModel));
+            Dispatcher.Dispatch(() => ((Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext).RegularSpentBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.PurchasePurchaseSpentBridgeViewModel));
         });
     }
 
