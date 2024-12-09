@@ -57,6 +57,7 @@
 		<None Remove="cache\**" />
 	</ItemGroup>
 	<ItemGroup>
+		<PackageReference Include="FreakyControls" Version="0.5.0" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="8.0.0" />
@@ -76,6 +77,7 @@
 		<None Remove="Resources\Images\default_organization_picture.png" />
 		<None Remove="Resources\Images\default_person_picture.jpg" />
 		<None Remove="Resources\Images\elaboration.jpg" />
+		<None Remove="Resources\Images\logo_art_frame.svg" />
 		<None Remove="Resources\Images\logo_chef_nuevo.png" />
 		<None Remove="Resources\Images\monitorization.jpg" />
 		<None Remove="Resources\Images\purchasing.jpg" />
@@ -98,21 +100,5 @@
 		<BundleResource Include="Resources\Images\rr_hh.jpg" />
 		<BundleResource Include="Resources\Images\sales.jpg" />
 		<BundleResource Include="Resources\Images\warehousing.jpg" />
-	</ItemGroup>
-	<ItemGroup>
-		<Compile Update="UI\Views\ModuleFlyoutSectionSubtitleContentView.xaml.cs">
-			<DependentUpon>ModuleFlyoutSectionSubtitleContentView.xaml</DependentUpon>
-		</Compile>
-	</ItemGroup>
-	<ItemGroup>
-		<MauiXaml Update="Resources\Styles\Values.xaml">
-			<Generator></Generator>
-		</MauiXaml>
-		<MauiXaml Update="UI\Views\ModuleFlyoutSectionTitleContentView.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="UI\Views\ModuleFlyoutSectionSubtitleContentView.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
 	</ItemGroup>
 </Project>

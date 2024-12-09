@@ -81,6 +81,10 @@
                         x:Name="ZonePicker"
                         ItemsSource="{Binding AvailableZones}"
                         SelectedIndexChanged="ZonePicker_SelectedIndexChanged" />
+                    <Label
+                        FontAttributes="Italic"
+                        TextColor="DimGray"
+                        Text="Solo especificar para compras no planificadas!" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="2">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Gastos Regulares" />
@@ -191,7 +195,8 @@
                             <Button
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
-                                Text="Agregar" />
+                                Text="Agregar"
+                                Clicked="AddExtraSpentButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
                                 Color="{StaticResource Gray050}" />
@@ -234,7 +239,7 @@
                                                     Text="Monto Unitario:"
                                                     TextColor="DimGray"
                                                     FontAttributes="Bold" />
-                                                <Entry
+                                                <Label
                                                     Grid.Column="1" Grid.Row="1"
                                                     Text="{Binding Amount, StringFormat='{0:F2}'}" />
                                                 <Label
@@ -242,24 +247,17 @@
                                                     Text="Cantidad:"
                                                     TextColor="DimGray"
                                                     FontAttributes="Bold" />
-                                                <HorizontalStackLayout Grid.Column="2" Grid.Row="1">
-                                                    <Label
-                                                        HorizontalOptions="FillAndExpand"
-                                                        Text="{Binding Count}" />
-                                                    <Stepper
-                                                        Value="{Binding Count}"
-                                                        Minimum="0" />                                                    
-                                                </HorizontalStackLayout>
+                                                <Label
+                                                    Grid.Column="2" Grid.Row="1"
+                                                    Text="{Binding Count}" />
                                                 <Label
                                                     Grid.Column="3" Grid.Row="0"
                                                     Text="Centro de Costo:"
                                                     TextColor="DimGray"
                                                     FontAttributes="Bold" />
-                                                <Picker
+                                                <Label
                                                     Grid.Column="3" Grid.Row="1"
-                                                    ItemsSource="{Binding Source={Reference Page}, Path=BindingContext.AvailableCostCenters}"
-                                                    ItemDisplayBinding="{Binding Name}"
-                                                    SelectedItem="{Binding CostCenter}" />
+                                                    Text="{Binding CostCenter.Name}" />
                                                 <Button
                                                     Grid.Column="4" Grid.RowSpan="2"
                                                     VerticalOptions="Center"
@@ -269,7 +267,8 @@
                                                     Grid.Column="5" Grid.RowSpan="2"
                                                     VerticalOptions="Center"
                                                     FontFamily="MaterialDesignIcons" 
-                                                    Text="&#xFA78;" />
+                                                    Text="&#xFA78;"
+                                                    Clicked="RemoveExtraPurchaseSpentBridgeButton_Clicked" />
                                             </Grid>
                                         </Frame>
                                     </DataTemplate>

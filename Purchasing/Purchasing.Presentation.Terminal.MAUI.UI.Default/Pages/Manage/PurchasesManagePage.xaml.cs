@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -187,7 +188,10 @@ public partial class PurchasesManagePage : Caney.MVVM.Core.Pages.ContentPage
                 }
                 else
                 {
-                    foreach (var model in task.Result)
+                    // TODO Replace by ordering at server with GuamaFramework update!!
+                    var orderedResult = task.Result.OrderByDescending(model => model.At).ToArray();
+
+                    foreach (var model in orderedResult)
                     {
                         concreteBindingContext.Items.Add(model);
                     }

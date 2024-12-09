@@ -5,6 +5,7 @@
     xmlns:decisorframework_core_models_page="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:freaky_controls="clr-namespace:Maui.FreakyControls;assembly=Maui.FreakyControls"
     x:Class="MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Pages.MainPage"
     x:TypeArguments="decisorframework_core_models_page:MainPageModel"
     x:DataType="decisorframework_core_models_page:MainPageModel"
@@ -12,7 +13,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="240" AbsoluteHorizontalSeparation="20" />
-            <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
+            <caneyframework_presentation_converters:DoubleToFactorConverter x:Key="DoubleToFactorConverter" />
 
             <Style x:Key="SectionCardFrameStyle" TargetType="Frame">
                 <Setter Property="CornerRadius" Value="4" />
@@ -34,19 +35,28 @@
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="FontAttributes" Value="Bold" />
             </Style>
+
+            <x:Double x:Key="LogoArtFrameImageWithFactor">1.25</x:Double>
         </ResourceDictionary>
     </ContentPage.Resources>
     <StackLayout>
         <Grid 
             BackgroundColor="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}"
-            HeightRequest="168">
+            HeightRequest="168"
+            ColumnSpacing="0">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
+            <Image
+                Grid.ColumnSpan="2"
+                Aspect="Fill"
+                Source="logo_art_frame.png"
+                WidthRequest="{Binding Source={Reference LogoWrapLayout}, Path=Width, Converter={StaticResource DoubleToFactorConverter}, ConverterParameter={StaticResource LogoArtFrameImageWithFactor}}" />
             <Grid
+                x:Name="LogoWrapLayout"
                 Grid.Column="0"
-                BackgroundColor="{StaticResource Primary}"
                 MinimumWidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}">
                 <Image
                     Margin="16"
@@ -54,8 +64,8 @@
                     Source="{Binding OwnerInformation.DefaultLogoImageSource}" />
             </Grid>
             <Grid
-                Grid.Column="1"
-                Padding="20"
+                Grid.Column="2"
+                Padding="0,20,20,20"
                 ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
@@ -76,7 +86,7 @@
                     StrokeThickness="4"
                     StrokeLineJoin="Bevel">
                     <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="0,40,40,0" />
+                        <RoundRectangle CornerRadius="60" />
                     </Border.StrokeShape>
                     <Image
                         WidthRequest="120" HeightRequest="120"

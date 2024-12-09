@@ -32,6 +32,9 @@
 		<ProjectReference Include="..\Purchasing.Presentation.Terminal.MAUI\Purchasing.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\PurchaseExtraPurchaseSpentBridgeConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\PurchaseZoneSpentBridgeConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

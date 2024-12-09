@@ -4,6 +4,7 @@ using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using CommunityToolkit.Maui;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using Maui.FreakyControls.Extensions;
 
 namespace MOROPO.CheffMigueSRL.Decisor.Terminal;
 
@@ -23,6 +24,7 @@ public static class MauiProgram
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
                 fonts.AddFont("materialdesignicons-webfont.ttf", "MaterialDesignIcons");
             })
+            .InitializeFreakyControls()
             .Services
                 .AddSingleton<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade, Providers.HttpClientHelperProvider>()
                 .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Providers.Facade.IRuntimeContextProviderFacade, Providers.SingleRuntimeContextProvider>()

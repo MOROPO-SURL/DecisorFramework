@@ -121,18 +121,17 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PurchasePlanToCompletePickPage(PlanPickComplete_Callback)));
     }
 
-    private void PlanPickComplete_Callback(Interop.API.Common.Models.Display.PurchasePlanDisplayModel model)
+    private void RegularSpentsResetButton_Clicked(object sender, System.EventArgs e)
     {
         var concreteBindingContext = (Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext;
 
-        concreteBindingContext.Plan = model;
-
-        ZonePicker.SelectedIndex = -1;
-        ZonePicker.IsEnabled = false;
-
         concreteBindingContext.RegularSpentBridges.Clear();
 
-        foreach (var item in model.Zone.SpentBridges)
+        var zone = concreteBindingContext.Plan?.Zone ?? (ZonePicker.SelectedItem as Interop.API.Common.Models.Display.PurchaseZoneDisplayModel);
+
+        if (zone == null) return;
+
+        foreach (var item in concreteBindingContext.Plan.Zone.SpentBridges)
         {
             concreteBindingContext.RegularSpentBridges.Add(new Models.View.PurchasePurchaseSpentBridgeViewModel
             {
@@ -145,104 +144,26 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
 
     private void AddLegalProviderPurchaseButton_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = (Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        System.Threading.Tasks.Task.Run(async () =>
+        this.NavigationPushPageAsync(new LegalProviderPurchaseProductBridgeConfigurationPage(PurchaseLegalProviderProductBridgeCreateSuccess_Callback, new Models.Page.Configuration.LegalProviderPurchaseProductBridgeConfigurationPageModel(null)
         {
-            try
-            {
-                var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-                var model = new Models.Page.Configuration.LegalProviderPurchaseProductBridgeConfigurationPageModel(null)
-                {
-                    AvailableCostCenters = await costCentersAPIConnectClient.GetAsync()
-                };
-
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    this.NavigationPushPageAsync(new LegalProviderPurchaseProductBridgeConfigurationPage(PurchaseLegalProviderProductBridgeCreateSuccess_Callback, model));
-                });
-            }
-            catch (System.Exception exception)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                });
-            }
-        });
+            AvailableCostCenters = ((Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext).AvailableCostCenters
+        }));
     }
 
     private void AddNaturalProviderPurchaseButton_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = (Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        System.Threading.Tasks.Task.Run(async () =>
+        this.NavigationPushPageAsync(new NaturalProviderPurchaseProductBridgeConfigurationPage(PurchaseNaturalProviderProductBridgeCreateSuccess_Callback, new Models.Page.Configuration.NaturalProviderPurchaseProductBridgeConfigurationPageModel(null)
         {
-            try
-            {
-                var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-                var model = new Models.Page.Configuration.NaturalProviderPurchaseProductBridgeConfigurationPageModel(null)
-                {
-                    AvailableCostCenters = await costCentersAPIConnectClient.GetAsync()
-                };
-
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    this.NavigationPushPageAsync(new NaturalProviderPurchaseProductBridgeConfigurationPage(PurchaseNaturalProviderProductBridgeCreateSuccess_Callback, model));
-                });
-            }
-            catch (System.Exception exception)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                });
-            }
-        });
+            AvailableCostCenters = ((Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext).AvailableCostCenters
+        }));
     }
 
     private void AddExtraSpentButton_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = (Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        //System.Threading.Tasks.Task.Run(async () =>
-        //{
-        //    try
-        //    {
-        //        var spentsAPIConnectClient = new Web.API.Connect.Clients.PurchaseSpentsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        //        var model = new Models.Page.PurchaseSpentBridgeConfigurationPageModel(null)
-        //        {
-        //            AvailableSpents = await spentsAPIConnectClient.GetAsync()
-        //        };
-
-        //        Dispatcher.Dispatch(() =>
-        //        {
-        //            concreteBindingContext.IsBusy = false;
-
-        //            this.NavigationPushPageAsync(new PurchaseSpentBridgeConfigurationPage(PurchaseSpentBridgeCreateSuccess_Callback, model));
-        //        });
-        //    }
-        //    catch (System.Exception exception)
-        //    {
-        //        Dispatcher.Dispatch(() =>
-        //        {
-        //            Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-        //        });
-        //    }
-        //});
+        this.NavigationPushPageAsync(new PurchaseExtraPurchaseSpentBridgeConfigurationPage(PurchaseExtraPurchaseSpentBridgeCreateSuccess_Callback, new Models.Page.Configuration.PurchaseExtraPurchaseSpentBridgeConfigurationPageModel(null)
+        {
+            AvailableCostCenters = ((Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext).AvailableCostCenters
+        }));
     }
 
     private void EditLegalProviderPurchaseButton_Clicked(object sender, System.EventArgs e)
@@ -256,14 +177,13 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
             try
             {
                 var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-                var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
+                
                 var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseProductLegalProviderBridgeModel;
 
                 var model = new Models.Page.Configuration.LegalProviderPurchaseProductBridgeConfigurationPageModel()
                 {
                     AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetReleatedsAsync(target.Product.DefaultUnitMeasurement.Id),
-                    AvailableCostCenters = await costCentersAPIConnectClient.GetAsync()
+                    AvailableCostCenters = ((Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext).AvailableCostCenters
                 };
 
                 Dispatcher.Dispatch(() =>
@@ -294,14 +214,13 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
             try
             {
                 var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-                var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
+                
                 var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseProductNaturalProviderBridgeModel;
 
                 var model = new Models.Page.Configuration.NaturalProviderPurchaseProductBridgeConfigurationPageModel(target)
                 {
                     AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetReleatedsAsync(target.Product.DefaultUnitMeasurement.Id),
-                    AvailableCostCenters = await costCentersAPIConnectClient.GetAsync()
+                    AvailableCostCenters = ((Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext).AvailableCostCenters
                 };
 
                 Dispatcher.Dispatch((System.Action)(() =>
@@ -345,16 +264,38 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
         });
     }
 
-    private void PurchaseSpentBridgeRemoveButton_Clicked(object sender, System.EventArgs e)
+    private void RemoveExtraPurchaseSpentBridgeButton_Clicked(object sender, System.EventArgs e)
     {
-        DisplayAlert("Confirmación", "Está seguro que desea retirar esta gasto?", "Confirmar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta gasto extra?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
             hasChangesFlag = true;
 
-            Dispatcher.Dispatch(() => ((Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext).RegularSpentBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.PurchasePurchaseSpentBridgeViewModel));
+            Dispatcher.Dispatch(() => ((Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext).ExtraSpentBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.PurchasePurchaseSpentBridgeViewModel));
         });
+    }
+
+    private void PlanPickComplete_Callback(Interop.API.Common.Models.Display.PurchasePlanDisplayModel model)
+    {
+        var concreteBindingContext = (Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext;
+
+        concreteBindingContext.Plan = model;
+
+        ZonePicker.SelectedIndex = -1;
+        ZonePicker.IsEnabled = false;
+
+        concreteBindingContext.RegularSpentBridges.Clear();
+
+        foreach (var item in model.Zone.SpentBridges)
+        {
+            concreteBindingContext.RegularSpentBridges.Add(new Models.View.PurchasePurchaseSpentBridgeViewModel
+            {
+                Spent = item.Spent,
+                Amount = item.Amount,
+                Count = 1
+            });
+        }
     }
 
     private void PurchaseLegalProviderProductBridgeCreateSuccess_Callback(Interop.API.Common.Models.Bridge.PurchaseProductLegalProviderBridgeModel model)
@@ -393,6 +334,13 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
         var index = concreteBindingContext.NaturalProviderProductBridges.IndexOf(reference);
 
         concreteBindingContext.NaturalProviderProductBridges[index] = model;
+
+        hasChangesFlag = true;
+    }
+
+    private void PurchaseExtraPurchaseSpentBridgeCreateSuccess_Callback(Models.View.PurchasePurchaseSpentBridgeViewModel model)
+    {
+        ((Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext).ExtraSpentBridges.Add(model);
 
         hasChangesFlag = true;
     }

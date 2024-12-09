@@ -12,5 +12,7 @@
         public int Count { get => count; set => SetProperty(ref count, value); }
 
         public Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel CostCenter { get; set; }
+
+        public Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel[] AvailableCostCenters { get; set; }
     }
 }

@@ -29,6 +29,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public List<PurchaseColaboratorBridgeModel> ColaboratorBridges { get; set; } = new List<PurchaseColaboratorBridgeModel>();
 
+        public System.Guid? ReceptionId { get; set; }
+
+        public System.DateTime? ReceptionAt { get; set; }
+
         public void Import(Persistence.Entities.Purchase entity)
         {
             Id = entity.Id;
@@ -38,12 +42,14 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             if (entity.Plan != null)
             {
                 Plan = new PurchasePlanDisplayModel();
+
                 Plan.Import(entity.Plan);
             }
 
             if (entity.Zone != null)
             {
                 Zone = new PurchaseZoneDisplayModel();
+
                 Zone.Import(entity.Zone);
             }
 
@@ -51,6 +57,12 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             {
                 Purchaser = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
                 Purchaser.Import(entity.Purchaser);
+            }
+
+            if (entity.Reception != null)
+            {
+                ReceptionId = entity.Reception.Id;
+                ReceptionAt = entity.Reception.At;
             }
 
             foreach (var bridge in entity.LegalProviderProductBridges)

@@ -35,7 +35,7 @@ public partial class PurchaseZoneSpentBridgeConfigurationPage : Core.Presentatio
 
     private void SpentPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PurchaseSpentPickPage(SpentPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PurchaseSpentPickPage(SpentPickComplete_Callback)));
     }
 
     private void SpentPickComplete_Callback(Interop.API.Common.Models.Display.PurchaseSpentDisplayModel model)
