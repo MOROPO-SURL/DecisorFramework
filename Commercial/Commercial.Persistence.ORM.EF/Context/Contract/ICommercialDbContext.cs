@@ -1,0 +1,28 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
+
+namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract
+{
+    public interface ICommercialDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext, Servicing.Persistence.ORM.EF.Context.Contract.IServicingDbContext
+    {
+        public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
+        public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
+        public DbSet<Entities.Contract.AbstractContact> Contacts { get; set; }
+        public DbSet<LegalContact> LegalContacts { get; set; }
+        public DbSet<NaturalContact> NaturalContacts { get; set; }
+        public DbSet<ContactProductBridge> ContactProductBridges { get; set; }
+        public DbSet<ContactServiceBridge> ContactServiceBridges { get; set; }
+        public DbSet<LegalContactBudget> LegalContactBudgets { get; set; }
+        public DbSet<NaturalContactBudget> NaturalContactBudgets { get; set; }
+        public DbSet<BudgetProductBridge> BudgetProductBridges { get; set; }
+        public DbSet<BudgetServiceBridge> BudgetServiceBridges { get; set; }
+        public DbSet<LegalProvider> LegalProviders { get; set; }
+        public DbSet<LegalProviderPurchasingContract> LegalProviderPurchasingContracts { get; set; }
+        public DbSet<NaturalProvider> NaturalProviders { get; set; }
+        public DbSet<NaturalProviderPurchasingContract> NaturalProviderPurchasingContracts { get; set; }
+        public DbSet<LegalClient> LegalClients { get; set; }
+        public DbSet<LegalClientSaleContract> LegalClientSaleContracts { get; set; }
+        public DbSet<NaturalClient> NaturalClients { get; set; }
+        public DbSet<NaturalClientSaleContract> NaturalClientSaleContracts { get; set; }
+    }
+}

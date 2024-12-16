@@ -6,7 +6,7 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Financial\Financial.Presentation.Web.Frontend\Financial.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\..\Core\Core.Presentation.Web.Frontend\Core.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Legal.Interop.API.Common\Legal.Interop.API.Common.csproj" />
 	</ItemGroup>
 </Project>

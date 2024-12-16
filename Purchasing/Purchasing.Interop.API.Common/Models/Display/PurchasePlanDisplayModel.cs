@@ -96,7 +96,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             {
                 var model = new PurchasePlanLegalProviderBridgeModel
                 {
-                    Provider = new LegalProviderDisplayModel(),
+                    Provider = new Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel(),
                     Debt = bridge.Debt
                 };
 
@@ -109,7 +109,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             {
                 var model = new PurchasePlanNaturalProviderBridgeModel
                 {
-                    Provider = new NaturalProviderDisplayModel(),
+                    Provider = new Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel(),
                     Debt = bridge.Debt
                 };
 

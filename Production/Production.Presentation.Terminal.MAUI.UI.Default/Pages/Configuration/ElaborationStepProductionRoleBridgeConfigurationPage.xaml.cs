@@ -2,7 +2,7 @@ using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ElaborationStepProductionRoleBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<ElaborationStepProductionRoleBridgeModel>
+public partial class ElaborationStepProductionRoleBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<ElaborationStepProductionRoleBridgeModel>
 {
     public ElaborationStepProductionRoleBridgeConfigurationPage(System.Action<ElaborationStepProductionRoleBridgeModel> successAction, Models.Page.Configuration.ElaborationStepProductionRoleBridgeConfigurationPageModel model) : base(successAction, model)
     {

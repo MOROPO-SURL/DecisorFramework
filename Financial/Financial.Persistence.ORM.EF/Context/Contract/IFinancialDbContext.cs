@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Financial.Persistence.ORM.EF.Context.Contract
 {
-	public interface IFinancialDbContext : Essential.Persistence.ORM.EF.Context.Contract.IEssentialDbContext
+	public interface IFinancialDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDomainDbContext
     {
 		public DbSet<Entities.Currency> Currencies { get; set; }
 		public DbSet<Entities.BankAgency> BankAgencies { get; set; }
@@ -10,7 +10,8 @@ namespace MOROPO.Framework.Decisor.Financial.Persistence.ORM.EF.Context.Contract
 		public DbSet<Entities.BankAccount> BankAccounts { get; set; }
 		public DbSet<Entities.BankDebitCard> BankDebitCards { get; set; }
 		public DbSet<Entities.CostCenter> CostCenters { get; set; }
-		public DbSet<Entities.Contract.AbstractCashAdvance> Advances { get; set; }
+		// TODO Review if required !!
+		//public DbSet<Entities.Contract.AbstractCashAdvance> Advances { get; set; }
 	}
 }
 

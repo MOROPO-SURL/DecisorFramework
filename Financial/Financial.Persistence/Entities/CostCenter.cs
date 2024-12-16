@@ -21,6 +21,10 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DefaultBankAccountId))]
         public BankAccount DefaultBankAccount { get; set; }
         public System.Guid DefaultBankAccountId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(StructureId))]
+        public Domain.Persistence.Entities.Structure Structure { get; set; }
+        public System.Guid StructureId { get; set; }
     }
 }
 

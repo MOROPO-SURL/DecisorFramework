@@ -6,7 +6,12 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Inventory\Inventory.Presentation.Web.Frontend\Inventory.Presentation.Web.Frontend.csproj" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.0.31" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.0.31" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\Purchasing.Interop.API.Common\Purchasing.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Purchasing.Presentation.Web.Common\Purchasing.Presentation.Web.Common.csproj" />
 	</ItemGroup>
 </Project>

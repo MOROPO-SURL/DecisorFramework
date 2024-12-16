@@ -6,6 +6,7 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Production.Interop.API.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\Essential\Essential.Interop.API.Common\Essential.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\..\Inventory\Inventory.Interop.API.Common\Inventory.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Production.Persistence\Production.Persistence.csproj" />
 	</ItemGroup>

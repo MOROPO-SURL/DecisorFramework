@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Configurators
 {
-    public class PurchasePlanNaturalProviderBridgeEntityTypeConfigurator : Guama.Core.Persistence.ORM.EF.Configurators.Contract.AbstractBridgeEntityTypeConfigurator<Entities.PurchasePlanNaturalProviderBridge, Entities.PurchasePlan, System.Guid, Entities.NaturalProvider, System.Guid>
+    public class PurchasePlanNaturalProviderBridgeEntityTypeConfigurator : Guama.Core.Persistence.ORM.EF.Configurators.Contract.AbstractBridgeEntityTypeConfigurator<Entities.PurchasePlanNaturalProviderBridge, Entities.PurchasePlan, System.Guid, Commercial.Persistence.Entities.NaturalProvider, System.Guid>
     {
         public PurchasePlanNaturalProviderBridgeEntityTypeConfigurator()
         {

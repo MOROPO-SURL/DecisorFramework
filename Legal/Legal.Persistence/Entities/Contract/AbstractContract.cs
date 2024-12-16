@@ -15,9 +15,9 @@
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DefaultBankAccountId))]
-        public Financial.Persistence.Entities.BankAccount DefaultBankAccount { get; set; }
-        public System.Guid DefaultBankAccountId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProformaId))]
+        public Proforma Proforma { get; set; }
+        public System.Guid ProformaId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Objective { get; set; }

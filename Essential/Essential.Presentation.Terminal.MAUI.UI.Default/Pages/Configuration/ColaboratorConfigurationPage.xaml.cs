@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Essential.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ColaboratorConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ColaboratorDisplayModel>
+public partial class ColaboratorConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ColaboratorDisplayModel>
 {
     private byte[] imagePickedData;
     private string imageContentType;

@@ -2,7 +2,7 @@
 {
     public abstract class AbstractWholesaleSale : AbstractSale
     {
-        public AbstractBudget Budget { get; set; }
+        public Commercial.Persistence.Entities.Contract.AbstractBudget Budget { get; set; }
         public int BudgetNumber { get; set; }
         public int BudgetYear { get; set; }
     }

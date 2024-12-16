@@ -3,7 +3,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class PurchaseSpentConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel>
+public partial class PurchaseSpentConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel>
 {
 	public PurchaseSpentConfigurationPage(System.Action<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel> successAction, Models.Page.Configuration.PurchaseSpentConfigurationPageModel model) : base(successAction, model)
 	{

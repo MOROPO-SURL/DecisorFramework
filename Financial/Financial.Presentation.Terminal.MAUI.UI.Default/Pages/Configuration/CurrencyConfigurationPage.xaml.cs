@@ -3,7 +3,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class CurrencyConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.CurrencyDisplayModel>
+public partial class CurrencyConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.CurrencyDisplayModel>
 {
     public CurrencyConfigurationPage(System.Action<Interop.API.Common.Models.Display.CurrencyDisplayModel> successAction, Models.Page.Configuration.CurrencyConfigurationPageModel model) : base(successAction, model)
     {

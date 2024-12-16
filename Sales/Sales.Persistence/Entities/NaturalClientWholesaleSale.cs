@@ -2,7 +2,7 @@
 {
 	public class NaturalClientWholesaleSale : Contract.AbstractWholesaleSale
     {
-        public NaturalClientSaleContract Contract { get; set; }
+        public Commercial.Persistence.Entities.NaturalClientSaleContract Contract { get; set; }
         public int? ContractNumber { get; set; }
         public int? ContractYear { get; set; }
     }

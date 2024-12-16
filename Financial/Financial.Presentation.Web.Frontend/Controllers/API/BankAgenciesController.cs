@@ -2,8 +2,6 @@
 using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
-using MOROPO.Framework.Guama.Identity.Persistence.Entities;
-using MOROPO.Framework.Guama.Location.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 

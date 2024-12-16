@@ -2,6 +2,6 @@
 {
     public class PurchaseProductLegalProviderBridgeModel : Contract.AbstractProviderPurchaseProductBridgeModel
     {
-        public Display.LegalProviderDisplayModel Provider { get; set; }
+        public Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel Provider { get; set; }
     }
 }

@@ -3,7 +3,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class BankAccountConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.BankAccountDisplayModel>
+public partial class BankAccountConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.BankAccountDisplayModel>
 {
     public BankAccountConfigurationPage(System.Action<Interop.API.Common.Models.Display.BankAccountDisplayModel> successAction, Models.Page.Configuration.BankAccountConfigurationPageModel model) : base(successAction, model)
     {

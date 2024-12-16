@@ -86,7 +86,7 @@
             },
             xaxis: {
                 type: 'int',
-                categories: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SemesterUserActivity.Select(_item => monthNames[_item.Key]).ToArray()))
+                categories: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SemesterUserActivity.Select(_item => monthNames[_item.Key - 1]).ToArray()))
             }
         };
 

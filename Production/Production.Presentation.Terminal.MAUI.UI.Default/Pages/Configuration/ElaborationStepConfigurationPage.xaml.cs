@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ElaborationStepConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ElaborationStepDisplayModel>
+public partial class ElaborationStepConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ElaborationStepDisplayModel>
 {
     public ElaborationStepConfigurationPage(System.Action<Interop.API.Common.Models.Display.ElaborationStepDisplayModel> successAction, Models.Page.Configuration.ElaborationStepConfigurationPageModel model) : base(successAction, model)
     {

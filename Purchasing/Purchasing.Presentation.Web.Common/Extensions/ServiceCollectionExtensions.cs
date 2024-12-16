@@ -9,8 +9,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions
 	{
         public static void AddDecisorPurchasingPresentationWebCommon(this IServiceCollection services)
         {
-            services.AddScoped<IEntityRepository<LegalProvider, System.Guid>, LegalProviderRepository>();
-            services.AddScoped<IEntityRepository<NaturalProvider, System.Guid>, NaturalProviderRepository>();
             services.AddScoped<IEntityRepository<PurchasePlan, System.Guid>, PurchasePlanRepository>();
             services.AddScoped<IEntityRepository<PurchaseReception, System.Guid>, PurchaseReceptionRepository>();
             services.AddScoped<IEntityRepository<Purchase, System.Guid>, PurchaseRepository>();
@@ -18,11 +16,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<PurchaseZone, System.Guid>, PurchaseZoneRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.PurchasingDbSchemaConfigurationProvider>();
-        }
-
-        public static void AddDecisorPurchasingContractualPresentationWebCommon(this IServiceCollection services)
-        {
-            services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.PurchasingContractualDbSchemaConfigurationProvider>();
         }
     }
 }

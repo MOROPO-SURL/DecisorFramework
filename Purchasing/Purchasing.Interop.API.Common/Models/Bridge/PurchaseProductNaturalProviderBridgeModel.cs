@@ -2,6 +2,6 @@
 {
     public class PurchaseProductNaturalProviderBridgeModel : Contract.AbstractProviderPurchaseProductBridgeModel
     {
-        public Display.NaturalProviderDisplayModel Provider { get; set; }
+        public Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel Provider { get; set; }
     }
 }

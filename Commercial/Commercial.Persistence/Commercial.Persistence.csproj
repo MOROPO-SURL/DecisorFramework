@@ -1,0 +1,11 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Commercial.Persistence</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Commercial.Persistence</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Inventory\Inventory.Persistence\Inventory.Persistence.csproj" />
+		<ProjectReference Include="..\..\Servicing\Servicing.Persistence\Servicing.Persistence.csproj" />
+	</ItemGroup>
+</Project>

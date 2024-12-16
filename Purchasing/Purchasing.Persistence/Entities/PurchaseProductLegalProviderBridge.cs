@@ -14,7 +14,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
         public Financial.Persistence.Entities.CostCenter CostCenter { get; set; }
 
         public System.Guid ProviderId { get; set; }
-        public LegalProvider Provider { get; set; }
+        public Commercial.Persistence.Entities.LegalProvider Provider { get; set; }
 
         public decimal Amount { get; set; }
 

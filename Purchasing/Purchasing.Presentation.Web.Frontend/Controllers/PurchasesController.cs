@@ -52,7 +52,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
 
                 if (item.Provider.Image != null)
                 {
-                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Identity.Image.ContentType);
+                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Contact.Identity.Image.ContentType);
                 }
             }
 
@@ -74,7 +74,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
 
                 if (item.Provider.Image != null)
                 {
-                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Identity.Image.ContentType);
+                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Contact.Identity.Image.ContentType);
                 }
             }
 

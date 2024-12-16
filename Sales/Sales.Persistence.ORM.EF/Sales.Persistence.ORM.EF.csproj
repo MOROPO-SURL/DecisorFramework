@@ -6,8 +6,10 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Sales.Persistence.ORM.EF</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\Commercial\Commercial.Persistence.ORM.EF\Commercial.Persistence.ORM.EF.csproj" />
 	  <ProjectReference Include="..\Sales.Persistence\Sales.Persistence.csproj" />
-	  <ProjectReference Include="..\..\Inventory\Inventory.Persistence.ORM.EF\Inventory.Persistence.ORM.EF.csproj" />
-	  <ProjectReference Include="..\..\Servicing\Servicing.Persistence.ORM.EF\Servicing.Persistence.ORM.EF.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Repositories\" />
 	</ItemGroup>
 </Project>

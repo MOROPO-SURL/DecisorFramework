@@ -1,10 +1,10 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CommunityToolkit.Maui;
+using Maui.FreakyControls.Extensions;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
-using CommunityToolkit.Maui;
 using SkiaSharp.Views.Maui.Controls.Hosting;
-using Maui.FreakyControls.Extensions;
 
 namespace MOROPO.CheffMigueSRL.Decisor.Terminal;
 

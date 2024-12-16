@@ -6,6 +6,10 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Servicing.Presentation.Web.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Identity.Presentation.Web.Common" Version="6.0.0.31" />
+		<PackageReference Include="SkiaSharp" Version="2.88.8" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\Servicing.Persistence.ORM.EF\Servicing.Persistence.ORM.EF.csproj" />
 	</ItemGroup>
 </Project>

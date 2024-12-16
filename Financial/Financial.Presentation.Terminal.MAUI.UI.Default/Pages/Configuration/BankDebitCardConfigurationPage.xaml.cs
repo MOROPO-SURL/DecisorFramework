@@ -4,7 +4,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class BankDebitCardConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.BankDebitCardDisplayModel>
+public partial class BankDebitCardConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.BankDebitCardDisplayModel>
 {
     public BankDebitCardConfigurationPage(System.Action<Interop.API.Common.Models.Display.BankDebitCardDisplayModel> successAction, Models.Page.Configuration.BankDebitCardConfigurationPageModel model) : base(successAction, model)
     {

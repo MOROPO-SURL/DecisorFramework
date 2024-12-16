@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.PurchaseReceptionDisplayModel>
+public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.PurchaseReceptionDisplayModel>
 {
     public PurchaseReceptionConfigurationPage(System.Action<Interop.API.Common.Models.Display.PurchaseReceptionDisplayModel> successAction, Models.Page.Configuration.PurchaseReceptionConfigurationPageModel model) : base(successAction, model)
     {

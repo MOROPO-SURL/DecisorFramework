@@ -6,22 +6,14 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.0.31" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\Purchasing.Interop.API.Common\Purchasing.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Purchasing.Presentation.Web.Common\Purchasing.Presentation.Web.Common.csproj" />
-		<ProjectReference Include="..\..\Inventory\Inventory.Presentation.Web.Backend\Inventory.Presentation.Web.Backend.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Constants\" />
-	  <None Remove="Controllers\" />
-	  <None Remove="Extensions\" />
-	  <None Remove="Helpers\" />
-	  <None Remove="Models\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Constants\" />
 	  <Folder Include="Controllers\" />
-	  <Folder Include="Extensions\" />
-	  <Folder Include="Helpers\" />
-	  <Folder Include="Models\" />
+	  <Folder Include="Models\View\Display\" />
 	</ItemGroup>
 </Project>

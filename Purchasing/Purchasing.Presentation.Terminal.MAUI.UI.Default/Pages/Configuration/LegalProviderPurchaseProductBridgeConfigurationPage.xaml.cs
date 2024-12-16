@@ -4,7 +4,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class LegalProviderPurchaseProductBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Bridge.PurchaseProductLegalProviderBridgeModel>
+public partial class LegalProviderPurchaseProductBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Bridge.PurchaseProductLegalProviderBridgeModel>
 {
     public LegalProviderPurchaseProductBridgeConfigurationPage(System.Action<Interop.API.Common.Models.Bridge.PurchaseProductLegalProviderBridgeModel> successAction, Models.Page.Configuration.LegalProviderPurchaseProductBridgeConfigurationPageModel model) : base(successAction, model)
     {

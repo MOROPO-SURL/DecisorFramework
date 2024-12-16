@@ -23,10 +23,9 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="CaneyFramework.Presentation" Version="0.1.4" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.83" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.83" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
-		<PackageReference Include="CommunityToolkit.Maui" Version="6.1.0" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj" />

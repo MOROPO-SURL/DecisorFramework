@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<ProductionDisplayModel>
+public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<ProductionDisplayModel>
 {
     public ProductionConfigurationPage(System.Action<ProductionDisplayModel> successAction, Models.Page.Configuration.ProductionConfigurationPageModel model) : base(successAction, model)
     {

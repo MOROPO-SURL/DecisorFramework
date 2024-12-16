@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Domain.Presentation.Web.Common</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Domain.Presentation.Web.Common</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Domain.Persistence.ORM.EF\Domain.Persistence.ORM.EF.csproj" />
+	</ItemGroup>
+</Project>

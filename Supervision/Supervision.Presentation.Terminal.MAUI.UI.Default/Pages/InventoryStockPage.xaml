@@ -5,7 +5,7 @@
     xmlns:local_converters="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Converters"
     xmlns:interop_common_models="clr-namespace:MOROPO.Framework.Decisor.Supervision.Interop.API.Common.Models;assembly=MOROPO.Framework.Decisor.Supervision.Interop.API.Common"
     xmlns:presentation_page_models="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.Models.Page;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI"
-    xmlns:core_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
@@ -16,7 +16,7 @@
     Title="Existencias de Inventario">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <core_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
             <local_converters:InventoryStockDetailsModelToLiveChartSeriesConverter x:Key="InventoryStockDetailsModelToLiveChartSeriesConverter" />
             <local_converters:InventoryStockDetailsModelToLiveChartXAxisConverter x:Key="InventoryStockDetailsModelToLiveChartXAxisConverter" />
 

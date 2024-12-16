@@ -11,10 +11,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Providers
                 return new Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator[]
                 {
                     new BaseEntityTypeConfigurator<Entities.PurchaseZone>(),
-                    new Configurators.LegalProviderEntityTypeConfigurator(),
-                    new Configurators.LegalProviderPurchaseZoneBridgeEntityTypeConfigurator(),
-                    new Configurators.NaturalProviderEntityTypeConfigurator(),
-                    new Configurators.NaturalProviderPurchaseZoneBridgeEntityTypeConfigurator(),
+                    new Configurators.PurchaseZoneLegalProviderBridgeEntityTypeConfigurator(),
+                    new Configurators.PurchaseZoneNaturalProviderBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Purchase>(),
                     new Configurators.PurchaseColaboratorBridgeEntityTypeConfigurator(),
                     new Configurators.PurchaseEmployeeBridgeEntityTypeConfigurator(),

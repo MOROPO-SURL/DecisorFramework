@@ -124,16 +124,16 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Title = "Proveedores Jurídicos",
                 Controller = "legalproviders",
                 Action = "Index",
-                Area = "purchasing",
-                Role = Purchasing.Presentation.Web.Backend.Constants.Security.Authorization.LegalProviderViewerPermission
+                Area = "commercial",
+                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.LegalProviderViewerPermission
             });
             purchaseSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Proveedores Naturales",
                 Controller = "naturalproviders",
                 Action = "Index",
-                Area = "purchasing",
-                Role = Purchasing.Presentation.Web.Backend.Constants.Security.Authorization.NaturalProviderViewerPermission
+                Area = "commercial",
+                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.NaturalProviderViewerPermission
             });
             #endregion
 
@@ -143,16 +143,16 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Title = "Clientes Jurídicos",
                 Controller = "legalclients",
                 Action = "Index",
-                Area = "sales",
-                Role = Sales.Presentation.Web.Backend.Constants.Security.Authorization.LegalClientViewerPermission
+                Area = "commercial",
+                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.LegalClientViewerPermission
             });
             saleSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Clientes Naturales",
                 Controller = "naturalclients",
                 Action = "Index",
-                Area = "sales",
-                Role = Sales.Presentation.Web.Backend.Constants.Security.Authorization.NaturalClientViewerPermission
+                Area = "commercial",
+                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.NaturalClientViewerPermission
             });
             #endregion
 
@@ -162,16 +162,16 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Title = "Tipos de Pers. Jurídica",
                 Controller = "legalbusinesskinds",
                 Action = "Index",
-                Area = "globals",
-                Role = Core.Presentation.Web.Backend.Constants.Security.Authorization.LegalBusinessKindViewerPermission
+                Area = "commercial",
+                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.LegalBusinessKindViewerPermission
             });
             globalsSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Tipos de Pers. Natural",
                 Controller = "naturalbusinesskinds",
                 Action = "Index",
-                Area = "globals",
-                Role = Core.Presentation.Web.Backend.Constants.Security.Authorization.NaturalBusinessKindViewerPermission
+                Area = "commercial",
+                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.NaturalBusinessKindViewerPermission
             });
             #endregion
 

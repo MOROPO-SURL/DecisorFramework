@@ -2,7 +2,7 @@
 {
     public class PurchasePlanLegalProviderBridgeModel
     {
-        public Display.LegalProviderDisplayModel Provider { get; set; }
+        public Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel Provider { get; set; }
 
         public decimal Debt { get; set; }
     }

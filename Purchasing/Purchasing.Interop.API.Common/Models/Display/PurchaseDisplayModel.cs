@@ -70,7 +70,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 var model = new PurchaseProductLegalProviderBridgeModel
                 {
                     Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    Provider = new LegalProviderDisplayModel(),
+                    Provider = new Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel(),
                     CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
                     UnitMeasurement = new Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
@@ -90,7 +90,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 var model = new PurchaseProductNaturalProviderBridgeModel
                 {
                     Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    Provider = new NaturalProviderDisplayModel(),
+                    Provider = new Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel(),
                     CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
                     UnitMeasurement = new Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),

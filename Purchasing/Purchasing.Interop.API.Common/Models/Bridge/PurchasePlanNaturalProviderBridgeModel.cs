@@ -2,7 +2,7 @@
 {
     public class PurchasePlanNaturalProviderBridgeModel
     {
-        public Display.NaturalProviderDisplayModel Provider { get; set; }
+        public Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel Provider { get; set; }
 
         public decimal Debt { get; set; }
     }

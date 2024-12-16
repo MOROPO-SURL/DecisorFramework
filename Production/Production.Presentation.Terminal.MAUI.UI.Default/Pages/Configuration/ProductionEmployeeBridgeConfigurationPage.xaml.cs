@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProductionEmployeeBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<ProductionEmployeeBridgeModel>
+public partial class ProductionEmployeeBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<ProductionEmployeeBridgeModel>
 {
     public ProductionEmployeeBridgeConfigurationPage(System.Action<ProductionEmployeeBridgeModel> successAction, Models.Page.Configuration.ProductionEmployeeBridgeConfigurationPageModel model) : base(successAction, model)
     {

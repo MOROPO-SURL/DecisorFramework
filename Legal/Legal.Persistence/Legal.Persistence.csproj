@@ -5,6 +5,6 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Legal.Persistence</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Financial\Financial.Persistence\Financial.Persistence.csproj" />
+	  <ProjectReference Include="..\..\Core\Core.Persistence\Core.Persistence.csproj" />
 	</ItemGroup>
 </Project>

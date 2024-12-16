@@ -12,12 +12,4 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Core.Persistence\Core.Persistence.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Configurators\" />
-	  <None Remove="Configurators\Base\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Configurators\" />
-	  <Folder Include="Configurators\Base\" />
-	</ItemGroup>
 </Project>

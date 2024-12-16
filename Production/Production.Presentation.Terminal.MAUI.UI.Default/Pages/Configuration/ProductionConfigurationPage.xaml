@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<core_contract_configuration_pages:BaseConfigurationContentPage 
+<core_ui_configuration_pages:BaseConfigurationContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI"
     xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI"
-    xmlns:core_contract_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
     xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
@@ -193,4 +193,4 @@
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>
-</core_contract_configuration_pages:BaseConfigurationContentPage>
+</core_ui_configuration_pages:BaseConfigurationContentPage>

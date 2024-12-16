@@ -4,7 +4,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class CostCenterConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.CostCenterDisplayModel>
+public partial class CostCenterConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.CostCenterDisplayModel>
 {
     public CostCenterConfigurationPage(System.Action<Interop.API.Common.Models.Display.CostCenterDisplayModel> successAction, Models.Page.Configuration.CostCenterConfigurationPageModel model) : base(successAction, model)
     {

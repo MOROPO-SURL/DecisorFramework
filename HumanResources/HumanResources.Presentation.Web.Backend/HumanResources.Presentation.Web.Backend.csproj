@@ -6,8 +6,10 @@
 		<RootNamespace>MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Backend</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.0.31" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\HumanResources.Interop.API.Common\HumanResources.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\HumanResources.Presentation.Web.Common\HumanResources.Presentation.Web.Common.csproj" />
-		<ProjectReference Include="..\..\Legal\Legal.Presentation.Web.Backend\Legal.Presentation.Web.Backend.csproj" />
 	</ItemGroup>
 </Project>

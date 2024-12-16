@@ -5,11 +5,4 @@
 		<AssemblyName>MOROPO.Framework.Decisor.Core.Presentation.Web.Common</AssemblyName>
 		<RootNamespace>MOROPO.Framework.Decisor.Core.Presentation.Web.Common</RootNamespace>
 	</PropertyGroup>
-	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Identity.Presentation.Web.Common" Version="6.0.0.31" />
-		<PackageReference Include="SkiaSharp" Version="2.88.8" />
-    </ItemGroup>
-	<ItemGroup>
-		<ProjectReference Include="..\Core.Persistence.ORM.EF\Core.Persistence.ORM.EF.csproj" />
-	</ItemGroup>
 </Project> 

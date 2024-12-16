@@ -5,7 +5,6 @@
     xmlns:presentation_page_models="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.Models.Page;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
-    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:live_charts_controls="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
     x:Class="MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages.InventoryDashboardPage"
     x:TypeArguments="presentation_page_models:InventoryDashboardPageModel"
@@ -13,8 +12,6 @@
     Title="Panel de Control para Inventario">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="CountCardItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="360" AbsoluteHorizontalSeparation="20" />
-
             <Style x:Key="CardHeaderSeparatorBoxViewStyle" TargetType="BoxView">
                 <Setter Property="Color" Value="DimGray" />
                 <Setter Property="Margin" Value="0,5,0,10" />

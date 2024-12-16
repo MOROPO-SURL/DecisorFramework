@@ -9,6 +9,7 @@
 		<SingleProject>true</SingleProject>
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>disable</Nullable>
+		<SkipValidateMauiImplicitPackageReferences>true</SkipValidateMauiImplicitPackageReferences>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">11.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'maccatalyst'">13.1</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
@@ -24,8 +25,6 @@
 		<MtouchLink>None</MtouchLink>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.82" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.82" />
 		<PackageReference Include="LiveChartsCore.SkiaSharpView.Maui" Version="2.0.0-rc3.3" />
 	</ItemGroup>
 	<ItemGroup>
@@ -33,13 +32,5 @@
 		<ProjectReference Include="..\..\Inventory\Inventory.Interop.API.Connect\Inventory.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\..\Purchasing\Purchasing.Interop.API.Connect\Purchasing.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\Supervision.Presentation.Terminal.MAUI\Supervision.Presentation.Terminal.MAUI.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <MauiXaml Update="Pages\InventoryDashboardPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\PurchasingDashboardPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 </Project>

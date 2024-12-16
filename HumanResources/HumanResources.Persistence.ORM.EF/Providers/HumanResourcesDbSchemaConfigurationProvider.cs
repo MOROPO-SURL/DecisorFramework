@@ -9,7 +9,8 @@
                 return new System.Collections.Generic.List<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
                 {
                     new Configurators.EmployeeEntityTypeConfigurator(),
-                    new Configurators.EmploymentContractEntityTypeConfigurator()
+                    new Configurators.EmploymentContractEntityTypeConfigurator(),
+                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.NamingResolution>()
                 };
             }
         }
