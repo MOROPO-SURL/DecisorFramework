@@ -8,4 +8,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Core\Core.Persistence\Core.Persistence.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Entities\Contract\" />
+	</ItemGroup>
 </Project>

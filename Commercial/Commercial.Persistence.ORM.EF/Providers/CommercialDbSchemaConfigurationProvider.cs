@@ -12,6 +12,8 @@ namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Providers
                 {
                     new BaseEntityTypeConfigurator<Entities.LegalBusinessKind>(),
                     new BaseEntityTypeConfigurator<Entities.NaturalBusinessKind>(),
+                    new BaseEntityTypeConfigurator<Entities.RequestableService>(),
+                    new BaseEntityTypeConfigurator<Entities.ProvisionableService>(),
                     new Configurators.BudgetEntityTypeConfigurator(),
                     new Configurators.BudgetProductBridgeEntityTypeConfigurator(),
                     new Configurators.BudgetServiceBridgeEntityTypeConfigurator(),

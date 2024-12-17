@@ -1,4 +1,6 @@
-﻿using MOROPO.Framework.Guama.Core.Presentation.Web.Backend.Models.View;
+﻿using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Constants.Security;
+using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security;
+using MOROPO.Framework.Guama.Core.Presentation.Web.Backend.Models.View;
 using System.Collections.Generic;
 
 namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
@@ -77,7 +79,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "employees",
                 Action = "Index",
                 Area = "HHRR",
-                Role = Framework.Decisor.HumanResources.Presentation.Web.Backend.Constants.Security.Authorization.EmployeeViewerPermission
+                Role = Authorization.EmployeeViewerPermission
             });
             #endregion
 
@@ -108,7 +110,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
                 Action = "Index",
                 Area = "financial",
                 // TODO Set spected permission to Frontend too!!
-                Role = Framework.Decisor.Financial.Presentation.Web.Backend.Constants.Security.Authorization.CostCenterViewerPermission
+                Role = Framework.Decisor.Financial.Interop.API.Common.Constants.Security.Authorization.CostCenterViewerPermission
             });
             financialSection.Add(new ManagementDashboardSectionViewModel
             {

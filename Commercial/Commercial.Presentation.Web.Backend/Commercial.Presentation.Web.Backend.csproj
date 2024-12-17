@@ -9,7 +9,6 @@
 		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.0.31" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Commercial.Interop.API.Common\Commercial.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Commercial.Presentation.Web.Common\Commercial.Presentation.Web.Common.csproj" />
 	</ItemGroup>
 </Project>

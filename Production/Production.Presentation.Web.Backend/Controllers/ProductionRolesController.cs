@@ -17,67 +17,67 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Controlle
         {
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRoleViewerPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRoleViewerPermission)]
         public override IActionResult Index(int sheet = 1, int limit = 25)
         {
             return base.Index(sheet, limit);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRoleCreatorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRoleCreatorPermission)]
         public override IActionResult Create()
         {
             return base.Create();
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRoleCreatorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRoleCreatorPermission)]
         public override IActionResult Create(ProductionRoleInputViewModel model)
         {
             return base.Create(model);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRoleEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRoleEditorPermission)]
         public override IActionResult Edit(Guid key)
         {
             return base.Edit(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRoleEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRoleEditorPermission)]
         public override IActionResult Edit(ProductionRoleInputViewModel model)
         {
             return base.Edit(model);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRoleEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRoleEditorPermission)]
         public override IActionResult Enable(Guid key)
         {
             return base.Enable(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRoleEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRoleEditorPermission)]
         public override IActionResult Disable(Guid key)
         {
             return base.Disable(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRoleEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRoleEditorPermission)]
         public override IActionResult Archive(Guid key)
         {
             return base.Archive(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRoleEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRoleEditorPermission)]
         public override IActionResult Unarchive(Guid key)
         {
             return base.Unarchive(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRoleRemoverPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRoleRemoverPermission)]
         public override IActionResult Delete(Guid key)
         {
             return base.Delete(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRoleRemoverPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRoleRemoverPermission)]
         public override IActionResult Delete(ProductionRoleDisplayViewModel model)
         {
             return base.Delete(model);

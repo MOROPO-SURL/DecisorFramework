@@ -2,7 +2,6 @@
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
 using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
-using MOROPO.Framework.Decisor.Servicing.Persistence.Entities;
 using MOROPO.Framework.Decisor.Sales.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Security.Common.Persistence.Entities;
 using MOROPO.Framework.Guama.Identity.Persistence.Entities;
@@ -131,7 +130,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Con
         public DbSet<ReceptionBatchBridge> ReceptionBatchBridges { get; set; }
         public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
         public DbSet<UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
-        public DbSet<Service> Services { get; set; }
+        public DbSet<RequestableService> Services { get; set; }
         public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
         public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
         public DbSet<AbstractContact> Contacts { get; set; }

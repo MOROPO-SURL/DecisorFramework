@@ -17,7 +17,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Controlle
         {
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionPlanViewerPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionPlanViewerPermission)]
         public override IActionResult Index(int sheet = 1, int limit = 25)
         {
             return base.Index(sheet, limit);
@@ -43,13 +43,13 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Controlle
             return NotFound();
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionPlanEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionPlanEditorPermission)]
         public override IActionResult Archive(System.Guid key)
         {
             return base.Archive(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionPlanEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionPlanEditorPermission)]
         public override IActionResult Unarchive(System.Guid key)
         {
             return base.Unarchive(key);
@@ -60,7 +60,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Controlle
             return NotFound();
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionPlanRemoverPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionPlanRemoverPermission)]
         public override IActionResult Delete(ProductionPlanDisplayViewModel model)
         {
             return base.Delete(model);

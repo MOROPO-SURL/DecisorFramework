@@ -10,6 +10,7 @@
 		<PackageReference Include="SkiaSharp" Version="2.88.8" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\Financial.Interop.API.Common\Financial.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Financial.Persistence.ORM.EF\Financial.Persistence.ORM.EF.csproj" />
 	</ItemGroup>
 </Project>

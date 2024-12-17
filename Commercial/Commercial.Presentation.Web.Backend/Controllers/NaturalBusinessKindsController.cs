@@ -5,6 +5,7 @@ using MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Models.View.D
 using MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Models.View.Input;
 using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
+using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Constants.Security;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Controllers
 {
@@ -17,67 +18,67 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Controlle
         {
         }
 
-        [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindViewerPermission)]
+        [RequirePermissions(Authorization.NaturalBusinessKindViewerPermission)]
         public override IActionResult Index(int sheet = 1, int limit = 25)
         {
             return base.Index(sheet, limit);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindCreatorPermission)]
+        [RequirePermissions(Authorization.NaturalBusinessKindCreatorPermission)]
         public override IActionResult Create()
         {
             return base.Create();
         }
 
-        [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindCreatorPermission)]
+        [RequirePermissions(Authorization.NaturalBusinessKindCreatorPermission)]
         public override IActionResult Create(NaturalBusinessKindInputViewModel model)
         {
             return base.Create(model);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindEditorPermission)]
+        [RequirePermissions(Authorization.NaturalBusinessKindEditorPermission)]
         public override IActionResult Edit(Guid key)
         {
             return base.Edit(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindEditorPermission)]
+        [RequirePermissions(Authorization.NaturalBusinessKindEditorPermission)]
         public override IActionResult Edit(NaturalBusinessKindInputViewModel model)
         {
             return base.Edit(model);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindEditorPermission)]
+        [RequirePermissions(Authorization.NaturalBusinessKindEditorPermission)]
         public override IActionResult Enable(Guid key)
         {
             return base.Enable(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindEditorPermission)]
+        [RequirePermissions(Authorization.NaturalBusinessKindEditorPermission)]
         public override IActionResult Disable(Guid key)
         {
             return base.Disable(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindEditorPermission)]
+        [RequirePermissions(Authorization.NaturalBusinessKindEditorPermission)]
         public override IActionResult Archive(Guid key)
         {
             return base.Archive(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindEditorPermission)]
+        [RequirePermissions(Authorization.NaturalBusinessKindEditorPermission)]
         public override IActionResult Unarchive(Guid key)
         {
             return base.Unarchive(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindRemoverPermission)]
+        [RequirePermissions(Authorization.NaturalBusinessKindRemoverPermission)]
         public override IActionResult Delete(Guid key)
         {
             return base.Delete(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.NaturalBusinessKindRemoverPermission)]
+        [RequirePermissions(Authorization.NaturalBusinessKindRemoverPermission)]
         public override IActionResult Delete(NaturalBusinessKindDisplayViewModel model)
         {
             return base.Delete(model);

@@ -3,13 +3,15 @@ using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract
 {
-    public interface ICommercialDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext, Servicing.Persistence.ORM.EF.Context.Contract.IServicingDbContext
+    public interface ICommercialDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext
     {
         public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
         public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
         public DbSet<Entities.Contract.AbstractContact> Contacts { get; set; }
         public DbSet<LegalContact> LegalContacts { get; set; }
         public DbSet<NaturalContact> NaturalContacts { get; set; }
+        public DbSet<RequestableService> RequestableServices { get; set; }
+        public DbSet<ProvisionableService> ProvisionableServices { get; set; }
         public DbSet<ContactProductBridge> ContactProductBridges { get; set; }
         public DbSet<ContactServiceBridge> ContactServiceBridges { get; set; }
         public DbSet<LegalContactBudget> LegalContactBudgets { get; set; }

@@ -6,6 +6,5 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Inventory\Inventory.Persistence\Inventory.Persistence.csproj" />
-		<ProjectReference Include="..\..\Servicing\Servicing.Persistence\Servicing.Persistence.csproj" />
 	</ItemGroup>
 </Project>

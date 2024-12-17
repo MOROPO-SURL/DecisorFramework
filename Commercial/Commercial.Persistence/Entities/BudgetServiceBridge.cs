@@ -6,7 +6,7 @@
         public int BudgetYear { get; set; }
         public Contract.AbstractBudget Budget { get; set; }
 
-        public Servicing.Persistence.Entities.Service Service { get; set; }
+        public ProvisionableService Service { get; set; }
         public System.Guid ServiceId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]

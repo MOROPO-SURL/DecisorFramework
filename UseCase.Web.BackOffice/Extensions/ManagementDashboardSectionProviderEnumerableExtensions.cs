@@ -1,4 +1,9 @@
-﻿using MOROPO.Framework.Guama.Core.Presentation.Web.Backend.Models.View;
+﻿using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Constants.Security;
+using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Constants.Security;
+using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Constants.Security;
+using MOROPO.Framework.Decisor.Production.Interop.API.Common.Constants.Security;
+using MOROPO.Framework.Guama.Core.Presentation.Web.Backend.Models.View;
 using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
@@ -78,7 +83,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "employees",
                 Action = "Index",
                 Area = "HHRR",
-                Role = HumanResources.Presentation.Web.Backend.Constants.Security.Authorization.EmployeeViewerPermission
+                Role = Authorization.EmployeeViewerPermission
             });
             #endregion
 
@@ -125,7 +130,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "legalproviders",
                 Action = "Index",
                 Area = "commercial",
-                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = Commercial.Interop.API.Common.Constants.Security.Authorization.LegalProviderViewerPermission
             });
             purchaseSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -133,7 +138,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "naturalproviders",
                 Action = "Index",
                 Area = "commercial",
-                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.NaturalProviderViewerPermission
+                Role = Commercial.Interop.API.Common.Constants.Security.Authorization.NaturalProviderViewerPermission
             });
             #endregion
 
@@ -144,7 +149,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "legalclients",
                 Action = "Index",
                 Area = "commercial",
-                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.LegalClientViewerPermission
+                Role = Commercial.Interop.API.Common.Constants.Security.Authorization.LegalClientViewerPermission
             });
             saleSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -152,7 +157,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "naturalclients",
                 Action = "Index",
                 Area = "commercial",
-                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.NaturalClientViewerPermission
+                Role = Commercial.Interop.API.Common.Constants.Security.Authorization.NaturalClientViewerPermission
             });
             #endregion
 
@@ -163,7 +168,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "legalbusinesskinds",
                 Action = "Index",
                 Area = "commercial",
-                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.LegalBusinessKindViewerPermission
+                Role = Commercial.Interop.API.Common.Constants.Security.Authorization.LegalBusinessKindViewerPermission
             });
             globalsSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -171,7 +176,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "naturalbusinesskinds",
                 Action = "Index",
                 Area = "commercial",
-                Role = Commercial.Presentation.Web.Backend.Constants.Security.Authorization.NaturalBusinessKindViewerPermission
+                Role = Commercial.Interop.API.Common.Constants.Security.Authorization.NaturalBusinessKindViewerPermission
             });
             #endregion
 
@@ -182,7 +187,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "warehouses",
                 Action = "Index",
                 Area = "inventory",
-                Role = Inventory.Presentation.Web.Backend.Constants.Security.Authorization.WarehouseViewerPermission
+                Role = Inventory.Interop.API.Common.Constants.Security.Authorization.WarehouseViewerPermission
             });
             inventorySection.Add(new ManagementDashboardSectionViewModel
             {
@@ -190,7 +195,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "receptions",
                 Action = "Index",
                 Area = "inventory",
-                Role = Inventory.Presentation.Web.Backend.Constants.Security.Authorization.ReceptionViewerPermission
+                Role = Inventory.Interop.API.Common.Constants.Security.Authorization.ReceptionViewerPermission
             });
             inventorySection.Add(new ManagementDashboardSectionViewModel
             {
@@ -198,7 +203,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "departures",
                 Action = "Index",
                 Area = "inventory",
-                Role = Inventory.Presentation.Web.Backend.Constants.Security.Authorization.DepartureViewerPermission
+                Role = Inventory.Interop.API.Common.Constants.Security.Authorization.DepartureViewerPermission
             });
             inventorySection.Add(new ManagementDashboardSectionViewModel
             {
@@ -206,7 +211,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "products",
                 Action = "Index",
                 Area = "inventory",
-                Role = Inventory.Presentation.Web.Backend.Constants.Security.Authorization.ProductViewerPermission
+                Role = Inventory.Interop.API.Common.Constants.Security.Authorization.ProductViewerPermission
             });
             inventorySection.Add(new ManagementDashboardSectionViewModel
             {
@@ -214,7 +219,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "categories",
                 Action = "Index",
                 Area = "inventory",
-                Role = Inventory.Presentation.Web.Backend.Constants.Security.Authorization.CategoryViewerPermission
+                Role = Inventory.Interop.API.Common.Constants.Security.Authorization.CategoryViewerPermission
             });
             inventorySection.Add(new ManagementDashboardSectionViewModel
             {
@@ -222,7 +227,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "customattributes",
                 Action = "Index",
                 Area = "inventory",
-                Role = Inventory.Presentation.Web.Backend.Constants.Security.Authorization.CustomAttributeViewerPermission
+                Role = Inventory.Interop.API.Common.Constants.Security.Authorization.CustomAttributeViewerPermission
             });
             inventorySection.Add(new ManagementDashboardSectionViewModel
             {
@@ -230,7 +235,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "unitmeasurements",
                 Action = "Index",
                 Area = "inventory",
-                Role = Inventory.Presentation.Web.Backend.Constants.Security.Authorization.UnitMeasurementViewerPermission
+                Role = Inventory.Interop.API.Common.Constants.Security.Authorization.UnitMeasurementViewerPermission
             });
             #endregion
 
@@ -241,7 +246,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "elaborations",
                 Action = "Index",
                 Area = "production",
-                Role = Production.Presentation.Web.Backend.Constants.Security.Authorization.ElaborationViewerPermission
+                Role = Production.Interop.API.Common.Constants.Security.Authorization.ElaborationViewerPermission
             });
             productionSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -249,7 +254,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "productions",
                 Action = "Index",
                 Area = "production",
-                Role = Production.Presentation.Web.Backend.Constants.Security.Authorization.ProductionViewerPermission
+                Role = Production.Interop.API.Common.Constants.Security.Authorization.ProductionViewerPermission
             });
             productionSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -257,7 +262,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "productionplans",
                 Action = "Index",
                 Area = "production",
-                Role = Production.Presentation.Web.Backend.Constants.Security.Authorization.ProductionPlanViewerPermission
+                Role = Production.Interop.API.Common.Constants.Security.Authorization.ProductionPlanViewerPermission
             });
             productionSection.Add(new ManagementDashboardSectionViewModel
             {
@@ -265,7 +270,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "productionroles",
                 Action = "Index",
                 Area = "production",
-                Role = Production.Presentation.Web.Backend.Constants.Security.Authorization.ProductionRoleViewerPermission
+                Role = Production.Interop.API.Common.Constants.Security.Authorization.ProductionRoleViewerPermission
             });
             #endregion
 
@@ -277,7 +282,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Action = "Index",
                 Area = "financial",
                 // TODO Set spected permission
-                Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization.CostCenterViewerPermission
+                Role = Financial.Interop.API.Common.Constants.Security.Authorization.CostCenterViewerPermission
             });
             financialSection.Add(new ManagementDashboardSectionViewModel
             {

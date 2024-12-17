@@ -16,7 +16,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Controlle
         {
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionViewerPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionViewerPermission)]
         public override IActionResult Index(int sheet = 1, int limit = 25)
         {
             return base.Index(sheet, limit);
@@ -42,25 +42,25 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Controlle
             return NotFound();
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionEditorPermission)]
         public override IActionResult Enable(System.Guid key)
         {
             return base.Enable(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionEditorPermission)]
         public override IActionResult Disable(System.Guid key)
         {
             return base.Disable(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionEditorPermission)]
         public override IActionResult Archive(System.Guid key)
         {
             return base.Archive(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionEditorPermission)]
         public override IActionResult Unarchive(System.Guid key)
         {
             return base.Unarchive(key);
@@ -71,7 +71,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Controlle
             return NotFound();
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ProductionRemoverPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProductionRemoverPermission)]
         public override IActionResult Delete(ProductionDisplayViewModel model)
         {
             return base.Delete(model);

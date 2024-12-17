@@ -10,6 +10,7 @@
 		<PackageReference Include="SkiaSharp" Version="2.88.8" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Servicing.Persistence.ORM.EF\Servicing.Persistence.ORM.EF.csproj" />
 	</ItemGroup>
 </Project>

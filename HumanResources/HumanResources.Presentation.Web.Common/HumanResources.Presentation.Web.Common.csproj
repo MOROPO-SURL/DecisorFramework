@@ -6,10 +6,12 @@
 		<RootNamespace>MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Persistence.ORM.EF" Version="6.0.0.31" />
 		<PackageReference Include="GuamaFramework.Identity.Presentation.Web.Common" Version="6.0.0.31" />
 		<PackageReference Include="SkiaSharp" Version="2.88.8" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\HumanResources.Interop.API.Common\HumanResources.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\HumanResources.Persistence.ORM.EF\HumanResources.Persistence.ORM.EF.csproj" />
 	</ItemGroup>
 </Project>

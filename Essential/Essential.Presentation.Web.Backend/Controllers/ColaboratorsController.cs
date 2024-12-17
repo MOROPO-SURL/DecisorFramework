@@ -7,6 +7,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
+using MOROPO.Framework.Decisor.Essential.Interop.API.Common.Constants.Security;
 
 namespace MOROPO.Framework.Decisor.Essential.Presentation.Web.Backend.Controllers
 {
@@ -24,7 +25,7 @@ namespace MOROPO.Framework.Decisor.Essential.Presentation.Web.Backend.Controller
             this.imageFileManager = imageFileManager;
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ColaboratorViewerPermission)]
+        [RequirePermissions(Authorization.ColaboratorViewerPermission)]
         public override IActionResult Index(int sheet = 1, int limit = 25)
         {
             return base.Index(sheet, limit);
@@ -50,25 +51,25 @@ namespace MOROPO.Framework.Decisor.Essential.Presentation.Web.Backend.Controller
             return NotFound();
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ColaboratorEditorPermission)]
+        [RequirePermissions(Authorization.ColaboratorEditorPermission)]
         public override IActionResult Enable(System.Guid key)
         {
             return base.Enable(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ColaboratorEditorPermission)]
+        [RequirePermissions(Authorization.ColaboratorEditorPermission)]
         public override IActionResult Disable(System.Guid key)
         {
             return base.Disable(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ColaboratorEditorPermission)]
+        [RequirePermissions(Authorization.ColaboratorEditorPermission)]
         public override IActionResult Archive(System.Guid key)
         {
             return base.Archive(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ColaboratorEditorPermission)]
+        [RequirePermissions(Authorization.ColaboratorEditorPermission)]
         public override IActionResult Unarchive(System.Guid key)
         {
             return base.Unarchive(key);
@@ -79,7 +80,7 @@ namespace MOROPO.Framework.Decisor.Essential.Presentation.Web.Backend.Controller
             return NotFound();
         }
 
-        [RequirePermissions(Constants.Security.Authorization.ColaboratorRemoverPermission)]
+        [RequirePermissions(Authorization.ColaboratorRemoverPermission)]
         public override IActionResult Delete(ColaboratorDisplayViewModel model)
         {
             return base.Delete(model);

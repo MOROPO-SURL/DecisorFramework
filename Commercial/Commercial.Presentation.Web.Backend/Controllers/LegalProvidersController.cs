@@ -7,6 +7,7 @@ using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 using MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Models.View.Display;
 using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input;
+using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Constants.Security;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Controllers
 {
@@ -24,7 +25,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Controlle
             this.imageFileManager = imageFileManager;
         }
 
-        [RequirePermissions(Constants.Security.Authorization.LegalProviderViewerPermission)]
+        [RequirePermissions(Authorization.LegalProviderViewerPermission)]
         public override IActionResult Index(int sheet = 1, int limit = 25)
         {
             return base.Index(sheet, limit);
@@ -50,25 +51,25 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Controlle
             return NotFound();
         }
 
-        [RequirePermissions(Constants.Security.Authorization.LegalProviderEditorPermission)]
+        [RequirePermissions(Authorization.LegalProviderEditorPermission)]
         public override IActionResult Enable(System.Guid key)
         {
             return base.Enable(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.LegalProviderEditorPermission)]
+        [RequirePermissions(Authorization.LegalProviderEditorPermission)]
         public override IActionResult Disable(System.Guid key)
         {
             return base.Disable(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.LegalProviderEditorPermission)]
+        [RequirePermissions(Authorization.LegalProviderEditorPermission)]
         public override IActionResult Archive(System.Guid key)
         {
             return base.Archive(key);
         }
 
-        [RequirePermissions(Constants.Security.Authorization.LegalProviderEditorPermission)]
+        [RequirePermissions(Authorization.LegalProviderEditorPermission)]
         public override IActionResult Unarchive(System.Guid key)
         {
             return base.Unarchive(key);
@@ -79,7 +80,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Controlle
             return NotFound();
         }
 
-        [RequirePermissions(Constants.Security.Authorization.LegalProviderRemoverPermission)]
+        [RequirePermissions(Authorization.LegalProviderRemoverPermission)]
         public override IActionResult Delete(LegalProviderDisplayViewModel model)
         {
             return base.Delete(model);

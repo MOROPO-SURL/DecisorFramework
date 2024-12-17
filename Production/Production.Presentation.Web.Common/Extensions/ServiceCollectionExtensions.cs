@@ -16,6 +16,8 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<ProductionRole, System.Guid>, ProductionRoleRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.ProductionDbSchemaConfigurationProvider>();
+
+            services.AddSingleton<Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, Helpers.ProductionDataInitializationHelper>();
         }
     }
 }

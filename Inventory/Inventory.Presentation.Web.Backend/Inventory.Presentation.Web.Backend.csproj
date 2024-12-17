@@ -9,7 +9,6 @@
 		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.0.31" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Inventory.Interop.API.Common\Inventory.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Inventory.Presentation.Web.Common\Inventory.Presentation.Web.Common.csproj" />
 	</ItemGroup>
 </Project>

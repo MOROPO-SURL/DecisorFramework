@@ -104,7 +104,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<CostCenter> CostCenters { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
         
-        public DbSet<Service> Services { get; set; }
+        public DbSet<RequestableService> Services { get; set; }
         public DbSet<LegalClient> ServicingLegalClients { get; set; }
         public DbSet<NaturalClient> ServicingNationalClients { get; set; }
     }

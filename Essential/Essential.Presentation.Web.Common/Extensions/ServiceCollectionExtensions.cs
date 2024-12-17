@@ -12,6 +12,8 @@ namespace MOROPO.Framework.Decisor.Essential.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<Colaborator, System.Guid>, ColaboratorRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.EssentialDbSchemaConfigurationProvider>();
+
+            services.AddSingleton<Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, Helpers.EssentialDataInitializationHelper>();
         }
     }
 }
