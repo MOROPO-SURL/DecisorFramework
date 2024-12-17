@@ -79,8 +79,6 @@
 	    <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
 	  </ProjectReference>
 	  <ProjectReference Include="..\Sales\Sales.Presentation.Web.Frontend\Sales.Presentation.Web.Frontend.csproj" />
-	  <ProjectReference Include="..\Servicing\Servicing.Presentation.Web.Backend\Servicing.Presentation.Web.Backend.csproj" />
-	  <ProjectReference Include="..\Servicing\Servicing.Presentation.Web.Frontend\Servicing.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\Supervision\Supervision.Presentation.Web.Frontend\Supervision.Presentation.Web.Frontend.csproj" />
 	</ItemGroup>
 	<ItemGroup>

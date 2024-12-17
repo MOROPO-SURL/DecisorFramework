@@ -55,9 +55,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 name: "decisorframework_sales");
 
             migrationBuilder.EnsureSchema(
-                name: "decisorframework_servicing");
-
-            migrationBuilder.EnsureSchema(
                 name: "guamaframework_security_personal");
 
             migrationBuilder.CreateTable(
@@ -940,8 +937,8 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 });
 
             migrationBuilder.CreateTable(
-                name: "services",
-                schema: "decisorframework_servicing",
+                name: "provisionableservices",
+                schema: "decisorframework_commercial",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -955,9 +952,34 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_services", x => x.id);
+                    table.PrimaryKey("pk_provisionableservices", x => x.id);
                     table.ForeignKey(
-                        name: "fk_services_images_featureimageid",
+                        name: "fk_provisionableservices_images_featureimageid",
+                        column: x => x.featureimageid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "images",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "requestableservice",
+                schema: "decisorframework_commercial",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true),
+                    featureimageid = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_requestableservice", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_requestableservice_images_featureimageid",
                         column: x => x.featureimageid,
                         principalSchema: "guamaframework_media",
                         principalTable: "images",
@@ -1537,10 +1559,10 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_contactservicebridges_services_sternid",
+                        name: "fk_contactservicebridges_requestableservice_sternid",
                         column: x => x.sternid,
-                        principalSchema: "decisorframework_servicing",
-                        principalTable: "services",
+                        principalSchema: "decisorframework_commercial",
+                        principalTable: "requestableservice",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -2299,10 +2321,10 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                         principalColumns: new[] { "number", "year" },
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_budgetservicebridges_services_serviceid",
+                        name: "fk_budgetservicebridges_provisionableservices_serviceid",
                         column: x => x.serviceid,
-                        principalSchema: "decisorframework_servicing",
-                        principalTable: "services",
+                        principalSchema: "decisorframework_commercial",
+                        principalTable: "provisionableservices",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -4303,6 +4325,12 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_provisionableservices_featureimageid",
+                schema: "decisorframework_commercial",
+                table: "provisionableservices",
+                column: "featureimageid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_purchasecashadvances_purchaseplanid",
                 schema: "decisorframework_purchasing",
                 table: "purchasecashadvances",
@@ -4528,6 +4556,12 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 column: "countryid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_requestableservice_featureimageid",
+                schema: "decisorframework_commercial",
+                table: "requestableservice",
+                column: "featureimageid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_rolepermissionbridges_sternid",
                 schema: "guamaframework_core_security_common",
                 table: "rolepermissionbridges",
@@ -4556,12 +4590,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 schema: "decisorframework_sales",
                 table: "sales",
                 column: "sellerid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_services_featureimageid",
-                schema: "decisorframework_servicing",
-                table: "services",
-                column: "featureimageid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_states_regionid",
@@ -4986,12 +5014,16 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Persistence.ORM.EF.Mig
                 schema: "guamaframework_media");
 
             migrationBuilder.DropTable(
+                name: "provisionableservices",
+                schema: "decisorframework_commercial");
+
+            migrationBuilder.DropTable(
                 name: "clausetags",
                 schema: "decisorframework_legal");
 
             migrationBuilder.DropTable(
-                name: "services",
-                schema: "decisorframework_servicing");
+                name: "requestableservice",
+                schema: "decisorframework_commercial");
 
             migrationBuilder.DropTable(
                 name: "departures",

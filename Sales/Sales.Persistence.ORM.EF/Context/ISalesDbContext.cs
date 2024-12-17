@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MOROPO.Framework.Decisor.Servicing.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Sales.Persistence.ORM.EF.Context
 {

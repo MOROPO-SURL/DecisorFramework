@@ -67,8 +67,7 @@ public partial class ColaboratorConfigurationPage : Core.Presentation.Terminal.M
             PhoneContacts = concreteBindingContext.PhoneContactItems.ToList(),
             EmailContacts = concreteBindingContext.EmailContactItems.ToList(),
             PostalContacts = concreteBindingContext.PostalContactItems.ToList(),
-            WebContacts = concreteBindingContext.WebContactItems.ToList(),
-            PersonalIdentificationNumber = concreteBindingContext.PersonalIdentificationNumber
+            WebContacts = concreteBindingContext.WebContactItems.ToList()
         };
 
         if (imagePickedData != null)
@@ -106,8 +105,7 @@ public partial class ColaboratorConfigurationPage : Core.Presentation.Terminal.M
             PhoneContacts = concreteBindingContext.PhoneContactItems.ToList(),
             EmailContacts = concreteBindingContext.EmailContactItems.ToList(),
             PostalContacts = concreteBindingContext.PostalContactItems.ToList(),
-            WebContacts = concreteBindingContext.WebContactItems.ToList(),
-            PersonalIdentificationNumber = concreteBindingContext.PersonalIdentificationNumber
+            WebContacts = concreteBindingContext.WebContactItems.ToList()
         };
 
         if (imagePickedData != null)

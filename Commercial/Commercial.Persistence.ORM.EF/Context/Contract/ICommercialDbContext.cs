@@ -8,14 +8,14 @@ namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contrac
         public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
         public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
         public DbSet<Entities.Contract.AbstractContact> Contacts { get; set; }
-        public DbSet<LegalContact> LegalContacts { get; set; }
-        public DbSet<NaturalContact> NaturalContacts { get; set; }
+        public DbSet<OrganizationContact> OrganizationContacts { get; set; }
+        public DbSet<PersonContact> PersonContacts { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }
         public DbSet<ProvisionableService> ProvisionableServices { get; set; }
         public DbSet<ContactProductBridge> ContactProductBridges { get; set; }
         public DbSet<ContactServiceBridge> ContactServiceBridges { get; set; }
-        public DbSet<LegalContactBudget> LegalContactBudgets { get; set; }
-        public DbSet<NaturalContactBudget> NaturalContactBudgets { get; set; }
+        public DbSet<OrganizationContactBudget> OrganizationContactBudgets { get; set; }
+        public DbSet<PersonContactBudget> PersonContactBudgets { get; set; }
         public DbSet<BudgetProductBridge> BudgetProductBridges { get; set; }
         public DbSet<BudgetServiceBridge> BudgetServiceBridges { get; set; }
         public DbSet<LegalProvider> LegalProviders { get; set; }

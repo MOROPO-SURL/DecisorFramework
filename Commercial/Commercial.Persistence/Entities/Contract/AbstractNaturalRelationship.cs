@@ -13,7 +13,7 @@
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        public NaturalContact Contact { get; set; }
+        public PersonContact Contact { get; set; }
         public System.Guid ContactId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]

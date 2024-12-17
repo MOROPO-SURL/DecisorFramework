@@ -83,7 +83,7 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice.Extensions
                 Controller = "employees",
                 Action = "Index",
                 Area = "HHRR",
-                Role = Authorization.EmployeeViewerPermission
+                Role = HumanResources.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
             });
             #endregion
 

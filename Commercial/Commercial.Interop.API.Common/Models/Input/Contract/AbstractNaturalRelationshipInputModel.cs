@@ -39,7 +39,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input.Co
 
         public TEntity Export()
         {
-            var entity = new TEntity { Id = Id, Enabled = true, Contact = new Persistence.Entities.NaturalContact { Identity = new Guama.Identity.Persistence.Entities.PersonIdentity() } };
+            var entity = new TEntity { Id = Id, Enabled = true, Contact = new Persistence.Entities.PersonContact { Identity = new Guama.Identity.Persistence.Entities.PersonIdentity() } };
 
             Mergue(entity);
 

@@ -31,8 +31,8 @@ namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Providers
                     new Configurators.NaturalProviderEntityTypeConfigurator(),
                     new Configurators.NaturalProviderPurchasingContractEntityTypeConfigurator(),
                     new Configurators.BudgetEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.LegalContactBudget>(),
-                    new BaseEntityTypeConfigurator<Entities.NaturalContactBudget>()
+                    new BaseEntityTypeConfigurator<Entities.OrganizationContactBudget>(),
+                    new BaseEntityTypeConfigurator<Entities.PersonContactBudget>()
                 };
             }
         }

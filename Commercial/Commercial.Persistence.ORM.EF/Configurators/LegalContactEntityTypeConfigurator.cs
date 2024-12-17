@@ -1,12 +1,12 @@
 ﻿namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Configurators
 {
-    public class LegalContactEntityTypeConfigurator : Guama.Core.Persistence.ORM.EF.Configurators.Contract.AbstractEntityTypeConfigurator<Entities.LegalContact>
+    public class LegalContactEntityTypeConfigurator : Guama.Core.Persistence.ORM.EF.Configurators.Contract.AbstractEntityTypeConfigurator<Entities.OrganizationContact>
     {
-        protected override void ApplayRules(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Entities.LegalContact> entityTypeBuilder)
+        protected override void ApplayRules(Microsoft.EntityFrameworkCore.Metadata.Builders.EntityTypeBuilder<Entities.OrganizationContact> entityTypeBuilder)
         {
             base.ApplayRules(entityTypeBuilder);
 
-            entityTypeBuilder.HasOne(entity => entity.Identity).WithOne().HasForeignKey<Entities.LegalContact>(entity => entity.IdentityId).OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade);
+            entityTypeBuilder.HasOne(entity => entity.Identity).WithOne().HasForeignKey<Entities.OrganizationContact>(entity => entity.IdentityId).OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade);
         }
     }
 }

@@ -16,7 +16,6 @@ using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Production.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Sales.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Decisor.Servicing.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Core.Security.Common.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Location.Presentation.Web.Common.Extensions;
@@ -64,7 +63,6 @@ namespace MOROPO.Framework.Decisor.UseCase.Web.BackOffice
             services.AddDecisorFinancialPresentationWebCommon();
             services.AddDecisorInventoryPresentationWebCommon();
             services.AddDecisorProductionPresentationWebCommon();
-            services.AddDecisorServicingPresentationWebCommon();
             services.AddDecisorCommercialPresentationWebCommon();
             services.AddDecisorPurchasingPresentationWebCommon();
             services.AddDecisorSalesPresentationWebCommon();

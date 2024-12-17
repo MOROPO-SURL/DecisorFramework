@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Commercial.Persistence.Entities
 {
-    public class NaturalContact : Contract.AbstractContact
+    public class PersonContact : Contract.AbstractContact
     {
         public Guama.Identity.Persistence.Entities.PersonIdentity Identity { get; set; }
         public System.Guid IdentityId { get; set; }

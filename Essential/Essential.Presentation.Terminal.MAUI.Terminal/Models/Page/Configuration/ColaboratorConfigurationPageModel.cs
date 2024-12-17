@@ -14,7 +14,6 @@ namespace MOROPO.Framework.Decisor.Essential.Presentation.Terminal.MAUI.Models.P
         private Sex sex;
         private CivilStatus civilStatus;
         private int priority = 1;
-        private string personalIdentificationNumber;
         private Microsoft.Maui.Controls.ImageSource imageSource;
 
         public ColaboratorConfigurationPageModel(Interop.API.Common.Models.Display.ColaboratorDisplayModel model) : base(model)
@@ -25,7 +24,6 @@ namespace MOROPO.Framework.Decisor.Essential.Presentation.Terminal.MAUI.Models.P
                 Name = model.Name;
                 LastName = model.LastName;
                 Alias = model.Alias;
-                PersonalIdentificationNumber = model.PersonalIdentificationNumber;
                 About = model.About;
                 Sex = model.Sex;
                 CivilStatus = model.CivilStatus;
@@ -64,8 +62,6 @@ namespace MOROPO.Framework.Decisor.Essential.Presentation.Terminal.MAUI.Models.P
         public CivilStatus CivilStatus { get => civilStatus; set => SetProperty(ref civilStatus, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
-
-        public string PersonalIdentificationNumber { get => personalIdentificationNumber; set => SetProperty(ref personalIdentificationNumber, value); }
 
         public Microsoft.Maui.Controls.ImageSource ImageSource { get => imageSource; set => SetProperty(ref imageSource, value); }
 
