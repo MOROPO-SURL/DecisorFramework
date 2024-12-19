@@ -1,0 +1,55 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>disable</Nullable>
+		<ImplicitUsings>disable</ImplicitUsings>
+		<AssemblyName>MOROPO.Tool.Decisor.Web.BackOffice</AssemblyName>
+		<RootNamespace>MOROPO.Tool.Decisor.Web.BackOffice</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<Compile Remove="dpkeys\**" />
+		<Compile Remove="logs\**" />
+		<Content Remove="dpkeys\**" />
+		<Content Remove="logs\**" />
+		<EmbeddedResource Remove="dpkeys\**" />
+		<EmbeddedResource Remove="logs\**" />
+		<None Remove="dpkeys\**" />
+		<None Remove="logs\**" />
+	</ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.0.31" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.0.31" />
+		<PackageReference Include="GuamaFramework.Location.Presentation.Web.Backend" Version="6.0.0.31" />
+		<PackageReference Include="GuamaFramework.Media.Presentation.Web.Common" Version="6.0.0.31" />
+		<PackageReference Include="GuamaFramework.Security.Personal.Presentation.Web.Backend" Version="6.0.0.31" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="7.0.4" />
+		<PackageReference Include="Serilog.Extensions.Logging" Version="8.0.0" />
+		<PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
+		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
+		<PackageReference Include="SkiaSharp" Version="2.88.8" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Backend\Commercial.Presentation.Web.Backend.csproj" />
+	  <ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Frontend\Commercial.Presentation.Web.Frontend.csproj" />
+	  <ProjectReference Include="..\..\..\Core\Core.Presentation.Web.Backend\Core.Presentation.Web.Backend.csproj" />
+	  <ProjectReference Include="..\..\..\Core\Core.Presentation.Web.Frontend\Core.Presentation.Web.Frontend.csproj" />
+	  <ProjectReference Include="..\..\..\Domain\Domain.Presentation.Web.Backend\Domain.Presentation.Web.Backend.csproj" />
+	  <ProjectReference Include="..\..\..\Domain\Domain.Presentation.Web.Frontend\Domain.Presentation.Web.Frontend.csproj" />
+	  <ProjectReference Include="..\..\..\Financial\Financial.Presentation.Web.Backend\Financial.Presentation.Web.Backend.csproj" />
+	  <ProjectReference Include="..\..\..\Financial\Financial.Presentation.Web.Frontend\Financial.Presentation.Web.Frontend.csproj" />
+	  <ProjectReference Include="..\..\..\HumanResources\HumanResources.Presentation.Web.Backend\HumanResources.Presentation.Web.Backend.csproj" />
+	  <ProjectReference Include="..\..\..\HumanResources\HumanResources.Presentation.Web.Frontend\HumanResources.Presentation.Web.Frontend.csproj" />
+	  <ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Web.Backend\Inventory.Presentation.Web.Backend.csproj" />
+	  <ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Web.Frontend\Inventory.Presentation.Web.Frontend.csproj" />
+	  <ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Backend\Legal.Presentation.Web.Backend.csproj" />
+	  <ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Frontend\Legal.Presentation.Web.Frontend.csproj" />
+	  <ProjectReference Include="..\..\..\Production\Production.Presentation.Web.Backend\Production.Presentation.Web.Backend.csproj" />
+	  <ProjectReference Include="..\..\..\Production\Production.Presentation.Web.Frontend\Production.Presentation.Web.Frontend.csproj" />
+	  <ProjectReference Include="..\..\..\Purchasing\Purchasing.Presentation.Web.Backend\Purchasing.Presentation.Web.Backend.csproj" />
+	  <ProjectReference Include="..\..\..\Purchasing\Purchasing.Presentation.Web.Frontend\Purchasing.Presentation.Web.Frontend.csproj" />
+	</ItemGroup>
+</Project>

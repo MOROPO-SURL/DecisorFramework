@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MOROPO.Tool.Decisor.Terminal.UI.Views.ModuleFlyoutSectionSubtitleContentView"
+    x:DataType="MenuFlyoutItem">
+    <Label
+        Padding="12,6"
+        Text="{Binding Text}"
+        TextColor="DimGray"
+        FontAttributes="Bold,Italic" />
+</ContentView>

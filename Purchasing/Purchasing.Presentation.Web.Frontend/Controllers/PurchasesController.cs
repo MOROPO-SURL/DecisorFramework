@@ -50,9 +50,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                     return _model;
                 }).ToArray();
 
-                if (item.Provider.Image != null)
+                if (item.Provider.Contact.Identity.Image != null)
                 {
-                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Contact.Identity.Image.ContentType);
+                    item.Provider.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Contact.Identity.Image.ContentType);
                 }
             }
 
@@ -72,9 +72,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                     return _model;
                 }).ToArray();
 
-                if (item.Provider.Image != null)
+                if (item.Provider.Contact.Identity.Image != null)
                 {
-                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Contact.Identity.Image.ContentType);
+                    item.Provider.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Contact.Identity.Image.ContentType);
                 }
             }
 

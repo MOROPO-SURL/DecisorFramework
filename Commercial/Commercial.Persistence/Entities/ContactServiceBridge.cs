@@ -7,5 +7,9 @@
         
         public System.Guid SternId { get; set; }
         public RequestableService Stern { get; set; }
+
+        public string Description { get; set; }
+
+        public int Evaluation { get; set; }
     }
 }
