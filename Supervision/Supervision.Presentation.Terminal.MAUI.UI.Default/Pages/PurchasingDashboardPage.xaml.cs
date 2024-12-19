@@ -63,8 +63,8 @@ public partial class PurchasingDashboardPage : Caney.MVVM.Core.Pages.BindingCont
             var purchasePlansAPIConnectClient = new Purchasing.Interop.API.Connect.Clients.PurchasePlansAPIConnectClient(httpClientHelperProvider);
             var purchasesAPIConnectClient = new Purchasing.Interop.API.Connect.Clients.PurchasesAPIConnectClient(httpClientHelperProvider);
             var purchaseZonesAPIConnectClient = new Purchasing.Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(httpClientHelperProvider);
-            var legalProvidersAPIConnectClient = new Purchasing.Interop.API.Connect.Clients.LegalProvidersAPIConnectClient(httpClientHelperProvider);
-            var naturalProvidersAPIConnectClient = new Purchasing.Interop.API.Connect.Clients.NaturalProvidersAPIConnectClient(httpClientHelperProvider);
+            var legalProvidersAPIConnectClient = new Commercial.Interop.API.Connect.Clients.LegalProvidersAPIConnectClient(httpClientHelperProvider);
+            var naturalProvidersAPIConnectClient = new Commercial.Interop.API.Connect.Clients.NaturalProvidersAPIConnectClient(httpClientHelperProvider);
 
             var purchaseZoneCount = await purchaseZonesAPIConnectClient.CountAsync();
             var purchasePlanCount = await purchasePlansAPIConnectClient.CountAsync();

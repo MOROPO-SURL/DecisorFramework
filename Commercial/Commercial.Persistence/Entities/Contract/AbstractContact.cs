@@ -13,8 +13,8 @@
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        public System.Collections.Generic.List<ContactProductBridge> ProductBridges { get; set; } = new System.Collections.Generic.List<ContactProductBridge>();
+        public System.Collections.Generic.IEnumerable<ProductValueProposition> ProductValuePropositions { get; set; }
 
-        public System.Collections.Generic.List<ContactServiceBridge> ServiceBridges { get; set; } = new System.Collections.Generic.List<ContactServiceBridge>();
+        public System.Collections.Generic.IEnumerable<ServiceValueProposition> ServiceValuePropositions { get; set; }
     }
 }

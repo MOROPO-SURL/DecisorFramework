@@ -108,7 +108,7 @@ public partial class LegalProviderPurchaseProductBridgeConfigurationPage : Core.
         hasChangesFlag = true;
     }
 
-    private void ProviderPickComplete_Callback(Interop.API.Common.Models.Display.LegalProviderDisplayModel model)
+    private void ProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel model)
     {
         ((Models.Page.Configuration.LegalProviderPurchaseProductBridgeConfigurationPageModel)BindingContext).Provider = model;
 

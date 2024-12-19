@@ -12,8 +12,12 @@ namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contrac
         public DbSet<PersonContact> PersonContacts { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }
         public DbSet<ProvisionableService> ProvisionableServices { get; set; }
-        public DbSet<ContactProductBridge> ContactProductBridges { get; set; }
-        public DbSet<ContactServiceBridge> ContactServiceBridges { get; set; }
+        public DbSet<ProductValueProposition> ProductValuePropositions { get; set; }
+        public DbSet<ProductValuePropositionRate> ProductValuePropositionRates { get; set; }
+        public DbSet<ProductValuePropositionImageBridge> ProductValuePropositionImageBridges { get; set; }
+        public DbSet<ServiceValueProposition> ServiceValuePropositions { get; set; }
+        public DbSet<ServiceValuePropositionRate> ServiceValuePropositionRates { get; set; }
+        public DbSet<ServiceValuePropositionImageBridge> ServiceValuePropositionImageBridges { get; set; }
         public DbSet<OrganizationContactBudget> OrganizationContactBudgets { get; set; }
         public DbSet<PersonContactBudget> PersonContactBudgets { get; set; }
         public DbSet<BudgetProductBridge> BudgetProductBridges { get; set; }

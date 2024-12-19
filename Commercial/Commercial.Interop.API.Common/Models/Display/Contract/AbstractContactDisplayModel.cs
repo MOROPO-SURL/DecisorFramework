@@ -20,29 +20,29 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.
             Id = entity.Id;
             Priority = entity.Priority;
             At = entity.At;
-            Products = entity.ProductBridges.Select(bridge =>
+            Products = entity.ProductValuePropositions.Select(_entity =>
             {
                 var model = new Bridge.ProductContactBridgeModel
                 {
                     Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    Description = bridge.Description,
-                    Evaluation = bridge.Evaluation
+                    Description = _entity.Description,
+                    Evaluation = _entity.Evaluation
                 };
 
-                model.Product.Import(bridge.Stern);
+                model.Product.Import(_entity.Product);
 
                 return model;
             }).ToArray();
-            Services = entity.ServiceBridges.Select(bridge =>
+            Services = entity.ServiceValuePropositions.Select(_entity =>
             {
                 var model = new Bridge.RequestableServiceContactBridgeModel
                 {
                     Service = new RequestableServiceDisplayModel(),
-                    Description = bridge.Description,
-                    Evaluation = bridge.Evaluation
+                    Description = _entity.Description,
+                    Evaluation = _entity.Evaluation
                 };
 
-                model.Service.Import(bridge.Stern);
+                model.Service.Import(_entity.Service);
 
                 return model;
             }).ToArray();

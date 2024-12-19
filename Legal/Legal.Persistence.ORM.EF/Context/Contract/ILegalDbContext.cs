@@ -8,5 +8,12 @@
         public Microsoft.EntityFrameworkCore.DbSet<Entities.Section> Sections { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.Proforma> Proformas { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.ProformaClauseBridge> ProformaSectionClauseBridges { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Entities.ProclamationKind> ProclamationKinds { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Entities.Proclamation> Proclamations { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Entities.CentralStateStructure> CentralStateStructures { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Entities.RegulationKind> RegulationKinds { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Entities.Regulation> Regulations { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Entities.Disposition> Dispositions { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Entities.DispositionTagBridge> DispositionTagBridges { get; set; }
     }
 }

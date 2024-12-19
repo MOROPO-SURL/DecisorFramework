@@ -73,8 +73,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<PersonContact> PersonContacts { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }
         public DbSet<ProvisionableService> ProvisionableServices { get; set; }
-        public DbSet<ContactProductBridge> ContactProductBridges { get; set; }
-        public DbSet<ContactServiceBridge> ContactServiceBridges { get; set; }
+        public DbSet<ProductValueProposition> ProductValuePropositions { get; set; }
+        public DbSet<ProductValuePropositionRate> ProductValuePropositionRates { get; set; }
+        public DbSet<ProductValuePropositionImageBridge> ProductValuePropositionImageBridges { get; set; }
+        public DbSet<ServiceValueProposition> ServiceValuePropositions { get; set; }
+        public DbSet<ServiceValuePropositionRate> ServiceValuePropositionRates { get; set; }
+        public DbSet<ServiceValuePropositionImageBridge> ServiceValuePropositionImageBridges { get; set; }
         public DbSet<OrganizationContactBudget> OrganizationContactBudgets { get; set; }
         public DbSet<PersonContactBudget> PersonContactBudgets { get; set; }
         public DbSet<BudgetProductBridge> BudgetProductBridges { get; set; }
@@ -125,6 +129,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Section> Sections { get; set; }
         public DbSet<Proforma> Proformas { get; set; }
         public DbSet<ProformaClauseBridge> ProformaSectionClauseBridges { get; set; }
+        public DbSet<ProclamationKind> ProclamationKinds { get; set; }
+        public DbSet<Proclamation> Proclamations { get; set; }
+        public DbSet<CentralStateStructure> CentralStateStructures { get; set; }
+        public DbSet<RegulationKind> RegulationKinds { get; set; }
+        public DbSet<Regulation> Regulations { get; set; }
+        public DbSet<Disposition> Dispositions { get; set; }
+        public DbSet<DispositionTagBridge> DispositionTagBridges { get; set; }
         public DbSet<Elaboration> Elaborations { get; set; }
         public DbSet<ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
         public DbSet<ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }

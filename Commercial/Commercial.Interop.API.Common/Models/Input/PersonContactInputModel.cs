@@ -32,6 +32,8 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input
 
         public Guama.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
 
+        public System.Guid BusinessKindId { get; set; }
+
         public Persistence.Entities.PersonContact Export()
         {
             var entity = new Persistence.Entities.PersonContact { Id = Id, Enabled = true, Identity = new Guama.Identity.Persistence.Entities.PersonIdentity() };
@@ -55,6 +57,12 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input
             entity.Identity.Alias = Alias;
             entity.Identity.Sex = Sex;
             entity.Identity.CivilStatus = CivilStatus;
+
+            if (entity.BusinessKindId != BusinessKindId)
+            {
+                entity.BusinessKind = null;
+                entity.BusinessKindId = BusinessKindId;
+            }
         }
     }
 }

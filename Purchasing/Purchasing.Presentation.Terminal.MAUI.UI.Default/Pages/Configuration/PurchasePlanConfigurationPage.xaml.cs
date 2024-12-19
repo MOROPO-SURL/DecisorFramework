@@ -327,7 +327,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
         });
     }
 
-    private void LegalProviderPickComplete_Callback(Interop.API.Common.Models.Display.LegalProviderDisplayModel model)
+    private void LegalProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel model)
     {
         ((Models.Page.Configuration.PurchasePlanConfigurationPageModel)BindingContext).LegalProviderBridges.Add(new Interop.API.Common.Models.Bridge.PurchasePlanLegalProviderBridgeModel
         {
@@ -338,7 +338,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
         hasChangesFlag = true;
     }
 
-    private void NaturalProviderPickComplete_Callback(Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
+    private void NaturalProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
     {
         ((Models.Page.Configuration.PurchasePlanConfigurationPageModel)BindingContext).NaturalProviderBridges.Add(new Interop.API.Common.Models.Bridge.PurchasePlanNaturalProviderBridgeModel
         {

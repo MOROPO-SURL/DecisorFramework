@@ -15,7 +15,14 @@ namespace MOROPO.Framework.Decisor.Legal.Persistence.ORM.EF.Providers
                     new Configurators.ClauseTagBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Section>(),
                     new BaseEntityTypeConfigurator<Entities.Proforma>(),
-                    new Configurators.ProformaSectionClauseBridgeEntityTypeConfigurator()
+                    new Configurators.ProformaSectionClauseBridgeEntityTypeConfigurator(),
+                    new BaseEntityTypeConfigurator<Entities.ProclamationKind>(),
+                    new BaseEntityTypeConfigurator<Entities.Proclamation>(),
+                    new Configurators.CentralStateStructureEntityTypeConfigurator(),
+                    new BaseEntityTypeConfigurator<Entities.RegulationKind>(),
+                    new BaseEntityTypeConfigurator<Entities.Regulation>(),
+                    new BaseEntityTypeConfigurator<Entities.Disposition>(),
+                    new Configurators.DispositionTagBridgeEntityTypeConfigurator()
                 };
             }
         }

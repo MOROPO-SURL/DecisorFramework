@@ -7,6 +7,6 @@
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(BusinessKindId))]
         public LegalBusinessKind BusinessKind { get; set; }
-        public System.Guid BusinessKindId { get; set; }
+        public System.Guid? BusinessKindId { get; set; }
     }
 }

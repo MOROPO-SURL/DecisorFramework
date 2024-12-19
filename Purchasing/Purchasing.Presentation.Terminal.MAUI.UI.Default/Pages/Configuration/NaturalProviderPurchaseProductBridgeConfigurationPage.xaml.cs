@@ -108,7 +108,7 @@ public partial class NaturalProviderPurchaseProductBridgeConfigurationPage : Cor
         hasChangesFlag = true;
     }
 
-    private void ProviderPickComplete_Callback(Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
+    private void ProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
     {
         ((Models.Page.Configuration.NaturalProviderPurchaseProductBridgeConfigurationPageModel)BindingContext).Provider = model;
 
