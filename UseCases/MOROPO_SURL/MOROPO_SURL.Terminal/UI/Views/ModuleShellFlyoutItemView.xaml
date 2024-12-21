@@ -6,7 +6,7 @@
     x:DataType="FlyoutItem"
     Padding="12" ColumnSpacing="12">
     <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="28" />
         <ColumnDefinition />
     </Grid.ColumnDefinitions>
     <Image

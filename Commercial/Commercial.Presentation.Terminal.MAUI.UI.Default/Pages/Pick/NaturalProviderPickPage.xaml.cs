@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
-namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
+namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
 public partial class NaturalProviderPickPage : Caney.MVVM.Core.Pages.ContentPage
 {

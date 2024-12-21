@@ -3,8 +3,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
-    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
-    x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card.LegalProviderDefaultCardView"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Commercial.Interop.API.Common"
+    x:Class="MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Views.Card.LegalProviderDefaultCardView"
     x:DataType="interop_common_display_models:LegalProviderDisplayModel">
     <ContentView.Resources>
         <ResourceDictionary>
@@ -21,7 +21,7 @@
                 Grid.Column="0" Grid.RowSpan="3"
                 Aspect="AspectFill"
                 WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
-                Source="{Binding Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
             <StackLayout 
                 Grid.Column="1"
                 Padding="10">
@@ -29,10 +29,10 @@
                     FontAttributes="Bold"
                     FontSize="Medium"
                     LineBreakMode="TailTruncation"
-                    Text="{Binding Name}" />
+                    Text="{Binding Contact.Identity.Name}" />
                 <Label 
                     Margin="0,2,0,0"
-                    Text="{Binding BusinessKind.Name}" />
+                    Text="{Binding Contact.BusinessKind.Name}" />
                 <Label 
                     Margin="0,8,0,0"
                     Text="Descripción"
@@ -43,7 +43,7 @@
                     VerticalOptions="FillAndExpand"
                     LineBreakMode="TailTruncation"
                     MaxLines="2"
-                    Text="{Binding About, TargetNullValue='---'}" />
+                    Text="{Binding Contact.Identity.About, TargetNullValue='---'}" />
             </StackLayout>
         </Grid>
     </Frame>

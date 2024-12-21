@@ -1,11 +1,7 @@
-﻿using Foundation;
-using MOROPO.Tool.Decisor.Terminal;
+﻿namespace MOROPO.Tool.Decisor.Terminal.Platforms.iOS;
 
-namespace MOROPO_SURL.Terminal
+[Foundation.Register("AppDelegate")]
+public class AppDelegate : Microsoft.Maui.MauiUIApplicationDelegate
 {
-    [Register("AppDelegate")]
-    public class AppDelegate : MauiUIApplicationDelegate
-    {
-        protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
-    }
+    protected override Microsoft.Maui.Hosting.MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 }

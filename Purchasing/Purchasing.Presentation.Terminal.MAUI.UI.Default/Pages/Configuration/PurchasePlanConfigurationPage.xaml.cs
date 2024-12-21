@@ -137,12 +137,12 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
 
     private void AddLegalProviderButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.LegalProviderPickPage(LegalProviderPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.LegalProviderPickPage(LegalProviderPickComplete_Callback)));
     }
 
     private void AddNaturalProviderButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.NaturalProviderPickPage(NaturalProviderPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.NaturalProviderPickPage(NaturalProviderPickComplete_Callback)));
     }
 
     private void AddInputProductBridgeButton_Clicked(object sender, System.EventArgs e)

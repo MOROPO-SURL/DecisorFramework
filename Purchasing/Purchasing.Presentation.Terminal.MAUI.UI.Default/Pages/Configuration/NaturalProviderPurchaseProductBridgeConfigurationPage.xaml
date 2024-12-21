@@ -2,7 +2,7 @@
 <core_ui_configuration_pages:BaseConfigurationContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:commercial_card_views="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
     xmlns:inventory_card_views="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI"
     xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
@@ -64,7 +64,7 @@
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Proveedor" />
                     <ContentView                        
                         IsVisible="{Binding Provider, Converter={StaticResource IsNotNullConverter}}">
-                        <local_card_views:NaturalProviderDefaultCardView
+                        <commercial_card_views:NaturalProviderDefaultCardView
                             BindingContext="{Binding Provider}"
                             HeightRequest="160" />
                     </ContentView>

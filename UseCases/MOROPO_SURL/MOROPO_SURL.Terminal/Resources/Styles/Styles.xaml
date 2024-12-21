@@ -3,7 +3,7 @@
 <ResourceDictionary 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_views="clr-namespace:MOROPO.EPTCamaguey.Decisor.Terminal.MAUI.UI.Views"
+    xmlns:local_views="clr-namespace:MOROPO.Tool.Decisor.Terminal.UI.Views"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation">
 
     <Style TargetType="ActivityIndicator">

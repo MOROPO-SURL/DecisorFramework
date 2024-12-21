@@ -2,15 +2,15 @@
 <caneyframework_mvvm_pages:ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
-    xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.LegalProvidersManagePage"
+    x:Class="MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.LegalProvidersManagePage"
     x:DataType="presentation_manage_page_models:LegalProvidersManagePageModel"
-    Title="Gestión de Proveedores Jurídicas">
+    Title="Gestión de Proveedores Jurídicos">
     <ContentPage.Resources>
         <ResourceDictionary>
             <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="384" AbsoluteHorizontalSeparation="20" />
@@ -40,13 +40,7 @@
             Text="Actualizar"
             Clicked="ReloadToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -108,7 +102,7 @@
                                             Text="Nombre" />
                                         <Label
                                             Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Name}" />
+                                            Text="{Binding PresentedItem.Contact.Identity.Name}" />
                                         <Label 
                                             Style="{StaticResource CaptionFieldLabelStyle}"
                                             Text="Prioridad" />
@@ -120,7 +114,7 @@
                                             Text="Descripción" />
                                         <Label
                                             Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.About, TargetNullValue='---'}" />
+                                            Text="{Binding PresentedItem.Contact.Identity.About, TargetNullValue='---'}" />
                                     </StackLayout>
                                     <StackLayout
                                         Orientation="Horizontal"

@@ -25,29 +25,4 @@
 		<ProjectReference Include="..\..\Inventory\Inventory.Presentation.Terminal.MAUI.UI.Default\Inventory.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Commercial.Presentation.Terminal.MAUI\Commercial.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <MauiXaml Update="Pages\Configuration\PersonContactConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Card\LegalProviderDefaultCardView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Card\NaturalProviderDefaultCardView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Card\OrganizationContactDefaultCardView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Views\Card\PersonContactDefaultCardView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
-	<ItemGroup>
-	  <Compile Update="Views\Card\LegalProviderDefaultCardView.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	  <Compile Update="Views\Card\NaturalProviderDefaultCardView.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	</ItemGroup>
 </Project>

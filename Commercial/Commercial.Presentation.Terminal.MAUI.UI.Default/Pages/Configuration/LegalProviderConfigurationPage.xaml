@@ -2,11 +2,12 @@
 <core_ui_configuration_pages:BaseConfigurationContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI"
     xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
-    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Commercial.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
-    x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.LegalProviderConfigurationPage"
+    x:Class="MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.LegalProviderConfigurationPage"
     x:TypeArguments="interop_common_display_models:LegalProviderDisplayModel"
     x:DataType="presentation_configuration_page_models:LegalProviderConfigurationPageModel">
     <ContentPage.ToolbarItems>
@@ -42,78 +43,23 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
-                <Grid 
-                    Grid.ColumnSpan="3" Grid.Row="0"
-                    VerticalOptions="Start"
-                    ColumnSpacing="16" RowSpacing="16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <VerticalStackLayout
-                        Grid.ColumnSpan="2" Grid.Row="0"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
-                        <Entry Text="{Binding Name}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout 
-                        Grid.Column="0" Grid.Row="1"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="NIT" />
-                        <Entry Text="{Binding TaxIdentificationNumber}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout 
-                        Grid.Column="1" Grid.Row="1"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
-                        <Picker 
-                            x:Name="BusinessKindPicker"
-                            ItemsSource="{Binding AvailableBusinessKinds, Mode=OneTime}" 
-                            ItemDisplayBinding="{Binding Name}"
-                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout 
-                        Grid.Column="0" Grid.Row="2"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha de fundación" />
-                        <StackLayout Orientation="Horizontal" Spacing="0">
-                            <Switch IsToggled="{Binding IsSettedBornDate}" />
-                            <DatePicker
-                            HorizontalOptions="FillAndExpand"
-                            IsEnabled="{Binding IsSettedBornDate}"
-                            IsVisible="{Binding IsSettedBornDate}"
-                            Date="{Binding BornDate}" />
-                        </StackLayout>
-                    </VerticalStackLayout>
-                </Grid>                 
-                <Frame
-                    Grid.Column="3" Grid.Row="0"
-                    VerticalOptions="Start"
-                    Padding="0"
-                    HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
-                    <Grid>
-                        <Image Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
-                        <Grid BackgroundColor="#A7000000">
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />
-                            </Grid.GestureRecognizers>
-                            <Label
-                                Text="&#xF8CB;"
-                                TextColor="White"
-                                HorizontalOptions="Center" VerticalOptions="Center"
-                                FontFamily="MaterialDesignIcons"
-                                FontSize="96" />
-                        </Grid>
-                    </Grid>
-                </Frame>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="4" Grid.Row="1">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
-                    <Editor Text="{Binding About}" HeightRequest="200" />
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="4" Grid.Row="0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Plan" />
+                    <ContentView                        
+                        IsVisible="{Binding Contact, Converter={StaticResource IsNotNullConverter}}">
+                        <local_card_views:OrganizationContactDefaultCardView
+                            BindingContext="{Binding Contact}" />
+                    </ContentView>
+                    <Button
+                        HorizontalOptions="Start"
+                        Text="Seleccionar ..."
+                        Clicked="ContactPickButton_Clicked" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Grid.Column="0" Grid.Row="1"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="NIT" />
+                    <Entry Text="{Binding TaxIdentificationNumber}" />
                 </VerticalStackLayout>
                 <BoxView 
                     Grid.ColumnSpan="4" Grid.Row="2" 

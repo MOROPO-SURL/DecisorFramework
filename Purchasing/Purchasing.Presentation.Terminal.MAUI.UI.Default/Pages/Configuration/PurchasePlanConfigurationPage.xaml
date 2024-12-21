@@ -121,11 +121,11 @@
                                             <StackLayout Orientation="Horizontal">
                                                 <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                                                     <Label                                                 
-                                                        Text="{Binding Provider.Name}"
+                                                        Text="{Binding Provider.Contact.Identity.Name}"
                                                         FontAttributes="Bold"
                                                         LineBreakMode="TailTruncation" />
                                                     <Label 
-                                                        Text="{Binding Provider.BusinessKind.Name}"
+                                                        Text="{Binding Provider.Contact.BusinessKind.Name}"
                                                         FontSize="Caption"
                                                         LineBreakMode="TailTruncation" />
                                                     <Label Margin="0,4,0,0">
@@ -186,15 +186,15 @@
                                                 <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                                                     <HorizontalStackLayout Spacing="4">
                                                         <Label                                                 
-                                                            Text="{Binding Provider.Name}"
+                                                            Text="{Binding Provider.Contact.Identity.Name}"
                                                             FontAttributes="Bold"
                                                             LineBreakMode="TailTruncation" />
                                                         <Label                                                 
-                                                            Text="{Binding Provider.LastName}"
+                                                            Text="{Binding Provider.Contact.Identity.LastName}"
                                                             LineBreakMode="TailTruncation" />
                                                     </HorizontalStackLayout>
                                                     <Label 
-                                                        Text="{Binding Provider.BusinessKind.Name}"
+                                                        Text="{Binding Provider.Contact.BusinessKind.Name}"
                                                         FontSize="Caption"
                                                         LineBreakMode="TailTruncation" />
                                                     <Label Margin="0,4,0,0">

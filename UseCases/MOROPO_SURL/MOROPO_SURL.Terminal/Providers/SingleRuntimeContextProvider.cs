@@ -5,8 +5,7 @@
         internal static Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.View.OwnerInformationViewModel OWNER_INFORMATION = new Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.View.OwnerInformationViewModel
         {
             Name = "MOROPO S.U.R.L.",
-            IsNamePresentInLogo = false,
-            DefaultLogoImageSource = Microsoft.Maui.Controls.ImageSource.FromFile("identity_color.png")
+            LogoImageViewStyle = (Microsoft.Maui.Controls.Style)Microsoft.Maui.Controls.Application.Current.Resources["LogoImageViewStyle"]
         };
 
         public Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.View.OwnerInformationViewModel OwnerInformation => OWNER_INFORMATION;

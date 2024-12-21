@@ -178,7 +178,7 @@
                                     }
                                     else
                                     {
-                                        using (Html.BeginForm(item.Enabled ? "disable" : "enable", "naturalbusinesskinds", new { Area = "globals" }, FormMethod.Post, true, null))
+                                        using (Html.BeginForm(item.Enabled ? "disable" : "enable", "naturalbusinesskinds", null, FormMethod.Post, true, null))
                                         {
                                             <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
 
@@ -196,7 +196,7 @@
                                     }
                                 </td>
                                 <td class="fit" style="vertical-align: middle;">
-                                    @using (Html.BeginForm(item.Archived ? "unarchive" : "archive", "naturalbusinesskinds", new { Area = "globals" }, FormMethod.Post, true, null))
+                                    @using (Html.BeginForm(item.Archived ? "unarchive" : "archive", "naturalbusinesskinds", null, FormMethod.Post, true, null))
                                     {
                                         <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
 

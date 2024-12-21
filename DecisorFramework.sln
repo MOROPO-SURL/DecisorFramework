@@ -259,6 +259,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commercial.Presentation.Ter
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Commercial.Presentation.Terminal.MAUI.UI.Default", "Commercial\Commercial.Presentation.Terminal.MAUI.UI.Default\Commercial.Presentation.Terminal.MAUI.UI.Default.csproj", "{5D5342FF-05B6-4FAE-A352-C4D629BFA6C1}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Legal.Presentation.Terminal.MAUI.UI.Default", "Legal\Legal.Presentation.Terminal.MAUI.UI.Default\Legal.Presentation.Terminal.MAUI.UI.Default.csproj", "{9CF8CC99-2EFF-49E3-AFB2-67AAA96C0CDB}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -719,6 +721,10 @@ Global
 		{5D5342FF-05B6-4FAE-A352-C4D629BFA6C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5D5342FF-05B6-4FAE-A352-C4D629BFA6C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5D5342FF-05B6-4FAE-A352-C4D629BFA6C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9CF8CC99-2EFF-49E3-AFB2-67AAA96C0CDB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9CF8CC99-2EFF-49E3-AFB2-67AAA96C0CDB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9CF8CC99-2EFF-49E3-AFB2-67AAA96C0CDB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9CF8CC99-2EFF-49E3-AFB2-67AAA96C0CDB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -836,6 +842,7 @@ Global
 		{DB548BDE-D15E-4697-A80B-35A65E245382} = {97386BFC-A878-46E0-A542-B1604353C42E}
 		{18571CD4-C997-4598-BD7F-ECBEC0F5744C} = {C22AFE4B-3D49-4641-B848-9E8167FA1928}
 		{5D5342FF-05B6-4FAE-A352-C4D629BFA6C1} = {C22AFE4B-3D49-4641-B848-9E8167FA1928}
+		{9CF8CC99-2EFF-49E3-AFB2-67AAA96C0CDB} = {BA49F6D7-E332-43E1-9BE0-44CFAFE70D36}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {747B719B-EA48-4793-98E6-ECCB62300F19}

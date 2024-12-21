@@ -11,6 +11,7 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<Persistence.Entities.Clause, System.Guid>, Persistence.ORM.EF.Repositories.ClauseRepository>();
             services.AddScoped<IEntityRepository<Persistence.Entities.Section, System.Guid>, Persistence.ORM.EF.Repositories.SectionRepository>();
             services.AddScoped<IEntityRepository<Persistence.Entities.Proforma, System.Guid>, Persistence.ORM.EF.Repositories.ProformaRepository>();
+            services.AddScoped<IEntityRepository<Persistence.Entities.CentralStateStructure, System.Guid>, Persistence.ORM.EF.Repositories.CentralStateSctructureRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.LegalDbSchemaConfigurationProvider>();
         }

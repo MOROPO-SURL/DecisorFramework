@@ -2,13 +2,13 @@
 <caneyframework_mvvm_pages:ContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:presentation_pick_page_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Pick;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI"
-    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:presentation_pick_page_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Pick;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.NaturalProviderPickPage"
+    x:Class="MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.NaturalProviderPickPage"
     x:DataType="presentation_pick_page_models:NaturalProviderPickPageModel"
     Title="Seleccionar Proveedor Natural">
     <ContentPage.Resources>

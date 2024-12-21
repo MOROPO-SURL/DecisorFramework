@@ -4,6 +4,7 @@
     {
         private Interop.API.Common.Models.Display.OrganizationContactDisplayModel contact;
         private string taxIdentificationNumber;
+        private int priority;
 
         public LegalProviderConfigurationPageModel(Interop.API.Common.Models.Display.LegalProviderDisplayModel model) : base(model)
         {
@@ -12,6 +13,7 @@
                 Id = model.Id;
                 Contact = model.Contact;
                 TaxIdentificationNumber = model.TaxIdentificationNumber;
+                Priority = model.Priority;
             }
         }
 
@@ -20,5 +22,7 @@
         public Interop.API.Common.Models.Display.OrganizationContactDisplayModel Contact { get => contact; set => SetProperty(ref contact, value); }
 
         public string TaxIdentificationNumber { get => taxIdentificationNumber; set => SetProperty(ref taxIdentificationNumber, value); }
+
+        public int Priority { get => priority; set => SetProperty(ref priority, value); }
     }
 }

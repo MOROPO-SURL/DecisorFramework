@@ -45,7 +45,7 @@
     <MenuFlyoutItem Text="Operaciones" />
     <ShellContent
         Title="Cobros"
-        ContentTemplate="{DataTemplate local_pages:FinancialDashboardPage}">
+        ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

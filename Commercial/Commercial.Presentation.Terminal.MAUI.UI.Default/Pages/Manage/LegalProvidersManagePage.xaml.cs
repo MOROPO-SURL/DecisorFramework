@@ -1,9 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
-using System;
 
-namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
+namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
 public partial class LegalProvidersManagePage : Caney.MVVM.Core.Pages.ContentPage
 {
@@ -29,40 +28,7 @@ public partial class LegalProvidersManagePage : Caney.MVVM.Core.Pages.ContentPag
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = (Models.Page.Manage.LegalProvidersManagePageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        System.Threading.Tasks.Task.Run(async () =>
-        {
-            try
-            {
-                var kindsAPIConnectClient = new Core.Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-                var statesAPIConnectClient = new Core.Interop.API.Connect.Clients.StatesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-                var model = new Models.Page.Configuration.LegalProviderConfigurationPageModel(null)
-                {
-                    AvailableBusinessKinds = await kindsAPIConnectClient.GetAsync(),
-                    AvailableStates = await statesAPIConnectClient.GetAsync()
-                };
-
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    this.NavigationPushPageAsync(new Configuration.LegalProviderConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                    PresentedItemDismissButton_Clicked(sender, e);
-                });
-            }
-            catch (System.Exception exception)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                });
-            }
-        });
+        this.NavigationPushPageAsync(new Configuration.LegalProviderConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.LegalProviderConfigurationPageModel(null)));
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
@@ -84,41 +50,7 @@ public partial class LegalProvidersManagePage : Caney.MVVM.Core.Pages.ContentPag
 
     private void PresentedItemEditButton_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = (Models.Page.Manage.LegalProvidersManagePageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        System.Threading.Tasks.Task.Run(async () =>
-        {
-            try
-            {
-                var kindsAPIConnectClient = new Core.Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-                var statesAPIConnectClient = new Core.Interop.API.Connect.Clients.StatesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-                var model = new Models.Page.Configuration.LegalProviderConfigurationPageModel(concreteBindingContext.PresentedItem)
-                {
-                    AvailableBusinessKinds = await kindsAPIConnectClient.GetAsync(),
-                    AvailableStates = await statesAPIConnectClient.GetAsync()
-                };
-
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    this.NavigationPushPageAsync(new Configuration.LegalProviderConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                    PresentedItemDismissButton_Clicked(sender, e);
-                });
-            }
-            catch (System.Exception exception)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                });
-            }
-        });
+        this.NavigationPushPageAsync(new Configuration.LegalProviderConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.LegalProviderConfigurationPageModel(((Models.Page.Manage.LegalProvidersManagePageModel)BindingContext).PresentedItem)));
     }
 
     private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)

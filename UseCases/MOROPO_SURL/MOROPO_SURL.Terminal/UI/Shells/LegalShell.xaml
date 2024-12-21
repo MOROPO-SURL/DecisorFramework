@@ -2,6 +2,7 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:decisorframework_legal_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.LegalShell"
     FlyoutBehavior="Locked">
     <Shell.FlyoutHeader>
@@ -62,9 +63,39 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <ShellContent
+        Title="Disposiciones Legislativas"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFEC3;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
-        Title="Secciones"
+        Title="Organismos"
+        ContentTemplate="{DataTemplate decisorframework_legal_manage_pages:CentralStateStructuresManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA35;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Publicaciones Legislativas"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF01B1;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Secciones Contractuales"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -74,7 +105,7 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Cláusulas"
+        Title="Cláusulas Contractuales"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -90,6 +121,27 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF4F9;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Configuración" />
+    <ShellContent
+        Title="Tipos de Publicación Legislativa"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF01B2;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tipos de Regulación Legislativa"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFAB6;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

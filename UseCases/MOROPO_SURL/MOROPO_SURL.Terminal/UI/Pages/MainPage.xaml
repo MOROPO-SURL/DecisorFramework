@@ -46,22 +46,16 @@
             ColumnSpacing="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
-                <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
-            <Image
-                Grid.ColumnSpan="2"
-                Aspect="Fill"
-                Source="logo_art_frame.png"
-                WidthRequest="{Binding Source={Reference LogoWrapLayout}, Path=Width, Converter={StaticResource DoubleToFactorConverter}, ConverterParameter={StaticResource LogoArtFrameImageWithFactor}}" />
             <Grid
                 x:Name="LogoWrapLayout"
                 Grid.Column="0"
                 MinimumWidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}">
                 <Image
-                    Margin="16"
+                    Margin="32,16"
                     HorizontalOptions="Center" VerticalOptions="Center"
-                    Source="identity_white.png" />
+                    Style="{StaticResource LogoImageViewStyle}" />
             </Grid>
             <Grid
                 Grid.Column="2"
@@ -86,7 +80,7 @@
                     StrokeThickness="4"
                     StrokeLineJoin="Bevel">
                     <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="60" />
+                        <RoundRectangle CornerRadius="0,30,30,00" />
                     </Border.StrokeShape>
                     <Image
                         WidthRequest="120" HeightRequest="120"

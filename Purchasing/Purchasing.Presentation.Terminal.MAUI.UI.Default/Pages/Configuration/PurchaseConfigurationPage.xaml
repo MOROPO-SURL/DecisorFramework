@@ -342,11 +342,11 @@
                                                         Margin="0,8,0,0"
                                                         Text="Proveedor" />
                                                     <Label                                                 
-                                                        Text="{Binding Provider.Name}"
+                                                        Text="{Binding Provider.Contact.Identity.Name}"
                                                         FontAttributes="Bold"
                                                         LineBreakMode="TailTruncation" />
                                                     <Label 
-                                                        Text="{Binding Provider.BusinessKind.Name}"
+                                                        Text="{Binding Provider.Contact.BusinessKind.Name}"
                                                         FontSize="Caption"
                                                         LineBreakMode="TailTruncation" />
                                                 </VerticalStackLayout>
@@ -434,14 +434,14 @@
                                                         LineBreakMode="TailTruncation">
                                                         <Label.FormattedText>
                                                             <FormattedString>
-                                                                <Span Text="{Binding Provider.Name}" />
+                                                                <Span Text="{Binding Provider.Contact.Identity.Name}" />
                                                                 <Span Text=" " />
-                                                                <Span Text="{Binding Provider.LastName}" />
+                                                                <Span Text="{Binding Provider.Contact.Identity.LastName}" />
                                                             </FormattedString>
                                                         </Label.FormattedText>
                                                     </Label>
                                                     <Label 
-                                                        Text="{Binding Provider.BusinessKind.Name}"
+                                                        Text="{Binding Provider.Contact.BusinessKind.Name}"
                                                         FontSize="Caption"
                                                         LineBreakMode="TailTruncation" />
                                                 </VerticalStackLayout>

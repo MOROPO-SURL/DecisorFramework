@@ -68,6 +68,7 @@
 	  <ProjectReference Include="..\..\..\Financial\Financial.Presentation.Terminal.MAUI.UI.Default\Financial.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\HumanResources\HumanResources.Presentation.Terminal.MAUI.UI.Default\HumanResources.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Terminal.MAUI.UI.Default\Inventory.Presentation.Terminal.MAUI.UI.Default.csproj" />
+	  <ProjectReference Include="..\..\..\Legal\Legal.Presentation.Terminal.MAUI.UI.Default\Legal.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Production\Production.Presentation.Terminal.MAUI.UI.Default\Production.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Purchasing\Purchasing.Presentation.Terminal.MAUI.UI.Default\Purchasing.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Supervision\Supervision.Presentation.Terminal.MAUI.UI.Default\Supervision.Presentation.Terminal.MAUI.UI.Default.csproj" />

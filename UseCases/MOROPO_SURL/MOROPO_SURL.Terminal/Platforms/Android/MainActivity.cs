@@ -1,11 +1,9 @@
 ﻿using Android.App;
 using Android.Content.PM;
-using Android.OS;
 
-namespace MOROPO.Tool.Decisor.Terminal.Platforms.Android
+namespace MOROPO.Tool.Decisor.Terminal.Platforms.Android;
+
+[Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, LaunchMode = LaunchMode.SingleTop, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
+public class MainActivity : Microsoft.Maui.MauiAppCompatActivity
 {
-    [Activity(Theme = "@style/Maui.SplashTheme", MainLauncher = true, LaunchMode = LaunchMode.SingleTop, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation | ConfigChanges.UiMode | ConfigChanges.ScreenLayout | ConfigChanges.SmallestScreenSize | ConfigChanges.Density)]
-    public class MainActivity : MauiAppCompatActivity
-    {
-    }
 }

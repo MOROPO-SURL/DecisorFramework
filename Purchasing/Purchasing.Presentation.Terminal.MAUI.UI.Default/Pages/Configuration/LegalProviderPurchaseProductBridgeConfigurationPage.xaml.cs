@@ -80,7 +80,7 @@ public partial class LegalProviderPurchaseProductBridgeConfigurationPage : Core.
 
     private void ProviderPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.LegalProviderPickPage(ProviderPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.LegalProviderPickPage(ProviderPickComplete_Callback)));
     }
 
     private void ProductPickComplete_Callback(Inventory.Interop.API.Common.Models.Display.ProductDisplayModel model)

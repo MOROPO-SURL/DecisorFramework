@@ -24,7 +24,7 @@
                 Grid.Column="0" Grid.RowSpan="3"
                 Aspect="AspectFill"
                 WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
-                Source="{Binding Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                Source="{Binding Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
             <StackLayout 
                 Grid.Column="1"
                 Padding="10">
@@ -32,12 +32,12 @@
                     FontAttributes="Bold"
                     FontSize="Medium"
                     LineBreakMode="TailTruncation"
-                    Text="{Binding Name}" />
+                    Text="{Binding Identity.Name}" />
                 <Label 
-                    IsVisible="{Binding LastName, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                    IsVisible="{Binding Identity.LastName, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
                     FontAttributes="Bold"
                     LineBreakMode="TailTruncation"
-                    Text="{Binding LastName}" />
+                    Text="{Binding Identity.LastName}" />
                 <Label 
                     Margin="0,2,0,0"
                     Text="{Binding BusinessKind.Name}" />
@@ -51,7 +51,7 @@
                     VerticalOptions="FillAndExpand"
                     LineBreakMode="TailTruncation"
                     MaxLines="2"
-                    Text="{Binding About, TargetNullValue='---'}" />
+                    Text="{Binding Identity.About, TargetNullValue='---'}" />
             </StackLayout>
         </Grid>
     </Frame>

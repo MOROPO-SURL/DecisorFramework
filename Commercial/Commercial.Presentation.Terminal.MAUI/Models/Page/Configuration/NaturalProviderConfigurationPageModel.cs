@@ -4,6 +4,7 @@
     {
         private Interop.API.Common.Models.Display.PersonContactDisplayModel contact;
         private string personalIdentificationNumber;
+        private int priority;
 
         public NaturalProviderConfigurationPageModel(Interop.API.Common.Models.Display.NaturalProviderDisplayModel model) : base(model)
         {
@@ -12,6 +13,7 @@
                 Id = model.Id;
                 Contact = model.Contact;
                 PersonalIdentificationNumber = model.PersonalIdentificationNumber;
+                Priority = model.Priority;
             }
         }
 
@@ -20,5 +22,7 @@
         public Interop.API.Common.Models.Display.PersonContactDisplayModel Contact { get => contact; set => SetProperty(ref contact, value); }
 
         public string PersonalIdentificationNumber { get => personalIdentificationNumber; set => SetProperty(ref personalIdentificationNumber, value); }
+
+        public int Priority { get => priority; set => SetProperty(ref priority, value); }
     }
 }

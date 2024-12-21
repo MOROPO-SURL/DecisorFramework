@@ -25,9 +25,9 @@
                         WidthRequest="280"
                         Spacing="16">
                         <Image
-                            IsVisible="{Binding OwnerInformation.DefaultLogoImageSource, Converter={StaticResource IsNotNullConverter}}"
+                            IsVisible="{Binding OwnerInformation.LogoImageViewStyle, Converter={StaticResource IsNotNullConverter}}"
                             Margin="16,0"
-                            Source="{Binding OwnerInformation.DefaultLogoImageSource}" />
+                            Style="{Binding OwnerInformation.LogoImageViewStyle}" />
                         <VerticalStackLayout>
                             <Label
                                 HorizontalTextAlignment="Center"

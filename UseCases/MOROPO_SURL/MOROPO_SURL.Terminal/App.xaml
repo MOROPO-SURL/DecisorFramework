@@ -10,6 +10,10 @@
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="LogoImageViewStyle" TargetType="Image">
+                <Setter Property="Source" Value="{AppThemeBinding Light='identity_color.png', Dark='identity_white.png'}" />
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
