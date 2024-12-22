@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<caneyframework_mvvm_pages:ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_list_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
+    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List.StructureKindsListPage"
+    x:DataType="presentation_list_page_models:StructureKindsListPageModel"
+    Title="Disponibilidad de Tipos de Estructura">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="280" AbsoluteHorizontalSeparation="20" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+
+            <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="Caption" />
+                <Setter Property="Margin" Value="0,16,0,0" />
+            </Style>
+            <Style TargetType="Label" x:Key="ValueFieldLabelStyle">
+                <Setter Property="FontSize" Value="Default" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <SearchBar Margin="20,20,20,0" />
+                <ScrollView 
+                    Orientation="Vertical"
+                    VerticalOptions="FillAndExpand">
+                    <FlexLayout
+                        Margin="10"
+                        Wrap="Wrap"
+                        AlignItems="Start" AlignContent="Start"
+                        BindableLayout.ItemsSource="{Binding Items}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Frame
+                                    x:DataType="interop_common_display_models:StructureKindDisplayModel"
+                                    Margin="5"
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
+                                    HeightRequest="128">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout>
+                                        <Label 
+                                            Text="{Binding Name}"
+                                            LineBreakMode="TailTruncation"
+                                            FontSize="Medium" />
+                                        <Label 
+                                            Margin="0,8,0,0"
+                                            Text="Descripción"
+                                            TextColor="DimGray"
+                                            FontSize="Caption"
+                                            FontAttributes="Bold" />
+                                        <Label 
+                                            VerticalOptions="FillAndExpand"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="2"
+                                            Text="{Binding Description, TargetNullValue='---'}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                        <BindableLayout.EmptyView>
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                Margin="5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                FontAttributes="Italic" />
+                        </BindableLayout.EmptyView>
+                    </FlexLayout>
+                </ScrollView>
+            </StackLayout>
+            <ContentView 
+                IsVisible="{Binding PresentedItem, Converter={StaticResource IsNotNullConverter}}"
+                Style="{StaticResource ModalFrameWrapContentViewStyle}">
+                <ScrollView Orientation="Vertical">
+                    <Grid>
+                        <Frame
+                            VerticalOptions="Center" HorizontalOptions="Center"
+                            Padding="0" Margin="20"
+                            WidthRequest="400">
+                            <Grid>
+                                <StackLayout Margin="20" Spacing="20">
+                                    <StackLayout>
+                                        <Label 
+                                            Margin="0,0,0,20"
+                                            Text="Detalles"
+                                            FontAttributes="Bold"
+                                            FontSize="Medium" />
+                                        <Label
+                                            Style="{StaticResource CaptionFieldLabelStyle}"
+                                            Margin="0"
+                                            Text="Nombre" />
+                                        <Label
+                                            Style="{StaticResource ValueFieldLabelStyle}"
+                                            Text="{Binding PresentedItem.Name}" />
+                                        <Label 
+                                            Style="{StaticResource CaptionFieldLabelStyle}"
+                                            Text="Prioridad" />
+                                        <Label
+                                            Style="{StaticResource ValueFieldLabelStyle}"
+                                            Text="{Binding PresentedItem.Priority}" />
+                                        <Label 
+                                            Style="{StaticResource CaptionFieldLabelStyle}"
+                                            Text="Descripción" />
+                                        <Label
+                                            Style="{StaticResource ValueFieldLabelStyle}"
+                                            Text="{Binding PresentedItem.Description, TargetNullValue='---'}" />
+                                    </StackLayout>
+                                </StackLayout>
+                                <Button
+                                    HorizontalOptions="End" VerticalOptions="Start"
+                                    Padding="10"
+                                    BackgroundColor="Transparent"
+                                    Text="&#xf5ad;"
+                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                                    FontSize="Medium"
+                                    FontFamily="MaterialDesignIcons"
+                                    BorderWidth="0"
+                                    WidthRequest="48" HeightRequest="48"
+                                    Clicked="PresentedItemDismissButton_Clicked" />
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </ScrollView>
+            </ContentView>
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</caneyframework_mvvm_pages:ContentPage>

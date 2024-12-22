@@ -23,7 +23,7 @@
 		<CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\HumanResources\HumanResources.Presentation.Terminal.MAUI\HumanResources.Presentation.Terminal.MAUI.csproj" />
+		<ProjectReference Include="..\..\Core\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj" />
 		<ProjectReference Include="..\Domain.Interop.API.Connect\Domain.Interop.API.Connect.csproj" />
 	</ItemGroup>
 </Project>

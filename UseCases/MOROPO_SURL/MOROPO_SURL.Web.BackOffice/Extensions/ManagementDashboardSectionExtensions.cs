@@ -98,8 +98,13 @@
 
             if (target.Controller == "costcenters") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-finance");
 
-            return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
+            if (target.Controller == "structurekinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-graph-outline");
 
+            if (target.Controller == "propertykinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-home-city-outline");
+
+            if (target.Controller == "vehicleenginekinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-engine");
+
+            return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
         }
     }
 }

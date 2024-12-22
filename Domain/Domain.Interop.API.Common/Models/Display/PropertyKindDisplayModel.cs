@@ -12,7 +12,7 @@
 
         public int Priority { get; set; }
 
-        public void Import(Persistence.Entities.PropertyKind entity)
+        public virtual void Import(Persistence.Entities.PropertyKind entity)
         {
             Id = entity.Id;
             Name = entity.Name;
