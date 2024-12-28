@@ -22,7 +22,6 @@ using System.Linq;
 using MOROPO.Framework.Guama.Security.Personal.Persistence.ORM.EF.Extensions;
 using System.Runtime.CompilerServices;
 using System;
-using SkiaSharp;
 using Microsoft.AspNetCore.Http;
 
 namespace MOROPO.Tool.Decisor.Web.BackOffice

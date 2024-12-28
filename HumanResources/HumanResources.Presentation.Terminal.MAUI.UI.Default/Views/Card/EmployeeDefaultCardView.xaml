@@ -11,14 +11,14 @@
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <Frame Margin="5" Padding="0">
+    <Frame Padding="0">
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Image
-                Grid.Column="0" Grid.RowSpan="3"
+                Grid.Column="0"
                 Aspect="AspectFill"
                 WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
                 Source="{Binding Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />

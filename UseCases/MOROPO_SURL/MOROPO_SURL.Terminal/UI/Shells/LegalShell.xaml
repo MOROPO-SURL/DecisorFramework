@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:decisorframework_legal_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.LegalShell"
     FlyoutBehavior="Locked">
     <Shell.FlyoutHeader>
@@ -43,26 +44,17 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
-    <ShellContent
-        Title="Resoluciones"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
+    <FlyoutItem Title="Resoluciones">
+        <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xFD15;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-        Title="Proformas de Contrato"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF00A6;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Nombramiento"
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:NamingResolutionsManagePage}" />
+    </FlyoutItem>
     <ShellContent
         Title="Disposiciones Legislativas"
         ContentTemplate="{DataTemplate ContentPage}">
@@ -91,6 +83,16 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF01B1;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Proformas de Contrato"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF00A6;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

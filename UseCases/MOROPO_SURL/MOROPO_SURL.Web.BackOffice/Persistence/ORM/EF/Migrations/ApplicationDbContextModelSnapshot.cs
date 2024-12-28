@@ -111,7 +111,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("CommercialId")
@@ -119,7 +119,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("commercialid");
 
                     b.Property<DateTime?>("ConfirmedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("confirmedat");
 
                     b.Property<string>("Description")
@@ -140,7 +140,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("priority");
 
                     b.Property<DateTime?>("SharedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("sharedat");
 
                     b.HasKey("Number", "Year")
@@ -168,7 +168,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Discriminator")
@@ -206,7 +206,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -244,7 +244,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("ContactId")
@@ -289,7 +289,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("ClientId")
@@ -318,7 +318,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("proformaid");
 
                     b.Property<DateTime>("StarAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("starat");
 
                     b.HasKey("Number", "Year")
@@ -345,7 +345,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("ContactId")
@@ -390,7 +390,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<TimeSpan>("Duration")
@@ -419,7 +419,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("providerid");
 
                     b.Property<DateTime>("StarAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("starat");
 
                     b.HasKey("Number", "Year")
@@ -446,7 +446,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -484,7 +484,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("ContactId")
@@ -529,7 +529,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("ClientId")
@@ -558,7 +558,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("proformaid");
 
                     b.Property<DateTime>("StarAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("starat");
 
                     b.HasKey("Number", "Year")
@@ -585,7 +585,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("BusinessKindId")
@@ -637,7 +637,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<TimeSpan>("Duration")
@@ -666,7 +666,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("providerid");
 
                     b.Property<DateTime>("StarAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("starat");
 
                     b.HasKey("Number", "Year")
@@ -795,7 +795,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -840,7 +840,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -1083,7 +1083,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -1144,7 +1144,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("bigint")
                         .HasColumnName("representativenamingresolutionnid");
 
-                    b.Property<Guid>("SocialPropertyId")
+                    b.Property<Guid?>("SocialPropertyId")
                         .HasColumnType("uuid")
                         .HasColumnName("socialpropertyid");
 
@@ -1181,7 +1181,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -1326,7 +1326,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -1371,7 +1371,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -1435,7 +1435,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<bool>("Enabled")
@@ -1471,7 +1471,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("BranchId")
@@ -1532,7 +1532,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<bool>("Enabled")
@@ -1577,7 +1577,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<bool>("Enabled")
@@ -1620,7 +1620,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("BankAccountId")
@@ -1632,7 +1632,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("enabled");
 
                     b.Property<DateTime>("ExpireOn")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("expireon");
 
                     b.Property<string>("Number")
@@ -1669,7 +1669,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("DefaultBankAccountId")
@@ -1756,7 +1756,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<bool>("Enabled")
@@ -1801,7 +1801,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<TimeSpan>("Duration")
@@ -1830,7 +1830,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("proformaid");
 
                     b.Property<DateTime>("StarAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("starat");
 
                     b.HasKey("Number", "Year")
@@ -1859,7 +1859,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("NamedEmployeeId")
@@ -1892,7 +1892,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("amount");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid?>("ClassificationId")
@@ -1954,7 +1954,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -1999,7 +1999,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -2040,7 +2040,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("ResponsibleId")
@@ -2066,7 +2066,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -2100,7 +2100,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -2157,7 +2157,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<int?>("CategoryId")
@@ -2285,7 +2285,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<bool>("Enabled")
@@ -2347,7 +2347,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -2537,7 +2537,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("reference");
 
                     b.Property<DateTime>("ReleasedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("releasedat");
 
                     b.HasKey("Id")
@@ -2564,7 +2564,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -2724,7 +2724,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -2800,7 +2800,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -2970,7 +2970,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -3084,7 +3084,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("amount");
 
                     b.Property<DateTime?>("ApprovedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("approvedat");
 
                     b.Property<bool>("Archived")
@@ -3092,7 +3092,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("DecisorId")
@@ -3108,7 +3108,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("elaborationid");
 
                     b.Property<DateTime>("PlannedFor")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("plannedfor");
 
                     b.Property<Guid>("PlannerId")
@@ -3183,7 +3183,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -3221,7 +3221,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -3268,7 +3268,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("amount");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid?>("PurchasePlanId")
@@ -3352,7 +3352,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTime?>("ApprovedAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("approvedat");
 
                     b.Property<bool>("Archived")
@@ -3360,7 +3360,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<Guid>("DecisorId")
@@ -3380,7 +3380,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("estimatedadvance");
 
                     b.Property<DateTime>("PlannedFor")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("plannedfor");
 
                     b.Property<Guid>("PlannerId")
@@ -3703,7 +3703,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -3741,7 +3741,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -3840,7 +3840,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
                     b.Property<string>("Description")
@@ -3898,7 +3898,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("nextid");
 
                     b.Property<DateTime>("Registered")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("registered");
 
                     b.Property<string>("Signature")
@@ -4042,7 +4042,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("about");
 
                     b.Property<DateTime?>("BornDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("borndate");
 
                     b.Property<Guid?>("ImageId")
@@ -4204,7 +4204,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("alias");
 
                     b.Property<DateTime?>("BornDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("borndate");
 
                     b.Property<int>("CivilStatus")
@@ -4641,7 +4641,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("contenttype");
 
                     b.Property<DateTime>("CreateAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("createat");
 
                     b.Property<int>("Height")
@@ -4724,7 +4724,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("colormodel");
 
                     b.Property<DateTime>("CreateAt")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("createat");
 
                     b.Property<TimeSpan>("Duration")
@@ -4774,7 +4774,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("id");
 
                     b.Property<DateTime>("Created")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("created");
 
                     b.Property<bool>("Enabled")
@@ -4794,7 +4794,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("identityid");
 
                     b.Property<DateTime>("LastSessionDate")
-                        .HasColumnType("timestamp with time zone")
+                        .HasColumnType("timestamp without time zone")
                         .HasColumnName("lastsessiondate");
 
                     b.Property<string>("Password")
@@ -4888,6 +4888,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("businesskindid");
 
+                    b.Property<Guid?>("CentralStateStructureId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("centralstatestructureid");
+
                     b.Property<Guid>("IdentityId")
                         .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("uuid")
@@ -4895,6 +4899,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("BusinessKindId")
                         .HasDatabaseName("ix_contacts_businesskindid");
+
+                    b.HasIndex("CentralStateStructureId")
+                        .HasDatabaseName("ix_contacts_centralstatestructureid");
 
                     b.HasIndex("IdentityId")
                         .IsUnique()
@@ -5476,8 +5483,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Property", "SocialProperty")
                         .WithMany()
                         .HasForeignKey("SocialPropertyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_structures_properties_socialpropertyid");
 
                     b.Navigation("Identity");
@@ -7217,6 +7222,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasForeignKey("BusinessKindId")
                         .HasConstraintName("fk_contacts_legalbusinesskinds_businesskindid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Legal.Persistence.Entities.CentralStateStructure", "CentralStateStructure")
+                        .WithMany()
+                        .HasForeignKey("CentralStateStructureId")
+                        .HasConstraintName("fk_contacts_centralstatestructures_centralstatestructureid");
+
                     b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.OrganizationIdentity", "Identity")
                         .WithOne()
                         .HasForeignKey("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.OrganizationContact", "IdentityId")
@@ -7225,6 +7235,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_contacts_organizationidentities_identityid");
 
                     b.Navigation("BusinessKind");
+
+                    b.Navigation("CentralStateStructure");
 
                     b.Navigation("Identity");
                 });

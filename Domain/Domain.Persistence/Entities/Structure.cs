@@ -30,6 +30,6 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.Entities
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SocialPropertyId))]
         public Property SocialProperty { get; set; }
-        public System.Guid SocialPropertyId { get; set; }
+        public System.Guid? SocialPropertyId { get; set; }
     }
 }

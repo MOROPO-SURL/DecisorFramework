@@ -8,6 +8,8 @@ public partial class EmployeePickPage : Caney.MVVM.Core.Pages.ContentPage
 {
     private System.Action<Interop.API.Common.Models.Display.EmployeeDisplayModel> pickCompleteAction;
 
+    private bool pickedFlag = false;
+
     public EmployeePickPage(System.Action<Interop.API.Common.Models.Display.EmployeeDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
@@ -23,7 +25,12 @@ public partial class EmployeePickPage : Caney.MVVM.Core.Pages.ContentPage
     {
         base.OnAppearing();
 
-        if (IsEnabled) return;
+        if (IsEnabled)
+        {
+            if (pickedFlag) (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+
+            return;
+        }
 
         LoadItems();
 
@@ -35,6 +42,11 @@ public partial class EmployeePickPage : Caney.MVVM.Core.Pages.ContentPage
         base.DisposeUnmanagementResources();
 
         pickCompleteAction = null;
+    }
+
+    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushPageAsync(new Configuration.EmployeeConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.EmployeeConfigurationPageModel(null)));
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
@@ -51,7 +63,16 @@ public partial class EmployeePickPage : Caney.MVVM.Core.Pages.ContentPage
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync().ContinueWith(_ => Dispatcher.Dispatch(() => pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.EmployeeDisplayModel)));
+        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.EmployeeDisplayModel));
+
+        (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
+    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    {
+        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+
+        pickedFlag = true;
     }
 
     private void LoadItems()
