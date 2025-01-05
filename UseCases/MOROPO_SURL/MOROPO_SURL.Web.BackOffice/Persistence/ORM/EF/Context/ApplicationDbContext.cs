@@ -119,7 +119,15 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleImageBridge> VehicleImageBridges { get; set; }
         public DbSet<StructureKind> StructureKinds { get; set; }
+        public DbSet<OrganizationalUnity> OrganizationalUnities { get; set; }
+        public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
         public DbSet<Structure> Structures { get; set; }
+        public DbSet<Schooling> Schoolings { get; set; }
+        public DbSet<VacantKind> VacantKinds { get; set; }
+        public DbSet<Vacant> Vacants { get; set; }
+        public DbSet<SalaryStandard> SalaryStandards { get; set; }
+        public DbSet<Workforce> Workforces { get; set; }
+        public DbSet<WorkforceOrganizationalUnityVacantBridge> WorkforceOrganizationalUnityVacantBridge { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmploymentContract> EmploymentContracts { get; set; }
         public DbSet<NamingResolution> NamingResolutions { get; set; }

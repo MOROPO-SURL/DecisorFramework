@@ -105,6 +105,22 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
             #region HH.RR.
             humanResourcesSection.Add(new ManagementDashboardSectionViewModel
             {
+                Title = "Niveles de Escolaridad",
+                Controller = "schoolings",
+                Action = "Index",
+                Area = "HHRR",
+                Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.SchoolingViewerPermission
+            });
+            humanResourcesSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Tipos de Plaza",
+                Controller = "vacantkinds",
+                Action = "Index",
+                Area = "HHRR",
+                Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.VacantKindViewerPermission
+           });
+            humanResourcesSection.Add(new ManagementDashboardSectionViewModel
+            {
                 Title = "Empleados",
                 Controller = "employees",
                 Action = "Index",

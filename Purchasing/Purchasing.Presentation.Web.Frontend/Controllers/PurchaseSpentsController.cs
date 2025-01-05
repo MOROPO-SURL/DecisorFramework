@@ -17,5 +17,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
         {
             return entity => !entity.Archived && entity.Enabled;
         }
+
+        protected override System.Func<PurchaseSpent, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
+        }
     }
 }

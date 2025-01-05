@@ -8,11 +8,6 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Repositories
         {
         }
 
-        public override System.Func<Entities.UnitMeasurement, object> GetPagingOrderSelector()
-        {
-            return entity => entity.Priority;
-        }
-
         protected override System.Linq.IQueryable<Entities.UnitMeasurement> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet().Include(entity => entity.ConversionBridges).ThenInclude(bridge => bridge.Stern);

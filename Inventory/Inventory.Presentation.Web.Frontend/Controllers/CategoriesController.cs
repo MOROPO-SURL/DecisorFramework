@@ -18,15 +18,14 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
             return entity => !entity.Archived && entity.Enabled;
         }
 
+        protected override System.Func<Category, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
+        }
+
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(int key)
         {
             return NotFound();
-        }
-
-        [Microsoft.AspNetCore.Mvc.HttpGet("[action]")]
-        public Microsoft.AspNetCore.Mvc.ActionResult<long> Count()
-        {
-            return Ok(Repository.Count());
         }
     }
 }

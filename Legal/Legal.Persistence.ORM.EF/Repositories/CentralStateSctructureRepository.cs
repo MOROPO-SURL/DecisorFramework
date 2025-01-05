@@ -12,9 +12,4 @@ public class CentralStateSctructureRepository : Guama.Core.Persistence.ORM.EF.Re
     {
         return base.GetQueryableDbSet().Include(entity => entity.Identity).ThenInclude(entity => entity.Image);
     }
-
-    public override System.Func<Entities.CentralStateStructure, object> GetPagingOrderSelector()
-    {
-        return entity => entity.Priority;
-    }
 }

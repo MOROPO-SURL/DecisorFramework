@@ -11,10 +11,5 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Connect.Clients
         }
 
         protected override string TargetController => "api/purchasing/purchases";
-
-        public async System.Threading.Tasks.Task<long> CountAsync()
-        {
-            return await httpClientHelperProvider.HttpClientHelper.GetAsync<long>($"{TargetController}/count");
-        }
     }
 }

@@ -15,5 +15,10 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
         {
             return entity => !entity.Archived && entity.Enabled;
         }
+
+        protected override System.Func<Persistence.Entities.ProductionRole, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
+        }
     }
 }

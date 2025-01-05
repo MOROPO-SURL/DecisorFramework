@@ -1,0 +1,29 @@
+﻿namespace MOROPO.Framework.Decisor.HumanResources.Persistence.Entities
+{
+    public class Vacant : Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
+    {
+        [System.ComponentModel.DataAnnotations.Key]
+        public System.Guid Id { get; set; } = System.Guid.NewGuid();
+
+        public bool Archived { get; set; }
+
+        public bool Enabled { get; set; }
+
+        public int Priority { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Name { get; set; }
+
+        public string Reference { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(KindId))]
+        public VacantKind Kind { get; set; }
+        public System.Guid KindId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SchoolingId))]
+        public Schooling Schooling { get; set; }
+        public System.Guid SchoolingId { get; set; }
+
+        public string Description { get; set; }
+    }
+}

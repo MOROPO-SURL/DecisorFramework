@@ -25,6 +25,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             return entity => !entity.Archived;
         }
 
+        protected override System.Func<Purchase, object> GetOrderSelector()
+        {
+            return entity => entity.At;
+        }
+
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
         {
             return NotFound();
@@ -269,12 +274,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             //}
 
             throw new System.InvalidOperationException();
-        }
-
-        [Microsoft.AspNetCore.Mvc.HttpGet("[action]")]
-        public Microsoft.AspNetCore.Mvc.ActionResult<long> Count()
-        {
-            return Ok(Repository.Count());
         }
     }
 }

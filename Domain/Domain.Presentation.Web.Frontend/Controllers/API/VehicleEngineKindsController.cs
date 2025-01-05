@@ -14,5 +14,10 @@
         {
             return entity => !entity.Archived && entity.Enabled;
         }
+
+        protected override System.Func<Persistence.Entities.VehicleEngineKind, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
+        }
     }
 }

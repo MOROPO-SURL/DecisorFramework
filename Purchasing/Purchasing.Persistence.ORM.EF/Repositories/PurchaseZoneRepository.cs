@@ -9,11 +9,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Repositories
         {
         }
 
-        public override System.Func<Entities.PurchaseZone, object> GetPagingOrderSelector()
-        {
-            return entity => entity.Priority;
-        }
-
         protected override IQueryable<Entities.PurchaseZone> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet().Include(entity => entity.SpentBridges).ThenInclude(bridge => bridge.Stern);

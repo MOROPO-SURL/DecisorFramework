@@ -5,11 +5,6 @@
         public ProductionRoleRepository(Microsoft.EntityFrameworkCore.DbContext dbContext) : base(dbContext)
         {
         }
-
-        public override System.Func<Entities.ProductionRole, object> GetPagingOrderSelector()
-        {
-            return entity => entity.Priority;
-        }
     }
 }
 

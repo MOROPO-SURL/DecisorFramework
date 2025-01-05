@@ -29,6 +29,63 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Helper
             }
             #endregion
 
+            #region Schooling
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.SchoolingViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.SchoolingViewerPermission.ToPermissionEntity(Authorization.SchoolingManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.SchoolingCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.SchoolingCreatorPermission.ToPermissionEntity(Authorization.SchoolingManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.SchoolingEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.SchoolingEditorPermission.ToPermissionEntity(Authorization.SchoolingManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.SchoolingRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.SchoolingRemoverPermission.ToPermissionEntity(Authorization.SchoolingManagementPermissionGroup));
+            }
+            #endregion
+
+            #region VacantKind
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantKindViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.VacantKindViewerPermission.ToPermissionEntity(Authorization.VacantKindManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantKindCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.VacantKindCreatorPermission.ToPermissionEntity(Authorization.VacantKindManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantKindEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.VacantKindEditorPermission.ToPermissionEntity(Authorization.VacantKindManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantKindRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.VacantKindRemoverPermission.ToPermissionEntity(Authorization.VacantKindManagementPermissionGroup));
+            }
+            #endregion
+
+            #region Vacant
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.VacantViewerPermission.ToPermissionEntity(Authorization.VacantManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.VacantCreatorPermission.ToPermissionEntity(Authorization.VacantManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.VacantEditorPermission.ToPermissionEntity(Authorization.VacantManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.VacantRemoverPermission.ToPermissionEntity(Authorization.VacantManagementPermissionGroup));
+            }
+            #endregion
+
             if (dbContext is Guama.Core.Persistence.ORM.EF.Context.Contract.ITraceableDbContext)
             {
                 (dbContext as Guama.Core.Persistence.ORM.EF.Context.Contract.ITraceableDbContext).SaveChanges("system");

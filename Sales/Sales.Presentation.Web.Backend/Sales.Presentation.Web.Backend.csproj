@@ -6,7 +6,7 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Sales.Presentation.Web.Backend</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.0.31" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.0.32" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Sales.Presentation.Web.Common\Sales.Presentation.Web.Common.csproj" />

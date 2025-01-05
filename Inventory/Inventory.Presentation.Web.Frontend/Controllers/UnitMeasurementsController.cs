@@ -19,6 +19,11 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
             return entity => !entity.Archived && entity.Enabled;
         }
 
+        protected override System.Func<UnitMeasurement, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
+        }
+
         public override ActionResult Delete(System.Guid key)
         {
             return NotFound();

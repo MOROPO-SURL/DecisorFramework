@@ -10,6 +10,8 @@
         public Microsoft.EntityFrameworkCore.DbSet<Entities.Vehicle> Vehicles { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.VehicleImageBridge> VehicleImageBridges { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.StructureKind> StructureKinds { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Entities.OrganizationalUnity> OrganizationalUnities { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Entities.StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.Structure> Structures { get; set; }
     }
 }

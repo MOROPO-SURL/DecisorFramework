@@ -21,6 +21,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             return entity => !entity.Archived && entity.Enabled;
         }
 
+        protected override System.Func<PurchasePlan, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
+        }
+
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
         {
             return NotFound();
@@ -129,12 +134,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                     entity.OutputProductBridges.Add(new PurchasePlanOutputProductBridge { ProwId = entity.Id, SternId = item.Product.Id, UnitMeasurementId = item.UnitMeasurement.Id, Amount = item.Amount });
                 }
             }
-        }
-
-        [Microsoft.AspNetCore.Mvc.HttpGet("[action]")]
-        public Microsoft.AspNetCore.Mvc.ActionResult<long> Count()
-        {
-            return Ok(Repository.Count());
         }
 
         [Microsoft.AspNetCore.Mvc.HttpPut("approve/{key}")]

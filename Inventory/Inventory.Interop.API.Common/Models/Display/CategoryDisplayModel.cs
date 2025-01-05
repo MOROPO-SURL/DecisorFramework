@@ -38,6 +38,14 @@
 
             return self;
         }
+
+        public string TreeName
+        {
+            get
+            {
+                return Parent != null ? string.Format("{0} / {1}", Parent.TreeName, Name) : Name;
+            }
+        }
     }
 }
 

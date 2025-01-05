@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:decisorframework_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_humanresources_list_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.HumanResourcesShell"
     FlyoutBehavior="Locked">
     <Shell.FlyoutHeader>
@@ -50,6 +51,37 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xFDF0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Plazas Laborales"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:VacantsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF007;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Configuración" />
+    <ShellContent
+        Title="Categorías Ocupacionales"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:VacantKindsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF017;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Niveles de Preparación"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:SchoolingsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF474;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

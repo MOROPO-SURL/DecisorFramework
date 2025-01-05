@@ -35,11 +35,5 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
 
             return model;
         }
-
-        [HttpGet("[action]")]
-        public ActionResult<long> Count()
-        {
-            return Ok(Repository.Count());
-        }
     }
 }

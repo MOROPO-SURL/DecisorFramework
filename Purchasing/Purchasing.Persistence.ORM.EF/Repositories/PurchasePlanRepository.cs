@@ -25,10 +25,5 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Repositories
                 .Include(entity => entity.OutputProductBridges).ThenInclude(bridge => bridge.UnitMeasurement)
                 .Include(entity => entity.Purchase);
         }
-
-        public override System.Func<Persistence.Entities.PurchasePlan, object> GetPagingOrderSelector()
-        {
-            return entity => entity.Priority;
-        }
     }
 }

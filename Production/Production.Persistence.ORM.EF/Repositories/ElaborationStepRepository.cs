@@ -12,10 +12,5 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Repositories
         {
             return base.GetQueryableDbSet().Include(entity => entity.ProductionRoleBridges).ThenInclude(bridge => bridge.Stern);
         }
-
-        public override System.Func<Entities.ElaborationStep, object> GetPagingOrderSelector()
-        {
-            return entity => entity.Priority;
-        }
     }
 }

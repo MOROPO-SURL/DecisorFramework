@@ -5,6 +5,6 @@
 		<RootNamespace>MOROPO.Framework.Decisor.HumanResources.Persistence</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Legal\Legal.Persistence\Legal.Persistence.csproj" />
+	  <ProjectReference Include="..\..\Domain\Domain.Persistence\Domain.Persistence.csproj" />
 	</ItemGroup>
 </Project>

@@ -18,10 +18,5 @@ namespace MOROPO.Framework.Decisor.Essential.Persistence.ORM.EF.Repositories
                 .Include(entity => entity.Identity).ThenInclude(entity => entity.PostalContactItemBridges).ThenInclude(bridge => bridge.Stern)
                 .Include(entity => entity.Identity).ThenInclude(entity => entity.WebSiteContactItemBridges).ThenInclude(bridge => bridge.Stern);
         }
-
-        public override System.Func<Entities.Colaborator, object> GetPagingOrderSelector()
-        {
-            return entity => entity.Priority;
-        }
     }
 }

@@ -434,6 +434,17 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
     </Style>
 
+    <Style TargetType="Label" x:Key="CaptionPropertyLabelStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="Caption" />
+        <Setter Property="Margin" Value="0,16,0,0" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="ValuePropertyLabelStyle">
+        <Setter Property="FontSize" Value="Default" />
+    </Style>
+
     <Style TargetType="ContentView" x:Key="ModalFrameWrapContentViewStyle">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#A9000000, Dark=#A9333333}" />
     </Style>

@@ -16,15 +16,5 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
                 .Include(entity => entity.NamedEmployee).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.PostalContactItemBridges).ThenInclude(bridge => bridge.Stern)
                 .Include(entity => entity.NamedEmployee).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.WebSiteContactItemBridges).ThenInclude(bridge => bridge.Stern);
         }
-
-        public override System.Func<Entities.NamingResolution, object> GetPagingOrderSelector()
-        {
-            return entity => entity.Id * 10000 + entity.At.Year;
-        }
-
-        public override bool IsPagingOrderDescending()
-        {
-            return true;
-        }
     }
 }

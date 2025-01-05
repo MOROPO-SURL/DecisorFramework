@@ -10,10 +10,5 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Connect.Clients
         }
 
         protected override string TargetController => "api/commercial/naturalproviders";
-
-        public async System.Threading.Tasks.Task<long> CountAsync()
-        {
-            return await httpClientHelperProvider.HttpClientHelper.GetAsync<long>($"{TargetController}/count");
-        }
     }
 }

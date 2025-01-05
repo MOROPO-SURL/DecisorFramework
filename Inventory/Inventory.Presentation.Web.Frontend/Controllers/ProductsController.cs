@@ -30,6 +30,11 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
             return entity => !entity.Archived && entity.Enabled;
         }
 
+        protected override System.Func<Product, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
+        }
+
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
         {
             return NotFound();
@@ -143,12 +148,6 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
 
                 imageFileManager.DeleteImageFile(oldLogoImage);
             }
-        }
-
-        [Microsoft.AspNetCore.Mvc.HttpGet("[action]")]
-        public Microsoft.AspNetCore.Mvc.ActionResult<long> Count()
-        {
-            return Ok(Repository.Count());
         }
 
         private void FillParent(Category entity)

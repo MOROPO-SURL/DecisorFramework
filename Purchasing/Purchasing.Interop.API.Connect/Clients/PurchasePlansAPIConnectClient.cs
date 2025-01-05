@@ -21,10 +21,5 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Connect.Clients
         {
             await httpClientHelperProvider.HttpClientHelper.PutAsync($"{TargetController}/invalidate/{key}");
         }
-
-        public async System.Threading.Tasks.Task<long> CountAsync()
-        {
-            return await httpClientHelperProvider.HttpClientHelper.GetAsync<long>($"{TargetController}/count");
-        }
     }
 }

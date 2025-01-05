@@ -7,10 +7,5 @@
         }
 
         protected override string TargetController => "api/legal/centralstatestructures";
-
-        public async System.Threading.Tasks.Task<long> CountAsync()
-        {
-            return await httpClientHelperProvider.HttpClientHelper.GetAsync<long>($"{TargetController}/count");
-        }
     }
 }

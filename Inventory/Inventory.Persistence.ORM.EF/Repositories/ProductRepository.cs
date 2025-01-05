@@ -16,10 +16,5 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Repositories
                 .Include(entity => entity.Classifications)
                 .Include(entity => entity.WarehousingDecreaseKindBridges);
         }
-
-        public override System.Func<Entities.Product, object> GetPagingOrderSelector()
-        {
-            return entity => entity.Priority;
-        }
     }
 }

@@ -25,6 +25,16 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
             return entity => !entity.Archived;
         }
 
+        protected override System.Func<NamingResolution, object> GetOrderSelector()
+        {
+            return entity => 1000 * entity.Id + entity.At.Year;
+        }
+
+        protected override bool IsOrderDescending()
+        {
+            return true;
+        }
+
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(long key)
         {
             return NotFound();

@@ -18,6 +18,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             return entity => !entity.Archived && entity.Enabled;
         }
 
+        protected override System.Func<PurchaseZone, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
+        }
+
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
         {
             return NotFound();
@@ -49,12 +54,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                     entity.SpentBridges.Add(new PurchaseZoneSpentBridge { ProwId = entity.Id, SternId = item.Spent.Id, Amount = item.Amount });
                 }
             }
-        }
-
-        [Microsoft.AspNetCore.Mvc.HttpGet("[action]")]
-        public Microsoft.AspNetCore.Mvc.ActionResult<long> Count()
-        {
-            return Ok(Repository.Count());
         }
     }
 }

@@ -5,10 +5,5 @@
         public PurchaseSpentRepository(Microsoft.EntityFrameworkCore.DbContext dbContext) : base(dbContext)
         {
         }
-
-        public override System.Func<Entities.PurchaseSpent, object> GetPagingOrderSelector()
-        {
-            return entity => entity.Priority;
-        }
     }
 }

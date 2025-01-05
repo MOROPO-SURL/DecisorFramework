@@ -26,6 +26,11 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.A
             return entity => !entity.Archived;
         }
 
+        protected override System.Func<CentralStateStructure, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
+        }
+
         public override ActionResult Delete(System.Guid key)
         {
             return NotFound();
@@ -105,12 +110,6 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.A
 
                 imageFileManager.DeleteImageFile(oldLogoImage);
             }
-        }
-
-        [HttpGet("[action]")]
-        public ActionResult<long> Count()
-        {
-            return Ok(Repository.Count());
         }
     }
 }

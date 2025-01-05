@@ -30,12 +30,39 @@
 	  <Compile Update="Pages\List\PropertyKindsListPage.xaml.cs">
 	    <DependentUpon>PropertyKindsListPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Card\OrganizationalUnityTreeCardView.xaml.cs">
+	    <DependentUpon>OrganizationalUnityTreeCardView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\StructureTreeCardView.xaml.cs">
+	    <DependentUpon>StructureTreeCardView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\OrganizationalUnityConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\StructureConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\List\PropertyKindsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\List\VehicleEngineKindsListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\OrganizationalUnitiesManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\StructuresManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\OrganizationalUnityPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\OrganizationalUnityTreeCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\StructureTreeCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
