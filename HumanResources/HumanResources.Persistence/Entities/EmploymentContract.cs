@@ -2,9 +2,8 @@
 {
     public class EmploymentContract : Legal.Persistence.Entities.Contract.AbstractContract
 	{
-		[System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(EmployeeId))]
-		public Employee Employee { get; set; }
-		public System.Guid EmployeeId { get; set; }
+		[System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(OcupationId))]
+		public Ocupation Ocupation { get; set; }
+		public System.Guid OcupationId { get; set; }
 	}
 }
-

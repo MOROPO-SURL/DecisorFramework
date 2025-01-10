@@ -20,22 +20,22 @@
         public const string SchoolingRemoverPermission = "schooling-remover-permission";
         #endregion
 
-        #region VacantKind
-        public const string VacantKindManagementPermissionGroup = "vacantkind-management-permission-group";
+        #region WorkPositionKind
+        public const string WorkPositionKindManagementPermissionGroup = "workpositionkind-management-permission-group";
 
-        public const string VacantKindViewerPermission = "vacantkind-viewer-permission";
-        public const string VacantKindCreatorPermission = "vacantkind-creator-permission";
-        public const string VacantKindEditorPermission = "vacantkind-editor-permission";
-        public const string VacantKindRemoverPermission = "vacantkind-remover-permission";
+        public const string WorkPositionKindViewerPermission = "workpositionkind-viewer-permission";
+        public const string WorkPositionKindCreatorPermission = "workpositionkind-creator-permission";
+        public const string WorkPositionKindEditorPermission = "workpositionkind-editor-permission";
+        public const string WorkPositionKindRemoverPermission = "workpositionkind-remover-permission";
         #endregion
 
-        #region Vacant
-        public const string VacantManagementPermissionGroup = "vacant-management-permission-group";
+        #region WorkPosition
+        public const string WorkPositionManagementPermissionGroup = "workposition-management-permission-group";
 
-        public const string VacantViewerPermission = "vacant-viewer-permission";
-        public const string VacantCreatorPermission = "vacant-creator-permission";
-        public const string VacantEditorPermission = "vacant-editor-permission";
-        public const string VacantRemoverPermission = "vacant-remover-permission";
+        public const string WorkPositionViewerPermission = "workposition-viewer-permission";
+        public const string WorkPositionCreatorPermission = "workposition-creator-permission";
+        public const string WorkPositionEditorPermission = "workposition-editor-permission";
+        public const string WorkPositionRemoverPermission = "workposition-remover-permission";
         #endregion
     }
 }

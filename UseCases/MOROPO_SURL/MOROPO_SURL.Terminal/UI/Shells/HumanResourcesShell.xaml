@@ -45,6 +45,26 @@
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
+        Title="Personal en Plantilla"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF8C4;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Definiciones de Plantilla"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF002C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
         Title="Empleados"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:EmployeesManagePage}">
         <ShellContent.Icon>
@@ -56,18 +76,28 @@
     </ShellContent>
     <ShellContent
         Title="Plazas Laborales"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:VacantsManagePage}">
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkPositionsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF007;"
+                Glyph="&#xF631;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Escalas Salariales"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:SalaryStandardsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF00C2;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Configuración" />
     <ShellContent
         Title="Categorías Ocupacionales"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:VacantKindsListPage}">
+        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:WorkPositionKindsListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

@@ -1,12 +1,12 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Persistence.Entities
 {
-    public class Workforce : Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
+    public class Workforce : Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>, Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; } = System.Guid.NewGuid();
 
-        public Domain.Persistence.Entities.Structure Structure { get; set; }
-        public System.Guid StructureId { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Name { get; set; }
 
         public bool Archived { get; set; }
 
@@ -16,6 +16,8 @@
 
         public System.DateTime At { get; set; }
 
-        public System.Collections.Generic.List<WorkforceOrganizationalUnityVacantBridge> OrganizationalUnityVacantBridges { get; set; } = new System.Collections.Generic.List<WorkforceOrganizationalUnityVacantBridge>();
+        public System.Collections.Generic.List<WorkforceOrganizationalUnityBridge> OrganizationalUnityBridges { get; set; } = new System.Collections.Generic.List<WorkforceOrganizationalUnityBridge>();
+
+        public System.Collections.Generic.IEnumerable<Vacant> Vacants { get; set; }
     }
 }

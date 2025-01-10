@@ -114,10 +114,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
             humanResourcesSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Tipos de Plaza",
-                Controller = "vacantkinds",
+                Controller = "workpositionkinds",
                 Action = "Index",
                 Area = "HHRR",
-                Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.VacantKindViewerPermission
+                Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.WorkPositionKindViewerPermission
            });
             humanResourcesSection.Add(new ManagementDashboardSectionViewModel
             {

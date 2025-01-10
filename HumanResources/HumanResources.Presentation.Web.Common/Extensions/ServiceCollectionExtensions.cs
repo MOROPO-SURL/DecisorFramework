@@ -10,10 +10,14 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extens
         public static void AddDecisorHumanResourcesPresentationWebCommon(this IServiceCollection services)
         {
             services.AddScoped<IEntityRepository<Schooling, System.Guid>, SchoolingRepository>();
-            services.AddScoped<IEntityRepository<VacantKind, System.Guid>, VacantKindRepository>();
-            services.AddScoped<IEntityRepository<Vacant, System.Guid>, VacantRepository>();
+            services.AddScoped<IEntityRepository<WorkPositionKind, System.Guid>, WorkPositionKindRepository>();
+            services.AddScoped<IEntityRepository<WorkPosition, System.Guid>, WorkPositionRepository>();
             services.AddScoped<IEntityRepository<Employee, System.Guid>, EmployeeRepository>();
             services.AddScoped<IEntityRepository<NamingResolution, long>, NamingResolutionRepository>();
+            services.AddScoped<IEntityRepository<SalaryStandard, System.Guid>, SalaryStandardRepository>();
+            services.AddScoped<IEntityRepository<Workforce, System.Guid>, WorkforceRepository>();
+            services.AddScoped<IEntityRepository<Vacant, System.Guid>, VacantRepository>();
+            services.AddScoped<IEntityRepository<Ocupation, System.Guid>, OcupationRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.HumanResourcesDbSchemaConfigurationProvider>();
 

@@ -6,8 +6,8 @@
         public Employee NamedEmployee { get; set; }
         public System.Guid NamedEmployeeId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(OcupationId))]
-        public Vacant Ocupation { get; set; }
-        public System.Guid OcupationId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(VacantId))]
+        public Vacant Vacant { get; set; }
+        public System.Guid VacantId { get; set; }
     }
 }

@@ -123,14 +123,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
         public DbSet<Structure> Structures { get; set; }
         public DbSet<Schooling> Schoolings { get; set; }
-        public DbSet<VacantKind> VacantKinds { get; set; }
-        public DbSet<Vacant> Vacants { get; set; }
+        public DbSet<WorkPositionKind> WorkPositionKinds { get; set; }
+        public DbSet<WorkPosition> WorkPositions { get; set; }
         public DbSet<SalaryStandard> SalaryStandards { get; set; }
         public DbSet<Workforce> Workforces { get; set; }
-        public DbSet<WorkforceOrganizationalUnityVacantBridge> WorkforceOrganizationalUnityVacantBridge { get; set; }
+        public DbSet<WorkforceOrganizationalUnityBridge> WorkforceOrganizationalUnityBridges { get; set; }
+        public DbSet<Vacant> Vacants { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<EmploymentContract> EmploymentContracts { get; set; }
         public DbSet<NamingResolution> NamingResolutions { get; set; }
+        public DbSet<Ocupation> Ocupations { get; set; }
         public DbSet<Tag> ClauseTags { get; set; }
         public DbSet<Clause> Clauses { get; set; }
         public DbSet<ClauseTagBridge> ClauseTagBridges { get; set; }

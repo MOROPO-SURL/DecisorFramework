@@ -11,19 +11,22 @@
 
         public int Priority { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
-        public string Name { get; set; }
+        public bool NamingResolutionRequired { get; set; }
 
-        public string Reference { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(WorkPositionId))]
+        public WorkPosition WorkPosition { get; set; }
+        public System.Guid WorkPositionId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(KindId))]
-        public VacantKind Kind { get; set; }
-        public System.Guid KindId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(WorkforceId))]
+        public Workforce Workforce { get; set; }
+        public System.Guid WorkforceId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SchoolingId))]
-        public Schooling Schooling { get; set; }
-        public System.Guid SchoolingId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(OrganizationUnityId))]
+        public Domain.Persistence.Entities.OrganizationalUnity OrganizationUnity { get; set; }
+        public System.Guid OrganizationUnityId { get; set; }
 
-        public string Description { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SalaryStandardId))]
+        public SalaryStandard SalaryStandard { get; set; }
+        public System.Guid SalaryStandardId { get; set; }
     }
 }

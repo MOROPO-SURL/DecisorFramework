@@ -9,14 +9,16 @@
                 return new System.Collections.Generic.List<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
                 {
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.Schooling>(),
-                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.VacantKind>(),
-                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.Vacant>(),
+                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.WorkPositionKind>(),
+                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.WorkPosition>(),
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.SalaryStandard>(),
-                    new Configurators.WorkforceEntityTypeConfigurator(),
-                    new Configurators.WorkforceOrganizationalUnityVacantBridgeEntityTypeConfigurator(),
+                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.Workforce>(),
+                    new Configurators.WorkforceOrganizationalUnityBridgeEntityTypeConfigurator(),
+                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.Vacant>(),
                     new Configurators.EmployeeEntityTypeConfigurator(),
                     new Configurators.EmploymentContractEntityTypeConfigurator(),
-                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.NamingResolution>()
+                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.NamingResolution>(),
+                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.Ocupation>()
                 };
             }
         }

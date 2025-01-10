@@ -27,22 +27,51 @@
 		<ProjectReference Include="..\HumanResources.Presentation.Terminal.MAUI\HumanResources.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\Configuration\WorkPositionConfigurationPage.xaml.cs">
+	    <DependentUpon>WorkPositionConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\List\WorkPositionKindsListPage.xaml.cs">
+	    <DependentUpon>WorkPositionKindsListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\WorkPositionsManagePage.xaml.cs">
+	    <DependentUpon>WorkPositionsManagePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
 	  <MauiXaml Update="Pages\Configuration\NamingResolutionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\SalaryStandardConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\VacantConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\WorkforceConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\WorkPositionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\List\SchoolingsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\List\VacantKindsListPage.xaml">
+	  <MauiXaml Update="Pages\List\WorkPositionKindsListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\NamingResolutionsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Manage\VacantsManagePage.xaml">
+	  <MauiXaml Update="Pages\Manage\SalaryStandardsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\WorkforcesManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\WorkPositionsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\OrganizationalUnityAndVacantsCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

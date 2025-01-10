@@ -6,20 +6,17 @@
 
         public int Priority { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
-        public string Name { get; set; }
+        public bool NamingResolutionRequired { get; set; }
 
-        public string Reference { get; set; }
+        public System.Guid WorkPositionId { get; set; }
 
-        public System.Guid KindId { get; set; }
+        public System.Guid SalaryStandardId { get; set; }
 
-        public System.Guid SchoolingId { get; set; }
-
-        public string Description { get; set; }
+        public System.Guid OrganizationUnityId { get; set; }
 
         public Persistence.Entities.Vacant Export()
         {
-            var entity = new Persistence.Entities.Vacant { Id = Id, Enabled = true };
+            var entity = new Persistence.Entities.Vacant {Id = Id, Enabled = true, OrganizationUnityId = OrganizationUnityId };
 
             Mergue(entity);
 
@@ -33,21 +30,19 @@
 
         public void Mergue(Persistence.Entities.Vacant entity)
         {
-            entity.Name = Name;
-            entity.Reference = Reference;
-            entity.Description = Description;
             entity.Priority = Priority;
+            entity.NamingResolutionRequired = NamingResolutionRequired;
 
-            if (entity.KindId != KindId)
+            if (entity.WorkPositionId != WorkPositionId)
             {
-                entity.Kind = null;
-                entity.KindId = KindId;
+                entity.WorkPosition = null;
+                entity.WorkPositionId = WorkPositionId;
             }
 
-            if (entity.SchoolingId != SchoolingId)
+            if (entity.SalaryStandardId != SalaryStandardId)
             {
-                entity.Schooling = null;
-                entity.SchoolingId = SchoolingId;
+                entity.SalaryStandard = null;
+                entity.SalaryStandardId = SalaryStandardId;
             }
         }
     }

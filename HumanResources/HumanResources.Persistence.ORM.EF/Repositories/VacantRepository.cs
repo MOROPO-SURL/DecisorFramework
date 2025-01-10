@@ -1,4 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositories
 {
@@ -8,11 +10,11 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
         {
         }
 
-        protected override System.Linq.IQueryable<Entities.Vacant> GetQueryableDbSet()
+        protected override IQueryable<Vacant> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
-                .Include(entity => entity.Kind)
-                .Include(entity => entity.Schooling);
+                .Include(entity => entity.WorkPosition)
+                .Include(entity => entity.SalaryStandard);
         }
     }
 }

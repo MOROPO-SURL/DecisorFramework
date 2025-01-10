@@ -9,8 +9,8 @@ public partial class OrganizationalUnityTreeCardView : Microsoft.Maui.Controls.C
 
 	public event System.EventHandler<Microsoft.Maui.Controls.TappedEventArgs> ItemTapGestureRecognizerTapped;
 
-    private void TapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    private void TapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs eventArgs)
     {
-        ItemTapGestureRecognizerTapped.Invoke(sender, e);
+        ItemTapGestureRecognizerTapped.Invoke(sender, eventArgs);
     }
 }

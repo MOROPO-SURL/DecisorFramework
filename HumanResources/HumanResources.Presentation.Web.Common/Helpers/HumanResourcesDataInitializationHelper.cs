@@ -49,40 +49,40 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Helper
             #endregion
 
             #region VacantKind
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantKindViewerPermission)))
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.WorkPositionKindViewerPermission)))
             {
-                permissionDbSet.Add(Authorization.VacantKindViewerPermission.ToPermissionEntity(Authorization.VacantKindManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.WorkPositionKindViewerPermission.ToPermissionEntity(Authorization.WorkPositionKindManagementPermissionGroup));
             }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantKindCreatorPermission)))
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.WorkPositionKindCreatorPermission)))
             {
-                permissionDbSet.Add(Authorization.VacantKindCreatorPermission.ToPermissionEntity(Authorization.VacantKindManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.WorkPositionKindCreatorPermission.ToPermissionEntity(Authorization.WorkPositionKindManagementPermissionGroup));
             }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantKindEditorPermission)))
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.WorkPositionKindEditorPermission)))
             {
-                permissionDbSet.Add(Authorization.VacantKindEditorPermission.ToPermissionEntity(Authorization.VacantKindManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.WorkPositionKindEditorPermission.ToPermissionEntity(Authorization.WorkPositionKindManagementPermissionGroup));
             }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantKindRemoverPermission)))
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.WorkPositionKindRemoverPermission)))
             {
-                permissionDbSet.Add(Authorization.VacantKindRemoverPermission.ToPermissionEntity(Authorization.VacantKindManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.WorkPositionKindRemoverPermission.ToPermissionEntity(Authorization.WorkPositionKindManagementPermissionGroup));
             }
             #endregion
 
             #region Vacant
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantViewerPermission)))
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.WorkPositionViewerPermission)))
             {
-                permissionDbSet.Add(Authorization.VacantViewerPermission.ToPermissionEntity(Authorization.VacantManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.WorkPositionViewerPermission.ToPermissionEntity(Authorization.WorkPositionManagementPermissionGroup));
             }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantCreatorPermission)))
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.WorkPositionCreatorPermission)))
             {
-                permissionDbSet.Add(Authorization.VacantCreatorPermission.ToPermissionEntity(Authorization.VacantManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.WorkPositionCreatorPermission.ToPermissionEntity(Authorization.WorkPositionManagementPermissionGroup));
             }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantEditorPermission)))
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.WorkPositionEditorPermission)))
             {
-                permissionDbSet.Add(Authorization.VacantEditorPermission.ToPermissionEntity(Authorization.VacantManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.WorkPositionEditorPermission.ToPermissionEntity(Authorization.WorkPositionManagementPermissionGroup));
             }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VacantRemoverPermission)))
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.WorkPositionRemoverPermission)))
             {
-                permissionDbSet.Add(Authorization.VacantRemoverPermission.ToPermissionEntity(Authorization.VacantManagementPermissionGroup));
+                permissionDbSet.Add(Authorization.WorkPositionRemoverPermission.ToPermissionEntity(Authorization.WorkPositionManagementPermissionGroup));
             }
             #endregion
 

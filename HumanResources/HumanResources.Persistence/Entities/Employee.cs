@@ -19,5 +19,7 @@
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
         public string PersonalIdentificationNumber { get; set; }
+
+        public System.Collections.Generic.IEnumerable<Ocupation> Ocupations { get; set; }
     }
 }

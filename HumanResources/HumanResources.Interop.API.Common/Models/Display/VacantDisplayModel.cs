@@ -2,43 +2,43 @@
 {
     public class VacantDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Vacant, System.Guid>
     {
-        public System.Guid Id { get; set; } = System.Guid.NewGuid();
+        public System.Guid Id { get; set; }
 
         public bool Enabled { get; set; }
 
         public int Priority { get; set; }
 
-        public string Name { get; set; }
+        public bool NamingResolutionRequired { get; set; }
 
-        public string Reference { get; set; }
+        public WorkPositionDisplayModel WorkPosition { get; set; }
 
-        public VacantKindDisplayModel Kind { get; set; }
+        public System.Guid WorkforceId { get; set; }
 
-        public SchoolingDisplayModel Schooling { get; set; }
+        public System.Guid OrganizationUnityId { get; set; }
 
-        public string Description { get; set; }
+        public SalaryStandardDisplayModel SalaryStandard { get; set; }
 
         public void Import(Persistence.Entities.Vacant entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;
             Priority = entity.Priority;
-            Name = entity.Name;
-            Reference = entity.Reference;
-            Description = entity.Description;
+            NamingResolutionRequired = entity.NamingResolutionRequired;
+            WorkforceId = entity.WorkforceId;
+            OrganizationUnityId = entity.OrganizationUnityId;
 
-            if (entity.Kind != null)
+            if (entity.WorkPosition != null)
             {
-                Kind = new VacantKindDisplayModel();
+                WorkPosition = new WorkPositionDisplayModel();
 
-                Kind.Import(entity.Kind);
+                WorkPosition.Import(entity.WorkPosition);
             }
 
-            if (entity.Schooling != null)
+            if (entity.SalaryStandard != null)
             {
-                Schooling = new SchoolingDisplayModel();
+                SalaryStandard = new SalaryStandardDisplayModel();
 
-                Schooling.Import(entity.Schooling);
+                SalaryStandard.Import(entity.SalaryStandard);
             }
         }
     }
