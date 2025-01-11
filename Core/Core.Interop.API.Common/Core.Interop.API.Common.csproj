@@ -6,7 +6,7 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Core.Interop.API.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Persistence.Presentation" Version="6.0.0.32" />
+		<PackageReference Include="GuamaFramework.Core.Persistence.Presentation" Version="6.0.0.33" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Core.Persistence\Core.Persistence.csproj" />

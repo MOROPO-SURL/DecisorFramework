@@ -122,7 +122,7 @@ public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAU
 
     private void AddOrganizationalUnityButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationalUnityPickPage(OrganizationalUnityPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OrganizationalUnityPickPage(OrganizationalUnityPickComplete_Callback)));
     }
 
     private void OrganizationalUnityRemoveButton_Clicked(object sender, System.EventArgs e)

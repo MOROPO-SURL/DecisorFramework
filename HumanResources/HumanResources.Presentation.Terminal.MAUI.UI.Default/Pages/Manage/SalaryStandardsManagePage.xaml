@@ -94,8 +94,7 @@
                 <ScrollView Orientation="Vertical">
                     <Grid>
                         <Frame
-                            VerticalOptions="Center" HorizontalOptions="Center"
-                            Padding="0" Margin="20"
+                            Style="{StaticResource PopupFrameStyle}"
                             WidthRequest="400">
                             <Grid>
                                 <StackLayout Margin="20" Spacing="20">

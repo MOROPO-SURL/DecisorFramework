@@ -4,15 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.EmployeeDefaultCardView"
     x:DataType="interop_common_display_models:EmployeeDisplayModel">
     <ContentView.Resources>
         <ResourceDictionary>
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <Frame Padding="0">
-        <Grid>
+        <Grid ColumnSpacing="4">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
@@ -25,15 +28,14 @@
             <StackLayout 
                 Grid.Column="1"
                 Padding="10">
-                <Label FontAttributes="Bold">
-                    <Label.FormattedText>
-                        <FormattedString>
-                            <Span Text="{Binding Name}" />
-                            <Span Text=" " />
-                            <Span Text="{Binding LastName}" />
-                        </FormattedString>
-                    </Label.FormattedText>
-                </Label>
+                <Label 
+                    FontSize="Medium"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Name}" />
+                <Label
+                    IsVisible="{Binding LastName, Converter={StaticResource IsNotNullConverter}}"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding LastName}" />
                 <Label 
                     Margin="0,6,0,0"
                     Text="Descripción"

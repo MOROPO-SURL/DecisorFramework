@@ -301,7 +301,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         {
             base.PostEdit(entity, model);
 
-            if (model.Image != null)
+            if (model.Image != null && model.Image.Id != default)
             {
                 var oldImage = imageRepository.Get(model.Image.Id);
 

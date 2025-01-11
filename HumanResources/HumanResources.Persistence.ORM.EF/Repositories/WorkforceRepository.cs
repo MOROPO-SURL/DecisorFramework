@@ -12,9 +12,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
 
         protected override IQueryable<Workforce> GetQueryableDbSet()
         {
-            return base.GetQueryableDbSet()
-                .Include(entity => entity.OrganizationalUnityBridges).ThenInclude(bridge => bridge.Stern)
-                .Include(entity => entity.Vacants);
+            return base.GetQueryableDbSet().Include(entity => entity.OrganizationalUnityBridges).ThenInclude(bridge => bridge.Stern);
         }
     }
 }

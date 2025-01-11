@@ -44,26 +44,23 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
-    <ShellContent
-        Title="Personal en Plantilla"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
+    <FlyoutItem Title="Plantilla">
+        <FlyoutItem.Icon>
             <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF8C4;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-        Title="Definiciones de Plantilla"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF002C;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
+             FontFamily="MaterialDesignIcons"
+             Glyph="&#xF002C;"
+             Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Personal"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Asignaciones"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+             Title="Disposiciones"
+             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}" />
+    </FlyoutItem>
     <ShellContent
         Title="Empleados"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:EmployeesManagePage}">

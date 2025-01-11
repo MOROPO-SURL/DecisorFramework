@@ -12,7 +12,7 @@
 
         public string Reference { get; set; }
 
-        public System.Collections.ObjectModel.ObservableCollection<VacantViewModel> Vacants { get; set; } = new System.Collections.ObjectModel.ObservableCollection<VacantViewModel>();
+        public System.Collections.ObjectModel.ObservableCollection<VacantViewModel> Vacants { get; set; } = [];
 
         public OrganizationalUnityViewModel[] Children { get; set; }
     }

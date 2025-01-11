@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters
+﻿using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Extensions;
+
+namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters
 {
     public class ImageDisplayModelToImageSourceConverter : Microsoft.Maui.Controls.IValueConverter
     {
@@ -8,7 +10,7 @@
 
             var model = value as Interop.API.Common.Models.Display.ImageDisplayModel;
 
-            return Providers.ImageSourceProvider.GetByModel(model);
+            return model.ToImageSource();
         }
 
         public object ConvertBack(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)

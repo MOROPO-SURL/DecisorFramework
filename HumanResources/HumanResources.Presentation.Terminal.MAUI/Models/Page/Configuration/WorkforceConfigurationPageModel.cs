@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Extensions;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -30,7 +31,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
                     if (item.Children != null)
                     {
-                        result.Children = GetOrganizationalUnityChildren(item);
+                        result.Children = item.ToOrganizationalUnityViewModelChildren();
                     }
 
                     if (item.Vacants != null)
@@ -59,45 +60,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<View.OrganizationalUnityViewModel> OrganizationalUnities { get; set; } = new System.Collections.ObjectModel.ObservableCollection<View.OrganizationalUnityViewModel>();
-
-        private static View.OrganizationalUnityViewModel[] GetOrganizationalUnityChildren(Interop.API.Common.Models.Display.OrganizationalUnityDisplayModel model)
-        {
-            var result = new System.Collections.Generic.List<View.OrganizationalUnityViewModel>();
-
-            foreach (var item in model.Children)
-            {
-                var _model = new View.OrganizationalUnityViewModel
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Enabled = item.Enabled,
-                    Priority = item.Priority,
-                    Reference = item.Reference
-                };
-
-                if (item.Children != null)
-                {
-                    _model.Children = GetOrganizationalUnityChildren(item);
-                }
-
-                if (item.Vacants != null)
-                {
-                    _model.Vacants = new System.Collections.ObjectModel.ObservableCollection<Models.View.VacantViewModel>(item.Vacants.Select(__model => new View.VacantViewModel
-                    {
-                        Id = __model.Id,
-                        Priority = __model.Priority,
-                        NamingResolutionRequired = __model.NamingResolutionRequired,
-                        WorkPosition = __model.WorkPosition,
-                        SalaryStandard = __model.SalaryStandard,
-                        OrganizationUnity = _model
-                    }));
-                }
-
-                result.Add(_model);
-            }
-
-            return result.ToArray();
-        }
+        public System.Collections.ObjectModel.ObservableCollection<View.OrganizationalUnityViewModel> OrganizationalUnities { get; set; } = [];
     }
 }

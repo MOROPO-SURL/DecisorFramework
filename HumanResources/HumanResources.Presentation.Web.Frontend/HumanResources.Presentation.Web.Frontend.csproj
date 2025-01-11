@@ -6,8 +6,8 @@
 		<RootNamespace>MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.0.32" />
-		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.0.32" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.0.33" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.0.33" />
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
 	</ItemGroup>
 	<ItemGroup>

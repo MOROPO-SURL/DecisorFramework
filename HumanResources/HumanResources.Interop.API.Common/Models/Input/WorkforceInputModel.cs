@@ -39,9 +39,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
 
         public void Mergue(Persistence.Entities.Workforce entity)
         {
+            entity.At = System.DateTime.Now;
             entity.Name = Name;
             entity.Priority = Priority;
-            entity.At = At;
             entity.OrganizationalUnityBridges = OrganizationalUnities.Select(model => new Persistence.Entities.WorkforceOrganizationalUnityBridge
             {
                 ProwId = entity.Id,

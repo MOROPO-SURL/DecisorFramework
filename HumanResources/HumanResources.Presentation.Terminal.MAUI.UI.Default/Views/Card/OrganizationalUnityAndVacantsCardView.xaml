@@ -5,16 +5,22 @@
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
-    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.OrganizationalUnityAndVacantsCardView"
     x:DataType="presentation_view_models:OrganizationalUnityViewModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
     <Frame>
         <VerticalStackLayout>
             <Label
                 FontSize="Medium"
                 Text="{Binding Name}" />
             <Label 
-                Style="{StaticResource CaptionPropertyLabelStyle}"
+                Style="{StaticResource CaptionFieldLabelStyle}"
+                Margin="0,8"
                 Text="Vacantes" />
             <Frame Padding="8">
                 <Grid RowSpacing="8">
@@ -46,7 +52,8 @@
                         </CollectionView.EmptyView>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:VacantDisplayModel">
-                                <Frame Padding="8">
+                                <Frame Padding="8"
+                                        Margin="0,12,0,0">
                                     <StackLayout Orientation="Horizontal">
                                         <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                                             <Label
@@ -55,7 +62,6 @@
                                                 FontSize="Medium" />
                                             <Label
                                                 Style="{StaticResource CaptionFieldLabelStyle}"
-                                                FontSize="Caption"
                                                 Margin="0,8,0,0"
                                                 Text="Referencia" />
                                             <Label
@@ -82,7 +88,8 @@
             </Frame>
             <Label 
                 IsVisible="{Binding Children, Converter={StaticResource IsListNotNullOrEmptyConverter}}"
-                Style="{StaticResource CaptionPropertyLabelStyle}"
+                Style="{StaticResource CaptionFieldLabelStyle}"
+                Margin="0,16,0,0"
                 Text="Dependencias" />
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Children}">
                 <BindableLayout.ItemTemplate>

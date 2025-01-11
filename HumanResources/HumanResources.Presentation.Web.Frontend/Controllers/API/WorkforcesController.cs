@@ -61,7 +61,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                 organizationalUnityModels.Add(model);
             }
 
-            result.OrganizationalUnities = organizationalUnityModels.ToArray();
+            result.OrganizationalUnities = organizationalUnityModels.OrderBy(model => model.Priority).ToArray();
 
             return result;
         }
@@ -119,7 +119,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                 var model = new OrganizationalUnityDisplayModel();
                 model.Import(child);
 
-                model.Vacants = vacantRepository.FindBy(_entity => _entity.WorkforceId == workforce.Id && _entity.OrganizationUnityId == entity.Id).OrderBy(_entity => _entity.Priority).ToArray().Select(_entity =>
+                model.Vacants = vacantRepository.FindBy(_entity => _entity.WorkforceId == workforce.Id && _entity.OrganizationUnityId == child.Id).OrderBy(_entity => _entity.Priority).ToArray().Select(_entity =>
                 {
                     var _model = new VacantDisplayModel();
 

@@ -115,7 +115,7 @@ public partial class EmployeeConfigurationPage : Core.Presentation.Terminal.MAUI
         {
             model.Image = new Core.Interop.API.Common.Models.Input.ImageInputModel
             {
-                Id = concreteBindingContext.ImageId ?? System.Guid.NewGuid(),
+                Id = concreteBindingContext.ImageId ?? default,
                 ContentData = imagePickedData,
                 ContentType = imageContentType,
                 About = $"Empleado {model.Id}"

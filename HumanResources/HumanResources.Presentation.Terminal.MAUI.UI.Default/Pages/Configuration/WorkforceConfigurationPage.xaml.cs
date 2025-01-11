@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Controls;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
@@ -18,7 +19,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         InitializeComponent();
     }
     
-    protected override string EntityTypeName => "Definición de Plantilla";
+    protected override string EntityTypeName => "Disposición de Plantilla";
 
     protected override async System.Threading.Tasks.Task<WorkforceDisplayModel> PerformCreationAsync()
     {
@@ -141,16 +142,38 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
     private void OrganizationalUnityPickComplete_Callback(Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel model)
     {
-        ((Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext).OrganizationalUnities.Add(new Models.View.OrganizationalUnityViewModel 
-        {
-            Id = model.Id,
-            Name = model.Name,
-            Enabled = model.Enabled,
-            Priority = model.Priority,
-            Reference = model.Reference
-        });
+        var apiConnectClient = new Domain.Interop.API.Connect.Clients.TreeOrganizationalUnitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        hasChangesFlag = true;
+        var concreteBindingContext = (Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext;
+
+        concreteBindingContext.IsBusy = true;
+
+        apiConnectClient.GetAsync(model.Id).ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                concreteBindingContext.IsBusy = false;
+
+                if (task.Exception != null || task.IsCanceled)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    ((Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext).OrganizationalUnities.Add(new Models.View.OrganizationalUnityViewModel
+                    {
+                        Id = task.Result.Id,
+                        Name = task.Result.Name,
+                        Enabled = task.Result.Enabled,
+                        Priority = task.Result.Priority,
+                        Reference = task.Result.Reference,
+                        Children = GetOrganizationalUnityChildren(task.Result)
+                    });
+
+                    hasChangesFlag = true;
+                }
+            });
+        });
     }
 
     private void VacantCreateSuccess_Callback(Models.View.VacantViewModel model)
@@ -223,5 +246,31 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
             item.WorkPosition = model.WorkPosition;
             item.SalaryStandard = model.SalaryStandard;
         }
+    }
+
+    private static Models.View.OrganizationalUnityViewModel[] GetOrganizationalUnityChildren(Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel model)
+    {
+        var result = new System.Collections.Generic.List<Models.View.OrganizationalUnityViewModel>();
+
+        foreach (var item in model.Children)
+        {
+            var _model = new Models.View.OrganizationalUnityViewModel
+            {
+                Id = item.Id,
+                Name = item.Name,
+                Enabled = item.Enabled,
+                Priority = item.Priority,
+                Reference = item.Reference
+            };
+
+            if (item.Children != null)
+            {
+                _model.Children = GetOrganizationalUnityChildren(item);
+            }
+
+            result.Add(_model);
+        }
+
+        return [.. result];
     }
 }
