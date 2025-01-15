@@ -1,4 +1,5 @@
 ﻿using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
@@ -8,7 +9,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 {
     [Microsoft.AspNetCore.Mvc.Route("api/hhrr/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class WorkforcesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Workforce, System.Guid, WorkforceInputModel, WorkforceDisplayModel>
+    public class WorkforcesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<Workforce, System.Guid, WorkforceInputModel, WorkforceDisplayModel, WorkforceFilterModel>
     {
         private readonly IEntityRepository<Vacant, System.Guid> vacantRepository;
         private readonly IEntityRepository<Domain.Persistence.Entities.OrganizationalUnity, System.Guid> organizationalUnityRepository;

@@ -45,7 +45,7 @@
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
-        Title="Estructuras"
+        Title="Entidades Administrativas"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:StructuresManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -86,7 +86,7 @@
     </ShellContent>
     <MenuFlyoutItem Text="Configuración" />
     <ShellContent
-        Title="Tipos de Estructura"
+        Title="Tipos de Entidad Administrativa"
         ContentTemplate="{DataTemplate decisorframework_domain_list_pages:StructureKindsListPage}">
         <ShellContent.Icon>
             <FontImageSource

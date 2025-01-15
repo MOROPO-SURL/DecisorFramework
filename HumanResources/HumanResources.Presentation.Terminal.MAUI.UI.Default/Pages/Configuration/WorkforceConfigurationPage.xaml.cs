@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Maui.Controls;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
@@ -19,7 +18,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         InitializeComponent();
     }
     
-    protected override string EntityTypeName => "Disposición de Plantilla";
+    protected override string EntityTypeName => "Estructura de Plantilla";
 
     protected override async System.Threading.Tasks.Task<WorkforceDisplayModel> PerformCreationAsync()
     {

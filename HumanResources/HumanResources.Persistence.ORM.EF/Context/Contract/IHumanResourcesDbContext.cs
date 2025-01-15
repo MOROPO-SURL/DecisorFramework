@@ -12,6 +12,8 @@
         public Microsoft.EntityFrameworkCore.DbSet<Entities.Employee> Employees { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.EmploymentContract> EmploymentContracts { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.NamingResolution> NamingResolutions { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Entities.Staff> Staffs { get; set; }
+        public Microsoft.EntityFrameworkCore.DbSet<Entities.StaffWorkforceBridge> StaffWorkforceBridges { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.Ocupation> Ocupations { get; set; }
     }
 }

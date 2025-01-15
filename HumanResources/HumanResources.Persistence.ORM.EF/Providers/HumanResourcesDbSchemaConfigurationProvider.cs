@@ -18,7 +18,9 @@
                     new Configurators.EmployeeEntityTypeConfigurator(),
                     new Configurators.EmploymentContractEntityTypeConfigurator(),
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.NamingResolution>(),
-                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.Ocupation>()
+                    new Configurators.StaffEntityTypeConfigurator(),
+                    new Configurators.StaffWorkforceBridgeEntityTypeConfigurator(),
+                    new Configurators.OcupationEntityTypeConfigurator()
                 };
             }
         }

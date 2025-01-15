@@ -34,12 +34,53 @@
     </Shell.FlyoutHeader>
     <MenuFlyoutItem Text="Inicio" />
     <ShellContent
-        Title="Panel de Control"
+        Title="Panel de control"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Procesos" />
+    <ShellContent
+        Title="Elaboración de pre-nóminas"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFB32;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Procedimientos de alta"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF014;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Solicitudes de baja"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF015;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tramitaciones de jubilación"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFB2F;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -52,17 +93,17 @@
              Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
-            Title="Personal"
-            ContentTemplate="{DataTemplate ContentPage}" />
+             Title="Estructuras"
+             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}" />
         <ShellContent
             Title="Asignaciones"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}" />
         <ShellContent
-             Title="Disposiciones"
-             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}" />
+            Title="Personal"
+            ContentTemplate="{DataTemplate ContentPage}" />
     </FlyoutItem>
     <ShellContent
-        Title="Empleados"
+        Title="Trabajadores"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:EmployeesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -72,7 +113,7 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Plazas Laborales"
+        Title="Plazas laborales"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkPositionsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -82,7 +123,7 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Escalas Salariales"
+        Title="Escalas salariales"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:SalaryStandardsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -93,7 +134,7 @@
     </ShellContent>
     <MenuFlyoutItem Text="Configuración" />
     <ShellContent
-        Title="Categorías Ocupacionales"
+        Title="Categorías ocupacionales"
         ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:WorkPositionKindsListPage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -103,7 +144,7 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Niveles de Preparación"
+        Title="Niveles de preparación"
         ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:SchoolingsListPage}">
         <ShellContent.Icon>
             <FontImageSource

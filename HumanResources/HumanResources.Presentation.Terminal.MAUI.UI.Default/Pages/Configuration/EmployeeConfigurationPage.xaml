@@ -98,7 +98,7 @@
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.ColumnSpan="4" Grid.Row="5">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
-                    <Editor Text="{Binding About}" HeightRequest="200" BackgroundColor="#F8F9FA" />
+                    <Editor Text="{Binding About}" HeightRequest="200" />
                 </VerticalStackLayout>
                 <BoxView 
                     Grid.ColumnSpan="4" Grid.Row="6" 

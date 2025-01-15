@@ -45,7 +45,7 @@ public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAU
         }
     }
 
-    protected override string EntityTypeName => "Estructura";
+    protected override string EntityTypeName => "Entidad Administrativa";
 
     protected override void DisposeUnmanagementResources()
     {

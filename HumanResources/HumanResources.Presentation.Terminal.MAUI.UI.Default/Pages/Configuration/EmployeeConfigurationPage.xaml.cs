@@ -40,7 +40,7 @@ public partial class EmployeeConfigurationPage : Core.Presentation.Terminal.MAUI
         }
     }
 
-    protected override string EntityTypeName => "Empleado";
+    protected override string EntityTypeName => "Trabajador";
 
     protected override void DisposeUnmanagementResources()
     {
@@ -79,7 +79,7 @@ public partial class EmployeeConfigurationPage : Core.Presentation.Terminal.MAUI
                 Id = System.Guid.NewGuid(),
                 ContentData = imagePickedData,
                 ContentType = imageContentType,
-                About = $"Empleado {model.Id}"
+                About = $"{EntityTypeName} {model.Id}"
             };
         }
 
@@ -118,7 +118,7 @@ public partial class EmployeeConfigurationPage : Core.Presentation.Terminal.MAUI
                 Id = concreteBindingContext.ImageId ?? default,
                 ContentData = imagePickedData,
                 ContentType = imageContentType,
-                About = $"Empleado {model.Id}"
+                About = $"{EntityTypeName} {model.Id}"
             };
         }
 
