@@ -10,7 +10,7 @@
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.StaffsManagePage"
     x:DataType="presentation_manage_page_models:StaffsManagePageModel"
-    Title="Gestión de Asignaciones de plantilla a entidades administrativas">
+    Title="Gestión de Asignaciones de Plantilla">
     <ContentPage.Resources>
         <ResourceDictionary>
             <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="720" AbsoluteHorizontalSeparation="20" />
@@ -73,7 +73,7 @@
                                             Text="{Binding Structure.Identity.Name}" />
                                         <Label 
                                             Margin="0,8,0,0"
-                                            Text="Estructura principal de plantilla"
+                                            Text="Principal Estructura de Plantilla"
                                             TextColor="DimGray"
                                             FontSize="Caption"
                                             FontAttributes="Bold" />
@@ -116,13 +116,13 @@
                                         <Label
                                             Style="{StaticResource CaptionFieldLabelStyle}"
                                             Margin="0"
-                                            Text="Entidad administrativa" />
+                                            Text="Entidad Administrativa" />
                                         <Label
                                             Style="{StaticResource ValueFieldLabelStyle}"
                                             Text="{Binding PresentedItem.Structure.Identity.Name}" />
                                         <Label 
                                             Style="{StaticResource CaptionFieldLabelStyle}"
-                                            Text="Estructura principal de plantilla" />
+                                            Text="Principal Estructura de Plantilla" />
                                         <Label
                                             Style="{StaticResource ValueFieldLabelStyle}"
                                             Text="{Binding PresentedItem.MainWorkforce.Name}" />

@@ -6,6 +6,8 @@
         private int priority = 1;
         private double fee;
 
+        public SalaryStandardConfigurationPageModel() : this(null) { }
+
         public SalaryStandardConfigurationPageModel(Interop.API.Common.Models.Display.SalaryStandardDisplayModel model) : base(model)
         {
             if (model != null)

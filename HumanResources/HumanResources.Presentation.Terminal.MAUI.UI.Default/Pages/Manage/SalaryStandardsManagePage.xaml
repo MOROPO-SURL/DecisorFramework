@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<caneyframework_mvvm_pages:ContentPage 
+<core_ui_base_pages:ManageBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
+    xmlns:local_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.SalaryStandardsManagePage"
+    x:TypeArguments="interop_common_display_models:SalaryStandardDisplayModel,presentation_manage_page_models:SalaryStandardsManagePageModel,presentation_configuration_page_models:SalaryStandardConfigurationPageModel,local_configuration_pages:SalaryStandardConfigurationPage,local_detail_pages:SalaryStandardDetailPage"
     x:DataType="presentation_manage_page_models:SalaryStandardsManagePageModel"
     Title="Gestión de Escalas Salariales">
     <ContentPage.Resources>
@@ -21,14 +26,14 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Agregar"
-            Clicked="AddToolbarItem_Clicked">
+            Clicked="AddItemControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Actualizar"
-            Clicked="ReloadToolbarItem_Clicked">
+            Clicked="ReloadControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -88,72 +93,7 @@
                     </FlexLayout>
                 </ScrollView>
             </StackLayout>
-            <ContentView 
-                IsVisible="{Binding PresentedItem, Converter={StaticResource IsNotNullConverter}}"
-                BackgroundColor="#A9000000">
-                <ScrollView Orientation="Vertical">
-                    <Grid>
-                        <Frame
-                            Style="{StaticResource PopupFrameStyle}"
-                            WidthRequest="400">
-                            <Grid>
-                                <StackLayout Margin="20" Spacing="20">
-                                    <StackLayout>
-                                        <Label 
-                                            Margin="0,0,0,20"
-                                            Text="Detalles"
-                                            FontAttributes="Bold"
-                                            FontSize="Medium" />
-                                        <Label
-                                            Style="{StaticResource CaptionPropertyLabelStyle}"
-                                            Margin="0"
-                                            Text="Nombre" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Name}" />
-                                        <Label 
-                                            Style="{StaticResource CaptionPropertyLabelStyle}"
-                                            Text="Tarifa" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Fee, StringFormat='{0:F2}'}" />
-                                        <Label 
-                                            Style="{StaticResource CaptionPropertyLabelStyle}"
-                                            Text="Prioridad" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Priority}" />
-                                    </StackLayout>
-                                    <StackLayout
-                                        Orientation="Horizontal"
-                                        Spacing="20">
-                                        <Button 
-                                            HorizontalOptions="FillAndExpand"
-                                            Text="Modificar"
-                                            Clicked="PresentedItemEditButton_Clicked" />
-                                        <Button 
-                                            HorizontalOptions="FillAndExpand"
-                                            Text="Eliminar"
-                                            Clicked="PresentedItemRemoveButton_Clicked" />
-                                    </StackLayout>
-                                </StackLayout>
-                                <Button
-                                    HorizontalOptions="End" VerticalOptions="Start"
-                                    Padding="10"
-                                    BackgroundColor="Transparent"
-                                    Text="&#xf5ad;"
-                                    TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-                                    FontSize="Medium"
-                                    FontFamily="MaterialDesignIcons"
-                                    BorderWidth="0"
-                                    WidthRequest="48" HeightRequest="48"
-                                    Clicked="PresentedItemDismissButton_Clicked" />
-                            </Grid>
-                        </Frame>
-                    </Grid>
-                </ScrollView>
-            </ContentView>
             <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
-</caneyframework_mvvm_pages:ContentPage>
+</core_ui_base_pages:ManageBaseContentPage>

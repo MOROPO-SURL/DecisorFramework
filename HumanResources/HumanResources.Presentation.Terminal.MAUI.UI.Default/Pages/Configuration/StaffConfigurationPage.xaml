@@ -52,7 +52,7 @@
                 <VerticalStackLayout
                     Grid.Column="1" Grid.Row="0"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Estructura principal de plantilla" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Principal Estructura de Plantilla" />
                     <Picker 
                         x:Name="MainWorkforcePicker"
                         ItemsSource="{Binding AvailableWorkforces}"

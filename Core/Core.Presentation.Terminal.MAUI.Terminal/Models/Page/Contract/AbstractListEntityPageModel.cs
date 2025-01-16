@@ -4,7 +4,7 @@
     {
         private bool hasMoreItems;
 
-        public System.Collections.ObjectModel.ObservableCollection<T> Items { get; set; } = new System.Collections.ObjectModel.ObservableCollection<T>();
+        public System.Collections.ObjectModel.ObservableCollection<T> Items { get; set; } = [];
 
         public bool HasMoreItems { get => hasMoreItems; set => SetProperty(ref hasMoreItems, value); }
     }

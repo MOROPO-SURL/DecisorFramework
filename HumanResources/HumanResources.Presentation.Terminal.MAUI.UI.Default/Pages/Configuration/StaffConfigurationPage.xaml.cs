@@ -42,7 +42,7 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
         }
     }
 
-    protected override string EntityTypeName => "Asignación de plantilla a entidad administrativa";
+    protected override string EntityTypeName => "Asignación de Plantilla";
 
     protected override async System.Threading.Tasks.Task<StaffDisplayModel> PerformCreationAsync()
     {

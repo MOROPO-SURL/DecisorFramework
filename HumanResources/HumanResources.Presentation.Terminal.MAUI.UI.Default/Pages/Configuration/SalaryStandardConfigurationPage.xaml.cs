@@ -3,7 +3,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class SalaryStandardConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.SalaryStandardDisplayModel>
+public partial class SalaryStandardConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.SalaryStandardDisplayModel, Models.Page.Configuration.SalaryStandardConfigurationPageModel>
 {
     public SalaryStandardConfigurationPage(System.Action<Interop.API.Common.Models.Display.SalaryStandardDisplayModel> successAction, Models.Page.Configuration.SalaryStandardConfigurationPageModel model) : base(successAction, model)
     {

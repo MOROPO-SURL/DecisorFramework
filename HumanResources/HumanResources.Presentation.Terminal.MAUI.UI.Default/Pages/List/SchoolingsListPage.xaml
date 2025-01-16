@@ -1,14 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<caneyframework_mvvm_pages:ContentPage 
+<core_ui_base_pages:ListBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
     xmlns:presentation_list_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.List;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
-    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List.SchoolingsListPage"
+    x:TypeArguments="interop_common_display_models:SchoolingDisplayModel,presentation_list_page_models:SchoolingsListPageModel,local_detail_pages:SchoolingDetailPage"
     x:DataType="presentation_list_page_models:SchoolingsListPageModel"
     Title="Disponibilidad de Niveles de Preparación">
     <ContentPage.Resources>
@@ -31,7 +33,7 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Actualizar"
-            Clicked="ReloadToolbarItem_Clicked">
+            Clicked="ReloadControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -90,60 +92,7 @@
                     </FlexLayout>
                 </ScrollView>
             </StackLayout>
-            <ContentView 
-                IsVisible="{Binding PresentedItem, Converter={StaticResource IsNotNullConverter}}"
-                Style="{StaticResource ModalFrameWrapContentViewStyle}">
-                <ScrollView Orientation="Vertical">
-                    <Grid>
-                        <Frame
-                            Style="{StaticResource PopupFrameStyle}"
-                            WidthRequest="400">
-                            <Grid>
-                                <StackLayout Margin="20" Spacing="20">
-                                    <StackLayout>
-                                        <Label 
-                                            Margin="0,0,0,20"
-                                            Text="Detalles"
-                                            FontAttributes="Bold"
-                                            FontSize="Medium" />
-                                        <Label
-                                            Style="{StaticResource CaptionFieldLabelStyle}"
-                                            Margin="0"
-                                            Text="Nombre" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Name}" />
-                                        <Label 
-                                            Style="{StaticResource CaptionFieldLabelStyle}"
-                                            Text="Prioridad" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Priority}" />
-                                        <Label 
-                                            Style="{StaticResource CaptionFieldLabelStyle}"
-                                            Text="Descripción" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Description, TargetNullValue='---'}" />
-                                    </StackLayout>
-                                </StackLayout>
-                                <Button
-                                    HorizontalOptions="End" VerticalOptions="Start"
-                                    Padding="10"
-                                    BackgroundColor="Transparent"
-                                    Text="&#xf5ad;"
-                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                                    FontSize="Medium"
-                                    FontFamily="MaterialDesignIcons"
-                                    BorderWidth="0"
-                                    WidthRequest="48" HeightRequest="48"
-                                    Clicked="PresentedItemDismissButton_Clicked" />
-                            </Grid>
-                        </Frame>
-                    </Grid>
-                </ScrollView>
-            </ContentView>
             <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
-</caneyframework_mvvm_pages:ContentPage>
+</core_ui_base_pages:ListBaseContentPage>
