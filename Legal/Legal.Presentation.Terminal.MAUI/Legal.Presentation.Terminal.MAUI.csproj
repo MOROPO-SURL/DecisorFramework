@@ -23,6 +23,10 @@
 		<CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.83" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.83" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\Legal.Interop.API.Connect\Legal.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\..\Core\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
