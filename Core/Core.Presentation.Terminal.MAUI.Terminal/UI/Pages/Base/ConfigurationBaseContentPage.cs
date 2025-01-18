@@ -68,7 +68,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
             //if (!BindingContextPageModel.IsValid) return;
 
-            var concreteBindingContext = (Models.Page.Contract.AbstractConfigurationPageModel<TModel>)BindingContext;
+            var concreteBindingContext = (TConfigurationPageModel)BindingContext;
 
             concreteBindingContext.IsBusy = true;
 
