@@ -26,6 +26,8 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="LiveChartsCore.SkiaSharpView.Maui" Version="2.0.0-rc3.3" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.83" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.83" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Commercial\Commercial.Interop.API.Connect\Commercial.Interop.API.Connect.csproj" />
