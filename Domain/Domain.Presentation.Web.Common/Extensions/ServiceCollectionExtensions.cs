@@ -9,6 +9,10 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions
     {
         public static void AddDecisorDomainPresentationWebCommon(this IServiceCollection services)
         {
+            services.AddScoped<IEntityRepository<PersonContact, System.Guid>, PersonContactRepository>();
+            services.AddScoped<IEntityRepository<OrganizationContact, System.Guid>, OrganizationContactRepository>();
+            services.AddScoped<IEntityRepository<LegalBusinessKind, System.Guid>, LegalBusinessKindRepository>();
+            services.AddScoped<IEntityRepository<NaturalBusinessKind, System.Guid>, NaturalBusinessKindRepository>();
             services.AddScoped<IEntityRepository<PropertyKind, System.Guid>, PropertyKindRepository>();
             services.AddScoped<IEntityRepository<VehicleEngineKind, System.Guid>, VehicleEngineKindRepository>();
             services.AddScoped<IEntityRepository<StructureKind, System.Guid>, StructureKindRepository>();
@@ -16,7 +20,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<Structure, System.Guid>, StructureRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.DomainDbSchemaConfigurationProvider>();
+
+            services.AddSingleton<Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, Helpers.DomainDataInitializationHelper>();
         }
     }
 }
-

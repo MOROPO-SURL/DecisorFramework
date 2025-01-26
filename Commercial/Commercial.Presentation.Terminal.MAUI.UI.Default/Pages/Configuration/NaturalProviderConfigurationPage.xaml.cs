@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
@@ -23,8 +24,7 @@ public partial class NaturalProviderConfigurationPage : Core.Presentation.Termin
         {
             Id = System.Guid.NewGuid(),
             ContactId = concreteBindingContext.Contact.Id,
-            Priority = concreteBindingContext.Priority,
-            PersonalIdentificationNumber = concreteBindingContext.PersonalIdentificationNumber
+            Priority = concreteBindingContext.Priority
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -42,8 +42,7 @@ public partial class NaturalProviderConfigurationPage : Core.Presentation.Termin
         {
             Id = concreteBindingContext.Id,
             ContactId = concreteBindingContext.Contact.Id,
-            Priority = concreteBindingContext.Priority,
-            PersonalIdentificationNumber = concreteBindingContext.PersonalIdentificationNumber
+            Priority = concreteBindingContext.Priority
         };
 
         await apiConnectClient.EditAsync(model);
@@ -53,10 +52,10 @@ public partial class NaturalProviderConfigurationPage : Core.Presentation.Termin
 
     private void ContactPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PersonContactPickPage(ContactPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback)));
     }
 
-    private void ContactPickComplete_Callback(Interop.API.Common.Models.Display.PersonContactDisplayModel model)
+    private void ContactPickComplete_Callback(PersonContactDisplayModel model)
     {
         var concreteBindingContext = (Models.Page.Configuration.NaturalProviderConfigurationPageModel)BindingContext;
 

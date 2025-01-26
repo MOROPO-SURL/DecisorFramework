@@ -10,6 +10,10 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Providers
             {
                 return new System.Collections.Generic.List<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
                 {
+                    new BaseEntityTypeConfigurator<Entities.LegalBusinessKind>(),
+                    new BaseEntityTypeConfigurator<Entities.NaturalBusinessKind>(),
+                    new Configurators.OrganizationContactEntityTypeConfigurator(),
+                    new Configurators.PersonContactEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.PropertyKind>(),
                     new Configurators.PropertyEntityTypeConfigurator(),
                     new Configurators.PropertyImageBridgeEntityTypeConfigurator(),

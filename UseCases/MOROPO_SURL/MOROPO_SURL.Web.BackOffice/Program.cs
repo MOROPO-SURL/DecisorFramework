@@ -54,8 +54,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
             builder.Services.PerformLocationWebCommonServiceRegistration();
 
             builder.Services.AddDecisorLegalPresentationWebCommon();
-            builder.Services.AddDecisorHumanResourcesPresentationWebCommon();
             builder.Services.AddDecisorDomainPresentationWebCommon();
+            builder.Services.AddDecisorHumanResourcesPresentationWebCommon();
             builder.Services.AddDecisorFinancialPresentationWebCommon();
             builder.Services.AddDecisorInventoryPresentationWebCommon();
             builder.Services.AddDecisorCommercialPresentationWebCommon();
@@ -136,11 +136,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
                     if (!((Persistence.ORM.EF.Context.ApplicationDbContext)dbContext).Users.Any())
                     {
                         var defaultUserId = "admin";
-                        var k3y = new System.Guid(0x4c9294dd, 0x1e74, 0x45b2, 0xa8, 0x45, 0xaf, 0x6, 0xe5, 0x2a, 0xf6, 0x19);
+                        var k3y = new System.Guid(0x7c9294dd, 0x1e74, 0x45b2, 0xa8, 0x45, 0xaf, 0x6A, 0xe5, 0x2a, 0xf6, 0x19);
 
                         var protectedPassword = (dbContext as Persistence.ORM.EF.Context.ApplicationDbContext).CreateSecureUser(k3y, defaultUserId, "system");
 
-                        Log.Logger.Information(string.Format(">>>>>> Protected Password : \"{0}\" => \"{1}\"", defaultUserId, protectedPassword));
+                        Log.Logger.Information(string.Format(">>>>>> Protected Password : '{0}' => '{1}'", defaultUserId, protectedPassword));
                     }
                 }
                 else

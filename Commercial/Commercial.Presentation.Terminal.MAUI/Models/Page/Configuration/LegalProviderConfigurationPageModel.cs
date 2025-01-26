@@ -1,8 +1,10 @@
-﻿namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Configuration
+﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+
+namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class LegalProviderConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.LegalProviderDisplayModel>
     {
-        private Interop.API.Common.Models.Display.OrganizationContactDisplayModel contact;
+        private OrganizationContactDisplayModel contact;
         private string taxIdentificationNumber;
         private int priority;
 
@@ -19,7 +21,7 @@
 
         public System.Guid Id { get; set; }
 
-        public Interop.API.Common.Models.Display.OrganizationContactDisplayModel Contact { get => contact; set => SetProperty(ref contact, value); }
+        public OrganizationContactDisplayModel Contact { get => contact; set => SetProperty(ref contact, value); }
 
         public string TaxIdentificationNumber { get => taxIdentificationNumber; set => SetProperty(ref taxIdentificationNumber, value); }
 

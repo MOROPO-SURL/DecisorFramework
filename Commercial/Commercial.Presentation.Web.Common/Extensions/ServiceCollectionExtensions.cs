@@ -9,10 +9,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Common.Extensions
     {
         public static void AddDecisorCommercialPresentationWebCommon(this IServiceCollection services)
         {
-            services.AddScoped<IEntityRepository<PersonContact, System.Guid>, PersonContactRepository>();
-            services.AddScoped<IEntityRepository<OrganizationContact, System.Guid>, OrganizationContactRepository>();
-            services.AddScoped<IEntityRepository<LegalBusinessKind, System.Guid>, LegalBusinessKindRepository>();
-            services.AddScoped<IEntityRepository<NaturalBusinessKind, System.Guid>, NaturalBusinessKindRepository>();
             services.AddScoped<IEntityRepository<LegalProvider, System.Guid>, LegalProviderRepository>();
             services.AddScoped<IEntityRepository<NaturalProvider, System.Guid>, NaturalProviderRepository>();
             services.AddScoped<IEntityRepository<ProvisionableService, System.Guid>, ProvisionableServiceRepository>();

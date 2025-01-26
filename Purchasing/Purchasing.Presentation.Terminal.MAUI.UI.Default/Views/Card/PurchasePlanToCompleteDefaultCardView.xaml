@@ -37,9 +37,9 @@
                 LineBreakMode="TailTruncation">
                 <Label.FormattedText>
                     <FormattedString>
-                        <Span Text="{Binding Responsible.Name}" />
+                        <Span Text="{Binding Responsible.Contact.Identity.Name}" />
                         <Span Text=" " />
-                        <Span Text="{Binding Responsible.LastName}" />
+                        <Span Text="{Binding Responsible.Contact.Identity.LastName}" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>

@@ -94,17 +94,17 @@
                                                 </Border.StrokeShape>
                                                 <Image                                                
                                                     WidthRequest="60" HeightRequest="60"
-                                                    Source="{Binding NamedEmployee.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                                    Source="{Binding NamedEmployee.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
                                             </Border>
                                             <StackLayout 
                                                 Grid.Column="1"
                                                 Padding="10">
                                                 <Label
-                                                    Text="{Binding NamedEmployee.Name}"
+                                                    Text="{Binding NamedEmployee.Contact.Identity.Name}"
                                                     FontSize="Medium"
                                                     LineBreakMode="TailTruncation" />
                                                 <Label
-                                                    Text="{Binding NamedEmployee.LastName}"
+                                                    Text="{Binding NamedEmployee.Contact.Identity.LastName}"
                                                     LineBreakMode="TailTruncation" />
                                             </StackLayout>
                                         </Grid>

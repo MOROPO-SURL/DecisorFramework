@@ -100,6 +100,22 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
                 // TODO Set spected permission
                 //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
             });
+            domainSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Tipos de Pers. Jurídica",
+                Controller = "legalbusinesskinds",
+                Action = "Index",
+                Area = "domain",
+                Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.LegalBusinessKindViewerPermission
+            });
+            domainSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Tipos de Pers. Natural",
+                Controller = "naturalbusinesskinds",
+                Action = "Index",
+                Area = "domain",
+                Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.NaturalBusinessKindViewerPermission
+            });
             #endregion
 
             #region HH.RR.
@@ -204,22 +220,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
                 Action = "Index",
                 Area = "commercial",
                 Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.NaturalProviderViewerPermission
-            });
-            commercialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Tipos de Pers. Jurídica",
-                Controller = "legalbusinesskinds",
-                Action = "Index",
-                Area = "commercial",
-                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.LegalBusinessKindViewerPermission
-            });
-            commercialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Tipos de Pers. Natural",
-                Controller = "naturalbusinesskinds",
-                Action = "Index",
-                Area = "commercial",
-                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.NaturalBusinessKindViewerPermission
             });
             #endregion
 

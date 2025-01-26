@@ -143,21 +143,21 @@
                                 <td style="vertical-align: middle;" title="Nombre">
                                     @if (item.Archived)
                                     {
-                                        <span class="display-archived">@item.Name</span>
+                                        <span class="display-archived">@item.Contact.Identity.Name</span>
                                     }
                                     else
                                     {
-                                        <span>@item.Name</span>
+                                        <span>@item.Contact.Identity.Name</span>
                                     }
                                 </td>
                                 <td style="vertical-align: middle;" title="Apellidos">
                                     @if (item.Archived)
                                     {
-                                        <span class="display-archived">@item.LastName</span>
+                                        <span class="display-archived">@item.Contact.Identity.LastName</span>
                                     }
                                     else
                                     {
-                                        <span>@item.LastName</span>
+                                        <span>@item.Contact.Identity.LastName</span>
                                     }
                                 </td>
                                 <td style="vertical-align: middle; text-align: center;" title="Habilitado?">
@@ -228,20 +228,20 @@
                                                 <div class="modal-body">
                                                     <dl class="mb-0">
                                                         <dt>Nombre</dt>
-                                                        <dd>@item.Name</dd>
+                                                        <dd>@item.Contact.Identity.Name</dd>
                                                         <dt>Apellidos</dt>
                                                         <dd>
-                                                            @if (string.IsNullOrEmpty(item.LastName))
+                                                            @if (string.IsNullOrEmpty(item.Contact.Identity.LastName))
                                                             {
                                                                 <span>---</span>
                                                             }
                                                             else
                                                             {
-                                                                <span>@item.LastName</span>
+                                                                <span>@item.Contact.Identity.LastName</span>
                                                             }
                                                         </dd>
                                                         <dt>Sexo</dt>
-                                                        <dd>@item.Sex</dd>
+                                                        <dd>@item.Contact.Identity.Sex</dd>
                                                         <dt>Creado</dt>
                                                         <dd>@item.At.ToShortDateString()</dd>
                                                         <dt>Habilitado?</dt>

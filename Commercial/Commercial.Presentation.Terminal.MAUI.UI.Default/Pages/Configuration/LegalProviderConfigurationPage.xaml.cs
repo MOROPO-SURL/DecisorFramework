@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
@@ -53,10 +54,10 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
 
     private void ContactPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OrganizationContactPickPage(ContactPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationContactPickPage(ContactPickComplete_Callback)));
     }
 
-    private void ContactPickComplete_Callback(Interop.API.Common.Models.Display.OrganizationContactDisplayModel model)
+    private void ContactPickComplete_Callback(OrganizationContactDisplayModel model)
     {
         var concreteBindingContext = (Models.Page.Configuration.LegalProviderConfigurationPageModel)BindingContext;
 

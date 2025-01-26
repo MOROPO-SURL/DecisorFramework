@@ -13,7 +13,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Repositories
             return base.GetQueryableDbSet()
                 .Include(entity => entity.Zone)
                 .Include(entity => entity.Plan).ThenInclude(entity => entity.Zone)
-                .Include(entity => entity.Purchaser).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+                .Include(entity => entity.Purchaser).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.LegalProviderProductBridges).ThenInclude(bridge => bridge.Product).ThenInclude(entity => entity.FeatureImage)
                 .Include(entity => entity.LegalProviderProductBridges).ThenInclude(bridge => bridge.Provider).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.LegalProviderProductBridges).ThenInclude(bridge => bridge.Provider).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.BusinessKind)
@@ -24,7 +24,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Repositories
                 .Include(entity => entity.NaturalProviderProductBridges).ThenInclude(bridge => bridge.Provider).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.BusinessKind)
                 .Include(entity => entity.NaturalProviderProductBridges).ThenInclude(bridge => bridge.CostCenter)
                 .Include(entity => entity.NaturalProviderProductBridges).ThenInclude(bridge => bridge.UnitMeasurement)
-                .Include(entity => entity.EmployeeBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+                .Include(entity => entity.EmployeeBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.ColaboratorBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.SpentBridges).ThenInclude(bridge => bridge.Stern)
                 .Include(entity => entity.Reception);

@@ -13,7 +13,7 @@
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        public OrganizationContact Contact { get; set; }
+        public Domain.Persistence.Entities.OrganizationContact Contact { get; set; }
         public System.Guid ContactId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]

@@ -64,6 +64,20 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <FlyoutItem Title="Contactos">
+        <FlyoutItem.Icon>
+            <FontImageSource
+             FontFamily="MaterialDesignIcons"
+             Glyph="&#xF5D2;"
+             Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+             Title="Organizaciones"
+             ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationContactsManagePage}" />
+        <ShellContent
+            Title="Personas"
+            ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}" />
+    </FlyoutItem>
     <ShellContent
         Title="Inmuebles"
         ContentTemplate="{DataTemplate ContentPage}">

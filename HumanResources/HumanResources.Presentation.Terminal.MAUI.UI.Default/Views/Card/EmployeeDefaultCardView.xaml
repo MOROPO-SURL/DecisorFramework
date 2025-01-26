@@ -24,18 +24,18 @@
                 Grid.Column="0"
                 Aspect="AspectFill"
                 WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
-                Source="{Binding Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
             <StackLayout 
                 Grid.Column="1"
                 Padding="10">
                 <Label 
                     FontSize="Medium"
                     LineBreakMode="TailTruncation"
-                    Text="{Binding Name}" />
+                    Text="{Binding Contact.Identity.Name}" />
                 <Label
-                    IsVisible="{Binding LastName, Converter={StaticResource IsNotNullConverter}}"
+                    IsVisible="{Binding Contact.Identity.LastName, Converter={StaticResource IsNotNullConverter}}"
                     LineBreakMode="TailTruncation"
-                    Text="{Binding LastName}" />
+                    Text="{Binding Contact.Identity.LastName}" />
                 <Label 
                     Margin="0,6,0,0"
                     Text="Descripción"
@@ -46,7 +46,7 @@
                     VerticalOptions="FillAndExpand"
                     LineBreakMode="TailTruncation"
                     MaxLines="2"
-                    Text="{Binding About, TargetNullValue='---'}" />
+                    Text="{Binding Contact.Identity.About, TargetNullValue='---'}" />
             </StackLayout>
         </Grid>
     </Frame>

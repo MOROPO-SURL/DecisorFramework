@@ -9,10 +9,6 @@
 
         public System.Guid ContactId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
-        public string PersonalIdentificationNumber { get; set; }
-
         public TEntity Export()
         {
             var entity = new TEntity { Id = Id, Enabled = true };
@@ -30,7 +26,6 @@
         public virtual void Mergue(TEntity entity)
         {
             entity.Priority = Priority;
-            entity.PersonalIdentificationNumber = PersonalIdentificationNumber;
 
             if (entity.ContactId != ContactId)
             {

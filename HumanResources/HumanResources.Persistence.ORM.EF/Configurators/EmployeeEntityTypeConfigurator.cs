@@ -6,7 +6,7 @@
         {
             base.ApplayRules(entityTypeBuilder);
 
-            entityTypeBuilder.HasOne(entity => entity.Identity).WithOne().HasForeignKey<Entities.Employee>(entity => entity.IdentityId).OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade);
+            entityTypeBuilder.HasOne(entity => entity.Contact).WithOne().HasForeignKey<Entities.Employee>(entity => entity.ContactId).OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Restrict);
         }
     }
 }

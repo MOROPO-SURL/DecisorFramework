@@ -13,12 +13,9 @@
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        public Guama.Identity.Persistence.Entities.PersonIdentity Identity { get; set; }
-        public System.Guid IdentityId { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
-        public string PersonalIdentificationNumber { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ContactId))]
+        public Domain.Persistence.Entities.PersonContact Contact { get; set; }
+        public System.Guid ContactId { get; set; }
 
         public System.Collections.Generic.IEnumerable<Ocupation> Ocupations { get; set; }
     }

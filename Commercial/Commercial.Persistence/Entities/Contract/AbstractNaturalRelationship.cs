@@ -13,12 +13,8 @@
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        public PersonContact Contact { get; set; }
+        public Domain.Persistence.Entities.PersonContact Contact { get; set; }
         public System.Guid ContactId { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
-        public string PersonalIdentificationNumber { get; set; }
     }
 }
 

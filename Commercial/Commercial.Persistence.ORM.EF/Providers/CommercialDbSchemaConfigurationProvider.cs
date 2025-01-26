@@ -10,16 +10,11 @@ namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Providers
             {
                 return new Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator[]
                 {
-                    new BaseEntityTypeConfigurator<Entities.LegalBusinessKind>(),
-                    new BaseEntityTypeConfigurator<Entities.NaturalBusinessKind>(),
                     new BaseEntityTypeConfigurator<Entities.RequestableService>(),
                     new BaseEntityTypeConfigurator<Entities.ProvisionableService>(),
                     new Configurators.BudgetEntityTypeConfigurator(),
                     new Configurators.BudgetProductBridgeEntityTypeConfigurator(),
                     new Configurators.BudgetServiceBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.Contract.AbstractContact>(),
-                    new Configurators.LegalContactEntityTypeConfigurator(),
-                    new Configurators.NaturalContactEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.ProductValueProposition>(),
                     new BaseEntityTypeConfigurator<Entities.ProductValuePropositionRate>(),
                     new Configurators.ProductValuePropositionImageBridgeEntityTypeConfigurator(),

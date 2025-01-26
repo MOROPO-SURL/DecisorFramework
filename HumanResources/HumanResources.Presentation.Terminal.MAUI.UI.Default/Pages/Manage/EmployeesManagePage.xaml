@@ -101,7 +101,7 @@
                                             Text="Nombre" />
                                         <Label
                                             Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Name}" />
+                                            Text="{Binding PresentedItem.Contact.Identity.Name}" />
                                         <Label 
                                             Style="{StaticResource CaptionFieldLabelStyle}"
                                             Text="Prioridad" />
@@ -113,7 +113,7 @@
                                             Text="Acerca de" />
                                         <Label
                                             Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.About, TargetNullValue='---'}" />
+                                            Text="{Binding PresentedItem.Contact.Identity.About, TargetNullValue='---'}" />
                                     </StackLayout>
                                     <StackLayout
                                         Orientation="Horizontal"

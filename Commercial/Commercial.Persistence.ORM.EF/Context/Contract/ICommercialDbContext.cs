@@ -5,11 +5,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contrac
 {
     public interface ICommercialDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext
     {
-        public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
-        public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
-        public DbSet<Entities.Contract.AbstractContact> Contacts { get; set; }
-        public DbSet<OrganizationContact> OrganizationContacts { get; set; }
-        public DbSet<PersonContact> PersonContacts { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }
         public DbSet<ProvisionableService> ProvisionableServices { get; set; }
         public DbSet<ProductValueProposition> ProductValuePropositions { get; set; }

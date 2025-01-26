@@ -42,9 +42,9 @@
                     LineBreakMode="TailTruncation">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding Purchaser.Name}" />
+                            <Span Text="{Binding Purchaser.Contact.Identity.Name}" />
                             <Span Text=" " />
-                            <Span Text="{Binding Purchaser.LastName}" />
+                            <Span Text="{Binding Purchaser.Contact.Identity.LastName}" />
                         </FormattedString>
                     </Label.FormattedText>
                 </Label>

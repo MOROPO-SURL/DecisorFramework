@@ -30,4 +30,58 @@
 		<ProjectReference Include="..\..\Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Domain.Presentation.Terminal.MAUI\Domain.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Pages\Configuration\OrganizationContactConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\PersonContactConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\OrganizationContactsManagePage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\PersonContactsManagePage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\OrganizationContactPickPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\PersonContactPickPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\OrganizationContactDefaultCardView.xaml.cs">
+	    <SubType>Code</SubType>
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\PersonContactDefaultCardView.xaml.cs">
+	    <SubType>Code</SubType>
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\OrganizationContactConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\PersonContactConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\OrganizationContactsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\PersonContactsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\OrganizationContactPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\PersonContactPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\OrganizationContactDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\PersonContactDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>

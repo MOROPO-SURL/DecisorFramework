@@ -90,11 +90,11 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Backend.Contr
         {
             base.PostDelete(entity);
 
-            if (entity.Identity.Image != null)
+            if (entity.Contact.Identity.Image != null)
             {
-                imageRepository.Delete(entity.Identity.Image, User.Identity.Name);
+                imageRepository.Delete(entity.Contact.Identity.Image, User.Identity.Name);
 
-                imageFileManager.DeleteImageFile(entity.Identity.Image);
+                imageFileManager.DeleteImageFile(entity.Contact.Identity.Image);
             }
         }
     }

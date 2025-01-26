@@ -2,7 +2,7 @@
 <core_ui_configuration_pages:BaseConfigurationContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI"
     xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Commercial.Interop.API.Common"
@@ -41,13 +41,12 @@
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <VerticalStackLayout Spacing="6" Grid.ColumnSpan="4" Grid.Row="0">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Plan" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Contacto" />
                     <ContentView                        
                         IsVisible="{Binding Contact, Converter={StaticResource IsNotNullConverter}}">
-                        <local_card_views:PersonContactDefaultCardView
+                        <domain_presentation_card_views:PersonContactDefaultCardView
                             BindingContext="{Binding Contact}" />
                     </ContentView>
                     <Button
@@ -55,16 +54,12 @@
                         Text="Seleccionar ..."
                         Clicked="ContactPickButton_Clicked" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="1">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Carnet de identidad" />
-                    <Entry Text="{Binding PersonalIdentificationNumber}" />
-                </VerticalStackLayout>
                 <BoxView 
-                    Grid.ColumnSpan="4" Grid.Row="2" 
+                    Grid.ColumnSpan="4" Grid.Row="1" 
                     Margin="0,8,0,0"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="3">
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="2">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
                     <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
                 </VerticalStackLayout>

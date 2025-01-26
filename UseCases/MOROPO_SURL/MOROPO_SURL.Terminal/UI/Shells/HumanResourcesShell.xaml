@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:decisorframework_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_humanresources_list_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.HumanResourcesShell"
     FlyoutBehavior="Locked">
     <Shell.FlyoutHeader>
@@ -103,12 +104,12 @@
             ContentTemplate="{DataTemplate ContentPage}" />
     </FlyoutItem>
     <ShellContent
-        Title="Trabajadores"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:EmployeesManagePage}">
+        Title="Contactos"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFDF0;"
+                Glyph="&#xF5D2;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

@@ -6,7 +6,7 @@
         public System.Guid Id { get; set; } = System.Guid.NewGuid();
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ContactId))]
-        public Contract.AbstractContact Contact { get; set; }
+        public Domain.Persistence.Entities.Contract.AbstractContact Contact { get; set; }
         public System.Guid ContactId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ServiceId))]

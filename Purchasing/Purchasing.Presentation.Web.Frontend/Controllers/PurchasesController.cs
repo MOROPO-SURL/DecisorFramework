@@ -85,9 +85,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
 
             foreach (var item in model.EmployeeBridges)
             {
-                if (item.Employee.Image != null)
+                if (item.Employee.Contact.Identity.Image != null)
                 {
-                    item.Employee.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.EmployeeBridges.First(bridge => bridge.SternId == item.Employee.Id).Stern.Identity.Image.ContentType);
+                    item.Employee.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.EmployeeBridges.First(bridge => bridge.SternId == item.Employee.Id).Stern.Contact.Identity.Image.ContentType);
                 }
             }
 
@@ -95,7 +95,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             {
                 if (item.Colaborator.Image != null)
                 {
-                    item.Colaborator.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.EmployeeBridges.First(bridge => bridge.SternId == item.Colaborator.Id).Stern.Identity.Image.ContentType);
+                    item.Colaborator.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.EmployeeBridges.First(bridge => bridge.SternId == item.Colaborator.Id).Stern.Contact.Identity.Image.ContentType);
                 }
             }
 

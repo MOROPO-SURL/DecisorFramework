@@ -89,9 +89,9 @@
                                     <Label LineBreakMode="TailTruncation">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="{Binding Decisor.Name}" />
+                                                <Span Text="{Binding Decisor.Contact.Identity.Name}" />
                                                 <Span Text=" " />
-                                                <Span Text="{Binding Decisor.LastName}" />
+                                                <Span Text="{Binding Decisor.Contact.Identity.LastName}" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
