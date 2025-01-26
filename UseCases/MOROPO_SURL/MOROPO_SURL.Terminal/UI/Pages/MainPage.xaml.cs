@@ -46,4 +46,19 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
     {
         Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.FinancialShell();
     }
+
+    private void PurchasingSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.PurchasingShell();
+    }
+
+    private void InventorySectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.InventoryShell();
+    }
+
+    private void ProductionSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.ProductionShell();
+    }
 }

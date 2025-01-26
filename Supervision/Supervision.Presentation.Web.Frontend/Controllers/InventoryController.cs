@@ -9,15 +9,15 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.Supervision.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/supervision/stock/inventory")]
+    [Microsoft.AspNetCore.Mvc.Route("api/supervision/inventory")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class InventoryStockController : Guama.Core.Presentation.Web.Common.Controllers.BaseWebController
+    public class InventoryController : Guama.Core.Presentation.Web.Common.Controllers.BaseWebController
     {
         private readonly IEntityRepository<Batch, System.Guid> batchRepository;
         private readonly IEntityRepository<Product, System.Guid> productRepository;
         private readonly IEntityRepository<Purchase, System.Guid> purchaseRepository;
 
-        public InventoryStockController(IEntityRepository<Purchase, System.Guid> purchaseRepository, IEntityRepository<Product, System.Guid> productRepository, IEntityRepository<Batch, System.Guid> batchRepository, Microsoft.Extensions.Localization.IStringLocalizer<InventoryStockController> localizer, ILogger<InventoryStockController> logger) : base(localizer, logger)
+        public InventoryController(IEntityRepository<Purchase, System.Guid> purchaseRepository, IEntityRepository<Product, System.Guid> productRepository, IEntityRepository<Batch, System.Guid> batchRepository, Microsoft.Extensions.Localization.IStringLocalizer<InventoryController> localizer, ILogger<InventoryController> logger) : base(localizer, logger)
         {
             this.batchRepository = batchRepository;
             this.productRepository = productRepository;
