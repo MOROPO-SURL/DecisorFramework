@@ -1,4 +1,4 @@
-﻿namespace MOROPO.Framework.Decisor.Core.Presentation.Web.Options
+﻿namespace MOROPO.Framework.Decisor.Core.Presentation.Web.Frontend.Options
 {
     public class JwtOptions
     {

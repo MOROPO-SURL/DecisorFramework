@@ -4,7 +4,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class NaturalProviderPurchaseProductBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Bridge.PurchaseProductNaturalProviderBridgeModel>
+public partial class NaturalProviderPurchaseProductBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Bridge.PurchaseProductNaturalProviderBridgeModel>
 {
     public NaturalProviderPurchaseProductBridgeConfigurationPage(System.Action<Interop.API.Common.Models.Bridge.PurchaseProductNaturalProviderBridgeModel> successAction, Models.Page.Configuration.NaturalProviderPurchaseProductBridgeConfigurationPageModel model) : base(successAction, model)
     {
@@ -80,7 +80,7 @@ public partial class NaturalProviderPurchaseProductBridgeConfigurationPage : Cor
 
     private void ProviderPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.NaturalProviderPickPage(ProviderPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.NaturalProviderPickPage(ProviderPickComplete_Callback)));
     }
 
     private void ProductPickComplete_Callback(Inventory.Interop.API.Common.Models.Display.ProductDisplayModel model)
@@ -91,7 +91,7 @@ public partial class NaturalProviderPurchaseProductBridgeConfigurationPage : Cor
         {
             concreteBindingContext.IsBusy = true;
 
-            var unitMeasurementsAPIConnectClient = new Essential.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+            var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
             unitMeasurementsAPIConnectClient.GetReleatedsAsync(model.DefaultUnitMeasurement.Id).ContinueWith(task =>
             {
@@ -108,7 +108,7 @@ public partial class NaturalProviderPurchaseProductBridgeConfigurationPage : Cor
         hasChangesFlag = true;
     }
 
-    private void ProviderPickComplete_Callback(Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
+    private void ProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
     {
         ((Models.Page.Configuration.NaturalProviderPurchaseProductBridgeConfigurationPageModel)BindingContext).Provider = model;
 

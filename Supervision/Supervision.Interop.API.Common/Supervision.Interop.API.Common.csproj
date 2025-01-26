@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Supervision.Interop.API.Common</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Supervision.Interop.API.Common</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Inventory\Inventory.Interop.API.Common\Inventory.Interop.API.Common.csproj" />
+	</ItemGroup>
+</Project>

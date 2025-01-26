@@ -6,19 +6,24 @@ using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using System.Linq;
 
-namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/purchasing/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class PurchasePlansController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<PurchasePlan, System.Guid, PurchasePlanInputModel, PurchasePlanDisplayModel, PurchasePlanFilterModel>
     {
-        public PurchasePlansController(IEntityRepository<PurchasePlan, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchasePlansController> localizer, Microsoft.Extensions.Logging.ILogger<PurchasePlansController> logger) : base(repository, localizer, logger)
+        public PurchasePlansController(IEntityRepository<PurchasePlan, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchasePlansController> localizer, ILogger<PurchasePlansController> logger) : base(repository, localizer, logger)
         {
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<PurchasePlan, bool>> GetGlobalSelector()
         {
             return entity => !entity.Archived && entity.Enabled;
+        }
+
+        protected override System.Func<PurchasePlan, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
         }
 
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
@@ -132,13 +137,40 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
         }
 
         [Microsoft.AspNetCore.Mvc.HttpPut("approve/{key}")]
-        public virtual Microsoft.AspNetCore.Mvc.ActionResult Edit(System.Guid key)
+        public Microsoft.AspNetCore.Mvc.ActionResult Approve(System.Guid key)
         {
             try
             {
                 var entity = Repository.Get(key);
 
                 entity.ApprovedAt = System.DateTime.Now;
+
+                Repository.Update(entity, User.Identity.Name);
+
+                return Ok();
+            }
+            catch (System.InvalidOperationException e)
+            {
+                logger.LogError(e.InnerException, e.Message);
+
+                return NoContent();
+            }
+            catch (System.Exception e)
+            {
+                logger.LogError(e.InnerException, e.Message);
+
+                return Conflict();
+            }
+        }
+
+        [Microsoft.AspNetCore.Mvc.HttpPut("invalidate/{key}")]
+        public virtual Microsoft.AspNetCore.Mvc.ActionResult Invalidate(System.Guid key)
+        {
+            try
+            {
+                var entity = Repository.Get(key);
+
+                entity.ApprovedAt = null;
 
                 Repository.Update(entity, User.Identity.Name);
 

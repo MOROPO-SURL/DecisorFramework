@@ -1,23 +1,33 @@
-﻿using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
+﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
+using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using System.Linq;
 
-namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/purchasing/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class PurchasesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementFilteredController<Purchase, System.Guid, PurchaseInputModel, PurchaseDisplayModel, PurchaseFilterModel>
     {
-        public PurchasesController(IEntityRepository<Purchase, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchasesController> localizer, Microsoft.Extensions.Logging.ILogger<PurchasesController> logger) : base(repository, localizer, logger)
+        private readonly IEntityRepository<Classification, System.Guid> classificationRepository;
+
+        public PurchasesController(IEntityRepository<Classification, System.Guid> classificationRepository, IEntityRepository<Purchase, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchasesController> localizer, Microsoft.Extensions.Logging.ILogger<PurchasesController> logger) : base(repository, localizer, logger)
         {
+            this.classificationRepository = classificationRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<Purchase, bool>> GetGlobalSelector()
         {
             return entity => !entity.Archived;
+        }
+
+        protected override System.Func<Purchase, object> GetOrderSelector()
+        {
+            return entity => entity.At;
         }
 
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
@@ -36,9 +46,18 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                     item.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProductId == item.Product.Id).Product.FeatureImage.ContentType);
                 }
 
-                if (item.Provider.Image != null)
+                item.Product.Classifications = classificationRepository.FindBy(_entity => _entity.ProductId == item.Product.Id && !_entity.Archived && _entity.Enabled).ToArray().Select(_entity =>
                 {
-                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Identity.Image.ContentType);
+                    var _model = new ClassificationDisplayModel();
+
+                    _model.Import(_entity);
+
+                    return _model;
+                }).ToArray();
+
+                if (item.Provider.Contact.Identity.Image != null)
+                {
+                    item.Provider.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.LegalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Contact.Identity.Image.ContentType);
                 }
             }
 
@@ -49,17 +68,26 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                     item.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.ProductId == item.Product.Id).Product.FeatureImage.ContentType);
                 }
 
-                if (item.Provider.Image != null)
+                item.Product.Classifications = classificationRepository.FindBy(_entity => _entity.ProductId == item.Product.Id && !_entity.Archived && _entity.Enabled).ToArray().Select(_entity =>
                 {
-                    item.Provider.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Identity.Image.ContentType);
+                    var _model = new ClassificationDisplayModel();
+
+                    _model.Import(_entity);
+
+                    return _model;
+                }).ToArray();
+
+                if (item.Provider.Contact.Identity.Image != null)
+                {
+                    item.Provider.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NaturalProviderProductBridges.First(bridge => bridge.ProviderId == item.Provider.Id).Provider.Contact.Identity.Image.ContentType);
                 }
             }
 
             foreach (var item in model.EmployeeBridges)
             {
-                if (item.Employee.Image != null)
+                if (item.Employee.Contact.Identity.Image != null)
                 {
-                    item.Employee.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.EmployeeBridges.First(bridge => bridge.SternId == item.Employee.Id).Stern.Identity.Image.ContentType);
+                    item.Employee.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.EmployeeBridges.First(bridge => bridge.SternId == item.Employee.Id).Stern.Contact.Identity.Image.ContentType);
                 }
             }
 
@@ -67,7 +95,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             {
                 if (item.Colaborator.Image != null)
                 {
-                    item.Colaborator.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.EmployeeBridges.First(bridge => bridge.SternId == item.Colaborator.Id).Stern.Identity.Image.ContentType);
+                    item.Colaborator.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.EmployeeBridges.First(bridge => bridge.SternId == item.Colaborator.Id).Stern.Contact.Identity.Image.ContentType);
                 }
             }
 
@@ -82,12 +110,12 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             {
                 foreach (var item in model.LegalProviderProductBridges)
                 {
-                    entity.LegalProviderProductBridges.Add(new PurchaseProductLegalProviderBridge 
-                    { 
-                        PurchaseId = entity.Id, 
-                        ProductId = item.Product.Id, 
+                    entity.LegalProviderProductBridges.Add(new PurchaseProductLegalProviderBridge
+                    {
+                        PurchaseId = entity.Id,
+                        ProductId = item.Product.Id,
                         ProviderId = item.Provider.Id,
-                        CostCenterId = item.CostCenter.Id, 
+                        CostCenterId = item.CostCenter.Id,
                         UnitMeasurementId = item.UnitMeasurement.Id,
                         Amount = item.Amount,
                         Cost = item.Cost
@@ -128,17 +156,34 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 }
             }
 
-            if (model.SpentBridges != null)
+            if (model.RegularSpentBridges != null)
             {
-                foreach (var item in model.SpentBridges)
+                foreach (var item in model.RegularSpentBridges)
                 {
-                    entity.SpentBridges.Add(new PurchasePurchaseSpentBridge 
-                    { 
-                        ProwId = entity.Id, 
-                        SternId = item.Spent.Id, 
-                        Amount = item.Amount, 
-                        Cost = item.Cost, 
-                        CostCenterId = item.CostCenter.Id 
+                    entity.SpentBridges.Add(new PurchasePurchaseSpentBridge
+                    {
+                        ProwId = entity.Id,
+                        SternId = item.Spent.Id,
+                        Amount = item.Amount,
+                        Count = item.Count,
+                        IsRegular =true,
+                        CostCenterId = item.CostCenter.Id
+                    });
+                }
+            }
+
+            if (model.ExtraSpentBridges != null)
+            {
+                foreach (var item in model.ExtraSpentBridges)
+                {
+                    entity.SpentBridges.Add(new PurchasePurchaseSpentBridge
+                    {
+                        ProwId = entity.Id,
+                        SternId = item.Spent.Id,
+                        Amount = item.Amount,
+                        Count = item.Count,
+                        IsRegular = false,
+                        CostCenterId = item.CostCenter.Id
                     });
                 }
             }

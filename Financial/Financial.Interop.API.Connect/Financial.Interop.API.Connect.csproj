@@ -6,15 +6,12 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Financial.Interop.API.Connect</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.0.31" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.0.33" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Financial.Interop.API.Common\Financial.Interop.API.Common.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Remove="Clients\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Clients\" />
 	</ItemGroup>
 </Project>

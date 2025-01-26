@@ -6,17 +6,9 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Core.Interop.API.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Persistence.Presentation" Version="6.0.0.31" />
+		<PackageReference Include="GuamaFramework.Core.Persistence.Presentation" Version="6.0.0.33" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Core.Persistence\Core.Persistence.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Models\Display\Contract\" />
-	  <None Remove="Models\Input\Contract\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Models\Display\Contract\" />
-	  <Folder Include="Models\Input\Contract\" />
 	</ItemGroup>
 </Project>

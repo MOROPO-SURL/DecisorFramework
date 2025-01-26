@@ -20,7 +20,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
         public System.Guid? ZoneId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(PurchaserId))]
-        public Essential.Persistence.Entities.Employee Purchaser { get; set; }
+        public HumanResources.Persistence.Entities.Employee Purchaser { get; set; }
         public System.Guid PurchaserId { get; set; }
 
         public string Description { get; set; }

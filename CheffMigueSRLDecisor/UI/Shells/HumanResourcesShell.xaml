@@ -4,9 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_pages="clr-namespace:MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Pages"
     xmlns:decisorframework_essential_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Essential.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Essential.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Shells.HumanResourcesShell"
-    FlyoutBehavior="Locked"
-    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Gray050}, Dark={StaticResource Gray900}}">
+    FlyoutBehavior="Locked">
     <Shell.FlyoutHeader>
         <Grid HeightRequest="180">
             <Image 
@@ -20,7 +20,7 @@
                     HorizontalOptions="Start" VerticalOptions="Start"
                     Text="&#xF2DE;"
                     FontFamily="MaterialDesignIcons"
-                    FontSize="Large"
+                    FontSize="Medium"
                     Padding="4"
                     BackgroundColor="#60FFFFFF"
                     Clicked="BackHomeButton_Clicked" />
@@ -41,19 +41,18 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF9E7;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutSeparator />
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
         Title="Empleados"
-        ContentTemplate="{DataTemplate decisorframework_essential_manage_pages:EmployeesManagePage}">
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:EmployeesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xFDF0;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
@@ -63,7 +62,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF898;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
 </Shell>

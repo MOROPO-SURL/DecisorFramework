@@ -6,8 +6,9 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Inventory.Presentation.Web.Backend</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Inventory.Interop.API.Common\Inventory.Interop.API.Common.csproj" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.0.33" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\Inventory.Presentation.Web.Common\Inventory.Presentation.Web.Common.csproj" />
-		<ProjectReference Include="..\..\Financial\Financial.Presentation.Web.Backend\Financial.Presentation.Web.Backend.csproj" />
 	</ItemGroup>
 </Project>

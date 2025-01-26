@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ProductDisplayModel>
+public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ProductDisplayModel>
 {
     private byte[] imagePickedData;
     private string imageContentType;
@@ -61,7 +61,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
         var model = new Interop.API.Common.Models.Input.ProductInputModel
         {
-            Id = concreteBindingContext.Id,
+            Id = System.Guid.NewGuid(),
             Name = concreteBindingContext.Name,
             Description = concreteBindingContext.Description,
             Priority = concreteBindingContext.Priority,

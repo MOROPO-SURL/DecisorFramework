@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Supervision.Interop.API.Connect</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Supervision.Interop.API.Connect</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.0.33" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Supervision.Interop.API.Common\Supervision.Interop.API.Common.csproj" />
+	</ItemGroup>
+</Project>

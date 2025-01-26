@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<core_contract_configuration_pages:BaseConfigurationContentPage 
+<core_ui_configuration_pages:BaseConfigurationContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
-    xmlns:core_contract_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
     xmlns:inventory_interop_common_input_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
@@ -15,11 +15,6 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
-
-            <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
-            </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -27,26 +22,14 @@
             Text="Aplicar"
             Clicked="ApplyClickableControl_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Cancelar"
             Clicked="CancelClickableControl_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -98,20 +81,20 @@
                                 <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                             </CollectionView.ItemsLayout>
                             <CollectionView.EmptyView>
-                                <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                <Label Padding="0,16,0,0" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
-                                <DataTemplate>
+                                <DataTemplate x:DataType="presentation_view_models:PurchaseReceptionWeightsByCostCenterViewModel">
                                     <VerticalStackLayout Padding="0,16,0,8">
                                         <Label Text="Centro de costo:" />
                                         <Label
-                                            Text="{Binding Key.Name}"
-                                            FontSize="Large"
+                                            Text="{Binding CostCenter.Name}"
+                                            FontSize="Medium"
                                             FontAttributes="Bold" />
                                         <VerticalStackLayout
-                                            BindableLayout.ItemsSource="{Binding Value}">
+                                            BindableLayout.ItemsSource="{Binding ProductWeights}">
                                             <BindableLayout.ItemTemplate>
-                                                <DataTemplate x:DataType="presentation_view_models:PurchaseReceptionProductCommonWeightBridgeViewModel">
+                                                <DataTemplate x:DataType="presentation_view_models:PurchaseReceptionProductWeightBridgeViewModel">
                                                     <Frame x:Name="WrapFrame" Padding="16" Margin="0,4">
                                                         <Grid ColumnSpacing="8">
                                                             <Grid.ColumnDefinitions>
@@ -145,7 +128,7 @@
                                                             <BoxView
                                                                 Grid.ColumnSpan="3" Grid.Row="2"
                                                                 Margin="0,12,0,16"
-                                                                HeightRequest="2"
+                                                                HeightRequest="1"
                                                                 Color="{AppThemeBinding Light=DimGray, Dark=LightGray}" />
                                                             <Label
                                                                 Grid.ColumnSpan="2" Grid.Row="3"
@@ -203,7 +186,7 @@
                                                                                     Grid.Column="2" Grid.Row="1"
                                                                                     SelectedItem="{Binding Classification}"
                                                                                     ItemsSource="{Binding Source={Reference WrapFrame}, Path=BindingContext.Product.Classifications}"
-                                                                                    ItemDisplayBinding="{Binding Name}" />
+                                                                                    ItemDisplayBinding="{Binding Path=Name}" />
                                                                                 <Label
                                                                                     Grid.Column="3" Grid.Row="0"
                                                                                     Text="Almacen:"
@@ -236,8 +219,6 @@
                 </VerticalStackLayout>
             </Grid>
         </ScrollView>
-        <caneyframework_presentation_views:BusyView
-            BackgroundColor="#A7FFFFFF"
-            IsVisible="{Binding IsBusy}" />
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>
-</core_contract_configuration_pages:BaseConfigurationContentPage>
+</core_ui_configuration_pages:BaseConfigurationContentPage>

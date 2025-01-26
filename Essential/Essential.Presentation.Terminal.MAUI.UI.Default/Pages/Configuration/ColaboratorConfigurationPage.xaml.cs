@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Essential.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ColaboratorConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ColaboratorDisplayModel>
+public partial class ColaboratorConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ColaboratorDisplayModel>
 {
     private byte[] imagePickedData;
     private string imageContentType;
@@ -67,8 +67,7 @@ public partial class ColaboratorConfigurationPage : Core.Presentation.Terminal.M
             PhoneContacts = concreteBindingContext.PhoneContactItems.ToList(),
             EmailContacts = concreteBindingContext.EmailContactItems.ToList(),
             PostalContacts = concreteBindingContext.PostalContactItems.ToList(),
-            WebContacts = concreteBindingContext.WebContactItems.ToList(),
-            PersonalIdentificationNumber = concreteBindingContext.PersonalIdentificationNumber
+            WebContacts = concreteBindingContext.WebContactItems.ToList()
         };
 
         if (imagePickedData != null)
@@ -106,8 +105,7 @@ public partial class ColaboratorConfigurationPage : Core.Presentation.Terminal.M
             PhoneContacts = concreteBindingContext.PhoneContactItems.ToList(),
             EmailContacts = concreteBindingContext.EmailContactItems.ToList(),
             PostalContacts = concreteBindingContext.PostalContactItems.ToList(),
-            WebContacts = concreteBindingContext.WebContactItems.ToList(),
-            PersonalIdentificationNumber = concreteBindingContext.PersonalIdentificationNumber
+            WebContacts = concreteBindingContext.WebContactItems.ToList()
         };
 
         if (imagePickedData != null)

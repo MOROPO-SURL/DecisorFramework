@@ -1,0 +1,4 @@
+﻿[*.cs]
+
+# MCTME001: `.UseMauiCommunityToolkitMediaElement()` Not Found on MauiAppBuilder
+dotnet_diagnostic.MCTME001.severity = error

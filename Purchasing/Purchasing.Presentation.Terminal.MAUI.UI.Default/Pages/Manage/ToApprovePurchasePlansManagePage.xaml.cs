@@ -1,6 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Enumerations;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -36,7 +38,7 @@ public partial class ToApprovePurchasePlansManagePage : Caney.MVVM.Core.Pages.Co
         {
             try
             {
-                var employeesAPIConnectClient = new Essential.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
                 var zoneAPIConnectClient = new Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var employees = await employeesAPIConnectClient.GetAsync();
@@ -62,7 +64,7 @@ public partial class ToApprovePurchasePlansManagePage : Caney.MVVM.Core.Pages.Co
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -103,7 +105,7 @@ public partial class ToApprovePurchasePlansManagePage : Caney.MVVM.Core.Pages.Co
 
                     if (_task.Exception != null || _task.IsCanceled)
                     {
-                        DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                     }
                     else
                     {
@@ -128,7 +130,7 @@ public partial class ToApprovePurchasePlansManagePage : Caney.MVVM.Core.Pages.Co
         {
             try
             {
-                var employeesAPIConnectClient = new Essential.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
                 var zoneAPIConnectClient = new Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var employees = await employeesAPIConnectClient.GetAsync();
@@ -154,7 +156,7 @@ public partial class ToApprovePurchasePlansManagePage : Caney.MVVM.Core.Pages.Co
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -178,7 +180,7 @@ public partial class ToApprovePurchasePlansManagePage : Caney.MVVM.Core.Pages.Co
 
                     if (_task.Exception != null || _task.IsCanceled)
                     {
-                        DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                     }
                     else
                     {
@@ -208,7 +210,7 @@ public partial class ToApprovePurchasePlansManagePage : Caney.MVVM.Core.Pages.Co
 
         var apiConnectClient = new Interop.API.Connect.Clients.PurchasePlansAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        apiConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.PurchasePlanFilterModel { Kind = Interop.API.Common.Enumerations.CommonPlanFilterKind.ToApprove }).ContinueWith(task =>
+        apiConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.PurchasePlanFilterModel { Kind = CommonPlanFilterKind.ToApprove }).ContinueWith(task =>
         {
             Dispatcher.Dispatch(() =>
             {
@@ -216,11 +218,14 @@ public partial class ToApprovePurchasePlansManagePage : Caney.MVVM.Core.Pages.Co
 
                 if (task.Exception != null || task.IsCanceled)
                 {
-                    DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                 }
                 else
                 {
-                    foreach (var model in task.Result)
+                    // TODO Replace by ordering at server with GuamaFramework update!!
+                    var orderedResult = task.Result.OrderByDescending(model => model.At).ToArray();
+
+                    foreach (var model in orderedResult)
                     {
                         concreteBindingContext.Items.Add(model);
                     }

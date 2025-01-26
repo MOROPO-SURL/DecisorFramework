@@ -5,7 +5,7 @@ using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
-namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/purchasing/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]

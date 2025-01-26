@@ -2,7 +2,7 @@
 {
     public class LegalProviderPurchaseProductBridgeConfigurationPageModel : Contract.AbstractCommonProviderPurchaseProductBridgeModel<Interop.API.Common.Models.Bridge.PurchaseProductLegalProviderBridgeModel>
     {
-        private Interop.API.Common.Models.Display.LegalProviderDisplayModel provider;
+        private Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel provider;
 
         public LegalProviderPurchaseProductBridgeConfigurationPageModel(Interop.API.Common.Models.Bridge.PurchaseProductLegalProviderBridgeModel model = null) : base(model)
         {
@@ -12,6 +12,6 @@
             }
         }
 
-        public Interop.API.Common.Models.Display.LegalProviderDisplayModel Provider { get => provider; set => SetProperty(ref provider, value); }
+        public Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel Provider { get => provider; set => SetProperty(ref provider, value); }
     }
 }

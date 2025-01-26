@@ -33,26 +33,14 @@
             Text="Agregar"
             Clicked="AddToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Actualizar"
             Clicked="ReloadToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -110,14 +98,13 @@
             </StackLayout>
             <ContentView 
                 IsVisible="{Binding PresentedItem, Converter={StaticResource IsNotNullConverter}}"
-                BackgroundColor="#A9000000">
+                Style="{StaticResource ModalFrameWrapContentViewStyle}">
                 <ScrollView Orientation="Vertical">
                     <Grid>
                         <Frame
                             VerticalOptions="Center" HorizontalOptions="Center"
                             Padding="0" Margin="20"
-                            WidthRequest="400"
-                            BackgroundColor="White">
+                            WidthRequest="400">
                             <Grid>
                                 <StackLayout Margin="20" Spacing="20">
                                     <StackLayout>
@@ -164,7 +151,7 @@
                                     Padding="10"
                                     BackgroundColor="Transparent"
                                     Text="&#xf5ad;"
-                                    TextColor="Black"
+                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                     FontSize="Medium"
                                     FontFamily="MaterialDesignIcons"
                                     BorderWidth="0"
@@ -175,9 +162,7 @@
                     </Grid>
                 </ScrollView>
             </ContentView>
-            <caneyframework_presentation_views:BusyView 
-                BackgroundColor="#A7FFFFFF"
-                IsVisible="{Binding Path=IsBusy}" />
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
 </caneyframework_mvvm_pages:ContentPage>

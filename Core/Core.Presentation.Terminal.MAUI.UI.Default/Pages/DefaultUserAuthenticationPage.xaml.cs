@@ -5,7 +5,10 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class DefaultUserAuthenticationPage : Caney.MVVM.Core.Pages.BindingContextedContentPage<Models.Page.UserAuthenticationPageModel>
 {
-	public DefaultUserAuthenticationPage() : base(new Models.Page.UserAuthenticationPageModel())
+	public DefaultUserAuthenticationPage() : base(new Models.Page.UserAuthenticationPageModel
+    {
+        OwnerInformation = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Providers.Facade.IRuntimeContextProviderFacade>().OwnerInformation
+    })
     {
 		InitializeComponent();
     }
@@ -73,13 +76,6 @@ public partial class DefaultUserAuthenticationPage : Caney.MVVM.Core.Pages.Bindi
                                 message = "Servicio no disponible en este momento.";
                             }
                         }
-                        // TODO Handle native exceptions
-                        //else
-                        //{
-                        //    var nativeMessage = Xamarin.Forms.DependencyService.Get<IApplicationManagerFacade>().GetUnhandleExceptionMessage(targetException);
-
-                        //    if (nativeMessage != null) message = nativeMessage;
-                        //}
                     }
 
                     BindingContextPageModel.IsBusy = false;

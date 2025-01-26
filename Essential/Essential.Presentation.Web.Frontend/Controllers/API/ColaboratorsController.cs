@@ -37,6 +37,11 @@ namespace MOROPO.Framework.Decisor.Essential.Presentation.Web.Frontend.Controlle
             return entity => !entity.Archived && entity.Enabled;
         }
 
+        protected override System.Func<Colaborator, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
+        }
+
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
         {
             return NotFound();

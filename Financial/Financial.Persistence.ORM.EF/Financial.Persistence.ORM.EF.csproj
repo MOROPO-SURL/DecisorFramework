@@ -6,7 +6,7 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Financial.Persistence.ORM.EF</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Essential\Essential.Persistence.ORM.EF\Essential.Persistence.ORM.EF.csproj" />
+		<ProjectReference Include="..\..\Domain\Domain.Persistence.ORM.EF\Domain.Persistence.ORM.EF.csproj" />
 		<ProjectReference Include="..\Financial.Persistence\Financial.Persistence.csproj" />
 	</ItemGroup>
 	<ItemGroup>

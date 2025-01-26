@@ -6,7 +6,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
-namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/inventory/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
@@ -28,6 +28,11 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
         protected override System.Linq.Expressions.Expression<System.Func<Product, bool>> GetGlobalSelector()
         {
             return entity => !entity.Archived && entity.Enabled;
+        }
+
+        protected override System.Func<Product, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
         }
 
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
@@ -102,7 +107,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
 
                 _entity.ProductId = entity.Id;
 
-                classificationRepository.Add(_entity, User.Identity.Name, i == model.Classifications.Count -1);
+                classificationRepository.Add(_entity, User.Identity.Name, i == model.Classifications.Count - 1);
             }
         }
 

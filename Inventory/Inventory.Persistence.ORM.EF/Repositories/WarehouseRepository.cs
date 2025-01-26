@@ -5,10 +5,5 @@
         public WarehouseRepository(Microsoft.EntityFrameworkCore.DbContext dbContext) : base(dbContext)
         {
         }
-
-        public override System.Func<Entities.Warehouse, object> GetPagingOrderSelector()
-        {
-            return entity => entity.Priority;
-        }
     }
 }

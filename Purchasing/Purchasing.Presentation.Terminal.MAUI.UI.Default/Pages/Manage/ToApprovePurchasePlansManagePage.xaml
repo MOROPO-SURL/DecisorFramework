@@ -17,6 +17,7 @@
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <communitytoolkit_converters:ListToStringConverter x:Key="ListToStringConverter" Separator=", " />
 
             <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
                 <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
@@ -34,26 +35,14 @@
             Text="Agregar"
             Clicked="AddToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Actualizar"
             Clicked="ReloadToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -70,9 +59,9 @@
                     <BindableLayout.ItemTemplate>
                         <DataTemplate x:DataType="interop_common_display_models:PurchasePlanDisplayModel">
                             <Frame
-                                Margin="5" Padding="10"
+                                Margin="5"
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
-                                HeightRequest="180">
+                                HeightRequest="240">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                 </Frame.GestureRecognizers>
@@ -84,6 +73,15 @@
                                     <Label Text="{Binding PlannedFor, StringFormat='{0:D}'}" />
                                     <Label 
                                         Margin="0,8,0,0"
+                                        Text="Productos"
+                                        TextColor="DimGray"
+                                        FontSize="Caption"
+                                        FontAttributes="Bold" />
+                                    <Label
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding OutputProductBridges, Converter={StaticResource ListToStringConverter}}" />
+                                    <Label 
+                                        Margin="0,8,0,0"
                                         Text="Aprueba"
                                         TextColor="DimGray"
                                         FontSize="Caption"
@@ -91,9 +89,9 @@
                                     <Label LineBreakMode="TailTruncation">
                                         <Label.FormattedText>
                                             <FormattedString>
-                                                <Span Text="{Binding Decisor.Name}" />
+                                                <Span Text="{Binding Decisor.Contact.Identity.Name}" />
                                                 <Span Text=" " />
-                                                <Span Text="{Binding Decisor.LastName}" />
+                                                <Span Text="{Binding Decisor.Contact.Identity.LastName}" />
                                             </FormattedString>
                                         </Label.FormattedText>
                                     </Label>
@@ -125,14 +123,13 @@
             </ScrollView>
             <ContentView 
                 IsVisible="{Binding PresentedItem, Converter={StaticResource IsNotNullConverter}}"
-                BackgroundColor="#A9000000">
+                Style="{StaticResource ModalFrameWrapContentViewStyle}">
                 <ScrollView Orientation="Vertical">
                     <Grid>
                         <Frame
                             VerticalOptions="Center" HorizontalOptions="Center"
                             Padding="0" Margin="20"
-                            WidthRequest="400"
-                            BackgroundColor="White">
+                            WidthRequest="400">
                             <Grid>
                                 <StackLayout Margin="20" Spacing="20">
                                     <StackLayout>
@@ -183,7 +180,7 @@
                                     Padding="10"
                                     BackgroundColor="Transparent"
                                     Text="&#xf5ad;"
-                                    TextColor="Black"
+                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
                                     FontSize="Medium"
                                     FontFamily="MaterialDesignIcons"
                                     BorderWidth="0"
@@ -194,9 +191,7 @@
                     </Grid>
                 </ScrollView>
             </ContentView>
-            <caneyframework_presentation_views:BusyView 
-                BackgroundColor="#A7FFFFFF"
-                IsVisible="{Binding IsBusy}" />
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
 </caneyframework_mvvm_pages:ContentPage>

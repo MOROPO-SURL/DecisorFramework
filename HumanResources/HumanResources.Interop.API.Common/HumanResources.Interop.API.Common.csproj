@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.HumanResources.Interop.API.Common</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.HumanResources.Interop.API.Common</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Domain\Domain.Interop.API.Common\Domain.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\HumanResources.Persistence\HumanResources.Persistence.csproj" />
+	</ItemGroup>
+</Project>

@@ -3,7 +3,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ClassificationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ClassificationDisplayModel>
+public partial class ClassificationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ClassificationDisplayModel>
 {
     public ClassificationConfigurationPage(System.Action<Interop.API.Common.Models.Display.ClassificationDisplayModel> successAction, Models.Page.Configuration.ClassificationConfigurationPageModel model) : base(successAction, model)
     {

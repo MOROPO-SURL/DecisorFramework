@@ -39,6 +39,8 @@
 
     @foreach (var group in Model)
     {
+        if (group.Value == null) continue;
+
         <!-- Divider -->
         <hr class="sidebar-divider">
 
@@ -47,6 +49,7 @@
 
         @foreach (var item in group.Value)
         {
+
             if (User.IsAuthorized(item.Role, Context))
             {
                 if (Context.Request.Path.Value.StartsWith("/management/" + item.Area + "/" + item.Controller))

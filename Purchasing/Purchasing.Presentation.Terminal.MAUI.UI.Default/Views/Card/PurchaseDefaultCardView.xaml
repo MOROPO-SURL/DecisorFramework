@@ -1,0 +1,85 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
+    xmlns:local_converters="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Converters"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card.PurchaseDefaultCardView"
+    x:DataType="interop_common_display_models:PurchaseDisplayModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <local_converters:PurchaseDisplayModelToProductSummaryListConverter x:Key="PurchaseDisplayModelToProductSummaryListConverter" />
+            
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Grid IsClippedToBounds="True">        
+        <Frame>
+            <StackLayout>
+                <Label 
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Path=At, StringFormat='{0:D}'}" />
+                <Label Text="{Binding Plan.Zone.Name}" />
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Productos"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Converter={StaticResource PurchaseDisplayModelToProductSummaryListConverter}}" />
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Responsable"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label
+                    LineBreakMode="TailTruncation">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Purchaser.Contact.Identity.Name}" />
+                            <Span Text=" " />
+                            <Span Text="{Binding Purchaser.Contact.Identity.LastName}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Descripción"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label
+                    VerticalOptions="FillAndExpand"
+                    LineBreakMode="TailTruncation"
+                    MaxLines="2"
+                    Text="{Binding Description, TargetNullValue='---'}" />
+            </StackLayout>
+        </Frame>
+        <VerticalStackLayout 
+            IsVisible="{Binding ReceptionAt, Converter={StaticResource IsNotNullConverter}}"
+            BackgroundColor="{StaticResource Primary}"
+            HorizontalOptions="End" VerticalOptions="End"
+            WidthRequest="320"
+            Rotation="-45"
+            TranslationX="90" TranslationY="-40">
+            <Label
+                Padding="10,10,10,0"
+                FontSize="Medium"
+                HorizontalOptions="Center"
+                TextColor="White"
+                Text="Recepcionada" />
+            <Label
+                Padding="10,0,10,10"
+                FontSize="Caption"
+                HorizontalOptions="Center"
+                TextColor="White"
+                Text="{Binding ReceptionAt}" />
+        </VerticalStackLayout>
+    </Grid>
+</ContentView>

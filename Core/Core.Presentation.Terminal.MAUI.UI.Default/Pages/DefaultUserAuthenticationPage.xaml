@@ -12,6 +12,7 @@
     Title="Iniciar sesión">
     <ContentPage.Resources>
         <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
     </ContentPage.Resources>
     <ContentPage.Content>
         <Grid>
@@ -23,11 +24,27 @@
                         HorizontalOptions="Center" VerticalOptions="Center"
                         WidthRequest="280"
                         Spacing="16">
+                        <Image
+                            IsVisible="{Binding OwnerInformation.LogoImageViewStyle, Converter={StaticResource IsNotNullConverter}}"
+                            Margin="16,0"
+                            Style="{Binding OwnerInformation.LogoImageViewStyle}" />
+                        <VerticalStackLayout>
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                FontAttributes="Bold"
+                                FontSize="Medium"
+                                Text="{Binding OwnerInformation.Name}" />
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                FontSize="Large"
+                                FontAttributes="Bold"
+                                Text="Decisor" />
+                        </VerticalStackLayout>
                         <Entry
-                            Text="{Binding Path=UserName}"
+                            Text="{Binding UserName}"
                             Placeholder="usuario" />
                         <Entry
-                            Text="{Binding Path=Password}"
+                            Text="{Binding Password}"
                             Placeholder="contraseña"
                             IsPassword="true" />
                         <Button
@@ -38,9 +55,7 @@
                     </VerticalStackLayout>
                 </Grid>
             </ScrollView>
-            <caneyframework_presentation_views:BusyView
-                BackgroundColor="#A7FFFFFF"
-                IsVisible="{Binding IsBusy}"/>
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>       
     </ContentPage.Content>
 </caneyframework_mvvm_pages:BindingContextedContentPage>

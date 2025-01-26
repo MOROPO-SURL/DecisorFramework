@@ -21,9 +21,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
 
         public string Description { get; set; }
 
-        public List<LegalProviderPurchaseZoneBridge> LegalProviderBridges { get; set; } = new List<LegalProviderPurchaseZoneBridge>();
+        public List<PurchaseZoneLegalProviderBridge> LegalProviderBridges { get; set; } = new List<PurchaseZoneLegalProviderBridge>();
 
-        public List<NaturalProviderPurchaseZoneBridge> NaturalProviderBridges { get; set; } = new List<NaturalProviderPurchaseZoneBridge>();
+        public List<PurchaseZoneNaturalProviderBridge> NaturalProviderBridges { get; set; } = new List<PurchaseZoneNaturalProviderBridge>();
 
         public List<PurchaseZoneSpentBridge> SpentBridges { get; set; } = new List<PurchaseZoneSpentBridge>();
     }

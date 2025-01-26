@@ -1,0 +1,12 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Domain.Interop.API.Common</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Domain.Interop.API.Common</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\Legal\Legal.Interop.API.Common\Legal.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Domain.Persistence\Domain.Persistence.csproj" />
+	</ItemGroup>
+</Project>

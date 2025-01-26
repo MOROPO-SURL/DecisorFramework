@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Legal.Presentation.Web.Common</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Legal.Presentation.Web.Common</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Persistence.ORM.EF" Version="6.0.0.33" />
+		<PackageReference Include="GuamaFramework.Identity.Presentation.Web.Common" Version="6.0.0.33" />
+		<PackageReference Include="SkiaSharp" Version="2.88.8" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Legal.Interop.API.Common\Legal.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Legal.Persistence.ORM.EF\Legal.Persistence.ORM.EF.csproj" />
+	</ItemGroup>
+</Project>

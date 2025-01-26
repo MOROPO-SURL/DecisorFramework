@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_configuration_pages:BaseConfigurationContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI"
+    xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI"
+    xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
+    xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ProductionConfigurationPage"
+    x:TypeArguments="interop_common_display_models:ProductionDisplayModel"
+    x:DataType="presentation_configuration_page_models:ProductionConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <Grid 
+                Padding="20"
+                ColumnSpacing="16" RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Plan" />
+                    <ContentView                        
+                        IsVisible="{Binding Path=Plan, Converter={StaticResource IsNotNullConverter}}">
+                        <local_card_views:ProductionPlanToCompleteDefaultCardView
+                            BindingContext="{Binding Plan}"
+                            HeightRequest="180"
+                            Margin="0,0,0,10" />
+                    </ContentView>
+                    <Button
+                        Text="Seleccionar ..."
+                        Clicked="PlanPickButton_Clicked" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="0" VerticalOptions="Start">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cantidad" />
+                    <Entry Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="0" VerticalOptions="Start">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad de medida" />
+                    <Picker 
+                        x:Name="UnitMeasurementPicker"
+                        ItemsSource="{Binding AvailableUnitMeasurements}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="1">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Observaciones (Opcional)" />
+                    <Editor Text="{Binding Description}" HeightRequest="120" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="2">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sub-Productos" />
+                    <Frame Padding="8">
+                        <VerticalStackLayout 
+                            Spacing="8"
+                            BindableLayout.ItemsSource="{Binding ProductBridges}">
+                            <BindableLayout.ItemTemplate>
+                                <DataTemplate x:DataType="presentation_view_models:ProductionProductBridgeViewModel">
+                                    <Frame Padding="8">
+                                        <Grid ColumnSpacing="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="6*" />
+                                                <ColumnDefinition Width="3*" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Label
+                                                Grid.Column="0"
+                                                VerticalOptions="Center"
+                                                Text="{Binding Product.Name}"
+                                                LineBreakMode="TailTruncation" />
+                                            <Entry
+                                                Grid.Column="1"
+                                                Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                            <Label
+                                                Grid.Column="2"
+                                                VerticalOptions="Center"
+                                                Text="{Binding UnitMeasurement.Symbol}"
+                                                FontAttributes="Bold" />
+                                        </Grid>
+                                    </Frame>
+                                </DataTemplate>
+                            </BindableLayout.ItemTemplate>
+                        </VerticalStackLayout>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="3">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Empleados" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="AddEmployeeBridgeButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding EmployeeBridges}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_bridge_models:ProductionEmployeeBridgeModel">
+                                        <Frame Padding="8">
+                                            <StackLayout Orientation="Horizontal">
+                                                <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                    <Label
+                                                        Text="{Binding Employee}"
+                                                        LineBreakMode="TailTruncation"
+                                                        FontSize="Medium" />
+                                                    <Label
+                                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                                        FontSize="Caption"
+                                                        Margin="0,8,0,0"
+                                                        Text="Etapa" />
+                                                    <Label
+                                                        Text="{Binding Step.Name}"
+                                                        LineBreakMode="TailTruncation" />
+                                                    <Label
+                                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                                        FontSize="Caption"
+                                                        Margin="0,8,0,0"
+                                                        Text="Rol" />
+                                                    <Label
+                                                        Text="{Binding Role.Name}"
+                                                        LineBreakMode="TailTruncation" />
+                                                </VerticalStackLayout>
+                                                <VerticalStackLayout Spacing="8">
+                                                    <Button
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xF90B;"
+                                                        Clicked="EditEmployeeBridgeButton_Clicked" />
+                                                    <Button
+                                                        VerticalOptions="Start"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="RemoveEmployeeBridgeButton_Clicked" />
+                                                </VerticalStackLayout>
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</core_ui_configuration_pages:BaseConfigurationContentPage>

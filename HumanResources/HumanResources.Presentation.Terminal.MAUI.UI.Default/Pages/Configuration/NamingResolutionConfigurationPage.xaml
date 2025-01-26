@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_configuration_pages:BaseConfigurationContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
+    xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.NamingResolutionConfigurationPage"
+    x:TypeArguments="interop_common_display_models:NamingResolutionDisplayModel"
+    x:DataType="presentation_configuration_page_models:NamingResolutionConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+        Text="Aplicar"
+        Clicked="ApplyClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+        Text="Cancelar"
+        Clicked="CancelClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <Grid 
+                Padding="20"
+                ColumnSpacing="16" RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="2*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Grid
+                    Grid.Column="0" Grid.Row="0"
+                    ColumnSpacing="6" RowSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Row="0"
+                        Style="{StaticResource CaptionFieldLabelStyle}" Text="No. Consecutivo" />
+                    <Entry
+                        Grid.Row="1"
+                        BackgroundColor="Transparent"
+                        IsReadOnly="True"
+                        Text="{Binding Id}" />
+                    <Stepper
+                        Grid.Row="1"
+                        Margin="0,0,6,0"
+                        HorizontalOptions="End" VerticalOptions="Center"
+                        Value="{Binding Id}" />
+                </Grid>
+                <VerticalStackLayout
+                    Grid.Column="1" Grid.Row="0"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha de Emisión" />
+                    <DatePicker Date="{Binding At}" Format="dddd dd, MMMM, yyyy" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombrado" />
+                    <ContentView IsVisible="{Binding NamedEmployee, Converter={StaticResource IsNotNullConverter}}">
+                        <local_card_views:EmployeeDefaultCardView 
+                            BindingContext="{Binding NamedEmployee}"
+                            HeightRequest="140" />
+                    </ContentView>
+                    <Button
+                        HorizontalOptions="Start"
+                        Text="Seleccionar ..."
+                        Clicked="NamedEmployeePickButton_Clicked" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Grid.ColumnSpan="3" Grid.Row="1"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Resumen" />
+                    <Editor 
+                        HeightRequest="200"
+                        Text="{Binding Summary}" />
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</core_ui_configuration_pages:BaseConfigurationContentPage>

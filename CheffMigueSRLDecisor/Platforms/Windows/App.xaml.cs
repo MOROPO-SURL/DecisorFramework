@@ -8,7 +8,7 @@ namespace MOROPO.CheffMigueSRL.Decisor.Terminal.WinUI;
 /// <summary>
 /// Provides application-specific behavior to supplement the default Application class.
 /// </summary>
-public partial class App : MauiWinUIApplication
+public partial class App : Microsoft.Maui.MauiWinUIApplication
 {
 	/// <summary>
 	/// Initializes the singleton application object.  This is the first line of authored code
@@ -19,7 +19,7 @@ public partial class App : MauiWinUIApplication
 		this.InitializeComponent();
 	}
 
-	protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+	protected override Microsoft.Maui.Hosting.MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
 }
 
 

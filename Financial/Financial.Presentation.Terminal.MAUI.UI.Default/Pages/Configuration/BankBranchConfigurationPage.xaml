@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_configuration_pages:BaseConfigurationContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI"
+    xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Financial.Interop.API.Common"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    x:Class="MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.BankBranchConfigurationPage"
+    x:TypeArguments="interop_common_display_models:BankBranchDisplayModel"
+    x:DataType="presentation_configuration_page_models:BankBranchConfigurationPageModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+        Text="Aplicar"
+        Clicked="ApplyClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+        Text="Cancelar"
+        Clicked="CancelClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <Grid 
+                Padding="20"
+                ColumnSpacing="16" RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Agencia" />
+                    <Picker 
+                        x:Name="AgencyPicker"
+                        ItemsSource="{Binding AvailableAgencies}" 
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Spacing="6" Grid.Column="3" Grid.Row="0">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Número" />
+                    <Entry Text="{Binding Number}" />
+                </VerticalStackLayout>
+                <BoxView 
+                    Grid.ColumnSpan="4" Grid.Row="1" 
+                    Margin="0,8,0,0"
+                    HeightRequest="1" 
+                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="2">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</core_ui_configuration_pages:BaseConfigurationContentPage>

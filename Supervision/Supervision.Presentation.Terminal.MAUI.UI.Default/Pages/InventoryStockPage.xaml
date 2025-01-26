@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<caneyframework_mvvm_pages:ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_converters="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Converters"
+    xmlns:interop_common_models="clr-namespace:MOROPO.Framework.Decisor.Supervision.Interop.API.Common.Models;assembly=MOROPO.Framework.Decisor.Supervision.Interop.API.Common"
+    xmlns:presentation_page_models="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.Models.Page;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    xmlns:live_charts_controls="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    x:Class="MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages.InventoryStockPage"
+    x:DataType="presentation_page_models:InventoryStockOverviewPageModel"
+    Title="Existencias de Inventario">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            <local_converters:InventoryStockDetailsModelToLiveChartSeriesConverter x:Key="InventoryStockDetailsModelToLiveChartSeriesConverter" />
+            <local_converters:InventoryStockDetailsModelToLiveChartXAxisConverter x:Key="InventoryStockDetailsModelToLiveChartXAxisConverter" />
+
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="240" AbsoluteHorizontalSeparation="20" />
+            <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
+            
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+
+            <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
+                <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+                <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="FontSize" Value="Caption" />
+                <Setter Property="Margin" Value="0,16,0,0" />
+            </Style>
+            <Style TargetType="Label" x:Key="ValueFieldLabelStyle">
+                <Setter Property="FontSize" Value="Default" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <SearchBar Margin="20,20,20,0" />
+                <ScrollView 
+                    Orientation="Vertical"
+                    VerticalOptions="FillAndExpand">
+                    <FlexLayout
+                        Margin="10"
+                        Wrap="Wrap"
+                        AlignItems="Start" AlignContent="Start"
+                        BindableLayout.ItemsSource="{Binding Items}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="interop_common_models:InventoryStockOverviewModel">
+                                <Frame 
+                                    Margin="5" Padding="0"
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
+                                    HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout>
+                                        <Image
+                                            Aspect="AspectFill"
+                                            HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=1.777777777777778}"
+                                            Source="{Binding Product.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                        <StackLayout
+                                            IsClippedToBounds="True"
+                                            Padding="10">
+                                            <Label
+                                                LineBreakMode="TailTruncation"
+                                                FontAttributes="Bold"
+                                                Text="{Binding Product.Name}" />
+                                            <Label 
+                                                HorizontalTextAlignment="End"
+                                                Text="{Binding Totalization, StringFormat='{0:F2}'}"
+                                                LineBreakMode="TailTruncation"
+                                                FontSize="Large"
+                                                FontAttributes="Bold" />
+                                            <Label 
+                                                HorizontalTextAlignment="End"
+                                                Text="{Binding Product.DefaultUnitMeasurement.Symbol}" />
+                                        </StackLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                        <BindableLayout.EmptyView>
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                Margin="5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                FontAttributes="Italic" />
+                        </BindableLayout.EmptyView>
+                    </FlexLayout>
+                </ScrollView>
+            </StackLayout>
+            <ContentView 
+                IsVisible="{Binding PresentedDetails, Converter={StaticResource IsNotNullConverter}}"
+                Style="{StaticResource ModalFrameWrapContentViewStyle}">
+                <ScrollView Orientation="Vertical">
+                    <Grid>
+                        <Frame
+                            VerticalOptions="Center" HorizontalOptions="Center"
+                            Padding="0" Margin="20"
+                            WidthRequest="960">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label 
+                                    Grid.Row="0"
+                                    Margin="20"
+                                    Text="Detalles"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium" />
+                                <FlexLayout
+                                    Grid.Row="1"
+                                    Wrap="Wrap"
+                                    AlignItems="Start"
+                                    AlignContent="Start">
+                                    <StackLayout WidthRequest="640">
+                                        <live_charts_controls:CartesianChart 
+                                            HeightRequest="300" 
+                                            Series="{Binding Converter={StaticResource InventoryStockDetailsModelToLiveChartSeriesConverter}}"
+                                            XAxes="{Binding Converter={StaticResource InventoryStockDetailsModelToLiveChartXAxisConverter}}" />
+                                    </StackLayout>
+                                    <StackLayout Padding="20" Spacing="8" WidthRequest="320">
+                                        <Label
+                                            Style="{StaticResource CaptionFieldLabelStyle}"
+                                            Margin="0"
+                                            Text="Producto" />
+                                        <Label
+                                            Style="{StaticResource ValueFieldLabelStyle}"
+                                            Text="{Binding PresentedDetails.Product.Name}" />
+                                        <Label 
+                                            Style="{StaticResource CaptionFieldLabelStyle}"
+                                            Text="Existencias" />
+                                        <StackLayout
+                                            BindableLayout.ItemsSource="{Binding PresentedDetails.Existences}">
+                                            <BindableLayout.ItemTemplate>
+                                                <DataTemplate x:DataType="interop_common_models:WarehouseExistenseModel">
+                                                    <Grid Margin="0,8">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="2*" />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Label
+                                                            Grid.Column="0"
+                                                            Text="{Binding Warehouse.Name}" />
+                                                        <Label
+                                                            Grid.Column="1"
+                                                            Text="{Binding Amount, StringFormat='{0:F2}'}"
+                                                            HorizontalTextAlignment="End" />
+                                                    </Grid>
+                                                </DataTemplate>
+                                            </BindableLayout.ItemTemplate>
+                                        </StackLayout>
+                                        <BoxView
+                                            HeightRequest="2"
+                                            Color="{AppThemeBinding Light={StaticResource Gray100}, Dark={StaticResource Gray600}}" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Label
+                                                Grid.Column="0" Grid.Row="0"
+                                                Text="Total"
+                                                FontAttributes="Bold" />
+                                            <Label
+                                                Grid.Column="1" Grid.Row="0"
+                                                Text="{Binding PresentedDetails.Totalization, StringFormat='{0:F2}'}"
+                                                FontSize="Large"
+                                                FontAttributes="Bold"
+                                                HorizontalTextAlignment="End" />
+                                            <Label 
+                                                Grid.ColumnSpan="2" Grid.Row="1"
+                                                HorizontalTextAlignment="End"
+                                                Text="{Binding PresentedDetails.Product.DefaultUnitMeasurement.Symbol}" />
+                                        </Grid>
+                                        <Label 
+                                            Style="{StaticResource CaptionFieldLabelStyle}"
+                                            Text="Costo Unitario (ponderado)" />
+                                        <Label
+                                            Style="{StaticResource ValueFieldLabelStyle}"
+                                            Text="{Binding PresentedDetails.WeightedCost, StringFormat='{0:F2} CUP'}" />
+                                    </StackLayout>
+                                </FlexLayout>
+                                <Button
+                                    Grid.Row="0"
+                                    HorizontalOptions="End" VerticalOptions="Start"
+                                    Padding="10"
+                                    BackgroundColor="Transparent"
+                                    Text="&#xf5ad;"
+                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
+                                    FontSize="Medium"
+                                    FontFamily="MaterialDesignIcons"
+                                    BorderWidth="0"
+                                    WidthRequest="48" HeightRequest="48"
+                                    Clicked="PresentedItemDismissButton_Clicked" />
+                            </Grid>
+                        </Frame>
+                    </Grid>
+                </ScrollView>
+            </ContentView>
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</caneyframework_mvvm_pages:ContentPage>

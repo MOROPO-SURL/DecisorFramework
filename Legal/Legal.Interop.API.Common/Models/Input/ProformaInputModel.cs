@@ -1,0 +1,43 @@
+﻿namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Input
+{
+    public class ProformaInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Proforma, System.Guid>
+    {
+        public System.Guid Id { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public System.Collections.Generic.List<Bridge.ProformaSectionClauseBridge> Sections { get; set; }
+
+        public Persistence.Entities.Proforma Export()
+        {
+            var entity = new Persistence.Entities.Proforma { Id = Id, Enabled = true };
+
+            Mergue(entity);
+
+            return entity;
+        }
+
+        public void Import(Persistence.Entities.Proforma entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Mergue(Persistence.Entities.Proforma entity)
+        {
+            entity.Name = Name;
+            entity.Description = Description;
+            entity.ClauseBridges.Clear();
+
+            foreach (var model in Sections)
+            {
+                foreach (var _model in model.Clauses)
+                {
+                    entity.ClauseBridges.Add(new Persistence.Entities.ProformaClauseBridge { ProwId = entity.Id, SternId = _model.Id, SectionId = model.Section.Id });
+                }
+            }
+        }
+    }
+}

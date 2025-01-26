@@ -5,8 +5,7 @@
     xmlns:local_pages="clr-namespace:MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Pages"
     xmlns:decisorframework_financial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Shells.FinancialShell"
-    FlyoutBehavior="Locked"
-    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Gray050}, Dark={StaticResource Gray900}}">
+    FlyoutBehavior="Locked">
     <Shell.FlyoutHeader>
         <Grid HeightRequest="180">
             <Image 
@@ -20,7 +19,7 @@
                     HorizontalOptions="Start" VerticalOptions="Start"
                     Text="&#xF2DE;"
                     FontFamily="MaterialDesignIcons"
-                    FontSize="Large"
+                    FontSize="Medium"
                     Padding="4"
                     BackgroundColor="#60FFFFFF"
                     Clicked="BackHomeButton_Clicked" />
@@ -41,10 +40,120 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF9E7;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutSeparator />
+    <MenuFlyoutItem Text="Operaciones" />
+    <ShellContent
+        Title="Cobros"
+        ContentTemplate="{DataTemplate local_pages:TempIncomesPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF028C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Pagos"
+        ContentTemplate="{DataTemplate local_pages:TempPaymentsPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF028B;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Recaudaciones"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:CachingsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFCD0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Caja Extra"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:RecashesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFAA7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Anticipos"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:AdvancesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF116;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Reintegros"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BacksManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF116;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Reembolsos"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:RefundsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA9B;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Depositos Bancarios"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankInputsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA27;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Extracciones Bancarias"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankOutputsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA28;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Pagos de Nómina"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:NomsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF675;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Pagos de Remineración"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:RemunerationsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF00C2;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
         Title="Centros de Costo"
@@ -53,7 +162,57 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF81E;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Agencias Bancarias"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankAgenciesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF070;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Sucursales Bancarias"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankBranchesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA26;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Cuentas Bancarias"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankAccountsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF02A8;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tarjetas Bancarias de Débito"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankDebitCardsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF19B;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Monedas"
+        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:CurrenciesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF4CB;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
 </Shell>

@@ -5,10 +5,13 @@ namespace MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Pages;
 
 public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContextedContentPage<Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.MainPageModel>
 {
-	public MainPage() : base(new Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.MainPageModel())
+    public MainPage() : base(new Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.MainPageModel
+    {
+        OwnerInformation = Providers.SingleRuntimeContextProvider.OWNER_INFORMATION
+    })
 	{
 		InitializeComponent();
-	}
+    }
 
     protected override void OnAppearing()
     {
@@ -36,7 +39,7 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
 
     private void ProductionSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        //this.NavigationPushModalPageAsync(new ProductionPage());
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.ProductionShell();
     }
 
     private void HumanResourcesSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
@@ -47,5 +50,10 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
     private void FinancialSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.FinancialShell();
+    }
+
+    private void SalesSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.SalesShell();
     }
 }

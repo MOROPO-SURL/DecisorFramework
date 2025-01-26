@@ -6,12 +6,9 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Servicing.Persistence</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<None Remove="Entities\" />
+		<ProjectReference Include="..\..\Core\Core.Persistence\Core.Persistence.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<Folder Include="Entities\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <ProjectReference Include="..\..\Core\Core.Persistence\Core.Persistence.csproj" />
+	  <Folder Include="Entities\Contract\" />
 	</ItemGroup>
 </Project>

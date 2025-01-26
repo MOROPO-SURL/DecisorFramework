@@ -6,15 +6,11 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Essential.Presentation.Web.Frontend</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Core\Core.Presentation.Web.Frontend\Core.Presentation.Web.Frontend.csproj" />
-		<ProjectReference Include="..\Essential.Interop.API.Common\Essential.Interop.API.Common.csproj" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.0.33" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.0.33" />
+		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
 	</ItemGroup>
 	<ItemGroup>
-	  <None Remove="Controllers\" />
-	  <None Remove="Controllers\API\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Controllers\" />
-	  <Folder Include="Controllers\API\" />
+		<ProjectReference Include="..\Essential.Presentation.Web.Common\Essential.Presentation.Web.Common.csproj" />
 	</ItemGroup>
 </Project>

@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Input
+﻿using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
+
+namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Input
 {
     public class CostCenterInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.CostCenter, System.Guid>
     {
@@ -10,6 +12,8 @@
         public string Description { get; set; }
 
         public int Priority { get; set; }
+
+        public System.Guid DefaultBankAccountId { get; set; }
 
         public Persistence.Entities.CostCenter Export()
         {
@@ -30,6 +34,12 @@
             entity.Name = Name;
             entity.About = Description;
             entity.Priority = Priority;
+
+            if (DefaultBankAccountId != entity.DefaultBankAccountId)
+            {
+                entity.DefaultBankAccount = null;
+                entity.DefaultBankAccountId = DefaultBankAccountId;
+            }
         }
     }
 }

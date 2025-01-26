@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
-using MOROPO.Framework.Decisor.Essential.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
@@ -26,6 +27,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public System.DateTime? ApprovedAt { get; set; }
 
+        public decimal EstimatedAdvance { get; set; }
+
         public List<PurchasePlanCommonProductBridgeModel> OutputProductBridges { get; set; } = new List<PurchasePlanCommonProductBridgeModel>();
 
         public List<PurchasePlanCommonProductBridgeModel> InputProductBridges { get; set; } = new List<PurchasePlanCommonProductBridgeModel>();
@@ -39,8 +42,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             Id = entity.Id;
             At = entity.At;
             PlannedFor = entity.PlannedFor;
+            ApprovedAt = entity.ApprovedAt;
             Priority = entity.Priority;
             Description = entity.Description;
+            EstimatedAdvance = entity.EstimatedAdvance;
 
             Zone = new PurchaseZoneDisplayModel();
             Zone.Import(entity.Zone);
@@ -91,7 +96,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             {
                 var model = new PurchasePlanLegalProviderBridgeModel
                 {
-                    Provider = new LegalProviderDisplayModel(),
+                    Provider = new Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel(),
                     Debt = bridge.Debt
                 };
 
@@ -104,7 +109,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             {
                 var model = new PurchasePlanNaturalProviderBridgeModel
                 {
-                    Provider = new NaturalProviderDisplayModel(),
+                    Provider = new Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel(),
                     Debt = bridge.Debt
                 };
 

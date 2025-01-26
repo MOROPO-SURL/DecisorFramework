@@ -7,9 +7,6 @@
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        public Essential.Persistence.Entities.Employee Responsible { get; set; }
-        public System.Guid ResponsibleId { get; set; }
-
         public decimal Amount { get; set; }
     }
 }

@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<core_contract_configuration_pages:BaseConfigurationContentPage 
+<core_ui_configuration_pages:BaseConfigurationContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_converters="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Converters"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI"
-    xmlns:core_contract_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
@@ -13,24 +13,6 @@
     x:DataType="presentation_configuration_page_models:ProductConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
-            </Style>
-
-            <Array Type="{x:Type x:Int32}" x:Key="PriorityValues">
-                <x:Int32>1</x:Int32>
-                <x:Int32>2</x:Int32>
-                <x:Int32>3</x:Int32>
-                <x:Int32>4</x:Int32>
-                <x:Int32>5</x:Int32>
-                <x:Int32>6</x:Int32>
-                <x:Int32>7</x:Int32>
-                <x:Int32>8</x:Int32>
-                <x:Int32>9</x:Int32>
-                <x:Int32>10</x:Int32>
-            </Array>
-
             <local_converters:CategoryToTreeNameConverter x:Key="CategoryToTreeNameConverter" />
 
             <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
@@ -41,26 +23,14 @@
         Text="Aplicar"
         Clicked="ApplyClickableControl_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
         Text="Cancelar"
         Clicked="CancelClickableControl_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -198,7 +168,7 @@
                         </Grid>
                     </Frame>
                 </VerticalStackLayout>
-                <!--<VerticalStackLayout Spacing="6" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2">
+                <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Mermas de Almacenamiento" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
@@ -228,7 +198,7 @@
                             </CollectionView>
                         </Grid>
                     </Frame>
-                </VerticalStackLayout>-->
+                </VerticalStackLayout>
                 <BoxView 
                     Grid.ColumnSpan="4" Grid.Row="3" 
                     Margin="0,8,0,0"
@@ -240,9 +210,6 @@
                 </VerticalStackLayout>
             </Grid>
         </ScrollView>
-        <caneyframework_presentation_views:BusyView
-            Grid.ColumnSpan="4" Grid.RowSpan="6"
-            BackgroundColor="#A7FFFFFF"
-            IsVisible="{Binding IsBusy}" />
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>
-</core_contract_configuration_pages:BaseConfigurationContentPage>
+</core_ui_configuration_pages:BaseConfigurationContentPage>

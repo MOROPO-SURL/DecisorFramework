@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_configuration_pages:BaseConfigurationContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
+    xmlns:presentation_configuration_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
+    xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.VacantConfigurationPage"
+    x:TypeArguments="presentation_configuration_view_models:VacantViewModel"
+    x:DataType="presentation_configuration_page_models:VacantConfigurationPageModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+        Text="Aplicar"
+        Clicked="ApplyClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+        Text="Cancelar"
+        Clicked="CancelClickableControl_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <Grid 
+                Padding="20"
+                ColumnSpacing="16" RowSpacing="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <VerticalStackLayout 
+                    Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="0"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Plaza Laboral" />
+                    <Picker 
+                        x:Name="WorkPositionPicker"
+                        ItemsSource="{Binding AvailableWorkPositions}" 
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Escala Salarial" />
+                    <Picker 
+                        x:Name="SalaryStandardPicker"
+                        ItemsSource="{Binding AvailableSalaryStandards}" 
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout>
+                <VerticalStackLayout
+                    Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Requiere resolución de nombramiento" />
+                    <Switch IsToggled="{Binding NamingResolutionRequired}" />
+                </VerticalStackLayout>
+                <BoxView 
+                    Grid.ColumnSpan="4" Grid.Row="2" 
+                    Margin="0,8,0,0"
+                    HeightRequest="1" 
+                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="3">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                </VerticalStackLayout>
+            </Grid>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</core_ui_configuration_pages:BaseConfigurationContentPage>

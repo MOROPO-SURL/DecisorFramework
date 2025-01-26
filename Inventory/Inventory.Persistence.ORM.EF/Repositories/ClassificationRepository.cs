@@ -5,11 +5,6 @@
         public ClassificationRepository(Microsoft.EntityFrameworkCore.DbContext dbContext) : base(dbContext)
         {
         }
-
-        public override System.Func<Entities.Classification, object> GetPagingOrderSelector()
-        {
-            return entity => entity.Priority;
-        }
     }
 }
 

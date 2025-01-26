@@ -1,6 +1,59 @@
-﻿namespace MOROPO.Framework.Decisor.Essential.Interop.API.Common.Models.Input
+﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+using System.Collections.Generic;
+
+namespace MOROPO.Framework.Decisor.Essential.Interop.API.Common.Models.Input
 {
-    public class ColaboratorInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNaturalRelationshipInputModel<Persistence.Entities.Colaborator>
+    public class ColaboratorInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Colaborator, System.Guid>
     {
+        public System.Guid Id { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Name { get; set; }
+
+        public string About { get; set; }
+
+        public int Priority { get; set; }
+
+        public ImageInputModel Image { get; set; }
+
+        public List<Core.Interop.API.Common.Models.Display.EmailContactItemDisplayModel> EmailContacts { get; set; }
+
+        public List<Core.Interop.API.Common.Models.Display.PhoneContactItemDisplayModel> PhoneContacts { get; set; }
+
+        public List<Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel> PostalContacts { get; set; }
+
+        public List<Core.Interop.API.Common.Models.Display.WebContactItemDisplayModel> WebContacts { get; set; }
+
+        public string LastName { get; set; }
+
+        public string Alias { get; set; }
+
+        public Guama.Identity.Persistence.Enumerations.Sex Sex { get; set; }
+
+        public Guama.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
+
+        public Persistence.Entities.Colaborator Export()
+        {
+            var entity = new Persistence.Entities.Colaborator { Id = Id, Enabled = true, Identity = new Guama.Identity.Persistence.Entities.PersonIdentity() };
+
+            Mergue(entity);
+            return entity;
+        }
+
+        public void Import(Persistence.Entities.Colaborator entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public virtual void Mergue(Persistence.Entities.Colaborator entity)
+        {
+            entity.Identity.Name = Name;
+            entity.Identity.About = About;
+            entity.Priority = Priority;
+            entity.Identity.LastName = LastName;
+            entity.Identity.Alias = Alias;
+            entity.Identity.Sex = Sex;
+            entity.Identity.CivilStatus = CivilStatus;
+        }
     }
 }

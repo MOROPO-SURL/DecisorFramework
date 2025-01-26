@@ -4,9 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_pages="clr-namespace:MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Pages"
     xmlns:decisorframework_purchasing_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_supervision_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.CheffMigueSRL.Decisor.Terminal.UI.Shells.PurchasingShell"
-    FlyoutBehavior="Locked"
-    FlyoutBackgroundColor="{AppThemeBinding Light={StaticResource Gray050}, Dark={StaticResource Gray900}}">
+    FlyoutBehavior="Locked">
     <Shell.FlyoutHeader>
         <Grid HeightRequest="180">
             <Image 
@@ -20,7 +20,7 @@
                     HorizontalOptions="Start" VerticalOptions="Start"
                     Text="&#xF2DE;"
                     FontFamily="MaterialDesignIcons"
-                    FontSize="Large"
+                    FontSize="Medium"
                     Padding="4"
                     BackgroundColor="#60FFFFFF"
                     Clicked="BackHomeButton_Clicked" />
@@ -36,15 +36,14 @@
     <MenuFlyoutItem Text="Inicio" />
     <ShellContent
         Title="Panel de Control"
-        ContentTemplate="{DataTemplate local_pages:PurchasingDashboardPage}">
+        ContentTemplate="{DataTemplate decisorframework_supervision_manage_pages:PurchasingDashboardPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF9E7;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutSeparator />
     <MenuFlyoutItem Text="Operaciones" />
     <FlyoutItem
         Title="Planes">
@@ -52,17 +51,17 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF787;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
+        <ShellContent
+            Title="Realizados"
+            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:FilledPurchasePlansManagePage}" />
+        <ShellContent
+            Title="Por Realizar"
+            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:ToCompletePurchasePlansManagePage}" />
         <ShellContent
             Title="Por Aprobar"
             ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:ToApprovePurchasePlansManagePage}" />
-        <ShellContent
-            Title="Por Completar"
-            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:ToCompletePurchasePlansManagePage}" />
-        <ShellContent
-            Title="Realizado"
-            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:FilledPurchasePlansManagePage}" />
     </FlyoutItem>
     <ShellContent
         Title="Compras"
@@ -71,10 +70,9 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xFCB0;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutSeparator />
     <MenuFlyoutItem Text="Gestión" />
     <FlyoutItem
         Title="Proveedores">
@@ -82,7 +80,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF6D8;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
             Title="Jurídicos"
@@ -97,8 +95,8 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFEBB;"
-                Color="Black" />
+                Glyph="&#xF352;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
@@ -108,7 +106,7 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF117;"
-                Color="Black" />
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
 </Shell>

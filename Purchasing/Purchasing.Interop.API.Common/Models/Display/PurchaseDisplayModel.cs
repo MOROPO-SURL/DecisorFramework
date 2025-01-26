@@ -13,7 +13,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public PurchaseZoneDisplayModel Zone { get; set; }
 
-        public Essential.Interop.API.Common.Models.Display.EmployeeDisplayModel Purchaser { get; set; }
+        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Purchaser { get; set; }
 
         public string Description { get; set; }
 
@@ -21,11 +21,17 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public List<PurchaseProductNaturalProviderBridgeModel> NaturalProviderProductBridges { get; set; } = new List<PurchaseProductNaturalProviderBridgeModel>();
 
-        public List<PurchasePurchaseSpentBridgeModel> SpentBridges { get; set; } = new List<PurchasePurchaseSpentBridgeModel>();
+        public List<PurchasePurchaseSpentBridgeModel> RegularSpentBridges { get; set; } = new List<PurchasePurchaseSpentBridgeModel>();
+
+        public List<PurchasePurchaseSpentBridgeModel> ExtraSpentBridges { get; set; } = new List<PurchasePurchaseSpentBridgeModel>();
 
         public List<PurchaseEmployeeBridgeModel> EmployeeBridges { get; set; } = new List<PurchaseEmployeeBridgeModel>();
 
         public List<PurchaseColaboratorBridgeModel> ColaboratorBridges { get; set; } = new List<PurchaseColaboratorBridgeModel>();
+
+        public System.Guid? ReceptionId { get; set; }
+
+        public System.DateTime? ReceptionAt { get; set; }
 
         public void Import(Persistence.Entities.Purchase entity)
         {
@@ -36,19 +42,27 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             if (entity.Plan != null)
             {
                 Plan = new PurchasePlanDisplayModel();
+
                 Plan.Import(entity.Plan);
             }
 
             if (entity.Zone != null)
             {
                 Zone = new PurchaseZoneDisplayModel();
+
                 Zone.Import(entity.Zone);
             }
 
             if (entity.Purchaser != null)
             {
-                Purchaser = new Essential.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Purchaser = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
                 Purchaser.Import(entity.Purchaser);
+            }
+
+            if (entity.Reception != null)
+            {
+                ReceptionId = entity.Reception.Id;
+                ReceptionAt = entity.Reception.At;
             }
 
             foreach (var bridge in entity.LegalProviderProductBridges)
@@ -56,10 +70,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 var model = new PurchaseProductLegalProviderBridgeModel
                 {
                     Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    Provider = new LegalProviderDisplayModel(),
+                    Provider = new Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel(),
                     CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
-                    UnitMeasurement = new Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    UnitMeasurement = new Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
                     Cost = bridge.Cost
                 };
 
@@ -76,10 +90,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 var model = new PurchaseProductNaturalProviderBridgeModel
                 {
                     Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    Provider = new NaturalProviderDisplayModel(),
+                    Provider = new Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel(),
                     CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
-                    UnitMeasurement = new Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    UnitMeasurement = new Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
                     Cost = bridge.Cost
                 };
 
@@ -97,7 +111,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 {
                     Spent = new PurchaseSpentDisplayModel(),
                     Amount = bridge.Amount,
-                    Cost = bridge.Cost
+                    Count = bridge.Count
                 };
 
                 if (bridge.CostCenter != null)
@@ -109,14 +123,17 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
                 model.Spent.Import(bridge.Stern);
 
-                SpentBridges.Add(model);
+                if (bridge.IsRegular)
+                    RegularSpentBridges.Add(model);
+                else
+                    ExtraSpentBridges.Add(model);
             }
 
             foreach (var bridge in entity.EmployeeBridges)
             {
                 var model = new PurchaseEmployeeBridgeModel
                 {
-                    Employee = new Essential.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
+                    Employee = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
                     Role = bridge.Role
                 };
 

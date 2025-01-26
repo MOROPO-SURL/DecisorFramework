@@ -6,13 +6,8 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Inventory\Inventory.Persistence.ORM.EF\Inventory.Persistence.ORM.EF.csproj" />
+		<ProjectReference Include="..\..\Commercial\Commercial.Persistence.ORM.EF\Commercial.Persistence.ORM.EF.csproj" />
+		<ProjectReference Include="..\..\Essential\Essential.Persistence.ORM.EF\Essential.Persistence.ORM.EF.csproj" />
 		<ProjectReference Include="..\Purchasing.Persistence\Purchasing.Persistence.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Context\Contract\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Context\Contract\" />
 	</ItemGroup>
 </Project>

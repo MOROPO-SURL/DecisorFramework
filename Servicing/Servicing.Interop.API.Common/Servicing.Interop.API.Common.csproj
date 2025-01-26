@@ -14,7 +14,7 @@
 	  <None Remove="Models\Filter\" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Folder Include="Models\Display\" />
 	  <Folder Include="Models\Input\" />
-	  <Folder Include="Models\Filter\" />
 	</ItemGroup>
 </Project>

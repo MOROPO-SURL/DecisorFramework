@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.PurchaseReceptionDisplayModel>
+public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.PurchaseReceptionDisplayModel>
 {
     public PurchaseReceptionConfigurationPage(System.Action<Interop.API.Common.Models.Display.PurchaseReceptionDisplayModel> successAction, Models.Page.Configuration.PurchaseReceptionConfigurationPageModel model) : base(successAction, model)
     {
@@ -35,20 +35,20 @@ public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Term
 
         foreach (var item in concreteBindingContext.Weights)
         {
-            foreach (var _item in item.Value)
+            foreach (var _item in item.ProductWeights)
             {
                 model.WeightBridges.Add(new Interop.API.Common.Models.Bridge.PurchaseReceptionProductWeightBridgeModel
                 {
                     Product = _item.Product,
                     Amount = _item.Amount,
-                    CostCenter = item.Key,
+                    CostCenter = item.CostCenter,
                     // TODO Set Decrease
                     Batches = _item.Batchs.Select(__item => new Inventory.Interop.API.Common.Models.Input.BatchInputModel
                     {
                         ExternalReference = __item.ExternalReference,
                         Amount = __item.Amount,
                         WarehouseId = __item.Warehouse.Id,
-                        ClassificationId = __item.Classification?.Id 
+                        ClassificationId = __item.Classification?.Id
                     }).ToList()
                 });
             }
@@ -80,13 +80,16 @@ public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Term
 
         var resetWeights = concreteBindingContext.Purchase == null || concreteBindingContext.Purchase.Id != model.Id;
 
-        concreteBindingContext.Purchase = model;
+        Dispatcher.Dispatch(() =>
+        {
+            concreteBindingContext.Purchase = model;
 
-        hasChangesFlag = true;
+            hasChangesFlag = true;
 
-        if (!resetWeights) return;
+            if (!resetWeights) return;
 
-        ResetWeights();
+            ResetWeights();
+        });
     }
 
     private void ResetWeights()
@@ -115,7 +118,7 @@ public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Term
 
         foreach (var costCenter in costCenters)
         {
-            var models = new List<Models.View.PurchaseReceptionProductCommonWeightBridgeViewModel>();
+            var models = new List<Models.View.PurchaseReceptionProductWeightBridgeViewModel>();
 
             var products = new List<Inventory.Interop.API.Common.Models.Display.ProductDisplayModel>();
 
@@ -151,7 +154,7 @@ public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Term
                     amount += bridge.Amount;
                 }
 
-                var _model = new Models.View.PurchaseReceptionProductCommonWeightBridgeViewModel
+                var _model = new Models.View.PurchaseReceptionProductWeightBridgeViewModel
                 {
                     Amount = amount,
                     Product = product
@@ -166,7 +169,7 @@ public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Term
                 models.Add(_model);
             }
 
-            concreteBindingContext.Weights.Add(new KeyValuePair<Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel, Models.View.PurchaseReceptionProductCommonWeightBridgeViewModel[]>(costCenter, models.ToArray()));
+            concreteBindingContext.Weights.Add(new Models.View.PurchaseReceptionWeightsByCostCenterViewModel { CostCenter = costCenter, ProductWeights = models.ToArray() });
         }
     }
 }

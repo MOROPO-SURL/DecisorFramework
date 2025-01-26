@@ -3,7 +3,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class CategoryConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.CategoryDisplayModel>
+public partial class CategoryConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.CategoryDisplayModel>
 {
     public CategoryConfigurationPage(System.Action<Interop.API.Common.Models.Display.CategoryDisplayModel> successAction, Models.Page.Configuration.CategoryConfigurationPageModel model) : base(successAction, model)
     {

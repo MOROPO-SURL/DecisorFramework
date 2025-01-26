@@ -6,6 +6,11 @@
 
         public decimal Amount { get; set; }
 
-        public Essential.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get; set; }
+        public Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get; set; }
+
+        public override string ToString()
+        {
+            return string.Format("{0} ({1:F2} {2})", Product.Name, Amount, UnitMeasurement.Symbol);
+        }
     }
 }

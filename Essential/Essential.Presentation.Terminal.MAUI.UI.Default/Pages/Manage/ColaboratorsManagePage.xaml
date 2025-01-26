@@ -33,26 +33,14 @@
             Text="Agregar"
             Clicked="AddToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Actualizar"
             Clicked="ReloadToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -157,9 +145,7 @@
                     </Grid>
                 </ScrollView>
             </ContentView>
-            <caneyframework_presentation_views:BusyView 
-                BackgroundColor="#A7FFFFFF"
-                IsVisible="{Binding IsBusy}" />
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}" />
         </Grid>
     </ContentPage.Content>
 </caneyframework_mvvm_pages:ContentPage>

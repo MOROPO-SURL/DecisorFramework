@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Display.PurchasePlanDisplayModel>
+public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.PurchasePlanDisplayModel>
 {
     public PurchasePlanConfigurationPage(System.Action<Interop.API.Common.Models.Display.PurchasePlanDisplayModel> successAction, Models.Page.Configuration.PurchasePlanConfigurationPageModel model) : base(successAction, model)
     {
@@ -93,7 +93,8 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             LegalProviderBridges = concreteBindingContext.LegalProviderBridges.ToList(),
             NaturalProviderBridges = concreteBindingContext.NaturalProviderBridges.ToList(),
             InputProductBridges = concreteBindingContext.InputProductBridges.ToList(),
-            OutputProductBridges = concreteBindingContext.OutputProductBridges.ToList()
+            OutputProductBridges = concreteBindingContext.OutputProductBridges.ToList(),
+            EstimatedAdvance = concreteBindingContext.EstimatedAdvance
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -120,7 +121,8 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             LegalProviderBridges = concreteBindingContext.LegalProviderBridges.ToList(),
             NaturalProviderBridges = concreteBindingContext.NaturalProviderBridges.ToList(),
             InputProductBridges = concreteBindingContext.InputProductBridges.ToList(),
-            OutputProductBridges = concreteBindingContext.OutputProductBridges.ToList()
+            OutputProductBridges = concreteBindingContext.OutputProductBridges.ToList(),
+            EstimatedAdvance = concreteBindingContext.EstimatedAdvance
         };
 
         await apiConnectClient.EditAsync(model);
@@ -135,12 +137,12 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
 
     private void AddLegalProviderButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.LegalProviderPickPage(LegalProviderPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.LegalProviderPickPage(LegalProviderPickComplete_Callback)));
     }
 
     private void AddNaturalProviderButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.NaturalProviderPickPage(NaturalProviderPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.NaturalProviderPickPage(NaturalProviderPickComplete_Callback)));
     }
 
     private void AddInputProductBridgeButton_Clicked(object sender, System.EventArgs e)
@@ -153,7 +155,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
         {
             try
             {
-                var unitMeasurementsAPIConnectClient = new Essential.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.PurchasePlanCommonProductBridgeConfigurationPageModel(null)
                 {
@@ -171,7 +173,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -187,7 +189,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
         {
             try
             {
-                var unitMeasurementsAPIConnectClient = new Essential.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.PurchasePlanCommonProductBridgeConfigurationPageModel(null)
                 {
@@ -205,7 +207,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -221,7 +223,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
         {
             try
             {
-                var unitMeasurementsAPIConnectClient = new Essential.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.PurchasePlanCommonProductBridgeConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchasePlanCommonProductBridgeModel)
                 {
@@ -239,7 +241,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -255,7 +257,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
         {
             try
             {
-                var unitMeasurementsAPIConnectClient = new Essential.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.PurchasePlanCommonProductBridgeConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchasePlanCommonProductBridgeModel)
                 {
@@ -273,7 +275,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -325,7 +327,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
         });
     }
 
-    private void LegalProviderPickComplete_Callback(Interop.API.Common.Models.Display.LegalProviderDisplayModel model)
+    private void LegalProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel model)
     {
         ((Models.Page.Configuration.PurchasePlanConfigurationPageModel)BindingContext).LegalProviderBridges.Add(new Interop.API.Common.Models.Bridge.PurchasePlanLegalProviderBridgeModel
         {
@@ -336,7 +338,7 @@ public partial class PurchasePlanConfigurationPage : Core.Presentation.Terminal.
         hasChangesFlag = true;
     }
 
-    private void NaturalProviderPickComplete_Callback(Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
+    private void NaturalProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
     {
         ((Models.Page.Configuration.PurchasePlanConfigurationPageModel)BindingContext).NaturalProviderBridges.Add(new Interop.API.Common.Models.Bridge.PurchasePlanNaturalProviderBridgeModel
         {

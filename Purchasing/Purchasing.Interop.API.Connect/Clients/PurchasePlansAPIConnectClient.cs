@@ -10,11 +10,16 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Connect.Clients
         {
         }
 
-        public virtual async System.Threading.Tasks.Task ApproveAsync(System.Guid key)
+        protected override string TargetController => "api/purchasing/purchaseplans";
+
+        public async System.Threading.Tasks.Task ApproveAsync(System.Guid key)
         {
             await httpClientHelperProvider.HttpClientHelper.PutAsync($"{TargetController}/approve/{key}");
         }
 
-        protected override string TargetController => "api/purchasing/purchaseplans";
+        public async System.Threading.Tasks.Task InvalidateAsync(System.Guid key)
+        {
+            await httpClientHelperProvider.HttpClientHelper.PutAsync($"{TargetController}/invalidate/{key}");
+        }
     }
 }

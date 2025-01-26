@@ -1,5 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Enumerations;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -52,7 +54,7 @@ public partial class FilledPurchasePlansManagePage : Caney.MVVM.Core.Pages.Conte
 
         var apiConnectClient = new Interop.API.Connect.Clients.PurchasePlansAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        apiConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.PurchasePlanFilterModel { Kind = Interop.API.Common.Enumerations.CommonPlanFilterKind.Filled }).ContinueWith(task =>
+        apiConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.PurchasePlanFilterModel { Kind = CommonPlanFilterKind.Filled }).ContinueWith(task =>
         {
             Dispatcher.Dispatch(() =>
             {
@@ -60,11 +62,14 @@ public partial class FilledPurchasePlansManagePage : Caney.MVVM.Core.Pages.Conte
 
                 if (task.Exception != null || task.IsCanceled)
                 {
-                    DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                 }
                 else
                 {
-                    foreach (var model in task.Result)
+                    // TODO Replace by ordering at server with GuamaFramework update!!
+                    var orderedResult = task.Result.OrderByDescending(model => model.At).ToArray();
+
+                    foreach (var model in orderedResult)
                     {
                         concreteBindingContext.Items.Add(model);
                     }

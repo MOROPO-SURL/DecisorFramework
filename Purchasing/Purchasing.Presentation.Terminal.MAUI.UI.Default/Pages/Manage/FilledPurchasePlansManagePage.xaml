@@ -16,6 +16,7 @@
             <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="384" AbsoluteHorizontalSeparation="20" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:ListToStringConverter x:Key="ListToStringConverter" Separator=", " />
 
             <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
                 <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
@@ -33,13 +34,7 @@
             Text="Actualizar"
             Clicked="ReloadToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;">
-                    <FontImageSource.Color>
-                        <OnPlatform x:TypeArguments="Color">
-                            <On Platform="UWP" Value="Black" />
-                        </OnPlatform>
-                    </FontImageSource.Color>
-                </FontImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
@@ -58,47 +53,48 @@
                         <BindableLayout.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:PurchasePlanDisplayModel">
                                 <Frame
-                                    Margin="5" Padding="0"
+                                    Margin="5"
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
-                                    HeightRequest="180">
+                                    HeightRequest="240">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </Frame.GestureRecognizers>
-                                    <Grid>
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition Width="Auto" />
-                                            <ColumnDefinition />
-                                        </Grid.ColumnDefinitions>
-                                        <StackLayout 
-                                            Grid.Column="1"
-                                            Padding="10">
-                                            <Label 
-                                                FontAttributes="Bold"
-                                                FontSize="Medium"
-                                                Text="{Binding Zone.Name}" />
-                                            <Label Text="{Binding Path=PlannedFor, StringFormat='{0:D}'}" />
-                                            <Label 
-                                                Margin="0,8,0,0"
-                                                Text="Aprobado"
-                                                TextColor="DimGray"
-                                                FontSize="Caption"
-                                                FontAttributes="Bold" />
-                                            <Label
-                                                LineBreakMode="TailTruncation"
-                                                Text="{Binding ApprovedAt, StringFormat='{0:D}'}" />
-                                            <Label 
-                                                Margin="0,8,0,0"
-                                                Text="Descripción"
-                                                TextColor="DimGray"
-                                                FontSize="Caption"
-                                                FontAttributes="Bold" />
-                                            <Label
-                                                VerticalOptions="FillAndExpand"
-                                                LineBreakMode="TailTruncation"
-                                                MaxLines="2"
-                                                Text="{Binding Description, TargetNullValue='---'}" />
-                                        </StackLayout>
-                                    </Grid>
+                                    <StackLayout>
+                                        <Label 
+                                            FontAttributes="Bold"
+                                            FontSize="Medium"
+                                            Text="{Binding Zone.Name}" />
+                                        <Label Text="{Binding Path=PlannedFor, StringFormat='{0:D}'}" />
+                                        <Label 
+                                            Margin="0,8,0,0"
+                                            Text="Productos"
+                                            TextColor="DimGray"
+                                            FontSize="Caption"
+                                            FontAttributes="Bold" />
+                                        <Label
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding OutputProductBridges, Converter={StaticResource ListToStringConverter}}" />
+                                        <Label 
+                                            Margin="0,8,0,0"
+                                            Text="Aprobado"
+                                            TextColor="DimGray"
+                                            FontSize="Caption"
+                                            FontAttributes="Bold" />
+                                        <Label
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding ApprovedAt, StringFormat='{0:D}'}" />
+                                        <Label 
+                                            Margin="0,8,0,0"
+                                            Text="Descripción"
+                                            TextColor="DimGray"
+                                            FontSize="Caption"
+                                            FontAttributes="Bold" />
+                                        <Label
+                                            VerticalOptions="FillAndExpand"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="2"
+                                            Text="{Binding Description, TargetNullValue='---'}" />
+                                    </StackLayout>
                                 </Frame>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
@@ -168,9 +164,7 @@
                     </Grid>
                 </ScrollView>
             </ContentView>
-            <caneyframework_presentation_views:BusyView 
-                BackgroundColor="#A7FFFFFF"
-                IsVisible="{Binding IsBusy}" />
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
 </caneyframework_mvvm_pages:ContentPage>

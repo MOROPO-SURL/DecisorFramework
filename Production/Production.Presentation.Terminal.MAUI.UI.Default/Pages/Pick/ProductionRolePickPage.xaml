@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<caneyframework_mvvm_pages:ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
+    xmlns:presentation_pick_page_models="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Pick;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.ProductionRolePickPage"
+    x:DataType="presentation_pick_page_models:ProductionRolePickPageModel"
+    Title="Seleccionar Rol de Producción">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="320" AbsoluteHorizontalSeparation="20" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <SearchBar Margin="20,20,20,0" />
+                <ScrollView 
+                    Orientation="Vertical"
+                    VerticalOptions="FillAndExpand">
+                    <FlexLayout
+                        Margin="10"
+                        Wrap="Wrap"
+                        AlignItems="Start" AlignContent="Start"
+                        BindableLayout.ItemsSource="{Binding Path=Items}">
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate x:DataType="interop_common_display_models:ProductionRoleDisplayModel">
+                                <Frame
+                                    Margin="5"
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
+                                    HeightRequest="72">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout>
+                                        <Label 
+                                            Text="{Binding Path=Name}"
+                                            LineBreakMode="TailTruncation"
+                                            FontSize="Medium" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                        <BindableLayout.EmptyView>
+                            <Label
+                                HorizontalTextAlignment="Center"
+                                Margin="5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                FontAttributes="Italic" />
+                        </BindableLayout.EmptyView>
+                    </FlexLayout>
+                </ScrollView>
+            </StackLayout>
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</caneyframework_mvvm_pages:ContentPage>

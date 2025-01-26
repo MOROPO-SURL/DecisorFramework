@@ -36,7 +36,7 @@ public partial class PurchaseReceptionsManagePage : Caney.MVVM.Core.Pages.Conten
         {
             try
             {
-                var employeesAPIConnectClient = new Essential.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
                 var warehousesAPIConnectClient = new Inventory.Interop.API.Connect.Clients.WarehousesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.PurchaseReceptionConfigurationPageModel(null)
@@ -58,7 +58,7 @@ public partial class PurchaseReceptionsManagePage : Caney.MVVM.Core.Pages.Conten
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    // TODO Handle exception
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
         });
@@ -104,7 +104,7 @@ public partial class PurchaseReceptionsManagePage : Caney.MVVM.Core.Pages.Conten
 
                 if (task.Exception != null || task.IsCanceled)
                 {
-                    DisplayAlert("Aviso", "Error no esperado!!", "Aceptar");
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                 }
                 else
                 {

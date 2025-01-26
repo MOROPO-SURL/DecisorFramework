@@ -1,4 +1,6 @@
-﻿using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
+﻿using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
+using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
+using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
 {
@@ -12,6 +14,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
         public int Priority { get; set; }
 
         public string Description { get; set; }
+
+        public List<PurchaseZoneSpentBridgeModel> SpentBridges { get; set; } = new List<PurchaseZoneSpentBridgeModel>();
 
         public PurchaseZone Export()
         {

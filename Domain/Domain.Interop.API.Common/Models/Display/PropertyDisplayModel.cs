@@ -1,0 +1,63 @@
+﻿namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
+{
+    public class PropertyDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Property, System.Guid>
+    {
+        public System.Guid Id { get; set; } = System.Guid.NewGuid();
+
+        public int Priority { get; set; }
+
+        public PropertyKindDisplayModel Kind { get; set; }
+
+        public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel PostalContact { get; set; }
+
+        public Core.Interop.API.Common.Models.Display.ImageDisplayModel FeatureImage { get; set; }
+
+        public StructureTreeDisplayModel Structure { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string PropertyRecordIdentifier { get; set; }
+
+        public decimal Area { get; set; }
+
+        public string Description { get; set; }
+
+        public Core.Interop.API.Common.Models.Display.ImageDisplayModel[] Images { get; set; }
+
+        public void Import(Persistence.Entities.Property entity)
+        {
+            Id = entity.Id;
+            Priority = entity.Priority;
+            PropertyRecordIdentifier = entity.PropertyRecordIdentifier;
+            Area = entity.Area;
+            Description = entity.Description;
+
+            if (entity.Kind != null)
+            {
+                Kind = new PropertyKindDisplayModel();
+
+                Kind.Import(entity.Kind);
+            }
+
+            if (entity.PostalContact != null)
+            {
+                PostalContact = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
+
+                PostalContact.Import(entity.PostalContact);
+            }
+
+            if (entity.FeatureImage != null)
+            {
+                FeatureImage = new Core.Interop.API.Common.Models.Display.ImageDisplayModel();
+
+                FeatureImage.Import(entity.FeatureImage);
+            }
+
+            if (entity.Structure != null)
+            {
+                Structure = new StructureTreeDisplayModel();
+
+                Structure.Import(entity.Structure);
+            }
+        }
+    }
+}

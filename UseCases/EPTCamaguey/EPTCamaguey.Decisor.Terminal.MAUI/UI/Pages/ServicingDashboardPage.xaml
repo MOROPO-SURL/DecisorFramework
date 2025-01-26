@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<caneyframework_mvvm_pages:BindingContextedContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_mock_page_models="clr-namespace:MOROPO.EPTCamaguey.Decisor.Terminal.MAUI.Models.Page.Mock"
+    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:live_charts_controls="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    x:Class="MOROPO.EPTCamaguey.Decisor.Terminal.MAUI.UI.Pages.ServicingDashboardPage"
+    x:TypeArguments="local_mock_page_models:ServicingDashboardMockPageModel"
+    x:DataType="local_mock_page_models:ServicingDashboardMockPageModel"
+    Title="Panel de Control para Servicios">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="CardHeaderSeparatorBoxViewStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="DimGray" />
+                <Setter Property="Margin" Value="0,5,0,10" />
+                <Setter Property="HeightRequest" Value="2" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout>
+                <Grid 
+                    Margin="20"
+                    ColumnSpacing="20" RowSpacing="20">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Frame 
+                        Grid.Column="0"
+                        VerticalOptions="Start">
+                        <StackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                Text="Distribución de contratos" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <live_charts_controls:PieChart 
+                                HeightRequest="400"
+                                Series="{Binding LeasyTypeAreaChart.Series}"
+                                LegendPosition="Bottom" />
+                        </StackLayout>
+                    </Frame>
+                    <Frame 
+                        Grid.Column="1"
+                        VerticalOptions="Start">
+                        <StackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                Text="Progreso de pagos (%)" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <live_charts_controls:PieChart 
+                                HeightRequest="400"
+                                Series="{Binding PaymentProgressChart.Series}"
+                                InitialRotation="-90"
+                                MinValue="0"
+                                MaxValue="100" />
+                        </StackLayout>
+                    </Frame>
+                    <VerticalStackLayout
+                        Grid.Column="2"
+                        VerticalOptions="Start"
+                        Spacing="20">
+                        <Frame>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    Text="Licitaciones" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Label
+                                    Grid.Column="0" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="Header"
+                                    Text="&#xF0E6;" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="End"
+                                    LineBreakMode="MiddleTruncation"
+                                    Text="{Binding TenderCount}" />
+                            </Grid>
+                        </Frame>
+                        <Frame>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    Text="Arrendamientos" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Label
+                                    Grid.Column="0" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="Header"
+                                    Text="&#xF0243;" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="End"
+                                    LineBreakMode="MiddleTruncation"
+                                    Text="{Binding LeaseCount}" />
+                            </Grid>
+                        </Frame>
+                        <Frame>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    FontSize="Medium"
+                                    FontAttributes="Bold"
+                                    Text="Clientes" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                                <Label
+                                    Grid.Column="0" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="Header"
+                                    Text="&#xF009;" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    VerticalOptions="Center"
+                                    FontSize="Large"
+                                    HorizontalTextAlignment="End"
+                                    LineBreakMode="MiddleTruncation"
+                                    Text="{Binding ClientCount}" />
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                </Grid>
+                <Frame Margin="20,0,20,20">
+                    <StackLayout>
+                        <Label
+                            FontSize="Medium"
+                            FontAttributes="Bold"
+                            Text="Comportamiento de clientes respecto al pago (6 meses)" />
+                        <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                        <live_charts_controls:CartesianChart 
+                            MinimumHeightRequest="400"
+                            Series="{Binding LatePaymentByClientHeatChart.Series}"
+                            XAxes="{Binding LatePaymentByClientHeatChart.XAxes}"
+                            YAxes="{Binding LatePaymentByClientHeatChart.YAxes}" />
+                    </StackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}" />
+    </Grid>
+</caneyframework_mvvm_pages:BindingContextedContentPage>

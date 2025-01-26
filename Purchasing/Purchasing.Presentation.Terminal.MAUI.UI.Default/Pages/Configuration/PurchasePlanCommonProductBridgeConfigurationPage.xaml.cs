@@ -2,7 +2,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class PurchasePlanCommonProductBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Contract.BaseConfigurationContentPage<Interop.API.Common.Models.Bridge.PurchasePlanCommonProductBridgeModel>
+public partial class PurchasePlanCommonProductBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Bridge.PurchasePlanCommonProductBridgeModel>
 {
     public PurchasePlanCommonProductBridgeConfigurationPage(string entityTypeName, System.Action<Interop.API.Common.Models.Bridge.PurchasePlanCommonProductBridgeModel> successAction, Models.Page.Configuration.PurchasePlanCommonProductBridgeConfigurationPageModel model) : base(successAction, model)
     {

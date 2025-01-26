@@ -6,8 +6,9 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Essential.Presentation.Web.Backend</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Essential.Interop.API.Common\Essential.Interop.API.Common.csproj" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.0.33" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\Essential.Presentation.Web.Common\Essential.Presentation.Web.Common.csproj" />
-		<ProjectReference Include="..\..\Core\Core.Presentation.Web.Backend\Core.Presentation.Web.Backend.csproj" />
 	</ItemGroup>
 </Project>

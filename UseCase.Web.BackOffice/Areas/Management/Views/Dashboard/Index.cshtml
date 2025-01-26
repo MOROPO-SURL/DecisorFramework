@@ -86,7 +86,7 @@
             },
             xaxis: {
                 type: 'int',
-                categories: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SemesterUserActivity.Select(_item => monthNames[_item.Key]).ToArray()))
+                categories: @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.SemesterUserActivity.Select(_item => monthNames[_item.Key - 1]).ToArray()))
             }
         };
 
@@ -189,6 +189,8 @@
         {
             var group = Model.Sections.ElementAt(i);
 
+            if (group.Value == null) continue;
+
             <div class="card shadow-lg mb-4">
                 <div class="card-header"><h5 class="mb-0 font-weight-bold text-primary">@group.Key</h5></div>
                 <div class="card-body">
@@ -235,6 +237,8 @@
             for (int i = 1; i < Model.Sections.Count; i += 2)
             {
                 var group = Model.Sections.ElementAt(i);
+
+                if (group.Value == null) continue;
 
                 <div class="card shadow-lg mb-4">
                     <div class="card-header"><h5 class="mb-0 font-weight-bold text-primary">@group.Key</h5></div>
