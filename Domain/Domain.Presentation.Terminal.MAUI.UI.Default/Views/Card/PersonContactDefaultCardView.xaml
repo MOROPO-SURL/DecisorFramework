@@ -39,19 +39,12 @@
                     LineBreakMode="TailTruncation"
                     Text="{Binding Identity.LastName}" />
                 <Label 
-                    Margin="0,2,0,0"
-                    Text="{Binding BusinessKind.Name}" />
-                <Label 
-                    Margin="0,8,0,0"
-                    Text="Descripción"
+                    Margin="0,6,0,0"
+                    Text="{Binding Identity.About}"
                     TextColor="DimGray"
                     FontSize="Caption"
-                    FontAttributes="Bold" />
-                <Label
-                    VerticalOptions="FillAndExpand"
                     LineBreakMode="TailTruncation"
-                    MaxLines="2"
-                    Text="{Binding Identity.About, TargetNullValue='---'}" />
+                    MaxLines="3" />
             </StackLayout>
         </Grid>
     </Frame>

@@ -80,7 +80,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         private void ConfigurationSuccess_Callback(TModel model)
         {
-            LoadItems();
+            LoadItems(true);
         }
 
         protected virtual System.Threading.Tasks.Task<TConfigurationPageModel> FillConfigurationPageModelAsync(TModel model = null)

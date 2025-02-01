@@ -61,4 +61,18 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
     {
         Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.ProductionShell();
     }
+
+    private void SupervisionSectionCardFrameTapGEstureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        //try
+        //{
+        //    Microsoft.Maui.Controls.Application.Current.MainPage = new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.PersonContactsManagePage();
+        //}
+        //catch (System.Exception exception)
+        //{
+        //    DisplayAlert("Aviso", string.Format("Page build failure!! {0}", exception.Message), "Aceptar");
+
+        //    return;
+        //}
+    }
 }
