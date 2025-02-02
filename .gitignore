@@ -400,4 +400,4 @@ FodyWeavers.xsd
 #macOS Finder config file
 .DS_Store
 /UseCase.Web.BackOffice/dpkeys
-/UseCases/MOROPO_SURL/MOROPO_SURL.Web.BackOffice/wwwroot/media/images
+/UseCases/MOROPO_SURL/MOROPO_SURL.Web.BackOffice/wwwroot/media

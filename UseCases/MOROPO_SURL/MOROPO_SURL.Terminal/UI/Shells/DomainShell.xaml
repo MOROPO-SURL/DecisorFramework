@@ -139,4 +139,14 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <ShellContent
+        Title="Tipos de Negocio Personal"
+        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:NaturalBusinessKindsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF00F5;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
 </Shell>

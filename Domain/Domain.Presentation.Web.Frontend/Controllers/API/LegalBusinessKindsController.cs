@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 {
     [Microsoft.AspNetCore.Mvc.Route("api/domain/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class LegalBusinessKindsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultController<LegalBusinessKind, System.Guid, LegalBusinessKindDisplayModel>
+    public class LegalBusinessKindsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEnableableEntityAPIConsultController<LegalBusinessKind, System.Guid, LegalBusinessKindDisplayModel>
     {
         public LegalBusinessKindsController(Guama.Core.Persistence.Repositories.IEntityRepository<LegalBusinessKind, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalBusinessKindsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalBusinessKindsController> logger)
             : base(repository, localizer, logger)

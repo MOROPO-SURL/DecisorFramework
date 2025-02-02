@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -28,6 +29,17 @@ public partial class PersonContactsManagePage : Core.Presentation.Terminal.MAUI.
         var apiConnectClient = new Interop.API.Connect.Clients.PersonContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
+    }
+
+    protected override async System.Threading.Tasks.Task<PersonContactConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.PersonContactDisplayModel model = null)
+    {
+        var result = new PersonContactConfigurationPageModel();
+
+        var apiConnectClient = new Interop.API.Connect.Clients.NaturalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        result.AvailableBusinessKinds = await apiConnectClient.GetEnabledAsync();
+
+        return result;
     }
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
