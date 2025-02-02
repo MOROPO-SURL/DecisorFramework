@@ -1,44 +1,37 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<caneyframework_mvvm_pages:ContentPage 
+<core_ui_base_pages:ManageBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI"
+    xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
+    xmlns:local_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Financial.Interop.API.Common"
-    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
-    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.BankAgenciesManagePage"
+    x:TypeArguments="interop_common_display_models:BankAgencyDisplayModel,presentation_manage_page_models:BankAgenciesManagePageModel,presentation_configuration_page_models:BankAgencyConfigurationPageModel,local_configuration_pages:BankAgencyConfigurationPage,local_detail_pages:BankAgencyDetailPage"
     x:DataType="presentation_manage_page_models:BankAgenciesManagePageModel"
     Title="Gestión de Agencias Bancarias">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="384" AbsoluteHorizontalSeparation="20" />
-
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
-
-            <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
-                <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="FontSize" Value="Caption" />
-                <Setter Property="Margin" Value="0,16,0,0" />
-            </Style>
-            <Style TargetType="Label" x:Key="ValueFieldLabelStyle">
-                <Setter Property="FontSize" Value="Default" />
-            </Style>
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Agregar"
-            Clicked="AddToolbarItem_Clicked">
+            Clicked="AddItemControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Actualizar"
-            Clicked="ReloadToolbarItem_Clicked">
+            Clicked="ReloadControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -48,21 +41,21 @@
         <Grid>
             <StackLayout Orientation="Vertical">
                 <SearchBar Margin="20,20,20,0" />
-                <ScrollView 
-                    Orientation="Vertical"
-                    VerticalOptions="FillAndExpand">
-                    <FlexLayout
+                <Grid 
+                    VerticalOptions="FillAndExpand"
+                    SizeChanged="ItemsCollectionViewLayoutControl_SizeChanged">
+                    <CollectionView
+                        x:Name="ItemsCollectionView"
                         Margin="10"
-                        Wrap="Wrap"
-                        AlignItems="Start" AlignContent="Start"
-                        BindableLayout.ItemsSource="{Binding Items}">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate>
-                                <Frame 
-                                    x:DataType="interop_common_display_models:BankAgencyDisplayModel"
-                                    Margin="5" Padding="0"
-                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
-                                    HeightRequest="140">
+                        ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_common_display_models:BankAgencyDisplayModel">
+                                <Frame                                     
+                                    Padding="0"
+                                    HeightRequest="{Static local:BankAgenciesManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </Frame.GestureRecognizers>
@@ -85,6 +78,10 @@
                                                 LineBreakMode="TailTruncation"
                                                 Text="{Binding Name}" />
                                             <Label 
+                                                FontAttributes="Bold"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Alias}" />
+                                            <Label 
                                                 Margin="0,8,0,0"
                                                 Text="Descripción"
                                                 TextColor="DimGray"
@@ -99,86 +96,29 @@
                                     </Grid>
                                 </Frame>
                             </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                        <BindableLayout.EmptyView>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
                             <Label
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
                                 HorizontalTextAlignment="Center"
                                 Margin="5"
                                 Text="Sin elementos que mostrar"
                                 TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
                                 FontAttributes="Italic" />
-                        </BindableLayout.EmptyView>
-                    </FlexLayout>
-                </ScrollView>
-            </StackLayout>
-            <ContentView 
-                IsVisible="{Binding PresentedItem, Converter={StaticResource IsNotNullConverter}}"
-                BackgroundColor="#A9000000">
-                <ScrollView Orientation="Vertical">
-                    <Grid>
-                        <Frame
-                            VerticalOptions="Center" HorizontalOptions="Center"
-                            Padding="0" Margin="20"
-                            WidthRequest="400"
-                            BackgroundColor="White">
-                            <Grid>
-                                <StackLayout Margin="20" Spacing="20">
-                                    <StackLayout>
-                                        <Label 
-                                            Margin="0,0,0,20"
-                                            Text="Detalles"
-                                            FontAttributes="Bold"
-                                            FontSize="Medium" />
-                                        <Label
-                                            Style="{StaticResource CaptionFieldLabelStyle}"
-                                            Margin="0"
-                                            Text="Nombre" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Name}" />
-                                        <Label 
-                                            Style="{StaticResource CaptionFieldLabelStyle}"
-                                            Text="Prioridad" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Priority}" />
-                                        <Label 
-                                            Style="{StaticResource CaptionFieldLabelStyle}"
-                                            Text="Descripción" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.About, TargetNullValue='---'}" />
-                                    </StackLayout>
-                                    <StackLayout
-                                        Orientation="Horizontal"
-                                        Spacing="20">
-                                        <Button 
-                                            HorizontalOptions="FillAndExpand"
-                                            Text="Modificar"
-                                            Clicked="PresentedItemEditButton_Clicked" />
-                                        <Button 
-                                            HorizontalOptions="FillAndExpand"
-                                            Text="Eliminar"
-                                            Clicked="PresentedItemRemoveButton_Clicked" />
-                                    </StackLayout>
-                                </StackLayout>
+                        </CollectionView.EmptyView>
+                        <CollectionView.Footer>
+                            <StackLayout IsVisible="{Binding HasMoreItems}">
                                 <Button
-                                    HorizontalOptions="End" VerticalOptions="Start"
-                                    Padding="10"
-                                    BackgroundColor="Transparent"
-                                    Text="&#xf5ad;"
-                                    TextColor="Black"
-                                    FontSize="Medium"
-                                    FontFamily="MaterialDesignIcons"
-                                    BorderWidth="0"
-                                    WidthRequest="48" HeightRequest="48"
-                                    Clicked="PresentedItemDismissButton_Clicked" />
-                            </Grid>
-                        </Frame>
-                    </Grid>
-                </ScrollView>
-            </ContentView>
+                                    HorizontalOptions="Center"
+                                    Margin="5"
+                                    Text="Mostrar más"
+                                    Clicked="LoadMoreItemsControl_Invoked" />
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
             <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>
-</caneyframework_mvvm_pages:ContentPage>
+</core_ui_base_pages:ManageBaseContentPage>

@@ -10,6 +10,8 @@
 
         public string Name { get; set; }
 
+        public string Alias { get; set; }
+
         public Core.Interop.API.Common.Models.Display.ImageDisplayModel Image { get; set; }
 
         public string About { get; set; }
@@ -19,6 +21,7 @@
             Id = entity.Id;
             Priority = entity.Priority;
             Name = entity.Name;
+            Alias = entity.Alias;
             At = entity.At;
             About = entity.About;
 

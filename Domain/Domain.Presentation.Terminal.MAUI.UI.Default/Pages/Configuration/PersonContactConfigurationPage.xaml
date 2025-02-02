@@ -11,15 +11,15 @@
     x:DataType="presentation_configuration_page_models:PersonContactConfigurationPageModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-        Text="Aplicar"
-        Clicked="ApplyControl_Invoked">
+            Text="Aplicar"
+            Clicked="ApplyControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
-        Text="Cancelar"
-        Clicked="CancelControl_Invoked">
+            Text="Cancelar"
+            Clicked="CancelControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>

@@ -1618,6 +1618,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("about");
 
+                    b.Property<string>("Alias")
+                        .HasColumnType("text")
+                        .HasColumnName("alias");
+
                     b.Property<bool>("Archived")
                         .HasColumnType("boolean")
                         .HasColumnName("archived");

@@ -66,7 +66,7 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
     {
         //try
         //{
-        //    Microsoft.Maui.Controls.Application.Current.MainPage = new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.PersonContactsManagePage();
+        //    Microsoft.Maui.Controls.Application.Current.MainPage = new Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.BankAgenciesManagePage();
         //}
         //catch (System.Exception exception)
         //{
