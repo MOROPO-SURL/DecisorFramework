@@ -32,4 +32,9 @@
 		<ProjectReference Include="..\..\Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Inventory.Presentation.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Pages\Detail\WarehouseDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>

@@ -20,6 +20,11 @@ using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Factories;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration;
+using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Factories;
+using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
+using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MOROPO.Tool.Decisor.Terminal
@@ -52,9 +57,11 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IDetailContentPageFactoryFacade<PersonContactDisplayModel, PersonContactDetailPage>, PersonContactDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<NaturalBusinessKindDisplayModel, NaturalBusinessKindDetailPage>, NaturalBusinessKindDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyDetailPage>, BankAgencyDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<WarehouseDisplayModel, WarehouseDetailPage>, WarehouseDetailPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel, SalaryStandardConfigurationPage>, SalaryConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel, PersonContactConfigurationPage>, PersonContactConfigurationPageFactory>()
-               .AddSingleton<IConfigurationContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyConfigurationPageModel, BankAgencyConfigurationPage>, BankAgencyConfigurationPageFactory>();
+               .AddSingleton<IConfigurationContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyConfigurationPageModel, BankAgencyConfigurationPage>, BankAgencyConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<WarehouseDisplayModel, WarehouseConfigurationPageModel, WarehouseConfigurationPage>, WarehouseConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

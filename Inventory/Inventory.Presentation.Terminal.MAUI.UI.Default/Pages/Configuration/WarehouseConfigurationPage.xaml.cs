@@ -3,7 +3,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.WarehouseDisplayModel>
+public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.WarehouseDisplayModel, Models.Page.Configuration.WarehouseConfigurationPageModel>
 {
     public WarehouseConfigurationPage(System.Action<Interop.API.Common.Models.Display.WarehouseDisplayModel> successAction, Models.Page.Configuration.WarehouseConfigurationPageModel model) : base(successAction, model)
     {
@@ -16,14 +16,12 @@ public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAU
     {
         var apiConnectClient = new Interop.API.Connect.Clients.WarehousesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.WarehouseConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.WarehouseInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -35,14 +33,12 @@ public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAU
     {
         var apiConnectClient = new Interop.API.Connect.Clients.WarehousesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.WarehouseConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.WarehouseInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.EditAsync(model);

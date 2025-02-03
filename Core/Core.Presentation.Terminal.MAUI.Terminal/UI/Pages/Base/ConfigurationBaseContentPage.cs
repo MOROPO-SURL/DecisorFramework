@@ -37,6 +37,8 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected virtual string EntityTypeName { get; } = "Elemento";
 
+        protected TConfigurationPageModel ConcreteBindingContext => (TConfigurationPageModel)BindingContext;
+
         protected virtual System.Threading.Tasks.Task<TModel> PerformCreationAsync() => throw new System.NotImplementedException();
 
         protected virtual System.Threading.Tasks.Task<TModel> PerformEditionAsync() => throw new System.NotImplementedException();
@@ -68,11 +70,9 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
             //if (!BindingContextPageModel.IsValid) return;
 
-            var concreteBindingContext = (TConfigurationPageModel)BindingContext;
+            ConcreteBindingContext.IsBusy = true;
 
-            concreteBindingContext.IsBusy = true;
-
-            var task = concreteBindingContext.OnEditionMode ? PerformEditionAsync() : PerformCreationAsync();
+            var task = ConcreteBindingContext.OnEditionMode ? PerformEditionAsync() : PerformCreationAsync();
 
             task.ContinueWith(task =>
             {
