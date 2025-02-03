@@ -9,6 +9,20 @@ public partial class CostCenterConfigurationPage : Core.Presentation.Terminal.MA
     public CostCenterConfigurationPage(System.Action<Interop.API.Common.Models.Display.CostCenterDisplayModel> successAction, Models.Page.Configuration.CostCenterConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
+
+        if (model.Structure != null)
+        {
+            for (int i = 0; i < model.AvailableStructures.Length; i++)
+            {
+                var current = model.AvailableStructures[i];
+
+                if (model.Structure.Id != current.Id) continue;
+
+                StructurePicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Centro de Costo";
@@ -25,7 +39,8 @@ public partial class CostCenterConfigurationPage : Core.Presentation.Terminal.MA
             Name = concreteBindingContext.Name,
             Description = concreteBindingContext.Description,
             Priority = concreteBindingContext.Priority,
-            DefaultBankAccountId = concreteBindingContext.DefaultBankAccount.Id
+            DefaultBankAccountId = concreteBindingContext.DefaultBankAccount.Id,
+            StructureId = concreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -45,7 +60,8 @@ public partial class CostCenterConfigurationPage : Core.Presentation.Terminal.MA
             Name = concreteBindingContext.Name,
             Description = concreteBindingContext.Description,
             Priority = concreteBindingContext.Priority,
-            DefaultBankAccountId = concreteBindingContext.DefaultBankAccount.Id
+            DefaultBankAccountId = concreteBindingContext.DefaultBankAccount.Id,
+            StructureId = concreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id
         };
 
         await apiConnectClient.EditAsync(model);
@@ -56,6 +72,11 @@ public partial class CostCenterConfigurationPage : Core.Presentation.Terminal.MA
     private void DefaultBankAccountPickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.InternalBankAccountPickPage(DefaultBankAccountPickComplete_Callback)));
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
     }
 
     private void DefaultBankAccountPickComplete_Callback(Interop.API.Common.Models.Display.BankAccountDisplayModel model)

@@ -28,7 +28,36 @@ public partial class CostCentersManagePage : Caney.MVVM.Core.Pages.ContentPage
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new Configuration.CostCenterConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.CostCenterConfigurationPageModel(null)));
+        var concreteBindingContext = (Models.Page.Manage.CostCentersManagePageModel)BindingContext;
+
+        concreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var structuresAPIConnectClient = new Domain.Interop.API.Connect.Clients.TreeStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+                var model = new Models.Page.Configuration.CostCenterConfigurationPageModel(null)
+                {
+                    AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync()
+                };
+
+                Dispatcher.Dispatch(() =>
+                {
+                    concreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(new Configuration.CostCenterConfigurationPage(ConfigurationSuccess_Callback, model));
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        });
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
@@ -52,9 +81,36 @@ public partial class CostCentersManagePage : Caney.MVVM.Core.Pages.ContentPage
     {
         var concreteBindingContext = (Models.Page.Manage.CostCentersManagePageModel)BindingContext;
 
-        this.NavigationPushPageAsync(new Configuration.CostCenterConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.CostCenterConfigurationPageModel(concreteBindingContext.PresentedItem)));
+        concreteBindingContext.IsBusy = true;
 
-        PresentedItemDismissButton_Clicked(sender, e);
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var structuresAPIConnectClient = new Domain.Interop.API.Connect.Clients.TreeStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+                var model = new Models.Page.Configuration.CostCenterConfigurationPageModel(concreteBindingContext.PresentedItem)
+                {
+                    AvailableStructures = await structuresAPIConnectClient.GetAsync()
+                };
+
+                Dispatcher.Dispatch(() =>
+                {
+                    concreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(new Configuration.CostCenterConfigurationPage(ConfigurationSuccess_Callback, model));
+
+                    PresentedItemDismissButton_Clicked(sender, e);
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        });
     }
 
     private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)

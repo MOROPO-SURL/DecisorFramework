@@ -41,7 +41,7 @@ public partial class StaffsManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                 var model = new Models.Page.Configuration.StaffConfigurationPageModel(null)
                 {
-                    AvailableStructures = await structuresAPIConnectClient.GetAsync(),
+                    AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync(),
                     AvailableWorkforces = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.WorkforceDisplayModel>(await workforcesAPIConnectClient.GetAsync())
                 };
 
