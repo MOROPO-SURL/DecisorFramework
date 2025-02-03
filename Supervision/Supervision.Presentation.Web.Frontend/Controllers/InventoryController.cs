@@ -58,7 +58,7 @@ namespace MOROPO.Framework.Decisor.Supervision.Presentation.Web.Frontend.Control
                 .Include(entity => entity.Reception)
                 .ToArray();
 
-            var groups = universe.GroupBy(entity => entity.Warehouse);
+            var groups = universe.GroupBy(entity => entity.WarehousingArea.Warehouse);
 
             var model = new InventoryStockDetailsModel
             {

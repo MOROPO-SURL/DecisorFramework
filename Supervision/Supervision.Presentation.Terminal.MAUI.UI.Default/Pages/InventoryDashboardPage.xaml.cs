@@ -62,7 +62,7 @@ public partial class InventoryDashboardPage : Caney.MVVM.Core.Pages.BindingConte
 
             var warehousesAPIConnectClient = new Inventory.Interop.API.Connect.Clients.WarehousesAPIConnectClient(httpClientHelperProvider);
             var productsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.ProductsAPIConnectClient(httpClientHelperProvider);
-            var categoriesAPIConnectClient = new Inventory.Interop.API.Connect.Clients.CategoriesAPIConnectClient(httpClientHelperProvider);
+            var categoriesAPIConnectClient = new Inventory.Interop.API.Connect.Clients.FamiliesAPIConnectClient(httpClientHelperProvider);
 
             var warehouseCount = await warehousesAPIConnectClient.CountAsync();
             var productCount = await productsAPIConnectClient.CountAsync();

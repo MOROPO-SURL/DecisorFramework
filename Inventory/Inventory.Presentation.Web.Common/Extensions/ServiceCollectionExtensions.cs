@@ -12,7 +12,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<Warehouse, System.Guid>, WarehouseRepository>();
             services.AddScoped<IEntityRepository<Batch, System.Guid>, BatchRepository>();
             services.AddScoped<IEntityRepository<Product, System.Guid>, ProductRepository>();
-            services.AddScoped<IEntityRepository<Category, int>, CategoryRepository>();
+            services.AddScoped<IEntityRepository<Family, int>, FamiliesRepository>();
             services.AddScoped<IEntityRepository<Classification, System.Guid>, ClassificationRepository>();
             services.AddScoped<IEntityRepository<UnitMeasurement, System.Guid>, UnitMeasurementRepository>();
 

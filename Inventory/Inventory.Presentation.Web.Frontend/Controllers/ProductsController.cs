@@ -13,11 +13,11 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
     public class ProductsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Product, System.Guid, ProductInputModel, ProductDisplayModel>
     {
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
-        private readonly IEntityRepository<Category, int> categoryRepository;
+        private readonly IEntityRepository<Family, int> categoryRepository;
         private readonly IEntityRepository<Classification, System.Guid> classificationRepository;
         private readonly IImageFileManagerFacade imageFileManager;
 
-        public ProductsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Classification, System.Guid> classificationRepository, IEntityRepository<Category, int> categoryRepository, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Product, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProductsController> localizer, Microsoft.Extensions.Logging.ILogger<ProductsController> logger) : base(repository, localizer, logger)
+        public ProductsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Classification, System.Guid> classificationRepository, IEntityRepository<Family, int> categoryRepository, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Product, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProductsController> localizer, Microsoft.Extensions.Logging.ILogger<ProductsController> logger) : base(repository, localizer, logger)
         {
             this.imageRepository = imageRepository;
             this.categoryRepository = categoryRepository;
@@ -49,15 +49,15 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
                 model.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.FeatureImage.ContentType);
             }
 
-            if (entity.CategoryId != null)
+            if (entity.FamilyId != null)
             {
-                entity.Category = categoryRepository.Get(entity.CategoryId.Value);
+                entity.Family = categoryRepository.Get(entity.FamilyId.Value);
 
-                FillParent(entity.Category);
+                FillParent(entity.Family);
 
-                model.Category = new CategoryDisplayModel();
+                model.Category = new FamilyDisplayModel();
 
-                model.Category.Import(entity.Category);
+                model.Category.Import(entity.Family);
             }
 
             model.Classifications = classificationRepository.FindBy(_entity => _entity.ProductId == entity.Id && !_entity.Archived && _entity.Enabled).ToArray().Select(_entity =>
@@ -150,7 +150,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
             }
         }
 
-        private void FillParent(Category entity)
+        private void FillParent(Family entity)
         {
             if (entity.ParentId == null) return;
 

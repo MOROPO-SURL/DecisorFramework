@@ -6,19 +6,19 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
 {
     [Microsoft.AspNetCore.Mvc.Route("api/inventory/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class CategoriesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Category, int, CategoryInputModel, CategoryDisplayModel>
+    public class FamiliesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Family, int, FamilyInputModel, FamilyDisplayModel>
     {
-        public CategoriesController(Guama.Core.Persistence.Repositories.IEntityRepository<Category, int> repository, Microsoft.Extensions.Localization.IStringLocalizer<CategoriesController> localizer, Microsoft.Extensions.Logging.ILogger<CategoriesController> logger)
+        public FamiliesController(Guama.Core.Persistence.Repositories.IEntityRepository<Family, int> repository, Microsoft.Extensions.Localization.IStringLocalizer<FamiliesController> localizer, Microsoft.Extensions.Logging.ILogger<FamiliesController> logger)
             : base(repository, localizer, logger)
         {
         }
 
-        protected override System.Linq.Expressions.Expression<System.Func<Category, bool>> GetGlobalSelector()
+        protected override System.Linq.Expressions.Expression<System.Func<Family, bool>> GetGlobalSelector()
         {
             return entity => !entity.Archived && entity.Enabled;
         }
 
-        protected override System.Func<Category, object> GetOrderSelector()
+        protected override System.Func<Family, object> GetOrderSelector()
         {
             return entity => entity.Priority;
         }

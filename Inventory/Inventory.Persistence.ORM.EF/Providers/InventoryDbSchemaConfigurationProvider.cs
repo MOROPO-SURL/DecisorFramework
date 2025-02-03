@@ -13,7 +13,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.CustomAttribute>(),
                     new BaseEntityTypeConfigurator<Entities.Product>(),
                     new BaseEntityTypeConfigurator<Entities.Classification>(),
-                    new BaseEntityTypeConfigurator<Entities.Category>(),
+                    new BaseEntityTypeConfigurator<Entities.Family>(),
                     new Configurators.ProductCustomAttributeBridgeEntityTypeConfigurator(),
                     new Configurators.ProductWarehousingDecreaseKindBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Warehouse>(),

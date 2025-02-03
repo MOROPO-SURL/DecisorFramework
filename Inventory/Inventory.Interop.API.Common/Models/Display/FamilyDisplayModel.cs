@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
 {
-	public class CategoryDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Category, int>
+	public class FamilyDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Family, int>
     {
         public int Id { get; set; }
 
@@ -12,9 +12,9 @@
 
         public int Priority { get; set; }
 
-        public CategoryDisplayModel Parent { get; set; }
+        public FamilyDisplayModel Parent { get; set; }
 
-        public void Import(Persistence.Entities.Category entity)
+        public void Import(Persistence.Entities.Family entity)
         {
             Id = entity.Id;
             Name = entity.Name;
@@ -24,7 +24,7 @@
 
             if (entity.Parent != null)
             {
-                Parent = new CategoryDisplayModel();
+                Parent = new FamilyDisplayModel();
 
                 Parent.Import(entity.Parent);
             }

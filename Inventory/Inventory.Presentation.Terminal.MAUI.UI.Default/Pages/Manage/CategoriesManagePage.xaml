@@ -57,7 +57,7 @@
                         AlignItems="Start" AlignContent="Start"
                         BindableLayout.ItemsSource="{Binding Items}">
                         <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="interop_common_display_models:CategoryDisplayModel">
+                            <DataTemplate x:DataType="interop_common_display_models:FamilyDisplayModel">
                                 <Frame
                                     Margin="5"
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"

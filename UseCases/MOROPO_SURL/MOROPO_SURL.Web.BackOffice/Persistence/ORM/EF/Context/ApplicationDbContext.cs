@@ -94,10 +94,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<CustomAttribute> CustomAttributes { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Classification> Classifications { get; set; }
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Family> Families { get; set; }
         public DbSet<ProductCustomAttributeBridge> ProductCustomAttributeBridges { get; set; }
         public DbSet<ProductWarehousingDecreaseKindBridge> ProductWarehousingDecreaseKindBridges { get; set; }
         public DbSet<Warehouse> Warehouses { get; set; }
+        public DbSet<WarehousingArea> WarehousingAreas { get; set; }
         public DbSet<Batch> Batches { get; set; }
         public DbSet<AbstractReception> Receptions { get; set; }
         public DbSet<AbstractDeparture> Departures { get; set; }

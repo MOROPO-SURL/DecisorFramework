@@ -29,13 +29,13 @@
         public const string ProductRemoverPermission = "product-remover-permission";
         #endregion
 
-        #region Category
-        public const string CategoryManagementPermissionGroup = "category-management-permission-group";
+        #region Family
+        public const string FamilyManagementPermissionGroup = "family-management-permission-group";
 
-        public const string CategoryViewerPermission = "category-viewer-permission";
-        public const string CategoryCreatorPermission = "category-creator-permission";
-        public const string CategoryEditorPermission = "category-editor-permission";
-        public const string CategoryRemoverPermission = "category-remover-permission";
+        public const string FamilyViewerPermission = "family-viewer-permission";
+        public const string FamilyCreatorPermission = "family-creator-permission";
+        public const string FamilyEditorPermission = "family-editor-permission";
+        public const string FamilyRemoverPermission = "family-remover-permission";
         #endregion
 
         #region UnitMeasurement

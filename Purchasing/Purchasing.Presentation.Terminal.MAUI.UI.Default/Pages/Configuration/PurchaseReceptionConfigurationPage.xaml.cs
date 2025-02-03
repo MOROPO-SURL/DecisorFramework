@@ -47,7 +47,7 @@ public partial class PurchaseReceptionConfigurationPage : Core.Presentation.Term
                     {
                         ExternalReference = __item.ExternalReference,
                         Amount = __item.Amount,
-                        WarehouseId = __item.Warehouse.Id,
+                        WarehousingAreaId = __item.Warehouse.Id,
                         ClassificationId = __item.Classification?.Id
                     }).ToList()
                 });

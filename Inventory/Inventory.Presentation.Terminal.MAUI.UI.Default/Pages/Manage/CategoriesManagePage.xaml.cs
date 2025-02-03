@@ -36,7 +36,7 @@ public partial class CategoriesManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             try
             {
-                var categoriesAPIConnectClient = new Interop.API.Connect.Clients.CategoriesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var categoriesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.CategoryConfigurationPageModel(null)
                 {
@@ -71,7 +71,7 @@ public partial class CategoriesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        ((Models.Page.Manage.CategoriesManagePageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.CategoryDisplayModel;
+        ((Models.Page.Manage.CategoriesManagePageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.FamilyDisplayModel;
     }
 
     private void PresentedItemDismissButton_Clicked(object sender, System.EventArgs e)
@@ -85,13 +85,13 @@ public partial class CategoriesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
         concreteBindingContext.IsBusy = true;
 
-        System.Threading.Tasks.Task.Run(async () =>
+        System.Threading.Tasks.Task.Run((System.Func<System.Threading.Tasks.Task>)(async () =>
         {
             try
             {
-                var categoriesAPIConnectClient = new Interop.API.Connect.Clients.CategoriesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var categoriesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-                var categories = new System.Collections.Generic.List<Interop.API.Common.Models.Display.CategoryDisplayModel>(await categoriesAPIConnectClient.GetAsync());
+                var categories = new System.Collections.Generic.List<Interop.API.Common.Models.Display.FamilyDisplayModel>(await categoriesAPIConnectClient.GetAsync());
 
                 categories.RemoveAll(model => model.Id == concreteBindingContext.PresentedItem.Id);
 
@@ -100,14 +100,14 @@ public partial class CategoriesManagePage : Caney.MVVM.Core.Pages.ContentPage
                     AvailableParents = categories.ToArray()
                 };
 
-                Dispatcher.Dispatch(() =>
+                Dispatcher.Dispatch((System.Action)(() =>
                 {
                     concreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new Configuration.CategoryConfigurationPage(ConfigurationSuccess_Callback, model));
+                    this.NavigationPushPageAsync((Microsoft.Maui.Controls.Page)new Configuration.CategoryConfigurationPage(ConfigurationSuccess_Callback, model));
 
                     PresentedItemDismissButton_Clicked(sender, e);
-                });
+                }));
             }
             catch (System.Exception exception)
             {
@@ -116,7 +116,7 @@ public partial class CategoriesManagePage : Caney.MVVM.Core.Pages.ContentPage
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
-        });
+        }));
     }
 
     private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)
@@ -127,7 +127,7 @@ public partial class CategoriesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
             var concreteBindingContext = (Models.Page.Manage.CategoriesManagePageModel)BindingContext;
 
-            var apiConnectClient = new Interop.API.Connect.Clients.CategoriesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+            var apiConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
             apiConnectClient.ArchiveAsync(concreteBindingContext.PresentedItem.Id).ContinueWith(_task =>
             {
@@ -152,7 +152,7 @@ public partial class CategoriesManagePage : Caney.MVVM.Core.Pages.ContentPage
         });
     }
 
-    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.CategoryDisplayModel model)
+    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.FamilyDisplayModel model)
     {
         LoadItems();
     }
@@ -165,7 +165,7 @@ public partial class CategoriesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
         concreteBindingContext.Items.Clear();
 
-        var apiConnectClient = new Interop.API.Connect.Clients.CategoriesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
         apiConnectClient.GetAsync().ContinueWith(task =>
         {

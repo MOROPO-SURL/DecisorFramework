@@ -8,9 +8,11 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities
         public UnitMeasurement UnitMeasurement { get; set; }
         public System.Guid DefaultUnitMeasurementId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CategoryId))]
-        public Category Category { get; set; }
-        public int? CategoryId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(FamilyId))]
+        public Family Family { get; set; }
+        public int? FamilyId { get; set; }
+
+        public System.TimeSpan? ExpirationTime { get; set; }
 
         public virtual ICollection<Classification> Classifications { get; set; }
 
