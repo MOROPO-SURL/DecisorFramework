@@ -22,6 +22,6 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities
 
         public string Description { get; set; }
 
-        public WarehousingArea[] Areas { get; set; }
+        public System.Collections.Generic.ICollection<WarehousingArea> Areas { get; set; }
     }
 }

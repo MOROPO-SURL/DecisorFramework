@@ -85,7 +85,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
                 Id = System.Guid.NewGuid(),
                 ContentData = imagePickedData,
                 ContentType = imageContentType,
-                About = $"Producto {model.Id}"
+                About = $"{EntityTypeName} {model.Id}"
             };
         }
 
@@ -118,7 +118,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
                 Id = concreteBindingContext.FeatureImageId ?? System.Guid.NewGuid(),
                 ContentData = imagePickedData,
                 ContentType = imageContentType,
-                About = $"Producto {model.Id}"
+                About = $"{EntityTypeName} {model.Id}"
             };
         }
 

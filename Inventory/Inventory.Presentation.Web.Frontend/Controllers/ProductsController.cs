@@ -2,6 +2,7 @@
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
+using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
@@ -13,14 +14,14 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
     public class ProductsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Product, System.Guid, ProductInputModel, ProductDisplayModel>
     {
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
-        private readonly IEntityRepository<Family, int> categoryRepository;
+        private readonly IEntityRepository<Family, int> familyRepository;
         private readonly IEntityRepository<Classification, System.Guid> classificationRepository;
         private readonly IImageFileManagerFacade imageFileManager;
 
         public ProductsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Classification, System.Guid> classificationRepository, IEntityRepository<Family, int> categoryRepository, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Product, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProductsController> localizer, Microsoft.Extensions.Logging.ILogger<ProductsController> logger) : base(repository, localizer, logger)
         {
             this.imageRepository = imageRepository;
-            this.categoryRepository = categoryRepository;
+            this.familyRepository = categoryRepository;
             this.classificationRepository = classificationRepository;
             this.imageFileManager = imageFileManager;
         }
@@ -51,9 +52,9 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
 
             if (entity.FamilyId != null)
             {
-                entity.Family = categoryRepository.Get(entity.FamilyId.Value);
+                entity.Family = familyRepository.Get(entity.FamilyId.Value);
 
-                FillParent(entity.Family);
+                entity.Family.FillParent(familyRepository);
 
                 model.Category = new FamilyDisplayModel();
 
@@ -148,15 +149,6 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
 
                 imageFileManager.DeleteImageFile(oldLogoImage);
             }
-        }
-
-        private void FillParent(Family entity)
-        {
-            if (entity.ParentId == null) return;
-
-            entity.Parent = categoryRepository.Get(entity.ParentId.Value);
-
-            FillParent(entity.Parent);
         }
     }
 }

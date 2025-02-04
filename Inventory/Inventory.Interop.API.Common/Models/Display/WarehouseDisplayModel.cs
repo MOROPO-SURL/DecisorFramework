@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
+﻿using System.Linq;
+
+namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
 {
     public class WarehouseDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Warehouse, System.Guid>
     {
@@ -12,6 +14,10 @@
 
         public int Priority { get; set; }
 
+        public Persistence.Enumerations.WharehouseKind Kind { get; set; }
+
+        public WarehousingAreaDisplayModel[] Areas { get; set; }
+
         public void Import(Persistence.Entities.Warehouse entity)
         {
             Id = entity.Id;
@@ -19,6 +25,7 @@
             Description = entity.Description;
             At = entity.At;
             Priority = entity.Priority;
+            Kind = entity.Kind;
         }
     }
 }

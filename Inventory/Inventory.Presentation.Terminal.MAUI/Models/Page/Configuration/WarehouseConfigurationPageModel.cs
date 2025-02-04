@@ -16,6 +16,7 @@
                 Name = model.Name;
                 Description = model.Description;
                 Priority = model.Priority;
+                Areas = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.WarehousingAreaDisplayModel>(model.Areas);
             }
         }
 
@@ -26,5 +27,7 @@
         public string Description { get => description; set => SetProperty(ref description, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
+
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.WarehousingAreaDisplayModel> Areas { get; set; } = [];
     }
 }

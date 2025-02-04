@@ -2901,7 +2901,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("WarehouseId")
                         .HasDatabaseName("ix_warehousingareas_warehouseid");
 
-                    b.ToTable("warehousingareas");
+                    b.ToTable("warehousingareas", "decisorframework_inventory");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Legal.Persistence.Entities.CentralStateStructure", b =>

@@ -17,6 +17,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Providers
                     new Configurators.ProductCustomAttributeBridgeEntityTypeConfigurator(),
                     new Configurators.ProductWarehousingDecreaseKindBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Warehouse>(),
+                    new BaseEntityTypeConfigurator<Entities.WarehousingArea>(),
                     new BaseEntityTypeConfigurator<Entities.Batch>(),
                     new BaseEntityTypeConfigurator<Entities.Contract.AbstractDeparture>(),
                     new Configurators.DepartureBatchBridgeEntityTypeConfigurator(),

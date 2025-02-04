@@ -21,6 +21,7 @@ using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Defa
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Factories;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
@@ -61,7 +62,8 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel, SalaryStandardConfigurationPage>, SalaryConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel, PersonContactConfigurationPage>, PersonContactConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyConfigurationPageModel, BankAgencyConfigurationPage>, BankAgencyConfigurationPageFactory>()
-               .AddSingleton<IConfigurationContentPageFactoryFacade<WarehouseDisplayModel, WarehouseConfigurationPageModel, WarehouseConfigurationPage>, WarehouseConfigurationPageFactory>();
+               .AddSingleton<IConfigurationContentPageFactoryFacade<WarehouseDisplayModel, WarehouseConfigurationPageModel, WarehouseConfigurationPage>, WarehouseConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<WarehousingAreaDisplayModel, WarehousingAreaConfigurationPageModel, WarehousingAreaConfigurationPage>, WarehousingAreaConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

@@ -1,10 +1,16 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
 public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.WarehouseDisplayModel, Models.Page.Configuration.WarehouseConfigurationPageModel>
 {
+    private readonly List<Interop.API.Common.Models.Input.WarehousingAreaInputModel> editionAreas = [];
+    private readonly List<Interop.API.Common.Models.Input.WarehousingAreaInputModel> incomingAreas = [];
+    private readonly List<Interop.API.Common.Models.Display.WarehousingAreaDisplayModel> outgoingAreas = [];
+
     public WarehouseConfigurationPage(System.Action<Interop.API.Common.Models.Display.WarehouseDisplayModel> successAction, Models.Page.Configuration.WarehouseConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
@@ -21,7 +27,8 @@ public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAU
             Id = System.Guid.NewGuid(),
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
-            Priority = ConcreteBindingContext.Priority
+            Priority = ConcreteBindingContext.Priority,
+            IncomingAreas = incomingAreas
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -38,11 +45,168 @@ public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAU
             Id = ConcreteBindingContext.Id,
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
-            Priority = ConcreteBindingContext.Priority
+            Priority = ConcreteBindingContext.Priority,
+            IncomingAreas = incomingAreas,
+            EditionAreas = editionAreas,
+            OutgoingAreas = outgoingAreas
         };
 
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void AreaAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var familiesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                var model = new Models.Page.Configuration.WarehousingAreaConfigurationPageModel(null)
+                {
+                    AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync(),
+                    AvailableFamilies = await familiesAPIConnectClient.GetAsync()
+                };
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(new WarehousingAreaConfigurationPage(AreaCreateSuccess_Callback, model));
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        });
+    }
+
+    private void AreaEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var familiesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                var model = new Models.Page.Configuration.WarehousingAreaConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.WarehousingAreaDisplayModel)
+                {
+                    AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync(),
+                    AvailableFamilies = await familiesAPIConnectClient.GetAsync()
+                };
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(new WarehousingAreaConfigurationPage(AreaEditSuccess_Callback, model));
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        });
+    }
+
+    private void AreaRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta área de almacenamiento?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                ConcreteBindingContext.Areas.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.WarehousingAreaDisplayModel);
+            });
+        });
+    }
+
+    private void AreaCreateSuccess_Callback(Interop.API.Common.Models.Display.WarehousingAreaDisplayModel model)
+    {
+        incomingAreas.Add(new Interop.API.Common.Models.Input.WarehousingAreaInputModel
+        {
+            Id = model.Id,
+            Name = model.Name,
+            Capacity = model.Capacity,
+            UnitMeasurementId = model.UnitMeasurement.Id,
+            Description = model.Description,
+            FamilyId = model.Family.Id
+        });
+
+        ConcreteBindingContext.Areas.Add(model);
+    }
+
+    private void AreaEditSuccess_Callback(Interop.API.Common.Models.Display.WarehousingAreaDisplayModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingAreas)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.Name = model.Name;
+            item.Capacity = model.Capacity;
+            item.UnitMeasurementId = model.UnitMeasurement.Id;
+            item.Description = model.Description;
+            item.FamilyId = model.Family.Id;
+
+            handled = true;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionAreas)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.Name = model.Name;
+                item.Capacity = model.Capacity;
+                item.UnitMeasurementId = model.UnitMeasurement.Id;
+                item.Description = model.Description;
+                item.FamilyId = model.Family.Id;
+
+                handled = true;
+            }
+        }
+
+        if (!handled)
+        {
+            editionAreas.Add(new Interop.API.Common.Models.Input.WarehousingAreaInputModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Capacity = model.Capacity,
+                UnitMeasurementId = model.UnitMeasurement.Id,
+                Description = model.Description,
+                FamilyId = model.Family.Id
+            });
+        }
+
+        foreach (var item in ConcreteBindingContext.Areas)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.Name = model.Name;
+            item.Capacity = model.Capacity;
+            item.UnitMeasurement = model.UnitMeasurement;
+            item.Description = model.Description;
+            item.Family = model.Family;
+        }
     }
 }

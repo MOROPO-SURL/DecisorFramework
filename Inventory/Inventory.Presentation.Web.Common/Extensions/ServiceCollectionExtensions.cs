@@ -10,6 +10,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions
         public static void AddDecisorInventoryPresentationWebCommon(this IServiceCollection services)
         {
             services.AddScoped<IEntityRepository<Warehouse, System.Guid>, WarehouseRepository>();
+            services.AddScoped<IEntityRepository<WarehousingArea, System.Guid>, WarehousingAreaRepository>();
             services.AddScoped<IEntityRepository<Batch, System.Guid>, BatchRepository>();
             services.AddScoped<IEntityRepository<Product, System.Guid>, ProductRepository>();
             services.AddScoped<IEntityRepository<Family, int>, FamiliesRepository>();
