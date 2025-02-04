@@ -89,4 +89,9 @@ public partial class DefaultUserAuthenticationPage : Caney.MVVM.Core.Pages.Bindi
             });
         });
     }
+
+    private void OnPasswordEnterPressed(object sender, System.EventArgs e)
+    {
+        SignInButton_Clicked(sender, e);
+    }
 }

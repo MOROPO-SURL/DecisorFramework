@@ -31,6 +31,8 @@
 		<PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 		<PackageReference Include="SkiaSharp" Version="2.88.8" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
+	
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Backend\Commercial.Presentation.Web.Backend.csproj" />
