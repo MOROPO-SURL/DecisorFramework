@@ -1,5 +1,4 @@
 ﻿using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Extensions;
-using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -8,9 +7,11 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
         private string name;
         private string description;
         private int priority = 1;
-        private UnitMeasurementDisplayModel defaultUnitMeasurement;
+        private Interop.API.Common.Models.Display.UnitMeasurementDisplayModel defaultUnitMeasurement;
         private Interop.API.Common.Models.Display.FamilyDisplayModel category;
         private Microsoft.Maui.Controls.ImageSource featureImageSource;
+
+        public ProductConfigurationPageModel() : this(null) { }
 
         public ProductConfigurationPageModel(Interop.API.Common.Models.Display.ProductDisplayModel model) : base(model)
         {
@@ -42,7 +43,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public UnitMeasurementDisplayModel DefaultUnitMeasurement { get => defaultUnitMeasurement; set => SetProperty(ref defaultUnitMeasurement, value); }
+        public Interop.API.Common.Models.Display.UnitMeasurementDisplayModel DefaultUnitMeasurement { get => defaultUnitMeasurement; set => SetProperty(ref defaultUnitMeasurement, value); }
 
         public Interop.API.Common.Models.Display.FamilyDisplayModel Category { get => category; set => SetProperty(ref category, value); }
 
@@ -52,7 +53,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
 
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.WarehousingDecreaseModel> WarehousingDecreases { get; set; } = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.WarehousingDecreaseModel>();
 
-        public UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
+        public Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
 
         public Interop.API.Common.Models.Display.FamilyDisplayModel[] AvailableCategories { get; set; }
     }

@@ -59,11 +59,13 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IDetailContentPageFactoryFacade<NaturalBusinessKindDisplayModel, NaturalBusinessKindDetailPage>, NaturalBusinessKindDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyDetailPage>, BankAgencyDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<WarehouseDisplayModel, WarehouseDetailPage>, WarehouseDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<ProductDisplayModel, ProductDetailPage>, ProductDetailPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel, SalaryStandardConfigurationPage>, SalaryConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel, PersonContactConfigurationPage>, PersonContactConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyConfigurationPageModel, BankAgencyConfigurationPage>, BankAgencyConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<WarehouseDisplayModel, WarehouseConfigurationPageModel, WarehouseConfigurationPage>, WarehouseConfigurationPageFactory>()
-               .AddSingleton<IConfigurationContentPageFactoryFacade<WarehousingAreaDisplayModel, WarehousingAreaConfigurationPageModel, WarehousingAreaConfigurationPage>, WarehousingAreaConfigurationPageFactory>();
+               .AddSingleton<IConfigurationContentPageFactoryFacade<WarehousingAreaDisplayModel, WarehousingAreaConfigurationPageModel, WarehousingAreaConfigurationPage>, WarehousingAreaConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<ProductDisplayModel, ProductConfigurationPageModel, ProductConfigurationPage>, ProductConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();
