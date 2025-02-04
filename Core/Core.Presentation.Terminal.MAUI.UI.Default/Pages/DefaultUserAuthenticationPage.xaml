@@ -46,7 +46,8 @@
                         <Entry
                             Text="{Binding Password}"
                             Placeholder="contraseña"
-                            IsPassword="true" />
+                            IsPassword="true"
+                            Completed="OnPasswordEnterPressed"/>
                         <Button
                             IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
                             HorizontalOptions="Center"
