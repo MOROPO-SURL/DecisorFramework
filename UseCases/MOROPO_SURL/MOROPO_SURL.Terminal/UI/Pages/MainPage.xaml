@@ -266,6 +266,9 @@
                     </Grid>
                 </Frame>
                 <Frame Style="{StaticResource SectionCardFrameStyle}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SupervisionSectionCardFrameTapGEstureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
                     <Grid>
                         <Image Style="{StaticResource SectionCardBackgroudImageStyle}" Source="monitorization.jpg" />
                         <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
