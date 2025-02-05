@@ -93,17 +93,17 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF3D7;"
+                Glyph="&#xF2D8;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Categorías"
-        ContentTemplate="{DataTemplate decisorframework_inventory_manage_pages:CategoriesManagePage}">
+        Title="Familias de Productos"
+        ContentTemplate="{DataTemplate decisorframework_inventory_manage_pages:FamiliesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF0C0;"
+                Glyph="&#xF6E0;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

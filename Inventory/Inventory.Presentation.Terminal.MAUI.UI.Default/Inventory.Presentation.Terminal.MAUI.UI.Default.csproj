@@ -33,7 +33,18 @@
 		<ProjectReference Include="..\Inventory.Presentation.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\Configuration\FamilyConfigurationPage.xaml.cs">
+	    <DependentUpon>FamilyConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\FamiliesManagePage.xaml.cs">
+	    <DependentUpon>FamiliesManagePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
 	  <MauiXaml Update="Pages\Configuration\WarehousingAreaConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\FamilyDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ProductDetailPage.xaml">

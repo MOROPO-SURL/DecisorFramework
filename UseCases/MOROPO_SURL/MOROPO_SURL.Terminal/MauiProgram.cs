@@ -60,12 +60,14 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IDetailContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyDetailPage>, BankAgencyDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<WarehouseDisplayModel, WarehouseDetailPage>, WarehouseDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<ProductDisplayModel, ProductDetailPage>, ProductDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<FamilyDisplayModel, FamilyDetailPage>, FamilyDetailPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel, SalaryStandardConfigurationPage>, SalaryConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel, PersonContactConfigurationPage>, PersonContactConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyConfigurationPageModel, BankAgencyConfigurationPage>, BankAgencyConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<WarehouseDisplayModel, WarehouseConfigurationPageModel, WarehouseConfigurationPage>, WarehouseConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<WarehousingAreaDisplayModel, WarehousingAreaConfigurationPageModel, WarehousingAreaConfigurationPage>, WarehousingAreaConfigurationPageFactory>()
-               .AddSingleton<IConfigurationContentPageFactoryFacade<ProductDisplayModel, ProductConfigurationPageModel, ProductConfigurationPage>, ProductConfigurationPageFactory>();
+               .AddSingleton<IConfigurationContentPageFactoryFacade<ProductDisplayModel, ProductConfigurationPageModel, ProductConfigurationPage>, ProductConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<FamilyDisplayModel, FamilyConfigurationPageModel, FamilyConfigurationPage>, FamilyConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

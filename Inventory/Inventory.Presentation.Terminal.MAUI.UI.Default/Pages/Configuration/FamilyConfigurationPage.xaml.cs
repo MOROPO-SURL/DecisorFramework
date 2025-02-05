@@ -3,9 +3,9 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class CategoryConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.FamilyDisplayModel>
+public partial class FamilyConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.FamilyDisplayModel, Models.Page.Configuration.FamilyConfigurationPageModel>
 {
-    public CategoryConfigurationPage(System.Action<Interop.API.Common.Models.Display.FamilyDisplayModel> successAction, Models.Page.Configuration.CategoryConfigurationPageModel model) : base(successAction, model)
+    public FamilyConfigurationPage(System.Action<Interop.API.Common.Models.Display.FamilyDisplayModel> successAction, Models.Page.Configuration.FamilyConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
 
@@ -31,14 +31,12 @@ public partial class CategoryConfigurationPage : Core.Presentation.Terminal.MAUI
     {
         var apiConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.CategoryConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.FamilyInputModel
         {
-            Name = concreteBindingContext.Name,
-            ParentId = ParentPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority
+            Name = ConcreteBindingContext.Name,
+            ParentId = ParentPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -51,15 +49,13 @@ public partial class CategoryConfigurationPage : Core.Presentation.Terminal.MAUI
     {
         var apiConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.CategoryConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.FamilyInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            ParentId = ParentPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            ParentId = ParentPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.EditAsync(model);
