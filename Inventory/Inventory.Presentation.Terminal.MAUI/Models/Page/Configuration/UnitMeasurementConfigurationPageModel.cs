@@ -6,6 +6,8 @@
         private string symbol;
         private int priority = 1;
 
+        public UnitMeasurementConfigurationPageModel() : this(null) { }
+
         public UnitMeasurementConfigurationPageModel(Interop.API.Common.Models.Display.UnitMeasurementDisplayModel model) : base(model)
         {
             if (model != null)

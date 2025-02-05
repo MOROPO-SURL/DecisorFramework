@@ -3,7 +3,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class UnitMeasurementConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel>
+public partial class UnitMeasurementConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, Models.Page.Configuration.UnitMeasurementConfigurationPageModel>
 {
     public UnitMeasurementConfigurationPage(System.Action<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel> successAction, Models.Page.Configuration.UnitMeasurementConfigurationPageModel model) : base(successAction, model)
     {
@@ -16,14 +16,12 @@ public partial class UnitMeasurementConfigurationPage : Core.Presentation.Termin
     {
         var apiConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.UnitMeasurementConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.UnitMeasurementInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            Symbol = concreteBindingContext.Symbol,
-            Priority = concreteBindingContext.Priority
+            Name = ConcreteBindingContext.Name,
+            Symbol = ConcreteBindingContext.Symbol,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -39,10 +37,10 @@ public partial class UnitMeasurementConfigurationPage : Core.Presentation.Termin
 
         var model = new Interop.API.Common.Models.Input.UnitMeasurementInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            Symbol = concreteBindingContext.Symbol,
-            Priority = concreteBindingContext.Priority
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            Symbol = ConcreteBindingContext.Symbol,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.EditAsync(model);
