@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
@@ -132,7 +133,41 @@ public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAU
 
             Dispatcher.Dispatch(() =>
             {
-                ConcreteBindingContext.Areas.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.WarehousingAreaDisplayModel);
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.WarehousingAreaDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingAreas)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingAreas.Remove(editionAreas.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionAreas)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionAreas.Remove(editionAreas.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingAreas.Add(target);
+                }
+
+                ConcreteBindingContext.Areas.Remove(target);
+
+                hasChangesFlag = true;
             });
         });
     }
@@ -150,6 +185,8 @@ public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAU
         });
 
         ConcreteBindingContext.Areas.Add(model);
+
+        hasChangesFlag = true;
     }
 
     private void AreaEditSuccess_Callback(Interop.API.Common.Models.Display.WarehousingAreaDisplayModel model)
@@ -167,6 +204,8 @@ public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAU
             item.FamilyId = model.Family.Id;
 
             handled = true;
+
+            break;
         }
 
         if (!handled)
@@ -182,6 +221,8 @@ public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAU
                 item.FamilyId = model.Family.Id;
 
                 handled = true;
+
+                break;
             }
         }
 
@@ -198,15 +239,19 @@ public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAU
             });
         }
 
+        var index = -1;
+
         foreach (var item in ConcreteBindingContext.Areas)
         {
+            index++;
+
             if (item.Id != model.Id) continue;
 
-            item.Name = model.Name;
-            item.Capacity = model.Capacity;
-            item.UnitMeasurement = model.UnitMeasurement;
-            item.Description = model.Description;
-            item.Family = model.Family;
+            ConcreteBindingContext.Areas[index] = model;
+
+            break;
         }
+
+        hasChangesFlag = true;
     }
 }

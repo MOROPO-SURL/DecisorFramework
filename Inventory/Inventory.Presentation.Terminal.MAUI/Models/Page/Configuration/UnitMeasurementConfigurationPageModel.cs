@@ -16,6 +16,7 @@
                 Name = model.Name;
                 Symbol = model.Symbol;
                 Priority = model.Priority;
+                ConvertionBridges = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.UnitMeasurementConvertionBridgeModel>(model.ConverstionBridges);
             }
         }
 
@@ -26,5 +27,7 @@
         public string Symbol { get => symbol; set => SetProperty(ref symbol, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
+
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.UnitMeasurementConvertionBridgeModel> ConvertionBridges { get; set; } = [];
     }
 }

@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Defau
 
 public partial class UnitMeasurementsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, Models.Page.Manage.UnitMeasurementsManagePageModel, Models.Page.Configuration.UnitMeasurementConfigurationPageModel, Configuration.UnitMeasurementConfigurationPage, Detail.UnitMeasurementDetailPage>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 112;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 116;
 
     public UnitMeasurementsManagePage()
     {

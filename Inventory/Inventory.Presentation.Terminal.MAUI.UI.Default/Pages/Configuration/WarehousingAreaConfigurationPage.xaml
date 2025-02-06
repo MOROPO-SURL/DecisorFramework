@@ -6,16 +6,12 @@
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
-    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
-    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.WarehousingAreaConfigurationPage"
     x:TypeArguments="interop_common_display_models:WarehousingAreaDisplayModel,presentation_configuration_page_models:WarehousingAreaConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:WarehousingAreaConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local_converters:CategoryToTreeNameConverter x:Key="CategoryToTreeNameConverter" />
-
-            <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -34,51 +30,48 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <Grid>
-        <ScrollView Orientation="Vertical">
-            <Grid 
-                Padding="20"
-                ColumnSpacing="16" RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="0">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
-                    <Entry Text="{Binding Name}" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="1">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Capacidad" />
-                    <Entry Text="{Binding Capacity, StringFormat='{0:F2}'}" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="1">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad de Medida" />
-                    <Picker 
-                        x:Name="UnitMeasurementPicker"
-                        ItemsSource="{Binding AvailableUnitMeasurements}" 
-                        ItemDisplayBinding="{Binding Name}"
-                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="2">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Familia de producto" />
-                    <Picker 
-                        x:Name="FamilyPicker"
-                        ItemsSource="{Binding AvailableFamilies}" 
-                        ItemDisplayBinding="{Binding Converter={StaticResource CategoryToTreeNameConverter}}"
-                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="3">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
-                    <Editor Text="{Binding Description}" HeightRequest="200" />
-                </VerticalStackLayout>
-            </Grid>
-        </ScrollView>
-        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
-    </Grid>
+    <ScrollView Orientation="Vertical">
+        <Grid 
+            Padding="20"
+            ColumnSpacing="16" RowSpacing="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="0">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                <Entry Text="{Binding Name}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="1">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Capacidad" />
+                <Entry Text="{Binding Capacity, StringFormat='{0:F2}'}" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="1">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad de Medida" />
+                <Picker 
+                    x:Name="UnitMeasurementPicker"
+                    ItemsSource="{Binding AvailableUnitMeasurements}" 
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="2">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Familia de producto" />
+                <Picker 
+                    x:Name="FamilyPicker"
+                    ItemsSource="{Binding AvailableFamilies}" 
+                    ItemDisplayBinding="{Binding Converter={StaticResource CategoryToTreeNameConverter}}"
+                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="3">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
+                <Editor Text="{Binding Description}" HeightRequest="200" />
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </core_ui_base_pages:ConfigurationBaseContentPage>
