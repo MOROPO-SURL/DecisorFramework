@@ -42,6 +42,11 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
             return NotFound();
         }
 
+        protected override System.Func<OrganizationContact, object> GetOrderSelector()
+        {
+            return entity => entity.Priority;
+        }
+
         protected override OrganizationContactDisplayModel EntityToDisplayModel(OrganizationContact entity)
         {
             var model = base.EntityToDisplayModel(entity);
