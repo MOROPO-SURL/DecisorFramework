@@ -3,8 +3,10 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:decisorframework_production_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
-    x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.ProductionShell"
-    FlyoutBehavior="Locked">
+    x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.ProductionShell">
+    <Shell.FlyoutBehavior>
+        <OnIdiom Default="Flyout" Desktop="Locked" />
+    </Shell.FlyoutBehavior>
     <Shell.FlyoutHeader>
         <Grid HeightRequest="180">
             <Image 
