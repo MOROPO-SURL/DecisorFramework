@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:decisorframework_domain_list_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    x:Class="MOROPO.EPTCamaguey.Decisor.Terminal.UI.Shells.DomainShell">
+    <Shell.FlyoutBehavior>
+        <OnIdiom Default="Flyout" Desktop="Locked" />
+    </Shell.FlyoutBehavior>
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="180">
+            <Image 
+                Aspect="AspectFill"
+                Source="domain.jpg" />
+            <BoxView
+                Color="#A7000000" />
+            <Grid
+                Padding="16">
+                <Button
+                    HorizontalOptions="Start" VerticalOptions="Start"
+                    Text="&#xF2DE;"
+                    FontFamily="MaterialDesignIcons"
+                    FontSize="Medium"
+                    Padding="4"
+                    BackgroundColor="#60FFFFFF"
+                    Clicked="BackHomeButton_Clicked" />
+                <Label
+                    Text="Dominio"
+                    TextColor="White"
+                    HorizontalTextAlignment="Center" VerticalOptions="Center"
+                    FontSize="Large"
+                    FontAttributes="Bold" />
+            </Grid>
+        </Grid>
+    </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Inicio" />
+    <ShellContent
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Gestión" />
+    <ShellContent
+        Title="Entidades Administrativas"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:StructuresManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF006B;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Unidades Organizativas"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationalUnitiesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF645;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <FlyoutItem Title="Contactos">
+        <FlyoutItem.Icon>
+            <FontImageSource
+             FontFamily="MaterialDesignIcons"
+             Glyph="&#xF5D2;"
+             Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+             Title="Organizaciones"
+             ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationContactsManagePage}" />
+        <ShellContent
+            Title="Personas"
+            ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}" />
+    </FlyoutItem>
+    <ShellContent
+        Title="Inmuebles"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFCF1;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Vehículos"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Configuración" />
+    <ShellContent
+        Title="Tipos de Entidad Administrativa"
+        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:StructureKindsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF006C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tipos de Inmueble"
+        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:PropertyKindsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFCF2;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Categorías de Vehículo"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA98;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tipos de Motorización"
+        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:VehicleEngineKindsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF1FA;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tipos de Negocio Personal"
+        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:NaturalBusinessKindsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF00F5;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+</Shell>

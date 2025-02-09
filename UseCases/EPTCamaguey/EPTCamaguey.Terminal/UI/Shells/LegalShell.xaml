@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<Shell 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:decisorframework_legal_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
+    x:Class="MOROPO.EPTCamaguey.Decisor.Terminal.UI.Shells.LegalShell">
+    <Shell.FlyoutBehavior>
+        <OnIdiom Default="Flyout" Desktop="Locked" />
+    </Shell.FlyoutBehavior>
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="180">
+            <Image 
+                Aspect="AspectFill"
+                Source="legal.jpg" />
+            <BoxView
+                Color="#A7000000" />
+            <Grid
+                Padding="16">
+                <Button
+                    HorizontalOptions="Start" VerticalOptions="Start"
+                    Text="&#xF2DE;"
+                    FontFamily="MaterialDesignIcons"
+                    FontSize="Medium"
+                    Padding="4"
+                    BackgroundColor="#60FFFFFF"
+                    Clicked="BackHomeButton_Clicked" />
+                <Label
+                    Text="Jurídico"
+                    TextColor="White"
+                    HorizontalTextAlignment="Center" VerticalOptions="Center"
+                    FontSize="Large"
+                    FontAttributes="Bold" />
+            </Grid>
+        </Grid>
+    </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Inicio" />
+    <ShellContent
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Operaciones" />
+    <FlyoutItem Title="Resoluciones">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFD15;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Nombramiento"
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:NamingResolutionsManagePage}" />
+    </FlyoutItem>
+    <ShellContent
+        Title="Disposiciones Legislativas"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFEC3;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Gestión" />
+    <ShellContent
+        Title="Organismos"
+        ContentTemplate="{DataTemplate decisorframework_legal_manage_pages:CentralStateStructuresManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA35;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Publicaciones Legislativas"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF01B1;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Proformas de Contrato"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF00A6;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Secciones Contractuales"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF728;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Cláusulas Contractuales"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFCA9;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Etiqutas"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF4F9;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Configuración" />
+    <ShellContent
+        Title="Tipos de Publicación Legislativa"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF01B2;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tipos de Regulación Legislativa"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFAB6;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+</Shell>
