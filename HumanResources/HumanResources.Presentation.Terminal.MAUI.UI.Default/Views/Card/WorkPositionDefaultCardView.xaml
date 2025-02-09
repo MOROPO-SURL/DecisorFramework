@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.WorkPositionDefaultCardView"
+    x:DataType="interop_common_display_models:WorkPositionDisplayModel">
+    <ContentView.Resources>
+        <ResourceDictionary>           
+
+            <communitytoolkit_converters:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame Padding="0">
+        <Grid>
+            <Grid.ColumnDefinitions>                
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>           
+            
+            <StackLayout 
+            Grid.Column="0"
+            Padding="10">
+                <Label 
+                FontAttributes="Bold"
+                FontSize="Medium"
+                LineBreakMode="TailTruncation"
+                Text="{Binding Name}" />
+                <Label 
+                IsVisible="{Binding Enabled, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                FontAttributes="Bold"
+                LineBreakMode="TailTruncation"
+                Text="{Binding Kind}" />
+                <Label 
+                Margin="0,6,0,0"
+                Text="{Binding Description}"
+                TextColor="DimGray"
+                FontSize="Caption"
+                LineBreakMode="TailTruncation"
+                MaxLines="3" />
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentView>

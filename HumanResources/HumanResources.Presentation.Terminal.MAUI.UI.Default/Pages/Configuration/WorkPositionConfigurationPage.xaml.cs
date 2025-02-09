@@ -1,9 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class WorkPositionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.WorkPositionDisplayModel>
+public partial class WorkPositionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<WorkPositionDisplayModel, Models.Page.Configuration.WorkPositionConfigurationPageModel>
 {
     public WorkPositionConfigurationPage(System.Action<Interop.API.Common.Models.Display.WorkPositionDisplayModel> successAction, Models.Page.Configuration.WorkPositionConfigurationPageModel model) : base(successAction, model)
     {
@@ -46,7 +47,7 @@ public partial class WorkPositionConfigurationPage : Core.Presentation.Terminal.
     {
         var apiConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.WorkPositionConfigurationPageModel)BindingContext;
+        var concreteBindingContext = (Models.Page.Configuration.WorkPositionConfigurationPageModel) BindingContext;
 
         var model = new Interop.API.Common.Models.Input.WorkPositionInputModel
         {
