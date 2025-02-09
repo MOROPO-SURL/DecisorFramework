@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
+﻿using System.Linq;
+
+namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
 {
     public class UnitMeasurementDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.UnitMeasurement, System.Guid>
     {
@@ -12,6 +14,8 @@
 
         public int Priority { get; set; }
 
+        public Bridge.UnitMeasurementConvertionBridgeModel[] ConverstionBridges { get; set; }
+
         public void Import(Persistence.Entities.UnitMeasurement entity)
         {
             Id = entity.Id;
@@ -19,6 +23,23 @@
             Symbol = entity.Symbol;
             Priority = entity.Priority;
             At = entity.At;
+            ConverstionBridges = entity.ConversionBridges.Select(bridge =>
+            {
+                var model = new Bridge.UnitMeasurementConvertionBridgeModel
+                {
+                    Destination = new UnitMeasurementDisplayModel
+                    {
+                        Id = bridge.SternId,
+                        Name = bridge.Stern.Name,
+                        Symbol = bridge.Stern.Symbol,
+                        At = bridge.Stern.At,
+                        Priority = bridge.Stern.Priority
+                    },
+                    Convertion = bridge.Convertion
+                };
+
+                return model;
+            }).ToArray();
         }
     }
 }

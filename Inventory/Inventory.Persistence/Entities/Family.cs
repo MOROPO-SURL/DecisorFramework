@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities
 {
-	public class Category : Guama.Core.Persistence.Entities.Contract.INamedEntity<int>, Core.Persistence.Entities.Contract.IFullFeatureEntity<int>
+	public class Family : Guama.Core.Persistence.Entities.Contract.INamedEntity<int>, Core.Persistence.Entities.Contract.IFullFeatureEntity<int>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public int Id { get; set; }
@@ -17,7 +17,7 @@
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ParentId))]
-        public Category Parent { get; set; }
+        public Family Parent { get; set; }
         public int? ParentId { get; set; }
 
         public string Description { get; set; }

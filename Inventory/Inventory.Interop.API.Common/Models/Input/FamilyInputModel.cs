@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
 {
-	public class CategoryInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Category, int>
+	public class FamilyInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Family, int>
     {
         public int Id { get; set; }
 
@@ -15,21 +15,21 @@ namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
 
         public int? ParentId { get; set; }
 
-        public Category Export()
+        public Family Export()
         {
-            var entity = new Category { Enabled = true };
+            var entity = new Family { Enabled = true };
 
             Mergue(entity);
 
             return entity;
         }
 
-        public void Import(Category entity)
+        public void Import(Family entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Mergue(Category entity)
+        public void Mergue(Family entity)
         {
             entity.Name = Name;
             entity.Priority = Priority;

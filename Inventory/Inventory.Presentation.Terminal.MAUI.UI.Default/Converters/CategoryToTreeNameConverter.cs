@@ -8,7 +8,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Defau
 
 		public object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            return ((Interop.API.Common.Models.Display.CategoryDisplayModel)value).ToTreeName(Separator);
+            return ((Interop.API.Common.Models.Display.FamilyDisplayModel)value).ToTreeName(Separator);
         }
 
         public object ConvertBack(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)

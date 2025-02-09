@@ -121,9 +121,9 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                         {
                             concreteBindingContext.Items.Add(model);
                         }
-                    }
 
-                    concreteBindingContext.HasMoreItems = task.Result.HasNext && task.Result.List.Count > 0;
+                        concreteBindingContext.HasMoreItems = task.Result.HasNext && task.Result.List.Count > 0;
+                    }
 
                     concreteBindingContext.IsBusy = false;
                 });

@@ -18,6 +18,10 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
+        public Enumerations.WharehouseKind Kind { get; set; }
+
         public string Description { get; set; }
+
+        public System.Collections.Generic.ICollection<WarehousingArea> Areas { get; set; }
     }
 }

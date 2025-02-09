@@ -262,7 +262,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
                 Controller = "categories",
                 Action = "Index",
                 Area = "inventory",
-                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.CategoryViewerPermission
+                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.FamilyViewerPermission
             });
             inventorySection.Add(new ManagementDashboardSectionViewModel
             {

@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
+﻿using System.Collections.Generic;
+
+namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
 {
     public class WarehouseInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Warehouse, System.Guid>
     {
@@ -10,6 +12,12 @@
         public string Description { get; set; }
 
         public int Priority { get; set; }
+
+        public Persistence.Enumerations.WharehouseKind Kind { get; set; }
+
+        public List<WarehousingAreaInputModel> EditionAreas { get; set; } = new List<WarehousingAreaInputModel>();
+        public List<WarehousingAreaInputModel> IncomingAreas { get; set; } = new List<WarehousingAreaInputModel>();
+        public List<Display.WarehousingAreaDisplayModel> OutgoingAreas { get; set; } = new List<Display.WarehousingAreaDisplayModel>();
 
         public Persistence.Entities.Warehouse Export()
         {
@@ -34,6 +42,7 @@
             entity.Name = Name;
             entity.Description = Description;
             entity.Priority = Priority;
+            entity.Kind = Kind;
         }
     }
 }

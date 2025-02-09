@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ProductDisplayModel>
+public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.ProductDisplayModel, Models.Page.Configuration.ProductConfigurationPageModel>
 {
     private byte[] imagePickedData;
     private string imageContentType;
@@ -57,24 +57,22 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProductsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.ProductConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.ProductInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority,
-            DefaultMetricUnityId = concreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
-            CategoryId = CategoryPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
-            WarehousingDecreases = concreteBindingContext.WarehousingDecreases.ToList(),
-            Classifications = concreteBindingContext.Classifications.Select(item => new Interop.API.Common.Models.Input.ClassificationInputModel
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority,
+            DefaultMetricUnityId = ConcreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
+            CategoryId = CategoryPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
+            WarehousingDecreases = ConcreteBindingContext.WarehousingDecreases.ToList(),
+            Classifications = ConcreteBindingContext.Classifications.Select(item => new Interop.API.Common.Models.Input.ClassificationInputModel
             {
                 Id = item.Id,
                 Name = item.Name,
                 Description = item.Description,
                 Priority = item.Priority,
-                ProductId = concreteBindingContext.Id
+                ProductId = ConcreteBindingContext.Id
             }).ToList()
         };
 
@@ -85,7 +83,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
                 Id = System.Guid.NewGuid(),
                 ContentData = imagePickedData,
                 ContentType = imageContentType,
-                About = $"Producto {model.Id}"
+                About = $"{EntityTypeName} {model.Id}"
             };
         }
 
@@ -98,27 +96,25 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProductsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.ProductConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.ProductInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority,
-            DefaultMetricUnityId = concreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
-            CategoryId = CategoryPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
-            WarehousingDecreases = concreteBindingContext.WarehousingDecreases.ToList()
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority,
+            DefaultMetricUnityId = ConcreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
+            CategoryId = CategoryPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
+            WarehousingDecreases = ConcreteBindingContext.WarehousingDecreases.ToList()
         };
 
         if (imagePickedData != null)
         {
             model.FeatureImage = new Core.Interop.API.Common.Models.Input.ImageInputModel
             {
-                Id = concreteBindingContext.FeatureImageId ?? System.Guid.NewGuid(),
+                Id = ConcreteBindingContext.FeatureImageId ?? System.Guid.NewGuid(),
                 ContentData = imagePickedData,
                 ContentType = imageContentType,
-                About = $"Producto {model.Id}"
+                About = $"{EntityTypeName} {model.Id}"
             };
         }
 
@@ -129,8 +125,6 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
     private async void ImageLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ProductConfigurationPageModel)BindingContext;
-
         if (!Microsoft.Maui.Media.MediaPicker.IsCaptureSupported) PresentForImagePick();
 
         var action = await DisplayActionSheet("Seleccionar imágen desde", "Cancelar", null, CommonActionSheetConstants.PICKIMAGE_OPTION_CAMARA, CommonActionSheetConstants.PICKIMAGE_OPTION_GALLERY);
@@ -150,8 +144,8 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
                 {
                     DisplayAlert("Aviso", string.Format("El permiso para acceder a cámara del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
 
-                    concreteBindingContext.IsBusy = false;
-                    concreteBindingContext.BusyProgressMessage = string.Empty;
+                    ConcreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
                 });
 
                 return;
@@ -159,15 +153,15 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
             Dispatcher.Dispatch(() =>
             {
-                concreteBindingContext.IsBusy = true;
-                concreteBindingContext.BusyProgressMessage = "Capturando imagen ...";
+                ConcreteBindingContext.IsBusy = true;
+                ConcreteBindingContext.BusyProgressMessage = "Capturando imagen ...";
             });
 
             await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(1));
 
             Dispatcher.Dispatch(() =>
             {
-                concreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
+                ConcreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
             });
 
             await Microsoft.Maui.Media.MediaPicker.CapturePhotoAsync().ContinueWith(PickedImageContinuationTask);
@@ -185,12 +179,12 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
     private void AddClassificationButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationCreateSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel((Models.Page.Configuration.ProductConfigurationPageModel)BindingContext, null)));
+        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationCreateSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel(ConcreteBindingContext, null)));
     }
 
     private void EditClassificationButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationEditSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel((Models.Page.Configuration.ProductConfigurationPageModel)BindingContext, ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ClassificationDisplayModel)));
+        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationEditSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel(ConcreteBindingContext, ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ClassificationDisplayModel)));
     }
 
     private void ClassificationRemoveButton_Clicked(object sender, System.EventArgs e)
@@ -201,32 +195,28 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
             hasChangesFlag = true;
 
-            Dispatcher.Dispatch(() => ((Models.Page.Configuration.ProductConfigurationPageModel)BindingContext).Classifications.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ClassificationDisplayModel));
+            Dispatcher.Dispatch(() => ConcreteBindingContext.Classifications.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ClassificationDisplayModel));
         });
     }
 
     private void ClassificationCreateSuccess_Callback(Interop.API.Common.Models.Display.ClassificationDisplayModel model)
     {
-        ((Models.Page.Configuration.ProductConfigurationPageModel)BindingContext).Classifications.Add(model);
+        ConcreteBindingContext.Classifications.Add(model);
     }
 
     private void ClassificationEditSuccess_Callback(Interop.API.Common.Models.Display.ClassificationDisplayModel model)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ProductConfigurationPageModel)BindingContext;
+        var reference = ConcreteBindingContext.Classifications.First(item => item.Id == model.Id);
 
-        var reference = concreteBindingContext.Classifications.First(item => item.Id == model.Id);
+        var index = ConcreteBindingContext.Classifications.IndexOf(reference);
 
-        var index = concreteBindingContext.Classifications.IndexOf(reference);
-
-        concreteBindingContext.Classifications[index] = model;
+        ConcreteBindingContext.Classifications[index] = model;
 
         hasChangesFlag = true;
     }
 
     private void PickedImageCroppingComplete_Callback(SkiaSharp.SKBitmap result)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ProductConfigurationPageModel)BindingContext;
-
         if (result != null)
         {
             using (var skImage = SkiaSharp.SKImage.FromBitmap(result))
@@ -239,21 +229,19 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
             result.Dispose();
 
-            concreteBindingContext.FeatureImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
+            ConcreteBindingContext.FeatureImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
 
             hasChangesFlag = true;
         }
 
         this.NavigationPopModalPageAsync();
 
-        concreteBindingContext.IsBusy = false;
-        concreteBindingContext.BusyProgressMessage = string.Empty;
+        ConcreteBindingContext.IsBusy = false;
+        ConcreteBindingContext.BusyProgressMessage = string.Empty;
     }
 
     private async void PresentForImagePick()
     {
-        var concreteBindingContext = (Models.Page.Configuration.ProductConfigurationPageModel)BindingContext;
-
         if (Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.iOS)
         {
             var permission = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.Photos>();
@@ -269,8 +257,8 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
                 {
                     DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
 
-                    concreteBindingContext.IsBusy = false;
-                    concreteBindingContext.BusyProgressMessage = string.Empty;
+                    ConcreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
                 });
 
                 return;
@@ -291,8 +279,8 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
                 {
                     DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
 
-                    concreteBindingContext.IsBusy = false;
-                    concreteBindingContext.BusyProgressMessage = string.Empty;
+                    ConcreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
                 });
 
                 return;
@@ -301,8 +289,8 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
         Dispatcher.Dispatch(() =>
         {
-            concreteBindingContext.IsBusy = true;
-            concreteBindingContext.BusyProgressMessage = "Seleccionando imagen ...";
+            ConcreteBindingContext.IsBusy = true;
+            ConcreteBindingContext.BusyProgressMessage = "Seleccionando imagen ...";
         });
 
         await Microsoft.Maui.Media.MediaPicker.PickPhotoAsync().ContinueWith(PickedImageContinuationTask);
@@ -310,14 +298,12 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
     private async System.Threading.Tasks.Task PickedImageContinuationTask(System.Threading.Tasks.Task<Microsoft.Maui.Storage.FileResult> task)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ProductConfigurationPageModel)BindingContext;
-
         if (task.Result == null)
         {
             Dispatcher.Dispatch(() =>
             {
-                concreteBindingContext.IsBusy = false;
-                concreteBindingContext.BusyProgressMessage = string.Empty;
+                ConcreteBindingContext.IsBusy = false;
+                ConcreteBindingContext.BusyProgressMessage = string.Empty;
             });
 
             return;
@@ -327,7 +313,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
         Dispatcher.Dispatch(() =>
         {
-            concreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
+            ConcreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
         });
 
         SkiaSharp.SKBitmap croppingImageTarget = null;
@@ -354,12 +340,12 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
         Dispatcher.Dispatch(() =>
         {
-            concreteBindingContext.FeatureImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
+            ConcreteBindingContext.FeatureImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
 
             hasChangesFlag = true;
 
-            concreteBindingContext.IsBusy = false;
-            concreteBindingContext.BusyProgressMessage = string.Empty;
+            ConcreteBindingContext.IsBusy = false;
+            ConcreteBindingContext.BusyProgressMessage = string.Empty;
         });
     }
 }

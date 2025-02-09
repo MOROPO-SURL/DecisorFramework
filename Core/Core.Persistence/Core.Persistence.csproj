@@ -6,6 +6,6 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Core.Persistence</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Security.Personal.Persistence" Version="6.0.0.33" />
+		<PackageReference Include="GuamaFramework.Security.Personal.Persistence" Version="6.0.1" />
 	</ItemGroup>
 </Project>

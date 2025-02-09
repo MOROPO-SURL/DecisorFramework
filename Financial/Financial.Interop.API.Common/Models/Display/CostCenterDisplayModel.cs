@@ -16,6 +16,8 @@ namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display
 
         public BankAccountDisplayModel DefaultBankAccount { get; set; }
 
+        public Domain.Interop.API.Common.Models.Display.StructureTreeDisplayModel Structure { get; set; }
+
         public void Import(Persistence.Entities.CostCenter entity)
         {
             Id = entity.Id;
@@ -29,6 +31,13 @@ namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display
                 DefaultBankAccount = new BankAccountDisplayModel();
 
                 DefaultBankAccount.Import(entity.DefaultBankAccount);
+            }
+
+            if (entity.Structure != null)
+            {
+                Structure = new Domain.Interop.API.Common.Models.Display.StructureTreeDisplayModel();
+
+                Structure.Import(entity.Structure);
             }
         }
     }
