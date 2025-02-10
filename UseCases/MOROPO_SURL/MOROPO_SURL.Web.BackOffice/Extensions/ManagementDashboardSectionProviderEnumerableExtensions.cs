@@ -438,6 +438,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
             });
             #endregion
 
+            #region Commercial
+            commercialSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Términos de Pago",
+                Controller = "paymentterms",
+                Action = "Index",
+                Area = "commercial",
+                // TODO Set spected permission
+                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+            });
+            #endregion
+
             return new Dictionary<string, ICollection<ManagementDashboardSectionViewModel>>
             {
                 { "Seguridad", securitySection },

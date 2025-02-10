@@ -175,6 +175,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("contactid");
 
+                    b.Property<Guid>("DefaultPaymentTermId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("defaultpaymenttermid");
+
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
@@ -194,6 +198,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("ContactId")
                         .IsUnique()
                         .HasDatabaseName("ix_legalclients_contactid");
+
+                    b.HasIndex("DefaultPaymentTermId")
+                        .HasDatabaseName("ix_legalclients_defaultpaymenttermid");
 
                     b.ToTable("legalclients", "decisorframework_commercial");
                 });
@@ -276,6 +283,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("contactid");
 
+                    b.Property<Guid>("DefaultPaymentTermId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("defaultpaymenttermid");
+
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
@@ -295,6 +306,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("ContactId")
                         .IsUnique()
                         .HasDatabaseName("ix_legalproviders_contactid");
+
+                    b.HasIndex("DefaultPaymentTermId")
+                        .HasDatabaseName("ix_legalproviders_defaultpaymenttermid");
 
                     b.ToTable("legalproviders", "decisorframework_commercial");
                 });
@@ -377,6 +391,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("contactid");
 
+                    b.Property<Guid>("DefaultPaymentTermId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("defaultpaymenttermid");
+
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
@@ -391,6 +409,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("ContactId")
                         .IsUnique()
                         .HasDatabaseName("ix_naturalclients_contactid");
+
+                    b.HasIndex("DefaultPaymentTermId")
+                        .HasDatabaseName("ix_naturalclients_defaultpaymenttermid");
 
                     b.ToTable("naturalclients", "decisorframework_commercial");
                 });
@@ -473,6 +494,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("contactid");
 
+                    b.Property<Guid>("DefaultPaymentTermId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("defaultpaymenttermid");
+
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
@@ -487,6 +512,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("ContactId")
                         .IsUnique()
                         .HasDatabaseName("ix_naturalproviders_contactid");
+
+                    b.HasIndex("DefaultPaymentTermId")
+                        .HasDatabaseName("ix_naturalproviders_defaultpaymenttermid");
 
                     b.ToTable("naturalproviders", "decisorframework_commercial");
                 });
@@ -548,6 +576,44 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_naturalproviderpurchasingcontracts_providerid");
 
                     b.ToTable("naturalproviderpurchasingcontracts", "decisorframework_commercial");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.PaymentTerm", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<int>("Term")
+                        .HasColumnType("integer")
+                        .HasColumnName("term");
+
+                    b.HasKey("Id")
+                        .HasName("pk_paymentterms");
+
+                    b.ToTable("paymentterms", "decisorframework_commercial");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.ProductValueProposition", b =>
@@ -1547,7 +1613,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("IdentityId")
                         .HasDatabaseName("ix_colaborators_identityid");
 
-                    b.ToTable("colaborators", (string)null);
+                    b.ToTable("colaborators");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Financial.Persistence.Entities.BankAccount", b =>
@@ -4443,7 +4509,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasKey("Id")
                         .HasName("pk_traces");
 
-                    b.ToTable("traces", (string)null);
+                    b.ToTable("traces");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Guama.Core.Security.Common.Persistence.Entities.Permission", b =>
@@ -5589,7 +5655,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_legalclients_organizationcontacts_contactid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.PaymentTerm", "DefaultPaymentTerm")
+                        .WithMany()
+                        .HasForeignKey("DefaultPaymentTermId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclients_paymentterms_defaultpaymenttermid");
+
                     b.Navigation("Contact");
+
+                    b.Navigation("DefaultPaymentTerm");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClientSaleContract", b =>
@@ -5622,7 +5697,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_legalproviders_organizationcontacts_contactid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.PaymentTerm", "DefaultPaymentTerm")
+                        .WithMany()
+                        .HasForeignKey("DefaultPaymentTermId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalproviders_paymentterms_defaultpaymenttermid");
+
                     b.Navigation("Contact");
+
+                    b.Navigation("DefaultPaymentTerm");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProviderPurchasingContract", b =>
@@ -5655,7 +5739,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_naturalclients_personcontacts_contactid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.PaymentTerm", "DefaultPaymentTerm")
+                        .WithMany()
+                        .HasForeignKey("DefaultPaymentTermId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclients_paymentterms_defaultpaymenttermid");
+
                     b.Navigation("Contact");
+
+                    b.Navigation("DefaultPaymentTerm");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClientSaleContract", b =>
@@ -5688,7 +5781,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_naturalproviders_personcontacts_contactid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.PaymentTerm", "DefaultPaymentTerm")
+                        .WithMany()
+                        .HasForeignKey("DefaultPaymentTermId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalproviders_paymentterms_defaultpaymenttermid");
+
                     b.Navigation("Contact");
+
+                    b.Navigation("DefaultPaymentTerm");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalProviderPurchasingContract", b =>

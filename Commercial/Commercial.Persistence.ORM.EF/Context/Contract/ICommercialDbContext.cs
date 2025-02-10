@@ -5,6 +5,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contrac
 {
     public interface ICommercialDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext
     {
+        public DbSet<PaymentTerm> PaymentTerms { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }
         public DbSet<ProvisionableService> ProvisionableServices { get; set; }
         public DbSet<ProductValueProposition> ProductValuePropositions { get; set; }
