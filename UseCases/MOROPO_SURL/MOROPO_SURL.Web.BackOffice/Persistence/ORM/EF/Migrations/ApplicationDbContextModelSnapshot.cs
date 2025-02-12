@@ -3363,12 +3363,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("parentid");
+
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
                     b.HasKey("Id")
                         .HasName("pk_sections");
+
+                    b.HasIndex("ParentId")
+                        .HasDatabaseName("ix_sections_parentid");
 
                     b.ToTable("sections", "decisorframework_legal");
                 });
@@ -6885,6 +6892,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Proclamation");
 
                     b.Navigation("Structure");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Section", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Section", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .HasConstraintName("fk_sections_sections_parentid");
+
+                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.Elaboration", b =>

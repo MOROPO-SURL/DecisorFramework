@@ -11,5 +11,9 @@
         public int Priority { get; set; }
 
         public string Description { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ParentId))]
+        public Section Parent { get; set; }
+        public System.Guid? ParentId { get; set; }
     }
 }

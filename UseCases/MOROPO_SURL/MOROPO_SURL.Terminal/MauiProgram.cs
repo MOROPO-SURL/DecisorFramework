@@ -28,6 +28,11 @@ using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.
 using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Factories;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
+using MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.Models.Page.Configuration;
+using MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Factories;
+using MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
+using MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MOROPO.Tool.Decisor.Terminal
@@ -68,6 +73,7 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IDetailContentPageFactoryFacade<FamilyDisplayModel, FamilyDetailPage>, FamilyDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementDetailPage>, UnitMeasurementDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<PaymentTermDisplayModel, PaymentTermDetailPage>, PaymentTermDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<SectionDisplayModel, SectionDetailPage>, SectionDetailPageFactory>()
                // ConfigurationPage factory resgistration !!!
                .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel, SalaryStandardConfigurationPage>, SalaryConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel, PersonContactConfigurationPage>, PersonContactConfigurationPageFactory>()
@@ -79,7 +85,8 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IConfigurationContentPageFactoryFacade<WarehousingAreaDisplayModel, WarehousingAreaConfigurationPageModel, WarehousingAreaConfigurationPage>, WarehousingAreaConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<ProductDisplayModel, ProductConfigurationPageModel, ProductConfigurationPage>, ProductConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<FamilyDisplayModel, FamilyConfigurationPageModel, FamilyConfigurationPage>, FamilyConfigurationPageFactory>()
-               .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel, UnitMeasurementConfigurationPage>, UnitMeasurementConfigurationPageFactory>();
+               .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel, UnitMeasurementConfigurationPage>, UnitMeasurementConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<SectionDisplayModel, SectionConfigurationPageModel, SectionConfigurationPage>, SectionConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();
