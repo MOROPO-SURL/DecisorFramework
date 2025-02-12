@@ -262,7 +262,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
                 Controller = "categories",
                 Action = "Index",
                 Area = "inventory",
-                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.CategoryViewerPermission
+                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.FamilyViewerPermission
             });
             inventorySection.Add(new ManagementDashboardSectionViewModel
             {
@@ -435,6 +435,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
                 Area = "financial",
                 // TODO Set spected permission
                 //Role = Constants.Security.Authorization.LegalProviderViewerPermission
+            });
+            #endregion
+
+            #region Commercial
+            commercialSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Términos de Pago",
+                Controller = "paymentterms",
+                Action = "Index",
+                Area = "commercial",
+                // TODO Set spected permission
+                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });
             #endregion
 

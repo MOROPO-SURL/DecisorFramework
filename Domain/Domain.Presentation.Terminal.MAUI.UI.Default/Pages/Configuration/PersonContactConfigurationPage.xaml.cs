@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class PersonContactConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<PersonContactDisplayModel>
+public partial class PersonContactConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<PersonContactDisplayModel, Models.Page.Configuration.PersonContactConfigurationPageModel>
 {
     private byte[] imagePickedData;
     private string imageContentType;

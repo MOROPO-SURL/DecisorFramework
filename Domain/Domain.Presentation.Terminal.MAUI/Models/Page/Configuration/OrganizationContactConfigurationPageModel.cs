@@ -15,6 +15,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private System.DateTime? bornDate;
         private Microsoft.Maui.Controls.ImageSource imageSource;
 
+        public OrganizationContactConfigurationPageModel() : this(null) { }
+
         public OrganizationContactConfigurationPageModel(OrganizationContactDisplayModel model) : base(model)
         {
             if (model != null)

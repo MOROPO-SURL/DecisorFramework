@@ -10,7 +10,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Repositories
 
         protected override System.Linq.IQueryable<Entities.Batch> GetQueryableDbSet()
         {
-            return base.GetQueryableDbSet().Include(entity => entity.Warehouse);
+            return base.GetQueryableDbSet().Include(entity => entity.WarehousingArea).ThenInclude(entity => entity.Warehouse);
         }
     }
 }

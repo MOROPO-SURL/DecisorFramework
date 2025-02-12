@@ -9,9 +9,9 @@
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(WarehouseId))]
-        public Warehouse Warehouse { get; set; }
-        public System.Guid WarehouseId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(WarehousingAreaId))]
+        public WarehousingArea WarehousingArea { get; set; }
+        public System.Guid WarehousingAreaId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProductId))]
         public Product Product { get; set; }

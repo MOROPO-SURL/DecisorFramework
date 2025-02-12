@@ -10,11 +10,13 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions
         public static void AddDecisorInventoryPresentationWebCommon(this IServiceCollection services)
         {
             services.AddScoped<IEntityRepository<Warehouse, System.Guid>, WarehouseRepository>();
+            services.AddScoped<IEntityRepository<WarehousingArea, System.Guid>, WarehousingAreaRepository>();
             services.AddScoped<IEntityRepository<Batch, System.Guid>, BatchRepository>();
             services.AddScoped<IEntityRepository<Product, System.Guid>, ProductRepository>();
-            services.AddScoped<IEntityRepository<Category, int>, CategoryRepository>();
+            services.AddScoped<IEntityRepository<Family, int>, FamiliesRepository>();
             services.AddScoped<IEntityRepository<Classification, System.Guid>, ClassificationRepository>();
             services.AddScoped<IEntityRepository<UnitMeasurement, System.Guid>, UnitMeasurementRepository>();
+            services.AddScoped<IBridgeRepository<UnitMeasurementConversionBridge, UnitMeasurement, System.Guid, UnitMeasurement, System.Guid>, UnitMeasurementConversionBridgeRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.InventoryDbSchemaConfigurationProvider>();
         }

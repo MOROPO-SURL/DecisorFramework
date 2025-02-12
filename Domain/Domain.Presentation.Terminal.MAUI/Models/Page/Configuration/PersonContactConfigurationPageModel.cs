@@ -19,6 +19,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private string personalIdentificationNumber;
         private Microsoft.Maui.Controls.ImageSource imageSource;
 
+        public PersonContactConfigurationPageModel() : this(null) { }
+
         public PersonContactConfigurationPageModel(PersonContactDisplayModel model) : base(model)
         {
             if (model != null)

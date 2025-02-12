@@ -22,7 +22,18 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 {
                     var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IDetailContentPageFactoryFacade<TModel, TDetailContentPage>>();
 
-                    this.NavigationPushModalPageAsync(factory.Build(task.Result, ActionDelegationRequest_Callback, ConfigurationSuccess_Callback));
+                    //try
+                    //{
+                        var page = factory.Build(task.Result, ActionDelegationRequest_Callback, ConfigurationSuccess_Callback);
+
+                        this.NavigationPushModalPageAsync(page);
+                    //}
+                    //catch (System.Exception exception)
+                    //{
+                    //    DisplayAlert("Aviso", string.Format("Page build failure!! {0}", exception.Message), "Aceptar");
+
+                    //    return;
+                    //}
                 });
             });
         }
@@ -69,7 +80,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         private void ConfigurationSuccess_Callback(TModel model)
         {
-            LoadItems();
+            LoadItems(true);
         }
 
         protected virtual System.Threading.Tasks.Task<TConfigurationPageModel> FillConfigurationPageModelAsync(TModel model = null)

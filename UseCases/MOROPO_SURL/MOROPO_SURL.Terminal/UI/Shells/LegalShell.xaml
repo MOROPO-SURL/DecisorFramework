@@ -4,8 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:decisorframework_legal_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
-    x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.LegalShell"
-    FlyoutBehavior="Locked">
+    x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.LegalShell">
+    <Shell.FlyoutBehavior>
+        <OnIdiom Default="Flyout" Desktop="Locked" />
+    </Shell.FlyoutBehavior>
     <Shell.FlyoutHeader>
         <Grid HeightRequest="180">
             <Image 
@@ -98,7 +100,7 @@
     </ShellContent>
     <ShellContent
         Title="Secciones Contractuales"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate decisorframework_legal_manage_pages:SectionsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

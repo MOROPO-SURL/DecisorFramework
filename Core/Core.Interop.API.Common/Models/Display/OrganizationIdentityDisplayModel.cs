@@ -8,6 +8,8 @@ namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display
 
         public string Name { get; set; }
 
+        public string Alias { get; set; }
+
         public System.DateTime? BornDate { get; set; }
 
         public string About { get; set; }
@@ -26,6 +28,7 @@ namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display
         {
             Id = entity.Id;
             Name = entity.Name;
+            Alias = entity.Alias;
             BornDate = entity.BornDate;
             About = entity.About;
 

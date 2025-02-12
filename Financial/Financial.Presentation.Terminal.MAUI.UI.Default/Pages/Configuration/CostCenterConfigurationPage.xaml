@@ -68,6 +68,16 @@
                         Text="Seleccionar ..."
                         Clicked="DefaultBankAccountPickButton_Clicked" />
                 </VerticalStackLayout>
+                <VerticalStackLayout
+                    Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Entidad Administrativa" />
+                    <Picker 
+                        x:Name="StructurePicker"
+                        ItemsSource="{Binding AvailableStructures}"
+                        ItemDisplayBinding="{Binding Path=Identity.Name}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout>
                 <BoxView 
                     Grid.ColumnSpan="3" Grid.Row="3"
                     Margin="0,8,0,0"

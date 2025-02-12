@@ -8,7 +8,7 @@
 
         public decimal Amount { get; set; }
 
-        public System.Guid WarehouseId { get; set; }
+        public System.Guid WarehousingAreaId { get; set; }
 
         public System.Guid? ClassificationId { get; set; }
 
@@ -30,7 +30,7 @@
         {
             entity.ExternalReference = ExternalReference;
             entity.Amount = Amount;
-            entity.WarehouseId = WarehouseId;
+            entity.WarehousingAreaId = WarehousingAreaId;
             entity.ClassificationId = ClassificationId;
         }
     }

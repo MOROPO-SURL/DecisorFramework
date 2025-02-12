@@ -51,10 +51,10 @@
                 entity.DefaultUnitMeasurementId = DefaultMetricUnityId;
             }
 
-            if (entity.CategoryId != CategoryId)
+            if (entity.FamilyId != CategoryId)
             {
-                entity.Category = null;
-                entity.CategoryId = CategoryId;
+                entity.Family = null;
+                entity.FamilyId = CategoryId;
             }
 
             entity.WarehousingDecreaseKindBridges.Clear();

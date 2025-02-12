@@ -16,6 +16,8 @@
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
+        public string Alias { get; set; }
+
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey("ImageId")]
         public Guama.Media.Persistence.Entities.Image Image { get; set; }
         public System.Guid? ImageId { get; set; }

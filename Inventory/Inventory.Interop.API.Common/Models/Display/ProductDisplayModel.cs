@@ -18,7 +18,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
 
         public UnitMeasurementDisplayModel DefaultUnitMeasurement { get; set; }
 
-        public CategoryDisplayModel Category { get; set; }
+        public FamilyDisplayModel Category { get; set; }
 
         public ClassificationDisplayModel[] Classifications { get; set; }
 

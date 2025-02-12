@@ -9,6 +9,8 @@
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
+        public string Alias { get; set; }
+
         public Core.Interop.API.Common.Models.Input.ImageInputModel Image { get; set; }
 
         public string About { get; set; }
@@ -30,6 +32,7 @@
         public void Mergue(Persistence.Entities.BankAgency entity)
         {
             entity.Name = Name;
+            entity.Alias = Alias;
             entity.Priority = Priority;
             entity.About = About;
         }

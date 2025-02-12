@@ -11,6 +11,8 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
+        public string Alias { get; set; }
+
         public System.DateTime? BornDate { get; set; }
 
         public string About { get; set; }
@@ -46,6 +48,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         public void Mergue(OrganizationContact entity)
         {
             entity.Identity.Name = Name;
+            entity.Identity.Alias = Alias;
             entity.Identity.BornDate = BornDate;
             entity.Identity.About = About;
             entity.Priority = Priority;

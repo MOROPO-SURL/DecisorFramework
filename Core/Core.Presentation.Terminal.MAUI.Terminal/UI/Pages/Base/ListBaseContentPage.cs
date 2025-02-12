@@ -8,23 +8,22 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
         where TListPageModel : Models.Page.Contract.AbstractListEntityPageModel<TModel>, new()
         where TDetailContentPage : DetailBaseContentPage<TModel>
     {
+        private int currentItemsCollectionViewCellColumnCount = 3;
+
         public ListBaseContentPage()
         {
-            IsEnabled = false;
-
             BindingContext = new TListPageModel();
         }
 
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
+        protected int CurrentItemsPageNumber { get; private set; }
 
-            if (IsEnabled) return;
+        protected int CurrentItemsPageLimit { get; private set; }
 
-            LoadItems();
+        protected virtual Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() { throw new System.NotImplementedException(); }
 
-            IsEnabled = true;
-        }
+        protected virtual double ItemViewRequestWidth { get => 320; }
+
+        protected virtual double MeasureCollectionViewCellHeight(double width) { return width; }
 
         protected virtual void ItemDetailRequestControl_Invoked(object sender, System.EventArgs eventArgs)
         {
@@ -45,25 +44,75 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
         {
             if (((TListPageModel)BindingContext).IsBusy) return;
 
+            LoadItems(true);
+        }
+
+        private void LoadMoreItemsControl_Invoked(object sender, System.EventArgs eventArgs)
+        {
             LoadItems();
         }
 
-        protected void LoadItems()
+        private void ItemsCollectionViewLayoutControl_SizeChanged(object sender, System.EventArgs eventArgs)
+        {
+            var itemsCollectionViewItemsLayout = GetItemsCollectionView().ItemsLayout as Microsoft.Maui.Controls.GridItemsLayout;
+
+            var itemsCollectionViewLayout = sender as Microsoft.Maui.Controls.Layout;
+
+            if (itemsCollectionViewLayout.Width < 0 || itemsCollectionViewLayout.Height < 0) return;
+
+            if ((BindingContext as TListPageModel).IsBusy) return;
+
+            var reazon = itemsCollectionViewLayout.Width / (ItemViewRequestWidth + itemsCollectionViewItemsLayout.HorizontalItemSpacing);
+
+            int columnCount = System.Convert.ToInt32(System.Math.Round(reazon, System.MidpointRounding.ToEven));
+
+            if (columnCount > reazon)
+            {
+                columnCount--;
+            }
+
+            if (columnCount <= 0)
+            {
+                columnCount = 1;
+            }
+
+            itemsCollectionViewItemsLayout.Span = columnCount;
+
+            LoadItems(true);
+        }
+
+        protected void LoadItems(bool restart = false)
         {
             var concreteBindingContext = (TListPageModel)BindingContext;
 
             concreteBindingContext.IsBusy = true;
 
-            concreteBindingContext.Items.Clear();
+            if (restart)
+            {
+                CalculateCollectionViewPagingMetrics();
+
+                CurrentItemsPageNumber = 0;
+
+                foreach (var item in concreteBindingContext.Items)
+                {
+                    if (item == null || item is not System.IDisposable) continue;
+
+                    (item as System.IDisposable).Dispose();
+                }
+
+                concreteBindingContext.Items.Clear();
+            }
+
+            CurrentItemsPageNumber++;
 
             FetchItemsAsync().ContinueWith(task =>
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    concreteBindingContext.IsBusy = false;
-
                     if (task.Exception != null || task.IsCanceled)
                     {
+                        CurrentItemsPageNumber--;
+
                         Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
                     }
                     else
@@ -72,7 +121,11 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                         {
                             concreteBindingContext.Items.Add(model);
                         }
+
+                        concreteBindingContext.HasMoreItems = task.Result.HasNext && task.Result.List.Count > 0;
                     }
+
+                    concreteBindingContext.IsBusy = false;
                 });
             });
         }
@@ -82,6 +135,44 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
         protected virtual System.Threading.Tasks.Task<TModel> FillItemDataAsync(TModel model)
         {
             return System.Threading.Tasks.Task.FromResult(model);
+        }
+
+        private void CalculateCollectionViewPagingMetrics()
+        {
+            var itemsCollectionViewItemsLayout = GetItemsCollectionView().ItemsLayout as Microsoft.Maui.Controls.GridItemsLayout;
+
+            var itemsCollectionViewLayout = GetItemsCollectionView().Parent as Microsoft.Maui.Controls.Layout;
+
+            var collumnReazon = itemsCollectionViewLayout.Width / (ItemViewRequestWidth + itemsCollectionViewItemsLayout.HorizontalItemSpacing);
+
+            currentItemsCollectionViewCellColumnCount = System.Convert.ToInt32(System.Math.Round(collumnReazon, System.MidpointRounding.ToEven));
+
+            if (currentItemsCollectionViewCellColumnCount > collumnReazon)
+            {
+                currentItemsCollectionViewCellColumnCount--;
+            }
+
+            if (currentItemsCollectionViewCellColumnCount <= 0)
+            {
+                currentItemsCollectionViewCellColumnCount = 1;
+            }
+
+            var collectionViewCellWidth = (itemsCollectionViewLayout.Width - ((currentItemsCollectionViewCellColumnCount - 1) * itemsCollectionViewItemsLayout.HorizontalItemSpacing)) / currentItemsCollectionViewCellColumnCount;
+
+            var collectionViewCellHeight = MeasureCollectionViewCellHeight(collectionViewCellWidth);
+
+            var availableVerticalHeight = itemsCollectionViewLayout.Height;
+
+            var rowCount = 0;
+
+            while (availableVerticalHeight > 0)
+            {
+                rowCount++;
+
+                availableVerticalHeight -= collectionViewCellHeight + itemsCollectionViewItemsLayout.HorizontalItemSpacing;
+            }
+
+            CurrentItemsPageLimit = currentItemsCollectionViewCellColumnCount * rowCount;
         }
     }
 }

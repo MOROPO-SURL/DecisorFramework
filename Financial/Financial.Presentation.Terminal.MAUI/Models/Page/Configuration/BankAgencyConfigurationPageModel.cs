@@ -6,9 +6,12 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.P
     public class BankAgencyConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<BankAgencyDisplayModel>
     {
         private string name;
+        private string alias;
         private string about;
         private int priority = 1;
         private Microsoft.Maui.Controls.ImageSource imageSource;
+
+        public BankAgencyConfigurationPageModel() : this(null) { }
 
         public BankAgencyConfigurationPageModel(BankAgencyDisplayModel model) : base(model)
         {
@@ -16,6 +19,7 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.P
             {
                 Id = model.Id;
                 Name = model.Name;
+                Alias = model.Alias;
                 About = model.About;
                 Priority = model.Priority;
 
@@ -32,6 +36,8 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.P
         public System.Guid? ImageId { get; set; }
 
         public string Name { get => name; set => SetProperty(ref name, value); }
+
+        public string Alias { get => alias; set => SetProperty(ref alias, value); }
 
         public string About { get => about; set => SetProperty(ref about, value); }
 

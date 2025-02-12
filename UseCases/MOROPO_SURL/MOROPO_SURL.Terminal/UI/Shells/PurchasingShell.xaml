@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Shell
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:decisorframework_purchasing_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_supervision_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default"
+    x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.PurchasingShell">
+    <Shell.FlyoutBehavior>
+        <OnIdiom Default="Flyout" Desktop="Locked" />
+    </Shell.FlyoutBehavior>
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="180">
+            <Image 
+                Aspect="AspectFill"
+                Source="purchasing.jpg" />
+            <BoxView
+                Color="#A7000000" />
+            <Grid
+                Padding="16">
+                <Button
+                    HorizontalOptions="Start" VerticalOptions="Start"
+                    Text="&#xF2DE;"
+                    FontFamily="MaterialDesignIcons"
+                    FontSize="Medium"
+                    Padding="4"
+                    BackgroundColor="#60FFFFFF"
+                    Clicked="BackHomeButton_Clicked" />
+                <Label
+                    Text="Compras"
+                    TextColor="White"
+                    HorizontalTextAlignment="Center" VerticalOptions="Center"
+                    FontSize="Large"
+                    FontAttributes="Bold" />
+            </Grid>
+        </Grid>
+    </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Inicio" />
+    <ShellContent
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate decisorframework_supervision_manage_pages:PurchasingDashboardPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Operaciones" />
+    <FlyoutItem
+        Title="Planes">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF787;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Realizados"
+            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:FilledPurchasePlansManagePage}" />
+        <ShellContent
+            Title="Por Realizar"
+            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:ToCompletePurchasePlansManagePage}" />
+        <ShellContent
+            Title="Por Aprobar"
+            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:ToApprovePurchasePlansManagePage}" />
+    </FlyoutItem>
+    <ShellContent
+        Title="Compras"
+        ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:PurchasesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFCB0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Gestión" />
+    <FlyoutItem
+        Title="Proveedores">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF6D8;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
+    <ShellContent
+        Title="Zonas de Compra"
+        ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:PurchaseZonesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF352;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tipos de Gasto"
+        ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:PurchaseSpentsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF117;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+</Shell>

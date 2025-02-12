@@ -1,13 +1,12 @@
-﻿using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;
-
-namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Configuration
+﻿namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class CostCenterConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.CostCenterDisplayModel>
     {
         private string name;
         private string description;
         private int priority = 1;
-        private BankAccountDisplayModel defaultBankAccount;
+        private Interop.API.Common.Models.Display.BankAccountDisplayModel defaultBankAccount;
+        private Domain.Interop.API.Common.Models.Display.StructureTreeDisplayModel structure;
 
         public CostCenterConfigurationPageModel(Interop.API.Common.Models.Display.CostCenterDisplayModel model) : base(model)
         {
@@ -18,6 +17,7 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.P
                 Description = model.Description;
                 Priority = model.Priority;
                 DefaultBankAccount = model.DefaultBankAccount;
+                Structure = model.Structure;
             }
         }
 
@@ -29,7 +29,11 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.P
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public BankAccountDisplayModel DefaultBankAccount { get => defaultBankAccount; set => SetProperty(ref defaultBankAccount, value); }
+        public Interop.API.Common.Models.Display.BankAccountDisplayModel DefaultBankAccount { get => defaultBankAccount; set => SetProperty(ref defaultBankAccount, value); }
+
+        public Domain.Interop.API.Common.Models.Display.StructureTreeDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
+
+        public Domain.Interop.API.Common.Models.Display.StructureTreeDisplayModel[] AvailableStructures { get; set; }
     }
 }
 

@@ -11,6 +11,7 @@ namespace MOROPO.Framework.Decisor.Financial.Persistence.ORM.EF.Repositories
         protected override System.Linq.IQueryable<Entities.CostCenter> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
+                .Include(entity => entity.Structure).ThenInclude(entity => entity.Identity)
                 .Include(entity => entity.DefaultBankAccount).ThenInclude(entity => entity.Branch).ThenInclude(entity => entity.Agency)
                 .Include(entity => entity.DefaultBankAccount).ThenInclude(entity => entity.Currency);
         }

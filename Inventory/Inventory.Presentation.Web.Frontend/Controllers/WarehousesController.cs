@@ -1,16 +1,24 @@
 ﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
+using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Extensions;
+using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers
 {
     [Microsoft.AspNetCore.Mvc.Route("api/inventory/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class WarehousesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Warehouse, System.Guid, WarehouseInputModel, WarehouseDisplayModel>
+    public class WarehousesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Warehouse, System.Guid, WarehouseInputModel, WarehouseDisplayModel>
     {
-        public WarehousesController(Guama.Core.Persistence.Repositories.IEntityRepository<Warehouse, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<WarehousesController> localizer, Microsoft.Extensions.Logging.ILogger<WarehousesController> logger)
+        private readonly IEntityRepository<WarehousingArea, System.Guid> warehousingAreaRepository;
+        private readonly IEntityRepository<Family, int> familyRepository;
+
+        public WarehousesController(IEntityRepository<Family, int> familyRepository, IEntityRepository<WarehousingArea, System.Guid> warehousingAreaRepository, IEntityRepository<Warehouse, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<WarehousesController> localizer, Microsoft.Extensions.Logging.ILogger<WarehousesController> logger)
             : base(repository, localizer, logger)
         {
+            this.warehousingAreaRepository = warehousingAreaRepository;
+            this.familyRepository = familyRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<Warehouse, bool>> GetGlobalSelector()
@@ -26,6 +34,72 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
         {
             return NotFound();
+        }
+
+        protected override WarehouseDisplayModel EntityToDisplayModel(Warehouse entity)
+        {
+            var result = base.EntityToDisplayModel(entity);
+
+            result.Areas = warehousingAreaRepository.FindBy(_entity => _entity.WarehouseId == entity.Id).ToArray().Select(_entity =>
+            {
+                var model = new WarehousingAreaDisplayModel();
+
+                _entity.Family = familyRepository.Get(_entity.FamilyId);
+
+                _entity.Family.FillParent(familyRepository);
+
+                model.Family = new FamilyDisplayModel();
+
+                model.Family.Import(_entity.Family);
+
+                model.Import(_entity);
+
+                return model;
+            }).ToArray();
+
+            return result;
+        }
+
+        protected override void PreCreate(Warehouse entity, WarehouseInputModel model)
+        {
+            base.PreCreate(entity, model);
+
+            foreach (var _model in model.IncomingAreas)
+            {
+                var _entity = _model.Export();
+
+                _entity.WarehouseId = entity.Id;
+
+                warehousingAreaRepository.Add(_entity, User.Identity.Name, false);
+            }
+        }
+
+        protected override void PreEdit(Warehouse entity, WarehouseInputModel model)
+        {
+            base.PreEdit(entity, model);
+
+            foreach (var _model in model.OutgoingAreas)
+            {
+                warehousingAreaRepository.Delete(new WarehousingArea { Id = _model.Id }, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionAreas)
+            {
+                var _entity = _model.Export();
+
+                _entity.WarehouseId = entity.Id;
+
+                warehousingAreaRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingAreas)
+            {
+                var _entity = _model.Export();
+
+                _entity.WarehouseId = entity.Id;
+
+                warehousingAreaRepository.Add(_entity, User.Identity.Name, false);
+            }
         }
     }
 }

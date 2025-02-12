@@ -46,4 +46,38 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
     {
         Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.FinancialShell();
     }
+
+    private void PurchasingSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.PurchasingShell();
+    }
+
+    private void InventorySectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.InventoryShell();
+    }
+
+    private void ProductionSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.ProductionShell();
+    }
+
+    private void CommecrcialSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.CommercialShell();
+    }
+
+    private void SupervisionSectionCardFrameTapGEstureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        //try
+        //{
+        //    Microsoft.Maui.Controls.Application.Current.MainPage = new Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.BankAgenciesManagePage();
+        //}
+        //catch (System.Exception exception)
+        //{
+        //    DisplayAlert("Aviso", string.Format("Page build failure!! {0}", exception.Message), "Aceptar");
+
+        //    return;
+        //}
+    }
 }

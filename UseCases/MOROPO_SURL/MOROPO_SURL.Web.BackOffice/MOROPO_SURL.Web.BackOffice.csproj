@@ -17,11 +17,11 @@
 		<None Remove="logs\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.0.33" />
-		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.0.33" />
-		<PackageReference Include="GuamaFramework.Location.Presentation.Web.Backend" Version="6.0.0.33" />
-		<PackageReference Include="GuamaFramework.Media.Presentation.Web.Common" Version="6.0.0.33" />
-		<PackageReference Include="GuamaFramework.Security.Personal.Presentation.Web.Backend" Version="6.0.0.33" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Location.Presentation.Web.Backend" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Media.Presentation.Web.Common" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Security.Personal.Presentation.Web.Backend" Version="6.0.1" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -31,6 +31,8 @@
 		<PackageReference Include="Serilog.Settings.Configuration" Version="8.0.0" />
 		<PackageReference Include="Serilog.Sinks.File" Version="5.0.0" />
 		<PackageReference Include="SkiaSharp" Version="2.88.8" />
+		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
+	
 	</ItemGroup>
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Backend\Commercial.Presentation.Web.Backend.csproj" />
@@ -51,5 +53,6 @@
 	  <ProjectReference Include="..\..\..\Production\Production.Presentation.Web.Frontend\Production.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\..\..\Purchasing\Purchasing.Presentation.Web.Backend\Purchasing.Presentation.Web.Backend.csproj" />
 	  <ProjectReference Include="..\..\..\Purchasing\Purchasing.Presentation.Web.Frontend\Purchasing.Presentation.Web.Frontend.csproj" />
+	  <ProjectReference Include="..\..\..\Supervision\Supervision.Presentation.Web.Frontend\Supervision.Presentation.Web.Frontend.csproj" />
 	</ItemGroup>
 </Project>

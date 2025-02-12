@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 {
     [Microsoft.AspNetCore.Mvc.Route("api/domain/structures/tree")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class TreeStructuresController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultController<Structure, System.Guid, StructureTreeDisplayModel>
+    public class TreeStructuresController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEnableableEntityAPIConsultController<Structure, System.Guid, StructureTreeDisplayModel>
     {
         public TreeStructuresController(Guama.Core.Persistence.Repositories.IEntityRepository<Structure, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<TreeStructuresController> localizer, Microsoft.Extensions.Logging.ILogger<TreeStructuresController> logger)
             : base(repository, localizer, logger)

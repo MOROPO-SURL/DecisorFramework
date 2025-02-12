@@ -32,4 +32,35 @@
 		<ProjectReference Include="..\..\Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Inventory.Presentation.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Pages\Configuration\FamilyConfigurationPage.xaml.cs">
+	    <DependentUpon>FamilyConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\UnitMeasurementConvertionBridgeConfigurationPage.xaml.cs">
+	    <DependentUpon>UnitMeasurementConvertionBridgeConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\FamiliesManagePage.xaml.cs">
+	    <DependentUpon>FamiliesManagePage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\UnitMeasurementConvertionBridgeConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\WarehousingAreaConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\FamilyDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\ProductDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\UnitMeasurementDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\WarehouseDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>

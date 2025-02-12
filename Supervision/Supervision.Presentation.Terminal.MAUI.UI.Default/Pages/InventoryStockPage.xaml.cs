@@ -38,7 +38,7 @@ public partial class InventoryStockPage : Caney.MVVM.Core.Pages.ContentPage
 
         concreteBindingContext.IsBusy = true;
 
-        var apiConnectClient = new Interop.API.Connect.Clients.InventoryStockAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.InventoryAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
         apiConnectClient.GetDetailsAsync((((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.InventoryStockOverviewModel).Product.Id).ContinueWith(task =>
         {
@@ -76,7 +76,7 @@ public partial class InventoryStockPage : Caney.MVVM.Core.Pages.ContentPage
 
         concreteBindingContext.Items.Clear();
 
-        var apiConnectClient = new Interop.API.Connect.Clients.InventoryStockAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.InventoryAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
         apiConnectClient.GetOverviewsAsync().ContinueWith(task =>
         {

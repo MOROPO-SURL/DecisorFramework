@@ -6,12 +6,12 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class OrganizationContactConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<OrganizationContactDisplayModel>
+public partial class OrganizationContactConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<OrganizationContactDisplayModel, Models.Page.Configuration.OrganizationContactConfigurationPageModel>
 {
     private byte[] imagePickedData;
     private string imageContentType;
 
-    public OrganizationContactConfigurationPage(System.Action<OrganizationContactDisplayModel> successAction, Domain.Presentation.Terminal.MAUI.Models.Page.Configuration.OrganizationContactConfigurationPageModel model) : base(successAction, model)
+    public OrganizationContactConfigurationPage(System.Action<OrganizationContactDisplayModel> successAction, Models.Page.Configuration.OrganizationContactConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
 
@@ -24,7 +24,6 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
                 if (model.BusinessKind.Id != current.Id) continue;
 
                 BusinessKindPicker.SelectedIndex = i;
-                //BusinessKindPicker.SelectedItem = current;
 
                 break;
             }
@@ -44,20 +43,18 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
     {
         var apiConnectClient = new Interop.API.Connect.Clients.OrganizationContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Domain.Presentation.Terminal.MAUI.Models.Page.Configuration.OrganizationContactConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.OrganizationContactInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            About = concreteBindingContext.About,
-            Priority = concreteBindingContext.Priority,
-            BornDate = concreteBindingContext.IsSettedBornDate ? concreteBindingContext.BornDate : null,
-            BusinessKindId = concreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
-            PhoneContacts = concreteBindingContext.PhoneContactItems.ToList(),
-            EmailContacts = concreteBindingContext.EmailContactItems.ToList(),
-            PostalContacts = concreteBindingContext.PostalContactItems.ToList(),
-            WebContacts = concreteBindingContext.WebContactItems.ToList()
+            Name = ConcreteBindingContext.Name,
+            About = ConcreteBindingContext.About,
+            Priority = ConcreteBindingContext.Priority,
+            BornDate = ConcreteBindingContext.IsSettedBornDate ? ConcreteBindingContext.BornDate : null,
+            BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            PhoneContacts = ConcreteBindingContext.PhoneContactItems.ToList(),
+            EmailContacts = ConcreteBindingContext.EmailContactItems.ToList(),
+            PostalContacts = ConcreteBindingContext.PostalContactItems.ToList(),
+            WebContacts = ConcreteBindingContext.WebContactItems.ToList()
         };
 
         if (imagePickedData != null)
@@ -80,27 +77,25 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
     {
         var apiConnectClient = new Interop.API.Connect.Clients.OrganizationContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Domain.Presentation.Terminal.MAUI.Models.Page.Configuration.OrganizationContactConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.OrganizationContactInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            About = concreteBindingContext.About,
-            Priority = concreteBindingContext.Priority,
-            BornDate = concreteBindingContext.IsSettedBornDate ? concreteBindingContext.BornDate : null,
-            BusinessKindId = concreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
-            PhoneContacts = concreteBindingContext.PhoneContactItems.ToList(),
-            EmailContacts = concreteBindingContext.EmailContactItems.ToList(),
-            PostalContacts = concreteBindingContext.PostalContactItems.ToList(),
-            WebContacts = concreteBindingContext.WebContactItems.ToList()
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            About = ConcreteBindingContext.About,
+            Priority = ConcreteBindingContext.Priority,
+            BornDate = ConcreteBindingContext.IsSettedBornDate ? ConcreteBindingContext.BornDate : null,
+            BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            PhoneContacts = ConcreteBindingContext.PhoneContactItems.ToList(),
+            EmailContacts = ConcreteBindingContext.EmailContactItems.ToList(),
+            PostalContacts = ConcreteBindingContext.PostalContactItems.ToList(),
+            WebContacts = ConcreteBindingContext.WebContactItems.ToList()
         };
 
         if (imagePickedData != null)
         {
             model.Image = new Core.Interop.API.Common.Models.Input.ImageInputModel
             {
-                Id = concreteBindingContext.ImageId ?? System.Guid.NewGuid(),
+                Id = ConcreteBindingContext.ImageId ?? System.Guid.NewGuid(),
                 ContentData = imagePickedData,
                 ContentType = imageContentType,
                 About = $"{EntityTypeName} {model.Id}"
@@ -119,8 +114,6 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
 
     private async void ImageLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        var concreteBindingContext = (Domain.Presentation.Terminal.MAUI.Models.Page.Configuration.OrganizationContactConfigurationPageModel)BindingContext;
-
         if (!Microsoft.Maui.Media.MediaPicker.IsCaptureSupported) PresentForImagePick();
 
         var action = await DisplayActionSheet("Seleccionar imagen desde", "Cancelar", null, CommonActionSheetConstants.PICKIMAGE_OPTION_CAMARA, CommonActionSheetConstants.PICKIMAGE_OPTION_GALLERY);
@@ -140,8 +133,8 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
                 {
                     DisplayAlert("Aviso", string.Format("El permiso para acceder a cámara del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
 
-                    concreteBindingContext.IsBusy = false;
-                    concreteBindingContext.BusyProgressMessage = string.Empty;
+                    ConcreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
                 });
 
                 return;
@@ -149,15 +142,15 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
 
             Dispatcher.Dispatch(() =>
             {
-                concreteBindingContext.IsBusy = true;
-                concreteBindingContext.BusyProgressMessage = "Capturando imagen ...";
+                ConcreteBindingContext.IsBusy = true;
+                ConcreteBindingContext.BusyProgressMessage = "Capturando imagen ...";
             });
 
             await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(1));
 
             Dispatcher.Dispatch(() =>
             {
-                concreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
+                ConcreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
             });
 
             await Microsoft.Maui.Media.MediaPicker.CapturePhotoAsync().ContinueWith(PickedImageContinuationTask);
@@ -170,8 +163,6 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
 
     private void PickedImageCroppingComplete_Callback(SkiaSharp.SKBitmap result)
     {
-        var concreteBindingContext = (Domain.Presentation.Terminal.MAUI.Models.Page.Configuration.OrganizationContactConfigurationPageModel)BindingContext;
-
         if (result != null)
         {
             using (var skImage = SkiaSharp.SKImage.FromBitmap(result))
@@ -184,21 +175,19 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
 
             result.Dispose();
 
-            concreteBindingContext.ImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
+            ConcreteBindingContext.ImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
 
             hasChangesFlag = true;
         }
 
         this.NavigationPopModalPageAsync();
 
-        concreteBindingContext.IsBusy = false;
-        concreteBindingContext.BusyProgressMessage = string.Empty;
+        ConcreteBindingContext.IsBusy = false;
+        ConcreteBindingContext.BusyProgressMessage = string.Empty;
     }
 
     private async void PresentForImagePick()
     {
-        var concreteBindingContext = (Domain.Presentation.Terminal.MAUI.Models.Page.Configuration.OrganizationContactConfigurationPageModel)BindingContext;
-
         if (Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.iOS)
         {
             var permission = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.Photos>();
@@ -214,8 +203,8 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
                 {
                     DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
 
-                    concreteBindingContext.IsBusy = false;
-                    concreteBindingContext.BusyProgressMessage = string.Empty;
+                    ConcreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
                 });
 
                 return;
@@ -236,8 +225,8 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
                 {
                     DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
 
-                    concreteBindingContext.IsBusy = false;
-                    concreteBindingContext.BusyProgressMessage = string.Empty;
+                    ConcreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
                 });
 
                 return;
@@ -246,8 +235,8 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
 
         Dispatcher.Dispatch(() =>
         {
-            concreteBindingContext.IsBusy = true;
-            concreteBindingContext.BusyProgressMessage = "Seleccionando imagen ...";
+            ConcreteBindingContext.IsBusy = true;
+            ConcreteBindingContext.BusyProgressMessage = "Seleccionando imagen ...";
         });
 
         await Microsoft.Maui.Media.MediaPicker.PickPhotoAsync().ContinueWith(PickedImageContinuationTask);
@@ -255,14 +244,12 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
 
     private async System.Threading.Tasks.Task PickedImageContinuationTask(System.Threading.Tasks.Task<Microsoft.Maui.Storage.FileResult> task)
     {
-        var concreteBindingContext = (Domain.Presentation.Terminal.MAUI.Models.Page.Configuration.OrganizationContactConfigurationPageModel)BindingContext;
-
         if (task.Result == null)
         {
             Dispatcher.Dispatch(() =>
             {
-                concreteBindingContext.IsBusy = false;
-                concreteBindingContext.BusyProgressMessage = string.Empty;
+                ConcreteBindingContext.IsBusy = false;
+                ConcreteBindingContext.BusyProgressMessage = string.Empty;
             });
 
             return;
@@ -272,7 +259,7 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
 
         Dispatcher.Dispatch(() =>
         {
-            concreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
+            ConcreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
         });
 
         SkiaSharp.SKBitmap croppingImageTarget = null;
@@ -295,7 +282,7 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
                 {
                     if (cropAskTask.Result)
                     {
-                        concreteBindingContext.BusyProgressMessage = "Recortando imagen ...";
+                        ConcreteBindingContext.BusyProgressMessage = "Recortando imagen ...";
 
                         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.ImageCropPage(croppingImageTarget, PickedImageCroppingComplete_Callback)));
                     }
@@ -311,12 +298,12 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
 
                         croppingImageTarget.Dispose();
 
-                        concreteBindingContext.ImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
+                        ConcreteBindingContext.ImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
 
                         hasChangesFlag = true;
 
-                        concreteBindingContext.IsBusy = false;
-                        concreteBindingContext.BusyProgressMessage = string.Empty;
+                        ConcreteBindingContext.IsBusy = false;
+                        ConcreteBindingContext.BusyProgressMessage = string.Empty;
                     }
                 });
             });
