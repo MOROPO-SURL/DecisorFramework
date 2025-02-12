@@ -10,12 +10,21 @@
 
         public string Description { get; set; }
 
+        public SectionDisplayModel Parent { get; set; }
+
         public void Import(Persistence.Entities.Section entity)
         {
             Id = entity.Id;
             Name = entity.Name;
             Priority = entity.Priority;
             Description = entity.Description;
+
+            if (entity.Parent != null)
+            {
+                Parent = new SectionDisplayModel();
+
+                Parent.Import(entity.Parent);
+            }
         }
     }
 }

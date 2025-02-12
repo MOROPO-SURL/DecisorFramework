@@ -4,7 +4,7 @@
 	{
 		public static string ToTreeName(this Interop.API.Common.Models.Display.FamilyDisplayModel target, string separator = " / ")
 		{
-            return target.Parent != null ? string.Format("{0} / {1}", target.Parent.ToTreeName(separator), target.Name) : target.Name;
+            return target.Parent != null ? string.Format("{0}{2}{1}", target.Parent.ToTreeName(separator), target.Name, separator) : target.Name;
         }
 	}
 }

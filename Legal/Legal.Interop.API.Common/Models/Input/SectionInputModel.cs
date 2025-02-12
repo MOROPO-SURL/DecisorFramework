@@ -11,6 +11,8 @@
 
         public string Description { get; set; }
 
+        public System.Guid? ParentId { get; set; }
+
         public Persistence.Entities.Section Export()
         {
             var entity = new Persistence.Entities.Section { Id = Id };
@@ -30,6 +32,12 @@
             entity.Name = Name;
             entity.Priority = Priority;
             entity.Description = Description;
+
+            if (entity.ParentId != ParentId)
+            {
+                entity.Parent = null;
+                entity.ParentId = ParentId;
+            }
         }
     }
 }

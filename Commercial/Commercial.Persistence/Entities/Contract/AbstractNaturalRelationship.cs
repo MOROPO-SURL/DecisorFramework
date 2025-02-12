@@ -15,6 +15,10 @@
 
         public Domain.Persistence.Entities.PersonContact Contact { get; set; }
         public System.Guid ContactId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DefaultPaymentTermId))]
+        public PaymentTerm DefaultPaymentTerm { get; set; }
+        public System.Guid DefaultPaymentTermId { get; set; }
     }
 }
 
