@@ -18,7 +18,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
         {
             Id = entity.Id;
             Name = entity.Name;
-            Body = entity.Body;
+            Body = entity.Content;
             Priority = entity.Priority;
             Tags = entity.TagBridges.Select(bridge =>
             {

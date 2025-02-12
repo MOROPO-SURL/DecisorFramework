@@ -30,35 +30,35 @@ public partial class SectionConfigurationPage : Core.Presentation.Terminal.MAUI.
     {
         var apiConnectClient = new Interop.API.Connect.Clients.SectionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.SectionConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.SectionInputModel
         {
-            Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
+            Name = ConcreteBindingContext.Name,
+            Title = ConcreteBindingContext.Title,
+            Content = ConcreteBindingContext.Content,
             ParentId = ParentPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.CreateAsync(model);
 
-        return await apiConnectClient.GetAsync(model.Id);
+        // TODO Try to recover added Section
+        return null;
     }
 
     protected override async System.Threading.Tasks.Task<SectionDisplayModel> PerformEditionAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.SectionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.SectionConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.SectionInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            Title = ConcreteBindingContext.Title,
+            Content = ConcreteBindingContext.Content,
             ParentId = ParentPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.EditAsync(model);

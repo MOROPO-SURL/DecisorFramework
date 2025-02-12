@@ -10,9 +10,9 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.A
 {
     [Route("api/legal/[controller]")]
     [ApiController]
-    public class SectionsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<Section, System.Guid, SectionInputModel, SectionDisplayModel>
+    public class SectionsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<Section, int, SectionInputModel, SectionDisplayModel>
     {
-        public SectionsController(Guama.Core.Persistence.Repositories.IEntityRepository<Section, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<SectionsController> localizer, Microsoft.Extensions.Logging.ILogger<SectionsController> logger) : base(repository, localizer, logger)
+        public SectionsController(Guama.Core.Persistence.Repositories.IEntityRepository<Section, int> repository, Microsoft.Extensions.Localization.IStringLocalizer<SectionsController> localizer, Microsoft.Extensions.Logging.ILogger<SectionsController> logger) : base(repository, localizer, logger)
         {
         }
 

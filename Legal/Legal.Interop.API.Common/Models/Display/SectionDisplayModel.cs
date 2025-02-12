@@ -1,10 +1,14 @@
 ﻿namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
 {
-    public class SectionDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Section, System.Guid>
+    public class SectionDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Section, int>
     {
-        public System.Guid Id { get; set; }
+        public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public string Title { get; set; }
+
+        public string Content { get; set; }
 
         public int Priority { get; set; }
 
@@ -16,6 +20,8 @@
         {
             Id = entity.Id;
             Name = entity.Name;
+            Title = entity.Title;
+            Content = entity.Content;
             Priority = entity.Priority;
             Description = entity.Description;
 
