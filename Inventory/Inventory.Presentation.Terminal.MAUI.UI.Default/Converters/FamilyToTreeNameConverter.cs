@@ -2,9 +2,9 @@
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Converters
 {
-	public class CategoryToTreeNameConverter : Microsoft.Maui.Controls.IValueConverter
+	public class FamilyToTreeNameConverter : Microsoft.Maui.Controls.IValueConverter
 	{
-        public string Separator { get; set; }
+        public string Separator { get; set; } = " / ";
 
 		public object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {

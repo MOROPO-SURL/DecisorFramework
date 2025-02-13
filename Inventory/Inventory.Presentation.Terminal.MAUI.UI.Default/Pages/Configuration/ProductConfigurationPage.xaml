@@ -13,7 +13,7 @@
     x:DataType="presentation_configuration_page_models:ProductConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local_converters:CategoryToTreeNameConverter x:Key="CategoryToTreeNameConverter" />
+            <local_converters:FamilyToTreeNameConverter x:Key="FamilyToTreeNameConverter" />
 
             <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
         </ResourceDictionary>
@@ -96,7 +96,7 @@
                         <Picker 
                             x:Name="CategoryPicker"
                             ItemsSource="{Binding AvailableCategories}" 
-                            ItemDisplayBinding="{Binding Converter={StaticResource CategoryToTreeNameConverter}}"
+                            ItemDisplayBinding="{Binding Converter={StaticResource FamilyToTreeNameConverter}}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
                     </VerticalStackLayout>
                     <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="2">

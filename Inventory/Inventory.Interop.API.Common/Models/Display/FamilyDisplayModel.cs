@@ -29,23 +29,6 @@
                 Parent.Import(entity.Parent);
             }
         }
-
-        public override int GetHashCode()
-        {
-            var self = Id * 100 + Priority;
-
-            if (Parent != null) return Parent.GetHashCode() * 100 + self;
-
-            return self;
-        }
-
-        public string TreeName
-        {
-            get
-            {
-                return Parent != null ? string.Format("{0} / {1}", Parent.TreeName, Name) : Name;
-            }
-        }
     }
 }
 

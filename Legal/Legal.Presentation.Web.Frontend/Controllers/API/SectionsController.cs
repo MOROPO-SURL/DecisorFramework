@@ -65,6 +65,11 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.A
             return Ok(result);
         }
 
+        public override ActionResult Delete(int key)
+        {
+            return NotFound();
+        }
+
         protected override SectionDisplayModel EntityToDisplayModel(Section entity)
         {
             entity.FillParent(Repository);
