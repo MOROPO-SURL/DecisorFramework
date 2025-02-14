@@ -3198,9 +3198,25 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("archived");
 
+                    b.Property<DateTime?>("CachedDocumentAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("cacheddocumentat");
+
+                    b.Property<Guid?>("CachedDocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("cacheddocumentid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("createdat");
+
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
+
+                    b.Property<DateTime>("EditedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("editedat");
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
@@ -3211,8 +3227,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
+                    b.Property<Guid?>("RawDocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("rawdocumentid");
+
                     b.HasKey("Id")
                         .HasName("pk_proformas");
+
+                    b.HasIndex("CachedDocumentId")
+                        .HasDatabaseName("ix_proformas_cacheddocumentid");
+
+                    b.HasIndex("RawDocumentId")
+                        .HasDatabaseName("ix_proformas_rawdocumentid");
 
                     b.ToTable("proformas", "decisorframework_legal");
                 });
@@ -6838,6 +6864,23 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Document");
 
                     b.Navigation("Kind");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Proforma", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "CachedDocument")
+                        .WithMany()
+                        .HasForeignKey("CachedDocumentId")
+                        .HasConstraintName("fk_proformas_documents_cacheddocumentid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "RawDocument")
+                        .WithMany()
+                        .HasForeignKey("RawDocumentId")
+                        .HasConstraintName("fk_proformas_documents_rawdocumentid");
+
+                    b.Navigation("CachedDocument");
+
+                    b.Navigation("RawDocument");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Legal.Persistence.Entities.ProformaClauseBridge", b =>

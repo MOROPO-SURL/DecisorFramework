@@ -10,13 +10,28 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
 
         public string Description { get; set; }
 
+        public System.DateTime CreatedAt { get; set; }
+
+        public System.DateTime EditedAt { get; set; }
+
         public Bridge.ProformaSectionClauseBridge[] Sections { get; set; }
+
+        public Core.Interop.API.Common.Models.Display.DocumentDisplayModel RawDocument { get; set; }
 
         public void Import(Persistence.Entities.Proforma entity)
         {
             Id = entity.Id;
             Name = entity.Name;
             Description = entity.Description;
+            CreatedAt = entity.CreatedAt;
+            EditedAt = entity.EditedAt;
+
+            if (entity.RawDocument != null)
+            {
+                RawDocument = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+
+                RawDocument.Import(entity.RawDocument);
+            }
 
             var groups = entity.ClauseBridges.OrderBy(bridge => bridge.Section.Priority).GroupBy(bridge => bridge.Section).ToList();
 

@@ -90,7 +90,7 @@
     </ShellContent>
     <ShellContent
         Title="Proformas de Contrato"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate decisorframework_legal_manage_pages:ProformasManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
