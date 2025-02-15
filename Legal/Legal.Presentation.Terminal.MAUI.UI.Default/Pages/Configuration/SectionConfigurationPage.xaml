@@ -13,7 +13,7 @@
     x:DataType="presentation_configuration_page_models:SectionConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" Spacing="16" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" SingleSpacing="16" />
             <local_converters:SectionToTreeNameConverter x:Key="SectionToTreeNameConverter" Separator=" > " />
         </ResourceDictionary>
     </ContentPage.Resources>

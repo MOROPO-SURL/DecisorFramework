@@ -9,7 +9,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 {
     [Microsoft.AspNetCore.Mvc.Route("api/domain/structures/parental")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class ParentalStructuresController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Structure, System.Guid, StructureInputModel, StructureParentalDisplayModel>
+    public class ParentalStructuresController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Structure, System.Guid, StructureInputModel, StructureParentalDisplayModel>
     {
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
         private readonly IImageFileManagerFacade imageFileManager;

@@ -4,6 +4,8 @@
     {
         public System.Guid MunicipalityId { get; set; }
 
+        public string Label { get; set; }
+
         public string Address { get; set; }
 
         public int ZipCode { get; set; }

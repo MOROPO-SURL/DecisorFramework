@@ -21,7 +21,7 @@
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(FeatureImageId))]
         public Guama.Media.Persistence.Entities.Image FeatureImage { get; set; }
-        public System.Guid FeatureImageId { get; set; }
+        public System.Guid? FeatureImageId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(StructureId))]
         public Structure Structure { get; set; }

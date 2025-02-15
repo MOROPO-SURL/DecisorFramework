@@ -24,9 +24,6 @@
             ZipCode = entity.ZipCode;
             Longitude = entity.Longitude;
             Latitude = entity.Latitude;
-            Municipality = new MunicipalityDisplayModel();
-
-            Municipality.Import(((Guama.Location.Persistence.Entities.MunicipalityLocation)entity.Location).Municipality);
         }
     }
 }

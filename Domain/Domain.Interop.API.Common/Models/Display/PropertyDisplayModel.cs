@@ -12,7 +12,7 @@
 
         public Core.Interop.API.Common.Models.Display.ImageDisplayModel FeatureImage { get; set; }
 
-        public StructureTreeDisplayModel Structure { get; set; }
+        public StructureParentalDisplayModel Structure { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string PropertyRecordIdentifier { get; set; }
@@ -54,7 +54,7 @@
 
             if (entity.Structure != null)
             {
-                Structure = new StructureTreeDisplayModel();
+                Structure = new StructureParentalDisplayModel();
 
                 Structure.Import(entity.Structure);
             }
