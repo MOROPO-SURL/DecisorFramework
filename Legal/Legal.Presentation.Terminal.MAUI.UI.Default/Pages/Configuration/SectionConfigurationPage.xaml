@@ -13,7 +13,7 @@
     x:DataType="presentation_configuration_page_models:SectionConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" Spacing="16" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" SingleSpacing="16" />
             <local_converters:SectionToTreeNameConverter x:Key="SectionToTreeNameConverter" Separator=" > " />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -51,6 +51,12 @@
                 <VerticalStackLayout 
                     Margin="24,8"
                     Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (Opcional)" />
+                    <Editor Text="{Binding Description}" HeightRequest="120" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="24,8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Superior" />
                     <Picker
                         x:Name="ParentPicker"
@@ -61,8 +67,14 @@
                 <VerticalStackLayout 
                     Margin="24,8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (Opcional)" />
-                    <Editor Text="{Binding Description}" HeightRequest="200" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Título" />
+                    <Entry Text="{Binding Title}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="24,8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Contenido (Opcional)" />
+                    <Editor Text="{Binding Content}" HeightRequest="200" />
                 </VerticalStackLayout>
                 <BoxView 
                     Margin="24,16,24,0"

@@ -68,7 +68,7 @@
     </ShellContent>
     <ShellContent
         Title="Inmuebles"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PropertiesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

@@ -14,10 +14,12 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<LegalBusinessKind, System.Guid>, LegalBusinessKindRepository>();
             services.AddScoped<IEntityRepository<NaturalBusinessKind, System.Guid>, NaturalBusinessKindRepository>();
             services.AddScoped<IEntityRepository<PropertyKind, System.Guid>, PropertyKindRepository>();
+            services.AddScoped<IEntityRepository<VehicleBrand, System.Guid>, VehicleBrandRepository>();
             services.AddScoped<IEntityRepository<VehicleEngineKind, System.Guid>, VehicleEngineKindRepository>();
             services.AddScoped<IEntityRepository<StructureKind, System.Guid>, StructureKindRepository>();
             services.AddScoped<IEntityRepository<OrganizationalUnity, System.Guid>, OrganizationalUnityRepository>();
             services.AddScoped<IEntityRepository<Structure, System.Guid>, StructureRepository>();
+            services.AddScoped<IEntityRepository<Property, System.Guid>, PropertyRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.DomainDbSchemaConfigurationProvider>();
 

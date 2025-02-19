@@ -9,6 +9,8 @@
 
         public string Description { get; set; }
 
+        public Core.Interop.API.Common.Models.Input.DocumentInputModel RawDocument { get; set; }
+
         public System.Collections.Generic.List<Bridge.ProformaSectionClauseBridge> Sections { get; set; }
 
         public Persistence.Entities.Proforma Export()
@@ -27,8 +29,11 @@
 
         public void Mergue(Persistence.Entities.Proforma entity)
         {
+            entity.EditedAt = System.DateTime.Now;
             entity.Name = Name;
             entity.Description = Description;
+
+            // TODO Implement new list syncronization protocol !!
             entity.ClauseBridges.Clear();
 
             foreach (var model in Sections)

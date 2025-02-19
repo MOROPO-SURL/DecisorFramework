@@ -1,8 +1,6 @@
-﻿using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
-
-namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display
+﻿namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display
 {
-	public class CostCenterDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.CostCenter, System.Guid>
+    public class CostCenterDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.CostCenter, System.Guid>
 	{
 		public System.Guid Id { get; set; }
 
@@ -16,7 +14,7 @@ namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display
 
         public BankAccountDisplayModel DefaultBankAccount { get; set; }
 
-        public Domain.Interop.API.Common.Models.Display.StructureTreeDisplayModel Structure { get; set; }
+        public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel Structure { get; set; }
 
         public void Import(Persistence.Entities.CostCenter entity)
         {
@@ -35,7 +33,7 @@ namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display
 
             if (entity.Structure != null)
             {
-                Structure = new Domain.Interop.API.Common.Models.Display.StructureTreeDisplayModel();
+                Structure = new Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel();
 
                 Structure.Import(entity.Structure);
             }

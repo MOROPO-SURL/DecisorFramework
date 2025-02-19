@@ -11,7 +11,7 @@
         public int Priority { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public string Body { get; set; }
+        public string Content { get; set; }
 
         public System.Collections.Generic.List<ClauseTagBridge> TagBridges { get; set; } = new System.Collections.Generic.List<ClauseTagBridge>();
     }

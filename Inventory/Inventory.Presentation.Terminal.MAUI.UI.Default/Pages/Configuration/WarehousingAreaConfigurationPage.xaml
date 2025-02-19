@@ -11,7 +11,7 @@
     x:DataType="presentation_configuration_page_models:WarehousingAreaConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <local_converters:CategoryToTreeNameConverter x:Key="CategoryToTreeNameConverter" />
+            <local_converters:FamilyToTreeNameConverter x:Key="FamilyToTreeNameConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -65,7 +65,7 @@
                 <Picker 
                     x:Name="FamilyPicker"
                     ItemsSource="{Binding AvailableFamilies}" 
-                    ItemDisplayBinding="{Binding Converter={StaticResource CategoryToTreeNameConverter}}"
+                    ItemDisplayBinding="{Binding Converter={StaticResource FamilyToTreeNameConverter}}"
                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
             </VerticalStackLayout>
             <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="3">

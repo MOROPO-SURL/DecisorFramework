@@ -15,13 +15,5 @@
                 Parent.Import(entity.Parent);
             }
         }
-
-        public string TreeName
-        {
-            get
-            {
-                return Parent != null ? string.Format("{0} / {1}", Parent.TreeName, Identity.Name) : Identity.Name;
-            }
-        }
     }
 }

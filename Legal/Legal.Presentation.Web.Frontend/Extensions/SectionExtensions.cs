@@ -2,7 +2,7 @@
 {
     public static class SectionExtensions
     {
-        public static void FillParent(this Persistence.Entities.Section entity, Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Section, System.Guid> repository)
+        public static void FillParent(this Persistence.Entities.Section entity, Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Section, int> repository)
         {
             if (entity.ParentId == null) return;
 
@@ -13,7 +13,7 @@
 
         public static double GetTreePriority(this Persistence.Entities.Section entity)
         {
-            if (entity.Parent == null) return entity.Priority;
+            if (entity.Parent == null) return entity.Priority * 1000 + entity.Id;
 
             var parentTreePriority = entity.Parent.GetTreePriority();
 
@@ -25,12 +25,13 @@
             {
                 count++;
 
-                @case *= 100;
+                @case *= 100000;
             }
 
-            var fraction = (double)count * 100;
+            var priorityFraction = (double)count * 100000;
+            var idFraction = (double)count * 1000;
 
-            return entity.Priority / fraction + parentTreePriority;
+            return entity.Priority / priorityFraction + entity.Id / idFraction + parentTreePriority;
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Domain.Persistence.Entities
 {
-    public class Property : Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
+    public class Property : Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>, Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; } = System.Guid.NewGuid();
@@ -10,6 +10,9 @@
         public bool Enabled { get; set; }
 
         public int Priority { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Name { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(KindId))]
         public PropertyKind Kind { get; set; }
@@ -21,14 +24,14 @@
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(FeatureImageId))]
         public Guama.Media.Persistence.Entities.Image FeatureImage { get; set; }
-        public System.Guid FeatureImageId { get; set; }
+        public System.Guid? FeatureImageId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(StructureId))]
         public Structure Structure { get; set; }
         public System.Guid StructureId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public string PropertyRecordIdentifier { get; set; }
+        public string Reference { get; set; }
 
         public decimal Area { get; set; }
 

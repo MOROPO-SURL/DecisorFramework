@@ -6,7 +6,7 @@
         {
             base.ApplayRules(entityTypeBuilder);
 
-            entityTypeBuilder.HasIndex(entity => entity.PropertyRecordIdentifier).IsUnique();
+            entityTypeBuilder.HasIndex(entity => entity.Reference).IsUnique();
         }
     }
 }

@@ -1,0 +1,23 @@
+﻿namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display
+{
+    public class DocumentDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Guama.Media.Persistence.Entities.Document, System.Guid>
+    {
+        public System.Guid Id { get; set; }
+
+        public string Name { get; set; }
+
+        public string Extension { get; set; }
+
+        public long Length { get; set; }
+
+        public string Description { get; set; }
+
+        public void Import(Guama.Media.Persistence.Entities.Document entity)
+        {
+            Id = entity.Id;
+            Name = entity.Name;
+            Length = entity.Length;
+            Description = entity.Description;
+        }
+    }
+}

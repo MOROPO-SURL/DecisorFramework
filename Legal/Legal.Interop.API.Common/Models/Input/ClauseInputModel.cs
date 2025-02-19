@@ -35,7 +35,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Input
         {
             entity.Name = Name;
             entity.Priority = Priority;
-            entity.Body = Body;
+            entity.Content = Body;
 
             entity.TagBridges.Clear();
 

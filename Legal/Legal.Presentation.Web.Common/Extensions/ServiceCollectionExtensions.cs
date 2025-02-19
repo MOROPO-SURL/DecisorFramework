@@ -9,7 +9,7 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Common.Extensions
         {
             services.AddScoped<IEntityRepository<Persistence.Entities.Tag, string>, Persistence.ORM.EF.Repositories.TagRepository>();
             services.AddScoped<IEntityRepository<Persistence.Entities.Clause, System.Guid>, Persistence.ORM.EF.Repositories.ClauseRepository>();
-            services.AddScoped<IEntityRepository<Persistence.Entities.Section, System.Guid>, Persistence.ORM.EF.Repositories.SectionRepository>();
+            services.AddScoped<IEntityRepository<Persistence.Entities.Section, int>, Persistence.ORM.EF.Repositories.SectionRepository>();
             services.AddScoped<IEntityRepository<Persistence.Entities.Proforma, System.Guid>, Persistence.ORM.EF.Repositories.ProformaRepository>();
             services.AddScoped<IEntityRepository<Persistence.Entities.CentralStateStructure, System.Guid>, Persistence.ORM.EF.Repositories.CentralStateSctructureRepository>();
 

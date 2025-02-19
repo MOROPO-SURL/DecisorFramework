@@ -10,6 +10,6 @@
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SectionId))]
         public Section Section { get; set; }
-        public System.Guid SectionId { get; set; }
+        public int SectionId { get; set; }
     }
 }
