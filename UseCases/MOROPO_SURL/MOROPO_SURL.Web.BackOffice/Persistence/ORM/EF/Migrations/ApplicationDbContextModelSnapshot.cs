@@ -1385,6 +1385,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("bodyidentifier");
 
+                    b.Property<Guid>("BrandId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("brandid");
+
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer")
                         .HasColumnName("categoryid");
@@ -1414,6 +1418,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("double precision")
                         .HasColumnName("loadcapacity");
 
+                    b.Property<string>("Model")
+                        .HasColumnType("text")
+                        .HasColumnName("model");
+
                     b.Property<string>("Plate")
                         .IsRequired()
                         .HasColumnType("text")
@@ -1422,6 +1430,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
+
+                    b.Property<string>("Reference")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("reference");
 
                     b.Property<int>("SeatCount")
                         .HasColumnType("integer")
@@ -1440,12 +1453,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("trafficcirculationidentifier");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
                     b.HasKey("Id")
                         .HasName("pk_vehicles");
 
                     b.HasIndex("BodyIdentifier")
                         .IsUnique()
                         .HasDatabaseName("ix_vehicles_bodyidentifier");
+
+                    b.HasIndex("BrandId")
+                        .HasDatabaseName("ix_vehicles_brandid");
 
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("ix_vehicles_categoryid");
@@ -1472,6 +1492,44 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_vehicles_trafficcirculationidentifier");
 
                     b.ToTable("vehicles", "decisorframework_domain");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleBrand", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_vehiclebrands");
+
+                    b.ToTable("vehiclebrands", "decisorframework_domain");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleCategory", b =>
@@ -6165,6 +6223,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Vehicle", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleBrand", "Brand")
+                        .WithMany()
+                        .HasForeignKey("BrandId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicles_vehiclebrands_brandid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
@@ -6192,6 +6257,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_vehicles_structures_structureid");
+
+                    b.Navigation("Brand");
 
                     b.Navigation("Category");
 
