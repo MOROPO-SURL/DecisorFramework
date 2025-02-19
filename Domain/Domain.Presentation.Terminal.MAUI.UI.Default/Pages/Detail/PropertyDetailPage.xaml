@@ -23,17 +23,28 @@
                                 FontSize="Medium" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Nombre" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Name}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Tipo" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Kind.Name}" />
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Margin="0"
                                 Text="Unidad Administrativa" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Structure.Identity.Name}" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="No. Activo Fijo" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Reference}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Prioridad" />

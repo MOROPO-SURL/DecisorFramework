@@ -59,8 +59,10 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
         var model = new Interop.API.Common.Models.Input.PropertyInputModel
         {
             Id = System.Guid.NewGuid(),
+            Name = ConcreteBindingContext.Name,
+            Priority = ConcreteBindingContext.Priority,
             StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
-            PropertyRecordIdentifier = ConcreteBindingContext.PropertyRecordIdentifier,
+            Reference = ConcreteBindingContext.Reference,
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
             Area = ConcreteBindingContext.Area,
             Description = ConcreteBindingContext.Description,
@@ -98,8 +100,10 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
         var model = new Interop.API.Common.Models.Input.PropertyInputModel
         {
             Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            Priority = ConcreteBindingContext.Priority,
             StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
-            PropertyRecordIdentifier = ConcreteBindingContext.PropertyRecordIdentifier,
+            Reference = ConcreteBindingContext.Reference,
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
             Area = ConcreteBindingContext.Area,
             Description = ConcreteBindingContext.Description,

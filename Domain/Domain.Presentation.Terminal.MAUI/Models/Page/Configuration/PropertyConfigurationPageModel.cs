@@ -8,10 +8,11 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
     {
         private int priority = 1;
         private Microsoft.Maui.Controls.ImageSource fatureImageSource;
+        private string name;
         private PropertyKindDisplayModel kind;
         private StructureParentalDisplayModel structure;
         private PostalContactItemDisplayModel postalContact;
-        private string propertyRecordIdentifier;
+        private string reference;
         private decimal area;
         private string description;
 
@@ -23,10 +24,11 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
             {
                 Id = model.Id;
                 Priority = model.Priority;
+                Name = model.Name;
                 Kind = model.Kind;
                 Structure = model.Structure;
                 PostalContact = model.PostalContact;
-                PropertyRecordIdentifier = model.PropertyRecordIdentifier;
+                Reference = model.Reference;
                 Area = model.Area;
                 Description = model.Description;
 
@@ -42,6 +44,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public System.Guid? FeatureImageId { get; set; }
 
+        public string Name { get => name; set => SetProperty(ref name, value); }
+
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
         public Microsoft.Maui.Controls.ImageSource FeatureImageSource { get => fatureImageSource; set => SetProperty(ref fatureImageSource, value); }
@@ -52,7 +56,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public PostalContactItemDisplayModel PostalContact { get => postalContact; set => SetProperty(ref postalContact, value); }
 
-        public string PropertyRecordIdentifier { get => propertyRecordIdentifier; set => SetProperty(ref propertyRecordIdentifier, value); }
+        public string Reference { get => reference; set => SetProperty(ref reference, value); }
 
         public decimal Area { get => area; set => SetProperty(ref area, value); }
 

@@ -14,7 +14,7 @@ public partial class PropertiesManagePage : Core.Presentation.Terminal.MAUI.UI.P
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 240; }
+    protected override double ItemViewRequestWidth { get => 320; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {

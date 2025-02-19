@@ -1151,6 +1151,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("kindid");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
                     b.Property<Guid>("PostalContactId")
                         .HasColumnType("uuid")
                         .HasColumnName("postalcontactid");
@@ -1159,10 +1164,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
-                    b.Property<string>("PropertyRecordIdentifier")
+                    b.Property<string>("Reference")
                         .IsRequired()
                         .HasColumnType("text")
-                        .HasColumnName("propertyrecordidentifier");
+                        .HasColumnName("reference");
 
                     b.Property<Guid>("StructureId")
                         .HasColumnType("uuid")
@@ -1180,9 +1185,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("PostalContactId")
                         .HasDatabaseName("ix_properties_postalcontactid");
 
-                    b.HasIndex("PropertyRecordIdentifier")
+                    b.HasIndex("Reference")
                         .IsUnique()
-                        .HasDatabaseName("ix_properties_propertyrecordidentifier");
+                        .HasDatabaseName("ix_properties_reference");
 
                     b.HasIndex("StructureId")
                         .HasDatabaseName("ix_properties_structureid");

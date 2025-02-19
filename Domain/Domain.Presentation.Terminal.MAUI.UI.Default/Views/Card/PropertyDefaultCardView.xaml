@@ -24,6 +24,11 @@
             <StackLayout
                 IsClippedToBounds="True"
                 Padding="10">
+                <Label                    
+                    LineBreakMode="TailTruncation"
+                    MaxLines="2"
+                    FontSize="Medium"
+                    Text="{Binding Name}" />
                 <Label
                     LineBreakMode="TailTruncation"
                     FontAttributes="Bold"

@@ -70,6 +70,12 @@
                     </Frame>
                     <StackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}">
+                        <VerticalStackLayout 
+                            Margin="8"
+                            Spacing="6">
+                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                            <Entry Text="{Binding Name}" />
+                        </VerticalStackLayout>
                         <FlexLayout
                             Wrap="Wrap">
                             <VerticalStackLayout 
@@ -98,8 +104,8 @@
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
                                 Margin="4"
                                 Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="ID en Registro de la Propiedad" />
-                                <Entry Text="{Binding PropertyRecordIdentifier}" />
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. Activo Fijo" />
+                                <Entry Text="{Binding Reference}" />
                             </VerticalStackLayout>
                             <Grid 
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
@@ -173,8 +179,43 @@
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Áreas" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Margin="4"
+                                Grid.ColumnSpan="2" Grid.Row="2">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                </CollectionView.EmptyView>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
-                    <Editor Text="{Binding Description}" HeightRequest="200" />
+                    <Editor Text="{Binding Description}" HeightRequest="160" />
                 </VerticalStackLayout>
                 <BoxView 
                     Margin="8,16,8,8"
