@@ -36,7 +36,7 @@ public partial class CostCentersManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             try
             {
-                var structuresAPIConnectClient = new Domain.Interop.API.Connect.Clients.TreeStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var structuresAPIConnectClient = new Domain.Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.CostCenterConfigurationPageModel(null)
                 {
@@ -87,11 +87,11 @@ public partial class CostCentersManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             try
             {
-                var structuresAPIConnectClient = new Domain.Interop.API.Connect.Clients.TreeStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var structuresAPIConnectClient = new Domain.Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.CostCenterConfigurationPageModel(concreteBindingContext.PresentedItem)
                 {
-                    AvailableStructures = await structuresAPIConnectClient.GetAsync()
+                    AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync()
                 };
 
                 Dispatcher.Dispatch(() =>
