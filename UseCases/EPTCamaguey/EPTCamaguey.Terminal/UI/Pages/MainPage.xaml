@@ -191,6 +191,30 @@
                 </Frame>
                 <Frame Style="{StaticResource SectionCardFrameStyle}">
                     <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="CommecrcialSectionCardFrameTapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Image Style="{StaticResource SectionCardBackgroudImageStyle}" Source="commercial.jpg" />
+                        <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
+                        <Grid Padding="5">
+                            <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="Comercial" />
+                        </Grid>
+                    </Grid>
+                </Frame>
+                <Frame Style="{StaticResource SectionCardFrameStyle}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="ServicingSectionCardFrameTapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Image Style="{StaticResource SectionCardBackgroudImageStyle}" Source="servicing.jpg" />
+                        <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
+                        <Grid Padding="5">
+                            <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="Servicios" />
+                        </Grid>
+                    </Grid>
+                </Frame>
+                <Frame Style="{StaticResource SectionCardFrameStyle}">
+                    <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="HumanResourcesSectionCardFrameTapGestureRecognizer_Tapped" />
                     </Frame.GestureRecognizers>
                     <Grid>

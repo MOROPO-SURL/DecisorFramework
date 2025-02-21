@@ -34,7 +34,7 @@
             </Grid>
         </Grid>
     </Shell.FlyoutHeader>
-    <MenuFlyoutItem Text="Inicio" />
+    <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
     <ShellContent
         Title="Panel de Control"
         ContentTemplate="{DataTemplate ContentPage}">
@@ -45,7 +45,8 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Gestión" />
+    <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
+    <MenuFlyoutItem Text="Estructural" IsEnabled="False" />
     <ShellContent
         Title="Entidades Administrativas"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:StructuresManagePage}">
@@ -66,23 +67,10 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <FlyoutItem Title="Contactos">
-        <FlyoutItem.Icon>
-            <FontImageSource
-             FontFamily="MaterialDesignIcons"
-             Glyph="&#xF5D2;"
-             Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </FlyoutItem.Icon>
-        <ShellContent
-             Title="Organizaciones"
-             ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationContactsManagePage}" />
-        <ShellContent
-            Title="Personas"
-            ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}" />
-    </FlyoutItem>
+    <MenuFlyoutItem Text="Activos" IsEnabled="False" />
     <ShellContent
         Title="Inmuebles"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PropertiesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -100,7 +88,18 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Configuración" />
+    <MenuFlyoutItem Text="Complementarios" IsEnabled="False" />
+    <ShellContent
+        Title="Marcas"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF4CF;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
     <ShellContent
         Title="Tipos de Entidad Administrativa"
         ContentTemplate="{DataTemplate decisorframework_domain_list_pages:StructureKindsListPage}">
@@ -138,16 +137,6 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF1FA;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-        Title="Tipos de Negocio Personal"
-        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:NaturalBusinessKindsListPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF00F5;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

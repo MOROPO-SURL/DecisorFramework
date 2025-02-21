@@ -8,5 +8,5 @@
         Padding="12,6"
         Text="{Binding Text}"
         TextColor="DimGray"
-        FontAttributes="Bold,Italic" />
+        FontAttributes="Bold" />
 </ContentView>

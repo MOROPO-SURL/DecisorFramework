@@ -137,9 +137,17 @@
 
     <Style TargetType="Frame">
         <Setter Property="HasShadow" Value="False" />
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#AFFFFFFF, Dark=#60000000}" />
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
         <Setter Property="CornerRadius" Value="8" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="PopupFrameStyle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
+        <Setter Property="HorizontalOptions" Value="Center" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="20" />
     </Style>
 
     <Style TargetType="ImageButton">
@@ -432,6 +440,17 @@
     <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
         <Setter Property="FontAttributes" Value="Bold" />
         <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="CaptionPropertyLabelStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="Caption" />
+        <Setter Property="Margin" Value="0,16,0,0" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="ValuePropertyLabelStyle">
+        <Setter Property="FontSize" Value="Default" />
     </Style>
 
     <Style TargetType="ContentView" x:Key="ModalFrameWrapContentViewStyle">
