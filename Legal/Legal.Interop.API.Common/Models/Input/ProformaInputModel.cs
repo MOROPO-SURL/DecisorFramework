@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Input
+﻿using MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Bridge;
+
+namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Input
 {
     public class ProformaInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Proforma, System.Guid>
     {
@@ -11,7 +13,7 @@
 
         public Core.Interop.API.Common.Models.Input.DocumentInputModel RawDocument { get; set; }
 
-        public System.Collections.Generic.List<Bridge.ProformaSectionClauseBridge> Sections { get; set; }
+        public System.Collections.Generic.List<ProformaSectionClauseBridgeModel> Sections { get; set; }
 
         public Persistence.Entities.Proforma Export()
         {
@@ -33,7 +35,6 @@
             entity.Name = Name;
             entity.Description = Description;
 
-            // TODO Implement new list syncronization protocol !!
             entity.ClauseBridges.Clear();
 
             foreach (var model in Sections)

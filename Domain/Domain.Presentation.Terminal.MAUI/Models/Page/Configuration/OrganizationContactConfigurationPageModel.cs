@@ -8,6 +8,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
     public class OrganizationContactConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<OrganizationContactDisplayModel>
     {
         private string name;
+        private string alias;
         private string about;
         private int priority = 1;
         private LegalBusinessKindDisplayModel businessKind;
@@ -51,6 +52,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public string Name { get => name; set => SetProperty(ref name, value); }
 
+        public string Alias { get => alias; set => SetProperty(ref alias, value); }
+
         public string About { get => about; set => SetProperty(ref about, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
@@ -72,9 +75,5 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public ObservableCollection<PostalContactItemDisplayModel> PostalContactItems { get; set; } = new ObservableCollection<PostalContactItemDisplayModel>();
 
         public LegalBusinessKindDisplayModel[] AvailableBusinessKinds { get; set; }
-
-        public StateDisplayModel[] AvailableStates { get; set; }
-
-        public MunicipalityDisplayModel[] AvailableMunicipalities { get; set; }
     }
 }

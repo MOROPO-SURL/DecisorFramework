@@ -47,6 +47,7 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
         {
             Id = System.Guid.NewGuid(),
             Name = ConcreteBindingContext.Name,
+            Alias = ConcreteBindingContext.Alias,
             About = ConcreteBindingContext.About,
             Priority = ConcreteBindingContext.Priority,
             BornDate = ConcreteBindingContext.IsSettedBornDate ? ConcreteBindingContext.BornDate : null,
@@ -81,6 +82,7 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
         {
             Id = ConcreteBindingContext.Id,
             Name = ConcreteBindingContext.Name,
+            Alias = ConcreteBindingContext.Alias,
             About = ConcreteBindingContext.About,
             Priority = ConcreteBindingContext.Priority,
             BornDate = ConcreteBindingContext.IsSettedBornDate ? ConcreteBindingContext.BornDate : null,

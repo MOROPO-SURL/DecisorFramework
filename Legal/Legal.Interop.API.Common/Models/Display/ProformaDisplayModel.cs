@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Bridge;
 
 namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
 {
@@ -14,7 +15,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
 
         public System.DateTime EditedAt { get; set; }
 
-        public Bridge.ProformaSectionClauseBridge[] Sections { get; set; }
+        public ProformaSectionClauseBridgeModel[] Sections { get; set; }
 
         public Core.Interop.API.Common.Models.Display.DocumentDisplayModel RawDocument { get; set; }
 
@@ -35,7 +36,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
 
             var groups = entity.ClauseBridges.OrderBy(bridge => bridge.Section.Priority).GroupBy(bridge => bridge.Section).ToList();
 
-            var sectionList = new System.Collections.Generic.List<Bridge.ProformaSectionClauseBridge>();
+            var sectionList = new System.Collections.Generic.List<ProformaSectionClauseBridgeModel>();
 
             foreach (var group in groups)
             {
@@ -43,7 +44,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
 
                 section.Import(group.Key);
 
-                var item = new Bridge.ProformaSectionClauseBridge
+                var item = new Bridge.ProformaSectionClauseBridgeModel
                 {
                     Section = section,
                     Clauses = group.Select(bridge =>

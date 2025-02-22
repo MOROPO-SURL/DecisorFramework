@@ -44,45 +44,40 @@
                     Margin="24,0"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (Opcional)" />
-                    <Editor Text="{Binding Description}" HeightRequest="200" />
+                    <Editor Text="{Binding Description}" HeightRequest="120" />
                 </VerticalStackLayout>
                 <FlexLayout 
                     Margin="8"
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=9, SmallContainerColumn=12}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=9, LargeContainerColumn=12}}"
                         Margin="8"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Documento Estático" />
-                        <Grid ColumnSpacing="8" RowSpacing="8">
+                        <Grid ColumnSpacing="8">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition />
-                            </Grid.RowDefinitions>
                             <Frame
-                                Grid.Column="0" Grid.RowSpan="3">
+                                Grid.Column="0">
                                 <VerticalStackLayout>
                                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                                     <Label Text="{Binding RawDocument.Name, FallbackValue='---'}" />
                                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Margin="0,8,0,0" Text="Tipo" />
                                     <Label Text="{Binding RawDocument.Extension, FallbackValue='---'}" />
                                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Margin="0,8,0,0" Text="Tamaño" />
-                                    <Label Text="{Binding RawDocument.Length, FallbackValue='---'}" />
+                                    <Label Text="{Binding RawDocument.Length, FallbackValue='---', StringFormat='{0} bytes'}" />
                                 </VerticalStackLayout>
                             </Frame>
-                            <Button
-                                Grid.Column="1" Grid.Row="0"
-                                Text="Seleccionar ..."
-                                Clicked="RawDocumentPickButton_Clicked" />
-                            <Button
-                                Grid.Column="1" Grid.Row="1"
-                                Text="Descartar" />
+                            <VerticalStackLayout Grid.Column="1" Spacing="8">
+                                <Button
+                                    Text="Seleccionar ..."
+                                    Clicked="RawDocumentPickButton_Clicked" />
+                                <Button
+                                    Text="Descartar" />                                
+                            </VerticalStackLayout>
                         </Grid>
                     </VerticalStackLayout>
                 </FlexLayout>

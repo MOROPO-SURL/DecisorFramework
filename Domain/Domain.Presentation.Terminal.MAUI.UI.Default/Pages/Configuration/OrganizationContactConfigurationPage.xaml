@@ -61,8 +61,14 @@
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                         <Entry Text="{Binding Name}" />
                     </VerticalStackLayout>
-                    <VerticalStackLayout 
+                    <VerticalStackLayout
                         Grid.Column="0" Grid.Row="1"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Siglas (opcional)" />
+                        <Entry Text="{Binding Alias}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
                         <Picker 
@@ -72,17 +78,15 @@
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
-                        Grid.Column="0" Grid.Row="2"
+                        Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha de fundación" />
-                        <StackLayout Orientation="Horizontal" Spacing="0">
-                            <Switch IsToggled="{Binding IsSettedBornDate}" />
-                            <DatePicker
-                                HorizontalOptions="FillAndExpand"
-                                IsEnabled="{Binding IsSettedBornDate}"
-                                IsVisible="{Binding IsSettedBornDate}"
-                                Date="{Binding BornDate}" />
-                        </StackLayout>
+                        <Switch IsToggled="{Binding IsSettedBornDate}" />
+                        <DatePicker
+                            HorizontalOptions="FillAndExpand"
+                            IsEnabled="{Binding IsSettedBornDate}"
+                            IsVisible="{Binding IsSettedBornDate}"
+                            Date="{Binding BornDate}" />
                     </VerticalStackLayout>
                 </Grid>
                 <Frame
