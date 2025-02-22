@@ -1,0 +1,71 @@
+<core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ProformaSectionClauseBridgeConfigurationPage"
+    x:TypeArguments="presentation_view_models:SectionClauseBridgeViewModel,presentation_configuration_page_models:ProformaSectionClauseBridgeConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:ProformaSectionClauseBridgeConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" SingleSpacing="16" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyControl_Invoked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelControl_Invoked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <FlexLayout 
+            Margin="8"
+            Wrap="Wrap"
+            AlignItems="Start" AlignContent="Start">
+            <VerticalStackLayout 
+                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=12}}"
+                Margin="8"
+                Spacing="6">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sección" />
+                <Picker 
+                    x:Name="SectionPicker"
+                    Grid.Column="0"
+                    VerticalTextAlignment="Center"
+                    ItemsSource="{Binding AvailableSections}" 
+                    ItemDisplayBinding="{Binding Name}"
+                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+            </VerticalStackLayout>
+            <VerticalStackLayout 
+                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=12}}"
+                Margin="8"
+                Spacing="6">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cláusula" />
+                <ContentView IsVisible="{Binding Clause, Converter={StaticResource IsNotNullConverter}}">
+                    <local_card_views:ClauseDefaultCardView BindingContext="{Binding Clause}" />
+                </ContentView>
+                <Button 
+                    HorizontalOptions="Start"
+                    Text="Selecionar ..." 
+                    Clicked="ClauseChangeButton_Clicked" />
+            </VerticalStackLayout>
+        </FlexLayout>
+    </ScrollView>
+</core_ui_base_pages:ConfigurationBaseContentPage>

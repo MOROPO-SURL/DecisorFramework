@@ -13,7 +13,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Input
 
         public Core.Interop.API.Common.Models.Input.DocumentInputModel RawDocument { get; set; }
 
-        public System.Collections.Generic.List<ProformaSectionClauseBridgeModel> Sections { get; set; }
+        public ProformaSectionClauseBridgeModel[] Sections { get; set; }
 
         public Persistence.Entities.Proforma Export()
         {
@@ -34,16 +34,6 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Input
             entity.EditedAt = System.DateTime.Now;
             entity.Name = Name;
             entity.Description = Description;
-
-            entity.ClauseBridges.Clear();
-
-            foreach (var model in Sections)
-            {
-                foreach (var _model in model.Clauses)
-                {
-                    entity.ClauseBridges.Add(new Persistence.Entities.ProformaClauseBridge { ProwId = entity.Id, SternId = _model.Id, SectionId = model.Section.Id });
-                }
-            }
         }
     }
 }

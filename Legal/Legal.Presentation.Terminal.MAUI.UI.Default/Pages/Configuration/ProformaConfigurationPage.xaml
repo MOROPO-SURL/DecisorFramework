@@ -6,13 +6,18 @@
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Legal.Interop.API.Common"
+    xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Legal.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ProformaConfigurationPage"
     x:TypeArguments="interop_common_display_models:ProformaDisplayModel,presentation_configuration_page_models:ProformaConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:ProformaConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" SingleSpacing="16" />
+
+            <communitytoolkit_converters:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -54,33 +59,113 @@
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=9, LargeContainerColumn=12}}"
                         Margin="8"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Documento Estático" />
-                        <Grid ColumnSpacing="8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            <Frame
-                                Grid.Column="0">
-                                <VerticalStackLayout>
-                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
-                                    <Label Text="{Binding RawDocument.Name, FallbackValue='---'}" />
-                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Margin="0,8,0,0" Text="Tipo" />
-                                    <Label Text="{Binding RawDocument.Extension, FallbackValue='---'}" />
-                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Margin="0,8,0,0" Text="Tamaño" />
-                                    <Label Text="{Binding RawDocument.Length, FallbackValue='---', StringFormat='{0} bytes'}" />
-                                </VerticalStackLayout>
-                            </Frame>
-                            <VerticalStackLayout Grid.Column="1" Spacing="8">
-                                <Button
-                                    Text="Seleccionar ..."
-                                    Clicked="RawDocumentPickButton_Clicked" />
-                                <Button
-                                    Text="Descartar" />                                
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Documento Estático (opcional)" />
+                        <Frame
+                            IsVisible="{Binding RawDocument, Converter={StaticResource IsNotNullConverter}}"
+                            Grid.Column="0">
+                            <VerticalStackLayout>
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                                <Label Text="{Binding RawDocument.Name, FallbackValue='---'}" />
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Margin="0,8,0,0" Text="Tipo" />
+                                <Label Text="{Binding RawDocument.Extension, FallbackValue='---'}" />
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Margin="0,8,0,0" Text="Tamaño" />
+                                <Label Text="{Binding RawDocument.Length, FallbackValue='---', StringFormat='{0} bytes'}" />
                             </VerticalStackLayout>
-                        </Grid>
+                        </Frame>
+                        <HorizontalStackLayout Grid.Column="1" Spacing="8">
+                            <Button
+                                IsVisible="{Binding RawDocument, Converter={StaticResource IsNotNullConverter}}"
+                                Text="Descartar" />
+                            <Button
+                                Text="Seleccionar ..."
+                                Clicked="RawDocumentPickButton_Clicked" />                                
+                        </HorizontalStackLayout>
                     </VerticalStackLayout>
                 </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="24,0,24,24"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Contenido Dinámico" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="AddClauseButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding Sections}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_bridge_models:ProformaSectionClauseBridgeModel">
+                                        <StackLayout 
+                                            Padding="8"
+                                            Spacing="8">
+                                            <Label 
+                                                Text="{Binding Section.Title}"
+                                                FontSize="Medium"
+                                                FontAttributes="Bold" />
+                                            <Label
+                                                IsVisible="{Binding Section.Content, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                                                Text="{Binding Section.Content}" />
+                                             <CollectionView ItemsSource="{Binding Clauses}">
+                                                 <CollectionView.ItemsLayout>
+                                                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                                 </CollectionView.ItemsLayout>
+                                                 <CollectionView.EmptyView>
+                                                     <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                                 </CollectionView.EmptyView>
+                                                 <CollectionView.ItemTemplate>
+                                                     <DataTemplate x:DataType="interop_common_display_models:ClauseDisplayModel">
+                                                        <Grid
+                                                            BackgroundColor="{AppThemeBinding Light=#AFFFFFFF, Dark=#60000000}"
+                                                            ColumnSpacing="8">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="4" />
+                                                                <ColumnDefinition />
+                                                                <ColumnDefinition Width="Auto" />
+                                                            </Grid.ColumnDefinitions>
+                                                            <BoxView
+                                                                Grid.Column="0"
+                                                                BackgroundColor="DimGray" />
+                                                            <Label 
+                                                                Grid.Column="1"
+                                                                Text="{Binding Content}" />
+                                                            <Button
+                                                                Grid.Column="2"
+                                                                Margin="8"
+                                                                VerticalOptions="Start"
+                                                                FontFamily="MaterialDesignIcons" Text="&#xF5AD;"
+                                                                Clicked="ClauseRemoveButton_Clicked" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                 </CollectionView.ItemTemplate>
+                                             </CollectionView>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>

@@ -5,6 +5,7 @@
         private string name;
         private string description;
         private Core.Interop.API.Common.Models.Display.DocumentDisplayModel rawDocument;
+        private System.Collections.ObjectModel.ObservableCollection<View.ProformaSectionClauseBridgeViewModel> sections = [];
 
         public ProformaConfigurationPageModel() : this(null) { }
 
@@ -16,6 +17,15 @@
                 Name = model.Name;
                 Description = model.Description;
                 RawDocument = model.RawDocument;
+
+                foreach (var item in model.Sections)
+                {
+                    Sections.Add(new View.ProformaSectionClauseBridgeViewModel
+                    {
+                        Section = item.Section,
+                        Clauses = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ClauseDisplayModel>(item.Clauses)
+                    });
+                }
 
                 if (model.RawDocument != null)
                 {
@@ -33,5 +43,7 @@
         public string Description { get => description; set => SetProperty(ref description, value); }
 
         public Core.Interop.API.Common.Models.Display.DocumentDisplayModel RawDocument { get => rawDocument; set => SetProperty(ref rawDocument, value); }
+
+        public System.Collections.ObjectModel.ObservableCollection<View.ProformaSectionClauseBridgeViewModel> Sections { get => sections; set => SetProperty(ref sections, value); }
     }
 }

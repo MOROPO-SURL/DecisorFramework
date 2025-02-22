@@ -5,6 +5,7 @@ using MOROPO.Framework.Decisor.Legal.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
+using static System.Collections.Specialized.BitVector32;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.API
 {
@@ -12,11 +13,13 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.A
     [ApiController]
     public class ProformasController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Proforma, System.Guid, ProformaInputModel, ProformaDisplayModel>
     {
+        private readonly IBridgeRepository<ProformaClauseBridge, Proforma, System.Guid, Clause, System.Guid> proformaClauseBridgeRepository;
         private readonly IEntityRepository<Document, System.Guid> documentRepository;
         private readonly IDocumentFileManagerFacade documentFileManager;
 
-        public ProformasController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<Proforma, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProformasController> localizer, Microsoft.Extensions.Logging.ILogger<ProformasController> logger) : base(repository, localizer, logger)
+        public ProformasController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IBridgeRepository<ProformaClauseBridge, Proforma, System.Guid, Clause, System.Guid> proformaClauseBridgeRepository, IEntityRepository<Proforma, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProformasController> localizer, Microsoft.Extensions.Logging.ILogger<ProformasController> logger) : base(repository, localizer, logger)
         {
+            this.proformaClauseBridgeRepository = proformaClauseBridgeRepository;
             this.documentRepository = documentRepository;
             this.documentFileManager = documentFileManager;
         }
@@ -52,6 +55,14 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.A
         {
             base.PreCreate(entity, model);
 
+            foreach (var _model in model.Sections)
+            {
+                foreach (var __model in _model.Clauses)
+                {
+                    entity.ClauseBridges.Add(new Persistence.Entities.ProformaClauseBridge { ProwId = entity.Id, SternId = __model.Id, SectionId = _model.Section.Id });
+                }
+            }
+
             if (model.RawDocument != null)
             {
                 entity.RawDocument = documentRepository.Add(new Document
@@ -69,6 +80,21 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.A
         protected override void PreEdit(Proforma entity, ProformaInputModel model)
         {
             base.PreEdit(entity, model);
+
+            foreach (var bridge in entity.ClauseBridges)
+            {
+                proformaClauseBridgeRepository.Delete(bridge, User.Identity.Name, false);
+            }
+
+            entity.ClauseBridges.Clear();
+
+            foreach (var _model in model.Sections)
+            {
+                foreach (var __model in _model.Clauses)
+                {
+                    entity.ClauseBridges.Add(new Persistence.Entities.ProformaClauseBridge { ProwId = entity.Id, SternId = __model.Id, SectionId = _model.Section.Id });
+                }
+            }
 
             if (model.RawDocument != null)
             {

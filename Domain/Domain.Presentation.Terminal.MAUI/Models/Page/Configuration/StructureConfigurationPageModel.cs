@@ -47,7 +47,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public Interop.API.Common.Models.Display.StructureParentalDisplayModel Parent { get => parent; set => SetProperty(ref parent, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel> OrganizationalUnities { get; set; } = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel>();
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel> OrganizationalUnities { get; set; } = [];
 
         public Interop.API.Common.Models.Display.StructureKindDisplayModel[] AvailableKinds { get; set; }
 

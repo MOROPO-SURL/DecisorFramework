@@ -1,5 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
@@ -23,7 +25,7 @@ public partial class ProformaConfigurationPage : Core.Presentation.Terminal.MAUI
             Id = System.Guid.NewGuid(),
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
-            Sections = []
+            Sections = ConcreteBindingContext.Sections.Select(item => new Interop.API.Common.Models.Bridge.ProformaSectionClauseBridgeModel { Section = item.Section, Clauses = item.Clauses.ToArray() }).ToArray()
         };
 
         if (rawDocumentFilePickResult != null)
@@ -55,7 +57,7 @@ public partial class ProformaConfigurationPage : Core.Presentation.Terminal.MAUI
             Id = ConcreteBindingContext.Id,
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
-            Sections = []
+            Sections = ConcreteBindingContext.Sections.Select(item => new Interop.API.Common.Models.Bridge.ProformaSectionClauseBridgeModel { Section = item.Section, Clauses = item.Clauses.ToArray() }).ToArray()
         };
 
         if (rawDocumentFilePickResult != null)
@@ -121,6 +123,83 @@ public partial class ProformaConfigurationPage : Core.Presentation.Terminal.MAUI
                     Extension = System.IO.Path.GetExtension(rawDocumentFilePickResult.FileName),
                     Length = lenght
                 };
+            });
+        });
+    }
+
+    private void AddClauseButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.SectionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        apiConnectClient.GetAsync().ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                if (task.Exception == null && !task.IsCanceled)
+                {
+                    var model = new Models.Page.Configuration.ProformaSectionClauseBridgeConfigurationPageModel(null)
+                    {
+                        AvailableSections = task.Result
+                    };
+
+                    this.NavigationPushPageAsync(new ProformaSectionClauseBridgeConfigurationPage(ClauseCreationSuccess_Callback, model));
+                }
+                else
+                {
+                    ((Caney.MVVM.Core.Models.Page.BasePageModel)BindingContext).IsBusy = false;
+
+                    HandleException(task.Exception);
+                }
+            });
+        });
+    }
+
+    private void ClauseCreationSuccess_Callback(Models.View.SectionClauseBridgeViewModel model)
+    {
+        var isSectionPresent = false;
+
+        foreach (var item in ConcreteBindingContext.Sections)
+        {
+            if (item.Section.Id != model.Section.Id) continue;
+
+            item.Clauses.Add(model.Clause);
+
+            item.Clauses = new System.Collections.ObjectModel.ObservableCollection<ClauseDisplayModel>(item.Clauses.OrderBy(_item => _item.Priority));
+
+            isSectionPresent = true;
+        }
+
+        if (!isSectionPresent)
+        {
+            var bridge = new Models.View.ProformaSectionClauseBridgeViewModel { Section = model.Section };
+
+            bridge.Clauses.Add(model.Clause);
+
+            ConcreteBindingContext.Sections.Add(bridge);
+
+            ConcreteBindingContext.Sections = new System.Collections.ObjectModel.ObservableCollection<Models.View.ProformaSectionClauseBridgeViewModel>(ConcreteBindingContext.Sections.OrderBy(_item => _item.Section.Priority));
+        }
+
+        hasChangesFlag = true;
+    }
+
+    private void ClauseRemoveButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar la cláusula especificada de la presente proforma?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var clause = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as ClauseDisplayModel;
+
+                var clausesGroup  = (sender as Microsoft.Maui.Controls.Button).Parent.Parent.BindingContext as Models.View.ProformaSectionClauseBridgeViewModel;
+
+                clausesGroup.Clauses.Remove(clause);
+
+                if (clausesGroup.Clauses.Count > 0) return;
+
+                ConcreteBindingContext.Sections.Remove(clausesGroup);
             });
         });
     }
