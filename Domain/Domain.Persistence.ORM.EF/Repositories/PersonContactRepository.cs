@@ -11,9 +11,7 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Repositories
 
         protected override System.Linq.IQueryable<PersonContact> GetQueryableDbSet()
         {
-            return base.GetQueryableDbSet()
-                .Include(entity => entity.Identity).ThenInclude(entity => entity.Image)
-                .Include(entity => entity.BusinessKind);
+            return base.GetQueryableDbSet().Include(entity => entity.Identity).ThenInclude(entity => entity.Image);
         }
     }
 }

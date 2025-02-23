@@ -33,8 +33,6 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public Guama.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
 
-        public System.Guid? BusinessKindId { get; set; }
-
         [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
         public string PersonalIdentificationNumber { get; set; }
 
@@ -62,12 +60,6 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             entity.Identity.Sex = Sex;
             entity.Identity.CivilStatus = CivilStatus;
             entity.PersonalIdentificationNumber = PersonalIdentificationNumber;
-
-            if (entity.BusinessKindId != BusinessKindId)
-            {
-                entity.BusinessKind = null;
-                entity.BusinessKindId = BusinessKindId;
-            }
         }
     }
 }

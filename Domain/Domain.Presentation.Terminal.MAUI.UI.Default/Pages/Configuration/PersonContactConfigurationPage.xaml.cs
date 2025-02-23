@@ -15,20 +15,6 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
     {
         InitializeComponent();
 
-        if (model.BusinessKind != null)
-        {
-            for (int i = 0; i < model.AvailableBusinessKinds.Length; i++)
-            {
-                var current = model.AvailableBusinessKinds[i];
-
-                if (model.BusinessKind.Id != current.Id) continue;
-
-                BusinessKindPicker.SelectedIndex = i;
-
-                break;
-            }
-        }
-
         for (int i = 0; i < model.AvailableSexs.Length; i++)
         {
             var current = model.AvailableSexs[i];
@@ -77,7 +63,6 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
             Sex = concreteBindingContext.AvailableSexs[SexPicker.SelectedIndex],
             CivilStatus = concreteBindingContext.AvailableCivilStatuses[CivilStatusPicker.SelectedIndex],
             Priority = concreteBindingContext.Priority,
-            BusinessKindId = BusinessKindPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
             PersonalIdentificationNumber = concreteBindingContext.PersonalIdentificationNumber,
             PhoneContacts = concreteBindingContext.PhoneContactItems.ToList(),
             EmailContacts = concreteBindingContext.EmailContactItems.ToList(),
@@ -117,7 +102,6 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
             Sex = concreteBindingContext.AvailableSexs[SexPicker.SelectedIndex],
             CivilStatus = concreteBindingContext.AvailableCivilStatuses[CivilStatusPicker.SelectedIndex],
             Priority = concreteBindingContext.Priority,
-            BusinessKindId = BusinessKindPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
             PersonalIdentificationNumber = concreteBindingContext.PersonalIdentificationNumber,
             PhoneContacts = concreteBindingContext.PhoneContactItems.ToList(),
             EmailContacts = concreteBindingContext.EmailContactItems.ToList(),
@@ -129,7 +113,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
         {
             model.Image = new Core.Interop.API.Common.Models.Input.ImageInputModel
             {
-                Id = concreteBindingContext.ImageId ?? System.Guid.NewGuid(),
+                Id = concreteBindingContext.ImageId ?? default,
                 ContentData = imagePickedData,
                 ContentType = imageContentType,
                 About = $"{EntityTypeName} {model.Id}"

@@ -97,7 +97,7 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
         {
             model.Image = new Core.Interop.API.Common.Models.Input.ImageInputModel
             {
-                Id = ConcreteBindingContext.ImageId ?? System.Guid.NewGuid(),
+                Id = ConcreteBindingContext.ImageId ?? default,
                 ContentData = imagePickedData,
                 ContentType = imageContentType,
                 About = $"{EntityTypeName} {model.Id}"

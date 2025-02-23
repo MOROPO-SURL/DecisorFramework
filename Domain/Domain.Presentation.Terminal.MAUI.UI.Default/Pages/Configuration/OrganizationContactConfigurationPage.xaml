@@ -1,14 +1,21 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <core_ui_base_pages:ConfigurationBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.OrganizationContactConfigurationPage"
     x:TypeArguments="interop_common_display_models:OrganizationContactDisplayModel,presentation_configuration_page_models:OrganizationContactConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:OrganizationContactConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="RootFlexLayoutItemResponsiveWithConverter" SingleSpacing="4" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrappedFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="4" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
         Text="Aplicar"
@@ -27,102 +34,84 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <Grid 
-                Padding="20"
-                ColumnSpacing="16" RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Grid 
-                    Grid.ColumnSpan="3" Grid.Row="0"
-                    VerticalOptions="Start"
-                    ColumnSpacing="16" RowSpacing="16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition Width="2*" />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <VerticalStackLayout
-                        Grid.ColumnSpan="2" Grid.Row="0"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
-                        <Entry Text="{Binding Name}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout
-                        Grid.Column="0" Grid.Row="1"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Siglas (opcional)" />
-                        <Entry Text="{Binding Alias}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout 
-                        Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
-                        <Picker 
-                            x:Name="BusinessKindPicker"
-                            ItemsSource="{Binding AvailableBusinessKinds, Mode=OneTime}" 
-                            ItemDisplayBinding="{Binding Name}"
-                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout 
-                        Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha de fundación" />
-                        <Switch IsToggled="{Binding IsSettedBornDate}" />
-                        <DatePicker
-                            HorizontalOptions="FillAndExpand"
-                            IsEnabled="{Binding IsSettedBornDate}"
-                            IsVisible="{Binding IsSettedBornDate}"
-                            Date="{Binding BornDate}" />
-                    </VerticalStackLayout>
-                </Grid>
-                <Frame
-                    Grid.Column="3" Grid.Row="0"
-                    VerticalOptions="Start"
-                    Padding="0"
-                    HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
-                    <Grid>
-                        <Image Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
-                        <Grid BackgroundColor="#A7000000">
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />
-                            </Grid.GestureRecognizers>
-                            <Label
-                                Text="&#xF8CB;"
-                                TextColor="White"
-                                HorizontalOptions="Center" VerticalOptions="Center"
-                                FontFamily="MaterialDesignIcons"
-                                FontSize="96" />
+            <VerticalStackLayout Spacing="0" Padding="8">
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}}"
+                        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
+                        VerticalOptions="Start"
+                        Margin="4"
+                        Padding="0">
+                        <Grid>
+                            <Image Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
+                            <Grid BackgroundColor="#A7000000">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />
+                                </Grid.GestureRecognizers>
+                                <Label
+                                    Text="&#xF8CB;"
+                                    TextColor="White"
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="96" />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Frame>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="4" Grid.Row="1">
+                    </Frame>
+                    <VerticalStackLayout WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=9, LargeContainerColumn=8, MediumContainerColumn=12}}">
+                        <VerticalStackLayout 
+                            Margin="4"
+                            Spacing="6">
+                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                            <Entry Text="{Binding Name}" />
+                        </VerticalStackLayout>
+                        <FlexLayout 
+                            Wrap="Wrap"
+                            AlignItems="Start" AlignContent="Start">
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                Margin="4"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Alias (opcional)" />
+                                <Entry Text="{Binding Alias}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=9, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                Margin="4"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Estado Civil" />
+                                <Picker 
+                                    x:Name="BusinessKindPicker"
+                                    ItemsSource="{Binding AvailableBusinessKinds, Mode=OneTime}" 
+                                    ItemDisplayBinding="{Binding Name}"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                            </VerticalStackLayout>
+                        </FlexLayout>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
                     <Editor Text="{Binding About}" HeightRequest="200" />
                 </VerticalStackLayout>
                 <BoxView 
-                    Grid.ColumnSpan="4" Grid.Row="2" 
-                    Margin="0,8,0,0"
+                    Margin="8,16,8,8"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="3">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                </VerticalStackLayout>
-            </Grid>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+            </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>

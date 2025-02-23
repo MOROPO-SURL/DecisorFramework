@@ -15,7 +15,6 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private Sex sex;
         private CivilStatus civilStatus;
         private int priority = 1;
-        private NaturalBusinessKindDisplayModel businessKind;
         private string personalIdentificationNumber;
         private Microsoft.Maui.Controls.ImageSource imageSource;
 
@@ -33,7 +32,6 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
                 Sex = model.Identity.Sex;
                 CivilStatus = model.Identity.CivilStatus;
                 Priority = model.Priority;
-                BusinessKind = model.BusinessKind;
                 PersonalIdentificationNumber = model.PersonalIdentificationNumber;
 
                 foreach (var item in model.Identity.EmailContacts) EmailContactItems.Add(item);
@@ -70,8 +68,6 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public NaturalBusinessKindDisplayModel BusinessKind { get => businessKind; set => SetProperty(ref businessKind, value); }
-
         public string PersonalIdentificationNumber { get => personalIdentificationNumber; set => SetProperty(ref personalIdentificationNumber, value); }
 
         public Microsoft.Maui.Controls.ImageSource ImageSource { get => imageSource; set => SetProperty(ref imageSource, value); }
@@ -84,14 +80,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public ObservableCollection<PostalContactItemDisplayModel> PostalContactItems { get; set; } = new ObservableCollection<PostalContactItemDisplayModel>();
 
-        public NaturalBusinessKindDisplayModel[] AvailableBusinessKinds { get; set; }
+        public Sex[] AvailableSexs { get; private set; } = [Sex.Unknown, Sex.Male, Sex.Famale];
 
-        public StateDisplayModel[] AvailableStates { get; set; }
-
-        public ObservableCollection<MunicipalityDisplayModel> AvailableMunicipalities { get; set; } = new ObservableCollection<MunicipalityDisplayModel>();
-
-        public Sex[] AvailableSexs { get; private set; } = new Sex[] { Sex.Unknown, Sex.Male, Sex.Famale };
-
-        public CivilStatus[] AvailableCivilStatuses { get; private set; } = new CivilStatus[] { CivilStatus.Single, CivilStatus.Married, CivilStatus.Divorced, CivilStatus.Widower, CivilStatus.Unknow };
+        public CivilStatus[] AvailableCivilStatuses { get; private set; } = [CivilStatus.Single, CivilStatus.Married, CivilStatus.Divorced, CivilStatus.Widower, CivilStatus.Unknow];
     }
 }

@@ -301,14 +301,18 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
         {
             base.PostEdit(entity, model);
 
-            if (model.Image != null)
+            try
             {
-                var oldLogoImage = imageRepository.Get(model.Image.Id);
+                if (model.Image != null)
+                {
+                    var oldLogoImage = imageRepository.Get(model.Image.Id);
 
-                imageRepository.Delete(oldLogoImage, User.Identity.Name);
+                    imageRepository.Delete(oldLogoImage, User.Identity.Name);
 
-                imageFileManager.DeleteImageFile(oldLogoImage);
+                    imageFileManager.DeleteImageFile(oldLogoImage);
+                }
             }
+            catch { }
         }
     }
 }

@@ -122,7 +122,7 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
         {
             model.FeatureImage = new Core.Interop.API.Common.Models.Input.ImageInputModel
             {
-                Id = ConcreteBindingContext.FeatureImageId ?? System.Guid.NewGuid(),
+                Id = ConcreteBindingContext.FeatureImageId ?? default,
                 ContentData = imagePickedData,
                 ContentType = imageContentType,
                 About = $"{EntityTypeName} {model.Id}"

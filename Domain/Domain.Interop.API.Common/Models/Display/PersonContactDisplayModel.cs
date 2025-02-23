@@ -23,13 +23,6 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 
                 Identity.Import(entity.Identity);
             }
-
-            if (entity.BusinessKind != null)
-            {
-                BusinessKind = new NaturalBusinessKindDisplayModel();
-
-                BusinessKind.Import(entity.BusinessKind);
-            }
         }
 
         public override string ToString()

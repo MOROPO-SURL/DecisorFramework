@@ -13,6 +13,8 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.
 
         public PersonContactDisplayModel Contact { get; set; }
 
+        public NaturalBusinessKindDisplayModel BusinessKind { get; set; }
+
         public virtual void Import(TEntity entity)
         {
             Id = entity.Id;
@@ -24,6 +26,13 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.
                 Contact = new PersonContactDisplayModel();
 
                 Contact.Import(entity.Contact);
+            }
+
+            if (entity.BusinessKind != null)
+            {
+                BusinessKind = new NaturalBusinessKindDisplayModel();
+
+                BusinessKind.Import(entity.BusinessKind);
             }
         }
 

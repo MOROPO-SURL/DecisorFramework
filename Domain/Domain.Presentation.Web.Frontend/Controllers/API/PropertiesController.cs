@@ -153,14 +153,18 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
         {
             base.PostEdit(entity, model);
 
-            if (model.FeatureImage != null)
+            try
             {
-                var oldLogoImage = imageRepository.Get(model.FeatureImage.Id);
+                if (model.FeatureImage != null)
+                {
+                    var oldLogoImage = imageRepository.Get(model.FeatureImage.Id);
 
-                imageRepository.Delete(oldLogoImage, User.Identity.Name);
+                    imageRepository.Delete(oldLogoImage, User.Identity.Name);
 
-                imageFileManager.DeleteImageFile(oldLogoImage);
+                    imageFileManager.DeleteImageFile(oldLogoImage);
+                }
             }
+            catch { }
         }
     }
 }

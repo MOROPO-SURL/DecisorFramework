@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <core_ui_base_pages:ConfigurationBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -13,7 +12,8 @@
     x:DataType="presentation_configuration_page_models:PersonContactConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" SingleSpacing="16" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="RootFlexLayoutItemResponsiveWithConverter" SingleSpacing="4" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrappedFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="4" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -34,16 +34,15 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <VerticalStackLayout Spacing="0">
+            <VerticalStackLayout Spacing="0" Padding="8">
                 <FlexLayout 
-                    Margin="8"
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <Frame
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}}"
                         HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
                         VerticalOptions="Start"
-                        Margin="8"
+                        Margin="4"
                         Padding="0">
                         <Grid>
                             <Image Source="{Binding ImageSource, TargetNullValue='default_person_picture.jpg'}" />
@@ -60,42 +59,41 @@
                             </Grid>
                         </Grid>
                     </Frame>
-                    <ContentView 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=9, LargeContainerColumn=8, MediumContainerColumn=12}}">
+                    <VerticalStackLayout WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=9, LargeContainerColumn=8, MediumContainerColumn=12}}">
                         <FlexLayout 
-                            Margin="4"
-                            Wrap="Wrap">
+                            Wrap="Wrap"
+                            AlignItems="Start" AlignContent="Start">
                             <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=12}}"
-                                Margin="4,8"
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=12}}"
+                                Margin="4"
                                 Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                                 <Entry Text="{Binding Name}" />
                             </VerticalStackLayout>
                             <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=12}}"
-                                Margin="4,8"
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=12}}"
+                                Margin="4"
                                 Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Apellidos" />
                                 <Entry Text="{Binding LastName}" />
                             </VerticalStackLayout>
                             <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4,8"
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                Margin="4"
                                 Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Identificador personal (opcional)" />
                                 <Entry Text="{Binding PersonalIdentificationNumber}" />
                             </VerticalStackLayout>
                             <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4,8"
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                Margin="4"
                                 Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Alias (opcional)" />
                                 <Entry Text="{Binding Alias}" />
                             </VerticalStackLayout>
                             <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4,8"
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                Margin="4"
                                 Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sexo" />
                                 <Picker 
@@ -104,8 +102,8 @@
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
                             </VerticalStackLayout>
                             <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4,8"
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                Margin="4"
                                 Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Estado Civil" />
                                 <Picker 
@@ -113,37 +111,25 @@
                                     ItemsSource="{Binding AvailableCivilStatuses}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
                             </VerticalStackLayout>
-                            <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=12}}"
-                                Margin="4,8"
-                                Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo de negocio (opcional)" />
-                                <Picker 
-                                    x:Name="BusinessKindPicker" 
-                                    ItemsSource="{Binding AvailableBusinessKinds}" 
-                                    ItemDisplayBinding="{Binding Name}"
-                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                            </VerticalStackLayout>
                         </FlexLayout>
-                    </ContentView>
+                    </VerticalStackLayout>
                 </FlexLayout>
                 <VerticalStackLayout 
-                    Margin="24,16"
+                    Margin="8"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
                     <Editor Text="{Binding About}" HeightRequest="200" />
                 </VerticalStackLayout>
                 <BoxView 
-                    Margin="24,16,24,0"
+                    Margin="8,16,8,8"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
                 <FlexLayout 
-                    Margin="8"
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
-                        Margin="8"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
                         <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
