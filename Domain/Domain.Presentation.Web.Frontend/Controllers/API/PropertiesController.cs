@@ -47,7 +47,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
         {
             var model = base.EntityToDisplayModel(entity);
 
-            var municipality = municipalityRepository.Get((entity.PostalContact.Location as Guama.Location.Persistence.Entities.MunicipalityLocation).MunicipalityId.Value);
+            var municipality = municipalityRepository.Get((entity.PostalContact.Location as MunicipalityLocation).MunicipalityId.Value);
 
             model.PostalContact.Municipality = new Core.Interop.API.Common.Models.Display.MunicipalityDisplayModel();
 

@@ -1,4 +1,5 @@
-﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using System.Collections.Generic;
 
@@ -17,13 +18,11 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public ImageInputModel Image { get; set; }
 
-        public List<Core.Interop.API.Common.Models.Display.EmailContactItemDisplayModel> EmailContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.EmailContactItemDisplayModel>();
+        //public List<Core.Interop.API.Common.Models.Display.EmailContactItemDisplayModel> EmailContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.EmailContactItemDisplayModel>();
 
-        public List<Core.Interop.API.Common.Models.Display.PhoneContactItemDisplayModel> PhoneContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.PhoneContactItemDisplayModel>();
+        //public List<Core.Interop.API.Common.Models.Display.PhoneContactItemDisplayModel> PhoneContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.PhoneContactItemDisplayModel>();
 
-        public List<Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel> PostalContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel>();
-
-        public List<Core.Interop.API.Common.Models.Display.WebContactItemDisplayModel> WebContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.WebContactItemDisplayModel>();
+        //public List<Core.Interop.API.Common.Models.Display.WebContactItemDisplayModel> WebContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.WebContactItemDisplayModel>();
 
         public string LastName { get; set; }
 
@@ -35,6 +34,10 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
         public string PersonalIdentificationNumber { get; set; }
+
+        public List<PostalContactItemInputModel> EditionPostalContactItems { get; set; } = new List<PostalContactItemInputModel>();
+        public List<PostalContactItemInputModel> IncomingPostalContactItems { get; set; } = new List<PostalContactItemInputModel>();
+        public List<PostalContactItemDisplayModel> OutgoingPostalContactItems { get; set; } = new List<PostalContactItemDisplayModel>();
 
         public PersonContact Export()
         {

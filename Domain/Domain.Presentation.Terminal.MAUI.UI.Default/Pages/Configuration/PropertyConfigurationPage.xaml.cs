@@ -66,7 +66,7 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
             Area = ConcreteBindingContext.Area,
             Description = ConcreteBindingContext.Description,
-            PostalContact = new Core.Interop.API.Common.Models.Input.PostalContactInputModel
+            PostalContact = new Core.Interop.API.Common.Models.Input.PostalContactItemInputModel
             {
                 Label = ConcreteBindingContext.PostalContact.Label,
                 Address = ConcreteBindingContext.PostalContact.Address,
@@ -107,7 +107,7 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
             Area = ConcreteBindingContext.Area,
             Description = ConcreteBindingContext.Description,
-            PostalContact = new Core.Interop.API.Common.Models.Input.PostalContactInputModel
+            PostalContact = new Core.Interop.API.Common.Models.Input.PostalContactItemInputModel
             {
                 Label = ConcreteBindingContext.PostalContact.Label,
                 Address = ConcreteBindingContext.PostalContact.Address,

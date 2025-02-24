@@ -1,7 +1,9 @@
 ﻿namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input
 {
-    public class PostalContactInputModel
+    public class PostalContactItemInputModel
     {
+        public System.Guid Id { get; set; }
+
         public System.Guid MunicipalityId { get; set; }
 
         public string Label { get; set; }

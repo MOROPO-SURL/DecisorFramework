@@ -24,6 +24,8 @@
             ZipCode = entity.ZipCode;
             Longitude = entity.Longitude;
             Latitude = entity.Latitude;
+
+            Municipality = new MunicipalityDisplayModel { Id = (entity.Location as Guama.Location.Persistence.Entities.MunicipalityLocation).MunicipalityId.Value };
         }
     }
 }

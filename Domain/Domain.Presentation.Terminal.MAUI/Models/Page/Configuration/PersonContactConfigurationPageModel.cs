@@ -72,13 +72,13 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public Microsoft.Maui.Controls.ImageSource ImageSource { get => imageSource; set => SetProperty(ref imageSource, value); }
 
-        public ObservableCollection<EmailContactItemDisplayModel> EmailContactItems { get; set; } = new ObservableCollection<EmailContactItemDisplayModel>();
+        public ObservableCollection<EmailContactItemDisplayModel> EmailContactItems { get; set; } = [];
 
-        public ObservableCollection<PhoneContactItemDisplayModel> PhoneContactItems { get; set; } = new ObservableCollection<PhoneContactItemDisplayModel>();
+        public ObservableCollection<PhoneContactItemDisplayModel> PhoneContactItems { get; set; } = [];
 
-        public ObservableCollection<WebContactItemDisplayModel> WebContactItems { get; set; } = new ObservableCollection<WebContactItemDisplayModel>();
+        public ObservableCollection<WebContactItemDisplayModel> WebContactItems { get; set; } = [];
 
-        public ObservableCollection<PostalContactItemDisplayModel> PostalContactItems { get; set; } = new ObservableCollection<PostalContactItemDisplayModel>();
+        public ObservableCollection<PostalContactItemDisplayModel> PostalContactItems { get; set; } = [];
 
         public Sex[] AvailableSexs { get; private set; } = [Sex.Unknown, Sex.Male, Sex.Famale];
 
