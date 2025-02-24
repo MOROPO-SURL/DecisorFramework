@@ -307,7 +307,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 
             foreach (var _model in model.OutgoingPostalContactItems)
             {
-                postalContactRepository.Delete(new PostalContactItem { Id = _model.Id }, User.Identity.Name, false);
+                var _entity = entity.Identity.PostalContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                postalContactRepository.Delete(_entity, User.Identity.Name, false);
             }
 
             foreach (var _model in model.EditionPostalContactItems)

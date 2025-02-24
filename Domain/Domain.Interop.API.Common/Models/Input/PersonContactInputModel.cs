@@ -18,12 +18,6 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public ImageInputModel Image { get; set; }
 
-        //public List<Core.Interop.API.Common.Models.Display.EmailContactItemDisplayModel> EmailContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.EmailContactItemDisplayModel>();
-
-        //public List<Core.Interop.API.Common.Models.Display.PhoneContactItemDisplayModel> PhoneContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.PhoneContactItemDisplayModel>();
-
-        //public List<Core.Interop.API.Common.Models.Display.WebContactItemDisplayModel> WebContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.WebContactItemDisplayModel>();
-
         public string LastName { get; set; }
 
         public string Alias { get; set; }

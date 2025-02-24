@@ -6,6 +6,7 @@ using MOROPO.Framework.Guama.Identity.Persistence.Entities;
 using MOROPO.Framework.Guama.Location.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
@@ -18,16 +19,18 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
         private readonly IEntityRepository<PostalContactItem, System.Guid> postalContactRepository;
         private readonly IEntityRepository<WebSiteContactItem, System.Guid> webSiteContactRepository;
         private readonly IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository;
+        private readonly IEntityRepository<Municipality, System.Guid> municipalityRepository;
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
         private readonly IImageFileManagerFacade imageFileManager;
 
-        public OrganizationContactsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<WebSiteContactItem, System.Guid> webSiteContactRepository, IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository, IEntityRepository<EmailContactItem, System.Guid> emailContactRepository, IEntityRepository<OrganizationContact, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OrganizationContactsController> localizer, Microsoft.Extensions.Logging.ILogger<OrganizationContactsController> logger) : base(repository, localizer, logger)
+        public OrganizationContactsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<WebSiteContactItem, System.Guid> webSiteContactRepository, IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository, IEntityRepository<EmailContactItem, System.Guid> emailContactRepository, IEntityRepository<OrganizationContact, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OrganizationContactsController> localizer, Microsoft.Extensions.Logging.ILogger<OrganizationContactsController> logger) : base(repository, localizer, logger)
         {
             this.emailContactRepository = emailContactRepository;
             this.phoneContactRepository = phoneContactRepository;
             this.postalContactRepository = postalContactRepository;
             this.webSiteContactRepository = webSiteContactRepository;
             this.municipalityLocationRepository = municipalityLocationRepository;
+            this.municipalityRepository = municipalityRepository;
             this.imageRepository = imageRepository;
             this.imageFileManager = imageFileManager;
         }
@@ -54,6 +57,15 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
             if (model.Identity.Image != null)
             {
                 model.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Identity.Image.ContentType);
+            }
+
+            foreach (var _model in model.Identity.PostalContacts)
+            {
+                var municipality = municipalityRepository.Get(_model.Municipality.Id);
+
+                _model.Municipality = new Core.Interop.API.Common.Models.Display.MunicipalityDisplayModel();
+
+                _model.Municipality.Import(municipality);
             }
 
             return model;
@@ -83,94 +95,34 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                 imageFileManager.SaveImageFileContent(entity.Identity.Image.Id, model.Image.ContentData, model.Image.ContentType);
             }
 
-            if (model.EmailContacts != null)
+            foreach (var _model in model.IncomingPostalContactItems)
             {
-                foreach (var item in model.EmailContacts)
+                var municipalityLocation = municipalityLocationRepository.FindOneBy(_entity => _entity.MunicipalityId == _model.MunicipalityId);
+
+                if (municipalityLocation == null)
                 {
-                    var _entity = emailContactRepository.Add(new EmailContactItem
+                    municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
                     {
-                        Id = item.Id,
-                        Label = item.Label,
-                        EmailAddress = item.EmailAddress
+                        MunicipalityId = _model.MunicipalityId
                     }, User.Identity.Name, false);
-
-                    entity.Identity.EmailContactItemBridges.Add(new OrganizationEmailContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
                 }
-            }
 
-            if (model.PhoneContacts != null)
-            {
-                foreach (var item in model.PhoneContacts)
+                var _entity = postalContactRepository.Add(new PostalContactItem
                 {
-                    var _entity = phoneContactRepository.Add(new PhoneContactItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        PhoneNumber = item.PhoneNumber
-                    }, User.Identity.Name, false);
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    Address = _model.Address,
+                    ZipCode = _model.ZipCode,
+                    Latitude = _model.Latitude,
+                    Longitude = _model.Longitude,
+                    LocationId = municipalityLocation.Id
+                }, User.Identity.Name, false);
 
-                    entity.Identity.PhoneContactItemBridges.Add(new OrganizationPhoneContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
-                }
-            }
-
-            if (model.WebContacts != null)
-            {
-                foreach (var item in model.WebContacts)
+                entity.Identity.PostalContactItemBridges.Add(new OrganizationPostalContactItemBridge
                 {
-                    var _entity = webSiteContactRepository.Add(new WebSiteContactItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        Url = item.Url
-                    }, User.Identity.Name, false);
-
-                    entity.Identity.WebSiteContactItemBridges.Add(new OrganizationWebSiteContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
-                }
-            }
-
-            if (model.PostalContacts != null)
-            {
-                foreach (var item in model.PostalContacts)
-                {
-                    var municipalityLocation = municipalityLocationRepository.FindOneBy(__entity => __entity.MunicipalityId == item.Municipality.Id);
-
-                    if (municipalityLocation == null)
-                    {
-                        municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
-                        {
-                            MunicipalityId = item.Municipality.Id
-                        }, User.Identity.Name, false);
-                    }
-
-                    var _entity = postalContactRepository.Add(new PostalContactItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        Address = item.Address,
-                        ZipCode = item.ZipCode,
-                        Latitude = item.Latitude,
-                        Longitude = item.Longitude,
-                        LocationId = municipalityLocation.Id
-                    }, User.Identity.Name, false);
-
-                    entity.Identity.PostalContactItemBridges.Add(new OrganizationPostalContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
-                }
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
             }
         }
 
@@ -198,102 +150,70 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                 imageFileManager.SaveImageFileContent(entity.Identity.Image.Id, model.Image.ContentData, model.Image.ContentType);
             }
 
-            if (model.EmailContacts != null)
+            foreach (var _model in model.OutgoingPostalContactItems)
             {
-                entity.Identity.EmailContactItemBridges.Clear();
+                var _entity = entity.Identity.PostalContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
 
-                foreach (var item in model.EmailContacts)
-                {
-                    var _entity = emailContactRepository.Add(new EmailContactItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        EmailAddress = item.EmailAddress
-                    }, User.Identity.Name, false);
-
-                    entity.Identity.EmailContactItemBridges.Add(new OrganizationEmailContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
-                }
+                postalContactRepository.Delete(_entity, User.Identity.Name, false);
             }
 
-            if (model.PhoneContacts != null)
+            foreach (var _model in model.EditionPostalContactItems)
             {
-                entity.Identity.PhoneContactItemBridges.Clear();
+                var municipalityLocation = municipalityLocationRepository.FindOneBy(_entity => _entity.MunicipalityId == _model.MunicipalityId);
 
-                foreach (var item in model.PhoneContacts)
+                if (municipalityLocation == null)
                 {
-                    var _entity = phoneContactRepository.Add(new PhoneContactItem
+                    municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
                     {
-                        Id = item.Id,
-                        Label = item.Label,
-                        PhoneNumber = item.PhoneNumber
+                        MunicipalityId = _model.MunicipalityId
                     }, User.Identity.Name, false);
-
-                    entity.Identity.PhoneContactItemBridges.Add(new OrganizationPhoneContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
                 }
+
+                var _entity = entity.Identity.PostalContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                _entity.Label = _model.Label;
+                _entity.Address = _model.Address;
+                _entity.ZipCode = _model.ZipCode;
+                _entity.Latitude = _model.Latitude;
+                _entity.Longitude = _model.Longitude;
+
+                if (_entity.LocationId != municipalityLocation.Id)
+                {
+                    _entity.Location = null;
+                    _entity.LocationId = municipalityLocation.Id;
+                }
+
+                postalContactRepository.Update(_entity, User.Identity.Name, false);
             }
 
-            if (model.WebContacts != null)
+            foreach (var _model in model.IncomingPostalContactItems)
             {
-                entity.Identity.WebSiteContactItemBridges.Clear();
+                var municipalityLocation = municipalityLocationRepository.FindOneBy(_entity => _entity.MunicipalityId == _model.MunicipalityId);
 
-                foreach (var item in model.WebContacts)
+                if (municipalityLocation == null)
                 {
-                    var _entity = webSiteContactRepository.Add(new WebSiteContactItem
+                    municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
                     {
-                        Id = item.Id,
-                        Label = item.Label,
-                        Url = item.Url
+                        MunicipalityId = _model.MunicipalityId
                     }, User.Identity.Name, false);
-
-                    entity.Identity.WebSiteContactItemBridges.Add(new OrganizationWebSiteContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
                 }
-            }
 
-            if (model.PostalContacts != null)
-            {
-                entity.Identity.PostalContactItemBridges.Clear();
-
-                foreach (var item in model.PostalContacts)
+                var _entity = postalContactRepository.Add(new PostalContactItem
                 {
-                    var municipalityLocation = municipalityLocationRepository.FindOneBy(__entity => __entity.MunicipalityId == item.Municipality.Id);
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    Address = _model.Address,
+                    ZipCode = _model.ZipCode,
+                    Latitude = _model.Latitude,
+                    Longitude = _model.Longitude,
+                    LocationId = municipalityLocation.Id
+                }, User.Identity.Name, false);
 
-                    if (municipalityLocation == null)
-                    {
-                        municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
-                        {
-                            MunicipalityId = item.Municipality.Id
-                        }, User.Identity.Name, false);
-                    }
-
-                    var _entity = postalContactRepository.Add(new PostalContactItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        Address = item.Address,
-                        ZipCode = item.ZipCode,
-                        Latitude = item.Latitude,
-                        Longitude = item.Longitude,
-                        LocationId = municipalityLocation.Id
-                    }, User.Identity.Name, false);
-
-                    entity.Identity.PostalContactItemBridges.Add(new OrganizationPostalContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
-                }
+                entity.Identity.PostalContactItemBridges.Add(new OrganizationPostalContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
             }
         }
 
@@ -315,18 +235,19 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
             catch { }
         }
 
-        protected override void PostDelete(OrganizationContact entity)
-        {
-            base.PostDelete(entity);
+        // TODO Transpolate to backend !!!
+        //protected override void PostDelete(OrganizationContact entity)
+        //{
+        //    base.PostDelete(entity);
 
-            if (entity.Identity.ImageId != null)
-            {
-                var oldImage = imageRepository.Get(entity.Identity.ImageId.Value);
+        //    if (entity.Identity.ImageId != null)
+        //    {
+        //        var oldImage = imageRepository.Get(entity.Identity.ImageId.Value);
 
-                imageRepository.Delete(oldImage, User.Identity.Name);
+        //        imageRepository.Delete(oldImage, User.Identity.Name);
 
-                imageFileManager.DeleteImageFile(oldImage);
-            }
-        }
+        //        imageFileManager.DeleteImageFile(oldImage);
+        //    }
+        //}
     }
 }

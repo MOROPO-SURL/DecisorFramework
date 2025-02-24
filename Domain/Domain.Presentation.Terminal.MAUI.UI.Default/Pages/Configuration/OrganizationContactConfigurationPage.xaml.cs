@@ -1,7 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
@@ -10,6 +13,10 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
 {
     private byte[] imagePickedData;
     private string imageContentType;
+
+    private readonly List<PostalContactItemInputModel> editionPostalContactItems = [];
+    private readonly List<PostalContactItemInputModel> incomingPostalContactItems = [];
+    private readonly List<PostalContactItemDisplayModel> outgoingPostalContactItems = [];
 
     public OrganizationContactConfigurationPage(System.Action<OrganizationContactDisplayModel> successAction, Models.Page.Configuration.OrganizationContactConfigurationPageModel model) : base(successAction, model)
     {
@@ -52,10 +59,7 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
             Priority = ConcreteBindingContext.Priority,
             BornDate = ConcreteBindingContext.IsSettedBornDate ? ConcreteBindingContext.BornDate : null,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
-            PhoneContacts = ConcreteBindingContext.PhoneContactItems.ToList(),
-            EmailContacts = ConcreteBindingContext.EmailContactItems.ToList(),
-            PostalContacts = ConcreteBindingContext.PostalContactItems.ToList(),
-            WebContacts = ConcreteBindingContext.WebContactItems.ToList()
+            IncomingPostalContactItems = incomingPostalContactItems
         };
 
         if (imagePickedData != null)
@@ -87,10 +91,9 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
             Priority = ConcreteBindingContext.Priority,
             BornDate = ConcreteBindingContext.IsSettedBornDate ? ConcreteBindingContext.BornDate : null,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
-            PhoneContacts = ConcreteBindingContext.PhoneContactItems.ToList(),
-            EmailContacts = ConcreteBindingContext.EmailContactItems.ToList(),
-            PostalContacts = ConcreteBindingContext.PostalContactItems.ToList(),
-            WebContacts = ConcreteBindingContext.WebContactItems.ToList()
+            EditionPostalContactItems = editionPostalContactItems,
+            IncomingPostalContactItems = incomingPostalContactItems,
+            OutgoingPostalContactItems = outgoingPostalContactItems
         };
 
         if (imagePickedData != null)
@@ -161,6 +164,210 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
         {
             PresentForImagePick();
         }
+    }
+
+    private void PostalContactItemAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var statesAPIConnectClient = new Core.Interop.API.Connect.Clients.StatesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                var model = new Core.Presentation.Terminal.MAUI.Models.Page.Configuration.PostalContactConfigurationPageModel(null)
+                {
+                    AvailableStates = await statesAPIConnectClient.GetAsync()
+                };
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PostalContactConfigurationPage(PostalContactItemCreateSuccess_Callback, model));
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        });
+    }
+
+    private void PostalContactItemEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+                var statesAPIConnectClient = new Core.Interop.API.Connect.Clients.StatesAPIConnectClient(httpClientHelperProvider);
+                var municipalitiesAPIConnectClient = new Core.Interop.API.Connect.Clients.MunicipalitiesAPIConnectClient(httpClientHelperProvider);
+
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PostalContactItemDisplayModel;
+
+                var model = new Core.Presentation.Terminal.MAUI.Models.Page.Configuration.PostalContactConfigurationPageModel(target)
+                {
+                    AvailableStates = await statesAPIConnectClient.GetAsync(),
+                    AvailableMunicipalities = new System.Collections.ObjectModel.ObservableCollection<MunicipalityDisplayModel>(await municipalitiesAPIConnectClient.FilterAsync(new Core.Interop.API.Common.Models.Filter.MunicipalityFilterModel { StateId = target.Municipality.State.Id }))
+                };
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PostalContactConfigurationPage(PostalContactItemEditSuccess_Callback, model));
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        });
+    }
+
+    private void PostalContactItemRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta dirección postal?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PostalContactItemDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingPostalContactItems)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingPostalContactItems.Remove(editionPostalContactItems.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionPostalContactItems)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionPostalContactItems.Remove(editionPostalContactItems.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingPostalContactItems.Add(target);
+                }
+
+                ConcreteBindingContext.PostalContactItems.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void PostalContactItemCreateSuccess_Callback(PostalContactItemDisplayModel model)
+    {
+        incomingPostalContactItems.Add(new PostalContactItemInputModel
+        {
+            Id = model.Id,
+            Label = model.Label,
+            Address = model.Address,
+            ZipCode = model.ZipCode,
+            MunicipalityId = model.Municipality.Id,
+            Latitude = model.Latitude,
+            Longitude = model.Longitude
+        });
+
+        ConcreteBindingContext.PostalContactItems.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void PostalContactItemEditSuccess_Callback(PostalContactItemDisplayModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingPostalContactItems)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.Label = model.Label;
+            item.Address = model.Address;
+            item.ZipCode = model.ZipCode;
+            item.MunicipalityId = model.Municipality.Id;
+            item.Latitude = model.Latitude;
+            item.Longitude = model.Longitude;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionPostalContactItems)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.Label = model.Label;
+                item.Address = model.Address;
+                item.ZipCode = model.ZipCode;
+                item.MunicipalityId = model.Municipality.Id;
+                item.Latitude = model.Latitude;
+                item.Longitude = model.Longitude;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionPostalContactItems.Add(new PostalContactItemInputModel
+            {
+                Id = model.Id,
+                Label = model.Label,
+                Address = model.Address,
+                ZipCode = model.ZipCode,
+                MunicipalityId = model.Municipality.Id,
+                Latitude = model.Latitude,
+                Longitude = model.Longitude
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.PostalContactItems)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.PostalContactItems[index] = model;
+
+            break;
+        }
+
+        hasChangesFlag = true;
     }
 
     private void PickedImageCroppingComplete_Callback(SkiaSharp.SKBitmap result)

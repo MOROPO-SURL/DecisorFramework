@@ -5,8 +5,10 @@
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Core.Interop.API.Common"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.OrganizationContactConfigurationPage"
     x:TypeArguments="interop_common_display_models:OrganizationContactDisplayModel,presentation_configuration_page_models:OrganizationContactConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:OrganizationContactConfigurationPageModel">
@@ -14,6 +16,9 @@
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="RootFlexLayoutItemResponsiveWithConverter" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrappedFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="4" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="PostalContactDetailFlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -90,7 +95,109 @@
                         </FlexLayout>
                     </VerticalStackLayout>
                 </FlexLayout>
-                <VerticalStackLayout 
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start"
+                    AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Direcciones postales" />                    
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="PostalContactItemAgregationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding PostalContactItems}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="core_interop_common_display_models:PostalContactItemDisplayModel">
+                                            <Frame 
+                                                Padding="8"
+                                                Margin="0,12,0,0">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <VerticalStackLayout 
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Margin="8">
+                                                        <Label 
+                                                            IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                            Margin="4,0"
+                                                            Text="{Binding Label}"
+                                                            FontSize="Medium" />
+                                                        <BoxView 
+                                                            IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                            Margin="4,8"
+                                                            HeightRequest="1"
+                                                            Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                                                        <Label Margin="8,4" Text="{Binding Address}" />
+                                                        <FlexLayout
+                                                            Wrap="Wrap"
+                                                            AlignItems="Start" AlignContent="Start">
+                                                            <VerticalStackLayout 
+                                                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource PostalContactDetailFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
+                                                                Margin="4"
+                                                                Spacing="6">
+                                                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Provincia" />
+                                                                <Label Text="{Binding Municipality.State.Name}" />
+                                                            </VerticalStackLayout>
+                                                            <VerticalStackLayout 
+                                                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource PostalContactDetailFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
+                                                                Margin="4"
+                                                                Spacing="6">
+                                                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Municipio" />
+                                                                <Label Text="{Binding Municipality.Name}" />
+                                                            </VerticalStackLayout>
+                                                            <VerticalStackLayout 
+                                                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource PostalContactDetailFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
+                                                                Margin="4"
+                                                                Spacing="6">
+                                                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código Postal" />
+                                                                <Label Text="{Binding ZipCode}" />
+                                                            </VerticalStackLayout>
+                                                        </FlexLayout>
+                                                    </VerticalStackLayout>
+                                                    <VerticalStackLayout Spacing="8">
+                                                        <Button
+                                                            FontFamily="MaterialDesignIcons" 
+                                                            Text="&#xF90B;"
+                                                            Clicked="PostalContactItemEditionButton_Clicked" />
+                                                        <Button
+                                                            VerticalOptions="Start"
+                                                            FontFamily="MaterialDesignIcons" 
+                                                            Text="&#xFA78;"
+                                                            Clicked="PostalContactItemRemotionButton_Clicked" />
+                                                    </VerticalStackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                </FlexLayout><VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
