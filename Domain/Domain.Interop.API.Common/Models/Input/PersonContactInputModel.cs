@@ -33,6 +33,18 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         public List<PostalContactItemInputModel> IncomingPostalContactItems { get; set; } = new List<PostalContactItemInputModel>();
         public List<PostalContactItemDisplayModel> OutgoingPostalContactItems { get; set; } = new List<PostalContactItemDisplayModel>();
 
+        public List<PhoneContactItemInputModel> EditionPhoneContactItems { get; set; } = new List<PhoneContactItemInputModel>();
+        public List<PhoneContactItemInputModel> IncomingPhoneContactItems { get; set; } = new List<PhoneContactItemInputModel>();
+        public List<PhoneContactItemDisplayModel> OutgoingPhoneContactItems { get; set; } = new List<PhoneContactItemDisplayModel>();
+
+        public List<EmailContactItemInputModel> EditionEmailContactItems { get; set; } = new List<EmailContactItemInputModel>();
+        public List<EmailContactItemInputModel> IncomingEmailContactItems { get; set; } = new List<EmailContactItemInputModel>();
+        public List<EmailContactItemDisplayModel> OutgoingEmailContactItems { get; set; } = new List<EmailContactItemDisplayModel>();
+
+        public List<WebContactItemInputModel> EditionWebContactItems { get; set; } = new List<WebContactItemInputModel>();
+        public List<WebContactItemInputModel> IncomingWebContactItems { get; set; } = new List<WebContactItemInputModel>();
+        public List<WebContactItemDisplayModel> OutgoingWebContactItems { get; set; } = new List<WebContactItemDisplayModel>();
+
         public PersonContact Export()
         {
             var entity = new PersonContact { Id = Id, Enabled = true, Identity = new Guama.Identity.Persistence.Entities.PersonIdentity() };

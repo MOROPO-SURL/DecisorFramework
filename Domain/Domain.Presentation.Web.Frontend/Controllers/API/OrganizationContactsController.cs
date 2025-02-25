@@ -124,6 +124,54 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                     SternId = _entity.Id
                 });
             }
+
+            foreach (var _model in model.IncomingPhoneContactItems)
+            {
+                var _entity = phoneContactRepository.Add(new PhoneContactItem
+                {
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    PhoneNumber = _model.PhoneNumber
+                }, User.Identity.Name, false);
+
+                entity.Identity.PhoneContactItemBridges.Add(new OrganizationPhoneContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
+
+            foreach (var _model in model.IncomingEmailContactItems)
+            {
+                var _entity = emailContactRepository.Add(new EmailContactItem
+                {
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    EmailAddress = _model.EmailAddress
+                }, User.Identity.Name, false);
+
+                entity.Identity.EmailContactItemBridges.Add(new OrganizationEmailContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
+
+            foreach (var _model in model.IncomingWebContactItems)
+            {
+                var _entity = webSiteContactRepository.Add(new WebSiteContactItem
+                {
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    Url = _model.Url
+                }, User.Identity.Name, false);
+
+                entity.Identity.WebSiteContactItemBridges.Add(new OrganizationWebSiteContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
         }
 
         protected override void PreEdit(OrganizationContact entity, OrganizationContactInputModel model)
@@ -149,6 +197,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 
                 imageFileManager.SaveImageFileContent(entity.Identity.Image.Id, model.Image.ContentData, model.Image.ContentType);
             }
+
+            #region Postal Contact Items
 
             foreach (var _model in model.OutgoingPostalContactItems)
             {
@@ -215,6 +265,119 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                     SternId = _entity.Id
                 });
             }
+
+            #endregion
+
+            #region Phone Contact Items
+
+            foreach (var _model in model.OutgoingPhoneContactItems)
+            {
+                var _entity = entity.Identity.PhoneContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                phoneContactRepository.Delete(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionPhoneContactItems)
+            {
+                var _entity = entity.Identity.PhoneContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                _entity.Label = _model.Label;
+                _entity.PhoneNumber = _model.PhoneNumber;
+
+                phoneContactRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingPhoneContactItems)
+            {
+                var _entity = phoneContactRepository.Add(new PhoneContactItem
+                {
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    PhoneNumber = _model.PhoneNumber
+                }, User.Identity.Name, false);
+
+                entity.Identity.PhoneContactItemBridges.Add(new OrganizationPhoneContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
+
+            #endregion
+
+            #region Email Contact Items
+
+            foreach (var _model in model.OutgoingEmailContactItems)
+            {
+                var _entity = entity.Identity.EmailContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                emailContactRepository.Delete(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionEmailContactItems)
+            {
+                var _entity = entity.Identity.EmailContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                _entity.Label = _model.Label;
+                _entity.EmailAddress = _model.EmailAddress;
+
+                emailContactRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingEmailContactItems)
+            {
+                var _entity = emailContactRepository.Add(new EmailContactItem
+                {
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    EmailAddress = _model.EmailAddress
+                }, User.Identity.Name, false);
+
+                entity.Identity.EmailContactItemBridges.Add(new OrganizationEmailContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
+
+            #endregion
+
+            #region Web Contact Items
+
+            foreach (var _model in model.OutgoingWebContactItems)
+            {
+                var _entity = entity.Identity.WebSiteContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                webSiteContactRepository.Delete(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionWebContactItems)
+            {
+                var _entity = entity.Identity.WebSiteContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                _entity.Label = _model.Label;
+                _entity.Url = _model.Url;
+
+                webSiteContactRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingWebContactItems)
+            {
+                var _entity = webSiteContactRepository.Add(new WebSiteContactItem
+                {
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    Url = _model.Url
+                }, User.Identity.Name, false);
+
+                entity.Identity.WebSiteContactItemBridges.Add(new OrganizationWebSiteContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
+
+            #endregion
         }
 
         protected override void PostEdit(OrganizationContact entity, OrganizationContactInputModel model)

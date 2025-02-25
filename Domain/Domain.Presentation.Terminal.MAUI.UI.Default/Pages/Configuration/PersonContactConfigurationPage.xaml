@@ -119,15 +119,159 @@
                         </FlexLayout>
                     </VerticalStackLayout>
                 </FlexLayout>
+
                 <FlexLayout
                     Wrap="Wrap"
-                    AlignItems="Start"
-                    AlignContent="Start">
+                    AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Direcciones postales" />                    
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Teléfonos" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="PhoneContactItemAgregationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding PhoneContactItems}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="core_interop_common_display_models:PhoneContactItemDisplayModel">
+                                            <Frame 
+                                                Padding="8"
+                                                Margin="0,12,0,0">
+                                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                                    <VerticalStackLayout 
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Margin="8">
+                                                        <Label 
+                                                            IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                            Margin="4,0"
+                                                            Text="{Binding Label}"
+                                                            LineBreakMode="TailTruncation"
+                                                            FontAttributes="Bold" />
+                                                        <Label 
+                                                            Margin="8,4" 
+                                                            Text="{Binding PhoneNumber}"
+                                                            LineBreakMode="TailTruncation"
+                                                            FontSize="Medium" />
+                                                    </VerticalStackLayout>
+                                                    <Button
+                                                        VerticalOptions="Center"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xF90B;"
+                                                        Clicked="PhoneContactItemEditionButton_Clicked" />
+                                                    <Button
+                                                        VerticalOptions="Center"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="PhoneContactItemRemotionButton_Clicked" />
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Correos electrónicos" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="EmailContactItemAgregationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding EmailContactItems}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="core_interop_common_display_models:EmailContactItemDisplayModel">
+                                            <Frame 
+                                                Padding="8"
+                                                Margin="0,12,0,0">
+                                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                                    <VerticalStackLayout 
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Margin="8">
+                                                        <Label 
+                                                            IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                            Margin="4,0"
+                                                            Text="{Binding Label}"
+                                                            LineBreakMode="TailTruncation"
+                                                            FontAttributes="Bold" />
+                                                        <Label 
+                                                            Margin="8,4" 
+                                                            Text="{Binding EmailAddress}"
+                                                            LineBreakMode="TailTruncation"
+                                                            FontSize="Medium" />
+                                                    </VerticalStackLayout>
+                                                    <Button
+                                                        VerticalOptions="Center"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xF90B;"
+                                                        Clicked="EmailContactItemEditionButton_Clicked" />
+                                                    <Button
+                                                        VerticalOptions="Center"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="EmailContactItemRemotionButton_Clicked" />
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Direcciones postales" />
                         <Frame Padding="8">
                             <Grid RowSpacing="8">
                                 <Grid.ColumnDefinitions>
@@ -213,6 +357,77 @@
                                                             Text="&#xFA78;"
                                                             Clicked="PostalContactItemRemotionButton_Clicked" />
                                                     </VerticalStackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sitios de Internet" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="WebContactItemAgregationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding WebContactItems}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="core_interop_common_display_models:WebContactItemDisplayModel">
+                                            <Frame 
+                                                Padding="8"
+                                                Margin="0,12,0,0">
+                                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                                    <VerticalStackLayout 
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Margin="8">
+                                                        <Label 
+                                                            IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                            Margin="4,0"
+                                                            Text="{Binding Label}"
+                                                            LineBreakMode="TailTruncation"
+                                                            FontAttributes="Bold" />
+                                                        <Label 
+                                                            Margin="8,4" 
+                                                            Text="{Binding Url}"
+                                                            FontSize="Medium" />
+                                                    </VerticalStackLayout>
+                                                    <Button
+                                                        VerticalOptions="Center"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xF90B;"
+                                                        Clicked="WebContactItemEditionButton_Clicked" />
+                                                    <Button
+                                                        VerticalOptions="Center"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="WebContactItemRemotionButton_Clicked" />
                                                 </StackLayout>
                                             </Frame>
                                         </DataTemplate>
