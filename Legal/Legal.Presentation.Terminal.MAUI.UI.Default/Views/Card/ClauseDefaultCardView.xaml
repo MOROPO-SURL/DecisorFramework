@@ -1,0 +1,22 @@
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Legal.Interop.API.Common"
+    x:Class="MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Views.Card.ClauseDefaultCardView"
+    x:DataType="interop_common_display_models:ClauseDisplayModel">
+    <Frame>
+        <StackLayout>
+            <Label 
+                FontAttributes="Bold"
+                FontSize="Medium"
+                LineBreakMode="TailTruncation"
+                Text="{Binding Name}" />
+            <Label 
+                Margin="0,6,0,0"
+                Text="{Binding Content}"
+                TextColor="DimGray"
+                LineBreakMode="TailTruncation"
+                MaxLines="3" />
+        </StackLayout>
+    </Frame>
+</ContentView>

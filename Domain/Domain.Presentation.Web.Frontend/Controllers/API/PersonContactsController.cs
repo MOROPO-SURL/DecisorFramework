@@ -6,6 +6,7 @@ using MOROPO.Framework.Guama.Identity.Persistence.Entities;
 using MOROPO.Framework.Guama.Location.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
@@ -18,16 +19,18 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
         private readonly IEntityRepository<PostalContactItem, System.Guid> postalContactRepository;
         private readonly IEntityRepository<WebSiteContactItem, System.Guid> webSiteContactRepository;
         private readonly IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository;
+        private readonly IEntityRepository<Municipality, System.Guid> municipalityRepository;
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
         private readonly IImageFileManagerFacade imageFileManager;
 
-        public PersonContactsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<WebSiteContactItem, System.Guid> webSiteContactRepository, IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository, IEntityRepository<EmailContactItem, System.Guid> emailContactRepository, IEntityRepository<PersonContact, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PersonContactsController> localizer, Microsoft.Extensions.Logging.ILogger<PersonContactsController> logger) : base(repository, localizer, logger)
+        public PersonContactsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<WebSiteContactItem, System.Guid> webSiteContactRepository, IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository, IEntityRepository<EmailContactItem, System.Guid> emailContactRepository, IEntityRepository<PersonContact, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PersonContactsController> localizer, Microsoft.Extensions.Logging.ILogger<PersonContactsController> logger) : base(repository, localizer, logger)
         {
             this.emailContactRepository = emailContactRepository;
             this.phoneContactRepository = phoneContactRepository;
             this.postalContactRepository = postalContactRepository;
             this.webSiteContactRepository = webSiteContactRepository;
             this.municipalityLocationRepository = municipalityLocationRepository;
+            this.municipalityRepository = municipalityRepository;
             this.imageRepository = imageRepository;
             this.imageFileManager = imageFileManager;
         }
@@ -54,6 +57,15 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
             if (model.Identity.Image != null)
             {
                 model.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Identity.Image.ContentType);
+            }
+
+            foreach (var _model in model.Identity.PostalContacts)
+            {
+                var municipality = municipalityRepository.Get(_model.Municipality.Id);
+
+                _model.Municipality = new Core.Interop.API.Common.Models.Display.MunicipalityDisplayModel();
+
+                _model.Municipality.Import(municipality);
             }
 
             return model;
@@ -83,94 +95,82 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                 imageFileManager.SaveImageFileContent(entity.Identity.Image.Id, model.Image.ContentData, model.Image.ContentType);
             }
 
-            if (model.EmailContacts != null)
+            foreach (var _model in model.IncomingPostalContactItems)
             {
-                foreach (var item in model.EmailContacts)
-                {
-                    var _entity = emailContactRepository.Add(new EmailContactItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        EmailAddress = item.EmailAddress
-                    }, User.Identity.Name, false);
+                var municipalityLocation = municipalityLocationRepository.FindOneBy(_entity => _entity.MunicipalityId == _model.MunicipalityId);
 
-                    entity.Identity.EmailContactItemBridges.Add(new PersonEmailContactItemBridge
+                if (municipalityLocation == null)
+                {
+                    municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
                     {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
+                        MunicipalityId = _model.MunicipalityId
+                    }, User.Identity.Name, false);
                 }
+
+                var _entity = postalContactRepository.Add(new PostalContactItem
+                {
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    Address = _model.Address,
+                    ZipCode = _model.ZipCode,
+                    Latitude = _model.Latitude,
+                    Longitude = _model.Longitude,
+                    LocationId = municipalityLocation.Id
+                }, User.Identity.Name, false);
+
+                entity.Identity.PostalContactItemBridges.Add(new PersonPostalContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
             }
 
-            if (model.PhoneContacts != null)
+            foreach (var _model in model.IncomingPhoneContactItems)
             {
-                foreach (var item in model.PhoneContacts)
+                var _entity = phoneContactRepository.Add(new PhoneContactItem
                 {
-                    var _entity = phoneContactRepository.Add(new PhoneContactItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        PhoneNumber = item.PhoneNumber
-                    }, User.Identity.Name, false);
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    PhoneNumber = _model.PhoneNumber
+                }, User.Identity.Name, false);
 
-                    entity.Identity.PhoneContactItemBridges.Add(new PersonPhoneContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
-                }
+                entity.Identity.PhoneContactItemBridges.Add(new PersonPhoneContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
             }
 
-            if (model.WebContacts != null)
+            foreach (var _model in model.IncomingEmailContactItems)
             {
-                foreach (var item in model.WebContacts)
+                var _entity = emailContactRepository.Add(new EmailContactItem
                 {
-                    var _entity = webSiteContactRepository.Add(new WebSiteContactItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        Url = item.Url
-                    }, User.Identity.Name, false);
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    EmailAddress = _model.EmailAddress
+                }, User.Identity.Name, false);
 
-                    entity.Identity.WebSiteContactItemBridges.Add(new PersonWebSiteContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
-                }
+                entity.Identity.EmailContactItemBridges.Add(new PersonEmailContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
             }
 
-            if (model.PostalContacts != null)
+            foreach (var _model in model.IncomingWebContactItems)
             {
-                foreach (var item in model.PostalContacts)
+                var _entity = webSiteContactRepository.Add(new WebSiteContactItem
                 {
-                    var municipalityLocation = municipalityLocationRepository.FindOneBy(__entity => __entity.MunicipalityId == item.Municipality.Id);
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    Url = _model.Url
+                }, User.Identity.Name, false);
 
-                    if (municipalityLocation == null)
-                    {
-                        municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
-                        {
-                            MunicipalityId = item.Municipality.Id
-                        }, User.Identity.Name, false);
-                    }
-
-                    var _entity = postalContactRepository.Add(new PostalContactItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        Address = item.Address,
-                        ZipCode = item.ZipCode,
-                        Latitude = item.Latitude,
-                        Longitude = item.Longitude,
-                        LocationId = municipalityLocation.Id
-                    }, User.Identity.Name, false);
-
-                    entity.Identity.PostalContactItemBridges.Add(new PersonPostalContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
-                }
+                entity.Identity.WebSiteContactItemBridges.Add(new PersonWebSiteContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
             }
         }
 
@@ -198,117 +198,204 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                 imageFileManager.SaveImageFileContent(entity.Identity.Image.Id, model.Image.ContentData, model.Image.ContentType);
             }
 
-            if (model.EmailContacts != null)
+            #region Postal Contact Items
+
+            foreach (var _model in model.OutgoingPostalContactItems)
             {
-                entity.Identity.EmailContactItemBridges.Clear();
+                var _entity = entity.Identity.PostalContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
 
-                foreach (var item in model.EmailContacts)
-                {
-                    var _entity = emailContactRepository.Add(new EmailContactItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        EmailAddress = item.EmailAddress
-                    }, User.Identity.Name, false);
-
-                    entity.Identity.EmailContactItemBridges.Add(new PersonEmailContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
-                }
+                postalContactRepository.Delete(_entity, User.Identity.Name, false);
             }
 
-            if (model.PhoneContacts != null)
+            foreach (var _model in model.EditionPostalContactItems)
             {
-                entity.Identity.PhoneContactItemBridges.Clear();
+                var municipalityLocation = municipalityLocationRepository.FindOneBy(_entity => _entity.MunicipalityId == _model.MunicipalityId);
 
-                foreach (var item in model.PhoneContacts)
+                if (municipalityLocation == null)
                 {
-                    var _entity = phoneContactRepository.Add(new PhoneContactItem
+                    municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
                     {
-                        Id = item.Id,
-                        Label = item.Label,
-                        PhoneNumber = item.PhoneNumber
+                        MunicipalityId = _model.MunicipalityId
                     }, User.Identity.Name, false);
-
-                    entity.Identity.PhoneContactItemBridges.Add(new PersonPhoneContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
                 }
+
+                var _entity = entity.Identity.PostalContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                _entity.Label = _model.Label;
+                _entity.Address = _model.Address;
+                _entity.ZipCode = _model.ZipCode;
+                _entity.Latitude = _model.Latitude;
+                _entity.Longitude = _model.Longitude;
+
+                if (_entity.LocationId != municipalityLocation.Id)
+                {
+                    _entity.Location = null;
+                    _entity.LocationId = municipalityLocation.Id;
+                }
+
+                postalContactRepository.Update(_entity, User.Identity.Name, false);
             }
 
-            if (model.WebContacts != null)
+            foreach (var _model in model.IncomingPostalContactItems)
             {
-                entity.Identity.WebSiteContactItemBridges.Clear();
+                var municipalityLocation = municipalityLocationRepository.FindOneBy(_entity => _entity.MunicipalityId == _model.MunicipalityId);
 
-                foreach (var item in model.WebContacts)
+                if (municipalityLocation == null)
                 {
-                    var _entity = webSiteContactRepository.Add(new WebSiteContactItem
+                    municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
                     {
-                        Id = item.Id,
-                        Label = item.Label,
-                        Url = item.Url
+                        MunicipalityId = _model.MunicipalityId
                     }, User.Identity.Name, false);
-
-                    entity.Identity.WebSiteContactItemBridges.Add(new PersonWebSiteContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
                 }
+
+                var _entity = postalContactRepository.Add(new PostalContactItem
+                {
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    Address = _model.Address,
+                    ZipCode = _model.ZipCode,
+                    Latitude = _model.Latitude,
+                    Longitude = _model.Longitude,
+                    LocationId = municipalityLocation.Id
+                }, User.Identity.Name, false);
+
+                entity.Identity.PostalContactItemBridges.Add(new PersonPostalContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
             }
 
-            if (model.PostalContacts != null)
+            #endregion
+
+            #region Phone Contact Items
+
+            foreach (var _model in model.OutgoingPhoneContactItems)
             {
-                entity.Identity.PostalContactItemBridges.Clear();
+                var _entity = entity.Identity.PhoneContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
 
-                foreach (var item in model.PostalContacts)
-                {
-                    var municipalityLocation = municipalityLocationRepository.FindOneBy(__entity => __entity.MunicipalityId == item.Municipality.Id);
-
-                    if (municipalityLocation == null)
-                    {
-                        municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
-                        {
-                            MunicipalityId = item.Municipality.Id
-                        }, User.Identity.Name, false);
-                    }
-
-                    var _entity = postalContactRepository.Add(new PostalContactItem
-                    {
-                        Id = item.Id,
-                        Label = item.Label,
-                        Address = item.Address,
-                        ZipCode = item.ZipCode,
-                        Latitude = item.Latitude,
-                        Longitude = item.Longitude,
-                        LocationId = municipalityLocation.Id
-                    }, User.Identity.Name, false);
-
-                    entity.Identity.PostalContactItemBridges.Add(new PersonPostalContactItemBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = _entity.Id
-                    });
-                }
+                phoneContactRepository.Delete(_entity, User.Identity.Name, false);
             }
+
+            foreach (var _model in model.EditionPhoneContactItems)
+            {
+                var _entity = entity.Identity.PhoneContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                _entity.Label = _model.Label;
+                _entity.PhoneNumber = _model.PhoneNumber;
+
+                phoneContactRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingPhoneContactItems)
+            {
+                var _entity = phoneContactRepository.Add(new PhoneContactItem
+                {
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    PhoneNumber = _model.PhoneNumber
+                }, User.Identity.Name, false);
+
+                entity.Identity.PhoneContactItemBridges.Add(new PersonPhoneContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
+
+            #endregion
+
+            #region Email Contact Items
+
+            foreach (var _model in model.OutgoingEmailContactItems)
+            {
+                var _entity = entity.Identity.EmailContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                emailContactRepository.Delete(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionEmailContactItems)
+            {
+                var _entity = entity.Identity.EmailContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                _entity.Label = _model.Label;
+                _entity.EmailAddress = _model.EmailAddress;
+
+                emailContactRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingEmailContactItems)
+            {
+                var _entity = emailContactRepository.Add(new EmailContactItem
+                {
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    EmailAddress = _model.EmailAddress
+                }, User.Identity.Name, false);
+
+                entity.Identity.EmailContactItemBridges.Add(new PersonEmailContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
+
+            #endregion
+
+            #region Web Contact Items
+
+            foreach (var _model in model.OutgoingWebContactItems)
+            {
+                var _entity = entity.Identity.WebSiteContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                webSiteContactRepository.Delete(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionWebContactItems)
+            {
+                var _entity = entity.Identity.WebSiteContactItemBridges.First(bridge => bridge.SternId == _model.Id).Stern;
+
+                _entity.Label = _model.Label;
+                _entity.Url = _model.Url;
+
+                webSiteContactRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingWebContactItems)
+            {
+                var _entity = webSiteContactRepository.Add(new WebSiteContactItem
+                {
+                    Id = System.Guid.NewGuid(),
+                    Label = _model.Label,
+                    Url = _model.Url
+                }, User.Identity.Name, false);
+
+                entity.Identity.WebSiteContactItemBridges.Add(new PersonWebSiteContactItemBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
+
+            #endregion
         }
 
         protected override void PostEdit(PersonContact entity, PersonContactInputModel model)
         {
             base.PostEdit(entity, model);
 
-            if (model.Image != null)
+            try
             {
-                var oldLogoImage = imageRepository.Get(model.Image.Id);
+                if (model.Image != null)
+                {
+                    var oldLogoImage = imageRepository.Get(model.Image.Id);
 
-                imageRepository.Delete(oldLogoImage, User.Identity.Name);
+                    imageRepository.Delete(oldLogoImage, User.Identity.Name);
 
-                imageFileManager.DeleteImageFile(oldLogoImage);
+                    imageFileManager.DeleteImageFile(oldLogoImage);
+                }
             }
+            catch { }
         }
     }
 }

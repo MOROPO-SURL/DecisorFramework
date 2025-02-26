@@ -47,7 +47,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
         {
             var model = base.EntityToDisplayModel(entity);
 
-            var municipality = municipalityRepository.Get((entity.PostalContact.Location as Guama.Location.Persistence.Entities.MunicipalityLocation).MunicipalityId.Value);
+            var municipality = municipalityRepository.Get((entity.PostalContact.Location as MunicipalityLocation).MunicipalityId.Value);
 
             model.PostalContact.Municipality = new Core.Interop.API.Common.Models.Display.MunicipalityDisplayModel();
 
@@ -153,14 +153,18 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
         {
             base.PostEdit(entity, model);
 
-            if (model.FeatureImage != null)
+            try
             {
-                var oldLogoImage = imageRepository.Get(model.FeatureImage.Id);
+                if (model.FeatureImage != null)
+                {
+                    var oldLogoImage = imageRepository.Get(model.FeatureImage.Id);
 
-                imageRepository.Delete(oldLogoImage, User.Identity.Name);
+                    imageRepository.Delete(oldLogoImage, User.Identity.Name);
 
-                imageFileManager.DeleteImageFile(oldLogoImage);
+                    imageFileManager.DeleteImageFile(oldLogoImage);
+                }
             }
+            catch { }
         }
     }
 }

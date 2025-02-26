@@ -9,6 +9,8 @@
 
         public System.Guid ContactId { get; set; }
 
+        public System.Guid? BusinessKindId { get; set; }
+
         public TEntity Export()
         {
             var entity = new TEntity { Id = Id, Enabled = true };
@@ -31,6 +33,12 @@
             {
                 entity.Contact = null;
                 entity.ContactId = ContactId;
+            }
+
+            if (entity.BusinessKindId != BusinessKindId)
+            {
+                entity.BusinessKind = null;
+                entity.BusinessKindId = BusinessKindId;
             }
         }
     }

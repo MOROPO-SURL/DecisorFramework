@@ -1,4 +1,3 @@
-using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
@@ -28,17 +27,7 @@ public partial class PersonContactDetailPage : Core.Presentation.Terminal.MAUI.U
                 {
                     var _model = new Models.Page.Configuration.PersonContactConfigurationPageModel(model);
 
-                    var apiConnectClient = new Interop.API.Connect.Clients.NaturalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-                    apiConnectClient.GetEnabledAsync().ContinueWith(task =>
-                    {
-                        if (task.IsCompleted)
-                        {
-                            _model.AvailableBusinessKinds = task.Result;
-                        }
-
-                        Dispatcher.Dispatch(() => Microsoft.Maui.Controls.Application.Current.MainPage.NavigationPushPageAsync(new Configuration.PersonContactConfigurationPage(completationFeedbackAction, _model)));
-                    });
+                    Microsoft.Maui.Controls.Application.Current.MainPage.NavigationPushPageAsync(new Configuration.PersonContactConfigurationPage(completationFeedbackAction, _model));
                 });
             });
         });

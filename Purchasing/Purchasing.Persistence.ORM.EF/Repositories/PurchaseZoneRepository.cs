@@ -11,7 +11,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Repositories
 
         protected override IQueryable<Entities.PurchaseZone> GetQueryableDbSet()
         {
-            return base.GetQueryableDbSet().Include(entity => entity.SpentBridges).ThenInclude(bridge => bridge.Stern);
+            return base.GetQueryableDbSet()
+                .Include(entity => entity.SpentBridges).ThenInclude(bridge => bridge.Stern)
+                .Include(entity => entity.SpentBridges).ThenInclude(bridge => bridge.Currency);
         }
     }
 }

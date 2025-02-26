@@ -9,6 +9,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
         private string description;
         private int priority = 1;
 
+        public PurchaseZoneConfigurationPageModel() : this(null) { }
+
         public PurchaseZoneConfigurationPageModel(Interop.API.Common.Models.Display.PurchaseZoneDisplayModel model) : base(model)
         {
             if (model != null)

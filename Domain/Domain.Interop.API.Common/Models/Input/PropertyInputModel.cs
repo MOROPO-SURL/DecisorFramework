@@ -12,7 +12,7 @@
         public string Name { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public Core.Interop.API.Common.Models.Input.PostalContactInputModel PostalContact { get; set; }
+        public Core.Interop.API.Common.Models.Input.PostalContactItemInputModel PostalContact { get; set; }
 
         public Core.Interop.API.Common.Models.Input.ImageInputModel FeatureImage { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using System.Collections.Generic;
 
@@ -17,14 +18,6 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public ImageInputModel Image { get; set; }
 
-        public List<Core.Interop.API.Common.Models.Display.EmailContactItemDisplayModel> EmailContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.EmailContactItemDisplayModel>();
-
-        public List<Core.Interop.API.Common.Models.Display.PhoneContactItemDisplayModel> PhoneContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.PhoneContactItemDisplayModel>();
-
-        public List<Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel> PostalContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel>();
-
-        public List<Core.Interop.API.Common.Models.Display.WebContactItemDisplayModel> WebContacts { get; set; } = new List<Core.Interop.API.Common.Models.Display.WebContactItemDisplayModel>();
-
         public string LastName { get; set; }
 
         public string Alias { get; set; }
@@ -33,10 +26,24 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public Guama.Identity.Persistence.Enumerations.CivilStatus CivilStatus { get; set; }
 
-        public System.Guid? BusinessKindId { get; set; }
-
         [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
         public string PersonalIdentificationNumber { get; set; }
+
+        public List<PostalContactItemInputModel> EditionPostalContactItems { get; set; } = new List<PostalContactItemInputModel>();
+        public List<PostalContactItemInputModel> IncomingPostalContactItems { get; set; } = new List<PostalContactItemInputModel>();
+        public List<PostalContactItemDisplayModel> OutgoingPostalContactItems { get; set; } = new List<PostalContactItemDisplayModel>();
+
+        public List<PhoneContactItemInputModel> EditionPhoneContactItems { get; set; } = new List<PhoneContactItemInputModel>();
+        public List<PhoneContactItemInputModel> IncomingPhoneContactItems { get; set; } = new List<PhoneContactItemInputModel>();
+        public List<PhoneContactItemDisplayModel> OutgoingPhoneContactItems { get; set; } = new List<PhoneContactItemDisplayModel>();
+
+        public List<EmailContactItemInputModel> EditionEmailContactItems { get; set; } = new List<EmailContactItemInputModel>();
+        public List<EmailContactItemInputModel> IncomingEmailContactItems { get; set; } = new List<EmailContactItemInputModel>();
+        public List<EmailContactItemDisplayModel> OutgoingEmailContactItems { get; set; } = new List<EmailContactItemDisplayModel>();
+
+        public List<WebContactItemInputModel> EditionWebContactItems { get; set; } = new List<WebContactItemInputModel>();
+        public List<WebContactItemInputModel> IncomingWebContactItems { get; set; } = new List<WebContactItemInputModel>();
+        public List<WebContactItemDisplayModel> OutgoingWebContactItems { get; set; } = new List<WebContactItemDisplayModel>();
 
         public PersonContact Export()
         {
@@ -62,12 +69,6 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             entity.Identity.Sex = Sex;
             entity.Identity.CivilStatus = CivilStatus;
             entity.PersonalIdentificationNumber = PersonalIdentificationNumber;
-
-            if (entity.BusinessKindId != BusinessKindId)
-            {
-                entity.BusinessKind = null;
-                entity.BusinessKindId = BusinessKindId;
-            }
         }
     }
 }

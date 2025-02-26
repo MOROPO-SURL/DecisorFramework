@@ -99,28 +99,18 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
         {
             base.PostEdit(entity, model);
 
-            if (model.Image != null)
+            try
             {
-                var oldImage = imageRepository.Get(model.Image.Id);
+                if (model.Image != null)
+                {
+                    var oldLogoImage = imageRepository.Get(model.Image.Id);
 
-                imageRepository.Delete(oldImage, User.Identity.Name);
+                    imageRepository.Delete(oldLogoImage, User.Identity.Name);
 
-                imageFileManager.DeleteImageFile(oldImage);
+                    imageFileManager.DeleteImageFile(oldLogoImage);
+                }
             }
-        }
-
-        protected override void PostDelete(Structure entity)
-        {
-            base.PostDelete(entity);
-
-            if (entity.Identity.ImageId != null)
-            {
-                var oldImage = imageRepository.Get(entity.Identity.ImageId.Value);
-
-                imageRepository.Delete(oldImage, User.Identity.Name);
-
-                imageFileManager.DeleteImageFile(oldImage);
-            }
+            catch { }
         }
 
         private StructureParentalDisplayModel GetParent(Structure entity)
