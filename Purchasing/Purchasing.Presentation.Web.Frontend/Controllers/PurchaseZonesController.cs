@@ -1,6 +1,7 @@
 ﻿using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
@@ -32,12 +33,15 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
         {
             base.PreCreate(entity, model);
 
-            if (model.SpentBridges != null)
+            foreach (var _model in model.IncomingSpentBridges)
             {
-                foreach (var item in model.SpentBridges)
+                entity.SpentBridges.Add(new PurchaseZoneSpentBridge
                 {
-                    entity.SpentBridges.Add(new PurchaseZoneSpentBridge { ProwId = entity.Id, SternId = item.Spent.Id, Amount = item.Amount });
-                }
+                    ProwId = entity.Id,
+                    SternId = _model.Spent.Id,
+                    Amount = _model.Amount,
+                    CurrencyId = _model.Currency.Id
+                });
             }
         }
 
@@ -45,14 +49,30 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
         {
             base.PreEdit(entity, model);
 
-            if (model.SpentBridges != null)
+            foreach (var _model in model.OutgoingSpentBridges)
             {
-                entity.SpentBridges.Clear();
+                var bridge = entity.SpentBridges.First(bridge => bridge.SternId == _model.Spent.Id);
 
-                foreach (var item in model.SpentBridges)
+                entity.SpentBridges.Remove(bridge);
+            }
+
+            foreach (var _model in model.EditionSpentBridges)
+            {
+                var bridge = entity.SpentBridges.First(bridge => bridge.SternId == _model.Spent.Id);
+
+                bridge.Amount = _model.Amount;
+                bridge.CurrencyId = _model.Currency.Id;
+            }
+
+            foreach (var _model in model.IncomingSpentBridges)
+            {
+                entity.SpentBridges.Add(new PurchaseZoneSpentBridge
                 {
-                    entity.SpentBridges.Add(new PurchaseZoneSpentBridge { ProwId = entity.Id, SternId = item.Spent.Id, Amount = item.Amount });
-                }
+                    ProwId = entity.Id,
+                    SternId = _model.Spent.Id,
+                    Amount = _model.Amount,
+                    CurrencyId = _model.Currency.Id
+                });
             }
         }
     }

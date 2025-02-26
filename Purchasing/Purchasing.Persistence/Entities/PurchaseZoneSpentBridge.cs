@@ -9,5 +9,9 @@
         public PurchaseSpent Stern { get; set; }
 
         public decimal Amount { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CurrencyId))]
+        public Financial.Persistence.Entities.Currency Currency { get; set; }
+        public System.Guid CurrencyId { get; set; }
     }
 }

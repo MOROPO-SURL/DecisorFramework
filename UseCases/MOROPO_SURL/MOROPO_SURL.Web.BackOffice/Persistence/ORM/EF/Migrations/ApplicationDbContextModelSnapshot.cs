@@ -4585,8 +4585,15 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("numeric")
                         .HasColumnName("amount");
 
+                    b.Property<Guid>("CurrencyId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("currencyid");
+
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_purchasezonespentbridges");
+
+                    b.HasIndex("CurrencyId")
+                        .HasDatabaseName("ix_purchasezonespentbridges_currencyid");
 
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_purchasezonespentbridges_sternid");
@@ -7855,6 +7862,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZoneSpentBridge", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("CurrencyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_purchasezonespentbridges_currencies_currencyid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZone", "Prow")
                         .WithMany("SpentBridges")
                         .HasForeignKey("ProwId")
@@ -7868,6 +7882,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_purchasezonespentbridges_purchasespents_sternid");
+
+                    b.Navigation("Currency");
 
                     b.Navigation("Prow");
 

@@ -30,10 +30,12 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 var model = new PurchaseZoneSpentBridgeModel
                 {
                     Spent = new PurchaseSpentDisplayModel(),
-                    Amount = bridge.Amount
+                    Amount = bridge.Amount,
+                    Currency = new Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel()
                 };
 
                 model.Spent.Import(bridge.Stern);
+                model.Currency.Import(bridge.Currency);
 
                 SpentBridges.Add(model);
             }
