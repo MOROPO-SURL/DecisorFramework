@@ -8,8 +8,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Providers
         {
             get
             {
-                return new Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator[]
-                {
+                return
+                [
                     new BaseEntityTypeConfigurator<Entities.PurchaseZone>(),
                     new Configurators.PurchaseZoneLegalProviderBridgeEntityTypeConfigurator(),
                     new Configurators.PurchaseZoneNaturalProviderBridgeEntityTypeConfigurator(),
@@ -26,12 +26,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Providers
                     new Configurators.PurchasePlanOutputProductBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.PurchaseCashAdvance>(),
                     new BaseEntityTypeConfigurator<Entities.PurchasePlanDeparture>(),
-                    new BaseEntityTypeConfigurator<Entities.PurchaseReception>(),
                     new Configurators.PurchaseReceptionProductWeightBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.PurchaseSpent>(),
                     new Configurators.PurchaseZoneSpentBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Role>()
-                };
+                ];
             }
         }
 
