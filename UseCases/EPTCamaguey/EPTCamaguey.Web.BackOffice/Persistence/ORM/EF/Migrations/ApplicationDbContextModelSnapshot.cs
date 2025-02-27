@@ -2702,7 +2702,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                     b.HasIndex("ResponsibleId")
                         .HasDatabaseName("ix_receptions_responsibleid");
 
-                    b.ToTable("receptions", "decisorframework_inventory");
+                    b.ToTable("receptions", (string)null);
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("AbstractReception");
 
@@ -4587,7 +4587,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                     b.HasIndex("WarehouseId")
                         .HasDatabaseName("ix_receptions_warehouseid");
 
-                    b.ToTable("receptions", "decisorframework_inventory");
+                    b.ToTable("receptions");
 
                     b.HasDiscriminator().HasValue("TransferReception");
                 });

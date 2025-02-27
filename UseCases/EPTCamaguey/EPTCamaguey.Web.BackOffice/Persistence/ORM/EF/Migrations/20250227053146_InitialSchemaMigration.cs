@@ -2305,7 +2305,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
 
             migrationBuilder.CreateTable(
                 name: "receptions",
-                schema: "decisorframework_inventory",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -2870,7 +2869,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                     table.ForeignKey(
                         name: "fk_batches_receptions_receptionid",
                         column: x => x.receptionid,
-                        principalSchema: "decisorframework_inventory",
                         principalTable: "receptions",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -2931,7 +2929,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                     table.ForeignKey(
                         name: "fk_receptionbatchbridges_receptions_prowid",
                         column: x => x.prowid,
-                        principalSchema: "decisorframework_inventory",
                         principalTable: "receptions",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -3997,13 +3994,11 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
 
             migrationBuilder.CreateIndex(
                 name: "ix_receptions_responsibleid",
-                schema: "decisorframework_inventory",
                 table: "receptions",
                 column: "responsibleid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_receptions_warehouseid",
-                schema: "decisorframework_inventory",
                 table: "receptions",
                 column: "warehouseid");
 
@@ -4683,8 +4678,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_finantial");
 
             migrationBuilder.DropTable(
-                name: "receptions",
-                schema: "decisorframework_inventory");
+                name: "receptions");
 
             migrationBuilder.DropTable(
                 name: "warehousingareas",
