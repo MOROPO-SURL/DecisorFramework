@@ -14,7 +14,8 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Context.Contract
 		public DbSet<Entities.WarehousingArea> WarehousingAreas { get; set; }
 		public DbSet<Entities.Batch> Batches { get; set; }
 		public DbSet<Entities.Contract.AbstractReception> Receptions { get; set; }
-		public DbSet<Entities.Contract.AbstractDeparture> Departures { get; set; }
+        public DbSet<Entities.TransferReception> TransferReceptions { get; set; }
+        public DbSet<Entities.Contract.AbstractDeparture> Departures { get; set; }
 		public DbSet<Entities.DepartureBatchBridge> DepartureBatchBridges { get; set; }
         public DbSet<Entities.ReceptionBatchBridge> ReceptionBatchBridges { get; set; }
         public DbSet<Entities.UnitMeasurement> UnitMeasurements { get; set; }
