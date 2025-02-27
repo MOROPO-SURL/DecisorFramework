@@ -2689,6 +2689,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
                     b.Property<Guid>("ResponsibleId")
                         .HasColumnType("uuid")
                         .HasColumnName("responsibleid");
@@ -2699,9 +2704,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("ResponsibleId")
                         .HasDatabaseName("ix_receptions_responsibleid");
 
-                    b.ToTable("receptions", "decisorframework_inventory");
+                    b.ToTable("receptions", (string)null);
 
-                    b.UseTptMappingStrategy();
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractReception");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.CustomAttribute", b =>
@@ -5684,6 +5691,22 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("departures", "decisorframework_purchasing");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.TransferReception", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception");
+
+                    b.Property<Guid>("WarehouseId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("warehouseid");
+
+                    b.HasIndex("WarehouseId")
+                        .HasDatabaseName("ix_receptions_warehouseid");
+
+                    b.ToTable("receptions");
+
+                    b.HasDiscriminator().HasValue("TransferReception");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionReception", b =>
                 {
                     b.HasBaseType("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception");
@@ -5695,7 +5718,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("ProductionId")
                         .HasDatabaseName("ix_receptions_productionid");
 
-                    b.ToTable("receptions", "decisorframework_production");
+                    b.ToTable("receptions");
+
+                    b.HasDiscriminator().HasValue("ProductionReception");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", b =>
@@ -5710,7 +5735,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_receptions_purchaseid");
 
-                    b.ToTable("receptions", "decisorframework_purchasing");
+                    b.ToTable("receptions");
+
+                    b.HasDiscriminator().HasValue("PurchaseReception");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Guama.Location.Persistence.Entities.LocalityLocation", b =>
@@ -8342,14 +8369,20 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("PurchasePlan");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.TransferReception", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Warehouse", "Warehouse")
+                        .WithMany()
+                        .HasForeignKey("WarehouseId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_receptions_warehouses_warehouseid");
+
+                    b.Navigation("Warehouse");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionReception", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception", null)
-                        .WithOne()
-                        .HasForeignKey("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionReception", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", "Production")
                         .WithMany()
                         .HasForeignKey("ProductionId")
@@ -8360,12 +8393,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractReception", null)
-                        .WithOne()
-                        .HasForeignKey("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", "Id")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", "Purchase")
                         .WithOne("Reception")
                         .HasForeignKey("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception", "PurchaseId")

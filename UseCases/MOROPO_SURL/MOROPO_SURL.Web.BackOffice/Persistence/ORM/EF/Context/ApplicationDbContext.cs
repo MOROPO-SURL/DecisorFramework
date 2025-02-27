@@ -105,7 +105,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<WarehousingArea> WarehousingAreas { get; set; }
         public DbSet<Batch> Batches { get; set; }
-        public DbSet<AbstractReception> Receptions { get; set; }
         public DbSet<TransferReception> TransferReceptions { get; set; }
         public DbSet<AbstractDeparture> Departures { get; set; }
         public DbSet<DepartureBatchBridge> DepartureBatchBridges { get; set; }

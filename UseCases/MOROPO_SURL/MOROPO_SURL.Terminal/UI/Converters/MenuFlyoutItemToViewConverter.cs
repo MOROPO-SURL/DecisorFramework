@@ -12,6 +12,9 @@
             {
                 case "Minoristas":
                 case "Mayoristas":
+                case "Estructural":
+                case "Activos":
+                case "Complementarios":
                     return new Views.ModuleFlyoutSectionSubtitleContentView();
 
                 default:
