@@ -1,0 +1,89 @@
+﻿namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
+{
+    public class VehicleDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Vehicle, System.Guid>
+    {
+        public System.Guid Id { get; set; }
+
+        public bool Enabled { get; set; }
+
+        public int Priority { get; set; }
+
+        public Core.Interop.API.Common.Models.Display.ImageDisplayModel FeatureImage { get; set; }
+
+        public StructureParentalDisplayModel Structure { get; set; }
+
+        public string Reference { get; set; }
+
+        public VehicleCategoryDisplayModel Category { get; set; }
+
+        public VehicleBrandDisplayModel Brand { get; set; }
+
+        public string Model { get; set; }
+
+        public int Year { get; set; }
+
+        public string Plate { get; set; }
+
+        public string TrafficCirculationIdentifier { get; set; }
+
+        public string BodyIdentifier { get; set; }
+
+        public string EngineIdentifier { get; set; }
+
+        public VehicleEngineKindDisplayModel EngineKind { get; set; }
+
+        public int SeatCount { get; set; }
+
+        public double LoadCapacity { get; set; }
+
+        public double TechnicalAvailabilityIndex { get; set; }
+
+        public string Description { get; set; }
+
+        public void Import(Persistence.Entities.Vehicle entity)
+        {
+            Id = entity.Id;
+            Enabled = entity.Enabled;
+            Priority = entity.Priority;
+            Reference = entity.Reference;
+            Model = entity.Model;
+            Year = entity.Year;
+            Plate = entity.Plate;
+            TrafficCirculationIdentifier = entity.TrafficCirculationIdentifier;
+            BodyIdentifier = entity.BodyIdentifier;
+            EngineIdentifier = entity.EngineIdentifier;
+            SeatCount = entity.SeatCount;
+            LoadCapacity = entity.LoadCapacity;
+            TechnicalAvailabilityIndex = entity.TechnicalAvailabilityIndex;
+            Description = entity.Description;
+
+            if (entity.FeatureImage != null)
+            {
+                FeatureImage = new Core.Interop.API.Common.Models.Display.ImageDisplayModel();
+
+                FeatureImage.Import(entity.FeatureImage);
+            }
+
+            if (entity.Category != null)
+            {
+                Category = new VehicleCategoryDisplayModel();
+
+                Category.Import(entity.Category);
+            }
+
+            if (entity.Brand != null)
+            {
+                Brand = new VehicleBrandDisplayModel();
+
+                Brand.Import(entity.Brand);
+            }
+
+            if (entity.EngineKind != null)
+            {
+                EngineKind = new VehicleEngineKindDisplayModel();
+
+                EngineKind.Import(entity.EngineKind);
+            }
+        }
+    }
+}

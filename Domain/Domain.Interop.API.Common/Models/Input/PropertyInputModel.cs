@@ -9,14 +9,17 @@
         public System.Guid KindId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public Core.Interop.API.Common.Models.Input.PostalContactInputModel PostalContact { get; set; }
+        public string Name { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public Core.Interop.API.Common.Models.Input.PostalContactItemInputModel PostalContact { get; set; }
 
         public Core.Interop.API.Common.Models.Input.ImageInputModel FeatureImage { get; set; }
 
         public System.Guid StructureId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public string PropertyRecordIdentifier { get; set; }
+        public string Reference { get; set; }
 
         public decimal Area { get; set; }
 
@@ -39,7 +42,8 @@
         public void Mergue(Persistence.Entities.Property entity)
         {
             entity.Priority = Priority;
-            entity.PropertyRecordIdentifier = PropertyRecordIdentifier;
+            entity.Name = Name;
+            entity.Reference = Reference;
             entity.Area = Area;
             entity.Description = Description;
 

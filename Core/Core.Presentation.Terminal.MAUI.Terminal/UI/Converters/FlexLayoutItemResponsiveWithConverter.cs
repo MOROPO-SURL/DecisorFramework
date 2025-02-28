@@ -2,7 +2,9 @@
 {
     public class FlexLayoutItemResponsiveWithConverter : Microsoft.Maui.Controls.IValueConverter
     {
-        public double Spacing { get; set; }
+        public double WrapSpacing { get; set; }
+
+        public double SingleSpacing { get; set; }
 
         public object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
@@ -68,7 +70,19 @@
 
             var factor = column / 12d;
 
-            return containerWidth * factor - Spacing;
+            //if (factor == 1)
+            //{
+            //    return containerWidth * factor - Spacing * 2;
+            //}
+
+            System.Diagnostics.Debug.WriteLine($"------------------------------------------");
+            System.Diagnostics.Debug.WriteLine($"????? ContainerWidth: {containerWidth}");
+            System.Diagnostics.Debug.WriteLine($"????? Factor: {factor}");
+            System.Diagnostics.Debug.WriteLine($"????? WrapSpacing: {WrapSpacing}");
+            System.Diagnostics.Debug.WriteLine($"????? SingleSpacing: {SingleSpacing}");
+            System.Diagnostics.Debug.WriteLine($"????? Result: {containerWidth * factor - WrapSpacing - SingleSpacing * 2}");
+
+            return containerWidth * factor - WrapSpacing - SingleSpacing * 2d;
         }
 
         public object ConvertBack(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)

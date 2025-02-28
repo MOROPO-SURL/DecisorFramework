@@ -33,4 +33,9 @@
 		<ProjectReference Include="..\..\HumanResources\HumanResources.Interop.API.Connect\HumanResources.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\Purchasing.Presentation.Terminal.MAUI\Purchasing.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Pages\Detail\PurchaseZoneDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>

@@ -10,7 +10,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
 
         public int Priority { get; set; }
 
-        public string Body { get; set; }
+        public string Content { get; set; }
 
         public TagDisplayModel[] Tags { get; set; }
 
@@ -18,7 +18,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
         {
             Id = entity.Id;
             Name = entity.Name;
-            Body = entity.Body;
+            Content = entity.Content;
             Priority = entity.Priority;
             Tags = entity.TagBridges.Select(bridge =>
             {

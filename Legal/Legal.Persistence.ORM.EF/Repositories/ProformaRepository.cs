@@ -14,7 +14,9 @@ namespace MOROPO.Framework.Decisor.Legal.Persistence.ORM.EF.Repositories
         {
             return base.GetQueryableDbSet()
                 .Include(entity => entity.ClauseBridges).ThenInclude(bridge => bridge.Section)
-                .Include(entity => entity.ClauseBridges).ThenInclude(bridge => bridge.Stern);
+                .Include(entity => entity.ClauseBridges).ThenInclude(bridge => bridge.Stern)
+                .Include(entity => entity.CachedDocument)
+                .Include(entity => entity.RawDocument);
         }
     }
 }

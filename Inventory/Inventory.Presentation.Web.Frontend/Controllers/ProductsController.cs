@@ -1,4 +1,5 @@
 ﻿using System.Linq;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
@@ -141,14 +142,18 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
         {
             base.PostEdit(entity, model);
 
-            if (model.FeatureImage != null)
+            try
             {
-                var oldLogoImage = imageRepository.Get(model.FeatureImage.Id);
+                if (model.FeatureImage != null)
+                {
+                    var oldLogoImage = imageRepository.Get(model.FeatureImage.Id);
 
-                imageRepository.Delete(oldLogoImage, User.Identity.Name);
+                    imageRepository.Delete(oldLogoImage, User.Identity.Name);
 
-                imageFileManager.DeleteImageFile(oldLogoImage);
+                    imageFileManager.DeleteImageFile(oldLogoImage);
+                }
             }
+            catch { }
         }
     }
 }

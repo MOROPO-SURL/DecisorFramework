@@ -104,6 +104,8 @@
 
             if (target.Controller == "vehicleenginekinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-engine");
 
+            if (target.Controller == "paymentterms") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-calendar-clock");
+
             return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
         }
     }

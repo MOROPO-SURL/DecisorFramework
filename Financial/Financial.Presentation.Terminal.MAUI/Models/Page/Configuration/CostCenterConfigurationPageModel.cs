@@ -6,7 +6,7 @@
         private string description;
         private int priority = 1;
         private Interop.API.Common.Models.Display.BankAccountDisplayModel defaultBankAccount;
-        private Domain.Interop.API.Common.Models.Display.StructureTreeDisplayModel structure;
+        private Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel structure;
 
         public CostCenterConfigurationPageModel(Interop.API.Common.Models.Display.CostCenterDisplayModel model) : base(model)
         {
@@ -31,9 +31,9 @@
 
         public Interop.API.Common.Models.Display.BankAccountDisplayModel DefaultBankAccount { get => defaultBankAccount; set => SetProperty(ref defaultBankAccount, value); }
 
-        public Domain.Interop.API.Common.Models.Display.StructureTreeDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
+        public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
 
-        public Domain.Interop.API.Common.Models.Display.StructureTreeDisplayModel[] AvailableStructures { get; set; }
+        public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel[] AvailableStructures { get; set; }
     }
 }
 

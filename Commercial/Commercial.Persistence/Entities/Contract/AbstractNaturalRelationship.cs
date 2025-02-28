@@ -15,6 +15,14 @@
 
         public Domain.Persistence.Entities.PersonContact Contact { get; set; }
         public System.Guid ContactId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DefaultPaymentTermId))]
+        public PaymentTerm DefaultPaymentTerm { get; set; }
+        public System.Guid DefaultPaymentTermId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(BusinessKindId))]
+        public Domain.Persistence.Entities.NaturalBusinessKind BusinessKind { get; set; }
+        public System.Guid? BusinessKindId { get; set; }
     }
 }
 

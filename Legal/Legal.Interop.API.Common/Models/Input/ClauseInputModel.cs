@@ -13,7 +13,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Input
         public int Priority { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public string Body { get; set; }
+        public string Content { get; set; }
 
         public System.Collections.Generic.List<TagDisplayModel> Tags { get; set; } = new System.Collections.Generic.List<TagDisplayModel>();
 
@@ -35,7 +35,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Input
         {
             entity.Name = Name;
             entity.Priority = Priority;
-            entity.Body = Body;
+            entity.Content = Content;
 
             entity.TagBridges.Clear();
 

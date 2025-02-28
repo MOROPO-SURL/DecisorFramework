@@ -8,6 +8,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
     public class OrganizationContactConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<OrganizationContactDisplayModel>
     {
         private string name;
+        private string alias;
         private string about;
         private int priority = 1;
         private LegalBusinessKindDisplayModel businessKind;
@@ -23,6 +24,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
             {
                 Id = model.Id;
                 Name = model.Identity.Name;
+                Alias = model.Identity.Alias;
                 About = model.Identity.About;
                 Priority = model.Priority;
                 BusinessKind = model.BusinessKind;
@@ -51,6 +53,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public string Name { get => name; set => SetProperty(ref name, value); }
 
+        public string Alias { get => alias; set => SetProperty(ref alias, value); }
+
         public string About { get => about; set => SetProperty(ref about, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
@@ -63,18 +67,14 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public Microsoft.Maui.Controls.ImageSource ImageSource { get => imageSource; set => SetProperty(ref imageSource, value); }
 
-        public ObservableCollection<EmailContactItemDisplayModel> EmailContactItems { get; set; } = new ObservableCollection<EmailContactItemDisplayModel>();
+        public ObservableCollection<EmailContactItemDisplayModel> EmailContactItems { get; set; } = [];
 
-        public ObservableCollection<PhoneContactItemDisplayModel> PhoneContactItems { get; set; } = new ObservableCollection<PhoneContactItemDisplayModel>();
+        public ObservableCollection<PhoneContactItemDisplayModel> PhoneContactItems { get; set; } = [];
 
-        public ObservableCollection<WebContactItemDisplayModel> WebContactItems { get; set; } = new ObservableCollection<WebContactItemDisplayModel>();
+        public ObservableCollection<WebContactItemDisplayModel> WebContactItems { get; set; } = [];
 
-        public ObservableCollection<PostalContactItemDisplayModel> PostalContactItems { get; set; } = new ObservableCollection<PostalContactItemDisplayModel>();
+        public ObservableCollection<PostalContactItemDisplayModel> PostalContactItems { get; set; } = [];
 
         public LegalBusinessKindDisplayModel[] AvailableBusinessKinds { get; set; }
-
-        public StateDisplayModel[] AvailableStates { get; set; }
-
-        public MunicipalityDisplayModel[] AvailableMunicipalities { get; set; }
     }
 }

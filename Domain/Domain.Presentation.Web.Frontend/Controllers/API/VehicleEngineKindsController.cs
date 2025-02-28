@@ -12,7 +12,7 @@
 
         protected override System.Linq.Expressions.Expression<System.Func<Persistence.Entities.VehicleEngineKind, bool>> GetGlobalSelector()
         {
-            return entity => !entity.Archived && entity.Enabled;
+            return entity => !entity.Archived;
         }
 
         protected override System.Func<Persistence.Entities.VehicleEngineKind, object> GetOrderSelector()

@@ -71,6 +71,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<AbstractContact> Contacts { get; set; }
         public DbSet<OrganizationContact> OrganizationContacts { get; set; }
         public DbSet<PersonContact> PersonContacts { get; set; }
+        public DbSet<PaymentTerm> PaymentTerms { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }
         public DbSet<ProvisionableService> ProvisionableServices { get; set; }
         public DbSet<ProductValueProposition> ProductValuePropositions { get; set; }
@@ -84,12 +85,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<BudgetProductBridge> BudgetProductBridges { get; set; }
         public DbSet<BudgetServiceBridge> BudgetServiceBridges { get; set; }
         public DbSet<LegalProvider> LegalProviders { get; set; }
+        public DbSet<LegalProviderBankAccountBridge> LegalProviderBankAccountBridges { get; set; }
         public DbSet<LegalProviderPurchasingContract> LegalProviderPurchasingContracts { get; set; }
         public DbSet<NaturalProvider> NaturalProviders { get; set; }
+        public DbSet<NaturalProviderBankAccountBridge> NaturalProviderBankAccountBridges { get; set; }
         public DbSet<NaturalProviderPurchasingContract> NaturalProviderPurchasingContracts { get; set; }
         public DbSet<LegalClient> LegalClients { get; set; }
+        public DbSet<LegalClientBankAccountBridge> LegalClientBankAccountBridges { get; set; }
         public DbSet<LegalClientSaleContract> LegalClientSaleContracts { get; set; }
         public DbSet<NaturalClient> NaturalClients { get; set; }
+        public DbSet<NaturalClientBankAccountBridge> NaturalClientBankAccountBridges { get; set; }
         public DbSet<NaturalClientSaleContract> NaturalClientSaleContracts { get; set; }
         public DbSet<CustomAttribute> CustomAttributes { get; set; }
         public DbSet<Product> Products { get; set; }
@@ -100,7 +105,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<WarehousingArea> WarehousingAreas { get; set; }
         public DbSet<Batch> Batches { get; set; }
-        public DbSet<AbstractReception> Receptions { get; set; }
+        public DbSet<TransferReception> TransferReceptions { get; set; }
         public DbSet<AbstractDeparture> Departures { get; set; }
         public DbSet<DepartureBatchBridge> DepartureBatchBridges { get; set; }
         public DbSet<ReceptionBatchBridge> ReceptionBatchBridges { get; set; }
@@ -115,6 +120,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<PropertyKind> PropertyKinds { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<PropertyImageBridge> PropertyImageBridges { get; set; }
+        public DbSet<VehicleBrand> VehicleBrands { get; set; }
         public DbSet<VehicleCategory> VehicleCategories { get; set; }
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }

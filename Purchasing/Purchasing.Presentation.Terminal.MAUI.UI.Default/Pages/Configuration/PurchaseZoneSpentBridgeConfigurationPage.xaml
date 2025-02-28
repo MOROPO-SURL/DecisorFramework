@@ -1,48 +1,47 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<core_ui_configuration_pages:BaseConfigurationContentPage 
+<core_ui_base_pages:ConfigurationBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI"
-    xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
-    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PurchaseZoneSpentBridgeConfigurationPage"
-    x:TypeArguments="interop_common_bridge_models:PurchaseZoneSpentBridgeModel"
+    x:TypeArguments="interop_common_bridge_models:PurchaseZoneSpentBridgeModel,presentation_configuration_page_models:PurchaseZoneSpentBridgeConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:PurchaseZoneSpentBridgeConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="4" />
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
         Text="Aplicar"
-        Clicked="ApplyClickableControl_Clicked">
+        Clicked="ApplyControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
         Text="Cancelar"
-        Clicked="CancelClickableControl_Clicked">
+        Clicked="CancelControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <Grid>
-        <ScrollView Orientation="Vertical">
-            <Grid 
-                Padding="20"
-                ColumnSpacing="16" RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <VerticalStackLayout Spacing="6" Grid.Column="0">
+    <ScrollView Orientation="Vertical" Padding="8">
+        <VerticalStackLayout Padding="4">
+            <FlexLayout 
+                Wrap="Wrap"
+                AlignItems="Start" AlignContent="Start">
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=12}}"
+                    Margin="4"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo de Gasto" />
                     <ContentView                        
                         IsVisible="{Binding Spent, Converter={StaticResource IsNotNullConverter}}">
@@ -53,12 +52,29 @@
                         Text="Selecionar ..." 
                         Clicked="SpentPickButton_Clicked" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="2" VerticalOptions="Start">
+            </FlexLayout>
+            <FlexLayout 
+                Wrap="Wrap"
+                AlignItems="Start" AlignContent="Start">
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                    Margin="4"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Monto Unitario" />
-                    <Entry Text="{Binding Amount}" />
+                    <Entry Text="{Binding Amount, StringFormat='{0:F2}'}" />
                 </VerticalStackLayout>
-            </Grid>
-        </ScrollView>
-        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
-    </Grid>
-</core_ui_configuration_pages:BaseConfigurationContentPage>
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Moneda" />
+                    <Picker 
+                        x:Name="CurrencyPicker" 
+                        ItemsSource="{Binding AvailableCurrrencies}"
+                        ItemDisplayBinding="{Binding Name}"
+                        SelectedIndexChanged="CurrencyPicker_SelectedIndexChanged" />
+                </VerticalStackLayout>
+            </FlexLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</core_ui_base_pages:ConfigurationBaseContentPage>

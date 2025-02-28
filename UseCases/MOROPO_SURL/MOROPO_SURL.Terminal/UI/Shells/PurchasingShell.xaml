@@ -4,8 +4,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:decisorframework_purchasing_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_supervision_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default"
-    x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.PurchasingShell"
-    FlyoutBehavior="Locked">
+    x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.PurchasingShell">
+    <Shell.FlyoutBehavior>
+        <OnIdiom Default="Flyout" Desktop="Locked" />
+    </Shell.FlyoutBehavior>
     <Shell.FlyoutHeader>
         <Grid HeightRequest="180">
             <Image 

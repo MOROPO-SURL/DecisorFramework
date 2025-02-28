@@ -21,7 +21,6 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.ProductionPlan>(),
                     new BaseEntityTypeConfigurator<Entities.ProductionPlanDeparture>(),
                     new Configurators.ProductionProductBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.ProductionReception>(),
                     new BaseEntityTypeConfigurator<Entities.ProductionRole>()
                 };
             }

@@ -5,8 +5,10 @@
     xmlns:decisorframework_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_humanresources_list_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
-    x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.HumanResourcesShell"
-    FlyoutBehavior="Locked">
+    x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.HumanResourcesShell">
+    <Shell.FlyoutBehavior>
+        <OnIdiom Default="Flyout" Desktop="Locked" />
+    </Shell.FlyoutBehavior>
     <Shell.FlyoutHeader>
         <Grid HeightRequest="180">
             <Image 

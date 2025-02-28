@@ -4,6 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
+using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Factories;
+using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;
@@ -21,11 +24,20 @@ using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Defa
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Factories;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
+using MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.Models.Page.Configuration;
+using MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Factories;
+using MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
+using MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
+using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration;
+using MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Factories;
+using MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
+using MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MOROPO.Tool.Decisor.Terminal
@@ -59,11 +71,19 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IDetailContentPageFactoryFacade<PersonContactDisplayModel, PersonContactDetailPage>, PersonContactDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<OrganizationContactDisplayModel, OrganizationContactDetailPage>, OrganizationContactDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<NaturalBusinessKindDisplayModel, NaturalBusinessKindDetailPage>, NaturalBusinessKindDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<LegalBusinessKindDisplayModel, LegalBusinessKindDetailPage>, LegalBusinessKindDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyDetailPage>, BankAgencyDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<WarehouseDisplayModel, WarehouseDetailPage>, WarehouseDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<ProductDisplayModel, ProductDetailPage>, ProductDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<FamilyDisplayModel, FamilyDetailPage>, FamilyDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementDetailPage>, UnitMeasurementDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<PaymentTermDisplayModel, PaymentTermDetailPage>, PaymentTermDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<SectionDisplayModel, SectionDetailPage>, SectionDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<ProformaDisplayModel, ProformaDetailPage>, ProformaDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<PropertyDisplayModel, PropertyDetailPage>, PropertyDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<PurchaseZoneDisplayModel, PurchaseZoneDetailPage>, PurchaseZoneDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<WorkPositionDisplayModel, WorkPositionDetailPage>, WorkPositionDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<ClauseDisplayModel, ClauseDetailPage>, ClauseDetailPageFactory>()
                // ConfigurationPage factory resgistration !!!
                .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel, SalaryStandardConfigurationPage>, SalaryConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel, PersonContactConfigurationPage>, PersonContactConfigurationPageFactory>()
@@ -75,7 +95,13 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IConfigurationContentPageFactoryFacade<WarehousingAreaDisplayModel, WarehousingAreaConfigurationPageModel, WarehousingAreaConfigurationPage>, WarehousingAreaConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<ProductDisplayModel, ProductConfigurationPageModel, ProductConfigurationPage>, ProductConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<FamilyDisplayModel, FamilyConfigurationPageModel, FamilyConfigurationPage>, FamilyConfigurationPageFactory>()
-               .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel, UnitMeasurementConfigurationPage>, UnitMeasurementConfigurationPageFactory>();
+               .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel, UnitMeasurementConfigurationPage>, UnitMeasurementConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<SectionDisplayModel, SectionConfigurationPageModel, SectionConfigurationPage>, SectionConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<ProformaDisplayModel, ProformaConfigurationPageModel, ProformaConfigurationPage>, ProformaConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<PropertyDisplayModel, PropertyConfigurationPageModel, PropertyConfigurationPage>, PropertyConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<PurchaseZoneDisplayModel, PurchaseZoneConfigurationPageModel, PurchaseZoneConfigurationPage>, PurchaseZoneConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<WorkPositionDisplayModel, WorkPositionConfigurationPageModel, WorkPositionConfigurationPage>, WorkPositionConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<ClauseDisplayModel, ClauseConfigurationPageModel, ClauseConfigurationPage>, ClauseConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

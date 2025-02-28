@@ -31,17 +31,6 @@ public partial class PersonContactsManagePage : Core.Presentation.Terminal.MAUI.
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<PersonContactConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.PersonContactDisplayModel model = null)
-    {
-        var result = new PersonContactConfigurationPageModel();
-
-        var apiConnectClient = new Interop.API.Connect.Clients.NaturalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-        result.AvailableBusinessKinds = await apiConnectClient.GetEnabledAsync();
-
-        return result;
-    }
-
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);

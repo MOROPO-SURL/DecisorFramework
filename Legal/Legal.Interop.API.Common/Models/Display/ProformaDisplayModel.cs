@@ -10,17 +10,32 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
 
         public string Description { get; set; }
 
-        public Bridge.ProformaSectionClauseBridge[] Sections { get; set; }
+        public System.DateTime CreatedAt { get; set; }
+
+        public System.DateTime EditedAt { get; set; }
+
+        public Bridge.ProformaSectionClauseBridgeModel[] Sections { get; set; }
+
+        public Core.Interop.API.Common.Models.Display.DocumentDisplayModel RawDocument { get; set; }
 
         public void Import(Persistence.Entities.Proforma entity)
         {
             Id = entity.Id;
             Name = entity.Name;
             Description = entity.Description;
+            CreatedAt = entity.CreatedAt;
+            EditedAt = entity.EditedAt;
+
+            if (entity.RawDocument != null)
+            {
+                RawDocument = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+
+                RawDocument.Import(entity.RawDocument);
+            }
 
             var groups = entity.ClauseBridges.OrderBy(bridge => bridge.Section.Priority).GroupBy(bridge => bridge.Section).ToList();
 
-            var sectionList = new System.Collections.Generic.List<Bridge.ProformaSectionClauseBridge>();
+            var sectionList = new System.Collections.Generic.List<Bridge.ProformaSectionClauseBridgeModel>();
 
             foreach (var group in groups)
             {
@@ -28,7 +43,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
 
                 section.Import(group.Key);
 
-                var item = new Bridge.ProformaSectionClauseBridge
+                var item = new Bridge.ProformaSectionClauseBridgeModel
                 {
                     Section = section,
                     Clauses = group.Select(bridge =>
@@ -38,7 +53,7 @@ namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display
                         clause.Import(bridge.Stern);
 
                         return clause;
-                    }).ToList()
+                    }).ToArray()
                 };
 
                 sectionList.Add(item);

@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class OrganizationContactsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.OrganizationContactDisplayModel, Models.Page.Manage.OrganizationContactsManagePageModel, Models.Page.Configuration.OrganizationContactConfigurationPageModel, Configuration.OrganizationContactConfigurationPage, Detail.OrganizationContactDetailPage>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 144;
 
     public OrganizationContactsManagePage()
     {
@@ -16,7 +16,7 @@ public partial class OrganizationContactsManagePage : Core.Presentation.Terminal
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 384; }
+    protected override double ItemViewRequestWidth { get => 420; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {

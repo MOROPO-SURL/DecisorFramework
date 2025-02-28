@@ -1,10 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class WorkPositionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<WorkPositionDisplayModel, Models.Page.Configuration.WorkPositionConfigurationPageModel>
+public partial class WorkPositionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.WorkPositionDisplayModel, Models.Page.Configuration.WorkPositionConfigurationPageModel>
 {
     public WorkPositionConfigurationPage(System.Action<Interop.API.Common.Models.Display.WorkPositionDisplayModel> successAction, Models.Page.Configuration.WorkPositionConfigurationPageModel model) : base(successAction, model)
     {
@@ -47,17 +46,15 @@ public partial class WorkPositionConfigurationPage : Core.Presentation.Terminal.
     {
         var apiConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.WorkPositionConfigurationPageModel) BindingContext;
-
         var model = new Interop.API.Common.Models.Input.WorkPositionInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            Priority = concreteBindingContext.Priority,
-            KindId = concreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
-            SchoolingId = concreteBindingContext.AvailableSchoolings[SchoolingPicker.SelectedIndex].Id,
-            Reference = concreteBindingContext.Reference,
-            Description = concreteBindingContext.Description
+            Name = ConcreteBindingContext.Name,
+            Priority = ConcreteBindingContext.Priority,
+            KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
+            SchoolingId = ConcreteBindingContext.AvailableSchoolings[SchoolingPicker.SelectedIndex].Id,
+            Reference = ConcreteBindingContext.Reference,
+            Description = ConcreteBindingContext.Description
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -69,17 +66,15 @@ public partial class WorkPositionConfigurationPage : Core.Presentation.Terminal.
     {
         var apiConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.WorkPositionConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.WorkPositionInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            Priority = concreteBindingContext.Priority,
-            KindId = concreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
-            SchoolingId = concreteBindingContext.AvailableSchoolings[SchoolingPicker.SelectedIndex].Id,
-            Reference = concreteBindingContext.Reference,
-            Description = concreteBindingContext.Description
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            Priority = ConcreteBindingContext.Priority,
+            KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
+            SchoolingId = ConcreteBindingContext.AvailableSchoolings[SchoolingPicker.SelectedIndex].Id,
+            Reference = ConcreteBindingContext.Reference,
+            Description = ConcreteBindingContext.Description
         };
 
         await apiConnectClient.EditAsync(model);

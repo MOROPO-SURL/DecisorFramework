@@ -11,10 +11,6 @@
 
         public int Priority { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CategoryId))]
-        public VehicleCategory Category { get; set; }
-        public int CategoryId { get; set; }
-
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(FeatureImageId))]
         public Guama.Media.Persistence.Entities.Image FeatureImage { get; set; }
         public System.Guid FeatureImageId { get; set; }
@@ -22,6 +18,21 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(StructureId))]
         public Structure Structure { get; set; }
         public System.Guid StructureId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Reference { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CategoryId))]
+        public VehicleCategory Category { get; set; }
+        public int CategoryId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(BrandId))]
+        public VehicleBrand Brand { get; set; }
+        public System.Guid BrandId { get; set; }
+
+        public string Model { get; set; }
+
+        public int Year { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Plate { get; set; }

@@ -57,6 +57,8 @@
                 entity.FamilyId = CategoryId;
             }
 
+            // TODO Implement new list syncronization protocol !!
+
             entity.WarehousingDecreaseKindBridges.Clear();
 
             foreach (var model in WarehousingDecreases)
