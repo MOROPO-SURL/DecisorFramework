@@ -1,0 +1,13 @@
+﻿<ContentView
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_converters="clr-namespace:MOROPO.CheffMIGUE.Decisor.Terminal.UI.Converters"
+    x:Class="MOROPO.CheffMIGUE.Decisor.Terminal.UI.Views.ModuleShellFlyoutMenuItemView"
+    Content="{Binding Converter={StaticResource MenuFlyoutItemToViewConverter}}">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <local_converters:MenuFlyoutItemToViewConverter x:Key="MenuFlyoutItemToViewConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+</ContentView>
+

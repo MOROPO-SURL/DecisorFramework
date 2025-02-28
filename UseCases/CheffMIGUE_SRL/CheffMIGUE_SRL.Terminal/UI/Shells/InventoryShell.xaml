@@ -1,0 +1,121 @@
+<Shell 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
+    xmlns:decisorframework_inventory_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_purchasing_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_supervision_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default"
+    x:Class="MOROPO.CheffMIGUE.Decisor.Terminal.UI.Shells.InventoryShell">
+    <Shell.FlyoutBehavior>
+        <OnIdiom Default="Flyout" Desktop="Locked" />
+    </Shell.FlyoutBehavior>
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="180">
+            <Image 
+                Aspect="AspectFill"
+                Source="warehousing.jpg" />
+            <BoxView
+                Color="#A7000000" />
+            <Grid
+                Padding="16">
+                <Button
+                    HorizontalOptions="Start" VerticalOptions="Start"
+                    Text="&#xF2DE;"
+                    FontFamily="MaterialDesignIcons"
+                    FontSize="Medium"
+                    Padding="4"
+                    BackgroundColor="#60FFFFFF"
+                    Clicked="BackHomeButton_Clicked" />
+                <Label
+                    Text="Inventario"
+                    TextColor="White"
+                    HorizontalTextAlignment="Center" VerticalOptions="Center"
+                    FontSize="Large"
+                    FontAttributes="Bold" />
+            </Grid>
+        </Grid>
+    </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Inicio" />
+    <ShellContent
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate decisorframework_supervision_manage_pages:InventoryDashboardPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Existencias"
+        ContentTemplate="{DataTemplate decisorframework_supervision_manage_pages:InventoryStockPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF3D3;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Operaciones" />
+    <FlyoutItem
+        Title="Recepciones">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF3D4;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Compras"
+            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:PurchaseReceptionsManagePage}" />
+    </FlyoutItem>
+    <ShellContent
+        Title="Salidas">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF3D5;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Gestión" />
+    <ShellContent
+        Title="Almacenes"
+        ContentTemplate="{DataTemplate decisorframework_inventory_manage_pages:WarehousesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFFBB;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Productos"
+        ContentTemplate="{DataTemplate decisorframework_inventory_manage_pages:ProductsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF2D8;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Familias de Productos"
+        ContentTemplate="{DataTemplate decisorframework_inventory_manage_pages:FamiliesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF6E0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Unidades de Medida"
+        ContentTemplate="{DataTemplate decisorframework_inventory_manage_pages:UnitMeasurementsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF472;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+</Shell>
