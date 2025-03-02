@@ -7,5 +7,10 @@
         }
 
         protected override string TargetController => "api/hhrr/employees";
+
+        public virtual async System.Threading.Tasks.Task<Common.Models.Display.EmployeeDisplayModel> FindByContactAsync(System.Guid key)
+        {
+            return await httpClientHelperProvider.HttpClientHelper.GetAsync<Common.Models.Display.EmployeeDisplayModel>($"{TargetController}/findbycontact/{key}");
+        }
     }
 }

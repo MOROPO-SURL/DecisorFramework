@@ -2,6 +2,7 @@
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Controllers.API
 {
@@ -38,6 +39,18 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
             }
 
             return model;
+        }
+
+        [Microsoft.AspNetCore.Mvc.HttpGet("[action]/{key}")]
+        public virtual Microsoft.AspNetCore.Mvc.ActionResult<EmployeeDisplayModel> FindByContact(System.Guid key)
+        {
+            var entity = Repository.FindOneBy(entity => entity.ContactId == key);
+
+            if (entity == null) return NoContent();
+
+            var model = EntityToDisplayModel(entity);
+
+            return Ok(model);
         }
     }
 }

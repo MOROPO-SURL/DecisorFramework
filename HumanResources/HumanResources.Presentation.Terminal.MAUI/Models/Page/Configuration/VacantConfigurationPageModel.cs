@@ -1,13 +1,13 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
-    public class VacantConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<View.VacantViewModel>
+    public class VacantConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<View.WorkforceConfigurationVacantViewModel>
     {
         private int priority = 1;
         private bool namingResolutionRequired;
         private Interop.API.Common.Models.Display.WorkPositionDisplayModel workPosition;
         private Interop.API.Common.Models.Display.SalaryStandardDisplayModel salaryStandard;
 
-        public VacantConfigurationPageModel(View.VacantViewModel model) : base(model)
+        public VacantConfigurationPageModel(View.WorkforceConfigurationVacantViewModel model) : base(model)
         {
             if (model != null)
             {
@@ -20,14 +20,14 @@
             }
         }
 
-        public VacantConfigurationPageModel(View.OrganizationalUnityViewModel organizationUnity) : base(null)
+        public VacantConfigurationPageModel(View.WorkforceConfigurationOrganizationalUnityViewModel organizationUnity) : base(null)
         {
             OrganizationUnity = organizationUnity;
         }
 
         public System.Guid Id { get; set; }
 
-        public View.OrganizationalUnityViewModel OrganizationUnity { get; set; }
+        public View.WorkforceConfigurationOrganizationalUnityViewModel OrganizationUnity { get; set; }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 

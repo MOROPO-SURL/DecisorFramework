@@ -4,15 +4,18 @@
     {
         public System.Guid Id { get; set; } = System.Guid.NewGuid();
 
-        public System.Guid VacantId { get; set; }
-
         public System.DateTime At { get; set; }
+        public System.Guid StaffId { get; set; }
+
+        public System.Guid WorkforceId { get; set; }
+
+        public System.Guid VacantId { get; set; }
 
         public System.Guid EmployeeId { get; set; }
 
         public Persistence.Entities.Ocupation Export()
         {
-            var entity = new Persistence.Entities.Ocupation { Id = Id, VacantId = VacantId };
+            var entity = new Persistence.Entities.Ocupation { Id = Id, StaffId = StaffId, WorkforceId = WorkforceId, VacantId = VacantId };
 
             Mergue(entity);
 
