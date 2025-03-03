@@ -1,5 +1,4 @@
 ﻿using System.Linq;
-using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
@@ -97,19 +96,14 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
 
                 imageFileManager.SaveImageFileContent(entity.FeatureImage.Id, model.FeatureImage.ContentData, model.FeatureImage.ContentType);
             }
-        }
 
-        protected override void PostCreate(Product entity, ProductInputModel model)
-        {
-            base.PostCreate(entity, model);
-
-            for (int i = 0; i < model.Classifications.Count; i++)
+            foreach (var _model in model.IncomingClassificationItems)
             {
-                var _entity = model.Classifications[i].Export();
+                var _entity = _model.Export();
 
                 _entity.ProductId = entity.Id;
 
-                classificationRepository.Add(_entity, User.Identity.Name, i == model.Classifications.Count - 1);
+                classificationRepository.Add(_entity, User.Identity.Name, false);
             }
         }
 
@@ -135,6 +129,29 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
                 }, User.Identity.Name, false);
 
                 imageFileManager.SaveImageFileContent(entity.FeatureImage.Id, model.FeatureImage.ContentData, model.FeatureImage.ContentType);
+            }
+
+            foreach (var _model in model.OutgoingClassificationItems)
+            {
+                classificationRepository.Delete(entity.Classifications.First(_entity => _entity.Id == _model.Id), User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionClassificationItems)
+            {
+                var _entity = entity.Classifications.First(_entity => _entity.Id == _model.Id);
+
+                _model.Mergue(_entity);
+
+                classificationRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingClassificationItems)
+            {
+                var _entity = _model.Export();
+
+                _entity.ProductId = entity.Id;
+
+                classificationRepository.Add(_entity, User.Identity.Name, false);
             }
         }
 

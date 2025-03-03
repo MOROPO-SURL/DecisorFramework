@@ -1,17 +1,24 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.ProductDisplayModel, Models.Page.Configuration.ProductConfigurationPageModel>
+public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProductDisplayModel, Models.Page.Configuration.ProductConfigurationPageModel>
 {
     private byte[] imagePickedData;
     private string imageContentType;
 
-    public ProductConfigurationPage(System.Action<Interop.API.Common.Models.Display.ProductDisplayModel> successAction, Models.Page.Configuration.ProductConfigurationPageModel model) : base(successAction, model)
+    private readonly List<ClassificationInputModel> editionClassificationItems = [];
+    private readonly List<ClassificationInputModel> incomingClassificationItems = [];
+    private readonly List<ClassificationDisplayModel> outgoingClassificationItems = [];
+
+    public ProductConfigurationPage(System.Action<ProductDisplayModel> successAction, Models.Page.Configuration.ProductConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
 
@@ -66,14 +73,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
             DefaultMetricUnityId = ConcreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
             CategoryId = CategoryPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
             WarehousingDecreases = ConcreteBindingContext.WarehousingDecreases.ToList(),
-            Classifications = ConcreteBindingContext.Classifications.Select(item => new Interop.API.Common.Models.Input.ClassificationInputModel
-            {
-                Id = item.Id,
-                Name = item.Name,
-                Description = item.Description,
-                Priority = item.Priority,
-                ProductId = ConcreteBindingContext.Id
-            }).ToList()
+            IncomingClassificationItems = incomingClassificationItems
         };
 
         if (imagePickedData != null)
@@ -104,7 +104,10 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
             Priority = ConcreteBindingContext.Priority,
             DefaultMetricUnityId = ConcreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
             CategoryId = CategoryPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
-            WarehousingDecreases = ConcreteBindingContext.WarehousingDecreases.ToList()
+            WarehousingDecreases = ConcreteBindingContext.WarehousingDecreases.ToList(),
+            EditionClassificationItems = editionClassificationItems,
+            IncomingClassificationItems = incomingClassificationItems,
+            OutgoingClassificationItems = outgoingClassificationItems
         };
 
         if (imagePickedData != null)
@@ -184,7 +187,15 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
     private void EditClassificationButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationEditSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel(ConcreteBindingContext, ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ClassificationDisplayModel)));
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ClassificationDisplayModel;
+
+        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationEditSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel(ConcreteBindingContext, new ClassificationInputModel
+        {
+            Id = target.Id,
+            Name = target.Name,
+            Description = target.Description,
+            Priority = target.Priority
+        })));
     }
 
     private void ClassificationRemoveButton_Clicked(object sender, System.EventArgs e)
@@ -193,24 +204,115 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
         {
             if (!task.Result) return;
 
+            var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ClassificationDisplayModel;
+
+            var handled = false;
+
+            foreach (var item in incomingClassificationItems)
+            {
+                if (item.Id != target.Id) continue;
+
+                incomingClassificationItems.Remove(incomingClassificationItems.First(model => model.Id == target.Id));
+
+                handled = true;
+
+                break;
+            }
+
+            if (!handled)
+            {
+                foreach (var item in editionClassificationItems)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    editionClassificationItems.Remove(editionClassificationItems.First(model => model.Id == target.Id));
+
+                    break;
+                }
+            }
+
+            if (!handled)
+            {
+                outgoingClassificationItems.Add(target);
+            }
+
             hasChangesFlag = true;
 
-            Dispatcher.Dispatch(() => ConcreteBindingContext.Classifications.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ClassificationDisplayModel));
+            Dispatcher.Dispatch(() => ConcreteBindingContext.Classifications.Remove(target));
         });
     }
 
-    private void ClassificationCreateSuccess_Callback(Interop.API.Common.Models.Display.ClassificationDisplayModel model)
+    private void ClassificationCreateSuccess_Callback(ClassificationInputModel model)
     {
-        ConcreteBindingContext.Classifications.Add(model);
+        incomingClassificationItems.Add(model);
+
+        ConcreteBindingContext.Classifications.Add(new ClassificationDisplayModel
+        {
+            Id = model.Id,
+            Name = model.Name,
+            Description = model.Description,
+            Priority = model.Priority
+        });
+
+        hasChangesFlag = true;
     }
 
-    private void ClassificationEditSuccess_Callback(Interop.API.Common.Models.Display.ClassificationDisplayModel model)
+    private void ClassificationEditSuccess_Callback(ClassificationInputModel model)
     {
-        var reference = ConcreteBindingContext.Classifications.First(item => item.Id == model.Id);
+        var handled = false;
 
-        var index = ConcreteBindingContext.Classifications.IndexOf(reference);
+        foreach (var item in incomingClassificationItems)
+        {
+            if (item.Id != model.Id) continue;
 
-        ConcreteBindingContext.Classifications[index] = model;
+            item.Name = model.Name;
+            item.Description = model.Description;
+            item.Priority = model.Priority;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionClassificationItems)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.Name = model.Name;
+                item.Description = model.Description;
+                item.Priority = model.Priority;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionClassificationItems.Add(model);
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.Classifications)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.Classifications[index] = new ClassificationDisplayModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                Priority = model.Priority
+            };
+
+            break;
+        }
 
         hasChangesFlag = true;
     }
