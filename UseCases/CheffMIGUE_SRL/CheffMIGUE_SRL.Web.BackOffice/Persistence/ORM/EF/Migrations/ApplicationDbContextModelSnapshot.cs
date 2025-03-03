@@ -2191,6 +2191,10 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("vacantid");
 
+                    b.Property<Guid>("WorkforceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("workforceid");
+
                     b.HasKey("Id")
                         .HasName("pk_ocupations");
 
@@ -2199,6 +2203,9 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("VacantId")
                         .HasDatabaseName("ix_ocupations_vacantid");
+
+                    b.HasIndex("WorkforceId")
+                        .HasDatabaseName("ix_ocupations_workforceid");
 
                     b.HasIndex("StaffId", "VacantId")
                         .IsUnique()
@@ -6637,11 +6644,20 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_ocupations_vacants_vacantid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", "Workforce")
+                        .WithMany()
+                        .HasForeignKey("WorkforceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_ocupations_workforces_workforceid");
+
                     b.Navigation("Employee");
 
                     b.Navigation("Staff");
 
                     b.Navigation("Vacant");
+
+                    b.Navigation("Workforce");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Staff", b =>
