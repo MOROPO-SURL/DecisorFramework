@@ -32,6 +32,13 @@
 		<DefaultLanguage>en-US</DefaultLanguage>
 		<PackageCertificateThumbprint>8496D1173129CED1DE72A913E2C2FB8D7679FEB4</PackageCertificateThumbprint>
 		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
+		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+		<GenerateTestArtifacts>True</GenerateTestArtifacts>
+		<AppInstallerUri>https://www.moropo.cu/tools/decisor/windows</AppInstallerUri>
+		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
@@ -68,6 +75,10 @@
 	  <ProjectReference Include="..\..\..\Production\Production.Presentation.Terminal.MAUI.UI.Default\Production.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Purchasing\Purchasing.Presentation.Terminal.MAUI.UI.Default\Purchasing.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Supervision\Supervision.Presentation.Terminal.MAUI.UI.Default\Supervision.Presentation.Terminal.MAUI.UI.Default.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Properties\PublishProfiles\" />
 	</ItemGroup>
 
 </Project>

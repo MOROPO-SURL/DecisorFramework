@@ -45,19 +45,17 @@
                                     <Grid
                                         IsVisible="{Binding Ocupation, Converter={StaticResource IsNotNullConverter}}"
                                         VerticalOptions="End"
-                                        Background="{StaticResource OverlayBackgroundBrush}">
+                                        BackgroundColor="{AppThemeBinding Light=#BBDDDDDD, Dark=#A9333333}">
                                         <VerticalStackLayout Margin="8">
                                             <Label
                                                 ToolTipProperties.Text="{Binding Ocupation.Employee.Contact.Identity.Name}"
                                                 LineBreakMode="TailTruncation"
                                                 Text="{Binding Ocupation.Employee.Contact.Identity.Name}"
-                                                TextColor="White"
                                                 FontAttributes="Bold" />
                                             <Label
                                                 ToolTipProperties.Text="{Binding Ocupation.Employee.Contact.Identity.LastName}"
                                                 LineBreakMode="TailTruncation"
-                                                Text="{Binding Ocupation.Employee.Contact.Identity.LastName, TargetNullValue='---'}"
-                                                TextColor="White" />
+                                                Text="{Binding Ocupation.Employee.Contact.Identity.LastName, TargetNullValue='---'}" />
                                         </VerticalStackLayout>
                                     </Grid>
                                 </Grid>
