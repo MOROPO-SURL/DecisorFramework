@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View
 {
-    public class VacantViewModel : Caney.MVVM.Core.Models.BaseBindableModel
+    public class WorkforceConfigurationVacantViewModel : Caney.MVVM.Core.Models.BaseBindableModel
     {
         private int priority;
         private bool namingResolutionRequired;
@@ -9,7 +9,7 @@
 
         public System.Guid Id { get; set; }
 
-        public OrganizationalUnityViewModel OrganizationUnity { get; set; }
+        public WorkforceConfigurationOrganizationalUnityViewModel OrganizationUnity { get; set; }
 
         public int Priority { get => priority; set => priority = value; }
 

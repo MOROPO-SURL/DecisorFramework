@@ -8,9 +8,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Disp
 
         public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel Structure { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(MainWorkforceId))]
         public WorkforceDisplayModel MainWorkforce { get; set; }
-        public System.Guid MainWorkforceId { get; set; }
 
         public Bridge.AlternativeWorkforceBridgeModel[] AlternativeWorkforces { get; set; }
 

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <ContentView 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -6,8 +5,8 @@
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.OrganizationalUnityAndVacantsCardView"
-    x:DataType="presentation_view_models:OrganizationalUnityViewModel">
+    x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.WorkforceConfigurationOrganizationalUnityAndVacantsCardView"
+    x:DataType="presentation_view_models:WorkforceConfigurationOrganizationalUnityViewModel">
     <ContentView.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
@@ -65,7 +64,7 @@
                                                 Margin="0,8,0,0"
                                                 Text="Referencia" />
                                             <Label
-                                                Text="{Binding WorkPosition.Reference}"
+                                                Text="{Binding WorkPosition.Reference, TargetNullValue='---'}"
                                                 LineBreakMode="TailTruncation" />
                                         </VerticalStackLayout>
                                         <VerticalStackLayout Spacing="8">
@@ -94,12 +93,12 @@
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Children}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <local_card_views:OrganizationalUnityAndVacantsCardView 
+                        <local_card_views:WorkforceConfigurationOrganizationalUnityAndVacantsCardView 
                             AddVacantButtonClick="AddVacantButton_Clicked"
                             VacantEditionButtonClick="VacantEditionButton_Clicked"
                             VacantRemoveButtonClick="VacantRemoveButton_Clicked"
                             Margin="0,8,0,0">
-                        </local_card_views:OrganizationalUnityAndVacantsCardView>
+                        </local_card_views:WorkforceConfigurationOrganizationalUnityAndVacantsCardView>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </VerticalStackLayout>
