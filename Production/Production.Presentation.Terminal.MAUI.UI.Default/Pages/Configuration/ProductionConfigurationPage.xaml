@@ -51,17 +51,17 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
                 <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Plan" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Orden" />
                     <ContentView                        
-                        IsVisible="{Binding Path=Plan, Converter={StaticResource IsNotNullConverter}}">
-                        <local_card_views:ProductionPlanToCompleteDefaultCardView
-                            BindingContext="{Binding Plan}"
+                        IsVisible="{Binding Order, Converter={StaticResource IsNotNullConverter}}">
+                        <local_card_views:ProductionOrderToCompleteDefaultCardView
+                            BindingContext="{Binding Order}"
                             HeightRequest="180"
                             Margin="0,0,0,10" />
                     </ContentView>
                     <Button
                         Text="Seleccionar ..."
-                        Clicked="PlanPickButton_Clicked" />
+                        Clicked="OrderPickButton_Clicked" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="0" VerticalOptions="Start">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cantidad" />

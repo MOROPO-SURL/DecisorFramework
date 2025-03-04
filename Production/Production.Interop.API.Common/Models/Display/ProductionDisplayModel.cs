@@ -12,7 +12,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public System.DateTime At { get; set; }
 
-        public ProductionPlanDisplayModel Plan { get; set; }
+        public ProductionOrderDisplayModel Plan { get; set; }
 
         public decimal Amount { get; set; }
 
@@ -80,7 +80,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
             if (entity.Plan != null)
             {
-                Plan = new ProductionPlanDisplayModel();
+                Plan = new ProductionOrderDisplayModel();
 
                 Plan.Import(entity.Plan);
             }

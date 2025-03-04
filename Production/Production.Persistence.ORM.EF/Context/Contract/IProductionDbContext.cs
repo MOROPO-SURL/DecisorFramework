@@ -4,18 +4,18 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Context.Contrac
 {
     public interface IProductionDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext, Essential.Persistence.ORM.EF.Context.Contract.IEssentialDbContext
     {
-        public DbSet<Persistence.Entities.Elaboration> Elaborations { get; set; }
-        public DbSet<Persistence.Entities.ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
-        public DbSet<Persistence.Entities.ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
-        public DbSet<Persistence.Entities.ElaborationStep> ElaborationSteps { get; set;}
-        public DbSet<Persistence.Entities.ElaborationStepProductionRoleBridge> ElaborationStepProductionRoleBridges { get; set; }
-        public DbSet<Persistence.Entities.Production> Productions { get; set; }
-        public DbSet<Persistence.Entities.ProductionColaboratorBridge> ProductionColaboratorBridges { get; set; }
-        public DbSet<Persistence.Entities.ProductionEmployeeBridge> ProductionEmployeeBridges { get; set; }
-        public DbSet<Persistence.Entities.ProductionPlan> ProductionPlans { get; set; }
-        public DbSet<Persistence.Entities.ProductionPlanDeparture> ProductionPlanDepartures { get; set; }
-        public DbSet<Persistence.Entities.ProductionProductBridge> ProductionProductBridges { get; set; }
-        public DbSet<Persistence.Entities.ProductionReception> ProductionReceptions { get; set; }
-        public DbSet<Persistence.Entities.ProductionRole> ProductionRoles { get; set; }
+        public DbSet<Entities.Elaboration> Elaborations { get; set; }
+        public DbSet<Entities.ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
+        public DbSet<Entities.ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
+        public DbSet<Entities.ElaborationStep> ElaborationSteps { get; set; }
+        public DbSet<Entities.ElaborationStepProductionRoleBridge> ElaborationStepProductionRoleBridges { get; set; }
+        public DbSet<Entities.Production> Productions { get; set; }
+        public DbSet<Entities.ProductionColaboratorBridge> ProductionColaboratorBridges { get; set; }
+        public DbSet<Entities.ProductionEmployeeBridge> ProductionEmployeeBridges { get; set; }
+        public DbSet<Entities.ProductionOrder> ProductionOrders { get; set; }
+        public DbSet<Entities.ProductionOrderDeparture> ProductionOrderDepartures { get; set; }
+        public DbSet<Entities.ProductionProductBridge> ProductionProductBridges { get; set; }
+        public DbSet<Entities.ProductionReception> ProductionReceptions { get; set; }
+        public DbSet<Entities.ProductionRole> ProductionRoles { get; set; }
     }
 }

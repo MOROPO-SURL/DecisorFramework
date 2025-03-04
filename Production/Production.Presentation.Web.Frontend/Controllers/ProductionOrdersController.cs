@@ -10,16 +10,16 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
 {
     [Microsoft.AspNetCore.Mvc.Route("api/production/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class ProductionPlansController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<ProductionPlan, System.Guid, ProductionPlanInputModel, ProductionPlanDisplayModel, ProductionPlanFilterModel>
+    public class ProductionOrdersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<ProductionOrder, System.Guid, ProductionOrderInputModel, ProductionOrderDisplayModel, ProductionPlanFilterModel>
     {
         private readonly IEntityRepository<ElaborationStep, System.Guid> stepRepository;
 
-        public ProductionPlansController(IEntityRepository<ElaborationStep, System.Guid> stepRepository, IEntityRepository<ProductionPlan, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProductionPlansController> localizer, ILogger<ProductionPlansController> logger) : base(repository, localizer, logger)
+        public ProductionOrdersController(IEntityRepository<ElaborationStep, System.Guid> stepRepository, IEntityRepository<ProductionOrder, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProductionOrdersController> localizer, ILogger<ProductionOrdersController> logger) : base(repository, localizer, logger)
         {
             this.stepRepository = stepRepository;
         }
 
-        protected override System.Linq.Expressions.Expression<System.Func<ProductionPlan, bool>> GetGlobalSelector()
+        protected override System.Linq.Expressions.Expression<System.Func<ProductionOrder, bool>> GetGlobalSelector()
         {
             return entity => !entity.Archived;
         }
@@ -29,7 +29,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
             return NotFound();
         }
 
-        protected override ProductionPlanDisplayModel EntityToDisplayModel(ProductionPlan entity)
+        protected override ProductionOrderDisplayModel EntityToDisplayModel(ProductionOrder entity)
         {
             var steps = stepRepository.FindBy(_entity => _entity.ElaborationId == entity.ElaborationId).ToArray();
 

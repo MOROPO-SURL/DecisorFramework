@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 {
-    public class ProductionPlanDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.ProductionPlan, System.Guid>
+    public class ProductionOrderDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.ProductionOrder, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -14,11 +14,11 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public decimal Amount { get; set; }
 
-        public System.DateTime PlannedFor { get; set; }
+        public System.DateTime RequestedFor { get; set; }
 
         public System.DateTime? ApprovedAt { get; set; }
 
-        public EmployeeDisplayModel Planner { get; set; }
+        public EmployeeDisplayModel Author { get; set; }
 
         public EmployeeDisplayModel Responsible { get; set; }
 
@@ -28,21 +28,21 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public ProductionDisplayModel Production { get; set; }
 
-        public virtual void Import(Persistence.Entities.ProductionPlan entity)
+        public virtual void Import(Persistence.Entities.ProductionOrder entity)
         {
             Id = entity.Id;
             Priority = entity.Priority;
             At = entity.At;
             Amount = entity.Amount;
             Description = entity.Description;
-            PlannedFor = entity.PlannedFor;
+            RequestedFor = entity.RequestedFor;
             ApprovedAt = entity.ApprovedAt;
 
-            if (entity.Planner != null)
+            if (entity.Author != null)
             {
-                Planner = new EmployeeDisplayModel();
+                Author = new EmployeeDisplayModel();
 
-                Planner.Import(entity.Planner);
+                Author.Import(entity.Author);
             }
 
             if (entity.Responsible != null)

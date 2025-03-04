@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 {
-    public class ProductionPlanInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<ProductionPlan, System.Guid>
+    public class ProductionOrderInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<ProductionOrder, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -10,9 +10,9 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public string Description { get; set; }
 
-        public System.DateTime PlannedFor { get; set; }
+        public System.DateTime RequestedFor { get; set; }
 
-        public System.Guid PlannerId { get; set; }
+        public System.Guid AuthorId { get; set; }
 
         public System.Guid ResponsibleId { get; set; }
 
@@ -22,23 +22,23 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public decimal Amount { get; set; }
 
-        public ProductionPlan Export()
+        public ProductionOrder Export()
         {
-            var entity = new ProductionPlan { Id = Id };
+            var entity = new ProductionOrder { Id = Id };
 
             Mergue(entity);
 
             return entity;
         }
 
-        public void Import(ProductionPlan entity)
+        public void Import(ProductionOrder entity)
         {
             throw new System.NotImplementedException();
         }
 
-        public void Mergue(ProductionPlan entity)
+        public void Mergue(ProductionOrder entity)
         {
-            entity.PlannedFor = PlannedFor;
+            entity.RequestedFor = RequestedFor;
             entity.Priority = Priority;
             entity.Description = Description;
             entity.Amount = Amount;
@@ -49,10 +49,10 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
                 entity.ElaborationId = ElaborationId;
             }
 
-            if (entity.PlannerId != PlannerId)
+            if (entity.AuthorId != AuthorId)
             {
-                entity.Planner = null;
-                entity.PlannerId = PlannerId;
+                entity.Author = null;
+                entity.AuthorId = AuthorId;
             }
 
             if (entity.ResponsibleId != ResponsibleId)

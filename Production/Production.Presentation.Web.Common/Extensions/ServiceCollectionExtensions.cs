@@ -11,7 +11,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Common.Extensions
         {
             services.AddScoped<IEntityRepository<Elaboration, System.Guid>, ElaborationRepository>();
             services.AddScoped<IEntityRepository<ElaborationStep, System.Guid>, ElaborationStepRepository>();
-            services.AddScoped<IEntityRepository<ProductionPlan, System.Guid>, ProductionPlanRepository>();
+            services.AddScoped<IEntityRepository<ProductionOrder, System.Guid>, ProductionOrderRepository>();
             services.AddScoped<IEntityRepository<Persistence.Entities.Production, System.Guid>, ProductionRepository>();
             services.AddScoped<IEntityRepository<ProductionRole, System.Guid>, ProductionRoleRepository>();
 
