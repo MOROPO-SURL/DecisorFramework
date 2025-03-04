@@ -2,42 +2,44 @@
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
-    public class ProductionPlanConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ProductionPlanDisplayModel>
+    public class ProductionOrderConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ProductionOrderDisplayModel>
     {
-        private System.DateTime plannedFor;
+        private System.DateTime requestedFor;
         private string description;
         private int priority = 1;
         private Interop.API.Common.Models.Display.ElaborationDisplayModel elaboration;
-        private EmployeeDisplayModel planner;
+        private EmployeeDisplayModel author;
         private EmployeeDisplayModel responsible;
         private EmployeeDisplayModel decisor;
         private decimal amount;
 
-        public ProductionPlanConfigurationPageModel(Interop.API.Common.Models.Display.ProductionPlanDisplayModel model = null) : base(model)
+        public ProductionOrderConfigurationPageModel() : this(null) { }
+
+        public ProductionOrderConfigurationPageModel(Interop.API.Common.Models.Display.ProductionOrderDisplayModel model = null) : base(model)
         {
             if (model != null)
             {
                 Id = model.Id;
-                PlannedFor = model.PlannedFor;
+                RequestedFor = model.RequestedFor;
                 Description = model.Description;
                 Priority = model.Priority;
                 Elaboration = model.Elaboration;
-                Planner = model.Planner;
+                Author = model.Author;
                 Responsible = model.Responsible;
                 Decisor = model.Decisor;
                 Amount = model.Amount;
             }
             else
             {
-                PlannedFor = System.DateTime.Now;
+                RequestedFor = System.DateTime.Now;
             }
         }
 
         public System.Guid Id { get; set; }
 
-        public System.DateTime PlannerForMinDate { get; } = System.DateTime.Now;
+        public System.DateTime RequestedForMinDate { get; } = System.DateTime.Now;
 
-        public System.DateTime PlannedFor { get => plannedFor; set => SetProperty(ref plannedFor, value); }
+        public System.DateTime RequestedFor { get => requestedFor; set => SetProperty(ref requestedFor, value); }
 
         public string Description { get => description; set => SetProperty(ref description, value); }
 
@@ -45,7 +47,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public Interop.API.Common.Models.Display.ElaborationDisplayModel Elaboration { get => elaboration; set => SetProperty(ref elaboration, value); }
 
-        public EmployeeDisplayModel Planner { get => planner; set => SetProperty(ref planner, value); }
+        public EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
 
         public EmployeeDisplayModel Responsible { get => responsible; set => SetProperty(ref responsible, value); }
 
@@ -53,7 +55,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public decimal Amount { get => amount; set => SetProperty(ref amount, value); }
 
-        public EmployeeDisplayModel[] AvailablePlanners { get; set; } = [];
+        public EmployeeDisplayModel[] AvailableAuthors { get; set; } = [];
 
         public EmployeeDisplayModel[] AvailableResponsibles { get; set; } = [];
 

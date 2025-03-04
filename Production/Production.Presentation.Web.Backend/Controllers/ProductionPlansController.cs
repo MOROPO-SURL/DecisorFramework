@@ -11,9 +11,9 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Controlle
     [Microsoft.AspNetCore.Authorization.Authorize]
     [RequirePermissions(Guama.Core.Security.Presentation.Constants.Permissions.ShellManager)]
     [Area("production")]
-    public class ProductionPlansController : Guama.Core.Presentation.Web.Backend.Controllers.Contract.AbstractArchivableEntityManagementController<ProductionPlan, System.Guid, ProductionPlanInputModel, ProductionPlanDisplayViewModel>
+    public class ProductionPlansController : Guama.Core.Presentation.Web.Backend.Controllers.Contract.AbstractArchivableEntityManagementController<ProductionOrder, System.Guid, ProductionOrderInputModel, ProductionPlanDisplayViewModel>
     {
-        public ProductionPlansController(IEntityRepository<ProductionPlan, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProductionPlansController> localizer, ILogger<ProductionPlansController> logger) : base(repository, localizer, logger)
+        public ProductionPlansController(IEntityRepository<ProductionOrder, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProductionPlansController> localizer, ILogger<ProductionPlansController> logger) : base(repository, localizer, logger)
         {
         }
 
@@ -28,7 +28,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Controlle
             return NotFound();
         }
 
-        public override IActionResult Create(ProductionPlanInputModel model)
+        public override IActionResult Create(ProductionOrderInputModel model)
         {
             return NotFound();
         }
@@ -38,7 +38,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Backend.Controlle
             return NotFound();
         }
 
-        public override IActionResult Edit(ProductionPlanInputModel model)
+        public override IActionResult Edit(ProductionOrderInputModel model)
         {
             return NotFound();
         }

@@ -163,8 +163,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Production> Productions { get; set; }
         public DbSet<ProductionColaboratorBridge> ProductionColaboratorBridges { get; set; }
         public DbSet<ProductionEmployeeBridge> ProductionEmployeeBridges { get; set; }
-        public DbSet<ProductionPlan> ProductionPlans { get; set; }
-        public DbSet<ProductionPlanDeparture> ProductionPlanDepartures { get; set; }
+        public DbSet<ProductionOrder> ProductionOrders { get; set; }
+        public DbSet<ProductionOrderDeparture> ProductionOrderDepartures { get; set; }
         public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
         public DbSet<ProductionReception> ProductionReceptions { get; set; }
         public DbSet<ProductionRole> ProductionRoles { get; set; }

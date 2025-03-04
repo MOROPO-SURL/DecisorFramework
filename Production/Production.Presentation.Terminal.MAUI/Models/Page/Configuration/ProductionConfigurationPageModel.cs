@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
     public class ProductionConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<ProductionDisplayModel>
     {
         // TODO Resposible?? !!!!!
-        private ProductionPlanDisplayModel plan;
+        private ProductionOrderDisplayModel order;
         private decimal amount;
         private Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel unitMeasurement;
         private string description;
@@ -30,7 +30,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public string Description { get => description; set => SetProperty(ref description, value); }
 
-        public ProductionPlanDisplayModel Plan { get => plan; set => SetProperty(ref plan, value); }
+        public ProductionOrderDisplayModel Order { get => order; set => SetProperty(ref order, value); }
 
         public decimal Amount { get => amount; set => SetProperty(ref amount, value); }
 

@@ -1,14 +1,14 @@
 ﻿namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Filter
 {
-    public class ProductionPlanFilterModel : Guama.Core.Persistence.Presentation.Models.Filter.Contract.IEntityFilterModel<Persistence.Entities.ProductionPlan, System.Guid>
+    public class ProductionPlanFilterModel : Guama.Core.Persistence.Presentation.Models.Filter.Contract.IEntityFilterModel<Persistence.Entities.ProductionOrder, System.Guid>
     {
         public Core.Interop.API.Common.Enumerations.CommonPlanFilterKind Kind { get; set; }
 
-        public System.Linq.Expressions.Expression<System.Func<Persistence.Entities.ProductionPlan, bool>> GetSelector()
+        public System.Linq.Expressions.Expression<System.Func<Persistence.Entities.ProductionOrder, bool>> GetSelector()
         {
             switch (Kind)
             {
-                case Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.Filled:
+                case Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.Handled:
 
                     return entity => entity.Production != null;
 

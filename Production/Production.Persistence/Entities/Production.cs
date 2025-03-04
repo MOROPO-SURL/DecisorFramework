@@ -17,7 +17,7 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.Entities
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(PlanId))]
-        public ProductionPlan Plan { get; set; }
+        public ProductionOrder Plan { get; set; }
         public System.Guid PlanId { get; set; }
 
         public decimal Amount { get; set; }

@@ -5,22 +5,21 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProductionPlanConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<ProductionPlanDisplayModel>
+public partial class ProductionOrderConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProductionOrderDisplayModel, Models.Page.Configuration.ProductionOrderConfigurationPageModel>
 {
-    public ProductionPlanConfigurationPage(System.Action<ProductionPlanDisplayModel> successAction, Models.Page.Configuration.ProductionPlanConfigurationPageModel model) : base(successAction, model)
+    public ProductionOrderConfigurationPage(System.Action<ProductionOrderDisplayModel> successAction, Models.Page.Configuration.ProductionOrderConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
 
-        if (model.Planner != null)
+        if (model.Author != null)
         {
-            for (int i = 0; i < model.AvailablePlanners.Length; i++)
+            for (int i = 0; i < model.AvailableAuthors.Length; i++)
             {
-                var current = model.AvailablePlanners[i];
+                var current = model.AvailableAuthors[i];
 
-                if (model.Planner.Id != current.Id) continue;
+                if (model.Author.Id != current.Id) continue;
 
-                PlannerPicker.SelectedIndex = i;
-                PlannerPicker.SelectedItem = current;
+                AuthorPicker.SelectedIndex = i;
 
                 break;
             }
@@ -35,7 +34,6 @@ public partial class ProductionPlanConfigurationPage : Core.Presentation.Termina
                 if (model.Responsible.Id != current.Id) continue;
 
                 ResponsiblePicker.SelectedIndex = i;
-                ResponsiblePicker.SelectedItem = current;
 
                 break;
             }
@@ -50,30 +48,29 @@ public partial class ProductionPlanConfigurationPage : Core.Presentation.Termina
                 if (model.Decisor.Id != current.Id) continue;
 
                 DecisorPicker.SelectedIndex = i;
-                DecisorPicker.SelectedItem = current;
 
                 break;
             }
         }
     }
 
-    protected override string EntityTypeName => "Plan de Compra";
+    protected override string EntityTypeName => "Orden de Producción";
 
-    protected override async System.Threading.Tasks.Task<ProductionPlanDisplayModel> PerformCreationAsync()
+    protected override async System.Threading.Tasks.Task<ProductionOrderDisplayModel> PerformCreationAsync()
     {
-        var apiConnectClient = new Interop.API.Connect.Clients.ProductionPlansAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.ProductionOrdersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.ProductionPlanConfigurationPageModel)BindingContext;
+        var concreteBindingContext = (Models.Page.Configuration.ProductionOrderConfigurationPageModel)BindingContext;
 
-        var model = new Interop.API.Common.Models.Input.ProductionPlanInputModel
+        var model = new Interop.API.Common.Models.Input.ProductionOrderInputModel
         {
             Id = System.Guid.NewGuid(),
-            PlannedFor = concreteBindingContext.PlannedFor,
+            RequestedFor = concreteBindingContext.RequestedFor,
             Amount = concreteBindingContext.Amount,
             Description = concreteBindingContext.Description,
             Priority = concreteBindingContext.Priority,
             ElaborationId = concreteBindingContext.Elaboration.Id,
-            PlannerId = concreteBindingContext.AvailablePlanners[PlannerPicker.SelectedIndex].Id,
+            AuthorId = concreteBindingContext.AvailableAuthors[AuthorPicker.SelectedIndex].Id,
             ResponsibleId = concreteBindingContext.AvailableResponsibles[ResponsiblePicker.SelectedIndex].Id,
             DecisorId = concreteBindingContext.AvailableDecisors[DecisorPicker.SelectedIndex].Id
         };
@@ -83,21 +80,21 @@ public partial class ProductionPlanConfigurationPage : Core.Presentation.Termina
         return await apiConnectClient.GetAsync(model.Id);
     }
 
-    protected override async System.Threading.Tasks.Task<ProductionPlanDisplayModel> PerformEditionAsync()
+    protected override async System.Threading.Tasks.Task<ProductionOrderDisplayModel> PerformEditionAsync()
     {
-        var apiConnectClient = new Interop.API.Connect.Clients.ProductionPlansAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.ProductionOrdersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.ProductionPlanConfigurationPageModel)BindingContext;
+        var concreteBindingContext = (Models.Page.Configuration.ProductionOrderConfigurationPageModel)BindingContext;
 
-        var model = new Interop.API.Common.Models.Input.ProductionPlanInputModel
+        var model = new Interop.API.Common.Models.Input.ProductionOrderInputModel
         {
             Id = concreteBindingContext.Id,
-            PlannedFor = concreteBindingContext.PlannedFor,
+            RequestedFor = concreteBindingContext.RequestedFor,
             Amount = concreteBindingContext.Amount,
             Description = concreteBindingContext.Description,
             Priority = concreteBindingContext.Priority,
             ElaborationId = concreteBindingContext.Elaboration.Id,
-            PlannerId = concreteBindingContext.AvailablePlanners[PlannerPicker.SelectedIndex].Id,
+            AuthorId = concreteBindingContext.AvailableAuthors[AuthorPicker.SelectedIndex].Id,
             ResponsibleId = concreteBindingContext.AvailableResponsibles[ResponsiblePicker.SelectedIndex].Id,
             DecisorId = concreteBindingContext.AvailableDecisors[DecisorPicker.SelectedIndex].Id
         };
@@ -119,7 +116,7 @@ public partial class ProductionPlanConfigurationPage : Core.Presentation.Termina
 
     private void ElaborationPickComplete_Callback(ElaborationDisplayModel model)
     {
-        ((Models.Page.Configuration.ProductionPlanConfigurationPageModel)BindingContext).Elaboration = model;
+        ((Models.Page.Configuration.ProductionOrderConfigurationPageModel)BindingContext).Elaboration = model;
 
         hasChangesFlag = true;
     }

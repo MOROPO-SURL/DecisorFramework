@@ -4,6 +4,6 @@
     {
         ToComplete,
         ToApprove,
-        Filled
+        Handled
     }
 }
