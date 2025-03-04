@@ -5,6 +5,7 @@
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
+    xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ProductConfigurationPage"
@@ -172,7 +173,7 @@
                     </Frame>
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Mermas de Almacenamiento" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Márgenes de Merma" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
                             <Grid.ColumnDefinitions>
@@ -187,17 +188,56 @@
                             <Button
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
-                                Text="Agregar" />
+                                Text="Agregar"
+                                Clicked="AddWarehosingDecreaseButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
                                 Color="{StaticResource Gray050}" />
                             <CollectionView
                                 Margin="4"
                                 Grid.ColumnSpan="2" Grid.Row="2"
-                                HeightRequest="30">
+                                ItemsSource="{Binding WarehousingDecreases}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
                                 <CollectionView.EmptyView>
                                     <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
                                 </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_bridge_models:ProductWarehousingDecreaseBridgeModel">
+                                        <Frame Padding="8">
+                                            <StackLayout Spacing="8" Orientation="Horizontal">
+                                                <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                    <Label
+                                                        Text="{Binding Kind}"
+                                                        FontAttributes="Bold"
+                                                        LineBreakMode="TailTruncation" />
+                                                    <Label>
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding MinDecrease, StringFormat='{0:F2} %'}" />
+                                                                <Span Text=" ↔ " />
+                                                                <Span Text="{Binding MaxDecrease, StringFormat='{0:F2} %'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </VerticalStackLayout>
+                                                <Button
+                                                    VerticalOptions="Start"
+                                                    Padding="0"
+                                                    FontFamily="MaterialDesignIcons" Text="&#xF90B;"
+                                                    FontSize="21"
+                                                    Clicked="EditWarehousingDecreaseButton_Clicked" />
+                                                <Button
+                                                    VerticalOptions="Start"
+                                                    Padding="0"
+                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
+                                                    FontSize="21"
+                                                    Clicked="WarehousingDecreaseRemoveButton_Clicked" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
                             </CollectionView>
                         </Grid>
                     </Frame>

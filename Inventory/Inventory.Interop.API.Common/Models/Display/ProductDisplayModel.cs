@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Bridge;
 
 namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
 {
@@ -22,7 +22,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
 
         public ClassificationDisplayModel[] Classifications { get; set; }
 
-        public WarehousingDecreaseModel[] WarehousingDecreases { get; set; }
+        public ProductWarehousingDecreaseBridgeModel[] WarehousingDecreases { get; set; }
 
         public virtual void Import(Persistence.Entities.Product entity)
         {
@@ -42,11 +42,11 @@ namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
                 FeatureImage.Import(entity.FeatureImage);
             }
 
-            var warehousingDecreases = new System.Collections.Generic.List<WarehousingDecreaseModel>();
+            var warehousingDecreases = new System.Collections.Generic.List<ProductWarehousingDecreaseBridgeModel>();
 
             foreach (var bridge in entity.WarehousingDecreaseKindBridges)
             {
-                warehousingDecreases.Add(new WarehousingDecreaseModel
+                warehousingDecreases.Add(new ProductWarehousingDecreaseBridgeModel
                 {
                     Kind = bridge.Kind,
                     MinDecrease = bridge.MinDecrease,

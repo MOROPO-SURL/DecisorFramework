@@ -1,6 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Bridge;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
@@ -60,11 +61,11 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
         imagePickedData = null;
     }
 
-    protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.ProductDisplayModel> PerformCreationAsync()
+    protected override async System.Threading.Tasks.Task<ProductDisplayModel> PerformCreationAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProductsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var model = new Interop.API.Common.Models.Input.ProductInputModel
+        var model = new ProductInputModel
         {
             Id = System.Guid.NewGuid(),
             Name = ConcreteBindingContext.Name,
@@ -92,11 +93,11 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
         return await apiConnectClient.GetAsync(model.Id);
     }
 
-    protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.ProductDisplayModel> PerformEditionAsync()
+    protected override async System.Threading.Tasks.Task<ProductDisplayModel> PerformEditionAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProductsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var model = new Interop.API.Common.Models.Input.ProductInputModel
+        var model = new ProductInputModel
         {
             Id = ConcreteBindingContext.Id,
             Name = ConcreteBindingContext.Name,
@@ -185,6 +186,11 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
         this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationCreateSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel(ConcreteBindingContext, null)));
     }
 
+    private void AddWarehosingDecreaseButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushPageAsync(new ProductWarehousingDecreaseBridgeConfigurationPage(WarehousingDecreaseCreateSuccess_Callback, new Models.Page.Configuration.ProductWarehousingDecreaseBridgeConfigurationPageModel(null)));
+    }
+
     private void EditClassificationButton_Clicked(object sender, System.EventArgs e)
     {
         var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ClassificationDisplayModel;
@@ -196,6 +202,13 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
             Description = target.Description,
             Priority = target.Priority
         })));
+    }
+
+    private void EditWarehousingDecreaseButton_Clicked(object sender, System.EventArgs e)
+    {
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ProductWarehousingDecreaseBridgeModel;
+
+        this.NavigationPushPageAsync(new ProductWarehousingDecreaseBridgeConfigurationPage(WarehousingDecreaseEditSuccess_Callback, new Models.Page.Configuration.ProductWarehousingDecreaseBridgeConfigurationPageModel(target)));
     }
 
     private void ClassificationRemoveButton_Clicked(object sender, System.EventArgs e)
@@ -242,6 +255,32 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
         });
     }
 
+    private void WarehousingDecreaseRemoveButton_Clicked(object sender, System.EventArgs e)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este margen de merma?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ProductWarehousingDecreaseBridgeModel;
+
+            hasChangesFlag = true;
+
+            Dispatcher.Dispatch(() => ConcreteBindingContext.WarehousingDecreases.Remove(target));
+        });
+    }
+
+    private void WarehousingDecreaseCreateSuccess_Callback(ProductWarehousingDecreaseBridgeModel model)
+    {
+        if (ConcreteBindingContext.WarehousingDecreases.Any(_model => _model.Kind == model.Kind))
+        {
+            DisplayAlert("Aviso", "Ya se ha especificado un margen de merma de este tipo. Solo puede especificarse un margen de merma por cada tipo disponible.", "Aceptar");
+
+            return;
+        }
+
+        ConcreteBindingContext.WarehousingDecreases.Add(model);
+    }
+
     private void ClassificationCreateSuccess_Callback(ClassificationInputModel model)
     {
         incomingClassificationItems.Add(model);
@@ -255,6 +294,24 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
         });
 
         hasChangesFlag = true;
+    }
+
+    private void WarehousingDecreaseEditSuccess_Callback(ProductWarehousingDecreaseBridgeModel model)
+    {
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.WarehousingDecreases)
+        {
+            index++;
+
+            if (item.Kind != model.Kind) continue;
+
+            ConcreteBindingContext.WarehousingDecreases[index] = model;
+
+            hasChangesFlag = true;
+
+            break;
+        }
     }
 
     private void ClassificationEditSuccess_Callback(ClassificationInputModel model)

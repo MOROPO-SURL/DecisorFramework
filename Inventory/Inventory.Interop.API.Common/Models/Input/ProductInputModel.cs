@@ -20,7 +20,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
 
         public int? CategoryId { get; set; }
 
-        public List<WarehousingDecreaseModel> WarehousingDecreases { get; set; } = new List<WarehousingDecreaseModel>();
+        public List<Bridge.ProductWarehousingDecreaseBridgeModel> WarehousingDecreases { get; set; } = new List<Bridge.ProductWarehousingDecreaseBridgeModel>();
 
         public List<ClassificationInputModel> EditionClassificationItems { get; set; } = new List<ClassificationInputModel>();
         public List<ClassificationInputModel> IncomingClassificationItems { get; set; } = new List<ClassificationInputModel>();

@@ -1,6 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models
+﻿namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Bridge
 {
-    public class WarehousingDecreaseModel
+    public class ProductWarehousingDecreaseBridgeModel
     {
         public Persistence.Enumerations.WarehousingDecreaseKind Kind { get; set; }
 
