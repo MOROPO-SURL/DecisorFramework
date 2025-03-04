@@ -3852,7 +3852,7 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("productionemployeebridges", "decisorframework_production");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlan", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -3875,6 +3875,10 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
                     b.Property<Guid>("DecisorId")
                         .HasColumnType("uuid")
                         .HasColumnName("decisorid");
@@ -3887,38 +3891,34 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("elaborationid");
 
-                    b.Property<DateTime>("PlannedFor")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("plannedfor");
-
-                    b.Property<Guid>("PlannerId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("plannerid");
-
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
+
+                    b.Property<DateTime>("RequestedFor")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("requestedfor");
 
                     b.Property<Guid>("ResponsibleId")
                         .HasColumnType("uuid")
                         .HasColumnName("responsibleid");
 
                     b.HasKey("Id")
-                        .HasName("pk_productionplans");
+                        .HasName("pk_productionorders");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_productionorders_authorid");
 
                     b.HasIndex("DecisorId")
-                        .HasDatabaseName("ix_productionplans_decisorid");
+                        .HasDatabaseName("ix_productionorders_decisorid");
 
                     b.HasIndex("ElaborationId")
-                        .HasDatabaseName("ix_productionplans_elaborationid");
-
-                    b.HasIndex("PlannerId")
-                        .HasDatabaseName("ix_productionplans_plannerid");
+                        .HasDatabaseName("ix_productionorders_elaborationid");
 
                     b.HasIndex("ResponsibleId")
-                        .HasDatabaseName("ix_productionplans_responsibleid");
+                        .HasDatabaseName("ix_productionorders_responsibleid");
 
-                    b.ToTable("productionplans", "decisorframework_production");
+                    b.ToTable("productionorders", "decisorframework_production");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionProductBridge", b =>
@@ -5670,7 +5670,7 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasDiscriminator().HasValue("PersonContactBudget");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlanDeparture", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrderDeparture", b =>
                 {
                     b.HasBaseType("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture");
 
@@ -7293,12 +7293,12 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlan", "Plan")
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", "Plan")
                         .WithOne("Production")
                         .HasForeignKey("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", "PlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_productions_productionplans_planid");
+                        .HasConstraintName("fk_productions_productionorders_planid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
                         .WithMany()
@@ -7390,41 +7390,41 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Stern");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlan", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productionorders_employees_authorid");
+
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Decisor")
                         .WithMany()
                         .HasForeignKey("DecisorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_productionplans_employees_decisorid");
+                        .HasConstraintName("fk_productionorders_employees_decisorid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.Elaboration", "Elaboration")
                         .WithMany()
                         .HasForeignKey("ElaborationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_productionplans_elaborations_elaborationid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Planner")
-                        .WithMany()
-                        .HasForeignKey("PlannerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_productionplans_employees_plannerid");
+                        .HasConstraintName("fk_productionorders_elaborations_elaborationid");
 
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Responsible")
                         .WithMany()
                         .HasForeignKey("ResponsibleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_productionplans_employees_responsibleid");
+                        .HasConstraintName("fk_productionorders_employees_responsibleid");
+
+                    b.Navigation("Author");
 
                     b.Navigation("Decisor");
 
                     b.Navigation("Elaboration");
-
-                    b.Navigation("Planner");
 
                     b.Navigation("Responsible");
                 });
@@ -8353,11 +8353,11 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Contact");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlanDeparture", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrderDeparture", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", null)
                         .WithOne()
-                        .HasForeignKey("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlanDeparture", "Id")
+                        .HasForeignKey("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrderDeparture", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -8590,7 +8590,7 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("ProductBridges");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlan", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", b =>
                 {
                     b.Navigation("Production");
                 });
