@@ -4,6 +4,8 @@
     xmlns:local_converters="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Converters"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
@@ -13,6 +15,9 @@
     x:DataType="presentation_configuration_page_models:ProductConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="RootFlexLayoutItemResponsiveWithConverter" SingleSpacing="4" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrappedFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="4" />
+            
             <local_converters:FamilyToTreeNameConverter x:Key="FamilyToTreeNameConverter" />
 
             <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
@@ -36,222 +41,225 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <Grid 
-                Padding="20"
-                ColumnSpacing="16" RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="2*" />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition Width="2*" />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Frame
-                    Grid.Column="0" Grid.Row="0"
-                    HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=1.777777777777778}"
-                    VerticalOptions="Start"
-                    Padding="0">
-                    <Grid>
-                        <Image 
-                            Aspect="AspectFill"
-                            Source="{Binding Path=FeatureImageSource, TargetNullValue='default_organization_picture.png'}" />
-                        <Grid BackgroundColor="#A7000000">
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />
-                            </Grid.GestureRecognizers>
-                            <Label
-                                Text="&#xF8CB;"
-                                TextColor="White"
-                                HorizontalOptions="Center" VerticalOptions="Center"
-                                FontFamily="MaterialDesignIcons"
-                                FontSize="96" />
-                        </Grid>
-                    </Grid>
-                </Frame>
-                <Grid
-                    Grid.Column="1" Grid.ColumnSpan="3" Grid.Row="0"
-                    VerticalOptions="Start"
-                    ColumnSpacing="16" RowSpacing="16">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="0">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
-                        <Entry Text="{Binding Name}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="1">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Categoría" />
-                        <Picker 
-                            x:Name="CategoryPicker"
-                            ItemsSource="{Binding AvailableCategories}" 
-                            ItemDisplayBinding="{Binding Converter={StaticResource FamilyToTreeNameConverter}}"
-                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="2">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad de Medida por defecto" />
-                        <Picker 
-                            x:Name="DefaultUnitMeasurementPicker"
-                            ItemsSource="{Binding AvailableUnitMeasurements}" 
-                            ItemDisplayBinding="{Binding Name}"
-                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                    </VerticalStackLayout>
-                </Grid>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="4" Grid.Row="1">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
-                    <Editor Text="{Binding Description}" HeightRequest="200" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Clasificaciones" />
-                    <Frame Padding="8">
-                        <Grid RowSpacing="8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="2" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Button
-                                Grid.Column="1" Grid.Row="0"
-                                HorizontalOptions="End"
-                                Text="Agregar"
-                                Clicked="AddClassificationButton_Clicked" />
-                            <BoxView
-                                Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
-                            <CollectionView
-                                Margin="4"
-                                Grid.ColumnSpan="2" Grid.Row="2"
-                                ItemsSource="{Binding Classifications}">
-                                <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
-                                </CollectionView.ItemsLayout>
-                                <CollectionView.EmptyView>
-                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
-                                </CollectionView.EmptyView>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="interop_common_display_models:ClassificationDisplayModel">
-                                        <Frame Padding="8">
-                                            <StackLayout Spacing="8" Orientation="Horizontal">
-                                                <Label 
-                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                                    Text="{Binding Name}"
-                                                    FontAttributes="Bold"
-                                                    LineBreakMode="TailTruncation" />
-                                                <Button
-                                                    VerticalOptions="Start"
-                                                    Padding="0"
-                                                    FontFamily="MaterialDesignIcons" Text="&#xF90B;"
-                                                    FontSize="21"
-                                                    Clicked="EditClassificationButton_Clicked" />
-                                                <Button
-                                                    VerticalOptions="Start"
-                                                    Padding="0"
-                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
-                                                    FontSize="21"
-                                                    Clicked="ClassificationRemoveButton_Clicked" />
-                                            </StackLayout>
-                                        </Frame>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
+            <VerticalStackLayout Spacing="0" Padding="8">
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=6}}"
+                        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=1.777777777777778}"
+                        VerticalOptions="Start"
+                        Margin="4"
+                        Padding="0">
+                        <Grid>
+                            <Image 
+                                Aspect="AspectFill"
+                                Source="{Binding Path=FeatureImageSource, TargetNullValue='default_organization_picture.png'}" />
+                            <Grid BackgroundColor="#A7000000">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />
+                                </Grid.GestureRecognizers>
+                                <Label
+                                    Text="&#xF8CB;"
+                                    TextColor="White"
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="96" />
+                            </Grid>
                         </Grid>
                     </Frame>
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="2">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Márgenes de Merma" />
-                    <Frame Padding="8">
-                        <Grid RowSpacing="8">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition />
-                                <ColumnDefinition />
-                            </Grid.ColumnDefinitions>
-                            <Grid.RowDefinitions>
-                                <RowDefinition Height="Auto" />
-                                <RowDefinition Height="2" />
-                                <RowDefinition Height="Auto" />
-                            </Grid.RowDefinitions>
-                            <Button
-                                Grid.Column="1" Grid.Row="0"
-                                HorizontalOptions="End"
-                                Text="Agregar"
-                                Clicked="AddWarehosingDecreaseButton_Clicked" />
-                            <BoxView
-                                Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
-                            <CollectionView
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=8, LargeContainerColumn=6, MediumContainerColumn=12}}">
+                        <VerticalStackLayout Margin="6,4" Spacing="6">
+                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                            <Entry Text="{Binding Name}" />
+                        </VerticalStackLayout>
+                        <VerticalStackLayout Margin="6,4" Spacing="6">
+                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Categoría" />
+                            <Picker 
+                                x:Name="CategoryPicker"
+                                ItemsSource="{Binding AvailableCategories}" 
+                                ItemDisplayBinding="{Binding Converter={StaticResource FamilyToTreeNameConverter}}"
+                                SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        </VerticalStackLayout>
+                        <FlexLayout
+                            Wrap="Wrap">
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
                                 Margin="4"
-                                Grid.ColumnSpan="2" Grid.Row="2"
-                                ItemsSource="{Binding WarehousingDecreases}">
-                                <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
-                                </CollectionView.ItemsLayout>
-                                <CollectionView.EmptyView>
-                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
-                                </CollectionView.EmptyView>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="interop_common_bridge_models:ProductWarehousingDecreaseBridgeModel">
-                                        <Frame Padding="8">
-                                            <StackLayout Spacing="8" Orientation="Horizontal">
-                                                <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                                    <Label
-                                                        Text="{Binding Kind}"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad Administrativa" />
+                                <Picker 
+                                    x:Name="DefaultUnitMeasurementPicker"
+                                    ItemsSource="{Binding AvailableUnitMeasurements}" 
+                                    ItemDisplayBinding="{Binding Name}"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                            </VerticalStackLayout>
+                        </FlexLayout>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
+                    <Editor Text="{Binding Description}" HeightRequest="160" />
+                </VerticalStackLayout>
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Clasificaciones" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="AddClassificationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <CollectionView
+                                    Margin="4"
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding Classifications}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_display_models:ClassificationDisplayModel">
+                                            <Frame Padding="8">
+                                                <StackLayout Spacing="8" Orientation="Horizontal">
+                                                    <Label 
+                                                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                        Text="{Binding Name}"
                                                         FontAttributes="Bold"
                                                         LineBreakMode="TailTruncation" />
-                                                    <Label>
-                                                        <Label.FormattedText>
-                                                            <FormattedString>
-                                                                <Span Text="{Binding MinDecrease, StringFormat='{0:F2} %'}" />
-                                                                <Span Text=" ↔ " />
-                                                                <Span Text="{Binding MaxDecrease, StringFormat='{0:F2} %'}" />
-                                                            </FormattedString>
-                                                        </Label.FormattedText>
-                                                    </Label>
-                                                </VerticalStackLayout>
-                                                <Button
-                                                    VerticalOptions="Start"
-                                                    Padding="0"
-                                                    FontFamily="MaterialDesignIcons" Text="&#xF90B;"
-                                                    FontSize="21"
-                                                    Clicked="EditWarehousingDecreaseButton_Clicked" />
-                                                <Button
-                                                    VerticalOptions="Start"
-                                                    Padding="0"
-                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
-                                                    FontSize="21"
-                                                    Clicked="WarehousingDecreaseRemoveButton_Clicked" />
-                                            </StackLayout>
-                                        </Frame>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
-                        </Grid>
-                    </Frame>
-                </VerticalStackLayout>
+                                                    <Button
+                                                        VerticalOptions="Start"
+                                                        Padding="0"
+                                                        FontFamily="MaterialDesignIcons" Text="&#xF90B;"
+                                                        FontSize="21"
+                                                        Clicked="EditClassificationButton_Clicked" />
+                                                    <Button
+                                                        VerticalOptions="Start"
+                                                        Padding="0"
+                                                        FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
+                                                        FontSize="21"
+                                                        Clicked="ClassificationRemoveButton_Clicked" />
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Márgenes de Merma" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="AddWarehosingDecreaseButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <CollectionView
+                                    Margin="4"
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding WarehousingDecreases}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_bridge_models:ProductWarehousingDecreaseBridgeModel">
+                                            <Frame Padding="8">
+                                                <StackLayout Spacing="8" Orientation="Horizontal">
+                                                    <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                        <Label
+                                                            Text="{Binding Kind}"
+                                                            FontAttributes="Bold"
+                                                            LineBreakMode="TailTruncation" />
+                                                        <Label>
+                                                            <Label.FormattedText>
+                                                                <FormattedString>
+                                                                    <Span Text="{Binding MinDecrease, StringFormat='{0:F2} %'}" />
+                                                                    <Span Text=" ↔ " />
+                                                                    <Span Text="{Binding MaxDecrease, StringFormat='{0:F2} %'}" />
+                                                                </FormattedString>
+                                                            </Label.FormattedText>
+                                                        </Label>
+                                                    </VerticalStackLayout>
+                                                    <Button
+                                                        VerticalOptions="Start"
+                                                        Padding="0"
+                                                        FontFamily="MaterialDesignIcons" Text="&#xF90B;"
+                                                        FontSize="21"
+                                                        Clicked="EditWarehousingDecreaseButton_Clicked" />
+                                                    <Button
+                                                        VerticalOptions="Start"
+                                                        Padding="0"
+                                                        FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
+                                                        FontSize="21"
+                                                        Clicked="WarehousingDecreaseRemoveButton_Clicked" />
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                </FlexLayout>
                 <BoxView 
-                    Grid.ColumnSpan="4" Grid.Row="3" 
-                    Margin="0,8,0,0"
+                    Margin="8,16,8,8"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="4">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                </VerticalStackLayout>
-            </Grid>
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+            </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>
