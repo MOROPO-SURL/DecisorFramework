@@ -13,7 +13,11 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public ProductDisplayModel Product { get; set; }
 
+        public ClassificationDisplayModel Classification { get; set; }
+
         public string Description { get; set; }
+
+        public decimal ReferenceAmount { get; set; }
 
         public decimal MinPerformanceCoefficient { get; set; }
 
@@ -31,6 +35,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             Priority = entity.Priority;
             At = entity.At;
             Description = entity.Description;
+            ReferenceAmount = entity.ReferenceAmount;
             MinPerformanceCoefficient = entity.MinPerformanceCoefficient;
             MaxPerformanceCoefficient = entity.MaxPerformanceCoefficient;
             InputProducts = entity.InputProductBridges.Select(bridge =>
@@ -55,6 +60,13 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
                 Product = new ProductDisplayModel();
 
                 Product.Import(entity.Product);
+            }
+
+            if (entity.Classification != null)
+            {
+                Classification = new ClassificationDisplayModel();
+
+                Classification.Import(entity.Classification);
             }
         }
     }

@@ -10,25 +10,6 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Common.Helpers
         {
             var permissionDbSet = dbContext.Set<Guama.Core.Security.Common.Persistence.Entities.Permission>();
 
-            #region ProductionRole
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProductionRoleViewerPermission)))
-            {
-                permissionDbSet.Add(Authorization.ProductionRoleViewerPermission.ToPermissionEntity(Authorization.ProductionRoleManagementPermissionGroup));
-            }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProductionRoleCreatorPermission)))
-            {
-                permissionDbSet.Add(Authorization.ProductionRoleCreatorPermission.ToPermissionEntity(Authorization.ProductionRoleManagementPermissionGroup));
-            }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProductionRoleEditorPermission)))
-            {
-                permissionDbSet.Add(Authorization.ProductionRoleEditorPermission.ToPermissionEntity(Authorization.ProductionRoleManagementPermissionGroup));
-            }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProductionRoleRemoverPermission)))
-            {
-                permissionDbSet.Add(Authorization.ProductionRoleRemoverPermission.ToPermissionEntity(Authorization.ProductionRoleManagementPermissionGroup));
-            }
-            #endregion
-
             #region Elaboration
             if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ElaborationViewerPermission)))
             {

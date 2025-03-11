@@ -10,7 +10,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
 {
     [Microsoft.AspNetCore.Mvc.Route("api/production/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class ProductionOrdersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<ProductionOrder, System.Guid, ProductionOrderInputModel, ProductionOrderDisplayModel, ProductionPlanFilterModel>
+    public class ProductionOrdersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<ProductionOrder, System.Guid, ProductionOrderInputModel, ProductionOrderDisplayModel, ProductionOrderFilterModel>
     {
         private readonly IEntityRepository<ElaborationStep, System.Guid> stepRepository;
 

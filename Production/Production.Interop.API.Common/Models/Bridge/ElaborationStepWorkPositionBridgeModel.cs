@@ -1,8 +1,8 @@
 ﻿namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge
 {
-    public class ElaborationStepProductionRoleBridgeModel
+    public class ElaborationStepWorkPositionBridgeModel
     {
-        public Display.ProductionRoleDisplayModel Role { get; set; }
+        public HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel WorkPosition { get; set; }
 
         public decimal Participation { get; set; }
 

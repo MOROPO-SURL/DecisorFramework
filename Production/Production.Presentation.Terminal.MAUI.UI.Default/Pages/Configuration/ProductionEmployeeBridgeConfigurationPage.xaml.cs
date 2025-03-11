@@ -22,18 +22,18 @@ public partial class ProductionEmployeeBridgeConfigurationPage : Core.Presentati
 
                 var index = -1;
 
-                for (var y = 0; y < current.ProductionRoles.Length; y++)
+                for (var y = 0; y < current.WorkPositions.Length; y++)
                 {
-                    var item = current.ProductionRoles[y];
+                    var item = current.WorkPositions[y];
 
-                    model.AvailableRoles.Add(item.Role);
+                    model.AvailableWorkPositions.Add(item.WorkPosition);
 
                     if (y != -1) continue;
 
-                    if (model.Role.Id == item.Role.Id) index = y;
+                    if (model.WorkPosition.Id == item.WorkPosition.Id) index = y;
                 }
 
-                RolePicker.SelectedIndex = index;
+                WorkPositionPicker.SelectedIndex = index;
             }
         }
     }
@@ -48,7 +48,7 @@ public partial class ProductionEmployeeBridgeConfigurationPage : Core.Presentati
         {
             Employee = concreteBindingContext.Employee,
             Step = concreteBindingContext.AvailableSteps[StepPicker.SelectedIndex],
-            Role = concreteBindingContext.AvailableRoles[RolePicker.SelectedIndex]
+            WorkPosition = concreteBindingContext.AvailableWorkPositions[WorkPositionPicker.SelectedIndex]
         });
     }
 
@@ -60,7 +60,7 @@ public partial class ProductionEmployeeBridgeConfigurationPage : Core.Presentati
         {
             Employee = concreteBindingContext.Employee,
             Step = concreteBindingContext.AvailableSteps[StepPicker.SelectedIndex],
-            Role = concreteBindingContext.AvailableRoles[RolePicker.SelectedIndex]
+            WorkPosition = concreteBindingContext.AvailableWorkPositions[WorkPositionPicker.SelectedIndex]
         });
     }
 
@@ -84,13 +84,13 @@ public partial class ProductionEmployeeBridgeConfigurationPage : Core.Presentati
 
         var current = concreteBindingContext.AvailableSteps[StepPicker.SelectedIndex];
 
-        concreteBindingContext.AvailableRoles.Clear();
+        concreteBindingContext.AvailableWorkPositions.Clear();
 
-        for (var y = 0; y < current.ProductionRoles.Length; y++)
+        for (var y = 0; y < current.WorkPositions.Length; y++)
         {
-            var item = current.ProductionRoles[y];
+            var item = current.WorkPositions[y];
 
-            concreteBindingContext.AvailableRoles.Add(item.Role);
+            concreteBindingContext.AvailableWorkPositions.Add(item.WorkPosition);
         }
 
         hasChangesFlag = true;

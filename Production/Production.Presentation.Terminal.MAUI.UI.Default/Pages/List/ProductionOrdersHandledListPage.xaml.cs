@@ -27,7 +27,7 @@ public partial class ProductionOrdersHandledListPage : Core.Presentation.Termina
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProductionOrdersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.ProductionPlanFilterModel { Kind = Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.Handled }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.ProductionOrderFilterModel { Kind = Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.Handled }, CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)

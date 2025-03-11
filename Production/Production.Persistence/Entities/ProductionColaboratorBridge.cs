@@ -12,8 +12,8 @@
         public ElaborationStep Step { get; set; }
         public System.Guid StepId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(RoleId))]
-        public ProductionRole Role { get; set; }
-        public System.Guid RoleId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(WorkPositionId))]
+        public HumanResources.Persistence.Entities.WorkPosition WorkPosition { get; set; }
+        public System.Guid WorkPositionId { get; set; }
     }
 }

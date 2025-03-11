@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Filter
 {
-    public class ProductionPlanFilterModel : Guama.Core.Persistence.Presentation.Models.Filter.Contract.IEntityFilterModel<Persistence.Entities.ProductionOrder, System.Guid>
+    public class ProductionOrderFilterModel : Guama.Core.Persistence.Presentation.Models.Filter.Contract.IEntityFilterModel<Persistence.Entities.ProductionOrder, System.Guid>
     {
         public Core.Interop.API.Common.Enumerations.CommonPlanFilterKind Kind { get; set; }
 

@@ -52,13 +52,13 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
                 var model = new ProductionEmployeeBridgeModel
                 {
                     Employee = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
-                    Role = new ProductionRoleDisplayModel(),
+                    WorkPosition = new HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel(),
                     Step = new ElaborationStepDisplayModel()
                 };
 
                 model.Employee.Import(bridge.Stern);
                 model.Step.Import(bridge.Step);
-                model.Role.Import(bridge.Role);
+                model.WorkPosition.Import(bridge.WorkPosition);
 
                 return model;
             }).ToArray();
@@ -67,13 +67,13 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
                 var model = new ProductionColaboratorBridgeModel
                 {
                     Colaborator = new Essential.Interop.API.Common.Models.Display.ColaboratorDisplayModel(),
-                    Role = new ProductionRoleDisplayModel(),
+                    WorkPosition = new HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel(),
                     Step = new ElaborationStepDisplayModel()
                 };
 
                 model.Colaborator.Import(bridge.Stern);
                 model.Step.Import(bridge.Step);
-                model.Role.Import(bridge.Role);
+                model.WorkPosition.Import(bridge.WorkPosition);
 
                 return model;
             }).ToArray();

@@ -27,7 +27,7 @@ public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Ter
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProductionOrdersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.ProductionPlanFilterModel { Kind = Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.ToApprove }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.ProductionOrderFilterModel { Kind = Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.ToApprove }, CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     protected override async System.Threading.Tasks.Task<Models.Page.Configuration.ProductionOrderConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProductionOrderDisplayModel model = null)

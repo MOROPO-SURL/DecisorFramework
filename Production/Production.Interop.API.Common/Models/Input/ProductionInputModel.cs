@@ -68,7 +68,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
                 ProwId = entity.Id,
                 SternId = model.Employee.Id,
                 StepId = model.Step.Id,
-                RoleId = model.Role.Id,
+                WorkPositionId = model.WorkPosition.Id,
             }).ToList();
 
             entity.ColaboratorBridges = ColaboratorBridges.Select(model => new Persistence.Entities.ProductionColaboratorBridge
@@ -76,7 +76,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
                 ProwId = entity.Id,
                 SternId = model.Colaborator.Id,
                 StepId = model.Step.Id,
-                RoleId = model.Role.Id,
+                WorkPositionId = model.WorkPosition.Id,
             }).ToList();
         }
     }

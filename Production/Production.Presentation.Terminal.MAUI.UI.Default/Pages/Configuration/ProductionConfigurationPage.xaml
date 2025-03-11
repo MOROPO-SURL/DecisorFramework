@@ -167,7 +167,7 @@
                                                         Margin="0,8,0,0"
                                                         Text="Rol" />
                                                     <Label
-                                                        Text="{Binding Role.Name}"
+                                                        Text="{Binding WorkPosition.Name}"
                                                         LineBreakMode="TailTruncation" />
                                                 </VerticalStackLayout>
                                                 <VerticalStackLayout Spacing="8">

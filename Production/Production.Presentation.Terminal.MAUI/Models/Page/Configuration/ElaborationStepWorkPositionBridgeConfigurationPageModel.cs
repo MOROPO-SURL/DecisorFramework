@@ -1,23 +1,23 @@
 ﻿namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
-    public class ElaborationStepProductionRoleBridgeConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Bridge.ElaborationStepProductionRoleBridgeModel>
+    public class ElaborationStepWorkPositionBridgeConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Bridge.ElaborationStepWorkPositionBridgeModel>
     {
         private decimal participation;
         private bool linked;
         private string description;
 
-        public ElaborationStepProductionRoleBridgeConfigurationPageModel(Interop.API.Common.Models.Bridge.ElaborationStepProductionRoleBridgeModel model = null) : base(model)
+        public ElaborationStepWorkPositionBridgeConfigurationPageModel(Interop.API.Common.Models.Bridge.ElaborationStepWorkPositionBridgeModel model = null) : base(model)
         {
             if (model != null)
             {
-                Role = model.Role;
+                WorkPosition = model.WorkPosition;
                 Participation = model.Participation;
                 Linked = model.Linked;
                 Description = model.Description;
             }
         }
 
-        public Interop.API.Common.Models.Display.ProductionRoleDisplayModel Role { get; set; }
+        public HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel WorkPosition { get; set; }
 
         public decimal Participation { get => participation; set => SetProperty(ref participation, value); }
 
@@ -25,6 +25,6 @@
 
         public string Description { get => description; set => SetProperty(ref description, value); }
 
-        public Interop.API.Common.Models.Display.ProductionRoleDisplayModel[] AvailableRoles { get; set; } = [];
+        public HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel[] AvailableWorkPositions { get; set; } = [];
     }
 }
