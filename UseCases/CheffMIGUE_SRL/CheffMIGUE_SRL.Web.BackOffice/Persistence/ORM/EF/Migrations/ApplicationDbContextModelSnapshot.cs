@@ -3583,6 +3583,10 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<Guid?>("ClassificcationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("classificcationid");
+
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
@@ -3607,8 +3611,15 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("productid");
 
+                    b.Property<decimal>("ReferenceAmount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("referenceamount");
+
                     b.HasKey("Id")
                         .HasName("pk_elaborations");
+
+                    b.HasIndex("ClassificcationId")
+                        .HasDatabaseName("ix_elaborations_classificcationid");
 
                     b.HasIndex("ProductId")
                         .HasDatabaseName("ix_elaborations_productid");
@@ -3626,6 +3637,10 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("sternid");
 
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_elaborationinputproductbridges");
 
@@ -3633,6 +3648,29 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_elaborationinputproductbridges_sternid");
 
                     b.ToTable("elaborationinputproductbridges", "decisorframework_production");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationInputProductClassificationBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_elaborationinputproductclassificationbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_elaborationinputproductclassificationbridges_sternid");
+
+                    b.ToTable("elaborationinputproductclassificationbridges", "decisorframework_production");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationOutputProductBridge", b =>
@@ -3644,6 +3682,10 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<Guid>("SternId")
                         .HasColumnType("uuid")
                         .HasColumnName("sternid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
 
                     b.Property<decimal>("MaxPerformanceCoefficient")
                         .HasColumnType("numeric")
@@ -3703,7 +3745,7 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("elaborationsteps", "decisorframework_production");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStepProductionRoleBridge", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStepWorkPositionBridge", b =>
                 {
                     b.Property<Guid>("ProwId")
                         .HasColumnType("uuid")
@@ -3726,12 +3768,12 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("participation");
 
                     b.HasKey("ProwId", "SternId")
-                        .HasName("pk_elaborationstepproductionrolebridges");
+                        .HasName("pk_elaborationstepworkpositionbridges");
 
                     b.HasIndex("SternId")
-                        .HasDatabaseName("ix_elaborationstepproductionrolebridges_sternid");
+                        .HasDatabaseName("ix_elaborationstepworkpositionbridges_sternid");
 
-                    b.ToTable("elaborationstepproductionrolebridges", "decisorframework_production");
+                    b.ToTable("elaborationstepworkpositionbridges", "decisorframework_production");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", b =>
@@ -3796,25 +3838,25 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("sternid");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("roleid");
-
                     b.Property<Guid>("StepId")
                         .HasColumnType("uuid")
                         .HasColumnName("stepid");
 
+                    b.Property<Guid>("WorkPositionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("workpositionid");
+
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_productioncolaboratorbridges");
-
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_productioncolaboratorbridges_roleid");
 
                     b.HasIndex("StepId")
                         .HasDatabaseName("ix_productioncolaboratorbridges_stepid");
 
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_productioncolaboratorbridges_sternid");
+
+                    b.HasIndex("WorkPositionId")
+                        .HasDatabaseName("ix_productioncolaboratorbridges_workpositionid");
 
                     b.ToTable("productioncolaboratorbridges", "decisorframework_production");
                 });
@@ -3829,25 +3871,25 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("sternid");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("roleid");
-
                     b.Property<Guid>("StepId")
                         .HasColumnType("uuid")
                         .HasColumnName("stepid");
 
+                    b.Property<Guid>("WorkPositionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("workpositionid");
+
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_productionemployeebridges");
-
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_productionemployeebridges_roleid");
 
                     b.HasIndex("StepId")
                         .HasDatabaseName("ix_productionemployeebridges_stepid");
 
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_productionemployeebridges_sternid");
+
+                    b.HasIndex("WorkPositionId")
+                        .HasDatabaseName("ix_productionemployeebridges_workpositionid");
 
                     b.ToTable("productionemployeebridges", "decisorframework_production");
                 });
@@ -3949,44 +3991,6 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_productionproductbridges_unitmeasurementid");
 
                     b.ToTable("productionproductbridges", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionRole", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("boolean")
-                        .HasColumnName("archived");
-
-                    b.Property<DateTime>("At")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("at");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
-
-                    b.HasKey("Id")
-                        .HasName("pk_productionroles");
-
-                    b.ToTable("productionroles", "decisorframework_production");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", b =>
@@ -7206,12 +7210,19 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.Elaboration", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Classification", "Classification")
+                        .WithMany()
+                        .HasForeignKey("ClassificcationId")
+                        .HasConstraintName("fk_elaborations_classifications_classificcationid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_elaborations_products_productid");
+
+                    b.Navigation("Classification");
 
                     b.Navigation("Product");
                 });
@@ -7231,6 +7242,27 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_elaborationinputproductbridges_products_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationInputProductClassificationBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.Elaboration", "Prow")
+                        .WithMany("InputProductClassificationBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_elaborationinputproductclassificationbridges_elaborations_p~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Classification", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_elaborationinputproductclassificationbridges_classification~");
 
                     b.Navigation("Prow");
 
@@ -7270,21 +7302,21 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Elaboration");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStepProductionRoleBridge", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStepWorkPositionBridge", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStep", "Prow")
-                        .WithMany("ProductionRoleBridges")
+                        .WithMany("WorkPositionBridges")
                         .HasForeignKey("ProwId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_elaborationstepproductionrolebridges_elaborationsteps_prowid");
+                        .HasConstraintName("fk_elaborationstepworkpositionbridges_elaborationsteps_prowid");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionRole", "Stern")
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkPosition", "Stern")
                         .WithMany()
                         .HasForeignKey("SternId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_elaborationstepproductionrolebridges_productionroles_sternid");
+                        .HasConstraintName("fk_elaborationstepworkpositionbridges_workpositions_sternid");
 
                     b.Navigation("Prow");
 
@@ -7321,13 +7353,6 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_productioncolaboratorbridges_productions_prowid");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_productioncolaboratorbridges_productionroles_roleid");
-
                     b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStep", "Step")
                         .WithMany()
                         .HasForeignKey("StepId")
@@ -7342,13 +7367,20 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_productioncolaboratorbridges_colaborators_sternid");
 
-                    b.Navigation("Prow");
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkPosition", "WorkPosition")
+                        .WithMany()
+                        .HasForeignKey("WorkPositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productioncolaboratorbridges_workpositions_workpositionid");
 
-                    b.Navigation("Role");
+                    b.Navigation("Prow");
 
                     b.Navigation("Step");
 
                     b.Navigation("Stern");
+
+                    b.Navigation("WorkPosition");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionEmployeeBridge", b =>
@@ -7359,13 +7391,6 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_productionemployeebridges_productions_prowid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_productionemployeebridges_productionroles_roleid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStep", "Step")
                         .WithMany()
@@ -7381,13 +7406,20 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_productionemployeebridges_employees_sternid");
 
-                    b.Navigation("Prow");
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkPosition", "WorkPosition")
+                        .WithMany()
+                        .HasForeignKey("WorkPositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productionemployeebridges_workpositions_workpositionid");
 
-                    b.Navigation("Role");
+                    b.Navigation("Prow");
 
                     b.Navigation("Step");
 
                     b.Navigation("Stern");
+
+                    b.Navigation("WorkPosition");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", b =>
@@ -8571,6 +8603,8 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 {
                     b.Navigation("InputProductBridges");
 
+                    b.Navigation("InputProductClassificationBridges");
+
                     b.Navigation("OutputProductBridges");
 
                     b.Navigation("Steps");
@@ -8578,7 +8612,7 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStep", b =>
                 {
-                    b.Navigation("ProductionRoleBridges");
+                    b.Navigation("WorkPositionBridges");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", b =>

@@ -157,9 +157,10 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<DispositionTagBridge> DispositionTagBridges { get; set; }
         public DbSet<Elaboration> Elaborations { get; set; }
         public DbSet<ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
+        public DbSet<ElaborationInputProductClassificationBridge> ElaborationInputProductClassificationBridges { get; set; }
         public DbSet<ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
         public DbSet<ElaborationStep> ElaborationSteps { get; set; }
-        public DbSet<ElaborationStepProductionRoleBridge> ElaborationStepProductionRoleBridges { get; set; }
+        public DbSet<ElaborationStepWorkPositionBridge> ElaborationStepWorkPositionBridges { get; set; }
         public DbSet<Production> Productions { get; set; }
         public DbSet<ProductionColaboratorBridge> ProductionColaboratorBridges { get; set; }
         public DbSet<ProductionEmployeeBridge> ProductionEmployeeBridges { get; set; }
@@ -167,7 +168,6 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ProductionOrderDeparture> ProductionOrderDepartures { get; set; }
         public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
         public DbSet<ProductionReception> ProductionReceptions { get; set; }
-        public DbSet<ProductionRole> ProductionRoles { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent> PurchaseSpents { get; set; }
