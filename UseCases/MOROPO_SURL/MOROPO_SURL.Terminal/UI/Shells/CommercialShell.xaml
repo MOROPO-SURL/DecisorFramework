@@ -62,6 +62,20 @@
             Title="Personas"
             ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Clientes">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF009;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Organizaciones"
+            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:LegalProvidersManagePage}" />
+        <ShellContent
+            Title="Personas"
+            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:NaturalProvidersManagePage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Proveedores">
         <FlyoutItem.Icon>
             <FontImageSource

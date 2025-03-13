@@ -27,7 +27,7 @@
         public int CategoryId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(BrandId))]
-        public VehicleBrand Brand { get; set; }
+        public Brand Brand { get; set; }
         public System.Guid BrandId { get; set; }
 
         public string Model { get; set; }
