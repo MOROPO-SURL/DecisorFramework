@@ -5,7 +5,9 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Maui.Controls.Hosting;
 using Microsoft.Maui.Hosting;
 using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Configuration;
 using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Factories;
+using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
@@ -91,6 +93,7 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IDetailContentPageFactoryFacade<ClauseDisplayModel, ClauseDetailPage>, ClauseDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<EmployeeDisplayModel, EmployeeDetailPage>, EmployeeDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<ProductionOrderDisplayModel, ProductionOrderDetailPage>, ProductionOrderDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<LegalProviderDisplayModel, LegalProviderDetailPage>, LegalProviderDetailPageFactory>()
                // ConfigurationPage factory resgistration !!!
                .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel, SalaryStandardConfigurationPage>, SalaryConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel, PersonContactConfigurationPage>, PersonContactConfigurationPageFactory>()
@@ -109,7 +112,8 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IConfigurationContentPageFactoryFacade<PurchaseZoneDisplayModel, PurchaseZoneConfigurationPageModel, PurchaseZoneConfigurationPage>, PurchaseZoneConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<WorkPositionDisplayModel, WorkPositionConfigurationPageModel, WorkPositionConfigurationPage>, WorkPositionConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<ClauseDisplayModel, ClauseConfigurationPageModel, ClauseConfigurationPage>, ClauseConfigurationPageFactory>()
-               .AddSingleton<IConfigurationContentPageFactoryFacade<ProductionOrderDisplayModel, ProductionOrderConfigurationPageModel, ProductionOrderConfigurationPage>, ProductionOrderConfigurationPageFactory>();
+               .AddSingleton<IConfigurationContentPageFactoryFacade<ProductionOrderDisplayModel, ProductionOrderConfigurationPageModel, ProductionOrderConfigurationPage>, ProductionOrderConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<LegalProviderDisplayModel, LegalProviderConfigurationPageModel, LegalProviderConfigurationPage>, LegalProviderConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

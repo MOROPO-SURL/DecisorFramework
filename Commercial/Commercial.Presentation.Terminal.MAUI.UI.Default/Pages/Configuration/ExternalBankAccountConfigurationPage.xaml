@@ -1,0 +1,91 @@
+<core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Financial.Interop.API.Common"
+    x:Class="MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ExternalBankAccountConfigurationPage"
+    x:TypeArguments="interop_common_display_models:BankAccountDisplayModel,presentation_configuration_page_models:BankAccountConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:BankAccountConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyControl_Invoked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelControl_Invoked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <VerticalStackLayout Spacing="0" Padding="8">
+            <FlexLayout 
+                Wrap="Wrap"
+                AlignItems="Start" AlignContent="Start">
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=10, LargeContainerColumn=8, MediumContainerColumn=12}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sucursal" />
+                    <Picker 
+                        x:Name="BankBranchPicker"
+                        ItemsSource="{Binding AvailableBankBranches}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=4, MediumContainerColumn=4}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Moneda" />
+                    <Picker 
+                        x:Name="CurrencyPicker"
+                        ItemsSource="{Binding AvailableCurrencies}"
+                        ItemDisplayBinding="{Binding Path=Name}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Número" />
+                    <Entry Text="{Binding Number}" Keyboard="Numeric" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=8, LargeContainerColumn=6, MediumContainerColumn=12}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Titular" />
+                    <Entry Text="{Binding Holder}" />
+                </VerticalStackLayout>
+            </FlexLayout>
+            <BoxView 
+                Margin="8,16,8,8"
+                HeightRequest="1" 
+                Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+            <FlexLayout 
+                Wrap="Wrap"
+                AlignItems="Start" AlignContent="Start">
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                </VerticalStackLayout>
+            </FlexLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</core_ui_base_pages:ConfigurationBaseContentPage>

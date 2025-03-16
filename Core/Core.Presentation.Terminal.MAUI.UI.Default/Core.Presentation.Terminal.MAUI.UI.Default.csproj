@@ -31,6 +31,9 @@
 		<ProjectReference Include="..\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\DocumentConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\EmailContactItemConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

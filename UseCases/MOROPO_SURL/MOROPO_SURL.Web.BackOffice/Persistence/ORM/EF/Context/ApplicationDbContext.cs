@@ -86,6 +86,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<BudgetServiceBridge> BudgetServiceBridges { get; set; }
         public DbSet<LegalProvider> LegalProviders { get; set; }
         public DbSet<LegalProviderBankAccountBridge> LegalProviderBankAccountBridges { get; set; }
+        public DbSet<LegalProviderDocumentBridge> LegalProviderDocumentBridges { get; set; }
         public DbSet<LegalProviderPurchasingContract> LegalProviderPurchasingContracts { get; set; }
         public DbSet<NaturalProvider> NaturalProviders { get; set; }
         public DbSet<NaturalProviderBankAccountBridge> NaturalProviderBankAccountBridges { get; set; }

@@ -27,5 +27,17 @@
 
             Municipality = new MunicipalityDisplayModel { Id = (entity.Location as Guama.Location.Persistence.Entities.MunicipalityLocation).MunicipalityId.Value };
         }
+
+        public override string ToString()
+        {
+            var baseLine = $"{Address}, {Municipality.Name}, {Municipality.State.Name}";
+
+            if (!string.IsNullOrEmpty(Label))
+            {
+                return $"{baseLine} ({Label})";
+            }
+
+            return baseLine;
+        }
     }
 }

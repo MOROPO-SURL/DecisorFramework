@@ -15,18 +15,52 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.
 
         public string TaxIdentificationNumber { get; set; }
 
+        public string StateIdentificationCode { get; set; }
+
+        public PersonContactDisplayModel Representative { get; set; }
+
+        public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContact { get; set; }
+
+        public PaymentTermDisplayModel DefaultPaymentTerm { get; set; }
+
+        public Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel[] BankAccounts { get; set; }
+
+        public Core.Interop.API.Common.Models.Display.DocumentDisplayModel[] Documents { get; set; }
+
         public virtual void Import(TEntity entity)
         {
             Id = entity.Id;
             Priority = entity.Priority;
             At = entity.At;
             TaxIdentificationNumber = entity.TaxIdentificationNumber;
+            StateIdentificationCode = entity.StateIdentificationCode;
 
             if (entity.Contact != null)
             {
                 Contact = new OrganizationContactDisplayModel();
 
                 Contact.Import(entity.Contact);
+            }
+
+            if (entity.Representative != null)
+            {
+                Representative = new PersonContactDisplayModel();
+
+                Representative.Import(entity.Representative);
+            }
+
+            if (entity.MainPostalContact != null)
+            {
+                MainPostalContact = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
+
+                MainPostalContact.Import(entity.MainPostalContact);
+            }
+
+            if (entity.DefaultPaymentTerm != null)
+            {
+                DefaultPaymentTerm = new PaymentTermDisplayModel();
+
+                DefaultPaymentTerm.Import(entity.DefaultPaymentTerm);
             }
         }
 
