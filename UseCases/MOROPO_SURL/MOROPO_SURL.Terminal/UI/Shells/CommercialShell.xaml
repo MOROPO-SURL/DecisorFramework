@@ -70,7 +70,7 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Jurídicos"
-            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:LegalProvidersManagePage}" />
+            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:LegalClientsManagePage}" />
         <ShellContent
             Title="Naturales"
             ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:NaturalProvidersManagePage}" />

@@ -6,7 +6,7 @@
     x:Class="MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.LegalProviderDetailPage"
     x:TypeArguments="interop_common_display_models:LegalProviderDisplayModel"
     x:DataType="interop_common_display_models:LegalProviderDisplayModel"
-    Title="Detalles de Término de Pago"
+    Title="Detalles de Proveedor Jurídico"
     Background="{StaticResource OverlayBackgroundBrush}">
     <ScrollView Orientation="Vertical">
         <Grid>

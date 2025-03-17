@@ -94,6 +94,7 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IDetailContentPageFactoryFacade<EmployeeDisplayModel, EmployeeDetailPage>, EmployeeDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<ProductionOrderDisplayModel, ProductionOrderDetailPage>, ProductionOrderDetailPageFactory>()
                .AddSingleton<IDetailContentPageFactoryFacade<LegalProviderDisplayModel, LegalProviderDetailPage>, LegalProviderDetailPageFactory>()
+               .AddSingleton<IDetailContentPageFactoryFacade<LegalClientDisplayModel, LegalClientDetailPage>, LegalClientDetailPageFactory>()
                // ConfigurationPage factory resgistration !!!
                .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel, SalaryStandardConfigurationPage>, SalaryConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel, PersonContactConfigurationPage>, PersonContactConfigurationPageFactory>()
@@ -113,7 +114,8 @@ namespace MOROPO.Tool.Decisor.Terminal
                .AddSingleton<IConfigurationContentPageFactoryFacade<WorkPositionDisplayModel, WorkPositionConfigurationPageModel, WorkPositionConfigurationPage>, WorkPositionConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<ClauseDisplayModel, ClauseConfigurationPageModel, ClauseConfigurationPage>, ClauseConfigurationPageFactory>()
                .AddSingleton<IConfigurationContentPageFactoryFacade<ProductionOrderDisplayModel, ProductionOrderConfigurationPageModel, ProductionOrderConfigurationPage>, ProductionOrderConfigurationPageFactory>()
-               .AddSingleton<IConfigurationContentPageFactoryFacade<LegalProviderDisplayModel, LegalProviderConfigurationPageModel, LegalProviderConfigurationPage>, LegalProviderConfigurationPageFactory>();
+               .AddSingleton<IConfigurationContentPageFactoryFacade<LegalProviderDisplayModel, LegalProviderConfigurationPageModel, LegalProviderConfigurationPage>, LegalProviderConfigurationPageFactory>()
+               .AddSingleton<IConfigurationContentPageFactoryFacade<LegalClientDisplayModel, LegalClientConfigurationPageModel, LegalClientConfigurationPage>, LegalClientConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

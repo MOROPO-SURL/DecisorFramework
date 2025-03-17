@@ -93,6 +93,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<NaturalProviderPurchasingContract> NaturalProviderPurchasingContracts { get; set; }
         public DbSet<LegalClient> LegalClients { get; set; }
         public DbSet<LegalClientBankAccountBridge> LegalClientBankAccountBridges { get; set; }
+        public DbSet<LegalClientDocumentBridge> LegalClientDocumentBridges { get; set; }
         public DbSet<LegalClientSaleContract> LegalClientSaleContracts { get; set; }
         public DbSet<NaturalClient> NaturalClients { get; set; }
         public DbSet<NaturalClientBankAccountBridge> NaturalClientBankAccountBridges { get; set; }

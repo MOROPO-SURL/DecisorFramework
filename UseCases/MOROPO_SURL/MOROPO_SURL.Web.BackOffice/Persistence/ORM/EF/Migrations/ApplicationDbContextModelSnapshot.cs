@@ -242,6 +242,25 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("legalclientbankaccountbridges", "decisorframework_commercial");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClientDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_legalclientdocumentbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_legalclientdocumentbridges_sternid");
+
+                    b.ToTable("legalclientdocumentbridges", "decisorframework_commercial");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClientSaleContract", b =>
                 {
                     b.Property<int>("Number")
@@ -5975,6 +5994,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClientDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientdocumentbridges_legalclients_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientdocumentbridges_documents_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClientSaleContract", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", "Client")
@@ -8604,6 +8644,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", b =>
                 {
                     b.Navigation("BankAccountBridges");
+
+                    b.Navigation("DocumentBridges");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProvider", b =>
