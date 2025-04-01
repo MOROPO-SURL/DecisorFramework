@@ -86,12 +86,14 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<BudgetServiceBridge> BudgetServiceBridges { get; set; }
         public DbSet<LegalProvider> LegalProviders { get; set; }
         public DbSet<LegalProviderBankAccountBridge> LegalProviderBankAccountBridges { get; set; }
+        public DbSet<LegalProviderDocumentBridge> LegalProviderDocumentBridges { get; set; }
         public DbSet<LegalProviderPurchasingContract> LegalProviderPurchasingContracts { get; set; }
         public DbSet<NaturalProvider> NaturalProviders { get; set; }
         public DbSet<NaturalProviderBankAccountBridge> NaturalProviderBankAccountBridges { get; set; }
         public DbSet<NaturalProviderPurchasingContract> NaturalProviderPurchasingContracts { get; set; }
         public DbSet<LegalClient> LegalClients { get; set; }
         public DbSet<LegalClientBankAccountBridge> LegalClientBankAccountBridges { get; set; }
+        public DbSet<LegalClientDocumentBridge> LegalClientDocumentBridges { get; set; }
         public DbSet<LegalClientSaleContract> LegalClientSaleContracts { get; set; }
         public DbSet<NaturalClient> NaturalClients { get; set; }
         public DbSet<NaturalClientBankAccountBridge> NaturalClientBankAccountBridges { get; set; }
@@ -120,7 +122,7 @@ namespace MOROPO.CheffMIGUE.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<PropertyKind> PropertyKinds { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<PropertyImageBridge> PropertyImageBridges { get; set; }
-        public DbSet<VehicleBrand> VehicleBrands { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         public DbSet<VehicleCategory> VehicleCategories { get; set; }
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
