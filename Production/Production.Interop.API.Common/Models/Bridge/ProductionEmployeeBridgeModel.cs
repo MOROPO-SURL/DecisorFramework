@@ -2,10 +2,10 @@
 {
     public class ProductionEmployeeBridgeModel
     {
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Employee { get; set; }
-
         public Display.ElaborationStepDisplayModel Step { get; set; }
 
-        public Display.ProductionRoleDisplayModel Role { get; set; }
+        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Employee { get; set; }
+
+        public HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel WorkPosition { get; set; }
     }
 }

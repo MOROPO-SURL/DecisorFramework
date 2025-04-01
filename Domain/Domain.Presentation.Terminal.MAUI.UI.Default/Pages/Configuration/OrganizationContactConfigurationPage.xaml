@@ -23,15 +23,15 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-        Text="Aplicar"
-        Clicked="ApplyControl_Invoked">
+            Text="Aplicar"
+            Clicked="ApplyControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
-        Text="Cancelar"
-        Clicked="CancelControl_Invoked">
+            Text="Cancelar"
+            Clicked="CancelControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -85,7 +85,7 @@
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=9, MediumContainerColumn=6, SmallContainerColumn=12}}"
                                 Margin="4"
                                 Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Estado Civil" />
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
                                 <Picker 
                                     x:Name="BusinessKindPicker"
                                     ItemsSource="{Binding AvailableBusinessKinds, Mode=OneTime}" 

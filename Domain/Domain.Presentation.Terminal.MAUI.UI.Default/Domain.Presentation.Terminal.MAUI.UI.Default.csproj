@@ -62,6 +62,9 @@
 	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\BrandConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\OrganizationContactConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

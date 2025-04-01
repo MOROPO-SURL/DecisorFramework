@@ -86,12 +86,14 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<BudgetServiceBridge> BudgetServiceBridges { get; set; }
         public DbSet<LegalProvider> LegalProviders { get; set; }
         public DbSet<LegalProviderBankAccountBridge> LegalProviderBankAccountBridges { get; set; }
+        public DbSet<LegalProviderDocumentBridge> LegalProviderDocumentBridges { get; set; }
         public DbSet<LegalProviderPurchasingContract> LegalProviderPurchasingContracts { get; set; }
         public DbSet<NaturalProvider> NaturalProviders { get; set; }
         public DbSet<NaturalProviderBankAccountBridge> NaturalProviderBankAccountBridges { get; set; }
         public DbSet<NaturalProviderPurchasingContract> NaturalProviderPurchasingContracts { get; set; }
         public DbSet<LegalClient> LegalClients { get; set; }
         public DbSet<LegalClientBankAccountBridge> LegalClientBankAccountBridges { get; set; }
+        public DbSet<LegalClientDocumentBridge> LegalClientDocumentBridges { get; set; }
         public DbSet<LegalClientSaleContract> LegalClientSaleContracts { get; set; }
         public DbSet<NaturalClient> NaturalClients { get; set; }
         public DbSet<NaturalClientBankAccountBridge> NaturalClientBankAccountBridges { get; set; }
@@ -120,7 +122,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<PropertyKind> PropertyKinds { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<PropertyImageBridge> PropertyImageBridges { get; set; }
-        public DbSet<VehicleBrand> VehicleBrands { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         public DbSet<VehicleCategory> VehicleCategories { get; set; }
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
@@ -157,9 +159,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<DispositionTagBridge> DispositionTagBridges { get; set; }
         public DbSet<Elaboration> Elaborations { get; set; }
         public DbSet<ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
+        public DbSet<ElaborationInputProductClassificationBridge> ElaborationInputProductClassificationBridges { get; set; }
         public DbSet<ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
         public DbSet<ElaborationStep> ElaborationSteps { get; set; }
-        public DbSet<ElaborationStepProductionRoleBridge> ElaborationStepProductionRoleBridges { get; set; }
+        public DbSet<ElaborationStepWorkPositionBridge> ElaborationStepWorkPositionBridges { get; set; }
         public DbSet<Production> Productions { get; set; }
         public DbSet<ProductionColaboratorBridge> ProductionColaboratorBridges { get; set; }
         public DbSet<ProductionEmployeeBridge> ProductionEmployeeBridges { get; set; }
@@ -167,7 +170,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ProductionOrderDeparture> ProductionOrderDepartures { get; set; }
         public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
         public DbSet<ProductionReception> ProductionReceptions { get; set; }
-        public DbSet<ProductionRole> ProductionRoles { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent> PurchaseSpents { get; set; }

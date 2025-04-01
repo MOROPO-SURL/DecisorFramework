@@ -12,16 +12,16 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Providers
                 {
                     new BaseEntityTypeConfigurator<Entities.Elaboration>(),
                     new Configurators.ElaborationInputProductBridgeEntityTypeConfigurator(),
+                    new Configurators.ElaborationInputProductClassificationBridgeEntityTypeConfigurator(),
                     new Configurators.ElaborationOutputProductBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.ElaborationStep>(),
-                    new Configurators.ElaborationStepProductionRoleBridgeEntityTypeConfigurator(),
+                    new Configurators.ElaborationStepWorkPositionBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Production>(),
                     new Configurators.ProductionColaboratorBridgeEntityTypeConfigurator(),
                     new Configurators.ProductionEmployeeBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.ProductionOrder>(),
                     new BaseEntityTypeConfigurator<Entities.ProductionOrderDeparture>(),
-                    new Configurators.ProductionProductBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.ProductionRole>()
+                    new Configurators.ProductionProductBridgeEntityTypeConfigurator()
                 };
             }
         }

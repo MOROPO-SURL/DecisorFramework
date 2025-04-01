@@ -6,18 +6,18 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 {
     [Microsoft.AspNetCore.Mvc.Route("api/domain/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class VehicleBrandsController : Guama.Core.Presentation.Web.Frontend.Controllers.Contract.AbstractArchivableEnableableEntityManagementController<VehicleBrand, System.Guid, VehicleBrandInputModel, VehicleBrandDisplayModel>
+    public class VehicleBrandsController : Guama.Core.Presentation.Web.Frontend.Controllers.Contract.AbstractArchivableEnableableEntityManagementController<Brand, System.Guid, VehicleBrandInputModel, VehicleBrandDisplayModel>
     {
-        public VehicleBrandsController(Guama.Core.Persistence.Repositories.IEntityRepository<VehicleBrand, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<VehicleBrandsController> localizer, Microsoft.Extensions.Logging.ILogger<VehicleBrandsController> logger) : base(repository, localizer, logger)
+        public VehicleBrandsController(Guama.Core.Persistence.Repositories.IEntityRepository<Brand, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<VehicleBrandsController> localizer, Microsoft.Extensions.Logging.ILogger<VehicleBrandsController> logger) : base(repository, localizer, logger)
         {
         }
 
-        protected override System.Linq.Expressions.Expression<System.Func<VehicleBrand, bool>> GetGlobalSelector()
+        protected override System.Linq.Expressions.Expression<System.Func<Brand, bool>> GetGlobalSelector()
         {
             return entity => !entity.Archived;
         }
 
-        protected override System.Func<VehicleBrand, object> GetOrderSelector()
+        protected override System.Func<Brand, object> GetOrderSelector()
         {
             return entity => entity.Priority;
         }

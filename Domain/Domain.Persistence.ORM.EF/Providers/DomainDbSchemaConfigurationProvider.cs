@@ -17,7 +17,7 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.PropertyKind>(),
                     new Configurators.PropertyEntityTypeConfigurator(),
                     new Configurators.PropertyImageBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.VehicleBrand>(),
+                    new BaseEntityTypeConfigurator<Entities.Brand>(),
                     new BaseEntityTypeConfigurator<Entities.VehicleCategory>(),
                     new BaseEntityTypeConfigurator<Entities.VehicleEngineKind>(),
                     new Configurators.VehicleEntityTypeConfigurator(),

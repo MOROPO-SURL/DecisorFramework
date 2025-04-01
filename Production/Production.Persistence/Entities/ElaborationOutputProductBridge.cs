@@ -8,6 +8,8 @@
         public System.Guid SternId { get; set; }
         public Inventory.Persistence.Entities.Product Stern { get; set; }
 
+        public decimal Amount { get; set; }
+
         public decimal MinPerformanceCoefficient { get; set; }
 
         public decimal MaxPerformanceCoefficient { get; set; }

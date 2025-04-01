@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 {
-    public class VehicleBrandDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.VehicleBrand, System.Guid>
+    public class VehicleBrandDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Brand, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -12,7 +12,7 @@
 
         public int Priority { get; set; }
 
-        public virtual void Import(Persistence.Entities.VehicleBrand entity)
+        public virtual void Import(Persistence.Entities.Brand entity)
         {
             Id = entity.Id;
             Name = entity.Name;

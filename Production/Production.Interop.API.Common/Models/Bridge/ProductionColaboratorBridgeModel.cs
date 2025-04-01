@@ -2,10 +2,10 @@
 {
     public class ProductionColaboratorBridgeModel
     {
-        public Essential.Interop.API.Common.Models.Display.ColaboratorDisplayModel Colaborator { get; set; }
-
         public Display.ElaborationStepDisplayModel Step { get; set; }
 
-        public Display.ProductionRoleDisplayModel Role { get; set; }
+        public Essential.Interop.API.Common.Models.Display.ColaboratorDisplayModel Colaborator { get; set; }
+
+        public HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel WorkPosition { get; set; }
     }
 }

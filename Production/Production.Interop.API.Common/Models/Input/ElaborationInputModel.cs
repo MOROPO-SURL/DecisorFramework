@@ -14,11 +14,19 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public System.Guid ProductId { get; set; }
 
+        public System.Guid? ClassificationId { get; set; }
+
         public string Description { get; set; }
+
+        public decimal ReferenceAmount { get; set; }
 
         public decimal MinPerformanceCoefficient { get; set; }
 
         public decimal MaxPerformanceCoefficient { get; set; }
+
+        //public List<ElaborationStepDisplayModel> EditionSteps { get; set; } = new List<ElaborationStepDisplayModel>();
+        //public List<ElaborationStepDisplayModel> IncomingSteps { get; set; } = new List<ElaborationStepDisplayModel>();
+        //public List<ElaborationStepDisplayModel> OutgoingSteps { get; set; } = new List<ElaborationStepDisplayModel>();
 
         public List<ElaborationStepDisplayModel> Steps { get; set; } = new List<ElaborationStepDisplayModel>();
 
@@ -44,6 +52,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
         {
             entity.Priority = Priority;
             entity.Description = Description;
+            entity.ReferenceAmount = ReferenceAmount;
             entity.MinPerformanceCoefficient = MinPerformanceCoefficient;
             entity.MaxPerformanceCoefficient = MaxPerformanceCoefficient;
             entity.InputProductBridges = InputProducts.Select(model => new ElaborationInputProductBridge
@@ -61,6 +70,12 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
             {
                 entity.Product = null;
                 entity.ProductId = ProductId;
+            }
+
+            if (entity.ClassificcationId != ClassificationId)
+            {
+                entity.Classification = null;
+                entity.ClassificcationId = ClassificationId;
             }
         }
     }

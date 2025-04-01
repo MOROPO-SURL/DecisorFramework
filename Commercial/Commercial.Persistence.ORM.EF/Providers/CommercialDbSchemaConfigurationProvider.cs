@@ -36,7 +36,9 @@ namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Providers
                     new Configurators.LegalProviderBankAccountBridgeEntityTypeConfigurator(),
                     new Configurators.LegalClientBankAccountBridgeEntityTypeConfigurator(),
                     new Configurators.NaturalProviderBankAccountBridgeEntityTypeConfigurator(),
-                    new Configurators.NaturalClientBankAccountBridgeEntityTypeConfigurator()
+                    new Configurators.NaturalClientBankAccountBridgeEntityTypeConfigurator(),
+                    new Configurators.LegalProviderDocumentBridgeEntityTypeConfigurator(),
+                    new Configurators.LegalClientDocumentBridgeEntityTypeConfigurator()
                 ];
             }
         }

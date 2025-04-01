@@ -19,7 +19,7 @@
                 MinDecrease = model.MinDecrease;
                 MaxDecrease = model.MaxDecrease;
 
-                foreach (var item in model.ProductionRoles) Roles.Add(item);
+                foreach (var item in model.WorkPositions) WorkPositions.Add(item);
             }
         }
 
@@ -35,6 +35,6 @@
 
         public decimal MaxDecrease { get => maxDecrease; set => SetProperty(ref maxDecrease, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.ElaborationStepProductionRoleBridgeModel> Roles { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.ElaborationStepWorkPositionBridgeModel> WorkPositions { get; set; } = [];
     }
 }

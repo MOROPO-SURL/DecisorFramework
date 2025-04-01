@@ -10,6 +10,8 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.P
         private CurrencyDisplayModel currency;
         private int priority = 1;
 
+        public BankAccountConfigurationPageModel() : this(null) { }
+
         public BankAccountConfigurationPageModel(BankAccountDisplayModel model) : base(model)
         {
             if (model != null)

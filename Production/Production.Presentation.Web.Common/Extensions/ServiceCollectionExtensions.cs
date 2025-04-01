@@ -13,7 +13,6 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<ElaborationStep, System.Guid>, ElaborationStepRepository>();
             services.AddScoped<IEntityRepository<ProductionOrder, System.Guid>, ProductionOrderRepository>();
             services.AddScoped<IEntityRepository<Persistence.Entities.Production, System.Guid>, ProductionRepository>();
-            services.AddScoped<IEntityRepository<ProductionRole, System.Guid>, ProductionRoleRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.ProductionDbSchemaConfigurationProvider>();
 
