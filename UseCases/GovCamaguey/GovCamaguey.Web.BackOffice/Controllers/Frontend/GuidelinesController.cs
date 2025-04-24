@@ -19,7 +19,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
 
         protected override System.Func<Guideline, object> GetOrderSelector()
         {
-            return entity => entity.Priority;
+            return entity => entity.Index;
         }
 
         public override ActionResult Delete(System.Guid key)

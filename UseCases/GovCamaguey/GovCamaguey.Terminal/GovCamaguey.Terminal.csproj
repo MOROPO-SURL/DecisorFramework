@@ -50,7 +50,6 @@
 	  <None Remove="Resources\Images\default_person_picture.jpg" />
 	  <None Remove="Resources\Images\domain.jpg" />
 	  <None Remove="Resources\Images\identity_color.png" />
-	  <None Remove="Resources\Images\identity_white.png" />
 	  <None Remove="Resources\Images\logo_art_frame.svg" />
 	</ItemGroup>
 
@@ -123,6 +122,9 @@
 	  <MauiXaml Update="Resources\Styles\Values.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Configuration\GuidelineConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Configuration\OrganizationConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -132,6 +134,9 @@
 	  <MauiXaml Update="UI\Pages\Configuration\UnitMeasurementConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Detail\GuidelineDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Detail\OrganizationDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -139,6 +144,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Detail\UnitMeasurementDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Manage\GuidelinesManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Manage\OrganizationsManagePage.xaml">

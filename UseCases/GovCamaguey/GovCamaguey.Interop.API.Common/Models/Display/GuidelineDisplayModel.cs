@@ -6,9 +6,7 @@
 
         public bool Enabled { get; set; }
 
-        public int Priority { get; set; }
-
-        public int Number { get; set; }
+        public int Index { get; set; }
 
         public string Name { get; set; }
 
@@ -18,8 +16,7 @@
         {
             Id = entity.Id;
             Enabled = entity.Enabled;
-            Priority = entity.Priority;
-            Number = entity.Number;
+            Index = entity.Index;
             Name = entity.Name;
             Description = entity.Description;
         }

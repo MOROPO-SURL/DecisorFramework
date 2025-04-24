@@ -36,9 +36,11 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Providers.Facade.IRuntimeContextProviderFacade, Providers.SingleRuntimeContextProvider>()
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade, Helpers.MainExceptionHandlingHelper>()
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSessionManager>()
+                   .AddSingleton<IDetailContentPageFactoryFacade<GuidelineDisplayModel, GuidelineDetailPage>, GuidelineDetailPageFactory>()
                    .AddSingleton<IDetailContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementDetailPage>, UnitMeasurementDetailPageFactory>()
                    .AddSingleton<IDetailContentPageFactoryFacade<PersonDisplayModel, PersonDetailPage>, PersonDetailPageFactory>()
                    .AddSingleton<IDetailContentPageFactoryFacade<OrganizationDisplayModel, OrganizationDetailPage>, OrganizationDetailPageFactory>()
+                   .AddSingleton<IConfigurationContentPageFactoryFacade<GuidelineDisplayModel, GuidelineConfigurationPageModel, GuidelineConfigurationPage>, GuidelineConfigurationPageFactory>()
                    .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel, UnitMeasurementConfigurationPage>, UnitMeasurementConfigurationPageFactory>()
                    .AddSingleton<IConfigurationContentPageFactoryFacade<PersonDisplayModel, PersonConfigurationPageModel, PersonConfigurationPage>, PersonConfigurationPageFactory>()
                    .AddSingleton<IConfigurationContentPageFactoryFacade<OrganizationDisplayModel, OrganizationConfigurationPageModel, OrganizationConfigurationPage>, OrganizationConfigurationPageFactory>();

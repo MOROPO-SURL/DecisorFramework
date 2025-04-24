@@ -20,7 +20,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
 
         protected override System.Func<Objective, object> GetOrderSelector()
         {
-            return entity => entity.Priority;
+            return entity => entity.Index;
         }
 
         protected override ObjectiveDisplayModel EntityToDisplayModel(Objective entity)

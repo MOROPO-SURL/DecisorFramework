@@ -48,7 +48,7 @@
     <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
     <ShellContent
         Title="Lineamientos"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate local_manage_pages:GuidelinesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

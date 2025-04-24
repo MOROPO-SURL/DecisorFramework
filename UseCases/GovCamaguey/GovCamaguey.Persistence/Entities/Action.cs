@@ -1,8 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using MOROPO.Framework.Guama.Core.Persistence.Entities.Contract;
+using System.Collections.Generic;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
 {
-    public class Action : Framework.Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>, Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
+    public class Action : INamedEntity<System.Guid>, IArchivableEntity<System.Guid>, IEnableableEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; } = System.Guid.NewGuid();
@@ -10,8 +11,6 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
         public bool Archived { get; set; }
 
         public bool Enabled { get; set; }
-
-        public int Priority { get; set; }
 
         public int Index { get; set; }
 

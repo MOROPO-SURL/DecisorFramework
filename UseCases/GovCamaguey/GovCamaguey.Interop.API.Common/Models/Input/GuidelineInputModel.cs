@@ -4,9 +4,7 @@
     {
         public System.Guid Id { get; set; }
 
-        public int Priority { get; set; }
-
-        public int Number { get; set; }
+        public int Index { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
@@ -15,7 +13,7 @@
 
         public Persistence.Entities.Guideline Export()
         {
-            var entity = new Persistence.Entities.Guideline { Id = System.Guid.NewGuid(), Enabled = true };
+            var entity = new Persistence.Entities.Guideline { Id = Id, Enabled = true };
 
             Mergue(entity);
 
@@ -29,8 +27,7 @@
 
         public void Mergue(Persistence.Entities.Guideline entity)
         {
-            entity.Priority = Priority;
-            entity.Number = Number;
+            entity.Index = Index;
             entity.Name = Name;
             entity.Description = Description;
         }

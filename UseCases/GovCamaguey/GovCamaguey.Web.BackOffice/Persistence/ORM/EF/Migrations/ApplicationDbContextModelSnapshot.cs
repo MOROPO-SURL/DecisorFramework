@@ -1033,10 +1033,6 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
-
                     b.HasKey("Id")
                         .HasName("pk_actions");
 
@@ -1128,21 +1124,21 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<int>("Number")
-                        .HasColumnType("integer")
-                        .HasColumnName("number");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
-
                     b.HasKey("Id")
                         .HasName("pk_guidelines");
+
+                    b.HasIndex("Index")
+                        .IsUnique()
+                        .HasDatabaseName("ix_guidelines_index");
 
                     b.ToTable("guidelines");
                 });
@@ -1230,10 +1226,6 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
 
                     b.Property<Guid>("ResponsibleId")
                         .HasColumnType("uuid")
@@ -1349,10 +1341,6 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("name");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
 
                     b.HasKey("Id")
                         .HasName("pk_proyections");

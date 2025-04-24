@@ -17,7 +17,8 @@
                     new Configurators.ProyectionOrganizationParticipationBridgeEntityTypeConfigurator(),
                     new Configurators.ActionEntityTypeConfigurator(),
                     new Configurators.ActionOrganizationResponsabilityBridgeEntityTypeConfigurator(),
-                    new Configurators.ActionOrganizationParticipationBridgeEntityTypeConfigurator()
+                    new Configurators.ActionOrganizationParticipationBridgeEntityTypeConfigurator(),
+                    new Configurators.GuidelineEntityTypeConfigurator()
                 ];
             }
         }

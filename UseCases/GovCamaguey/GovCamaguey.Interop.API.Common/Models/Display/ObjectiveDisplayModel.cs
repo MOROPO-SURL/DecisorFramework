@@ -4,8 +4,6 @@
     {
         public System.Guid Id { get; set; }
 
-        public int Priority { get; set; }
-
         public int Index { get; set; }
 
         public string Name { get; set; }
@@ -17,7 +15,6 @@
         public void Import(Persistence.Entities.Objective entity)
         {
             Id = entity.Id;
-            Priority = entity.Priority;
             Index = entity.Index;
             Name = entity.Name;
             Description = entity.Description;
