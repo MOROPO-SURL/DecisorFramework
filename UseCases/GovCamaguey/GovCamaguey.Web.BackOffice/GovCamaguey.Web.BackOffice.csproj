@@ -35,9 +35,7 @@
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Persistence\ORM\EF\Repositories\" />
-	</ItemGroup>
-	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Core\Core.Presentation.Web.Backend\Core.Presentation.Web.Backend.csproj" />
 	  <ProjectReference Include="..\..\..\Core\Core.Presentation.Web.Frontend\Core.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\GovCamaguey.Interop.API.Common\GovCamaguey.Interop.API.Common.csproj" />
 	</ItemGroup>
@@ -52,6 +50,13 @@
 	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 	  </Content>
+	</ItemGroup>
+	<ItemGroup>
+	  <None Update="Properties\launchSettings.json">
+	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>Never</CopyToPublishDirectory>
+	  </None>
 	</ItemGroup>
 
 </Project>

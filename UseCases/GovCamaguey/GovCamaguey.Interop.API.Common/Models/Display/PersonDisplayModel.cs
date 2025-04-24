@@ -1,0 +1,24 @@
+﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
+{
+    public class PersonDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Person, System.Guid>
+    {
+        public System.Guid Id { get; set; }
+
+        public int Priority { get; set; }
+
+        public Framework.Decisor.Core.Interop.API.Common.Models.Display.PersonIdentityDisplayModel Identity { get; set; }
+
+        public virtual void Import(Persistence.Entities.Person entity)
+        {
+            Id = entity.Id;
+            Priority = entity.Priority;
+
+            if (entity.Identity != null)
+            {
+                Identity = new Framework.Decisor.Core.Interop.API.Common.Models.Display.PersonIdentityDisplayModel();
+
+                Identity.Import(entity.Identity);
+            }
+        }
+    }
+}

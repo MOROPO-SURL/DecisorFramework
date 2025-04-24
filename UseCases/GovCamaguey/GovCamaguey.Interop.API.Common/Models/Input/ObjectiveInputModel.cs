@@ -1,0 +1,46 @@
+﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
+{
+    public class ObjectiveInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Objective, System.Guid>
+    {
+        public System.Guid Id { get; set; }
+
+        public int Priority { get; set; }
+
+        public int Index { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public System.Guid ResponsibleId { get; set; }
+
+        public Persistence.Entities.Objective Export()
+        {
+            var entity = new Persistence.Entities.Objective { Id = System.Guid.NewGuid(), Enabled = true };
+
+            Mergue(entity);
+
+            return entity;
+        }
+
+        public void Import(Persistence.Entities.Objective entity)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        public void Mergue(Persistence.Entities.Objective entity)
+        {
+            entity.Priority = Priority;
+            entity.Index = Index;
+            entity.Name = Name;
+            entity.Description = Description;
+
+            if (entity.ResponsibleId != ResponsibleId)
+            {
+                entity.Responsible = null;
+                entity.ResponsibleId = ResponsibleId;
+            }
+        }
+    }
+}

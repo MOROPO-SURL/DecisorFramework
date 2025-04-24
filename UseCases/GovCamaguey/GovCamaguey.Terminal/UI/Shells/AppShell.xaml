@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Shells.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_manage_pages="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Manage"
+    xmlns:local_pages="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages">
+    <Shell.FlyoutBehavior>
+        <OnIdiom Default="Flyout" Desktop="Locked" />
+    </Shell.FlyoutBehavior>
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="180">
+            <Image 
+                Aspect="AspectFill"
+                Source="domain.jpg" />
+            <BoxView Color="#A7000000" />
+            <Label
+                Padding="16"
+                Text="Gestión de Gobierno"
+                TextColor="White"
+                HorizontalTextAlignment="Center" VerticalOptions="Center"
+                FontSize="Large"
+                FontAttributes="Bold" />
+        </Grid>
+    </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
+    <ShellContent
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
+    <ShellContent
+        Title="Objetivos"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF790;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
+    <ShellContent
+        Title="Lineamientos"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF355;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Personas"
+        ContentTemplate="{DataTemplate local_manage_pages:PersonsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF004;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Organismos"
+        ContentTemplate="{DataTemplate local_manage_pages:OrganizationsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF990;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Unidades de medida"
+        ContentTemplate="{DataTemplate local_manage_pages:UnitMeasurementsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF472;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+</Shell>

@@ -8,6 +8,8 @@
             {
                 return
                 [
+                    new Configurators.PersonEntityTypeConfigurator(),
+                    new Configurators.OrganizationEntityTypeConfigurator(),
                     new Configurators.ObjectiveEntityTypeConfigurator(),
                     new Configurators.ProyectionEntityTypeConfigurator(),
                     new Configurators.ProyectionGuidelineBridgeEntityTypeConfigurator(),
