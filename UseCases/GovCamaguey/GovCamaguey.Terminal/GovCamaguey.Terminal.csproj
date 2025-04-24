@@ -125,16 +125,25 @@
 	  <MauiXaml Update="UI\Pages\Configuration\GuidelineConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Configuration\OrganizationConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Configuration\PersonConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Configuration\ProyectionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Configuration\UnitMeasurementConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Detail\GuidelineDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Detail\ObjectiveDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Detail\OrganizationDetailPage.xaml">
@@ -147,6 +156,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Manage\GuidelinesManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Manage\ObjectivesManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Manage\OrganizationsManagePage.xaml">

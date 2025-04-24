@@ -19,6 +19,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
 
         public string Description { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ObjectiveId))]
+        public Objective Objective { get; set; }
+        public System.Guid ObjectiveId { get; set; }
+
         public ICollection<ProyectionMonthlyClosure> MonthlyClosures { get; set; }
 
         public ICollection<ProyectionOrganizationResponsabilityBridge> OrganizationResponsablityBridges { get; set; }
@@ -26,5 +30,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
         public ICollection<ProyectionOrganizationParticipationBridge> OrganizationParticipationBridges { get; set; }
 
         public ICollection<ProyectionGuidelineBridge> GuidelineBridges { get; set; }
+
+        public ICollection<Action> Actions { get; set; }
     }
 }

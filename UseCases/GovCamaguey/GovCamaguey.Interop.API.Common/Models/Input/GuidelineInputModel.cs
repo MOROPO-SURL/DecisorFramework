@@ -6,7 +6,6 @@
 
         public int Index { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
         public string Description { get; set; }

@@ -25,7 +25,7 @@
     </Shell.FlyoutHeader>
     <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
     <ShellContent
-        Title="Panel de Control"
+        Title="Estado"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -37,7 +37,7 @@
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Objetivos"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate local_manage_pages:ObjectivesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -45,7 +45,6 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
     <ShellContent
         Title="Lineamientos"
         ContentTemplate="{DataTemplate local_manage_pages:GuidelinesManagePage}">

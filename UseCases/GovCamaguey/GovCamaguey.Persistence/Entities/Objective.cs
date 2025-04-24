@@ -1,4 +1,5 @@
 ﻿using MOROPO.Framework.Guama.Core.Persistence.Entities.Contract;
+using System.Collections.Generic;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
 {
@@ -21,5 +22,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResponsibleId))]
         public Person Responsible { get; set; }
         public System.Guid ResponsibleId { get; set; }
+
+        public ICollection<Proyection> Proyections { get; set; }
     }
 }

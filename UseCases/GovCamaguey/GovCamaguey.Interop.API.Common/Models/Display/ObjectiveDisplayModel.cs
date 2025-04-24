@@ -1,4 +1,6 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
+﻿using System.Linq;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 {
     public class ObjectiveDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Objective, System.Guid>
     {
@@ -11,6 +13,8 @@
         public string Description { get; set; }
 
         public PersonDisplayModel Responsible { get; set; }
+
+        public ProyectionDisplayModel[] Proyections { get; set; }
 
         public void Import(Persistence.Entities.Objective entity)
         {
@@ -25,6 +29,15 @@
 
                 Responsible.Import(entity.Responsible);
             }
+
+            Proyections = entity.Proyections.OrderBy(_entity => _entity.Index).Select(_entity =>
+            {
+                var model = new ProyectionDisplayModel();
+
+                model.Import(_entity);
+
+                return model;
+            }).ToArray();
         }
     }
 }

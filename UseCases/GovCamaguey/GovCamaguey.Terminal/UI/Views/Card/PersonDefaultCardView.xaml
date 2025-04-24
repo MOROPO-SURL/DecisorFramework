@@ -43,7 +43,7 @@
                     TextColor="DimGray"
                     FontSize="Caption"
                     LineBreakMode="TailTruncation"
-                    MaxLines="3" />
+                    MaxLines="2" />
             </StackLayout>
         </Grid>
     </Frame>

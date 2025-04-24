@@ -1033,12 +1033,19 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .HasColumnType("text")
                         .HasColumnName("name");
 
+                    b.Property<Guid>("ProyectionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("proyectionid");
+
                     b.HasKey("Id")
                         .HasName("pk_actions");
 
                     b.HasIndex("Index")
                         .IsUnique()
                         .HasDatabaseName("ix_actions_index");
+
+                    b.HasIndex("ProyectionId")
+                        .HasDatabaseName("ix_actions_proyectionid");
 
                     b.ToTable("actions");
                 });
@@ -1342,12 +1349,19 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .HasColumnType("text")
                         .HasColumnName("name");
 
+                    b.Property<Guid>("ObjectiveId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("objectiveid");
+
                     b.HasKey("Id")
                         .HasName("pk_proyections");
 
                     b.HasIndex("Index")
                         .IsUnique()
                         .HasDatabaseName("ix_proyections_index");
+
+                    b.HasIndex("ObjectiveId")
+                        .HasDatabaseName("ix_proyections_objectiveid");
 
                     b.ToTable("proyections");
                 });
@@ -1946,6 +1960,18 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Action", b =>
+                {
+                    b.HasOne("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Proyection", "Proyection")
+                        .WithMany("Actions")
+                        .HasForeignKey("ProyectionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_actions_proyections_proyectionid");
+
+                    b.Navigation("Proyection");
+                });
+
             modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.ActionMonthlyClosure", b =>
                 {
                     b.HasOne("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Action", "Action")
@@ -2055,6 +2081,18 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .HasConstraintName("fk_persons_personidentities_identityid");
 
                     b.Navigation("Identity");
+                });
+
+            modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Proyection", b =>
+                {
+                    b.HasOne("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Objective", "Objective")
+                        .WithMany("Proyections")
+                        .HasForeignKey("ObjectiveId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_proyections_objectives_objectiveid");
+
+                    b.Navigation("Objective");
                 });
 
             modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.ProyectionGuidelineBridge", b =>
@@ -2233,8 +2271,15 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.Navigation("OrganizationResponsablityBridges");
                 });
 
+            modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Objective", b =>
+                {
+                    b.Navigation("Proyections");
+                });
+
             modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Proyection", b =>
                 {
+                    b.Navigation("Actions");
+
                     b.Navigation("GuidelineBridges");
 
                     b.Navigation("MonthlyClosures");

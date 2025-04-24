@@ -19,6 +19,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
 
         public string Description { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProyectionId))]
+        public Proyection Proyection { get; set; }
+        public System.Guid ProyectionId { get; set; }
+
         public ICollection<ActionMonthlyClosure> MonthlyClosures { get; set; }
 
         public ICollection<ActionOrganizationResponsabilityBridge> OrganizationResponsablityBridges { get; set; }

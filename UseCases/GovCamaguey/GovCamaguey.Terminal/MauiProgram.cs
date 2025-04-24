@@ -40,10 +40,12 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal
                    .AddSingleton<IDetailContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementDetailPage>, UnitMeasurementDetailPageFactory>()
                    .AddSingleton<IDetailContentPageFactoryFacade<PersonDisplayModel, PersonDetailPage>, PersonDetailPageFactory>()
                    .AddSingleton<IDetailContentPageFactoryFacade<OrganizationDisplayModel, OrganizationDetailPage>, OrganizationDetailPageFactory>()
+                   .AddSingleton<IDetailContentPageFactoryFacade<ObjectiveDisplayModel, ObjectiveDetailPage>, ObjectiveDetailPageFactory>()
                    .AddSingleton<IConfigurationContentPageFactoryFacade<GuidelineDisplayModel, GuidelineConfigurationPageModel, GuidelineConfigurationPage>, GuidelineConfigurationPageFactory>()
                    .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel, UnitMeasurementConfigurationPage>, UnitMeasurementConfigurationPageFactory>()
                    .AddSingleton<IConfigurationContentPageFactoryFacade<PersonDisplayModel, PersonConfigurationPageModel, PersonConfigurationPage>, PersonConfigurationPageFactory>()
-                   .AddSingleton<IConfigurationContentPageFactoryFacade<OrganizationDisplayModel, OrganizationConfigurationPageModel, OrganizationConfigurationPage>, OrganizationConfigurationPageFactory>();
+                   .AddSingleton<IConfigurationContentPageFactoryFacade<OrganizationDisplayModel, OrganizationConfigurationPageModel, OrganizationConfigurationPage>, OrganizationConfigurationPageFactory>()
+                   .AddSingleton<IConfigurationContentPageFactoryFacade<ObjectiveDisplayModel, ObjectiveConfigurationPageModel, ObjectiveConfigurationPage>, ObjectiveConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

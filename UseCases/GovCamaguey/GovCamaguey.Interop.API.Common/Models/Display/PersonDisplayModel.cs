@@ -8,6 +8,8 @@
 
         public Framework.Decisor.Core.Interop.API.Common.Models.Display.PersonIdentityDisplayModel Identity { get; set; }
 
+        public string FullName => string.IsNullOrEmpty(Identity.LastName) ? Identity.Name : $"{Identity.Name} {Identity.LastName}";
+
         public virtual void Import(Persistence.Entities.Person entity)
         {
             Id = entity.Id;

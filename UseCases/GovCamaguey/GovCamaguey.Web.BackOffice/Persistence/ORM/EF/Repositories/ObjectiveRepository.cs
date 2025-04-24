@@ -12,7 +12,9 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
 
         protected override IQueryable<Objective> GetQueryableDbSet()
         {
-            return base.GetQueryableDbSet().Include(entity => entity.Responsible).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image);
+            return base.GetQueryableDbSet()
+                .Include(entity => entity.Responsible).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+                .Include(entity => entity.Proyections);
         }
     }
 }
