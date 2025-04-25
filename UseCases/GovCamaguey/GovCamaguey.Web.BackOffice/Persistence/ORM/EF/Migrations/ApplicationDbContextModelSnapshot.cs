@@ -1040,12 +1040,12 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.HasKey("Id")
                         .HasName("pk_actions");
 
-                    b.HasIndex("Index")
-                        .IsUnique()
-                        .HasDatabaseName("ix_actions_index");
-
                     b.HasIndex("ProyectionId")
                         .HasDatabaseName("ix_actions_proyectionid");
+
+                    b.HasIndex("Index", "ProyectionId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_actions_index_proyectionid");
 
                     b.ToTable("actions");
                 });
@@ -1176,10 +1176,6 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
-
-                    b.Property<int>("Index")
-                        .HasColumnType("integer")
-                        .HasColumnName("index");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1356,12 +1352,12 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.HasKey("Id")
                         .HasName("pk_proyections");
 
-                    b.HasIndex("Index")
-                        .IsUnique()
-                        .HasDatabaseName("ix_proyections_index");
-
                     b.HasIndex("ObjectiveId")
                         .HasDatabaseName("ix_proyections_objectiveid");
+
+                    b.HasIndex("Index", "ObjectiveId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_proyections_index_objectiveid");
 
                     b.ToTable("proyections");
                 });

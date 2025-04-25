@@ -1,0 +1,37 @@
+﻿using System.Linq;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
+{
+    public class ActionDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Action, System.Guid>
+    {
+        public System.Guid Id { get; set; }
+
+        public bool Enabled { get; set; }
+
+        public int Index { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+
+        public IndicatorDisplayModel[] Indicators { get; set; }
+
+        public void Import(Persistence.Entities.Action entity)
+        {
+            Id = entity.Id;
+            Enabled = entity.Enabled;
+            Index = entity.Index;
+            Name = entity.Name;
+            Description = entity.Description;
+
+            Indicators = entity.Indicators.OrderBy(_entity => _entity.Priority).Select(_entity =>
+            {
+                var model = new IndicatorDisplayModel();
+
+                model.Import(_entity);
+
+                return model;
+            }).ToArray();
+        }
+    }
+}

@@ -12,11 +12,15 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
     public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Objective, System.Guid, Interop.API.Common.Models.Input.ObjectiveInputModel, Interop.API.Common.Models.Display.ObjectiveDisplayModel>
     {
         private readonly IEntityRepository<Proyection, System.Guid> proyectionRepository;
+        private readonly IEntityRepository<Action, System.Guid> actionRepository;
+        private readonly IEntityRepository<Indicator, System.Guid> indicatorRepository;
 
-        public ObjectivesController(IEntityRepository<Proyection, System.Guid> proyectionRepository, IEntityRepository<Objective, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, Microsoft.Extensions.Logging.ILogger<ObjectivesController> logger)
+        public ObjectivesController(IEntityRepository<Indicator, System.Guid> indicatorRepository, IEntityRepository<Action, System.Guid> actionRepository, IEntityRepository<Proyection, System.Guid> proyectionRepository, IEntityRepository<Objective, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, Microsoft.Extensions.Logging.ILogger<ObjectivesController> logger)
             : base(repository, localizer, logger)
         {
             this.proyectionRepository = proyectionRepository;
+            this.actionRepository = actionRepository;
+            this.indicatorRepository = indicatorRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<Objective, bool>> GetGlobalSelector()
@@ -57,6 +61,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                 _entity.ObjectiveId = entity.Id;
 
                 proyectionRepository.Add(_entity, User.Identity.Name, false);
+
+                ExtendCreate(_entity, _model);
             }
         }
 
@@ -80,6 +86,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                 _model.Mergue(_entity);
 
                 proyectionRepository.Update(_entity, User.Identity.Name, false);
+
+                ExtendEdit(_entity, _model);
             }
 
             foreach (var _model in model.IncomingProyections)
@@ -89,6 +97,98 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                 _entity.ObjectiveId = entity.Id;
 
                 proyectionRepository.Add(_entity, User.Identity.Name, false);
+
+                ExtendCreate(_entity, _model);
+            }
+        }
+
+        protected void ExtendCreate(Proyection entity, ProyectionInputModel model)
+        {
+            foreach (var _model in model.IncomingActions)
+            {
+                var _entity = _model.Export();
+
+                _entity.ProyectionId = entity.Id;
+
+                actionRepository.Add(_entity, User.Identity.Name, false);
+
+                ExtendCreate(_entity, _model);
+            }
+        }
+
+        protected void ExtendEdit(Proyection entity, ProyectionInputModel model)
+        {
+            foreach (var _model in model.OutgoingActions)
+            {
+                var _entity = entity.Actions.First(bridge => bridge.Id == _model.Id);
+
+                _entity.Archived = true;
+
+                actionRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionActions)
+            {
+                var _entity = entity.Actions.First(bridge => bridge.Id == _model.Id);
+
+                _model.Mergue(_entity);
+
+                actionRepository.Update(_entity, User.Identity.Name, false);
+
+                ExtendEdit(_entity, _model);
+            }
+
+            foreach (var _model in model.IncomingActions)
+            {
+                var _entity = _model.Export();
+
+                _entity.ProyectionId = entity.Id;
+
+                actionRepository.Add(_entity, User.Identity.Name, false);
+
+                ExtendCreate(_entity, _model);
+            }
+        }
+
+        protected void ExtendCreate(Action entity, ActionInputModel model)
+        {
+            foreach (var _model in model.IncomingIndicators)
+            {
+                var _entity = _model.Export();
+
+                _entity.ActionId = entity.Id;
+
+                indicatorRepository.Add(_entity, User.Identity.Name, false);
+            }
+        }
+
+        protected void ExtendEdit(Action entity, ActionInputModel model)
+        {
+            foreach (var _model in model.OutgoingIndicators)
+            {
+                var _entity = entity.Indicators.First(bridge => bridge.Id == _model.Id);
+
+                _entity.Archived = true;
+
+                indicatorRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionIndicators)
+            {
+                var _entity = entity.Indicators.First(bridge => bridge.Id == _model.Id);
+
+                _model.Mergue(_entity);
+
+                indicatorRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingIndicators)
+            {
+                var _entity = _model.Export();
+
+                _entity.ActionId = entity.Id;
+
+                indicatorRepository.Add(_entity, User.Identity.Name, false);
             }
         }
     }

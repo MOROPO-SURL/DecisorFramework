@@ -1,4 +1,7 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
+﻿using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
+using System.Collections.Generic;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
 {
     public class ProyectionInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Proyection, System.Guid>
     {
@@ -10,6 +13,10 @@
         public string Name { get; set; }
 
         public string Description { get; set; }
+
+        public List<ActionInputModel> EditionActions { get; set; } = new List<ActionInputModel>();
+        public List<ActionInputModel> IncomingActions { get; set; } = new List<ActionInputModel>();
+        public List<ActionDisplayModel> OutgoingActions { get; set; } = new List<ActionDisplayModel>();
 
         public Persistence.Entities.Proyection Export()
         {

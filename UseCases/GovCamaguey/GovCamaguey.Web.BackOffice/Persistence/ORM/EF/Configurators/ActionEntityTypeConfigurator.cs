@@ -6,7 +6,7 @@
         {
             base.ApplayRules(entityTypeBuilder);
 
-            entityTypeBuilder.HasIndex(entity => entity.Index).IsUnique();
+            entityTypeBuilder.HasIndex(entity => new { entity.Index, entity.ProyectionId }).IsUnique();
         }
     }
 }

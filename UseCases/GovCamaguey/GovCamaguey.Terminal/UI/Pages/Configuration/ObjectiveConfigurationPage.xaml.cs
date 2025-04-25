@@ -13,7 +13,7 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
     private readonly List<ProyectionInputModel> incomingProyections = [];
     private readonly List<ProyectionDisplayModel> outgoingProyections = [];
 
-    public ObjectiveConfigurationPage(System.Action<Interop.API.Common.Models.Display.ObjectiveDisplayModel> successAction, Models.Page.Configuration.ObjectiveConfigurationPageModel model) : base(successAction, model)
+    public ObjectiveConfigurationPage(System.Action<ObjectiveDisplayModel> successAction, Models.Page.Configuration.ObjectiveConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
     }
@@ -72,7 +72,19 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
 
     private void ProyectionEditionButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new ProyectionConfigurationPage(ProyectionEditSuccess_Callback, new Models.Page.Configuration.ProyectionConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ProyectionDisplayModel)));
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ProyectionDisplayModel;
+
+        var model = incomingProyections.FirstOrDefault(_model => _model.Id == target.Id) ?? editionProyections.FirstOrDefault(_model => _model.Id == target.Id);
+
+        model ??= new ProyectionInputModel
+        {
+            Id = target.Id,
+            Index = target.Index,
+            Name = target.Name,
+            Description = target.Description
+        };
+        
+        this.NavigationPushPageAsync(new ProyectionConfigurationPage(ProyectionEditSuccess_Callback, new Models.Page.Configuration.ProyectionConfigurationPageModel(model, target.Actions), model.EditionActions, model.IncomingActions, model.OutgoingActions));
     }
 
     private void ProyectionRemotionButton_Clicked(object sender, System.EventArgs e)
@@ -122,9 +134,11 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
         });
     }
 
-    private void ProyectionCreateSuccess_Callback(ProyectionDisplayModel model)
+    private void ProyectionCreateSuccess_Callback(ProyectionInputModel model)
     {
-        incomingProyections.Add(new ProyectionInputModel
+        incomingProyections.Add(model);
+
+        ConcreteBindingContext.Proyections.Add(new ProyectionDisplayModel
         {
             Id = model.Id,
             Index = model.Index,
@@ -132,12 +146,10 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
             Description = model.Description
         });
 
-        ConcreteBindingContext.Proyections.Add(model);
-
         hasChangesFlag = true;
     }
 
-    private void ProyectionEditSuccess_Callback(ProyectionDisplayModel model)
+    private void ProyectionEditSuccess_Callback(ProyectionInputModel model)
     {
         var handled = false;
 
@@ -148,6 +160,7 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
             item.Index = model.Index;
             item.Name = model.Name;
             item.Description = model.Description;
+            item.IncomingActions = model.IncomingActions;
 
             handled = true;
 
@@ -163,6 +176,9 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
                 item.Index = model.Index;
                 item.Name = model.Name;
                 item.Description = model.Description;
+                item.IncomingActions = model.IncomingActions;
+                item.EditionActions = model.EditionActions;
+                item.OutgoingActions = model.OutgoingActions;
 
                 handled = true;
 
@@ -172,13 +188,7 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
 
         if (!handled)
         {
-            editionProyections.Add(new ProyectionInputModel
-            {
-                Id = model.Id,
-                Index = model.Index,
-                Name = model.Name,
-                Description = model.Description
-            });
+            editionProyections.Add(model);
         }
 
         var index = -1;
@@ -189,7 +199,13 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
 
             if (item.Id != model.Id) continue;
 
-            ConcreteBindingContext.Proyections[index] = model;
+            ConcreteBindingContext.Proyections[index] = new ProyectionDisplayModel
+            {
+                Id = model.Id,
+                Index = model.Index,
+                Name = model.Name,
+                Description = model.Description
+            };
 
             break;
         }
@@ -197,7 +213,7 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
         hasChangesFlag = true;
     }
 
-    private void ResponsiblePickComplete_Callback(Interop.API.Common.Models.Display.PersonDisplayModel model)
+    private void ResponsiblePickComplete_Callback(PersonDisplayModel model)
     {
         ConcreteBindingContext.Responsible = model;
     }
