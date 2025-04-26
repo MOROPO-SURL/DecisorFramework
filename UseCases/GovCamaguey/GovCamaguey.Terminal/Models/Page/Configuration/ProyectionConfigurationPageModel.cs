@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration
 {
@@ -10,7 +12,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 
         public ProyectionConfigurationPageModel() : this(null) { }
 
-        public ProyectionConfigurationPageModel(Interop.API.Common.Models.Input.ProyectionInputModel model, Interop.API.Common.Models.Display.ActionDisplayModel[] actions = null) : base(model)
+        public ProyectionConfigurationPageModel(Interop.API.Common.Models.Input.ProyectionInputModel model, ActionDisplayModel[] actions = null) : base(model)
         {
             if (model != null)
             {
@@ -18,10 +20,13 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
                 Index = model.Index;
                 Name = model.Name;
                 Description = model.Description;
+                Guidelines = new ObservableCollection<GuidelineDisplayModel>(model.Guidelines);
+                ResponsabilityOrganizations = new ObservableCollection<OrganizationDisplayModel>(model.ResponsabilityOrganizations);
+                ParticipationOrganizations = new ObservableCollection<OrganizationDisplayModel>(model.ParticipationOrganizations);
 
                 if (actions != null)
                 {
-                    Actions = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ActionDisplayModel>(actions.OrderBy(_model => _model.Index));
+                    Actions = new ObservableCollection<ActionDisplayModel>(actions.OrderBy(_model => _model.Index));
                 }
             }
         }
@@ -34,6 +39,12 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 
         public string Description { get => description; set => SetProperty(ref description, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ActionDisplayModel> Actions { get; set; } = [];
+        public ObservableCollection<GuidelineDisplayModel> Guidelines { get; set; } = [];
+
+        public ObservableCollection<OrganizationDisplayModel> ResponsabilityOrganizations { get; set; } = [];
+
+        public ObservableCollection<OrganizationDisplayModel> ParticipationOrganizations { get; set; } = [];
+
+        public ObservableCollection<ActionDisplayModel> Actions { get; set; } = [];
     }
 }

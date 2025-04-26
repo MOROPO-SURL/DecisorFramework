@@ -14,6 +14,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
 
         public string Description { get; set; }
 
+        public OrganizationDisplayModel[] ResponsabilityOrganizations { get; set; }
+
+        public OrganizationDisplayModel[] ParticipationOrganizations { get; set; }
+
         public List<IndicatorInputModel> EditionIndicators { get; set; } = new List<IndicatorInputModel>();
         public List<IndicatorInputModel> IncomingIndicators { get; set; } = new List<IndicatorInputModel>();
         public List<IndicatorDisplayModel> OutgoingIndicators { get; set; } = new List<IndicatorDisplayModel>();
@@ -37,6 +41,28 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
             entity.Index = Index;
             entity.Name = Name;
             entity.Description = Description;
+
+            entity.OrganizationResponsabilityBridges.Clear();
+
+            foreach (var model in ResponsabilityOrganizations)
+            {
+                entity.OrganizationResponsabilityBridges.Add(new Persistence.Entities.ActionOrganizationResponsabilityBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = model.Id
+                });
+            }
+
+            entity.OrganizationParticipationBridges.Clear();
+
+            foreach (var model in ParticipationOrganizations)
+            {
+                entity.OrganizationParticipationBridges.Add(new Persistence.Entities.ActionOrganizationParticipationBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = model.Id
+                });
+            }
         }
     }
 }

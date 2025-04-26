@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration
 {
@@ -18,10 +20,12 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
                 Index = model.Index;
                 Name = model.Name;
                 Description = model.Description;
+                ResponsabilityOrganizations = new ObservableCollection<OrganizationDisplayModel>(model.ResponsabilityOrganizations);
+                ParticipationOrganizations = new ObservableCollection<OrganizationDisplayModel>(model.ParticipationOrganizations);
 
                 if (indicators != null)
                 {
-                    Indicators = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.IndicatorDisplayModel>(indicators.OrderBy(_model => _model.Priority));
+                    Indicators = new ObservableCollection<IndicatorDisplayModel>(indicators.OrderBy(_model => _model.Priority));
                 }
             }
         }
@@ -34,6 +38,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 
         public string Description { get => description; set => SetProperty(ref description, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.IndicatorDisplayModel> Indicators { get; set; } = [];
+        public ObservableCollection<OrganizationDisplayModel> ResponsabilityOrganizations { get; set; } = [];
+
+        public ObservableCollection<OrganizationDisplayModel> ParticipationOrganizations { get; set; } = [];
+
+        public ObservableCollection<IndicatorDisplayModel> Indicators { get; set; } = [];
     }
 }

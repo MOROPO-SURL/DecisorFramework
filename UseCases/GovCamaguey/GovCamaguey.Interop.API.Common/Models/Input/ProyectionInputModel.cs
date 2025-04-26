@@ -14,6 +14,12 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
 
         public string Description { get; set; }
 
+        public GuidelineDisplayModel[] Guidelines { get; set; }
+
+        public OrganizationDisplayModel[] ResponsabilityOrganizations { get; set; }
+
+        public OrganizationDisplayModel[] ParticipationOrganizations { get; set; }
+
         public List<ActionInputModel> EditionActions { get; set; } = new List<ActionInputModel>();
         public List<ActionInputModel> IncomingActions { get; set; } = new List<ActionInputModel>();
         public List<ActionDisplayModel> OutgoingActions { get; set; } = new List<ActionDisplayModel>();
@@ -37,6 +43,39 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
             entity.Index = Index;
             entity.Name = Name;
             entity.Description = Description;
+
+            entity.GuidelineBridges.Clear();
+
+            foreach (var model in Guidelines)
+            {
+                entity.GuidelineBridges.Add(new Persistence.Entities.ProyectionGuidelineBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = model.Id
+                });
+            }
+
+            entity.OrganizationResponsabilityBridges.Clear();
+
+            foreach (var model in ResponsabilityOrganizations)
+            {
+                entity.OrganizationResponsabilityBridges.Add(new Persistence.Entities.ProyectionOrganizationResponsabilityBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = model.Id
+                });
+            }
+
+            entity.OrganizationParticipationBridges.Clear();
+
+            foreach (var model in ParticipationOrganizations)
+            {
+                entity.OrganizationParticipationBridges.Add(new Persistence.Entities.ProyectionOrganizationParticipationBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = model.Id
+                });
+            }
         }
     }
 }

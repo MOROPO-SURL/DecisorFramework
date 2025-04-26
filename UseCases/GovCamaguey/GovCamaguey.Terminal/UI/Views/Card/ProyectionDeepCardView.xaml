@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_card_views="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;assembly=MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card.ProyectionDeepCardView"
+    x:DataType="interop_common_display_models:ProyectionDisplayModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame>
+        <VerticalStackLayout>
+            <Label FontSize="Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span
+                            FontAttributes="Bold"
+                            Text="{Binding Index, StringFormat='{0}.'}" />
+                        <Span Text=" " />
+                        <Span Text="{Binding Name}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <FlexLayout
+                Wrap="Wrap"
+                AlignItems="Start" AlignContent="Start">
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label 
+                        Style="{StaticResource CaptionFieldLabelStyle}"
+                        Margin="0,16,0,4" 
+                        Text="Responsables" />
+                    <BoxView Color="DimGray" HeightRequest="1" /> 
+                    <StackLayout BindableLayout.ItemsSource="{Binding ResponsabilityOrganizations}">
+                        <BindableLayout.EmptyView>
+                            <Label
+                                Padding="0,4"
+                                FontAttributes="Italic"
+                                TextColor="DimGray"
+                                Text="Sin elementos que mostrar" />
+                        </BindableLayout.EmptyView>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,4">
+                                    <local_card_views:OrganizationDefaultCardView HeightRequest="120" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label 
+                        Style="{StaticResource CaptionFieldLabelStyle}"
+                        Margin="0,16,0,4" 
+                        Text="Participantes" />
+                    <BoxView Color="DimGray" HeightRequest="1" />
+                    <StackLayout BindableLayout.ItemsSource="{Binding ParticipationOrganizations}">
+                        <BindableLayout.EmptyView>
+                            <Label
+                                Padding="0,4"
+                                FontAttributes="Italic"
+                                TextColor="DimGray"
+                                Text="Sin elementos que mostrar" />
+                        </BindableLayout.EmptyView>
+                        <BindableLayout.ItemTemplate>
+                            <DataTemplate>
+                                <Grid Margin="0,4">
+                                    <local_card_views:OrganizationDefaultCardView HeightRequest="120" />
+                                </Grid>
+                            </DataTemplate>
+                        </BindableLayout.ItemTemplate>
+                    </StackLayout>                    
+                </VerticalStackLayout>
+            </FlexLayout>
+            <Label 
+                Style="{StaticResource CaptionFieldLabelStyle}" 
+                Margin="8,16,8,0" 
+                Text="Acciones" />
+            <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
+            <CollectionView ItemsSource="{Binding Actions}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <local_card_views:ActionDeepCardView Padding="8,4" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+                <CollectionView.EmptyView>
+                    <Label
+                        Padding="8,0"
+                        FontAttributes="Italic"
+                        TextColor="DimGray"
+                        Text="Sin elementos que mostrar" />
+                </CollectionView.EmptyView>
+            </CollectionView>
+        </VerticalStackLayout>
+    </Frame>
+</ContentView>

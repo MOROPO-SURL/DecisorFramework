@@ -257,17 +257,17 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Commercial.Presentation.Ter
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Legal.Presentation.Terminal.MAUI.UI.Default", "Legal\Legal.Presentation.Terminal.MAUI.UI.Default\Legal.Presentation.Terminal.MAUI.UI.Default.csproj", "{9CF8CC99-2EFF-49E3-AFB2-67AAA96C0CDB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GovCamaguey.Terminal", "UseCases\GovCamaguey\GovCamaguey.Terminal\GovCamaguey.Terminal.csproj", "{DF185D87-BB79-4687-9B56-A1B000D0A767}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GovCamaguey.Terminal", "UseCases\GovCamaguey\GovCamaguey.Terminal\GovCamaguey.Terminal.csproj", "{DF185D87-BB79-4687-9B56-A1B000D0A767}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "GovCamaguey", "GovCamaguey", "{EDEB8466-9D13-48F2-9056-D0EDA1902A23}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GovCamaguey.Persistence", "UseCases\GovCamaguey\GovCamaguey.Persistence\GovCamaguey.Persistence.csproj", "{80EB8204-6A0A-4C77-8408-08EEEBA29CCC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GovCamaguey.Persistence", "UseCases\GovCamaguey\GovCamaguey.Persistence\GovCamaguey.Persistence.csproj", "{80EB8204-6A0A-4C77-8408-08EEEBA29CCC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GovCamaguey.Interop.API.Common", "UseCases\GovCamaguey\GovCamaguey.Interop.API.Common\GovCamaguey.Interop.API.Common.csproj", "{F3C502D9-3C15-4D16-8C4D-322B039EB9E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GovCamaguey.Interop.API.Common", "UseCases\GovCamaguey\GovCamaguey.Interop.API.Common\GovCamaguey.Interop.API.Common.csproj", "{F3C502D9-3C15-4D16-8C4D-322B039EB9E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GovCamaguey.Web.BackOffice", "UseCases\GovCamaguey\GovCamaguey.Web.BackOffice\GovCamaguey.Web.BackOffice.csproj", "{44734D68-9910-4413-9372-180BCFEBAAB4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GovCamaguey.Web.BackOffice", "UseCases\GovCamaguey\GovCamaguey.Web.BackOffice\GovCamaguey.Web.BackOffice.csproj", "{44734D68-9910-4413-9372-180BCFEBAAB4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GovCamaguey.Interop.API.Connect", "UseCases\GovCamaguey\GovCamaguey.Interop.API.Connect\GovCamaguey.Interop.API.Connect.csproj", "{ACC26D6A-1DFC-468C-B676-C2AEAF1AA159}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "GovCamaguey.Interop.API.Connect", "UseCases\GovCamaguey\GovCamaguey.Interop.API.Connect\GovCamaguey.Interop.API.Connect.csproj", "{ACC26D6A-1DFC-468C-B676-C2AEAF1AA159}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

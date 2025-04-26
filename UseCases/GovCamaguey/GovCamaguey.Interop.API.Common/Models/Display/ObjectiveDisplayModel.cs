@@ -39,5 +39,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
                 return model;
             }).ToArray();
         }
+
+        public override string ToString()
+        {
+            return $"{Index} {Name}";
+        }
     }
 }

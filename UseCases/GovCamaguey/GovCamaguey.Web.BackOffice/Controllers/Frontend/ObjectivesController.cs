@@ -42,6 +42,52 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                 model.Responsible.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Responsible.Identity.Image.ContentType);
             }
 
+            foreach (var proyection in entity.Proyections)
+            {
+                var item = model.Proyections.First(_model => _model.Id == proyection.Id);
+
+                foreach (var bridge in proyection.OrganizationResponsabilityBridges)
+                {
+                    if (bridge.Stern.Identity.Image == null) continue;
+
+                    var target = item.ResponsabilityOrganizations.First(_model => _model.Id == bridge.SternId);
+
+                    target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
+                }
+
+                foreach (var bridge in proyection.OrganizationParticipationBridges)
+                {
+                    if (bridge.Stern.Identity.Image == null) continue;
+
+                    var target = item.ParticipationOrganizations.First(_model => _model.Id == bridge.SternId);
+
+                    target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
+                }
+
+                foreach (var action in proyection.Actions)
+                {
+                    var _item = item.Actions.First(_model => _model.Id == action.Id);
+
+                    foreach (var bridge in action.OrganizationResponsabilityBridges)
+                    {
+                        if (bridge.Stern.Identity.Image == null) continue;
+
+                        var target = _item.ResponsabilityOrganizations.First(_model => _model.Id == bridge.SternId);
+
+                        target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
+                    }
+
+                    foreach (var bridge in action.OrganizationParticipationBridges)
+                    {
+                        if (bridge.Stern.Identity.Image == null) continue;
+
+                        var target = _item.ParticipationOrganizations.First(_model => _model.Id == bridge.SternId);
+
+                        target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
+                    }
+                }
+            }
+
             return model;
         }
 

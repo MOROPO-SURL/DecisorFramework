@@ -14,6 +14,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 
         public string Description { get; set; }
 
+        public OrganizationDisplayModel[] ResponsabilityOrganizations { get; set; }
+
+        public OrganizationDisplayModel[] ParticipationOrganizations { get; set; }
+
         public IndicatorDisplayModel[] Indicators { get; set; }
 
         public void Import(Persistence.Entities.Action entity)
@@ -23,6 +27,24 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
             Index = entity.Index;
             Name = entity.Name;
             Description = entity.Description;
+
+            ResponsabilityOrganizations = entity.OrganizationResponsabilityBridges.OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
+            {
+                var model = new OrganizationDisplayModel();
+
+                model.Import(bridge.Stern);
+
+                return model;
+            }).ToArray();
+
+            ParticipationOrganizations = entity.OrganizationParticipationBridges.OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
+            {
+                var model = new OrganizationDisplayModel();
+
+                model.Import(bridge.Stern);
+
+                return model;
+            }).ToArray();
 
             Indicators = entity.Indicators.OrderBy(_entity => _entity.Priority).Select(_entity =>
             {

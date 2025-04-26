@@ -6,7 +6,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
     {
         public ActionOrganizationResponsabilityBridgeEntityTypeConfigurator()
         {
-            prowNavigationExpression = bridge => bridge.OrganizationResponsablityBridges;
+            prowNavigationExpression = bridge => bridge.OrganizationResponsabilityBridges;
         }
     }
 }

@@ -1,15 +1,16 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
-using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Pick;
 
 public partial class PersonPickPage : Framework.Caney.MVVM.Core.Pages.ContentPage
 {
-    private System.Action<PersonDisplayModel> pickCompleteAction;
+    private System.Action<Interop.API.Common.Models.Display.PersonDisplayModel> pickCompleteAction;
 
-    public PersonPickPage(System.Action<PersonDisplayModel> pickCompleteAction)
+    private bool pickedFlag = false;
+
+    public PersonPickPage(System.Action<Interop.API.Common.Models.Display.PersonDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
@@ -24,7 +25,12 @@ public partial class PersonPickPage : Framework.Caney.MVVM.Core.Pages.ContentPag
     {
         base.OnAppearing();
 
-        if (IsEnabled) return;
+        if (IsEnabled)
+        {
+            if (pickedFlag) (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+
+            return;
+        }
 
         LoadItems();
 
@@ -50,11 +56,23 @@ public partial class PersonPickPage : Framework.Caney.MVVM.Core.Pages.ContentPag
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }
 
+    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushPageAsync(new Configuration.PersonConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.PersonConfigurationPageModel(null)));
+    }
+
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PersonDisplayModel);
+        pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.PersonDisplayModel);
 
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
+    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.PersonDisplayModel model)
+    {
+        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+
+        pickedFlag = true;
     }
 
     private void LoadItems()

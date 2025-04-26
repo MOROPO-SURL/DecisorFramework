@@ -81,7 +81,10 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
             Id = target.Id,
             Index = target.Index,
             Name = target.Name,
-            Description = target.Description
+            Description = target.Description,
+            Guidelines = target.Guidelines,
+            ResponsabilityOrganizations = target.ResponsabilityOrganizations,
+            ParticipationOrganizations = target.ParticipationOrganizations
         };
         
         this.NavigationPushPageAsync(new ProyectionConfigurationPage(ProyectionEditSuccess_Callback, new Models.Page.Configuration.ProyectionConfigurationPageModel(model, target.Actions), model.EditionActions, model.IncomingActions, model.OutgoingActions));
@@ -143,7 +146,10 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
             Id = model.Id,
             Index = model.Index,
             Name = model.Name,
-            Description = model.Description
+            Description = model.Description,
+            Guidelines = model.Guidelines,
+            ResponsabilityOrganizations = model.ResponsabilityOrganizations,
+            ParticipationOrganizations = model.ParticipationOrganizations
         });
 
         hasChangesFlag = true;
@@ -160,6 +166,9 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
             item.Index = model.Index;
             item.Name = model.Name;
             item.Description = model.Description;
+            item.Guidelines = model.Guidelines;
+            item.ResponsabilityOrganizations = model.ResponsabilityOrganizations;
+            item.ParticipationOrganizations = model.ParticipationOrganizations;
             item.IncomingActions = model.IncomingActions;
 
             handled = true;
@@ -176,6 +185,9 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
                 item.Index = model.Index;
                 item.Name = model.Name;
                 item.Description = model.Description;
+                item.Guidelines = model.Guidelines;
+                item.ResponsabilityOrganizations = model.ResponsabilityOrganizations;
+                item.ParticipationOrganizations = model.ParticipationOrganizations;
                 item.IncomingActions = model.IncomingActions;
                 item.EditionActions = model.EditionActions;
                 item.OutgoingActions = model.OutgoingActions;
@@ -204,7 +216,10 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
                 Id = model.Id,
                 Index = model.Index,
                 Name = model.Name,
-                Description = model.Description
+                Description = model.Description,
+                Guidelines = model.Guidelines,
+                ResponsabilityOrganizations = model.ResponsabilityOrganizations,
+                ParticipationOrganizations = model.ParticipationOrganizations
             };
 
             break;

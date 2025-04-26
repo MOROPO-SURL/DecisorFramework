@@ -25,7 +25,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
 
         public ICollection<ActionMonthlyClosure> MonthlyClosures { get; set; }
 
-        public ICollection<ActionOrganizationResponsabilityBridge> OrganizationResponsablityBridges { get; set; }
+        public ICollection<ActionOrganizationResponsabilityBridge> OrganizationResponsabilityBridges { get; set; }
 
         public ICollection<ActionOrganizationParticipationBridge> OrganizationParticipationBridges { get; set; }
 

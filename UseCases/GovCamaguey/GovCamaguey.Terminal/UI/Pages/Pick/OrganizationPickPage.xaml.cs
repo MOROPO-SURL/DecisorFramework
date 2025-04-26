@@ -9,6 +9,8 @@ public partial class OrganizationPickPage : Framework.Caney.MVVM.Core.Pages.Cont
 {
     private System.Action<OrganizationDisplayModel> pickCompleteAction;
 
+    private bool pickedFlag = false;
+
     public OrganizationPickPage(System.Action<OrganizationDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
@@ -24,7 +26,12 @@ public partial class OrganizationPickPage : Framework.Caney.MVVM.Core.Pages.Cont
     {
         base.OnAppearing();
 
-        if (IsEnabled) return;
+        if (IsEnabled)
+        {
+            if (pickedFlag) (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+
+            return;
+        }
 
         LoadItems();
 
@@ -50,11 +57,23 @@ public partial class OrganizationPickPage : Framework.Caney.MVVM.Core.Pages.Cont
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }
 
+    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushPageAsync(new Configuration.OrganizationConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.OrganizationConfigurationPageModel(null)));
+    }
+
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as OrganizationDisplayModel);
 
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
+    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.OrganizationDisplayModel model)
+    {
+        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+
+        pickedFlag = true;
     }
 
     private void LoadItems()

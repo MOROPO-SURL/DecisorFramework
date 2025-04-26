@@ -24,7 +24,7 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
         this.outgoingActions = outgoingActions;
     }
 
-    protected override string EntityTypeName => "Proyección";
+    protected override string EntityTypeName => "Objetivo Espefífico";
 
     protected override System.Threading.Tasks.Task<ProyectionInputModel> PerformCreationAsync()
     {
@@ -34,6 +34,9 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
             Index = ConcreteBindingContext.Index,
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
+            Guidelines = [.. ConcreteBindingContext.Guidelines],
+            ResponsabilityOrganizations = [.. ConcreteBindingContext.ResponsabilityOrganizations],
+            ParticipationOrganizations = [.. ConcreteBindingContext.ParticipationOrganizations],
             IncomingActions = incomingActions
         });
     }
@@ -46,6 +49,9 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
             Index = ConcreteBindingContext.Index,
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
+            Guidelines = [.. ConcreteBindingContext.Guidelines],
+            ResponsabilityOrganizations = [.. ConcreteBindingContext.ResponsabilityOrganizations],
+            ParticipationOrganizations = [.. ConcreteBindingContext.ParticipationOrganizations],
             IncomingActions = incomingActions,
             EditionActions = editionActions,
             OutgoingActions = outgoingActions
@@ -68,7 +74,9 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
             Id = target.Id,
             Index = target.Index,
             Name = target.Name,
-            Description = target.Description
+            Description = target.Description,
+            ResponsabilityOrganizations = target.ResponsabilityOrganizations,
+            ParticipationOrganizations = target.ParticipationOrganizations
         };
         
         this.NavigationPushPageAsync(new ActionConfigurationPage(ActionEditSuccess_Callback, new Models.Page.Configuration.ActionConfigurationPageModel(model, target.Indicators), model.EditionIndicators, model.IncomingIndicators, model.OutgoingIndicators));
@@ -121,6 +129,46 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
         });
     }
 
+    private void AddOrganizationParticipationButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OrganizationPickPage(ParticipationOrganizationPickComplete_Callback)));
+    }
+
+    private void AddOrganizationResponsabilityButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OrganizationPickPage(ResponsabilityOrganizationPickComplete_Callback)));
+    }
+
+    private void ParticipationOrganizationRemoveButton_Clicked(object sender, System.EventArgs e)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este organismo participante?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                ConcreteBindingContext.ParticipationOrganizations.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as OrganizationDisplayModel);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void ResponsabilityOrganizationRemoveButton_Clicked(object sender, System.EventArgs e)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este organismo responsable?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                ConcreteBindingContext.ResponsabilityOrganizations.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as OrganizationDisplayModel);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
     private void ActionCreateSuccess_Callback(ActionInputModel model)
     {
         incomingActions.Add(model);
@@ -130,7 +178,9 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
             Id = model.Id,
             Index = model.Index,
             Name = model.Name,
-            Description = model.Description
+            Description = model.Description,
+            ResponsabilityOrganizations = model.ResponsabilityOrganizations,
+            ParticipationOrganizations = model.ParticipationOrganizations
         });
 
         hasChangesFlag = true;
@@ -147,6 +197,8 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
             item.Index = model.Index;
             item.Name = model.Name;
             item.Description = model.Description;
+            item.ResponsabilityOrganizations = model.ResponsabilityOrganizations;
+            item.ParticipationOrganizations = model.ParticipationOrganizations;
             item.IncomingIndicators = model.IncomingIndicators;
 
             handled = true;
@@ -163,6 +215,8 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
                 item.Index = model.Index;
                 item.Name = model.Name;
                 item.Description = model.Description;
+                item.ResponsabilityOrganizations = model.ResponsabilityOrganizations;
+                item.ParticipationOrganizations = model.ParticipationOrganizations;
                 item.IncomingIndicators = model.IncomingIndicators;
                 item.EditionIndicators = model.EditionIndicators;
                 item.OutgoingIndicators = model.OutgoingIndicators;
@@ -191,11 +245,27 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
                 Id = model.Id,
                 Index = model.Index,
                 Name = model.Name,
-                Description = model.Description
+                Description = model.Description,
+                ResponsabilityOrganizations = model.ResponsabilityOrganizations,
+                ParticipationOrganizations = model.ParticipationOrganizations
             };
 
             break;
         }
+
+        hasChangesFlag = true;
+    }
+
+    private void ParticipationOrganizationPickComplete_Callback(OrganizationDisplayModel model)
+    {
+        ConcreteBindingContext.ParticipationOrganizations.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void ResponsabilityOrganizationPickComplete_Callback(OrganizationDisplayModel model)
+    {
+        ConcreteBindingContext.ResponsabilityOrganizations.Add(model);
 
         hasChangesFlag = true;
     }
