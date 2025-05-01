@@ -16,6 +16,8 @@
 
         public double Amount { get; set; }
 
+        public double Balance { get; set; }
+
         public void Import(Persistence.Entities.Indicator entity)
         {
             Id = entity.Id;

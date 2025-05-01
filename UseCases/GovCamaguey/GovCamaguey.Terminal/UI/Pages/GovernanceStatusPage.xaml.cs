@@ -1,4 +1,7 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages;
 
@@ -71,12 +74,12 @@ public partial class GovernanceStatusPage : Microsoft.Maui.Controls.ContentPage
 
         var objectiveId = ConcreteBindingContext.AvaialbleObjetives[ObjectivePicker.SelectedIndex].Id;
 
-        System.Threading.Tasks.Task.Run(async () =>
-        {
-            var objectivesAPIConnectClient = new Interop.API.Connect.Clients.ObjectivesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
-            return await objectivesAPIConnectClient.GetAsync(objectiveId);
-        }).ContinueWith(task =>
+        var objectivesAPIConnectClient = new Interop.API.Connect.Clients.ObjectivesAPIConnectClient(httpClientHelperProvider);
+        var resultsAPIConnectClient = new Interop.API.Connect.Clients.ResultsAPIConnectClient(httpClientHelperProvider);
+
+        objectivesAPIConnectClient.GetAsync(objectiveId).ContinueWith(task =>
         {
             Dispatcher.Dispatch(() =>
             {
@@ -85,13 +88,51 @@ public partial class GovernanceStatusPage : Microsoft.Maui.Controls.ContentPage
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
 
                     ConcreteBindingContext.Objective = null;
+                    ConcreteBindingContext.IsBusy = false;
                 }
                 else
                 {
-                    ConcreteBindingContext.Objective = task.Result;
-                }
+                    var indicators = new List<IndicatorDisplayModel>();
 
-                ConcreteBindingContext.IsBusy = false;
+                    var model = task.Result;
+
+                    foreach (var item in model.Proyections)
+                    {
+                        foreach (var _item in item.Actions)
+                        {
+                            foreach (var __item in _item.Indicators)
+                            {
+                                indicators.Add(__item);
+                            }
+                        }
+                    }
+
+                    resultsAPIConnectClient.GetLastsByIndicators(indicators.ToArray()).ContinueWith(_task =>
+                    {
+                        Dispatcher.Dispatch(() =>
+                        {
+                            if (_task.Exception != null || _task.IsCanceled)
+                            {
+                                Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(_task.Exception, this);
+
+                                ConcreteBindingContext.Objective = null;
+                                ConcreteBindingContext.IsBusy = false;
+                            }
+                            else
+                            {
+                                foreach (var item in indicators)
+                                {
+                                    var target = _task.Result.FirstOrDefault(_model => _model.IndicatorId == item.Id);
+
+                                    item.Balance = target?.Amount ?? 0;
+                                }
+
+                                ConcreteBindingContext.Objective = model;
+                                ConcreteBindingContext.IsBusy = false;
+                            }
+                        });
+                    });
+                }
             });
         });
     }

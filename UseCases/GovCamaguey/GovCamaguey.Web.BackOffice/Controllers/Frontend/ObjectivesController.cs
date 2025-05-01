@@ -9,7 +9,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
 {
     [Route("api/governance/[controller]")]
     [ApiController]
-    public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Objective, System.Guid, Interop.API.Common.Models.Input.ObjectiveInputModel, Interop.API.Common.Models.Display.ObjectiveDisplayModel>
+    public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Objective, System.Guid, ObjectiveInputModel, ObjectiveDisplayModel>
     {
         private readonly IEntityRepository<Proyection, System.Guid> proyectionRepository;
         private readonly IEntityRepository<Action, System.Guid> actionRepository;

@@ -38,7 +38,7 @@
                 <Label FontSize="Medium">
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span Text="{Binding Amount}" />
+                            <Span x:Name="BalanceSpan" Text="{Binding Balance, StringFormat='{0:F2}', Mode=OneTime}" />
                             <Span Text=" " />
                             <Span Text="{Binding UnitMeasurement.Symbol}" />
                         </FormattedString>
@@ -51,7 +51,8 @@
                 Padding="0"
                 FontSize="21"
                 FontFamily="MaterialDesignIcons" 
-                Text="&#xF90B;" />
+                Text="&#xF90B;"
+                Clicked="ResultUpgradeButton_Clicked" />
         </Grid>
     </Frame>
 </ContentView>
