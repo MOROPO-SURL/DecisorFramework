@@ -11,6 +11,7 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <Frame>
@@ -47,10 +48,13 @@
                                 Text="Sin elementos que mostrar" />
                         </BindableLayout.EmptyView>
                         <BindableLayout.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0,4">
-                                    <local_card_views:OrganizationDefaultCardView HeightRequest="120" />
-                                </Grid>
+                            <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
+                                <Frame Margin="0,4" Padding="10">
+                                    <Label 
+                                        FontSize="Medium"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding Identity.Name}" />
+                                </Frame>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>
@@ -73,10 +77,13 @@
                                 Text="Sin elementos que mostrar" />
                         </BindableLayout.EmptyView>
                         <BindableLayout.ItemTemplate>
-                            <DataTemplate>
-                                <Grid Margin="0,4">
-                                    <local_card_views:OrganizationDefaultCardView HeightRequest="120" />
-                                </Grid>
+                            <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
+                                <Frame Margin="0,4" Padding="10">
+                                    <Label 
+                                        FontSize="Medium"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding Identity.Name}" />
+                                </Frame>
                             </DataTemplate>
                         </BindableLayout.ItemTemplate>
                     </StackLayout>

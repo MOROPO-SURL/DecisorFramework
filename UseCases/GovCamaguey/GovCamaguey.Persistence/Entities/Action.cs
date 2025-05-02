@@ -25,10 +25,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
 
         public ICollection<ActionMonthlyClosure> MonthlyClosures { get; set; }
 
-        public ICollection<ActionOrganizationResponsabilityBridge> OrganizationResponsabilityBridges { get; set; }
+        public ICollection<ActionOrganizationResponsabilityBridge> OrganizationResponsabilityBridges { get; set; } = new List<ActionOrganizationResponsabilityBridge>();
 
-        public ICollection<ActionOrganizationParticipationBridge> OrganizationParticipationBridges { get; set; }
+        public ICollection<ActionOrganizationParticipationBridge> OrganizationParticipationBridges { get; set; } = new List<ActionOrganizationParticipationBridge>();
 
-        public ICollection<Indicator> Indicators { get; set; }
+        public ICollection<Indicator> Indicators { get; set; } = new List<Indicator>();
     }
 }
