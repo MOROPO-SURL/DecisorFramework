@@ -45,6 +45,7 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
+    <MenuFlyoutItem Text="- Productos -" IsEnabled="False" />
     <FlyoutItem
         Title="Ordenes">
         <FlyoutItem.Icon>
@@ -70,6 +71,48 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF8D5;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="- Servicios -" IsEnabled="False" />
+    <ShellContent
+        Title="Ordenes"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF14E;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Ejecusiones"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9AB;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="- Arrendamiento -" IsEnabled="False" />
+    <ShellContent
+        Title="Ofertas"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0246;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Contrataciones"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF01C9;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

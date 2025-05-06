@@ -11,7 +11,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.
         private PersonContactDisplayModel representative;
         private Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel mainPostalContact;
         private PaymentTermDisplayModel defaultPaymentTerm;
-        private int priority;
+        private int priority = 1;
 
         public LegalProviderConfigurationPageModel() : this(null) { }
 

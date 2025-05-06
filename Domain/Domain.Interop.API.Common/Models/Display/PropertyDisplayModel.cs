@@ -6,6 +6,8 @@
 
         public int Priority { get; set; }
 
+        public Persistence.Enumerations.PropertyAssignment? Assignment { get; set; }
+
         public string Name { get; set; }
 
         public PropertyKindDisplayModel Kind { get; set; }
@@ -29,6 +31,7 @@
         {
             Id = entity.Id;
             Priority = entity.Priority;
+            Assignment = entity.Assignment;
             Name = entity.Name;
             Reference = entity.Reference;
             Area = entity.Area;

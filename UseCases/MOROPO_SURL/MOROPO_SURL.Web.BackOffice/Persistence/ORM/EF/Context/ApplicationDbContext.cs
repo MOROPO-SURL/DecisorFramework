@@ -123,7 +123,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Property> Properties { get; set; }
         public DbSet<PropertyImageBridge> PropertyImageBridges { get; set; }
         public DbSet<Brand> Brands { get; set; }
-        public DbSet<VehicleCategory> VehicleCategories { get; set; }
+        public DbSet<VehicleKind> VehicleKinds { get; set; }
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleImageBridge> VehicleImageBridges { get; set; }
@@ -170,6 +170,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ProductionOrderDeparture> ProductionOrderDepartures { get; set; }
         public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
         public DbSet<ProductionReception> ProductionReceptions { get; set; }
+        public DbSet<PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
+        public DbSet<PropertyLeaseOfferOrganizationContactBridge> PropertyLeaseOfferOrganizationContactBridges { get; set; }
+        public DbSet<PropertyLeaseOfferPersonContactBridge> PropertyLeaseOfferPersonContactBridges { get; set; }
+        public DbSet<VehicleLeaseOffer> VehicleLeaseOffers { get; set; }
+        public DbSet<VehicleLeaseOfferOrganizationContactBridge> VehicleLeaseOfferOrganizationContactBridges { get; set; }
+        public DbSet<VehicleLeaseOfferPersonContactBridge> VehicleLeaseOfferPersonContactBridges { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent> PurchaseSpents { get; set; }

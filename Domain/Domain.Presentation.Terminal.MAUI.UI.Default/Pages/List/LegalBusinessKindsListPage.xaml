@@ -43,7 +43,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:LegalBusinessKindDisplayModel">
-                                <Frame HeightRequest="{Static local:NaturalBusinessKindsListPage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                <Frame HeightRequest="{Static local:LegalBusinessKindsListPage.ITEM_VIEW_REQUEST_HEIGHT}">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </Frame.GestureRecognizers>

@@ -4,7 +4,9 @@
     {
         private string name;
         private string description;
-        private int priority;
+        private int priority = 1;
+
+        public BrandConfigurationPageModel() : this(null) { }
 
         public BrandConfigurationPageModel(Interop.API.Common.Models.Display.BrandDisplayModel model) : base(model)
         {

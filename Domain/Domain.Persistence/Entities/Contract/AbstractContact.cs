@@ -13,5 +13,9 @@
         public int Priority { get; set; }
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(MainPostalContactId))]
+        public Guama.Identity.Persistence.Entities.PostalContactItem MainPostalContact { get; set; }
+        public System.Guid? MainPostalContactId { get; set; }
     }
 }

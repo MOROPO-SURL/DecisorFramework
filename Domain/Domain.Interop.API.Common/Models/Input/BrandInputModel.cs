@@ -15,7 +15,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public Brand Export()
         {
-            var entity = new Brand { Id = System.Guid.NewGuid(), Enabled = true };
+            var entity = new Brand { Id = Id, Enabled = true };
 
             Mergue(entity);
 

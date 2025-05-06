@@ -3,73 +3,36 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;
 
-public partial class VehicleEngineKindsListPage : Caney.MVVM.Core.Pages.ContentPage
+public partial class VehicleEngineKindsListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.VehicleEngineKindDisplayModel, Models.Page.List.VehicleEngineKindsListPageModel, Detail.VehicleEngineKindDetailPage>
 {
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 128;
+
     public VehicleEngineKindsListPage()
     {
         InitializeComponent();
-
-        IsEnabled = false;
-
-        BindingContext = new Models.Page.List.VehicleEngineKindsListPageModel();
     }
 
-    protected override void OnAppearing()
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
     {
-        base.OnAppearing();
-
-        if (IsEnabled) return;
-
-        LoadItems();
-
-        IsEnabled = true;
+        return ItemsCollectionView;
     }
 
-    private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
-    {
-        if (((Models.Page.List.VehicleEngineKindsListPageModel)BindingContext).IsBusy) return;
+    protected override double ItemViewRequestWidth { get => 320; }
 
-        LoadItems();
+    protected override double MeasureCollectionViewCellHeight(double width)
+    {
+        return ITEM_VIEW_REQUEST_HEIGHT;
+    }
+
+    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.VehicleEngineKindDisplayModel>> FetchItemsAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.VehicleEngineKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        ((Models.Page.List.VehicleEngineKindsListPageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.VehicleEngineKindDisplayModel;
-    }
-
-    private void PresentedItemDismissButton_Clicked(object sender, System.EventArgs e)
-    {
-        ((Models.Page.List.VehicleEngineKindsListPageModel)BindingContext).PresentedItem = null;
-    }
-
-    private void LoadItems()
-    {
-        var concreteBindingContext = (Models.Page.List.VehicleEngineKindsListPageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        concreteBindingContext.Items.Clear();
-
-        var apiConnectClient = new Interop.API.Connect.Clients.VehicleEngineKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        apiConnectClient.GetAsync().ContinueWith(task =>
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                concreteBindingContext.IsBusy = false;
-
-                if (task.Exception != null || task.IsCanceled)
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                }
-                else
-                {
-                    foreach (var model in task.Result)
-                    {
-                        concreteBindingContext.Items.Add(model);
-                    }
-                }
-            });
-        });
+        base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 }
