@@ -10,7 +10,7 @@
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ProformaSectionClauseBridgeConfigurationPage"
-    x:TypeArguments="presentation_view_models:SectionClauseBridgeViewModel,presentation_configuration_page_models:ProformaSectionClauseBridgeConfigurationPageModel"
+    x:TypeArguments="presentation_view_models:SectionClauseBridgeViewModel,presentation_view_models:SectionClauseBridgeViewModel,presentation_configuration_page_models:ProformaSectionClauseBridgeConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:ProformaSectionClauseBridgeConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>

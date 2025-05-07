@@ -11,7 +11,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.VehicleConfigurationPage"
-    x:TypeArguments="interop_common_display_models:VehicleDisplayModel,presentation_configuration_page_models:VehicleConfigurationPageModel"
+    x:TypeArguments="interop_common_display_models:VehicleDisplayModel,interop_common_display_models:VehicleDisplayModel,presentation_configuration_page_models:VehicleConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:VehicleConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>

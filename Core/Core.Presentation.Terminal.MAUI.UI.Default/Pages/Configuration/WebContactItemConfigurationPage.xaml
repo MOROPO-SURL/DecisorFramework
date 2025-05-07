@@ -7,7 +7,7 @@
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Core.Interop.API.Common"
     x:Class="MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.WebContactItemConfigurationPage"
-    x:TypeArguments="interop_common_display_models:WebContactItemDisplayModel,presentation_configuration_page_models:WebContactItemConfigurationPageModel"
+    x:TypeArguments="interop_common_display_models:WebContactItemDisplayModel,interop_common_display_models:WebContactItemDisplayModel,presentation_configuration_page_models:WebContactItemConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:WebContactItemConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>

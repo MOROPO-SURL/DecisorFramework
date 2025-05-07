@@ -5,7 +5,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProductionOrderConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProductionOrderDisplayModel, Models.Page.Configuration.ProductionOrderConfigurationPageModel>
+public partial class ProductionOrderConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProductionOrderDisplayModel, ProductionOrderDisplayModel, Models.Page.Configuration.ProductionOrderConfigurationPageModel>
 {
     public ProductionOrderConfigurationPage(System.Action<ProductionOrderDisplayModel> successAction, Models.Page.Configuration.ProductionOrderConfigurationPageModel model) : base(successAction, model)
     {

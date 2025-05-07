@@ -11,7 +11,7 @@
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ProductConfigurationPage"
-    x:TypeArguments="interop_common_display_models:ProductDisplayModel,presentation_configuration_page_models:ProductConfigurationPageModel"
+    x:TypeArguments="interop_common_display_models:ProductDisplayModel,interop_common_display_models:ProductDisplayModel,presentation_configuration_page_models:ProductConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:ProductConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>

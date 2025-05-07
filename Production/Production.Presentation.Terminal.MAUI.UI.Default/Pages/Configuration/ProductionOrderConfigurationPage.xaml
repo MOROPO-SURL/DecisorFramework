@@ -8,7 +8,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ProductionOrderConfigurationPage"
-    x:TypeArguments="interop_common_display_models:ProductionOrderDisplayModel,presentation_configuration_page_models:ProductionOrderConfigurationPageModel"
+    x:TypeArguments="interop_common_display_models:ProductionOrderDisplayModel,interop_common_display_models:ProductionOrderDisplayModel,presentation_configuration_page_models:ProductionOrderConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:ProductionOrderConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>

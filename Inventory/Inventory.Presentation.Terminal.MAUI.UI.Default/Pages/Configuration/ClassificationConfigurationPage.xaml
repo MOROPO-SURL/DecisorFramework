@@ -7,7 +7,7 @@
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ClassificationConfigurationPage"
-    x:TypeArguments="interop_common_input_models:ClassificationInputModel,presentation_configuration_page_models:ClassificationConfigurationPageModel"
+    x:TypeArguments="interop_common_input_models:ClassificationInputModel,interop_common_input_models:ClassificationInputModel,presentation_configuration_page_models:ClassificationConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:ClassificationConfigurationPageModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem 

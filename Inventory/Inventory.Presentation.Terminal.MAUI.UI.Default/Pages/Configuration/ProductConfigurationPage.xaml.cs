@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProductDisplayModel, Models.Page.Configuration.ProductConfigurationPageModel>
+public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProductDisplayModel, ProductDisplayModel, Models.Page.Configuration.ProductConfigurationPageModel>
 {
     private byte[] imagePickedData;
     private string imageContentType;

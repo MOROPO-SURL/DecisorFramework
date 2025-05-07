@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class BrandConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<BrandDisplayModel, Models.Page.Configuration.BrandConfigurationPageModel>
+public partial class BrandConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<BrandDisplayModel, BrandDisplayModel, Models.Page.Configuration.BrandConfigurationPageModel>
 {
     public BrandConfigurationPage(System.Action<BrandDisplayModel> successAction, Models.Page.Configuration.BrandConfigurationPageModel model) : base(successAction, model)
     {

@@ -1,6 +1,6 @@
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ExternalBankAccountConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel, Financial.Presentation.Terminal.MAUI.Models.Page.Configuration.BankAccountConfigurationPageModel>
+public partial class ExternalBankAccountConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel, Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel, Financial.Presentation.Terminal.MAUI.Models.Page.Configuration.BankAccountConfigurationPageModel>
 {
     public ExternalBankAccountConfigurationPage(System.Action<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel> successAction, Financial.Presentation.Terminal.MAUI.Models.Page.Configuration.BankAccountConfigurationPageModel model) : base(successAction, model)
     {

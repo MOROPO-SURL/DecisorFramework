@@ -5,7 +5,7 @@ using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<PropertyDisplayModel, Models.Page.Configuration.PropertyConfigurationPageModel>
+public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<PropertyDisplayModel, PropertyDisplayModel, Models.Page.Configuration.PropertyConfigurationPageModel>
 {
     private byte[] imagePickedData;
     private string imageContentType;

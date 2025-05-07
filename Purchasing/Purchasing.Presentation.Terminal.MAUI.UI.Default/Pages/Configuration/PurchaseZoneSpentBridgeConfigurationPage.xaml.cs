@@ -2,7 +2,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class PurchaseZoneSpentBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Bridge.PurchaseZoneSpentBridgeModel, Models.Page.Configuration.PurchaseZoneSpentBridgeConfigurationPageModel>
+public partial class PurchaseZoneSpentBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Bridge.PurchaseZoneSpentBridgeModel, Interop.API.Common.Models.Bridge.PurchaseZoneSpentBridgeModel, Models.Page.Configuration.PurchaseZoneSpentBridgeConfigurationPageModel>
 {
     public PurchaseZoneSpentBridgeConfigurationPage(System.Action<Interop.API.Common.Models.Bridge.PurchaseZoneSpentBridgeModel> successAction, Models.Page.Configuration.PurchaseZoneSpentBridgeConfigurationPageModel model) : base(successAction, model)
     {

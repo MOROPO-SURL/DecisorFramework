@@ -13,7 +13,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.NaturalClientConfigurationPage"
-    x:TypeArguments="interop_common_display_models:NaturalClientDisplayModel,presentation_configuration_page_models:NaturalClientConfigurationPageModel"
+    x:TypeArguments="interop_common_display_models:NaturalClientDisplayModel,interop_common_display_models:NaturalClientDisplayModel,presentation_configuration_page_models:NaturalClientConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:NaturalClientConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>

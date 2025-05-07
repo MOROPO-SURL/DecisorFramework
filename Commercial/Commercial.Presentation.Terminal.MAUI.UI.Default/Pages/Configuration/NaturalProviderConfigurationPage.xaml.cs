@@ -11,7 +11,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class NaturalProviderConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.NaturalProviderDisplayModel, Models.Page.Configuration.NaturalProviderConfigurationPageModel>
+public partial class NaturalProviderConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.NaturalProviderDisplayModel, Interop.API.Common.Models.Display.NaturalProviderDisplayModel, Models.Page.Configuration.NaturalProviderConfigurationPageModel>
 {
     private readonly List<BankAccountInputModel> editionBankAccounts = [];
     private readonly List<BankAccountInputModel> incomingBankAccounts = [];

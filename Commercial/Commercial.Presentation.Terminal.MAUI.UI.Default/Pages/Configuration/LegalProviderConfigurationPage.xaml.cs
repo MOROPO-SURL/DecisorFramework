@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.LegalProviderDisplayModel, Models.Page.Configuration.LegalProviderConfigurationPageModel>
+public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.LegalProviderDisplayModel, Interop.API.Common.Models.Display.LegalProviderDisplayModel, Models.Page.Configuration.LegalProviderConfigurationPageModel>
 {
     private readonly List<BankAccountInputModel> editionBankAccounts = [];
     private readonly List<BankAccountInputModel> incomingBankAccounts = [];

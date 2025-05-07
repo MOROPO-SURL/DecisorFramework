@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ClauseConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ClauseDisplayModel, Models.Page.Configuration.ClauseConfigurationPageModel>
+public partial class ClauseConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ClauseDisplayModel, ClauseDisplayModel, Models.Page.Configuration.ClauseConfigurationPageModel>
 {
     public ClauseConfigurationPage(System.Action<ClauseDisplayModel> successAction, Models.Page.Configuration.ClauseConfigurationPageModel model) : base(successAction, model)
     {

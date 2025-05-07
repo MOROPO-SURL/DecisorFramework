@@ -5,7 +5,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class BankAgencyConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.BankAgencyDisplayModel, Models.Page.Configuration.BankAgencyConfigurationPageModel>
+public partial class BankAgencyConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.BankAgencyDisplayModel, Interop.API.Common.Models.Display.BankAgencyDisplayModel, Models.Page.Configuration.BankAgencyConfigurationPageModel>
 {
     private byte[] imagePickedData;
     private string imageContentType;
