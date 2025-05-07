@@ -22,14 +22,14 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Agregar"
-            Clicked="AddItemControl_Invoked">
+            Clicked="AddItemToolbarItems_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Actualizar"
-            Clicked="ReloadControl_Invoked">
+            Clicked="ReloadToolbarItems_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -41,7 +41,7 @@
                 <SearchBar Margin="20,20,20,0" />
                 <Grid 
                     VerticalOptions="FillAndExpand"
-                    SizeChanged="ItemsCollectionViewLayoutControl_SizeChanged">
+                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
                     <CollectionView
                         x:Name="ItemsCollectionView"
                         Margin="10"
@@ -100,7 +100,7 @@
                                     HorizontalOptions="Center"
                                     Margin="5"
                                     Text="Mostrar más"
-                                    Clicked="LoadMoreItemsControl_Invoked" />
+                                    Clicked="LoadMoreBurron_Clicked" />
                             </StackLayout>
                         </CollectionView.Footer>
                     </CollectionView>

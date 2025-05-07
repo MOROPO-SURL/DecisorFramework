@@ -40,19 +40,19 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             });
         }
 
-        private void ReloadControl_Invoked(object sender, System.EventArgs eventArgs)
+        protected void OnReload(object sender, System.EventArgs eventArgs)
         {
             if (((TListPageModel)BindingContext).IsBusy) return;
 
             LoadItems(true);
         }
 
-        private void LoadMoreItemsControl_Invoked(object sender, System.EventArgs eventArgs)
+        protected void OnLoadMore(object sender, System.EventArgs eventArgs)
         {
             LoadItems();
         }
 
-        private void ItemsCollectionViewLayoutControl_SizeChanged(object sender, System.EventArgs eventArgs)
+        protected void OnItemsCollectionViewLayoutResize(object sender, System.EventArgs eventArgs)
         {
             if (GetItemsCollectionView().ItemsLayout is Microsoft.Maui.Controls.GridItemsLayout)
             {

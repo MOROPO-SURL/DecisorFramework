@@ -60,6 +60,16 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         return await apiConnectClient.GetAsync(model.Id);
     }
 
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
+
     private void AddOrganizationalUnityButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationalUnityPickPage(OrganizationalUnityPickComplete_Callback)));

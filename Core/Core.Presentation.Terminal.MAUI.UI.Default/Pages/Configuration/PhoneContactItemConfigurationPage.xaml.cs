@@ -28,4 +28,14 @@ public partial class PhoneContactItemConfigurationPage : UI.Pages.Base.Configura
             PhoneNumber = ConcreteBindingContext.PhoneNumber
         });
     }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
 }

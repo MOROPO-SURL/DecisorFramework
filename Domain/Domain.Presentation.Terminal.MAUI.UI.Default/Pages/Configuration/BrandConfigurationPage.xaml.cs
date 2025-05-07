@@ -45,4 +45,14 @@ public partial class BrandConfigurationPage : Core.Presentation.Terminal.MAUI.UI
 
         return await apiConnectClient.GetAsync(model.Id);
     }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
 }

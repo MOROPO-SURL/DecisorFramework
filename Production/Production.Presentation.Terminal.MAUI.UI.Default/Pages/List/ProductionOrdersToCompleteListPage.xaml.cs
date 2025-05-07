@@ -30,6 +30,21 @@ public partial class ProductionOrdersToCompleteListPage : Core.Presentation.Term
         return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.ProductionOrderFilterModel { Kind = Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.ToComplete }, CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
+    private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
+    }
+
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
+    }
+
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
+    {
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
+    }
+
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
