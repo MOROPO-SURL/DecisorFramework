@@ -93,6 +93,15 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
             });
             domainSection.Add(new ManagementDashboardSectionViewModel
             {
+                Title = "Tipos de Vehículo",
+                Controller = "vehiclekinds",
+                Action = "Index",
+                Area = "domain",
+                // TODO Set spected permission
+                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
+            });
+            domainSection.Add(new ManagementDashboardSectionViewModel
+            {
                 Title = "Tipos de Motorización",
                 Controller = "vehicleenginekinds",
                 Action = "Index",

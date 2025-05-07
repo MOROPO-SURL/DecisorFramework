@@ -69,15 +69,15 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
-            Title="Organizaciones"
+            Title="Jurídicos"
             ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:LegalProvidersManagePage}" />
         <ShellContent
-            Title="Personas"
+            Title="Naturales"
             ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:NaturalProvidersManagePage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Configuración" />
     <ShellContent
-        Title="Tipos de Negocio Legal"
+        Title="Tipos de Negocio Jurídico"
         ContentTemplate="{DataTemplate decisorframework_domain_list_pages:LegalBusinessKindsListPage}">
         <ShellContent.Icon>
             <FontImageSource

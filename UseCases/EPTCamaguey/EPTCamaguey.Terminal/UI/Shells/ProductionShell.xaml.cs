@@ -1,8 +1,8 @@
 namespace MOROPO.EPTCamaguey.Decisor.Terminal.UI.Shells;
 
-public partial class ServicingShell : Microsoft.Maui.Controls.Shell
+public partial class ProductionShell : Microsoft.Maui.Controls.Shell
 {
-	public ServicingShell()
+	public ProductionShell()
 	{
 		InitializeComponent();
     }

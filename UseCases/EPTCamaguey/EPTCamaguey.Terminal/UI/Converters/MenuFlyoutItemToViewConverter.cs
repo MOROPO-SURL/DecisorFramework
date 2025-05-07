@@ -10,9 +10,10 @@
 
             switch (concreteValue.Title)
             {
-                case "Estructural":
-                case "Activos":
-                case "Complementarios":
+                case "- Estructural -":
+                case "- Activos -":
+                case "- Complementarios -":
+                case "- Arrendamiento -":
                     return new Views.ModuleFlyoutSectionSubtitleContentView();
 
                 default:

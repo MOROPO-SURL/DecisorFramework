@@ -54,6 +54,6 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
 
     private void ServicingSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.ServicingShell();
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.ProductionShell();
     }
 }

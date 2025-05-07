@@ -1,31 +1,31 @@
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Decisor.Core.Presentation.Web.Frontend.Options;
-using MOROPO.Framework.Decisor.Legal.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Decisor.Financial.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extensions;
+using Microsoft.Extensions.Hosting;
+using MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Helpers;
+using MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Managers;
+using MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Models.View;
+using MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context;
 using MOROPO.Framework.Decisor.Commercial.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Core.Presentation.Web.Frontend.Options;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Financial.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Legal.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Production.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Core.Security.Common.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Location.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Guama.Security.Personal.Presentation.Web.Backend.Extensions;
-using Microsoft.AspNetCore.DataProtection;
-using Serilog;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.Extensions.Hosting;
-using System.Linq;
 using MOROPO.Framework.Guama.Security.Personal.Persistence.ORM.EF.Extensions;
-using System.Runtime.CompilerServices;
+using MOROPO.Framework.Guama.Security.Personal.Presentation.Web.Backend.Extensions;
+using Serilog;
 using System;
-using Microsoft.AspNetCore.Http;
-using MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context;
-using MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Helpers;
-using MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Models.View;
-using MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Managers;
-using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions;
+using System.Linq;
+using System.Runtime.CompilerServices;
 
 namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice
 {
@@ -62,6 +62,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice
             builder.Services.AddDecisorFinancialPresentationWebCommon();
             builder.Services.AddDecisorInventoryPresentationWebCommon();
             builder.Services.AddDecisorCommercialPresentationWebCommon();
+            builder.Services.AddDecisorProductionPresentationWebCommon();
 
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Framework.Guama.Core.Persistence.ORM.EF.Entities.Trace, long>, Framework.Guama.Core.Persistence.ORM.EF.Repositories.TraceRepository>();
 

@@ -68,8 +68,15 @@
 	  <ProjectReference Include="..\..\..\Financial\Financial.Presentation.Terminal.MAUI.UI.Default\Financial.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\HumanResources\HumanResources.Presentation.Terminal.MAUI.UI.Default\HumanResources.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Legal\Legal.Presentation.Terminal.MAUI.UI.Default\Legal.Presentation.Terminal.MAUI.UI.Default.csproj" />
+	  <ProjectReference Include="..\..\..\Production\Production.Presentation.Terminal.MAUI.UI.Default\Production.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Sales\Sales.Presentation.Terminal.MAUI.UI.Default\Sales.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Supervision\Supervision.Presentation.Terminal.MAUI.UI.Default\Supervision.Presentation.Terminal.MAUI.UI.Default.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="UI\Shells\ProductionShell.xaml.cs">
+	    <DependentUpon>ProductionShell.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

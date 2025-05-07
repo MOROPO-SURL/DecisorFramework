@@ -13,6 +13,7 @@ using MOROPO.Framework.Decisor.Legal.Persistence.Entities;
 using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Essential.Persistence.Entities;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities.Contract;
+using MOROPO.Framework.Decisor.Production.Persistence.Entities;
 
 namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
 {
@@ -22,7 +23,8 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         Framework.Guama.Location.Persistence.ORM.EF.Context.IPersistenceDbContext,
         Framework.Guama.Media.Persistence.ORM.EF.Context.IPersistenceDbContext,
         Framework.Guama.Security.Personal.Persistence.ORM.EF.Contract.IPersistenceDbContext,
-        Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract.ICommercialDbContext
+        Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract.ICommercialDbContext,
+        Framework.Decisor.Production.Persistence.ORM.EF.Context.Contract.IProductionDbContext
     {
         public ApplicationDbContext(System.Collections.Generic.IEnumerable<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
         {
@@ -119,8 +121,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<PropertyKind> PropertyKinds { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<PropertyImageBridge> PropertyImageBridges { get; set; }
-        public DbSet<VehicleBrand> VehicleBrands { get; set; }
-        public DbSet<VehicleCategory> VehicleCategories { get; set; }
+        public DbSet<Brand> Brands { get; set; }
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleImageBridge> VehicleImageBridges { get; set; }
@@ -155,6 +156,28 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Disposition> Dispositions { get; set; }
         public DbSet<DispositionTagBridge> DispositionTagBridges { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
+        public DbSet<LegalProviderDocumentBridge> LegalProviderDocumentBridges { get; set; }
+        public DbSet<LegalClientDocumentBridge> LegalClientDocumentBridges { get; set; }
+        public DbSet<VehicleKind> VehicleKinds { get; set; }
+        public DbSet<Elaboration> Elaborations { get; set; }
+        public DbSet<ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
+        public DbSet<ElaborationInputProductClassificationBridge> ElaborationInputProductClassificationBridges { get; set; }
+        public DbSet<ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
+        public DbSet<ElaborationStep> ElaborationSteps { get; set; }
+        public DbSet<ElaborationStepWorkPositionBridge> ElaborationStepWorkPositionBridges { get; set; }
+        public DbSet<Production> Productions { get; set; }
+        public DbSet<ProductionColaboratorBridge> ProductionColaboratorBridges { get; set; }
+        public DbSet<ProductionEmployeeBridge> ProductionEmployeeBridges { get; set; }
+        public DbSet<ProductionOrder> ProductionOrders { get; set; }
+        public DbSet<ProductionOrderDeparture> ProductionOrderDepartures { get; set; }
+        public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
+        public DbSet<ProductionReception> ProductionReceptions { get; set; }
+        public DbSet<PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
+        public DbSet<PropertyLeaseOfferOrganizationContactBridge> PropertyLeaseOfferOrganizationContactBridges { get; set; }
+        public DbSet<PropertyLeaseOfferPersonContactBridge> PropertyLeaseOfferPersonContactBridges { get; set; }
+        public DbSet<VehicleLeaseOffer> VehicleLeaseOffers { get; set; }
+        public DbSet<VehicleLeaseOfferOrganizationContactBridge> VehicleLeaseOfferOrganizationContactBridges { get; set; }
+        public DbSet<VehicleLeaseOfferPersonContactBridge> VehicleLeaseOfferPersonContactBridges { get; set; }
     }
 }
 

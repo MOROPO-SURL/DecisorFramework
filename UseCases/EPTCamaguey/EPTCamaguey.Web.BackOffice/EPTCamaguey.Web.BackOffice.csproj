@@ -52,6 +52,8 @@
 		<ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Web.Common\Inventory.Presentation.Web.Common.csproj" />
 		<ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Backend\Legal.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Frontend\Legal.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\..\..\Production\Production.Presentation.Web.Backend\Production.Presentation.Web.Backend.csproj" />
+		<ProjectReference Include="..\..\..\Production\Production.Presentation.Web.Frontend\Production.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\..\..\Supervision\Supervision.Presentation.Web.Frontend\Supervision.Presentation.Web.Frontend.csproj" />
 	</ItemGroup>
 

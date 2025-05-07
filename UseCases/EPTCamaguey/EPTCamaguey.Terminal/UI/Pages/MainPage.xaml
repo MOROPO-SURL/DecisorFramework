@@ -209,7 +209,7 @@
                         <Image Style="{StaticResource SectionCardBackgroudImageStyle}" Source="servicing.jpg" />
                         <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
                         <Grid Padding="5">
-                            <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="Servicios" />
+                            <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="Producción" />
                         </Grid>
                     </Grid>
                 </Frame>
