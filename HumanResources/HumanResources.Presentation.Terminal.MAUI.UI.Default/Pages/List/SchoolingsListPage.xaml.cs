@@ -30,6 +30,21 @@ public partial class SchoolingsListPage : Core.Presentation.Terminal.MAUI.UI.Pag
         return apiConnectClient.GetPaginateAsync();
     }
 
+    private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
+    }
+
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
+    }
+
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
+    {
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
+    }
+
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);

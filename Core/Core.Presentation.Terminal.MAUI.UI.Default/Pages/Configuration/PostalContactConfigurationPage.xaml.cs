@@ -68,6 +68,16 @@ public partial class PostalContactConfigurationPage : UI.Pages.Base.Configuratio
         });
     }
 
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
+
     private void StatePicker_SelectedIndexChanged(object sender, System.EventArgs e)
     {
         if (!IsEnabled || ConcreteBindingContext == null) return;

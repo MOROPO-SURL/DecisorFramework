@@ -38,7 +38,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             });
         }
 
-        private void AddItemControl_Invoked(object sender, System.EventArgs eventArgs)
+        protected void AddItem(object sender, System.EventArgs eventArgs)
         {
             var concreteBindingContext = (TManagePageModel)BindingContext;
 

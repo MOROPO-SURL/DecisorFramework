@@ -66,6 +66,16 @@ public partial class SectionConfigurationPage : Core.Presentation.Terminal.MAUI.
         return await apiConnectClient.GetAsync(model.Id);
     }
 
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
+
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
     {
         hasChangesFlag = true;

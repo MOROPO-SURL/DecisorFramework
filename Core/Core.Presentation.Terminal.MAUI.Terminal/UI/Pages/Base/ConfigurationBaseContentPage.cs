@@ -31,7 +31,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected override bool OnBackButtonPressed()
         {
-            CancelControl_Invoked(this, System.EventArgs.Empty);
+            OnCancel(this, System.EventArgs.Empty);
 
             return true;
         }
@@ -49,7 +49,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             hasChangesFlag = true;
         }
 
-        protected void ApplyControl_Invoked(object sender, System.EventArgs eventArgs)
+        protected void OnApply(object sender, System.EventArgs eventArgs)
         {
             if (!hasChangesFlag)
             {
@@ -97,7 +97,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             });
         }
 
-        protected void CancelControl_Invoked(object sender, System.EventArgs eventArgs)
+        protected void OnCancel(object sender, System.EventArgs eventArgs)
         {
             if (!hasChangesFlag)
             {

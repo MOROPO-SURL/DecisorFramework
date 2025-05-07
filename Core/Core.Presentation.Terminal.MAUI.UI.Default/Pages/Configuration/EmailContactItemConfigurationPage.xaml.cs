@@ -28,4 +28,14 @@ public partial class EmailContactItemConfigurationPage : UI.Pages.Base.Configura
             EmailAddress = ConcreteBindingContext.EmailAddress
         });
     }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
 }

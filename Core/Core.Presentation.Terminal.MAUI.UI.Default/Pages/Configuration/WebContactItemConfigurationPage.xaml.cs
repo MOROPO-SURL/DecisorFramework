@@ -28,4 +28,14 @@ public partial class WebContactItemConfigurationPage : UI.Pages.Base.Configurati
             Url = ConcreteBindingContext.Url
         });
     }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
 }

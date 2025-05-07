@@ -57,6 +57,16 @@ public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAU
         return await apiConnectClient.GetAsync(model.Id);
     }
 
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
+
     private void AreaAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         ConcreteBindingContext.IsBusy = true;

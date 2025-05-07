@@ -18,14 +18,14 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Aplicar"
-            Clicked="ApplyControl_Invoked">
+            Clicked="ApplyToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Cancelar"
-            Clicked="CancelControl_Invoked">
+            Clicked="CancelToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>

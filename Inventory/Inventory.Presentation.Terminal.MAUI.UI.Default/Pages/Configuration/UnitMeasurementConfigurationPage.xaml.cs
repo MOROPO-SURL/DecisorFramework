@@ -58,6 +58,16 @@ public partial class UnitMeasurementConfigurationPage : Core.Presentation.Termin
         return await apiConnectClient.GetAsync(model.Id);
     }
 
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
+
     private void ConvertionBridgeAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         ConcreteBindingContext.IsBusy = true;
