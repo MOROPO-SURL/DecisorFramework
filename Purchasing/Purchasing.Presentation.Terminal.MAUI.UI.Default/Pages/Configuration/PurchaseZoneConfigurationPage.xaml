@@ -7,7 +7,7 @@
     xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PurchaseZoneConfigurationPage"
-    x:TypeArguments="interop_common_display_models:PurchaseZoneDisplayModel,presentation_configuration_page_models:PurchaseZoneConfigurationPageModel"
+    x:TypeArguments="interop_common_display_models:PurchaseZoneDisplayModel,interop_common_display_models:PurchaseZoneDisplayModel,presentation_configuration_page_models:PurchaseZoneConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:PurchaseZoneConfigurationPageModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem 

@@ -1,4 +1,5 @@
 ﻿using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Extensions;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Bridge;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -24,6 +25,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
                 DefaultUnitMeasurement = model.DefaultUnitMeasurement;
                 Category = model.Category;
                 Classifications = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ClassificationDisplayModel>(model.Classifications);
+                WarehousingDecreases = new System.Collections.ObjectModel.ObservableCollection<ProductWarehousingDecreaseBridgeModel>(model.WarehousingDecreases);
 
                 if (model.FeatureImage != null)
                 {
@@ -49,9 +51,9 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
 
         public Microsoft.Maui.Controls.ImageSource FeatureImageSource { get => featureImageSource; set => SetProperty(ref featureImageSource, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ClassificationDisplayModel> Classifications { get; set; } = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ClassificationDisplayModel>();
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ClassificationDisplayModel> Classifications { get; set; } = [];
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.WarehousingDecreaseModel> WarehousingDecreases { get; set; } = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.WarehousingDecreaseModel>();
+        public System.Collections.ObjectModel.ObservableCollection<ProductWarehousingDecreaseBridgeModel> WarehousingDecreases { get; set; } = [];
 
         public Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
 

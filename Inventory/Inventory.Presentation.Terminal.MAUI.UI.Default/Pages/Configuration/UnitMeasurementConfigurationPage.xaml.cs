@@ -6,7 +6,7 @@ using System.Reflection;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class UnitMeasurementConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, Models.Page.Configuration.UnitMeasurementConfigurationPageModel>
+public partial class UnitMeasurementConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, Models.Page.Configuration.UnitMeasurementConfigurationPageModel>
 {
     private readonly List<Interop.API.Common.Models.Bridge.UnitMeasurementConvertionBridgeModel> editionConvetions = [];
     private readonly List<Interop.API.Common.Models.Bridge.UnitMeasurementConvertionBridgeModel> incomingConvetions = [];

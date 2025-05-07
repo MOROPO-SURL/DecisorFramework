@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProformaConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProformaDisplayModel, Models.Page.Configuration.ProformaConfigurationPageModel>
+public partial class ProformaConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProformaDisplayModel, ProformaDisplayModel, Models.Page.Configuration.ProformaConfigurationPageModel>
 {
     private Microsoft.Maui.Storage.FileResult rawDocumentFilePickResult;
 

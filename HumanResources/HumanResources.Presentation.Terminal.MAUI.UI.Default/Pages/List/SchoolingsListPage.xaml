@@ -1,12 +1,11 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <core_ui_base_pages:ListBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List"
     xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
     xmlns:presentation_list_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.List;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
-    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List.SchoolingsListPage"
@@ -15,19 +14,8 @@
     Title="Disponibilidad de Niveles de Preparación">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="280" AbsoluteHorizontalSeparation="20" />
-
-            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
-
-            <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
-                <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="FontSize" Value="Caption" />
-                <Setter Property="Margin" Value="0,16,0,0" />
-            </Style>
-            <Style TargetType="Label" x:Key="ValueFieldLabelStyle">
-                <Setter Property="FontSize" Value="Default" />
-            </Style>
+            <communitytoolkit_converters:BoolToObjectConverter x:Key="IsNotNullConverter"/>
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -43,21 +31,19 @@
         <Grid>
             <StackLayout Orientation="Vertical">
                 <SearchBar Margin="20,20,20,0" />
-                <ScrollView 
-                    Orientation="Vertical"
-                    VerticalOptions="FillAndExpand">
-                    <FlexLayout
+                <Grid 
+                    VerticalOptions="FillAndExpand"
+                    SizeChanged="ItemsCollectionViewLayoutControl_SizeChanged">
+                    <CollectionView
+                        x:Name="ItemsCollectionView"
                         Margin="10"
-                        Wrap="Wrap"
-                        AlignItems="Start" AlignContent="Start"
-                        BindableLayout.ItemsSource="{Binding Items}">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate>
-                                <Frame
-                                    x:DataType="interop_common_display_models:SchoolingDisplayModel"
-                                    Margin="5"
-                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ItemViewChildParentWidthToRelativeWidthConverter}}"
-                                    HeightRequest="128">
+                        ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_common_display_models:SchoolingDisplayModel">
+                                <Frame HeightRequest="{Static local:SchoolingsListPage.ITEM_VIEW_REQUEST_HEIGHT}">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </Frame.GestureRecognizers>
@@ -80,17 +66,27 @@
                                     </StackLayout>
                                 </Frame>
                             </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                        <BindableLayout.EmptyView>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
                             <Label
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
                                 HorizontalTextAlignment="Center"
                                 Margin="5"
                                 Text="Sin elementos que mostrar"
                                 TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
                                 FontAttributes="Italic" />
-                        </BindableLayout.EmptyView>
-                    </FlexLayout>
-                </ScrollView>
+                        </CollectionView.EmptyView>
+                        <CollectionView.Footer>
+                            <StackLayout IsVisible="{Binding HasMoreItems}">
+                                <Button
+                                HorizontalOptions="Center"
+                                Margin="5"
+                                Text="Mostrar más"
+                                Clicked="LoadMoreItemsControl_Invoked" />
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </Grid>
             </StackLayout>
             <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>

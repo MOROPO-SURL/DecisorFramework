@@ -7,7 +7,7 @@
     xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.UnitMeasurementConvertionBridgeConfigurationPage"
-    x:TypeArguments="interop_common_bridge_models:UnitMeasurementConvertionBridgeModel,presentation_configuration_page_models:UnitMeasurementConvertionBridgeConfigurationPageModel"
+    x:TypeArguments="interop_common_bridge_models:UnitMeasurementConvertionBridgeModel,interop_common_bridge_models:UnitMeasurementConvertionBridgeModel,presentation_configuration_page_models:UnitMeasurementConvertionBridgeConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:UnitMeasurementConvertionBridgeConfigurationPageModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem 

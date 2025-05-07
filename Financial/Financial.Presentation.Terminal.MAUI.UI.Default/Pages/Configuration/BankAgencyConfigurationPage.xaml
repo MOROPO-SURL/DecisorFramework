@@ -7,7 +7,7 @@
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Financial.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.BankAgencyConfigurationPage"
-    x:TypeArguments="interop_common_display_models:BankAgencyDisplayModel,presentation_configuration_page_models:BankAgencyConfigurationPageModel"
+    x:TypeArguments="interop_common_display_models:BankAgencyDisplayModel,interop_common_display_models:BankAgencyDisplayModel,presentation_configuration_page_models:BankAgencyConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:BankAgencyConfigurationPageModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem 

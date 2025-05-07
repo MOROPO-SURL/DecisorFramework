@@ -16,10 +16,6 @@
         public Domain.Persistence.Entities.OrganizationContact Contact { get; set; }
         public System.Guid ContactId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]+$")]
-        public string TaxIdentificationNumber { get; set; }
-
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DefaultPaymentTermId))]
         public PaymentTerm DefaultPaymentTerm { get; set; }
         public System.Guid DefaultPaymentTermId { get; set; }

@@ -9,6 +9,10 @@
         public Staff Staff { get; set; }
         public System.Guid StaffId { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(WorkforceId))]
+        public Workforce Workforce { get; set; }
+        public System.Guid WorkforceId { get; set; }
+
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(VacantId))]
         public Vacant Vacant { get; set; }
         public System.Guid VacantId { get; set; }

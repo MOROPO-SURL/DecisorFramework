@@ -441,7 +441,7 @@
                                                         </Label.FormattedText>
                                                     </Label>
                                                     <Label 
-                                                        Text="{Binding Provider.Contact.BusinessKind.Name}"
+                                                        Text="{Binding Provider.BusinessKind.Name}"
                                                         FontSize="Caption"
                                                         LineBreakMode="TailTruncation" />
                                                 </VerticalStackLayout>

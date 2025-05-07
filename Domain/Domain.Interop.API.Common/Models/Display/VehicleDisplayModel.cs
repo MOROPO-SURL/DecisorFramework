@@ -8,15 +8,17 @@
 
         public int Priority { get; set; }
 
+        public Persistence.Enumerations.VehicleAssignment? Assignment { get; set; }
+
         public Core.Interop.API.Common.Models.Display.ImageDisplayModel FeatureImage { get; set; }
 
         public StructureParentalDisplayModel Structure { get; set; }
 
         public string Reference { get; set; }
 
-        public VehicleCategoryDisplayModel Category { get; set; }
+        public VehicleKindDisplayModel Kind { get; set; }
 
-        public VehicleBrandDisplayModel Brand { get; set; }
+        public BrandDisplayModel Brand { get; set; }
 
         public string Model { get; set; }
 
@@ -45,6 +47,7 @@
             Id = entity.Id;
             Enabled = entity.Enabled;
             Priority = entity.Priority;
+            Assignment = entity.Assignment;
             Reference = entity.Reference;
             Model = entity.Model;
             Year = entity.Year;
@@ -64,16 +67,16 @@
                 FeatureImage.Import(entity.FeatureImage);
             }
 
-            if (entity.Category != null)
+            if (entity.Kind != null)
             {
-                Category = new VehicleCategoryDisplayModel();
+                Kind = new VehicleKindDisplayModel();
 
-                Category.Import(entity.Category);
+                Kind.Import(entity.Kind);
             }
 
             if (entity.Brand != null)
             {
-                Brand = new VehicleBrandDisplayModel();
+                Brand = new BrandDisplayModel();
 
                 Brand.Import(entity.Brand);
             }
@@ -83,6 +86,13 @@
                 EngineKind = new VehicleEngineKindDisplayModel();
 
                 EngineKind.Import(entity.EngineKind);
+            }
+
+            if (entity.Structure != null)
+            {
+                Structure = new StructureParentalDisplayModel();
+
+                Structure.Import(entity.Structure);
             }
         }
     }

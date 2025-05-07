@@ -15,6 +15,9 @@
                 case "Estructural":
                 case "Activos":
                 case "Complementarios":
+                case "- Productos -":
+                case "- Servicios -":
+                case "- Arrendamiento -":
                     return new Views.ModuleFlyoutSectionSubtitleContentView();
 
                 default:

@@ -26,7 +26,7 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
             Priority = concreteBindingContext.Priority,
             MinDecrease = concreteBindingContext.MinDecrease,
             MaxDecrease = concreteBindingContext.MaxDecrease,
-            ProductionRoles = concreteBindingContext.Roles.ToArray()
+            WorkPositions = concreteBindingContext.WorkPositions.ToArray()
         });
     }
 
@@ -42,7 +42,7 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
             Priority = concreteBindingContext.Priority,
             MinDecrease = concreteBindingContext.MinDecrease,
             MaxDecrease = concreteBindingContext.MaxDecrease,
-            ProductionRoles = concreteBindingContext.Roles.ToArray()
+            WorkPositions = concreteBindingContext.WorkPositions.ToArray()
         });
     }
 
@@ -56,18 +56,18 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
         {
             try
             {
-                var productionRolesAPIConnectClient = new Interop.API.Connect.Clients.ProductionRolesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var workPositionsAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-                var model = new Models.Page.Configuration.ElaborationStepProductionRoleBridgeConfigurationPageModel(null)
+                var model = new Models.Page.Configuration.ElaborationStepWorkPositionBridgeConfigurationPageModel(null)
                 {
-                    AvailableRoles = await productionRolesAPIConnectClient.GetAsync()
+                    AvailableWorkPositions = await workPositionsAPIConnectClient.GetAsync()
                 };
 
                 Dispatcher.Dispatch(() =>
                 {
                     concreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new ElaborationStepProductionRoleBridgeConfigurationPage(RoleCreationSuccess_Callback, model));
+                    this.NavigationPushPageAsync(new ElaborationStepWorkPositionBridgeConfigurationPage(RoleCreationSuccess_Callback, model));
                 });
             }
             catch (System.Exception exception)
@@ -90,18 +90,18 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
         {
             try
             {
-                var productionRolesAPIConnectClient = new Interop.API.Connect.Clients.ProductionRolesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var workPositionsAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-                var model = new Models.Page.Configuration.ElaborationStepProductionRoleBridgeConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.ElaborationStepProductionRoleBridgeModel)
+                var model = new Models.Page.Configuration.ElaborationStepWorkPositionBridgeConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.ElaborationStepWorkPositionBridgeModel)
                 {
-                    AvailableRoles = await productionRolesAPIConnectClient.GetAsync()
+                    AvailableWorkPositions = await workPositionsAPIConnectClient.GetAsync()
                 };
 
                 Dispatcher.Dispatch(() =>
                 {
                     concreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new ElaborationStepProductionRoleBridgeConfigurationPage(RoleEditionSuccess_Callback, model));
+                    this.NavigationPushPageAsync(new ElaborationStepWorkPositionBridgeConfigurationPage(RoleEditionSuccess_Callback, model));
                 });
             }
             catch (System.Exception exception)
@@ -122,26 +122,26 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
 
             hasChangesFlag = true;
 
-            Dispatcher.Dispatch(() => ((Models.Page.Configuration.ElaborationStepConfigurationPageModel)BindingContext).Roles.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.ElaborationStepProductionRoleBridgeModel));
+            Dispatcher.Dispatch(() => ((Models.Page.Configuration.ElaborationStepConfigurationPageModel)BindingContext).WorkPositions.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.ElaborationStepWorkPositionBridgeModel));
         });
     }
 
-    private void RoleCreationSuccess_Callback(Interop.API.Common.Models.Bridge.ElaborationStepProductionRoleBridgeModel model)
+    private void RoleCreationSuccess_Callback(Interop.API.Common.Models.Bridge.ElaborationStepWorkPositionBridgeModel model)
     {
-        ((Models.Page.Configuration.ElaborationStepConfigurationPageModel)BindingContext).Roles.Add(model);
+        ((Models.Page.Configuration.ElaborationStepConfigurationPageModel)BindingContext).WorkPositions.Add(model);
 
         hasChangesFlag = true;
     }
 
-    private void RoleEditionSuccess_Callback(Interop.API.Common.Models.Bridge.ElaborationStepProductionRoleBridgeModel model)
+    private void RoleEditionSuccess_Callback(Interop.API.Common.Models.Bridge.ElaborationStepWorkPositionBridgeModel model)
     {
         var concreteBindingContext = (Models.Page.Configuration.ElaborationStepConfigurationPageModel)BindingContext;
 
-        var reference = concreteBindingContext.Roles.First(item => item.Role.Id == model.Role.Id);
+        var reference = concreteBindingContext.WorkPositions.First(item => item.WorkPosition.Id == model.WorkPosition.Id);
 
-        var index = concreteBindingContext.Roles.IndexOf(reference);
+        var index = concreteBindingContext.WorkPositions.IndexOf(reference);
 
-        concreteBindingContext.Roles[index] = model;
+        concreteBindingContext.WorkPositions[index] = model;
 
         hasChangesFlag = true;
     }

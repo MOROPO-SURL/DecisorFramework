@@ -1,12 +1,14 @@
 ﻿namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
-	public class ClassificationConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ClassificationDisplayModel>
+	public class ClassificationConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Input.ClassificationInputModel>
     {
         private string name;
         private string description;
         private int priority = 1;
 
-        public ClassificationConfigurationPageModel(ProductConfigurationPageModel productConfigurationPageModel, Interop.API.Common.Models.Display.ClassificationDisplayModel model) : base(model)
+        public ClassificationConfigurationPageModel() : this(null, null) { }
+
+        public ClassificationConfigurationPageModel(ProductConfigurationPageModel productConfigurationPageModel, Interop.API.Common.Models.Input.ClassificationInputModel model) : base(model)
         {
             ProductConfigurationPageModel = productConfigurationPageModel;
 

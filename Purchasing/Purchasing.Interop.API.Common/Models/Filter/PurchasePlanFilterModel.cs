@@ -8,7 +8,7 @@
         {
             switch (Kind) 
             {
-                case Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.Filled:
+                case Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.Handled:
 
                     return entity => entity.Purchase != null;
                 

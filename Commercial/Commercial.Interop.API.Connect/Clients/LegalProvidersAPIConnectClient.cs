@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input;
 
 namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Connect.Clients
 {
-    public class LegalProvidersAPIConnectClient : Guama.Core.Presentation.API.Connect.Clients.Contract.AbstractArchivableEntityManagementAPIConnectClient<Persistence.Entities.LegalProvider, System.Guid, LegalProviderInputModel, LegalProviderDisplayModel>
+    public class LegalProvidersAPIConnectClient : Guama.Core.Presentation.API.Connect.Clients.Contract.AbstractArchivableEnableableEntityManagementAPIConnectClient<Persistence.Entities.LegalProvider, System.Guid, LegalProviderInputModel, LegalProviderDisplayModel>
     {
         public LegalProvidersAPIConnectClient(Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade httpClientHelperProvider) : base(httpClientHelperProvider)
         {

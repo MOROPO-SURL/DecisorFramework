@@ -11,7 +11,9 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Common.Extensions
         {
             services.AddScoped<IEntityRepository<PaymentTerm, System.Guid>, PaymentTermRepository>();
             services.AddScoped<IEntityRepository<LegalProvider, System.Guid>, LegalProviderRepository>();
+            services.AddScoped<IEntityRepository<LegalClient, System.Guid>, LegalClientRepository>();
             services.AddScoped<IEntityRepository<NaturalProvider, System.Guid>, NaturalProviderRepository>();
+            services.AddScoped<IEntityRepository<NaturalClient, System.Guid>, NaturalClientRepository>();
             services.AddScoped<IEntityRepository<ProvisionableService, System.Guid>, ProvisionableServiceRepository>();
             services.AddScoped<IEntityRepository<RequestableService, System.Guid>, RequestableServiceRepository>();
 

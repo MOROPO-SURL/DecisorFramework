@@ -2,15 +2,6 @@
 {
     public static class Authorization
     {
-        #region ProductionRole
-        public const string ProductionRoleManagementPermissionGroup = "production-role-management-permission-group";
-
-        public const string ProductionRoleViewerPermission = "production-role-viewer-permission";
-        public const string ProductionRoleCreatorPermission = "production-role-creator-permission";
-        public const string ProductionRoleEditorPermission = "production-role-editor-permission";
-        public const string ProductionRoleRemoverPermission = "production-role-remover-permission";
-        #endregion
-
         #region Elaboration
         public const string ElaborationManagementPermissionGroup = "elaboration-management-permission-group";
 

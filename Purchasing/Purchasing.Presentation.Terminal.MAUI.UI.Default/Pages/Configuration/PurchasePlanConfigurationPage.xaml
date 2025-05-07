@@ -194,7 +194,7 @@
                                                             LineBreakMode="TailTruncation" />
                                                     </HorizontalStackLayout>
                                                     <Label 
-                                                        Text="{Binding Provider.Contact.BusinessKind.Name}"
+                                                        Text="{Binding Provider.BusinessKind.Name}"
                                                         FontSize="Caption"
                                                         LineBreakMode="TailTruncation" />
                                                     <Label Margin="0,4,0,0">

@@ -1,8 +1,8 @@
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Models.View.VacantViewModel>
+public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Models.View.WorkforceConfigurationVacantViewModel>
 {
-    public VacantConfigurationPage(System.Action<Models.View.VacantViewModel> successAction, Models.Page.Configuration.VacantConfigurationPageModel model) : base(successAction, model)
+    public VacantConfigurationPage(System.Action<Models.View.WorkforceConfigurationVacantViewModel> successAction, Models.Page.Configuration.VacantConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
 
@@ -39,11 +39,11 @@ public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.U
 
     protected override string EntityTypeName => "Vacante";
 
-    protected override System.Threading.Tasks.Task<Models.View.VacantViewModel> PerformCreationAsync()
+    protected override System.Threading.Tasks.Task<Models.View.WorkforceConfigurationVacantViewModel> PerformCreationAsync()
     {
         var concreteBindingContext = (Models.Page.Configuration.VacantConfigurationPageModel)BindingContext;
 
-        return System.Threading.Tasks.Task.FromResult(new Models.View.VacantViewModel
+        return System.Threading.Tasks.Task.FromResult(new Models.View.WorkforceConfigurationVacantViewModel
         {
             Id = System.Guid.NewGuid(),
             OrganizationUnity = concreteBindingContext.OrganizationUnity,
@@ -54,11 +54,11 @@ public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.U
         });
     }
 
-    protected override System.Threading.Tasks.Task<Models.View.VacantViewModel> PerformEditionAsync()
+    protected override System.Threading.Tasks.Task<Models.View.WorkforceConfigurationVacantViewModel> PerformEditionAsync()
     {
         var concreteBindingContext = (Models.Page.Configuration.VacantConfigurationPageModel)BindingContext;
 
-        return System.Threading.Tasks.Task.FromResult(new Models.View.VacantViewModel
+        return System.Threading.Tasks.Task.FromResult(new Models.View.WorkforceConfigurationVacantViewModel
         {
             Id = concreteBindingContext.Id,
             OrganizationUnity = concreteBindingContext.OrganizationUnity,

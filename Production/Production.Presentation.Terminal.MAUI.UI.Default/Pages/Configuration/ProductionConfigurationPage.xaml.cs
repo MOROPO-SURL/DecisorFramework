@@ -39,7 +39,7 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
         var model = new Interop.API.Common.Models.Input.ProductionInputModel
         {
             Id = System.Guid.NewGuid(),
-            PlanId = concreteBindingContext.Plan.Id,
+            PlanId = concreteBindingContext.Order.Id,
             Amount = concreteBindingContext.Amount,
             UnitMeasurementId = concreteBindingContext.AvailableUnitMeasurements[UnitMeasurementPicker.SelectedIndex].Id,
             Description = concreteBindingContext.Description,
@@ -63,16 +63,16 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
         hasChangesFlag = true;
     }
 
-    private void PlanPickButton_Clicked(object sender, System.EventArgs e)
+    private void OrderPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ProductionPlanToCompletePickPage(PlanPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ProductionOrderToCompletePickPage(OrderPickComplete_Callback)));
     }
 
-    private void PlanPickComplete_Callback(ProductionPlanDisplayModel model)
+    private void OrderPickComplete_Callback(ProductionOrderDisplayModel model)
     {
         var concreteBindingContext = (Models.Page.Configuration.ProductionConfigurationPageModel)BindingContext;
 
-        concreteBindingContext.Plan = model;
+        concreteBindingContext.Order = model;
 
         concreteBindingContext.ProductBridges.Clear();
 
@@ -90,11 +90,11 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
     {
         var concreteBindingContext = (Models.Page.Configuration.ProductionConfigurationPageModel)BindingContext;
 
-        if (concreteBindingContext.Plan == null) return;
+        if (concreteBindingContext.Order == null) return;
 
         var model = new Models.Page.Configuration.ProductionEmployeeBridgeConfigurationPageModel(null)
         {
-            AvailableSteps = concreteBindingContext.Plan.Elaboration.Steps
+            AvailableSteps = concreteBindingContext.Order.Elaboration.Steps
         };
 
         this.NavigationPushPageAsync(new ProductionEmployeeBridgeConfigurationPage(EmployeeBridgeCreateSuccess_Callback, model));
@@ -106,7 +106,7 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
 
         var model = new Models.Page.Configuration.ProductionEmployeeBridgeConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.ProductionEmployeeBridgeModel)
         {
-            AvailableSteps = concreteBindingContext.Plan.Elaboration.Steps
+            AvailableSteps = concreteBindingContext.Order.Elaboration.Steps
         };
 
         this.NavigationPushPageAsync(new ProductionEmployeeBridgeConfigurationPage(EmployeetBridgeEditSuccess_Callback, model));

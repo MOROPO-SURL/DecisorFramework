@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class OrganizationContactConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<OrganizationContactDisplayModel, Models.Page.Configuration.OrganizationContactConfigurationPageModel>
+public partial class OrganizationContactConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<OrganizationContactDisplayModel, OrganizationContactDisplayModel, Models.Page.Configuration.OrganizationContactConfigurationPageModel>
 {
     private byte[] imagePickedData;
     private string imageContentType;

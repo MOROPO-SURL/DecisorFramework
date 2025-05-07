@@ -7,7 +7,7 @@
     xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.VacantConfigurationPage"
-    x:TypeArguments="presentation_configuration_view_models:VacantViewModel"
+    x:TypeArguments="presentation_configuration_view_models:WorkforceConfigurationVacantViewModel"
     x:DataType="presentation_configuration_page_models:VacantConfigurationPageModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem 

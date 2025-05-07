@@ -22,6 +22,6 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.Entities
 
         public decimal MaxDecrease { get; set; }
 
-        public List<ElaborationStepProductionRoleBridge> ProductionRoleBridges { get; set; } = new List<ElaborationStepProductionRoleBridge>();
+        public List<ElaborationStepWorkPositionBridge> WorkPositionBridges { get; set; } = new List<ElaborationStepWorkPositionBridge>();
     }
 }

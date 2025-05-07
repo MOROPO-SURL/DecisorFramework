@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.Logging;
+using MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Repositories;
 using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Production.Persistence.Entities;
@@ -55,6 +56,28 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
         {
             base.PreCreate(entity, model);
 
+            //foreach (var _model in model.IncomingSteps)
+            //{
+            //    stepRepository.Add(new ElaborationStep
+            //    {
+            //        Id = _model.Id,
+            //        Name = _model.Name,
+            //        ElaborationId = entity.Id,
+            //        Description = _model.Description,
+            //        MinDecrease = _model.MinDecrease,
+            //        MaxDecrease = _model.MaxDecrease,
+            //        Priority = _model.Priority,
+            //        WorkPositionBridges = _model.WorkPositions.Select(__model => new ElaborationStepWorkPositionBridge
+            //        {
+            //            ProwId = _model.Id,
+            //            SternId = __model.WorkPosition.Id,
+            //            Participation = __model.Participation,
+            //            Linked = __model.Linked,
+            //            Description = __model.Description
+            //        }).ToList()
+            //    }, User.Identity.Name, false);
+            //}
+
             if (model.Steps != null)
             {
                 foreach (var _model in model.Steps)
@@ -68,10 +91,10 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
                         MinDecrease = _model.MinDecrease,
                         MaxDecrease = _model.MaxDecrease,
                         Priority = _model.Priority,
-                        ProductionRoleBridges = _model.ProductionRoles.Select(__model => new ElaborationStepProductionRoleBridge
+                        WorkPositionBridges = _model.WorkPositions.Select(__model => new ElaborationStepWorkPositionBridge
                         {
                             ProwId = _model.Id,
-                            SternId = __model.Role.Id,
+                            SternId = __model.WorkPosition.Id,
                             Participation = __model.Participation,
                             Linked = __model.Linked,
                             Description = __model.Description
@@ -105,10 +128,10 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
                         MinDecrease = _model.MinDecrease,
                         MaxDecrease = _model.MaxDecrease,
                         Priority = _model.Priority,
-                        ProductionRoleBridges = _model.ProductionRoles.Select(__model => new ElaborationStepProductionRoleBridge
+                        WorkPositionBridges = _model.WorkPositions.Select(__model => new ElaborationStepWorkPositionBridge
                         {
                             ProwId = _model.Id,
-                            SternId = __model.Role.Id,
+                            SternId = __model.WorkPosition.Id,
                             Participation = __model.Participation,
                             Linked = __model.Linked,
                             Description = __model.Description

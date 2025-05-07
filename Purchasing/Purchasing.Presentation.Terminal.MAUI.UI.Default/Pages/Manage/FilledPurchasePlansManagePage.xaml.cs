@@ -54,7 +54,7 @@ public partial class FilledPurchasePlansManagePage : Caney.MVVM.Core.Pages.Conte
 
         var apiConnectClient = new Interop.API.Connect.Clients.PurchasePlansAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        apiConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.PurchasePlanFilterModel { Kind = CommonPlanFilterKind.Filled }).ContinueWith(task =>
+        apiConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.PurchasePlanFilterModel { Kind = CommonPlanFilterKind.Handled }).ContinueWith(task =>
         {
             Dispatcher.Dispatch(() =>
             {

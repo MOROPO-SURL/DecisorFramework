@@ -187,11 +187,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
-                    b.Property<string>("TaxIdentificationNumber")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("taxidentificationnumber");
-
                     b.HasKey("Id")
                         .HasName("pk_legalclients");
 
@@ -222,6 +217,25 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_legalclientbankaccountbridges_sternid");
 
                     b.ToTable("legalclientbankaccountbridges", "decisorframework_commercial");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClientDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_legalclientdocumentbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_legalclientdocumentbridges_sternid");
+
+                    b.ToTable("legalclientdocumentbridges", "decisorframework_commercial");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClientSaleContract", b =>
@@ -314,11 +328,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
-                    b.Property<string>("TaxIdentificationNumber")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("taxidentificationnumber");
-
                     b.HasKey("Id")
                         .HasName("pk_legalproviders");
 
@@ -349,6 +358,25 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_legalproviderbankaccountbridges_sternid");
 
                     b.ToTable("legalproviderbankaccountbridges", "decisorframework_commercial");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProviderDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_legalproviderdocumentbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_legalproviderdocumentbridges_sternid");
+
+                    b.ToTable("legalproviderdocumentbridges", "decisorframework_commercial");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProviderPurchasingContract", b =>
@@ -418,10 +446,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
-                    b.Property<Guid?>("BusinessKindId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("businesskindid");
-
                     b.Property<Guid>("ContactId")
                         .HasColumnType("uuid")
                         .HasColumnName("contactid");
@@ -440,9 +464,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_naturalclients");
-
-                    b.HasIndex("BusinessKindId")
-                        .HasDatabaseName("ix_naturalclients_businesskindid");
 
                     b.HasIndex("ContactId")
                         .IsUnique()
@@ -471,6 +492,25 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_naturalclientbankaccountbridges_sternid");
 
                     b.ToTable("naturalclientbankaccountbridges", "decisorframework_commercial");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClientDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_naturalclientdocumentbridge");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_naturalclientdocumentbridge_sternid");
+
+                    b.ToTable("naturalclientdocumentbridge", "decisorframework_commercial");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClientSaleContract", b =>
@@ -547,10 +587,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
-                    b.Property<Guid?>("BusinessKindId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("businesskindid");
-
                     b.Property<Guid>("ContactId")
                         .HasColumnType("uuid")
                         .HasColumnName("contactid");
@@ -569,9 +605,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_naturalproviders");
-
-                    b.HasIndex("BusinessKindId")
-                        .HasDatabaseName("ix_naturalproviders_businesskindid");
 
                     b.HasIndex("ContactId")
                         .IsUnique()
@@ -600,6 +633,25 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_naturalproviderbankaccountbridges_sternid");
 
                     b.ToTable("naturalproviderbankaccountbridges", "decisorframework_commercial");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalProviderDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_naturalproviderdocumentbridge");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_naturalproviderdocumentbridge_sternid");
+
+                    b.ToTable("naturalproviderdocumentbridge", "decisorframework_commercial");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalProviderPurchasingContract", b =>
@@ -980,6 +1032,44 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("servicevaluepropositionrates", "decisorframework_commercial");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Brand", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_brands");
+
+                    b.ToTable("brands", "decisorframework_domain");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.LegalBusinessKind", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1087,9 +1177,25 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("identityid");
 
+                    b.Property<Guid?>("MainPostalContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("mainpostalcontactid");
+
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
+
+                    b.Property<Guid?>("RepresentativeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("representativeid");
+
+                    b.Property<string>("StateIdentificationCode")
+                        .HasColumnType("text")
+                        .HasColumnName("stateidentificationcode");
+
+                    b.Property<string>("TaxIdentificationNumber")
+                        .HasColumnType("text")
+                        .HasColumnName("taxidentificationnumber");
 
                     b.HasKey("Id")
                         .HasName("pk_organizationcontacts");
@@ -1103,6 +1209,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("IdentityId")
                         .IsUnique()
                         .HasDatabaseName("ix_organizationcontacts_identityid");
+
+                    b.HasIndex("MainPostalContactId")
+                        .HasDatabaseName("ix_organizationcontacts_mainpostalcontactid");
+
+                    b.HasIndex("RepresentativeId")
+                        .HasDatabaseName("ix_organizationcontacts_representativeid");
 
                     b.ToTable("organizationcontacts", "decisorframework_domain");
                 });
@@ -1163,6 +1275,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<Guid?>("BusinessKindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("businesskindid");
+
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
@@ -1170,6 +1286,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<Guid>("IdentityId")
                         .HasColumnType("uuid")
                         .HasColumnName("identityid");
+
+                    b.Property<Guid?>("MainPostalContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("mainpostalcontactid");
 
                     b.Property<string>("PersonalIdentificationNumber")
                         .HasColumnType("text")
@@ -1182,9 +1302,15 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasKey("Id")
                         .HasName("pk_personcontacts");
 
+                    b.HasIndex("BusinessKindId")
+                        .HasDatabaseName("ix_personcontacts_businesskindid");
+
                     b.HasIndex("IdentityId")
                         .IsUnique()
                         .HasDatabaseName("ix_personcontacts_identityid");
+
+                    b.HasIndex("MainPostalContactId")
+                        .HasDatabaseName("ix_personcontacts_mainpostalcontactid");
 
                     b.ToTable("personcontacts", "decisorframework_domain");
                 });
@@ -1203,6 +1329,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<decimal>("Area")
                         .HasColumnType("numeric")
                         .HasColumnName("area");
+
+                    b.Property<int?>("Assignment")
+                        .HasColumnType("integer")
+                        .HasColumnName("assignment");
 
                     b.Property<string>("Description")
                         .HasColumnType("text")
@@ -1449,6 +1579,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("archived");
 
+                    b.Property<int?>("Assignment")
+                        .HasColumnType("integer")
+                        .HasColumnName("assignment");
+
                     b.Property<string>("BodyIdentifier")
                         .IsRequired()
                         .HasColumnType("text")
@@ -1457,10 +1591,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<Guid>("BrandId")
                         .HasColumnType("uuid")
                         .HasColumnName("brandid");
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("integer")
-                        .HasColumnName("categoryid");
 
                     b.Property<string>("Description")
                         .HasColumnType("text")
@@ -1479,9 +1609,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("enginekindid");
 
-                    b.Property<Guid>("FeatureImageId")
+                    b.Property<Guid?>("FeatureImageId")
                         .HasColumnType("uuid")
                         .HasColumnName("featureimageid");
+
+                    b.Property<Guid>("KindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("kindid");
 
                     b.Property<double>("LoadCapacity")
                         .HasColumnType("double precision")
@@ -1536,9 +1670,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("BrandId")
                         .HasDatabaseName("ix_vehicles_brandid");
 
-                    b.HasIndex("CategoryId")
-                        .HasDatabaseName("ix_vehicles_categoryid");
-
                     b.HasIndex("EngineIdentifier")
                         .IsUnique()
                         .HasDatabaseName("ix_vehicles_engineidentifier");
@@ -1548,6 +1679,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("FeatureImageId")
                         .HasDatabaseName("ix_vehicles_featureimageid");
+
+                    b.HasIndex("KindId")
+                        .HasDatabaseName("ix_vehicles_kindid");
 
                     b.HasIndex("Plate")
                         .IsUnique()
@@ -1561,91 +1695,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_vehicles_trafficcirculationidentifier");
 
                     b.ToTable("vehicles", "decisorframework_domain");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleBrand", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("boolean")
-                        .HasColumnName("archived");
-
-                    b.Property<DateTime>("At")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("at");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
-
-                    b.HasKey("Id")
-                        .HasName("pk_vehiclebrands");
-
-                    b.ToTable("vehiclebrands", "decisorframework_domain");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleCategory", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("boolean")
-                        .HasColumnName("archived");
-
-                    b.Property<DateTime>("At")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("at");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("integer")
-                        .HasColumnName("parentid");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
-
-                    b.HasKey("Id")
-                        .HasName("pk_vehiclecategories");
-
-                    b.HasIndex("ParentId")
-                        .HasDatabaseName("ix_vehiclecategories_parentid");
-
-                    b.ToTable("vehiclecategories", "decisorframework_domain");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleEngineKind", b =>
@@ -1710,6 +1759,44 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_vehicleimagebridges_vehicleid");
 
                     b.ToTable("vehicleimagebridges", "decisorframework_domain");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleKind", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_vehiclekinds");
+
+                    b.ToTable("vehiclekinds", "decisorframework_domain");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Essential.Persistence.Entities.Colaborator", b =>
@@ -2191,6 +2278,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("vacantid");
 
+                    b.Property<Guid>("WorkforceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("workforceid");
+
                     b.HasKey("Id")
                         .HasName("pk_ocupations");
 
@@ -2199,6 +2290,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("VacantId")
                         .HasDatabaseName("ix_ocupations_vacantid");
+
+                    b.HasIndex("WorkforceId")
+                        .HasDatabaseName("ix_ocupations_workforceid");
 
                     b.HasIndex("StaffId", "VacantId")
                         .IsUnique()
@@ -3576,6 +3670,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<Guid?>("ClassificcationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("classificcationid");
+
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
@@ -3600,8 +3698,15 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("productid");
 
+                    b.Property<decimal>("ReferenceAmount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("referenceamount");
+
                     b.HasKey("Id")
                         .HasName("pk_elaborations");
+
+                    b.HasIndex("ClassificcationId")
+                        .HasDatabaseName("ix_elaborations_classificcationid");
 
                     b.HasIndex("ProductId")
                         .HasDatabaseName("ix_elaborations_productid");
@@ -3619,6 +3724,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("sternid");
 
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_elaborationinputproductbridges");
 
@@ -3626,6 +3735,29 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_elaborationinputproductbridges_sternid");
 
                     b.ToTable("elaborationinputproductbridges", "decisorframework_production");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationInputProductClassificationBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_elaborationinputproductclassificationbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_elaborationinputproductclassificationbridges_sternid");
+
+                    b.ToTable("elaborationinputproductclassificationbridges", "decisorframework_production");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationOutputProductBridge", b =>
@@ -3637,6 +3769,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<Guid>("SternId")
                         .HasColumnType("uuid")
                         .HasColumnName("sternid");
+
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
 
                     b.Property<decimal>("MaxPerformanceCoefficient")
                         .HasColumnType("numeric")
@@ -3696,7 +3832,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("elaborationsteps", "decisorframework_production");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStepProductionRoleBridge", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStepWorkPositionBridge", b =>
                 {
                     b.Property<Guid>("ProwId")
                         .HasColumnType("uuid")
@@ -3719,12 +3855,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("participation");
 
                     b.HasKey("ProwId", "SternId")
-                        .HasName("pk_elaborationstepproductionrolebridges");
+                        .HasName("pk_elaborationstepworkpositionbridges");
 
                     b.HasIndex("SternId")
-                        .HasDatabaseName("ix_elaborationstepproductionrolebridges_sternid");
+                        .HasDatabaseName("ix_elaborationstepworkpositionbridges_sternid");
 
-                    b.ToTable("elaborationstepproductionrolebridges", "decisorframework_production");
+                    b.ToTable("elaborationstepworkpositionbridges", "decisorframework_production");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", b =>
@@ -3789,25 +3925,25 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("sternid");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("roleid");
-
                     b.Property<Guid>("StepId")
                         .HasColumnType("uuid")
                         .HasColumnName("stepid");
 
+                    b.Property<Guid>("WorkPositionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("workpositionid");
+
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_productioncolaboratorbridges");
-
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_productioncolaboratorbridges_roleid");
 
                     b.HasIndex("StepId")
                         .HasDatabaseName("ix_productioncolaboratorbridges_stepid");
 
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_productioncolaboratorbridges_sternid");
+
+                    b.HasIndex("WorkPositionId")
+                        .HasDatabaseName("ix_productioncolaboratorbridges_workpositionid");
 
                     b.ToTable("productioncolaboratorbridges", "decisorframework_production");
                 });
@@ -3822,19 +3958,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("sternid");
 
-                    b.Property<Guid>("RoleId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("roleid");
-
                     b.Property<Guid>("StepId")
                         .HasColumnType("uuid")
                         .HasColumnName("stepid");
 
+                    b.Property<Guid>("WorkPositionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("workpositionid");
+
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_productionemployeebridges");
-
-                    b.HasIndex("RoleId")
-                        .HasDatabaseName("ix_productionemployeebridges_roleid");
 
                     b.HasIndex("StepId")
                         .HasDatabaseName("ix_productionemployeebridges_stepid");
@@ -3842,10 +3975,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("SternId")
                         .HasDatabaseName("ix_productionemployeebridges_sternid");
 
+                    b.HasIndex("WorkPositionId")
+                        .HasDatabaseName("ix_productionemployeebridges_workpositionid");
+
                     b.ToTable("productionemployeebridges", "decisorframework_production");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlan", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -3868,6 +4004,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
                     b.Property<Guid>("DecisorId")
                         .HasColumnType("uuid")
                         .HasColumnName("decisorid");
@@ -3880,38 +4020,34 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("elaborationid");
 
-                    b.Property<DateTime>("PlannedFor")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("plannedfor");
-
-                    b.Property<Guid>("PlannerId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("plannerid");
-
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
+
+                    b.Property<DateTime>("RequestedFor")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("requestedfor");
 
                     b.Property<Guid>("ResponsibleId")
                         .HasColumnType("uuid")
                         .HasColumnName("responsibleid");
 
                     b.HasKey("Id")
-                        .HasName("pk_productionplans");
+                        .HasName("pk_productionorders");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_productionorders_authorid");
 
                     b.HasIndex("DecisorId")
-                        .HasDatabaseName("ix_productionplans_decisorid");
+                        .HasDatabaseName("ix_productionorders_decisorid");
 
                     b.HasIndex("ElaborationId")
-                        .HasDatabaseName("ix_productionplans_elaborationid");
-
-                    b.HasIndex("PlannerId")
-                        .HasDatabaseName("ix_productionplans_plannerid");
+                        .HasDatabaseName("ix_productionorders_elaborationid");
 
                     b.HasIndex("ResponsibleId")
-                        .HasDatabaseName("ix_productionplans_responsibleid");
+                        .HasDatabaseName("ix_productionorders_responsibleid");
 
-                    b.ToTable("productionplans", "decisorframework_production");
+                    b.ToTable("productionorders", "decisorframework_production");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionProductBridge", b =>
@@ -3944,7 +4080,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("productionproductbridges", "decisorframework_production");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionRole", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOffer", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -3959,6 +4095,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<DateTime?>("ClosedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("closedat");
+
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
@@ -3967,19 +4107,239 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
+                    b.Property<DateTime>("OpenAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("openat");
 
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
-                    b.HasKey("Id")
-                        .HasName("pk_productionroles");
+                    b.Property<Guid>("PropertyId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("propertyid");
 
-                    b.ToTable("productionroles", "decisorframework_production");
+                    b.HasKey("Id")
+                        .HasName("pk_propertyleaseoffers");
+
+                    b.HasIndex("PropertyId")
+                        .HasDatabaseName("ix_propertyleaseoffers_propertyid");
+
+                    b.ToTable("propertyleaseoffers", "decisorframework_production");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOfferOrganizationContactBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<string>("Argument")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("argument");
+
+                    b.Property<Guid?>("CredentialDocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("credentialdocumentid");
+
+                    b.Property<string>("StateIdentificationCode")
+                        .HasColumnType("text")
+                        .HasColumnName("stateidentificationcode");
+
+                    b.Property<string>("TaxIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("taxidentificationnumber");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_propertyleaseofferorganizationcontactbridges");
+
+                    b.HasIndex("CredentialDocumentId")
+                        .HasDatabaseName("ix_propertyleaseofferorganizationcontactbridges_credentialdocu~");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_propertyleaseofferorganizationcontactbridges_sternid");
+
+                    b.ToTable("propertyleaseofferorganizationcontactbridges", "decisorframework_production");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOfferPersonContactBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<string>("Argument")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("argument");
+
+                    b.Property<Guid>("BusinessKindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("businesskindid");
+
+                    b.Property<Guid?>("CredentialDocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("credentialdocumentid");
+
+                    b.Property<string>("TaxIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("taxidentificationnumber");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_propertyleaseofferpersoncontactbridges");
+
+                    b.HasIndex("BusinessKindId")
+                        .HasDatabaseName("ix_propertyleaseofferpersoncontactbridges_businesskindid");
+
+                    b.HasIndex("CredentialDocumentId")
+                        .HasDatabaseName("ix_propertyleaseofferpersoncontactbridges_credentialdocumentid");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_propertyleaseofferpersoncontactbridges_sternid");
+
+                    b.ToTable("propertyleaseofferpersoncontactbridges", "decisorframework_production");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOffer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<DateTime?>("ClosedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("closedat");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<DateTime>("OpenAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("openat");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vehicleid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_vehicleleaseoffers");
+
+                    b.HasIndex("VehicleId")
+                        .HasDatabaseName("ix_vehicleleaseoffers_vehicleid");
+
+                    b.ToTable("vehicleleaseoffers", "decisorframework_production");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOfferOrganizationContactBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<string>("Argument")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("argument");
+
+                    b.Property<Guid?>("CredentialDocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("credentialdocumentid");
+
+                    b.Property<string>("StateIdentificationCode")
+                        .HasColumnType("text")
+                        .HasColumnName("stateidentificationcode");
+
+                    b.Property<string>("TaxIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("taxidentificationnumber");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_vehicleleaseofferorganizationcontactbridges");
+
+                    b.HasIndex("CredentialDocumentId")
+                        .HasDatabaseName("ix_vehicleleaseofferorganizationcontactbridges_credentialdocum~");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_vehicleleaseofferorganizationcontactbridges_sternid");
+
+                    b.ToTable("vehicleleaseofferorganizationcontactbridges", "decisorframework_production");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOfferPersonContactBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<string>("Argument")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("argument");
+
+                    b.Property<Guid>("BusinessKindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("businesskindid");
+
+                    b.Property<Guid?>("CredentialDocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("credentialdocumentid");
+
+                    b.Property<string>("TaxIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("taxidentificationnumber");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_vehicleleaseofferpersoncontactbridges");
+
+                    b.HasIndex("BusinessKindId")
+                        .HasDatabaseName("ix_vehicleleaseofferpersoncontactbridges_businesskindid");
+
+                    b.HasIndex("CredentialDocumentId")
+                        .HasDatabaseName("ix_vehicleleaseofferpersoncontactbridges_credentialdocumentid");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_vehicleleaseofferpersoncontactbridges_sternid");
+
+                    b.ToTable("vehicleleaseofferpersoncontactbridges", "decisorframework_production");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", b =>
@@ -5663,7 +6023,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasDiscriminator().HasValue("PersonContactBudget");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlanDeparture", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrderDeparture", b =>
                 {
                     b.HasBaseType("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture");
 
@@ -5891,6 +6251,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClientDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientdocumentbridges_legalclients_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientdocumentbridges_documents_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClientSaleContract", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", "Client")
@@ -5954,6 +6335,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProviderDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProvider", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalproviderdocumentbridges_legalproviders_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalproviderdocumentbridges_documents_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProviderPurchasingContract", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProvider", "Provider")
@@ -5968,11 +6370,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClient", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
-                        .WithMany()
-                        .HasForeignKey("BusinessKindId")
-                        .HasConstraintName("fk_naturalclients_naturalbusinesskinds_businesskindid");
-
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
                         .WithOne()
                         .HasForeignKey("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClient", "ContactId")
@@ -5986,8 +6383,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_naturalclients_paymentterms_defaultpaymenttermid");
-
-                    b.Navigation("BusinessKind");
 
                     b.Navigation("Contact");
 
@@ -6009,6 +6404,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_naturalclientbankaccountbridges_bankaccounts_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClientDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClient", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientdocumentbridge_naturalclients_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientdocumentbridge_documents_sternid");
 
                     b.Navigation("Prow");
 
@@ -6038,11 +6454,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalProvider", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
-                        .WithMany()
-                        .HasForeignKey("BusinessKindId")
-                        .HasConstraintName("fk_naturalproviders_naturalbusinesskinds_businesskindid");
-
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
                         .WithOne()
                         .HasForeignKey("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalProvider", "ContactId")
@@ -6056,8 +6467,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_naturalproviders_paymentterms_defaultpaymenttermid");
-
-                    b.Navigation("BusinessKind");
 
                     b.Navigation("Contact");
 
@@ -6079,6 +6488,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_naturalproviderbankaccountbridges_bankaccounts_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalProviderDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalProvider", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalproviderdocumentbridge_naturalproviders_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalproviderdocumentbridge_documents_sternid");
 
                     b.Navigation("Prow");
 
@@ -6242,11 +6672,25 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_organizationcontacts_organizationidentities_identityid");
 
+                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PostalContactItem", "MainPostalContact")
+                        .WithMany()
+                        .HasForeignKey("MainPostalContactId")
+                        .HasConstraintName("fk_organizationcontacts_postalcontactitems_mainpostalcontactid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Representative")
+                        .WithMany()
+                        .HasForeignKey("RepresentativeId")
+                        .HasConstraintName("fk_organizationcontacts_personcontacts_representativeid");
+
                     b.Navigation("BusinessKind");
 
                     b.Navigation("CentralStateStructure");
 
                     b.Navigation("Identity");
+
+                    b.Navigation("MainPostalContact");
+
+                    b.Navigation("Representative");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationalUnity", b =>
@@ -6261,6 +6705,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
+                        .WithMany()
+                        .HasForeignKey("BusinessKindId")
+                        .HasConstraintName("fk_personcontacts_naturalbusinesskinds_businesskindid");
+
                     b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PersonIdentity", "Identity")
                         .WithOne()
                         .HasForeignKey("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "IdentityId")
@@ -6268,7 +6717,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_personcontacts_personidentities_identityid");
 
+                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PostalContactItem", "MainPostalContact")
+                        .WithMany()
+                        .HasForeignKey("MainPostalContactId")
+                        .HasConstraintName("fk_personcontacts_postalcontactitems_mainpostalcontactid");
+
+                    b.Navigation("BusinessKind");
+
                     b.Navigation("Identity");
+
+                    b.Navigation("MainPostalContact");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Property", b =>
@@ -6392,19 +6850,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Vehicle", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleBrand", "Brand")
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Brand", "Brand")
                         .WithMany()
                         .HasForeignKey("BrandId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_vehicles_vehiclebrands_brandid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleCategory", "Category")
-                        .WithMany()
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicles_vehiclecategories_categoryid");
+                        .HasConstraintName("fk_vehicles_brands_brandid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleEngineKind", "EngineKind")
                         .WithMany()
@@ -6416,9 +6867,14 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Image", "FeatureImage")
                         .WithMany()
                         .HasForeignKey("FeatureImageId")
+                        .HasConstraintName("fk_vehicles_images_featureimageid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleKind", "Kind")
+                        .WithMany()
+                        .HasForeignKey("KindId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_vehicles_images_featureimageid");
+                        .HasConstraintName("fk_vehicles_vehiclekinds_kindid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Structure", "Structure")
                         .WithMany()
@@ -6429,23 +6885,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.Navigation("Brand");
 
-                    b.Navigation("Category");
-
                     b.Navigation("EngineKind");
 
                     b.Navigation("FeatureImage");
 
+                    b.Navigation("Kind");
+
                     b.Navigation("Structure");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleCategory", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleCategory", "Parent")
-                        .WithMany()
-                        .HasForeignKey("ParentId")
-                        .HasConstraintName("fk_vehiclecategories_vehiclecategories_parentid");
-
-                    b.Navigation("Parent");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.VehicleImageBridge", b =>
@@ -6637,11 +7083,20 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_ocupations_vacants_vacantid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", "Workforce")
+                        .WithMany()
+                        .HasForeignKey("WorkforceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_ocupations_workforces_workforceid");
+
                     b.Navigation("Employee");
 
                     b.Navigation("Staff");
 
                     b.Navigation("Vacant");
+
+                    b.Navigation("Workforce");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Staff", b =>
@@ -7190,12 +7645,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.Elaboration", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Classification", "Classification")
+                        .WithMany()
+                        .HasForeignKey("ClassificcationId")
+                        .HasConstraintName("fk_elaborations_classifications_classificcationid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Product", "Product")
                         .WithMany()
                         .HasForeignKey("ProductId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_elaborations_products_productid");
+
+                    b.Navigation("Classification");
 
                     b.Navigation("Product");
                 });
@@ -7215,6 +7677,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_elaborationinputproductbridges_products_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationInputProductClassificationBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.Elaboration", "Prow")
+                        .WithMany("InputProductClassificationBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_elaborationinputproductclassificationbridges_elaborations_p~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Classification", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_elaborationinputproductclassificationbridges_classification~");
 
                     b.Navigation("Prow");
 
@@ -7254,21 +7737,21 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Elaboration");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStepProductionRoleBridge", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStepWorkPositionBridge", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStep", "Prow")
-                        .WithMany("ProductionRoleBridges")
+                        .WithMany("WorkPositionBridges")
                         .HasForeignKey("ProwId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_elaborationstepproductionrolebridges_elaborationsteps_prowid");
+                        .HasConstraintName("fk_elaborationstepworkpositionbridges_elaborationsteps_prowid");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionRole", "Stern")
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkPosition", "Stern")
                         .WithMany()
                         .HasForeignKey("SternId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_elaborationstepproductionrolebridges_productionroles_sternid");
+                        .HasConstraintName("fk_elaborationstepworkpositionbridges_workpositions_sternid");
 
                     b.Navigation("Prow");
 
@@ -7277,12 +7760,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlan", "Plan")
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", "Plan")
                         .WithOne("Production")
                         .HasForeignKey("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", "PlanId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_productions_productionplans_planid");
+                        .HasConstraintName("fk_productions_productionorders_planid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
                         .WithMany()
@@ -7305,13 +7788,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_productioncolaboratorbridges_productions_prowid");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_productioncolaboratorbridges_productionroles_roleid");
-
                     b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStep", "Step")
                         .WithMany()
                         .HasForeignKey("StepId")
@@ -7326,13 +7802,20 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_productioncolaboratorbridges_colaborators_sternid");
 
-                    b.Navigation("Prow");
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkPosition", "WorkPosition")
+                        .WithMany()
+                        .HasForeignKey("WorkPositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productioncolaboratorbridges_workpositions_workpositionid");
 
-                    b.Navigation("Role");
+                    b.Navigation("Prow");
 
                     b.Navigation("Step");
 
                     b.Navigation("Stern");
+
+                    b.Navigation("WorkPosition");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionEmployeeBridge", b =>
@@ -7343,13 +7826,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_productionemployeebridges_productions_prowid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionRole", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_productionemployeebridges_productionroles_roleid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStep", "Step")
                         .WithMany()
@@ -7365,50 +7841,57 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_productionemployeebridges_employees_sternid");
 
-                    b.Navigation("Prow");
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkPosition", "WorkPosition")
+                        .WithMany()
+                        .HasForeignKey("WorkPositionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productionemployeebridges_workpositions_workpositionid");
 
-                    b.Navigation("Role");
+                    b.Navigation("Prow");
 
                     b.Navigation("Step");
 
                     b.Navigation("Stern");
+
+                    b.Navigation("WorkPosition");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlan", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productionorders_employees_authorid");
+
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Decisor")
                         .WithMany()
                         .HasForeignKey("DecisorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_productionplans_employees_decisorid");
+                        .HasConstraintName("fk_productionorders_employees_decisorid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.Elaboration", "Elaboration")
                         .WithMany()
                         .HasForeignKey("ElaborationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_productionplans_elaborations_elaborationid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Planner")
-                        .WithMany()
-                        .HasForeignKey("PlannerId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_productionplans_employees_plannerid");
+                        .HasConstraintName("fk_productionorders_elaborations_elaborationid");
 
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Responsible")
                         .WithMany()
                         .HasForeignKey("ResponsibleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_productionplans_employees_responsibleid");
+                        .HasConstraintName("fk_productionorders_employees_responsibleid");
+
+                    b.Navigation("Author");
 
                     b.Navigation("Decisor");
 
                     b.Navigation("Elaboration");
-
-                    b.Navigation("Planner");
 
                     b.Navigation("Responsible");
                 });
@@ -7441,6 +7924,160 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Stern");
 
                     b.Navigation("UnitMeasurement");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOffer", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Property", "Property")
+                        .WithMany()
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseoffers_properties_propertyid");
+
+                    b.Navigation("Property");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOfferOrganizationContactBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "CredentialDocument")
+                        .WithMany()
+                        .HasForeignKey("CredentialDocumentId")
+                        .HasConstraintName("fk_propertyleaseofferorganizationcontactbridges_documents_cred~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOffer", "Prow")
+                        .WithMany("OrganizationContactBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferorganizationcontactbridges_propertyleaseo~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferorganizationcontactbridges_organizationco~");
+
+                    b.Navigation("CredentialDocument");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOfferPersonContactBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
+                        .WithMany()
+                        .HasForeignKey("BusinessKindId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferpersoncontactbridges_naturalbusinesskinds~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "CredentialDocument")
+                        .WithMany()
+                        .HasForeignKey("CredentialDocumentId")
+                        .HasConstraintName("fk_propertyleaseofferpersoncontactbridges_documents_credential~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOffer", "Prow")
+                        .WithMany("PersonContactBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferpersoncontactbridges_propertyleaseoffers_~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferpersoncontactbridges_personcontacts_stern~");
+
+                    b.Navigation("BusinessKind");
+
+                    b.Navigation("CredentialDocument");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOffer", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseoffers_vehicles_vehicleid");
+
+                    b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOfferOrganizationContactBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "CredentialDocument")
+                        .WithMany()
+                        .HasForeignKey("CredentialDocumentId")
+                        .HasConstraintName("fk_vehicleleaseofferorganizationcontactbridges_documents_crede~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOffer", "Prow")
+                        .WithMany("OrganizationContactBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferorganizationcontactbridges_vehicleleaseoff~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferorganizationcontactbridges_organizationcon~");
+
+                    b.Navigation("CredentialDocument");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOfferPersonContactBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
+                        .WithMany()
+                        .HasForeignKey("BusinessKindId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferpersoncontactbridges_naturalbusinesskinds_~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "CredentialDocument")
+                        .WithMany()
+                        .HasForeignKey("CredentialDocumentId")
+                        .HasConstraintName("fk_vehicleleaseofferpersoncontactbridges_documents_credentiald~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOffer", "Prow")
+                        .WithMany("PersonContactBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferpersoncontactbridges_vehicleleaseoffers_pr~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferpersoncontactbridges_personcontacts_sternid");
+
+                    b.Navigation("BusinessKind");
+
+                    b.Navigation("CredentialDocument");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", b =>
@@ -8337,11 +8974,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Contact");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlanDeparture", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrderDeparture", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", null)
                         .WithOne()
-                        .HasForeignKey("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlanDeparture", "Id")
+                        .HasForeignKey("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrderDeparture", "Id")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -8444,21 +9081,29 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", b =>
                 {
                     b.Navigation("BankAccountBridges");
+
+                    b.Navigation("DocumentBridges");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProvider", b =>
                 {
                     b.Navigation("BankAccountBridges");
+
+                    b.Navigation("DocumentBridges");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClient", b =>
                 {
                     b.Navigation("BankAccountBridges");
+
+                    b.Navigation("DocumentBridges");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalProvider", b =>
                 {
                     b.Navigation("BankAccountBridges");
+
+                    b.Navigation("DocumentBridges");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.ProductValueProposition", b =>
@@ -8555,6 +9200,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 {
                     b.Navigation("InputProductBridges");
 
+                    b.Navigation("InputProductClassificationBridges");
+
                     b.Navigation("OutputProductBridges");
 
                     b.Navigation("Steps");
@@ -8562,7 +9209,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationStep", b =>
                 {
-                    b.Navigation("ProductionRoleBridges");
+                    b.Navigation("WorkPositionBridges");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", b =>
@@ -8574,9 +9221,23 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("ProductBridges");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionPlan", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", b =>
                 {
                     b.Navigation("Production");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOffer", b =>
+                {
+                    b.Navigation("OrganizationContactBridges");
+
+                    b.Navigation("PersonContactBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOffer", b =>
+                {
+                    b.Navigation("OrganizationContactBridges");
+
+                    b.Navigation("PersonContactBridges");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", b =>

@@ -7,7 +7,7 @@
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.SalaryStandardConfigurationPage"
-    x:TypeArguments="interop_common_display_models:SalaryStandardDisplayModel,presentation_configuration_page_models:SalaryStandardConfigurationPageModel"
+    x:TypeArguments="interop_common_display_models:SalaryStandardDisplayModel,interop_common_display_models:SalaryStandardDisplayModel,presentation_configuration_page_models:SalaryStandardConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:SalaryStandardConfigurationPageModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem 

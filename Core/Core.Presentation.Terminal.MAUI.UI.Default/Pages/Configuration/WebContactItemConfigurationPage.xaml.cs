@@ -1,6 +1,6 @@
 namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class WebContactItemConfigurationPage : UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.WebContactItemDisplayModel, Models.Page.Configuration.WebContactItemConfigurationPageModel>
+public partial class WebContactItemConfigurationPage : UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.WebContactItemDisplayModel, Interop.API.Common.Models.Display.WebContactItemDisplayModel, Models.Page.Configuration.WebContactItemConfigurationPageModel>
 {
     public WebContactItemConfigurationPage(System.Action<Interop.API.Common.Models.Display.WebContactItemDisplayModel> successAction, Models.Page.Configuration.WebContactItemConfigurationPageModel model) : base(successAction, model)
     {

@@ -79,7 +79,7 @@
     </ShellContent>
     <ShellContent
         Title="Vehículos"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:VehiclesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -90,7 +90,7 @@
     <MenuFlyoutItem Text="Complementarios" IsEnabled="False" />
     <ShellContent
         Title="Marcas"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:BrandsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -120,8 +120,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Categorías de Vehículo"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Tipos de Vehículo"
+        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:VehicleKindsListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

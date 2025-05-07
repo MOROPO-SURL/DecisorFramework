@@ -6,8 +6,10 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
     public class ElaborationConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ElaborationDisplayModel>
     {
         private ProductDisplayModel product;
+        private ClassificationDisplayModel classification;
         private string description;
         private int priority = 1;
+        private decimal referenceAmount;
         private decimal minPerformanceCoefficient;
         private decimal maxPerformanceCoefficient;
 
@@ -17,8 +19,10 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
             {
                 Id = model.Id;
                 Product = model.Product;
+                Classification = model.Classification;
                 Description = model.Description;
                 Priority = model.Priority;
+                ReferenceAmount = model.ReferenceAmount;
                 MinPerformanceCoefficient = model.MinPerformanceCoefficient;
                 MaxPerformanceCoefficient = model.MaxPerformanceCoefficient;
 
@@ -34,9 +38,13 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public ProductDisplayModel Product { get => product; set => SetProperty(ref product, value); }
 
+        public ClassificationDisplayModel Classification { get => classification; set => SetProperty(ref classification, value); }
+
         public string Description { get => description; set => SetProperty(ref description, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
+
+        public decimal ReferenceAmount { get => referenceAmount; set => SetProperty(ref referenceAmount, value); }
 
         public decimal MinPerformanceCoefficient { get => minPerformanceCoefficient; set => SetProperty(ref minPerformanceCoefficient, value); }
 
@@ -47,5 +55,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
         public ObservableCollection<ProductDisplayModel> OutputProducts { get; set; } = [];
 
         public ObservableCollection<Interop.API.Common.Models.Display.ElaborationStepDisplayModel> Steps { get; set; } = [];
+
+        public ObservableCollection<ClassificationDisplayModel> AvailableClassifications { get; set; } = [];
     }
 }

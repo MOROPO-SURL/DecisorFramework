@@ -1,27 +1,26 @@
-<?xml version="1.0" encoding="utf-8" ?>
-<core_ui_configuration_pages:BaseConfigurationContentPage 
+<core_ui_base_pages:ConfigurationBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
-    xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.WorkforceConfigurationPage"
-    x:TypeArguments="interop_common_display_models:WorkforceDisplayModel"
+    x:TypeArguments="interop_common_display_models:WorkforceDisplayModel,interop_common_display_models:WorkforceDisplayModel,presentation_configuration_page_models:WorkforceConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:WorkforceConfigurationPageModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem 
         Text="Aplicar"
-        Clicked="ApplyClickableControl_Clicked">
+        Clicked="ApplyControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
         Text="Cancelar"
-        Clicked="CancelClickableControl_Clicked">
+        Clicked="CancelControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -81,7 +80,7 @@
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <local_card_views:OrganizationalUnityAndVacantsCardView
+                                        <local_card_views:WorkforceConfigurationOrganizationalUnityAndVacantsCardView
                                             Margin="10"
                                             AddVacantButtonClick="AddVacantButton_Clicked"
                                             VacantEditionButtonClick="VacantEditionButton_Clicked"
@@ -105,4 +104,4 @@
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>
-</core_ui_configuration_pages:BaseConfigurationContentPage>
+</core_ui_base_pages:ConfigurationBaseContentPage>

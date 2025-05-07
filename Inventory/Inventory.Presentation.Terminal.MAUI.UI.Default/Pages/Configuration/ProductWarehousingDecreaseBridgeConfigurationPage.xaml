@@ -1,0 +1,101 @@
+<core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    x:Class="MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ProductWarehousingDecreaseBridgeConfigurationPage"
+    x:TypeArguments="interop_common_bridge_models:ProductWarehousingDecreaseBridgeModel,interop_common_bridge_models:ProductWarehousingDecreaseBridgeModel,presentation_configuration_page_models:ProductWarehousingDecreaseBridgeConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:ProductWarehousingDecreaseBridgeConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyControl_Invoked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelControl_Invoked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <VerticalStackLayout Spacing="0" Padding="8">
+            <FlexLayout 
+                Wrap="Wrap"
+                AlignItems="Start" AlignContent="Start">
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=12}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo de Merma" />
+                    <Picker 
+                        ItemsSource="{Binding AvailableKinds}"
+                        SelectedItem="{Binding Kind}" />
+                </VerticalStackLayout>
+                <Grid 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, SmallContainerColumn=6}}"
+                    Margin="4"
+                    ColumnSpacing="6" RowSpacing="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="120" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.ColumnSpan="2" Grid.Row="0"
+                        Style="{StaticResource CaptionFieldLabelStyle}" 
+                        Text="% Mínimo" />
+                    <Slider 
+                        Grid.Column="0" Grid.Row="1"
+                        VerticalOptions="Center"
+                        Minimum="0" Maximum="100"
+                        Value="{Binding MinDecrease}" />
+                    <Entry
+                        Grid.Column="1" Grid.Row="1"
+                        Text="{Binding MinDecrease, StringFormat='{0:F2} %'}" />
+                </Grid>
+                <Grid 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, SmallContainerColumn=6}}"
+                    Margin="4"
+                    ColumnSpacing="6" RowSpacing="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="120" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.ColumnSpan="2" Grid.Row="0"
+                        Style="{StaticResource CaptionFieldLabelStyle}" 
+                        Text="% Máximo" />
+                    <Slider 
+                        Grid.Column="0" Grid.Row="1"
+                        VerticalOptions="Center"
+                        Minimum="0" Maximum="100"
+                        Value="{Binding MaxDecrease}" />
+                    <Entry
+                        Grid.Column="1" Grid.Row="1"
+                        Text="{Binding MaxDecrease, StringFormat='{0:F2} %'}" />
+                </Grid>
+            </FlexLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</core_ui_base_pages:ConfigurationBaseContentPage>

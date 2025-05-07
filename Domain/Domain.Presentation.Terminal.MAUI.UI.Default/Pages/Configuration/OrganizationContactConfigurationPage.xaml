@@ -10,7 +10,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.OrganizationContactConfigurationPage"
-    x:TypeArguments="interop_common_display_models:OrganizationContactDisplayModel,presentation_configuration_page_models:OrganizationContactConfigurationPageModel"
+    x:TypeArguments="interop_common_display_models:OrganizationContactDisplayModel,interop_common_display_models:OrganizationContactDisplayModel,presentation_configuration_page_models:OrganizationContactConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:OrganizationContactConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -23,15 +23,15 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-        Text="Aplicar"
-        Clicked="ApplyControl_Invoked">
+            Text="Aplicar"
+            Clicked="ApplyControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
-        Text="Cancelar"
-        Clicked="CancelControl_Invoked">
+            Text="Cancelar"
+            Clicked="CancelControl_Invoked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -85,7 +85,7 @@
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=9, MediumContainerColumn=6, SmallContainerColumn=12}}"
                                 Margin="4"
                                 Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Estado Civil" />
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
                                 <Picker 
                                     x:Name="BusinessKindPicker"
                                     ItemsSource="{Binding AvailableBusinessKinds, Mode=OneTime}" 

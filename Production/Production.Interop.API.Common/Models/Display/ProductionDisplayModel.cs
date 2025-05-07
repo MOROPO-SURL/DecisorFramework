@@ -12,7 +12,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public System.DateTime At { get; set; }
 
-        public ProductionPlanDisplayModel Plan { get; set; }
+        public ProductionOrderDisplayModel Plan { get; set; }
 
         public decimal Amount { get; set; }
 
@@ -52,13 +52,13 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
                 var model = new ProductionEmployeeBridgeModel
                 {
                     Employee = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
-                    Role = new ProductionRoleDisplayModel(),
+                    WorkPosition = new HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel(),
                     Step = new ElaborationStepDisplayModel()
                 };
 
                 model.Employee.Import(bridge.Stern);
                 model.Step.Import(bridge.Step);
-                model.Role.Import(bridge.Role);
+                model.WorkPosition.Import(bridge.WorkPosition);
 
                 return model;
             }).ToArray();
@@ -67,20 +67,20 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
                 var model = new ProductionColaboratorBridgeModel
                 {
                     Colaborator = new Essential.Interop.API.Common.Models.Display.ColaboratorDisplayModel(),
-                    Role = new ProductionRoleDisplayModel(),
+                    WorkPosition = new HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel(),
                     Step = new ElaborationStepDisplayModel()
                 };
 
                 model.Colaborator.Import(bridge.Stern);
                 model.Step.Import(bridge.Step);
-                model.Role.Import(bridge.Role);
+                model.WorkPosition.Import(bridge.WorkPosition);
 
                 return model;
             }).ToArray();
 
             if (entity.Plan != null)
             {
-                Plan = new ProductionPlanDisplayModel();
+                Plan = new ProductionOrderDisplayModel();
 
                 Plan.Import(entity.Plan);
             }
