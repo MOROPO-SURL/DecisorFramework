@@ -9,6 +9,8 @@ public partial class OrganizationContactPickPage : Caney.MVVM.Core.Pages.Content
 {
     private System.Action<OrganizationContactDisplayModel> pickCompleteAction;
 
+    private bool pickedFlag = false;
+
     public OrganizationContactPickPage(System.Action<OrganizationContactDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
@@ -24,7 +26,12 @@ public partial class OrganizationContactPickPage : Caney.MVVM.Core.Pages.Content
     {
         base.OnAppearing();
 
-        if (IsEnabled) return;
+        if (IsEnabled)
+        {
+            if (pickedFlag) (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+
+            return;
+        }
 
         LoadItems();
 
@@ -45,6 +52,11 @@ public partial class OrganizationContactPickPage : Caney.MVVM.Core.Pages.Content
         LoadItems();
     }
 
+    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushPageAsync(new Configuration.OrganizationContactConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.OrganizationContactConfigurationPageModel(null)));
+    }
+
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
@@ -55,6 +67,13 @@ public partial class OrganizationContactPickPage : Caney.MVVM.Core.Pages.Content
         pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as OrganizationContactDisplayModel);
 
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
+    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.OrganizationContactDisplayModel model)
+    {
+        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+
+        pickedFlag = true;
     }
 
     private void LoadItems()

@@ -8,6 +8,8 @@ public partial class NaturalProviderPickPage : Caney.MVVM.Core.Pages.ContentPage
 {
     private System.Action<Interop.API.Common.Models.Display.NaturalProviderDisplayModel> pickCompleteAction;
 
+    private bool pickedFlag = false;
+
     public NaturalProviderPickPage(System.Action<Interop.API.Common.Models.Display.NaturalProviderDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
@@ -23,7 +25,12 @@ public partial class NaturalProviderPickPage : Caney.MVVM.Core.Pages.ContentPage
     {
         base.OnAppearing();
 
-        if (IsEnabled) return;
+        if (IsEnabled)
+        {
+            if (pickedFlag) (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+
+            return;
+        }
 
         LoadItems();
 
@@ -44,6 +51,11 @@ public partial class NaturalProviderPickPage : Caney.MVVM.Core.Pages.ContentPage
         LoadItems();
     }
 
+    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushPageAsync(new Configuration.NaturalProviderConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.NaturalProviderConfigurationPageModel(null)));
+    }
+
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
@@ -54,6 +66,13 @@ public partial class NaturalProviderPickPage : Caney.MVVM.Core.Pages.ContentPage
         pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.NaturalProviderDisplayModel);
 
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
+    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
+    {
+        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+
+        pickedFlag = true;
     }
 
     private void LoadItems()
