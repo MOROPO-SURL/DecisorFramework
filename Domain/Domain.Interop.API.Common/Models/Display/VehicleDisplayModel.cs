@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
+﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
+
+namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 {
     public class VehicleDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Vehicle, System.Guid>
     {
@@ -41,6 +43,8 @@
         public double TechnicalAvailabilityIndex { get; set; }
 
         public string Description { get; set; }
+
+        public ImageDisplayModel[] Images { get; set; }
 
         public void Import(Persistence.Entities.Vehicle entity)
         {

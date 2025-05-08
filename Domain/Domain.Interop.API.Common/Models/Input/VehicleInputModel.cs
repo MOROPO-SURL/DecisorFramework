@@ -1,4 +1,8 @@
-﻿namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
+﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+using System.Collections.Generic;
+
+namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 {
     public class VehicleInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Vehicle, System.Guid>
     {
@@ -44,6 +48,9 @@
 
         [System.ComponentModel.DataAnnotations.Range(0d, 100d)]
         public double TechnicalAvailabilityIndex { get; set; }
+
+        public List<ImageInputModel> IncomingImageItems { get; set; } = new List<ImageInputModel>();
+        public List<ImageDisplayModel> OutgoingImagetItems { get; set; } = new List<ImageDisplayModel>();
 
         public Persistence.Entities.Vehicle Export()
         {
