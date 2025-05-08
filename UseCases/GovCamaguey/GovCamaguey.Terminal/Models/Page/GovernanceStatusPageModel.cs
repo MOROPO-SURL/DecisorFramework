@@ -5,9 +5,9 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page
 {
     public class GovernanceStatusPageModel : Framework.Caney.MVVM.Core.Models.Page.BasePageModel
     {
-        private ObjectiveDisplayModel objective;
+        private View.ObjectiveViewModel objective;
 
-        public ObjectiveDisplayModel Objective { get => objective; set => SetProperty(ref objective, value); }
+        public View.ObjectiveViewModel Objective { get => objective; set => SetProperty(ref objective, value); }
 
         public ObservableCollection<ObjectiveDisplayModel> AvaialbleObjetives { get; set; } = [];
     }

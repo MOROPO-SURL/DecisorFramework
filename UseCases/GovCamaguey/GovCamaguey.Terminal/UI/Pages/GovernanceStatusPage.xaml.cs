@@ -127,7 +127,7 @@ public partial class GovernanceStatusPage : Microsoft.Maui.Controls.ContentPage
                                     item.Balance = target?.Amount ?? 0;
                                 }
 
-                                ConcreteBindingContext.Objective = model;
+                                ConcreteBindingContext.Objective = new Models.View.ObjectiveViewModel(model);
                                 ConcreteBindingContext.IsBusy = false;
                             }
                         });
