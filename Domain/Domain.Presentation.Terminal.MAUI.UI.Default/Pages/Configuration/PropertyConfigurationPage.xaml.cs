@@ -1,14 +1,19 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
-using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
 public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<PropertyDisplayModel, PropertyDisplayModel, Models.Page.Configuration.PropertyConfigurationPageModel>
 {
-    private byte[] imagePickedData;
-    private string imageContentType;
+    private ImageInputModel featureImagePickedModel;
+
+    private readonly List<ImageInputModel> incomingImages = [];
+    private readonly List<ImageDisplayModel> outgoingImages = [];
 
     public PropertyConfigurationPage(System.Action<PropertyDisplayModel> successAction, Models.Page.Configuration.PropertyConfigurationPageModel model) : base(successAction, model)
     {
@@ -49,7 +54,7 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
     {
         base.DisposeUnmanagementResources();
 
-        imagePickedData = null;
+        featureImagePickedModel = null;
     }
 
     protected override async System.Threading.Tasks.Task<PropertyDisplayModel> PerformCreationAsync()
@@ -66,7 +71,7 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
             Area = ConcreteBindingContext.Area,
             Description = ConcreteBindingContext.Description,
-            PostalContact = new Core.Interop.API.Common.Models.Input.PostalContactItemInputModel
+            PostalContact = new PostalContactItemInputModel
             {
                 Label = ConcreteBindingContext.PostalContact.Label,
                 Address = ConcreteBindingContext.PostalContact.Address,
@@ -74,18 +79,16 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
                 ZipCode = ConcreteBindingContext.PostalContact.ZipCode,
                 Latitude = ConcreteBindingContext.PostalContact.Latitude,
                 Longitude = ConcreteBindingContext.PostalContact.Longitude
-            }
+            },
+            IncomingImageItems = incomingImages
         };
 
-        if (imagePickedData != null)
+        if (featureImagePickedModel != null)
         {
-            model.FeatureImage = new Core.Interop.API.Common.Models.Input.ImageInputModel
-            {
-                Id = System.Guid.NewGuid(),
-                ContentData = imagePickedData,
-                ContentType = imageContentType,
-                About = $"{EntityTypeName} {model.Id}"
-            };
+            featureImagePickedModel.Id = System.Guid.NewGuid();
+            featureImagePickedModel.About = $"{EntityTypeName} {model.Id}";
+
+            model.FeatureImage = featureImagePickedModel;
         }
 
         await apiConnectClient.CreateAsync(model);
@@ -107,7 +110,7 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
             Area = ConcreteBindingContext.Area,
             Description = ConcreteBindingContext.Description,
-            PostalContact = new Core.Interop.API.Common.Models.Input.PostalContactItemInputModel
+            PostalContact = new PostalContactItemInputModel
             {
                 Label = ConcreteBindingContext.PostalContact.Label,
                 Address = ConcreteBindingContext.PostalContact.Address,
@@ -115,18 +118,17 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
                 ZipCode = ConcreteBindingContext.PostalContact.ZipCode,
                 Latitude = ConcreteBindingContext.PostalContact.Latitude,
                 Longitude = ConcreteBindingContext.PostalContact.Longitude
-            }
+            },
+            IncomingImageItems = incomingImages,
+            OutgoingImagetItems = outgoingImages
         };
 
-        if (imagePickedData != null)
+        if (featureImagePickedModel != null)
         {
-            model.FeatureImage = new Core.Interop.API.Common.Models.Input.ImageInputModel
-            {
-                Id = ConcreteBindingContext.FeatureImageId ?? default,
-                ContentData = imagePickedData,
-                ContentType = imageContentType,
-                About = $"{EntityTypeName} {model.Id}"
-            };
+            featureImagePickedModel.Id = System.Guid.NewGuid();
+            featureImagePickedModel.About = $"{EntityTypeName} {model.Id}";
+
+            model.FeatureImage = featureImagePickedModel;
         }
 
         await apiConnectClient.EditAsync(model);
@@ -197,203 +199,67 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
             }
         });
     }
-
-    private async void ImageLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    private void ImageLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        if (!Microsoft.Maui.Media.MediaPicker.IsCaptureSupported) PresentForImagePick();
-
-        var action = await DisplayActionSheet("Seleccionar imagen desde", "Cancelar", null, CommonActionSheetConstants.PICKIMAGE_OPTION_CAMARA, CommonActionSheetConstants.PICKIMAGE_OPTION_GALLERY);
-
-        if (action == CommonActionSheetConstants.PICKIMAGE_OPTION_CAMARA)
-        {
-            var permission = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.Camera>();
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                permission = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.Camera>();
-            }
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    DisplayAlert("Aviso", string.Format("El permiso para acceder a cámara del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
-
-                    ConcreteBindingContext.IsBusy = false;
-                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
-                });
-
-                return;
-            }
-
-            Dispatcher.Dispatch(() =>
-            {
-                ConcreteBindingContext.IsBusy = true;
-                ConcreteBindingContext.BusyProgressMessage = "Capturando imagen ...";
-            });
-
-            await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(1));
-
-            Dispatcher.Dispatch(() =>
-            {
-                ConcreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
-            });
-
-            await Microsoft.Maui.Media.MediaPicker.CapturePhotoAsync().ContinueWith(PickedImageContinuationTask);
-        }
-        else if (action == CommonActionSheetConstants.PICKIMAGE_OPTION_GALLERY)
-        {
-            PresentForImagePick();
-        }
+        Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, FeatureImagePickSuccess_Callback);
+    }
+    private void ImageItemAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, ItemImagePickSuccess_Callback);
     }
 
-    private void PickedImageCroppingComplete_Callback(SkiaSharp.SKBitmap result)
+    private void ImageItemRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (result != null)
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta imagen?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
-            using (var skImage = SkiaSharp.SKImage.FromBitmap(result))
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
             {
-                using (var skData = skImage.Encode(SkiaSharp.SKEncodedImageFormat.Jpeg, 75))
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Microsoft.Maui.Controls.ImageSource;
+
+                if (target is Microsoft.Maui.Controls.StreamImageSource)
                 {
-                    imagePickedData = skData.ToArray();
+                    var incomingImageSources = ConcreteBindingContext.ItemImageSources.OfType<Microsoft.Maui.Controls.StreamImageSource>().ToList();
+
+                    var index = incomingImageSources.IndexOf(target as Microsoft.Maui.Controls.StreamImageSource);
+
+                    incomingImages.RemoveAt(index);
                 }
-            }
-
-            result.Dispose();
-
-            ConcreteBindingContext.FeatureImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
-
-            hasChangesFlag = true;
-        }
-
-        this.NavigationPopModalPageAsync();
-
-        ConcreteBindingContext.IsBusy = false;
-        ConcreteBindingContext.BusyProgressMessage = string.Empty;
-    }
-
-    private async void PresentForImagePick()
-    {
-        if (Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.iOS)
-        {
-            var permission = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.Photos>();
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                permission = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.Photos>();
-            }
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                Dispatcher.Dispatch(() =>
+                else
                 {
-                    DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
+                    var outgoingImageSources = ConcreteBindingContext.ItemImageSources.OfType<Microsoft.Maui.Controls.UriImageSource>().ToList();
 
-                    ConcreteBindingContext.IsBusy = false;
-                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
-                });
+                    var index = outgoingImageSources.IndexOf(target as Microsoft.Maui.Controls.UriImageSource);
 
-                return;
-            }
-        }
-        else
-        {
-            var permission = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.StorageRead>();
+                    outgoingImages.Add(ConcreteBindingContext.ItemImageModels[index]);
 
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                permission = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.StorageRead>();
-            }
+                    ConcreteBindingContext.ItemImageModels.RemoveAt(index);
+                }
 
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
+                ConcreteBindingContext.ItemImageSources.Remove(target);
 
-                    ConcreteBindingContext.IsBusy = false;
-                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
-                });
-
-                return;
-            }
-        }
-
-        Dispatcher.Dispatch(() =>
-        {
-            ConcreteBindingContext.IsBusy = true;
-            ConcreteBindingContext.BusyProgressMessage = "Seleccionando imagen ...";
-        });
-
-        await Microsoft.Maui.Media.MediaPicker.PickPhotoAsync().ContinueWith(PickedImageContinuationTask);
-    }
-
-    private async System.Threading.Tasks.Task PickedImageContinuationTask(System.Threading.Tasks.Task<Microsoft.Maui.Storage.FileResult> task)
-    {
-        if (task.Result == null)
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                ConcreteBindingContext.IsBusy = false;
-                ConcreteBindingContext.BusyProgressMessage = string.Empty;
-            });
-
-            return;
-        }
-
-        await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromMilliseconds(100));
-
-        Dispatcher.Dispatch(() =>
-        {
-            ConcreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
-        });
-
-        SkiaSharp.SKBitmap croppingImageTarget = null;
-
-        using (var imageFileStream = await task.Result.OpenReadAsync())
-        {
-            using (var skStream = new SkiaSharp.SKManagedStream(imageFileStream))
-            {
-                croppingImageTarget = SkiaSharp.SKBitmap.Decode(skStream);
-            }
-        }
-
-        Dispatcher.Dispatch(() =>
-        {
-            imageContentType = task.Result.ContentType;
-
-            DisplayAlert("Recortar", "Desea recortar esta imagen?", "Si", "No").ContinueWith(cropAskTask =>
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    if (cropAskTask.Result)
-                    {
-                        ConcreteBindingContext.BusyProgressMessage = "Recortando imagen ...";
-
-                        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.ImageCropPage(croppingImageTarget, PickedImageCroppingComplete_Callback)));
-                    }
-                    else
-                    {
-                        using (var skImage = SkiaSharp.SKImage.FromBitmap(croppingImageTarget))
-                        {
-                            using (var skData = skImage.Encode(SkiaSharp.SKEncodedImageFormat.Jpeg, 75))
-                            {
-                                imagePickedData = skData.ToArray();
-                            }
-                        }
-
-                        croppingImageTarget.Dispose();
-
-                        ConcreteBindingContext.FeatureImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
-
-                        hasChangesFlag = true;
-
-                        ConcreteBindingContext.IsBusy = false;
-                        ConcreteBindingContext.BusyProgressMessage = string.Empty;
-                    }
-                });
+                hasChangesFlag = true;
             });
         });
+    }
+
+    private void FeatureImagePickSuccess_Callback(ImageInputModel model)
+    {
+        featureImagePickedModel = model;
+
+        ConcreteBindingContext.FeatureImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(featureImagePickedModel.ContentData));
+
+        hasChangesFlag = true;
+    }
+
+    private void ItemImagePickSuccess_Callback(ImageInputModel model)
+    {
+        incomingImages.Add(model);
+
+        ConcreteBindingContext.ItemImageSources.Add(Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(model.ContentData)));
+
+        hasChangesFlag = true;
     }
 
     private void PostalContactConfigurationSuccess_Callback(Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel model)

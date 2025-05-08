@@ -15,7 +15,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         [System.ComponentModel.DataAnnotations.Required]
         public string Model { get; set; }
 
-        public Core.Interop.API.Common.Models.Input.ImageInputModel FeatureImage { get; set; }
+        public ImageInputModel FeatureImage { get; set; }
 
         public System.Guid StructureId { get; set; }
 
