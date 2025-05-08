@@ -12,5 +12,14 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CentralStateStructureId))]
         public Legal.Persistence.Entities.CentralStateStructure CentralStateStructure { get; set; }
         public System.Guid? CentralStateStructureId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]+$")]
+        public string TaxIdentificationNumber { get; set; }
+
+        public string StateIdentificationCode { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(RepresentativeId))]
+        public PersonContact Representative { get; set; }
+        public System.Guid? RepresentativeId { get; set; }
     }
 }

@@ -2,7 +2,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProformaSectionClauseBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Models.View.SectionClauseBridgeViewModel, Models.Page.Configuration.ProformaSectionClauseBridgeConfigurationPageModel>
+public partial class ProformaSectionClauseBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Models.View.SectionClauseBridgeViewModel, Models.View.SectionClauseBridgeViewModel, Models.Page.Configuration.ProformaSectionClauseBridgeConfigurationPageModel>
 {
     public ProformaSectionClauseBridgeConfigurationPage(System.Action<Models.View.SectionClauseBridgeViewModel> successAction, Models.Page.Configuration.ProformaSectionClauseBridgeConfigurationPageModel model) : base(successAction, model)
     {
@@ -37,6 +37,16 @@ public partial class ProformaSectionClauseBridgeConfigurationPage : Core.Present
     protected override System.Threading.Tasks.Task<Models.View.SectionClauseBridgeViewModel> PerformEditionAsync()
     {
         throw new System.NotImplementedException();
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)

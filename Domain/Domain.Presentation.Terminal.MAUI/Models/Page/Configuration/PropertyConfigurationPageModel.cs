@@ -1,6 +1,8 @@
 ﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Extensions;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -37,6 +39,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
                     FeatureImageId = model.FeatureImage.Id;
                     FeatureImageSource = model.FeatureImage.ToImageSource();
                 }
+
+                ItemImageSources = new ObservableCollection<Microsoft.Maui.Controls.ImageSource>(model.Images.Select(_model => _model.ToImageSource()));
+                ItemImageModels = model.Images.ToList();
             }
         }
 
@@ -61,6 +66,10 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public decimal Area { get => area; set => SetProperty(ref area, value); }
 
         public string Description { get => description; set => SetProperty(ref description, value); }
+
+        public ObservableCollection<Microsoft.Maui.Controls.ImageSource> ItemImageSources { get; set; } = [];
+
+        public System.Collections.Generic.List<ImageDisplayModel> ItemImageModels { get; set; }
 
         public PropertyKindDisplayModel[] AvailableKinds { get; set; }
 

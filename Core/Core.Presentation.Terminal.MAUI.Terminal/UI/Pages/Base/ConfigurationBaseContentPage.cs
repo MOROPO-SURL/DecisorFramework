@@ -3,14 +3,15 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 {
-    public class ConfigurationBaseContentPage<TModel, TConfigurationPageModel> : Caney.MVVM.Core.Pages.ContentPage
-        where TModel : class
-        where TConfigurationPageModel : Models.Page.Contract.AbstractConfigurationPageModel<TModel>
+    public class ConfigurationBaseContentPage<TInModel, TOutModel, TConfigurationPageModel> : Caney.MVVM.Core.Pages.ContentPage
+        where TInModel : class
+        where TOutModel : class
+        where TConfigurationPageModel : Models.Page.Contract.AbstractConfigurationPageModel<TInModel>
     {
-        private readonly System.Action<TModel> successCallbackAction;
+        private readonly System.Action<TOutModel> successCallbackAction;
         protected bool hasChangesFlag;
 
-        public ConfigurationBaseContentPage(System.Action<TModel> successCallbackAction, TConfigurationPageModel bindingContextModel)
+        public ConfigurationBaseContentPage(System.Action<TOutModel> successCallbackAction, TConfigurationPageModel bindingContextModel)
         {
             this.successCallbackAction = successCallbackAction;
 
@@ -30,7 +31,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected override bool OnBackButtonPressed()
         {
-            CancelControl_Invoked(this, System.EventArgs.Empty);
+            OnCancel(this, System.EventArgs.Empty);
 
             return true;
         }
@@ -39,16 +40,16 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected TConfigurationPageModel ConcreteBindingContext => (TConfigurationPageModel)BindingContext;
 
-        protected virtual System.Threading.Tasks.Task<TModel> PerformCreationAsync() => throw new System.NotImplementedException();
+        protected virtual System.Threading.Tasks.Task<TOutModel> PerformCreationAsync() => throw new System.NotImplementedException();
 
-        protected virtual System.Threading.Tasks.Task<TModel> PerformEditionAsync() => throw new System.NotImplementedException();
+        protected virtual System.Threading.Tasks.Task<TOutModel> PerformEditionAsync() => throw new System.NotImplementedException();
 
         private void PageModel_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
         {
             hasChangesFlag = true;
         }
 
-        protected void ApplyControl_Invoked(object sender, System.EventArgs eventArgs)
+        protected void OnApply(object sender, System.EventArgs eventArgs)
         {
             if (!hasChangesFlag)
             {
@@ -96,7 +97,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             });
         }
 
-        protected void CancelControl_Invoked(object sender, System.EventArgs eventArgs)
+        protected void OnCancel(object sender, System.EventArgs eventArgs)
         {
             if (!hasChangesFlag)
             {

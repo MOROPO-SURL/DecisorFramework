@@ -7,5 +7,9 @@
 
         [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
         public string PersonalIdentificationNumber { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(BusinessKindId))]
+        public NaturalBusinessKind BusinessKind { get; set; }
+        public System.Guid? BusinessKindId { get; set; }
     }
 }

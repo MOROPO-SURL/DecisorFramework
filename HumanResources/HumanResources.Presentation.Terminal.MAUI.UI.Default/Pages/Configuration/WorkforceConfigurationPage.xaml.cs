@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<WorkforceDisplayModel, Models.Page.Configuration.WorkforceConfigurationPageModel>
+public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<WorkforceDisplayModel, WorkforceDisplayModel, Models.Page.Configuration.WorkforceConfigurationPageModel>
 {
     private readonly List<VacantInputModel> editionVacants = [];
     private readonly List<VacantInputModel> incomingVacants = [];
@@ -58,6 +58,16 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void AddOrganizationalUnityButton_Clicked(object sender, System.EventArgs e)

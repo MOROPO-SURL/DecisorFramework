@@ -12,7 +12,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.LegalProviderConfigurationPage"
-    x:TypeArguments="interop_common_display_models:LegalProviderDisplayModel,presentation_configuration_page_models:LegalProviderConfigurationPageModel"
+    x:TypeArguments="interop_common_display_models:LegalProviderDisplayModel,interop_common_display_models:LegalProviderDisplayModel,presentation_configuration_page_models:LegalProviderConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:LegalProviderConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -25,14 +25,14 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem 
         Text="Aplicar"
-        Clicked="ApplyControl_Invoked">
+        Clicked="ApplyToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
         Text="Cancelar"
-        Clicked="CancelControl_Invoked">
+        Clicked="CancelToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>

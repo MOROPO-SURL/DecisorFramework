@@ -52,26 +52,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input.Co
         public virtual void Mergue(TEntity entity)
         {
             entity.Priority = Priority;
-            entity.TaxIdentificationNumber = TaxIdentificationNumber;
-            entity.StateIdentificationCode = StateIdentificationCode;
-
-            if (ContactId != entity.ContactId)
-            {
-                entity.Contact = null;
-                entity.ContactId = ContactId;
-            }
-
-            if (RepresentativeId != entity.RepresentativeId)
-            {
-                entity.Representative = null;
-                entity.RepresentativeId = RepresentativeId;
-            }
-
-            if (MainPostalContactId != entity.MainPostalContactId)
-            {
-                entity.MainPostalContact = null;
-                entity.MainPostalContactId = MainPostalContactId;
-            }
 
             if (DefaultPaymentTermId != entity.DefaultPaymentTermId)
             {

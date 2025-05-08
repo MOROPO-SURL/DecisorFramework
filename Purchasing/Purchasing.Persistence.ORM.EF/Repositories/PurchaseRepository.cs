@@ -21,7 +21,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Repositories
                 .Include(entity => entity.LegalProviderProductBridges).ThenInclude(bridge => bridge.UnitMeasurement)
                 .Include(entity => entity.NaturalProviderProductBridges).ThenInclude(bridge => bridge.Product).ThenInclude(entity => entity.FeatureImage)
                 .Include(entity => entity.NaturalProviderProductBridges).ThenInclude(bridge => bridge.Provider).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
-                .Include(entity => entity.NaturalProviderProductBridges).ThenInclude(bridge => bridge.Provider).ThenInclude(entity => entity.BusinessKind)
+                .Include(entity => entity.NaturalProviderProductBridges).ThenInclude(bridge => bridge.Provider).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.BusinessKind)
                 .Include(entity => entity.NaturalProviderProductBridges).ThenInclude(bridge => bridge.CostCenter)
                 .Include(entity => entity.NaturalProviderProductBridges).ThenInclude(bridge => bridge.UnitMeasurement)
                 .Include(entity => entity.EmployeeBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)

@@ -1,6 +1,6 @@
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProductWarehousingDecreaseBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Bridge.ProductWarehousingDecreaseBridgeModel, Models.Page.Configuration.ProductWarehousingDecreaseBridgeConfigurationPageModel>
+public partial class ProductWarehousingDecreaseBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Bridge.ProductWarehousingDecreaseBridgeModel, Interop.API.Common.Models.Bridge.ProductWarehousingDecreaseBridgeModel, Models.Page.Configuration.ProductWarehousingDecreaseBridgeConfigurationPageModel>
 {
     public ProductWarehousingDecreaseBridgeConfigurationPage(System.Action<Interop.API.Common.Models.Bridge.ProductWarehousingDecreaseBridgeModel> successAction, Models.Page.Configuration.ProductWarehousingDecreaseBridgeConfigurationPageModel model) : base(successAction, model)
     {
@@ -29,5 +29,15 @@ public partial class ProductWarehousingDecreaseBridgeConfigurationPage : Core.Pr
             MinDecrease = ConcreteBindingContext.MinDecrease,
             MaxDecrease = ConcreteBindingContext.MaxDecrease
         });
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 }

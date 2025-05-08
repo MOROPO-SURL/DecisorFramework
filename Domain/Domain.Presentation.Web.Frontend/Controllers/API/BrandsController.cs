@@ -7,7 +7,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 {
     [Route("api/domain/[controller]")]
     [ApiController]
-    public class BrandsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<Brand, System.Guid, BrandInputModel, BrandDisplayModel>
+    public class BrandsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Brand, System.Guid, BrandInputModel, BrandDisplayModel>
     {
         public BrandsController(Guama.Core.Persistence.Repositories.IEntityRepository<Brand, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<BrandsController> localizer, Microsoft.Extensions.Logging.ILogger<BrandsController> logger) : base(repository, localizer, logger)
         {

@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class BrandConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<BrandDisplayModel, Models.Page.Configuration.BrandConfigurationPageModel>
+public partial class BrandConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<BrandDisplayModel, BrandDisplayModel, Models.Page.Configuration.BrandConfigurationPageModel>
 {
     public BrandConfigurationPage(System.Action<BrandDisplayModel> successAction, Models.Page.Configuration.BrandConfigurationPageModel model) : base(successAction, model)
     {
@@ -44,5 +44,15 @@ public partial class BrandConfigurationPage : Core.Presentation.Terminal.MAUI.UI
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 }

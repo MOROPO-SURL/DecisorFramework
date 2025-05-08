@@ -11,8 +11,8 @@ namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Repositories
         protected override System.Linq.IQueryable<Entities.LegalClient> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
-                .Include(entity => entity.Representative).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
-                .Include(entity => entity.MainPostalContact).ThenInclude(entity => entity.Location)
+                .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+                .Include(entity => entity.Contact).ThenInclude(entity => entity.Representative).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.DefaultPaymentTerm)
                 .Include(entity => entity.BankAccountBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Branch).ThenInclude(entity => entity.Agency)
                 .Include(entity => entity.BankAccountBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Currency)

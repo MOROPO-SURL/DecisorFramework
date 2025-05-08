@@ -1,4 +1,8 @@
-﻿namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
+﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+using System.Collections.Generic;
+
+namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 {
     public class PropertyInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Property, System.Guid>
     {
@@ -12,9 +16,9 @@
         public string Name { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        public Core.Interop.API.Common.Models.Input.PostalContactItemInputModel PostalContact { get; set; }
+        public PostalContactItemInputModel PostalContact { get; set; }
 
-        public Core.Interop.API.Common.Models.Input.ImageInputModel FeatureImage { get; set; }
+        public ImageInputModel FeatureImage { get; set; }
 
         public System.Guid StructureId { get; set; }
 
@@ -24,6 +28,9 @@
         public decimal Area { get; set; }
 
         public string Description { get; set; }
+
+        public List<ImageInputModel> IncomingImageItems { get; set; } = new List<ImageInputModel>();
+        public List<ImageDisplayModel> OutgoingImagetItems { get; set; } = new List<ImageDisplayModel>();
 
         public Persistence.Entities.Property Export()
         {

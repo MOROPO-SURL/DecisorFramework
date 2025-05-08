@@ -1,6 +1,6 @@
 namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class DocumentConfigurationPage : UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.DocumentDisplayModel, Models.Page.Configuration.DocumentConfigurationPageModel>
+public partial class DocumentConfigurationPage : UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.DocumentDisplayModel, Interop.API.Common.Models.Display.DocumentDisplayModel, Models.Page.Configuration.DocumentConfigurationPageModel>
 {
     public DocumentConfigurationPage(System.Action<Interop.API.Common.Models.Display.DocumentDisplayModel> successAction, Models.Page.Configuration.DocumentConfigurationPageModel model) : base(successAction, model)
     {
@@ -22,5 +22,15 @@ public partial class DocumentConfigurationPage : UI.Pages.Base.ConfigurationBase
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description
         });
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 }

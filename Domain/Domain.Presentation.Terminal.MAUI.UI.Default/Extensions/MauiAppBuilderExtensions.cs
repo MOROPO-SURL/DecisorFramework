@@ -19,12 +19,18 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
                 .AddSingleton<IDetailContentPageFactoryFacade<NaturalBusinessKindDisplayModel, NaturalBusinessKindDetailPage>, NaturalBusinessKindDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<LegalBusinessKindDisplayModel, LegalBusinessKindDetailPage>, LegalBusinessKindDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<PropertyDisplayModel, PropertyDetailPage>, PropertyDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<VehicleKindDisplayModel, VehicleKindDetailPage>, VehicleKindDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<VehicleEngineKindDisplayModel, VehicleEngineKindDetailPage>, VehicleEngineKindDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<BrandDisplayModel, BrandDetailPage>, BrandDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<VehicleDisplayModel, VehicleDetailPage>, VehicleDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel, PersonContactConfigurationPage>, PersonContactConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel, PersonContactConfigurationPage>, PersonContactConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<OrganizationContactDisplayModel, OrganizationContactConfigurationPageModel, OrganizationContactConfigurationPage>, OrganizationContactConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<PropertyDisplayModel, PropertyConfigurationPageModel, PropertyConfigurationPage>, PropertyConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<PropertyDisplayModel, PropertyConfigurationPageModel, PropertyConfigurationPage>, PropertyConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<BrandDisplayModel, BrandConfigurationPageModel, BrandConfigurationPage>, BrandConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<VehicleDisplayModel, VehicleConfigurationPageModel, VehicleConfigurationPage>, VehicleConfigurationPageFactory>();
                 
             return builder;
         }

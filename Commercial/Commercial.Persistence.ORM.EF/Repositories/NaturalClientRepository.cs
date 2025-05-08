@@ -12,7 +12,10 @@ namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Repositories
         {
             return base.GetQueryableDbSet()
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
-                .Include(entity => entity.BusinessKind);
+                .Include(entity => entity.DefaultPaymentTerm)
+                .Include(entity => entity.BankAccountBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Branch).ThenInclude(entity => entity.Agency)
+                .Include(entity => entity.BankAccountBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Currency)
+                .Include(entity => entity.DocumentBridges).ThenInclude(bridge => bridge.Stern);
         }
     }
 }

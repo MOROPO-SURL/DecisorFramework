@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ClassificationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Input.ClassificationInputModel, Models.Page.Configuration.ClassificationConfigurationPageModel>
+public partial class ClassificationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Input.ClassificationInputModel, Interop.API.Common.Models.Input.ClassificationInputModel, Models.Page.Configuration.ClassificationConfigurationPageModel>
 {
     public ClassificationConfigurationPage(System.Action<Interop.API.Common.Models.Input.ClassificationInputModel> successAction, Models.Page.Configuration.ClassificationConfigurationPageModel model) : base(successAction, model)
     {
@@ -29,5 +29,15 @@ public partial class ClassificationConfigurationPage : Core.Presentation.Termina
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority
         });
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 }

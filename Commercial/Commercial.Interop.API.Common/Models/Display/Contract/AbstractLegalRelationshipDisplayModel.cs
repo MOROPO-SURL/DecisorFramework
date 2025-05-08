@@ -32,8 +32,8 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.
             Id = entity.Id;
             Priority = entity.Priority;
             At = entity.At;
-            TaxIdentificationNumber = entity.TaxIdentificationNumber;
-            StateIdentificationCode = entity.StateIdentificationCode;
+            TaxIdentificationNumber = entity.Contact.TaxIdentificationNumber;
+            StateIdentificationCode = entity.Contact.StateIdentificationCode;
 
             if (entity.Contact != null)
             {
@@ -42,18 +42,18 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.
                 Contact.Import(entity.Contact);
             }
 
-            if (entity.Representative != null)
+            if (entity.Contact.Representative != null)
             {
                 Representative = new PersonContactDisplayModel();
 
-                Representative.Import(entity.Representative);
+                Representative.Import(entity.Contact.Representative);
             }
 
-            if (entity.MainPostalContact != null)
+            if (entity.Contact.MainPostalContact != null)
             {
                 MainPostalContact = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
 
-                MainPostalContact.Import(entity.MainPostalContact);
+                MainPostalContact.Import(entity.Contact.MainPostalContact);
             }
 
             if (entity.DefaultPaymentTerm != null)

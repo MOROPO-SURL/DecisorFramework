@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class SectionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<SectionDisplayModel, Models.Page.Configuration.SectionConfigurationPageModel>
+public partial class SectionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<SectionDisplayModel, SectionDisplayModel, Models.Page.Configuration.SectionConfigurationPageModel>
 {
     public SectionConfigurationPage(System.Action<SectionDisplayModel> successAction, Models.Page.Configuration.SectionConfigurationPageModel model) : base(successAction, model)
     {
@@ -64,6 +64,16 @@ public partial class SectionConfigurationPage : Core.Presentation.Terminal.MAUI.
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)

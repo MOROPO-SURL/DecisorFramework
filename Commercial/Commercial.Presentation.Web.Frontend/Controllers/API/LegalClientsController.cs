@@ -80,10 +80,10 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
 
             if (model.Representative.Identity.Image != null)
             {
-                model.Representative.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Representative.Identity.Image.ContentType);
+                model.Representative.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Contact.Representative.Identity.Image.ContentType);
             }
 
-            model.MainPostalContact = model.Contact.Identity.PostalContacts.First(_model => _model.Id == entity.MainPostalContactId);
+            model.MainPostalContact = model.Contact.Identity.PostalContacts.First(_model => _model.Id == entity.Contact.MainPostalContactId);
 
             model.Documents = entity.DocumentBridges.Select(bridge =>
             {
@@ -103,20 +103,31 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
         {
             base.PreCreate(entity, model);
 
+            entity.ContactId = model.ContactId;
+
+            var _entity = organizationContactRepository.Get(entity.ContactId);
+
+            _entity.TaxIdentificationNumber = model.TaxIdentificationNumber;
+            _entity.StateIdentificationCode = model.StateIdentificationCode;
+            _entity.RepresentativeId = model.RepresentativeId;
+            _entity.MainPostalContactId = model.MainPostalContactId;
+
+            organizationContactRepository.Update(_entity, User.Identity.Name, false);
+
             foreach (var _model in model.IncomingBankAccounts)
             {
-                var _entity = bankAccountRepository.Add(_model.Export(), User.Identity.Name, false);
+                var __entity = bankAccountRepository.Add(_model.Export(), User.Identity.Name, false);
 
                 entity.BankAccountBridges.Add(new LegalClientBankAccountBridge
                 {
                     ProwId = entity.Id,
-                    SternId = _entity.Id
+                    SternId = __entity.Id
                 });
             }
 
             foreach (var _model in model.IncomingDocuments)
             {
-                var _entity = documentRepository.Add(new Document
+                var __entity = documentRepository.Add(new Document
                 {
                     Id = _model.Id,
                     Name = _model.Name,
@@ -128,16 +139,37 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
                 entity.DocumentBridges.Add(new LegalClientDocumentBridge
                 {
                     ProwId = entity.Id,
-                    SternId = _entity.Id
+                    SternId = __entity.Id
                 });
 
-                documentFileManager.SaveDocumentFileContent(_entity.Id, _model.ContentData, _entity.ContentType);
+                documentFileManager.SaveDocumentFileContent(__entity.Id, _model.ContentData, __entity.ContentType);
             }
         }
 
         protected override void PreEdit(LegalClient entity, LegalClientInputModel model)
         {
             base.PreEdit(entity, model);
+
+            if (model.ContactId != entity.ContactId)
+            {
+                entity.ContactId = model.ContactId;
+                entity.Contact = organizationContactRepository.Get(entity.ContactId);
+            }
+
+            entity.Contact.TaxIdentificationNumber = model.TaxIdentificationNumber;
+            entity.Contact.StateIdentificationCode = model.StateIdentificationCode;
+
+            if (model.RepresentativeId != entity.Contact.RepresentativeId)
+            {
+                entity.Contact.Representative = null;
+                entity.Contact.RepresentativeId = model.RepresentativeId;
+            }
+
+            if (model.MainPostalContactId != entity.Contact.MainPostalContactId)
+            {
+                entity.Contact.MainPostalContact = null;
+                entity.Contact.MainPostalContactId = model.MainPostalContactId;
+            }
 
             #region BankAccounts
             foreach (var _model in model.OutgoingBankAccounts)
