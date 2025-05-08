@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration;
 
-public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProyectionInputModel, Models.Page.Configuration.ProyectionConfigurationPageModel>
+public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProyectionInputModel, ProyectionInputModel, Models.Page.Configuration.ProyectionConfigurationPageModel>
 {
     private readonly List<ActionInputModel> editionActions = [];
     private readonly List<ActionInputModel> incomingActions = [];
@@ -24,7 +24,7 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
         this.outgoingActions = outgoingActions;
     }
 
-    protected override string EntityTypeName => "Objetivo Espefífico";
+    protected override string EntityTypeName => "Objetivo Específico";
 
     protected override System.Threading.Tasks.Task<ProyectionInputModel> PerformCreationAsync()
     {
@@ -56,6 +56,16 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
             EditionActions = editionActions,
             OutgoingActions = outgoingActions
         });
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void ActionAgregationButton_Clicked(object sender, System.EventArgs e)

@@ -2,7 +2,7 @@ using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration;
 
-public partial class IndicatorConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<IndicatorDisplayModel, Models.Page.Configuration.IndicatorConfigurationPageModel>
+public partial class IndicatorConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<IndicatorDisplayModel, IndicatorDisplayModel, Models.Page.Configuration.IndicatorConfigurationPageModel>
 {
     public IndicatorConfigurationPage(System.Action<IndicatorDisplayModel> successIndicator, Models.Page.Configuration.IndicatorConfigurationPageModel model) : base(successIndicator, model)
     {
@@ -49,6 +49,16 @@ public partial class IndicatorConfigurationPage : Framework.Decisor.Core.Present
             Amount = ConcreteBindingContext.Amount,
             UnitMeasurement = ConcreteBindingContext.AvailableUnitMeasurements[UnitMeasurementPicker.SelectedIndex]
         });
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)

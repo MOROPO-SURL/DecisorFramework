@@ -2,17 +2,15 @@ using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
-using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration;
 
-public partial class OrganizationConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<OrganizationDisplayModel, Models.Page.Configuration.OrganizationConfigurationPageModel>
+public partial class OrganizationConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<OrganizationDisplayModel, OrganizationDisplayModel, Models.Page.Configuration.OrganizationConfigurationPageModel>
 {
-    private byte[] imagePickedData;
-    private string imageContentType;
+    private ImageInputModel imagePickedModel;
 
     private readonly List<PhoneContactItemInputModel> editionPhoneContactItems = [];
     private readonly List<PhoneContactItemInputModel> incomingPhoneContactItems = [];
@@ -33,7 +31,7 @@ public partial class OrganizationConfigurationPage : Framework.Decisor.Core.Pres
     {
         base.DisposeUnmanagementResources();
 
-        imagePickedData = null;
+        imagePickedModel = null;
     }
 
     protected override async System.Threading.Tasks.Task<OrganizationDisplayModel> PerformCreationAsync()
@@ -51,15 +49,12 @@ public partial class OrganizationConfigurationPage : Framework.Decisor.Core.Pres
             IncomingEmailContactItems = incomingEmailContactItems
         };
 
-        if (imagePickedData != null)
+        if (imagePickedModel != null)
         {
-            model.Image = new Framework.Decisor.Core.Interop.API.Common.Models.Input.ImageInputModel
-            {
-                Id = System.Guid.NewGuid(),
-                ContentData = imagePickedData,
-                ContentType = imageContentType,
-                About = $"{EntityTypeName} {model.Id}"
-            };
+            imagePickedModel.Id = System.Guid.NewGuid();
+            imagePickedModel.About = $"{EntityTypeName} {model.Id}";
+
+            model.Image = imagePickedModel;
         }
 
         await apiConnectClient.CreateAsync(model);
@@ -86,15 +81,12 @@ public partial class OrganizationConfigurationPage : Framework.Decisor.Core.Pres
             OutgoingEmailContactItems = outgoingEmailContactItems
         };
 
-        if (imagePickedData != null)
+        if (imagePickedModel != null)
         {
-            model.Image = new Framework.Decisor.Core.Interop.API.Common.Models.Input.ImageInputModel
-            {
-                Id = ConcreteBindingContext.ImageId ?? default,
-                ContentData = imagePickedData,
-                ContentType = imageContentType,
-                About = $"{EntityTypeName} {model.Id}"
-            };
+            imagePickedModel.Id = System.Guid.NewGuid();
+            imagePickedModel.About = $"{EntityTypeName} {model.Id}";
+
+            model.Image = imagePickedModel;
         }
 
         await apiConnectClient.EditAsync(model);
@@ -102,58 +94,24 @@ public partial class OrganizationConfigurationPage : Framework.Decisor.Core.Pres
         return await apiConnectClient.GetAsync(model.Id);
     }
 
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
+
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
     {
         hasChangesFlag = true;
     }
 
-    private async void ImageLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    private void ImageLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        if (!Microsoft.Maui.Media.MediaPicker.IsCaptureSupported) PresentForImagePick();
-
-        var action = await DisplayActionSheet("Seleccionar imagen desde", "Cancelar", null, CommonActionSheetConstants.PICKIMAGE_OPTION_CAMARA, CommonActionSheetConstants.PICKIMAGE_OPTION_GALLERY);
-
-        if (action == CommonActionSheetConstants.PICKIMAGE_OPTION_CAMARA)
-        {
-            var permission = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.Camera>();
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                permission = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.Camera>();
-            }
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    DisplayAlert("Aviso", string.Format("El permiso para acceder a cámara del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
-
-                    ConcreteBindingContext.IsBusy = false;
-                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
-                });
-
-                return;
-            }
-
-            Dispatcher.Dispatch(() =>
-            {
-                ConcreteBindingContext.IsBusy = true;
-                ConcreteBindingContext.BusyProgressMessage = "Capturando imagen ...";
-            });
-
-            await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(1));
-
-            Dispatcher.Dispatch(() =>
-            {
-                ConcreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
-            });
-
-            await Microsoft.Maui.Media.MediaPicker.CapturePhotoAsync().ContinueWith(PickedImageContinuationTask);
-        }
-        else if (action == CommonActionSheetConstants.PICKIMAGE_OPTION_GALLERY)
-        {
-            PresentForImagePick();
-        }
+        Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, ImagePickSuccess_Callback);
     }
 
     private void PhoneContactItemAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -416,152 +374,12 @@ public partial class OrganizationConfigurationPage : Framework.Decisor.Core.Pres
         hasChangesFlag = true;
     }
 
-    private void PickedImageCroppingComplete_Callback(SkiaSharp.SKBitmap result)
+    private void ImagePickSuccess_Callback(ImageInputModel model)
     {
-        if (result != null)
-        {
-            using (var skImage = SkiaSharp.SKImage.FromBitmap(result))
-            {
-                using (var skData = skImage.Encode(SkiaSharp.SKEncodedImageFormat.Jpeg, 75))
-                {
-                    imagePickedData = skData.ToArray();
-                }
-            }
+        imagePickedModel = model;
 
-            result.Dispose();
+        ConcreteBindingContext.ImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedModel.ContentData));
 
-            ConcreteBindingContext.ImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
-
-            hasChangesFlag = true;
-        }
-
-        this.NavigationPopModalPageAsync();
-
-        ConcreteBindingContext.IsBusy = false;
-        ConcreteBindingContext.BusyProgressMessage = string.Empty;
-    }
-
-    private async void PresentForImagePick()
-    {
-        if (Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.iOS)
-        {
-            var permission = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.Photos>();
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                permission = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.Photos>();
-            }
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
-
-                    ConcreteBindingContext.IsBusy = false;
-                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
-                });
-
-                return;
-            }
-        }
-        else
-        {
-            var permission = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.StorageRead>();
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                permission = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.StorageRead>();
-            }
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
-
-                    ConcreteBindingContext.IsBusy = false;
-                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
-                });
-
-                return;
-            }
-        }
-
-        Dispatcher.Dispatch(() =>
-        {
-            ConcreteBindingContext.IsBusy = true;
-            ConcreteBindingContext.BusyProgressMessage = "Seleccionando imagen ...";
-        });
-
-        await Microsoft.Maui.Media.MediaPicker.PickPhotoAsync().ContinueWith(PickedImageContinuationTask);
-    }
-
-    private async System.Threading.Tasks.Task PickedImageContinuationTask(System.Threading.Tasks.Task<Microsoft.Maui.Storage.FileResult> task)
-    {
-        if (task.Result == null)
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                ConcreteBindingContext.IsBusy = false;
-                ConcreteBindingContext.BusyProgressMessage = string.Empty;
-            });
-
-            return;
-        }
-
-        await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromMilliseconds(100));
-
-        Dispatcher.Dispatch(() =>
-        {
-            ConcreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
-        });
-
-        SkiaSharp.SKBitmap croppingImageTarget = null;
-
-        using (var imageFileStream = await task.Result.OpenReadAsync())
-        {
-            using (var skStream = new SkiaSharp.SKManagedStream(imageFileStream))
-            {
-                croppingImageTarget = SkiaSharp.SKBitmap.Decode(skStream);
-            }
-        }
-
-        Dispatcher.Dispatch(() =>
-        {
-            imageContentType = task.Result.ContentType;
-
-            DisplayAlert("Recortar", "Desea recortar esta imagen?", "Si", "No").ContinueWith(cropAskTask =>
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    if (cropAskTask.Result)
-                    {
-                        ConcreteBindingContext.BusyProgressMessage = "Recortando imagen ...";
-
-                        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.ImageCropPage(croppingImageTarget, PickedImageCroppingComplete_Callback)));
-                    }
-                    else
-                    {
-                        using (var skImage = SkiaSharp.SKImage.FromBitmap(croppingImageTarget))
-                        {
-                            using (var skData = skImage.Encode(SkiaSharp.SKEncodedImageFormat.Jpeg, 75))
-                            {
-                                imagePickedData = skData.ToArray();
-                            }
-                        }
-
-                        croppingImageTarget.Dispose();
-
-                        ConcreteBindingContext.ImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
-
-                        hasChangesFlag = true;
-
-                        ConcreteBindingContext.IsBusy = false;
-                        ConcreteBindingContext.BusyProgressMessage = string.Empty;
-                    }
-                });
-            });
-        });
+        hasChangesFlag = true;
     }
 }

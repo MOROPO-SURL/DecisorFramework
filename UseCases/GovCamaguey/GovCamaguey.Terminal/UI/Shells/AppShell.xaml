@@ -14,13 +14,22 @@
                 Aspect="AspectFill"
                 Source="domain.jpg" />
             <BoxView Color="#A7000000" />
-            <Label
-                Padding="16"
-                Text="Gestión de Gobierno"
-                TextColor="White"
-                HorizontalTextAlignment="Center" VerticalOptions="Center"
-                FontSize="Large"
-                FontAttributes="Bold" />
+            <Grid
+                Padding="16">
+                <Button
+                    HorizontalOptions="End" VerticalOptions="Start"
+                    Text="&#xF343;"
+                    FontFamily="MaterialDesignIcons"
+                    FontSize="Medium"
+                    Padding="4"
+                    BackgroundColor="#60FFFFFF" />
+                <Label
+                    Text="Gestión de Gobierno"
+                    TextColor="White"
+                    HorizontalTextAlignment="Center" VerticalOptions="Center"
+                    FontSize="Large"
+                    FontAttributes="Bold" />
+            </Grid>
         </Grid>
     </Shell.FlyoutHeader>
     <MenuFlyoutItem Text="Inicio" IsEnabled="False" />

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration;
 
-public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ActionInputModel, Models.Page.Configuration.ActionConfigurationPageModel>
+public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ActionInputModel, ActionInputModel, Models.Page.Configuration.ActionConfigurationPageModel>
 {
     private readonly List<IndicatorInputModel> editionIndicators = [];
     private readonly List<IndicatorInputModel> incomingIndicators = [];
@@ -55,6 +55,16 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
             EditionIndicators = editionIndicators,
             OutgoingIndicators = outgoingIndicators
         });
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void IndicatorAgregationButton_Clicked(object sender, System.EventArgs e)

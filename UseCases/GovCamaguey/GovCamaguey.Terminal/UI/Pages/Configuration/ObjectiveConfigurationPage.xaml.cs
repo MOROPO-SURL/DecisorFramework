@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration;
 
-public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ObjectiveDisplayModel, Models.Page.Configuration.ObjectiveConfigurationPageModel>
+public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ObjectiveDisplayModel, ObjectiveDisplayModel, Models.Page.Configuration.ObjectiveConfigurationPageModel>
 {
     private readonly List<ProyectionInputModel> editionProyections = [];
     private readonly List<ProyectionInputModel> incomingProyections = [];
@@ -58,6 +58,16 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void ResponsiblePickButton_Clicked(object sender, System.EventArgs e)

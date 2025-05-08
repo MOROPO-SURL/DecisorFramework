@@ -7,19 +7,19 @@
     xmlns:interop_common_display_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;assembly=MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common"    
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration.GuidelineConfigurationPage"
-    x:TypeArguments="interop_common_display_models:GuidelineDisplayModel,local_configuration_page_models:GuidelineConfigurationPageModel"
+    x:TypeArguments="interop_common_display_models:GuidelineDisplayModel,interop_common_display_models:GuidelineDisplayModel,local_configuration_page_models:GuidelineConfigurationPageModel"
     x:DataType="local_configuration_page_models:GuidelineConfigurationPageModel">
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Aplicar"
-            Clicked="ApplyControl_Invoked">
+            Clicked="ApplyToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Cancelar"
-            Clicked="CancelControl_Invoked">
+            Clicked="ApplyToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
