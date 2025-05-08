@@ -199,10 +199,12 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
             }
         });
     }
+    
     private void ImageLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, FeatureImagePickSuccess_Callback);
     }
+
     private void ImageItemAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, ItemImagePickSuccess_Callback);
