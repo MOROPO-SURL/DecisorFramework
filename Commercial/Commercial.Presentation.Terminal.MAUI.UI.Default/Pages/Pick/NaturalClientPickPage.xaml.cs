@@ -4,8 +4,10 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class NaturalClientPickPage : Caney.MVVM.Core.Pages.ContentPage
+public partial class NaturalClientPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.NaturalClientDisplayModel, Models.Page.Pick.NaturalClientPickPageModel, Detail.NaturalClientDetailPage>
 {
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
+
     private System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel> pickCompleteAction;
 
     private bool pickedFlag = false;
@@ -17,25 +19,23 @@ public partial class NaturalClientPickPage : Caney.MVVM.Core.Pages.ContentPage
         this.pickCompleteAction = pickCompleteAction;
 
         IsEnabled = false;
-
-        BindingContext = new Models.Page.Pick.NaturalClientPickPageModel();
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        if (IsEnabled)
+        if (IsEnabled && pickedFlag)
         {
-            if (pickedFlag) (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
 
             return;
         }
 
-        LoadItems();
-
         IsEnabled = true;
     }
+
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override void DisposeUnmanagementResources()
     {
@@ -44,11 +44,16 @@ public partial class NaturalClientPickPage : Caney.MVVM.Core.Pages.ContentPage
         pickCompleteAction = null;
     }
 
+    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.NaturalClientDisplayModel>> FetchItemsAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.NaturalClientsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
+    }
+
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (((Models.Page.Pick.NaturalClientPickPageModel)BindingContext).IsBusy) return;
-
-        LoadItems();
+        OnReload(sender, eventArgs);
     }
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
@@ -59,6 +64,16 @@ public partial class NaturalClientPickPage : Caney.MVVM.Core.Pages.ContentPage
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
+    }
+
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
+    {
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
     }
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
@@ -73,36 +88,5 @@ public partial class NaturalClientPickPage : Caney.MVVM.Core.Pages.ContentPage
         Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
 
         pickedFlag = true;
-    }
-
-    private void LoadItems()
-    {
-        var concreteBindingContext = (Models.Page.Pick.NaturalClientPickPageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        concreteBindingContext.Items.Clear();
-
-        var apiConnectClient = new Interop.API.Connect.Clients.NaturalClientsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        apiConnectClient.GetAsync().ContinueWith(task =>
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                concreteBindingContext.IsBusy = false;
-
-                if (task.Exception != null || task.IsCanceled)
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                }
-                else
-                {
-                    foreach (var model in task.Result)
-                    {
-                        concreteBindingContext.Items.Add(model);
-                    }
-                }
-            });
-        });
     }
 }

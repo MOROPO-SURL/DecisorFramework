@@ -1,3 +1,5 @@
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Bridge;
 
 public partial class CommonLeaseOfferOrganizationContactBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.Bridge.CommonLeaseOfferOrganizationContactBridgeDisplayModel, Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferOrganizationContactBridgeInputModel, Models.Page.Configuration.Bridge.CommonLeaseOfferOrganizationContactBridgeConfigurationPageModel>
@@ -39,5 +41,15 @@ public partial class CommonLeaseOfferOrganizationContactBridgeConfigurationPage 
     private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         OnCancel(sender, eventArgs);
+    }
+
+    private void ContactPickButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationContactPickPage(ContactPickComplete_Callback)));
+    }
+
+    private void ContactPickComplete_Callback(Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel model)
+    {
+        ConcreteBindingContext.Contact = model;
     }
 }

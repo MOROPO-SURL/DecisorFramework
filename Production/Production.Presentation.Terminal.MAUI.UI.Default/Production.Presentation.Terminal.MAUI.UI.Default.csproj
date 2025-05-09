@@ -60,6 +60,9 @@
 	  <MauiXaml Update="Pages\Configuration\Bridge\CommonLeaseOfferOrganizationContactBridgeConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\Bridge\CommonLeaseOfferPersonContactBridgeConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ProductionOrderDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
