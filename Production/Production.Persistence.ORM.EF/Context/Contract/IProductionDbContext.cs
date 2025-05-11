@@ -18,10 +18,10 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Context.Contrac
         public DbSet<Entities.ProductionProductBridge> ProductionProductBridges { get; set; }
         public DbSet<Entities.ProductionReception> ProductionReceptions { get; set; }
         public DbSet<Entities.PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
-        public DbSet<Entities.PropertyLeaseOfferOrganizationContactBridge> PropertyLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<Entities.PropertyLeaseOfferPersonContactBridge> PropertyLeaseOfferPersonContactBridges { get; set; }
+        public DbSet<Entities.PropertyLeaseOrganizationPostulation> PropertyLeaseOfferOrganizationContactBridges { get; set; }
+        public DbSet<Entities.PropertyLeasePersonPostulation> PropertyLeaseOfferPersonContactBridges { get; set; }
         public DbSet<Entities.VehicleLeaseOffer> VehicleLeaseOffers { get; set; }
-        public DbSet<Entities.VehicleLeaseOfferOrganizationContactBridge> VehicleLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<Entities.VehicleLeaseOfferPersonContactBridge> VehicleLeaseOfferPersonContactBridges { get; set; }
+        public DbSet<Entities.VehicleLeaseOrganizationPostulation> VehicleLeaseOfferOrganizationContactBridges { get; set; }
+        public DbSet<Entities.VehicleLeasePersonPostulation> VehicleLeaseOfferPersonContactBridges { get; set; }
     }
 }

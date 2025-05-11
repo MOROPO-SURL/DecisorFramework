@@ -1,10 +1,13 @@
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input;
 
-namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Bridge;
+namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class CommonLeaseOfferPersonContactBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.Bridge.CommonLeaseOfferPersonContactBridgeDisplayModel, Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferPersonContactBridgeInputModel, Models.Page.Configuration.Bridge.CommonLeaseOfferPersonContactBridgeConfigurationPageModel>
+
+public partial class CommonLeasePersonPostulationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<CommonLeasePersonPostulationDisplayModel, CommonLeasePersonPostulationInputModel, Models.Page.Configuration.CommonLeasePersonPostulationConfigurationPageModel>
 {
-    public CommonLeaseOfferPersonContactBridgeConfigurationPage(System.Action<Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferPersonContactBridgeInputModel> successAction, Models.Page.Configuration.Bridge.CommonLeaseOfferPersonContactBridgeConfigurationPageModel model) : base(successAction, model)
+    public CommonLeasePersonPostulationConfigurationPage(System.Action<CommonLeasePersonPostulationInputModel> successAction, Models.Page.Configuration.CommonLeasePersonPostulationConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
 
@@ -25,9 +28,9 @@ public partial class CommonLeaseOfferPersonContactBridgeConfigurationPage : Core
 
     protected override string EntityTypeName => "Postulante Natural";
 
-    protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferPersonContactBridgeInputModel> PerformCreationAsync()
+    protected override System.Threading.Tasks.Task<CommonLeasePersonPostulationInputModel> PerformCreationAsync()
     {
-        return System.Threading.Tasks.Task.FromResult(new Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferPersonContactBridgeInputModel
+        return System.Threading.Tasks.Task.FromResult(new CommonLeasePersonPostulationInputModel
         {
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
@@ -36,9 +39,9 @@ public partial class CommonLeaseOfferPersonContactBridgeConfigurationPage : Core
         });
     }
 
-    protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferPersonContactBridgeInputModel> PerformEditionAsync()
+    protected override System.Threading.Tasks.Task<CommonLeasePersonPostulationInputModel> PerformEditionAsync()
     {
-        return System.Threading.Tasks.Task.FromResult(new Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferPersonContactBridgeInputModel
+        return System.Threading.Tasks.Task.FromResult(new CommonLeasePersonPostulationInputModel
         {
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,

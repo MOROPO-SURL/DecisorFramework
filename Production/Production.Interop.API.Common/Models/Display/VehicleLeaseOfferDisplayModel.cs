@@ -20,9 +20,9 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public Domain.Interop.API.Common.Models.Display.VehicleDisplayModel Vehicle { get; set; }
 
-        public Bridge.CommonLeaseOfferOrganizationContactBridgeDisplayModel[] OrganizationContactBridges { get; set; }
+        public CommonLeaseOrganizationPostulationDisplayModel[] OrganizationPostulations { get; set; }
 
-        public Bridge.CommonLeaseOfferPersonContactBridgeDisplayModel[] PersonContactBridges { get; set; }
+        public CommonLeasePersonPostulationDisplayModel[] PersonPostulations { get; set; }
 
         public void Import(Persistence.Entities.VehicleLeaseOffer entity)
         {
@@ -32,7 +32,49 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             At = entity.At;
             OpenAt = entity.OpenAt;
             ClosedAt = entity.ClosedAt;
-            Description = entity.Description;            
+            Description = entity.Description;
+            OrganizationPostulations = entity.OrganizationPostulations.Select(bridge =>
+            {
+                var result = new CommonLeaseOrganizationPostulationDisplayModel
+                {
+                    TaxIdentificationNumber = bridge.TaxIdentificationNumber,
+                    StateIdentificationCode = bridge.StateIdentificationCode,
+                    Argument = bridge.Argument
+                };
+
+                if (bridge.Contact != null)
+                {
+                    result.Contact = new Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel();
+
+                    result.Contact.Import(bridge.Contact);
+                }
+
+                return result;
+            }).ToArray();
+            PersonPostulations = entity.PersonPostulations.Select(bridge =>
+            {
+                var result = new CommonLeasePersonPostulationDisplayModel
+                {
+                    TaxIdentificationNumber = bridge.TaxIdentificationNumber,
+                    Argument = bridge.Argument
+                };
+
+                if (bridge.Contact != null)
+                {
+                    result.Contact = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
+
+                    result.Contact.Import(bridge.Contact);
+                }
+
+                if (bridge.BusinessKind != null)
+                {
+                    result.BusinessKind = new Domain.Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel();
+
+                    result.BusinessKind.Import(bridge.BusinessKind);
+                }
+
+                return result;
+            }).ToArray();
 
             if (entity.Vehicle != null)
             {

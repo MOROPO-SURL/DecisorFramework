@@ -1,19 +1,21 @@
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input;
 
-namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.Bridge;
+namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class CommonLeaseOfferOrganizationContactBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.Bridge.CommonLeaseOfferOrganizationContactBridgeDisplayModel, Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferOrganizationContactBridgeInputModel, Models.Page.Configuration.Bridge.CommonLeaseOfferOrganizationContactBridgeConfigurationPageModel>
+public partial class CommonLeaseOrganizationPostulationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<CommonLeaseOrganizationPostulationDisplayModel, CommonLeaseOrganizationPostulationInputModel, Models.Page.Configuration.CommonLeaseOrganizationPostulationConfigurationPageModel>
 {
-    public CommonLeaseOfferOrganizationContactBridgeConfigurationPage(System.Action<Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferOrganizationContactBridgeInputModel> successAction, Models.Page.Configuration.Bridge.CommonLeaseOfferOrganizationContactBridgeConfigurationPageModel model) : base(successAction, model)
+    public CommonLeaseOrganizationPostulationConfigurationPage(System.Action<CommonLeaseOrganizationPostulationInputModel> successAction, Models.Page.Configuration.CommonLeaseOrganizationPostulationConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
     }
 
     protected override string EntityTypeName => "Postulante Jurídico";
 
-    protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferOrganizationContactBridgeInputModel> PerformCreationAsync()
+    protected override System.Threading.Tasks.Task<CommonLeaseOrganizationPostulationInputModel> PerformCreationAsync()
     {
-        return System.Threading.Tasks.Task.FromResult(new Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferOrganizationContactBridgeInputModel
+        return System.Threading.Tasks.Task.FromResult(new CommonLeaseOrganizationPostulationInputModel
         {
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
@@ -22,9 +24,9 @@ public partial class CommonLeaseOfferOrganizationContactBridgeConfigurationPage 
         });
     }
 
-    protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferOrganizationContactBridgeInputModel> PerformEditionAsync()
+    protected override System.Threading.Tasks.Task<CommonLeaseOrganizationPostulationInputModel> PerformEditionAsync()
     {
-        return System.Threading.Tasks.Task.FromResult(new Interop.API.Common.Models.Input.Bridge.CommonLeaseOfferOrganizationContactBridgeInputModel
+        return System.Threading.Tasks.Task.FromResult(new CommonLeaseOrganizationPostulationInputModel
         {
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,

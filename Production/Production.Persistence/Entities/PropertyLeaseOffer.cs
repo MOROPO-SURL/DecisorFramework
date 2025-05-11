@@ -6,8 +6,10 @@
         public Domain.Persistence.Entities.Property Property { get; set; }
         public System.Guid PropertyId { get; set; }
 
-        public System.Collections.Generic.ICollection<PropertyLeaseOfferOrganizationContactBridge> OrganizationContactBridges { get; set; }
+        public System.Collections.Generic.ICollection<PropertyLeaseOrganizationPostulation> OrganizationPostulations { get; set; }
 
-        public System.Collections.Generic.ICollection<PropertyLeaseOfferPersonContactBridge> PersonContactBridges { get; set; }
+        public System.Collections.Generic.ICollection<PropertyLeasePersonPostulation> PersonPostulations { get; set; }
+
+        public System.Collections.Generic.List<PropertyLeaseOfferClauseBridge> ClauseBridges { get; set; }
     }
 }

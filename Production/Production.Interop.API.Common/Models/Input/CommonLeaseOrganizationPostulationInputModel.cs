@@ -1,10 +1,10 @@
-﻿namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input.Bridge
+﻿namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 {
-    public class CommonLeaseOfferOrganizationContactBridgeInputModel
+    public class CommonLeaseOrganizationPostulationInputModel
     {
-        public System.Guid ContactId { get; set; }
+        public System.Guid Id { get; set; }
 
-        public Core.Interop.API.Common.Models.Input.DocumentInputModel RawCredentialDocument { get; set; }
+        public System.Guid ContactId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]+$")]

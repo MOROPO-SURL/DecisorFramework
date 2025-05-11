@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 {
@@ -16,13 +17,13 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public System.Guid VehicleId { get; set; }
 
-        public List<Bridge.CommonLeaseOfferPersonContactBridgeInputModel> EditionPersonContactBridges { get; set; } = new List<Bridge.CommonLeaseOfferPersonContactBridgeInputModel>();
-        public List<Bridge.CommonLeaseOfferPersonContactBridgeInputModel> IncomingPersonContactBridges { get; set; } = new List<Bridge.CommonLeaseOfferPersonContactBridgeInputModel>();
-        public List<Display.Bridge.CommonLeaseOfferPersonContactBridgeDisplayModel> OutgoingPersonContactBridges { get; set; } = new List<Display.Bridge.CommonLeaseOfferPersonContactBridgeDisplayModel>();
+        public List<CommonLeasePersonPostulationInputModel> EditionPersonPostulations { get; set; } = new List<CommonLeasePersonPostulationInputModel>();
+        public List<CommonLeasePersonPostulationInputModel> IncomingPersonPostulations { get; set; } = new List<CommonLeasePersonPostulationInputModel>();
+        public List<CommonLeasePersonPostulationDisplayModel> OutgoingPersonPostulations { get; set; } = new List<CommonLeasePersonPostulationDisplayModel>();
 
-        public List<Bridge.CommonLeaseOfferOrganizationContactBridgeInputModel> EditionOrganizationContactBridges { get; set; } = new List<Bridge.CommonLeaseOfferOrganizationContactBridgeInputModel>();
-        public List<Bridge.CommonLeaseOfferOrganizationContactBridgeInputModel> IncomingOrganizationContactBridges { get; set; } = new List<Bridge.CommonLeaseOfferOrganizationContactBridgeInputModel>();
-        public List<Display.Bridge.CommonLeaseOfferOrganizationContactBridgeDisplayModel> OutgoingOrganizationContactBridges { get; set; } = new List<Display.Bridge.CommonLeaseOfferOrganizationContactBridgeDisplayModel>();
+        public List<CommonLeaseOrganizationPostulationInputModel> EditionOrganizationPostulations { get; set; } = new List<CommonLeaseOrganizationPostulationInputModel>();
+        public List<CommonLeaseOrganizationPostulationInputModel> IncomingOrganizationPostulations { get; set; } = new List<CommonLeaseOrganizationPostulationInputModel>();
+        public List<CommonLeaseOrganizationPostulationDisplayModel> OutgoingOrganizationPostulations { get; set; } = new List<CommonLeaseOrganizationPostulationDisplayModel>();
 
         public Persistence.Entities.VehicleLeaseOffer Export()
         {
