@@ -1,13 +1,15 @@
-﻿namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration.Bridge
+﻿using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;
+
+namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
-    public class CommonLeaseOfferOrganizationContactBridgeConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.Bridge.CommonLeaseOfferOrganizationContactBridgeDisplayModel>
+    public class CommonLeaseOrganizationPostulationConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<CommonLeaseOrganizationPostulationDisplayModel>
     {
         private Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel contact;
         private string taxIdentificationNumber;
         private string stateIdentificationCode;
         private string argument;
 
-        public CommonLeaseOfferOrganizationContactBridgeConfigurationPageModel(Interop.API.Common.Models.Display.Bridge.CommonLeaseOfferOrganizationContactBridgeDisplayModel model) : base(model)
+        public CommonLeaseOrganizationPostulationConfigurationPageModel(CommonLeaseOrganizationPostulationDisplayModel model) : base(model)
         {
             if (model != null)
             {

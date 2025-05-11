@@ -56,64 +56,64 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
                 model.Vehicle.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Vehicle.FeatureImage.ContentType);
             }
 
-            model.OrganizationContactBridges = entity.OrganizationContactBridges.Select(bridge =>
+            model.OrganizationPostulations = entity.OrganizationPostulations.Select(_entity =>
             {
-                var result = new Interop.API.Common.Models.Display.Bridge.CommonLeaseOfferOrganizationContactBridgeDisplayModel
+                var result = new CommonLeaseOrganizationPostulationDisplayModel
                 {
-                    TaxIdentificationNumber = bridge.TaxIdentificationNumber,
-                    StateIdentificationCode = bridge.StateIdentificationCode,
-                    Argument = bridge.Argument
+                    TaxIdentificationNumber = _entity.TaxIdentificationNumber,
+                    StateIdentificationCode = _entity.StateIdentificationCode,
+                    Argument = _entity.Argument
                 };
 
-                if (bridge.CredentialDocument != null)
-                {
-                    result.CredentialDocument = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+                //if (_entity.CredentialDocument != null)
+                //{
+                //    result.CredentialDocument = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
 
-                    result.CredentialDocument.Import(bridge.CredentialDocument);
+                //    result.CredentialDocument.Import(_entity.CredentialDocument);
 
-                    result.CredentialDocument.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.CredentialDocument.ContentType);
-                }
+                //    result.CredentialDocument.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.CredentialDocument.ContentType);
+                //}
 
-                if (bridge.Stern != null)
+                if (_entity.Contact != null)
                 {
                     result.Contact = new Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel();
 
-                    result.Contact.Import(bridge.Stern);
+                    result.Contact.Import(_entity.Contact);
 
-                    result.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
+                    result.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Contact.Identity.Image.ContentType);
                 }
 
                 return result;
             }).ToArray();
-            model.PersonContactBridges = entity.PersonContactBridges.Select(bridge =>
+            model.PersonPostulations = entity.PersonPostulations.Select(_entity =>
             {
-                var result = new Interop.API.Common.Models.Display.Bridge.CommonLeaseOfferPersonContactBridgeDisplayModel
+                var result = new CommonLeasePersonPostulationDisplayModel
                 {
-                    TaxIdentificationNumber = bridge.TaxIdentificationNumber,
-                    Argument = bridge.Argument
+                    TaxIdentificationNumber = _entity.TaxIdentificationNumber,
+                    Argument = _entity.Argument
                 };
 
-                if (bridge.CredentialDocument != null)
-                {
-                    result.CredentialDocument = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+                //if (bridge.CredentialDocument != null)
+                //{
+                //    result.CredentialDocument = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
 
-                    result.CredentialDocument.Import(bridge.CredentialDocument);
+                //    result.CredentialDocument.Import(bridge.CredentialDocument);
 
-                    result.CredentialDocument.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.CredentialDocument.ContentType);
-                }
+                //    result.CredentialDocument.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.CredentialDocument.ContentType);
+                //}
 
-                if (bridge.Stern != null)
+                if (_entity.Contact != null)
                 {
                     result.Contact = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
 
-                    result.Contact.Import(bridge.Stern);
+                    result.Contact.Import(_entity.Contact);
                 }
 
-                if (bridge.BusinessKind != null)
+                if (_entity.BusinessKind != null)
                 {
                     result.BusinessKind = new Domain.Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel();
 
-                    result.BusinessKind.Import(bridge.BusinessKind);
+                    result.BusinessKind.Import(_entity.BusinessKind);
                 }
 
                 return result;
@@ -126,62 +126,62 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
         {
             base.PreCreate(entity, model);
 
-            foreach (var _model in model.IncomingOrganizationContactBridges)
+            foreach (var _model in model.IncomingOrganizationPostulations)
             {
-                var bridge = new VehicleLeaseOfferOrganizationContactBridge
+                var bridge = new VehicleLeaseOrganizationPostulation
                 {
-                    ProwId = entity.Id,
-                    SternId = _model.ContactId,
+                    OfferId = entity.Id,
+                    ContactId = _model.ContactId,
                     TaxIdentificationNumber = _model.TaxIdentificationNumber,
                     StateIdentificationCode = _model.StateIdentificationCode,
                     Argument = _model.Argument
                 };
 
-                if (_model.RawCredentialDocument != null)
-                {
-                    bridge.CredentialDocument = documentRepository.Add(new Document
-                    {
-                        Id = _model.RawCredentialDocument.Id,
-                        Name = _model.RawCredentialDocument.Name,
-                        ContentType = _model.RawCredentialDocument.ContentType,
-                        Description = _model.RawCredentialDocument.Description,
-                        Length = _model.RawCredentialDocument.ContentData.Length
-                    }, User.Identity.Name, false);
-                    bridge.CredentialDocumentId = bridge.CredentialDocument.Id;
+                //if (_model.RawCredentialDocument != null)
+                //{
+                //    bridge.CredentialDocument = documentRepository.Add(new Document
+                //    {
+                //        Id = _model.RawCredentialDocument.Id,
+                //        Name = _model.RawCredentialDocument.Name,
+                //        ContentType = _model.RawCredentialDocument.ContentType,
+                //        Description = _model.RawCredentialDocument.Description,
+                //        Length = _model.RawCredentialDocument.ContentData.Length
+                //    }, User.Identity.Name, false);
+                //    bridge.CredentialDocumentId = bridge.CredentialDocument.Id;
 
-                    documentFileManager.SaveDocumentFileContent(bridge.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, bridge.CredentialDocument.ContentType);
-                }
+                //    documentFileManager.SaveDocumentFileContent(bridge.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, bridge.CredentialDocument.ContentType);
+                //}
 
-                entity.OrganizationContactBridges.Add(bridge);
+                entity.OrganizationPostulations.Add(bridge);
             }
 
-            foreach (var _model in model.IncomingPersonContactBridges)
+            foreach (var _model in model.IncomingPersonPostulations)
             {
-                var bridge = new VehicleLeaseOfferPersonContactBridge
+                var _entity = new VehicleLeasePersonPostulation
                 {
-                    ProwId = entity.Id,
-                    SternId = _model.ContactId,
+                    OfferId = entity.Id,
+                    ContactId = _model.ContactId,
                     TaxIdentificationNumber = _model.TaxIdentificationNumber,
                     BusinessKindId = _model.BusinessKindId,
                     Argument = _model.Argument
                 };
 
-                if (_model.RawCredentialDocument != null)
-                {
-                    bridge.CredentialDocument = documentRepository.Add(new Document
-                    {
-                        Id = _model.RawCredentialDocument.Id,
-                        Name = _model.RawCredentialDocument.Name,
-                        ContentType = _model.RawCredentialDocument.ContentType,
-                        Description = _model.RawCredentialDocument.Description,
-                        Length = _model.RawCredentialDocument.ContentData.Length
-                    }, User.Identity.Name, false);
-                    bridge.CredentialDocumentId = bridge.CredentialDocument.Id;
+                //if (_model.RawCredentialDocument != null)
+                //{
+                //    bridge.CredentialDocument = documentRepository.Add(new Document
+                //    {
+                //        Id = _model.RawCredentialDocument.Id,
+                //        Name = _model.RawCredentialDocument.Name,
+                //        ContentType = _model.RawCredentialDocument.ContentType,
+                //        Description = _model.RawCredentialDocument.Description,
+                //        Length = _model.RawCredentialDocument.ContentData.Length
+                //    }, User.Identity.Name, false);
+                //    bridge.CredentialDocumentId = bridge.CredentialDocument.Id;
 
-                    documentFileManager.SaveDocumentFileContent(bridge.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, bridge.CredentialDocument.ContentType);
-                }
+                //    documentFileManager.SaveDocumentFileContent(bridge.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, bridge.CredentialDocument.ContentType);
+                //}
 
-                entity.PersonContactBridges.Add(bridge);
+                entity.PersonPostulations.Add(_entity);
             }
         }
 
@@ -189,149 +189,149 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
         {
             base.PreEdit(entity, model);
 
-            #region OrganizationContacts
-            foreach (var _model in model.OutgoingOrganizationContactBridges)
+            #region Organizations
+            foreach (var _model in model.OutgoingOrganizationPostulations)
             {
-                var bridge = entity.OrganizationContactBridges.First(bridge => bridge.SternId == _model.Contact.Id);
+                var _entity = entity.OrganizationPostulations.First(_entity => _entity.Id == _model.Id);
 
-                entity.OrganizationContactBridges.Remove(bridge);
+                entity.OrganizationPostulations.Remove(_entity);
             }
 
-            foreach (var _model in model.EditionOrganizationContactBridges)
+            foreach (var _model in model.EditionOrganizationPostulations)
             {
-                var bridge = entity.OrganizationContactBridges.First(bridge => bridge.SternId == _model.ContactId);
+                var _entity = entity.OrganizationPostulations.First(_entity => _entity.Id == _model.Id);
 
-                bridge.TaxIdentificationNumber = _model.TaxIdentificationNumber;
-                bridge.StateIdentificationCode = _model.StateIdentificationCode;
-                bridge.Argument = _model.Argument;
+                _entity.TaxIdentificationNumber = _model.TaxIdentificationNumber;
+                _entity.StateIdentificationCode = _model.StateIdentificationCode;
+                _entity.Argument = _model.Argument;
                 
-                if (_model.RawCredentialDocument != null)
-                {
-                    bridge.CredentialDocument = documentRepository.Add(new Document
-                    {
-                        Id = _model.RawCredentialDocument.Id,
-                        Name = _model.RawCredentialDocument.Name,
-                        ContentType = _model.RawCredentialDocument.ContentType,
-                        Description = _model.RawCredentialDocument.Description,
-                        Length = _model.RawCredentialDocument.ContentData.Length
-                    }, User.Identity.Name, false);
-                    bridge.CredentialDocumentId = bridge.CredentialDocument.Id;
+                //if (_model.RawCredentialDocument != null)
+                //{
+                //    bridge.CredentialDocument = documentRepository.Add(new Document
+                //    {
+                //        Id = _model.RawCredentialDocument.Id,
+                //        Name = _model.RawCredentialDocument.Name,
+                //        ContentType = _model.RawCredentialDocument.ContentType,
+                //        Description = _model.RawCredentialDocument.Description,
+                //        Length = _model.RawCredentialDocument.ContentData.Length
+                //    }, User.Identity.Name, false);
+                //    bridge.CredentialDocumentId = bridge.CredentialDocument.Id;
 
-                    documentFileManager.SaveDocumentFileContent(bridge.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, bridge.CredentialDocument.ContentType);
-                }
+                //    documentFileManager.SaveDocumentFileContent(bridge.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, bridge.CredentialDocument.ContentType);
+                //}
             }
 
-            foreach (var _model in model.IncomingOrganizationContactBridges)
+            foreach (var _model in model.IncomingOrganizationPostulations)
             {
-                var bridge = new VehicleLeaseOfferOrganizationContactBridge
+                var _entity = new VehicleLeaseOrganizationPostulation
                 {
-                    ProwId = entity.Id,
-                    SternId = _model.ContactId,
+                    OfferId = entity.Id,
+                    ContactId = _model.ContactId,
                     TaxIdentificationNumber = _model.TaxIdentificationNumber,
                     StateIdentificationCode = _model.StateIdentificationCode,
                     Argument = _model.Argument
                 };
 
-                if (_model.RawCredentialDocument != null)
-                {
-                    bridge.CredentialDocument = documentRepository.Add(new Document
-                    {
-                        Id = _model.RawCredentialDocument.Id,
-                        Name = _model.RawCredentialDocument.Name,
-                        ContentType = _model.RawCredentialDocument.ContentType,
-                        Description = _model.RawCredentialDocument.Description,
-                        Length = _model.RawCredentialDocument.ContentData.Length
-                    }, User.Identity.Name, false);
-                    bridge.CredentialDocumentId = bridge.CredentialDocument.Id;
+                //if (_model.RawCredentialDocument != null)
+                //{
+                //    _entity.CredentialDocument = documentRepository.Add(new Document
+                //    {
+                //        Id = _model.RawCredentialDocument.Id,
+                //        Name = _model.RawCredentialDocument.Name,
+                //        ContentType = _model.RawCredentialDocument.ContentType,
+                //        Description = _model.RawCredentialDocument.Description,
+                //        Length = _model.RawCredentialDocument.ContentData.Length
+                //    }, User.Identity.Name, false);
+                //    _entity.CredentialDocumentId = _entity.CredentialDocument.Id;
 
-                    documentFileManager.SaveDocumentFileContent(bridge.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, bridge.CredentialDocument.ContentType);
-                }
+                //    documentFileManager.SaveDocumentFileContent(_entity.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, _entity.CredentialDocument.ContentType);
+                //}
 
-                entity.OrganizationContactBridges.Add(bridge);
+                entity.OrganizationPostulations.Add(_entity);
             }
             #endregion
 
             #region PersonContacts
-            foreach (var _model in model.OutgoingPersonContactBridges)
+            foreach (var _model in model.OutgoingPersonPostulations)
             {
-                var bridge = entity.PersonContactBridges.First(bridge => bridge.SternId == _model.Contact.Id);
+                var _entity = entity.PersonPostulations.First(_entity => _entity.Id == _model.Id);
 
-                entity.PersonContactBridges.Remove(bridge);
+                entity.PersonPostulations.Remove(_entity);
             }
 
-            foreach (var _model in model.EditionPersonContactBridges)
+            foreach (var _model in model.EditionPersonPostulations)
             {
-                var bridge = entity.PersonContactBridges.First(bridge => bridge.SternId == _model.ContactId);
+                var _entity = entity.PersonPostulations.First(_entity => _entity.Id == _model.Id);
 
-                bridge.TaxIdentificationNumber = _model.TaxIdentificationNumber;
-                bridge.Argument = _model.Argument;
+                _entity.TaxIdentificationNumber = _model.TaxIdentificationNumber;
+                _entity.Argument = _model.Argument;
 
-                if (bridge.BusinessKindId != _model.BusinessKindId)
+                if (_entity.BusinessKindId != _model.BusinessKindId)
                 {
-                    bridge.BusinessKind = null;
-                    bridge.BusinessKindId = _model.BusinessKindId;
+                    _entity.BusinessKind = null;
+                    _entity.BusinessKindId = _model.BusinessKindId;
                 }
 
-                if (_model.RawCredentialDocument != null)
-                {
-                    bridge.CredentialDocument = documentRepository.Add(new Document
-                    {
-                        Id = _model.RawCredentialDocument.Id,
-                        Name = _model.RawCredentialDocument.Name,
-                        ContentType = _model.RawCredentialDocument.ContentType,
-                        Description = _model.RawCredentialDocument.Description,
-                        Length = _model.RawCredentialDocument.ContentData.Length
-                    }, User.Identity.Name, false);
-                    bridge.CredentialDocumentId = bridge.CredentialDocument.Id;
+                //if (_model.RawCredentialDocument != null)
+                //{
+                //    _entity.CredentialDocument = documentRepository.Add(new Document
+                //    {
+                //        Id = _model.RawCredentialDocument.Id,
+                //        Name = _model.RawCredentialDocument.Name,
+                //        ContentType = _model.RawCredentialDocument.ContentType,
+                //        Description = _model.RawCredentialDocument.Description,
+                //        Length = _model.RawCredentialDocument.ContentData.Length
+                //    }, User.Identity.Name, false);
+                //    _entity.CredentialDocumentId = _entity.CredentialDocument.Id;
 
-                    documentFileManager.SaveDocumentFileContent(bridge.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, bridge.CredentialDocument.ContentType);
-                }
+                //    documentFileManager.SaveDocumentFileContent(_entity.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, _entity.CredentialDocument.ContentType);
+                //}
             }
 
-            foreach (var _model in model.IncomingPersonContactBridges)
+            foreach (var _model in model.IncomingPersonPostulations)
             {
-                var bridge = new VehicleLeaseOfferPersonContactBridge
+                var _entity = new VehicleLeasePersonPostulation
                 {
-                    ProwId = entity.Id,
-                    SternId = _model.ContactId,
+                    OfferId = entity.Id,
+                    ContactId = _model.ContactId,
                     TaxIdentificationNumber = _model.TaxIdentificationNumber,
                     BusinessKindId = _model.BusinessKindId,
                     Argument = _model.Argument
                 };
 
-                if (_model.RawCredentialDocument != null)
-                {
-                    bridge.CredentialDocument = documentRepository.Add(new Document
-                    {
-                        Id = _model.RawCredentialDocument.Id,
-                        Name = _model.RawCredentialDocument.Name,
-                        ContentType = _model.RawCredentialDocument.ContentType,
-                        Description = _model.RawCredentialDocument.Description,
-                        Length = _model.RawCredentialDocument.ContentData.Length
-                    }, User.Identity.Name, false);
-                    bridge.CredentialDocumentId = bridge.CredentialDocument.Id;
+                //if (_model.RawCredentialDocument != null)
+                //{
+                //    _entity.CredentialDocument = documentRepository.Add(new Document
+                //    {
+                //        Id = _model.RawCredentialDocument.Id,
+                //        Name = _model.RawCredentialDocument.Name,
+                //        ContentType = _model.RawCredentialDocument.ContentType,
+                //        Description = _model.RawCredentialDocument.Description,
+                //        Length = _model.RawCredentialDocument.ContentData.Length
+                //    }, User.Identity.Name, false);
+                //    _entity.CredentialDocumentId = _entity.CredentialDocument.Id;
 
-                    documentFileManager.SaveDocumentFileContent(bridge.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, bridge.CredentialDocument.ContentType);
-                }
+                //    documentFileManager.SaveDocumentFileContent(_entity.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, _entity.CredentialDocument.ContentType);
+                //}
 
-                entity.PersonContactBridges.Add(bridge);
+                entity.PersonPostulations.Add(_entity);
             }
             #endregion
         }
 
-        protected override void PostEdit(VehicleLeaseOffer entity, VehicleLeaseOfferInputModel model)
-        {
-            base.PostEdit(entity, model);
+        //protected override void PostEdit(VehicleLeaseOffer entity, VehicleLeaseOfferInputModel model)
+        //{
+        //    base.PostEdit(entity, model);
 
-            foreach (var _model in model.OutgoingOrganizationContactBridges)
-            {
-                documentFileManager.DeleteDocumentFile(new Document { Id = _model.CredentialDocument.Id, ContentType = MimeTypes.MimeTypeMap.GetMimeType(_model.CredentialDocument.Extension) });
-            }
+        //    foreach (var _model in model.OutgoingOrganizationPostulations)
+        //    {
+        //        documentFileManager.DeleteDocumentFile(new Document { Id = _model.CredentialDocument.Id, ContentType = MimeTypes.MimeTypeMap.GetMimeType(_model.CredentialDocument.Extension) });
+        //    }
 
-            foreach (var _model in model.OutgoingPersonContactBridges)
-            {
-                documentFileManager.DeleteDocumentFile(new Document { Id = _model.CredentialDocument.Id, ContentType = MimeTypes.MimeTypeMap.GetMimeType(_model.CredentialDocument.Extension) });
-            }
-        }
+        //    foreach (var _model in model.OutgoingPersonPostulations)
+        //    {
+        //        documentFileManager.DeleteDocumentFile(new Document { Id = _model.CredentialDocument.Id, ContentType = MimeTypes.MimeTypeMap.GetMimeType(_model.CredentialDocument.Extension) });
+        //    }
+        //}
     }
 }
