@@ -9,7 +9,7 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<!-- Display name -->
-		<ApplicationTitle>MOROPO S.U.R.L. Decisor</ApplicationTitle>
+		<ApplicationTitle>Decisor MOROPO S.U.R.L.</ApplicationTitle>
 		<!-- App Identifier -->
 		<ApplicationId>com.moropo.tool.decisor.terminal</ApplicationId>
 		<!-- Versions -->
@@ -42,10 +42,10 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<!-- App Icon -->
-		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#512BD4" />
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" ForegroundFile="Resources\AppIcon\appiconfg.svg" Color="#17174C" />
 
 		<!-- Splash Screen -->
-		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#512BD4" BaseSize="128,128" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="#17174C" BaseSize="128,128" />
 
 		<!-- Images -->
 		<MauiImage Include="Resources\Images\*" />

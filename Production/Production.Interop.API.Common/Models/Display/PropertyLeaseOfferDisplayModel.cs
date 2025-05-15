@@ -20,9 +20,9 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public Domain.Interop.API.Common.Models.Display.PropertyDisplayModel Property { get; set; }
 
-        public Bridge.CommonLeaseOfferOrganizationContactBridgeDisplayModel[] OrganizationContactBridges { get; set; }
+        public CommonLeaseOrganizationPostulationDisplayModel[] OrganizationPostulations { get; set; }
 
-        public Bridge.CommonLeaseOfferPersonContactBridgeDisplayModel[] PersonContactBridges { get; set; }
+        public CommonLeasePersonPostulationDisplayModel[] PersonPostulations { get; set; }
 
         public void Import(Persistence.Entities.PropertyLeaseOffer entity)
         {
@@ -33,51 +33,37 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             OpenAt = entity.OpenAt;
             ClosedAt = entity.ClosedAt;
             Description = entity.Description;
-            OrganizationContactBridges = entity.OrganizationContactBridges.Select(bridge =>
+            OrganizationPostulations = entity.OrganizationPostulations.Select(bridge =>
             {
-                var result = new Bridge.CommonLeaseOfferOrganizationContactBridgeDisplayModel
+                var result = new CommonLeaseOrganizationPostulationDisplayModel
                 {
                     TaxIdentificationNumber = bridge.TaxIdentificationNumber,
                     StateIdentificationCode = bridge.StateIdentificationCode,
                     Argument = bridge.Argument
                 };
 
-                if (bridge.CredentialDocument != null)
-                {
-                    result.CredentialDocument = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
-
-                    result.CredentialDocument.Import(bridge.CredentialDocument);
-                }
-
-                if (bridge.Stern != null)
+                if (bridge.Contact != null)
                 {
                     result.Contact = new Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel();
 
-                    result.Contact.Import(bridge.Stern);
+                    result.Contact.Import(bridge.Contact);
                 }
 
                 return result;
             }).ToArray();
-            PersonContactBridges = entity.PersonContactBridges.Select(bridge =>
+            PersonPostulations = entity.PersonPostulations.Select(bridge =>
             {
-                var result = new Bridge.CommonLeaseOfferPersonContactBridgeDisplayModel
+                var result = new CommonLeasePersonPostulationDisplayModel
                 {
                     TaxIdentificationNumber = bridge.TaxIdentificationNumber,
                     Argument = bridge.Argument
                 };
 
-                if (bridge.CredentialDocument != null)
-                {
-                    result.CredentialDocument = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
-
-                    result.CredentialDocument.Import(bridge.CredentialDocument);
-                }
-
-                if (bridge.Stern != null)
+                if (bridge.Contact != null)
                 {
                     result.Contact = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
 
-                    result.Contact.Import(bridge.Stern);
+                    result.Contact.Import(bridge.Contact);
                 }
 
                 if (bridge.BusinessKind != null)

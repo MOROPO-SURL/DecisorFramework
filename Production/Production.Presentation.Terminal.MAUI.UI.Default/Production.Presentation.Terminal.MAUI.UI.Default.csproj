@@ -34,11 +34,20 @@
 		<ProjectReference Include="..\Production.Presentation.Terminal.MAUI\Production.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\Configuration\CommonLeaseOrganizationPostulationConfigurationPage.xaml.cs">
+	    <DependentUpon>CommonLeaseOrganizationPostulationConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\CommonLeasePersonPostulationConfigurationPage.xaml.cs">
+	    <DependentUpon>CommonLeasePersonPostulationConfigurationPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Configuration\ElaborationStepWorkPositionBridgeConfigurationPage.xaml.cs">
 	    <DependentUpon>ElaborationStepWorkPositionBridgeConfigurationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Configuration\ProductionOrderConfigurationPage.xaml.cs">
 	    <DependentUpon>ProductionOrderConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\VehicleLeaseOfferConfigurationPage.xaml.cs">
+	    <DependentUpon>VehicleLeaseOfferConfigurationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\List\ProductionOrdersHandledListPage.xaml.cs">
 	    <DependentUpon>ProductionOrdersHandledListPage.xaml</DependentUpon>
@@ -57,10 +66,22 @@
 	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
-	  <MauiXaml Update="Pages\Configuration\Bridge\CommonLeaseOfferOrganizationContactBridgeConfigurationPage.xaml">
+	  <MauiXaml Update="Pages\Configuration\CommonLeaseOrganizationPostulationConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\CommonLeasePersonPostulationConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\PropertyLeaseOfferConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\VehicleLeaseOfferConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ProductionOrderDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\VehicleLeaseOfferDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

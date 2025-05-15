@@ -171,11 +171,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
         public DbSet<ProductionReception> ProductionReceptions { get; set; }
         public DbSet<PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
-        public DbSet<PropertyLeaseOfferOrganizationContactBridge> PropertyLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<PropertyLeaseOfferPersonContactBridge> PropertyLeaseOfferPersonContactBridges { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulation> PropertyLeaseOfferOrganizationContactBridges { get; set; }
+        public DbSet<PropertyLeasePersonPostulation> PropertyLeaseOfferPersonContactBridges { get; set; }
         public DbSet<VehicleLeaseOffer> VehicleLeaseOffers { get; set; }
-        public DbSet<VehicleLeaseOfferOrganizationContactBridge> VehicleLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<VehicleLeaseOfferPersonContactBridge> VehicleLeaseOfferPersonContactBridges { get; set; }
+        public DbSet<VehicleLeaseOrganizationPostulation> VehicleLeaseOfferOrganizationContactBridges { get; set; }
+        public DbSet<VehicleLeasePersonPostulation> VehicleLeaseOfferPersonContactBridges { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent> PurchaseSpents { get; set; }

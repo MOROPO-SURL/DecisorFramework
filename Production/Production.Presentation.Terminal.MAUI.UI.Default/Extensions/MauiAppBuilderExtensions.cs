@@ -15,9 +15,11 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Defa
             builder.Services
                 // DetailPage factory resgistration !!!
                 .AddSingleton<IDetailContentPageFactoryFacade<ProductionOrderDisplayModel, ProductionOrderDetailPage>, ProductionOrderDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<VehicleLeaseOfferDisplayModel, VehicleLeaseOfferDetailPage>, VehicleLeaseOfferDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
-                .AddSingleton<IConfigurationContentPageFactoryFacade<ProductionOrderDisplayModel, ProductionOrderConfigurationPageModel, ProductionOrderConfigurationPage>, ProductionOrderConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<ProductionOrderDisplayModel, ProductionOrderConfigurationPageModel, ProductionOrderConfigurationPage>, ProductionOrderConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<VehicleLeaseOfferDisplayModel, VehicleLeaseOfferConfigurationPageModel, VehicleLeaseOfferConfigurationPage>, VehicleLeaseOfferConfigurationPageFactory>();
 
             return builder;
         }
