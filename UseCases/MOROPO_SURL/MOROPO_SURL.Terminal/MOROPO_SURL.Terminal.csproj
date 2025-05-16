@@ -74,11 +74,24 @@
 	  <ProjectReference Include="..\..\..\Legal\Legal.Presentation.Terminal.MAUI.UI.Default\Legal.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Production\Production.Presentation.Terminal.MAUI.UI.Default\Production.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Purchasing\Purchasing.Presentation.Terminal.MAUI.UI.Default\Purchasing.Presentation.Terminal.MAUI.UI.Default.csproj" />
+	  <ProjectReference Include="..\..\..\Sales\Sales.Presentation.Terminal.MAUI.UI.Default\Sales.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Supervision\Supervision.Presentation.Terminal.MAUI.UI.Default\Supervision.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Folder Include="Properties\PublishProfiles\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="UI\Shells\SalesShell.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="UI\Shells\SalesShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

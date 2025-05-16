@@ -23,6 +23,8 @@ using MOROPO.Framework.Guama.Security.Personal.Persistence.ORM.EF.Extensions;
 using System.Runtime.CompilerServices;
 using System;
 using Microsoft.AspNetCore.Http;
+using MOROPO.Framework.Decisor.Sales.Presentation.Web.Backend.Extensions;
+using MOROPO.Framework.Decisor.Sales.Presentation.Web.Common.Extensions;
 
 namespace MOROPO.Tool.Decisor.Web.BackOffice
 {
@@ -61,6 +63,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
             builder.Services.AddDecisorCommercialPresentationWebCommon();
             builder.Services.AddDecisorProductionPresentationWebCommon();
             builder.Services.AddDecisorPurchasingPresentationWebCommon();
+            builder.Services.AddDecisorSalesPresentationWebCommon();
 
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Framework.Guama.Core.Persistence.ORM.EF.Entities.Trace, long>, Framework.Guama.Core.Persistence.ORM.EF.Repositories.TraceRepository>();
 

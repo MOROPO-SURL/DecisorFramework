@@ -1,0 +1,129 @@
+<Shell 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:decisorframework_sales_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Sales.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Sales.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_commercial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
+    x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.SalesShell"
+    FlyoutBehavior="Locked">
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="180">
+            <Image 
+                Aspect="AspectFill"
+                Source="sales.jpg" />
+            <BoxView
+                Color="#A7000000" />
+            <Grid
+                Padding="16">
+                <Button
+                    HorizontalOptions="Start" VerticalOptions="Start"
+                    Text="&#xF2DE;"
+                    FontFamily="MaterialDesignIcons"
+                    FontSize="Medium"
+                    Padding="4"
+                    BackgroundColor="#60FFFFFF"
+                    Clicked="BackHomeButton_Clicked" />
+                <Label
+                    Text="Ventas"
+                    TextColor="White"
+                    HorizontalTextAlignment="Center" VerticalOptions="Center"
+                    FontSize="Large"
+                    FontAttributes="Bold" />
+            </Grid>
+        </Grid>
+    </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
+    <ShellContent
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Operaciones" IsEnabled="False" />
+    <MenuFlyoutItem Text="Minoristas" IsEnabled="False" />
+    <ShellContent
+        Title="Inicios de Turno"
+        ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:ShiftOpeningsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF155;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Cierres de Turno"
+        ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:ShiftClosingsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF151;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutSeparator Text="Mayoristas" />
+    <FlyoutItem
+        Title="Ofertas">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFDA6;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Clientes Jurídicos"
+            ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:LegalClientBudgetsManagePage}" />
+        <ShellContent
+            Title="Clientes Naturales"
+            ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:NaturalClientBudgetsManagePage}" />
+    </FlyoutItem>
+    <ShellContent
+        Title="Órdenes"
+        ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:OrdersManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+            FontFamily="MaterialDesignIcons"
+            Glyph="&#xF216;"
+            Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Gestión" />
+    <FlyoutItem
+        Title="Clientes">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFAC0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:LegalClientsManagePage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:NaturalClientsManagePage}" />
+    </FlyoutItem>
+    <ShellContent
+        Title="Puntos de Venta"
+        ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:ShopsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF00EC;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Equipos de Venta"
+        ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:SaleTeamsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA8B;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+</Shell>
