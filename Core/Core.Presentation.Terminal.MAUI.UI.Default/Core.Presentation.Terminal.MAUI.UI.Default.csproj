@@ -23,28 +23,11 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<PackageReference Include="CaneyFramework.Presentation" Version="0.1.4" />
-		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.83" />
-		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.83" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
+		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
 		<PackageReference Include="SkiaSharp.Views.Maui.Controls" Version="2.88.8" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <MauiXaml Update="Pages\Configuration\DocumentConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\Configuration\EmailContactItemConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\Configuration\PhoneContactItemConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\Configuration\PostalContactConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Pages\Configuration\WebContactItemConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 </Project>
