@@ -8,8 +8,6 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
         where TListPageModel : Models.Page.Contract.AbstractListEntityPageModel<TModel>, new()
         where TDetailContentPage : DetailBaseContentPage<TModel>
     {
-        private int currentItemsCollectionViewCellColumnCount = 3;
-
         public ListBaseContentPage()
         {
             BindingContext = new TListPageModel();
@@ -144,36 +142,24 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
         {
             var itemsCollectionViewLayout = GetItemsCollectionView().Parent as Microsoft.Maui.Controls.Layout;
 
+            var columnCount = 1;
+
             double itemsCollectionViewItemsLayoutHorizontalItemSpacing;
 
             if (GetItemsCollectionView().ItemsLayout is Microsoft.Maui.Controls.GridItemsLayout)
             {
                 var itemsCollectionViewItemsLayout = GetItemsCollectionView().ItemsLayout as Microsoft.Maui.Controls.GridItemsLayout;
 
-                var collumnReazon = itemsCollectionViewLayout.Width / (ItemViewRequestWidth + itemsCollectionViewItemsLayout.HorizontalItemSpacing);
-
-                currentItemsCollectionViewCellColumnCount = System.Convert.ToInt32(System.Math.Round(collumnReazon, System.MidpointRounding.ToEven));
-
-                if (currentItemsCollectionViewCellColumnCount > collumnReazon)
-                {
-                    currentItemsCollectionViewCellColumnCount--;
-                }
-
-                if (currentItemsCollectionViewCellColumnCount <= 0)
-                {
-                    currentItemsCollectionViewCellColumnCount = 1;
-                }
+                columnCount = itemsCollectionViewItemsLayout.Span;
 
                 itemsCollectionViewItemsLayoutHorizontalItemSpacing = itemsCollectionViewItemsLayout.HorizontalItemSpacing;
             }
             else
             {
-                currentItemsCollectionViewCellColumnCount = 1;
-
                 itemsCollectionViewItemsLayoutHorizontalItemSpacing = (GetItemsCollectionView().ItemsLayout as Microsoft.Maui.Controls.LinearItemsLayout).ItemSpacing;
             }
 
-            var collectionViewCellWidth = (itemsCollectionViewLayout.Width - ((currentItemsCollectionViewCellColumnCount - 1) * itemsCollectionViewItemsLayoutHorizontalItemSpacing)) / currentItemsCollectionViewCellColumnCount;
+            var collectionViewCellWidth = (itemsCollectionViewLayout.Width - ((columnCount - 1) * itemsCollectionViewItemsLayoutHorizontalItemSpacing)) / columnCount;
 
             var collectionViewCellHeight = MeasureCollectionViewCellHeight(collectionViewCellWidth);
 
@@ -188,7 +174,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 availableVerticalHeight -= collectionViewCellHeight + itemsCollectionViewItemsLayoutHorizontalItemSpacing;
             }
 
-            CurrentItemsPageLimit = currentItemsCollectionViewCellColumnCount * rowCount;
+            CurrentItemsPageLimit = columnCount * rowCount;
         }
     }
 }

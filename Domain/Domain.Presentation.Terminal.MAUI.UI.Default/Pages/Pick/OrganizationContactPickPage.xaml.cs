@@ -45,6 +45,11 @@ public partial class OrganizationContactPickPage : Core.Presentation.Terminal.MA
         pickCompleteAction = null;
     }
 
+    protected override double MeasureCollectionViewCellHeight(double width)
+    {
+        return ITEM_VIEW_REQUEST_HEIGHT;
+    }
+
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.OrganizationContactDisplayModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.OrganizationContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());

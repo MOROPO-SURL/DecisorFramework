@@ -4,6 +4,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.VehicleDisplayModel, Models.Page.Manage.VehiclesManagePageModel, Models.Page.Configuration.VehicleConfigurationPageModel, Configuration.VehicleConfigurationPage, Detail.VehicleDetailPage>
 {
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 284;
+
     public VehiclesManagePage()
     {
         InitializeComponent();
@@ -18,7 +20,7 @@ public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
-        return width;
+        return 284;
     }
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.VehicleDisplayModel>> FetchItemsAsync()

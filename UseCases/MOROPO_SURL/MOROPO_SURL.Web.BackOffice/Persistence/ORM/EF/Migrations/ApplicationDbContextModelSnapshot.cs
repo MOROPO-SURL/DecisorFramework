@@ -5124,6 +5124,53 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("purchasingroles", "decisorframework_purchasing");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractSale", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("SellerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sellerid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_abstractsale");
+
+                    b.HasIndex("SellerId")
+                        .HasDatabaseName("ix_abstractsale_sellerid");
+
+                    b.ToTable("abstractsale", "decisorframework_sales");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractSale");
+
+                    b.UseTphMappingStrategy();
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Guama.Core.Persistence.ORM.EF.Entities.Trace", b =>
                 {
                     b.Property<long>("Id")
@@ -6216,6 +6263,92 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("receptions");
 
                     b.HasDiscriminator().HasValue("PurchaseReception");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientWholesaleSale", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractSale");
+
+                    b.Property<int>("BudgetNumber")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetnumber");
+
+                    b.Property<int>("BudgetYear")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetyear");
+
+                    b.Property<int?>("ContractNumber")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("contractnumber");
+
+                    b.Property<int?>("ContractYear")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("contractyear");
+
+                    b.HasIndex("BudgetNumber", "BudgetYear")
+                        .HasDatabaseName("ix_abstractsale_budgetnumber_budgetyear");
+
+                    b.HasIndex("ContractNumber", "ContractYear")
+                        .HasDatabaseName("ix_abstractsale_contractnumber_contractyear");
+
+                    b.ToTable("abstractsale", "decisorframework_sales");
+
+                    b.HasDiscriminator().HasValue("LegalClientWholesaleSale");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClientWholesaleSale", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractSale");
+
+                    b.Property<int>("BudgetNumber")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetnumber");
+
+                    b.Property<int>("BudgetYear")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("budgetyear");
+
+                    b.Property<int?>("ContractNumber")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("contractnumber");
+
+                    b.Property<int?>("ContractYear")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("integer")
+                        .HasColumnName("contractyear");
+
+                    b.HasIndex("BudgetNumber", "BudgetYear")
+                        .HasDatabaseName("ix_abstractsale_budgetnumber_budgetyear");
+
+                    b.HasIndex("ContractNumber", "ContractYear")
+                        .HasDatabaseName("ix_abstractsale_contractnumber_contractyear");
+
+                    b.ToTable("abstractsale", "decisorframework_sales");
+
+                    b.HasDiscriminator().HasValue("NaturalClientWholesaleSale");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.RetailSale", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractSale");
+
+                    b.Property<Guid?>("IdentityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("identityid");
+
+                    b.HasIndex("IdentityId")
+                        .HasDatabaseName("ix_abstractsale_identityid");
+
+                    b.ToTable("abstractsale", "decisorframework_sales");
+
+                    b.HasDiscriminator().HasValue("RetailSale");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Guama.Location.Persistence.Entities.LocalityLocation", b =>
@@ -8770,6 +8903,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractSale", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Seller")
+                        .WithMany()
+                        .HasForeignKey("SellerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_abstractsale_employees_sellerid");
+
+                    b.Navigation("Seller");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Guama.Core.Security.Common.Persistence.Entities.RolePermissionBridge", b =>
                 {
                     b.HasOne("MOROPO.Framework.Guama.Core.Security.Common.Persistence.Entities.Role", "Prow")
@@ -9252,6 +9397,54 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_receptions_purchases_purchaseid");
 
                     b.Navigation("Purchase");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientWholesaleSale", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.Contract.AbstractBudget", "Budget")
+                        .WithMany()
+                        .HasForeignKey("BudgetNumber", "BudgetYear")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_abstractsale_abstractbudget_budgetnumber_budgetyear");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClientSaleContract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractNumber", "ContractYear")
+                        .HasConstraintName("fk_abstractsale_legalclientsalecontracts_contractnumber_contra~");
+
+                    b.Navigation("Budget");
+
+                    b.Navigation("Contract");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClientWholesaleSale", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.Contract.AbstractBudget", "Budget")
+                        .WithMany()
+                        .HasForeignKey("BudgetNumber", "BudgetYear")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_abstractsale_abstractbudget_budgetnumber_budgetyear");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClientSaleContract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractNumber", "ContractYear")
+                        .HasConstraintName("fk_abstractsale_naturalclientsalecontracts_contractnumber_cont~");
+
+                    b.Navigation("Budget");
+
+                    b.Navigation("Contract");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.RetailSale", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PersonIdentity", "Identity")
+                        .WithMany()
+                        .HasForeignKey("IdentityId")
+                        .HasConstraintName("fk_abstractsale_personidentities_identityid");
+
+                    b.Navigation("Identity");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Guama.Location.Persistence.Entities.LocalityLocation", b =>
