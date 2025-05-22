@@ -20,7 +20,7 @@ public partial class BrandsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
-        return width;
+        return ITEM_VIEW_REQUEST_HEIGHT;
     }
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.BrandDisplayModel>> FetchItemsAsync()

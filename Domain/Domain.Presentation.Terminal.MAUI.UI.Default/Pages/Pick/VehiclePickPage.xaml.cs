@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class VehiclePickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.VehicleDisplayModel, Models.Page.Pick.VehiclePickPageModel, Detail.VehicleDetailPage>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 284;
 
     private System.Action<Interop.API.Common.Models.Display.VehicleDisplayModel> pickCompleteAction;
 
@@ -41,6 +41,11 @@ public partial class VehiclePickPage : Core.Presentation.Terminal.MAUI.UI.Pages.
         base.DisposeUnmanagementResources();
 
         pickCompleteAction = null;
+    }
+
+    protected override double MeasureCollectionViewCellHeight(double width)
+    {
+        return ITEM_VIEW_REQUEST_HEIGHT;
     }
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.VehicleDisplayModel>> FetchItemsAsync()
