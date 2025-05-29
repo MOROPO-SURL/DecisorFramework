@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <core_ui_base_pages:ManageBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -25,14 +24,14 @@
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Agregar"
-            Clicked="AddItemControl_Invoked">
+            Clicked="AddItemToolbarItems_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Actualizar"
-            Clicked="ReloadControl_Invoked">
+            Clicked="ReloadToolbarItems_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -44,7 +43,7 @@
                 <SearchBar Margin="20,20,20,0" />
                 <Grid 
                     VerticalOptions="FillAndExpand"
-                    SizeChanged="ItemsCollectionViewLayoutControl_SizeChanged">
+                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
                     <CollectionView
                         x:Name="ItemsCollectionView"
                         Margin="10"
@@ -63,20 +62,20 @@
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>
                             <Label
-                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
-                                HorizontalTextAlignment="Center"
-                                Margin="5"
-                                Text="Sin elementos que mostrar"
-                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
-                                FontAttributes="Italic" />
+                            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                            HorizontalTextAlignment="Center"
+                            Margin="5"
+                            Text="Sin elementos que mostrar"
+                            TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                            FontAttributes="Italic" />
                         </CollectionView.EmptyView>
                         <CollectionView.Footer>
                             <StackLayout IsVisible="{Binding HasMoreItems}">
                                 <Button
-                                    HorizontalOptions="Center"
-                                    Margin="5"
-                                    Text="Mostrar más"
-                                    Clicked="LoadMoreItemsControl_Invoked" />
+                                HorizontalOptions="Center"
+                                Margin="5"
+                                Text="Mostrar más"
+                                Clicked="LoadMoreBurron_Clicked" />
                             </StackLayout>
                         </CollectionView.Footer>
                     </CollectionView>

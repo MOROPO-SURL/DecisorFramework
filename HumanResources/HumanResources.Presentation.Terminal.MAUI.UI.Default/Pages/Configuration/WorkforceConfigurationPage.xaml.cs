@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<WorkforceDisplayModel>
+public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<WorkforceDisplayModel, WorkforceDisplayModel, Models.Page.Configuration.WorkforceConfigurationPageModel>
 {
     private readonly List<VacantInputModel> editionVacants = [];
     private readonly List<VacantInputModel> incomingVacants = [];
@@ -24,15 +24,13 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
     {
         var apiConnectClient = new Interop.API.Connect.Clients.WorkforcesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext;
-
         var model = new WorkforceInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            At = concreteBindingContext.At,
-            Priority = concreteBindingContext.Priority,
-            OrganizationalUnities = concreteBindingContext.OrganizationalUnities.Select(_model => new Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel { Id = _model.Id }).ToList(),
+            Name = ConcreteBindingContext.Name,
+            At = ConcreteBindingContext.At,
+            Priority = ConcreteBindingContext.Priority,
+            OrganizationalUnities = ConcreteBindingContext.OrganizationalUnities.Select(_model => new Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel { Id = _model.Id }).ToList(),
             IncomingVacants = incomingVacants
         };
 
@@ -45,15 +43,13 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
     {
         var apiConnectClient = new Interop.API.Connect.Clients.WorkforcesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext;
-
         var model = new WorkforceInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            At = concreteBindingContext.At,
-            Priority = concreteBindingContext.Priority,
-            OrganizationalUnities = concreteBindingContext.OrganizationalUnities.Select(_model => new Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel { Id = _model.Id }).ToList(),
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            At = ConcreteBindingContext.At,
+            Priority = ConcreteBindingContext.Priority,
+            OrganizationalUnities = ConcreteBindingContext.OrganizationalUnities.Select(_model => new Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel { Id = _model.Id }).ToList(),
             IncomingVacants = incomingVacants,
             EditionVacants = editionVacants,
             OutgoingVacants = outgoingVacants
@@ -62,6 +58,16 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void AddOrganizationalUnityButton_Clicked(object sender, System.EventArgs e)
@@ -75,7 +81,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         {
             if (!task.Result) return;
 
-            var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.OrganizationalUnityViewModel;
+            var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalUnityViewModel;
 
             incomingVacants.RemoveAll(model => model.OrganizationUnityId == target.Id);
             editionVacants.RemoveAll(model => model.OrganizationUnityId == target.Id);
@@ -87,9 +93,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
     private void AddVacantButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        var concreteBindingContext = (Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
+        ConcreteBindingContext.IsBusy = true;
 
         System.Threading.Tasks.Task.Run(async () =>
         {
@@ -98,7 +102,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
                 var workPositionsAPIConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
                 var salaryStandardsAPIConnectClient = new Interop.API.Connect.Clients.SalaryStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-                var model = new Models.Page.Configuration.VacantConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.OrganizationalUnityViewModel)
+                var model = new Models.Page.Configuration.VacantConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalUnityViewModel)
                 {
                     AvailableWorkPositions = await workPositionsAPIConnectClient.GetAsync(),
                     AvailableSalaryStandards = await salaryStandardsAPIConnectClient.GetAsync()
@@ -106,7 +110,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
                 Dispatcher.Dispatch(() =>
                 {
-                    concreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.IsBusy = false;
 
                     this.NavigationPushPageAsync(new Configuration.VacantConfigurationPage(VacantCreateSuccess_Callback, model));
                 });
@@ -123,7 +127,36 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
     private void VacantEditionButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushPageAsync(new VacantConfigurationPage(VacantEditSuccess_Callback, new Models.Page.Configuration.VacantConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.VacantViewModel)));
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run((System.Func<System.Threading.Tasks.Task>)(async () =>
+        {
+            try
+            {
+                var workPositionsAPIConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var salaryStandardsAPIConnectClient = new Interop.API.Connect.Clients.SalaryStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                var model = new Models.Page.Configuration.VacantConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationVacantViewModel)
+                {
+                    AvailableWorkPositions = await workPositionsAPIConnectClient.GetAsync(),
+                    AvailableSalaryStandards = await salaryStandardsAPIConnectClient.GetAsync()
+                };
+
+                Dispatcher.Dispatch((System.Action)(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync((Microsoft.Maui.Controls.Page)new Configuration.VacantConfigurationPage(VacantEditSuccess_Callback, model));
+                }));
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        }));
     }
 
     private void VacantRemoveButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -134,7 +167,44 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
             Dispatcher.Dispatch(() =>
             {
-                ((Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext).OrganizationalUnities.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.OrganizationalUnityViewModel);
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationVacantViewModel;
+
+                var handled = false;
+
+                foreach (var item in incomingVacants)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingVacants.Remove(incomingVacants.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionVacants)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionVacants.Remove(editionVacants.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingVacants.Add(new VacantDisplayModel
+                    {
+                        Id = target.Id                        
+                    });
+                }
+
+                target.OrganizationUnity.Vacants.Remove(target);
+
+                hasChangesFlag = true;
             });
         });
     }
@@ -159,7 +229,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
                 }
                 else
                 {
-                    ((Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext).OrganizationalUnities.Add(new Models.View.OrganizationalUnityViewModel
+                    ((Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext).OrganizationalUnities.Add(new Models.View.WorkforceConfigurationOrganizationalUnityViewModel
                     {
                         Id = task.Result.Id,
                         Name = task.Result.Name,
@@ -175,7 +245,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         });
     }
 
-    private void VacantCreateSuccess_Callback(Models.View.VacantViewModel model)
+    private void VacantCreateSuccess_Callback(Models.View.WorkforceConfigurationVacantViewModel model)
     {
         incomingVacants.Add(new VacantInputModel
         {
@@ -190,7 +260,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         model.OrganizationUnity.Vacants.Add(model);
     }
 
-    private void VacantEditSuccess_Callback(Models.View.VacantViewModel model)
+    private void VacantEditSuccess_Callback(Models.View.WorkforceConfigurationVacantViewModel model)
     {
         var handled = false;
 
@@ -247,13 +317,13 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         }
     }
 
-    private static Models.View.OrganizationalUnityViewModel[] GetOrganizationalUnityChildren(Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel model)
+    private static Models.View.WorkforceConfigurationOrganizationalUnityViewModel[] GetOrganizationalUnityChildren(Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel model)
     {
-        var result = new System.Collections.Generic.List<Models.View.OrganizationalUnityViewModel>();
+        var result = new List<Models.View.WorkforceConfigurationOrganizationalUnityViewModel>();
 
         foreach (var item in model.Children)
         {
-            var _model = new Models.View.OrganizationalUnityViewModel
+            var _model = new Models.View.WorkforceConfigurationOrganizationalUnityViewModel
             {
                 Id = item.Id,
                 Name = item.Name,

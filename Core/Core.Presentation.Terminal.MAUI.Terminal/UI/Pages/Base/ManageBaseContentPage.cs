@@ -7,7 +7,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
         where TModel : class
         where TManagePageModel : Models.Page.Contract.AbstractManageEntityPageModel<TModel>, new()
         where TConfigurationPageModel : Models.Page.Contract.AbstractConfigurationPageModel<TModel>, new()
-        where TConfigurationContentPage : ConfigurationBaseContentPage<TModel, TConfigurationPageModel>
+        where TConfigurationContentPage : ConfigurationBaseContentPage<TModel, TModel, TConfigurationPageModel>
         where TDetailContentPage : DetailBaseContentPage<TModel>
     {
         protected virtual bool ConfigurationRequiredAsyncWorkPresentation => false;
@@ -24,7 +24,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
                     try
                     {
-                        var page = factory.Build(task.Result, ActionDelegationRequest_Callback, ConfigurationSuccess_Callback);
+                        var page = factory.Build(task.Result, ActionDelegationRequest_Callback, CompletationFeedback_Callback);
 
                         this.NavigationPushModalPageAsync(page);
                     }
@@ -38,7 +38,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             });
         }
 
-        private void AddItemControl_Invoked(object sender, System.EventArgs eventArgs)
+        protected void AddItem(object sender, System.EventArgs eventArgs)
         {
             var concreteBindingContext = (TManagePageModel)BindingContext;
 
@@ -76,6 +76,11 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             concreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation;
 
             delegationAction.Invoke();
+        }
+
+        private void CompletationFeedback_Callback(TModel model)
+        {
+            LoadItems(true);
         }
 
         private void ConfigurationSuccess_Callback(TModel model)

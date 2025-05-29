@@ -1,75 +1,43 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+﻿namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
-
-public partial class ClassificationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ClassificationDisplayModel>
+public partial class ClassificationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Input.ClassificationInputModel, Interop.API.Common.Models.Input.ClassificationInputModel, Models.Page.Configuration.ClassificationConfigurationPageModel>
 {
-    public ClassificationConfigurationPage(System.Action<Interop.API.Common.Models.Display.ClassificationDisplayModel> successAction, Models.Page.Configuration.ClassificationConfigurationPageModel model) : base(successAction, model)
+    public ClassificationConfigurationPage(System.Action<Interop.API.Common.Models.Input.ClassificationInputModel> successAction, Models.Page.Configuration.ClassificationConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
     }
 
     protected override string EntityTypeName => "Clasificación";
 
-    protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.ClassificationDisplayModel> PerformCreationAsync()
+    protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Input.ClassificationInputModel> PerformCreationAsync()
     {
-        var concreteBindingContext = (Models.Page.Configuration.ClassificationConfigurationPageModel)BindingContext;
-
-        if (concreteBindingContext.ProductConfigurationPageModel.Id == default)
-        {
-            return new Interop.API.Common.Models.Display.ClassificationDisplayModel
-            {
-                Id = System.Guid.NewGuid(),
-                Name = concreteBindingContext.Name,
-                Description = concreteBindingContext.Description,
-                Priority = concreteBindingContext.Priority
-            };
-        }
-
-        var apiConnectClient = new Interop.API.Connect.Clients.ClassificationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        var model = new Interop.API.Common.Models.Input.ClassificationInputModel
+        return System.Threading.Tasks.Task.FromResult(new Interop.API.Common.Models.Input.ClassificationInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority,
-            ProductId = concreteBindingContext.ProductConfigurationPageModel.Id
-        };
-
-        await apiConnectClient.CreateAsync(model);
-
-        return await apiConnectClient.GetAsync(model.Id);
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority
+        });
     }
 
-    protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.ClassificationDisplayModel> PerformEditionAsync()
+    protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Input.ClassificationInputModel> PerformEditionAsync()
     {
-        var concreteBindingContext = (Models.Page.Configuration.ClassificationConfigurationPageModel)BindingContext;
-
-        if (concreteBindingContext.ProductConfigurationPageModel.Id == default)
+        return System.Threading.Tasks.Task.FromResult(new Interop.API.Common.Models.Input.ClassificationInputModel
         {
-            return new Interop.API.Common.Models.Display.ClassificationDisplayModel
-            {
-                Id = concreteBindingContext.Id,
-                Name = concreteBindingContext.Name,
-                Description = concreteBindingContext.Description,
-                Priority = concreteBindingContext.Priority
-            };
-        }
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority
+        });
+    }
 
-        var apiConnectClient = new Interop.API.Connect.Clients.ClassificationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
 
-        var model = new Interop.API.Common.Models.Input.ClassificationInputModel
-        {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority
-        };
-
-        await apiConnectClient.EditAsync(model);
-
-        return await apiConnectClient.GetAsync(model.Id);
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 }

@@ -6,6 +6,7 @@ using MOROPO.Framework.Guama.Identity.Persistence.Entities;
 using MOROPO.Framework.Guama.Location.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
@@ -58,6 +59,17 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                 model.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.FeatureImage.ContentType);
             }
 
+            model.Images = entity.ImageBridges.Select(bridge =>
+            {
+                var _model = new Core.Interop.API.Common.Models.Display.ImageDisplayModel();
+
+                _model.Import(bridge.Stern);
+
+                _model.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.ContentType);
+
+                return _model;
+            }).ToArray();
+
             return model;
         }
 
@@ -105,6 +117,32 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 
                 imageFileManager.SaveImageFileContent(entity.FeatureImage.Id, model.FeatureImage.ContentData, model.FeatureImage.ContentType);
             }
+
+            foreach (var _model in model.IncomingImageItems)
+            {
+                using var imageMemoryStream = new System.IO.MemoryStream(_model.ContentData);
+
+                using var imageSkData = SkiaSharp.SKData.Create(imageMemoryStream);
+
+                using var imageSkBitmap = SkiaSharp.SKBitmap.Decode(imageSkData);
+
+                var _entity = imageRepository.Add(new Image
+                {
+                    ContentType = _model.ContentType,
+                    Length = _model.ContentData.LongLength,
+                    Width = imageSkBitmap.Width,
+                    Height = imageSkBitmap.Height,
+                    About = string.Format("Image for Property: {0}", model.Id)
+                }, User.Identity.Name, false);
+
+                imageFileManager.SaveImageFileContent(_entity.Id, _model.ContentData, _model.ContentType);
+
+                entity.ImageBridges.Add(new PropertyImageBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
         }
 
         protected override void PreEdit(Property entity, PropertyInputModel model)
@@ -147,6 +185,43 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 
                 imageFileManager.SaveImageFileContent(entity.FeatureImage.Id, model.FeatureImage.ContentData, model.FeatureImage.ContentType);
             }
+
+            #region Image Items
+
+            foreach (var _model in model.OutgoingImagetItems)
+            {
+                var bridge = entity.ImageBridges.First(bridge => bridge.SternId == _model.Id);
+
+                imageRepository.Delete(bridge.Stern, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingImageItems)
+            {
+                using var imageMemoryStream = new System.IO.MemoryStream(_model.ContentData);
+
+                using var imageSkData = SkiaSharp.SKData.Create(imageMemoryStream);
+
+                using var imageSkBitmap = SkiaSharp.SKBitmap.Decode(imageSkData);
+
+                var _entity = imageRepository.Add(new Image
+                {
+                    ContentType = _model.ContentType,
+                    Length = _model.ContentData.LongLength,
+                    Width = imageSkBitmap.Width,
+                    Height = imageSkBitmap.Height,
+                    About = string.Format("Image for Property: {0}", model.Id)
+                }, User.Identity.Name, false);
+
+                imageFileManager.SaveImageFileContent(_entity.Id, _model.ContentData, _model.ContentType);
+
+                entity.ImageBridges.Add(new PropertyImageBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
+
+            #endregion
         }
 
         protected override void PostEdit(Property entity, PropertyInputModel model)
@@ -162,6 +237,15 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                     imageRepository.Delete(oldLogoImage, User.Identity.Name);
 
                     imageFileManager.DeleteImageFile(oldLogoImage);
+                }
+
+                foreach (var _model in model.OutgoingImagetItems)
+                {
+                    var _entity = new Image { Id = _model.Id };
+
+                    imageRepository.Delete(_entity, User.Identity.Name);
+
+                    imageFileManager.DeleteImageFile(_entity);
                 }
             }
             catch { }

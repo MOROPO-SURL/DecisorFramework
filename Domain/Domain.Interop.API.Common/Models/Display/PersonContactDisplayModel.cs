@@ -7,8 +7,6 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
     {
         public Core.Interop.API.Common.Models.Display.PersonIdentityDisplayModel Identity { get; set; }
 
-        public NaturalBusinessKindDisplayModel BusinessKind { get; set; }
-
         public string PersonalIdentificationNumber { get; set; }
 
         public override void Import(PersonContact entity)

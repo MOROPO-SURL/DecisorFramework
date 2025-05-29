@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8" ?>
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -62,6 +61,20 @@
             Title="Personas"
             ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}" />
     </FlyoutItem>
+    <FlyoutItem Title="Clientes">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFAC0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:LegalClientsManagePage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:NaturalClientsManagePage}" />
+    </FlyoutItem>
     <FlyoutItem Title="Proveedores">
         <FlyoutItem.Icon>
             <FontImageSource
@@ -70,10 +83,10 @@
              Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
-             Title="Organizaciones"
+             Title="Jurídicos"
              ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:LegalProvidersManagePage}" />
         <ShellContent
-            Title="Personas"
+            Title="Naturales"
             ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:NaturalProvidersManagePage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Configuración" />

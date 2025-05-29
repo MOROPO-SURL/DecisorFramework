@@ -7,5 +7,7 @@
 
         public System.Guid SternId { get; set; }
         public Inventory.Persistence.Entities.Product Stern { get; set; }
+
+        public decimal Amount { get; set; }
     }
 }

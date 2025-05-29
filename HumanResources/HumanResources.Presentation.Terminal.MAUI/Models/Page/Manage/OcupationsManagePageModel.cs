@@ -1,0 +1,11 @@
+﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Manage
+{
+    public class OcupationsManagePageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractManageEntityPageModel<Interop.API.Common.Models.Display.OcupationDisplayModel>
+    {
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.StaffDisplayModel> AvailableStaffs { get; set; } = [];
+
+        public System.Collections.ObjectModel.ObservableCollection<View.StaffWorkforceViewModel> AvailableStaffWorkforces { get; set; } = [];
+
+        public System.Collections.ObjectModel.ObservableCollection<View.OcupationsRawManageOrganizationalUnityViewModel> OrganizationalUnities { get; set; } = [];
+    }
+}

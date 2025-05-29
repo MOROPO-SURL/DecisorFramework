@@ -10,7 +10,7 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Repositories
 
         protected override System.Linq.IQueryable<Entities.ElaborationStep> GetQueryableDbSet()
         {
-            return base.GetQueryableDbSet().Include(entity => entity.ProductionRoleBridges).ThenInclude(bridge => bridge.Stern);
+            return base.GetQueryableDbSet().Include(entity => entity.WorkPositionBridges).ThenInclude(bridge => bridge.Stern);
         }
     }
 }

@@ -96,14 +96,14 @@
              Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
+            Title="Personal"
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsRawManagePage}" />
+        <ShellContent
              Title="Estructuras"
              ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}" />
         <ShellContent
             Title="Asignaciones"
             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}" />
-        <ShellContent
-            Title="Personal"
-            ContentTemplate="{DataTemplate ContentPage}" />
     </FlyoutItem>
     <ShellContent
         Title="Contactos"

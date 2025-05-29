@@ -1,17 +1,24 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
-using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Bridge;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.ProductDisplayModel, Models.Page.Configuration.ProductConfigurationPageModel>
+public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProductDisplayModel, ProductDisplayModel, Models.Page.Configuration.ProductConfigurationPageModel>
 {
-    private byte[] imagePickedData;
-    private string imageContentType;
+    private ImageInputModel featureImagePickedModel;
 
-    public ProductConfigurationPage(System.Action<Interop.API.Common.Models.Display.ProductDisplayModel> successAction, Models.Page.Configuration.ProductConfigurationPageModel model) : base(successAction, model)
+    private readonly List<ClassificationInputModel> editionClassificationItems = [];
+    private readonly List<ClassificationInputModel> incomingClassificationItems = [];
+    private readonly List<ClassificationDisplayModel> outgoingClassificationItems = [];
+
+    public ProductConfigurationPage(System.Action<ProductDisplayModel> successAction, Models.Page.Configuration.ProductConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
 
@@ -50,14 +57,14 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
     {
         base.DisposeUnmanagementResources();
 
-        imagePickedData = null;
+        featureImagePickedModel = null;
     }
 
-    protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.ProductDisplayModel> PerformCreationAsync()
+    protected override async System.Threading.Tasks.Task<ProductDisplayModel> PerformCreationAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProductsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var model = new Interop.API.Common.Models.Input.ProductInputModel
+        var model = new ProductInputModel
         {
             Id = System.Guid.NewGuid(),
             Name = ConcreteBindingContext.Name,
@@ -66,25 +73,15 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
             DefaultMetricUnityId = ConcreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
             CategoryId = CategoryPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
             WarehousingDecreases = ConcreteBindingContext.WarehousingDecreases.ToList(),
-            Classifications = ConcreteBindingContext.Classifications.Select(item => new Interop.API.Common.Models.Input.ClassificationInputModel
-            {
-                Id = item.Id,
-                Name = item.Name,
-                Description = item.Description,
-                Priority = item.Priority,
-                ProductId = ConcreteBindingContext.Id
-            }).ToList()
+            IncomingClassificationItems = incomingClassificationItems
         };
 
-        if (imagePickedData != null)
+        if (featureImagePickedModel != null)
         {
-            model.FeatureImage = new Core.Interop.API.Common.Models.Input.ImageInputModel
-            {
-                Id = System.Guid.NewGuid(),
-                ContentData = imagePickedData,
-                ContentType = imageContentType,
-                About = $"{EntityTypeName} {model.Id}"
-            };
+            featureImagePickedModel.Id = System.Guid.NewGuid();
+            featureImagePickedModel.About = $"{EntityTypeName} {model.Id}";
+
+            model.FeatureImage = featureImagePickedModel;
         }
 
         await apiConnectClient.CreateAsync(model);
@@ -92,11 +89,11 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
         return await apiConnectClient.GetAsync(model.Id);
     }
 
-    protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.ProductDisplayModel> PerformEditionAsync()
+    protected override async System.Threading.Tasks.Task<ProductDisplayModel> PerformEditionAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProductsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var model = new Interop.API.Common.Models.Input.ProductInputModel
+        var model = new ProductInputModel
         {
             Id = ConcreteBindingContext.Id,
             Name = ConcreteBindingContext.Name,
@@ -104,18 +101,18 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
             Priority = ConcreteBindingContext.Priority,
             DefaultMetricUnityId = ConcreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
             CategoryId = CategoryPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
-            WarehousingDecreases = ConcreteBindingContext.WarehousingDecreases.ToList()
+            WarehousingDecreases = ConcreteBindingContext.WarehousingDecreases.ToList(),
+            EditionClassificationItems = editionClassificationItems,
+            IncomingClassificationItems = incomingClassificationItems,
+            OutgoingClassificationItems = outgoingClassificationItems
         };
 
-        if (imagePickedData != null)
+        if (featureImagePickedModel != null)
         {
-            model.FeatureImage = new Core.Interop.API.Common.Models.Input.ImageInputModel
-            {
-                Id = ConcreteBindingContext.FeatureImageId ?? default,
-                ContentData = imagePickedData,
-                ContentType = imageContentType,
-                About = $"{EntityTypeName} {model.Id}"
-            };
+            featureImagePickedModel.Id = System.Guid.NewGuid();
+            featureImagePickedModel.About = $"{EntityTypeName} {model.Id}";
+
+            model.FeatureImage = featureImagePickedModel;
         }
 
         await apiConnectClient.EditAsync(model);
@@ -123,53 +120,19 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
         return await apiConnectClient.GetAsync(model.Id);
     }
 
-    private async void ImageLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (!Microsoft.Maui.Media.MediaPicker.IsCaptureSupported) PresentForImagePick();
+        OnApply(sender, eventArgs);
+    }
 
-        var action = await DisplayActionSheet("Seleccionar imágen desde", "Cancelar", null, CommonActionSheetConstants.PICKIMAGE_OPTION_CAMARA, CommonActionSheetConstants.PICKIMAGE_OPTION_GALLERY);
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
 
-        if (action == CommonActionSheetConstants.PICKIMAGE_OPTION_CAMARA)
-        {
-            var permission = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.Camera>();
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                permission = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.Camera>();
-            }
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    DisplayAlert("Aviso", string.Format("El permiso para acceder a cámara del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
-
-                    ConcreteBindingContext.IsBusy = false;
-                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
-                });
-
-                return;
-            }
-
-            Dispatcher.Dispatch(() =>
-            {
-                ConcreteBindingContext.IsBusy = true;
-                ConcreteBindingContext.BusyProgressMessage = "Capturando imagen ...";
-            });
-
-            await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromSeconds(1));
-
-            Dispatcher.Dispatch(() =>
-            {
-                ConcreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
-            });
-
-            await Microsoft.Maui.Media.MediaPicker.CapturePhotoAsync().ContinueWith(PickedImageContinuationTask);
-        }
-        else if (action == CommonActionSheetConstants.PICKIMAGE_OPTION_GALLERY)
-        {
-            PresentForImagePick();
-        }
+    private void ImageLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, FeatureImagePickSuccess_Callback);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -182,9 +145,29 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
         this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationCreateSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel(ConcreteBindingContext, null)));
     }
 
+    private void AddWarehosingDecreaseButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushPageAsync(new ProductWarehousingDecreaseBridgeConfigurationPage(WarehousingDecreaseCreateSuccess_Callback, new Models.Page.Configuration.ProductWarehousingDecreaseBridgeConfigurationPageModel(null)));
+    }
+
     private void EditClassificationButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationEditSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel(ConcreteBindingContext, ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ClassificationDisplayModel)));
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ClassificationDisplayModel;
+
+        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationEditSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel(ConcreteBindingContext, new ClassificationInputModel
+        {
+            Id = target.Id,
+            Name = target.Name,
+            Description = target.Description,
+            Priority = target.Priority
+        })));
+    }
+
+    private void EditWarehousingDecreaseButton_Clicked(object sender, System.EventArgs e)
+    {
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ProductWarehousingDecreaseBridgeModel;
+
+        this.NavigationPushPageAsync(new ProductWarehousingDecreaseBridgeConfigurationPage(WarehousingDecreaseEditSuccess_Callback, new Models.Page.Configuration.ProductWarehousingDecreaseBridgeConfigurationPageModel(target)));
     }
 
     private void ClassificationRemoveButton_Clicked(object sender, System.EventArgs e)
@@ -193,159 +176,169 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
         {
             if (!task.Result) return;
 
-            hasChangesFlag = true;
+            var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ClassificationDisplayModel;
 
-            Dispatcher.Dispatch(() => ConcreteBindingContext.Classifications.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ClassificationDisplayModel));
-        });
-    }
+            var handled = false;
 
-    private void ClassificationCreateSuccess_Callback(Interop.API.Common.Models.Display.ClassificationDisplayModel model)
-    {
-        ConcreteBindingContext.Classifications.Add(model);
-    }
-
-    private void ClassificationEditSuccess_Callback(Interop.API.Common.Models.Display.ClassificationDisplayModel model)
-    {
-        var reference = ConcreteBindingContext.Classifications.First(item => item.Id == model.Id);
-
-        var index = ConcreteBindingContext.Classifications.IndexOf(reference);
-
-        ConcreteBindingContext.Classifications[index] = model;
-
-        hasChangesFlag = true;
-    }
-
-    private void PickedImageCroppingComplete_Callback(SkiaSharp.SKBitmap result)
-    {
-        if (result != null)
-        {
-            using (var skImage = SkiaSharp.SKImage.FromBitmap(result))
+            foreach (var item in incomingClassificationItems)
             {
-                using (var skData = skImage.Encode(SkiaSharp.SKEncodedImageFormat.Jpeg, 75))
+                if (item.Id != target.Id) continue;
+
+                incomingClassificationItems.Remove(incomingClassificationItems.First(model => model.Id == target.Id));
+
+                handled = true;
+
+                break;
+            }
+
+            if (!handled)
+            {
+                foreach (var item in editionClassificationItems)
                 {
-                    imagePickedData = skData.ToArray();
+                    if (item.Id != target.Id) continue;
+
+                    editionClassificationItems.Remove(editionClassificationItems.First(model => model.Id == target.Id));
+
+                    break;
                 }
             }
 
-            result.Dispose();
-
-            ConcreteBindingContext.FeatureImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
+            if (!handled)
+            {
+                outgoingClassificationItems.Add(target);
+            }
 
             hasChangesFlag = true;
-        }
 
-        this.NavigationPopModalPageAsync();
-
-        ConcreteBindingContext.IsBusy = false;
-        ConcreteBindingContext.BusyProgressMessage = string.Empty;
-    }
-
-    private async void PresentForImagePick()
-    {
-        if (Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.iOS)
-        {
-            var permission = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.Photos>();
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                permission = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.Photos>();
-            }
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
-
-                    ConcreteBindingContext.IsBusy = false;
-                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
-                });
-
-                return;
-            }
-        }
-        else
-        {
-            var permission = await Microsoft.Maui.ApplicationModel.Permissions.CheckStatusAsync<Microsoft.Maui.ApplicationModel.Permissions.StorageRead>();
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                permission = await Microsoft.Maui.ApplicationModel.Permissions.RequestAsync<Microsoft.Maui.ApplicationModel.Permissions.StorageRead>();
-            }
-
-            if (permission != Microsoft.Maui.ApplicationModel.PermissionStatus.Granted)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    DisplayAlert("Aviso", string.Format("El permiso para acceder a las fotos del dispositivo es necesario para esta funcionalidad.{0}{0}Deberá permitir el acceso en los ajustes del sistema para la aplicación.", System.Environment.NewLine), "Aceptar");
-
-                    ConcreteBindingContext.IsBusy = false;
-                    ConcreteBindingContext.BusyProgressMessage = string.Empty;
-                });
-
-                return;
-            }
-        }
-
-        Dispatcher.Dispatch(() =>
-        {
-            ConcreteBindingContext.IsBusy = true;
-            ConcreteBindingContext.BusyProgressMessage = "Seleccionando imagen ...";
+            Dispatcher.Dispatch(() => ConcreteBindingContext.Classifications.Remove(target));
         });
-
-        await Microsoft.Maui.Media.MediaPicker.PickPhotoAsync().ContinueWith(PickedImageContinuationTask);
     }
 
-    private async System.Threading.Tasks.Task PickedImageContinuationTask(System.Threading.Tasks.Task<Microsoft.Maui.Storage.FileResult> task)
+    private void WarehousingDecreaseRemoveButton_Clicked(object sender, System.EventArgs e)
     {
-        if (task.Result == null)
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este margen de merma?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
-            Dispatcher.Dispatch(() =>
-            {
-                ConcreteBindingContext.IsBusy = false;
-                ConcreteBindingContext.BusyProgressMessage = string.Empty;
-            });
+            if (!task.Result) return;
+
+            var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ProductWarehousingDecreaseBridgeModel;
+
+            hasChangesFlag = true;
+
+            Dispatcher.Dispatch(() => ConcreteBindingContext.WarehousingDecreases.Remove(target));
+        });
+    }
+
+    private void WarehousingDecreaseCreateSuccess_Callback(ProductWarehousingDecreaseBridgeModel model)
+    {
+        if (ConcreteBindingContext.WarehousingDecreases.Any(_model => _model.Kind == model.Kind))
+        {
+            DisplayAlert("Aviso", "Ya se ha especificado un margen de merma de este tipo. Solo puede especificarse un margen de merma por cada tipo disponible.", "Aceptar");
 
             return;
         }
 
-        await System.Threading.Tasks.Task.Delay(System.TimeSpan.FromMilliseconds(100));
+        ConcreteBindingContext.WarehousingDecreases.Add(model);
+    }
 
-        Dispatcher.Dispatch(() =>
+    private void ClassificationCreateSuccess_Callback(ClassificationInputModel model)
+    {
+        incomingClassificationItems.Add(model);
+
+        ConcreteBindingContext.Classifications.Add(new ClassificationDisplayModel
         {
-            ConcreteBindingContext.BusyProgressMessage = "Preparando imagen ...";
+            Id = model.Id,
+            Name = model.Name,
+            Description = model.Description,
+            Priority = model.Priority
         });
 
-        SkiaSharp.SKBitmap croppingImageTarget = null;
+        hasChangesFlag = true;
+    }
 
-        using (var imageFileStream = await task.Result.OpenReadAsync())
+    private void WarehousingDecreaseEditSuccess_Callback(ProductWarehousingDecreaseBridgeModel model)
+    {
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.WarehousingDecreases)
         {
-            using (var skStream = new SkiaSharp.SKManagedStream(imageFileStream))
-            {
-                croppingImageTarget = SkiaSharp.SKBitmap.Decode(skStream);
-            }
-        }
+            index++;
 
-        imageContentType = task.Result.ContentType;
+            if (item.Kind != model.Kind) continue;
 
-        using (var skImage = SkiaSharp.SKImage.FromBitmap(croppingImageTarget))
-        {
-            using (var skData = skImage.Encode(SkiaSharp.SKEncodedImageFormat.Jpeg, 75))
-            {
-                imagePickedData = skData.ToArray();
-            }
-        }
-
-        croppingImageTarget.Dispose();
-
-        Dispatcher.Dispatch(() =>
-        {
-            ConcreteBindingContext.FeatureImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedData));
+            ConcreteBindingContext.WarehousingDecreases[index] = model;
 
             hasChangesFlag = true;
 
-            ConcreteBindingContext.IsBusy = false;
-            ConcreteBindingContext.BusyProgressMessage = string.Empty;
-        });
+            break;
+        }
+    }
+
+    private void ClassificationEditSuccess_Callback(ClassificationInputModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingClassificationItems)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.Name = model.Name;
+            item.Description = model.Description;
+            item.Priority = model.Priority;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionClassificationItems)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.Name = model.Name;
+                item.Description = model.Description;
+                item.Priority = model.Priority;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionClassificationItems.Add(model);
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.Classifications)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.Classifications[index] = new ClassificationDisplayModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                Priority = model.Priority
+            };
+
+            break;
+        }
+
+        hasChangesFlag = true;
+    }
+
+    private void FeatureImagePickSuccess_Callback(ImageInputModel model)
+    {
+        featureImagePickedModel = model;
+
+        ConcreteBindingContext.FeatureImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(featureImagePickedModel.ContentData));
+
+        hasChangesFlag = true;
     }
 }

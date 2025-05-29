@@ -6,7 +6,7 @@
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.LegalBusinessKindDetailPage"
     x:TypeArguments="interop_common_display_models:LegalBusinessKindDisplayModel"
     x:DataType="interop_common_display_models:LegalBusinessKindDisplayModel"
-    Title="Tipo de Negocio Legal"
+    Title="Detalles de Tipo de Negocio Jurídico"
     Background="{StaticResource OverlayBackgroundBrush}">
     <ScrollView Orientation="Vertical">
         <Grid>

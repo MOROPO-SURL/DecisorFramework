@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ClauseConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ClauseDisplayModel, Models.Page.Configuration.ClauseConfigurationPageModel>
+public partial class ClauseConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ClauseDisplayModel, ClauseDisplayModel, Models.Page.Configuration.ClauseConfigurationPageModel>
 {
     public ClauseConfigurationPage(System.Action<ClauseDisplayModel> successAction, Models.Page.Configuration.ClauseConfigurationPageModel model) : base(successAction, model)
     {
@@ -44,5 +44,15 @@ public partial class ClauseConfigurationPage : Core.Presentation.Terminal.MAUI.U
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 }

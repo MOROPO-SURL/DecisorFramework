@@ -9,6 +9,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
         private System.DateTime at;
         private int priority = 1;
 
+        public WorkforceConfigurationPageModel() : this(null) { }
+
         public WorkforceConfigurationPageModel(Interop.API.Common.Models.Display.WorkforceDisplayModel model) : base(model)
         {
             if (model != null)
@@ -20,7 +22,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
                 foreach (var item in model.OrganizationalUnities)
                 {
-                    var result = new View.OrganizationalUnityViewModel
+                    var result = new View.WorkforceConfigurationOrganizationalUnityViewModel
                     {
                         Id = item.Id,
                         Name = item.Name,
@@ -36,7 +38,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
                     if (item.Vacants != null)
                     {
-                        result.Vacants = new System.Collections.ObjectModel.ObservableCollection<Models.View.VacantViewModel>(item.Vacants.Select(__model => new View.VacantViewModel
+                        result.Vacants = new System.Collections.ObjectModel.ObservableCollection<Models.View.WorkforceConfigurationVacantViewModel>(item.Vacants.Select(__model => new View.WorkforceConfigurationVacantViewModel
                         {
                             Id = __model.Id,
                             Priority = __model.Priority,
@@ -60,6 +62,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<View.OrganizationalUnityViewModel> OrganizationalUnities { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<View.WorkforceConfigurationOrganizationalUnityViewModel> OrganizationalUnities { get; set; } = [];
     }
 }

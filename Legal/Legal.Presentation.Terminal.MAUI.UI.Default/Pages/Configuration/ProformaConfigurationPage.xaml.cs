@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ProformaConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProformaDisplayModel, Models.Page.Configuration.ProformaConfigurationPageModel>
+public partial class ProformaConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ProformaDisplayModel, ProformaDisplayModel, Models.Page.Configuration.ProformaConfigurationPageModel>
 {
     private Microsoft.Maui.Storage.FileResult rawDocumentFilePickResult;
 
@@ -85,6 +85,16 @@ public partial class ProformaConfigurationPage : Core.Presentation.Terminal.MAUI
         base.DisposeManagementResources();
 
         rawDocumentFilePickResult = null;
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)

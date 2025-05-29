@@ -17,7 +17,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public decimal MaxDecrease { get; set; }
 
-        public ElaborationStepProductionRoleBridgeModel[] ProductionRoles { get; set; }
+        public ElaborationStepWorkPositionBridgeModel[] WorkPositions { get; set; }
 
         public void Import(Persistence.Entities.ElaborationStep entity)
         {
@@ -27,17 +27,17 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             Description = entity.Description;
             MinDecrease = entity.MinDecrease;
             MaxDecrease = entity.MaxDecrease;
-            ProductionRoles = entity.ProductionRoleBridges.Select(bridge =>
+            WorkPositions = entity.WorkPositionBridges.Select(bridge =>
             {
-                var model = new ElaborationStepProductionRoleBridgeModel
+                var model = new ElaborationStepWorkPositionBridgeModel
                 {
-                    Role = new ProductionRoleDisplayModel(),
+                    WorkPosition = new HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel(),
                     Participation = bridge.Participation,
                     Linked = bridge.Linked,
                     Description = bridge.Description
                 };
 
-                model.Role.Import(bridge.Stern);
+                model.WorkPosition.Import(bridge.Stern);
 
                 return model;
             }).ToArray();

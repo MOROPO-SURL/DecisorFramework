@@ -1,4 +1,7 @@
-﻿namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
+﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+using System.Collections.Generic;
+
+namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input
 {
     public class ProductInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Product, System.Guid>
     {
@@ -17,9 +20,11 @@
 
         public int? CategoryId { get; set; }
 
-        public System.Collections.Generic.List<WarehousingDecreaseModel> WarehousingDecreases { get; set; } = new System.Collections.Generic.List<WarehousingDecreaseModel>();
+        public List<Bridge.ProductWarehousingDecreaseBridgeModel> WarehousingDecreases { get; set; } = new List<Bridge.ProductWarehousingDecreaseBridgeModel>();
 
-        public System.Collections.Generic.List<ClassificationInputModel> Classifications { get; set; } = new System.Collections.Generic.List<ClassificationInputModel>();
+        public List<ClassificationInputModel> EditionClassificationItems { get; set; } = new List<ClassificationInputModel>();
+        public List<ClassificationInputModel> IncomingClassificationItems { get; set; } = new List<ClassificationInputModel>();
+        public List<ClassificationDisplayModel> OutgoingClassificationItems { get; set; } = new List<ClassificationDisplayModel>();
 
         public Persistence.Entities.Product Export()
         {
@@ -56,8 +61,6 @@
                 entity.Family = null;
                 entity.FamilyId = CategoryId;
             }
-
-            // TODO Implement new list syncronization protocol !!
 
             entity.WarehousingDecreaseKindBridges.Clear();
 
