@@ -1,11 +1,12 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class EmployeePickPage : Caney.MVVM.Core.Pages.ContentPage
+public partial class EmployeePickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.EmployeeDisplayModel, Models.Page.Pick.EmployeePickPageModel, Detail.EmployeeDetailPage>
 {
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
+
     private System.Action<Interop.API.Common.Models.Display.EmployeeDisplayModel> pickCompleteAction;
 
     private bool pickedFlag = false;
@@ -17,25 +18,25 @@ public partial class EmployeePickPage : Caney.MVVM.Core.Pages.ContentPage
         this.pickCompleteAction = pickCompleteAction;
 
         IsEnabled = false;
-
-        BindingContext = new Models.Page.Pick.EmployeePickPageModel();
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        if (IsEnabled)
+        if (IsEnabled && pickedFlag)
         {
-            if (pickedFlag) (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
 
             return;
         }
 
-        LoadItems();
-
         IsEnabled = true;
     }
+
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
+
+    protected override double ItemViewRequestWidth => 384;
 
     protected override void DisposeUnmanagementResources()
     {
@@ -44,16 +45,21 @@ public partial class EmployeePickPage : Caney.MVVM.Core.Pages.ContentPage
         pickCompleteAction = null;
     }
 
-    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    protected override double MeasureCollectionViewCellHeight(double width)
     {
-        this.NavigationPushPageAsync(new Configuration.EmployeeConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.EmployeeConfigurationPageModel(null)));
+        return ITEM_VIEW_REQUEST_HEIGHT;
+    }
+
+    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.EmployeeDisplayModel>> FetchItemsAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (((Models.Page.Pick.EmployeePickPageModel)BindingContext).IsBusy) return;
-
-        LoadItems();
+        OnReload(sender, eventArgs);
     }
 
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
@@ -61,48 +67,20 @@ public partial class EmployeePickPage : Caney.MVVM.Core.Pages.ContentPage
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }
 
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
+    }
+
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
+    {
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
+    }
+
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.EmployeeDisplayModel));
+        pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.EmployeeDisplayModel);
 
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-    }
-
-    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.EmployeeDisplayModel model)
-    {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
-
-        pickedFlag = true;
-    }
-
-    private void LoadItems()
-    {
-        var concreteBindingContext = (Models.Page.Pick.EmployeePickPageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        concreteBindingContext.Items.Clear();
-
-        var apiConnectClient = new Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        apiConnectClient.GetAsync().ContinueWith(task =>
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                concreteBindingContext.IsBusy = false;
-
-                if (task.Exception != null || task.IsCanceled)
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                }
-                else
-                {
-                    foreach (var model in task.Result)
-                    {
-                        concreteBindingContext.Items.Add(model);
-                    }
-                }
-            });
-        });
     }
 }

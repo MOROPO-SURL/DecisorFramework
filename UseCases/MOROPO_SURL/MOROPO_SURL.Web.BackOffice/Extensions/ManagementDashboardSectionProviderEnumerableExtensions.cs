@@ -198,38 +198,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
             #endregion
 
             #region Globals
-            commercialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Clientes Jurídicos",
-                Controller = "legalclients",
-                Action = "Index",
-                Area = "commercial",
-                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.LegalClientViewerPermission
-            });
-            commercialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Clientes Naturales",
-                Controller = "naturalclients",
-                Action = "Index",
-                Area = "commercial",
-                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.NaturalClientViewerPermission
-            });
-            commercialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Proveedores Jurídicos",
-                Controller = "legalproviders",
-                Action = "Index",
-                Area = "commercial",
-                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            commercialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Proveedores Naturales",
-                Controller = "naturalproviders",
-                Action = "Index",
-                Area = "commercial",
-                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.NaturalProviderViewerPermission
-            });
             #endregion
 
             #region Inventory
@@ -448,7 +416,39 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
             #endregion
 
             #region Commercial
+
             commercialSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Clientes Jurídicos",
+                Controller = "legalclients",
+                Action = "Index",
+                Area = "commercial",
+                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.LegalClientViewerPermission
+            });
+            commercialSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Clientes Naturales",
+                Controller = "naturalclients",
+                Action = "Index",
+                Area = "commercial",
+                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.NaturalClientViewerPermission
+            });
+            commercialSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Proveedores Jurídicos",
+                Controller = "legalproviders",
+                Action = "Index",
+                Area = "commercial",
+                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.LegalProviderViewerPermission
+            });
+            commercialSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Proveedores Naturales",
+                Controller = "naturalproviders",
+                Action = "Index",
+                Area = "commercial",
+                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.NaturalProviderViewerPermission
+            }); commercialSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Términos de Pago",
                 Controller = "paymentterms",

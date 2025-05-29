@@ -37,7 +37,6 @@
                                 Text="{Binding Priority}" />
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Margin="0"
                                 Text="Descripción" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"

@@ -4,6 +4,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class PropertiesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PropertyDisplayModel, Models.Page.Manage.PropertiesManagePageModel, Models.Page.Configuration.PropertyConfigurationPageModel, Configuration.PropertyConfigurationPage, Detail.PropertyDetailPage>
 {
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 320;
+
     public PropertiesManagePage()
     {
         InitializeComponent();
@@ -18,7 +20,7 @@ public partial class PropertiesManagePage : Core.Presentation.Terminal.MAUI.UI.P
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
-        return width;
+        return ITEM_VIEW_REQUEST_HEIGHT;
     }
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.PropertyDisplayModel>> FetchItemsAsync()

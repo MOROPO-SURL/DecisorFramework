@@ -31,6 +31,9 @@
 		<ProjectReference Include="..\Financial.Presentation.Terminal.MAUI\Financial.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="Pages\Detail\BankAccountDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\BankAgencyDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
