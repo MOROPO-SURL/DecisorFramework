@@ -1,5 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -33,7 +33,7 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
     {
         var result = new Models.Page.Configuration.ProductConfigurationPageModel();
 
-        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
         var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
         var familiesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(httpClientHelperProvider);
@@ -45,6 +45,49 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         result.AvailableCategories = await familiesAPIConnectClient.GetAsync();
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ProductDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var model = new Models.Page.Configuration.ProductConfigurationPageModel(target);
+
+                System.Threading.Tasks.Task.Run(async () =>
+                {
+                    var familiesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(httpClientHelperProvider);
+                    var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
+
+                    return new { Families = await familiesAPIConnectClient.GetAsync(), UnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync() };
+
+                }).ContinueWith(task =>
+                {
+                    if (task.IsCompleted)
+                    {
+                        model.AvailableCategories = task.Result.Families;
+                        model.AvailableUnitMeasurements = task.Result.UnitMeasurements;
+                    }
+
+                    Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.ProductConfigurationPage(ConfigurationSuccess_Callback, model)));
+                });
+
+                break;
+            case 1:
+                var apiConnectClient = new Interop.API.Connect.Clients.ProductsAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

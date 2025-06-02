@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -28,6 +29,31 @@ public partial class SalaryStandardsManagePage : Core.Presentation.Terminal.MAUI
         var apiConnectClient = new Interop.API.Connect.Clients.SalaryStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync();
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.SalaryStandardDisplayModel target, int discriminator)
+    {
+        switch (discriminator)
+        {
+            case 0:
+                var model = new Models.Page.Configuration.SalaryStandardConfigurationPageModel(target);
+
+                this.NavigationPushPageAsync(new Configuration.SalaryStandardConfigurationPage(ConfigurationSuccess_Callback, model));
+
+                break;
+            case 1:
+                var apiConnectClient = new Interop.API.Connect.Clients.SalaryStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

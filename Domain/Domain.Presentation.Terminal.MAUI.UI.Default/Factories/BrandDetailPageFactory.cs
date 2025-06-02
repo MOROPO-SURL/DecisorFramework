@@ -2,9 +2,9 @@
 {
     public class BrandDetailPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.BrandDisplayModel, Pages.Detail.BrandDetailPage>
     {
-        public Pages.Detail.BrandDetailPage Build(Interop.API.Common.Models.Display.BrandDisplayModel model, System.Action<System.Action> delegationAction = null, System.Action<Interop.API.Common.Models.Display.BrandDisplayModel> completationFeedbackAction = null)
+        public Pages.Detail.BrandDetailPage Build(Interop.API.Common.Models.Display.BrandDisplayModel model, System.Action<Interop.API.Common.Models.Display.BrandDisplayModel, int> delegationAction = null)
         {
-            return new Pages.Detail.BrandDetailPage(model, delegationAction, completationFeedbackAction);
+            return new Pages.Detail.BrandDetailPage(model, delegationAction);
         }
     }
 }

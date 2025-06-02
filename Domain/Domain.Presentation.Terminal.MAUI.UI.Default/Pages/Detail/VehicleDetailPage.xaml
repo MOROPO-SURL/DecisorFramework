@@ -75,7 +75,7 @@
                             <Button 
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"
-                                Clicked="DismissControl_Invoked" />
+                                Clicked="DeleteButton_Clicked" />
                         </StackLayout>
                     </StackLayout>
                     <Button

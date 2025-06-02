@@ -2,7 +2,7 @@
 {
     public class VehicleEngineKindDetailPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.VehicleEngineKindDisplayModel, Pages.Detail.VehicleEngineKindDetailPage>
     {
-        public Pages.Detail.VehicleEngineKindDetailPage Build(Interop.API.Common.Models.Display.VehicleEngineKindDisplayModel model, System.Action<System.Action> delegationAction = null, System.Action<Interop.API.Common.Models.Display.VehicleEngineKindDisplayModel> completationFeedbackAction = null)
+        public Pages.Detail.VehicleEngineKindDetailPage Build(Interop.API.Common.Models.Display.VehicleEngineKindDisplayModel model, System.Action<Interop.API.Common.Models.Display.VehicleEngineKindDisplayModel, int> delegationAction = null)
         {
             return new Pages.Detail.VehicleEngineKindDetailPage(model);
         }

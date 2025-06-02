@@ -4,15 +4,13 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class VehicleLeaseOfferDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel>
 {
-    private readonly System.Action<System.Action> delegationAction;
-    private readonly System.Action<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel> completationFeedbackAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel, int> delegationAction;
 
-    public VehicleLeaseOfferDetailPage(Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel bindingContextModel, System.Action<System.Action> delegationAction, System.Action<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel> completationFeedbackAction) : base(bindingContextModel)
+    public VehicleLeaseOfferDetailPage(Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel, int> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
         this.delegationAction = delegationAction;
-        this.completationFeedbackAction = completationFeedbackAction;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -21,13 +19,25 @@ public partial class VehicleLeaseOfferDetailPage : Core.Presentation.Terminal.MA
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
+            // 0 for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+        });
+    }
+
+    private void DeleteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            var model = BindingContext as Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel;
+
             Dispatcher.Dispatch(() =>
             {
-                delegationAction.Invoke(() =>
+                this.NavigationPopModalPageAsync().ContinueWith(_ =>
                 {
-                    var _model = new Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel(model);
-
-                    Microsoft.Maui.Controls.Application.Current.MainPage.NavigationPushPageAsync(new Configuration.VehicleLeaseOfferConfigurationPage(completationFeedbackAction, _model));
+                    // 1 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 1));
                 });
             });
         });

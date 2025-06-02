@@ -1,9 +1,11 @@
 ﻿namespace MOROPO.Framework.Decisor.Legal.Persistence.Entities
 {
-    public class Section : Guama.Core.Persistence.Entities.Contract.INamedEntity<int>, Guama.Core.Persistence.Entities.Contract.IPriorizableEntity<int>
+    public class Section : Guama.Core.Persistence.Entities.Contract.INamedEntity<int>, Guama.Core.Persistence.Entities.Contract.IArchivableEntity<int>, Guama.Core.Persistence.Entities.Contract.IPriorizableEntity<int>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public int Id { get; set; }
+
+        public bool Archived { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
