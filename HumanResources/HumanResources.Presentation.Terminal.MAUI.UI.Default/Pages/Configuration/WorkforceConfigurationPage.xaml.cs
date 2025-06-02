@@ -167,7 +167,44 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
             Dispatcher.Dispatch(() =>
             {
-                ((Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext).OrganizationalUnities.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalUnityViewModel);
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationVacantViewModel;
+
+                var handled = false;
+
+                foreach (var item in incomingVacants)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingVacants.Remove(incomingVacants.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionVacants)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionVacants.Remove(editionVacants.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingVacants.Add(new VacantDisplayModel
+                    {
+                        Id = target.Id                        
+                    });
+                }
+
+                target.OrganizationUnity.Vacants.Remove(target);
+
+                hasChangesFlag = true;
             });
         });
     }
@@ -282,7 +319,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
     private static Models.View.WorkforceConfigurationOrganizationalUnityViewModel[] GetOrganizationalUnityChildren(Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel model)
     {
-        var result = new System.Collections.Generic.List<Models.View.WorkforceConfigurationOrganizationalUnityViewModel>();
+        var result = new List<Models.View.WorkforceConfigurationOrganizationalUnityViewModel>();
 
         foreach (var item in model.Children)
         {

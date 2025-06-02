@@ -4,9 +4,13 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class InternalBankAccountPickPage : Caney.MVVM.Core.Pages.ContentPage
+public partial class InternalBankAccountPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.BankAccountDisplayModel, Models.Page.Pick.BankAccountPickPageModel, Detail.BankAccountDetailPage>
 {
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 160;
+
     private System.Action<Interop.API.Common.Models.Display.BankAccountDisplayModel> pickCompleteAction;
+
+    private bool pickedFlag = false;
 
     public InternalBankAccountPickPage(System.Action<Interop.API.Common.Models.Display.BankAccountDisplayModel> pickCompleteAction)
     {
@@ -15,20 +19,25 @@ public partial class InternalBankAccountPickPage : Caney.MVVM.Core.Pages.Content
         this.pickCompleteAction = pickCompleteAction;
 
         IsEnabled = false;
-
-        BindingContext = new Models.Page.Pick.BankAccountPickPageModel();
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        if (IsEnabled) return;
+        if (IsEnabled && pickedFlag)
+        {
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
 
-        LoadItems();
+            return;
+        }
 
         IsEnabled = true;
     }
+
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
+
+    protected override double ItemViewRequestWidth => 360;
 
     protected override void DisposeUnmanagementResources()
     {
@@ -37,16 +46,36 @@ public partial class InternalBankAccountPickPage : Caney.MVVM.Core.Pages.Content
         pickCompleteAction = null;
     }
 
+    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.BankAccountDisplayModel>> FetchItemsAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.BankAccountsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.BankAccountFilterModel { IsExternal = false });
+    }
+
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (((Models.Page.Pick.BankAccountPickPageModel)BindingContext).IsBusy) return;
+        OnReload(sender, eventArgs);
+    }
 
-        LoadItems();
+    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushPageAsync(new Configuration.BankAccountConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.BankAccountConfigurationPageModel(null)));
     }
 
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
+    }
+
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
+    {
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
     }
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
@@ -56,34 +85,10 @@ public partial class InternalBankAccountPickPage : Caney.MVVM.Core.Pages.Content
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }
 
-    private void LoadItems()
+    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.BankAccountDisplayModel model)
     {
-        var concreteBindingContext = (Models.Page.Pick.BankAccountPickPageModel)BindingContext;
+        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
 
-        concreteBindingContext.IsBusy = true;
-
-        concreteBindingContext.Items.Clear();
-
-        var apiConnectClient = new Interop.API.Connect.Clients.BankAccountsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        apiConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.BankAccountFilterModel { IsExternal = false }).ContinueWith(task =>
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                concreteBindingContext.IsBusy = false;
-
-                if (task.Exception != null || task.IsCanceled)
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                }
-                else
-                {
-                    foreach (var model in task.Result)
-                    {
-                        concreteBindingContext.Items.Add(model);
-                    }
-                }
-            });
-        });
+        pickedFlag = true;
     }
 }

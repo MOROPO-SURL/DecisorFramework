@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.PropertyDisplayModel, Models.Page.Pick.PropertyPickPageModel, Detail.PropertyDetailPage>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 320;
 
     private System.Action<Interop.API.Common.Models.Display.PropertyDisplayModel> pickCompleteAction;
 
@@ -36,11 +36,18 @@ public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
+    protected override double ItemViewRequestWidth => 320;
+
     protected override void DisposeUnmanagementResources()
     {
         base.DisposeUnmanagementResources();
 
         pickCompleteAction = null;
+    }
+
+    protected override double MeasureCollectionViewCellHeight(double width)
+    {
+        return ITEM_VIEW_REQUEST_HEIGHT;
     }
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.PropertyDisplayModel>> FetchItemsAsync()

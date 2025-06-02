@@ -238,7 +238,7 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                 try
                 {
-                    var page = factory.Build(task.Result, null, null);
+                    var page = factory.Build(task.Result);
 
                     this.NavigationPushModalPageAsync(page);
                 }

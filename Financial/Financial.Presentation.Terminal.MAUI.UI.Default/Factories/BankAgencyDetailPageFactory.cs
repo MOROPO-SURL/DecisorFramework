@@ -2,9 +2,9 @@
 {
     public class BankAgencyDetailPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.BankAgencyDisplayModel, Pages.Detail.BankAgencyDetailPage>
     {
-        public Pages.Detail.BankAgencyDetailPage Build(Interop.API.Common.Models.Display.BankAgencyDisplayModel model, System.Action<System.Action> delegationAction = null, System.Action<Interop.API.Common.Models.Display.BankAgencyDisplayModel> completationFeedbackAction = null)
+        public Pages.Detail.BankAgencyDetailPage Build(Interop.API.Common.Models.Display.BankAgencyDisplayModel model, System.Action<Interop.API.Common.Models.Display.BankAgencyDisplayModel, int> delegationAction = null)
         {
-            return new Pages.Detail.BankAgencyDetailPage(model, delegationAction, completationFeedbackAction);
+            return new Pages.Detail.BankAgencyDetailPage(model, delegationAction);
         }
     }
 }

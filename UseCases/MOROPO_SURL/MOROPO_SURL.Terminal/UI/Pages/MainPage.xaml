@@ -222,6 +222,18 @@
                 </Frame>
                 <Frame Style="{StaticResource SectionCardFrameStyle}">
                     <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="SalesSectionCardFrameTapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Image Style="{StaticResource SectionCardBackgroudImageStyle}" Source="sales.jpg" />
+                        <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
+                        <Grid Padding="5">
+                            <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="Ventas" />
+                        </Grid>
+                    </Grid>
+                </Frame>
+                <Frame Style="{StaticResource SectionCardFrameStyle}">
+                    <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="InventorySectionCardFrameTapGestureRecognizer_Tapped" />
                     </Frame.GestureRecognizers>
                     <Grid>

@@ -2,9 +2,9 @@
 {
     public class ClauseDetailPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.ClauseDisplayModel, Pages.Detail.ClauseDetailPage>
     {
-        public Pages.Detail.ClauseDetailPage Build(Interop.API.Common.Models.Display.ClauseDisplayModel model, System.Action<System.Action> delegationAction = null, System.Action<Interop.API.Common.Models.Display.ClauseDisplayModel> completationFeedbackAction = null)
+        public Pages.Detail.ClauseDetailPage Build(Interop.API.Common.Models.Display.ClauseDisplayModel model, System.Action<Interop.API.Common.Models.Display.ClauseDisplayModel, int> delegationAction = null)
         {
-            return new Pages.Detail.ClauseDetailPage(model, delegationAction, completationFeedbackAction);
+            return new Pages.Detail.ClauseDetailPage(model, delegationAction);
         }
     }
 }

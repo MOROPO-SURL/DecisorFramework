@@ -2,9 +2,9 @@
 {
     public class SectionDetailPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.SectionDisplayModel, Pages.Detail.SectionDetailPage>
     {
-        public Pages.Detail.SectionDetailPage Build(Interop.API.Common.Models.Display.SectionDisplayModel model, System.Action<System.Action> delegationAction = null, System.Action<Interop.API.Common.Models.Display.SectionDisplayModel> completationFeedbackAction = null)
+        public Pages.Detail.SectionDetailPage Build(Interop.API.Common.Models.Display.SectionDisplayModel model, System.Action<Interop.API.Common.Models.Display.SectionDisplayModel, int> delegationAction = null)
         {
-            return new Pages.Detail.SectionDetailPage(model, delegationAction, completationFeedbackAction);
+            return new Pages.Detail.SectionDetailPage(model, delegationAction);
         }
     }
 }

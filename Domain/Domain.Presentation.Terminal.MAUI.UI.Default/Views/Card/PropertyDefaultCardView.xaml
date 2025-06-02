@@ -3,30 +3,24 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
-    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card.PropertyDefaultCardView"
     x:DataType="interop_common_display_models:PropertyDisplayModel">
     <ContentView.Resources>
         <ResourceDictionary>
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
-
-            <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <Frame 
-        Padding="0"
-        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
-        <StackLayout>
+    <Frame Padding="0">
+        <StackLayout Spacing="0">
             <Image
+                VerticalOptions="FillAndExpand"
                 Aspect="AspectFill"
-                HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=1.777777777777778}"
                 Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
             <StackLayout
                 IsClippedToBounds="True"
                 Padding="10">
                 <Label                    
                     LineBreakMode="TailTruncation"
-                    MaxLines="2"
                     FontSize="Medium"
                     Text="{Binding Name}" />
                 <Label
@@ -42,7 +36,6 @@
                 <Label
                     VerticalOptions="FillAndExpand"
                     LineBreakMode="TailTruncation"
-                    MaxLines="2"
                     Text="{Binding Description, TargetNullValue='---'}" />
             </StackLayout>
         </StackLayout>

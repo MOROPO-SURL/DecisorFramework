@@ -24,7 +24,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
                     try
                     {
-                        var page = factory.Build(task.Result, ActionDelegationRequest_Callback, CompletationFeedback_Callback);
+                        var page = factory.Build(task.Result, DetailActionDelegationRequest_Callback);
 
                         this.NavigationPushModalPageAsync(page);
                     }
@@ -69,21 +69,18 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             });
         }
 
-        private void ActionDelegationRequest_Callback(System.Action delegationAction)
+        private void DetailActionDelegationRequest_Callback(TModel target, int discriminator)
         {
             var concreteBindingContext = (TManagePageModel)BindingContext;
 
             concreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation;
 
-            delegationAction.Invoke();
+            OnActionDelegationRequest(target, discriminator);
         }
 
-        private void CompletationFeedback_Callback(TModel model)
-        {
-            LoadItems(true);
-        }
+        protected virtual void OnActionDelegationRequest(TModel target, int discriminator) { }
 
-        private void ConfigurationSuccess_Callback(TModel model)
+        protected void ConfigurationSuccess_Callback(TModel model)
         {
             LoadItems(true);
         }

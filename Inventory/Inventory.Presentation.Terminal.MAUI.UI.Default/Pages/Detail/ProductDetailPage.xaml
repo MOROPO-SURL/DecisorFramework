@@ -37,7 +37,6 @@
                                 Text="{Binding Priority}" />
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Margin="0"
                                 Text="Descripción" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
@@ -53,7 +52,7 @@
                             <Button 
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"
-                                Clicked="DismissControl_Invoked" />
+                                Clicked="DeleteButton_Clicked" />
                         </StackLayout>
                     </StackLayout>
                     <Button

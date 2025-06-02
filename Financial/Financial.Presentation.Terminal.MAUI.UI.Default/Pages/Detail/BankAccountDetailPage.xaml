@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Financial.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.BankAccountDetailPage"
+    x:TypeArguments="interop_common_display_models:BankAccountDisplayModel"
+    x:DataType="interop_common_display_models:BankAccountDisplayModel"
+    Title="Detalles de Cuenta Bancaria"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Frame
+                Style="{StaticResource PopupFrameStyle}"
+                WidthRequest="400">
+                <Grid>
+                    <StackLayout Margin="20" Spacing="20">
+                        <StackLayout>
+                            <Label 
+                                Margin="0,0,0,20"
+                                Text="Detalles"
+                                FontAttributes="Bold"
+                                FontSize="Medium" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
+                                Text="Número" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Number}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Banco" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Branch.Agency.Name}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding Branch.Number}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Moneda" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Currency.Name}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Prioridad" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Priority}" />
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Spacing="20">
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Modificar"
+                                Clicked="EditButton_Clicked" />
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Eliminar"
+                                Clicked="DismissControl_Invoked" />
+                        </StackLayout>
+                    </StackLayout>
+                    <Button
+                        HorizontalOptions="End" VerticalOptions="Start"
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        Text="&#xf5ad;"
+                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                        FontSize="Medium"
+                        FontFamily="MaterialDesignIcons"
+                        BorderWidth="0"
+                        WidthRequest="48" HeightRequest="48"
+                        Clicked="DismissControl_Invoked" />
+                </Grid>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

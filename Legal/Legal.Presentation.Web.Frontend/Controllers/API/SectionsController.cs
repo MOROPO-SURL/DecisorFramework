@@ -10,7 +10,7 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.A
 {
     [Route("api/legal/[controller]")]
     [ApiController]
-    public class SectionsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<Section, int, SectionInputModel, SectionDisplayModel>
+    public class SectionsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Section, int, SectionInputModel, SectionDisplayModel>
     {
         public SectionsController(Guama.Core.Persistence.Repositories.IEntityRepository<Section, int> repository, Microsoft.Extensions.Localization.IStringLocalizer<SectionsController> localizer, Microsoft.Extensions.Logging.ILogger<SectionsController> logger) : base(repository, localizer, logger)
         {
@@ -18,7 +18,12 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.A
 
         public override ActionResult<SectionDisplayModel[]> Get()
         {
-            return Ok(Repository.GetAll().ToArray().OrderBy(entity => entity.GetTreePriority()).Select(entity => EntityToDisplayModel(entity)).ToArray());
+            return Ok(Repository.FindBy(GetGlobalSelector()).ToArray().OrderBy(entity => entity.GetTreePriority()).Select(entity => EntityToDisplayModel(entity)).ToArray());
+        }
+
+        protected override System.Linq.Expressions.Expression<System.Func<Section, bool>> GetGlobalSelector()
+        {
+            return entity => !entity.Archived;
         }
 
         public override ActionResult<PaginationModel<SectionDisplayModel>> GetPaginate(int sheet = 1, int limit = 25)
@@ -55,7 +60,7 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.A
                     HasPrevious = (sheet > 1),
                     HasNext = (sheet < num3),
                     MaxPageCount = num3,
-                    List = Repository.GetAll().ToArray().Skip((sheet - 1) * limit).Take(limit).OrderBy(entity => entity.GetTreePriority()).Select(entity => EntityToDisplayModel(entity)).ToList()
+                    List = Repository.FindBy(GetGlobalSelector()).ToArray().Skip((sheet - 1) * limit).Take(limit).OrderBy(entity => entity.GetTreePriority()).Select(entity => EntityToDisplayModel(entity)).ToList()
                 };
             }
 
