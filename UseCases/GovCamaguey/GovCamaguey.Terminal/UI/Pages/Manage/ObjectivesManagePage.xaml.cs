@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Manage;
 
@@ -26,6 +27,31 @@ public partial class ObjectivesManagePage : Framework.Decisor.Core.Presentation.
         var apiConnectClient = new Interop.API.Connect.Clients.ObjectivesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ObjectiveDisplayModel target, int discriminator)
+    {
+        switch (discriminator)
+        {
+            case 0:
+                var model = new Models.Page.Configuration.ObjectiveConfigurationPageModel(target);
+
+                this.NavigationPushPageAsync(new Configuration.ObjectiveConfigurationPage(ConfigurationSuccess_Callback, model));
+
+                break;
+            case 1:
+                var apiConnectClient = new Interop.API.Connect.Clients.ObjectivesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

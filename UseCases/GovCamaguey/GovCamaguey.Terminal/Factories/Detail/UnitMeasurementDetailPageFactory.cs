@@ -2,9 +2,9 @@
 {
     public class UnitMeasurementDetailPageFactory : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, UI.Pages.Detail.UnitMeasurementDetailPage>
     {
-        public UI.Pages.Detail.UnitMeasurementDetailPage Build(Interop.API.Common.Models.Display.UnitMeasurementDisplayModel model, System.Action<System.Action> delegationAction = null, System.Action<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel> completationFeedbackAction = null)
+        public UI.Pages.Detail.UnitMeasurementDetailPage Build(Interop.API.Common.Models.Display.UnitMeasurementDisplayModel model, System.Action<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, int> delegationAction = null)
         {
-            return new UI.Pages.Detail.UnitMeasurementDetailPage(model, delegationAction, completationFeedbackAction);
+            return new UI.Pages.Detail.UnitMeasurementDetailPage(model, delegationAction);
         }
     }
 }

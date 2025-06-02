@@ -4,15 +4,13 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Detail;
 
 public partial class PersonDetailPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.PersonDisplayModel>
 {
-    private readonly System.Action<System.Action> delegationAction;
-    private readonly System.Action<Interop.API.Common.Models.Display.PersonDisplayModel> completationFeedbackAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.PersonDisplayModel, int> delegationAction;
 
-    public PersonDetailPage(Interop.API.Common.Models.Display.PersonDisplayModel bindingContextModel, System.Action<System.Action> delegationAction, System.Action<Interop.API.Common.Models.Display.PersonDisplayModel> completationFeedbackAction) : base(bindingContextModel)
+    public PersonDetailPage(Interop.API.Common.Models.Display.PersonDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.PersonDisplayModel, int> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
         this.delegationAction = delegationAction;
-        this.completationFeedbackAction = completationFeedbackAction;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -21,13 +19,25 @@ public partial class PersonDetailPage : Framework.Decisor.Core.Presentation.Term
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
+            // 0 for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+        });
+    }
+
+    private void DeleteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            var model = BindingContext as Interop.API.Common.Models.Display.PersonDisplayModel;
+
             Dispatcher.Dispatch(() =>
             {
-                delegationAction.Invoke(() =>
+                this.NavigationPopModalPageAsync().ContinueWith(_ =>
                 {
-                    var _model = new Models.Page.Configuration.PersonConfigurationPageModel(model);
-
-                    Microsoft.Maui.Controls.Application.Current.MainPage.NavigationPushPageAsync(new Configuration.PersonConfigurationPage(completationFeedbackAction, _model));
+                    // 1 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 1));
                 });
             });
         });
