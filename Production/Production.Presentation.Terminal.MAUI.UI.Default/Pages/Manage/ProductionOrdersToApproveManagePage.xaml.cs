@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -43,6 +44,45 @@ public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Ter
         result.AvailableDecisors = employees;
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ProductionOrderDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var model = new Models.Page.Configuration.ProductionOrderConfigurationPageModel(target);
+
+                var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientHelperProvider);
+
+                employeesAPIConnectClient.GetAsync().ContinueWith(task =>
+                {
+                    if (task.IsCompleted)
+                    {
+                        model.AvailableAuthors = task.Result;
+                        model.AvailableDecisors = task.Result;
+                        model.AvailableResponsibles = task.Result;
+                    }
+
+                    Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.ProductionOrderConfigurationPage(ConfigurationSuccess_Callback, model)));
+                });
+
+                break;
+            case 1:
+                var apiConnectClient = new Interop.API.Connect.Clients.ProductionOrdersAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

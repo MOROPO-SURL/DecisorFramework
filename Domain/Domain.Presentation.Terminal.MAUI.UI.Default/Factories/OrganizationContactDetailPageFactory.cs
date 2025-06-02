@@ -2,9 +2,9 @@
 {
     public class OrganizationContactDetailPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.OrganizationContactDisplayModel, Pages.Detail.OrganizationContactDetailPage>
     {
-        public Pages.Detail.OrganizationContactDetailPage Build(Interop.API.Common.Models.Display.OrganizationContactDisplayModel model, System.Action<System.Action> delegationAction = null, System.Action<Interop.API.Common.Models.Display.OrganizationContactDisplayModel> completationFeedbackAction = null)
+        public Pages.Detail.OrganizationContactDetailPage Build(Interop.API.Common.Models.Display.OrganizationContactDisplayModel model, System.Action<Interop.API.Common.Models.Display.OrganizationContactDisplayModel, int> delegationAction = null)
         {
-            return new Pages.Detail.OrganizationContactDetailPage(model, delegationAction, completationFeedbackAction);
+            return new Pages.Detail.OrganizationContactDetailPage(model, delegationAction);
         }
     }
 }

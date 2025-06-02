@@ -2,9 +2,9 @@
 {
     public class NaturalClientDetailPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.NaturalClientDisplayModel, Pages.Detail.NaturalClientDetailPage>
     {
-        public Pages.Detail.NaturalClientDetailPage Build(Interop.API.Common.Models.Display.NaturalClientDisplayModel model, System.Action<System.Action> delegationAction = null, System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel> completationFeedbackAction = null)
+        public Pages.Detail.NaturalClientDetailPage Build(Interop.API.Common.Models.Display.NaturalClientDisplayModel model, System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel, int> delegationAction = null)
         {
-            return new Pages.Detail.NaturalClientDetailPage(model, delegationAction, completationFeedbackAction);
+            return new Pages.Detail.NaturalClientDetailPage(model, delegationAction);
         }
     }
 }

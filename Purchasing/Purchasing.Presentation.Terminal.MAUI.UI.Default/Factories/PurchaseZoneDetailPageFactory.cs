@@ -2,9 +2,9 @@
 {
     public class PurchaseZoneDetailPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, Pages.Detail.PurchaseZoneDetailPage>
     {
-        public Pages.Detail.PurchaseZoneDetailPage Build(Interop.API.Common.Models.Display.PurchaseZoneDisplayModel model, System.Action<System.Action> delegationAction = null, System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel> completationFeedbackAction = null)
+        public Pages.Detail.PurchaseZoneDetailPage Build(Interop.API.Common.Models.Display.PurchaseZoneDisplayModel model, System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, int> delegationAction = null)
         {
-            return new Pages.Detail.PurchaseZoneDetailPage(model, delegationAction, completationFeedbackAction);
+            return new Pages.Detail.PurchaseZoneDetailPage(model, delegationAction);
         }
     }
 }

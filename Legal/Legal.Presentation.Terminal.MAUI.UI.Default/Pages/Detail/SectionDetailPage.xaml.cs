@@ -1,19 +1,16 @@
-using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 
 public partial class SectionDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.SectionDisplayModel>
 {
-    private readonly System.Action<System.Action> delegationAction;
-    private readonly System.Action<Interop.API.Common.Models.Display.SectionDisplayModel> completationFeedbackAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.SectionDisplayModel, int> delegationAction;
 
-    public SectionDetailPage(Interop.API.Common.Models.Display.SectionDisplayModel bindingContextModel, System.Action<System.Action> delegationAction, System.Action<Interop.API.Common.Models.Display.SectionDisplayModel> completationFeedbackAction) : base(bindingContextModel)
+    public SectionDetailPage(Interop.API.Common.Models.Display.SectionDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.SectionDisplayModel, int> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
         this.delegationAction = delegationAction;
-        this.completationFeedbackAction = completationFeedbackAction;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -22,24 +19,25 @@ public partial class SectionDetailPage : Core.Presentation.Terminal.MAUI.UI.Page
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
+            // 0 for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+        });
+    }
+
+    private void DeleteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            var model = BindingContext as Interop.API.Common.Models.Display.SectionDisplayModel;
+
             Dispatcher.Dispatch(() =>
             {
-                delegationAction.Invoke(() =>
+                this.NavigationPopModalPageAsync().ContinueWith(_ =>
                 {
-                    var _model = new Models.Page.Configuration.SectionConfigurationPageModel(model);
-
-                    var categoriesAPIConnectClient = new Interop.API.Connect.Clients.SectionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-                    categoriesAPIConnectClient.GetAsync().ContinueWith(task =>
-                    {
-                        var families = new System.Collections.Generic.List<Interop.API.Common.Models.Display.SectionDisplayModel>(task.Result);
-
-                        families.RemoveAll(___model => ___model.Id == model.Id);
-
-                        _model.AvailableParents = families.ToArray();
-
-                        Dispatcher.Dispatch(() => Microsoft.Maui.Controls.Application.Current.MainPage.NavigationPushPageAsync(new Configuration.SectionConfigurationPage(completationFeedbackAction, _model)));
-                    });
+                    // 1 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 1));
                 });
             });
         });

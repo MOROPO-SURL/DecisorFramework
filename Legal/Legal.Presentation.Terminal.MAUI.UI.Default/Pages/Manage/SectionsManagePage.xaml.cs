@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -39,6 +40,47 @@ public partial class SectionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         result.AvailableParents = await categoriesAPIConnectClient.GetAsync();
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.SectionDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var model = new Models.Page.Configuration.SectionConfigurationPageModel(target);
+
+                var categoriesAPIConnectClient = new Interop.API.Connect.Clients.SectionsAPIConnectClient(httpClientHelperProvider);
+
+                categoriesAPIConnectClient.GetAsync().ContinueWith(task =>
+                {
+                    if (task.IsCompleted)
+                    {
+                        var families = new System.Collections.Generic.List<Interop.API.Common.Models.Display.SectionDisplayModel>(task.Result);
+
+                        families.RemoveAll(_model => _model.Id == model.Id);
+
+                        model.AvailableParents = families.ToArray();
+                    }
+
+                    Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.SectionConfigurationPage(ConfigurationSuccess_Callback, model)));
+                });
+
+                break;
+            case 1:
+                var apiConnectClient = new Interop.API.Connect.Clients.SectionsAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

@@ -2,7 +2,7 @@
 {
     public class NaturalBusinessKindDetailPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel, Pages.Detail.NaturalBusinessKindDetailPage>
     {
-        public Pages.Detail.NaturalBusinessKindDetailPage Build(Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel model, System.Action<System.Action> delegationAction = null, System.Action<Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel> completationFeedbackAction = null)
+        public Pages.Detail.NaturalBusinessKindDetailPage Build(Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel model, System.Action<Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel, int> delegationAction = null)
         {
             return new Pages.Detail.NaturalBusinessKindDetailPage(model);
         }

@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -43,6 +44,49 @@ public partial class PropertiesManagePage : Core.Presentation.Terminal.MAUI.UI.P
         result.AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync();
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.PropertyDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var model = new Models.Page.Configuration.PropertyConfigurationPageModel(target);
+
+                System.Threading.Tasks.Task.Run(async () =>
+                {
+                    var structuresAPIConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(httpClientHelperProvider);
+                    var kindAPIConnectClient = new Interop.API.Connect.Clients.PropertyKindsAPIConnectClient(httpClientHelperProvider);
+
+                    return new { Structures = await structuresAPIConnectClient.GetEnabledAsync(), Kinds = await kindAPIConnectClient.GetAsync() };
+
+                }).ContinueWith(task =>
+                {
+                    if (task.IsCompleted)
+                    {
+                        model.AvailableStructures = task.Result.Structures;
+                        model.AvailableKinds = task.Result.Kinds;
+                    }
+
+                    Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.PropertyConfigurationPage(ConfigurationSuccess_Callback, model)));
+                });
+
+                break;
+            case 1:
+                var apiConnectClient = new Interop.API.Connect.Clients.PropertiesAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

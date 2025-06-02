@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -47,6 +48,59 @@ public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         result.AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync();
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.VehicleDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var model = new Models.Page.Configuration.VehicleConfigurationPageModel(target);
+
+                System.Threading.Tasks.Task.Run(async () =>
+                {
+                    var brandsAPIConnectClient = new Interop.API.Connect.Clients.BrandsAPIConnectClient(httpClientHelperProvider);
+                    var kindsAPIConnectClient = new Interop.API.Connect.Clients.VehicleKindsAPIConnectClient(httpClientHelperProvider);
+                    var engineKindsAPIConnectClient = new Interop.API.Connect.Clients.VehicleEngineKindsAPIConnectClient(httpClientHelperProvider);
+                    var structuresAPIConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(httpClientHelperProvider);
+
+                    return new 
+                    { 
+                        Structures = await structuresAPIConnectClient.GetEnabledAsync(), 
+                        Kinds = await kindsAPIConnectClient.GetEnabledAsync(),
+                        EngineKinds = await engineKindsAPIConnectClient.GetEnabledAsync(),
+                        Brands = await brandsAPIConnectClient.GetEnabledAsync()
+                    };
+
+                }).ContinueWith(task =>
+                {
+                    if (task.IsCompleted)
+                    {
+                        model.AvailableStructures = task.Result.Structures;
+                        model.AvailableKinds = task.Result.Kinds;
+                        model.AvailableEngineKinds = task.Result.EngineKinds;
+                        model.AvailableBrands = task.Result.Brands;
+                    }
+
+                    Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.VehicleConfigurationPage(ConfigurationSuccess_Callback, model)));
+                });
+
+                break;
+            case 1:
+                var apiConnectClient = new Interop.API.Connect.Clients.VehiclesAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

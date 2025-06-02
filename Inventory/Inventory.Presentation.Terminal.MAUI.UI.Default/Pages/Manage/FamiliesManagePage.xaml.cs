@@ -42,6 +42,47 @@ public partial class FamiliesManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         return result;
     }
 
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.FamilyDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var model = new Models.Page.Configuration.FamilyConfigurationPageModel(target);
+
+                var categoriesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(httpClientHelperProvider);
+
+                categoriesAPIConnectClient.GetAsync().ContinueWith(task =>
+                {
+                    if (task.IsCompleted)
+                    {
+                        var families = new System.Collections.Generic.List<Interop.API.Common.Models.Display.FamilyDisplayModel>(task.Result);
+
+                        families.RemoveAll(_model => _model.Id == model.Id);
+
+                        model.AvailableParents = families.ToArray();
+                    }
+
+                    Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.FamilyConfigurationPage(ConfigurationSuccess_Callback, model)));
+                });
+
+                break;
+            case 1:
+                var apiConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
+    }
+
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
         AddItem(sender, eventArgs);
