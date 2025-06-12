@@ -96,16 +96,24 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="- Arrendamiento -" IsEnabled="False" />
-    <ShellContent
-        Title="Ofertas"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
+    <FlyoutItem
+        Title="Ofertas">
+        <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF0246;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Realizadas"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Por Realizar"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Por Aprobar"
+            ContentTemplate="{DataTemplate decisorframework_production_manage_pages:VehicleLeaseOffersToApproveManagePage}" />
+    </FlyoutItem>
     <ShellContent
         Title="Contrataciones"
         ContentTemplate="{DataTemplate ContentPage}">

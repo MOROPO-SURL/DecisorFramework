@@ -7,8 +7,6 @@
         private Core.Interop.API.Common.Models.Display.DocumentDisplayModel rawDocument;
         private System.Collections.ObjectModel.ObservableCollection<View.ProformaSectionClauseBridgeViewModel> sections = [];
 
-        public ProformaConfigurationPageModel() : this(null) { }
-
         public ProformaConfigurationPageModel(Interop.API.Common.Models.Display.ProformaDisplayModel model) : base(model)
         {
             if (model != null)

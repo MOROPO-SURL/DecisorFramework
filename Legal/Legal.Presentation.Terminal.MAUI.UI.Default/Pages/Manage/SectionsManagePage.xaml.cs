@@ -31,9 +31,9 @@ public partial class SectionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.SectionConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.SectionDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.SectionConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.SectionDisplayModel model = null)
     {
-        var result = new Models.Page.Configuration.SectionConfigurationPageModel();
+        var result = new Models.Page.Configuration.SectionConfigurationPageModel(model);
 
         var categoriesAPIConnectClient = new Interop.API.Connect.Clients.SectionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
@@ -49,26 +49,6 @@ public partial class SectionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.SectionConfigurationPageModel(target);
-
-                var categoriesAPIConnectClient = new Interop.API.Connect.Clients.SectionsAPIConnectClient(httpClientHelperProvider);
-
-                categoriesAPIConnectClient.GetAsync().ContinueWith(task =>
-                {
-                    if (task.IsCompleted)
-                    {
-                        var families = new System.Collections.Generic.List<Interop.API.Common.Models.Display.SectionDisplayModel>(task.Result);
-
-                        families.RemoveAll(_model => _model.Id == model.Id);
-
-                        model.AvailableParents = families.ToArray();
-                    }
-
-                    Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.SectionConfigurationPage(ConfigurationSuccess_Callback, model)));
-                });
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.SectionsAPIConnectClient(httpClientHelperProvider);
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>

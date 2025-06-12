@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -29,9 +28,9 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.ProductConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProductDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.ProductConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProductDisplayModel model = null)
     {
-        var result = new Models.Page.Configuration.ProductConfigurationPageModel();
+        var result = new Models.Page.Configuration.ProductConfigurationPageModel(model);
 
         var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
@@ -54,28 +53,6 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.ProductConfigurationPageModel(target);
-
-                System.Threading.Tasks.Task.Run(async () =>
-                {
-                    var familiesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(httpClientHelperProvider);
-                    var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
-
-                    return new { Families = await familiesAPIConnectClient.GetAsync(), UnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync() };
-
-                }).ContinueWith(task =>
-                {
-                    if (task.IsCompleted)
-                    {
-                        model.AvailableCategories = task.Result.Families;
-                        model.AvailableUnitMeasurements = task.Result.UnitMeasurements;
-                    }
-
-                    Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.ProductConfigurationPage(ConfigurationSuccess_Callback, model)));
-                });
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.ProductsAPIConnectClient(httpClientHelperProvider);
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>

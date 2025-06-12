@@ -11,8 +11,6 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.Models.Page.
         private string descriptiont;
         private int priority = 1;
 
-        public SectionConfigurationPageModel() : this(null) { }
-
         public SectionConfigurationPageModel(Interop.API.Common.Models.Display.SectionDisplayModel model) : base(model)
         {
             if (model != null)

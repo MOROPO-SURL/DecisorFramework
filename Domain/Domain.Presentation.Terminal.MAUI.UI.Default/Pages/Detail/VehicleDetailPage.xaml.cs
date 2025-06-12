@@ -4,9 +4,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class VehicleDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.VehicleDisplayModel>
 {
-    private readonly System.Action<Interop.API.Common.Models.Display.VehicleDisplayModel, int> delegationAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.VehicleDisplayModel, int?> delegationAction;
 
-    public VehicleDetailPage(Interop.API.Common.Models.Display.VehicleDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.VehicleDisplayModel, int> delegationAction) : base(bindingContextModel)
+    public VehicleDetailPage(Interop.API.Common.Models.Display.VehicleDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.VehicleDisplayModel, int?> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
@@ -19,8 +19,8 @@ public partial class VehicleDetailPage : Core.Presentation.Terminal.MAUI.UI.Page
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
-            // 0 for Edit
-            Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+            // null for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, null));
         });
     }
 
@@ -36,8 +36,8 @@ public partial class VehicleDetailPage : Core.Presentation.Terminal.MAUI.UI.Page
             {
                 this.NavigationPopModalPageAsync().ContinueWith(_ =>
                 {
-                    // 1 for Delete
-                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 1));
+                    // 0 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
                 });
             });
         });

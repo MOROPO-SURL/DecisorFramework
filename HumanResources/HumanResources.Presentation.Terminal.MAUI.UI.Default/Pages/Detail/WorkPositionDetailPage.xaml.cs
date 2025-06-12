@@ -4,9 +4,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class WorkPositionDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.WorkPositionDisplayModel>
 {
-    private readonly System.Action<Interop.API.Common.Models.Display.WorkPositionDisplayModel, int> delegationAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.WorkPositionDisplayModel, int?> delegationAction;
 
-    public WorkPositionDetailPage(Interop.API.Common.Models.Display.WorkPositionDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.WorkPositionDisplayModel, int> delegationAction) : base(bindingContextModel)
+    public WorkPositionDetailPage(Interop.API.Common.Models.Display.WorkPositionDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.WorkPositionDisplayModel, int?> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
@@ -19,8 +19,8 @@ public partial class WorkPositionDetailPage : Core.Presentation.Terminal.MAUI.UI
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
-            // 0 for Edit
-            Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+            // null for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, null));
         });
     }
 
@@ -36,8 +36,8 @@ public partial class WorkPositionDetailPage : Core.Presentation.Terminal.MAUI.UI
             {
                 this.NavigationPopModalPageAsync().ContinueWith(_ =>
                 {
-                    // 1 for Delete
-                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 1));
+                    // 0 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
                 });
             });
         });

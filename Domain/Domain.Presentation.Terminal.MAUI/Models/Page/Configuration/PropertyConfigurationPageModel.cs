@@ -18,8 +18,6 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private decimal area;
         private string description;
 
-        public PropertyConfigurationPageModel() : this(null) { }
-
         public PropertyConfigurationPageModel(PropertyDisplayModel model) : base(model)
         {
             if (model != null)

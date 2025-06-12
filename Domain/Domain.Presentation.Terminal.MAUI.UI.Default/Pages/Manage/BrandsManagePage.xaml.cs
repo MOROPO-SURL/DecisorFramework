@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -31,17 +30,16 @@ public partial class BrandsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
+    protected override System.Threading.Tasks.Task<Models.Page.Configuration.BrandConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.BrandDisplayModel model = null)
+    {
+        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.BrandConfigurationPageModel(model));
+    }
+
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.BrandDisplayModel target, int discriminator)
     {
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.BrandConfigurationPageModel(target);
-
-                this.NavigationPushPageAsync(new Configuration.BrandConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.BrandsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>

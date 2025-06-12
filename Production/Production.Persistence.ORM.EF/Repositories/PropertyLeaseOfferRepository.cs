@@ -11,6 +11,8 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Repositories
         protected override System.Linq.IQueryable<Entities.PropertyLeaseOffer> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
+                .Include(entity => entity.Author).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+                .Include(entity => entity.Decisor).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.Property).ThenInclude(entity => entity.FeatureImage)
                 .Include(entity => entity.ClauseBridges).ThenInclude(bridge => bridge.Stern)
                 .Include(entity => entity.OrganizationPostulations).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)

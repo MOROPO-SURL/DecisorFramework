@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
     public class PropertyLeaseOfferConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PropertyLeaseOfferDisplayModel>
     {
         private int priority;
-        private System.DateTime openAt;
+        private System.DateTime? openAt;
         private System.DateTime? closedAt;
         private string description;
         private Domain.Interop.API.Common.Models.Display.PropertyDisplayModel vehicle;
@@ -28,7 +28,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public System.DateTime OpenAt { get => openAt; set => SetProperty(ref openAt, value); }
+        public System.DateTime? OpenAt { get => openAt; set => SetProperty(ref openAt, value); }
 
         public System.DateTime? ClosedAt { get => closedAt; set => SetProperty(ref closedAt, value); }
 

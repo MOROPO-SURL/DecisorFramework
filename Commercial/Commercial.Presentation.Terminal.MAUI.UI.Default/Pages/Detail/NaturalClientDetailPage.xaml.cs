@@ -4,9 +4,9 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class NaturalClientDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.NaturalClientDisplayModel>
 {
-    private readonly System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel, int> delegationAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel, int?> delegationAction;
 
-    public NaturalClientDetailPage(Interop.API.Common.Models.Display.NaturalClientDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel, int> delegationAction) : base(bindingContextModel)
+    public NaturalClientDetailPage(Interop.API.Common.Models.Display.NaturalClientDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel, int?> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
@@ -19,8 +19,8 @@ public partial class NaturalClientDetailPage : Core.Presentation.Terminal.MAUI.U
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
-            // 0 for Edit
-            Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+            // null for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, null));
         });
     }
 
@@ -36,8 +36,8 @@ public partial class NaturalClientDetailPage : Core.Presentation.Terminal.MAUI.U
             {
                 this.NavigationPopModalPageAsync().ContinueWith(_ =>
                 {
-                    // 1 for Delete
-                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 1));
+                    // 0 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
                 });
             });
         });

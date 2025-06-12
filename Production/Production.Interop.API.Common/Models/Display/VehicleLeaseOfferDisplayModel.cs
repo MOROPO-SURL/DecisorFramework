@@ -12,11 +12,17 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        public System.DateTime OpenAt { get; set; }
+        public System.DateTime? OpenAt { get; set; }
 
         public System.DateTime? ClosedAt { get; set; }
 
         public string Description { get; set; }
+
+        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get; set; }
+
+        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Decisor { get; set; }
+
+        public string ApprovationReference { get; set; }
 
         public Domain.Interop.API.Common.Models.Display.VehicleDisplayModel Vehicle { get; set; }
 
@@ -75,6 +81,21 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
                 return result;
             }).ToArray();
+            ApprovationReference = entity.ApprovationReference;
+
+            if (entity.Author != null)
+            {
+                Author = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+
+                Author.Import(entity.Author);
+            }
+
+            if (entity.Decisor != null)
+            {
+                Decisor = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+
+                Decisor.Import(entity.Decisor);
+            }
 
             if (entity.Vehicle != null)
             {

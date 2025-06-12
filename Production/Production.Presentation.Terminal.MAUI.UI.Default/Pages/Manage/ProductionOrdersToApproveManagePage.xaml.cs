@@ -31,9 +31,9 @@ public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Ter
         return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.ProductionOrderFilterModel { Kind = Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.ToApprove }, CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.ProductionOrderConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProductionOrderDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.ProductionOrderConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProductionOrderDisplayModel model = null)
     {
-        var result = new Models.Page.Configuration.ProductionOrderConfigurationPageModel();
+        var result = new Models.Page.Configuration.ProductionOrderConfigurationPageModel(model);
 
         var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
@@ -53,24 +53,6 @@ public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Ter
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.ProductionOrderConfigurationPageModel(target);
-
-                var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientHelperProvider);
-
-                employeesAPIConnectClient.GetAsync().ContinueWith(task =>
-                {
-                    if (task.IsCompleted)
-                    {
-                        model.AvailableAuthors = task.Result;
-                        model.AvailableDecisors = task.Result;
-                        model.AvailableResponsibles = task.Result;
-                    }
-
-                    Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.ProductionOrderConfigurationPage(ConfigurationSuccess_Callback, model)));
-                });
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.ProductionOrdersAPIConnectClient(httpClientHelperProvider);
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>

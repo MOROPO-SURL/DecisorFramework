@@ -53,6 +53,20 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
 
             break;
         }
+
+        if (model.User != null)
+        {
+            for (int i = 0; i < model.AvailableUsers.Length; i++)
+            {
+                var current = model.AvailableUsers[i];
+
+                if (model.User.Id != current.Id) continue;
+
+                UsersPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Contacto (Persona)";
@@ -68,19 +82,18 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
     {
         var apiConnectClient = new Interop.API.Connect.Clients.PersonContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.PersonContactConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.PersonContactInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            LastName = concreteBindingContext.LastName,
-            Alias = concreteBindingContext.Alias,
-            About = concreteBindingContext.About,
-            Sex = concreteBindingContext.AvailableSexs[SexPicker.SelectedIndex],
-            CivilStatus = concreteBindingContext.AvailableCivilStatuses[CivilStatusPicker.SelectedIndex],
-            Priority = concreteBindingContext.Priority,
-            PersonalIdentificationNumber = concreteBindingContext.PersonalIdentificationNumber,
+            Name = ConcreteBindingContext.Name,
+            LastName = ConcreteBindingContext.LastName,
+            Alias = ConcreteBindingContext.Alias,
+            About = ConcreteBindingContext.About,
+            Sex = ConcreteBindingContext.AvailableSexs[SexPicker.SelectedIndex],
+            CivilStatus = ConcreteBindingContext.AvailableCivilStatuses[CivilStatusPicker.SelectedIndex],
+            UserId = UsersPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableUsers[UsersPicker.SelectedIndex].Id,
+            Priority = ConcreteBindingContext.Priority,
+            PersonalIdentificationNumber = ConcreteBindingContext.PersonalIdentificationNumber,
             IncomingPostalContactItems = incomingPostalContactItems,
             IncomingPhoneContactItems = incomingPhoneContactItems,
             IncomingEmailContactItems = incomingEmailContactItems,
@@ -104,19 +117,18 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
     {
         var apiConnectClient = new Interop.API.Connect.Clients.PersonContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.PersonContactConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.PersonContactInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            LastName = concreteBindingContext.LastName,
-            Alias = concreteBindingContext.Alias,
-            About = concreteBindingContext.About,
-            Sex = concreteBindingContext.AvailableSexs[SexPicker.SelectedIndex],
-            CivilStatus = concreteBindingContext.AvailableCivilStatuses[CivilStatusPicker.SelectedIndex],
-            Priority = concreteBindingContext.Priority,
-            PersonalIdentificationNumber = concreteBindingContext.PersonalIdentificationNumber,
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            LastName = ConcreteBindingContext.LastName,
+            Alias = ConcreteBindingContext.Alias,
+            About = ConcreteBindingContext.About,
+            Sex = ConcreteBindingContext.AvailableSexs[SexPicker.SelectedIndex],
+            CivilStatus = ConcreteBindingContext.AvailableCivilStatuses[CivilStatusPicker.SelectedIndex],
+            UserId = UsersPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableUsers[UsersPicker.SelectedIndex].Id,
+            Priority = ConcreteBindingContext.Priority,
+            PersonalIdentificationNumber = ConcreteBindingContext.PersonalIdentificationNumber,
             EditionPostalContactItems = editionPostalContactItems,
             IncomingPostalContactItems = incomingPostalContactItems,
             OutgoingPostalContactItems = outgoingPostalContactItems,

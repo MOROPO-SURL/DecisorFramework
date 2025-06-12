@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
@@ -32,9 +31,9 @@ public partial class WorkPositionsManagePage : Core.Presentation.Terminal.MAUI.U
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<WorkPositionConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.WorkPositionDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<WorkPositionConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.WorkPositionDisplayModel model = null)
     {
-        var result = new WorkPositionConfigurationPageModel();
+        var result = new WorkPositionConfigurationPageModel(model);
 
         var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
@@ -54,28 +53,6 @@ public partial class WorkPositionsManagePage : Core.Presentation.Terminal.MAUI.U
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.WorkPositionConfigurationPageModel(target);
-
-                System.Threading.Tasks.Task.Run(async () =>
-                {
-                    var kindsAPIConnectClient = new Interop.API.Connect.Clients.WorkPositionKindsAPIConnectClient(httpClientHelperProvider);
-                    var shoolingsAPIConnectClient = new Interop.API.Connect.Clients.SchoolingsAPIConnectClient(httpClientHelperProvider);
-
-                    return new { Schoolings = await shoolingsAPIConnectClient.GetAsync(), Kinds = await kindsAPIConnectClient.GetAsync() };
-
-                }).ContinueWith(task =>
-                {
-                    if (task.IsCompleted)
-                    {
-                        model.AvailableSchoolings = task.Result.Schoolings;
-                        model.AvailableKinds = task.Result.Kinds;
-                    }
-
-                    Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.WorkPositionConfigurationPage(ConfigurationSuccess_Callback, model)));
-                });
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(httpClientHelperProvider);
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>

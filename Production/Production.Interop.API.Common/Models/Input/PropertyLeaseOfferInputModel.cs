@@ -9,11 +9,17 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public int Priority { get; set; }
 
-        public System.DateTime OpenAt { get; set; }
+        public System.DateTime? OpenAt { get; set; }
 
         public System.DateTime? ClosedAt { get; set; }
 
         public string Description { get; set; }
+
+        public System.Guid AuthorId { get; set; }
+
+        public System.Guid? DecisorId { get; set; }
+
+        public string ApprovationReference { get; set; }
 
         public System.Guid PropertyId { get; set; }
 
@@ -27,7 +33,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public Persistence.Entities.PropertyLeaseOffer Export()
         {
-            var entity = new Persistence.Entities.PropertyLeaseOffer { Id = Id, Enabled = true };
+            var entity = new Persistence.Entities.PropertyLeaseOffer { Id = Id, Enabled = true, AuthorId = AuthorId };
 
             Mergue(entity);
 
@@ -45,6 +51,13 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
             entity.OpenAt = OpenAt;
             entity.ClosedAt = ClosedAt;
             entity.Description = Description;
+            entity.ApprovationReference = ApprovationReference;
+
+            if (entity.DecisorId != DecisorId)
+            {
+                entity.Decisor = null;
+                entity.DecisorId = DecisorId;
+            }
 
             if (entity.PropertyId != PropertyId)
             {

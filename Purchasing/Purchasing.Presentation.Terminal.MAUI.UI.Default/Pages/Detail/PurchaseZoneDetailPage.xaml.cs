@@ -4,9 +4,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class PurchaseZoneDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel>
 {
-    private readonly System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, int> delegationAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, int?> delegationAction;
 
-    public PurchaseZoneDetailPage(Interop.API.Common.Models.Display.PurchaseZoneDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, int> delegationAction) : base(bindingContextModel)
+    public PurchaseZoneDetailPage(Interop.API.Common.Models.Display.PurchaseZoneDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, int?> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
@@ -19,8 +19,8 @@ public partial class PurchaseZoneDetailPage : Core.Presentation.Terminal.MAUI.UI
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
-            // 0 for Edit
-            Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+            // null for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, null));
         });
     }
 
@@ -36,8 +36,8 @@ public partial class PurchaseZoneDetailPage : Core.Presentation.Terminal.MAUI.UI
             {
                 this.NavigationPopModalPageAsync().ContinueWith(_ =>
                 {
-                    // 1 for Delete
-                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 1));
+                    // 0 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
                 });
             });
         });

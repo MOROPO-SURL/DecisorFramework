@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -31,9 +30,9 @@ public partial class OrganizationContactsManagePage : Core.Presentation.Terminal
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.OrganizationContactConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.OrganizationContactDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.OrganizationContactConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.OrganizationContactDisplayModel model = null)
     {
-        var result = new Models.Page.Configuration.OrganizationContactConfigurationPageModel();
+        var result = new Models.Page.Configuration.OrganizationContactConfigurationPageModel(model);
 
         var apiConnectClient = new Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
@@ -49,22 +48,6 @@ public partial class OrganizationContactsManagePage : Core.Presentation.Terminal
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.OrganizationContactConfigurationPageModel(target);
-
-                var naturalBusinessKindAPIConnectClient = new Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(httpClientHelperProvider);
-
-                naturalBusinessKindAPIConnectClient.GetEnabledAsync().ContinueWith(task =>
-                {
-                    if (task.IsCompleted)
-                    {
-                        model.AvailableBusinessKinds = task.Result;
-                    }
-
-                    Dispatcher.Dispatch(() => this.NavigationPushPageAsync(new Configuration.OrganizationContactConfigurationPage(ConfigurationSuccess_Callback, model)));
-                });
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.OrganizationContactsAPIConnectClient(httpClientHelperProvider);
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>

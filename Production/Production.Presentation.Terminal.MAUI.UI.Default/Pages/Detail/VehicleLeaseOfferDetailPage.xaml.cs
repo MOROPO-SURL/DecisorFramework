@@ -4,9 +4,9 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class VehicleLeaseOfferDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel>
 {
-    private readonly System.Action<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel, int> delegationAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel, int?> delegationAction;
 
-    public VehicleLeaseOfferDetailPage(Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel, int> delegationAction) : base(bindingContextModel)
+    public VehicleLeaseOfferDetailPage(Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel, int?> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
@@ -19,8 +19,8 @@ public partial class VehicleLeaseOfferDetailPage : Core.Presentation.Terminal.MA
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
-            // 0 for Edit
-            Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+            // null for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, null));
         });
     }
 
@@ -36,8 +36,8 @@ public partial class VehicleLeaseOfferDetailPage : Core.Presentation.Terminal.MA
             {
                 this.NavigationPopModalPageAsync().ContinueWith(_ =>
                 {
-                    // 1 for Delete
-                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 1));
+                    // 0 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
                 });
             });
         });
