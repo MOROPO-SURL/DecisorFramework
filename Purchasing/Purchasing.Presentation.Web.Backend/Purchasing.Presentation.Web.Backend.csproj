@@ -12,8 +12,4 @@
 		<ProjectReference Include="..\Purchasing.Interop.API.Common\Purchasing.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Purchasing.Presentation.Web.Common\Purchasing.Presentation.Web.Common.csproj" />
 	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Controllers\" />
-	  <Folder Include="Models\View\Display\" />
-	</ItemGroup>
 </Project>

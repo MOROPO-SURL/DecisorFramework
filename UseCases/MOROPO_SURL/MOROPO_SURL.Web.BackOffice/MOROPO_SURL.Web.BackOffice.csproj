@@ -57,4 +57,11 @@
 	  <ProjectReference Include="..\..\..\Sales\Sales.Presentation.Web.Frontend\Sales.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\..\..\Supervision\Supervision.Presentation.Web.Frontend\Supervision.Presentation.Web.Frontend.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="wwwroot\documents\" />
+	  <Folder Include="wwwroot\images\" />
+	  <Folder Include="wwwroot\media\documents\" />
+	  <Folder Include="wwwroot\media\thumbnails\" />
+	  <Folder Include="wwwroot\media\videos\" />
+	</ItemGroup>
 </Project>
