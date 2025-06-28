@@ -71,6 +71,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
         public DbSet<ActionOrganizationResponsabilityBridge> ActionOrganizationResponsabilityBridges { get; set; }
         public DbSet<ActionOrganizationParticipationBridge> ActionOrganizationParticipationBridges { get; set; }
         public DbSet<Indicator> Indicators { get; set; }
+        public DbSet<IndicatorMontlyPlan> IndicatorMontlyPlans { get; set; }
         public DbSet<Result> Results { get; set; }
     }
 }
