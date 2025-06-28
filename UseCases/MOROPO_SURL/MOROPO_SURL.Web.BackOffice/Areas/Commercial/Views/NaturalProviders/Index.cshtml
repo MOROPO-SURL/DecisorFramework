@@ -174,7 +174,7 @@
                                     }
                                     else
                                     {
-                                        using (Html.BeginForm(item.Enabled ? "disable" : "enable", "NaturalProviders", new { Area = "purchasing" }, FormMethod.Post, true, null))
+                                        using (Html.BeginForm(item.Enabled ? "disable" : "enable", "NaturalProviders", new { Area = "commercial" }, FormMethod.Post, true, null))
                                         {
                                             <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
 
@@ -192,7 +192,7 @@
                                     }
                                 </td>
                                 <td class="fit" style="vertical-align: middle;">
-                                    @using (Html.BeginForm(item.Archived ? "unarchive" : "archive", "NaturalProviders", new { Area = "purchasing" }, FormMethod.Post, true, null))
+                                    @using (Html.BeginForm(item.Archived ? "unarchive" : "archive", "NaturalProviders", new { Area = "commercial" }, FormMethod.Post, true, null))
                                     {
                                         <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
 
@@ -266,7 +266,7 @@
                                     <div class="modal fade" id="delete-@item.Id" tabindex="-1" role="dialog" aria-labelledby="delete-@item.Id-lable" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                @using (Html.BeginForm("delete", "NaturalProviders", new { Area = "purchasing" }, FormMethod.Post, true, new { @class = "modal-content" }))
+                                                @using (Html.BeginForm("delete", "NaturalProviders", new { Area = "commercial" }, FormMethod.Post, true, new { @class = "modal-content" }))
                                                 {
                                                     @Html.Hidden("Id", item.Id)
 
