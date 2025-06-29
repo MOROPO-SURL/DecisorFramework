@@ -21,19 +21,7 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Providers
                     new Configurators.ProductionEmployeeBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.ProductionOrder>(),
                     new BaseEntityTypeConfigurator<Entities.ProductionOrderDeparture>(),
-                    new Configurators.ProductionProductBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.VehicleLeaseOffer>(),
-                    new Configurators.VehicleLeaseOfferClauseBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.VehicleLeaseOrganizationPostulation>(),
-                    new Configurators.VehicleLeaseOrganizationPostulationDocumentBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.VehicleLeasePersonPostulation>(),
-                    new Configurators.VehicleLeasePersonPostulationDocumentBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.PropertyLeaseOffer>(),
-                    new Configurators.PropertyLeaseOfferClauseBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.PropertyLeaseOrganizationPostulation>(),
-                    new Configurators.PropertyLeaseOrganizationPostulationDocumentBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.PropertyLeasePersonPostulation>(),
-                    new Configurators.PropertyLeasePersonPostulationDocumentBridgeEntityTypeConfigurator()
+                    new Configurators.ProductionProductBridgeEntityTypeConfigurator()
                 };
             }
         }

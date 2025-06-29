@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Leasing.Interop.API.Common</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Leasing.Interop.API.Common</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\HumanResources\HumanResources.Interop.API.Common\HumanResources.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Leasing.Persistence\Leasing.Persistence.csproj" />
+	</ItemGroup>
+
+</Project>

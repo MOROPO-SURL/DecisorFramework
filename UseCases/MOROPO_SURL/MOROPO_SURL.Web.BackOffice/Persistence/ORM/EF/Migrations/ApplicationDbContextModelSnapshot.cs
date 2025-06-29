@@ -3204,6 +3204,422 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("warehousingareas", "decisorframework_inventory");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOffer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("ApprovationReference")
+                        .HasColumnType("text")
+                        .HasColumnName("approvationreference");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<DateTime?>("ClosedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("closedat");
+
+                    b.Property<Guid?>("DecisorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("decisorid");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<DateTime?>("OpenAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("openat");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("PropertyId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("propertyid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_propertyleaseoffers");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_propertyleaseoffers_authorid");
+
+                    b.HasIndex("DecisorId")
+                        .HasDatabaseName("ix_propertyleaseoffers_decisorid");
+
+                    b.HasIndex("PropertyId")
+                        .HasDatabaseName("ix_propertyleaseoffers_propertyid");
+
+                    b.ToTable("propertyleaseoffers", "decisorframework_leasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOfferClauseBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_propertyleaseofferclausebridge");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_propertyleaseofferclausebridge_sternid");
+
+                    b.ToTable("propertyleaseofferclausebridge", "decisorframework_leasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOrganizationPostulation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Argument")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("argument");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contactid");
+
+                    b.Property<Guid>("OfferId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("offerid");
+
+                    b.Property<string>("StateIdentificationCode")
+                        .HasColumnType("text")
+                        .HasColumnName("stateidentificationcode");
+
+                    b.Property<string>("TaxIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("taxidentificationnumber");
+
+                    b.HasKey("Id")
+                        .HasName("pk_propertyleaseofferorganizationcontactbridges");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_propertyleaseofferorganizationcontactbridges_contactid");
+
+                    b.HasIndex("OfferId")
+                        .HasDatabaseName("ix_propertyleaseofferorganizationcontactbridges_offerid");
+
+                    b.ToTable("propertyleaseofferorganizationcontactbridges", "decisorframework_leasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOrganizationPostulationDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_propertyleaseorganizationpostulationdocumentbridge");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_propertyleaseorganizationpostulationdocumentbridge_sternid");
+
+                    b.ToTable("propertyleaseorganizationpostulationdocumentbridge", "decisorframework_leasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeasePersonPostulation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Argument")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("argument");
+
+                    b.Property<Guid>("BusinessKindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("businesskindid");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contactid");
+
+                    b.Property<Guid>("OfferId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("offerid");
+
+                    b.Property<string>("TaxIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("taxidentificationnumber");
+
+                    b.HasKey("Id")
+                        .HasName("pk_propertyleaseofferpersoncontactbridges");
+
+                    b.HasIndex("BusinessKindId")
+                        .HasDatabaseName("ix_propertyleaseofferpersoncontactbridges_businesskindid");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_propertyleaseofferpersoncontactbridges_contactid");
+
+                    b.HasIndex("OfferId")
+                        .HasDatabaseName("ix_propertyleaseofferpersoncontactbridges_offerid");
+
+                    b.ToTable("propertyleaseofferpersoncontactbridges", "decisorframework_leasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeasePersonPostulationDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_propertyleasepersonpostulationdocumentbridge");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_propertyleasepersonpostulationdocumentbridge_sternid");
+
+                    b.ToTable("propertyleasepersonpostulationdocumentbridge", "decisorframework_leasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOffer", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("ApprovationReference")
+                        .HasColumnType("text")
+                        .HasColumnName("approvationreference");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<DateTime?>("ClosedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("closedat");
+
+                    b.Property<Guid?>("DecisorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("decisorid");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<DateTime?>("OpenAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("openat");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("VehicleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vehicleid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_vehicleleaseoffers");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_vehicleleaseoffers_authorid");
+
+                    b.HasIndex("DecisorId")
+                        .HasDatabaseName("ix_vehicleleaseoffers_decisorid");
+
+                    b.HasIndex("VehicleId")
+                        .HasDatabaseName("ix_vehicleleaseoffers_vehicleid");
+
+                    b.ToTable("vehicleleaseoffers", "decisorframework_leasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOfferClauseBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_vehicleleaseofferclausebridge");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_vehicleleaseofferclausebridge_sternid");
+
+                    b.ToTable("vehicleleaseofferclausebridge", "decisorframework_leasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOrganizationPostulation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Argument")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("argument");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contactid");
+
+                    b.Property<Guid>("OfferId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("offerid");
+
+                    b.Property<string>("StateIdentificationCode")
+                        .HasColumnType("text")
+                        .HasColumnName("stateidentificationcode");
+
+                    b.Property<string>("TaxIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("taxidentificationnumber");
+
+                    b.HasKey("Id")
+                        .HasName("pk_vehicleleaseofferorganizationcontactbridges");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_vehicleleaseofferorganizationcontactbridges_contactid");
+
+                    b.HasIndex("OfferId")
+                        .HasDatabaseName("ix_vehicleleaseofferorganizationcontactbridges_offerid");
+
+                    b.ToTable("vehicleleaseofferorganizationcontactbridges", "decisorframework_leasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOrganizationPostulationDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_vehicleleaseorganizationpostulationdocumentbridge");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_vehicleleaseorganizationpostulationdocumentbridge_sternid");
+
+                    b.ToTable("vehicleleaseorganizationpostulationdocumentbridge", "decisorframework_leasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeasePersonPostulation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Argument")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("argument");
+
+                    b.Property<Guid>("BusinessKindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("businesskindid");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contactid");
+
+                    b.Property<Guid>("OfferId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("offerid");
+
+                    b.Property<string>("TaxIdentificationNumber")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("taxidentificationnumber");
+
+                    b.HasKey("Id")
+                        .HasName("pk_vehicleleaseofferpersoncontactbridges");
+
+                    b.HasIndex("BusinessKindId")
+                        .HasDatabaseName("ix_vehicleleaseofferpersoncontactbridges_businesskindid");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_vehicleleaseofferpersoncontactbridges_contactid");
+
+                    b.HasIndex("OfferId")
+                        .HasDatabaseName("ix_vehicleleaseofferpersoncontactbridges_offerid");
+
+                    b.ToTable("vehicleleaseofferpersoncontactbridges", "decisorframework_leasing");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeasePersonPostulationDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_vehicleleasepersonpostulationdocumentbridge");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_vehicleleasepersonpostulationdocumentbridge_sternid");
+
+                    b.ToTable("vehicleleasepersonpostulationdocumentbridge", "decisorframework_leasing");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Legal.Persistence.Entities.CentralStateStructure", b =>
                 {
                     b.Property<Guid>("Id")
@@ -4094,422 +4510,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_productionproductbridges_unitmeasurementid");
 
                     b.ToTable("productionproductbridges", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOffer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("ApprovationReference")
-                        .HasColumnType("text")
-                        .HasColumnName("approvationreference");
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("boolean")
-                        .HasColumnName("archived");
-
-                    b.Property<DateTime>("At")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("at");
-
-                    b.Property<Guid>("AuthorId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("authorid");
-
-                    b.Property<DateTime?>("ClosedAt")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("closedat");
-
-                    b.Property<Guid?>("DecisorId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("decisorid");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
-                    b.Property<DateTime?>("OpenAt")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("openat");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
-
-                    b.Property<Guid>("PropertyId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("propertyid");
-
-                    b.HasKey("Id")
-                        .HasName("pk_propertyleaseoffers");
-
-                    b.HasIndex("AuthorId")
-                        .HasDatabaseName("ix_propertyleaseoffers_authorid");
-
-                    b.HasIndex("DecisorId")
-                        .HasDatabaseName("ix_propertyleaseoffers_decisorid");
-
-                    b.HasIndex("PropertyId")
-                        .HasDatabaseName("ix_propertyleaseoffers_propertyid");
-
-                    b.ToTable("propertyleaseoffers", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOfferClauseBridge", b =>
-                {
-                    b.Property<Guid>("ProwId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("prowid");
-
-                    b.Property<Guid>("SternId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sternid");
-
-                    b.HasKey("ProwId", "SternId")
-                        .HasName("pk_propertyleaseofferclausebridge");
-
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_propertyleaseofferclausebridge_sternid");
-
-                    b.ToTable("propertyleaseofferclausebridge", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOrganizationPostulation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Argument")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("argument");
-
-                    b.Property<Guid>("ContactId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("contactid");
-
-                    b.Property<Guid>("OfferId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("offerid");
-
-                    b.Property<string>("StateIdentificationCode")
-                        .HasColumnType("text")
-                        .HasColumnName("stateidentificationcode");
-
-                    b.Property<string>("TaxIdentificationNumber")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("taxidentificationnumber");
-
-                    b.HasKey("Id")
-                        .HasName("pk_propertyleaseofferorganizationcontactbridges");
-
-                    b.HasIndex("ContactId")
-                        .HasDatabaseName("ix_propertyleaseofferorganizationcontactbridges_contactid");
-
-                    b.HasIndex("OfferId")
-                        .HasDatabaseName("ix_propertyleaseofferorganizationcontactbridges_offerid");
-
-                    b.ToTable("propertyleaseofferorganizationcontactbridges", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOrganizationPostulationDocumentBridge", b =>
-                {
-                    b.Property<Guid>("ProwId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("prowid");
-
-                    b.Property<Guid>("SternId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sternid");
-
-                    b.HasKey("ProwId", "SternId")
-                        .HasName("pk_propertyleaseorganizationpostulationdocumentbridge");
-
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_propertyleaseorganizationpostulationdocumentbridge_sternid");
-
-                    b.ToTable("propertyleaseorganizationpostulationdocumentbridge", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeasePersonPostulation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Argument")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("argument");
-
-                    b.Property<Guid>("BusinessKindId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("businesskindid");
-
-                    b.Property<Guid>("ContactId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("contactid");
-
-                    b.Property<Guid>("OfferId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("offerid");
-
-                    b.Property<string>("TaxIdentificationNumber")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("taxidentificationnumber");
-
-                    b.HasKey("Id")
-                        .HasName("pk_propertyleaseofferpersoncontactbridges");
-
-                    b.HasIndex("BusinessKindId")
-                        .HasDatabaseName("ix_propertyleaseofferpersoncontactbridges_businesskindid");
-
-                    b.HasIndex("ContactId")
-                        .HasDatabaseName("ix_propertyleaseofferpersoncontactbridges_contactid");
-
-                    b.HasIndex("OfferId")
-                        .HasDatabaseName("ix_propertyleaseofferpersoncontactbridges_offerid");
-
-                    b.ToTable("propertyleaseofferpersoncontactbridges", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeasePersonPostulationDocumentBridge", b =>
-                {
-                    b.Property<Guid>("ProwId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("prowid");
-
-                    b.Property<Guid>("SternId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sternid");
-
-                    b.HasKey("ProwId", "SternId")
-                        .HasName("pk_propertyleasepersonpostulationdocumentbridge");
-
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_propertyleasepersonpostulationdocumentbridge_sternid");
-
-                    b.ToTable("propertyleasepersonpostulationdocumentbridge", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOffer", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("ApprovationReference")
-                        .HasColumnType("text")
-                        .HasColumnName("approvationreference");
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("boolean")
-                        .HasColumnName("archived");
-
-                    b.Property<DateTime>("At")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("at");
-
-                    b.Property<Guid>("AuthorId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("authorid");
-
-                    b.Property<DateTime?>("ClosedAt")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("closedat");
-
-                    b.Property<Guid?>("DecisorId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("decisorid");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
-                    b.Property<DateTime?>("OpenAt")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("openat");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
-
-                    b.Property<Guid>("VehicleId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("vehicleid");
-
-                    b.HasKey("Id")
-                        .HasName("pk_vehicleleaseoffers");
-
-                    b.HasIndex("AuthorId")
-                        .HasDatabaseName("ix_vehicleleaseoffers_authorid");
-
-                    b.HasIndex("DecisorId")
-                        .HasDatabaseName("ix_vehicleleaseoffers_decisorid");
-
-                    b.HasIndex("VehicleId")
-                        .HasDatabaseName("ix_vehicleleaseoffers_vehicleid");
-
-                    b.ToTable("vehicleleaseoffers", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOfferClauseBridge", b =>
-                {
-                    b.Property<Guid>("ProwId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("prowid");
-
-                    b.Property<Guid>("SternId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sternid");
-
-                    b.HasKey("ProwId", "SternId")
-                        .HasName("pk_vehicleleaseofferclausebridge");
-
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_vehicleleaseofferclausebridge_sternid");
-
-                    b.ToTable("vehicleleaseofferclausebridge", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOrganizationPostulation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Argument")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("argument");
-
-                    b.Property<Guid>("ContactId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("contactid");
-
-                    b.Property<Guid>("OfferId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("offerid");
-
-                    b.Property<string>("StateIdentificationCode")
-                        .HasColumnType("text")
-                        .HasColumnName("stateidentificationcode");
-
-                    b.Property<string>("TaxIdentificationNumber")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("taxidentificationnumber");
-
-                    b.HasKey("Id")
-                        .HasName("pk_vehicleleaseofferorganizationcontactbridges");
-
-                    b.HasIndex("ContactId")
-                        .HasDatabaseName("ix_vehicleleaseofferorganizationcontactbridges_contactid");
-
-                    b.HasIndex("OfferId")
-                        .HasDatabaseName("ix_vehicleleaseofferorganizationcontactbridges_offerid");
-
-                    b.ToTable("vehicleleaseofferorganizationcontactbridges", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOrganizationPostulationDocumentBridge", b =>
-                {
-                    b.Property<Guid>("ProwId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("prowid");
-
-                    b.Property<Guid>("SternId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sternid");
-
-                    b.HasKey("ProwId", "SternId")
-                        .HasName("pk_vehicleleaseorganizationpostulationdocumentbridge");
-
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_vehicleleaseorganizationpostulationdocumentbridge_sternid");
-
-                    b.ToTable("vehicleleaseorganizationpostulationdocumentbridge", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeasePersonPostulation", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<string>("Argument")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("argument");
-
-                    b.Property<Guid>("BusinessKindId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("businesskindid");
-
-                    b.Property<Guid>("ContactId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("contactid");
-
-                    b.Property<Guid>("OfferId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("offerid");
-
-                    b.Property<string>("TaxIdentificationNumber")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("taxidentificationnumber");
-
-                    b.HasKey("Id")
-                        .HasName("pk_vehicleleaseofferpersoncontactbridges");
-
-                    b.HasIndex("BusinessKindId")
-                        .HasDatabaseName("ix_vehicleleaseofferpersoncontactbridges_businesskindid");
-
-                    b.HasIndex("ContactId")
-                        .HasDatabaseName("ix_vehicleleaseofferpersoncontactbridges_contactid");
-
-                    b.HasIndex("OfferId")
-                        .HasDatabaseName("ix_vehicleleaseofferpersoncontactbridges_offerid");
-
-                    b.ToTable("vehicleleaseofferpersoncontactbridges", "decisorframework_production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeasePersonPostulationDocumentBridge", b =>
-                {
-                    b.Property<Guid>("ProwId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("prowid");
-
-                    b.Property<Guid>("SternId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sternid");
-
-                    b.HasKey("ProwId", "SternId")
-                        .HasName("pk_vehicleleasepersonpostulationdocumentbridge");
-
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_vehicleleasepersonpostulationdocumentbridge_sternid");
-
-                    b.ToTable("vehicleleasepersonpostulationdocumentbridge", "decisorframework_production");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", b =>
@@ -7777,6 +7777,290 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Warehouse");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOffer", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseoffers_employees_authorid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Decisor")
+                        .WithMany()
+                        .HasForeignKey("DecisorId")
+                        .HasConstraintName("fk_propertyleaseoffers_employees_decisorid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Property", "Property")
+                        .WithMany()
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseoffers_properties_propertyid");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Decisor");
+
+                    b.Navigation("Property");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOfferClauseBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOffer", "Prow")
+                        .WithMany("ClauseBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferclausebridge_propertyleaseoffers_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Clause", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferclausebridge_clauses_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOrganizationPostulation", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferorganizationcontactbridges_organizationco~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOffer", "Offer")
+                        .WithMany("OrganizationPostulations")
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferorganizationcontactbridges_propertyleaseo~");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Offer");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOrganizationPostulationDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOrganizationPostulation", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseorganizationpostulationdocumentbridge_property~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseorganizationpostulationdocumentbridge_document~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeasePersonPostulation", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
+                        .WithMany()
+                        .HasForeignKey("BusinessKindId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferpersoncontactbridges_naturalbusinesskinds~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferpersoncontactbridges_personcontacts_conta~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOffer", "Offer")
+                        .WithMany("PersonPostulations")
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleaseofferpersoncontactbridges_propertyleaseoffers_~");
+
+                    b.Navigation("BusinessKind");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Offer");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeasePersonPostulationDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeasePersonPostulation", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleasepersonpostulationdocumentbridge_propertyleaseo~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyleasepersonpostulationdocumentbridge_documents_ster~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOffer", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseoffers_employees_authorid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Decisor")
+                        .WithMany()
+                        .HasForeignKey("DecisorId")
+                        .HasConstraintName("fk_vehicleleaseoffers_employees_decisorid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Vehicle", "Vehicle")
+                        .WithMany()
+                        .HasForeignKey("VehicleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseoffers_vehicles_vehicleid");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Decisor");
+
+                    b.Navigation("Vehicle");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOfferClauseBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOffer", "Prow")
+                        .WithMany("ClauseBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferclausebridge_vehicleleaseoffers_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Clause", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferclausebridge_clauses_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOrganizationPostulation", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferorganizationcontactbridges_organizationcon~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOffer", "Offer")
+                        .WithMany("OrganizationPostulations")
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferorganizationcontactbridges_vehicleleaseoff~");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Offer");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOrganizationPostulationDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOrganizationPostulation", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseorganizationpostulationdocumentbridge_vehiclele~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseorganizationpostulationdocumentbridge_documents~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeasePersonPostulation", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
+                        .WithMany()
+                        .HasForeignKey("BusinessKindId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferpersoncontactbridges_naturalbusinesskinds_~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferpersoncontactbridges_personcontacts_contac~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOffer", "Offer")
+                        .WithMany("PersonPostulations")
+                        .HasForeignKey("OfferId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleaseofferpersoncontactbridges_vehicleleaseoffers_of~");
+
+                    b.Navigation("BusinessKind");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Offer");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeasePersonPostulationDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeasePersonPostulation", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleasepersonpostulationdocumentbridge_vehicleleaseoff~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vehicleleasepersonpostulationdocumentbridge_documents_stern~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Legal.Persistence.Entities.CentralStateStructure", b =>
                 {
                     b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.OrganizationIdentity", "Identity")
@@ -8235,290 +8519,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Stern");
 
                     b.Navigation("UnitMeasurement");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOffer", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleaseoffers_employees_authorid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Decisor")
-                        .WithMany()
-                        .HasForeignKey("DecisorId")
-                        .HasConstraintName("fk_propertyleaseoffers_employees_decisorid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Property", "Property")
-                        .WithMany()
-                        .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleaseoffers_properties_propertyid");
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Decisor");
-
-                    b.Navigation("Property");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOfferClauseBridge", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOffer", "Prow")
-                        .WithMany("ClauseBridges")
-                        .HasForeignKey("ProwId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleaseofferclausebridge_propertyleaseoffers_prowid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Clause", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleaseofferclausebridge_clauses_sternid");
-
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOrganizationPostulation", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleaseofferorganizationcontactbridges_organizationco~");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOffer", "Offer")
-                        .WithMany("OrganizationPostulations")
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleaseofferorganizationcontactbridges_propertyleaseo~");
-
-                    b.Navigation("Contact");
-
-                    b.Navigation("Offer");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOrganizationPostulationDocumentBridge", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOrganizationPostulation", "Prow")
-                        .WithMany("DocumentBridges")
-                        .HasForeignKey("ProwId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleaseorganizationpostulationdocumentbridge_property~");
-
-                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleaseorganizationpostulationdocumentbridge_document~");
-
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeasePersonPostulation", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
-                        .WithMany()
-                        .HasForeignKey("BusinessKindId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleaseofferpersoncontactbridges_naturalbusinesskinds~");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleaseofferpersoncontactbridges_personcontacts_conta~");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOffer", "Offer")
-                        .WithMany("PersonPostulations")
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleaseofferpersoncontactbridges_propertyleaseoffers_~");
-
-                    b.Navigation("BusinessKind");
-
-                    b.Navigation("Contact");
-
-                    b.Navigation("Offer");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeasePersonPostulationDocumentBridge", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeasePersonPostulation", "Prow")
-                        .WithMany("DocumentBridges")
-                        .HasForeignKey("ProwId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleasepersonpostulationdocumentbridge_propertyleaseo~");
-
-                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_propertyleasepersonpostulationdocumentbridge_documents_ster~");
-
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOffer", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Author")
-                        .WithMany()
-                        .HasForeignKey("AuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleaseoffers_employees_authorid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Decisor")
-                        .WithMany()
-                        .HasForeignKey("DecisorId")
-                        .HasConstraintName("fk_vehicleleaseoffers_employees_decisorid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Vehicle", "Vehicle")
-                        .WithMany()
-                        .HasForeignKey("VehicleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleaseoffers_vehicles_vehicleid");
-
-                    b.Navigation("Author");
-
-                    b.Navigation("Decisor");
-
-                    b.Navigation("Vehicle");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOfferClauseBridge", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOffer", "Prow")
-                        .WithMany("ClauseBridges")
-                        .HasForeignKey("ProwId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleaseofferclausebridge_vehicleleaseoffers_prowid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Clause", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleaseofferclausebridge_clauses_sternid");
-
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOrganizationPostulation", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleaseofferorganizationcontactbridges_organizationcon~");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOffer", "Offer")
-                        .WithMany("OrganizationPostulations")
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleaseofferorganizationcontactbridges_vehicleleaseoff~");
-
-                    b.Navigation("Contact");
-
-                    b.Navigation("Offer");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOrganizationPostulationDocumentBridge", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOrganizationPostulation", "Prow")
-                        .WithMany("DocumentBridges")
-                        .HasForeignKey("ProwId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleaseorganizationpostulationdocumentbridge_vehiclele~");
-
-                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleaseorganizationpostulationdocumentbridge_documents~");
-
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeasePersonPostulation", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.NaturalBusinessKind", "BusinessKind")
-                        .WithMany()
-                        .HasForeignKey("BusinessKindId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleaseofferpersoncontactbridges_naturalbusinesskinds_~");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
-                        .WithMany()
-                        .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleaseofferpersoncontactbridges_personcontacts_contac~");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOffer", "Offer")
-                        .WithMany("PersonPostulations")
-                        .HasForeignKey("OfferId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleaseofferpersoncontactbridges_vehicleleaseoffers_of~");
-
-                    b.Navigation("BusinessKind");
-
-                    b.Navigation("Contact");
-
-                    b.Navigation("Offer");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeasePersonPostulationDocumentBridge", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeasePersonPostulation", "Prow")
-                        .WithMany("DocumentBridges")
-                        .HasForeignKey("ProwId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleasepersonpostulationdocumentbridge_vehicleleaseoff~");
-
-                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vehicleleasepersonpostulationdocumentbridge_documents_stern~");
-
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", b =>
@@ -9682,6 +9682,44 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Areas");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOffer", b =>
+                {
+                    b.Navigation("ClauseBridges");
+
+                    b.Navigation("OrganizationPostulations");
+
+                    b.Navigation("PersonPostulations");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOrganizationPostulation", b =>
+                {
+                    b.Navigation("DocumentBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeasePersonPostulation", b =>
+                {
+                    b.Navigation("DocumentBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOffer", b =>
+                {
+                    b.Navigation("ClauseBridges");
+
+                    b.Navigation("OrganizationPostulations");
+
+                    b.Navigation("PersonPostulations");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOrganizationPostulation", b =>
+                {
+                    b.Navigation("DocumentBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeasePersonPostulation", b =>
+                {
+                    b.Navigation("DocumentBridges");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Clause", b =>
                 {
                     b.Navigation("TagBridges");
@@ -9725,44 +9763,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", b =>
                 {
                     b.Navigation("Production");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOffer", b =>
-                {
-                    b.Navigation("ClauseBridges");
-
-                    b.Navigation("OrganizationPostulations");
-
-                    b.Navigation("PersonPostulations");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeaseOrganizationPostulation", b =>
-                {
-                    b.Navigation("DocumentBridges");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.PropertyLeasePersonPostulation", b =>
-                {
-                    b.Navigation("DocumentBridges");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOffer", b =>
-                {
-                    b.Navigation("ClauseBridges");
-
-                    b.Navigation("OrganizationPostulations");
-
-                    b.Navigation("PersonPostulations");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeaseOrganizationPostulation", b =>
-                {
-                    b.Navigation("DocumentBridges");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.VehicleLeasePersonPostulation", b =>
-                {
-                    b.Navigation("DocumentBridges");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Purchasing.Persistence.Entities.Purchase", b =>

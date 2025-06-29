@@ -14,6 +14,7 @@ using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Production.Persistence.Entities;
 using MOROPO.Framework.Decisor.Essential.Persistence.Entities;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities.Contract;
+using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
 
 namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
 {
@@ -24,7 +25,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         Framework.Guama.Media.Persistence.ORM.EF.Context.IPersistenceDbContext,
         Framework.Guama.Security.Personal.Persistence.ORM.EF.Contract.IPersistenceDbContext,
         Framework.Decisor.Production.Persistence.ORM.EF.Context.Contract.IProductionDbContext,
-        Framework.Decisor.Purchasing.Persistence.ORM.EF.Context.Contract.IPurchasingDbContext
+        Framework.Decisor.Purchasing.Persistence.ORM.EF.Context.Contract.IPurchasingDbContext,
+        Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract.ILeasingDbContext
     {
         public ApplicationDbContext(System.Collections.Generic.IEnumerable<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
         {

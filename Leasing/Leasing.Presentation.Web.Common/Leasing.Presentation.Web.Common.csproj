@@ -1,0 +1,17 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Leasing.Presentation.Web.Common</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Leasing.Presentation.Web.Common</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Persistence.ORM.EF" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Media.Presentation.Web.Common" Version="6.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+	  <ProjectReference Include="..\Leasing.Interop.API.Common\Leasing.Interop.API.Common.csproj" />
+	  <ProjectReference Include="..\Leasing.Persistence.ORM.EF\Leasing.Persistence.ORM.EF.csproj" />
+	</ItemGroup>
+
+</Project>
