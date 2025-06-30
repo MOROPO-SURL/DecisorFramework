@@ -9,12 +9,24 @@
 	<ItemGroup>
 		<Compile Remove="dpkeys\**" />
 		<Compile Remove="logs\**" />
+		<Compile Remove="wwwroot\documents\**" />
+		<Compile Remove="wwwroot\images\**" />
+		<Compile Remove="wwwroot\media\**" />
 		<Content Remove="dpkeys\**" />
 		<Content Remove="logs\**" />
+		<Content Remove="wwwroot\documents\**" />
+		<Content Remove="wwwroot\images\**" />
+		<Content Remove="wwwroot\media\**" />
 		<EmbeddedResource Remove="dpkeys\**" />
 		<EmbeddedResource Remove="logs\**" />
+		<EmbeddedResource Remove="wwwroot\documents\**" />
+		<EmbeddedResource Remove="wwwroot\images\**" />
+		<EmbeddedResource Remove="wwwroot\media\**" />
 		<None Remove="dpkeys\**" />
 		<None Remove="logs\**" />
+		<None Remove="wwwroot\documents\**" />
+		<None Remove="wwwroot\images\**" />
+		<None Remove="wwwroot\media\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.1" />
@@ -58,12 +70,5 @@
 	  <ProjectReference Include="..\..\..\Sales\Sales.Presentation.Web.Backend\Sales.Presentation.Web.Backend.csproj" />
 	  <ProjectReference Include="..\..\..\Sales\Sales.Presentation.Web.Frontend\Sales.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\..\..\Supervision\Supervision.Presentation.Web.Frontend\Supervision.Presentation.Web.Frontend.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="wwwroot\documents\" />
-	  <Folder Include="wwwroot\images\" />
-	  <Folder Include="wwwroot\media\documents\" />
-	  <Folder Include="wwwroot\media\thumbnails\" />
-	  <Folder Include="wwwroot\media\videos\" />
 	</ItemGroup>
 </Project>
