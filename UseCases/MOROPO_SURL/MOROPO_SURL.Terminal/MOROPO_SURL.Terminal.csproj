@@ -90,6 +90,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="UI\Shells\LeasingShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Shells\SalesShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

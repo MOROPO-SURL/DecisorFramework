@@ -34,6 +34,7 @@
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
             </Style>
 
             <x:Double x:Key="LogoArtFrameImageWithFactor">1.25</x:Double>
@@ -229,6 +230,18 @@
                         <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
                         <Grid Padding="5">
                             <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="Ventas" />
+                        </Grid>
+                    </Grid>
+                </Frame>
+                <Frame Style="{StaticResource SectionCardFrameStyle}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="LeasingSectionCardFrameTapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Image Style="{StaticResource SectionCardBackgroudImageStyle}" Source="leasing.jpg" />
+                        <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
+                        <Grid Padding="5">
+                            <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="Arrendamiento" />
                         </Grid>
                     </Grid>
                 </Frame>
