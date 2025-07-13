@@ -83,19 +83,4 @@
 	  <Folder Include="Properties\PublishProfiles\" />
 	</ItemGroup>
 
-	<ItemGroup>
-	  <Compile Update="UI\Shells\SalesShell.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="UI\Shells\LeasingShell.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Shells\SalesShell.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	</ItemGroup>
-
 </Project>

@@ -1,7 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:decisorframework_production_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_leasing_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.LeasingShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -45,11 +47,26 @@
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
     <FlyoutItem
-        Title="Ofertas">
+        Title="Propuestas">
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF0246;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="A Evaluar"
+            ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:VehicleLeaseOffersToApproveManagePage}" />
+        <ShellContent
+            Title="Evaluadas"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
+    <FlyoutItem
+        Title="Ofertas">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0032;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
@@ -60,7 +77,7 @@
             ContentTemplate="{DataTemplate ContentPage}" />
         <ShellContent
             Title="Por Aprobar"
-            ContentTemplate="{DataTemplate decisorframework_production_manage_pages:VehicleLeaseOffersToApproveManagePage}" />
+            ContentTemplate="{DataTemplate ContentPage}" />
     </FlyoutItem>
     <ShellContent
         Title="Contrataciones"
@@ -69,6 +86,27 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF01C9;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
+    <ShellContent
+        Title="Inmuebles"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PropertiesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFCF1;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Vehículos"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:VehiclesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0E7;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
