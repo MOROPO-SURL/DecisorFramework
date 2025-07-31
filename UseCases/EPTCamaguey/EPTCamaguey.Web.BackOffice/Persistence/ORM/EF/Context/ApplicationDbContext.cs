@@ -14,6 +14,7 @@ using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Essential.Persistence.Entities;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities.Contract;
 using MOROPO.Framework.Decisor.Production.Persistence.Entities;
+using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
 
 namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
 {
@@ -173,11 +174,11 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
         public DbSet<ProductionReception> ProductionReceptions { get; set; }
         public DbSet<PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
-        public DbSet<PropertyLeaseOfferOrganizationContactBridge> PropertyLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<PropertyLeaseOfferPersonContactBridge> PropertyLeaseOfferPersonContactBridges { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulation> PropertyLeaseOfferOrganizationContactBridges { get; set; }
+        public DbSet<PropertyLeasePersonPostulation> PropertyLeaseOfferPersonContactBridges { get; set; }
         public DbSet<VehicleLeaseOffer> VehicleLeaseOffers { get; set; }
-        public DbSet<VehicleLeaseOfferOrganizationContactBridge> VehicleLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<VehicleLeaseOfferPersonContactBridge> VehicleLeaseOfferPersonContactBridges { get; set; }
+        public DbSet<VehicleLeaseOrganizationPostulation> VehicleLeaseOfferOrganizationContactBridges { get; set; }
+        public DbSet<VehicleLeasePersonPostulation> VehicleLeaseOfferPersonContactBridges { get; set; }
     }
 }
 
