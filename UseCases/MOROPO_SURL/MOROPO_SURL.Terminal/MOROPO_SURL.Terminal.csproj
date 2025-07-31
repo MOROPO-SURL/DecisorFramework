@@ -56,6 +56,9 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Resources\Images\governance.jpg" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="FreakyControls" Version="0.5.1" />

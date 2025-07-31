@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
 {
     public class VehicleLeaseOfferConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<VehicleLeaseOfferDisplayModel>
     {
-        private int priority;
+        private int priority = 1;
         private System.DateTime? openAt;
         private System.DateTime? closedAt;
         private string description;

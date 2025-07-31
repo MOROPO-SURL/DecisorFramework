@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Governance.Persistence.ORM.EF</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Governance.Persistence.ORM.EF</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Domain\Domain.Persistence.ORM.EF\Domain.Persistence.ORM.EF.csproj" />
+		<ProjectReference Include="..\Governance.Persistence\Governance.Persistence.csproj" />
+	</ItemGroup>
+
+</Project>
