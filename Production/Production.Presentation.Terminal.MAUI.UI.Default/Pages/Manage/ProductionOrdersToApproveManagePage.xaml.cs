@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -30,9 +31,9 @@ public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Ter
         return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.ProductionOrderFilterModel { Kind = Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.ToApprove }, CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.ProductionOrderConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProductionOrderDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.ProductionOrderConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProductionOrderDisplayModel model = null)
     {
-        var result = new Models.Page.Configuration.ProductionOrderConfigurationPageModel();
+        var result = new Models.Page.Configuration.ProductionOrderConfigurationPageModel(model);
 
         var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
@@ -43,6 +44,27 @@ public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Ter
         result.AvailableDecisors = employees;
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ProductionOrderDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.ProductionOrdersAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

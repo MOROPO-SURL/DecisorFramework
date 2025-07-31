@@ -7,8 +7,6 @@
         private int priority = 1;
         private Interop.API.Common.Models.Display.FamilyDisplayModel parent;
 
-        public FamilyConfigurationPageModel() : this(null) { }
-
         public FamilyConfigurationPageModel(Interop.API.Common.Models.Display.FamilyDisplayModel model) : base(model)
         {
             if (model != null)

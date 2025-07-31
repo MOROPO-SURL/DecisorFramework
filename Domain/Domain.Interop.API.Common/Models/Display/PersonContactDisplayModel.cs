@@ -7,6 +7,8 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
     {
         public Core.Interop.API.Common.Models.Display.PersonIdentityDisplayModel Identity { get; set; }
 
+        public Core.Interop.API.Common.Models.Display.UserDisplayModel User { get; set; }
+
         public string PersonalIdentificationNumber { get; set; }
 
         public override void Import(PersonContact entity)
@@ -20,6 +22,13 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
                 Identity = new Core.Interop.API.Common.Models.Display.PersonIdentityDisplayModel();
 
                 Identity.Import(entity.Identity);
+            }
+
+            if (entity.User != null)
+            {
+                User = new Core.Interop.API.Common.Models.Display.UserDisplayModel();
+
+                User.Import(entity.User);
             }
         }
 

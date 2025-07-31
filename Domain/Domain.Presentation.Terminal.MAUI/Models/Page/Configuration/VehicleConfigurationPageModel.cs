@@ -25,8 +25,6 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private double technicalAvailabilityIndex;
         private string description;
 
-        public VehicleConfigurationPageModel() : this(null) { }
-
         public VehicleConfigurationPageModel(VehicleDisplayModel model) : base(model)
         {
             if (model != null)

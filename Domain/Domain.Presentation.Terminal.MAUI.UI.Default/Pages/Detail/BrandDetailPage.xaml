@@ -42,6 +42,18 @@
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Description, TargetNullValue='---'}" />
                         </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Spacing="20">
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Modificar"
+                                Clicked="EditButton_Clicked" />
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Eliminar"
+                                Clicked="DeleteButton_Clicked" />
+                        </StackLayout>
                     </StackLayout>
                     <Button
                         HorizontalOptions="End" VerticalOptions="Start"

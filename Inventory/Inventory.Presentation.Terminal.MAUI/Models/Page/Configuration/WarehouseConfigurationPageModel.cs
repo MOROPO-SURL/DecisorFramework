@@ -6,8 +6,6 @@
         private string description;
         private int priority = 1;
 
-        public WarehouseConfigurationPageModel() : this(null) { }
-
         public WarehouseConfigurationPageModel(Interop.API.Common.Models.Display.WarehouseDisplayModel model) : base(model)
         {
             if (model != null)

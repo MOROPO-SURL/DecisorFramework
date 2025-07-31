@@ -11,8 +11,6 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.P
         private int priority = 1;
         private Microsoft.Maui.Controls.ImageSource imageSource;
 
-        public BankAgencyConfigurationPageModel() : this(null) { }
-
         public BankAgencyConfigurationPageModel(BankAgencyDisplayModel model) : base(model)
         {
             if (model != null)

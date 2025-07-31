@@ -30,9 +30,9 @@ public partial class NaturalClientsManagePage : Core.Presentation.Terminal.MAUI.
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.NaturalClientConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.NaturalClientDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.NaturalClientConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.NaturalClientDisplayModel model = null)
     {
-        var result = new Models.Page.Configuration.NaturalClientConfigurationPageModel();
+        var result = new Models.Page.Configuration.NaturalClientConfigurationPageModel(model);
 
         var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
@@ -43,6 +43,27 @@ public partial class NaturalClientsManagePage : Core.Presentation.Terminal.MAUI.
         result.AvailableBusinessKinds = await businessKindsAPIConnectClient.GetEnabledAsync();
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.NaturalClientDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.NaturalClientsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

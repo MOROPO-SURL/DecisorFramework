@@ -4,15 +4,13 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Defau
 
 public partial class BankAgencyDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.BankAgencyDisplayModel>
 {
-    private readonly System.Action<System.Action> delegationAction;
-    private readonly System.Action<Interop.API.Common.Models.Display.BankAgencyDisplayModel> completationFeedbackAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.BankAgencyDisplayModel, int?> delegationAction;
 
-    public BankAgencyDetailPage(Interop.API.Common.Models.Display.BankAgencyDisplayModel bindingContextModel, System.Action<System.Action> delegationAction, System.Action<Interop.API.Common.Models.Display.BankAgencyDisplayModel> completationFeedbackAction) : base(bindingContextModel)
+    public BankAgencyDetailPage(Interop.API.Common.Models.Display.BankAgencyDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.BankAgencyDisplayModel, int?> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
         this.delegationAction = delegationAction;
-        this.completationFeedbackAction = completationFeedbackAction;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -21,9 +19,26 @@ public partial class BankAgencyDetailPage : Core.Presentation.Terminal.MAUI.UI.P
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
+            // null for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, null));
+        });
+    }
+
+    private void DeleteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            var model = BindingContext as Interop.API.Common.Models.Display.BankAgencyDisplayModel;
+
             Dispatcher.Dispatch(() =>
             {
-                delegationAction.Invoke(() => Microsoft.Maui.Controls.Application.Current.MainPage.NavigationPushPageAsync(new Configuration.BankAgencyConfigurationPage(completationFeedbackAction, new Models.Page.Configuration.BankAgencyConfigurationPageModel(model))));
+                this.NavigationPopModalPageAsync().ContinueWith(_ =>
+                {
+                    // 0 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+                });
             });
         });
     }

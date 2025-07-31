@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -30,15 +31,36 @@ public partial class SectionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.SectionConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.SectionDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.SectionConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.SectionDisplayModel model = null)
     {
-        var result = new Models.Page.Configuration.SectionConfigurationPageModel();
+        var result = new Models.Page.Configuration.SectionConfigurationPageModel(model);
 
         var categoriesAPIConnectClient = new Interop.API.Connect.Clients.SectionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         result.AvailableParents = await categoriesAPIConnectClient.GetAsync();
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.SectionDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.SectionsAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

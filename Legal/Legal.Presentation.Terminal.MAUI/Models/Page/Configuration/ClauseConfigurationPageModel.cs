@@ -6,8 +6,6 @@
         private string content;
         private int priority;
 
-        public ClauseConfigurationPageModel() : this(null) { }
-
         public ClauseConfigurationPageModel(Interop.API.Common.Models.Display.ClauseDisplayModel model) : base(model)
         {
             if (model != null)

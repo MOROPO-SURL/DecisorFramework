@@ -6,8 +6,6 @@
         private decimal amount;
         private Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel currency;
 
-        public PurchaseZoneSpentBridgeConfigurationPageModel() : this(null) { }
-
         public PurchaseZoneSpentBridgeConfigurationPageModel(Interop.API.Common.Models.Bridge.PurchaseZoneSpentBridgeModel model = null) : base(model)
         {
             if (model != null)

@@ -18,7 +18,8 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Repositories
                 .Include(entity => entity.Identity).ThenInclude(entity => entity.EmailContactItemBridges).ThenInclude(bridge => bridge.Stern)
                 .Include(entity => entity.Identity).ThenInclude(entity => entity.WebSiteContactItemBridges).ThenInclude(bridge => bridge.Stern)
                 .Include(entity => entity.MainPostalContact).ThenInclude(entity => entity.Location)
-                .Include(entity => entity.BusinessKind);
+                .Include(entity => entity.BusinessKind)
+                .Include(entity => entity.User).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image);
         }
     }
 }

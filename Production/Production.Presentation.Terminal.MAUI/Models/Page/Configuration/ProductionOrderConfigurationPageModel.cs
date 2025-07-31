@@ -13,9 +13,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
         private EmployeeDisplayModel decisor;
         private decimal amount;
 
-        public ProductionOrderConfigurationPageModel() : this(null) { }
-
-        public ProductionOrderConfigurationPageModel(Interop.API.Common.Models.Display.ProductionOrderDisplayModel model = null) : base(model)
+        public ProductionOrderConfigurationPageModel(Interop.API.Common.Models.Display.ProductionOrderDisplayModel model) : base(model)
         {
             if (model != null)
             {

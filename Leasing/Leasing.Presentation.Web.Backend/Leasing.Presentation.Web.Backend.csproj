@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Leasing.Presentation.Web.Backend</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Leasing.Presentation.Web.Backend</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Leasing.Presentation.Web.Common\Leasing.Presentation.Web.Common.csproj" />
+	</ItemGroup>
+
+</Project>

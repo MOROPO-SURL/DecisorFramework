@@ -12,6 +12,8 @@
 
         public int Priority { get; set; }
 
+        public bool Archived { get; set; }
+
         public void Import(Persistence.Entities.PurchaseSpent entity)
         {
             Id = entity.Id;
@@ -19,6 +21,7 @@
             Description = string.IsNullOrEmpty(entity.Description) ? null : entity.Description;
             At = entity.At;
             Priority = entity.Priority;
+            Archived = entity.Archived;
         }
     }
 }

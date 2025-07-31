@@ -4,15 +4,13 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.P
 
 public partial class ProformaDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.ProformaDisplayModel>
 {
-    private readonly System.Action<System.Action> delegationAction;
-    private readonly System.Action<Interop.API.Common.Models.Display.ProformaDisplayModel> completationFeedbackAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.ProformaDisplayModel, int?> delegationAction;
 
-    public ProformaDetailPage(Interop.API.Common.Models.Display.ProformaDisplayModel bindingContextModel, System.Action<System.Action> delegationAction, System.Action<Interop.API.Common.Models.Display.ProformaDisplayModel> completationFeedbackAction) : base(bindingContextModel)
+    public ProformaDetailPage(Interop.API.Common.Models.Display.ProformaDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.ProformaDisplayModel, int?> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
         this.delegationAction = delegationAction;
-        this.completationFeedbackAction = completationFeedbackAction;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -21,7 +19,27 @@ public partial class ProformaDetailPage : Core.Presentation.Terminal.MAUI.UI.Pag
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
-            Dispatcher.Dispatch(() => Microsoft.Maui.Controls.Application.Current.MainPage.NavigationPushPageAsync(new Configuration.ProformaConfigurationPage(completationFeedbackAction, new Models.Page.Configuration.ProformaConfigurationPageModel(model))));
+            // null for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, null));
+        });
+    }
+
+    private void DeleteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            var model = BindingContext as Interop.API.Common.Models.Display.ProformaDisplayModel;
+
+            Dispatcher.Dispatch(() =>
+            {
+                this.NavigationPopModalPageAsync().ContinueWith(_ =>
+                {
+                    // 0 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+                });
+            });
         });
     }
 }

@@ -14,6 +14,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
         public int Priority { get; set; }
 
         public string Description { get; set; }
+        public bool Archived { get; set; }
 
         public List<PurchaseZoneSpentBridgeModel> SpentBridges { get; set; } = new List<PurchaseZoneSpentBridgeModel>();
 
@@ -24,6 +25,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             At = entity.At;
             Priority = entity.Priority;
             Description = string.IsNullOrEmpty(entity.Description) ? null : entity.Description;
+            Archived = entity.Archived;
 
             foreach (var bridge in entity.SpentBridges)
             {

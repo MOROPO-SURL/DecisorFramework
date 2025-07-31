@@ -6,8 +6,6 @@
         private string description;
         private int priority = 1;
 
-        public ClassificationConfigurationPageModel() : this(null, null) { }
-
         public ClassificationConfigurationPageModel(ProductConfigurationPageModel productConfigurationPageModel, Interop.API.Common.Models.Input.ClassificationInputModel model) : base(model)
         {
             ProductConfigurationPageModel = productConfigurationPageModel;

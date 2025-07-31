@@ -34,6 +34,7 @@
                 <Setter Property="TextColor" Value="White" />
                 <Setter Property="FontSize" Value="Large" />
                 <Setter Property="FontAttributes" Value="Bold" />
+                <Setter Property="LineBreakMode" Value="TailTruncation" />
             </Style>
 
             <x:Double x:Key="LogoArtFrameImageWithFactor">1.25</x:Double>
@@ -198,6 +199,30 @@
                 </Frame>
                 <Frame Style="{StaticResource SectionCardFrameStyle}">
                     <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="HumanResourcesSectionCardFrameTapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Image Style="{StaticResource SectionCardBackgroudImageStyle}" Source="rr_hh.jpg" />
+                        <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
+                        <Grid Padding="5">
+                            <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="RR.HH." />
+                        </Grid>
+                    </Grid>
+                </Frame>
+                <Frame Style="{StaticResource SectionCardFrameStyle}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="GovernanceSectionCardFrameTapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Image Style="{StaticResource SectionCardBackgroudImageStyle}" Source="governance.jpg" />
+                        <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
+                        <Grid Padding="5">
+                            <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="Gobernanza" />
+                        </Grid>
+                    </Grid>
+                </Frame>
+                <Frame Style="{StaticResource SectionCardFrameStyle}">
+                    <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="CommecrcialSectionCardFrameTapGestureRecognizer_Tapped" />
                     </Frame.GestureRecognizers>
                     <Grid>
@@ -234,6 +259,18 @@
                 </Frame>
                 <Frame Style="{StaticResource SectionCardFrameStyle}">
                     <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="LeasingSectionCardFrameTapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Image Style="{StaticResource SectionCardBackgroudImageStyle}" Source="leasing.jpg" />
+                        <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
+                        <Grid Padding="5">
+                            <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="Arrendamiento" />
+                        </Grid>
+                    </Grid>
+                </Frame>
+                <Frame Style="{StaticResource SectionCardFrameStyle}">
+                    <Frame.GestureRecognizers>
                         <TapGestureRecognizer Tapped="InventorySectionCardFrameTapGestureRecognizer_Tapped" />
                     </Frame.GestureRecognizers>
                     <Grid>
@@ -253,18 +290,6 @@
                         <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
                         <Grid Padding="5">
                             <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="Producción" />
-                        </Grid>
-                    </Grid>
-                </Frame>
-                <Frame Style="{StaticResource SectionCardFrameStyle}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="HumanResourcesSectionCardFrameTapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
-                    <Grid>
-                        <Image Style="{StaticResource SectionCardBackgroudImageStyle}" Source="rr_hh.jpg" />
-                        <BoxView Style="{StaticResource SectionCardOverlayBoxViewStyle}" />
-                        <Grid Padding="5">
-                            <Label Style="{StaticResource SectionCardNameLabelStyle}" Text="RR.HH." />
                         </Grid>
                     </Grid>
                 </Frame>

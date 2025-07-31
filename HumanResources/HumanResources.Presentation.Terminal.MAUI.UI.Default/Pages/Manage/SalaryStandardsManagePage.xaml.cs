@@ -30,6 +30,30 @@ public partial class SalaryStandardsManagePage : Core.Presentation.Terminal.MAUI
         return apiConnectClient.GetPaginateAsync();
     }
 
+    protected override System.Threading.Tasks.Task<Models.Page.Configuration.SalaryStandardConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.SalaryStandardDisplayModel model = null)
+    {
+        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.SalaryStandardConfigurationPageModel(model));
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.SalaryStandardDisplayModel target, int discriminator)
+    {
+        switch (discriminator)
+        {
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.SalaryStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
+    }
+
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
         AddItem(sender, eventArgs);

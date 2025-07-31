@@ -31,9 +31,9 @@ public partial class WorkPositionsManagePage : Core.Presentation.Terminal.MAUI.U
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<WorkPositionConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.WorkPositionDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<WorkPositionConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.WorkPositionDisplayModel model = null)
     {
-        var result = new WorkPositionConfigurationPageModel();
+        var result = new WorkPositionConfigurationPageModel(model);
 
         var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
@@ -44,6 +44,27 @@ public partial class WorkPositionsManagePage : Core.Presentation.Terminal.MAUI.U
         result.AvailableSchoolings = await shoolingsAPIConnectClien.GetAsync();
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.WorkPositionDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

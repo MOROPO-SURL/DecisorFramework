@@ -30,15 +30,36 @@ public partial class OrganizationContactsManagePage : Core.Presentation.Terminal
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.OrganizationContactConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.OrganizationContactDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.OrganizationContactConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.OrganizationContactDisplayModel model = null)
     {
-        var result = new Models.Page.Configuration.OrganizationContactConfigurationPageModel();
+        var result = new Models.Page.Configuration.OrganizationContactConfigurationPageModel(model);
 
         var apiConnectClient = new Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         result.AvailableBusinessKinds = await apiConnectClient.GetEnabledAsync();
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.OrganizationContactDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.OrganizationContactsAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

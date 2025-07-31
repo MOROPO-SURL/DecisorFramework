@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -29,11 +28,11 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.ProductConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProductDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.ProductConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProductDisplayModel model = null)
     {
-        var result = new Models.Page.Configuration.ProductConfigurationPageModel();
+        var result = new Models.Page.Configuration.ProductConfigurationPageModel(model);
 
-        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
         var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
         var familiesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(httpClientHelperProvider);
@@ -45,6 +44,27 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         result.AvailableCategories = await familiesAPIConnectClient.GetAsync();
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ProductDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.ProductsAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

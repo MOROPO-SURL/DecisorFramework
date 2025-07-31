@@ -5,7 +5,6 @@ using MOROPO.Framework.Decisor.Legal.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
-using static System.Collections.Specialized.BitVector32;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.API
 {

@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -28,6 +29,30 @@ public partial class ClausesManagePage : Core.Presentation.Terminal.MAUI.UI.Page
         var apiConnectClient = new Interop.API.Connect.Clients.ClausesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
+    }
+
+    protected override System.Threading.Tasks.Task<Models.Page.Configuration.ClauseConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.ClauseDisplayModel model = null)
+    {
+        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.ClauseConfigurationPageModel(model));
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ClauseDisplayModel target, int discriminator)
+    {
+        switch (discriminator)
+        {
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.ClausesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

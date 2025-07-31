@@ -1,8 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class LegalClientsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.LegalClientDisplayModel, Models.Page.Manage.LegalClientsManagePageModel, Models.Page.Configuration.LegalClientConfigurationPageModel, Configuration.LegalClientConfigurationPage, Detail.LegalClientDetailPage>
+public partial class LegalClientsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<LegalClientDisplayModel, Models.Page.Manage.LegalClientsManagePageModel, Models.Page.Configuration.LegalClientConfigurationPageModel, Configuration.LegalClientConfigurationPage, Detail.LegalClientDetailPage>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 144;
 
@@ -23,22 +24,43 @@ public partial class LegalClientsManagePage : Core.Presentation.Terminal.MAUI.UI
         return ITEM_VIEW_REQUEST_HEIGHT;
     }
 
-    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.LegalClientDisplayModel>> FetchItemsAsync()
+    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<LegalClientDisplayModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.LegalClientsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.LegalClientConfigurationPageModel> FillConfigurationPageModelAsync(Interop.API.Common.Models.Display.LegalClientDisplayModel model = null)
+    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.LegalClientConfigurationPageModel> GetConfigurationPageModelAsync(LegalClientDisplayModel model = null)
     {
-        var result = new Models.Page.Configuration.LegalClientConfigurationPageModel();
+        var result = new Models.Page.Configuration.LegalClientConfigurationPageModel(model);
 
         var apiConnectClient = new Interop.API.Connect.Clients.PaymentTermsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         result.AvailablePaymentTerms = await apiConnectClient.GetEnabledAsync();
 
         return result;
+    }
+
+    protected override void OnActionDelegationRequest(LegalClientDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.LegalClientsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() => LoadItems(true));
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

@@ -1,0 +1,13 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Governance.Persistence</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Governance.Persistence</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\HumanResources\HumanResources.Persistence\HumanResources.Persistence.csproj" />
+	</ItemGroup>
+
+</Project>

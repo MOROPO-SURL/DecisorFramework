@@ -4,15 +4,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class PurchaseZoneDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel>
 {
-    private readonly System.Action<System.Action> delegationAction;
-    private readonly System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel> completationFeedbackAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, int?> delegationAction;
 
-    public PurchaseZoneDetailPage(Interop.API.Common.Models.Display.PurchaseZoneDisplayModel bindingContextModel, System.Action<System.Action> delegationAction, System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel> completationFeedbackAction) : base(bindingContextModel)
+    public PurchaseZoneDetailPage(Interop.API.Common.Models.Display.PurchaseZoneDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, int?> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
         this.delegationAction = delegationAction;
-        this.completationFeedbackAction = completationFeedbackAction;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -21,9 +19,26 @@ public partial class PurchaseZoneDetailPage : Core.Presentation.Terminal.MAUI.UI
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
+            // null for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, null));
+        });
+    }
+
+    private void DeleteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            var model = BindingContext as Interop.API.Common.Models.Display.PurchaseZoneDisplayModel;
+
             Dispatcher.Dispatch(() =>
             {
-                delegationAction.Invoke(() => Microsoft.Maui.Controls.Application.Current.MainPage.NavigationPushPageAsync(new Configuration.PurchaseZoneConfigurationPage(completationFeedbackAction, new Models.Page.Configuration.PurchaseZoneConfigurationPageModel(model))));
+                this.NavigationPopModalPageAsync().ContinueWith(_ =>
+                {
+                    // 0 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+                });
             });
         });
     }

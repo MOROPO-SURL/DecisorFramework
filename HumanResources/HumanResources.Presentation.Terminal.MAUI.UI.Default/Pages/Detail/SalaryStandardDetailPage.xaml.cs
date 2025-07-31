@@ -4,15 +4,13 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class SalaryStandardDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.SalaryStandardDisplayModel>
 {
-    private readonly System.Action<System.Action> delegationAction;
-    private readonly System.Action<Interop.API.Common.Models.Display.SalaryStandardDisplayModel> completationFeedbackAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.SalaryStandardDisplayModel, int?> delegationAction;
 
-    public SalaryStandardDetailPage(Interop.API.Common.Models.Display.SalaryStandardDisplayModel bindingContextModel, System.Action<System.Action> delegationAction, System.Action<Interop.API.Common.Models.Display.SalaryStandardDisplayModel> completationFeedbackAction) : base(bindingContextModel)
+    public SalaryStandardDetailPage(Interop.API.Common.Models.Display.SalaryStandardDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.SalaryStandardDisplayModel, int?> delegationAction) : base(bindingContextModel)
     {
 		InitializeComponent();
 
         this.delegationAction = delegationAction;
-        this.completationFeedbackAction = completationFeedbackAction;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -21,9 +19,26 @@ public partial class SalaryStandardDetailPage : Core.Presentation.Terminal.MAUI.
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
+            // null for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, null));
+        });
+    }
+
+    private void DeleteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            var model = BindingContext as Interop.API.Common.Models.Display.SalaryStandardDisplayModel;
+
             Dispatcher.Dispatch(() =>
             {
-                delegationAction.Invoke(() => Microsoft.Maui.Controls.Application.Current.MainPage.NavigationPushPageAsync(new Configuration.SalaryStandardConfigurationPage(completationFeedbackAction, new Models.Page.Configuration.SalaryStandardConfigurationPageModel(model))));
+                this.NavigationPopModalPageAsync().ContinueWith(_ =>
+                {
+                    // 0 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+                });
             });
         });
     }
