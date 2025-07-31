@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
@@ -8,6 +9,20 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
     public DecisionMakingGroupConfigurationPage(System.Action<Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel> successAction, Models.Page.Configuration.DecisionMakingGroupConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
+
+        if (model.Structure != null)
+        {
+            for (int i = 0; i < model.AvailableStructures.Length; i++)
+            {
+                var current = model.AvailableStructures[i];
+
+                if (model.Structure.Id != current.Id) continue;
+
+                StructurePicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Grupo Decisor";
@@ -22,8 +37,10 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
         {
             Id = System.Guid.NewGuid(),
             Name = concreteBindingContext.Name,
+            Description = concreteBindingContext.Description,
             Priority = concreteBindingContext.Priority,
-            Fee = concreteBindingContext.Fee
+            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
+            LeaderId = concreteBindingContext.Leader.Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -41,8 +58,10 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
         {
             Id = concreteBindingContext.Id,
             Name = concreteBindingContext.Name,
+            Description = concreteBindingContext.Description,
             Priority = concreteBindingContext.Priority,
-            Fee = concreteBindingContext.Fee
+            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
+            LeaderId = concreteBindingContext.Leader.Id
         };
 
         await apiConnectClient.EditAsync(model);
@@ -58,5 +77,20 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
     private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         OnCancel(sender, eventArgs);
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
+    }
+
+    private void LeaderPickButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(LeaderPickComplete_Callback)));
+    }
+
+    private void LeaderPickComplete_Callback(HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    {
+        ConcreteBindingContext.Leader = model;
     }
 }

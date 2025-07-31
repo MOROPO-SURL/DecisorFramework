@@ -72,6 +72,7 @@
 	  <ProjectReference Include="..\..\..\Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Domain\Domain.Presentation.Terminal.MAUI.UI.Default\Domain.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Financial\Financial.Presentation.Terminal.MAUI.UI.Default\Financial.Presentation.Terminal.MAUI.UI.Default.csproj" />
+	  <ProjectReference Include="..\..\..\Governance\Governance.Presentation.Terminal.MAUI.UI.Default\Governance.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\HumanResources\HumanResources.Presentation.Terminal.MAUI.UI.Default\HumanResources.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Terminal.MAUI.UI.Default\Inventory.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\..\..\Leasing\Leasing.Presentation.Terminal.MAUI.UI.Default\Leasing.Presentation.Terminal.MAUI.UI.Default.csproj" />
@@ -84,6 +85,12 @@
 
 	<ItemGroup>
 	  <Folder Include="Properties\PublishProfiles\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="UI\Shells\GovernanceShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

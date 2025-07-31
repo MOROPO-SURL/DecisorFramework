@@ -6,6 +6,8 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controllers.API
 {
+    [Microsoft.AspNetCore.Mvc.Route("api/governance/[controller]")]
+    [Microsoft.AspNetCore.Mvc.ApiController]
     public class DecisionMakingGroupsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<DecisionMakingGroup, System.Guid, DecisionMakingGroupInputModel, DecisionMakingGroupDisplayModel>
     {
         public DecisionMakingGroupsController(IEntityRepository<DecisionMakingGroup, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<DecisionMakingGroupsController> localizer, ILogger<DecisionMakingGroupsController> logger) : base(repository, localizer, logger)

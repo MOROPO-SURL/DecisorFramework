@@ -2132,6 +2132,275 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("currencies", "decisorframework_finantial");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Agreement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<DateTime?>("EndAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("endat");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
+
+                    b.Property<Guid>("MeetingId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("meetingid");
+
+                    b.Property<Guid?>("ResponsibleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("responsibleid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("pk_agreements");
+
+                    b.HasIndex("MeetingId")
+                        .HasDatabaseName("ix_agreements_meetingid");
+
+                    b.HasIndex("ResponsibleId")
+                        .HasDatabaseName("ix_agreements_responsibleid");
+
+                    b.HasIndex("Index", "MeetingId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_agreements_index_meetingid");
+
+                    b.ToTable("agreements", "decisorframework_governance");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid>("LeaderId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("leaderid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("StructureId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("structureid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_decisionmakinggroups");
+
+                    b.HasIndex("LeaderId")
+                        .HasDatabaseName("ix_decisionmakinggroups_leaderid");
+
+                    b.HasIndex("StructureId")
+                        .HasDatabaseName("ix_decisionmakinggroups_structureid");
+
+                    b.ToTable("decisionmakinggroups", "decisorframework_governance");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroupContactBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_decisionmakinggroupcontactbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_decisionmakinggroupcontactbridges_sternid");
+
+                    b.ToTable("decisionmakinggroupcontactbridges", "decisorframework_governance");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroupEmployeeBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_decisionmakinggroupemployeebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_decisionmakinggroupemployeebridges_sternid");
+
+                    b.ToTable("decisionmakinggroupemployeebridges", "decisorframework_governance");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Meeting", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<Guid>("DecisionMakingGroupId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("decisionmakinggroupid");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
+
+                    b.Property<string>("Rapporteurship")
+                        .HasColumnType("text")
+                        .HasColumnName("rapporteurship");
+
+                    b.Property<string>("Summary")
+                        .HasColumnType("text")
+                        .HasColumnName("summary");
+
+                    b.HasKey("Id")
+                        .HasName("pk_meetings");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_meetings_authorid");
+
+                    b.HasIndex("DecisionMakingGroupId")
+                        .HasDatabaseName("ix_meetings_decisionmakinggroupid");
+
+                    b.HasIndex("Index", "DecisionMakingGroupId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_meetings_index_decisionmakinggroupid");
+
+                    b.ToTable("meetings", "decisorframework_governance");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.MeetingContactBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_meetingcontactbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_meetingcontactbridges_sternid");
+
+                    b.ToTable("meetingcontactbridges", "decisorframework_governance");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.MeetingDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_meetingdocumentbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_meetingdocumentbridges_sternid");
+
+                    b.ToTable("meetingdocumentbridges", "decisorframework_governance");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.MeetingEmployeeBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_meetingemployeebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_meetingemployeebridges_sternid");
+
+                    b.ToTable("meetingemployeebridges", "decisorframework_governance");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Statement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid?>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contactid");
+
+                    b.Property<Guid>("MeetingId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("meetingid");
+
+                    b.Property<string>("Rapporteurship")
+                        .HasColumnType("text")
+                        .HasColumnName("rapporteurship");
+
+                    b.HasKey("Id")
+                        .HasName("pk_statements");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_statements_contactid");
+
+                    b.HasIndex("MeetingId")
+                        .HasDatabaseName("ix_statements_meetingid");
+
+                    b.ToTable("statements", "decisorframework_governance");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", b =>
                 {
                     b.Property<Guid>("Id")
@@ -7326,6 +7595,191 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Structure");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Agreement", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Meeting", "Meeting")
+                        .WithMany("Agreements")
+                        .HasForeignKey("MeetingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_agreements_meetings_meetingid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleId")
+                        .HasConstraintName("fk_agreements_personcontacts_responsibleid");
+
+                    b.Navigation("Meeting");
+
+                    b.Navigation("Responsible");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroup", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Leader")
+                        .WithMany()
+                        .HasForeignKey("LeaderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_decisionmakinggroups_employees_leaderid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Structure", "Structure")
+                        .WithMany()
+                        .HasForeignKey("StructureId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_decisionmakinggroups_structures_structureid");
+
+                    b.Navigation("Leader");
+
+                    b.Navigation("Structure");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroupContactBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroup", "Prow")
+                        .WithMany("ContactBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_decisionmakinggroupcontactbridges_decisionmakinggroups_prow~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_decisionmakinggroupcontactbridges_personcontacts_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroupEmployeeBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroup", "Prow")
+                        .WithMany("EmployeeBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_decisionmakinggroupemployeebridges_decisionmakinggroups_pro~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_decisionmakinggroupemployeebridges_employees_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Meeting", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_meetings_employees_authorid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroup", "DecisionMakingGroup")
+                        .WithMany("Meetings")
+                        .HasForeignKey("DecisionMakingGroupId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_meetings_decisionmakinggroups_decisionmakinggroupid");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("DecisionMakingGroup");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.MeetingContactBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Meeting", "Prow")
+                        .WithMany("ContactBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_meetingcontactbridges_meetings_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_meetingcontactbridges_personcontacts_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.MeetingDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Meeting", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_meetingdocumentbridges_meetings_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_meetingdocumentbridges_documents_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.MeetingEmployeeBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Meeting", "Prow")
+                        .WithMany("EmployeeBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_meetingemployeebridges_meetings_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_meetingemployeebridges_employees_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Statement", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .HasConstraintName("fk_statements_personcontacts_contactid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Meeting", "Meeting")
+                        .WithMany("Statements")
+                        .HasForeignKey("MeetingId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_statements_meetings_meetingid");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Meeting");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
@@ -9634,6 +10088,28 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Vehicle", b =>
                 {
                     b.Navigation("ImageBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroup", b =>
+                {
+                    b.Navigation("ContactBridges");
+
+                    b.Navigation("EmployeeBridges");
+
+                    b.Navigation("Meetings");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Meeting", b =>
+                {
+                    b.Navigation("Agreements");
+
+                    b.Navigation("ContactBridges");
+
+                    b.Navigation("DocumentBridges");
+
+                    b.Navigation("EmployeeBridges");
+
+                    b.Navigation("Statements");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Employee", b =>

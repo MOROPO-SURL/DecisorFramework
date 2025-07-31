@@ -17,7 +17,7 @@
 
         public Persistence.Entities.DecisionMakingGroup Export()
         {
-            var entity = new Persistence.Entities.DecisionMakingGroup { Id = System.Guid.NewGuid(), Enabled = true };
+            var entity = new Persistence.Entities.DecisionMakingGroup { Id = Id, Enabled = true };
 
             Mergue(entity);
 

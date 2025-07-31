@@ -3,12 +3,23 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI"
+    xmlns:hhrr_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Governance.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.DecisionMakingGroupConfigurationPage"
     x:TypeArguments="interop_common_display_models:DecisionMakingGroupDisplayModel,interop_common_display_models:DecisionMakingGroupDisplayModel,presentation_configuration_page_models:DecisionMakingGroupConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:DecisionMakingGroupConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
         Text="Aplicar"
@@ -27,39 +38,67 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <Grid 
-                Padding="20"
-                ColumnSpacing="16" RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="0">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
-                    <Entry Text="{Binding Name}" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="3" Grid.Row="0">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tarifa" />
-                    <Entry Text="{Binding Fee, StringFormat='{0:F2}'}" />
+            <VerticalStackLayout Spacing="0" Padding="8">
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Estructura" />
+                        <Picker 
+                            x:Name="StructurePicker"
+                            ItemsSource="{Binding AvailableStructures}"
+                            ItemDisplayBinding="{Binding Identity.Name}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=8, LargeContainerColumn=6, MediumContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                        <Entry Text="{Binding Name}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Decisor Superior" />
+                        <ContentView                        
+                            IsVisible="{Binding Leader, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="140">
+                            <hhrr_presentation_card_views:EmployeeDefaultCardView
+                                BindingContext="{Binding Leader}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="LeaderPickButton_Clicked" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
+                    <Editor Text="{Binding Description}" HeightRequest="200" />
                 </VerticalStackLayout>
                 <BoxView 
-                    Grid.ColumnSpan="4" Grid.Row="1" 
-                    Margin="0,8,0,0"
+                    Margin="8,16,8,8"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="2">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                </VerticalStackLayout>
-            </Grid>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+            </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>
