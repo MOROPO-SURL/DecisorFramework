@@ -16,9 +16,11 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Defa
             builder.Services
                 // DetailPage factory resgistration !!!
                 .AddSingleton<IDetailContentPageFactoryFacade<DecisionMakingGroupDisplayModel, DecisionMakingGroupDetailPage>, DecisionMakingGroupDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<MeetingDisplayModel, MeetingDetailPage>, MeetingDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
-                .AddSingleton<IConfigurationContentPageFactoryFacade<DecisionMakingGroupDisplayModel, DecisionMakingGroupConfigurationPageModel, DecisionMakingGroupConfigurationPage>, DecisionMakingGroupConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<DecisionMakingGroupDisplayModel, DecisionMakingGroupConfigurationPageModel, DecisionMakingGroupConfigurationPage>, DecisionMakingGroupConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<MeetingDisplayModel, MeetingConfigurationPageModel, MeetingConfigurationPage>, MeetingConfigurationPageFactory>();
 
             return builder;
         }

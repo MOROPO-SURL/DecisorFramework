@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
     {
         private int priority = 1;
         private string name;
-        public string description;
+        private string description;
         private Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel structure;
         private HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel leader;
 

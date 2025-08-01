@@ -29,7 +29,5 @@ namespace MOROPO.Framework.Decisor.Governance.Persistence.Entities
         public List<DecisionMakingGroupEmployeeBridge> EmployeeBridges { get; set; } = new List<DecisionMakingGroupEmployeeBridge>();
 
         public List<DecisionMakingGroupContactBridge> ContactBridges { get; set; } = new List<DecisionMakingGroupContactBridge>();
-
-        public Meeting[] Meetings { get; set; }
     }
 }

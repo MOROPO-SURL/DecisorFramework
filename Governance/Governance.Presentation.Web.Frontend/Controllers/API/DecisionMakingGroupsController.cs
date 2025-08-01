@@ -61,6 +61,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controll
 
                 return _model;
             }).ToArray();
+
             return model;
         }
     }

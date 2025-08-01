@@ -2,7 +2,7 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_governance_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.GovernanceShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -46,8 +46,8 @@
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
     <ShellContent
-        Title="Encuentros"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Reuniones"
+        ContentTemplate="{DataTemplate decisorframework_governance_manage_pages:MeetingsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -58,7 +58,7 @@
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Grupos Decisores"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:DecisionMakingGroupsManagePage}">
+        ContentTemplate="{DataTemplate decisorframework_governance_manage_pages:DecisionMakingGroupsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

@@ -1840,7 +1840,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("IdentityId")
                         .HasDatabaseName("ix_colaborators_identityid");
 
-                    b.ToTable("colaborators");
+                    b.ToTable("colaborators", (string)null);
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Financial.Persistence.Entities.BankAccount", b =>
@@ -2272,6 +2272,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
                         .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
 
                     b.Property<DateTime>("At")
                         .HasColumnType("timestamp without time zone")
@@ -5538,7 +5542,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasKey("Id")
                         .HasName("pk_traces");
 
-                    b.ToTable("traces");
+                    b.ToTable("traces", (string)null);
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Guama.Core.Security.Common.Persistence.Entities.Permission", b =>
@@ -6548,7 +6552,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("WarehouseId")
                         .HasDatabaseName("ix_receptions_warehouseid");
 
-                    b.ToTable("receptions");
+                    b.ToTable("receptions", (string)null);
 
                     b.HasDiscriminator().HasValue("TransferReception");
                 });
@@ -6564,7 +6568,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("ProductionId")
                         .HasDatabaseName("ix_receptions_productionid");
 
-                    b.ToTable("receptions");
+                    b.ToTable("receptions", (string)null);
 
                     b.HasDiscriminator().HasValue("ProductionReception");
                 });
@@ -6581,7 +6585,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsUnique()
                         .HasDatabaseName("ix_receptions_purchaseid");
 
-                    b.ToTable("receptions");
+                    b.ToTable("receptions", (string)null);
 
                     b.HasDiscriminator().HasValue("PurchaseReception");
                 });

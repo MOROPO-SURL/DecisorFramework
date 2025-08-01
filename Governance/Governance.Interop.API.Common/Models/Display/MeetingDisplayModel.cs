@@ -16,6 +16,10 @@
 
         public string Rapporteurship { get; set; }
 
+        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel[] InternalInvitations { get; set; }
+
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel[] ExternalInvitations { get; set; }
+
         public void Import(Persistence.Entities.Meeting entity)
         {
             Id = entity.Id;

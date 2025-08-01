@@ -2,10 +2,12 @@
 
 namespace MOROPO.Framework.Decisor.Governance.Persistence.Entities
 {
-    public class Meeting : Guama.Core.Persistence.Entities.Contract.IEntity<System.Guid>
+    public class Meeting : Guama.Core.Persistence.Entities.Contract.IArchivableEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; }
+
+        public bool Archived { get; set; }
 
         public int Index { get; set; }
 
