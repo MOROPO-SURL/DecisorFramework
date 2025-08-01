@@ -182,6 +182,7 @@ public partial class VehicleConfigurationPage : Core.Presentation.Terminal.MAUI.
     {
         Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, FeatureImagePickSuccess_Callback);
     }
+
     private void ImageItemAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, ItemImagePickSuccess_Callback);

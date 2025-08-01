@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.Page.Configuration
+﻿using System.Collections.ObjectModel;
+
+namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class DecisionMakingGroupConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel>
     {
@@ -18,6 +20,8 @@
                 Priority = model.Priority;
                 Structure = model.Structure;
                 Leader = model.Leader;
+                Members = new ObservableCollection<HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel>(model.Members);
+                Collaborators = new ObservableCollection<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel>(model.Collaborators);
             }
         }
 
@@ -32,6 +36,10 @@
         public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
 
         public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Leader { get => leader; set => SetProperty(ref leader, value); }
+
+        public ObservableCollection<HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel> Members { get; set; } = [];
+
+        public ObservableCollection<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel> Collaborators { get; set; } = [];
 
         public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel[] AvailableStructures { get; set; }
     }

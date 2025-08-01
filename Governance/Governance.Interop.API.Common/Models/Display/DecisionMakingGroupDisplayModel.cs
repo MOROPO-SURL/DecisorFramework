@@ -16,6 +16,10 @@
 
         public int Priority { get; set; }
 
+        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel[] Members { get; set; }
+
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel[] Collaborators { get; set; }
+
         public void Import(Persistence.Entities.DecisionMakingGroup entity)
         {
             Id = entity.Id;

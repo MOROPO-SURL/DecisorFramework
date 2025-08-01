@@ -3,6 +3,7 @@ using MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Governance.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controllers.API
 {
@@ -22,6 +23,45 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controll
         protected override System.Func<DecisionMakingGroup, object> GetOrderSelector()
         {
             return entity => entity.Priority;
+        }
+
+        protected override DecisionMakingGroupDisplayModel EntityToDisplayModel(DecisionMakingGroup entity)
+        {
+            var model = base.EntityToDisplayModel(entity);
+
+            if (model.Leader.Contact.Identity.Image != null)
+            {
+                model.Leader.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Leader.Contact.Identity.Image.ContentType);
+            }
+
+            model.Members = entity.EmployeeBridges.Select(bridge =>
+            {
+                var _model = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+
+                _model.Import(bridge.Stern);
+
+                if (bridge.Stern.Contact.Identity.Image != null)
+                {
+                    _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Contact.Identity.Image.ContentType);
+                }
+
+                return _model;
+            }).ToArray();
+
+            model.Collaborators = entity.ContactBridges.Select(bridge =>
+            {
+                var _model = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
+
+                _model.Import(bridge.Stern);
+
+                if (bridge.Stern.Identity.Image != null)
+                {
+                    _model.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
+                }
+
+                return _model;
+            }).ToArray();
+            return model;
         }
     }
 }

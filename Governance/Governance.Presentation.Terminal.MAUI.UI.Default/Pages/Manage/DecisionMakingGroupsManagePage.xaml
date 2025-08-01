@@ -53,13 +53,30 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:DecisionMakingGroupDisplayModel">
-                                <VerticalStackLayout HeightRequest="{Static local:DecisionMakingGroupsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
-                                    <VerticalStackLayout.GestureRecognizers>
+                                <Frame HeightRequest="{Static local:DecisionMakingGroupsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                    <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </VerticalStackLayout.GestureRecognizers>
-                                    <Label Text="{Binding Structure.Identity.Name}" />
-                                    <Label Text="{Binding Name}" />
-                                </VerticalStackLayout>
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout>
+                                        <Label 
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Structure.Identity.Name}" />
+                                        <Label 
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Name}" />
+                                        <Label 
+                                            Margin="0,8,0,0"
+                                            Text="Descripción"
+                                            TextColor="DimGray"
+                                            FontSize="Caption"
+                                            FontAttributes="Bold" />
+                                        <Label 
+                                            VerticalOptions="FillAndExpand"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="2"
+                                            Text="{Binding Description, TargetNullValue='---'}" />
+                                    </StackLayout>
+                                </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>
