@@ -20,6 +20,8 @@
 
         public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel[] ExternalInvitations { get; set; }
 
+        public AgreementDisplayModel[] Agreements { get; set; }
+
         public void Import(Persistence.Entities.Meeting entity)
         {
             Id = entity.Id;

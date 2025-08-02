@@ -1,12 +1,17 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
 public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.MeetingDisplayModel, Interop.API.Common.Models.Display.MeetingDisplayModel, Models.Page.Configuration.MeetingConfigurationPageModel>
 {
+    private readonly List<Interop.API.Common.Models.Input.AgreementInputModel> editionAgreements = [];
+    private readonly List<Interop.API.Common.Models.Input.AgreementInputModel> incomingAgreements = [];
+    private readonly List<Interop.API.Common.Models.Display.AgreementDisplayModel> outgoingAgreements = [];
+
     public MeetingConfigurationPage(System.Action<Interop.API.Common.Models.Display.MeetingDisplayModel> successAction, Models.Page.Configuration.MeetingConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
@@ -42,7 +47,8 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
             DecisionMakingGroupId = ConcreteBindingContext.AvailableGroups[GroupPicker.SelectedIndex].Id,
             AuthorId = ConcreteBindingContext.Author.Id,
             InternalInvitations = ConcreteBindingContext.InternalInvitations.ToList(),
-            ExternalInvitations = ConcreteBindingContext.ExternalInvitations.ToList()
+            ExternalInvitations = ConcreteBindingContext.ExternalInvitations.ToList(),
+            IncomingAgreements = incomingAgreements
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -64,7 +70,10 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
             DecisionMakingGroupId = ConcreteBindingContext.AvailableGroups[GroupPicker.SelectedIndex].Id,
             AuthorId = ConcreteBindingContext.Author.Id,
             InternalInvitations = ConcreteBindingContext.InternalInvitations.ToList(),
-            ExternalInvitations = ConcreteBindingContext.ExternalInvitations.ToList()
+            ExternalInvitations = ConcreteBindingContext.ExternalInvitations.ToList(),
+            IncomingAgreements = incomingAgreements,
+            EditionAgreements = editionAgreements,
+            OutgoingAgreements = outgoingAgreements
         };
 
         await apiConnectClient.EditAsync(model);
@@ -148,6 +157,155 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
                 hasChangesFlag = true;
             });
         });
+    }
+
+    private void AgreementAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new AgreementConfigurationPage(AgreementCreateSuccess_Callback, new Models.Page.Configuration.AgreementConfigurationPageModel(null)));
+    }
+
+    private void AgreementEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new AgreementConfigurationPage(AgreementEditSuccess_Callback, new Models.Page.Configuration.AgreementConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.AgreementDisplayModel)));
+    }
+
+    private void AgreementRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este acuerdo?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.AgreementDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingAgreements)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingAgreements.Remove(editionAgreements.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionAgreements)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionAgreements.Remove(editionAgreements.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingAgreements.Add(target);
+                }
+
+                ConcreteBindingContext.Agreements.Remove(target);
+
+                var index = 1;
+
+                foreach (var item in ConcreteBindingContext.Agreements)
+                {
+                    item.Index = index++;
+
+                    // TODO Provlema reordenamiento, resuelto en rama GovProvincial
+                }
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void AgreementCreateSuccess_Callback(Interop.API.Common.Models.Display.AgreementDisplayModel model)
+    {
+        incomingAgreements.Add(new Interop.API.Common.Models.Input.AgreementInputModel
+        {
+            Id = model.Id,
+            Index = ConcreteBindingContext.Agreements.Count + 1,
+            Title = model.Title,
+            Description = model.Description,
+            ResponsibleId = model.Responsible?.Id,
+            EndAt = model.EndAt
+        });
+
+        ConcreteBindingContext.Agreements.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void AgreementEditSuccess_Callback(Interop.API.Common.Models.Display.AgreementDisplayModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingAgreements)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.Index = model.Index;
+            item.Title = model.Title;
+            item.Description = model.Description;
+            item.ResponsibleId = model.Responsible?.Id;
+            item.EndAt = model.EndAt;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionAgreements)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.Index = model.Index;
+                item.Title = model.Title;
+                item.Description = model.Description;
+                item.ResponsibleId = model.Responsible?.Id;
+                item.EndAt = model.EndAt;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionAgreements.Add(new Interop.API.Common.Models.Input.AgreementInputModel
+            {
+                Id = model.Id,
+                Index = model.Index,
+                Title = model.Title,
+                Description = model.Description,
+                ResponsibleId = model.Responsible?.Id,
+                EndAt = model.EndAt
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.Agreements)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.Agreements[index] = model;
+
+            break;
+        }
+
+        hasChangesFlag = true;
     }
 
     private void AuthorPickComplete_Callback(HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel model)

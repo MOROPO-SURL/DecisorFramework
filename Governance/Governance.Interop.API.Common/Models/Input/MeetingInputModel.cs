@@ -25,6 +25,10 @@ namespace MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Input
 
         public List<PersonContactDisplayModel> ExternalInvitations { get; set; } = new List<PersonContactDisplayModel>();
 
+        public List<AgreementInputModel> EditionAgreements { get; set; } = new List<AgreementInputModel>();
+        public List<AgreementInputModel> IncomingAgreements { get; set; } = new List<AgreementInputModel>();
+        public List<Display.AgreementDisplayModel> OutgoingAgreements { get; set; } = new List<Display.AgreementDisplayModel>();
+
         public Persistence.Entities.Meeting Export()
         {
             var entity = new Persistence.Entities.Meeting { Id = Id };

@@ -11,8 +11,11 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controll
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class MeetingsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Meeting, System.Guid, MeetingInputModel, MeetingDisplayModel>
     {
-        public MeetingsController(IEntityRepository<Meeting, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<MeetingsController> localizer, ILogger<MeetingsController> logger) : base(repository, localizer, logger)
+        private readonly IEntityRepository<Agreement, System.Guid> agreementRepository;
+
+        public MeetingsController(IEntityRepository<Agreement, System.Guid> agreementRepository, IEntityRepository<Meeting, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<MeetingsController> localizer, ILogger<MeetingsController> logger) : base(repository, localizer, logger)
         {
+            this.agreementRepository = agreementRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<Meeting, bool>> GetGlobalSelector()
@@ -67,7 +70,63 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controll
                 return _model;
             }).ToArray();
 
+            model.Agreements = agreementRepository.FindBy(_entity => _entity.MeetingId == entity.Id).OrderBy(entity => entity.Index).ToArray().Select(_entity =>
+            {
+                var _model = new AgreementDisplayModel();
+
+                _model.Import(_entity);
+
+                if (_entity.Responsible != null && _entity.Responsible.Identity.Image != null)
+                {
+                    _model.Responsible.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Responsible.Identity.Image.ContentType);
+                }
+
+                return _model;
+            }).ToArray();
+
             return model;
+        }
+
+        protected override void PreCreate(Meeting entity, MeetingInputModel model)
+        {
+            base.PreCreate(entity, model);
+
+            foreach (var _model in model.IncomingAgreements)
+            {
+                var _entity = _model.Export();
+
+                _entity.MeetingId = entity.Id;
+
+                agreementRepository.Add(_entity, User.Identity.Name, false);
+            }
+        }
+
+        protected override void PreEdit(Meeting entity, MeetingInputModel model)
+        {
+            base.PreEdit(entity, model);
+
+            foreach (var _model in model.OutgoingAgreements)
+            {
+                agreementRepository.Delete(new Agreement { Id = _model.Id }, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionAgreements)
+            {
+                var _entity = _model.Export();
+
+                _entity.MeetingId = entity.Id;
+
+                agreementRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingAgreements)
+            {
+                var _entity = _model.Export();
+
+                _entity.MeetingId = entity.Id;
+
+                agreementRepository.Add(_entity, User.Identity.Name, false);
+            }
         }
     }
 }

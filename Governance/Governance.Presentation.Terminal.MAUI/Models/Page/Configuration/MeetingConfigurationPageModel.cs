@@ -26,6 +26,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
                 Author = model.Author;
                 InternalInvitations = new ObservableCollection<HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel>(model.InternalInvitations);
                 ExternalInvitations = new ObservableCollection<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel>(model.ExternalInvitations);
+                Agreements = new ObservableCollection<Interop.API.Common.Models.Display.AgreementDisplayModel>(model.Agreements);
             }
             else
             {
@@ -55,6 +56,8 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
         public ObservableCollection<HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel> InternalInvitations { get; set; } = [];
 
         public ObservableCollection<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel> ExternalInvitations { get; set; } = [];
+
+        public ObservableCollection<Interop.API.Common.Models.Display.AgreementDisplayModel> Agreements { get; set; } = [];
 
         public Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel[] AvailableGroups { get; set; }
     }
