@@ -185,7 +185,7 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
                 {
                     if (item.Id != target.Id) continue;
 
-                    incomingAgreements.Remove(editionAgreements.First(model => model.Id == target.Id));
+                    incomingAgreements.Remove(incomingAgreements.First(model => model.Id == target.Id));
 
                     handled = true;
 
@@ -216,8 +216,6 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
                 foreach (var item in ConcreteBindingContext.Agreements)
                 {
                     item.Index = index++;
-
-                    // TODO Provlema reordenamiento, resuelto en rama GovProvincial
                 }
 
                 hasChangesFlag = true;
@@ -227,10 +225,12 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
 
     private void AgreementCreateSuccess_Callback(Interop.API.Common.Models.Display.AgreementDisplayModel model)
     {
+        model.Index = ConcreteBindingContext.Agreements.Count + 1;
+
         incomingAgreements.Add(new Interop.API.Common.Models.Input.AgreementInputModel
         {
             Id = model.Id,
-            Index = ConcreteBindingContext.Agreements.Count + 1,
+            Index = model.Index,
             Title = model.Title,
             Description = model.Description,
             ResponsibleId = model.Responsible?.Id,

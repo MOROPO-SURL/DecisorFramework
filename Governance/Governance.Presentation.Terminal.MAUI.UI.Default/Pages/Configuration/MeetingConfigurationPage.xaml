@@ -273,6 +273,111 @@
                         </Frame>
                     </VerticalStackLayout>
                 </FlexLayout>
+                <VerticalStackLayout Margin="8" Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acuerdos" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="AgreementAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding Agreements}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:AgreementDisplayModel">
+                                        <Frame 
+                                            Padding="8"
+                                            Margin="0,12,0,0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Label
+                                                    Grid.Column="0" Grid.Row="0"
+                                                    Text="No." />
+                                                <Label
+                                                    Grid.Column="1" Grid.RowSpan="2"
+                                                    Margin="0,0,4,0"
+                                                    FontSize="Large"
+                                                    Text="{Binding Index}" />
+                                                <Label
+                                                    Grid.Column="2" Grid.ColumnSpan="4"
+                                                    FontAttributes="Bold"
+                                                    Text="{Binding Title}" />
+                                                <Label
+                                                    Grid.Column="2" Grid.Row="1"
+                                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                                    Margin="0"
+                                                    Text="Fecha de cumplimiento:" />
+                                                <Label
+                                                    Grid.Column="3" Grid.Row="1"
+                                                    Margin="4,0,8,0"
+                                                    Text="{Binding EndAt, TargetNullValue='No', StringFormat='{0:dd/MM/yyyy}'}" />
+                                                <Label
+                                                    Grid.Column="4" Grid.Row="1"
+                                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                                    Margin="0"
+                                                    Text="Responsable:" />
+                                                <Label
+                                                    Grid.Column="5" Grid.Row="1"
+                                                    Margin="4,0"
+                                                    Text="{Binding Responsible, TargetNullValue='No'}" />
+                                                <Label
+                                                    Grid.ColumnSpan="6" Grid.Row="2"
+                                                    Margin="0,0,4,0"
+                                                    Text="{Binding Description}" />
+                                                <VerticalStackLayout 
+                                                    Grid.Column="6" Grid.RowSpan="3"
+                                                    Spacing="8">
+                                                    <Button
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xF90B;"
+                                                        Clicked="AgreementEditionButton_Clicked" />
+                                                    <Button
+                                                        VerticalOptions="Start"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="AgreementRemotionButton_Clicked" />
+                                                </VerticalStackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">

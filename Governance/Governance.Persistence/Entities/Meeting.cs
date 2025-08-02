@@ -30,9 +30,5 @@ namespace MOROPO.Framework.Decisor.Governance.Persistence.Entities
         public List<MeetingContactBridge> ContactBridges { get; set; } = new List<MeetingContactBridge>();
 
         public List<MeetingDocumentBridge> DocumentBridges { get; set; } = new List<MeetingDocumentBridge>();
-
-        public Agreement[] Agreements { get; set; }
-
-        public Statement[] Statements { get; set; }
     }
 }
