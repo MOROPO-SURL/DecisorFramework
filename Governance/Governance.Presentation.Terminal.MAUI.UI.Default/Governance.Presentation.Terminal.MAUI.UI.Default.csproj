@@ -56,5 +56,8 @@
 	  <MauiXaml Update="Pages\Manage\MeetingsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\MeetingAgreementPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>
