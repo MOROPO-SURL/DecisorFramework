@@ -14,6 +14,8 @@ using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Production.Persistence.Entities;
 using MOROPO.Framework.Decisor.Essential.Persistence.Entities;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities.Contract;
+using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
+using MOROPO.Framework.Decisor.Governance.Persistence.Entities;
 
 namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
 {
@@ -24,7 +26,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         Framework.Guama.Media.Persistence.ORM.EF.Context.IPersistenceDbContext,
         Framework.Guama.Security.Personal.Persistence.ORM.EF.Contract.IPersistenceDbContext,
         Framework.Decisor.Production.Persistence.ORM.EF.Context.Contract.IProductionDbContext,
-        Framework.Decisor.Purchasing.Persistence.ORM.EF.Context.Contract.IPurchasingDbContext
+        Framework.Decisor.Purchasing.Persistence.ORM.EF.Context.Contract.IPurchasingDbContext,
+        Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract.ILeasingDbContext,
+        Framework.Decisor.Governance.Persistence.ORM.EF.Context.Contract.IGovernanceDbContext
     {
         public ApplicationDbContext(System.Collections.Generic.IEnumerable<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
         {
@@ -198,6 +202,15 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanDeparture> PurchasePlanDepartures { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception> PurchaseReceptions { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReceptionProductWeightBridge> PurchaseReceptionProductWeightBridges { get; set; }
+        public DbSet<DecisionMakingGroup> DecisionMakingGroups { get; set; }
+        public DbSet<DecisionMakingGroupEmployeeBridge> DecisionMakingGroupEmployeeBridges { get; set; }
+        public DbSet<DecisionMakingGroupContactBridge> DecisionMakingGroupContactBridges { get; set; }
+        public DbSet<Meeting> Meetings { get; set; }
+        public DbSet<MeetingEmployeeBridge> MeetingEmployeeBridges { get; set; }
+        public DbSet<MeetingContactBridge> MeetingContactBridges { get; set; }
+        public DbSet<MeetingDocumentBridge> MeetingDocumentBridges { get; set; }
+        public DbSet<Agreement> Agreements { get; set; }
+        public DbSet<Statement> Statements { get; set; }
     }
 }
 

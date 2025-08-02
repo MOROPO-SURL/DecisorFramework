@@ -9,15 +9,23 @@
 	<ItemGroup>
 		<Compile Remove="dpkeys\**" />
 		<Compile Remove="logs\**" />
+		<Compile Remove="wwwroot\documents\**" />
+		<Compile Remove="wwwroot\images\**" />
 		<Compile Remove="wwwroot\media\**" />
 		<Content Remove="dpkeys\**" />
 		<Content Remove="logs\**" />
+		<Content Remove="wwwroot\documents\**" />
+		<Content Remove="wwwroot\images\**" />
 		<Content Remove="wwwroot\media\**" />
 		<EmbeddedResource Remove="dpkeys\**" />
 		<EmbeddedResource Remove="logs\**" />
+		<EmbeddedResource Remove="wwwroot\documents\**" />
+		<EmbeddedResource Remove="wwwroot\images\**" />
 		<EmbeddedResource Remove="wwwroot\media\**" />
 		<None Remove="dpkeys\**" />
 		<None Remove="logs\**" />
+		<None Remove="wwwroot\documents\**" />
+		<None Remove="wwwroot\images\**" />
 		<None Remove="wwwroot\media\**" />
 	</ItemGroup>
 	<ItemGroup>
@@ -47,10 +55,13 @@
 	  <ProjectReference Include="..\..\..\Domain\Domain.Presentation.Web.Frontend\Domain.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\..\..\Financial\Financial.Presentation.Web.Backend\Financial.Presentation.Web.Backend.csproj" />
 	  <ProjectReference Include="..\..\..\Financial\Financial.Presentation.Web.Frontend\Financial.Presentation.Web.Frontend.csproj" />
+	  <ProjectReference Include="..\..\..\Governance\Governance.Presentation.Web.Frontend\Governance.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\..\..\HumanResources\HumanResources.Presentation.Web.Backend\HumanResources.Presentation.Web.Backend.csproj" />
 	  <ProjectReference Include="..\..\..\HumanResources\HumanResources.Presentation.Web.Frontend\HumanResources.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Web.Backend\Inventory.Presentation.Web.Backend.csproj" />
 	  <ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Web.Frontend\Inventory.Presentation.Web.Frontend.csproj" />
+	  <ProjectReference Include="..\..\..\Leasing\Leasing.Presentation.Web.Backend\Leasing.Presentation.Web.Backend.csproj" />
+	  <ProjectReference Include="..\..\..\Leasing\Leasing.Presentation.Web.Frontend\Leasing.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Backend\Legal.Presentation.Web.Backend.csproj" />
 	  <ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Frontend\Legal.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\..\..\Production\Production.Presentation.Web.Backend\Production.Presentation.Web.Backend.csproj" />

@@ -31,17 +31,16 @@ public partial class ClausesManagePage : Core.Presentation.Terminal.MAUI.UI.Page
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
+    protected override System.Threading.Tasks.Task<Models.Page.Configuration.ClauseConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.ClauseDisplayModel model = null)
+    {
+        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.ClauseConfigurationPageModel(model));
+    }
+
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ClauseDisplayModel target, int discriminator)
     {
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.ClauseConfigurationPageModel(target);
-
-                this.NavigationPushPageAsync(new Configuration.ClauseConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.ClausesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>

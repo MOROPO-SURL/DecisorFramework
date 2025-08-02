@@ -9,8 +9,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
         private System.DateTime at;
         private int priority = 1;
 
-        public WorkforceConfigurationPageModel() : this(null) { }
-
         public WorkforceConfigurationPageModel(Interop.API.Common.Models.Display.WorkforceDisplayModel model) : base(model)
         {
             if (model != null)

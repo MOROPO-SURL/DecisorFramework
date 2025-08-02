@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -31,17 +30,16 @@ public partial class WarehousesManagePage : Core.Presentation.Terminal.MAUI.UI.P
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
+    protected override System.Threading.Tasks.Task<Models.Page.Configuration.WarehouseConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.WarehouseDisplayModel model = null)
+    {
+        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.WarehouseConfigurationPageModel(model));
+    }
+
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.WarehouseDisplayModel target, int discriminator)
     {
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.WarehouseConfigurationPageModel(target);
-
-                this.NavigationPushPageAsync(new Configuration.WarehouseConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.WarehousesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>

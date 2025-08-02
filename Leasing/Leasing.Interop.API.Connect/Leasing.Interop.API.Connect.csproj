@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.Framework.Decisor.Leasing.Interop.API.Connect</AssemblyName>
+		<RootNamespace>MOROPO.Framework.Decisor.Leasing.Interop.API.Connect</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.1" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\Leasing.Interop.API.Common\Leasing.Interop.API.Common.csproj" />
+	</ItemGroup>
+
+</Project>

@@ -12,8 +12,6 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
         private Interop.API.Common.Models.Display.FamilyDisplayModel category;
         private Microsoft.Maui.Controls.ImageSource featureImageSource;
 
-        public ProductConfigurationPageModel() : this(null) { }
-
         public ProductConfigurationPageModel(Interop.API.Common.Models.Display.ProductDisplayModel model) : base(model)
         {
             if (model != null)

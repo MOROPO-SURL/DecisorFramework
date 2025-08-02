@@ -11,8 +11,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
         private WorkPositionKindDisplayModel kind;
         private SchoolingDisplayModel schooling;
 
-        public WorkPositionConfigurationPageModel(): this(null) { }
-
         public WorkPositionConfigurationPageModel(WorkPositionDisplayModel model) : base(model)
         {
             if (model != null)

@@ -14,11 +14,10 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private string about;
         private Sex sex;
         private CivilStatus civilStatus;
+        private UserDisplayModel user;
         private int priority = 1;
         private string personalIdentificationNumber;
         private Microsoft.Maui.Controls.ImageSource imageSource;
-
-        public PersonContactConfigurationPageModel() : this(null) { }
 
         public PersonContactConfigurationPageModel(PersonContactDisplayModel model) : base(model)
         {
@@ -31,6 +30,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
                 About = model.Identity.About;
                 Sex = model.Identity.Sex;
                 CivilStatus = model.Identity.CivilStatus;
+                User = model.User;
                 Priority = model.Priority;
                 PersonalIdentificationNumber = model.PersonalIdentificationNumber;
 
@@ -66,6 +66,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public CivilStatus CivilStatus { get => civilStatus; set => SetProperty(ref civilStatus, value); }
 
+        public UserDisplayModel User { get => user; set => SetProperty(ref user, value); }
+
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
         public string PersonalIdentificationNumber { get => personalIdentificationNumber; set => SetProperty(ref personalIdentificationNumber, value); }
@@ -79,6 +81,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public ObservableCollection<WebContactItemDisplayModel> WebContactItems { get; set; } = [];
 
         public ObservableCollection<PostalContactItemDisplayModel> PostalContactItems { get; set; } = [];
+
+        public UserDisplayModel[] AvailableUsers { get; set; }
 
         public Sex[] AvailableSexs { get; private set; } = [Sex.Unknown, Sex.Male, Sex.Famale];
 

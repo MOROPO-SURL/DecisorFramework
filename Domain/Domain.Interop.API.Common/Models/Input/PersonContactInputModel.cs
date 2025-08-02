@@ -29,6 +29,8 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
         public string PersonalIdentificationNumber { get; set; }
 
+        public string UserId { get; set; }
+
         public List<PostalContactItemInputModel> EditionPostalContactItems { get; set; } = new List<PostalContactItemInputModel>();
         public List<PostalContactItemInputModel> IncomingPostalContactItems { get; set; } = new List<PostalContactItemInputModel>();
         public List<PostalContactItemDisplayModel> OutgoingPostalContactItems { get; set; } = new List<PostalContactItemDisplayModel>();
@@ -69,6 +71,12 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             entity.Identity.Sex = Sex;
             entity.Identity.CivilStatus = CivilStatus;
             entity.PersonalIdentificationNumber = PersonalIdentificationNumber;
+
+            if (entity.UserId != UserId)
+            {
+                entity.User = null;
+                entity.UserId = UserId;
+            }
         }
     }
 }

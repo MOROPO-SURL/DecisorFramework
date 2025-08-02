@@ -13,8 +13,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.
         private PaymentTermDisplayModel defaultPaymentTerm;
         private int priority;
 
-        public LegalClientConfigurationPageModel() : this(null) { }
-
         public LegalClientConfigurationPageModel(LegalClientDisplayModel model) : base(model)
         {
             if (model != null)

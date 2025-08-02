@@ -4,9 +4,9 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class ProductionOrderDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.ProductionOrderDisplayModel>
 {
-    private readonly System.Action<Interop.API.Common.Models.Display.ProductionOrderDisplayModel, int> delegationAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.ProductionOrderDisplayModel, int?> delegationAction;
 
-    public ProductionOrderDetailPage(Interop.API.Common.Models.Display.ProductionOrderDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.ProductionOrderDisplayModel, int> delegationAction) : base(bindingContextModel)
+    public ProductionOrderDetailPage(Interop.API.Common.Models.Display.ProductionOrderDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.ProductionOrderDisplayModel, int?> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
@@ -19,8 +19,8 @@ public partial class ProductionOrderDetailPage : Core.Presentation.Terminal.MAUI
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
-            // 0 for Edit
-            Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
+            // null for Edit
+            Dispatcher.Dispatch(() => delegationAction.Invoke(model, null));
         });
     }
 
@@ -36,8 +36,8 @@ public partial class ProductionOrderDetailPage : Core.Presentation.Terminal.MAUI
             {
                 this.NavigationPopModalPageAsync().ContinueWith(_ =>
                 {
-                    // 1 for Delete
-                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 1));
+                    // 0 for Delete
+                    Dispatcher.Dispatch(() => delegationAction.Invoke(model, 0));
                 });
             });
         });

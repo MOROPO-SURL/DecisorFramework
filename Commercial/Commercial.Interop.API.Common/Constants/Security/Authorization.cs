@@ -54,6 +54,6 @@
         public const string RequestableServiceCreatorPermission = "requestableservice-creator-permission";
         public const string RequestableServiceEditorPermission = "requestableservice-editor-permission";
         public const string RequestableServiceRemoverPermission = "requestableservice-remover-permission";
-        #endregion
+        #endregion        
     }
 }

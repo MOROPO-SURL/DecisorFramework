@@ -72,7 +72,7 @@ public partial class OrganizationContactPickPage : Core.Presentation.Terminal.MA
 
         apiConnectClient.GetEnabledAsync().ContinueWith(task =>
         {
-            var model = new Models.Page.Configuration.OrganizationContactConfigurationPageModel
+            var model = new Models.Page.Configuration.OrganizationContactConfigurationPageModel(null)
             {
                 AvailableBusinessKinds = task.Result
             };

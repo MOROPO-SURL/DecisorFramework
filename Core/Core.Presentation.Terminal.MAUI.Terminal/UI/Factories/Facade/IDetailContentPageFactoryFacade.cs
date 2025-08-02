@@ -4,6 +4,6 @@
         where TModel : class
         where TDetailContentPage : Pages.Base.DetailBaseContentPage<TModel>
     {
-        TDetailContentPage Build(TModel model, System.Action<TModel,int> delegationAction = null);
+        TDetailContentPage Build(TModel model, System.Action<TModel,int?> delegationAction = null);
     }
 }

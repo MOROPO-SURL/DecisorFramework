@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
     public class ManageBaseContentPage<TModel, TManagePageModel, TConfigurationPageModel, TConfigurationContentPage, TDetailContentPage> : ListBaseContentPage<TModel, TManagePageModel, TDetailContentPage>
         where TModel : class
         where TManagePageModel : Models.Page.Contract.AbstractManageEntityPageModel<TModel>, new()
-        where TConfigurationPageModel : Models.Page.Contract.AbstractConfigurationPageModel<TModel>, new()
+        where TConfigurationPageModel : Models.Page.Contract.AbstractConfigurationPageModel<TModel>
         where TConfigurationContentPage : ConfigurationBaseContentPage<TModel, TModel, TConfigurationPageModel>
         where TDetailContentPage : DetailBaseContentPage<TModel>
     {
@@ -48,7 +48,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             {
                 try
                 {
-                    var model = await FillConfigurationPageModelAsync();
+                    var model = await GetConfigurationPageModelAsync();
 
                     Dispatcher.Dispatch(() =>
                     {
@@ -69,13 +69,39 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             });
         }
 
-        private void DetailActionDelegationRequest_Callback(TModel target, int discriminator)
+        private void DetailActionDelegationRequest_Callback(TModel target, int? discriminator)
         {
             var concreteBindingContext = (TManagePageModel)BindingContext;
 
             concreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation;
 
-            OnActionDelegationRequest(target, discriminator);
+            if (discriminator == null)
+            {
+                System.Threading.Tasks.Task.Run(async () =>
+                {
+                    try
+                    {
+                        var model = await GetConfigurationPageModelAsync(target);
+
+                        Dispatcher.Dispatch(() =>
+                        {
+                            concreteBindingContext.IsBusy = false;
+
+                            var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IConfigurationContentPageFactoryFacade<TModel, TConfigurationPageModel, TConfigurationContentPage>>();
+
+                            this.NavigationPushPageAsync(factory.Build(ConfigurationSuccess_Callback, model));
+                        });
+                    }
+                    catch (System.Exception exception)
+                    {
+                        Dispatcher.Dispatch(() =>
+                        {
+                            Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                        });
+                    }
+                });
+            }
+            else OnActionDelegationRequest(target, discriminator.Value);
         }
 
         protected virtual void OnActionDelegationRequest(TModel target, int discriminator) { }
@@ -85,9 +111,9 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             LoadItems(true);
         }
 
-        protected virtual System.Threading.Tasks.Task<TConfigurationPageModel> FillConfigurationPageModelAsync(TModel model = null)
+        protected virtual System.Threading.Tasks.Task<TConfigurationPageModel> GetConfigurationPageModelAsync(TModel model = null)
         {
-            return System.Threading.Tasks.Task.FromResult(new TConfigurationPageModel());
+            throw new System.NotImplementedException();
         }
     }
 }
