@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
 {
     public class PropertyLeasePropousalConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PropertyLeasePropousalDisplayModel>
     {
-        private int priority;
+        private int priority = 1;
         private string description;
         private HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel author;
         private Governance.Interop.API.Common.Models.Display.AgreementDisplayModel agreement;

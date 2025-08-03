@@ -59,7 +59,7 @@
             ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:VehicleLeasePropousalsManagePage}" />
         <ShellContent
             Title="Inmuebles"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:PropertyLeasePropousalsManagePage}" />
     </FlyoutItem>
     <FlyoutItem
         Title="Ofertas">

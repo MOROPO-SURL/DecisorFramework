@@ -78,7 +78,7 @@
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
                                 Margin="4"
                                 Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad Administrativa" />
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Entidad Administrativa" />
                                 <Picker 
                                     x:Name="StructurePicker" 
                                     ItemsSource="{Binding AvailableStructures}"

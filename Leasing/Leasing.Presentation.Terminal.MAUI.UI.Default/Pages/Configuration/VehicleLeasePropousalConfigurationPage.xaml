@@ -74,7 +74,7 @@
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Postulante" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Promotor" />
                         <ContentView                        
                             IsVisible="{Binding Author, Converter={StaticResource IsNotNullConverter}}"
                             HeightRequest="140">
@@ -93,7 +93,7 @@
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acuerdo C/D primario" />
                         <Frame 
                             IsVisible="{Binding Agreement, Converter={StaticResource IsNotNullConverter}}"
-                            Padding="8">
+                            Padding="16">
                             <Grid>
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="Auto" />
