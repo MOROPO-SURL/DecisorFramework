@@ -29,6 +29,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\Governance\Governance.Presentation.Terminal.MAUI.UI.Default\Governance.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\HumanResources\HumanResources.Presentation.Terminal.MAUI.UI.Default\HumanResources.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Leasing.Presentation.Terminal.MAUI\Leasing.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
@@ -45,11 +46,20 @@
 	  <Compile Update="Pages\Configuration\VehicleLeaseOfferConfigurationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Configuration\VehicleLeasePropousalConfigurationPage.xaml.cs">
+	    <DependentUpon>VehicleLeasePropousalConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\PropertyLeasePropousalDetailPage.xaml.cs">
+	    <DependentUpon>PropertyLeasePropousalDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Detail\VehicleLeaseOfferDetailPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\Manage\VehicleLeaseOffersToApproveManagePage.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
+	  <Compile Update="Pages\Detail\VehicleLeasePropousalDetailPage.xaml.cs">
+	    <DependentUpon>VehicleLeasePropousalDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\VehicleLeaseOffersManagePage.xaml.cs">
+	    <DependentUpon>VehicleLeaseOffersManagePage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
@@ -65,10 +75,25 @@
 	  <MauiXaml Update="Pages\Configuration\VehicleLeaseOfferConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\VehicleLeasePropousalConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\PropertyLeaseOfferDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\PropertyLeasePropousalDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\VehicleLeaseOfferDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Manage\VehicleLeaseOffersToApproveManagePage.xaml">
+	  <MauiXaml Update="Pages\Detail\VehicleLeasePropousalDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\VehicleLeaseOffersManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\VehicleLeasePropousalsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

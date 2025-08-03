@@ -27,8 +27,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         Framework.Guama.Security.Personal.Persistence.ORM.EF.Contract.IPersistenceDbContext,
         Framework.Decisor.Production.Persistence.ORM.EF.Context.Contract.IProductionDbContext,
         Framework.Decisor.Purchasing.Persistence.ORM.EF.Context.Contract.IPurchasingDbContext,
-        Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract.ILeasingDbContext,
-        Framework.Decisor.Governance.Persistence.ORM.EF.Context.Contract.IGovernanceDbContext
+        Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract.ILeasingDbContext
     {
         public ApplicationDbContext(System.Collections.Generic.IEnumerable<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
         {
@@ -174,6 +173,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ProductionOrderDeparture> ProductionOrderDepartures { get; set; }
         public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
         public DbSet<ProductionReception> ProductionReceptions { get; set; }
+        public DbSet<PropertyLeasePropousal> PropertyLeasePropousals { get; set; }
+        public DbSet<VehicleLeasePropousal> VehicleLeasePropousals { get; set; }
         public DbSet<PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
         public DbSet<PropertyLeaseOrganizationPostulation> PropertyLeaseOfferOrganizationContactBridges { get; set; }
         public DbSet<PropertyLeasePersonPostulation> PropertyLeaseOfferPersonContactBridges { get; set; }

@@ -21,7 +21,7 @@ public partial class VehicleLeaseOfferConfigurationPage : Core.Presentation.Term
         var model = new Interop.API.Common.Models.Input.VehicleLeaseOfferInputModel
         {
             Id = System.Guid.NewGuid(),
-            VehicleId = ConcreteBindingContext.Vehicle.Id,
+            PropousalId = ConcreteBindingContext.Propousal.Id,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority
         };
@@ -40,7 +40,7 @@ public partial class VehicleLeaseOfferConfigurationPage : Core.Presentation.Term
         var model = new Interop.API.Common.Models.Input.VehicleLeaseOfferInputModel
         {
             Id = concreteBindingContext.Id,
-            VehicleId = ConcreteBindingContext.Vehicle.Id,
+            PropousalId = ConcreteBindingContext.Propousal.Id,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority
         };
@@ -67,6 +67,6 @@ public partial class VehicleLeaseOfferConfigurationPage : Core.Presentation.Term
 
     private void VehiclePickComplete_Callback(Domain.Interop.API.Common.Models.Display.VehicleDisplayModel model)
     {
-        ConcreteBindingContext.Vehicle = model;
+        //ConcreteBindingContext.Postulation = model;
     }
 }

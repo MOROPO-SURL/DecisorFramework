@@ -55,10 +55,10 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
-            Title="A Evaluar"
-            ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:VehicleLeaseOffersToApproveManagePage}" />
+            Title="Vehículos"
+            ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:VehicleLeasePropousalsManagePage}" />
         <ShellContent
-            Title="Evaluadas"
+            Title="Inmuebles"
             ContentTemplate="{DataTemplate ContentPage}" />
     </FlyoutItem>
     <FlyoutItem
@@ -70,13 +70,10 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
-            Title="Realizadas"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            Title="Vehículos"
+            ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:VehicleLeaseOffersManagePage}" />
         <ShellContent
-            Title="Por Realizar"
-            ContentTemplate="{DataTemplate ContentPage}" />
-        <ShellContent
-            Title="Por Aprobar"
+            Title="Inmuebles"
             ContentTemplate="{DataTemplate ContentPage}" />
     </FlyoutItem>
     <ShellContent

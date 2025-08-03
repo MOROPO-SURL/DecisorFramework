@@ -2,11 +2,11 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class VehicleLeaseOffersToApproveManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel, Models.Page.Manage.VehicleLeaseOffersManagePageModel, Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel, Configuration.VehicleLeaseOfferConfigurationPage, Detail.VehicleLeaseOfferDetailPage>
+public partial class VehicleLeaseOffersManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel, Models.Page.Manage.VehicleLeaseOffersManagePageModel, Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel, Configuration.VehicleLeaseOfferConfigurationPage, Detail.VehicleLeaseOfferDetailPage>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 180;
 
-    public VehicleLeaseOffersToApproveManagePage()
+    public VehicleLeaseOffersManagePage()
     {
         InitializeComponent();
     }
@@ -27,7 +27,7 @@ public partial class VehicleLeaseOffersToApproveManagePage : Core.Presentation.T
     {
         var apiConnectClient = new Interop.API.Connect.Clients.VehicleLeaseOffersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.VehicleLeaseOfferFilterModel { Kind = Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.ToApprove }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     protected override System.Threading.Tasks.Task<Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel model = null)

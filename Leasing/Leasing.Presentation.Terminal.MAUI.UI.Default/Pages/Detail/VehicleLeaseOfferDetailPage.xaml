@@ -25,10 +25,10 @@
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Margin="0"
-                                Text="Elaboración" />
+                                Text="Vehículo" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Vehicle.Brand.Name}" />
+                                Text="{Binding Propousal.Vehicle.Brand.Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Fecha Inicial" />

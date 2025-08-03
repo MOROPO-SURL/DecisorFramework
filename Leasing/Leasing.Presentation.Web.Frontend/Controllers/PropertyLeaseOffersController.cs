@@ -51,9 +51,9 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
         {
             var model = base.EntityToDisplayModel(entity);
 
-            if (model.Property.FeatureImage != null)
+            if (model.Propousal.Property.FeatureImage != null)
             {
-                model.Property.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Property.FeatureImage.ContentType);
+                model.Propousal.Property.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Propousal.Property.FeatureImage.ContentType);
             }
 
             model.OrganizationPostulations = entity.OrganizationPostulations.Select(_entity =>

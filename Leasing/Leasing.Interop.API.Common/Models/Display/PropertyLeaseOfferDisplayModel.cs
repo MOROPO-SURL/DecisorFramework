@@ -12,19 +12,15 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        public System.DateTime? OpenAt { get; set; }
+        public System.DateTime OpenAt { get; set; }
 
         public System.DateTime? ClosedAt { get; set; }
 
         public string Description { get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get; set; }
+        public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Decisor { get; set; }
-
-        public string ApprovationReference { get; set; }
-
-        public Domain.Interop.API.Common.Models.Display.PropertyDisplayModel Property { get; set; }
+        public PropertyLeasePropousalDisplayModel Propousal { get; set; }
 
         public CommonLeaseOrganizationPostulationDisplayModel[] OrganizationPostulations { get; set; }
 
@@ -81,27 +77,19 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
 
                 return result;
             }).ToArray();
-            ApprovationReference = entity.ApprovationReference;
 
-            if (entity.Author != null)
+            if (entity.Agreement != null)
             {
-                Author = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Agreement = new Governance.Interop.API.Common.Models.Display.AgreementDisplayModel();
 
-                Author.Import(entity.Author);
+                Agreement.Import(entity.Agreement);
             }
 
-            if (entity.Decisor != null)
+            if (entity.Propousal != null)
             {
-                Decisor = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Propousal = new PropertyLeasePropousalDisplayModel();
 
-                Decisor.Import(entity.Decisor);
-            }
-
-            if (entity.Property != null)
-            {
-                Property = new Domain.Interop.API.Common.Models.Display.PropertyDisplayModel();
-
-                Property.Import(entity.Property);
+                Propousal.Import(entity.Propousal);
             }
         }
     }

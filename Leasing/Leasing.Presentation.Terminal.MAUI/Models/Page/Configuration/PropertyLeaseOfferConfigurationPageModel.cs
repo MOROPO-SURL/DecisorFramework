@@ -6,10 +6,10 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
     public class PropertyLeaseOfferConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PropertyLeaseOfferDisplayModel>
     {
         private int priority;
-        private System.DateTime? openAt;
+        private System.DateTime openAt;
         private System.DateTime? closedAt;
         private string description;
-        private Domain.Interop.API.Common.Models.Display.PropertyDisplayModel vehicle;
+        private PropertyLeasePropousalDisplayModel propousal;
 
         public PropertyLeaseOfferConfigurationPageModel(PropertyLeaseOfferDisplayModel model) : base(model)
         {
@@ -19,7 +19,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
             OpenAt = model.OpenAt;
             ClosedAt = model.ClosedAt;
             Description = model.Description;
-            Property = model.Property;
+            Propousal = model.Propousal;
             OrganizationPostulations = model.OrganizationPostulations.ToObservableCollection();
             PersonPostulations = model.PersonPostulations.ToObservableCollection();
         }
@@ -28,13 +28,13 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public System.DateTime? OpenAt { get => openAt; set => SetProperty(ref openAt, value); }
+        public System.DateTime OpenAt { get => openAt; set => SetProperty(ref openAt, value); }
 
         public System.DateTime? ClosedAt { get => closedAt; set => SetProperty(ref closedAt, value); }
 
         public string Description { get => description; set => SetProperty(ref description, value); }
 
-        public Domain.Interop.API.Common.Models.Display.PropertyDisplayModel Property { get => vehicle; set => SetProperty(ref vehicle, value); }
+        public PropertyLeasePropousalDisplayModel Propousal { get => propousal; set => SetProperty(ref propousal, value); }
 
         public System.Collections.ObjectModel.ObservableCollection<CommonLeaseOrganizationPostulationDisplayModel> OrganizationPostulations { get; set; } = [];
 

@@ -9,19 +9,15 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 
         public int Priority { get; set; }
 
-        public System.DateTime? OpenAt { get; set; }
+        public System.DateTime OpenAt { get; set; }
 
         public System.DateTime? ClosedAt { get; set; }
 
         public string Description { get; set; }
 
-        public System.Guid AuthorId { get; set; }
+        public System.Guid AgreementId { get; set; }
 
-        public System.Guid? DecisorId { get; set; }
-
-        public string ApprovationReference { get; set; }
-
-        public System.Guid PropertyId { get; set; }
+        public System.Guid PropousalId { get; set; }
 
         public List<CommonLeasePersonPostulationInputModel> EditionPersonPostulations { get; set; } = new List<CommonLeasePersonPostulationInputModel>();
         public List<CommonLeasePersonPostulationInputModel> IncomingPersonPostulations { get; set; } = new List<CommonLeasePersonPostulationInputModel>();
@@ -33,7 +29,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 
         public Persistence.Entities.PropertyLeaseOffer Export()
         {
-            var entity = new Persistence.Entities.PropertyLeaseOffer { Id = Id, Enabled = true, AuthorId = AuthorId };
+            var entity = new Persistence.Entities.PropertyLeaseOffer { Id = Id, Enabled = true };
 
             Mergue(entity);
 
@@ -51,18 +47,17 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
             entity.OpenAt = OpenAt;
             entity.ClosedAt = ClosedAt;
             entity.Description = Description;
-            entity.ApprovationReference = ApprovationReference;
 
-            if (entity.DecisorId != DecisorId)
+            if (entity.AgreementId != AgreementId)
             {
-                entity.Decisor = null;
-                entity.DecisorId = DecisorId;
+                entity.Agreement = null;
+                entity.AgreementId = AgreementId;
             }
 
-            if (entity.PropertyId != PropertyId)
+            if (entity.PropousalId != PropousalId)
             {
-                entity.Property = null;
-                entity.PropertyId = PropertyId;
+                entity.Propousal = null;
+                entity.PropousalId = PropousalId;
             }
         }
     }

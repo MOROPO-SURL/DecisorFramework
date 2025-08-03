@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Leasing.Persistence.Entities
 {
-    public class VehicleLeaseRequest : Contract.AbstractLeaseRequest
+    public class VehicleLeasePropousal : Contract.AbstractLeasePropousal
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(VehicleId))]
         public Domain.Persistence.Entities.Vehicle Vehicle { get; set; }

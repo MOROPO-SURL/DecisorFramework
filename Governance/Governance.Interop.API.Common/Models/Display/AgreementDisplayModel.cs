@@ -14,6 +14,8 @@
 
         public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel Responsible { get; set; }
 
+        public MeetingDisplayModel Meeting { get; set; }
+
         public void Import(Persistence.Entities.Agreement entity)
         {
             Id = entity.Id;
@@ -27,6 +29,13 @@
                 Responsible = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
 
                 Responsible.Import(entity.Responsible);
+            }
+
+            if (entity.Meeting != null)
+            {
+                Meeting = new MeetingDisplayModel();
+
+                Meeting.Import(entity.Meeting);
             }
         }
     }

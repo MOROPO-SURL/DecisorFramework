@@ -10,6 +10,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Providers
             {
                 return new System.Collections.Generic.List<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
                 {
+                    new BaseEntityTypeConfigurator<Entities.VehicleLeasePropousal>(),
+                    new BaseEntityTypeConfigurator<Entities.PropertyLeasePropousal>(),
                     new BaseEntityTypeConfigurator<Entities.VehicleLeaseOffer>(),
                     new Configurators.VehicleLeaseOfferClauseBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.VehicleLeaseOrganizationPostulation>(),

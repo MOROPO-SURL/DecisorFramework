@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ManageBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
+    xmlns:local_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
+    xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.VehicleLeaseOffersManagePage"
+    x:TypeArguments="interop_common_display_models:VehicleLeaseOfferDisplayModel,presentation_manage_page_models:VehicleLeaseOffersManagePageModel,presentation_configuration_page_models:VehicleLeaseOfferConfigurationPageModel,local_configuration_pages:VehicleLeaseOfferConfigurationPage,local_detail_pages:VehicleLeaseOfferDetailPage"
+    x:DataType="presentation_manage_page_models:VehicleLeaseOffersManagePageModel"
+    Title="Ofertas de Arrendamiento de Vehículos">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Agregar"
+            Clicked="AddItemToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <SearchBar Margin="20,20,20,0" />
+                <Grid 
+                    VerticalOptions="FillAndExpand"
+                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
+                    <CollectionView
+                        x:Name="ItemsCollectionView"
+                        Margin="10"
+                        ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_common_display_models:VehicleLeaseOfferDisplayModel">
+                                <Frame HeightRequest="{Static local:VehicleLeaseOffersManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                    </Frame.GestureRecognizers>
+                                    <StackLayout>
+                                        <Label 
+                                            FontAttributes="Bold"
+                                            FontSize="Medium"
+                                            Text="{Binding Propousal.Vehicle.Brand.Name}" />
+                                        <Label Text="{Binding OpenAt, StringFormat='{0:D}'}" />
+                                        <Label 
+                                            Margin="0,8,0,0"
+                                            Text="Aprueba"
+                                            TextColor="DimGray"
+                                            FontSize="Caption"
+                                            FontAttributes="Bold" />
+                                        <Label
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Agreement.Title}" />
+                                        <Label 
+                                            Margin="0,8,0,0"
+                                            Text="Descripción"
+                                            TextColor="DimGray"
+                                            FontSize="Caption"
+                                            FontAttributes="Bold" />
+                                        <Label
+                                            VerticalOptions="FillAndExpand"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="2"
+                                            Text="{Binding Description, TargetNullValue='---'}" />
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Label
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                                HorizontalTextAlignment="Center"
+                                Margin="5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                FontAttributes="Italic" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.Footer>
+                            <StackLayout IsVisible="{Binding HasMoreItems}">
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="5"
+                                    Text="Mostrar más"
+                                    Clicked="LoadMoreBurron_Clicked" />
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</core_ui_base_pages:ManageBaseContentPage>

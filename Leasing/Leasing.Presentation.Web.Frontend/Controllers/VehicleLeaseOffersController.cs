@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
@@ -12,7 +11,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 {
     [Route("api/leasing/[controller]")]
     [ApiController]
-    public class VehicleLeaseOffersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<VehicleLeaseOffer, System.Guid, VehicleLeaseOfferInputModel, VehicleLeaseOfferDisplayModel, VehicleLeaseOfferFilterModel>
+    public class VehicleLeaseOffersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<VehicleLeaseOffer, System.Guid, VehicleLeaseOfferInputModel, VehicleLeaseOfferDisplayModel>
     {
         private readonly IEntityRepository<Document, System.Guid> documentRepository;
         private readonly IDocumentFileManagerFacade documentFileManager;
@@ -52,9 +51,9 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
         {
             var model = base.EntityToDisplayModel(entity);
 
-            if (model.Vehicle.FeatureImage != null)
+            if (model.Propousal.Vehicle.FeatureImage != null)
             {
-                model.Vehicle.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Vehicle.FeatureImage.ContentType);
+                model.Propousal.Vehicle.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Propousal.Vehicle.FeatureImage.ContentType);
             }
 
             model.OrganizationPostulations = entity.OrganizationPostulations.Select(_entity =>
