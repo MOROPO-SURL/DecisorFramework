@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default
 
 public partial class PropertyLeasePropousalsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PropertyLeasePropousalDisplayModel, Models.Page.Manage.PropertyLeasePropousalsManagePageModel, Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel, Configuration.PropertyLeasePropousalConfigurationPage, Detail.PropertyLeasePropousalDetailPage>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 180;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 248;
 
     public PropertyLeasePropousalsManagePage()
     {

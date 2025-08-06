@@ -53,12 +53,6 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
                 entity.Agreement = null;
                 entity.AgreementId = AgreementId;
             }
-
-            if (entity.PropousalId != PropousalId)
-            {
-                entity.Propousal = null;
-                entity.PropousalId = PropousalId;
-            }
         }
     }
 }

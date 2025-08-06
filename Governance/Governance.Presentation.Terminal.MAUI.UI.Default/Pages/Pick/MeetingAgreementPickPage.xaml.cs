@@ -48,25 +48,11 @@ public partial class MeetingAgreementPickPage : Core.Presentation.Terminal.MAUI.
         return -1;
     }
 
-    protected override async System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.MeetingDisplayModel>> FetchItemsAsync()
+    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.MeetingDisplayModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.MeetingsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var result = await apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-
-        foreach (var item in result.List)
-        {
-            foreach (var _item in item.Agreements)
-            {
-                _item.Meeting = new Interop.API.Common.Models.Display.MeetingDisplayModel
-                {
-                    Id = item.Id,
-                    DecisionMakingGroup = item.DecisionMakingGroup
-                };
-            }
-        }
-
-        return result;
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)

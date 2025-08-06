@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default
 
 public partial class VehicleLeasePropousalsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.VehicleLeasePropousalDisplayModel, Models.Page.Manage.VehicleLeasePropousalsManagePageModel, Models.Page.Configuration.VehicleLeasePropousalConfigurationPageModel, Configuration.VehicleLeasePropousalConfigurationPage, Detail.VehicleLeasePropousalDetailPage>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 200;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 248;
 
     public VehicleLeasePropousalsManagePage()
     {

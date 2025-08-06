@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
     xmlns:local_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
@@ -51,46 +52,12 @@
                             <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="interop_common_display_models:PropertyLeasePropousalDisplayModel">
-                                <Frame HeightRequest="{Static local:PropertyLeasePropousalsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
-                                    <Frame.GestureRecognizers>
+                            <DataTemplate>
+                                <local_card_views:PropertyLeasePropousalDefaultCardView HeightRequest="{Static local:PropertyLeasePropousalsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                    <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </Frame.GestureRecognizers>
-                                    <StackLayout>
-                                        <Label 
-                                            FontAttributes="Bold"
-                                            FontSize="Medium"
-                                            Text="{Binding Property.Name}" />
-                                        <Label 
-                                            Margin="0,8,0,0"
-                                            Text="Acuerdo C/D primario"
-                                            TextColor="DimGray"
-                                            FontSize="Caption"
-                                            FontAttributes="Bold" />
-                                        <Label
-                                            LineBreakMode="TailTruncation">
-                                            <Label.FormattedText>
-                                                <FormattedString>
-                                                    <Span Text="No." />
-                                                    <Span Text="{Binding Agreement.Index}" />
-                                                    <Span Text=" " />
-                                                    <Span Text="{Binding Agreement.Title}" />
-                                                </FormattedString>
-                                            </Label.FormattedText>
-                                        </Label>
-                                        <Label 
-                                            Margin="0,8,0,0"
-                                            Text="Argumento"
-                                            TextColor="DimGray"
-                                            FontSize="Caption"
-                                            FontAttributes="Bold" />
-                                        <Label
-                                            VerticalOptions="FillAndExpand"
-                                            LineBreakMode="TailTruncation"
-                                            MaxLines="2"
-                                            Text="{Binding Description, TargetNullValue='---'}" />
-                                    </StackLayout>
-                                </Frame>
+                                    </ContentView.GestureRecognizers>
+                                </local_card_views:PropertyLeasePropousalDefaultCardView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

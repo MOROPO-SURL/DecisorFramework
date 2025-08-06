@@ -137,6 +137,7 @@
                                 <Label
                                     Grid.Column="5" Grid.Row="1"
                                     Margin="4,0"
+                                    LineBreakMode="TailTruncation"
                                     Text="{Binding Agreement.Meeting.At}" />
                                 <Label
                                     Grid.ColumnSpan="6" Grid.Row="2"
