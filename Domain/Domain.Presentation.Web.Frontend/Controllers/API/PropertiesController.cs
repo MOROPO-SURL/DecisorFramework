@@ -1,4 +1,5 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
@@ -12,7 +13,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 {
     [Microsoft.AspNetCore.Mvc.Route("api/domain/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class PropertiesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Property, System.Guid, PropertyInputModel, PropertyDisplayModel>
+    public class PropertiesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<Property, System.Guid, PropertyInputModel, PropertyDisplayModel, PropertyFilterModel>
     {
         private readonly IEntityRepository<PostalContactItem, System.Guid> postalContactRepository;
         private readonly IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository;

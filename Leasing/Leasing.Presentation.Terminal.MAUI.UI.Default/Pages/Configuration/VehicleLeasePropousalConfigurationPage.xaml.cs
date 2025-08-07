@@ -64,7 +64,7 @@ public partial class VehicleLeasePropousalConfigurationPage : Core.Presentation.
 
     private void VehiclePickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.VehiclePickPage(VehiclePickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.VehiclePickPage(VehiclePickComplete_Callback, new Domain.Interop.API.Common.Models.Filter.VehicleFilterModel { Assignments = [] })));
     }
 
     private void AuthorPickButton_Clicked(object sender, System.EventArgs e)

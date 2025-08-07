@@ -3,19 +3,49 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card.PropertyDefaultCardView"
     x:DataType="interop_common_display_models:PropertyDisplayModel">
     <ContentView.Resources>
         <ResourceDictionary>
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <Frame Padding="0">
         <StackLayout Spacing="0">
-            <Image
-                VerticalOptions="FillAndExpand"
-                Aspect="AspectFill"
-                Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+            <Grid 
+                IsClippedToBounds="True"
+                VerticalOptions="FillAndExpand">
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+                <Image
+                    Grid.RowSpan="2"
+                    Aspect="AspectFill"
+                    Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                <Grid
+                    IsVisible="{Binding Assignment, Converter={StaticResource IsNotNullConverter}}"
+                    Grid.Row="0"
+                    VerticalOptions="Center"
+                    Padding="0,2"
+                    BackgroundColor="#A7FFFFFF"
+                    Rotation="45"
+                    TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=3}">
+                    <Label                    
+                        Padding="8"
+                        BackgroundColor="{StaticResource Primary}"
+                        HorizontalTextAlignment="Center"
+                        FontAttributes="Bold"
+                        TextColor="White"
+                        Text="{Binding Assignment}" />
+                </Grid>
+            </Grid>
             <StackLayout
                 IsClippedToBounds="True"
                 Padding="10">

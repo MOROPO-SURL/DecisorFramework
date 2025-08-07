@@ -7,15 +7,18 @@ public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 320;
 
+    private readonly Interop.API.Common.Models.Filter.PropertyFilterModel filter;
+
     private System.Action<Interop.API.Common.Models.Display.PropertyDisplayModel> pickCompleteAction;
 
     private bool pickedFlag = false;
 
-    public PropertyPickPage(System.Action<Interop.API.Common.Models.Display.PropertyDisplayModel> pickCompleteAction)
+    public PropertyPickPage(System.Action<Interop.API.Common.Models.Display.PropertyDisplayModel> pickCompleteAction, Interop.API.Common.Models.Filter.PropertyFilterModel filter = null)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
+        this.filter = filter;
 
         IsEnabled = false;
     }
@@ -53,6 +56,8 @@ public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.PropertyDisplayModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.PropertiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        if (filter != null) return apiConnectClient.FilterPaginateAsync(filter, CurrentItemsPageNumber, CurrentItemsPageLimit);
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
