@@ -1338,10 +1338,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("numeric")
                         .HasColumnName("area");
 
-                    b.Property<int?>("Assignment")
-                        .HasColumnType("integer")
-                        .HasColumnName("assignment");
-
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
@@ -1464,6 +1460,54 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasName("pk_propertykinds");
 
                     b.ToTable("propertykinds", "decisorframework_domain");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PropertySpace", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<decimal>("Area")
+                        .HasColumnType("numeric")
+                        .HasColumnName("area");
+
+                    b.Property<int?>("Assignment")
+                        .HasColumnType("integer")
+                        .HasColumnName("assignment");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid?>("FeatureImageId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("featureimageid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<Guid>("PropertyId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("propertyid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_propertyspaces");
+
+                    b.HasIndex("FeatureImageId")
+                        .HasDatabaseName("ix_propertyspaces_featureimageid");
+
+                    b.HasIndex("PropertyId")
+                        .HasDatabaseName("ix_propertyspaces_propertyid");
+
+                    b.ToTable("propertyspaces", "decisorframework_domain");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Structure", b =>
@@ -7460,6 +7504,25 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Prow");
 
                     b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PropertySpace", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Image", "FeatureImage")
+                        .WithMany()
+                        .HasForeignKey("FeatureImageId")
+                        .HasConstraintName("fk_propertyspaces_images_featureimageid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Property", "Property")
+                        .WithMany()
+                        .HasForeignKey("PropertyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyspaces_properties_propertyid");
+
+                    b.Navigation("FeatureImage");
+
+                    b.Navigation("Property");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Structure", b =>

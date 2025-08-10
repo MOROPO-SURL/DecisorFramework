@@ -11,8 +11,6 @@
 
         public int Priority { get; set; }
 
-        public Enumerations.PropertyAssignment? Assignment { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 

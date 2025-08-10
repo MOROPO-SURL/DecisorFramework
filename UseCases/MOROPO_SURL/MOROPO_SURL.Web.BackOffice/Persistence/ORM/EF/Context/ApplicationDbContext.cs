@@ -125,6 +125,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<PropertyKind> PropertyKinds { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<PropertyImageBridge> PropertyImageBridges { get; set; }
+        public DbSet<PropertySpace> PropertySpaces { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<VehicleKind> VehicleKinds { get; set; }
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }

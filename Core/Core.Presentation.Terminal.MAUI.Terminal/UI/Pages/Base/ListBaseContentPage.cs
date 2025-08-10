@@ -110,6 +110,8 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             {
                 Dispatcher.Dispatch(() =>
                 {
+                    if (concreteBindingContext == null) return;
+
                     if (task.Exception != null || task.IsCanceled)
                     {
                         CurrentItemsPageNumber--;

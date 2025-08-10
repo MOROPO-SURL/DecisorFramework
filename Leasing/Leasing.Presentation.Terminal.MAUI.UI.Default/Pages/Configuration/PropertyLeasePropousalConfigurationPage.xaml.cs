@@ -64,7 +64,7 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
 
     private void PropertyPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PropertyPickPage(PropertyPickComplete_Callback, new Domain.Interop.API.Common.Models.Filter.PropertyFilterModel { Assignments = [] })));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PropertyPickPage(PropertyPickComplete_Callback)));
     }
 
     private void AuthorPickButton_Clicked(object sender, System.EventArgs e)
