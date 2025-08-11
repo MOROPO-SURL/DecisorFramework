@@ -3772,6 +3772,38 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("propertyleasepropousals", "decisorframework_leasing");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertySpaceLeasePropousal", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Argument")
+                        .HasColumnType("text")
+                        .HasColumnName("argument");
+
+                    b.Property<Guid>("PropertyLeasePropousalId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("propertyleasepropousalid");
+
+                    b.Property<Guid>("PropertySpaceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("propertyspaceid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_propertyspaceleasepropousals");
+
+                    b.HasIndex("PropertySpaceId")
+                        .HasDatabaseName("ix_propertyspaceleasepropousals_propertyspaceid");
+
+                    b.HasIndex("PropertyLeasePropousalId", "PropertySpaceId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_propertyspaceleasepropousals_propertyleasepropousalid_prope~");
+
+                    b.ToTable("propertyspaceleasepropousals", "decisorframework_leasing");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOffer", b =>
                 {
                     b.Property<Guid>("Id")
@@ -8547,6 +8579,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Author");
 
                     b.Navigation("Property");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertySpaceLeasePropousal", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeasePropousal", "PropertyLeasePropousal")
+                        .WithMany()
+                        .HasForeignKey("PropertyLeasePropousalId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyspaceleasepropousals_propertyleasepropousals_proper~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PropertySpace", "PropertySpace")
+                        .WithMany()
+                        .HasForeignKey("PropertySpaceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_propertyspaceleasepropousals_propertyspaces_propertyspaceid");
+
+                    b.Navigation("PropertyLeasePropousal");
+
+                    b.Navigation("PropertySpace");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOffer", b =>

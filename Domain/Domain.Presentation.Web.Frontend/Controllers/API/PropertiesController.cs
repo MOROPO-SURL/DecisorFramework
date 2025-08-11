@@ -73,7 +73,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                 return _model;
             }).ToArray();
 
-            model.Spaces = spaceRepository.FindBy(_entity => _entity.PropertyId == entity.Id).OrderBy(entity => entity.Name).ToArray().Select(_entity =>
+            model.Spaces = entity.Spaces.OrderBy(entity => entity.Name).ToArray().Select(_entity =>
             {
                 var _model = new PropertySpaceDisplayModel();
 

@@ -12,6 +12,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Providers
                 {
                     new BaseEntityTypeConfigurator<Entities.VehicleLeasePropousal>(),
                     new BaseEntityTypeConfigurator<Entities.PropertyLeasePropousal>(),
+                    new Configurators.PropertySpaceLeasePropousalEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.VehicleLeaseOffer>(),
                     new Configurators.VehicleLeaseOfferClauseBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.VehicleLeaseOrganizationPostulation>(),

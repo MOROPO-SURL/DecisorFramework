@@ -1,4 +1,7 @@
-﻿namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
+﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
+using System.Collections.Generic;
+
+namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 {
     public class PropertyLeasePropousalInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.PropertyLeasePropousal, System.Guid>
     {
@@ -13,6 +16,9 @@
         public System.Guid AgreementId { get; set; }
 
         public System.Guid PropertyId { get; set; }
+
+        public List<PropertySpaceLeasePropousalInputModel> IncomingSpaces { get; set; } = new List<PropertySpaceLeasePropousalInputModel>();
+        public List<Display.PropertySpaceLeasePropousalDisplayModel> OutgoingSpaces { get; set; } = new List<Display.PropertySpaceLeasePropousalDisplayModel>();
 
         public Persistence.Entities.PropertyLeasePropousal Export()
         {

@@ -8,6 +8,7 @@
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PropertyLeaseOfferConfigurationPage"
     x:TypeArguments="interop_common_display_models:PropertyLeaseOfferDisplayModel,interop_common_display_models:PropertyLeaseOfferDisplayModel,presentation_configuration_page_models:PropertyLeaseOfferConfigurationPageModel"
@@ -16,6 +17,8 @@
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="480" AbsoluteHorizontalSeparation="16" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
@@ -47,55 +50,126 @@
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Propuesta" />
-                        <Frame                        
-                            IsVisible="{Binding Propousal, Converter={StaticResource IsNotNullConverter}}"
-                            Padding="0">
-                            <Grid ColumnSpacing="0">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="2*" />
-                                </Grid.ColumnDefinitions>
-                                <Image
-                                    Grid.Column="0"
-                                    Aspect="AspectFill"               
-                                    Source="{Binding Propousal.Property.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
-                                <StackLayout 
-                                    Grid.Column="1"
-                                    Padding="16">
-                                    <Label 
-                                        FontAttributes="Bold"
-                                        FontSize="Medium"
-                                        Text="{Binding Propousal.Property.Name}" />
-                                    <Label 
-                                        Margin="0,8,0,0"
-                                        Text="Acuerdo C/D primario"
-                                        TextColor="DimGray"
-                                        FontSize="Caption"
-                                        FontAttributes="Bold" />
-                                    <Label
-                                        LineBreakMode="TailTruncation">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span Text="No." />
-                                                <Span Text="{Binding Propousal.Agreement.Index}" />
-                                                <Span Text=" " />
-                                                <Span Text="{Binding Propousal.Agreement.Title}" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                    <Label 
-                                        Margin="0,8,0,0"
-                                        Text="Argumento"
-                                        TextColor="DimGray"
-                                        FontSize="Caption"
-                                        FontAttributes="Bold" />
-                                    <Label
-                                        VerticalOptions="FillAndExpand"
-                                        LineBreakMode="TailTruncation"
-                                        MaxLines="2"
-                                        Text="{Binding Propousal.Description, TargetNullValue='---'}" />
-                                </StackLayout>
-                            </Grid>
+                        <Frame
+                            IsVisible="{Binding Propousal, Converter={StaticResource IsNotNullConverter}}">
+                            <VerticalStackLayout Spacing="4">
+                                <Label 
+                                    Style="{StaticResource CaptionFieldLabelStyle}" Text="Inmueble"
+                                    Margin="0" />
+                                <Frame Padding="0">
+                                    <Grid ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="2*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Grid.Column="0"
+                                            Aspect="AspectFill"               
+                                            Source="{Binding Propousal.Property.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                        <StackLayout 
+                                            Grid.Column="1"
+                                            Padding="16">
+                                            <Label 
+                                                FontAttributes="Bold"
+                                                FontSize="Medium"
+                                                Text="{Binding Propousal.Property.Name}" />
+                                            <Label 
+                                                Margin="0,8,0,0"
+                                                Text="Acuerdo C/D primario"
+                                                TextColor="DimGray"
+                                                FontSize="Caption"
+                                                FontAttributes="Bold" />
+                                            <Label
+                                                LineBreakMode="TailTruncation">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="No." />
+                                                        <Span Text="{Binding Propousal.Agreement.Index}" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding Propousal.Agreement.Title}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label 
+                                                Margin="0,8,0,0"
+                                                Text="Argumento"
+                                                TextColor="DimGray"
+                                                FontSize="Caption"
+                                                FontAttributes="Bold" />
+                                            <Label
+                                                VerticalOptions="FillAndExpand"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="2"
+                                                Text="{Binding Propousal.Description, TargetNullValue='---'}" />
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                                <Label 
+                                    Style="{StaticResource CaptionFieldLabelStyle}" Text="Espacios específicos"
+                                    Margin="0,4,0,0" />
+                                <BoxView 
+                                    Margin="0,0,0,8"
+                                    HeightRequest="2" 
+                                    Color="{StaticResource Gray050}" />
+                                <FlexLayout
+                                    Margin="4"
+                                    Wrap="Wrap"
+                                    AlignItems="Start" AlignContent="Start"
+                                    BindableLayout.ItemsSource="{Binding Propousal.SpacePropousals}">
+                                    <BindableLayout.EmptyView>
+                                        <Label Text="Sin elementos que mostrar (propuesta incluye todos los espacios)" FontAttributes="Italic" TextColor="DimGray" />
+                                    </BindableLayout.EmptyView>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_display_models:PropertySpaceLeasePropousalDisplayModel">
+                                            <Frame
+                                                Padding="0" Margin="4"
+                                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}"
+                                                HeightRequest="196">
+                                                <Grid ColumnSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="2*" />
+                                                        <ColumnDefinition Width="3*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image
+                                                        Grid.Column="0"
+                                                        Aspect="AspectFill"               
+                                                        Source="{Binding Space.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                                    <StackLayout 
+                                                        Grid.Column="1"
+                                                        Padding="8">
+                                                        <Label 
+                                                            FontAttributes="Bold"
+                                                            FontSize="Medium"
+                                                            LineBreakMode="TailTruncation"
+                                                            MaxLines="2"
+                                                            Text="{Binding Space.Name}" />
+                                                        <Label 
+                                                            Margin="0,8,0,0"
+                                                            Text="Espacio útil"
+                                                            TextColor="DimGray"
+                                                            FontSize="Caption"
+                                                            FontAttributes="Bold" />
+                                                        <Label
+                                                            LineBreakMode="TailTruncation"
+                                                            Text="{Binding Space.Area, StringFormat='{0:F2} m²'}" />
+                                                        <Label 
+                                                            Margin="0,8,0,0"
+                                                            Text="Descripción"
+                                                            TextColor="DimGray"
+                                                            FontSize="Caption"
+                                                            FontAttributes="Bold" />
+                                                        <Label
+                                                            VerticalOptions="FillAndExpand"
+                                                            LineBreakMode="TailTruncation"
+                                                            MaxLines="4"
+                                                            Text="{Binding Space.Description, TargetNullValue='---'}" />
+                                                    </StackLayout>
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </FlexLayout>
+                            </VerticalStackLayout>
                         </Frame>
                         <Button
                             HorizontalOptions="Start"

@@ -1,4 +1,5 @@
-﻿using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
+﻿using CommunityToolkit.Maui.Core.Extensions;
+using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -20,6 +21,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
             Author = model.Author;
             Agreement = model.Agreement;
             Property = model.Property;
+            SpacePropousals = model.SpacePropousals.ToObservableCollection();
         }
 
         public System.Guid Id { get; set; }
@@ -33,5 +35,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get => agreement; set => SetProperty(ref agreement, value); }
 
         public Domain.Interop.API.Common.Models.Display.PropertyDisplayModel Property { get => property; set => SetProperty(ref property, value); }
+
+        public System.Collections.ObjectModel.ObservableCollection<PropertySpaceLeasePropousalDisplayModel> SpacePropousals { get; set; } = [];
     }
 }

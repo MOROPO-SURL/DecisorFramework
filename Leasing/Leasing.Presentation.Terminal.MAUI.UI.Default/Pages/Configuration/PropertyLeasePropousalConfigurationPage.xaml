@@ -10,6 +10,7 @@
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PropertyLeasePropousalConfigurationPage"
     x:TypeArguments="interop_common_display_models:PropertyLeasePropousalDisplayModel,interop_common_display_models:PropertyLeasePropousalDisplayModel,presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel"
@@ -17,7 +18,10 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
 
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="480" AbsoluteHorizontalSeparation="16" />
+            
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -67,6 +71,103 @@
                         <Editor Text="{Binding Description}" HeightRequest="360" />
                     </VerticalStackLayout>
                 </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Espacios específicos" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                IsEnabled="{Binding Property, Converter={StaticResource IsNotNullConverter}}"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="SpacePropousalAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <FlexLayout
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                Margin="4"
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start"
+                                BindableLayout.ItemsSource="{Binding SpacePropousals}">
+                                <BindableLayout.EmptyView>
+                                    <Label Text="Sin elementos que mostrar (propuesta incluye todos los espacios)" FontAttributes="Italic" TextColor="DimGray" />
+                                </BindableLayout.EmptyView>
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:PropertySpaceLeasePropousalDisplayModel">
+                                        <Frame
+                                            Padding="0" Margin="4"
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}"
+                                            HeightRequest="196">
+                                            <Grid ColumnSpacing="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*" />
+                                                    <ColumnDefinition Width="3*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image
+                                                    Grid.Column="0"
+                                                    Aspect="AspectFill"               
+                                                    Source="{Binding Space.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                                <StackLayout 
+                                                    Grid.Column="1"
+                                                    Padding="8">
+                                                    <Label 
+                                                        FontAttributes="Bold"
+                                                        FontSize="Medium"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="2"
+                                                        Text="{Binding Space.Name}" />
+                                                    <Label 
+                                                        Margin="0,8,0,0"
+                                                        Text="Espacio útil"
+                                                        TextColor="DimGray"
+                                                        FontSize="Caption"
+                                                        FontAttributes="Bold" />
+                                                    <Label
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Space.Area, StringFormat='{0:F2} m²'}" />
+                                                    <Label 
+                                                        Margin="0,8,0,0"
+                                                        Text="Descripción"
+                                                        TextColor="DimGray"
+                                                        FontSize="Caption"
+                                                        FontAttributes="Bold" />
+                                                    <Label
+                                                        VerticalOptions="FillAndExpand"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="4"
+                                                        Text="{Binding Space.Description, TargetNullValue='---'}" />
+                                                </StackLayout>
+                                                <VerticalStackLayout 
+                                                    Grid.Column="2"
+                                                    Padding="8"
+                                                    Spacing="8">
+                                                    <Button
+                                                        VerticalOptions="Start"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="SpacePropousalRemotionButton_Clicked" />
+                                                </VerticalStackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
                 <FlexLayout 
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">

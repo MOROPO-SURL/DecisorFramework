@@ -18,6 +18,8 @@
 
         public Domain.Interop.API.Common.Models.Display.PropertyDisplayModel Property { get; set; }
 
+        public PropertySpaceLeasePropousalDisplayModel[] SpacePropousals { get; set; }
+
         public void Import(Persistence.Entities.PropertyLeasePropousal entity)
         {
             Id = entity.Id;

@@ -2,10 +2,7 @@
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
-using MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Repositories;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
-using MOROPO.Framework.Guama.Media.Persistence.Entities;
-using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
@@ -15,10 +12,12 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
     public class PropertyLeaseOffersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<PropertyLeaseOffer, System.Guid, PropertyLeaseOfferInputModel, PropertyLeaseOfferDisplayModel>
     {
         private readonly IEntityRepository<PropertyLeasePropousal, System.Guid> propertyLeasePropousalRepository;
+        private readonly IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository;
 
-        public PropertyLeaseOffersController(IEntityRepository<PropertyLeasePropousal, System.Guid> propertyLeasePropousalRepository, IEntityRepository<PropertyLeaseOffer, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PropertyLeaseOffersController> localizer, Microsoft.Extensions.Logging.ILogger<PropertyLeaseOffersController> logger) : base(repository, localizer, logger)
+        public PropertyLeaseOffersController(IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository, IEntityRepository<PropertyLeasePropousal, System.Guid> propertyLeasePropousalRepository, IEntityRepository<PropertyLeaseOffer, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PropertyLeaseOffersController> localizer, Microsoft.Extensions.Logging.ILogger<PropertyLeaseOffersController> logger) : base(repository, localizer, logger)
         {
             this.propertyLeasePropousalRepository = propertyLeasePropousalRepository;
+            this.spaceLeasePropousalRepository = spaceLeasePropousalRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<PropertyLeaseOffer, bool>> GetGlobalSelector()
@@ -54,6 +53,20 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
             {
                 model.Propousal.Property.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Propousal.Property.FeatureImage.ContentType);
             }
+
+            model.Propousal.SpacePropousals = spaceLeasePropousalRepository.FindBy(_entity => _entity.PropertyLeasePropousalId == entity.PropousalId).OrderBy(entity => entity.PropertySpace.Name).ToArray().Select(_entity =>
+            {
+                var _model = new PropertySpaceLeasePropousalDisplayModel();
+
+                _model.Import(_entity);
+
+                if (_entity.PropertySpace.FeatureImage != null)
+                {
+                    _model.Space.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.PropertySpace.FeatureImage.ContentType);
+                }
+
+                return _model;
+            }).ToArray();
 
             model.OrganizationPostulations = entity.OrganizationPostulations.Select(_entity =>
             {

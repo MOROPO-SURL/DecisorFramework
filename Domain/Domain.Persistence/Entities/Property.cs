@@ -37,6 +37,8 @@
 
         public string Description { get; set; }
 
+        public System.Collections.Generic.ICollection<PropertySpace> Spaces { get; set; }
+
         public System.Collections.Generic.List<PropertyImageBridge> ImageBridges { get; set; } = new System.Collections.Generic.List<PropertyImageBridge>();
     }
 }

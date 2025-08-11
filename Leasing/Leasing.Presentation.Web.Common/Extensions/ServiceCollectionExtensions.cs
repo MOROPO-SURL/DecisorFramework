@@ -10,6 +10,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Common.Extensions
         public static void AddDecisorLeasingPresentationWebCommon(this IServiceCollection services)
         {
             services.AddScoped<IEntityRepository<PropertyLeasePropousal, System.Guid>, PropertyLeasePropousalRepository>();
+            services.AddScoped<IEntityRepository<PropertySpaceLeasePropousal, System.Guid>, PropertySpaceLeasePropousalRepository>();
             services.AddScoped<IEntityRepository<VehicleLeasePropousal, System.Guid>, VehicleLeasePropousalRepository>();
             services.AddScoped<IEntityRepository<PropertyLeaseOffer, System.Guid>, PropertyLeaseOfferRepository>();
             services.AddScoped<IEntityRepository<VehicleLeaseOffer, System.Guid>, VehicleLeaseOfferRepository>();
