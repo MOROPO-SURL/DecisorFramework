@@ -22,8 +22,10 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.PropertyLeaseOffer>(),
                     new Configurators.PropertyLeaseOfferClauseBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.PropertyLeaseOrganizationPostulation>(),
+                    new Configurators.PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridgeEntitTypeConfigurator(),
                     new Configurators.PropertyLeaseOrganizationPostulationDocumentBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.PropertyLeasePersonPostulation>(),
+                    new Configurators.PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridgeEntityTypeConfigurator(),
                     new Configurators.PropertyLeasePersonPostulationDocumentBridgeEntityTypeConfigurator()
                 };
             }

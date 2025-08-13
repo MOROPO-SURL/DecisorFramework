@@ -155,28 +155,28 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 columnCount = itemsCollectionViewItemsLayout.Span;
 
                 itemsCollectionViewItemsLayoutHorizontalItemSpacing = itemsCollectionViewItemsLayout.HorizontalItemSpacing;
+
+                var collectionViewCellWidth = (itemsCollectionViewLayout.Width - ((columnCount - 1) * itemsCollectionViewItemsLayoutHorizontalItemSpacing)) / columnCount;
+
+                var collectionViewCellHeight = MeasureCollectionViewCellHeight(collectionViewCellWidth);
+
+                var availableVerticalHeight = itemsCollectionViewLayout.Height;
+
+                var rowCount = 0;
+
+                while (availableVerticalHeight > 0)
+                {
+                    rowCount++;
+
+                    availableVerticalHeight -= collectionViewCellHeight + itemsCollectionViewItemsLayoutHorizontalItemSpacing;
+                }
+
+                CurrentItemsPageLimit = columnCount * rowCount;
             }
             else
             {
-                itemsCollectionViewItemsLayoutHorizontalItemSpacing = (GetItemsCollectionView().ItemsLayout as Microsoft.Maui.Controls.LinearItemsLayout).ItemSpacing;
+                CurrentItemsPageLimit = 10;
             }
-
-            var collectionViewCellWidth = (itemsCollectionViewLayout.Width - ((columnCount - 1) * itemsCollectionViewItemsLayoutHorizontalItemSpacing)) / columnCount;
-
-            var collectionViewCellHeight = MeasureCollectionViewCellHeight(collectionViewCellWidth);
-
-            var availableVerticalHeight = itemsCollectionViewLayout.Height;
-
-            var rowCount = 0;
-
-            while (availableVerticalHeight > 0)
-            {
-                rowCount++;
-
-                availableVerticalHeight -= collectionViewCellHeight + itemsCollectionViewItemsLayoutHorizontalItemSpacing;
-            }
-
-            CurrentItemsPageLimit = columnCount * rowCount;
         }
     }
 }

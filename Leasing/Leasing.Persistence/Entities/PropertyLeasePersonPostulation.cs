@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Leasing.Persistence.Entities
+﻿using System.Collections.Generic;
+
+namespace MOROPO.Framework.Decisor.Leasing.Persistence.Entities
 {
     public class PropertyLeasePersonPostulation : Guama.Core.Persistence.Entities.Contract.IEntity<System.Guid>
     {
@@ -23,6 +25,8 @@
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Argument { get; set; }
+
+        public ICollection<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropertySpaceBridges { get; set; }
 
         public System.Collections.Generic.ICollection<PropertyLeasePersonPostulationDocumentBridge> DocumentBridges { get; set; }
     }

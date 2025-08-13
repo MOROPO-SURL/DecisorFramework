@@ -178,11 +178,17 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<PropertySpaceLeasePropousal> PropertySpaceLeasePropousals { get; set; }
         public DbSet<VehicleLeasePropousal> VehicleLeasePropousals { get; set; }
         public DbSet<PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
-        public DbSet<PropertyLeaseOrganizationPostulation> PropertyLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<PropertyLeasePersonPostulation> PropertyLeaseOfferPersonContactBridges { get; set; }
         public DbSet<VehicleLeaseOffer> VehicleLeaseOffers { get; set; }
-        public DbSet<VehicleLeaseOrganizationPostulation> VehicleLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<VehicleLeasePersonPostulation> VehicleLeaseOfferPersonContactBridges { get; set; }
+        public DbSet<VehicleLeaseOrganizationPostulation> VehicleLeaseOrganizationPostulations { get; set; }
+        public DbSet<VehicleLeaseOrganizationPostulationDocumentBridge> VehicleLeaseOrganizationPostulationDocumentBridges { get; set; }
+        public DbSet<VehicleLeasePersonPostulation> VehicleLeasePersonPostulations { get; set; }
+        public DbSet<VehicleLeasePersonPostulationDocumentBridge> VehicleLeasePersonPostulationDocumentBridges { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulation> PropertyLeaseOrganizationPostulations { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridge> PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridges { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulationDocumentBridge> PropertyLeaseOrganizationPostulationDocumentBridges { get; set; }
+        public DbSet<PropertyLeasePersonPostulation> PropertyLeasePersonPostulations { get; set; }
+        public DbSet<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridges { get; set; }
+        public DbSet<PropertyLeasePersonPostulationDocumentBridge> PropertyLeasePersonPostulationDocumentBridges { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent> PurchaseSpents { get; set; }

@@ -24,6 +24,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.Entities
         [System.ComponentModel.DataAnnotations.Required]
         public string Argument { get; set; }
 
+        public ICollection<PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridge> PropertySpaceBridges { get; set; }
+
         public ICollection<PropertyLeaseOrganizationPostulationDocumentBridge> DocumentBridges { get; set; }
     }
 }

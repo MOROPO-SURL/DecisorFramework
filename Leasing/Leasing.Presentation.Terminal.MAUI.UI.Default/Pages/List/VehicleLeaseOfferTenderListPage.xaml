@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ListBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:domain_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:presentation_list_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.List;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.List.VehicleLeaseOfferTenderListPage"
+    x:TypeArguments="interop_common_display_models:VehicleLeaseOfferDisplayModel,presentation_list_page_models:VehicleLeaseOfferTenderListPageModel,local_detail_pages:VehicleLeaseOfferDetailPage"
+    x:DataType="presentation_list_page_models:VehicleLeaseOfferTenderListPageModel"
+    Title="Licitaciones de Arrendamiento de Vehículos">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="280" AbsoluteHorizontalSeparation="16" />
+            
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <SearchBar Margin="20,20,20,0" />
+                <Grid 
+                    VerticalOptions="FillAndExpand"
+                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
+                    <CollectionView
+                        x:Name="ItemsCollectionView"
+                        Margin="20"
+                        ItemSizingStrategy="MeasureAllItems"
+                        ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_common_display_models:VehicleLeaseOfferDisplayModel">
+                                <Frame Margin="10">
+                                    <StackLayout>
+                                        <local_card_views:VehicleLeaseOfferDefaultCardView Margin="8">
+                                            <ContentView.GestureRecognizers>
+                                                <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                            </ContentView.GestureRecognizers>
+                                        </local_card_views:VehicleLeaseOfferDefaultCardView>
+                                        <FlexLayout
+                                            Wrap="Wrap"
+                                            AlignItems="Start" AlignContent="Start">
+                                            <VerticalStackLayout 
+                                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                                                Margin="4"
+                                                Spacing="6">
+                                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Postulantes jurídicos" />
+                                                <Frame Padding="8">
+                                                    <Grid RowSpacing="8">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="2" />
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
+                                                        <Button
+                                                            Grid.Column="1" Grid.Row="0"
+                                                            HorizontalOptions="End"
+                                                            Text="Agregar" />
+                                                        <BoxView
+                                                            Grid.ColumnSpan="2" Grid.Row="1"
+                                                            Color="{StaticResource Gray050}" />
+                                                        <FlexLayout
+                                                            Grid.ColumnSpan="2" Grid.Row="2"
+                                                            Margin="4"
+                                                            Wrap="Wrap"
+                                                            AlignItems="Start" AlignContent="Start"
+                                                            BindableLayout.ItemsSource="{Binding OrganizationPostulations}">
+                                                            <BindableLayout.EmptyView>
+                                                                <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                                            </BindableLayout.EmptyView>
+                                                            <BindableLayout.ItemTemplate>
+                                                                <DataTemplate x:DataType="interop_common_display_models:CommonLeaseOrganizationPostulationDisplayModel">
+                                                                    <Frame 
+                                                                        Padding="8"
+                                                                        Margin="0,12,0,0">
+                                                                        <StackLayout Orientation="Horizontal" Spacing="8">
+                                                                            <domain_card_views:OrganizationContactDefaultCardView 
+                                                                                BindingContext="{Binding Contact}"
+                                                                                HorizontalOptions="FillAndExpand"
+                                                                                Margin="8" />
+                                                                            <Button
+                                                                                VerticalOptions="Center"
+                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Text="&#xF90B;" />
+                                                                            <Button
+                                                                                VerticalOptions="Center"
+                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Text="&#xFA78;" />
+                                                                        </StackLayout>
+                                                                    </Frame>
+                                                                </DataTemplate>
+                                                            </BindableLayout.ItemTemplate>
+                                                        </FlexLayout>
+                                                    </Grid>
+                                                </Frame>
+                                            </VerticalStackLayout>
+                                            <VerticalStackLayout 
+                                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                                                Margin="4"
+                                                Spacing="6">
+                                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Postulantes naturales" />
+                                                <Frame Padding="8">
+                                                    <Grid RowSpacing="8">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="2" />
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
+                                                        <Button
+                                                            Grid.Column="1" Grid.Row="0"
+                                                            HorizontalOptions="End"
+                                                            Text="Agregar" />
+                                                        <BoxView
+                                                            Grid.ColumnSpan="2" Grid.Row="1"
+                                                            Color="{StaticResource Gray050}" />
+                                                        <FlexLayout
+                                                            Grid.ColumnSpan="2" Grid.Row="2"
+                                                            Margin="4"
+                                                            Wrap="Wrap"
+                                                            AlignItems="Start" AlignContent="Start"
+                                                            BindableLayout.ItemsSource="{Binding PersonPostulations}">
+                                                            <BindableLayout.EmptyView>
+                                                                <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                                            </BindableLayout.EmptyView>
+                                                            <BindableLayout.ItemTemplate>
+                                                                <DataTemplate x:DataType="interop_common_display_models:CommonLeasePersonPostulationDisplayModel">
+                                                                    <Frame 
+                                                                        Padding="8"
+                                                                        Margin="0,12,0,0">
+                                                                        <StackLayout Orientation="Horizontal" Spacing="8">
+                                                                            <domain_card_views:PersonContactDefaultCardView 
+                                                                                BindingContext="{Binding Contact}"
+                                                                                HorizontalOptions="FillAndExpand"
+                                                                                Margin="8" />
+                                                                            <Button
+                                                                                VerticalOptions="Center"
+                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Text="&#xF90B;" />
+                                                                            <Button
+                                                                                VerticalOptions="Center"
+                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Text="&#xFA78;" />
+                                                                        </StackLayout>
+                                                                    </Frame>
+                                                                </DataTemplate>
+                                                            </BindableLayout.ItemTemplate>
+                                                        </FlexLayout>
+                                                    </Grid>
+                                                </Frame>
+                                            </VerticalStackLayout>
+                                        </FlexLayout>
+                                    </StackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Label
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                                HorizontalTextAlignment="Center"
+                                Margin="5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                FontAttributes="Italic" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.Footer>
+                            <StackLayout IsVisible="{Binding HasMoreItems}">
+                                <Button
+                                HorizontalOptions="Center"
+                                Margin="5"
+                                Text="Mostrar más"
+                                Clicked="LoadMoreBurron_Clicked" />
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</core_ui_base_pages:ListBaseContentPage>
