@@ -90,7 +90,7 @@
             ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:VehicleLeaseOfferTenderListPage}" />
         <ShellContent
             Title="Inmuebles"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:PropertyLeaseOfferTenderListPage}" />
     </FlyoutItem>
     <ShellContent
         Title="Contrataciones"

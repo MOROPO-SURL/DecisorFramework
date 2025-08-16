@@ -15,9 +15,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Repositories
                 .Include(entity => entity.Propousal).ThenInclude(entity => entity.Agreement)
                 .Include(entity => entity.Propousal).ThenInclude(entity => entity.Property).ThenInclude(entity => entity.FeatureImage)
                 .Include(entity => entity.Propousal).ThenInclude(entity => entity.Property).ThenInclude(entity => entity.Kind)
-                .Include(entity => entity.ClauseBridges).ThenInclude(bridge => bridge.Stern)
-                .Include(entity => entity.OrganizationPostulations).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
-                .Include(entity => entity.PersonPostulations).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image);
+                .Include(entity => entity.ClauseBridges).ThenInclude(bridge => bridge.Stern);
         }
     }
 }

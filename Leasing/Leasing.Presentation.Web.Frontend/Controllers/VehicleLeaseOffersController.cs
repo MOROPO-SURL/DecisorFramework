@@ -11,11 +11,15 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
     [ApiController]
     public class VehicleLeaseOffersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<VehicleLeaseOffer, System.Guid, VehicleLeaseOfferInputModel, VehicleLeaseOfferDisplayModel>
     {
-        private readonly IEntityRepository<VehicleLeasePropousal, System.Guid> vehicleLeasePropousalRepository;
+        private readonly IEntityRepository<VehicleLeasePropousal, System.Guid> propousalRepository;
+        private readonly IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> organizationPostulationRepository;
+        private readonly IEntityRepository<VehicleLeasePersonPostulation, System.Guid> personPostulationRepository;
 
-        public VehicleLeaseOffersController(IEntityRepository<VehicleLeasePropousal, System.Guid> vehicleLeasePropousalRepository, IEntityRepository<VehicleLeaseOffer, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<VehicleLeaseOffersController> localizer, Microsoft.Extensions.Logging.ILogger<VehicleLeaseOffersController> logger) : base(repository, localizer, logger)
+        public VehicleLeaseOffersController(IEntityRepository<VehicleLeasePersonPostulation, System.Guid> personPostulationRepository, IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> organizationPostulationRepository, IEntityRepository<VehicleLeasePropousal, System.Guid> propousalRepository, IEntityRepository<VehicleLeaseOffer, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<VehicleLeaseOffersController> localizer, Microsoft.Extensions.Logging.ILogger<VehicleLeaseOffersController> logger) : base(repository, localizer, logger)
         {
-            this.vehicleLeasePropousalRepository = vehicleLeasePropousalRepository;
+            this.propousalRepository = propousalRepository;
+            this.organizationPostulationRepository = organizationPostulationRepository;
+            this.personPostulationRepository = personPostulationRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<VehicleLeaseOffer, bool>> GetGlobalSelector()
@@ -52,49 +56,31 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                 model.Propousal.Vehicle.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Propousal.Vehicle.FeatureImage.ContentType);
             }
 
-            model.OrganizationPostulations = entity.OrganizationPostulations.Select(_entity =>
+            model.OrganizationPostulations = organizationPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id).ToArray().Select(_entity =>
             {
-                var result = new CommonLeaseOrganizationPostulationDisplayModel
+                var _model = new VehicleLeaseOrganizationPostulationDisplayModel();
+
+                _model.Import(_entity);
+
+                if (_entity.Contact.Identity.Image != null)
                 {
-                    TaxIdentificationNumber = _entity.TaxIdentificationNumber,
-                    StateIdentificationCode = _entity.StateIdentificationCode,
-                    Argument = _entity.Argument
-                };
-
-                if (_entity.Contact != null)
-                {
-                    result.Contact = new Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel();
-
-                    result.Contact.Import(_entity.Contact);
-
-                    result.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Contact.Identity.Image.ContentType);
+                    _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Contact.Identity.Image.ContentType);
                 }
 
-                return result;
+                return _model;
             }).ToArray();
-            model.PersonPostulations = entity.PersonPostulations.Select(_entity =>
+            model.PersonPostulations = personPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id).ToArray().Select(_entity =>
             {
-                var result = new CommonLeasePersonPostulationDisplayModel
-                {
-                    TaxIdentificationNumber = _entity.TaxIdentificationNumber,
-                    Argument = _entity.Argument
-                };
+                var _model = new VehicleLeasePersonPostulationDisplayModel();
 
-                if (_entity.Contact != null)
-                {
-                    result.Contact = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
+                _model.Import(_entity);
 
-                    result.Contact.Import(_entity.Contact);
+                if (_entity.Contact.Identity.Image != null)
+                {
+                    _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Contact.Identity.Image.ContentType);
                 }
 
-                if (_entity.BusinessKind != null)
-                {
-                    result.BusinessKind = new Domain.Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel();
-
-                    result.BusinessKind.Import(_entity.BusinessKind);
-                }
-
-                return result;
+                return _model;
             }).ToArray();
 
             return model;
@@ -104,41 +90,13 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
         {
             base.PreCreate(entity, model);
 
-            var propousal = vehicleLeasePropousalRepository.Get(model.PropousalId);
+            var propousal = propousalRepository.Get(model.PropousalId);
             
             propousal.Archived = true;
 
-            vehicleLeasePropousalRepository.Update(propousal, User.Identity.Name, false);
+            propousalRepository.Update(propousal, User.Identity.Name, false);
 
             entity.PropousalId = model.PropousalId;
-
-            foreach (var _model in model.IncomingOrganizationPostulations)
-            {
-                var bridge = new VehicleLeaseOrganizationPostulation
-                {
-                    OfferId = entity.Id,
-                    ContactId = _model.ContactId,
-                    TaxIdentificationNumber = _model.TaxIdentificationNumber,
-                    StateIdentificationCode = _model.StateIdentificationCode,
-                    Argument = _model.Argument
-                };
-
-                entity.OrganizationPostulations.Add(bridge);
-            }
-
-            foreach (var _model in model.IncomingPersonPostulations)
-            {
-                var _entity = new VehicleLeasePersonPostulation
-                {
-                    OfferId = entity.Id,
-                    ContactId = _model.ContactId,
-                    TaxIdentificationNumber = _model.TaxIdentificationNumber,
-                    BusinessKindId = _model.BusinessKindId,
-                    Argument = _model.Argument
-                };
-
-                entity.PersonPostulations.Add(_entity);
-            }
         }
 
         protected override void PreEdit(VehicleLeaseOffer entity, VehicleLeaseOfferInputModel model)
@@ -147,165 +105,21 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
             if (entity.PropousalId != model.PropousalId)
             {
-                var oldPropousal = vehicleLeasePropousalRepository.Get(entity.PropousalId);
+                var oldPropousal = propousalRepository.Get(entity.PropousalId);
 
                 oldPropousal.Archived = false;
 
-                vehicleLeasePropousalRepository.Update(oldPropousal, User.Identity.Name, false);
+                propousalRepository.Update(oldPropousal, User.Identity.Name, false);
 
                 entity.Propousal = null;
                 entity.PropousalId = model.PropousalId;
 
-                var newPropousal = vehicleLeasePropousalRepository.Get(model.PropousalId);
+                var newPropousal = propousalRepository.Get(model.PropousalId);
 
                 newPropousal.Archived = true;
 
-                vehicleLeasePropousalRepository.Update(newPropousal, User.Identity.Name, false);
+                propousalRepository.Update(newPropousal, User.Identity.Name, false);
             }
-
-            #region Organizations
-            foreach (var _model in model.OutgoingOrganizationPostulations)
-            {
-                var _entity = entity.OrganizationPostulations.First(_entity => _entity.Id == _model.Id);
-
-                entity.OrganizationPostulations.Remove(_entity);
-            }
-
-            foreach (var _model in model.EditionOrganizationPostulations)
-            {
-                var _entity = entity.OrganizationPostulations.First(_entity => _entity.Id == _model.Id);
-
-                _entity.TaxIdentificationNumber = _model.TaxIdentificationNumber;
-                _entity.StateIdentificationCode = _model.StateIdentificationCode;
-                _entity.Argument = _model.Argument;
-
-                //if (_model.RawCredentialDocument != null)
-                //{
-                //    bridge.CredentialDocument = documentRepository.Add(new Document
-                //    {
-                //        Id = _model.RawCredentialDocument.Id,
-                //        Name = _model.RawCredentialDocument.Name,
-                //        ContentType = _model.RawCredentialDocument.ContentType,
-                //        Description = _model.RawCredentialDocument.Description,
-                //        Length = _model.RawCredentialDocument.ContentData.Length
-                //    }, User.Identity.Name, false);
-                //    bridge.CredentialDocumentId = bridge.CredentialDocument.Id;
-
-                //    documentFileManager.SaveDocumentFileContent(bridge.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, bridge.CredentialDocument.ContentType);
-                //}
-            }
-
-            foreach (var _model in model.IncomingOrganizationPostulations)
-            {
-                var _entity = new VehicleLeaseOrganizationPostulation
-                {
-                    OfferId = entity.Id,
-                    ContactId = _model.ContactId,
-                    TaxIdentificationNumber = _model.TaxIdentificationNumber,
-                    StateIdentificationCode = _model.StateIdentificationCode,
-                    Argument = _model.Argument
-                };
-
-                //if (_model.RawCredentialDocument != null)
-                //{
-                //    _entity.CredentialDocument = documentRepository.Add(new Document
-                //    {
-                //        Id = _model.RawCredentialDocument.Id,
-                //        Name = _model.RawCredentialDocument.Name,
-                //        ContentType = _model.RawCredentialDocument.ContentType,
-                //        Description = _model.RawCredentialDocument.Description,
-                //        Length = _model.RawCredentialDocument.ContentData.Length
-                //    }, User.Identity.Name, false);
-                //    _entity.CredentialDocumentId = _entity.CredentialDocument.Id;
-
-                //    documentFileManager.SaveDocumentFileContent(_entity.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, _entity.CredentialDocument.ContentType);
-                //}
-
-                entity.OrganizationPostulations.Add(_entity);
-            }
-            #endregion
-
-            #region PersonContacts
-            foreach (var _model in model.OutgoingPersonPostulations)
-            {
-                var _entity = entity.PersonPostulations.First(_entity => _entity.Id == _model.Id);
-
-                entity.PersonPostulations.Remove(_entity);
-            }
-
-            foreach (var _model in model.EditionPersonPostulations)
-            {
-                var _entity = entity.PersonPostulations.First(_entity => _entity.Id == _model.Id);
-
-                _entity.TaxIdentificationNumber = _model.TaxIdentificationNumber;
-                _entity.Argument = _model.Argument;
-
-                if (_entity.BusinessKindId != _model.BusinessKindId)
-                {
-                    _entity.BusinessKind = null;
-                    _entity.BusinessKindId = _model.BusinessKindId;
-                }
-
-                //if (_model.RawCredentialDocument != null)
-                //{
-                //    _entity.CredentialDocument = documentRepository.Add(new Document
-                //    {
-                //        Id = _model.RawCredentialDocument.Id,
-                //        Name = _model.RawCredentialDocument.Name,
-                //        ContentType = _model.RawCredentialDocument.ContentType,
-                //        Description = _model.RawCredentialDocument.Description,
-                //        Length = _model.RawCredentialDocument.ContentData.Length
-                //    }, User.Identity.Name, false);
-                //    _entity.CredentialDocumentId = _entity.CredentialDocument.Id;
-
-                //    documentFileManager.SaveDocumentFileContent(_entity.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, _entity.CredentialDocument.ContentType);
-                //}
-            }
-
-            foreach (var _model in model.IncomingPersonPostulations)
-            {
-                var _entity = new VehicleLeasePersonPostulation
-                {
-                    OfferId = entity.Id,
-                    ContactId = _model.ContactId,
-                    TaxIdentificationNumber = _model.TaxIdentificationNumber,
-                    BusinessKindId = _model.BusinessKindId,
-                    Argument = _model.Argument
-                };
-
-                //if (_model.RawCredentialDocument != null)
-                //{
-                //    _entity.CredentialDocument = documentRepository.Add(new Document
-                //    {
-                //        Id = _model.RawCredentialDocument.Id,
-                //        Name = _model.RawCredentialDocument.Name,
-                //        ContentType = _model.RawCredentialDocument.ContentType,
-                //        Description = _model.RawCredentialDocument.Description,
-                //        Length = _model.RawCredentialDocument.ContentData.Length
-                //    }, User.Identity.Name, false);
-                //    _entity.CredentialDocumentId = _entity.CredentialDocument.Id;
-
-                //    documentFileManager.SaveDocumentFileContent(_entity.CredentialDocument.Id, _model.RawCredentialDocument.ContentData, _entity.CredentialDocument.ContentType);
-                //}
-
-                entity.PersonPostulations.Add(_entity);
-            }
-            #endregion
         }
-
-        //protected override void PostEdit(VehicleLeaseOffer entity, VehicleLeaseOfferInputModel model)
-        //{
-        //    base.PostEdit(entity, model);
-
-        //    foreach (var _model in model.OutgoingOrganizationPostulations)
-        //    {
-        //        documentFileManager.DeleteDocumentFile(new Document { Id = _model.CredentialDocument.Id, ContentType = MimeTypes.MimeTypeMap.GetMimeType(_model.CredentialDocument.Extension) });
-        //    }
-
-        //    foreach (var _model in model.OutgoingPersonPostulations)
-        //    {
-        //        documentFileManager.DeleteDocumentFile(new Document { Id = _model.CredentialDocument.Id, ContentType = MimeTypes.MimeTypeMap.GetMimeType(_model.CredentialDocument.Extension) });
-        //    }
-        //}
     }
 }

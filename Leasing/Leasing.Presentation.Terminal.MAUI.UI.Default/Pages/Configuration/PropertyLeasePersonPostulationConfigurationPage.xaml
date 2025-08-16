@@ -8,12 +8,11 @@
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
-    xmlns:interop_common_input_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.CommonLeaseOrganizationPostulationConfigurationPage"
-    x:TypeArguments="interop_common_display_models:CommonLeaseOrganizationPostulationDisplayModel,interop_common_input_models:CommonLeaseOrganizationPostulationInputModel,presentation_configuration_page_models:CommonLeaseOrganizationPostulationConfigurationPageModel"
-    x:DataType="presentation_configuration_page_models:CommonLeaseOrganizationPostulationConfigurationPageModel">
+    x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PropertyLeasePersonPostulationConfigurationPage"
+    x:TypeArguments="interop_common_display_models:PropertyLeasePersonPostulationDisplayModel,interop_common_display_models:PropertyLeasePersonPostulationDisplayModel,presentation_configuration_page_models:PropertyLeasePersonPostulationConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:PropertyLeasePersonPostulationConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
@@ -45,14 +44,14 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=8, MediumContainerColumn=10}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Contacto" />
                         <ContentView                        
                             IsVisible="{Binding Contact, Converter={StaticResource IsNotNullConverter}}"
                             HeightRequest="148">
-                            <domain_presentation_card_views:OrganizationContactDefaultCardView
+                            <domain_presentation_card_views:PersonContactDefaultCardView
                                 BindingContext="{Binding Contact}" />
                         </ContentView>
                         <Button
@@ -60,19 +59,27 @@
                             Text="Seleccionar ..."
                             Clicked="ContactPickButton_Clicked" />
                     </VerticalStackLayout>
+                </FlexLayout>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="NIT" />
-                        <Entry Text="{Binding TaxIdentificationNumber}" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo de Autorización Comercial" />
+                        <Picker 
+                            x:Name="BusinessKindPicker"
+                            ItemsSource="{Binding AvailableBusinessKinds}"
+                            ItemDisplayBinding="{Binding Path=Name}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código REUP" />
-                        <Entry Text="{Binding StateIdentificationCode}" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. de Identidad (NIT)" />
+                        <Entry Text="{Binding TaxIdentificationNumber}" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <VerticalStackLayout 
@@ -82,7 +89,6 @@
                     <Editor Text="{Binding Argument}" HeightRequest="180" />
                 </VerticalStackLayout>
             </VerticalStackLayout>
-            
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>

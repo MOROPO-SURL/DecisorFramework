@@ -184,10 +184,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<VehicleLeasePersonPostulation> VehicleLeasePersonPostulations { get; set; }
         public DbSet<VehicleLeasePersonPostulationDocumentBridge> VehicleLeasePersonPostulationDocumentBridges { get; set; }
         public DbSet<PropertyLeaseOrganizationPostulation> PropertyLeaseOrganizationPostulations { get; set; }
-        public DbSet<PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridge> PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridges { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridge> PropertyLeaseOrgPostulationSpacePropousalBridges { get; set; }
         public DbSet<PropertyLeaseOrganizationPostulationDocumentBridge> PropertyLeaseOrganizationPostulationDocumentBridges { get; set; }
         public DbSet<PropertyLeasePersonPostulation> PropertyLeasePersonPostulations { get; set; }
-        public DbSet<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridges { get; set; }
+        public DbSet<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropertyLeasePersPostulationSpacePropousalBridges { get; set; }
         public DbSet<PropertyLeasePersonPostulationDocumentBridge> PropertyLeasePersonPostulationDocumentBridges { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }

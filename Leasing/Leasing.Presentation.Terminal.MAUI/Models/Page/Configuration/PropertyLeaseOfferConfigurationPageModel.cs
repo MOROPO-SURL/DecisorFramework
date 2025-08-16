@@ -1,5 +1,4 @@
-﻿using CommunityToolkit.Maui.Core.Extensions;
-using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
+﻿using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -25,8 +24,6 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
             Description = model.Description;
             Propousal = model.Propousal;
             Agreement = model.Agreement;
-            OrganizationPostulations = model.OrganizationPostulations.ToObservableCollection();
-            PersonPostulations = model.PersonPostulations.ToObservableCollection();
         }
 
         public System.Guid Id { get; set; }
@@ -44,9 +41,5 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         public PropertyLeasePropousalDisplayModel Propousal { get => propousal; set => SetProperty(ref propousal, value); }
 
         public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get => agreement; set => SetProperty(ref agreement, value); }
-
-        public System.Collections.ObjectModel.ObservableCollection<CommonLeaseOrganizationPostulationDisplayModel> OrganizationPostulations { get; set; } = [];
-
-        public System.Collections.ObjectModel.ObservableCollection<CommonLeasePersonPostulationDisplayModel> PersonPostulations { get; set; } = [];
     }
 }

@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
-
-namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
+﻿namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 {
     public class PropertyLeaseOfferInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.PropertyLeaseOffer, System.Guid>
     {
@@ -18,14 +15,6 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
         public System.Guid AgreementId { get; set; }
 
         public System.Guid PropousalId { get; set; }
-
-        public List<CommonLeasePersonPostulationInputModel> EditionPersonPostulations { get; set; } = new List<CommonLeasePersonPostulationInputModel>();
-        public List<CommonLeasePersonPostulationInputModel> IncomingPersonPostulations { get; set; } = new List<CommonLeasePersonPostulationInputModel>();
-        public List<CommonLeasePersonPostulationDisplayModel> OutgoingPersonPostulations { get; set; } = new List<CommonLeasePersonPostulationDisplayModel>();
-
-        public List<CommonLeaseOrganizationPostulationInputModel> EditionOrganizationPostulations { get; set; } = new List<CommonLeaseOrganizationPostulationInputModel>();
-        public List<CommonLeaseOrganizationPostulationInputModel> IncomingOrganizationPostulations { get; set; } = new List<CommonLeaseOrganizationPostulationInputModel>();
-        public List<CommonLeaseOrganizationPostulationDisplayModel> OutgoingOrganizationPostulations { get; set; } = new List<CommonLeaseOrganizationPostulationDisplayModel>();
 
         public Persistence.Entities.PropertyLeaseOffer Export()
         {

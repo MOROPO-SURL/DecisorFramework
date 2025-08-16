@@ -1,13 +1,14 @@
+using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;
+using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-
-public partial class CommonLeasePersonPostulationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<CommonLeasePersonPostulationDisplayModel, CommonLeasePersonPostulationInputModel, Models.Page.Configuration.CommonLeasePersonPostulationConfigurationPageModel>
+public partial class PropertyLeasePersonPostulationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<PropertyLeasePersonPostulationDisplayModel, PropertyLeasePersonPostulationDisplayModel, Models.Page.Configuration.PropertyLeasePersonPostulationConfigurationPageModel>
 {
-    public CommonLeasePersonPostulationConfigurationPage(System.Action<CommonLeasePersonPostulationInputModel> successAction, Models.Page.Configuration.CommonLeasePersonPostulationConfigurationPageModel model) : base(successAction, model)
+    public PropertyLeasePersonPostulationConfigurationPage(System.Action<PropertyLeasePersonPostulationDisplayModel> successAction, Models.Page.Configuration.PropertyLeasePersonPostulationConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
 
@@ -28,26 +29,42 @@ public partial class CommonLeasePersonPostulationConfigurationPage : Core.Presen
 
     protected override string EntityTypeName => "Postulante Natural";
 
-    protected override System.Threading.Tasks.Task<CommonLeasePersonPostulationInputModel> PerformCreationAsync()
+    protected override async System.Threading.Tasks.Task<PropertyLeasePersonPostulationDisplayModel> PerformCreationAsync()
     {
-        return System.Threading.Tasks.Task.FromResult(new CommonLeasePersonPostulationInputModel
+        var apiConnectClient = new Interop.API.Connect.Clients.PropertyLeasePersonPostulationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+        var model = new PropertyLeasePersonPostulationInputModel
         {
+            Id = System.Guid.NewGuid(),
+            OfferId = ConcreteBindingContext.OfferId,
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument
-        });
+        };
+
+        await apiConnectClient.CreateAsync(model);
+
+        return null;
     }
 
-    protected override System.Threading.Tasks.Task<CommonLeasePersonPostulationInputModel> PerformEditionAsync()
+    protected override async System.Threading.Tasks.Task<PropertyLeasePersonPostulationDisplayModel> PerformEditionAsync()
     {
-        return System.Threading.Tasks.Task.FromResult(new CommonLeasePersonPostulationInputModel
+        var apiConnectClient = new Interop.API.Connect.Clients.PropertyLeasePersonPostulationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+        var model = new PropertyLeasePersonPostulationInputModel
         {
+            Id = ConcreteBindingContext.Id,
+            OfferId = ConcreteBindingContext.OfferId,
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument
-        });
+        };
+
+        await apiConnectClient.EditAsync(model);
+
+        return null;
     }
 
     private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)

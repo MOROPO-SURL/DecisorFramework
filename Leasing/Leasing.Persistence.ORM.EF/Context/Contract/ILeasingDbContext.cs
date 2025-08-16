@@ -14,10 +14,10 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.VehicleLeasePersonPostulation> VehicleLeasePersonPostulations { get; set; }
         public DbSet<Entities.VehicleLeasePersonPostulationDocumentBridge> VehicleLeasePersonPostulationDocumentBridges { get; set; }
         public DbSet<Entities.PropertyLeaseOrganizationPostulation> PropertyLeaseOrganizationPostulations { get; set; }
-        public DbSet<Entities.PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridge> PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridges { get; set; }
+        public DbSet<Entities.PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridge> PropertyLeaseOrgPostulationSpacePropousalBridges { get; set; }
         public DbSet<Entities.PropertyLeaseOrganizationPostulationDocumentBridge> PropertyLeaseOrganizationPostulationDocumentBridges { get; set; }
         public DbSet<Entities.PropertyLeasePersonPostulation> PropertyLeasePersonPostulations { get; set; }
-        public DbSet<Entities.PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridges { get; set; }
+        public DbSet<Entities.PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropertyLeasePersPostulationSpacePropousalBridges { get; set; }
         public DbSet<Entities.PropertyLeasePersonPostulationDocumentBridge> PropertyLeasePersonPostulationDocumentBridges { get; set; }
     }
 }
