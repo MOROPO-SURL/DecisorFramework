@@ -1,5 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 {

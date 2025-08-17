@@ -20,5 +20,17 @@
                 Space.Import(entity.PropertySpace);
             }
         }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is PropertySpaceLeasePropousalDisplayModel)) return false;
+
+            return Id.Equals((obj as PropertySpaceLeasePropousalDisplayModel).Id);
+        }
     }
 }

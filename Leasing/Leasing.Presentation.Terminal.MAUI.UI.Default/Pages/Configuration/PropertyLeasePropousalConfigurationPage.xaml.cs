@@ -87,7 +87,7 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
 
     private void SpacePropousalAgregationButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PropertySpaceForLeasePropousalPickPage(PropertySpacePickComplete_Callback, ConcreteBindingContext.Property, ConcreteBindingContext.SpacePropousals.ToArray())));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PropertySpaceForLeasePropousalPickPage(PropertySpacePickComplete_Callback, ConcreteBindingContext.Property.Spaces.Except(ConcreteBindingContext.SpacePropousals.Select(item => item.Space)).ToArray())));
     }
 
     private void SpacePropousalRemotionButton_Clicked(object sender, System.EventArgs e)

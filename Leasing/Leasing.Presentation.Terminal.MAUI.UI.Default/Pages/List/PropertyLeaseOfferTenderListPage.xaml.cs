@@ -50,14 +50,14 @@ public partial class PropertyLeaseOfferTenderListPage : Core.Presentation.Termin
 
     private void OrganizationPostulationAgregationButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new Configuration.PropertyLeaseOrganizationPostulationConfigurationPage(OrganizationPostulationConfigurationSuccess_Callback, new Models.Page.Configuration.PropertyLeaseOrganizationPostulationConfigurationPageModel(((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as PropertyLeaseOfferDisplayModel).Id, null)));
+        this.NavigationPushPageAsync(new Configuration.PropertyLeaseOrganizationPostulationConfigurationPage(OrganizationPostulationConfigurationSuccess_Callback, new Models.Page.Configuration.PropertyLeaseOrganizationPostulationConfigurationPageModel((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as PropertyLeaseOfferDisplayModel, null)));
     }
 
     private void OrganizationPostulationEditionButton_Clicked(object sender, System.EventArgs e)
     {
         var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PropertyLeaseOrganizationPostulationDisplayModel;
 
-        this.NavigationPushPageAsync(new Configuration.PropertyLeaseOrganizationPostulationConfigurationPage(OrganizationPostulationConfigurationSuccess_Callback, new Models.Page.Configuration.PropertyLeaseOrganizationPostulationConfigurationPageModel(((sender as Microsoft.Maui.Controls.View).Parent.Parent.Parent.BindingContext as PropertyLeaseOfferDisplayModel).Id, target)));
+        this.NavigationPushPageAsync(new Configuration.PropertyLeaseOrganizationPostulationConfigurationPage(OrganizationPostulationConfigurationSuccess_Callback, new Models.Page.Configuration.PropertyLeaseOrganizationPostulationConfigurationPageModel((sender as Microsoft.Maui.Controls.View).Parent.Parent.Parent.BindingContext as PropertyLeaseOfferDisplayModel, target)));
     }
 
     private void PersonPostulationAgregationButton_Clicked(object sender, System.EventArgs e)
@@ -76,7 +76,7 @@ public partial class PropertyLeaseOfferTenderListPage : Core.Presentation.Termin
                 }
                 else
                 {
-                    var model = new Models.Page.Configuration.PropertyLeasePersonPostulationConfigurationPageModel(((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as PropertyLeaseOfferDisplayModel).Id, null)
+                    var model = new Models.Page.Configuration.PropertyLeasePersonPostulationConfigurationPageModel((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as PropertyLeaseOfferDisplayModel, null)
                     {
                         AvailableBusinessKinds = task.Result
                     };
@@ -107,7 +107,7 @@ public partial class PropertyLeaseOfferTenderListPage : Core.Presentation.Termin
                 {
                     var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PropertyLeasePersonPostulationDisplayModel;
 
-                    var model = new Models.Page.Configuration.PropertyLeasePersonPostulationConfigurationPageModel(((sender as Microsoft.Maui.Controls.View).Parent.Parent.Parent.BindingContext as PropertyLeaseOfferDisplayModel).Id, target)
+                    var model = new Models.Page.Configuration.PropertyLeasePersonPostulationConfigurationPageModel((sender as Microsoft.Maui.Controls.View).Parent.Parent.Parent.BindingContext as PropertyLeaseOfferDisplayModel, target)
                     {
                         AvailableBusinessKinds = task.Result
                     };

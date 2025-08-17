@@ -83,6 +83,20 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                     _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Contact.Identity.Image.ContentType);
                 }
 
+                _model.Spaces = _entity.PropertySpaceBridges.Select(bridge =>
+                {
+                    var __model = new PropertySpaceLeasePropousalDisplayModel();
+
+                    __model.Import(bridge.Stern);
+
+                    if (bridge.Stern.PropertySpace.FeatureImage != null)
+                    {
+                        __model.Space.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.PropertySpace.FeatureImage.ContentType);
+                    }
+
+                    return __model;
+                }).ToArray();
+
                 return _model;
             }).ToArray();
             model.PersonPostulations = personPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id).ToArray().Select(_entity =>
@@ -95,6 +109,20 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                 {
                     _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Contact.Identity.Image.ContentType);
                 }
+
+                _model.Spaces = _entity.PropertySpaceBridges.Select(bridge =>
+                {
+                    var __model = new PropertySpaceLeasePropousalDisplayModel();
+
+                    __model.Import(bridge.Stern);
+
+                    if (bridge.Stern.PropertySpace.FeatureImage != null)
+                    {
+                        __model.Space.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.PropertySpace.FeatureImage.ContentType);
+                    }
+
+                    return __model;
+                }).ToArray();
 
                 return _model;
             }).ToArray();

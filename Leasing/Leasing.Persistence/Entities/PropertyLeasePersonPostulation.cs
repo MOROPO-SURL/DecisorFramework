@@ -6,8 +6,8 @@
         public PropertyLeaseOffer Offer { get; set; }
         public System.Guid OfferId { get; set; }
 
-        public System.Collections.Generic.ICollection<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropertySpaceBridges { get; set; }
+        public System.Collections.Generic.List<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropertySpaceBridges { get; set; } = new System.Collections.Generic.List<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge>();
 
-        public System.Collections.Generic.ICollection<PropertyLeasePersonPostulationDocumentBridge> DocumentBridges { get; set; }
+        public System.Collections.Generic.List<PropertyLeasePersonPostulationDocumentBridge> DocumentBridges { get; set; } = new System.Collections.Generic.List<PropertyLeasePersonPostulationDocumentBridge>();
     }
 }

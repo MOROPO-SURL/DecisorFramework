@@ -5,17 +5,15 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default
 
 public partial class PropertySpaceForLeasePropousalPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel, Models.Page.Pick.PropertySpaceForLeasePropousalPickPageModel, Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.PropertySpaceDetailPage>
 {
-    private readonly Domain.Interop.API.Common.Models.Display.PropertyDisplayModel property;
-    private readonly Interop.API.Common.Models.Display.PropertySpaceLeasePropousalDisplayModel[] propousals;
+    private readonly Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel[] availables;
 
     private System.Action<Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel> pickCompleteAction;
 
-    public PropertySpaceForLeasePropousalPickPage(System.Action<Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel> pickCompleteAction, Domain.Interop.API.Common.Models.Display.PropertyDisplayModel property, Interop.API.Common.Models.Display.PropertySpaceLeasePropousalDisplayModel[] propousals)
+    public PropertySpaceForLeasePropousalPickPage(System.Action<Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel> pickCompleteAction, Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel[] availables)
     {
         InitializeComponent();
 
-        this.property = property;
-        this.propousals = propousals;
+        this.availables = availables;
 
         this.pickCompleteAction = pickCompleteAction;
     }
@@ -38,16 +36,14 @@ public partial class PropertySpaceForLeasePropousalPickPage : Core.Presentation.
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel>> FetchItemsAsync()
     {
-        var result = property.Spaces.Except(propousals.Select(model => model.Space));
-
         return System.Threading.Tasks.Task.FromResult(new Guama.Core.Presentation.Models.PaginationModel<Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel>
         {
             HasNext = false,
             HasPrevious = false,
-            Limit = result.Count(),
-            MaxPageCount = result.Count(),
+            Limit = availables.Count(),
+            MaxPageCount = availables.Count(),
             Page = 1,
-            List = result.ToList()
+            List = availables.ToList()
         });
     }
 
