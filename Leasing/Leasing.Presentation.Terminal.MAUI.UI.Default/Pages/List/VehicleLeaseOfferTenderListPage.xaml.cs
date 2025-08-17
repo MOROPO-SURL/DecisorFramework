@@ -48,6 +48,16 @@ public partial class VehicleLeaseOfferTenderListPage : Core.Presentation.Termina
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 
+    private void OganizationPostulationViewLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Detail.VehicleLeaseOrganizationPostulationDetailPage(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as VehicleLeaseOrganizationPostulationDisplayModel));
+    }
+
+    private void PersonPostulationViewLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Detail.VehicleLeasePersonPostulationDetailPage(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as VehicleLeasePersonPostulationDisplayModel));
+    }
+
     private void OrganizationPostulationAgregationButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushPageAsync(new Configuration.VehicleLeaseOrganizationPostulationConfigurationPage(OrganizationPostulationConfigurationSuccess_Callback, new Models.Page.Configuration.VehicleLeaseOrganizationPostulationConfigurationPageModel(((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as VehicleLeaseOfferDisplayModel).Id, null)));

@@ -48,6 +48,16 @@ public partial class PropertyLeaseOfferTenderListPage : Core.Presentation.Termin
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 
+    private void OganizationPostulationViewLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Detail.PropertyLeaseOrganizationPostulationDetailPage(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PropertyLeaseOrganizationPostulationDisplayModel));
+    }
+
+    private void PersonPostulationViewLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Detail.PropertyLeasePersonPostulationDetailPage(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PropertyLeasePersonPostulationDisplayModel));
+    }
+
     private void OrganizationPostulationAgregationButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushPageAsync(new Configuration.PropertyLeaseOrganizationPostulationConfigurationPage(OrganizationPostulationConfigurationSuccess_Callback, new Models.Page.Configuration.PropertyLeaseOrganizationPostulationConfigurationPageModel((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as PropertyLeaseOfferDisplayModel, null)));

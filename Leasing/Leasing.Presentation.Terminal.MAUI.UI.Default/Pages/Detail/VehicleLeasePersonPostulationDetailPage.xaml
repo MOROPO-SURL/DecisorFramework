@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.VehicleLeasePersonPostulationDetailPage"
+    x:TypeArguments="interop_common_display_models:VehicleLeasePersonPostulationDisplayModel"
+    x:DataType="interop_common_display_models:VehicleLeasePersonPostulationDisplayModel"
+    Title="Detalles de Postulación a Oferta de Arrendamiento de Vehículo"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Frame
+                Style="{StaticResource PopupFrameStyle}"
+                WidthRequest="400">
+                <Grid>
+                    <StackLayout Margin="20">
+                        <Label 
+                            Margin="0,0,0,20"
+                            Text="Detalles"
+                            FontAttributes="Bold"
+                            FontSize="Medium" />
+                        <Label
+                            Style="{StaticResource CaptionVehicleLabelStyle}"
+                            Margin="0"
+                            Text="Contacto" />
+                        <Label
+                            Style="{StaticResource ValueVehicleLabelStyle}"
+                            Text="{Binding Contact}" />
+                        <Label 
+                            Style="{StaticResource CaptionVehicleLabelStyle}"
+                            Text="Argumento" />
+                        <Label
+                            Style="{StaticResource ValueVehicleLabelStyle}"
+                            Text="{Binding Argument, TargetNullValue='---'}" />
+                    </StackLayout>
+                    <Button
+                        HorizontalOptions="End" VerticalOptions="Start"
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        Text="&#xf5ad;"
+                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                        FontSize="Medium"
+                        FontFamily="MaterialDesignIcons"
+                        BorderWidth="0"
+                        WidthRequest="48" HeightRequest="48"
+                        Clicked="DismissControl_Invoked" />
+                </Grid>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>
