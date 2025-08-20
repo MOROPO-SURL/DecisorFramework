@@ -18,7 +18,6 @@
     Title="Gestión de Plazas Laborales">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <communitytoolkit_converters:BoolToObjectConverter x:Key="IsNotNullConverter"/>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -65,7 +64,6 @@
                                             LineBreakMode="TailTruncation"
                                             Text="{Binding Name}" />
                                         <Label 
-                                            IsVisible="{Binding Enabled, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
                                             FontAttributes="Bold"
                                             LineBreakMode="TailTruncation"
                                             Text="{Binding Kind.Name}" />

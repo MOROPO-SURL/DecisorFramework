@@ -20,7 +20,7 @@
         public System.DateTime At { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(EmployeeId))]
-        public Employee Employee { get; set; }
+        public Domain.Persistence.Entities.Employee Employee { get; set; }
         public System.Guid EmployeeId { get; set; }
     }
 }

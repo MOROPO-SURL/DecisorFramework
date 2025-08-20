@@ -24,15 +24,15 @@
         public System.DateTime? ApprovedAt { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AuthorId))]
-        public HumanResources.Persistence.Entities.Employee Author { get; set; }
+        public Domain.Persistence.Entities.Employee Author { get; set; }
         public System.Guid AuthorId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResponsibleId))]
-        public HumanResources.Persistence.Entities.Employee Responsible { get; set; }
+        public Domain.Persistence.Entities.Employee Responsible { get; set; }
         public System.Guid ResponsibleId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DecisorId))]
-        public HumanResources.Persistence.Entities.Employee Decisor { get; set; }
+        public Domain.Persistence.Entities.Employee Decisor { get; set; }
         public System.Guid DecisorId { get; set; }
 
         public Production Production { get; set; }

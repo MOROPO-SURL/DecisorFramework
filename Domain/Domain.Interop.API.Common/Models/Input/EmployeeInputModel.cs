@@ -1,4 +1,4 @@
-﻿namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input
+﻿namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 {
     public class EmployeeInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Employee, System.Guid>
     {

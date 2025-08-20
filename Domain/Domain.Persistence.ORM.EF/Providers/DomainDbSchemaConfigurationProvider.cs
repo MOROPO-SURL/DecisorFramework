@@ -26,7 +26,8 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.StructureKind>(),
                     new BaseEntityTypeConfigurator<Entities.OrganizationalUnity>(),
                     new Configurators.StructureOrganizationalUnityBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.Structure>()
+                    new BaseEntityTypeConfigurator<Entities.Structure>(),
+                    new Configurators.EmployeeEntityTypeConfigurator()
                 };
             }
         }

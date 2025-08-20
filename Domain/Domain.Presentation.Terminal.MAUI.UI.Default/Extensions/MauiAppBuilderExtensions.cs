@@ -24,6 +24,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
                 .AddSingleton<IDetailContentPageFactoryFacade<VehicleEngineKindDisplayModel, VehicleEngineKindDetailPage>, VehicleEngineKindDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<BrandDisplayModel, BrandDetailPage>, BrandDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<VehicleDisplayModel, VehicleDetailPage>, VehicleDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<EmployeeDisplayModel, EmployeeDetailPage>, EmployeeDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel, PersonContactConfigurationPage>, PersonContactConfigurationPageFactory>()

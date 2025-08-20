@@ -51,7 +51,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             {
                 var model = new ProductionEmployeeBridgeModel
                 {
-                    Employee = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
+                    Employee = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
                     WorkPosition = new HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel(),
                     Step = new ElaborationStepDisplayModel()
                 };

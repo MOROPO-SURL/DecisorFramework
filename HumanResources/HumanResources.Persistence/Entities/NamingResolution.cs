@@ -3,7 +3,7 @@
     public class NamingResolution : Legal.Persistence.Entities.Contract.AbstractResolution
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(NamedEmployeeId))]
-        public Employee NamedEmployee { get; set; }
+        public Domain.Persistence.Entities.Employee NamedEmployee { get; set; }
         public System.Guid NamedEmployeeId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(VacantId))]

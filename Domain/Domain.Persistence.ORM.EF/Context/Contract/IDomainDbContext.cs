@@ -22,5 +22,6 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Context.Contract
         public DbSet<OrganizationalUnity> OrganizationalUnities { get; set; }
         public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
         public DbSet<Structure> Structures { get; set; }
+        public DbSet<Employee> Employees { get; set; }
     }
 }

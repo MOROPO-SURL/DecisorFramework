@@ -14,7 +14,7 @@
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SellerId))]
-        public HumanResources.Persistence.Entities.Employee Seller { get; set; }
+        public Domain.Persistence.Entities.Employee Seller { get; set; }
         public System.Guid SellerId { get; set; }
     }
 }

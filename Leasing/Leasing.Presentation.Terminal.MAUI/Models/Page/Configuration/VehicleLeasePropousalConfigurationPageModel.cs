@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
     {
         private int priority = 1;
         private string description;
-        private HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel author;
+        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel author;
         private Governance.Interop.API.Common.Models.Display.AgreementDisplayModel agreement;
         private Domain.Interop.API.Common.Models.Display.VehicleDisplayModel vehicle;
 
@@ -28,7 +28,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
 
         public string Description { get => description; set => SetProperty(ref description, value); }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
 
         public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get => agreement; set => SetProperty(ref agreement, value); }
 

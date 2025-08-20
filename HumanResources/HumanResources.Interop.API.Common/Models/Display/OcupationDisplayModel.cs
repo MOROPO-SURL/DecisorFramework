@@ -8,7 +8,7 @@
 
         public System.DateTime At { get; set; }
 
-        public EmployeeDisplayModel Employee { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Employee { get; set; }
 
         public void Import(Persistence.Entities.Ocupation entity)
         {
@@ -18,7 +18,7 @@
 
             if (entity.Employee != null)
             {
-                Employee = new EmployeeDisplayModel();
+                Employee = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
 
                 Employee.Import(entity.Employee);
             }

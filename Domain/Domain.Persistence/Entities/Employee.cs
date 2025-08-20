@@ -1,4 +1,4 @@
-﻿namespace MOROPO.Framework.Decisor.HumanResources.Persistence.Entities
+﻿namespace MOROPO.Framework.Decisor.Domain.Persistence.Entities
 {
     public class Employee : Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
@@ -14,9 +14,7 @@
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ContactId))]
-        public Domain.Persistence.Entities.PersonContact Contact { get; set; }
+        public PersonContact Contact { get; set; }
         public System.Guid ContactId { get; set; }
-
-        public System.Collections.Generic.IEnumerable<Ocupation> Ocupations { get; set; }
     }
 }

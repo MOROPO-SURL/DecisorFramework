@@ -44,7 +44,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controll
 
             model.InternalInvitations = entity.EmployeeBridges.Select(bridge =>
             {
-                var _model = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                var _model = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
 
                 _model.Import(bridge.Stern);
 

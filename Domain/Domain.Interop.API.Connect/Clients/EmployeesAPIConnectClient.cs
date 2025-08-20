@@ -1,4 +1,4 @@
-﻿namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Connect.Clients
+﻿namespace MOROPO.Framework.Decisor.Domain.Interop.API.Connect.Clients
 {
     public class EmployeesAPIConnectClient : Guama.Core.Presentation.API.Connect.Clients.Contract.AbstractArchivableEntityManagementAPIConnectClient<Persistence.Entities.Employee, System.Guid, Common.Models.Input.EmployeeInputModel, Common.Models.Display.EmployeeDisplayModel>
     {
@@ -6,7 +6,7 @@
         {
         }
 
-        protected override string TargetController => "api/hhrr/employees";
+        protected override string TargetController => "api/domain/employees";
 
         public virtual async System.Threading.Tasks.Task<Common.Models.Display.EmployeeDisplayModel> FindByContactAsync(System.Guid key)
         {

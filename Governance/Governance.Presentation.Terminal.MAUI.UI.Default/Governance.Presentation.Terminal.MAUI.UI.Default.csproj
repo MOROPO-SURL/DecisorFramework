@@ -28,7 +28,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Domain\Domain.Presentation.Terminal.MAUI.UI.Default\Domain.Presentation.Terminal.MAUI.UI.Default.csproj" />
-		<ProjectReference Include="..\..\HumanResources\HumanResources.Presentation.Terminal.MAUI.UI.Default\HumanResources.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Governance.Presentation.Terminal.MAUI\Governance.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>

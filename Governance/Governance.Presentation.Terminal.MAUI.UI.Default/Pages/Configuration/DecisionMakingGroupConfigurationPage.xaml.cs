@@ -87,12 +87,12 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
 
     private void LeaderPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(LeaderPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(LeaderPickComplete_Callback)));
     }
 
     private void MemberAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(MemberPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(MemberPickComplete_Callback)));
     }
 
     private void CollaboratorAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -102,9 +102,9 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
 
     private void MemberDetailButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel;
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel;
 
-        this.NavigationPushModalPageAsync(new HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.EmployeeDetailPage(target));
+        this.NavigationPushModalPageAsync(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.EmployeeDetailPage(target));
     }
 
     private void CollaboratorDetailButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -122,7 +122,7 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
 
             Dispatcher.Dispatch(() =>
             {
-                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel;
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel;
 
                 ConcreteBindingContext.Members.Remove(target);
 
@@ -148,12 +148,12 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
         });
     }
 
-    private void LeaderPickComplete_Callback(HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    private void LeaderPickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         ConcreteBindingContext.Leader = model;
     }
 
-    private void MemberPickComplete_Callback(HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    private void MemberPickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         ConcreteBindingContext.Members.Add(model);
     }

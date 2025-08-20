@@ -46,7 +46,7 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Procesos" />
+    <MenuFlyoutItem Text="Operaciones" />
     <ShellContent
         Title="Elaboración de pre-nóminas"
         ContentTemplate="{DataTemplate ContentPage}">
@@ -58,7 +58,7 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Procedimientos de alta"
+        Title="Postulaciones a vacantes"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource

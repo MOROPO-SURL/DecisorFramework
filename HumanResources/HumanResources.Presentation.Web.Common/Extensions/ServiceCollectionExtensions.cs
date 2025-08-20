@@ -12,7 +12,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extens
             services.AddScoped<IEntityRepository<Schooling, System.Guid>, SchoolingRepository>();
             services.AddScoped<IEntityRepository<WorkPositionKind, System.Guid>, WorkPositionKindRepository>();
             services.AddScoped<IEntityRepository<WorkPosition, System.Guid>, WorkPositionRepository>();
-            services.AddScoped<IEntityRepository<Employee, System.Guid>, EmployeeRepository>();
             services.AddScoped<IEntityRepository<NamingResolution, long>, NamingResolutionRepository>();
             services.AddScoped<IEntityRepository<SalaryStandard, System.Guid>, SalaryStandardRepository>();
             services.AddScoped<IEntityRepository<Workforce, System.Guid>, WorkforceRepository>();

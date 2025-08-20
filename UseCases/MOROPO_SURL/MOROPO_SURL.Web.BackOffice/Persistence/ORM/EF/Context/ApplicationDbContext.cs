@@ -122,6 +122,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<BankDebitCard> BankDebitCards { get; set; }
         public DbSet<CostCenter> CostCenters { get; set; }
+        
         public DbSet<PropertyKind> PropertyKinds { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<PropertyImageBridge> PropertyImageBridges { get; set; }
@@ -135,19 +136,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<OrganizationalUnity> OrganizationalUnities { get; set; }
         public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
         public DbSet<Structure> Structures { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        
         public DbSet<Schooling> Schoolings { get; set; }
+        public DbSet<SalaryStandard> SalaryStandards { get; set; }
         public DbSet<WorkPositionKind> WorkPositionKinds { get; set; }
         public DbSet<WorkPosition> WorkPositions { get; set; }
-        public DbSet<SalaryStandard> SalaryStandards { get; set; }
+        public DbSet<WorkPositionResponsability> WorkPositionResponsabilities { get; set; }
         public DbSet<Workforce> Workforces { get; set; }
         public DbSet<WorkforceOrganizationalUnityBridge> WorkforceOrganizationalUnityBridges { get; set; }
         public DbSet<Vacant> Vacants { get; set; }
-        public DbSet<Employee> Employees { get; set; }
+        public DbSet<VacantPostulation> VacantPostulations { get; set; }
+        public DbSet<VacantPostulationOcupation> VacantPostulationOcupations { get; set; }
+        public DbSet<VacantPostulationDocumentBridge> VacantPostulationDocumentBridges { get; set; }
+        public DbSet<OcupationCandidate> OcupationCandidates { get; set; }
+        public DbSet<AdmitionPropousal> AdmitionPropousals { get; set; }
         public DbSet<EmploymentContract> EmploymentContracts { get; set; }
         public DbSet<NamingResolution> NamingResolutions { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<StaffWorkforceBridge> StaffWorkforceBridges { get; set; }
         public DbSet<Ocupation> Ocupations { get; set; }
+
         public DbSet<Tag> ClauseTags { get; set; }
         public DbSet<Clause> Clauses { get; set; }
         public DbSet<ClauseTagBridge> ClauseTagBridges { get; set; }
@@ -211,6 +220,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanDeparture> PurchasePlanDepartures { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception> PurchaseReceptions { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReceptionProductWeightBridge> PurchaseReceptionProductWeightBridges { get; set; }
+        
         public DbSet<DecisionMakingGroup> DecisionMakingGroups { get; set; }
         public DbSet<DecisionMakingGroupEmployeeBridge> DecisionMakingGroupEmployeeBridges { get; set; }
         public DbSet<DecisionMakingGroupContactBridge> DecisionMakingGroupContactBridges { get; set; }

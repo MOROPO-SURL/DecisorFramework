@@ -52,10 +52,10 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
 
     private void NamedEmployeePickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.EmployeePickPage(NamedEmployeePickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(NamedEmployeePickComplete_Callback)));
     }
 
-    private void NamedEmployeePickComplete_Callback(Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    private void NamedEmployeePickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         var concreteBindingContext = (Models.Page.Configuration.NamingResolutionConfigurationPageModel)BindingContext;
 

@@ -226,7 +226,7 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
     {
         var model = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Models.View.OcupationsRawManageVacantViewModel;
 
-        var employeesAPIConnectClient = new Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var employeesAPIConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
         ConcreteBindingContext.IsBusy = true;
         
@@ -234,7 +234,7 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             Dispatcher.Dispatch(() =>
             {
-                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.EmployeeDisplayModel, Detail.EmployeeDetailPage>>();
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel, Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.EmployeeDetailPage>>();
 
                 try
                 {
@@ -273,9 +273,9 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
                 {
                     var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
 
-                    var employeesAPIConnectClient = new Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientHelperProvider);
+                    var employeesAPIConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientHelperProvider);
 
-                    Interop.API.Common.Models.Display.EmployeeDisplayModel employee;
+                    Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel employee;
 
                     try
                     {
@@ -287,7 +287,7 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                         var employeeId = System.Guid.NewGuid();
 
-                        await employeesAPIConnectClient.CreateAsync(new Interop.API.Common.Models.Input.EmployeeInputModel
+                        await employeesAPIConnectClient.CreateAsync(new Domain.Interop.API.Common.Models.Input.EmployeeInputModel
                         {
                             Id = employeeId,
                             ContactId = model.Id,

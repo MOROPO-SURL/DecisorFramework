@@ -1,4 +1,4 @@
-﻿namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Configurators
+﻿namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Configurators
 {
 	public class EmployeeEntityTypeConfigurator : Guama.Core.Persistence.ORM.EF.Configurators.Contract.AbstractEntityTypeConfigurator<Entities.Employee>
 	{

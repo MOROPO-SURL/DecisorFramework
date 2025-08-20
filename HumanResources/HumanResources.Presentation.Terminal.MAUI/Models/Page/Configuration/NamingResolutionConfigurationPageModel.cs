@@ -5,7 +5,7 @@
         private long id;
         private System.DateTime at = System.DateTime.Now;
         private string summary;
-        private Interop.API.Common.Models.Display.EmployeeDisplayModel namedEmployee;
+        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel namedEmployee;
 
         public NamingResolutionConfigurationPageModel(Interop.API.Common.Models.Display.NamingResolutionDisplayModel model) : base(model)
         {
@@ -24,6 +24,6 @@
 
         public string Summary { get => summary; set => SetProperty(ref summary, value); }
 
-        public Interop.API.Common.Models.Display.EmployeeDisplayModel NamedEmployee { get => namedEmployee; set => SetProperty(ref namedEmployee, value); }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel NamedEmployee { get => namedEmployee; set => SetProperty(ref namedEmployee, value); }
     }
 }

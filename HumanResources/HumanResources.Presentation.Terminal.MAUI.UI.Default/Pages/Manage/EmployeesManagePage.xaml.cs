@@ -40,7 +40,7 @@ public partial class EmployeesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        ((Models.Page.Manage.EmployeesManagePageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.EmployeeDisplayModel;
+        ((Models.Page.Manage.EmployeesManagePageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel;
     }
 
     private void PresentedItemDismissButton_Clicked(object sender, System.EventArgs e)
@@ -65,7 +65,7 @@ public partial class EmployeesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
             var concreteBindingContext = (Models.Page.Manage.EmployeesManagePageModel)BindingContext;
 
-            var apiConnectClient = new Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+            var apiConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
             apiConnectClient.ArchiveAsync(concreteBindingContext.PresentedItem.Id).ContinueWith(_task =>
             {
@@ -90,7 +90,7 @@ public partial class EmployeesManagePage : Caney.MVVM.Core.Pages.ContentPage
         });
     }
 
-    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    private void ConfigurationSuccess_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         LoadItems();
     }
@@ -103,7 +103,7 @@ public partial class EmployeesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
         concreteBindingContext.Items.Clear();
 
-        var apiConnectClient = new Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
         apiConnectClient.GetAsync().ContinueWith(task =>
         {

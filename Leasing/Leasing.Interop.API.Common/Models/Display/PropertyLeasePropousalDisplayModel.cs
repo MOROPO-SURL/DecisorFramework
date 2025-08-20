@@ -12,7 +12,7 @@
 
         public string Description { get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get; set; }
 
         public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get; set; }
 
@@ -30,7 +30,7 @@
 
             if (entity.Author != null)
             {
-                Author = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Author = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
 
                 Author.Import(entity.Author);
             }

@@ -77,7 +77,7 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
 
     private void AuthorPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(AuthorPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(AuthorPickComplete_Callback)));
     }
 
     private void AgreementPickButton_Clicked(object sender, System.EventArgs e)
@@ -149,7 +149,7 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
         ConcreteBindingContext.Property = model;
     }
 
-    private void AuthorPickComplete_Callback(HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    private void AuthorPickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         ConcreteBindingContext.Author = model;
     }

@@ -2,6 +2,6 @@
 {
     public class PurchaseEmployeeBridgeModel : Contract.AbstractPurchasePersonBridgeModel
     {
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Employee { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Employee { get; set; }
     }
 }

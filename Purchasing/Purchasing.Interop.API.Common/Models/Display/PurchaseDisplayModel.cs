@@ -13,7 +13,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public PurchaseZoneDisplayModel Zone { get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Purchaser { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Purchaser { get; set; }
 
         public string Description { get; set; }
 
@@ -55,7 +55,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
             if (entity.Purchaser != null)
             {
-                Purchaser = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Purchaser = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
                 Purchaser.Import(entity.Purchaser);
             }
 
@@ -133,7 +133,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             {
                 var model = new PurchaseEmployeeBridgeModel
                 {
-                    Employee = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
+                    Employee = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
                     Role = bridge.Role
                 };
 

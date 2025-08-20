@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositories
+namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Repositories
 {
     public class EmployeeRepository : Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Entities.Employee, System.Guid>
     {

@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
     public class ProductionEmployeeBridgeConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Bridge.ProductionEmployeeBridgeModel>
     {
         private ElaborationStepDisplayModel step;
-        private HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel employee;
+        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel employee;
         private HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel role;
 
         public ProductionEmployeeBridgeConfigurationPageModel(Interop.API.Common.Models.Bridge.ProductionEmployeeBridgeModel model = null) : base(model)
@@ -21,7 +21,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public ElaborationStepDisplayModel Step { get => step; set => SetProperty(ref step, value); }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Employee { get => employee; set => SetProperty(ref employee, value); }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Employee { get => employee; set => SetProperty(ref employee, value); }
 
         public HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel WorkPosition { get => role; set => SetProperty(ref role, value); }
 
