@@ -12,8 +12,6 @@
 
         public WorkPositionDisplayModel WorkPosition { get; set; }
 
-        public System.Guid WorkforceId { get; set; }
-
         public System.Guid OrganizationUnityId { get; set; }
 
         public SalaryStandardDisplayModel SalaryStandard { get; set; }
@@ -24,7 +22,6 @@
             Enabled = entity.Enabled;
             Priority = entity.Priority;
             NamingResolutionRequired = entity.NamingResolutionRequired;
-            WorkforceId = entity.WorkforceId;
             OrganizationUnityId = entity.OrganizationUnityId;
 
             if (entity.WorkPosition != null)

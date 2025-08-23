@@ -57,16 +57,24 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <ShellContent
-        Title="Postulaciones a vacantes"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
+    <FlyoutItem
+        Title="Admisión al empleo">
+        <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF014;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Postulaciones"
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:VacantPostulationsManagePage}" />
+        <ShellContent
+            Title="Candidatos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Propuestas"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
     <ShellContent
         Title="Solicitudes de baja"
         ContentTemplate="{DataTemplate ContentPage}">

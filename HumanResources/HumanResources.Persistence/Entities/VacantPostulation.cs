@@ -9,6 +9,10 @@
 
         public System.DateTime At { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(StaffId))]
+        public Staff Staff { get; set; }
+        public System.Guid StaffId { get; set; }
+
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(VacantId))]
         public Vacant Vacant { get; set; }
         public System.Guid VacantId { get; set; }
@@ -37,7 +41,7 @@
         [System.ComponentModel.DataAnnotations.Required]
         public string FemaleParentName { get; set; }
 
-        public bool Alignment { get; set; }
+        public string Alignment { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string ResponsabilityCommitment { get; set; }

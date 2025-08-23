@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
-using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
@@ -55,7 +54,7 @@ public partial class EmployeeConfigurationPage : Core.Presentation.Terminal.MAUI
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback)));
     }
 
-    private void ContactPickComplete_Callback(PersonContactDisplayModel model)
+    private void ContactPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
     {
         var concreteBindingContext = (Models.Page.Configuration.EmployeeConfigurationPageModel)BindingContext;
 

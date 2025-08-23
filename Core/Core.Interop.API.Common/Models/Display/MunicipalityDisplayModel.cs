@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display
+﻿using System;
+
+namespace MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display
 {
     public class MunicipalityDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Guama.Location.Persistence.Entities.Municipality, System.Guid>
     {
@@ -15,6 +17,11 @@
             State = new StateDisplayModel();
 
             State.Import(entity.State);
+        }
+
+        public void Import(object officialPostalContactItemMunicipality)
+        {
+            throw new NotImplementedException();
         }
     }
 }

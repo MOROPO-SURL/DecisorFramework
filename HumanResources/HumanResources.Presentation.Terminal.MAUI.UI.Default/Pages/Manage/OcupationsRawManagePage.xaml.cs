@@ -4,7 +4,6 @@ using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -156,7 +155,7 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                     if (item.Children != null)
                     {
-                        result.Children = item.ToOrganizationalUnityViewModelChildren(ocupations);
+                        result.Children = item.ToOcupationsRawManageOrganizationalUnityViewModelChildren(ocupations);
                     }
 
                     ConcreteBindingContext.OrganizationalUnities.Add(result);

@@ -2955,8 +2955,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
-                    b.Property<bool>("Alignment")
-                        .HasColumnType("boolean")
+                    b.Property<string>("Alignment")
+                        .HasColumnType("text")
                         .HasColumnName("alignment");
 
                     b.Property<Guid?>("AlternativePostalContactItemId")
@@ -3006,6 +3006,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("schoolingid");
 
+                    b.Property<Guid>("StaffId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("staffid");
+
                     b.Property<Guid>("VacantId")
                         .HasColumnType("uuid")
                         .HasColumnName("vacantid");
@@ -3027,6 +3031,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("SchoolingId")
                         .HasDatabaseName("ix_vacantpostulations_schoolingid");
+
+                    b.HasIndex("StaffId")
+                        .HasDatabaseName("ix_vacantpostulations_staffid");
 
                     b.HasIndex("VacantId")
                         .HasDatabaseName("ix_vacantpostulations_vacantid");
@@ -8601,6 +8608,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_vacantpostulations_schoolings_schoolingid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Staff", "Staff")
+                        .WithMany()
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_vacantpostulations_staffs_staffid");
+
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", "Vacant")
                         .WithMany()
                         .HasForeignKey("VacantId")
@@ -8617,6 +8631,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("RawModelDocument");
 
                     b.Navigation("Schooling");
+
+                    b.Navigation("Staff");
 
                     b.Navigation("Vacant");
                 });
