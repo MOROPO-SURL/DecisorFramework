@@ -90,8 +90,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
             postulationRepository.Update(postulation, User.Identity.Name, false);
 
-            entity.PostulationId = model.PostulationId;
-
             if (model.RawMedicalCheckDocument != null)
             {
                 entity.RawMedicalCheckDocument = documentRepository.Add(new Document

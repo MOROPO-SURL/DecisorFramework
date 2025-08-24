@@ -6,7 +6,7 @@
 		<RootNamespace>MOROPO.Framework.Decisor.HumanResources.Interop.API.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Domain\Domain.Interop.API.Common\Domain.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\..\Governance\Governance.Interop.API.Common\Governance.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\HumanResources.Persistence\HumanResources.Persistence.csproj" />
 	</ItemGroup>
 </Project>

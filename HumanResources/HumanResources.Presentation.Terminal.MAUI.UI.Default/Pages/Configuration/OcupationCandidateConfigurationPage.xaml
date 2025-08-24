@@ -12,7 +12,6 @@
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:domain_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
-    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.OcupationCandidateConfigurationPage"
     x:TypeArguments="interop_common_display_models:OcupationCandidateDisplayModel,interop_common_display_models:OcupationCandidateDisplayModel,presentation_configuration_page_models:OcupationCandidateConfigurationPageModel"
@@ -21,8 +20,6 @@
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
-
-            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="180" AbsoluteHorizontalSeparation="12" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>

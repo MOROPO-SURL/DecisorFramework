@@ -73,7 +73,7 @@
             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationCandidatesManagePage}" />
         <ShellContent
             Title="Propuestas"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:AdmitionPropousalsManagePage}" />
     </FlyoutItem>
     <ShellContent
         Title="Solicitudes de baja"

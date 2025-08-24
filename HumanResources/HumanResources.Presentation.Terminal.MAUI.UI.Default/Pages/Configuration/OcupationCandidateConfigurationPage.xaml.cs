@@ -403,7 +403,7 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
 
     private void PostulationPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Presentation.Terminal.MAUI.UI.Default.Pages.Pick.VacantPostulationPickPage(PostulationPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPostulationPickPage(PostulationPickComplete_Callback)));
     }
 
     private void ResponsiblePickButton_Clicked(object sender, System.EventArgs e)
@@ -411,7 +411,7 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(ResponsiblePickComplete_Callback)));
     }
 
-    private void PostulationPickComplete_Callback(Interop.API.Common.Models.Display.VacantPostulationDisplayModel model)
+    private void PostulationPickComplete_Callback(VacantPostulationDisplayModel model)
     {
         ConcreteBindingContext.Postulation = model;
     }
