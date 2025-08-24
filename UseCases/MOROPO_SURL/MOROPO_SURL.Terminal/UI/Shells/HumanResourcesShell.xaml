@@ -70,7 +70,7 @@
             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:VacantPostulationsManagePage}" />
         <ShellContent
             Title="Candidatos"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationCandidatesManagePage}" />
         <ShellContent
             Title="Propuestas"
             ContentTemplate="{DataTemplate ContentPage}" />
