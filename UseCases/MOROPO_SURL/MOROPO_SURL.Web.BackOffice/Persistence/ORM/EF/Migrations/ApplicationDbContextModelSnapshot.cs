@@ -2577,48 +2577,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("employmentcontracts", "decisorframework_humanresources");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.NamingResolution", b =>
-                {
-                    b.Property<long>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
-                        .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("boolean")
-                        .HasColumnName("archived");
-
-                    b.Property<DateTime>("At")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("at");
-
-                    b.Property<Guid>("NamedEmployeeId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("namedemployeeid");
-
-                    b.Property<string>("Summary")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("summary");
-
-                    b.Property<Guid>("VacantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("vacantid");
-
-                    b.HasKey("Id")
-                        .HasName("pk_namingresolutions");
-
-                    b.HasIndex("NamedEmployeeId")
-                        .HasDatabaseName("ix_namingresolutions_namedemployeeid");
-
-                    b.HasIndex("VacantId")
-                        .HasDatabaseName("ix_namingresolutions_vacantid");
-
-                    b.ToTable("namingresolutions", "decisorframework_humanresources");
-                });
-
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", b =>
                 {
                     b.Property<Guid>("Id")
@@ -4500,6 +4458,43 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_clausetagbridges_sternid");
 
                     b.ToTable("clausetagbridges", "decisorframework_legal");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Contract.AbstractResolution", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
+                    b.Property<string>("Summary")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("summary");
+
+                    b.HasKey("Id")
+                        .HasName("pk_resolutions");
+
+                    b.ToTable("resolutions", (string)null);
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractResolution");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Disposition", b =>
@@ -7120,6 +7115,61 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasDiscriminator().HasValue("PurchaseReception");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.NamingResolution", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Contract.AbstractResolution");
+
+                    b.Property<Guid>("AgreementId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("agreementid");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contactid");
+
+                    b.Property<Guid>("VacantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vacantid");
+
+                    b.HasIndex("AgreementId")
+                        .HasDatabaseName("ix_resolutions_agreementid");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_resolutions_contactid");
+
+                    b.HasIndex("VacantId")
+                        .HasDatabaseName("ix_resolutions_vacantid");
+
+                    b.ToTable("resolutions");
+
+                    b.HasDiscriminator().HasValue("NamingResolution");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.RemotionResolution", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Contract.AbstractResolution");
+
+                    b.Property<Guid>("AgreementId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("agreementid");
+
+                    b.Property<Guid>("OcupationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("ocupationid");
+
+                    b.HasIndex("AgreementId")
+                        .HasDatabaseName("ix_resolutions_agreementid");
+
+                    b.HasIndex("OcupationId")
+                        .HasDatabaseName("ix_resolutions_ocupationid");
+
+                    b.ToTable("resolutions");
+
+                    b.HasDiscriminator().HasValue("RemotionResolution");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientWholesaleSale", b =>
                 {
                     b.HasBaseType("MOROPO.Framework.Decisor.Sales.Persistence.Entities.Contract.AbstractSale");
@@ -8181,12 +8231,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroup", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Leader")
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Leader")
                         .WithMany()
                         .HasForeignKey("LeaderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_decisionmakinggroups_employees_leaderid");
+                        .HasConstraintName("fk_decisionmakinggroups_personcontacts_leaderid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Structure", "Structure")
                         .WithMany()
@@ -8376,27 +8426,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_employmentcontracts_ocupations_ocupationid");
 
                     b.Navigation("Ocupation");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.NamingResolution", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "NamedEmployee")
-                        .WithMany()
-                        .HasForeignKey("NamedEmployeeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_namingresolutions_employees_namedemployeeid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", "Vacant")
-                        .WithMany()
-                        .HasForeignKey("VacantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_namingresolutions_vacants_vacantid");
-
-                    b.Navigation("NamedEmployee");
-
-                    b.Navigation("Vacant");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", b =>
@@ -10806,6 +10835,57 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_receptions_purchases_purchaseid");
 
                     b.Navigation("Purchase");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.NamingResolution", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Agreement", "Agreement")
+                        .WithMany()
+                        .HasForeignKey("AgreementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_resolutions_agreements_agreementid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_resolutions_personcontacts_contactid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", "Vacant")
+                        .WithMany()
+                        .HasForeignKey("VacantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_resolutions_vacants_vacantid");
+
+                    b.Navigation("Agreement");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("Vacant");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.RemotionResolution", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Agreement", "Agreement")
+                        .WithMany()
+                        .HasForeignKey("AgreementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_resolutions_agreements_agreementid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", "Ocupation")
+                        .WithMany()
+                        .HasForeignKey("OcupationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_resolutions_ocupations_ocupationid");
+
+                    b.Navigation("Agreement");
+
+                    b.Navigation("Ocupation");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientWholesaleSale", b =>

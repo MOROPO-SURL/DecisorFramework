@@ -31,9 +31,6 @@
 		<ProjectReference Include="..\Governance.Presentation.Terminal.MAUI\Governance.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Views\Card\" />
-	</ItemGroup>
-	<ItemGroup>
 	  <MauiXaml Update="Pages\Configuration\AgreementConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

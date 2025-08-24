@@ -44,9 +44,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         {
             var model = base.EntityToDisplayModel(entity);
 
-            if (model.NamedEmployee.Contact.Identity.Image != null)
+            if (model.Contact.Identity.Image != null)
             {
-                model.NamedEmployee.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.NamedEmployee.Contact.Identity.Image.ContentType);
+                model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Contact.Identity.Image.ContentType);
             }
 
             return model;

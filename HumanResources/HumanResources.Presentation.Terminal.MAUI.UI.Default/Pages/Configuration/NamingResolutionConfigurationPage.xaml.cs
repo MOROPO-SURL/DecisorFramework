@@ -23,7 +23,7 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
             Id = concreteBindingContext.Id,
             At = concreteBindingContext.At,
             Summary = concreteBindingContext.Summary,
-            NamedEmployeeId = concreteBindingContext.NamedEmployee.Id
+            ContactId = concreteBindingContext.Contact.Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -42,7 +42,7 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
             Id = concreteBindingContext.Id,
             At = concreteBindingContext.At,
             Summary = concreteBindingContext.Summary,
-            NamedEmployeeId = concreteBindingContext.NamedEmployee.Id
+            ContactId = concreteBindingContext.Contact.Id
         };
 
         await apiConnectClient.EditAsync(model);
@@ -50,15 +50,15 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
         return await apiConnectClient.GetAsync(model.Id);
     }
 
-    private void NamedEmployeePickButton_Clicked(object sender, System.EventArgs e)
+    private void ContactPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(NamedEmployeePickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback)));
     }
 
-    private void NamedEmployeePickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    private void ContactPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
     {
         var concreteBindingContext = (Models.Page.Configuration.NamingResolutionConfigurationPageModel)BindingContext;
 
-        concreteBindingContext.NamedEmployee = model;
+        concreteBindingContext.Contact = model;
     }
 }

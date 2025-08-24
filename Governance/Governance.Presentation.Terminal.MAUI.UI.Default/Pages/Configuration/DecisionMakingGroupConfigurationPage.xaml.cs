@@ -87,7 +87,7 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
 
     private void LeaderPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(LeaderPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(LeaderPickComplete_Callback)));
     }
 
     private void MemberAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -148,7 +148,7 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
         });
     }
 
-    private void LeaderPickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    private void LeaderPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
     {
         ConcreteBindingContext.Leader = model;
     }

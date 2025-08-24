@@ -8,7 +8,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
         private string name;
         private string description;
         private Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel structure;
-        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel leader;
+        private Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel leader;
 
         public DecisionMakingGroupConfigurationPageModel(Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel model) : base(model)
         {
@@ -35,7 +35,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
 
         public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
 
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Leader { get => leader; set => SetProperty(ref leader, value); }
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel Leader { get => leader; set => SetProperty(ref leader, value); }
 
         public ObservableCollection<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel> Members { get; set; } = [];
 

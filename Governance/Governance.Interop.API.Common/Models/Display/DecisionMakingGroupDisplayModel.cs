@@ -10,7 +10,7 @@
 
         public string Name { get; set; }
 
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Leader { get; set; }
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel Leader { get; set; }
 
         public string Description { get; set; }
 
@@ -39,7 +39,7 @@
 
             if (entity.Leader != null)
             {
-                Leader = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Leader = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
 
                 Leader.Import(entity.Leader);
             }

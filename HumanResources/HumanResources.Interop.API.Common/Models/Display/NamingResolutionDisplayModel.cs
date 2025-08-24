@@ -2,17 +2,17 @@
 {
     public class NamingResolutionDisplayModel : Legal.Interop.API.Common.Models.Display.Contract.AbstractResolutionDisplayModel<Persistence.Entities.NamingResolution>
     {
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel NamedEmployee { get; set; }
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel Contact { get; set; }
 
         public override void Import(Persistence.Entities.NamingResolution entity)
         {
             base.Import(entity);
 
-            if (entity.NamedEmployee != null)
+            if (entity.Contact != null)
             {
-                NamedEmployee = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Contact = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
 
-                NamedEmployee.Import(entity.NamedEmployee);
+                Contact.Import(entity.Contact);
             }
         }
     }

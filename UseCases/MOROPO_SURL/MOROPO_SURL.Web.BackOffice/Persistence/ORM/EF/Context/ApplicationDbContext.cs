@@ -36,6 +36,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RolePermissionBridge> RolePermissionBridges { get; set; }
+
         public DbSet<Region> Regions { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
@@ -45,12 +46,15 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<StateLocation> StateLocations { get; set; }
         public DbSet<MunicipalityLocation> MunicipalityLocations { get; set; }
         public DbSet<LocalityLocation> LocalityLocations { get; set; }
+
         public DbSet<Thumbnail> Thumbnails { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Video> Videos { get; set; }
         public DbSet<Document> Documents { get; set; }
+
         public DbSet<User> Users { get; set; }
         public DbSet<UserRoleBridge> UserRoleBridges { get; set; }
+
         public DbSet<PersonIdentity> PersonIdentities { get; set; }
         public DbSet<OrganizationIdentity> OrganizationIdentities { get; set; }
         public DbSet<OrganizationPersonMembershipBridge> OrganizationPersonMembershipBridges { get; set; }
@@ -69,11 +73,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<OrganizationPostalContactItemBridge> OrganizationPostalContactItemBridges { get; set; }
         public DbSet<OrganizationSocialContactItemBridge> OrganizationSocialContactItemBridges { get; set; }
         public DbSet<OrganizationWebSiteContactItemBridge> OrganizationWebSiteContactItemBridges { get; set; }
+
         public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
         public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
         public DbSet<AbstractContact> Contacts { get; set; }
         public DbSet<OrganizationContact> OrganizationContacts { get; set; }
         public DbSet<PersonContact> PersonContacts { get; set; }
+
         public DbSet<PaymentTerm> PaymentTerms { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }
         public DbSet<ProvisionableService> ProvisionableServices { get; set; }
@@ -101,6 +107,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<NaturalClient> NaturalClients { get; set; }
         public DbSet<NaturalClientBankAccountBridge> NaturalClientBankAccountBridges { get; set; }
         public DbSet<NaturalClientSaleContract> NaturalClientSaleContracts { get; set; }
+
         public DbSet<CustomAttribute> CustomAttributes { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Classification> Classifications { get; set; }
@@ -116,6 +123,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ReceptionBatchBridge> ReceptionBatchBridges { get; set; }
         public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
         public DbSet<UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
+
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<BankAgency> BankAgencies { get; set; }
         public DbSet<BankBranch> BankBranches { get; set; }
@@ -153,6 +161,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<AdmitionPropousal> AdmitionPropousals { get; set; }
         public DbSet<EmploymentContract> EmploymentContracts { get; set; }
         public DbSet<NamingResolution> NamingResolutions { get; set; }
+        public DbSet<RemotionResolution> RemotionResolutions { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<StaffWorkforceBridge> StaffWorkforceBridges { get; set; }
         public DbSet<Ocupation> Ocupations { get; set; }
