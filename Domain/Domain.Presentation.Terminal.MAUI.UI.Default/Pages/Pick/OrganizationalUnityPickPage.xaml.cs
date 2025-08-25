@@ -104,7 +104,7 @@ public partial class OrganizationalUnityPickPage : Core.Presentation.Terminal.MA
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        pickCompleteAction.Invoke(null);
+        pickCompleteAction.Invoke((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel);
 
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }
