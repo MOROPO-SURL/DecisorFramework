@@ -10,20 +10,20 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
         private string summary;
         private string rapporteurship;
         private Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel group;
-        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel author;
+        private Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel author;
 
         public MeetingConfigurationPageModel(Interop.API.Common.Models.Display.MeetingDisplayModel model) : base(model)
         {
             if (model != null)
             {
                 Id = model.Id;
-                Index = model.Index;
-                Summary = model.Summary;
-                Rapporteurship = model.Rapporteurship;
-                AtDate = model.At.Date;
-                AtTime = model.At.TimeOfDay;
-                Group = model.DecisionMakingGroup;
-                Author = model.Author;
+                index = model.Index;
+                summary = model.Summary;
+                rapporteurship = model.Rapporteurship;
+                atDate = model.At.Date;
+                atTime = model.At.TimeOfDay;
+                group = model.DecisionMakingGroup;
+                author = model.Author;
                 InternalInvitations = new ObservableCollection<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel>(model.InternalInvitations);
                 ExternalInvitations = new ObservableCollection<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel>(model.ExternalInvitations);
                 Agreements = new ObservableCollection<Interop.API.Common.Models.Display.AgreementDisplayModel>(model.Agreements);
@@ -51,7 +51,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
 
         public Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel Group { get => group; set => SetProperty(ref group, value); }
 
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel Author { get => author; set => SetProperty(ref author, value); }
 
         public ObservableCollection<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel> InternalInvitations { get; set; } = [];
 

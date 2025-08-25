@@ -10,7 +10,7 @@
 
         public DecisionMakingGroupDisplayModel DecisionMakingGroup { get; set; }
 
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get; set; }
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel Author { get; set; }
 
         public string Summary { get; set; }
 
@@ -39,7 +39,7 @@
 
             if (entity.Author != null)
             {
-                Author = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Author = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
 
                 Author.Import(entity.Author);
             }

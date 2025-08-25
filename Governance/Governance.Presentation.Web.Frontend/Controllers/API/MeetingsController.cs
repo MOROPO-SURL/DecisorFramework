@@ -37,9 +37,9 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controll
         {
             var model = base.EntityToDisplayModel(entity);
 
-            if (model.Author.Contact.Identity.Image != null)
+            if (model.Author.Identity.Image != null)
             {
-                model.Author.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Author.Contact.Identity.Image.ContentType);
+                model.Author.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Author.Identity.Image.ContentType);
             }
 
             model.InternalInvitations = entity.EmployeeBridges.Select(bridge =>

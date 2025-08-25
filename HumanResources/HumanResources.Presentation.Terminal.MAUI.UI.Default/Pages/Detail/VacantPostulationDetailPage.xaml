@@ -24,6 +24,7 @@
                                 FontSize="Medium" />
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
                                 Text="Vacante" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"

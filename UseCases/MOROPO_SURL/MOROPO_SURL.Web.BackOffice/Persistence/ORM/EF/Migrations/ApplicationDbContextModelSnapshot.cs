@@ -7128,6 +7128,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("contactid");
 
+                    b.Property<Guid>("StaffId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("staffid");
+
                     b.Property<Guid>("VacantId")
                         .HasColumnType("uuid")
                         .HasColumnName("vacantid");
@@ -7137,6 +7141,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("ContactId")
                         .HasDatabaseName("ix_resolutions_contactid");
+
+                    b.HasIndex("StaffId")
+                        .HasDatabaseName("ix_resolutions_staffid");
 
                     b.HasIndex("VacantId")
                         .HasDatabaseName("ix_resolutions_vacantid");
@@ -8294,12 +8301,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Meeting", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Author")
                         .WithMany()
                         .HasForeignKey("AuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_meetings_employees_authorid");
+                        .HasConstraintName("fk_meetings_personcontacts_authorid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.DecisionMakingGroup", "DecisionMakingGroup")
                         .WithMany()
@@ -10853,6 +10860,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_resolutions_personcontacts_contactid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Staff", "Staff")
+                        .WithMany()
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_resolutions_staffs_staffid");
+
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", "Vacant")
                         .WithMany()
                         .HasForeignKey("VacantId")
@@ -10863,6 +10877,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Agreement");
 
                     b.Navigation("Contact");
+
+                    b.Navigation("Staff");
 
                     b.Navigation("Vacant");
                 });

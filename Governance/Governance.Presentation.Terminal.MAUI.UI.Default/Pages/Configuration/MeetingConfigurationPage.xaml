@@ -73,7 +73,7 @@
                         <ContentView                        
                             IsVisible="{Binding Author, Converter={StaticResource IsNotNullConverter}}"
                             HeightRequest="140">
-                            <domain_presentation_card_views:EmployeeDefaultCardView
+                            <domain_presentation_card_views:PersonContactDefaultCardView
                                 BindingContext="{Binding Author}" />
                         </ContentView>
                         <Button

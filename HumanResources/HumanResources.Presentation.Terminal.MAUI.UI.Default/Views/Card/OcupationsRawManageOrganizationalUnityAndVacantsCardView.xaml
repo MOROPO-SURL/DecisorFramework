@@ -72,7 +72,7 @@
                                         <Button
                                             ToolTipProperties.Text="Seleccionar contacto ..."
                                             FontFamily="MaterialDesignIcons" 
-                                            Text="&#xF016;"
+                                            Text="&#xF014;"
                                             Padding="0"
                                             FontSize="21"
                                             Clicked="PickContactButton_Clicked" />

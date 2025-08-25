@@ -56,6 +56,9 @@
         <ShellContent
             Title="Nombramiento"
             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:NamingResolutionsManagePage}" />
+        <ShellContent
+            Title="Destitución"
+            ContentTemplate="{DataTemplate ContentPage}" />
     </FlyoutItem>
     <ShellContent
         Title="Disposiciones Legislativas"

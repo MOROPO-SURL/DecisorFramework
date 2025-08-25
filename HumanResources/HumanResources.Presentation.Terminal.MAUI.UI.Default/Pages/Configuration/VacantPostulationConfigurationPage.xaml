@@ -56,25 +56,16 @@
                         <Frame
                             IsVisible="{Binding Vacant, Converter={StaticResource IsNotNullConverter}}"
                             Padding="0">
-                            <VerticalStackLayout Spacing="0">
-                                <Image 
-                                    HeightRequest="240"
-                                    BackgroundColor="DimGray"
-                                    Aspect="AspectFill"
-                                    Source="default_person_picture.jpg" />
-                                <VerticalStackLayout Margin="8,8,8,12" Spacing="8">
-                                    <Label
-                                        HorizontalOptions="Center"
-                                        ToolTipProperties.Text="{Binding Vacant.WorkPosition.Name}"
-                                        Text="{Binding Vacant.WorkPosition.Name}"
-                                        FontAttributes="Bold"
-                                        LineBreakMode="TailTruncation" />
-                                    <Label
-                                        HorizontalOptions="Center"
-                                        ToolTipProperties.Text="{Binding Vacant.WorkPosition.Schooling.Name}"
-                                        Text="{Binding Vacant.WorkPosition.Schooling.Name}"
-                                        LineBreakMode="TailTruncation" />
-                                </VerticalStackLayout>
+                            <VerticalStackLayout Margin="8" Spacing="8">
+                                <Label
+                                    ToolTipProperties.Text="{Binding Vacant.WorkPosition.Name}"
+                                    Text="{Binding Vacant.WorkPosition.Name}"
+                                    FontAttributes="Bold"
+                                    LineBreakMode="TailTruncation" />                                
+                                <Label
+                                    ToolTipProperties.Text="{Binding Staff.Structure.Identity.Name}"
+                                    Text="{Binding Staff.Structure.Identity.Name}"
+                                    LineBreakMode="TailTruncation" />
                             </VerticalStackLayout>
                         </Frame>
                         <Button

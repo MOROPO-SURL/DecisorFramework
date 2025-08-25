@@ -21,6 +21,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
                 .AddSingleton<IDetailContentPageFactoryFacade<VacantPostulationDisplayModel, VacantPostulationDetailPage>, VacantPostulationDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<OcupationCandidateDisplayModel, OcupationCandidateDetailPage>, OcupationCandidateDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<AdmitionPropousalDisplayModel, AdmitionPropousalDetailPage>, AdmitionPropousalDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<NamingResolutionDisplayModel, NamingResolutionDetailPage>, NamingResolutionDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel, SalaryStandardConfigurationPage>, SalaryConfigurationPageFactory>()
@@ -28,7 +29,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
                 .AddSingleton<IConfigurationContentPageFactoryFacade<WorkPositionDisplayModel, WorkPositionConfigurationPageModel, WorkPositionConfigurationPage>, WorkPositionConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<VacantPostulationDisplayModel, VacantPostulationConfigurationPageModel, VacantPostulationConfigurationPage>, VacantPostulationConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<OcupationCandidateDisplayModel, OcupationCandidateConfigurationPageModel, OcupationCandidateConfigurationPage>, OcupationCandidateConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<AdmitionPropousalDisplayModel, AdmitionPropousalConfigurationPageModel, AdmitionPropousalConfigurationPage>, AdmitionPropousalConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<AdmitionPropousalDisplayModel, AdmitionPropousalConfigurationPageModel, AdmitionPropousalConfigurationPage>, AdmitionPropousalConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<NamingResolutionDisplayModel, NamingResolutionConfigurationPageModel, NamingResolutionConfigurationPage>, NamingResolutionConfigurationPageFactory>();
 
             return builder;
         }

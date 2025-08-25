@@ -98,7 +98,7 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
 
     private void AuthorPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(AuthorPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(AuthorPickComplete_Callback)));
     }
 
     private void InternalInvitationAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -308,7 +308,7 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
         hasChangesFlag = true;
     }
 
-    private void AuthorPickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    private void AuthorPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
     {
         ConcreteBindingContext.Author = model;
     }

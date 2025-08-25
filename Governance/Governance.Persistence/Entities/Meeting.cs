@@ -18,7 +18,7 @@ namespace MOROPO.Framework.Decisor.Governance.Persistence.Entities
         public System.Guid DecisionMakingGroupId { get; set; }
         
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AuthorId))]
-        public Domain.Persistence.Entities.Employee Author { get; set; }
+        public Domain.Persistence.Entities.PersonContact Author { get; set; }
         public System.Guid AuthorId { get; set; }
 
         public string Summary { get; set; }

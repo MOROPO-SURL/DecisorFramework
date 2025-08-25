@@ -24,7 +24,7 @@
                 Grid.Column="0" Grid.RowSpan="3"
                 Aspect="AspectFill"
                 WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
-                Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
             <StackLayout 
                 Grid.Column="1"
                 Padding="10">
