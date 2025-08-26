@@ -240,9 +240,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClientSaleContract", b =>
                 {
-                    b.Property<int>("Number")
+                    b.Property<int>("Id")
                         .HasColumnType("integer")
-                        .HasColumnName("number");
+                        .HasColumnName("id");
 
                     b.Property<int>("Year")
                         .HasColumnType("integer")
@@ -260,13 +260,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("clientid");
 
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("interval")
-                        .HasColumnName("duration");
+                    b.Property<int?>("DurationUnitCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("durationunitcount");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
+                    b.Property<int?>("DurationUnitMeasureKind")
+                        .HasColumnType("integer")
+                        .HasColumnName("durationunitmeasurekind");
 
                     b.Property<string>("Objective")
                         .IsRequired()
@@ -285,7 +285,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("starat");
 
-                    b.HasKey("Number", "Year")
+                    b.HasKey("Id", "Year")
                         .HasName("pk_legalclientsalecontracts");
 
                     b.HasIndex("ClientId")
@@ -381,9 +381,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProviderPurchasingContract", b =>
                 {
-                    b.Property<int>("Number")
+                    b.Property<int>("Id")
                         .HasColumnType("integer")
-                        .HasColumnName("number");
+                        .HasColumnName("id");
 
                     b.Property<int>("Year")
                         .HasColumnType("integer")
@@ -397,13 +397,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("interval")
-                        .HasColumnName("duration");
+                    b.Property<int?>("DurationUnitCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("durationunitcount");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
+                    b.Property<int?>("DurationUnitMeasureKind")
+                        .HasColumnType("integer")
+                        .HasColumnName("durationunitmeasurekind");
 
                     b.Property<string>("Objective")
                         .IsRequired()
@@ -422,7 +422,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("starat");
 
-                    b.HasKey("Number", "Year")
+                    b.HasKey("Id", "Year")
                         .HasName("pk_legalproviderpurchasingcontracts");
 
                     b.HasIndex("ProviderId")
@@ -515,9 +515,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClientSaleContract", b =>
                 {
-                    b.Property<int>("Number")
+                    b.Property<int>("Id")
                         .HasColumnType("integer")
-                        .HasColumnName("number");
+                        .HasColumnName("id");
 
                     b.Property<int>("Year")
                         .HasColumnType("integer")
@@ -535,13 +535,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("clientid");
 
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("interval")
-                        .HasColumnName("duration");
+                    b.Property<int?>("DurationUnitCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("durationunitcount");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
+                    b.Property<int?>("DurationUnitMeasureKind")
+                        .HasColumnType("integer")
+                        .HasColumnName("durationunitmeasurekind");
 
                     b.Property<string>("Objective")
                         .IsRequired()
@@ -560,7 +560,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("starat");
 
-                    b.HasKey("Number", "Year")
+                    b.HasKey("Id", "Year")
                         .HasName("pk_naturalclientsalecontracts");
 
                     b.HasIndex("ClientId")
@@ -656,9 +656,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalProviderPurchasingContract", b =>
                 {
-                    b.Property<int>("Number")
+                    b.Property<int>("Id")
                         .HasColumnType("integer")
-                        .HasColumnName("number");
+                        .HasColumnName("id");
 
                     b.Property<int>("Year")
                         .HasColumnType("integer")
@@ -672,13 +672,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("interval")
-                        .HasColumnName("duration");
+                    b.Property<int?>("DurationUnitCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("durationunitcount");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
+                    b.Property<int?>("DurationUnitMeasureKind")
+                        .HasColumnType("integer")
+                        .HasColumnName("durationunitmeasurekind");
 
                     b.Property<string>("Objective")
                         .IsRequired()
@@ -697,7 +697,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("starat");
 
-                    b.HasKey("Number", "Year")
+                    b.HasKey("Id", "Year")
                         .HasName("pk_naturalproviderpurchasingcontracts");
 
                     b.HasIndex("ProviderId")
@@ -2525,15 +2525,14 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("admitionpropousals", "decisorframework_humanresources");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.EmploymentContract", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract.AbstractEmploymentContract", b =>
                 {
-                    b.Property<int>("Number")
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("number");
+                        .HasColumnName("id");
 
-                    b.Property<int>("Year")
-                        .HasColumnType("integer")
-                        .HasColumnName("year");
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Archived")
                         .HasColumnType("boolean")
@@ -2543,38 +2542,69 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
-                    b.Property<TimeSpan>("Duration")
-                        .HasColumnType("interval")
-                        .HasColumnName("duration");
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
+                    b.Property<int?>("DurationUnitCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("durationunitcount");
+
+                    b.Property<int?>("DurationUnitMeasureKind")
+                        .HasColumnType("integer")
+                        .HasColumnName("durationunitmeasurekind");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("employeeid");
 
                     b.Property<string>("Objective")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("objective");
 
-                    b.Property<Guid>("OcupationId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("ocupationid");
-
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
+
+                    b.Property<Guid>("StaffId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("staffid");
 
                     b.Property<DateTime>("StarAt")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("starat");
 
-                    b.HasKey("Number", "Year")
+                    b.Property<Guid>("VacantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vacantid");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
+                    b.HasKey("Id")
                         .HasName("pk_employmentcontracts");
 
-                    b.HasIndex("OcupationId")
-                        .HasDatabaseName("ix_employmentcontracts_ocupationid");
+                    b.HasIndex("EmployeeId")
+                        .HasDatabaseName("ix_employmentcontracts_employeeid");
+
+                    b.HasIndex("StaffId")
+                        .HasDatabaseName("ix_employmentcontracts_staffid");
+
+                    b.HasIndex("VacantId")
+                        .HasDatabaseName("ix_employmentcontracts_vacantid");
+
+                    b.HasIndex("Id", "Year")
+                        .IsUnique()
+                        .HasDatabaseName("ix_employmentcontracts_id_year");
 
                     b.ToTable("employmentcontracts", "decisorframework_humanresources");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractEmploymentContract");
+
+                    b.UseTphMappingStrategy();
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", b =>
@@ -2588,9 +2618,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
-                    b.Property<Guid>("EmployeeId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("employeeid");
+                    b.Property<int>("ContractId")
+                        .HasColumnType("integer")
+                        .HasColumnName("contractid");
 
                     b.Property<Guid>("StaffId")
                         .HasColumnType("uuid")
@@ -2600,21 +2630,15 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("vacantid");
 
-                    b.Property<Guid>("WorkforceId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("workforceid");
-
                     b.HasKey("Id")
                         .HasName("pk_ocupations");
 
-                    b.HasIndex("EmployeeId")
-                        .HasDatabaseName("ix_ocupations_employeeid");
+                    b.HasIndex("ContractId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_ocupations_contractid");
 
                     b.HasIndex("VacantId")
                         .HasDatabaseName("ix_ocupations_vacantid");
-
-                    b.HasIndex("WorkforceId")
-                        .HasDatabaseName("ix_ocupations_workforceid");
 
                     b.HasIndex("StaffId", "VacantId")
                         .IsUnique()
@@ -2864,9 +2888,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
-                    b.Property<bool>("NamingResolutionRequired")
-                        .HasColumnType("boolean")
-                        .HasColumnName("namingresolutionrequired");
+                    b.Property<int>("OcupationMode")
+                        .HasColumnType("integer")
+                        .HasColumnName("ocupationmode");
 
                     b.Property<Guid>("OrganizationUnityId")
                         .HasColumnType("uuid")
@@ -7038,6 +7062,53 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasDiscriminator().HasValue("PersonContactBudget");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.AdmitionEmploymentContract", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract.AbstractEmploymentContract");
+
+                    b.Property<Guid?>("AdmitionPropousalId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("admitionpropousalid");
+
+                    b.HasIndex("AdmitionPropousalId")
+                        .HasDatabaseName("ix_employmentcontracts_admitionpropousalid");
+
+                    b.ToTable("employmentcontracts", "decisorframework_humanresources");
+
+                    b.HasDiscriminator().HasValue("AdmitionEmploymentContract");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.NamingEmploymentContract", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract.AbstractEmploymentContract");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<DateTime?>("InterviewAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("interviewat");
+
+                    b.Property<long?>("ResolutionId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("resolutionid");
+
+                    b.Property<Guid?>("ResponsibleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("responsibleid");
+
+                    b.HasIndex("ResolutionId")
+                        .HasDatabaseName("ix_employmentcontracts_resolutionid");
+
+                    b.HasIndex("ResponsibleId")
+                        .HasDatabaseName("ix_employmentcontracts_responsibleid");
+
+                    b.ToTable("employmentcontracts", "decisorframework_humanresources");
+
+                    b.HasDiscriminator().HasValue("NamingEmploymentContract");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrderDeparture", b =>
                 {
                     b.HasBaseType("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture");
@@ -8423,26 +8494,44 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("OcupationCandidate");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.EmploymentContract", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", "Ocupation")
-                        .WithMany()
-                        .HasForeignKey("OcupationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_employmentcontracts_ocupations_ocupationid");
-
-                    b.Navigation("Ocupation");
-                });
-
-            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract.AbstractEmploymentContract", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Employee")
                         .WithMany()
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_ocupations_employees_employeeid");
+                        .HasConstraintName("fk_employmentcontracts_employees_employeeid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Staff", "Staff")
+                        .WithMany()
+                        .HasForeignKey("StaffId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_employmentcontracts_staffs_staffid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", "Vacant")
+                        .WithMany()
+                        .HasForeignKey("VacantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_employmentcontracts_vacants_vacantid");
+
+                    b.Navigation("Employee");
+
+                    b.Navigation("Staff");
+
+                    b.Navigation("Vacant");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract.AbstractEmploymentContract", "Contract")
+                        .WithOne("RefereceOcupation")
+                        .HasForeignKey("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", "ContractId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_ocupations_employmentcontracts_contractid");
 
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Staff", "Staff")
                         .WithMany()
@@ -8458,20 +8547,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_ocupations_vacants_vacantid");
 
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", "Workforce")
-                        .WithMany()
-                        .HasForeignKey("WorkforceId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_ocupations_workforces_workforceid");
-
-                    b.Navigation("Employee");
+                    b.Navigation("Contract");
 
                     b.Navigation("Staff");
 
                     b.Navigation("Vacant");
-
-                    b.Navigation("Workforce");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.OcupationCandidate", b =>
@@ -10780,6 +10860,33 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Contact");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.AdmitionEmploymentContract", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.AdmitionPropousal", "AdmitionPropousal")
+                        .WithMany()
+                        .HasForeignKey("AdmitionPropousalId")
+                        .HasConstraintName("fk_employmentcontracts_admitionpropousals_admitionpropousalid");
+
+                    b.Navigation("AdmitionPropousal");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.NamingEmploymentContract", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.NamingResolution", "Resolution")
+                        .WithMany()
+                        .HasForeignKey("ResolutionId")
+                        .HasConstraintName("fk_employmentcontracts_resolutions_resolutionid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleId")
+                        .HasConstraintName("fk_employmentcontracts_employees_responsibleid");
+
+                    b.Navigation("Resolution");
+
+                    b.Navigation("Responsible");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrderDeparture", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", null)
@@ -11065,6 +11172,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("DocumentBridges");
 
                     b.Navigation("EmployeeBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract.AbstractEmploymentContract", b =>
+                {
+                    b.Navigation("RefereceOcupation");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Staff", b =>

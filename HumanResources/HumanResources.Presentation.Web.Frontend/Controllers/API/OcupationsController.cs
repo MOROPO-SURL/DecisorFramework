@@ -1,4 +1,5 @@
-﻿using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
+﻿using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
@@ -10,8 +11,15 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class OcupationsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementFilteredController<Ocupation, System.Guid, OcupationInputModel, OcupationDisplayModel, OcupationFilterModel>
     {
-        public OcupationsController(IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
+        private readonly IEntityRepository<NamingResolution, long> namingResolutionRepository;
+        private readonly IEntityRepository<AdmitionPropousal, System.Guid> admisionPropousalRepository;
+        private readonly IEntityRepository<Employee, System.Guid> employeeRepository;
+
+        public OcupationsController(IEntityRepository<Employee, System.Guid> employeeRepository, IEntityRepository<AdmitionPropousal, System.Guid> admisionPropousalRepository, IEntityRepository<NamingResolution, long> namingResolutionRepository, IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
         {
+            this.namingResolutionRepository = namingResolutionRepository;
+            this.admisionPropousalRepository = admisionPropousalRepository;
+            this.employeeRepository = employeeRepository;
         }
 
         protected override OcupationDisplayModel EntityToDisplayModel(Ocupation entity)
@@ -20,10 +28,97 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
             if (model.Employee.Contact.Identity.Image != null)
             {
-                model.Employee.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Employee.Contact.Identity.Image.ContentType);
+                model.Employee.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Contract.Employee.Contact.Identity.Image.ContentType);
             }
 
             return model;
+        }
+
+        public override Microsoft.AspNetCore.Mvc.ActionResult Edit([Microsoft.AspNetCore.Mvc.FromBody] OcupationInputModel model)
+        {
+            return NotFound();
+        }
+
+        protected override void PreCreate(Ocupation entity, OcupationInputModel model)
+        {
+            base.PreCreate(entity, model);
+
+            if (model.NamingResolutionId != null)
+            {
+                var namingResolution = namingResolutionRepository.Get(model.NamingResolutionId.Value);
+
+                var employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == namingResolution.ContactId);
+
+                entity.StaffId = namingResolution.StaffId;
+                entity.VacantId = namingResolution.VacantId;
+                entity.Contract = new NamingEmploymentContract
+                {
+                    Year = model.StarAt.Year,
+                    StarAt = model.StarAt,
+                    Objective = $"Contratación generada a partir de la resolución de nombramiento \"{namingResolution.Id}/{namingResolution.At.Year}\"",
+                    DurationUnitCount = model.DurationUnitCount,
+                    DurationUnitMeasureKind = model.DurationUnitMeasureKind,
+                    Priority = namingResolution.Contact.Priority,                    
+                    StaffId = namingResolution.StaffId,
+                    VacantId = namingResolution.VacantId,
+                    ResolutionId = namingResolution.Id
+                };
+
+                if (employee != null)
+                {
+                    entity.Contract.EmployeeId = employee.Id;
+                }
+                else
+                {
+                    entity.Contract.Employee = new Employee
+                    {
+                        Enabled = true,
+                        Priority = namingResolution.Contact.Priority,
+                        ContactId = namingResolution.ContactId
+                    };
+                }
+
+                return;
+            }
+            else if (model.AdmisionPropousalId != null)
+            {
+                var admisionPropousal = admisionPropousalRepository.Get(model.AdmisionPropousalId.Value);
+
+                var employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == admisionPropousal.OcupationCandidate.Postulation.ContactId);
+
+                entity.StaffId = admisionPropousal.OcupationCandidate.Postulation.StaffId;
+                entity.VacantId = admisionPropousal.OcupationCandidate.Postulation.VacantId;
+                entity.Contract = new AdmitionEmploymentContract
+                {
+                    Year = model.StarAt.Year,
+                    StarAt = model.StarAt,
+                    Objective = $"Contratación generada a partir de la propuesta de admisión tomada en la reunión No.{admisionPropousal.Agreement.Meeting.Index} con fecha {admisionPropousal.Agreement.Meeting.At:D}",
+                    DurationUnitCount = model.DurationUnitCount,
+                    DurationUnitMeasureKind = model.DurationUnitMeasureKind,
+                    Priority = admisionPropousal.OcupationCandidate.Postulation.Contact.Priority,
+                    StaffId = admisionPropousal.OcupationCandidate.Postulation.StaffId,
+                    VacantId = admisionPropousal.OcupationCandidate.Postulation.VacantId,
+                    AdmitionPropousalId = admisionPropousal.Id
+                };
+
+                if (employee != null)
+                {
+                    entity.Contract.EmployeeId = employee.Id;
+                }
+                else
+                {
+                    entity.Contract.Employee = new Employee
+                    {
+                        Enabled = true,
+                        Priority = admisionPropousal.OcupationCandidate.Postulation.Contact.Priority,
+                        ContactId = admisionPropousal.OcupationCandidate.Postulation.ContactId
+                    };
+                }
+
+                return;
+            }
+
+            throw new System.InvalidOperationException();
         }
     }
 }

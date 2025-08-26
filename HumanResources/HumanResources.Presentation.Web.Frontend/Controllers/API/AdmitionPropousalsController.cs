@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
@@ -8,7 +9,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 {
     [Microsoft.AspNetCore.Mvc.Route("api/hhrr/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class AdmitionPropousalsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<AdmitionPropousal, System.Guid, AdmitionPropousalInputModel, AdmitionPropousalDisplayModel>
+    public class AdmitionPropousalsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<AdmitionPropousal, System.Guid, AdmitionPropousalInputModel, AdmitionPropousalDisplayModel, AdmitionPropousalFilterModel>
     {
         private readonly IEntityRepository<OcupationCandidate, System.Guid> candidateRepository;
 

@@ -22,6 +22,8 @@
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.OcupationCandidate>(),
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.AdmitionPropousal>(),
                     new Configurators.EmploymentContractEntityTypeConfigurator(),
+                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.NamingEmploymentContract>(),
+                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.AdmitionEmploymentContract>(),
                     new Configurators.StaffEntityTypeConfigurator(),
                     new Configurators.StaffWorkforceBridgeEntityTypeConfigurator(),
                     new Configurators.OcupationEntityTypeConfigurator()

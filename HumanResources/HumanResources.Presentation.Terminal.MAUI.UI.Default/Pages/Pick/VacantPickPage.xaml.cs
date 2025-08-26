@@ -9,14 +9,14 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
 {
     private System.Action<Models.View.StaffVacantViewModel> pickCompleteAction;
-    private bool isForNamingResolutionRequired;
+    private Persistence.Enumerations.VacantOcupationMode[] vacantOcupationModes;
 
-    public VacantPickPage(bool isForNamingResolutionRequired, System.Action<Models.View.StaffVacantViewModel> pickCompleteAction)
+    public VacantPickPage(Persistence.Enumerations.VacantOcupationMode[] vacantOcupationModes, System.Action<Models.View.StaffVacantViewModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-        this.isForNamingResolutionRequired = isForNamingResolutionRequired;
+        this.vacantOcupationModes = vacantOcupationModes;
 
         BindingContext = new Models.Page.Pick.VacantPickPageModel();
 
@@ -138,7 +138,7 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
 
                     foreach (var vacant in item.Vacants)
                     {
-                        if (vacant.NamingResolutionRequired != isForNamingResolutionRequired) continue;
+                        if (!vacantOcupationModes.Contains(vacant.OcupationMode)) continue;
 
                         var ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == vacant.Id);
 

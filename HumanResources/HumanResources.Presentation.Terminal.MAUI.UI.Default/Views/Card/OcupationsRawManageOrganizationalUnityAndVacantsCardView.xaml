@@ -14,6 +14,7 @@
 
             <communitytoolkit_converters:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <Frame>
@@ -66,33 +67,20 @@
                                         Text="{Binding WorkPosition.Name}"
                                         FontAttributes="Bold"
                                         LineBreakMode="TailTruncation" />
-                                    <HorizontalStackLayout
-                                        HorizontalOptions="Center"
-                                        Spacing="8">
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
                                         <Button
-                                            ToolTipProperties.Text="Seleccionar contacto ..."
+                                            IsVisible="{Binding Ocupation, Converter={StaticResource IsNullConverter}}"
                                             FontFamily="MaterialDesignIcons" 
                                             Text="&#xF014;"
                                             Padding="0"
                                             FontSize="21"
-                                            Clicked="PickContactButton_Clicked" />
+                                            Clicked="OcupationCreationButton_Clicked" />
                                         <Button
                                             IsEnabled="{Binding Ocupation, Converter={StaticResource IsNotNullConverter}}"
-                                            ToolTipProperties.Text="Liberar plaza ..."
-                                            FontFamily="MaterialDesignIcons" 
-                                            Text="&#xF015;"
-                                            Padding="0"
-                                            FontSize="21"
-                                            Clicked="RemoveOcupationButton_Clicked" />
-                                        <Button
-                                            IsEnabled="{Binding Ocupation, Converter={StaticResource IsNotNullConverter}}"
-                                            ToolTipProperties.Text="Detalles de Empleado ..."
-                                            FontFamily="MaterialDesignIcons" 
-                                            Text="&#xF2FD;"
-                                            Padding="0"
-                                            FontSize="21"
+                                            HorizontalOptions="FillAndExpand"
+                                            Text="Detalles"
                                             Clicked="EmployeeDetailButton_Clicked" />
-                                    </HorizontalStackLayout>
+                                    </StackLayout>
                                 </VerticalStackLayout>
                             </VerticalStackLayout>
                         </Frame>
@@ -109,7 +97,7 @@
                     <DataTemplate>
                         <local_card_views:OcupationsRawManageOrganizationalUnityAndVacantsCardView 
                             Margin="0,8,0,0"
-                            PickContactButtonClick="PickContactButton_Clicked"
+                            OcupationCreationButtonClick="OcupationCreationButton_Clicked"
                             RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"
                             EmployeeDetailButtonClick="EmployeeDetailButton_Clicked">
                         </local_card_views:OcupationsRawManageOrganizationalUnityAndVacantsCardView>

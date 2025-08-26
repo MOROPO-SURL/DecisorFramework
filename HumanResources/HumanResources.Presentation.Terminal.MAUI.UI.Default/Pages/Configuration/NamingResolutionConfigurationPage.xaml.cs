@@ -74,7 +74,7 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
 
     private void VacantPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPickPage(true, VacantPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPickPage([Persistence.Enumerations.VacantOcupationMode.Naming, Persistence.Enumerations.VacantOcupationMode.Hybrid], VacantPickComplete_Callback)));
     }
 
     private void ContactPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)

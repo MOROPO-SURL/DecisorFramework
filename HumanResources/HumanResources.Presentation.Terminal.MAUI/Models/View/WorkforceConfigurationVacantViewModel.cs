@@ -3,7 +3,7 @@
     public class WorkforceConfigurationVacantViewModel : Caney.MVVM.Core.Models.BaseBindableModel
     {
         private int priority;
-        private bool namingResolutionRequired;
+        private Persistence.Enumerations.VacantOcupationMode vacantOcupationMode;
         private Interop.API.Common.Models.Display.WorkPositionDisplayModel workPosition;
         private Interop.API.Common.Models.Display.SalaryStandardDisplayModel salaryStandard;
 
@@ -13,7 +13,7 @@
 
         public int Priority { get => priority; set => priority = value; }
 
-        public bool NamingResolutionRequired { get => namingResolutionRequired; set => namingResolutionRequired = value; }
+        public Persistence.Enumerations.VacantOcupationMode OcupationMode { get => vacantOcupationMode; set => vacantOcupationMode = value; }
 
         public Interop.API.Common.Models.Display.WorkPositionDisplayModel WorkPosition { get => workPosition; set => SetProperty(ref workPosition, value); }
 

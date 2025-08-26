@@ -1,23 +1,17 @@
 ﻿using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
-using MOROPO.Framework.Guama.Media.Persistence.Entities;
-using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Controllers.API
 {
     [Microsoft.AspNetCore.Mvc.Route("api/hhrr/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class NamingResolutionsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<NamingResolution, long, NamingResolutionInputModel, NamingResolutionDisplayModel>
+    public class NamingResolutionsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<NamingResolution, long, NamingResolutionInputModel, NamingResolutionDisplayModel, NamingResolutionFilterModel>
     {
-        private readonly IEntityRepository<Image, System.Guid> imageRepository;
-        private readonly IImageFileManagerFacade imageFileManager;
-
-        public NamingResolutionsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<NamingResolution, long> repository, Microsoft.Extensions.Localization.IStringLocalizer<NamingResolutionsController> localizer, Microsoft.Extensions.Logging.ILogger<NamingResolutionsController> logger) : base(repository, localizer, logger)
+        public NamingResolutionsController(IEntityRepository<NamingResolution, long> repository, Microsoft.Extensions.Localization.IStringLocalizer<NamingResolutionsController> localizer, Microsoft.Extensions.Logging.ILogger<NamingResolutionsController> logger) : base(repository, localizer, logger)
         {
-            this.imageRepository = imageRepository;
-            this.imageFileManager = imageFileManager;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<NamingResolution, bool>> GetGlobalSelector()

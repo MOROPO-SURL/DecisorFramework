@@ -250,7 +250,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         incomingVacants.Add(new VacantInputModel
         {
             Id = model.Id,
-            NamingResolutionRequired = model.NamingResolutionRequired,
+            OcupationMode = model.OcupationMode,
             Priority = model.Priority,
             OrganizationUnityId = model.OrganizationUnity.Id,
             WorkPositionId = model.WorkPosition.Id,
@@ -269,7 +269,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
             if (item.Id != model.Id) continue;
 
             item.Priority = model.Priority;
-            item.NamingResolutionRequired = model.NamingResolutionRequired;
+            item.OcupationMode = model.OcupationMode;
             item.OrganizationUnityId = model.OrganizationUnity.Id;
             item.WorkPositionId = model.WorkPosition.Id;
             item.SalaryStandardId = model.SalaryStandard.Id;
@@ -284,7 +284,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
                 if (item.Id != model.Id) continue;
 
                 item.Priority = model.Priority;
-                item.NamingResolutionRequired = model.NamingResolutionRequired;
+                item.OcupationMode = model.OcupationMode;
                 item.OrganizationUnityId = model.OrganizationUnity.Id;
                 item.WorkPositionId = model.WorkPosition.Id;
                 item.SalaryStandardId = model.SalaryStandard.Id;
@@ -298,7 +298,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
             editionVacants.Add(new VacantInputModel
             {
                 Id = model.Id,
-                NamingResolutionRequired = model.NamingResolutionRequired,
+                OcupationMode = model.OcupationMode,
                 Priority = model.Priority,
                 OrganizationUnityId = model.OrganizationUnity.Id,
                 WorkPositionId = model.WorkPosition.Id,
@@ -311,7 +311,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
             if (item.Id != model.Id) continue;
 
             item.Priority = model.Priority;
-            item.NamingResolutionRequired = model.NamingResolutionRequired;
+            item.OcupationMode = model.OcupationMode;
             item.WorkPosition = model.WorkPosition;
             item.SalaryStandard = model.SalaryStandard;
         }

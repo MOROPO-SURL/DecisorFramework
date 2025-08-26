@@ -4,22 +4,19 @@
     {
         public System.Guid Id { get; set; } = System.Guid.NewGuid();
 
-        public System.DateTime At { get; set; }
-        public System.Guid StaffId { get; set; }
+        public System.DateTime StarAt { get; set; }
 
-        public System.Guid WorkforceId { get; set; }
+        public int? DurationUnitCount { get; set; }
 
-        public System.Guid VacantId { get; set; }
+        public Legal.Persistence.Enumerations.DurationUnitMeasureKind? DurationUnitMeasureKind { get; set; }
 
-        public System.Guid EmployeeId { get; set; }
+        public System.Guid? AdmisionPropousalId { get; set; }
+
+        public long? NamingResolutionId { get; set; }
 
         public Persistence.Entities.Ocupation Export()
         {
-            var entity = new Persistence.Entities.Ocupation { Id = Id, StaffId = StaffId, WorkforceId = WorkforceId, VacantId = VacantId };
-
-            Mergue(entity);
-
-            return entity;
+            return new Persistence.Entities.Ocupation { Id = Id, At = System.DateTime.Now };
         }
 
         public void Import(Persistence.Entities.Ocupation entity)
@@ -29,13 +26,7 @@
 
         public void Mergue(Persistence.Entities.Ocupation entity)
         {
-            entity.At = At;
-
-            if (entity.EmployeeId != EmployeeId)
-            {
-                entity.Employee = null;
-                entity.EmployeeId = EmployeeId;
-            }
+            throw new System.NotImplementedException();
         }
     }
 }

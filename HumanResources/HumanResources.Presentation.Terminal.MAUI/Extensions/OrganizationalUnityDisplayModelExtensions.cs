@@ -30,7 +30,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                     {
                         Id = _model.Id,
                         Priority = _model.Priority,
-                        NamingResolutionRequired = _model.NamingResolutionRequired,
+                        OcupationMode = _model.OcupationMode,
                         WorkPosition = _model.WorkPosition,
                         SalaryStandard = _model.SalaryStandard,
                         OrganizationUnity = model
@@ -67,7 +67,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                         var result = new Models.View.OcupationsRawManageVacantViewModel
                         {
                             Id = _model.Id,
-                            NamingResolutionRequired = _model.NamingResolutionRequired,
+                            VacantOcupationMode = _model.OcupationMode,
                             WorkPosition = _model.WorkPosition,
                             SalaryStandard = _model.SalaryStandard,
                             Ocupation = ocupation
