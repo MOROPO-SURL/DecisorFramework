@@ -4,7 +4,7 @@
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResolutionId))]
         public NamingResolution Resolution { get; set; }
-        public long? ResolutionId { get; set; }
+        public System.Guid? ResolutionId { get; set; }
 
         public System.DateTime? InterviewAt { get; set; }
 

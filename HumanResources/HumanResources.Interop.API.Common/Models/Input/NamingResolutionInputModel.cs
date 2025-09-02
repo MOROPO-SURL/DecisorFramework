@@ -2,13 +2,15 @@
 {
     public class NamingResolutionInputModel : Legal.Interop.API.Common.Models.Input.Contract.AbstractResolutionInputModel<Persistence.Entities.NamingResolution>
     {
-        public System.Guid ContactId { get; set; }
+        public System.Guid? ContactId { get; set; }
+
+        public System.Guid? CandidateId { get; set; }
 
         public System.Guid AgreementId { get; set; }
 
-        public System.Guid VacantId { get; set; }
+        public System.Guid? VacantId { get; set; }
 
-        public System.Guid StaffId { get; set; }
+        public System.Guid? StaffId { get; set; }
 
         public override void Mergue(Persistence.Entities.NamingResolution entity)
         {
@@ -36,6 +38,12 @@
             {
                 entity.Staff = null;
                 entity.StaffId = StaffId;
+            }
+
+            if (entity.CandidateId != CandidateId)
+            {
+                entity.Candidate = null;
+                entity.CandidateId = CandidateId;
             }
         }
     }

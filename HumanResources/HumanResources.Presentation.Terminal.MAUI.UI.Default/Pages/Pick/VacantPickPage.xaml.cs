@@ -9,7 +9,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
 {
     private System.Action<Models.View.StaffVacantViewModel> pickCompleteAction;
-    private Persistence.Enumerations.VacantOcupationMode[] vacantOcupationModes;
+    private readonly Persistence.Enumerations.VacantOcupationMode[] vacantOcupationModes;
 
     public VacantPickPage(Persistence.Enumerations.VacantOcupationMode[] vacantOcupationModes, System.Action<Models.View.StaffVacantViewModel> pickCompleteAction)
     {

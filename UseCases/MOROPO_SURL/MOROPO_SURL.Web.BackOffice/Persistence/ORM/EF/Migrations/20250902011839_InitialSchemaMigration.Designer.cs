@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250826161302_HumanResoursesUpgrade6SchemaMigration")]
-    partial class HumanResoursesUpgrade6SchemaMigration
+    [Migration("20250902011839_InitialSchemaMigration")]
+    partial class InitialSchemaMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -4489,12 +4489,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Contract.AbstractResolution", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Archived")
                         .HasColumnType("boolean")
@@ -4509,13 +4507,24 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("discriminator");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
+
                     b.Property<string>("Summary")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("summary");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
                     b.HasKey("Id")
                         .HasName("pk_resolutions");
+
+                    b.HasIndex("Index", "Year")
+                        .HasDatabaseName("ix_resolutions_index_year");
 
                     b.ToTable("resolutions", (string)null);
 
@@ -7093,8 +7102,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("interviewat");
 
-                    b.Property<long?>("ResolutionId")
-                        .HasColumnType("bigint")
+                    b.Property<Guid?>("ResolutionId")
+                        .HasColumnType("uuid")
                         .HasColumnName("resolutionid");
 
                     b.Property<Guid?>("ResponsibleId")
@@ -7198,6 +7207,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("agreementid");
 
+                    b.Property<DateTime?>("ConcretedAt")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("concretedat");
+
                     b.Property<Guid>("ContactId")
                         .HasColumnType("uuid")
                         .HasColumnName("contactid");
@@ -7235,6 +7249,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("uuid")
                         .HasColumnName("agreementid");
+
+                    b.Property<DateTime?>("ConcretedAt")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("concretedat");
 
                     b.Property<Guid>("OcupationId")
                         .HasColumnType("uuid")

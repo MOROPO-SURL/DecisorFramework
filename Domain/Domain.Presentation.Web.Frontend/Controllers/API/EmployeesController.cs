@@ -15,12 +15,12 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 
         protected override System.Linq.Expressions.Expression<System.Func<Employee, bool>> GetGlobalSelector()
         {
-            return entity => !entity.Archived && entity.Enabled;
+            return entity => !entity.Archived;
         }
 
         protected override System.Func<Employee, object> GetOrderSelector()
         {
-            return entity => entity.Priority;
+            return entity => entity.Contact.Identity.Name;
         }
 
         public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)

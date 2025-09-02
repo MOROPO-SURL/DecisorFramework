@@ -62,7 +62,7 @@ public partial class AdmitionPropousalConfigurationPage : Core.Presentation.Term
 
     private void CandidatePickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OcupationCandidatePickPage(CondidatePickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OcupationCandidatePickPage(false, CondidatePickComplete_Callback)));
     }
 
     private void AgreementPickButton_Clicked(object sender, System.EventArgs e)

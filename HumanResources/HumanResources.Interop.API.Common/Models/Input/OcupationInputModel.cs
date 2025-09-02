@@ -12,7 +12,7 @@
 
         public System.Guid? AdmisionPropousalId { get; set; }
 
-        public long? NamingResolutionId { get; set; }
+        public System.Guid? NamingResolutionId { get; set; }
 
         public Persistence.Entities.Ocupation Export()
         {

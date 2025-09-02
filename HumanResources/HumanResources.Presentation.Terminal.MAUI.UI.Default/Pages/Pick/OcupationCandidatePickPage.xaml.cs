@@ -8,30 +8,14 @@ public partial class OcupationCandidatePickPage : Core.Presentation.Terminal.MAU
     public static double ITEM_VIEW_REQUEST_HEIGHT = 208;
 
     private System.Action<Interop.API.Common.Models.Display.OcupationCandidateDisplayModel> pickCompleteAction;
+    private readonly bool isForNamingResolution;
 
-    private bool pickedFlag = false;
-
-    public OcupationCandidatePickPage(System.Action<Interop.API.Common.Models.Display.OcupationCandidateDisplayModel> pickCompleteAction)
+    public OcupationCandidatePickPage(bool isForNamingResolution, System.Action<Interop.API.Common.Models.Display.OcupationCandidateDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
+        this.isForNamingResolution = isForNamingResolution;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
@@ -54,7 +38,7 @@ public partial class OcupationCandidatePickPage : Core.Presentation.Terminal.MAU
     {
         var apiConnectClient = new Interop.API.Connect.Clients.OcupationCandidatesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
+        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.OcupationCandidateFilterModel { VacantOcupationMode = isForNamingResolution ? Persistence.Enumerations.VacantOcupationMode.Hybrid : Persistence.Enumerations.VacantOcupationMode.Admision }, CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)

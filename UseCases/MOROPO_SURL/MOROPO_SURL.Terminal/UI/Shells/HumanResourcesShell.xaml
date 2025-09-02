@@ -114,12 +114,12 @@
             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}" />
     </FlyoutItem>
     <ShellContent
-        Title="Contactos"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}">
+        Title="Expedientes laborales"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:EmployeesListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF5D2;"
+                Glyph="&#xFDF0;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -140,6 +140,16 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF00C2;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Contactos"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF5D2;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
