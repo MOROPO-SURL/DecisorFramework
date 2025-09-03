@@ -52,7 +52,9 @@
                             <DataTemplate x:DataType="interop_common_display_models:PropertyLeaseOfferDisplayModel">
                                 <Frame Margin="10" Padding="8">
                                     <VerticalStackLayout>
-                                        <local_card_views:PropertyLeaseOfferDefaultCardView Margin="8">
+                                        <local_card_views:PropertyLeaseOfferDefaultCardView 
+                                            Margin="8"
+                                            MaximumHeightRequest="300">
                                             <ContentView.GestureRecognizers>
                                                 <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                             </ContentView.GestureRecognizers>
