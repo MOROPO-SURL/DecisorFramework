@@ -16,13 +16,13 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
         public Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel AdmitionPropousal { get; set; }
 
-        public System.DateTime StartAt { get => startAt; set => startAt = value; }
+        public System.DateTime StartAt { get => startAt; set => SetProperty(ref startAt, value); }
 
-        public bool IsDetermiteDuration { get => isDetermiteDuration; set => isDetermiteDuration = value; }
+        public bool IsDetermiteDuration { get => isDetermiteDuration; set => SetProperty(ref isDetermiteDuration, value); }
 
-        public int Duration { get => duration; set => duration = value; }
+        public int Duration { get => duration; set => SetProperty(ref duration, value); }
 
-        public DurationUnitMeasureKind DurationUnitMeasureKind { get => durationUnitMeasureKind; set => durationUnitMeasureKind = value; }
+        public DurationUnitMeasureKind DurationUnitMeasureKind { get => durationUnitMeasureKind; set => SetProperty(ref durationUnitMeasureKind, value); }
 
         public DurationUnitMeasureKind[] AvailableDurationUnitMeasureKinds => [DurationUnitMeasureKind.Years, DurationUnitMeasureKind.Months, DurationUnitMeasureKind.Days, DurationUnitMeasureKind.Hours];
     }

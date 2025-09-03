@@ -18,13 +18,15 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
 
         var model = new Interop.API.Common.Models.Input.NamingResolutionInputModel
         {
-            Id = ConcreteBindingContext.Id,
+            Id = System.Guid.NewGuid(),
+            Index = ConcreteBindingContext.Index,
             At = ConcreteBindingContext.At,
             Summary = ConcreteBindingContext.Summary,
-            ContactId = ConcreteBindingContext.Contact.Id,
             AgreementId = ConcreteBindingContext.Agreement.Id,
-            VacantId = ConcreteBindingContext.Vacant.Id,
-            StaffId = ConcreteBindingContext.Staff.Id
+            ContactId = ConcreteBindingContext.Contact?.Id,
+            VacantId = ConcreteBindingContext.Vacant?.Id,
+            StaffId = ConcreteBindingContext.Staff?.Id,
+            CandidateId = ConcreteBindingContext.Candidate?.Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -39,12 +41,14 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
         var model = new Interop.API.Common.Models.Input.NamingResolutionInputModel
         {
             Id = ConcreteBindingContext.Id,
+            Index = ConcreteBindingContext.Index,
             At = ConcreteBindingContext.At,
             Summary = ConcreteBindingContext.Summary,
-            ContactId = ConcreteBindingContext.Contact.Id,
             AgreementId = ConcreteBindingContext.Agreement.Id,
-            VacantId = ConcreteBindingContext.Vacant.Id,
-            StaffId = ConcreteBindingContext.Staff.Id
+            ContactId = ConcreteBindingContext.Contact?.Id,
+            VacantId = ConcreteBindingContext.Vacant?.Id,
+            StaffId = ConcreteBindingContext.Staff?.Id,
+            CandidateId = ConcreteBindingContext.Candidate?.Id
         };
 
         await apiConnectClient.EditAsync(model);
@@ -74,7 +78,17 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
 
     private void VacantPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPickPage([Persistence.Enumerations.VacantOcupationMode.Naming, Persistence.Enumerations.VacantOcupationMode.Hybrid], VacantPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPickPage([Persistence.Enumerations.VacantOcupationMode.Naming], VacantPickComplete_Callback)));
+    }
+
+    private void CandidatePickButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OcupationCandidatePickPage(true, CondidatePickComplete_Callback)));
+    }
+
+    private void CondidatePickComplete_Callback(Interop.API.Common.Models.Display.OcupationCandidateDisplayModel model)
+    {
+        ConcreteBindingContext.Candidate = model;
     }
 
     private void ContactPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)

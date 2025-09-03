@@ -66,16 +66,31 @@
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Duración" />
-                        <HorizontalStackLayout>
-                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Determinado?" />
-                            <Switch  IsToggled="{Binding IsDetermiteDuration}" />
+                        <HorizontalStackLayout Spacing="6">
+                            <Label 
+                                VerticalOptions="Center"
+                                Text="Determinado?" />
+                            <Switch  
+                                VerticalOptions="Center"
+                                IsToggled="{Binding IsDetermiteDuration}" />
                         </HorizontalStackLayout>
-                        <HorizontalStackLayout IsVisible="{Binding IsDetermiteDuration}" Spacing="6">
-                            <Stepper Value="{Binding Duration}" />
+                        <StackLayout 
+                            IsVisible="{Binding IsDetermiteDuration}" 
+                            Orientation="Horizontal" Spacing="6">
+                            <Grid HorizontalOptions="FillAndExpand">
+                                <Entry
+                                    BackgroundColor="Transparent"
+                                    IsReadOnly="True"
+                                    Text="{Binding Duration}" />
+                                <Stepper
+                                    Margin="0,0,6,0"
+                                    HorizontalOptions="End" VerticalOptions="Center"
+                                    Value="{Binding Duration}" />
+                            </Grid>
                             <Picker
                                 ItemsSource="{Binding AvailableDurationUnitMeasureKinds}"
                                 SelectedItem="{Binding DurationUnitMeasureKind}" />
-                        </HorizontalStackLayout>                        
+                        </StackLayout>                        
                     </VerticalStackLayout>
                 </FlexLayout>
             </VerticalStackLayout>

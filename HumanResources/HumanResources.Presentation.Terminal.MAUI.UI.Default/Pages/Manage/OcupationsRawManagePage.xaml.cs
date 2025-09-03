@@ -179,7 +179,7 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
     {
         pickContactVacantBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Models.View.OcupationsRawManageVacantViewModel;
 
-        if (pickContactVacantBindingContext.VacantOcupationMode == Persistence.Enumerations.VacantOcupationMode.Naming)
+        if (pickContactVacantBindingContext.VacantOcupationMode != Persistence.Enumerations.VacantOcupationMode.Admision)
         {
             ConcreteBindingContext.IsBusy = true;
 
@@ -197,7 +197,9 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
                     }
                     else
                     {
-                        if (task.Result.Length <= 0)
+                        var availables = task.Result.Where(model => model.ConcretedAt == null).ToArray();
+
+                        if (availables.Length <= 0)
                         {
                             ConcreteBindingContext.IsBusy = false;
 
@@ -224,7 +226,7 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
                                     {
                                         Id = ocupationId,
                                         StarAt = System.DateTime.Now,
-                                        NamingResolutionId = task.Result[0].Id
+                                        NamingResolutionId = availables[0].Id
                                     });
 
                                     return await ocupationAPIConnectClient.GetAsync(ocupationId);
@@ -252,14 +254,9 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
                 });
             });
         }
-        else if (pickContactVacantBindingContext.VacantOcupationMode == Persistence.Enumerations.VacantOcupationMode.Admision)
-        {
-            this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.AdmitionPropousalPickPage(pickContactVacantBindingContext.WorkPosition, ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex], AdmitionPropousalPickComplete_Callback)));
-        }
         else
         {
-            // TODO Implement expected behavior!!!
-            throw new System.NotImplementedException();
+            this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.AdmitionPropousalPickPage(pickContactVacantBindingContext.WorkPosition, ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex], AdmitionPropousalPickComplete_Callback)));
         }
 
         //System.Threading.Tasks.Task.Delay(100).ContinueWith(_ =>

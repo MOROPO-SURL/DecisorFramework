@@ -146,7 +146,7 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
 
     private void VacantPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPickPage([Persistence.Enumerations.VacantOcupationMode.Admision], VacantPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPickPage([Persistence.Enumerations.VacantOcupationMode.Admision, Persistence.Enumerations.VacantOcupationMode.Hybrid], VacantPickComplete_Callback)));
     }
 
     private void ContactPickButton_Clicked(object sender, System.EventArgs eventArgs)

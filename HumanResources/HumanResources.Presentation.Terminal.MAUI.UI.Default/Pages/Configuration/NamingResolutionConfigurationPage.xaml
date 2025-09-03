@@ -2,6 +2,7 @@
 <core_ui_base_pages:ConfigurationBaseContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:domain_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
@@ -18,6 +19,7 @@
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -59,12 +61,12 @@
                                 Grid.Row="1"
                                 BackgroundColor="Transparent"
                                 IsReadOnly="True"
-                                Text="{Binding Id}" />
+                                Text="{Binding Index}" />
                             <Stepper
                                 Grid.Row="1"
                                 Margin="0,0,6,0"
                                 HorizontalOptions="End" VerticalOptions="Center"
-                                Value="{Binding Id}" />
+                                Value="{Binding Index}" />
                         </Grid>
                         <Label 
                             Style="{StaticResource CaptionFieldLabelStyle}" 
@@ -73,6 +75,7 @@
                         <DatePicker Date="{Binding At}" Format="dddd dd, MMMM, yyyy" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
+                        IsVisible="{Binding IsForOcupationCandidate, Converter={StaticResource InvertedBoolConverter}}"
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=8}}"
                         Margin="4"
                         Spacing="6">
@@ -161,6 +164,7 @@
                             Clicked="AgreementPickButton_Clicked" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
+                        IsVisible="{Binding IsForOcupationCandidate, Converter={StaticResource InvertedBoolConverter}}"
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=5, MediumContainerColumn=6, SmallContainerColumn=10}}"
                         Margin="4"
                         Spacing="6">
@@ -174,6 +178,22 @@
                             HorizontalOptions="Start"
                             Text="Seleccionar ..."
                             Clicked="ContactPickButton_Clicked" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        IsVisible="{Binding IsForOcupationCandidate}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=8}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Candidato" />
+                        <ContentView
+                            IsVisible="{Binding Candidate, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="208">
+                            <local_presentation_card_views:OcupationCandidateDefaultCardView BindingContext="{Binding Candidate}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="CandidatePickButton_Clicked" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <VerticalStackLayout 

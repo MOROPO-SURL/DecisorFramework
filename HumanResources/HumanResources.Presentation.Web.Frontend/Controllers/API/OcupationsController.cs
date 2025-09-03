@@ -11,15 +11,17 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class OcupationsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementFilteredController<Ocupation, System.Guid, OcupationInputModel, OcupationDisplayModel, OcupationFilterModel>
     {
-        private readonly IEntityRepository<NamingResolution, long> namingResolutionRepository;
+        private readonly IEntityRepository<NamingResolution, System.Guid> namingResolutionRepository;
         private readonly IEntityRepository<AdmitionPropousal, System.Guid> admisionPropousalRepository;
         private readonly IEntityRepository<Employee, System.Guid> employeeRepository;
+        private readonly IEntityRepository<OcupationCandidate, System.Guid> ocupationCandidateRepository;
 
-        public OcupationsController(IEntityRepository<Employee, System.Guid> employeeRepository, IEntityRepository<AdmitionPropousal, System.Guid> admisionPropousalRepository, IEntityRepository<NamingResolution, long> namingResolutionRepository, IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
+        public OcupationsController(IEntityRepository<OcupationCandidate, System.Guid> ocupationCandidateRepository, IEntityRepository<Employee, System.Guid> employeeRepository, IEntityRepository<AdmitionPropousal, System.Guid> admisionPropousalRepository, IEntityRepository<NamingResolution, System.Guid> namingResolutionRepository, IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
         {
             this.namingResolutionRepository = namingResolutionRepository;
             this.admisionPropousalRepository = admisionPropousalRepository;
             this.employeeRepository = employeeRepository;
+            this.ocupationCandidateRepository = ocupationCandidateRepository;
         }
 
         protected override OcupationDisplayModel EntityToDisplayModel(Ocupation entity)
@@ -47,10 +49,12 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
             {
                 var namingResolution = namingResolutionRepository.Get(model.NamingResolutionId.Value);
 
-                var employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == namingResolution.ContactId);
+                var candidate = namingResolution.CandidateId == null ? null : ocupationCandidateRepository.Get(namingResolution.CandidateId.Value);
 
-                entity.StaffId = namingResolution.StaffId;
-                entity.VacantId = namingResolution.VacantId;
+                var employee = candidate == null ? employeeRepository.FindOneBy(_entity => _entity.ContactId == namingResolution.ContactId.Value) : employeeRepository.FindOneBy(_entity => _entity.ContactId == candidate.Postulation.ContactId);
+
+                entity.StaffId = namingResolution.StaffId ?? candidate.Postulation.StaffId;
+                entity.VacantId = namingResolution.VacantId ?? candidate.Postulation.VacantId;
                 entity.Contract = new NamingEmploymentContract
                 {
                     Year = model.StarAt.Year,
@@ -58,14 +62,21 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                     Objective = $"Contratación generada a partir de la resolución de nombramiento \"{namingResolution.Id}/{namingResolution.At.Year}\"",
                     DurationUnitCount = model.DurationUnitCount,
                     DurationUnitMeasureKind = model.DurationUnitMeasureKind,
-                    Priority = namingResolution.Contact.Priority,                    
-                    StaffId = namingResolution.StaffId,
-                    VacantId = namingResolution.VacantId,
+                    Priority = namingResolution.Contact?.Priority ?? candidate.Postulation.Contact.Priority,
+                    StaffId = namingResolution.StaffId ?? candidate.Postulation.StaffId,
+                    VacantId = namingResolution.VacantId ?? candidate.Postulation.VacantId,
                     ResolutionId = namingResolution.Id
                 };
 
                 if (employee != null)
                 {
+                    if (employee.Archived)
+                    {
+                        employee.Archived = false;
+
+                        employeeRepository.Update(employee, User.Identity.Name, false);
+                    }
+
                     entity.Contract.EmployeeId = employee.Id;
                 }
                 else
@@ -73,10 +84,14 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                     entity.Contract.Employee = new Employee
                     {
                         Enabled = true,
-                        Priority = namingResolution.Contact.Priority,
-                        ContactId = namingResolution.ContactId
+                        Priority = namingResolution.Contact?.Priority ?? candidate.Postulation.Contact.Priority,
+                        ContactId = namingResolution.ContactId ?? namingResolution.Candidate.Postulation.ContactId
                     };
                 }
+
+                namingResolution.ConcretedAt = System.DateTime.Now;
+
+                namingResolutionRepository.Update(namingResolution, User.Identity.Name, false);
 
                 return;
             }
@@ -103,6 +118,13 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
                 if (employee != null)
                 {
+                    if (employee.Archived)
+                    {
+                        employee.Archived = false;
+
+                        employeeRepository.Update(employee, User.Identity.Name, false);
+                    }
+
                     entity.Contract.EmployeeId = employee.Id;
                 }
                 else
@@ -114,6 +136,10 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                         ContactId = admisionPropousal.OcupationCandidate.Postulation.ContactId
                     };
                 }
+
+                admisionPropousal.Archived = true;
+
+                admisionPropousalRepository.Update(admisionPropousal, User.Identity.Name, false);
 
                 return;
             }

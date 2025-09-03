@@ -8,6 +8,8 @@ namespace MOROPO.Framework.Decisor.Legal.Persistence.ORM.EF.Configurators
         {
             base.ApplayRules(entityTypeBuilder);
 
+            entityTypeBuilder.HasIndex(entity => new { entity.Index, entity.Year }).IsUnique();
+
             entityTypeBuilder.ToTable("resolutions");
             entityTypeBuilder.HasDiscriminator();
         }

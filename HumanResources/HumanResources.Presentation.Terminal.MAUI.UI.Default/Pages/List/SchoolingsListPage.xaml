@@ -14,7 +14,6 @@
     Title="Disponibilidad de Niveles de Preparación">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <communitytoolkit_converters:BoolToObjectConverter x:Key="IsNotNullConverter"/>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
