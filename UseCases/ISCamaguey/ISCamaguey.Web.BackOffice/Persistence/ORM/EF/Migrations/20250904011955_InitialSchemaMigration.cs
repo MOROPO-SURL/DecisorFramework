@@ -3224,7 +3224,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     employeeid = table.Column<Guid>(type: "uuid", nullable: false),
                     discriminator = table.Column<string>(type: "text", nullable: false),
                     admitionpropousalid = table.Column<Guid>(type: "uuid", nullable: true),
-                    resolutionid = table.Column<long>(type: "bigint", nullable: true),
+                    resolutionid = table.Column<Guid>(type: "uuid", nullable: true),
                     interviewat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     responsibleid = table.Column<Guid>(type: "uuid", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true),
@@ -3633,16 +3633,19 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 name: "resolutions",
                 columns: table => new
                 {
-                    id = table.Column<long>(type: "bigint", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
+                    index = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     summary = table.Column<string>(type: "text", nullable: false),
                     discriminator = table.Column<string>(type: "text", nullable: false),
-                    contactid = table.Column<Guid>(type: "uuid", nullable: true),
+                    agreementid = table.Column<Guid>(type: "uuid", nullable: true),
                     vacantid = table.Column<Guid>(type: "uuid", nullable: true),
                     staffid = table.Column<Guid>(type: "uuid", nullable: true),
-                    agreementid = table.Column<Guid>(type: "uuid", nullable: true),
+                    contactid = table.Column<Guid>(type: "uuid", nullable: true),
+                    candidateid = table.Column<Guid>(type: "uuid", nullable: true),
+                    concretedat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     ocupationid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
@@ -3656,6 +3659,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "fk_resolutions_ocupationcandidates_candidateid",
+                        column: x => x.candidateid,
+                        principalSchema: "decisorframework_humanresources",
+                        principalTable: "ocupationcandidates",
+                        principalColumn: "id");
+                    table.ForeignKey(
                         name: "fk_resolutions_ocupations_ocupationid",
                         column: x => x.ocupationid,
                         principalSchema: "decisorframework_humanresources",
@@ -3667,8 +3676,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         column: x => x.contactid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "personcontacts",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -4847,9 +4855,20 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "agreementid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_resolutions_candidateid",
+                table: "resolutions",
+                column: "candidateid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_resolutions_contactid",
                 table: "resolutions",
                 column: "contactid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_resolutions_index_year",
+                table: "resolutions",
+                columns: new[] { "index", "year" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_resolutions_ocupationid",
@@ -5351,8 +5370,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "staffid",
                 principalSchema: "decisorframework_humanresources",
                 principalTable: "staffs",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "id");
 
             migrationBuilder.AddForeignKey(
                 name: "fk_resolutions_vacants_vacantid",
@@ -5360,8 +5378,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "vacantid",
                 principalSchema: "decisorframework_humanresources",
                 principalTable: "vacants",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "id");
 
             migrationBuilder.AddForeignKey(
                 name: "fk_staffs_workforces_mainworkforceid",
@@ -5479,6 +5496,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 name: "fk_admitionpropousals_ocupationcandidates_ocupationcandidateid",
                 schema: "decisorframework_humanresources",
                 table: "admitionpropousals");
+
+            migrationBuilder.DropForeignKey(
+                name: "fk_resolutions_ocupationcandidates_candidateid",
+                table: "resolutions");
 
             migrationBuilder.DropForeignKey(
                 name: "fk_organizationidentities_images_imageid",

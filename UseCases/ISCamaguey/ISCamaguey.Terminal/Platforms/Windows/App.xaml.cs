@@ -1,14 +1,12 @@
-﻿using Microsoft.UI.Xaml;
-
-// To learn more about WinUI, the WinUI project structure,
+﻿// To learn more about WinUI, the WinUI project structure,
 // and more about our project templates, see: http://aka.ms/winui-project-info.
 
-namespace ISCamaguey.Terminal.WinUI
+namespace MOROPO.ISCamaguey.Decisor.Terminal.WinUI
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public partial class App : MauiWinUIApplication
+    public partial class App : Microsoft.Maui.MauiWinUIApplication
     {
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -19,7 +17,7 @@ namespace ISCamaguey.Terminal.WinUI
             this.InitializeComponent();
         }
 
-        protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+        protected override Microsoft.Maui.Hosting.MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
 
 }

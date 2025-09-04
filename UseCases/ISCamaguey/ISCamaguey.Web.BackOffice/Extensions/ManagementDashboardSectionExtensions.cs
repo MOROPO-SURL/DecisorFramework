@@ -116,6 +116,58 @@
 
             if (target.Controller == "nationalnorms") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-octagram");
 
+            if (target.Controller == "certificates") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-certificate");
+
+            if (target.Controller == "floorstudyservices") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-sprout");
+
+            if (target.Controller == "workgroups") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-account-supervisor-circle");
+
+            if (target.Controller == "testhandlings") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-check");
+
+            if (target.Controller == "testreceptions") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-alert");
+
+            if (target.Controller == "technicals") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-microscope");
+
+            if (target.Controller == "internationalnorms") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-check-decagram");
+
+            if (target.Controller == "qualitychecks") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-clipboard-check");
+
+            if (target.Controller == "categories") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-star-four-points");
+
+            if (target.Controller == "releases") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-file-chart");
+
+            if (target.Controller == "labtestservices") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-question");
+
+            if (target.Controller == "propousals") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-lightbulb-on");
+
+            if (target.Controller == "schoolings") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-school");
+
+            if (target.Controller == "workpositionkinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-worker");
+
+            if (target.Controller == "achivements") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-trophy-award");
+
+            if (target.Controller == "achivements") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-podium");
+
+            if (target.Controller == "publishes") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-post");
+
+            if (target.Controller == "projects") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-folder-open");
+
+            if (target.Controller == "ctihits") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-file-star");
+
+            if (target.Controller == "ctihitintroductions") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-star-circle");
+
+            if (target.Controller == "ctihitkinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-playlist-star");
+
+            if (target.Controller == "sponsors") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-offer");
+
+            if (target.Controller == "programs") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-city-variant");
+
+            if (target.Controller == "researpartners") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-domain");
+
+            if (target.Controller == "researchers") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-account-tie");
+
+            if (target.Controller == "serviceorders") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-layers-triple");
+
             return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
         }
     }

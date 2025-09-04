@@ -1,12 +1,19 @@
-﻿namespace ISCamaguey.Terminal
+﻿namespace MOROPO.ISCamaguey.Decisor.Terminal
 {
-    public partial class App : Application
+    public partial class App : Microsoft.Maui.Controls.Application
     {
         public App()
         {
             InitializeComponent();
 
-            MainPage = new AppShell();
+            MainPage = new UI.Pages.MainPage();
+        }
+
+        protected override void OnStart()
+        {
+            base.OnStart();
+
+            Windows[0].Title = "Decisor Instituto de Suelos Camagüey";
         }
     }
 }

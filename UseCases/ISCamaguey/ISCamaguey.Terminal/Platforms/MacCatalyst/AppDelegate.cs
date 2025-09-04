@@ -1,10 +1,8 @@
-﻿using Foundation;
-
-namespace ISCamaguey.Terminal
+﻿namespace MOROPO.ISCamaguey.Decisor.Terminal.Platforms.MacCatalyst
 {
-    [Register("AppDelegate")]
-    public class AppDelegate : MauiUIApplicationDelegate
+    [Foundation.Register("AppDelegate")]
+    public class AppDelegate : Microsoft.Maui.MauiUIApplicationDelegate
     {
-        protected override MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
+        protected override Microsoft.Maui.Hosting.MauiApp CreateMauiApp() => MauiProgram.CreateMauiApp();
     }
 }

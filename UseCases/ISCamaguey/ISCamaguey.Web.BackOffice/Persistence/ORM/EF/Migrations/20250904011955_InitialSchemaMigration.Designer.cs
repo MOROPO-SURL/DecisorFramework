@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250826210345_InitialSchemaMigration")]
+    [Migration("20250904011955_InitialSchemaMigration")]
     partial class InitialSchemaMigration
     {
         /// <inheritdoc />
@@ -3879,12 +3879,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Legal.Persistence.Entities.Contract.AbstractResolution", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<bool>("Archived")
                         .HasColumnType("boolean")
@@ -3899,13 +3897,25 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("discriminator");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
+
                     b.Property<string>("Summary")
                         .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("summary");
 
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
                     b.HasKey("Id")
                         .HasName("pk_resolutions");
+
+                    b.HasIndex("Index", "Year")
+                        .IsUnique()
+                        .HasDatabaseName("ix_resolutions_index_year");
 
                     b.ToTable("resolutions", (string)null);
 
@@ -5347,8 +5357,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("interviewat");
 
-                    b.Property<long?>("ResolutionId")
-                        .HasColumnType("bigint")
+                    b.Property<Guid?>("ResolutionId")
+                        .HasColumnType("uuid")
                         .HasColumnName("resolutionid");
 
                     b.Property<Guid?>("ResponsibleId")
@@ -5391,20 +5401,32 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("agreementid");
 
-                    b.Property<Guid>("ContactId")
+                    b.Property<Guid?>("CandidateId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("candidateid");
+
+                    b.Property<DateTime?>("ConcretedAt")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("concretedat");
+
+                    b.Property<Guid?>("ContactId")
                         .HasColumnType("uuid")
                         .HasColumnName("contactid");
 
-                    b.Property<Guid>("StaffId")
+                    b.Property<Guid?>("StaffId")
                         .HasColumnType("uuid")
                         .HasColumnName("staffid");
 
-                    b.Property<Guid>("VacantId")
+                    b.Property<Guid?>("VacantId")
                         .HasColumnType("uuid")
                         .HasColumnName("vacantid");
 
                     b.HasIndex("AgreementId")
                         .HasDatabaseName("ix_resolutions_agreementid");
+
+                    b.HasIndex("CandidateId")
+                        .HasDatabaseName("ix_resolutions_candidateid");
 
                     b.HasIndex("ContactId")
                         .HasDatabaseName("ix_resolutions_contactid");
@@ -5428,6 +5450,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("uuid")
                         .HasColumnName("agreementid");
+
+                    b.Property<DateTime?>("ConcretedAt")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("concretedat");
 
                     b.Property<Guid>("OcupationId")
                         .HasColumnType("uuid")
@@ -7844,28 +7871,29 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_resolutions_agreements_agreementid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.OcupationCandidate", "Candidate")
+                        .WithMany()
+                        .HasForeignKey("CandidateId")
+                        .HasConstraintName("fk_resolutions_ocupationcandidates_candidateid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
                         .WithMany()
                         .HasForeignKey("ContactId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_resolutions_personcontacts_contactid");
 
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Staff", "Staff")
                         .WithMany()
                         .HasForeignKey("StaffId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_resolutions_staffs_staffid");
 
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", "Vacant")
                         .WithMany()
                         .HasForeignKey("VacantId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_resolutions_vacants_vacantid");
 
                     b.Navigation("Agreement");
+
+                    b.Navigation("Candidate");
 
                     b.Navigation("Contact");
 
