@@ -56,24 +56,6 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Resources\AppIcon\appicon.svg" />
-	  <None Remove="Resources\Fonts\materialdesignicons-webfont.ttf" />
-	  <None Remove="Resources\Images\cash.jpg" />
-	  <None Remove="Resources\Images\commercial.jpg" />
-	  <None Remove="Resources\Images\default_organization_picture.png" />
-	  <None Remove="Resources\Images\default_person_picture.jpg" />
-	  <None Remove="Resources\Images\domain.jpg" />
-	  <None Remove="Resources\Images\identity.png" />
-	  <None Remove="Resources\Images\lab.jpg" />
-	  <None Remove="Resources\Images\logo_art_frame.svg" />
-	  <None Remove="Resources\Images\production.jpg" />
-	  <None Remove="Resources\Images\quality.jpg" />
-	  <None Remove="Resources\Images\recomendations.jpg" />
-	  <None Remove="Resources\Images\research.jpg" />
-	  <None Remove="Resources\Images\rr_hh.jpg" />
-	  <None Remove="Resources\Images\service.jpg" />
-	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="FreakyControls" Version="0.5.1" />

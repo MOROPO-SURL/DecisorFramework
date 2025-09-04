@@ -14,7 +14,8 @@
                 Aspect="AspectFill"
                 Source="domain.jpg" />
             <BoxView
-                Color="#A7000000" />
+                BackgroundColor="Black"
+                Opacity="0.5" />
             <Grid
                 Padding="16">
                 <Button
