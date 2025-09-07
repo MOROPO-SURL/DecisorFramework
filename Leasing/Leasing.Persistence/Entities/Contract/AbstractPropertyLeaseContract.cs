@@ -1,6 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Leasing.Persistence.Entities
+﻿namespace MOROPO.Framework.Decisor.Leasing.Persistence.Entities.Contract
 {
-    public class PropertyLeaseContract : Contract.AbstractLeaseContract
+    public abstract class AbstractPropertyLeaseContract : AbstractLeaseContract
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(PropertyId))]
         public Domain.Persistence.Entities.Property Property { get; set; }

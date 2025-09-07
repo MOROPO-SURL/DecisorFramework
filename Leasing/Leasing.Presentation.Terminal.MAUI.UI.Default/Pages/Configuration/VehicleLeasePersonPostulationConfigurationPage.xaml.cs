@@ -26,6 +26,20 @@ public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Prese
                 break;
             }
         }
+
+        if (model.MainPostalContactItem != null)
+        {
+            for (int i = 0; i < model.Contact.Identity.PostalContacts.Length; i++)
+            {
+                var current = model.Contact.Identity.PostalContacts[i];
+
+                if (model.MainPostalContactItem.Id != current.Id) continue;
+
+                PostalContactItemPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Postulante Natural";
@@ -41,6 +55,7 @@ public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Prese
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument
         };
 
@@ -60,6 +75,7 @@ public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Prese
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument
         };
 
@@ -91,5 +107,6 @@ public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Prese
     private void ContactPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
     {
         ConcreteBindingContext.Contact = model;
+        ConcreteBindingContext.TaxIdentificationNumber = model.PersonalIdentificationNumber;
     }
 }

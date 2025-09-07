@@ -7,6 +7,7 @@
         private Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel contact;
         private string taxIdentificationNumber;
         private string stateIdentificationCode;
+        private Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel mainPostalContactItem;
         private string argument;
 
         public AbstractLeaseOrganizationPostulationConfigurationPageModel(System.Guid offerId, TModel model) : base(model)
@@ -16,10 +17,11 @@
             if (model != null)
             {
                 Id = model.Id;
-                Contact = model.Contact;
-                TaxIdentificationNumber = model.TaxIdentificationNumber;
-                StateIdentificationCode = model.StateIdentificationCode;
-                Argument = model.Argument;
+                contact = model.Contact;
+                taxIdentificationNumber = model.TaxIdentificationNumber;
+                stateIdentificationCode = model.StateIdentificationCode;
+                mainPostalContactItem = model.MainPostalContactItem;
+                argument = model.Argument;
             }
         }
 
@@ -32,6 +34,8 @@
         public string TaxIdentificationNumber { get => taxIdentificationNumber; set => SetProperty(ref taxIdentificationNumber, value); }
 
         public string StateIdentificationCode { get => stateIdentificationCode; set => SetProperty(ref stateIdentificationCode, value); }
+
+        public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContactItem { get => mainPostalContactItem; set => SetProperty(ref mainPostalContactItem, value); }
 
         public string Argument { get => argument; set => SetProperty(ref argument, value); }
     }

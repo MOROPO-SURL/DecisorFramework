@@ -11,6 +11,20 @@ public partial class VehicleLeaseOrganizationPostulationConfigurationPage : Core
     public VehicleLeaseOrganizationPostulationConfigurationPage(System.Action<VehicleLeaseOrganizationPostulationDisplayModel> successAction, Models.Page.Configuration.VehicleLeaseOrganizationPostulationConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
+
+        if (model.MainPostalContactItem != null)
+        {
+            for (int i = 0; i < model.Contact.Identity.PostalContacts.Length; i++)
+            {
+                var current = model.Contact.Identity.PostalContacts[i];
+
+                if (model.MainPostalContactItem.Id != current.Id) continue;
+
+                PostalContactItemPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Postulante Jurídico";
@@ -26,6 +40,7 @@ public partial class VehicleLeaseOrganizationPostulationConfigurationPage : Core
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument
         };
 
@@ -45,6 +60,7 @@ public partial class VehicleLeaseOrganizationPostulationConfigurationPage : Core
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument
         };
 
@@ -66,6 +82,11 @@ public partial class VehicleLeaseOrganizationPostulationConfigurationPage : Core
     private void ContactPickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationContactPickPage(ContactPickComplete_Callback)));
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
     }
 
     private void ContactPickComplete_Callback(Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel model)

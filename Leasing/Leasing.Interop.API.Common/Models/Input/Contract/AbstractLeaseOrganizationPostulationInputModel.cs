@@ -12,6 +12,8 @@
 
         public string StateIdentificationCode { get; set; }
 
+        public System.Guid MainPostalContactItemId { get; set; }
+
         [System.ComponentModel.DataAnnotations.Required]
         public string Argument { get; set; }
 
@@ -24,8 +26,6 @@
 
         public virtual void Mergue(TEntity entity)
         {
-            entity.TaxIdentificationNumber = TaxIdentificationNumber;
-            entity.StateIdentificationCode = StateIdentificationCode;
             entity.Argument = Argument;
 
             if (entity.ContactId != ContactId)

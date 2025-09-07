@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 {
@@ -11,6 +12,10 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
         where TDetailContentPage : DetailBaseContentPage<TModel>
     {
         protected virtual bool ConfigurationRequiredAsyncWorkPresentation => false;
+
+        protected virtual string CreatorPermissionCode => null;
+
+        protected virtual string EditorPermissionCode => null;
 
         protected override void ItemDetailRequestControl_Invoked(object sender, System.EventArgs eventArgs)
         {
@@ -40,6 +45,18 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected void AddItem(object sender, System.EventArgs eventArgs)
         {
+            if (CreatorPermissionCode != null)
+            {
+                var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+                if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == CreatorPermissionCode)))
+                {
+                    DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                    return;
+                }
+            }
+
             var concreteBindingContext = (TManagePageModel)BindingContext;
 
             concreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation;
@@ -77,6 +94,20 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
             if (discriminator == null)
             {
+                if (EditorPermissionCode != null)
+                {
+                    var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+                    if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == EditorPermissionCode)))
+                    {
+                        DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                        concreteBindingContext.IsBusy = false;
+
+                        return;
+                    }
+                }
+
                 System.Threading.Tasks.Task.Run(async () =>
                 {
                     try

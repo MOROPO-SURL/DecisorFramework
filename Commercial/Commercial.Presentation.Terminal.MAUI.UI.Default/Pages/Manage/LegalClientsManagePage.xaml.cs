@@ -19,6 +19,12 @@ public partial class LegalClientsManagePage : Core.Presentation.Terminal.MAUI.UI
 
     protected override double ItemViewRequestWidth { get => 420; }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientEditorPermission;
+
     protected override double MeasureCollectionViewCellHeight(double width)
     {
         return ITEM_VIEW_REQUEST_HEIGHT;
@@ -44,14 +50,12 @@ public partial class LegalClientsManagePage : Core.Presentation.Terminal.MAUI.UI
 
     protected override void OnActionDelegationRequest(LegalClientDisplayModel target, int discriminator)
     {
-        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
-
         switch (discriminator)
         {
             case 0:
                 var apiConnectClient = new Interop.API.Connect.Clients.LegalClientsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(_ =>
                 {
                     Dispatcher.Dispatch(() => LoadItems(true));
                 });

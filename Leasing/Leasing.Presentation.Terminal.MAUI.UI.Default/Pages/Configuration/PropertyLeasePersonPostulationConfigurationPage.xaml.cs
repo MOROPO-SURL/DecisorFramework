@@ -30,6 +30,20 @@ public partial class PropertyLeasePersonPostulationConfigurationPage : Core.Pres
                 break;
             }
         }
+
+        if (model.MainPostalContactItem != null)
+        {
+            for (int i = 0; i < model.Contact.Identity.PostalContacts.Length; i++)
+            {
+                var current = model.Contact.Identity.PostalContacts[i];
+
+                if (model.MainPostalContactItem.Id != current.Id) continue;
+
+                PostalContactItemPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Postulante Natural";
@@ -45,6 +59,7 @@ public partial class PropertyLeasePersonPostulationConfigurationPage : Core.Pres
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument,
             IncomingSpaces = incomingSpaces
         };
@@ -65,6 +80,7 @@ public partial class PropertyLeasePersonPostulationConfigurationPage : Core.Pres
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument,
             IncomingSpaces = incomingSpaces,
             OutgoingSpaces = outgoingSpaces
@@ -149,5 +165,6 @@ public partial class PropertyLeasePersonPostulationConfigurationPage : Core.Pres
     private void ContactPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
     {
         ConcreteBindingContext.Contact = model;
+        ConcreteBindingContext.TaxIdentificationNumber = model.PersonalIdentificationNumber;
     }
 }

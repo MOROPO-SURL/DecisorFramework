@@ -199,16 +199,45 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<VehicleLeasePropousal> VehicleLeasePropousals { get; set; }
         public DbSet<PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
         public DbSet<VehicleLeaseOffer> VehicleLeaseOffers { get; set; }
-        public DbSet<VehicleLeaseOrganizationPostulation> VehicleLeaseOrganizationPostulations { get; set; }
-        public DbSet<VehicleLeaseOrganizationPostulationDocumentBridge> VehicleLeaseOrganizationPostulationDocumentBridges { get; set; }
-        public DbSet<VehicleLeasePersonPostulation> VehicleLeasePersonPostulations { get; set; }
-        public DbSet<VehicleLeasePersonPostulationDocumentBridge> VehicleLeasePersonPostulationDocumentBridges { get; set; }
-        public DbSet<PropertyLeaseOrganizationPostulation> PropertyLeaseOrganizationPostulations { get; set; }
-        public DbSet<PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridge> PropertyLeaseOrgPostulationSpacePropousalBridges { get; set; }
-        public DbSet<PropertyLeaseOrganizationPostulationDocumentBridge> PropertyLeaseOrganizationPostulationDocumentBridges { get; set; }
-        public DbSet<PropertyLeasePersonPostulation> PropertyLeasePersonPostulations { get; set; }
-        public DbSet<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropertyLeasePersPostulationSpacePropousalBridges { get; set; }
+        public DbSet<VehicleLeaseOrganizationPostulation> VehLeasOrgPostulations { get; set; }
+        public DbSet<VehicleLeaseOrganizationPostulationDocumentBridge> VehLeasOrgPostDocumentBridges { get; set; }
+        public DbSet<VehicleLeasePersonPostulation> VehLeasPersonPostulations { get; set; }
+        public DbSet<VehicleLeasePersonPostulationDocumentBridge> VehLeasPersonPostDocumentBridges { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulation> PropLeasOrgPostulations { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridge> PropLeaseOrgPostSpacePropousalBridges { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulationDocumentBridge> PropLeasOrgPostDocumentBridges { get; set; }
+        public DbSet<PropertyLeasePersonPostulation> PropLeasPersonPostulations { get; set; }
+        public DbSet<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropLeasPersPostSpacePropBridges { get; set; }
         public DbSet<PropertyLeasePersonPostulationDocumentBridge> PropertyLeasePersonPostulationDocumentBridges { get; set; }
+        public DbSet<LegalClientPropertyLeaseContract> LegalClientPropertyLeaseContract { get; set; }
+        public DbSet<NaturalClientPropertyLeaseContract> NaturalClientPropertyLeaseContract { get; set; }
+        public DbSet<LegalClientPropertyLeaseContractSpaceBridge> LegClientPropLeasContractSpaceBridges { get; set; }
+        public DbSet<NaturalClientPropertyLeaseContractSpaceBridge> NatClientPropeLeasContractSpaceBridges { get; set; }
+        public DbSet<LegalClientVehicleLeaseContract> LegalClientVehicleLeaseContract { get; set; }
+        public DbSet<NaturalClientVehicleLeaseContract> NaturalClientVehicleLeaseContract { get; set; }
+        public DbSet<LegalClientVehicleLeasing> LegalClientVehicleLeasings { get; set; }
+        public DbSet<LegalClientVehicleLeasingPersonContactBridge> LegClientVehLeasPersonContactBridges { get; set; }
+        public DbSet<NaturalClientVehicleLeasing> NaturalClientVehicleLeasings { get; set; }
+        public DbSet<NaturalClientVehicleLeasingPersonContactBridge> NatClientVehLeasPersonContactBridges { get; set; }
+        public DbSet<LegalClientPropertyLeasing> LegalClientPropertyLeasings { get; set; }
+        public DbSet<LegalClientPropertyLeasingPersonContactBridge> LegClientPropLeasPersonContactBridges { get; set; }
+        public DbSet<NaturalClientPropertyLeasing> NaturalClientPropertyLeasings { get; set; }
+        public DbSet<NaturalClientPropertyLeasingPersonContactBridge> NatClientPropLeasPersonContactBridges { get; set; }
+        public DbSet<SupervisionGroup> SupervisionGroups { get; set; }
+        public DbSet<SupervisionGroupEmployeeBridge> SupervisionGroupEmployeeBridges { get; set; }
+        public DbSet<LegalClientPropertySupervisionControlAction> LegClientPropSupervControlActions { get; set; }
+        public DbSet<NaturalClientPropertySupervisionControlAction> NatClientPropSupervControlActions { get; set; }
+        public DbSet<LegalClientVehicleSupervisionControlAction> LegClientVehSupervControlActions { get; set; }
+        public DbSet<NaturalClientVehicleSupervisionControlAction> NatClientVehSupervControlActions { get; set; }
+        public DbSet<LegalClientPropertyLeasingCompensation> LegalClientPropertyLeasingCompensations { get; set; }
+        public DbSet<LegalClientPropertyLeasingCompensationDocumentBridge> LegClientPropLeasCompDocumentBridges { get; set; }
+        public DbSet<NaturalClientPropertyLeasingCompensation> NaturalClientPropertyLeasingCompensations { get; set; }
+        public DbSet<NaturalClientPropertyLeasingCompensationDocumentBridge> NatClientPropLeasCompDocumentBridges { get; set; }
+        public DbSet<LegalClientVehicleLeasingCompensation> LegalClientVehicleLeasingCompensations { get; set; }
+        public DbSet<LegalClientVehicleLeasingCompensationDocumentBridge> LegClientVehLeasCompDocumentBridges { get; set; }
+        public DbSet<NaturalClientVehicleLeasingCompensation> NaturalClientVehicleLeasingCompensations { get; set; }
+        public DbSet<NaturalClientVehicleLeasingCompensationDocumentBridge> NatClientVehLeasCompDocumentBridges { get; set; }
+
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent> PurchaseSpents { get; set; }

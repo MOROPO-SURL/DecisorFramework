@@ -3,6 +3,7 @@ using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using MOROPO.Framework.Guama.Location.Persistence.Entities;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
@@ -11,17 +12,19 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
     [ApiController]
     public class PropertyLeaseOffersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<PropertyLeaseOffer, System.Guid, PropertyLeaseOfferInputModel, PropertyLeaseOfferDisplayModel>
     {
-        private readonly IEntityRepository<PropertyLeasePropousal, System.Guid> propertyLeasePropousalRepository;
+        private readonly IEntityRepository<PropertyLeasePropousal, System.Guid> propousalRepository;
         private readonly IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository;
         private readonly IEntityRepository<PropertyLeaseOrganizationPostulation, System.Guid> organizationPostulationRepository;
         private readonly IEntityRepository<PropertyLeasePersonPostulation, System.Guid> personPostulationRepository;
+        private readonly IEntityRepository<Municipality, System.Guid> municipalityRepository;
 
-        public PropertyLeaseOffersController(IEntityRepository<PropertyLeasePersonPostulation, System.Guid> personPostulationRepository, IEntityRepository<PropertyLeaseOrganizationPostulation, System.Guid> organizationPostulationRepository, IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository, IEntityRepository<PropertyLeasePropousal, System.Guid> propertyLeasePropousalRepository, IEntityRepository<PropertyLeaseOffer, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PropertyLeaseOffersController> localizer, Microsoft.Extensions.Logging.ILogger<PropertyLeaseOffersController> logger) : base(repository, localizer, logger)
+        public PropertyLeaseOffersController(IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<PropertyLeasePersonPostulation, System.Guid> personPostulationRepository, IEntityRepository<PropertyLeaseOrganizationPostulation, System.Guid> organizationPostulationRepository, IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository, IEntityRepository<PropertyLeasePropousal, System.Guid> propousalRepository, IEntityRepository<PropertyLeaseOffer, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PropertyLeaseOffersController> localizer, Microsoft.Extensions.Logging.ILogger<PropertyLeaseOffersController> logger) : base(repository, localizer, logger)
         {
-            this.propertyLeasePropousalRepository = propertyLeasePropousalRepository;
+            this.propousalRepository = propousalRepository;
             this.spaceLeasePropousalRepository = spaceLeasePropousalRepository;
             this.organizationPostulationRepository = organizationPostulationRepository;
             this.personPostulationRepository = personPostulationRepository;
+            this.municipalityRepository = municipalityRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<PropertyLeaseOffer, bool>> GetGlobalSelector()
@@ -83,6 +86,17 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                     _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Contact.Identity.Image.ContentType);
                 }
 
+                foreach (var __model in _model.Contact.Identity.PostalContacts)
+                {
+                    var municipality = municipalityRepository.Get(__model.Municipality.Id);
+
+                    __model.Municipality = new Core.Interop.API.Common.Models.Display.MunicipalityDisplayModel();
+
+                    __model.Municipality.Import(municipality);
+                }
+
+                _model.MainPostalContactItem = _model.Contact.Identity.PostalContacts.First(_model => _model.Id == _entity.Contact.MainPostalContactId);
+
                 _model.Spaces = _entity.PropertySpaceBridges.Select(bridge =>
                 {
                     var __model = new PropertySpaceLeasePropousalDisplayModel();
@@ -110,6 +124,17 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                     _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Contact.Identity.Image.ContentType);
                 }
 
+                foreach (var __model in _model.Contact.Identity.PostalContacts)
+                {
+                    var municipality = municipalityRepository.Get(__model.Municipality.Id);
+
+                    __model.Municipality = new Core.Interop.API.Common.Models.Display.MunicipalityDisplayModel();
+
+                    __model.Municipality.Import(municipality);
+                }
+
+                _model.MainPostalContactItem = _model.Contact.Identity.PostalContacts.First(_model => _model.Id == _entity.Contact.MainPostalContactId);
+
                 _model.Spaces = _entity.PropertySpaceBridges.Select(bridge =>
                 {
                     var __model = new PropertySpaceLeasePropousalDisplayModel();
@@ -134,11 +159,11 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
         {
             base.PreCreate(entity, model);
 
-            var propousal = propertyLeasePropousalRepository.Get(model.PropousalId);
+            var propousal = propousalRepository.Get(model.PropousalId);
             
             propousal.Archived = true;
 
-            propertyLeasePropousalRepository.Update(propousal, User.Identity.Name, false);
+            propousalRepository.Update(propousal, User.Identity.Name, false);
 
             entity.PropousalId = model.PropousalId;
         }
@@ -149,20 +174,20 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
             if (entity.PropousalId != model.PropousalId)
             {
-                var oldPropousal = propertyLeasePropousalRepository.Get(entity.PropousalId);
+                var oldPropousal = propousalRepository.Get(entity.PropousalId);
 
                 oldPropousal.Archived = false;
 
-                propertyLeasePropousalRepository.Update(oldPropousal, User.Identity.Name, false);
+                propousalRepository.Update(oldPropousal, User.Identity.Name, false);
 
                 entity.Propousal = null;
                 entity.PropousalId = model.PropousalId;
 
-                var newPropousal = propertyLeasePropousalRepository.Get(model.PropousalId);
+                var newPropousal = propousalRepository.Get(model.PropousalId);
 
                 newPropousal.Archived = true;
 
-                propertyLeasePropousalRepository.Update(newPropousal, User.Identity.Name, false);
+                propousalRepository.Update(newPropousal, User.Identity.Name, false);
             }
         }
     }

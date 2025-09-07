@@ -22,17 +22,17 @@
                             FontAttributes="Bold"
                             FontSize="Medium" />
                         <Label
-                            Style="{StaticResource CaptionVehicleLabelStyle}"
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
                             Margin="0"
                             Text="Contacto" />
                         <Label
-                            Style="{StaticResource ValueVehicleLabelStyle}"
+                            Style="{StaticResource ValuePropertyLabelStyle}"
                             Text="{Binding Contact}" />
                         <Label 
-                            Style="{StaticResource CaptionVehicleLabelStyle}"
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
                             Text="Argumento" />
                         <Label
-                            Style="{StaticResource ValueVehicleLabelStyle}"
+                            Style="{StaticResource ValuePropertyLabelStyle}"
                             Text="{Binding Argument, TargetNullValue='---'}" />
                     </StackLayout>
                     <Button

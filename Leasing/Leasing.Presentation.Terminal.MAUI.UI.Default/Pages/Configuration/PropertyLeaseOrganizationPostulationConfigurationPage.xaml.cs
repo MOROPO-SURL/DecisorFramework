@@ -16,6 +16,20 @@ public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Cor
     public PropertyLeaseOrganizationPostulationConfigurationPage(System.Action<PropertyLeaseOrganizationPostulationDisplayModel> successAction, Models.Page.Configuration.PropertyLeaseOrganizationPostulationConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
+
+        if (model.MainPostalContactItem != null)
+        {
+            for (int i = 0; i < model.Contact.Identity.PostalContacts.Length; i++)
+            {
+                var current = model.Contact.Identity.PostalContacts[i];
+
+                if (model.MainPostalContactItem.Id != current.Id) continue;
+
+                PostalContactItemPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Postulante Jurídico";
@@ -31,6 +45,7 @@ public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Cor
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument,
             IncomingSpaces = incomingSpaces
         };
@@ -51,6 +66,7 @@ public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Cor
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument,
             IncomingSpaces = incomingSpaces,
             OutgoingSpaces = outgoingSpaces
@@ -79,6 +95,11 @@ public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Cor
     private void SpaceAgregationButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PropertySpaceForLeasePropousalPickPage(PropertySpacePickComplete_Callback, ConcreteBindingContext.Propousal.SpacePropousals.Except(ConcreteBindingContext.Spaces).Select(item => item.Space).ToArray())));
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
     }
 
     private void SpaceRemotionButton_Clicked(object sender, System.EventArgs e)
