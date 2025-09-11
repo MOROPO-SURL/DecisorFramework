@@ -1,8 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security;
-using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;

@@ -40,7 +40,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
                         {
                             Id = __model.Id,
                             Priority = __model.Priority,
-                            NamingResolutionRequired = __model.NamingResolutionRequired,
+                            OcupationMode = __model.OcupationMode,
                             WorkPosition = __model.WorkPosition,
                             SalaryStandard = __model.SalaryStandard,
                             OrganizationUnity = result

@@ -6,7 +6,7 @@
         {
             base.ApplayRules(entityTypeBuilder);
 
-            entityTypeBuilder.HasKey(entity => new { entity.Number, entity.Year });
+            entityTypeBuilder.HasKey(entity => new { entity.Id, entity.Year });
         }
     }
 }

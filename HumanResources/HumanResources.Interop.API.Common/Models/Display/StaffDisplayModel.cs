@@ -15,7 +15,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Disp
         public void Import(Persistence.Entities.Staff entity)
         {
             Id = entity.Id;
-            AlternativeWorkforces = entity.AlternativeWorkforceBridges.Select(bridge =>
+            AlternativeWorkforces = entity.AlternativeWorkforceBridges?.Select(bridge =>
             {
                 var model = new Bridge.AlternativeWorkforceBridgeModel
                 {

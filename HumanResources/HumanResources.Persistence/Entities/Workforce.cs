@@ -18,6 +18,8 @@
 
         public System.Collections.Generic.List<WorkforceOrganizationalUnityBridge> OrganizationalUnityBridges { get; set; } = new System.Collections.Generic.List<WorkforceOrganizationalUnityBridge>();
 
-        public System.Collections.Generic.IEnumerable<Vacant> Vacants { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResponsibleVacantId))]
+        public Vacant ChiefVacant { get; set; }
+        public System.Guid? ResponsibleVacantId { get; set; }
     }
 }

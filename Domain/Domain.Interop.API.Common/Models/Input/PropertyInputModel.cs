@@ -32,6 +32,10 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         public List<ImageInputModel> IncomingImageItems { get; set; } = new List<ImageInputModel>();
         public List<ImageDisplayModel> OutgoingImagetItems { get; set; } = new List<ImageDisplayModel>();
 
+        public List<PropertySpaceInputModel> EditionSpaces { get; set; } = new List<PropertySpaceInputModel>();
+        public List<PropertySpaceInputModel> IncomingSpaces { get; set; } = new List<PropertySpaceInputModel>();
+        public List<Display.PropertySpaceDisplayModel> OutgoingSpaces { get; set; } = new List<Display.PropertySpaceDisplayModel>();
+
         public Persistence.Entities.Property Export()
         {
             var entity = new Persistence.Entities.Property { Id = Id, Enabled = true };

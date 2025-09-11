@@ -3,7 +3,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:decisorframework_leasing_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_leasing_list_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_commercial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.LeasingShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -51,18 +53,33 @@
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
+                Glyph="&#xF64A;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Vehículos"
+            ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:VehicleLeasePropousalsManagePage}" />
+        <ShellContent
+            Title="Inmuebles"
+            ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:PropertyLeasePropousalsManagePage}" />
+    </FlyoutItem>
+    <FlyoutItem
+        Title="Ofertas">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
                 Glyph="&#xF0246;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
-            Title="A Evaluar"
-            ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:VehicleLeaseOffersToApproveManagePage}" />
+            Title="Vehículos"
+            ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:VehicleLeaseOffersManagePage}" />
         <ShellContent
-            Title="Evaluadas"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            Title="Inmuebles"
+            ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:PropertyLeaseOffersManagePage}" />
     </FlyoutItem>
     <FlyoutItem
-        Title="Ofertas">
+        Title="Licitaciones">
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -70,25 +87,43 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
-            Title="Realizadas"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            Title="Vehículos"
+            ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:VehicleLeaseOfferTenderListPage}" />
         <ShellContent
-            Title="Por Realizar"
-            ContentTemplate="{DataTemplate ContentPage}" />
-        <ShellContent
-            Title="Por Aprobar"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            Title="Inmuebles"
+            ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:PropertyLeaseOfferTenderListPage}" />
     </FlyoutItem>
-    <ShellContent
-        Title="Contrataciones"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
+    <MenuFlyoutItem Text="Supervisión" IsEnabled="False" />
+    <FlyoutItem
+        Title="Expedientes de Arrend. Inmuebles">
+        <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF01C9;"
+                Glyph="&#xFCF1;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Clientes Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Clientes Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
+    <FlyoutItem
+        Title="Expedientes de Arrend. Vehículos">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Clientes Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Clientes Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Inmuebles"
@@ -107,6 +142,30 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF0E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <FlyoutItem Title="Contactos">
+        <FlyoutItem.Icon>
+            <FontImageSource
+             FontFamily="MaterialDesignIcons"
+             Glyph="&#xF5D2;"
+             Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+             Title="Organizaciones"
+             ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationContactsManagePage}" />
+        <ShellContent
+            Title="Personas"
+            ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}" />
+    </FlyoutItem>
+    <ShellContent
+        Title="Grupos de Supervisión"
+        ContentTemplate="{DataTemplate decisorframework_leasing_manage_pages:SupervisionGroupsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0192;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

@@ -37,14 +37,14 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controll
         {
             var model = base.EntityToDisplayModel(entity);
 
-            if (model.Author.Contact.Identity.Image != null)
+            if (model.Author.Identity.Image != null)
             {
-                model.Author.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Author.Contact.Identity.Image.ContentType);
+                model.Author.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Author.Identity.Image.ContentType);
             }
 
             model.InternalInvitations = entity.EmployeeBridges.Select(bridge =>
             {
-                var _model = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                var _model = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
 
                 _model.Import(bridge.Stern);
 
@@ -91,11 +91,14 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controll
         {
             base.PreCreate(entity, model);
 
+            var index = 1;
+
             foreach (var _model in model.IncomingAgreements)
             {
                 var _entity = _model.Export();
 
                 _entity.MeetingId = entity.Id;
+                _entity.Index = index++;
 
                 agreementRepository.Add(_entity, User.Identity.Name, false);
             }
@@ -126,6 +129,17 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controll
                 _entity.MeetingId = entity.Id;
 
                 agreementRepository.Add(_entity, User.Identity.Name, false);
+            }
+
+            var agreements = agreementRepository.FindBy(_entity => _entity.MeetingId == entity.Id).ToArray();
+
+            var index = 1;
+
+            foreach (var agreement in agreements)
+            {
+                agreement.Index = index++;
+
+                agreementRepository.Update(agreement, User.Identity.Name, false);
             }
         }
     }

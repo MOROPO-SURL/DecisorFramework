@@ -4,7 +4,7 @@
     {
         public Display.ElaborationStepDisplayModel Step { get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Employee { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Employee { get; set; }
 
         public HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel WorkPosition { get; set; }
     }

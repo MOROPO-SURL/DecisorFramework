@@ -40,7 +40,7 @@
         <ScrollView Orientation="Vertical">
             <VerticalStackLayout Spacing="0" Padding="8">
                 <VerticalStackLayout 
-                    Margin="4"
+                    Margin="8"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Título" />
                     <Entry Text="{Binding Title}" />
@@ -48,8 +48,8 @@
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sumario (Opcional)" />
-                    <Editor Text="{Binding Summary}" HeightRequest="120" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (opcional)" />
+                    <Editor Text="{Binding Description}" HeightRequest="320" />
                 </VerticalStackLayout>
                 <FlexLayout 
                     Wrap="Wrap"

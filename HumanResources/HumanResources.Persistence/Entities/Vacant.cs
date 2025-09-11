@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.HumanResources.Persistence.Entities
+﻿using MOROPO.Framework.Decisor.HumanResources.Persistence.Enumerations;
+
+namespace MOROPO.Framework.Decisor.HumanResources.Persistence.Entities
 {
     public class Vacant : Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
@@ -11,7 +13,7 @@
 
         public int Priority { get; set; }
 
-        public bool NamingResolutionRequired { get; set; }
+        public VacantOcupationMode OcupationMode { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(WorkPositionId))]
         public WorkPosition WorkPosition { get; set; }

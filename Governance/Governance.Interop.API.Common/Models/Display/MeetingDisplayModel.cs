@@ -10,13 +10,13 @@
 
         public DecisionMakingGroupDisplayModel DecisionMakingGroup { get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get; set; }
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel Author { get; set; }
 
         public string Summary { get; set; }
 
         public string Rapporteurship { get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel[] InternalInvitations { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel[] InternalInvitations { get; set; }
 
         public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel[] ExternalInvitations { get; set; }
 
@@ -39,7 +39,7 @@
 
             if (entity.Author != null)
             {
-                Author = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Author = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
 
                 Author.Import(entity.Author);
             }

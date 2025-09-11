@@ -66,10 +66,10 @@ public partial class ProductionEmployeeBridgeConfigurationPage : Core.Presentati
 
     private void EmployeePickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(EmployeePickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(EmployeePickComplete_Callback)));
     }
 
-    private void EmployeePickComplete_Callback(HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    private void EmployeePickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         ((Models.Page.Configuration.ProductionEmployeeBridgeConfigurationPageModel)BindingContext).Employee = model;
 

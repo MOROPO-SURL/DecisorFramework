@@ -40,6 +40,14 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
                 ItemImageSources = new ObservableCollection<Microsoft.Maui.Controls.ImageSource>(model.Images.Select(_model => _model.ToImageSource()));
                 ItemImageModels = model.Images.ToList();
+                Spaces = new ObservableCollection<View.PropertySpaceViewModel>(model.Spaces.Select(_model => new View.PropertySpaceViewModel
+                {
+                    Id = _model.Id,
+                    Name = _model.Name,
+                    Description = _model.Description,
+                    Area = _model.Area,
+                    CurrentFeatureImage = _model.FeatureImage
+                }));
             }
         }
 
@@ -68,6 +76,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public ObservableCollection<Microsoft.Maui.Controls.ImageSource> ItemImageSources { get; set; } = [];
 
         public System.Collections.Generic.List<ImageDisplayModel> ItemImageModels { get; set; }
+
+        public ObservableCollection<View.PropertySpaceViewModel> Spaces { get; set; } = [];
 
         public PropertyKindDisplayModel[] AvailableKinds { get; set; }
 

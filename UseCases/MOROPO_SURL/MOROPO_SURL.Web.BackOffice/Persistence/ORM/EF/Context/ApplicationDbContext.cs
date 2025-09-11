@@ -27,8 +27,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         Framework.Guama.Security.Personal.Persistence.ORM.EF.Contract.IPersistenceDbContext,
         Framework.Decisor.Production.Persistence.ORM.EF.Context.Contract.IProductionDbContext,
         Framework.Decisor.Purchasing.Persistence.ORM.EF.Context.Contract.IPurchasingDbContext,
-        Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract.ILeasingDbContext,
-        Framework.Decisor.Governance.Persistence.ORM.EF.Context.Contract.IGovernanceDbContext
+        Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract.ILeasingDbContext
     {
         public ApplicationDbContext(System.Collections.Generic.IEnumerable<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
         {
@@ -37,6 +36,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RolePermissionBridge> RolePermissionBridges { get; set; }
+
         public DbSet<Region> Regions { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
@@ -46,12 +46,15 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<StateLocation> StateLocations { get; set; }
         public DbSet<MunicipalityLocation> MunicipalityLocations { get; set; }
         public DbSet<LocalityLocation> LocalityLocations { get; set; }
+
         public DbSet<Thumbnail> Thumbnails { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Video> Videos { get; set; }
         public DbSet<Document> Documents { get; set; }
+
         public DbSet<User> Users { get; set; }
         public DbSet<UserRoleBridge> UserRoleBridges { get; set; }
+
         public DbSet<PersonIdentity> PersonIdentities { get; set; }
         public DbSet<OrganizationIdentity> OrganizationIdentities { get; set; }
         public DbSet<OrganizationPersonMembershipBridge> OrganizationPersonMembershipBridges { get; set; }
@@ -70,11 +73,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<OrganizationPostalContactItemBridge> OrganizationPostalContactItemBridges { get; set; }
         public DbSet<OrganizationSocialContactItemBridge> OrganizationSocialContactItemBridges { get; set; }
         public DbSet<OrganizationWebSiteContactItemBridge> OrganizationWebSiteContactItemBridges { get; set; }
+
         public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
         public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
         public DbSet<AbstractContact> Contacts { get; set; }
         public DbSet<OrganizationContact> OrganizationContacts { get; set; }
         public DbSet<PersonContact> PersonContacts { get; set; }
+
         public DbSet<PaymentTerm> PaymentTerms { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }
         public DbSet<ProvisionableService> ProvisionableServices { get; set; }
@@ -102,6 +107,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<NaturalClient> NaturalClients { get; set; }
         public DbSet<NaturalClientBankAccountBridge> NaturalClientBankAccountBridges { get; set; }
         public DbSet<NaturalClientSaleContract> NaturalClientSaleContracts { get; set; }
+
         public DbSet<CustomAttribute> CustomAttributes { get; set; }
         public DbSet<Product> Products { get; set; }
         public DbSet<Classification> Classifications { get; set; }
@@ -117,15 +123,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ReceptionBatchBridge> ReceptionBatchBridges { get; set; }
         public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
         public DbSet<UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
+
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<BankAgency> BankAgencies { get; set; }
         public DbSet<BankBranch> BankBranches { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<BankDebitCard> BankDebitCards { get; set; }
         public DbSet<CostCenter> CostCenters { get; set; }
+        
         public DbSet<PropertyKind> PropertyKinds { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<PropertyImageBridge> PropertyImageBridges { get; set; }
+        public DbSet<PropertySpace> PropertySpaces { get; set; }
         public DbSet<Brand> Brands { get; set; }
         public DbSet<VehicleKind> VehicleKinds { get; set; }
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
@@ -135,19 +144,30 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<OrganizationalUnity> OrganizationalUnities { get; set; }
         public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
         public DbSet<Structure> Structures { get; set; }
+        public DbSet<Employee> Employees { get; set; }
+        
         public DbSet<Schooling> Schoolings { get; set; }
+        public DbSet<SalaryStandard> SalaryStandards { get; set; }
         public DbSet<WorkPositionKind> WorkPositionKinds { get; set; }
         public DbSet<WorkPosition> WorkPositions { get; set; }
-        public DbSet<SalaryStandard> SalaryStandards { get; set; }
+        public DbSet<WorkPositionResponsability> WorkPositionResponsabilities { get; set; }
         public DbSet<Workforce> Workforces { get; set; }
         public DbSet<WorkforceOrganizationalUnityBridge> WorkforceOrganizationalUnityBridges { get; set; }
         public DbSet<Vacant> Vacants { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<EmploymentContract> EmploymentContracts { get; set; }
+        public DbSet<VacantPostulation> VacantPostulations { get; set; }
+        public DbSet<VacantPostulationOcupation> VacantPostulationOcupations { get; set; }
+        public DbSet<VacantPostulationDocumentBridge> VacantPostulationDocumentBridges { get; set; }
+        public DbSet<OcupationCandidate> OcupationCandidates { get; set; }
+        public DbSet<AdmitionPropousal> AdmitionPropousals { get; set; }
+        public DbSet<Framework.Decisor.HumanResources.Persistence.Entities.Contract.AbstractEmploymentContract> EmploymentContracts { get; set; }
+        public DbSet<NamingEmploymentContract> NamingEmploymentContracts { get; set; }
+        public DbSet<AdmitionEmploymentContract> AdmitionEmploymentContracts { get; set; }
         public DbSet<NamingResolution> NamingResolutions { get; set; }
+        public DbSet<RemotionResolution> RemotionResolutions { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<StaffWorkforceBridge> StaffWorkforceBridges { get; set; }
         public DbSet<Ocupation> Ocupations { get; set; }
+
         public DbSet<Tag> ClauseTags { get; set; }
         public DbSet<Clause> Clauses { get; set; }
         public DbSet<ClauseTagBridge> ClauseTagBridges { get; set; }
@@ -174,12 +194,50 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ProductionOrderDeparture> ProductionOrderDepartures { get; set; }
         public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
         public DbSet<ProductionReception> ProductionReceptions { get; set; }
+        public DbSet<PropertyLeasePropousal> PropertyLeasePropousals { get; set; }
+        public DbSet<PropertySpaceLeasePropousal> PropertySpaceLeasePropousals { get; set; }
+        public DbSet<VehicleLeasePropousal> VehicleLeasePropousals { get; set; }
         public DbSet<PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
-        public DbSet<PropertyLeaseOrganizationPostulation> PropertyLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<PropertyLeasePersonPostulation> PropertyLeaseOfferPersonContactBridges { get; set; }
         public DbSet<VehicleLeaseOffer> VehicleLeaseOffers { get; set; }
-        public DbSet<VehicleLeaseOrganizationPostulation> VehicleLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<VehicleLeasePersonPostulation> VehicleLeaseOfferPersonContactBridges { get; set; }
+        public DbSet<VehicleLeaseOrganizationPostulation> VehLeasOrgPostulations { get; set; }
+        public DbSet<VehicleLeaseOrganizationPostulationDocumentBridge> VehLeasOrgPostDocumentBridges { get; set; }
+        public DbSet<VehicleLeasePersonPostulation> VehLeasPersonPostulations { get; set; }
+        public DbSet<VehicleLeasePersonPostulationDocumentBridge> VehLeasPersonPostDocumentBridges { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulation> PropLeasOrgPostulations { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridge> PropLeaseOrgPostSpacePropousalBridges { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulationDocumentBridge> PropLeasOrgPostDocumentBridges { get; set; }
+        public DbSet<PropertyLeasePersonPostulation> PropLeasPersonPostulations { get; set; }
+        public DbSet<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropLeasPersPostSpacePropBridges { get; set; }
+        public DbSet<PropertyLeasePersonPostulationDocumentBridge> PropertyLeasePersonPostulationDocumentBridges { get; set; }
+        public DbSet<LegalClientPropertyLeaseContract> LegalClientPropertyLeaseContract { get; set; }
+        public DbSet<NaturalClientPropertyLeaseContract> NaturalClientPropertyLeaseContract { get; set; }
+        public DbSet<LegalClientPropertyLeaseContractSpaceBridge> LegClientPropLeasContractSpaceBridges { get; set; }
+        public DbSet<NaturalClientPropertyLeaseContractSpaceBridge> NatClientPropeLeasContractSpaceBridges { get; set; }
+        public DbSet<LegalClientVehicleLeaseContract> LegalClientVehicleLeaseContract { get; set; }
+        public DbSet<NaturalClientVehicleLeaseContract> NaturalClientVehicleLeaseContract { get; set; }
+        public DbSet<LegalClientVehicleLeasing> LegalClientVehicleLeasings { get; set; }
+        public DbSet<LegalClientVehicleLeasingPersonContactBridge> LegClientVehLeasPersonContactBridges { get; set; }
+        public DbSet<NaturalClientVehicleLeasing> NaturalClientVehicleLeasings { get; set; }
+        public DbSet<NaturalClientVehicleLeasingPersonContactBridge> NatClientVehLeasPersonContactBridges { get; set; }
+        public DbSet<LegalClientPropertyLeasing> LegalClientPropertyLeasings { get; set; }
+        public DbSet<LegalClientPropertyLeasingPersonContactBridge> LegClientPropLeasPersonContactBridges { get; set; }
+        public DbSet<NaturalClientPropertyLeasing> NaturalClientPropertyLeasings { get; set; }
+        public DbSet<NaturalClientPropertyLeasingPersonContactBridge> NatClientPropLeasPersonContactBridges { get; set; }
+        public DbSet<SupervisionGroup> SupervisionGroups { get; set; }
+        public DbSet<SupervisionGroupEmployeeBridge> SupervisionGroupEmployeeBridges { get; set; }
+        public DbSet<LegalClientPropertySupervisionControlAction> LegClientPropSupervControlActions { get; set; }
+        public DbSet<NaturalClientPropertySupervisionControlAction> NatClientPropSupervControlActions { get; set; }
+        public DbSet<LegalClientVehicleSupervisionControlAction> LegClientVehSupervControlActions { get; set; }
+        public DbSet<NaturalClientVehicleSupervisionControlAction> NatClientVehSupervControlActions { get; set; }
+        public DbSet<LegalClientPropertyLeasingCompensation> LegalClientPropertyLeasingCompensations { get; set; }
+        public DbSet<LegalClientPropertyLeasingCompensationDocumentBridge> LegClientPropLeasCompDocumentBridges { get; set; }
+        public DbSet<NaturalClientPropertyLeasingCompensation> NaturalClientPropertyLeasingCompensations { get; set; }
+        public DbSet<NaturalClientPropertyLeasingCompensationDocumentBridge> NatClientPropLeasCompDocumentBridges { get; set; }
+        public DbSet<LegalClientVehicleLeasingCompensation> LegalClientVehicleLeasingCompensations { get; set; }
+        public DbSet<LegalClientVehicleLeasingCompensationDocumentBridge> LegClientVehLeasCompDocumentBridges { get; set; }
+        public DbSet<NaturalClientVehicleLeasingCompensation> NaturalClientVehicleLeasingCompensations { get; set; }
+        public DbSet<NaturalClientVehicleLeasingCompensationDocumentBridge> NatClientVehLeasCompDocumentBridges { get; set; }
+
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent> PurchaseSpents { get; set; }
@@ -202,6 +260,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanDeparture> PurchasePlanDepartures { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception> PurchaseReceptions { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReceptionProductWeightBridge> PurchaseReceptionProductWeightBridges { get; set; }
+        
         public DbSet<DecisionMakingGroup> DecisionMakingGroups { get; set; }
         public DbSet<DecisionMakingGroupEmployeeBridge> DecisionMakingGroupEmployeeBridges { get; set; }
         public DbSet<DecisionMakingGroupContactBridge> DecisionMakingGroupContactBridges { get; set; }

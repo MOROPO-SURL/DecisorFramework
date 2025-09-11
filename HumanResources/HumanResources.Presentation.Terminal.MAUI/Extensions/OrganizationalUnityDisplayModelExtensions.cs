@@ -30,7 +30,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                     {
                         Id = _model.Id,
                         Priority = _model.Priority,
-                        NamingResolutionRequired = _model.NamingResolutionRequired,
+                        OcupationMode = _model.OcupationMode,
                         WorkPosition = _model.WorkPosition,
                         SalaryStandard = _model.SalaryStandard,
                         OrganizationUnity = model
@@ -42,7 +42,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
 
             return result.OrderBy(model => model.Priority).ToArray();
         }
-        public static Models.View.OcupationsRawManageOrganizationalUnityViewModel[] ToOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.OrganizationalUnityDisplayModel target, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
+
+        public static Models.View.OcupationsRawManageOrganizationalUnityViewModel[] ToOcupationsRawManageOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.OrganizationalUnityDisplayModel target, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
         {
             var result = new System.Collections.Generic.List<Models.View.OcupationsRawManageOrganizationalUnityViewModel>();
 
@@ -66,7 +67,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                         var result = new Models.View.OcupationsRawManageVacantViewModel
                         {
                             Id = _model.Id,
-                            NamingResolutionRequired = _model.NamingResolutionRequired,
+                            VacantOcupationMode = _model.OcupationMode,
                             WorkPosition = _model.WorkPosition,
                             SalaryStandard = _model.SalaryStandard,
                             Ocupation = ocupation
@@ -80,7 +81,54 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
 
                 if (item.Children != null)
                 {
-                    model.Children = item.ToOrganizationalUnityViewModelChildren(ocupations);
+                    model.Children = item.ToOcupationsRawManageOrganizationalUnityViewModelChildren(ocupations);
+                }
+
+                result.Add(model);
+            }
+
+            return result.OrderBy(model => model.Priority).ToArray();
+        }
+
+        public static Models.View.VacantPickOrganizationalUnityViewModel[] ToVacantPickOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.OrganizationalUnityDisplayModel target, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
+        {
+            var result = new System.Collections.Generic.List<Models.View.VacantPickOrganizationalUnityViewModel>();
+
+            foreach (var item in target.Children)
+            {
+                var model = new Models.View.VacantPickOrganizationalUnityViewModel
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Enabled = item.Enabled,
+                    Priority = item.Priority,
+                    Reference = item.Reference
+                };
+
+                if (item.Vacants != null)
+                {
+                    var vacants = new System.Collections.Generic.List<Interop.API.Common.Models.Display.VacantDisplayModel>();
+
+                    foreach (var vacant in item.Vacants)
+                    {
+                        var ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == vacant.Id);
+
+                        if (ocupation != null)
+                        {
+                            ocupations.Remove(ocupation);
+                        }
+                        else
+                        {
+                            vacants.Add(vacant);
+                        }
+                    }
+
+                    model.Vacants = vacants.ToArray();
+                }
+
+                if (item.Children != null)
+                {
+                    model.Children = item.ToVacantPickOrganizationalUnityViewModelChildren(ocupations);
                 }
 
                 result.Add(model);

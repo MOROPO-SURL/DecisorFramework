@@ -8,11 +8,9 @@
 
         public int Priority { get; set; }
 
-        public bool NamingResolutionRequired { get; set; }
+        public Persistence.Enumerations.VacantOcupationMode OcupationMode { get; set; }
 
         public WorkPositionDisplayModel WorkPosition { get; set; }
-
-        public System.Guid WorkforceId { get; set; }
 
         public System.Guid OrganizationUnityId { get; set; }
 
@@ -23,8 +21,7 @@
             Id = entity.Id;
             Enabled = entity.Enabled;
             Priority = entity.Priority;
-            NamingResolutionRequired = entity.NamingResolutionRequired;
-            WorkforceId = entity.WorkforceId;
+            OcupationMode = entity.OcupationMode;
             OrganizationUnityId = entity.OrganizationUnityId;
 
             if (entity.WorkPosition != null)

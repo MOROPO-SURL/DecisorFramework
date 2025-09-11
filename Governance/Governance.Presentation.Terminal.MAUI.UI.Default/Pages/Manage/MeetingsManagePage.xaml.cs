@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class MeetingsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.MeetingDisplayModel, Models.Page.Manage.MeetingsManagePageModel, Models.Page.Configuration.MeetingConfigurationPageModel, Configuration.MeetingConfigurationPage, Detail.MeetingDetailPage>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 148;
 
     public MeetingsManagePage()
     {

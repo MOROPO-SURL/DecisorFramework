@@ -11,8 +11,6 @@
 
         public int Priority { get; set; }
 
-        public Enumerations.PropertyAssignment? Assignment { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -38,6 +36,8 @@
         public decimal Area { get; set; }
 
         public string Description { get; set; }
+
+        public System.Collections.Generic.ICollection<PropertySpace> Spaces { get; set; }
 
         public System.Collections.Generic.List<PropertyImageBridge> ImageBridges { get; set; } = new System.Collections.Generic.List<PropertyImageBridge>();
     }

@@ -16,6 +16,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
@@ -43,29 +44,168 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=8, LargeContainerColumn=9, MediumContainerColumn=10, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Vehículo" />
-                        <ContentView                        
-                            IsVisible="{Binding Vehicle, Converter={StaticResource IsNotNullConverter}}"
-                            HeightRequest="320">
-                            <domain_presentation_card_views:VehicleDefaultCardView
-                                BindingContext="{Binding Vehicle}" />
-                        </ContentView>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Propuesta" />
+                        <Frame                        
+                            IsVisible="{Binding Propousal, Converter={StaticResource IsNotNullConverter}}"
+                            Padding="0">
+                            <Grid ColumnSpacing="0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="2*" />
+                                </Grid.ColumnDefinitions>
+                                <Image
+                                    Grid.Column="0"
+                                    Aspect="AspectFill"               
+                                    Source="{Binding Propousal.Vehicle.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />                                
+                                <StackLayout 
+                                    Grid.Column="1"
+                                    Padding="16">
+                                    <Label 
+                                        FontAttributes="Bold"
+                                        FontSize="Medium">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Propousal.Vehicle.Brand.Name}" />
+                                                <Span Text=" " />
+                                                <Span Text="{Binding Propousal.Vehicle.Model}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label
+                                        FontAttributes="Bold"
+                                        Text="{Binding Propousal.Vehicle.Plate}" />
+                                    <Label 
+                                        Margin="0,8,0,0"
+                                        Text="Acuerdo C/D primario"
+                                        TextColor="DimGray"
+                                        FontSize="Caption"
+                                        FontAttributes="Bold" />
+                                    <Label
+                                        LineBreakMode="TailTruncation">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="No." />
+                                                <Span Text="{Binding Propousal.Agreement.Index}" />
+                                                <Span Text=" " />
+                                                <Span Text="{Binding Propousal.Agreement.Title}" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Label 
+                                        Margin="0,8,0,0"
+                                        Text="Argumento"
+                                        TextColor="DimGray"
+                                        FontSize="Caption"
+                                        FontAttributes="Bold" />
+                                    <Label
+                                        VerticalOptions="FillAndExpand"
+                                        LineBreakMode="TailTruncation"
+                                        MaxLines="2"
+                                        Text="{Binding Propousal.Description, TargetNullValue='---'}" />
+                                </StackLayout>
+                            </Grid>
+                        </Frame>
                         <Button
                             HorizontalOptions="Start"
                             Text="Seleccionar ..."
-                            Clicked="VehiclePickButton_Clicked" />
+                            Clicked="PropousalPickButton_Clicked" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=8, LargeContainerColumn=6, MediumContainerColumn=12}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=3, MediumContainerColumn=6}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Argumento" />
-                        <Editor Text="{Binding Description}" HeightRequest="360" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha de inicio" />
+                        <DatePicker Date="{Binding OpenAt}" />
                     </VerticalStackLayout>
                 </FlexLayout>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=8, LargeContainerColumn=9, MediumContainerColumn=10, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acuerdo C/D superior" />
+                        <Frame 
+                            IsVisible="{Binding Agreement, Converter={StaticResource IsNotNullConverter}}"
+                            Padding="16">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label
+                                    Grid.Column="0" Grid.Row="0"
+                                    Text="No." />
+                                <Label
+                                    Grid.Column="1" Grid.RowSpan="2"
+                                    Margin="0,0,4,0"
+                                    FontSize="Large"
+                                    Text="{Binding Agreement.Index}" />
+                                <Label
+                                    Grid.Column="2" Grid.ColumnSpan="4"
+                                    FontAttributes="Bold"
+                                    Text="{Binding Agreement.Title}" />
+                                <Label
+                                    Grid.Column="2" Grid.Row="1"
+                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                    Margin="0"
+                                    Text="Grupo Decisor:" />
+                                <Label
+                                    Grid.Column="3" Grid.Row="1"
+                                    Margin="4,0,8,0"
+                                    Text="{Binding Agreement.Meeting.DecisionMakingGroup.CanonicalName}" />
+                                <Label
+                                    Grid.Column="4" Grid.Row="1"
+                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                    Margin="0"
+                                    Text="Reunión:" />
+                                <Label
+                                    Grid.Column="5" Grid.Row="1"
+                                    Margin="4,0"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding Agreement.Meeting.At}" />
+                                <Label
+                                    Grid.ColumnSpan="6" Grid.Row="2"
+                                    Text="{Binding Agreement.Description, TargetNullValue='---'}" />
+                            </Grid>
+                        </Frame>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="AgreementPickButton_Clicked" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=3, MediumContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha límite (opcional)" />
+                        <StackLayout Orientation="Horizontal">
+                            <Switch IsToggled="{Binding HasClosetAtDate}" />
+                            <DatePicker 
+                                IsVisible="{Binding HasClosetAtDate}"
+                                Date="{Binding ClosedAt}" />
+                        </StackLayout>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición" />
+                    <Editor Text="{Binding Description}" HeightRequest="320" />
+                </VerticalStackLayout>
                 <BoxView 
                     Margin="8,16,8,8"
                     HeightRequest="1" 

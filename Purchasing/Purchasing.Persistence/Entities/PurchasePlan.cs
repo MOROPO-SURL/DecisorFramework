@@ -22,15 +22,15 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
         public System.DateTime? ApprovedAt { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(PlannerId))]
-        public HumanResources.Persistence.Entities.Employee Planner { get; set; }
+        public Domain.Persistence.Entities.Employee Planner { get; set; }
         public System.Guid PlannerId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResponsibleId))]
-        public HumanResources.Persistence.Entities.Employee Responsible { get; set; }
+        public Domain.Persistence.Entities.Employee Responsible { get; set; }
         public System.Guid ResponsibleId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DecisorId))]
-        public HumanResources.Persistence.Entities.Employee Decisor { get; set; }
+        public Domain.Persistence.Entities.Employee Decisor { get; set; }
         public System.Guid DecisorId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ZoneId))]

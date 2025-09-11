@@ -6,7 +6,7 @@
 
         public int Priority { get; set; }
 
-        public bool NamingResolutionRequired { get; set; }
+        public Persistence.Enumerations.VacantOcupationMode OcupationMode { get; set; }
 
         public System.Guid WorkPositionId { get; set; }
 
@@ -31,7 +31,7 @@
         public void Mergue(Persistence.Entities.Vacant entity)
         {
             entity.Priority = Priority;
-            entity.NamingResolutionRequired = NamingResolutionRequired;
+            entity.OcupationMode = OcupationMode;
 
             if (entity.WorkPositionId != WorkPositionId)
             {

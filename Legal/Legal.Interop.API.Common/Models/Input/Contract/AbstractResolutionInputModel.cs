@@ -1,9 +1,11 @@
 ﻿namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Input.Contract
 {
-    public abstract class AbstractResolutionInputModel<TResolution> : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<TResolution, long>
+    public abstract class AbstractResolutionInputModel<TResolution> : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<TResolution, System.Guid>
         where TResolution : Persistence.Entities.Contract.AbstractResolution, new()
     {
-        public long Id { get; set; }
+        public System.Guid Id { get; set; }
+
+        public int Index { get; set; }
 
         public System.DateTime At { get; set; }
 
@@ -26,6 +28,8 @@
 
         public virtual void Mergue(TResolution entity)
         {
+            entity.Index = Index;
+            entity.Year = At.Year;
             entity.At = At;
             entity.Summary = Summary;
         }

@@ -58,11 +58,11 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <local_card_views:OrganizationContactDefaultCardView HeightRequest="{Static local:OrganizationalUnityPickPage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                <local_card_views:OrganizationalUnityTreeCardView HeightRequest="{Static local:OrganizationalUnityPickPage.ITEM_VIEW_REQUEST_HEIGHT}">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </ContentView.GestureRecognizers>
-                                </local_card_views:OrganizationContactDefaultCardView>
+                                </local_card_views:OrganizationalUnityTreeCardView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

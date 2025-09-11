@@ -18,15 +18,15 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.
             if (model != null)
             {
                 Id = model.Id;
-                Contact = model.Contact;
-                TaxIdentificationNumber = model.TaxIdentificationNumber;
-                StateIdentificationCode = model.StateIdentificationCode;
-                Representative = model.Representative;
-                MainPostalContact = model.MainPostalContact;
-                DefaultPaymentTerm = model.DefaultPaymentTerm;
+                contact = model.Contact;
+                taxIdentificationNumber = model.TaxIdentificationNumber;
+                stateIdentificationCode = model.StateIdentificationCode;
+                representative = model.Representative;
+                mainPostalContact = model.MainPostalContact;
+                defaultPaymentTerm = model.DefaultPaymentTerm;
                 BankAccounts = new System.Collections.ObjectModel.ObservableCollection<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel>(model.BankAccounts);
                 Documents = new System.Collections.ObjectModel.ObservableCollection<Core.Interop.API.Common.Models.Display.DocumentDisplayModel>(model.Documents);
-                Priority = model.Priority;
+                priority = model.Priority;
                 AvailablePostalContactItems = new System.Collections.ObjectModel.ObservableCollection<Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel>(Contact.Identity.PostalContacts);
             }
         }

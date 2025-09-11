@@ -41,7 +41,7 @@ public partial class PurchasesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                 var zonesAPIConnectClient = new Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(httpClientProvider);
                 var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(httpClientProvider);
-                var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientProvider);
+                var employeesAPIConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientProvider);
 
                 var model = new Models.Page.Configuration.PurchaseConfigurationPageModel(null)
                 {
@@ -100,7 +100,7 @@ public partial class PurchasesManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                 var zonesAPIConnectClient = new Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(httpClientProvider);
                 var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(httpClientProvider);
-                var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientProvider);
+                var employeesAPIConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientProvider);
 
                 var model = new Models.Page.Configuration.PurchaseConfigurationPageModel(concreteBindingContext.PresentedItem)
                 {

@@ -29,14 +29,14 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controll
         {
             var model = base.EntityToDisplayModel(entity);
 
-            if (model.Leader.Contact.Identity.Image != null)
+            if (model.Leader.Identity.Image != null)
             {
-                model.Leader.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Leader.Contact.Identity.Image.ContentType);
+                model.Leader.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Leader.Identity.Image.ContentType);
             }
 
             model.Members = entity.EmployeeBridges.Select(bridge =>
             {
-                var _model = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                var _model = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
 
                 _model.Import(bridge.Stern);
 

@@ -65,8 +65,11 @@
                 <VerticalStackLayout
                     Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Requiere resolución de nombramiento" />
-                    <Switch IsToggled="{Binding NamingResolutionRequired}" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Modo de ocupación" />
+                    <Picker 
+                        ItemsSource="{Binding AvailableVacantOcupationModes}" 
+                        SelectedItem="{Binding OcupationMode}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
                 </VerticalStackLayout>
                 <BoxView 
                     Grid.ColumnSpan="4" Grid.Row="2" 

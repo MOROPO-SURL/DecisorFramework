@@ -1,5 +1,4 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using System.Collections.Generic;
 using System.Linq;
 

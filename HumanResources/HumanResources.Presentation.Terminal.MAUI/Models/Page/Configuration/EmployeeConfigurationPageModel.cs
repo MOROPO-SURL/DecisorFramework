@@ -1,11 +1,11 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
-    public class EmployeeConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.EmployeeDisplayModel>
+    public class EmployeeConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel>
     {
         private Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel contact;
         private int priority = 1;
 
-        public EmployeeConfigurationPageModel(Interop.API.Common.Models.Display.EmployeeDisplayModel model) : base(model)
+        public EmployeeConfigurationPageModel(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model) : base(model)
         {
             if (model != null)
             {

@@ -3,12 +3,11 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI"
-    xmlns:hhrr_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Governance.Interop.API.Common"
-    xmlns:hhrr_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:domain_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
@@ -74,7 +73,7 @@
                         <ContentView                        
                             IsVisible="{Binding Author, Converter={StaticResource IsNotNullConverter}}"
                             HeightRequest="140">
-                            <hhrr_presentation_card_views:EmployeeDefaultCardView
+                            <domain_presentation_card_views:PersonContactDefaultCardView
                                 BindingContext="{Binding Author}" />
                         </ContentView>
                         <Button
@@ -140,7 +139,7 @@
                                         <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                     </BindableLayout.EmptyView>
                                     <BindableLayout.ItemTemplate>
-                                        <DataTemplate x:DataType="hhrr_interop_common_display_models:EmployeeDisplayModel">
+                                        <DataTemplate x:DataType="domain_interop_common_display_models:EmployeeDisplayModel">
                                             <Frame 
                                                 Padding="0" Margin="4"
                                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}">
@@ -273,6 +272,111 @@
                         </Frame>
                     </VerticalStackLayout>
                 </FlexLayout>
+                <VerticalStackLayout Margin="8" Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acuerdos" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="AgreementAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding Agreements}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:AgreementDisplayModel">
+                                        <Frame 
+                                            Padding="8"
+                                            Margin="0,12,0,0">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Label
+                                                    Grid.Column="0" Grid.Row="0"
+                                                    Text="No." />
+                                                <Label
+                                                    Grid.Column="1" Grid.RowSpan="2"
+                                                    Margin="0,0,4,0"
+                                                    FontSize="Large"
+                                                    Text="{Binding Index}" />
+                                                <Label
+                                                    Grid.Column="2" Grid.ColumnSpan="4"
+                                                    FontAttributes="Bold"
+                                                    Text="{Binding Title}" />
+                                                <Label
+                                                    Grid.Column="2" Grid.Row="1"
+                                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                                    Margin="0"
+                                                    Text="Fecha de cumplimiento:" />
+                                                <Label
+                                                    Grid.Column="3" Grid.Row="1"
+                                                    Margin="4,0,8,0"
+                                                    Text="{Binding EndAt, TargetNullValue='No', StringFormat='{0:dd/MM/yyyy}'}" />
+                                                <Label
+                                                    Grid.Column="4" Grid.Row="1"
+                                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                                    Margin="0"
+                                                    Text="Responsable:" />
+                                                <Label
+                                                    Grid.Column="5" Grid.Row="1"
+                                                    Margin="4,0"
+                                                    Text="{Binding Responsible, TargetNullValue='No'}" />
+                                                <Label
+                                                    Grid.ColumnSpan="6" Grid.Row="2"
+                                                    Margin="0,0,4,0"
+                                                    Text="{Binding Description}" />
+                                                <VerticalStackLayout 
+                                                    Grid.Column="6" Grid.RowSpan="3"
+                                                    Spacing="8">
+                                                    <Button
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xF90B;"
+                                                        Clicked="AgreementEditionButton_Clicked" />
+                                                    <Button
+                                                        VerticalOptions="Start"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="AgreementRemotionButton_Clicked" />
+                                                </VerticalStackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">

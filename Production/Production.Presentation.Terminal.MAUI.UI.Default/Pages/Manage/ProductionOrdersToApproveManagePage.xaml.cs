@@ -35,7 +35,7 @@ public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Ter
     {
         var result = new Models.Page.Configuration.ProductionOrderConfigurationPageModel(model);
 
-        var employeesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+        var employeesAPIConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         var employees = await employeesAPIConnectClient.GetAsync();
 

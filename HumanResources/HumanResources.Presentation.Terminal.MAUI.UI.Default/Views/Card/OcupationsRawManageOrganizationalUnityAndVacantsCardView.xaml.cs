@@ -7,15 +7,15 @@ public partial class OcupationsRawManageOrganizationalUnityAndVacantsCardView : 
 		InitializeComponent();
     }
 
-    public event System.EventHandler PickContactButtonClick;
+    public event System.EventHandler OcupationCreationButtonClick;
 
     public event System.EventHandler RemoveOcupationButtonClick;
 
     public event System.EventHandler EmployeeDetailButtonClick;
 
-    private void PickContactButton_Clicked(object sender, System.EventArgs eventArgs)
+    private void OcupationCreationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        PickContactButtonClick?.Invoke(sender, eventArgs);
+        OcupationCreationButtonClick?.Invoke(sender, eventArgs);
     }
 
     private void RemoveOcupationButton_Clicked(object sender, System.EventArgs eventArgs)

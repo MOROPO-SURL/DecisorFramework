@@ -9,7 +9,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public PurchaseDisplayModel Purchase {  get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get; set; }
 
         public PurchaseReceptionProductWeightBridgeModel[] WeightBridges { get; set; }
 
@@ -29,7 +29,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
             if (entity.Responsible != null) 
             {
-                Responsible = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Responsible = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
 
                 Responsible.Import(entity.Responsible);
             }

@@ -48,7 +48,7 @@ public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.U
             Id = System.Guid.NewGuid(),
             OrganizationUnity = concreteBindingContext.OrganizationUnity,
             Priority = concreteBindingContext.Priority,
-            NamingResolutionRequired = concreteBindingContext.NamingResolutionRequired,
+            OcupationMode = concreteBindingContext.OcupationMode,
             WorkPosition = concreteBindingContext.AvailableWorkPositions[WorkPositionPicker.SelectedIndex],
             SalaryStandard = concreteBindingContext.AvailableSalaryStandards[SalaryStandardPicker.SelectedIndex]
         });
@@ -63,7 +63,7 @@ public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.U
             Id = concreteBindingContext.Id,
             OrganizationUnity = concreteBindingContext.OrganizationUnity,
             Priority = concreteBindingContext.Priority,
-            NamingResolutionRequired = concreteBindingContext.NamingResolutionRequired,
+            OcupationMode = concreteBindingContext.OcupationMode,
             WorkPosition = concreteBindingContext.AvailableWorkPositions[WorkPositionPicker.SelectedIndex],
             SalaryStandard = concreteBindingContext.AvailableSalaryStandards[SalaryStandardPicker.SelectedIndex]
         });

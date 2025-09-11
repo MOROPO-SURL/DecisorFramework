@@ -98,12 +98,12 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
 
     private void AuthorPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(AuthorPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(AuthorPickComplete_Callback)));
     }
 
     private void InternalInvitationAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(InternalInvitationPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(InternalInvitationPickComplete_Callback)));
     }
 
     private void ExternalInvitationAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -113,9 +113,9 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
 
     private void InternalInvitationDetailButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel;
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel;
 
-        this.NavigationPushModalPageAsync(new HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.EmployeeDetailPage(target));
+        this.NavigationPushModalPageAsync(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.EmployeeDetailPage(target));
     }
 
     private void ExternalInvitationDetailButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -133,7 +133,7 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
 
             Dispatcher.Dispatch(() =>
             {
-                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel;
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel;
 
                 ConcreteBindingContext.InternalInvitations.Remove(target);
 
@@ -185,7 +185,7 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
                 {
                     if (item.Id != target.Id) continue;
 
-                    incomingAgreements.Remove(editionAgreements.First(model => model.Id == target.Id));
+                    incomingAgreements.Remove(incomingAgreements.First(model => model.Id == target.Id));
 
                     handled = true;
 
@@ -216,8 +216,6 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
                 foreach (var item in ConcreteBindingContext.Agreements)
                 {
                     item.Index = index++;
-
-                    // TODO Provlema reordenamiento, resuelto en rama GovProvincial
                 }
 
                 hasChangesFlag = true;
@@ -227,10 +225,12 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
 
     private void AgreementCreateSuccess_Callback(Interop.API.Common.Models.Display.AgreementDisplayModel model)
     {
+        model.Index = ConcreteBindingContext.Agreements.Count + 1;
+
         incomingAgreements.Add(new Interop.API.Common.Models.Input.AgreementInputModel
         {
             Id = model.Id,
-            Index = ConcreteBindingContext.Agreements.Count + 1,
+            Index = model.Index,
             Title = model.Title,
             Description = model.Description,
             ResponsibleId = model.Responsible?.Id,
@@ -308,12 +308,12 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
         hasChangesFlag = true;
     }
 
-    private void AuthorPickComplete_Callback(HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    private void AuthorPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
     {
         ConcreteBindingContext.Author = model;
     }
 
-    private void InternalInvitationPickComplete_Callback(HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    private void InternalInvitationPickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         ConcreteBindingContext.InternalInvitations.Add(model);
     }

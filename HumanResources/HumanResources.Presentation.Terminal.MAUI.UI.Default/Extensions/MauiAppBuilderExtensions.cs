@@ -18,12 +18,20 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
                 .AddSingleton<IDetailContentPageFactoryFacade<SchoolingDisplayModel, SchoolingDetailPage>, SchoolingDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardDetailPage>, SalaryStandardDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<WorkPositionDisplayModel, WorkPositionDetailPage>, WorkPositionDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<EmployeeDisplayModel, EmployeeDetailPage>, EmployeeDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<VacantPostulationDisplayModel, VacantPostulationDetailPage>, VacantPostulationDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<OcupationCandidateDisplayModel, OcupationCandidateDetailPage>, OcupationCandidateDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<AdmitionPropousalDisplayModel, AdmitionPropousalDetailPage>, AdmitionPropousalDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<NamingResolutionDisplayModel, NamingResolutionDetailPage>, NamingResolutionDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel, EmployeeDetailPage>, EmployeeDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel, SalaryStandardConfigurationPage>, SalaryConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<WorkPositionDisplayModel, WorkPositionConfigurationPageModel, WorkPositionConfigurationPage>, WorkPositionConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<WorkPositionDisplayModel, WorkPositionConfigurationPageModel, WorkPositionConfigurationPage>, WorkPositionConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<WorkPositionDisplayModel, WorkPositionConfigurationPageModel, WorkPositionConfigurationPage>, WorkPositionConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<VacantPostulationDisplayModel, VacantPostulationConfigurationPageModel, VacantPostulationConfigurationPage>, VacantPostulationConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<OcupationCandidateDisplayModel, OcupationCandidateConfigurationPageModel, OcupationCandidateConfigurationPage>, OcupationCandidateConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<AdmitionPropousalDisplayModel, AdmitionPropousalConfigurationPageModel, AdmitionPropousalConfigurationPage>, AdmitionPropousalConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<NamingResolutionDisplayModel, NamingResolutionConfigurationPageModel, NamingResolutionConfigurationPage>, NamingResolutionConfigurationPageFactory>();
 
             return builder;
         }

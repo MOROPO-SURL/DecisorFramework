@@ -15,10 +15,19 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default
         {
             builder.Services
                 // DetailPage factory resgistration !!!
+                .AddSingleton<IDetailContentPageFactoryFacade<VehicleLeasePropousalDisplayModel, VehicleLeasePropousalDetailPage>, VehicleLeasePropousalDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<PropertyLeasePropousalDisplayModel, PropertyLeasePropousalDetailPage>, PropertyLeasePropousalDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<VehicleLeaseOfferDisplayModel, VehicleLeaseOfferDetailPage>, VehicleLeaseOfferDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<PropertyLeaseOfferDisplayModel, PropertyLeaseOfferDetailPage>, PropertyLeaseOfferDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<SupervisionGroupDisplayModel, SupervisionGroupDetailPage>, SupervisionGroupDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<LegalClientVehicleLeasingDisplayModel, LegalClientVehicleLeasingDetailPage>, LegalClientVehicleLeasingDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
-                .AddSingleton<IConfigurationContentPageFactoryFacade<VehicleLeaseOfferDisplayModel, VehicleLeaseOfferConfigurationPageModel, VehicleLeaseOfferConfigurationPage>, VehicleLeaseOfferConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<VehicleLeasePropousalDisplayModel, VehicleLeasePropousalConfigurationPageModel, VehicleLeasePropousalConfigurationPage>, VehicleLeasePropousalConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<PropertyLeasePropousalDisplayModel, PropertyLeasePropousalConfigurationPageModel, PropertyLeasePropousalConfigurationPage>, PropertyLeasePropousalConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<VehicleLeaseOfferDisplayModel, VehicleLeaseOfferConfigurationPageModel, VehicleLeaseOfferConfigurationPage>, VehicleLeaseOfferConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<PropertyLeaseOfferDisplayModel, PropertyLeaseOfferConfigurationPageModel, PropertyLeaseOfferConfigurationPage>, PropertyLeaseOfferConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<SupervisionGroupDisplayModel, SupervisionGroupConfigurationPageModel, SupervisionGroupConfigurationPage>, SupervisionGroupConfigurationPageFactory>();
 
             return builder;
         }

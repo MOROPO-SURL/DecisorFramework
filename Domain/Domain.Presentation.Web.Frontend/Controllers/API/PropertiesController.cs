@@ -1,4 +1,5 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
@@ -12,16 +13,18 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 {
     [Microsoft.AspNetCore.Mvc.Route("api/domain/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class PropertiesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Property, System.Guid, PropertyInputModel, PropertyDisplayModel>
+    public class PropertiesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<Property, System.Guid, PropertyInputModel, PropertyDisplayModel, PropertyFilterModel>
     {
+        private readonly IEntityRepository<PropertySpace, System.Guid> spaceRepository;
         private readonly IEntityRepository<PostalContactItem, System.Guid> postalContactRepository;
         private readonly IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository;
         private readonly IEntityRepository<Municipality, System.Guid> municipalityRepository;
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
         private readonly IImageFileManagerFacade imageFileManager;
 
-        public PropertiesController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<Property, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PropertiesController> localizer, Microsoft.Extensions.Logging.ILogger<PropertiesController> logger) : base(repository, localizer, logger)
+        public PropertiesController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<PropertySpace, System.Guid> spaceRepository, IEntityRepository<Property, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PropertiesController> localizer, Microsoft.Extensions.Logging.ILogger<PropertiesController> logger) : base(repository, localizer, logger)
         {
+            this.spaceRepository = spaceRepository;
             this.postalContactRepository = postalContactRepository;
             this.municipalityLocationRepository = municipalityLocationRepository;
             this.municipalityRepository = municipalityRepository;
@@ -66,6 +69,20 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                 _model.Import(bridge.Stern);
 
                 _model.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.ContentType);
+
+                return _model;
+            }).ToArray();
+
+            model.Spaces = entity.Spaces.OrderBy(entity => entity.Name).ToArray().Select(_entity =>
+            {
+                var _model = new PropertySpaceDisplayModel();
+
+                _model.Import(_entity);
+
+                if (_entity.FeatureImage != null)
+                {
+                    _model.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.FeatureImage.ContentType);
+                }
 
                 return _model;
             }).ToArray();
@@ -142,6 +159,35 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                     ProwId = entity.Id,
                     SternId = _entity.Id
                 });
+            }
+
+            foreach (var _model in model.IncomingSpaces)
+            {
+                var _entity = _model.Export();
+
+                _entity.PropertyId = entity.Id;
+
+                if (_model.FeatureImage != null)
+                {
+                    using var imageMemoryStream = new System.IO.MemoryStream(_model.FeatureImage.ContentData);
+
+                    using var imageSkData = SkiaSharp.SKData.Create(imageMemoryStream);
+
+                    using var imageSkBitmap = SkiaSharp.SKBitmap.Decode(imageSkData);
+
+                    _entity.FeatureImage = imageRepository.Add(new Image
+                    {
+                        ContentType = _model.FeatureImage.ContentType,
+                        Length = _model.FeatureImage.ContentData.LongLength,
+                        Width = imageSkBitmap.Width,
+                        Height = imageSkBitmap.Height,
+                        About = string.Format("Image for Property Space: {0}", _model.Id)
+                    }, User.Identity.Name, false);
+
+                    imageFileManager.SaveImageFileContent(_entity.FeatureImage.Id, _model.FeatureImage.ContentData, _model.FeatureImage.ContentType);
+                }
+
+                spaceRepository.Add(_entity, User.Identity.Name, false);
             }
         }
 
@@ -222,6 +268,73 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
             }
 
             #endregion
+
+            #region Spaces
+
+            foreach (var _model in model.OutgoingSpaces)
+            {
+                spaceRepository.Delete(new PropertySpace { Id = _model.Id }, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionSpaces)
+            {
+                var _entity = spaceRepository.Get(_model.Id); 
+                
+                _model.Mergue(_entity);
+
+                if (_model.FeatureImage != null)
+                {
+                    using var imageMemoryStream = new System.IO.MemoryStream(_model.FeatureImage.ContentData);
+
+                    using var imageSkData = SkiaSharp.SKData.Create(imageMemoryStream);
+
+                    using var imageSkBitmap = SkiaSharp.SKBitmap.Decode(imageSkData);
+
+                    _entity.FeatureImage = imageRepository.Add(new Image
+                    {
+                        ContentType = _model.FeatureImage.ContentType,
+                        Length = _model.FeatureImage.ContentData.LongLength,
+                        Width = imageSkBitmap.Width,
+                        Height = imageSkBitmap.Height,
+                        About = string.Format("Image for Property Space: {0}", _model.Id)
+                    }, User.Identity.Name, false);
+
+                    imageFileManager.SaveImageFileContent(_entity.FeatureImage.Id, _model.FeatureImage.ContentData, _model.FeatureImage.ContentType);
+                }
+
+                spaceRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingSpaces)
+            {
+                var _entity = _model.Export();
+
+                _entity.PropertyId = entity.Id;
+
+                if (_model.FeatureImage != null)
+                {
+                    using var imageMemoryStream = new System.IO.MemoryStream(_model.FeatureImage.ContentData);
+
+                    using var imageSkData = SkiaSharp.SKData.Create(imageMemoryStream);
+
+                    using var imageSkBitmap = SkiaSharp.SKBitmap.Decode(imageSkData);
+
+                    _entity.FeatureImage = imageRepository.Add(new Image
+                    {
+                        ContentType = _model.FeatureImage.ContentType,
+                        Length = _model.FeatureImage.ContentData.LongLength,
+                        Width = imageSkBitmap.Width,
+                        Height = imageSkBitmap.Height,
+                        About = string.Format("Image for Property Space: {0}", _model.Id)
+                    }, User.Identity.Name, false);
+
+                    imageFileManager.SaveImageFileContent(_entity.FeatureImage.Id, _model.FeatureImage.ContentData, _model.FeatureImage.ContentType);
+                }
+
+                spaceRepository.Add(_entity, User.Identity.Name, false);
+            }
+
+            #endregion
         }
 
         protected override void PostEdit(Property entity, PropertyInputModel model)
@@ -242,6 +355,17 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                 foreach (var _model in model.OutgoingImagetItems)
                 {
                     var _entity = new Image { Id = _model.Id };
+
+                    imageRepository.Delete(_entity, User.Identity.Name);
+
+                    imageFileManager.DeleteImageFile(_entity);
+                }
+
+                foreach (var _model in model.OutgoingSpaces)
+                {
+                    if (_model.FeatureImage == null) continue;
+
+                    var _entity = new Image { Id = _model.FeatureImage.Id };
 
                     imageRepository.Delete(_entity, User.Identity.Name);
 
