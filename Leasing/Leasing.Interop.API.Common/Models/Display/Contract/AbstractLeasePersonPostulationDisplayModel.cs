@@ -20,20 +20,12 @@
         {
             Id = entity.Id;
             Argument = entity.Argument;
-            TaxIdentificationNumber = entity.Contact.PersonalIdentificationNumber;
 
             if (entity.Contact != null)
             {
                 Contact = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
 
                 Contact.Import(entity.Contact);
-            }
-
-            if (entity.Contact.BusinessKind != null)
-            {
-                BusinessKind = new Domain.Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel();
-
-                BusinessKind.Import(entity.Contact.BusinessKind);
             }
 
             if (entity.Contact.MainPostalContact != null)

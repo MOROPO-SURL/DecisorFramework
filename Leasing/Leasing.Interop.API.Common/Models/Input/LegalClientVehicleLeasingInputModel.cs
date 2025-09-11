@@ -13,6 +13,13 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 
         public System.Guid AgreementId { get; set; }
 
+        public int Priority { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Objective { get; set; }
+
+        public System.DateTime StartAt { get; set; }
+
         public double Feed { get; set; }
 
         public Legal.Persistence.Enumerations.DurationUnitMeasureKind FeedDurationUnitMeasureKind { get; set; }

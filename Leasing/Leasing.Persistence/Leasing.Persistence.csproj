@@ -8,7 +8,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\..\Commercial\Commercial.Persistence\Commercial.Persistence.csproj" />
-	  <ProjectReference Include="..\..\Governance\Governance.Persistence\Governance.Persistence.csproj" />
 	</ItemGroup>
 
 </Project>

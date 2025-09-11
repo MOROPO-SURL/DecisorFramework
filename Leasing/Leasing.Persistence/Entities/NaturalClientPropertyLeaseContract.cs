@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Leasing.Persistence.Entities
 {
-    public class NaturalClientPropertyLeaseContract : Contract.AbstractPropertyLeaseContract
+    public class NaturalClientPropertyLeaseContract : Contract.AbstractLeaseContract
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(PostulationId))]
         public PropertyLeasePersonPostulation Postulation { get; set; }

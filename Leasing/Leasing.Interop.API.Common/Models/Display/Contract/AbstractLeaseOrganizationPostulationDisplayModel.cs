@@ -20,8 +20,6 @@
         {
             Id = entity.Id;
             Argument = entity.Argument;
-            TaxIdentificationNumber = entity.Contact.TaxIdentificationNumber;
-            StateIdentificationCode = entity.Contact.StateIdentificationCode;
 
             if (entity.Contact != null)
             {
