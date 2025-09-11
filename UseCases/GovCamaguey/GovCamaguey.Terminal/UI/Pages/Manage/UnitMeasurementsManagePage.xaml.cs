@@ -12,6 +12,12 @@ public partial class UnitMeasurementsManagePage : Framework.Decisor.Core.Present
         InitializeComponent();
     }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.UnitMeasurementViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.UnitMeasurementCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.UnitMeasurementEditorPermission;
+
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
     {
         return ItemsCollectionView;
@@ -36,12 +42,6 @@ public partial class UnitMeasurementsManagePage : Framework.Decisor.Core.Present
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.UnitMeasurementConfigurationPageModel(target);
-
-                this.NavigationPushPageAsync(new Configuration.UnitMeasurementConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>

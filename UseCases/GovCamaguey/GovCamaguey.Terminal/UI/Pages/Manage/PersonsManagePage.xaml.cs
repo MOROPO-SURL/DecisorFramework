@@ -17,6 +17,12 @@ public partial class PersonsManagePage : Framework.Decisor.Core.Presentation.Ter
         return ItemsCollectionView;
     }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.PersonViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.PersonCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.PersonEditorPermission;
+
     protected override double ItemViewRequestWidth { get => 384; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
@@ -36,12 +42,6 @@ public partial class PersonsManagePage : Framework.Decisor.Core.Presentation.Ter
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.PersonConfigurationPageModel(target);
-
-                this.NavigationPushPageAsync(new Configuration.PersonConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.PersonsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>

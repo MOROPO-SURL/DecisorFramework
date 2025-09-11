@@ -12,6 +12,12 @@ public partial class GuidelinesManagePage : Framework.Decisor.Core.Presentation.
         InitializeComponent();
     }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.GuidelineViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.GuidelineCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.GuidelineEditorPermission;
+
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
     {
         return ItemsCollectionView;
@@ -34,12 +40,6 @@ public partial class GuidelinesManagePage : Framework.Decisor.Core.Presentation.
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.GuidelineConfigurationPageModel(target);
-
-                this.NavigationPushPageAsync(new Configuration.GuidelineConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.GuidelinesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>

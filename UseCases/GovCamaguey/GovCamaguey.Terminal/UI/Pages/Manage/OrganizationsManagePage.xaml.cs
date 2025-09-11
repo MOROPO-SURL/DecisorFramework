@@ -12,6 +12,12 @@ public partial class OrganizationsManagePage : Framework.Decisor.Core.Presentati
         InitializeComponent();
     }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationEditorPermission;
+
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
     {
         return ItemsCollectionView;
@@ -36,12 +42,6 @@ public partial class OrganizationsManagePage : Framework.Decisor.Core.Presentati
         switch (discriminator)
         {
             case 0:
-                var model = new Models.Page.Configuration.OrganizationConfigurationPageModel(target);
-
-                this.NavigationPushPageAsync(new Configuration.OrganizationConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                break;
-            case 1:
                 var apiConnectClient = new Interop.API.Connect.Clients.OrganizationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
