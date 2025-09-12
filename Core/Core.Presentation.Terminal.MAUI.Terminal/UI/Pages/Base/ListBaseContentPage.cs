@@ -4,10 +4,9 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 {
-    public class ListBaseContentPage<TModel, TListPageModel, TDetailContentPage> : Caney.MVVM.Core.Pages.ContentPage
+    public class ListBaseContentPage<TModel, TListPageModel> : Caney.MVVM.Core.Pages.ContentPage
         where TModel : class
         where TListPageModel : Models.Page.Contract.AbstractListEntityPageModel<TModel>, new()
-        where TDetailContentPage : DetailBaseContentPage<TModel>
     {
         public ListBaseContentPage()
         {
@@ -34,7 +33,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<UI.Factories.Facade.IDetailContentPageFactoryFacade<TModel, TDetailContentPage>>();
+                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<UI.Factories.Facade.IDetailContentPageFactoryFacade<TModel>>();
 
                     this.NavigationPushModalPageAsync(factory.Build(task.Result));
                 });

@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class DecisionMakingGroupsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel, Models.Page.Manage.DecisionMakingGroupsManagePageModel, Models.Page.Configuration.DecisionMakingGroupConfigurationPageModel, Configuration.DecisionMakingGroupConfigurationPage, Detail.DecisionMakingGroupDetailPage>
+public partial class DecisionMakingGroupsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel, Models.Page.Manage.DecisionMakingGroupsManagePageModel, Models.Page.Configuration.DecisionMakingGroupConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
 

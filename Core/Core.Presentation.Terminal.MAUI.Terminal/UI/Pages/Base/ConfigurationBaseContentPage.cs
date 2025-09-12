@@ -9,11 +9,13 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
         where TConfigurationPageModel : Models.Page.Contract.AbstractConfigurationPageModel<TInModel>
     {
         private readonly System.Action<TOutModel> successCallbackAction;
+        private readonly FluentValidation.AbstractValidator<TConfigurationPageModel> validator;
         protected bool hasChangesFlag;
 
-        public ConfigurationBaseContentPage(System.Action<TOutModel> successCallbackAction, TConfigurationPageModel bindingContextModel)
+        public ConfigurationBaseContentPage(System.Action<TOutModel> successCallbackAction, TConfigurationPageModel bindingContextModel, FluentValidation.AbstractValidator<TConfigurationPageModel> validator)
         {
             this.successCallbackAction = successCallbackAction;
+            this.validator = validator;
 
             if (bindingContextModel.OnEditionMode)
             {
@@ -58,18 +60,14 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 return;
             }
 
-            //BindingContextPageModel.ResetValidationState();
+            if (validator != null)
+            {
+                ConcreteBindingContext.ValidationResult = null;
 
-            //foreach (var validationBehavior in validationBehaviors)
-            //{
-            //    var result = validationBehavior.Evaluate();
+                ConcreteBindingContext.ValidationResult = validator.Validate(ConcreteBindingContext);
 
-            //    if (!BindingContextPageModel.IsValid) continue;
-
-            //    if (!result) BindingContextPageModel.IsValid = false;
-            //}
-
-            //if (!BindingContextPageModel.IsValid) return;
+                if (!ConcreteBindingContext.ValidationResult.IsValid) return;
+            }
 
             ConcreteBindingContext.IsBusy = true;
 

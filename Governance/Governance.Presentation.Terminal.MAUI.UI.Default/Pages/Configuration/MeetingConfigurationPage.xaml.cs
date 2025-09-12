@@ -12,7 +12,7 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
     private readonly List<Interop.API.Common.Models.Input.AgreementInputModel> incomingAgreements = [];
     private readonly List<Interop.API.Common.Models.Display.AgreementDisplayModel> outgoingAgreements = [];
 
-    public MeetingConfigurationPage(System.Action<Interop.API.Common.Models.Display.MeetingDisplayModel> successAction, Models.Page.Configuration.MeetingConfigurationPageModel model) : base(successAction, model)
+    public MeetingConfigurationPage(System.Action<Interop.API.Common.Models.Display.MeetingDisplayModel> successAction, Models.Page.Configuration.MeetingConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

@@ -3,7 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class ClausePickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.ClauseDisplayModel, Models.Page.Pick.ClausePickPageModel, Detail.ClauseDetailPage>
+public partial class ClausePickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.ClauseDisplayModel, Models.Page.Pick.ClausePickPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 136;
 

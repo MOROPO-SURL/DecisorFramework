@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.P
 
 public partial class ProformaSectionClauseBridgeConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Models.View.SectionClauseBridgeViewModel, Models.View.SectionClauseBridgeViewModel, Models.Page.Configuration.ProformaSectionClauseBridgeConfigurationPageModel>
 {
-    public ProformaSectionClauseBridgeConfigurationPage(System.Action<Models.View.SectionClauseBridgeViewModel> successAction, Models.Page.Configuration.ProformaSectionClauseBridgeConfigurationPageModel model) : base(successAction, model)
+    public ProformaSectionClauseBridgeConfigurationPage(System.Action<Models.View.SectionClauseBridgeViewModel> successAction, Models.Page.Configuration.ProformaSectionClauseBridgeConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

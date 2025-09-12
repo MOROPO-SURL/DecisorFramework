@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class FamiliesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.FamilyDisplayModel, Models.Page.Manage.FamiliesManagePageModel, Models.Page.Configuration.FamilyConfigurationPageModel, Configuration.FamilyConfigurationPage, Detail.FamilyDetailPage>
+public partial class FamiliesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.FamilyDisplayModel, Models.Page.Manage.FamiliesManagePageModel, Models.Page.Configuration.FamilyConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 128;
 

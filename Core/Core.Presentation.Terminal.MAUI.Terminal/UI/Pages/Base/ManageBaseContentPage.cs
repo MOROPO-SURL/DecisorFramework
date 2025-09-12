@@ -4,12 +4,10 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 {
-    public class ManageBaseContentPage<TModel, TManagePageModel, TConfigurationPageModel, TConfigurationContentPage, TDetailContentPage> : ListBaseContentPage<TModel, TManagePageModel, TDetailContentPage>
+    public class ManageBaseContentPage<TModel, TManagePageModel, TConfigurationPageModel> : ListBaseContentPage<TModel, TManagePageModel>
         where TModel : class
         where TManagePageModel : Models.Page.Contract.AbstractManageEntityPageModel<TModel>, new()
         where TConfigurationPageModel : Models.Page.Contract.AbstractConfigurationPageModel<TModel>
-        where TConfigurationContentPage : ConfigurationBaseContentPage<TModel, TModel, TConfigurationPageModel>
-        where TDetailContentPage : DetailBaseContentPage<TModel>
     {
         protected virtual bool ConfigurationRequiredAsyncWorkPresentation => false;
 
@@ -25,7 +23,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IDetailContentPageFactoryFacade<TModel, TDetailContentPage>>();
+                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IDetailContentPageFactoryFacade<TModel>>();
 
                     try
                     {
@@ -71,7 +69,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                     {
                         concreteBindingContext.IsBusy = false;
 
-                        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IConfigurationContentPageFactoryFacade<TModel, TConfigurationPageModel, TConfigurationContentPage>>();
+                        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IConfigurationContentPageFactoryFacade<TModel, TConfigurationPageModel>>();
 
                         this.NavigationPushPageAsync(factory.Build(ConfigurationSuccess_Callback, model));
                     });
@@ -118,7 +116,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                         {
                             concreteBindingContext.IsBusy = false;
 
-                            var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IConfigurationContentPageFactoryFacade<TModel, TConfigurationPageModel, TConfigurationContentPage>>();
+                            var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IConfigurationContentPageFactoryFacade<TModel, TConfigurationPageModel>>();
 
                             this.NavigationPushPageAsync(factory.Build(ConfigurationSuccess_Callback, model));
                         });

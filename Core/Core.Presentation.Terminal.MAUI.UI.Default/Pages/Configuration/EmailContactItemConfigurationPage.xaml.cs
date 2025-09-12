@@ -2,7 +2,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class EmailContactItemConfigurationPage : UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.EmailContactItemDisplayModel, Interop.API.Common.Models.Display.EmailContactItemDisplayModel, Models.Page.Configuration.EmailContactItemConfigurationPageModel>
 {
-    public EmailContactItemConfigurationPage(System.Action<Interop.API.Common.Models.Display.EmailContactItemDisplayModel> successAction, Models.Page.Configuration.EmailContactItemConfigurationPageModel model) : base(successAction, model)
+    public EmailContactItemConfigurationPage(System.Action<Interop.API.Common.Models.Display.EmailContactItemDisplayModel> successAction, Models.Page.Configuration.EmailContactItemConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

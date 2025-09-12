@@ -4,7 +4,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class InternalBankAccountPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.BankAccountDisplayModel, Models.Page.Pick.BankAccountPickPageModel, Detail.BankAccountDetailPage>
+public partial class InternalBankAccountPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.BankAccountDisplayModel, Models.Page.Pick.BankAccountPickPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 160;
 

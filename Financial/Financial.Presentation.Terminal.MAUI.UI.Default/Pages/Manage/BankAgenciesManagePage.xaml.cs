@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class BankAgenciesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.BankAgencyDisplayModel, Models.Page.Manage.BankAgenciesManagePageModel, Models.Page.Configuration.BankAgencyConfigurationPageModel, Configuration.BankAgencyConfigurationPage, Detail.BankAgencyDetailPage>
+public partial class BankAgenciesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.BankAgencyDisplayModel, Models.Page.Manage.BankAgenciesManagePageModel, Models.Page.Configuration.BankAgencyConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
 

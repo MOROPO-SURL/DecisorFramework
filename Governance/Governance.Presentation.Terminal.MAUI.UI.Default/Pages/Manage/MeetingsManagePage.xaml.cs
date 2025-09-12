@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class MeetingsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.MeetingDisplayModel, Models.Page.Manage.MeetingsManagePageModel, Models.Page.Configuration.MeetingConfigurationPageModel, Configuration.MeetingConfigurationPage, Detail.MeetingDetailPage>
+public partial class MeetingsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.MeetingDisplayModel, Models.Page.Manage.MeetingsManagePageModel, Models.Page.Configuration.MeetingConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 148;
 

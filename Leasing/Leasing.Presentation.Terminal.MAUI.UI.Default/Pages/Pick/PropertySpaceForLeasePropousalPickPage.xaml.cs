@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class PropertySpaceForLeasePropousalPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel, Models.Page.Pick.PropertySpaceForLeasePropousalPickPageModel, Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.PropertySpaceDetailPage>
+public partial class PropertySpaceForLeasePropousalPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel, Models.Page.Pick.PropertySpaceForLeasePropousalPickPageModel>
 {
     private readonly Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel[] availables;
 

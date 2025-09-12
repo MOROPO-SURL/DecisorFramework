@@ -3,7 +3,7 @@ using Microsoft.Maui.Dispatching;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class PropertyLeasePropousalsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PropertyLeasePropousalDisplayModel, Models.Page.Manage.PropertyLeasePropousalsManagePageModel, Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel, Configuration.PropertyLeasePropousalConfigurationPage, Detail.PropertyLeasePropousalDetailPage>
+public partial class PropertyLeasePropousalsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PropertyLeasePropousalDisplayModel, Models.Page.Manage.PropertyLeasePropousalsManagePageModel, Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 248;
 

@@ -18,7 +18,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
     private readonly List<ClassificationInputModel> incomingClassificationItems = [];
     private readonly List<ClassificationDisplayModel> outgoingClassificationItems = [];
 
-    public ProductConfigurationPage(System.Action<ProductDisplayModel> successAction, Models.Page.Configuration.ProductConfigurationPageModel model) : base(successAction, model)
+    public ProductConfigurationPage(System.Action<ProductDisplayModel> successAction, Models.Page.Configuration.ProductConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

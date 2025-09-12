@@ -4,7 +4,7 @@ using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.List;
 
-public partial class VehicleLeaseOfferTenderListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<VehicleLeaseOfferDisplayModel, Models.Page.List.VehicleLeaseOfferTenderListPageModel, Detail.VehicleLeaseOfferDetailPage>
+public partial class VehicleLeaseOfferTenderListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<VehicleLeaseOfferDisplayModel, Models.Page.List.VehicleLeaseOfferTenderListPageModel>
 {
     public VehicleLeaseOfferTenderListPage()
     {

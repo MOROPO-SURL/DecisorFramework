@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.List;
 
-public partial class PaymentTermsListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.PaymentTermDisplayModel, Models.Page.List.PaymentTermsListPageModel, Detail.PaymentTermDetailPage>
+public partial class PaymentTermsListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.PaymentTermDisplayModel, Models.Page.List.PaymentTermsListPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 128;
 

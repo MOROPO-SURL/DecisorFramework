@@ -13,7 +13,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
     private readonly List<VacantInputModel> incomingVacants = [];
     private readonly List<VacantDisplayModel> outgoingVacants = [];
 
-    public WorkforceConfigurationPage(System.Action<WorkforceDisplayModel> successAction, Models.Page.Configuration.WorkforceConfigurationPageModel model) : base(successAction, model)
+    public WorkforceConfigurationPage(System.Action<WorkforceDisplayModel> successAction, Models.Page.Configuration.WorkforceConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

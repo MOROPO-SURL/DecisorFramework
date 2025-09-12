@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;
 
-public partial class LegalBusinessKindsListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.LegalBusinessKindDisplayModel, Models.Page.List.LegalBusinessKindsListPageModel, Detail.LegalBusinessKindDetailPage>
+public partial class LegalBusinessKindsListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.LegalBusinessKindDisplayModel, Models.Page.List.LegalBusinessKindsListPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 128;
 

@@ -3,7 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class VehicleLeasePropousalPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.VehicleLeasePropousalDisplayModel, Models.Page.Pick.VehicleLeasePropousalPickPageModel, Detail.VehicleLeasePropousalDetailPage>
+public partial class VehicleLeasePropousalPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.VehicleLeasePropousalDisplayModel, Models.Page.Pick.VehicleLeasePropousalPickPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 248;
 
