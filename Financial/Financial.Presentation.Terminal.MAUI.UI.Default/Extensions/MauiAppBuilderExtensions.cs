@@ -4,8 +4,6 @@ using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Configuration;
 using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Factories.Configuration;
 using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Factories.Detail;
-using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
-using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Extensions
 {
@@ -15,10 +13,10 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Defau
         {
             builder.Services
                 // DetailPage factory resgistration !!!
-                .AddSingleton<IDetailContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyDetailPage>, BankAgencyDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<BankAgencyDisplayModel>, BankAgencyDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
-                .AddSingleton<IConfigurationContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyConfigurationPageModel, BankAgencyConfigurationPage>, BankAgencyConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyConfigurationPageModel>, BankAgencyConfigurationPageFactory>();
 
             return builder;
         }

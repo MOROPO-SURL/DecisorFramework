@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.P
 
 public partial class ClauseConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ClauseDisplayModel, ClauseDisplayModel, Models.Page.Configuration.ClauseConfigurationPageModel>
 {
-    public ClauseConfigurationPage(System.Action<ClauseDisplayModel> successAction, Models.Page.Configuration.ClauseConfigurationPageModel model) : base(successAction, model)
+    public ClauseConfigurationPage(System.Action<ClauseDisplayModel> successAction, Models.Page.Configuration.ClauseConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

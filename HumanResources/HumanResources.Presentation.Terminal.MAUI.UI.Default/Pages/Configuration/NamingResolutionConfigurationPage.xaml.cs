@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class NamingResolutionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel>
 {
-    public NamingResolutionConfigurationPage(System.Action<Interop.API.Common.Models.Display.NamingResolutionDisplayModel> successAction, Models.Page.Configuration.NamingResolutionConfigurationPageModel model) : base(successAction, model)
+    public NamingResolutionConfigurationPage(System.Action<Interop.API.Common.Models.Display.NamingResolutionDisplayModel> successAction, Models.Page.Configuration.NamingResolutionConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

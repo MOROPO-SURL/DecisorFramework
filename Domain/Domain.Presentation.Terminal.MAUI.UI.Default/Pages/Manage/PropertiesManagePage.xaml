@@ -3,8 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card"
-    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
-    xmlns:local_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
@@ -12,7 +10,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.PropertiesManagePage"
-    x:TypeArguments="interop_common_display_models:PropertyDisplayModel,presentation_manage_page_models:PropertiesManagePageModel,presentation_configuration_page_models:PropertyConfigurationPageModel,local_configuration_pages:PropertyConfigurationPage,local_detail_pages:PropertyDetailPage"
+    x:TypeArguments="interop_common_display_models:PropertyDisplayModel,presentation_manage_page_models:PropertiesManagePageModel,presentation_configuration_page_models:PropertyConfigurationPageModel"
     x:DataType="presentation_manage_page_models:PropertiesManagePageModel"
     Title="Gestión de Inmuebles">
     <ContentPage.Resources>

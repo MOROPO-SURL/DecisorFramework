@@ -311,7 +311,7 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             Dispatcher.Dispatch(() =>
             {
-                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<EmployeeDisplayModel, Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.EmployeeDetailPage>>();
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<EmployeeDisplayModel>>();
 
                 try
                 {

@@ -2,7 +2,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class DocumentConfigurationPage : UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.DocumentDisplayModel, Interop.API.Common.Models.Display.DocumentDisplayModel, Models.Page.Configuration.DocumentConfigurationPageModel>
 {
-    public DocumentConfigurationPage(System.Action<Interop.API.Common.Models.Display.DocumentDisplayModel> successAction, Models.Page.Configuration.DocumentConfigurationPageModel model) : base(successAction, model)
+    public DocumentConfigurationPage(System.Action<Interop.API.Common.Models.Display.DocumentDisplayModel> successAction, Models.Page.Configuration.DocumentConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

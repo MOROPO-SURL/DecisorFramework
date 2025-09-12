@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class LegalProvidersManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<LegalProviderDisplayModel, Models.Page.Manage.LegalProvidersManagePageModel, Models.Page.Configuration.LegalProviderConfigurationPageModel, Configuration.LegalProviderConfigurationPage, Detail.LegalProviderDetailPage>
+public partial class LegalProvidersManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<LegalProviderDisplayModel, Models.Page.Manage.LegalProvidersManagePageModel, Models.Page.Configuration.LegalProviderConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 144;
 

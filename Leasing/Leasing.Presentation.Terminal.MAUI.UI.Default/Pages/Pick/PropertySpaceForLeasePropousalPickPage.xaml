@@ -2,7 +2,6 @@
 <core_ui_base_pages:ListBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:domain_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:domain_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:presentation_pick_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Pick;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
@@ -11,7 +10,7 @@
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PropertySpaceForLeasePropousalPickPage"
-    x:TypeArguments="domain_interop_common_display_models:PropertySpaceDisplayModel,presentation_pick_page_models:PropertySpaceForLeasePropousalPickPageModel,domain_detail_pages:PropertySpaceDetailPage"
+    x:TypeArguments="domain_interop_common_display_models:PropertySpaceDisplayModel,presentation_pick_page_models:PropertySpaceForLeasePropousalPickPageModel"
     x:DataType="presentation_pick_page_models:PropertySpaceForLeasePropousalPickPageModel"
     Title="Seleccionar Espacio en Inmueble">
     <ContentPage.Resources>

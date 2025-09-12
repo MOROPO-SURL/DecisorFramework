@@ -7,7 +7,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default
 
 public partial class VehicleLeasePropousalConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<VehicleLeasePropousalDisplayModel, VehicleLeasePropousalDisplayModel, Models.Page.Configuration.VehicleLeasePropousalConfigurationPageModel>
 {
-    public VehicleLeasePropousalConfigurationPage(System.Action<VehicleLeasePropousalDisplayModel> successAction, Models.Page.Configuration.VehicleLeasePropousalConfigurationPageModel model) : base(successAction, model)
+    public VehicleLeasePropousalConfigurationPage(System.Action<VehicleLeasePropousalDisplayModel> successAction, Models.Page.Configuration.VehicleLeasePropousalConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

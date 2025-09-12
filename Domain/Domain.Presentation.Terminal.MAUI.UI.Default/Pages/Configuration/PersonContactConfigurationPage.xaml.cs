@@ -28,7 +28,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
     private readonly List<WebContactItemInputModel> incomingWebContactItems = [];
     private readonly List<WebContactItemDisplayModel> outgoingWebContactItems = [];
 
-    public PersonContactConfigurationPage(System.Action<PersonContactDisplayModel> successAction, Models.Page.Configuration.PersonContactConfigurationPageModel model) : base(successAction, model)
+    public PersonContactConfigurationPage(System.Action<PersonContactDisplayModel> successAction, Models.Page.Configuration.PersonContactConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

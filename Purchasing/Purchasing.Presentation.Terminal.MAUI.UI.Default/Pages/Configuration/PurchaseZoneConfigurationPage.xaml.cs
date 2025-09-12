@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
-using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ public partial class PurchaseZoneConfigurationPage : Core.Presentation.Terminal.
     private readonly List<PurchaseZoneSpentBridgeModel> incomingSpentBridges = [];
     private readonly List<PurchaseZoneSpentBridgeModel> outgoingSpentBridges = [];
 
-    public PurchaseZoneConfigurationPage(System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel> successAction, Models.Page.Configuration.PurchaseZoneConfigurationPageModel model) : base(successAction, model)
+    public PurchaseZoneConfigurationPage(System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel> successAction, Models.Page.Configuration.PurchaseZoneConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

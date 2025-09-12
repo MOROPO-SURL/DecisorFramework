@@ -3,7 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProductionOrderDisplayModel, Models.Page.Manage.ProductionOrdersManagePageModel, Models.Page.Configuration.ProductionOrderConfigurationPageModel, Configuration.ProductionOrderConfigurationPage, Detail.ProductionOrderDetailPage>
+public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProductionOrderDisplayModel, Models.Page.Manage.ProductionOrdersManagePageModel, Models.Page.Configuration.ProductionOrderConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 180;
 

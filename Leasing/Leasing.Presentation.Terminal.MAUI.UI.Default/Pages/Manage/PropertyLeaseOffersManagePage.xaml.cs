@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class PropertyLeaseOffersManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel, Models.Page.Manage.PropertyLeaseOffersManagePageModel, Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel, Configuration.PropertyLeaseOfferConfigurationPage, Detail.PropertyLeaseOfferDetailPage>
+public partial class PropertyLeaseOffersManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel, Models.Page.Manage.PropertyLeaseOffersManagePageModel, Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 272;
 

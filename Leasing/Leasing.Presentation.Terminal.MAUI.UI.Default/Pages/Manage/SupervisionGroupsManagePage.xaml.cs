@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class SupervisionGroupsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.SupervisionGroupDisplayModel, Models.Page.Manage.SupervisionGroupsManagePageModel, Models.Page.Configuration.SupervisionGroupConfigurationPageModel, Configuration.SupervisionGroupConfigurationPage, Detail.SupervisionGroupDetailPage>
+public partial class SupervisionGroupsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.SupervisionGroupDisplayModel, Models.Page.Manage.SupervisionGroupsManagePageModel, Models.Page.Configuration.SupervisionGroupConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 196;
 

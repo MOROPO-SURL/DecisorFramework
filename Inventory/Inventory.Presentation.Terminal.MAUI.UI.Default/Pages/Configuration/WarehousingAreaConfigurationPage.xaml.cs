@@ -2,7 +2,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Defau
 
 public partial class WarehousingAreaConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.WarehousingAreaDisplayModel, Interop.API.Common.Models.Display.WarehousingAreaDisplayModel, Models.Page.Configuration.WarehousingAreaConfigurationPageModel>
 {
-    public WarehousingAreaConfigurationPage(System.Action<Interop.API.Common.Models.Display.WarehousingAreaDisplayModel> successAction, Models.Page.Configuration.WarehousingAreaConfigurationPageModel model) : base(successAction, model)
+    public WarehousingAreaConfigurationPage(System.Action<Interop.API.Common.Models.Display.WarehousingAreaDisplayModel> successAction, Models.Page.Configuration.WarehousingAreaConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

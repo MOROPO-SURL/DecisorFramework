@@ -12,7 +12,7 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
     private readonly List<Interop.API.Common.Models.Input.PropertySpaceLeasePropousalInputModel> incomingSpaces = [];
     private readonly List<PropertySpaceLeasePropousalDisplayModel> outgoingSpaces = [];
 
-    public PropertyLeasePropousalConfigurationPage(System.Action<PropertyLeasePropousalDisplayModel> successAction, Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel model) : base(successAction, model)
+    public PropertyLeasePropousalConfigurationPage(System.Action<PropertyLeasePropousalDisplayModel> successAction, Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

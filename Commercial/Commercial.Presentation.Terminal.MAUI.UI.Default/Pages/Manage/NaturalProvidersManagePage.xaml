@@ -4,8 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Views.Card"
-    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
-    xmlns:local_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Commercial.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI"
@@ -13,7 +11,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.NaturalProvidersManagePage"
-    x:TypeArguments="interop_common_display_models:NaturalProviderDisplayModel,presentation_manage_page_models:NaturalProvidersManagePageModel,presentation_configuration_page_models:NaturalProviderConfigurationPageModel,local_configuration_pages:NaturalProviderConfigurationPage,local_detail_pages:NaturalProviderDetailPage"
+    x:TypeArguments="interop_common_display_models:NaturalProviderDisplayModel,presentation_manage_page_models:NaturalProvidersManagePageModel,presentation_configuration_page_models:NaturalProviderConfigurationPageModel"
     x:DataType="presentation_manage_page_models:NaturalProvidersManagePageModel"
     Title="Gestión de Proveedores Naturales">
     <ContentPage.Resources>

@@ -3,7 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.PropertyDisplayModel, Models.Page.Pick.PropertyPickPageModel, Detail.PropertyDetailPage>
+public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.PropertyDisplayModel, Models.Page.Pick.PropertyPickPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 320;
 

@@ -4,8 +4,6 @@ using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration;
 using MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Factories.Configuration;
 using MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Factories.Detail;
-using MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
-using MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Extensions
 {
@@ -15,10 +13,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Defa
         {
             builder.Services
                 // DetailPage factory resgistration !!!
-                .AddSingleton<IDetailContentPageFactoryFacade<PurchaseZoneDisplayModel, PurchaseZoneDetailPage>, PurchaseZoneDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<PurchaseZoneDisplayModel>, PurchaseZoneDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
-                .AddSingleton<IConfigurationContentPageFactoryFacade<PurchaseZoneDisplayModel, PurchaseZoneConfigurationPageModel, PurchaseZoneConfigurationPage>, PurchaseZoneConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<PurchaseZoneDisplayModel, PurchaseZoneConfigurationPageModel>, PurchaseZoneConfigurationPageFactory>();
 
             return builder;
         }

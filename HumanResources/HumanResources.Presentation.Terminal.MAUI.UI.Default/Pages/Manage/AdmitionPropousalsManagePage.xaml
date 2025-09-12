@@ -4,8 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
-    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
-    xmlns:local_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
@@ -14,7 +12,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.AdmitionPropousalsManagePage"
-    x:TypeArguments="interop_common_display_models:AdmitionPropousalDisplayModel,presentation_manage_page_models:AdmitionPropousalsManagePageModel,presentation_configuration_page_models:AdmitionPropousalConfigurationPageModel,local_configuration_pages:AdmitionPropousalConfigurationPage,local_detail_pages:AdmitionPropousalDetailPage"
+    x:TypeArguments="interop_common_display_models:AdmitionPropousalDisplayModel,presentation_manage_page_models:AdmitionPropousalsManagePageModel,presentation_configuration_page_models:AdmitionPropousalConfigurationPageModel"
     x:DataType="presentation_manage_page_models:AdmitionPropousalsManagePageModel"
     Title="Gestión de Propuestas de Admisión">
     <ContentPage.Resources>

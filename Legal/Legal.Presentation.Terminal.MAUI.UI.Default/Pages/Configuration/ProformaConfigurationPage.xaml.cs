@@ -9,7 +9,7 @@ public partial class ProformaConfigurationPage : Core.Presentation.Terminal.MAUI
 {
     private Microsoft.Maui.Storage.FileResult rawDocumentFilePickResult;
 
-    public ProformaConfigurationPage(System.Action<ProformaDisplayModel> successAction, Models.Page.Configuration.ProformaConfigurationPageModel model) : base(successAction, model)
+    public ProformaConfigurationPage(System.Action<ProformaDisplayModel> successAction, Models.Page.Configuration.ProformaConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

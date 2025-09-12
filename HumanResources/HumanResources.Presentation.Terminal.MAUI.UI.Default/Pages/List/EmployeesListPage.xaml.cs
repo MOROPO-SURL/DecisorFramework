@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List;
 
-public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel, Models.Page.List.EmployeesListPageModel, Detail.EmployeeDetailPage>
+public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel, Models.Page.List.EmployeesListPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
 

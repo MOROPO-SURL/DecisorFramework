@@ -3,7 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class NamingResolutionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Manage.NamingResolutionsManagePageModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel, Configuration.NamingResolutionConfigurationPage, Detail.NamingResolutionDetailPage>
+public partial class NamingResolutionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Manage.NamingResolutionsManagePageModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 268;
 
@@ -94,7 +94,7 @@ public partial class NamingResolutionsManagePage : Core.Presentation.Terminal.MA
                     {
                         concreteBindingContext.IsBusy = false;
 
-                        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel, Configuration.NamingResolutionConfigurationPage>>();
+                        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel>>();
 
                         this.NavigationPushPageAsync(factory.Build(ConfigurationSuccess_Callback, model));
                     });
