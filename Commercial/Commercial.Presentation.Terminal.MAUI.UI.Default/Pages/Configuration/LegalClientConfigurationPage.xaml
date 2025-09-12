@@ -18,6 +18,8 @@
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
@@ -59,6 +61,10 @@
                             HorizontalOptions="Start"
                             Text="Seleccionar ..."
                             Clicked="ContactPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.ContactValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.ContactValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=8}}"
@@ -75,6 +81,10 @@
                             HorizontalOptions="Start"
                             Text="Seleccionar ..."
                             Clicked="RepresentativePickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.RepresentativeValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.RepresentativeValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=12}}"
@@ -84,7 +94,12 @@
                         <Picker 
                             x:Name="PostalContactPicker"
                             ItemsSource="{Binding AvailablePostalContactItems}"
+                            SelectedItem="{Binding MainPostalContact}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.MainPostalContactValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.MainPostalContactValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
@@ -92,6 +107,10 @@
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="NIT" />
                         <Entry Text="{Binding TaxIdentificationNumber}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.TaxIdentificationNumberValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.TaxIdentificationNumberValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
@@ -109,7 +128,12 @@
                             x:Name="PaymentTermPicker"
                             ItemsSource="{Binding AvailablePaymentTerms, Mode=OneTime}" 
                             ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding DefaultPaymentTerm}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.DefaultPaymentTermValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.DefaultPaymentTermValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <FlexLayout 
@@ -313,6 +337,10 @@
                                 </CollectionView>
                             </Grid>
                         </Frame>
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.BankAccountsValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientConfigurationPageModel.BankAccountsValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <BoxView 

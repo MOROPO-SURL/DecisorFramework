@@ -4,16 +4,26 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Validat
 {
     public class LegalClientConfigurationValidator : AbstractValidator<Models.Page.Configuration.LegalClientConfigurationPageModel>
     {
-        public static string ContactProperty => nameof(Models.Page.Configuration.LegalClientConfigurationPageModel.Contact);
-        public static string TaxIdentificationNumberProperty => nameof(Models.Page.Configuration.LegalClientConfigurationPageModel.TaxIdentificationNumber);
-
         public LegalClientConfigurationValidator()
         {
             RuleFor(model => model.Contact)
                 .NotNull();
 
+            RuleFor(model => model.Representative)
+                .NotNull();
+
+            RuleFor(model => model.MainPostalContact)
+                .NotNull();
+
             RuleFor(model => model.TaxIdentificationNumber)
+                .NotNull()
                 .Matches("^[0-9]+$");
+
+            RuleFor(model => model.DefaultPaymentTerm)
+                .NotNull();
+
+            RuleFor(model => model.BankAccounts)
+                .NotEmpty();
         }
     }
 }
