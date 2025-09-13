@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using MOROPO.Framework.Guama.Core.Presentation.Models;
+using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
@@ -7,6 +9,7 @@ using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/governance/[controller]")]
     [ApiController]
     public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Objective, System.Guid, ObjectiveInputModel, ObjectiveDisplayModel>
@@ -94,6 +97,52 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
         public override ActionResult Delete(System.Guid key)
         {
             return NotFound();
+        }
+
+        public override ActionResult Enable(System.Guid key)
+        {
+            return NotFound(key);
+        }
+
+        public override ActionResult Disable(System.Guid key)
+        {
+            return NotFound();
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission)]
+        public override ActionResult<ObjectiveDisplayModel[]> Get()
+        {
+            return base.Get();
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission)]
+        public override ActionResult<ObjectiveDisplayModel> Get(System.Guid key)
+        {
+            return base.Get(key);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission)]
+        public override ActionResult<PaginationModel<ObjectiveDisplayModel>> GetPaginate(int sheet = 1, int limit = 25)
+        {
+            return base.GetPaginate(sheet, limit);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveCreatorPermission)]
+        public override ActionResult Create([FromBody] ObjectiveInputModel model)
+        {
+            return base.Create(model);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveEditorPermission)]
+        public override ActionResult Edit([FromBody] ObjectiveInputModel model)
+        {
+            return base.Edit(model);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveRemoverPermission)]
+        public override ActionResult Archive(System.Guid key)
+        {
+            return base.Archive(key);
         }
 
         protected override void PreCreate(Objective entity, ObjectiveInputModel model)

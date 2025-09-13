@@ -1,9 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Manage;
 
-public partial class PersonsManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PersonDisplayModel, Models.Page.Manage.PersonsManagePageModel, Models.Page.Configuration.PersonConfigurationPageModel, Configuration.PersonConfigurationPage, Detail.PersonDetailPage>
+public partial class PersonsManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PersonDisplayModel, Models.Page.Manage.PersonsManagePageModel, Models.Page.Configuration.PersonConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
 

@@ -1,9 +1,14 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using MOROPO.Framework.Guama.Core.Presentation.Models;
+using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
+using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
+using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/governance/[controller]")]
     [ApiController]
     public class UnitMeasurementsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<UnitMeasurement, System.Guid, Interop.API.Common.Models.Input.UnitMeasurementInputModel, Interop.API.Common.Models.Display.UnitMeasurementDisplayModel>
@@ -26,6 +31,52 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
         public override ActionResult Delete(System.Guid key)
         {
             return NotFound();
+        }
+
+        public override ActionResult Enable(System.Guid key)
+        {
+            return NotFound(key);
+        }
+
+        public override ActionResult Disable(System.Guid key)
+        {
+            return NotFound();
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.UnitMeasurementViewerPermission)]
+        public override ActionResult<UnitMeasurementDisplayModel[]> Get()
+        {
+            return base.Get();
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.UnitMeasurementViewerPermission)]
+        public override ActionResult<UnitMeasurementDisplayModel> Get(System.Guid key)
+        {
+            return base.Get(key);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.UnitMeasurementViewerPermission)]
+        public override ActionResult<PaginationModel<UnitMeasurementDisplayModel>> GetPaginate(int sheet = 1, int limit = 25)
+        {
+            return base.GetPaginate(sheet, limit);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.UnitMeasurementCreatorPermission)]
+        public override ActionResult Create([FromBody] UnitMeasurementInputModel model)
+        {
+            return base.Create(model);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.UnitMeasurementEditorPermission)]
+        public override ActionResult Edit([FromBody] UnitMeasurementInputModel model)
+        {
+            return base.Edit(model);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.UnitMeasurementRemoverPermission)]
+        public override ActionResult Archive(System.Guid key)
+        {
+            return base.Archive(key);
         }
     }
 }

@@ -65,12 +65,35 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice
             {
                 config.DefaultScheme = Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme;
             })
-            .AddCookie(config =>
+                .AddCookie(config =>
+                {
+                    config.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/error/403");
+                    config.LoginPath = new Microsoft.AspNetCore.Http.PathString("/security/account/login");
+                    config.ExpireTimeSpan = System.TimeSpan.FromMinutes(15);
+                    config.SlidingExpiration = true;
+                })
+                .AddJwtBearer(config =>
+                {
+                    config.RequireHttpsMetadata = false;
+                    config.SaveToken = true;
+                    config.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                    {
+                        ValidIssuer = builder.Configuration["JWT:Issuer"],
+                        ValidAudience = builder.Configuration["JWT:Issuer"],
+                        ValidateLifetime = false,
+                        RequireExpirationTime = false,
+                        IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])),
+                        ClockSkew = System.TimeSpan.FromMinutes(15)
+                    };
+                });
+
+            builder.Services.AddAuthorization(options =>
             {
-                config.AccessDeniedPath = new Microsoft.AspNetCore.Http.PathString("/error/403");
-                config.LoginPath = new Microsoft.AspNetCore.Http.PathString("/security/account/login");
-                config.ExpireTimeSpan = System.TimeSpan.FromMinutes(5);
-                config.SlidingExpiration = true;
+                options.AddPolicy(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme, policy =>
+                {
+                    policy.AddAuthenticationSchemes(Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme);
+                    policy.RequireClaim(System.Security.Claims.ClaimTypes.NameIdentifier);
+                });
             });
 
             #region Security concreter dependencies configuration

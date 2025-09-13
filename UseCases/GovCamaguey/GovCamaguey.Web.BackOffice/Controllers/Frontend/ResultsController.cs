@@ -5,6 +5,7 @@ using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/governance/[controller]")]
     [ApiController]
     public class ResultsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementFilteredController<Result, long, Interop.API.Common.Models.Input.ResultInputModel, Interop.API.Common.Models.Display.ResultDisplayModel, Interop.API.Common.Models.Filter.ResultFilterModel>

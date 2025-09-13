@@ -1,4 +1,7 @@
-﻿using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using MOROPO.Framework.Guama.Core.Presentation.Models;
+using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
 using MOROPO.Framework.Guama.Identity.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
@@ -9,8 +12,9 @@ using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/governance/[controller]")]
-    [Microsoft.AspNetCore.Mvc.ApiController]
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+    [Route("api/governance/[controller]")]
+    [ApiController]
     public class OrganizationsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Organization, System.Guid, OrganizationInputModel, OrganizationDisplayModel>
     {
         private readonly IEntityRepository<EmailContactItem, System.Guid> emailContactRepository;
@@ -31,7 +35,17 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
             return entity => !entity.Archived && entity.Enabled;
         }
 
-        public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
+        public override ActionResult Delete(System.Guid key)
+        {
+            return NotFound();
+        }
+
+        public override ActionResult Enable(System.Guid key)
+        {
+            return NotFound(key);
+        }
+
+        public override ActionResult Disable(System.Guid key)
         {
             return NotFound();
         }
@@ -51,6 +65,42 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
             }
 
             return model;
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationViewerPermission)]
+        public override ActionResult<OrganizationDisplayModel[]> Get()
+        {
+            return base.Get();
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationViewerPermission)]
+        public override ActionResult<OrganizationDisplayModel> Get(System.Guid key)
+        {
+            return base.Get(key);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationViewerPermission)]
+        public override ActionResult<PaginationModel<OrganizationDisplayModel>> GetPaginate(int sheet = 1, int limit = 25)
+        {
+            return base.GetPaginate(sheet, limit);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationCreatorPermission)]
+        public override ActionResult Create([FromBody] OrganizationInputModel model)
+        {
+            return base.Create(model);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationEditorPermission)]
+        public override ActionResult Edit([FromBody] OrganizationInputModel model)
+        {
+            return base.Edit(model);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationRemoverPermission)]
+        public override ActionResult Archive(System.Guid key)
+        {
+            return base.Archive(key);
         }
 
         protected override void PreCreate(Organization entity, OrganizationInputModel model)
@@ -225,20 +275,6 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                 }
             }
             catch { }
-        }
-
-        protected override void PostDelete(Organization entity)
-        {
-            base.PostDelete(entity);
-
-            if (entity.Identity.ImageId != null)
-            {
-                var oldImage = imageRepository.Get(entity.Identity.ImageId.Value);
-
-                imageRepository.Delete(oldImage, User.Identity.Name);
-
-                imageFileManager.DeleteImageFile(oldImage);
-            }
         }
     }
 }

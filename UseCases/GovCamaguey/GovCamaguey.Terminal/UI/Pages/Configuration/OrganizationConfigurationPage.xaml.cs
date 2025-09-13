@@ -20,7 +20,7 @@ public partial class OrganizationConfigurationPage : Framework.Decisor.Core.Pres
     private readonly List<EmailContactItemInputModel> incomingEmailContactItems = [];
     private readonly List<EmailContactItemDisplayModel> outgoingEmailContactItems = [];
 
-    public OrganizationConfigurationPage(System.Action<OrganizationDisplayModel> successAction, Models.Page.Configuration.OrganizationConfigurationPageModel model) : base(successAction, model)
+    public OrganizationConfigurationPage(System.Action<OrganizationDisplayModel> successAction, Models.Page.Configuration.OrganizationConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

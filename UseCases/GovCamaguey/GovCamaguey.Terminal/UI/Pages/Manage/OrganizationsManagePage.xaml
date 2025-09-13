@@ -3,8 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Manage"
     xmlns:local_card_views="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card"
-    xmlns:local_detail_pages="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Detail"
-    xmlns:local_configuration_pages="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;assembly=MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common"
     xmlns:local_manage_page_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Manage"
     xmlns:local_configuration_page_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration"
@@ -12,7 +10,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Manage.OrganizationsManagePage"
-    x:TypeArguments="interop_common_display_models:OrganizationDisplayModel,local_manage_page_models:OrganizationsManagePageModel,local_configuration_page_models:OrganizationConfigurationPageModel,local_configuration_pages:OrganizationConfigurationPage,local_detail_pages:OrganizationDetailPage"
+    x:TypeArguments="interop_common_display_models:OrganizationDisplayModel,local_manage_page_models:OrganizationsManagePageModel,local_configuration_page_models:OrganizationConfigurationPageModel"
     x:DataType="local_manage_page_models:OrganizationsManagePageModel"
     Title="Gestión de Organismos">
     <ContentPage.Resources>

@@ -36,16 +36,16 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Providers.Facade.IRuntimeContextProviderFacade, Providers.SingleRuntimeContextProvider>()
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade, Helpers.MainExceptionHandlingHelper>()
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSessionManager>()
-                   .AddSingleton<IDetailContentPageFactoryFacade<GuidelineDisplayModel, GuidelineDetailPage>, GuidelineDetailPageFactory>()
-                   .AddSingleton<IDetailContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementDetailPage>, UnitMeasurementDetailPageFactory>()
-                   .AddSingleton<IDetailContentPageFactoryFacade<PersonDisplayModel, PersonDetailPage>, PersonDetailPageFactory>()
-                   .AddSingleton<IDetailContentPageFactoryFacade<OrganizationDisplayModel, OrganizationDetailPage>, OrganizationDetailPageFactory>()
-                   .AddSingleton<IDetailContentPageFactoryFacade<ObjectiveDisplayModel, ObjectiveDetailPage>, ObjectiveDetailPageFactory>()
-                   .AddSingleton<IConfigurationContentPageFactoryFacade<GuidelineDisplayModel, GuidelineConfigurationPageModel, GuidelineConfigurationPage>, GuidelineConfigurationPageFactory>()
-                   .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel, UnitMeasurementConfigurationPage>, UnitMeasurementConfigurationPageFactory>()
-                   .AddSingleton<IConfigurationContentPageFactoryFacade<PersonDisplayModel, PersonConfigurationPageModel, PersonConfigurationPage>, PersonConfigurationPageFactory>()
-                   .AddSingleton<IConfigurationContentPageFactoryFacade<OrganizationDisplayModel, OrganizationConfigurationPageModel, OrganizationConfigurationPage>, OrganizationConfigurationPageFactory>()
-                   .AddSingleton<IConfigurationContentPageFactoryFacade<ObjectiveDisplayModel, ObjectiveConfigurationPageModel, ObjectiveConfigurationPage>, ObjectiveConfigurationPageFactory>();
+                   .AddSingleton<IDetailContentPageFactoryFacade<GuidelineDisplayModel>, GuidelineDetailPageFactory>()
+                   .AddSingleton<IDetailContentPageFactoryFacade<UnitMeasurementDisplayModel>, UnitMeasurementDetailPageFactory>()
+                   .AddSingleton<IDetailContentPageFactoryFacade<PersonDisplayModel>, PersonDetailPageFactory>()
+                   .AddSingleton<IDetailContentPageFactoryFacade<OrganizationDisplayModel>, OrganizationDetailPageFactory>()
+                   .AddSingleton<IDetailContentPageFactoryFacade<ObjectiveDisplayModel>, ObjectiveDetailPageFactory>()
+                   .AddSingleton<IConfigurationContentPageFactoryFacade<GuidelineDisplayModel, GuidelineConfigurationPageModel>, GuidelineConfigurationPageFactory>()
+                   .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel>, UnitMeasurementConfigurationPageFactory>()
+                   .AddSingleton<IConfigurationContentPageFactoryFacade<PersonDisplayModel, PersonConfigurationPageModel>, PersonConfigurationPageFactory>()
+                   .AddSingleton<IConfigurationContentPageFactoryFacade<OrganizationDisplayModel, OrganizationConfigurationPageModel>, OrganizationConfigurationPageFactory>()
+                   .AddSingleton<IConfigurationContentPageFactoryFacade<ObjectiveDisplayModel, ObjectiveConfigurationPageModel>, ObjectiveConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

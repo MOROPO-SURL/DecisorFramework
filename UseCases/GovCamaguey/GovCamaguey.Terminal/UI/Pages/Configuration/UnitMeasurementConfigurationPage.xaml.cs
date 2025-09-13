@@ -4,7 +4,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration;
 
 public partial class UnitMeasurementConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, Models.Page.Configuration.UnitMeasurementConfigurationPageModel>
 {
-    public UnitMeasurementConfigurationPage(System.Action<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel> successAction, Models.Page.Configuration.UnitMeasurementConfigurationPageModel model) : base(successAction, model)
+    public UnitMeasurementConfigurationPage(System.Action<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel> successAction, Models.Page.Configuration.UnitMeasurementConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

@@ -13,7 +13,7 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
     private readonly List<IndicatorInputModel> incomingIndicators = [];
     private readonly List<IndicatorDisplayModel> outgoingIndicators = [];
 
-    public ActionConfigurationPage(System.Action<ActionInputModel> successAction, Models.Page.Configuration.ActionConfigurationPageModel model) : base(successAction, model)
+    public ActionConfigurationPage(System.Action<ActionInputModel> successAction, Models.Page.Configuration.ActionConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

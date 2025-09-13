@@ -12,7 +12,7 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
     private readonly List<ActionInputModel> incomingActions = [];
     private readonly List<ActionDisplayModel> outgoingActions = [];
 
-    public ProyectionConfigurationPage(System.Action<ProyectionInputModel> successAction, Models.Page.Configuration.ProyectionConfigurationPageModel model) : base(successAction, model)
+    public ProyectionConfigurationPage(System.Action<ProyectionInputModel> successAction, Models.Page.Configuration.ProyectionConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }
