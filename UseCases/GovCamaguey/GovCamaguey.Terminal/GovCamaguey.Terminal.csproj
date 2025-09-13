@@ -182,6 +182,9 @@
 	  <MauiXaml Update="UI\Pages\Manage\UnitMeasurementsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Pick\GuidelinePickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Pick\OrganizationPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

@@ -232,7 +232,74 @@
                             </Grid>
                         </Frame>
                     </VerticalStackLayout>
-                </FlexLayout>
+                </FlexLayout><VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Lineamientos" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="AddGuidelineButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding Guidelines}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:GuidelineDisplayModel">
+                                        <Frame
+                                            Padding="8"
+                                            HeightRequest="60">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Label
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    Margin="8"
+                                                    LineBreakMode="TailTruncation"
+                                                    FontSize="Medium">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span
+                                                                FontAttributes="Bold"
+                                                                Text="{Binding Index, StringFormat='{0}.'}" />
+                                                            <Span Text=" " />
+                                                            <Span Text="{Binding Name}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Button
+                                                    HorizontalOptions="End" VerticalOptions="Start"
+                                                    Padding="0"
+                                                    FontFamily="MaterialDesignIcons" 
+                                                    FontSize="21"
+                                                    Text="&#xFA78;"
+                                                    Clicked="GuidelineRemoveButton_Clicked" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8,0"
                     Spacing="6">

@@ -149,6 +149,11 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OrganizationPickPage(ResponsabilityOrganizationPickComplete_Callback)));
     }
 
+    private void AddGuidelineButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.GuidelinePickPage(GuidelinePickComplete_Callback)));
+    }
+
     private void ParticipationOrganizationRemoveButton_Clicked(object sender, System.EventArgs e)
     {
         DisplayAlert("Confirmación", "Está seguro que desea retirar este organismo participante?", "Confirmar", "Cancelar").ContinueWith(task =>
@@ -173,6 +178,21 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
             Dispatcher.Dispatch(() =>
             {
                 ConcreteBindingContext.ResponsabilityOrganizations.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as OrganizationDisplayModel);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void GuidelineRemoveButton_Clicked(object sender, System.EventArgs e)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este lineamiento?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                ConcreteBindingContext.Guidelines.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as GuidelineDisplayModel);
 
                 hasChangesFlag = true;
             });
@@ -276,6 +296,13 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
     private void ResponsabilityOrganizationPickComplete_Callback(OrganizationDisplayModel model)
     {
         ConcreteBindingContext.ResponsabilityOrganizations.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void GuidelinePickComplete_Callback(GuidelineDisplayModel model)
+    {
+        ConcreteBindingContext.Guidelines.Add(model);
 
         hasChangesFlag = true;
     }
