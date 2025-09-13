@@ -34,6 +34,11 @@ public partial class GuidelinesManagePage : Framework.Decisor.Core.Presentation.
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
+    protected override System.Threading.Tasks.Task<Models.Page.Configuration.GuidelineConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.GuidelineDisplayModel model = null)
+    {
+        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.GuidelineConfigurationPageModel(model));
+    }
+
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.GuidelineDisplayModel target, int discriminator)
     {
         switch (discriminator)

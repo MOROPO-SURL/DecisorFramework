@@ -55,6 +55,11 @@ public partial class PersonsManagePage : Framework.Decisor.Core.Presentation.Ter
         }
     }
 
+    protected override System.Threading.Tasks.Task<Models.Page.Configuration.PersonConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.PersonDisplayModel model = null)
+    {
+        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.PersonConfigurationPageModel(model));
+    }
+
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
         AddItem(sender, eventArgs);

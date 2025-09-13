@@ -36,6 +36,11 @@ public partial class OrganizationsManagePage : Framework.Decisor.Core.Presentati
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
+    protected override System.Threading.Tasks.Task<Models.Page.Configuration.OrganizationConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.OrganizationDisplayModel model = null)
+    {
+        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.OrganizationConfigurationPageModel(model));
+    }
+
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.OrganizationDisplayModel target, int discriminator)
     {
         switch (discriminator)
