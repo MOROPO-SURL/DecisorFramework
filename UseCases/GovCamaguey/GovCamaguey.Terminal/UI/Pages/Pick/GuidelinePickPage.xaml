@@ -56,26 +56,28 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:GuidelineDisplayModel">
-                                <Frame
-                                    Padding="12"
-                                    HeightRequest="{Static local:GuidelinePickPage.ITEM_VIEW_REQUEST_HEIGHT}">
-                                    <Frame.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </Frame.GestureRecognizers>
-                                    <Label
-                                        LineBreakMode="TailTruncation"
-                                        FontSize="Medium">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span
-                                                    FontAttributes="Bold"
-                                                    Text="{Binding Index, StringFormat='{0}.'}" />
-                                                <Span Text=" " />
-                                                <Span Text="{Binding Name}" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
-                                </Frame>
+                                <ContentView Padding="10,0">
+                                    <Frame
+                                        Padding="12"
+                                        HeightRequest="{Static local:GuidelinePickPage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                        <Frame.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                        </Frame.GestureRecognizers>
+                                        <Label
+                                            LineBreakMode="TailTruncation"
+                                            FontSize="Medium">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Index, StringFormat='{0}.'}" />
+                                                    <Span Text=" " />
+                                                    <Span Text="{Binding Name}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </Frame>
+                                </ContentView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

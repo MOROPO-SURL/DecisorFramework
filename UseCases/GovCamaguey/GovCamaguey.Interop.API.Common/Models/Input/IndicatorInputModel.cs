@@ -1,4 +1,6 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
+﻿using System.Collections.Generic;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
 {
     public class IndicatorInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Indicator, System.Guid>
     {
@@ -14,6 +16,10 @@
         public System.Guid UnitMeasurementId { get; set; }
 
         public double Amount { get; set; }
+
+        public List<IndicatorMontlyPlanInputModel> EditionMontlyPlans { get; set; } = new List<IndicatorMontlyPlanInputModel>();
+        public List<IndicatorMontlyPlanInputModel> IncomingMontlyPlans { get; set; } = new List<IndicatorMontlyPlanInputModel>();
+        public List<Display.IndicatorMontlyPlanDisplayModel> OutgoingMontlyPlans { get; set; } = new List<Display.IndicatorMontlyPlanDisplayModel>();
 
         public Persistence.Entities.Indicator Export()
         {

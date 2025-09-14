@@ -89,7 +89,7 @@ public partial class ProyectionConfigurationPage : Framework.Decisor.Core.Presen
             ParticipationOrganizations = target.ParticipationOrganizations
         };
         
-        this.NavigationPushPageAsync(new ActionConfigurationPage(ActionEditSuccess_Callback, new Models.Page.Configuration.ActionConfigurationPageModel(model, target.Indicators), model.EditionIndicators, model.IncomingIndicators, model.OutgoingIndicators));
+        this.NavigationPushPageAsync(new ActionConfigurationPage(ActionEditSuccess_Callback, new Models.Page.Configuration.ActionConfigurationPageModel(model, target.Indicators, target.MonthlyClosures), model.EditionIndicators, model.IncomingIndicators, model.OutgoingIndicators, model.EditionMonthlyClosures, model.IncomingMonthlyClosures, model.OutgoingMonthlyClosures));
     }
 
     private void ActionRemotionButton_Clicked(object sender, System.EventArgs e)

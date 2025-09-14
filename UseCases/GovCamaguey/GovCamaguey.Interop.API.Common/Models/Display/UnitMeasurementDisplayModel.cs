@@ -19,5 +19,10 @@
             Symbol = entity.Symbol;
             Priority = entity.Priority;
         }
+
+        public override string ToString()
+        {
+            return $"{Name} ({Symbol})";
+        }
     }
 }

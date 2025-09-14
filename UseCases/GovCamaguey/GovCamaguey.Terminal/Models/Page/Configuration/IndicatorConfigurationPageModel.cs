@@ -1,6 +1,9 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration
+﻿using System.Collections.ObjectModel;
+using System.Linq;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration
 {
-    public class IndicatorConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.IndicatorDisplayModel>
+    public class IndicatorConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Input.IndicatorInputModel>
     {
         private string name;
         private string description;
@@ -9,7 +12,7 @@
 
         public IndicatorConfigurationPageModel() : this(null) { }
 
-        public IndicatorConfigurationPageModel(Interop.API.Common.Models.Display.IndicatorDisplayModel model) : base(model)
+        public IndicatorConfigurationPageModel(Interop.API.Common.Models.Input.IndicatorInputModel model, Interop.API.Common.Models.Display.IndicatorMontlyPlanDisplayModel[] montlyPlans = null) : base(model)
         {
             if (model != null)
             {
@@ -18,7 +21,12 @@
                 Name = model.Name;
                 Description = model.Description;
                 Amount = model.Amount;
-                UnitMeasurementId = model.UnitMeasurement.Id;
+                UnitMeasurementId = model.UnitMeasurementId;
+
+                if (montlyPlans != null)
+                {
+                    MontlyPlans = new ObservableCollection<Interop.API.Common.Models.Display.IndicatorMontlyPlanDisplayModel>(montlyPlans.OrderBy(_model => _model.Year * 100 + _model.Month));
+                }
             }
         }
 
@@ -33,6 +41,8 @@
         public double Amount { get => amount; set => SetProperty(ref amount, value); }
 
         public System.Guid? UnitMeasurementId { get; set; }
+
+        public ObservableCollection<Interop.API.Common.Models.Display.IndicatorMontlyPlanDisplayModel> MontlyPlans { get; set; } = [];
 
         public Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
     }

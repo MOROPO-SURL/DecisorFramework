@@ -54,6 +54,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.ActionMonthlyClosure, System.Guid>, Persistence.ORM.EF.Repositories.ActionMonthlyClosureRepository>();
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.Indicator, System.Guid>, Persistence.ORM.EF.Repositories.IndicatorRepository>();
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.Result, long>, Persistence.ORM.EF.Repositories.ResultRepository>();
+            builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.IndicatorMontlyPlan, System.Guid>, Persistence.ORM.EF.Repositories.IndicatorMontlyPlanRepository>();
 
             builder.Services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.ApplicationDbSchemaConfigurationProvider>();
 

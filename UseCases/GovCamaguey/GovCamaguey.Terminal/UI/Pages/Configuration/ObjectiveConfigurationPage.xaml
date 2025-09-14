@@ -38,11 +38,12 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <VerticalStackLayout Spacing="0" Padding="8">
+            <VerticalStackLayout 
+                Spacing="0" 
+                Padding="8">
                 <StackLayout 
-                    Grid.ColumnSpan="4" Grid.Row="0"
-                    Padding="8,0"
-                    Spacing="16"
+                    Margin="8"
+                    Spacing="6"
                     Orientation="Horizontal">
                     <VerticalStackLayout 
                         Spacing="6">
@@ -59,7 +60,6 @@
                     </VerticalStackLayout>
                 </StackLayout>
                 <FlexLayout 
-                    Margin="0,8"
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
@@ -78,12 +78,14 @@
                             Clicked="ResponsiblePickButton_Clicked" />
                     </VerticalStackLayout>
                 </FlexLayout>
-                <VerticalStackLayout Padding="8,0" Spacing="6">
+                <VerticalStackLayout 
+                    Margin="8" 
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="120" />
                 </VerticalStackLayout>
                 <VerticalStackLayout 
-                    Padding="8,16,8,0"
+                    Margin="8"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Objetivos específicos" />
                     <Frame Padding="8">

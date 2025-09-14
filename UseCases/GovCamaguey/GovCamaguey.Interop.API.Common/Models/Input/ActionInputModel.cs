@@ -22,6 +22,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
         public List<IndicatorInputModel> IncomingIndicators { get; set; } = new List<IndicatorInputModel>();
         public List<IndicatorDisplayModel> OutgoingIndicators { get; set; } = new List<IndicatorDisplayModel>();
 
+        public List<ActionMonthlyClosureInputModel> EditionMonthlyClosures { get; set; } = new List<ActionMonthlyClosureInputModel>();
+        public List<ActionMonthlyClosureInputModel> IncomingMonthlyClosures { get; set; } = new List<ActionMonthlyClosureInputModel>();
+        public List<ActionMonthlyClosureDisplayModel> OutgoingMonthlyClosures { get; set; } = new List<ActionMonthlyClosureDisplayModel>();
+
         public Persistence.Entities.Action Export()
         {
             var entity = new Persistence.Entities.Action { Id = Id, Enabled = true };

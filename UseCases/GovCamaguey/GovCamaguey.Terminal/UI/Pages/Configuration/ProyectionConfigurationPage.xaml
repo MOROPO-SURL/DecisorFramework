@@ -38,12 +38,12 @@
     <Grid>
         <ScrollView Orientation="Vertical">
             <StackLayout 
-                Padding="12"
-                Spacing="16">
+                Padding="8"
+                Spacing="0">
                 <StackLayout 
                     Grid.ColumnSpan="4" Grid.Row="0"
-                    Margin="8,8,8,0"
-                    Spacing="16"
+                    Margin="8"
+                    Spacing="6"
                     Orientation="Horizontal">
                     <VerticalStackLayout 
                         Spacing="6">
@@ -60,7 +60,7 @@
                     </VerticalStackLayout>
                 </StackLayout>
                 <VerticalStackLayout 
-                    Margin="8,0"
+                    Margin="8"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="120" />
@@ -137,7 +137,7 @@
                                                     <Button
                                                         Grid.Column="2"
                                                         HorizontalOptions="End" VerticalOptions="Start"
-                                                        Margin="10"
+                                                        Margin="10" Padding="0"
                                                         FontFamily="MaterialDesignIcons" 
                                                         FontSize="21"
                                                         Text="&#xFA78;"
@@ -219,7 +219,7 @@
                                                     <Button
                                                         Grid.Column="2"
                                                         HorizontalOptions="End" VerticalOptions="Start"
-                                                        Margin="10"
+                                                        Margin="10" Padding="0"
                                                         FontFamily="MaterialDesignIcons" 
                                                         FontSize="21"
                                                         Text="&#xFA78;"
@@ -301,7 +301,7 @@
                     </Frame>
                 </VerticalStackLayout>
                 <VerticalStackLayout 
-                    Margin="8,0"
+                    Margin="8"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acciones" />
                     <Frame Padding="8">

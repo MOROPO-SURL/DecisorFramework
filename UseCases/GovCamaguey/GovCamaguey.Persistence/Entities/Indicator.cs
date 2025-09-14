@@ -1,4 +1,6 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
+﻿using System.Collections.Generic;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
 {
     public class Indicator : Framework.Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>, Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
@@ -25,5 +27,7 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ActionId))]
         public Action Action { get; set; }
         public System.Guid ActionId { get; set; }
+
+        public ICollection<IndicatorMontlyPlan> MontlyPlans { get; set; } = new List<IndicatorMontlyPlan>();
     }
 }

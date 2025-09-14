@@ -18,7 +18,7 @@
                 <Label 
                     FontSize="Medium"
                     Text="{Binding Name}" />
-                <Label>
+                <Label FontSize="Medium">
                     <Label.FormattedText>
                         <FormattedString>
                             <Span FontAttributes="Bold" Text="Meta: " />
@@ -34,6 +34,7 @@
                 VerticalOptions="Center">
                 <Label 
                     FontAttributes="Bold"
+                    FontSize="Medium"
                     Text="Estado" />
                 <Label FontSize="Medium">
                     <Label.FormattedText>

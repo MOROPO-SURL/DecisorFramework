@@ -12,7 +12,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 
         public ActionConfigurationPageModel() : this(null) { }
 
-        public ActionConfigurationPageModel(Interop.API.Common.Models.Input.ActionInputModel model, Interop.API.Common.Models.Display.IndicatorDisplayModel[] indicators = null) : base(model)
+        public ActionConfigurationPageModel(Interop.API.Common.Models.Input.ActionInputModel model, IndicatorDisplayModel[] indicators = null, ActionMonthlyClosureDisplayModel[] monthlyClosures = null) : base(model)
         {
             if (model != null)
             {
@@ -26,6 +26,11 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
                 if (indicators != null)
                 {
                     Indicators = new ObservableCollection<IndicatorDisplayModel>(indicators.OrderBy(_model => _model.Priority));
+                }
+                
+                if (monthlyClosures != null)
+                {
+                    MonthlyClosures = new ObservableCollection<ActionMonthlyClosureDisplayModel>(monthlyClosures.OrderBy(_model => _model.At));
                 }
             }
         }
@@ -43,5 +48,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
         public ObservableCollection<OrganizationDisplayModel> ParticipationOrganizations { get; set; } = [];
 
         public ObservableCollection<IndicatorDisplayModel> Indicators { get; set; } = [];
+
+        public ObservableCollection<ActionMonthlyClosureDisplayModel> MonthlyClosures { get; set; } = [];
     }
 }

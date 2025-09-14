@@ -1,4 +1,6 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
+﻿using System.Linq;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 {
     public class IndicatorDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Indicator, System.Guid>
     {
@@ -18,6 +20,8 @@
 
         public double Balance { get; set; }
 
+        public IndicatorMontlyPlanDisplayModel[] MontlyPlans { get; set; }
+
         public void Import(Persistence.Entities.Indicator entity)
         {
             Id = entity.Id;
@@ -26,6 +30,14 @@
             Name = entity.Name;
             Description = entity.Description;
             Amount = entity.Amount;
+            MontlyPlans = entity.MontlyPlans.OrderBy(_model => _model.Year * 100 + _model.Month).Select(_entity =>
+            {
+                var model = new IndicatorMontlyPlanDisplayModel();
+
+                model.Import(_entity);
+
+                return model;
+            }).ToArray();
 
             if (entity.UnitMeasurement != null)
             {

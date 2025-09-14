@@ -17,13 +17,17 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
         private readonly IEntityRepository<Proyection, System.Guid> proyectionRepository;
         private readonly IEntityRepository<Action, System.Guid> actionRepository;
         private readonly IEntityRepository<Indicator, System.Guid> indicatorRepository;
+        private readonly IEntityRepository<IndicatorMontlyPlan, System.Guid> indicatorMontlyPlanRepository;
+        private readonly IEntityRepository<ActionMonthlyClosure, System.Guid> actionMonthlyClosureRepository;
 
-        public ObjectivesController(IEntityRepository<Indicator, System.Guid> indicatorRepository, IEntityRepository<Action, System.Guid> actionRepository, IEntityRepository<Proyection, System.Guid> proyectionRepository, IEntityRepository<Objective, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, Microsoft.Extensions.Logging.ILogger<ObjectivesController> logger)
+        public ObjectivesController(IEntityRepository<ActionMonthlyClosure, System.Guid> actionMonthlyClosureRepository, IEntityRepository<IndicatorMontlyPlan, System.Guid> indicatorMontlyPlanRepository, IEntityRepository<Indicator, System.Guid> indicatorRepository, IEntityRepository<Action, System.Guid> actionRepository, IEntityRepository<Proyection, System.Guid> proyectionRepository, IEntityRepository<Objective, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, Microsoft.Extensions.Logging.ILogger<ObjectivesController> logger)
             : base(repository, localizer, logger)
         {
             this.proyectionRepository = proyectionRepository;
             this.actionRepository = actionRepository;
             this.indicatorRepository = indicatorRepository;
+            this.indicatorMontlyPlanRepository = indicatorMontlyPlanRepository;
+            this.actionMonthlyClosureRepository = actionMonthlyClosureRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<Objective, bool>> GetGlobalSelector()
@@ -254,6 +258,17 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                 _entity.ActionId = entity.Id;
 
                 indicatorRepository.Add(_entity, User.Identity.Name, false);
+
+                ExtendCreate(_entity, _model);
+            }
+
+            foreach (var _model in model.IncomingMonthlyClosures)
+            {
+                var _entity = _model.Export();
+
+                _entity.ActionId = entity.Id;
+
+                actionMonthlyClosureRepository.Add(_entity, User.Identity.Name, false);
             }
         }
 
@@ -275,6 +290,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                 _model.Mergue(_entity);
 
                 indicatorRepository.Update(_entity, User.Identity.Name, false);
+
+                ExtendEdit(_entity, _model);
             }
 
             foreach (var _model in model.IncomingIndicators)
@@ -284,6 +301,73 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                 _entity.ActionId = entity.Id;
 
                 indicatorRepository.Add(_entity, User.Identity.Name, false);
+
+                ExtendCreate(_entity, _model);
+            }
+
+            foreach (var _model in model.OutgoingMonthlyClosures)
+            {
+                var _entity = entity.MonthlyClosures.First(bridge => bridge.Id == _model.Id);
+
+                actionMonthlyClosureRepository.Delete(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionMonthlyClosures)
+            {
+                var _entity = entity.MonthlyClosures.First(bridge => bridge.Id == _model.Id);
+
+                _model.Mergue(_entity);
+
+                actionMonthlyClosureRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingMonthlyClosures)
+            {
+                var _entity = _model.Export();
+
+                _entity.ActionId = entity.Id;
+
+                actionMonthlyClosureRepository.Add(_entity, User.Identity.Name, false);
+            }
+        }
+
+        protected void ExtendCreate(Indicator entity, IndicatorInputModel model)
+        {
+            foreach (var _model in model.IncomingMontlyPlans)
+            {
+                var _entity = _model.Export();
+
+                _entity.IndicatorId = entity.Id;
+
+                indicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
+            }
+        }
+
+        protected void ExtendEdit(Indicator entity, IndicatorInputModel model)
+        {
+            foreach (var _model in model.OutgoingMontlyPlans)
+            {
+                var _entity = entity.MontlyPlans.First(bridge => bridge.Id == _model.Id);
+
+                indicatorMontlyPlanRepository.Delete(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionMontlyPlans)
+            {
+                var _entity = entity.MontlyPlans.First(bridge => bridge.Id == _model.Id);
+
+                _model.Mergue(_entity);
+
+                indicatorMontlyPlanRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingMontlyPlans)
+            {
+                var _entity = _model.Export();
+
+                _entity.IndicatorId = entity.Id;
+
+                indicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
             }
         }
     }
