@@ -104,9 +104,23 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice
             builder.Services.AddScoped<Framework.Guama.Core.Presentation.Web.Security.Managers.Facade.IUserProfileManagerFacade, Managers.UserProfileManager>();
             #endregion
 
+            var defaultCulture = new System.Globalization.CultureInfo("es");
+
+            builder.Services.AddLocalization(options => options.ResourcesPath = "LocalizationResources");
+
+            builder.Services.Configure<RequestLocalizationOptions>(options =>
+            {
+                options.DefaultRequestCulture = new Microsoft.AspNetCore.Localization.RequestCulture(defaultCulture);
+                options.SupportedCultures = [defaultCulture];
+                options.SupportedUICultures = [defaultCulture];
+
+                options.RequestCultureProviders = new[] { new Framework.Guama.Core.Presentation.Web.Common.Localization.UrlRequestCultureProvider() };
+            });
+
             builder.Services.Configure<Microsoft.AspNetCore.Routing.RouteOptions>(options => options.LowercaseUrls = true);
 
-            builder.Services.AddLocalization();
+            builder.Services.AddSingleton<Helpers.GlobalViewLocalizationHelper>();
+
             builder.Services.AddResponseCaching();
             builder.Services.AddMemoryCache();
             builder.Services.AddSession();

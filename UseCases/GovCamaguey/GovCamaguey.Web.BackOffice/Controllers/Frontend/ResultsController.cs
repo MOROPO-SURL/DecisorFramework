@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
+using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 using System.Collections.Generic;
 using System.Linq;
@@ -28,6 +30,18 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
         public override ActionResult Delete(long key)
         {
             return NotFound();
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ResultCreatorPermission)]
+        public override ActionResult Create([FromBody] ResultInputModel inputModel)
+        {
+            return base.Create(inputModel);
+        }
+
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ResultEditorPermission)]
+        public override ActionResult Edit([FromBody] ResultInputModel inputModel)
+        {
+            return base.Edit(inputModel);
         }
 
         [HttpPost("lasts/by/indicators")]

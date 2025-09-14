@@ -46,5 +46,41 @@
         public const string ObjectiveEditorPermission = "objective-editor-permission";
         public const string ObjectiveRemoverPermission = "objective-remover-permission";
         #endregion
+
+        #region Proyection
+        public const string ProyectionManagementPermissionGroup = "proyection-management-permission-group";
+
+        public const string ProyectionViewerPermission = "proyection-viewer-permission";
+        public const string ProyectionCreatorPermission = "proyection-creator-permission";
+        public const string ProyectionEditorPermission = "proyection-editor-permission";
+        public const string ProyectionRemoverPermission = "proyection-remover-permission";
+        #endregion
+
+        #region Action
+        public const string ActionManagementPermissionGroup = "action-management-permission-group";
+
+        public const string ActionViewerPermission = "action-viewer-permission";
+        public const string ActionCreatorPermission = "action-creator-permission";
+        public const string ActionEditorPermission = "action-editor-permission";
+        public const string ActionRemoverPermission = "action-remover-permission";
+        #endregion
+
+        #region Indicator
+        public const string IndicatorManagementPermissionGroup = "indicator-management-permission-group";
+
+        public const string IndicatorViewerPermission = "indicator-viewer-permission";
+        public const string IndicatorCreatorPermission = "indicator-creator-permission";
+        public const string IndicatorEditorPermission = "indicator-editor-permission";
+        public const string IndicatorRemoverPermission = "indicator-remover-permission";
+        #endregion
+
+        #region Result
+        public const string ResultManagementPermissionGroup = "result-management-permission-group";
+
+        public const string ResultViewerPermission = "result-viewer-permission";
+        public const string ResultCreatorPermission = "result-creator-permission";
+        public const string ResultEditorPermission = "result-editor-permission";
+        public const string ResultRemoverPermission = "result-remover-permission";
+        #endregion
     }
 }

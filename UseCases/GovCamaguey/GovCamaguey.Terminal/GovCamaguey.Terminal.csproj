@@ -23,10 +23,20 @@
 
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">21.0</SupportedOSPlatformVersion>
 		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</SupportedOSPlatformVersion>
-		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>
+		<TargetPlatformMinVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'windows'">10.0.17763.0</TargetPlatformMinVersion>		
+	</PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<DefaultLanguage>es-US</DefaultLanguage>
 		<PackageCertificateThumbprint>8496D1173129CED1DE72A913E2C2FB8D7679FEB4</PackageCertificateThumbprint>
 		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
+		<GenerateAppInstallerFile>False</GenerateAppInstallerFile>
+		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>
+		<AppxAutoIncrementPackageRevision>True</AppxAutoIncrementPackageRevision>
+		<AppxSymbolPackageEnabled>False</AppxSymbolPackageEnabled>
+		<GenerateTestArtifacts>True</GenerateTestArtifacts>
+		<AppInstallerUri>https://decisor.moropo.cu/gobcamaguey/last</AppInstallerUri>
+		<HoursBetweenUpdateChecks>0</HoursBetweenUpdateChecks>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -65,165 +75,6 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\..\..\Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	  <ProjectReference Include="..\GovCamaguey.Interop.API.Connect\GovCamaguey.Interop.API.Connect.csproj" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Compile Update="UI\Pages\Configuration\OrganizationConfigurationPage.xaml.cs">
-	    <DependentUpon>OrganizationConfigurationPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Pages\Configuration\PersonConfigurationPage.xaml.cs">
-	    <DependentUpon>PersonConfigurationPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Pages\Configuration\UnitMeasurementConfigurationPage.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Pages\Detail\OrganizationDetailPage.xaml.cs">
-	    <DependentUpon>OrganizationDetailPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Pages\Detail\PersonDetailPage.xaml.cs">
-	    <DependentUpon>PersonDetailPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Pages\Detail\UnitMeasurementDetailPage.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Pages\Manage\OrganizationsManagePage.xaml.cs">
-	    <DependentUpon>OrganizationsManagePage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Pages\Manage\PersonsManagePage.xaml.cs">
-	    <DependentUpon>PersonsManagePage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Pages\Manage\UnitMeasurementsManagePage.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Pages\Pick\OrganizationPickPage.xaml.cs">
-	    <DependentUpon>OrganizationPickPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Pages\Pick\PersonPickPage.xaml.cs">
-	    <DependentUpon>PersonPickPage.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Views\Card\OrganizationDefaultCardView.xaml.cs">
-	    <DependentUpon>OrganizationDefaultCardView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Views\Card\PersonDefaultCardView.xaml.cs">
-	    <DependentUpon>PersonDefaultCardView.xaml</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Views\ModuleFlyoutSectionSubtitleContentView.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Views\ModuleFlyoutSectionTitleContentView.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Views\ModuleShellFlyoutItemView.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	  <Compile Update="UI\Views\ModuleShellFlyoutMenuItemView.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
-	  </Compile>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <MauiXaml Update="UI\Pages\Configuration\ActionConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="Resources\Styles\Values.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\ActionMonthlyClosureConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\GuidelineConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\IndicatorConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\IndicatorMontlyPlanConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\OrganizationConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\PersonConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\ProyectionConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\UnitMeasurementConfigurationPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Detail\GuidelineDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Detail\ObjectiveDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Detail\OrganizationDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Detail\PersonDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Detail\UnitMeasurementDetailPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\GovernanceStatusPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Manage\GuidelinesManagePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Manage\ObjectivesManagePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Manage\OrganizationsManagePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Manage\PersonsManagePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Manage\UnitMeasurementsManagePage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Pick\GuidelinePickPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Pick\OrganizationPickPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Pick\PersonPickPage.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\ActionDeepCardView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\IndicatorDeepCardView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\OrganizationDefaultCardView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\PersonDefaultCardView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\ProyectionDeepCardView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\ModuleFlyoutSectionSubtitleContentView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\ModuleFlyoutSectionTitleContentView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\ModuleShellFlyoutItemView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\ModuleShellFlyoutMenuItemView.xaml">
-	    <Generator>MSBuild:Compile</Generator>
-	  </MauiXaml>
 	</ItemGroup>
 
 </Project>

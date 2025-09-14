@@ -77,11 +77,29 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
 
     private void ProyectionAgregationButton_Clicked(object sender, System.EventArgs e)
     {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ProyectionCreatorPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
         this.NavigationPushPageAsync(new ProyectionConfigurationPage(ProyectionCreateSuccess_Callback, new Models.Page.Configuration.ProyectionConfigurationPageModel(null)));
     }
 
     private void ProyectionEditionButton_Clicked(object sender, System.EventArgs e)
     {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ProyectionEditorPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
         var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ProyectionDisplayModel;
 
         var model = incomingProyections.FirstOrDefault(_model => _model.Id == target.Id) ?? editionProyections.FirstOrDefault(_model => _model.Id == target.Id);
@@ -102,6 +120,15 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
 
     private void ProyectionRemotionButton_Clicked(object sender, System.EventArgs e)
     {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ProyectionRemoverPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para retirar elementos registrados de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
         DisplayAlert("Confirmación", "Está seguro que desea retirar esta proyección?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;

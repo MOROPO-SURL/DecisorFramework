@@ -104,7 +104,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Extensions
             });
             govermenanceSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Proyecciones",
+                Title = "Obj. Específicos",
                 Controller = "proyections",
                 Action = "index",
                 Area = "governance",
@@ -124,6 +124,15 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Extensions
             {
                 Title = "Indicadores",
                 Controller = "indicators",
+                Action = "index",
+                Area = "governance",
+                // TODO Set spected permission
+                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
+            });
+            govermenanceSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Resultados",
+                Controller = "results",
                 Action = "index",
                 Area = "governance",
                 // TODO Set spected permission

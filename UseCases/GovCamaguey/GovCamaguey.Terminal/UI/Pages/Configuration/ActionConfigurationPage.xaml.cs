@@ -81,6 +81,15 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
 
     private void IndicatorAgregationButton_Clicked(object sender, System.EventArgs e)
     {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.IndicatorCreatorPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
         ConcreteBindingContext.IsBusy = true;
 
         System.Threading.Tasks.Task.Run(async () =>
@@ -113,6 +122,15 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
 
     private void IndicatorEditionButton_Clicked(object sender, System.EventArgs e)
     {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.IndicatorEditorPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
         var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as IndicatorDisplayModel;
         
         ConcreteBindingContext.IsBusy = true;
@@ -159,6 +177,15 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
 
     private void IndicatorRemotionButton_Clicked(object sender, System.EventArgs e)
     {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.IndicatorRemoverPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para retirar elementos registrados de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
         DisplayAlert("Confirmación", "Está seguro que desea retirar este indicador?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;

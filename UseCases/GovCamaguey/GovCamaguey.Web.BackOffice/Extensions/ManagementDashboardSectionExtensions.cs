@@ -22,6 +22,22 @@
 
             if (target.Controller == "unitmeasurements") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-scale");
 
+            if (target.Controller == "guidelines") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-marker-check");
+
+            if (target.Controller == "persons") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-account-box");
+
+            if (target.Controller == "organizations") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-office-building");
+
+            if (target.Controller == "objectives") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-check-decagram");
+
+            if (target.Controller == "proyections") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-checkbox-marked");
+
+            if (target.Controller == "actions") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-check-bold");
+
+            if (target.Controller == "indicators") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-speedometer");
+
+            if (target.Controller == "results") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-chart-areaspline");
+
             return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
         }
     }

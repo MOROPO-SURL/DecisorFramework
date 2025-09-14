@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card;
 
@@ -11,7 +12,16 @@ public partial class IndicatorDeepCardView : Microsoft.Maui.Controls.ContentView
 
     private void ResultUpgradeButton_Clicked(object sender, System.EventArgs e)
     {
-		var concreteBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.IndicatorDisplayModel;
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ResultCreatorPermission)))
+        {
+            Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
+        var concreteBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.IndicatorDisplayModel;
 
 		Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayPromptAsync($"Actualizar indicador", $"Especifique el nuevo valor del indicador ¨{concreteBindingContext.Name}¨. El valor no debe ser inferior a {concreteBindingContext.Balance:F2} {concreteBindingContext.UnitMeasurement.Name}.{System.Environment.NewLine}", "Aplicar", "Cancelar", null, keyboard: Microsoft.Maui.Keyboard.Numeric).ContinueWith(task =>
 		{
