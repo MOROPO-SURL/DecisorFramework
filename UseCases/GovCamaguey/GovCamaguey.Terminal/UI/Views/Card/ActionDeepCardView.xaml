@@ -99,6 +99,31 @@
             <Label 
                 Style="{StaticResource CaptionFieldLabelStyle}" 
                 Margin="8,16,8,0" 
+                Text="Controles de Cumplimiento" />
+            <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
+            <CollectionView ItemsSource="{Binding MonthlyClosures}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="interop_common_display_models:ActionMonthlyClosureDisplayModel">
+                        <Frame 
+                            Padding="8"
+                            Margin="0,12,0,0">
+                            <StackLayout Orientation="Horizontal" Spacing="8">
+                                <Label
+                                    Margin="8"
+                                    LineBreakMode="TailTruncation"
+                                    FontSize="Medium"
+                                    Text="{Binding At, StringFormat='{0:D}'}" />
+                            </StackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label 
+                Style="{StaticResource CaptionFieldLabelStyle}" 
+                Margin="8,16,8,0" 
                 Text="Indicadores" />
             <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
             <CollectionView ItemsSource="{Binding Indicators}">

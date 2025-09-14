@@ -30,5 +30,21 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Shells
                 this.NavigationPushModalPageAsync(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.DefaultUserAuthenticationPage());
             }
         }
+
+        private void LogOutButton_Clicked(object sender, System.EventArgs eventArgs)
+        {
+            var sessionManager = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>();
+
+            if (sessionManager.CurrentSession?.User == null) return;
+
+            DisplayAlert("Confirmación", "Está seguro que desea terminar su sesión?", "Confirmar", "Cancelar").ContinueWith(async task =>
+            {
+                if (!task.Result) return;
+
+                await sessionManager.SignOutAsync();
+
+                Dispatcher.Dispatch(() => this.NavigationPushModalPageAsync(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.DefaultUserAuthenticationPage()));
+            });
+        }
     }
 }

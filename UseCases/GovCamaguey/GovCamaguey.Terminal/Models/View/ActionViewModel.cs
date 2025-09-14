@@ -24,6 +24,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.View
 
         public IndicatorDisplayModel[] Indicators { get; set; }
 
+        public ActionMonthlyClosureDisplayModel[] MonthlyClosures { get; set; }
+
         public ActionViewModel(ActionDisplayModel model, int proyectionIndex, int objectiveIndex) 
         {
             Id = model.Id;
@@ -34,6 +36,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.View
             ResponsabilityOrganizations = model.ResponsabilityOrganizations;
             ParticipationOrganizations = model.ParticipationOrganizations;
             Indicators = model.Indicators;
+            MonthlyClosures = model.MonthlyClosures;
 
             ProyectionIndex = proyectionIndex;
             ObjectiveIndex = objectiveIndex;

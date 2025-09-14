@@ -22,7 +22,8 @@
                     FontFamily="MaterialDesignIcons"
                     FontSize="Medium"
                     Padding="4"
-                    BackgroundColor="#60FFFFFF" />
+                    BackgroundColor="#60FFFFFF"
+                    Clicked="LogOutButton_Clicked" />
                 <Label
                     Text="Gestión de Gobierno"
                     TextColor="White"
