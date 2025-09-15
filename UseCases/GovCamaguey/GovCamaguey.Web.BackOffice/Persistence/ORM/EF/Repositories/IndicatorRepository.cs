@@ -1,9 +1,18 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF.Repositories
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF.Repositories
 {
     public class IndicatorRepository : Framework.Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Prototype.Persistence.Entities.Indicator, System.Guid>
     {
-        public IndicatorRepository(Microsoft.EntityFrameworkCore.DbContext dbContext) : base(dbContext)
+        public IndicatorRepository(DbContext dbContext) : base(dbContext)
         {
+        }
+
+        protected override System.Linq.IQueryable<Prototype.Persistence.Entities.Indicator> GetQueryableDbSet()
+        {
+            return base.GetQueryableDbSet()
+                .Include(entity => entity.UnitMeasurement)
+                .Include(entity => entity.Action).ThenInclude(entity => entity.Proyection).ThenInclude(entity => entity.Objective);
         }
     }
 }

@@ -22,7 +22,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 
         public IndicatorMontlyPlanDisplayModel[] MontlyPlans { get; set; }
 
-        public void Import(Persistence.Entities.Indicator entity)
+        public virtual void Import(Persistence.Entities.Indicator entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;

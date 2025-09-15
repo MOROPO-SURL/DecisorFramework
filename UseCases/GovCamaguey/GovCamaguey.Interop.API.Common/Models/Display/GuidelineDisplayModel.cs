@@ -12,7 +12,7 @@
 
         public string Description { get; set; }
 
-        public void Import(Persistence.Entities.Guideline entity)
+        public virtual void Import(Persistence.Entities.Guideline entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;

@@ -10,7 +10,7 @@
 
         public double Amount { get; set; }
 
-        public void Import(Persistence.Entities.Result entity)
+        public virtual void Import(Persistence.Entities.Result entity)
         {
             Id = entity.Id;
             At = entity.At;

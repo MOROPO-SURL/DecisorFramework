@@ -16,7 +16,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 
         public ProyectionDisplayModel[] Proyections { get; set; }
 
-        public void Import(Persistence.Entities.Objective entity)
+        public virtual void Import(Persistence.Entities.Objective entity)
         {
             Id = entity.Id;
             Index = entity.Index;

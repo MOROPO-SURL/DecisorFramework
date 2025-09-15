@@ -22,7 +22,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 
         public ActionMonthlyClosureDisplayModel[] MonthlyClosures { get; set; }
 
-        public void Import(Persistence.Entities.Action entity)
+        public virtual void Import(Persistence.Entities.Action entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;
@@ -57,7 +57,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
                 return model;
             }).ToArray();
 
-            MonthlyClosures = entity.MonthlyClosures.OrderBy(_entity => _entity.At).Select(_entity =>
+            MonthlyClosures = entity.MonthlyClosures?.OrderBy(_entity => _entity.At).Select(_entity =>
             {
                 var model = new ActionMonthlyClosureDisplayModel();
 

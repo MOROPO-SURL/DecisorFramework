@@ -22,7 +22,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 
         public ActionDisplayModel[] Actions { get; set; }
 
-        public void Import(Persistence.Entities.Proyection entity)
+        public virtual void Import(Persistence.Entities.Proyection entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;
