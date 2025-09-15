@@ -2,6 +2,10 @@
 
 public class ObjectiveConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ObjectiveDisplayModel>
 {
+    public static string NameValidableProperty => nameof(Name);
+    public static string IndexValidableProperty => nameof(Index);
+    public static string ResponsibleValidableProperty => nameof(Responsible);
+
     private string name;
     private string description;
     private int index = 1;

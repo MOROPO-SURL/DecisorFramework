@@ -17,6 +17,8 @@
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="RootFlexLayoutItemResponsiveWithConverter" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrappedFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="PostalContactDetailFlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
@@ -70,6 +72,10 @@
                             Spacing="6">
                             <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                             <Entry Text="{Binding Name}" />
+                            <Label
+                                IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:OrganizationConfigurationPageModel.NameValidableProperty}}"
+                                Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:OrganizationConfigurationPageModel.NameValidableProperty}}"
+                                TextColor="IndianRed" />
                         </VerticalStackLayout>
                         <FlexLayout 
                             Wrap="Wrap"

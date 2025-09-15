@@ -20,7 +20,7 @@ public partial class PersonConfigurationPage : Framework.Decisor.Core.Presentati
     private readonly List<EmailContactItemInputModel> incomingEmailContactItems = [];
     private readonly List<EmailContactItemDisplayModel> outgoingEmailContactItems = [];
 
-    public PersonConfigurationPage(System.Action<PersonDisplayModel> successAction, Models.Page.Configuration.PersonConfigurationPageModel model) : base(successAction, model, null)
+    public PersonConfigurationPage(System.Action<PersonDisplayModel> successAction, Models.Page.Configuration.PersonConfigurationPageModel model) : base(successAction, model, new Validators.PersonConfigurationValidator())
     {
         InitializeComponent();
 

@@ -14,6 +14,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
 
             <local_converters:YearMonthKeyValuePairToStringConverter x:Key="YearMonthKeyValuePairToStringConverter" />
         </ResourceDictionary>
@@ -50,6 +52,10 @@
                         ItemDisplayBinding="{Binding Converter={StaticResource YearMonthKeyValuePairToStringConverter}}"
                         SelectedItem="{Binding YearMonth}"
                         SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:IndicatorMontlyPlanConfigurationPageModel.YearMonthValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:IndicatorMontlyPlanConfigurationPageModel.YearMonthValidableProperty}}"
+                        TextColor="IndianRed" />
                 </VerticalStackLayout>
                 <VerticalStackLayout 
                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=8}}"
@@ -57,6 +63,10 @@
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Meta" />
                     <Entry Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:IndicatorMontlyPlanConfigurationPageModel.AmountValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:IndicatorMontlyPlanConfigurationPageModel.AmountValidableProperty}}"
+                        TextColor="IndianRed" />
                 </VerticalStackLayout>
                 <VerticalStackLayout 
                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=2, SmallContainerColumn=4}}"

@@ -17,7 +17,7 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
     private readonly List<ActionMonthlyClosureInputModel> incomingMonthlyClosures = [];
     private readonly List<ActionMonthlyClosureDisplayModel> outgoingMonthlyClosures = [];
 
-    public ActionConfigurationPage(System.Action<ActionInputModel> successAction, Models.Page.Configuration.ActionConfigurationPageModel model) : base(successAction, model, null)
+    public ActionConfigurationPage(System.Action<ActionInputModel> successAction, Models.Page.Configuration.ActionConfigurationPageModel model) : base(successAction, model, new Validators.ActionConfigurationValidator())
     {
         InitializeComponent();
     }

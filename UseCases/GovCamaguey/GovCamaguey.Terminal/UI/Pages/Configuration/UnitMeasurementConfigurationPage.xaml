@@ -3,12 +3,19 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_configuration_page_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;assembly=MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common"    
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration.UnitMeasurementConfigurationPage"
     x:TypeArguments="interop_common_display_models:UnitMeasurementDisplayModel,interop_common_display_models:UnitMeasurementDisplayModel,local_configuration_page_models:UnitMeasurementConfigurationPageModel"
     x:DataType="local_configuration_page_models:UnitMeasurementConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Aplicar"
@@ -50,13 +57,22 @@
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                         <Entry Text="{Binding Name}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.NameValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.NameValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Símbolo" />
                         <Entry 
+                            HorizontalOptions="Start"
                             WidthRequest="96"
                             Text="{Binding Symbol}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.SymbolValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.SymbolValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                 </StackLayout>
                 <BoxView 

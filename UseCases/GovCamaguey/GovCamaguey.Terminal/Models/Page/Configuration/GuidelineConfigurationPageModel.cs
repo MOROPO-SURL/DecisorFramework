@@ -2,6 +2,9 @@
 {
     public class GuidelineConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.GuidelineDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string IndexValidableProperty => nameof(Index);
+
         private string name;
         private string description;
         private int index = 1;

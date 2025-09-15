@@ -4,7 +4,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration;
 
 public partial class IndicatorMontlyPlanConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<IndicatorMontlyPlanInputModel, IndicatorMontlyPlanInputModel, Models.Page.Configuration.IndicatorMontlyPlanConfigurationPageModel>
 {
-    public IndicatorMontlyPlanConfigurationPage(System.Action<IndicatorMontlyPlanInputModel> successIndicator, Models.Page.Configuration.IndicatorMontlyPlanConfigurationPageModel model) : base(successIndicator, model, null)
+    public IndicatorMontlyPlanConfigurationPage(System.Action<IndicatorMontlyPlanInputModel> successIndicator, Models.Page.Configuration.IndicatorMontlyPlanConfigurationPageModel model) : base(successIndicator, model, new Validators.IndicatorMontlyPlanConfigurationValidator())
     {
         InitializeComponent();
     }

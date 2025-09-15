@@ -5,6 +5,9 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 {
     public class IndicatorMontlyPlanConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Input.IndicatorMontlyPlanInputModel>
     {
+        public static string YearMonthValidableProperty => nameof(YearMonth);
+        public static string AmountValidableProperty => nameof(Amount);
+
         private KeyValuePair<int, int> yearMonthPair;
         private double amount;
 

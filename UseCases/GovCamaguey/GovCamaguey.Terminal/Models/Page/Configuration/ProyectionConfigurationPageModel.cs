@@ -6,6 +6,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 {
     public class ProyectionConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Input.ProyectionInputModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string IndexValidableProperty => nameof(Index);
+        public static string ResponsabilityOrganizationsValidableProperty => nameof(ResponsabilityOrganizations);
+
         private string name;
         private string description;
         private int index = 1;

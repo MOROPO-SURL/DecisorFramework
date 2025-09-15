@@ -8,6 +8,9 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 {
     public class PersonConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PersonDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string SexValidableProperty => nameof(Sex);
+
         private string name;
         private string lastName;
         private string alias;

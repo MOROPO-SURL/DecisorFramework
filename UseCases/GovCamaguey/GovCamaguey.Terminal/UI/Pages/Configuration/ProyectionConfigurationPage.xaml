@@ -17,6 +17,8 @@
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -51,12 +53,20 @@
                         <Entry 
                             WidthRequest="96"
                             Text="{Binding Index}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:ProyectionConfigurationPageModel.IndexValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:ProyectionConfigurationPageModel.IndexValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         HorizontalOptions="FillAndExpand"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                         <Entry Text="{Binding Name}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:ProyectionConfigurationPageModel.NameValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:ProyectionConfigurationPageModel.NameValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                 </StackLayout>
                 <VerticalStackLayout 
@@ -149,6 +159,10 @@
                                 </CollectionView>
                             </Grid>
                         </Frame>
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:ProyectionConfigurationPageModel.ResponsabilityOrganizationsValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:ProyectionConfigurationPageModel.ResponsabilityOrganizationsValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"

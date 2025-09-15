@@ -12,7 +12,7 @@ public partial class IndicatorConfigurationPage : Framework.Decisor.Core.Present
     private readonly List<IndicatorMontlyPlanInputModel> incomingMontlyPlans = [];
     private readonly List<IndicatorMontlyPlanDisplayModel> outgoingMontlyPlans = [];
 
-    public IndicatorConfigurationPage(System.Action<IndicatorInputModel> successIndicator, Models.Page.Configuration.IndicatorConfigurationPageModel model) : base(successIndicator, model, null)
+    public IndicatorConfigurationPage(System.Action<IndicatorInputModel> successIndicator, Models.Page.Configuration.IndicatorConfigurationPageModel model) : base(successIndicator, model, new Validators.IndicatorConfigurationValidator())
     {
         InitializeComponent();
 

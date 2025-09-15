@@ -7,6 +7,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 {
     public class OrganizationConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<OrganizationDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+
         private string name;
         private string alias;
         private string about;

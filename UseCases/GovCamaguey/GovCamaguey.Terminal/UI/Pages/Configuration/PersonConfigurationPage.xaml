@@ -17,7 +17,9 @@
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="RootFlexLayoutItemResponsiveWithConverter" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrappedFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="PostalContactDetailFlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
-            
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -74,6 +76,10 @@
                                 Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                                 <Entry Text="{Binding Name}" />
+                                <Label
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:PersonConfigurationPageModel.NameValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:PersonConfigurationPageModel.NameValidableProperty}}"
+                                    TextColor="IndianRed" />
                             </VerticalStackLayout>
                             <VerticalStackLayout 
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=12}}"
@@ -97,12 +103,16 @@
                                 <Picker 
                                     x:Name="SexPicker" 
                                     ItemsSource="{Binding AvailableSexs}"
+                                    SelectedItem="{Binding Sex}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                                <Label
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:PersonConfigurationPageModel.SexValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:PersonConfigurationPageModel.SexValidableProperty}}"
+                                    TextColor="IndianRed" />
                             </VerticalStackLayout>
                         </FlexLayout>
                     </VerticalStackLayout>
                 </FlexLayout>
-
                 <FlexLayout
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">

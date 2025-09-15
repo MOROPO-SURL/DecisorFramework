@@ -5,6 +5,9 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 {
     public class IndicatorConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Input.IndicatorInputModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string AmountValidableProperty => nameof(Amount);
+
         private string name;
         private string description;
         private int priority = 1;

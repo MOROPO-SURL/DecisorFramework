@@ -13,7 +13,7 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
     private readonly List<ProyectionInputModel> incomingProyections = [];
     private readonly List<ProyectionDisplayModel> outgoingProyections = [];
 
-    public ObjectiveConfigurationPage(System.Action<ObjectiveDisplayModel> successAction, Models.Page.Configuration.ObjectiveConfigurationPageModel model) : base(successAction, model, null)
+    public ObjectiveConfigurationPage(System.Action<ObjectiveDisplayModel> successAction, Models.Page.Configuration.ObjectiveConfigurationPageModel model) : base(successAction, model, new Validators.ObjectiveConfigurationValidator())
     {
         InitializeComponent();
     }
