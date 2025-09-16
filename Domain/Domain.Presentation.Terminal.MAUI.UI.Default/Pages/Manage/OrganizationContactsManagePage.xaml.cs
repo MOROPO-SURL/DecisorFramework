@@ -18,6 +18,12 @@ public partial class OrganizationContactsManagePage : Core.Presentation.Terminal
 
     protected override double ItemViewRequestWidth { get => 420; }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationContactViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationContactCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationContactEditorPermission;
+
     protected override double MeasureCollectionViewCellHeight(double width)
     {
         return ITEM_VIEW_REQUEST_HEIGHT;

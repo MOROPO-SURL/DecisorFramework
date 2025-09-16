@@ -19,6 +19,12 @@ public partial class LegalProvidersManagePage : Core.Presentation.Terminal.MAUI.
 
     protected override double ItemViewRequestWidth { get => 420; }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalProviderViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalProviderCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalProviderEditorPermission;
+
     protected override double MeasureCollectionViewCellHeight(double width)
     {
         return ITEM_VIEW_REQUEST_HEIGHT;

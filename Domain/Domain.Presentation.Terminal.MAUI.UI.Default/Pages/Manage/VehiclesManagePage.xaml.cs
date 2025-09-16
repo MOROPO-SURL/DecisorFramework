@@ -18,6 +18,12 @@ public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
 
     protected override double ItemViewRequestWidth { get => 320; }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.VehicleViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.VehicleCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.VehicleEditorPermission;
+
     protected override double MeasureCollectionViewCellHeight(double width)
     {
         return 284;

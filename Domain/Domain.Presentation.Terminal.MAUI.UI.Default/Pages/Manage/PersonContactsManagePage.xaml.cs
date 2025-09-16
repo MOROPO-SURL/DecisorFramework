@@ -18,6 +18,12 @@ public partial class PersonContactsManagePage : Core.Presentation.Terminal.MAUI.
 
     protected override double ItemViewRequestWidth { get => 384; }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.PersonContactViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.PersonContactCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.PersonContactEditorPermission;
+
     protected override double MeasureCollectionViewCellHeight(double width)
     {
         return ITEM_VIEW_REQUEST_HEIGHT;

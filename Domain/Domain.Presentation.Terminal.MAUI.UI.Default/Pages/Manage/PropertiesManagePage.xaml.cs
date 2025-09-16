@@ -18,6 +18,12 @@ public partial class PropertiesManagePage : Core.Presentation.Terminal.MAUI.UI.P
 
     protected override double ItemViewRequestWidth { get => 320; }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.PropertyViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.PropertyCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.PropertyEditorPermission;
+
     protected override double MeasureCollectionViewCellHeight(double width)
     {
         return ITEM_VIEW_REQUEST_HEIGHT;
