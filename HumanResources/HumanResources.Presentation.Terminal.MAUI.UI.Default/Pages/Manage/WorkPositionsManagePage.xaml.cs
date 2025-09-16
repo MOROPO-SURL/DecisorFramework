@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class WorkPositionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.WorkPositionDisplayModel, Models.Page.Manage.WorkPositionsManagePageModel, Models.Page.Configuration.WorkPositionConfigurationPageModel, Configuration.WorkPositionConfigurationPage, Detail.WorkPositionDetailPage>
+public partial class WorkPositionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.WorkPositionDisplayModel, Models.Page.Manage.WorkPositionsManagePageModel, Models.Page.Configuration.WorkPositionConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
 

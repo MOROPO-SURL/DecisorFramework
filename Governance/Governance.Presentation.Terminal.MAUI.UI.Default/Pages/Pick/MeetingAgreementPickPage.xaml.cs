@@ -3,7 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class MeetingAgreementPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.MeetingDisplayModel, Models.Page.Pick.MeetingAgreementPickPageModel, Detail.MeetingDetailPage>
+public partial class MeetingAgreementPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.MeetingDisplayModel, Models.Page.Pick.MeetingAgreementPickPageModel>
 {
     private System.Action<Interop.API.Common.Models.Display.AgreementDisplayModel> pickCompleteAction;
 

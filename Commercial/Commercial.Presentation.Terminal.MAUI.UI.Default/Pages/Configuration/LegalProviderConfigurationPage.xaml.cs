@@ -22,7 +22,7 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
     private readonly List<DocumentInputModel> incomingDocuments = [];
     private readonly List<DocumentDisplayModel> outgoingDocuments = [];
 
-    public LegalProviderConfigurationPage(System.Action<Interop.API.Common.Models.Display.LegalProviderDisplayModel> successAction, Models.Page.Configuration.LegalProviderConfigurationPageModel model) : base(successAction, model)
+    public LegalProviderConfigurationPage(System.Action<Interop.API.Common.Models.Display.LegalProviderDisplayModel> successAction, Models.Page.Configuration.LegalProviderConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

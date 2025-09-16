@@ -11,12 +11,6 @@
         public System.Guid ContactId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]+$")]
-        public string TaxIdentificationNumber { get; set; }
-
-        public string StateIdentificationCode { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Required]
         public string Argument { get; set; }
     }
 }

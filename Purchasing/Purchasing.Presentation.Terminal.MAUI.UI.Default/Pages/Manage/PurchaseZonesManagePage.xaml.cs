@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class PurchaseZonesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, Models.Page.Manage.PurchaseZonesManagePageModel, Models.Page.Configuration.PurchaseZoneConfigurationPageModel, Configuration.PurchaseZoneConfigurationPage, Detail.PurchaseZoneDetailPage>
+public partial class PurchaseZonesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, Models.Page.Manage.PurchaseZonesManagePageModel, Models.Page.Configuration.PurchaseZoneConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
 

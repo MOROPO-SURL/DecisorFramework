@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class BrandsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.BrandDisplayModel, Models.Page.Manage.BrandsManagePageModel, Models.Page.Configuration.BrandConfigurationPageModel, Configuration.BrandConfigurationPage, Detail.BrandDetailPage>
+public partial class BrandsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.BrandDisplayModel, Models.Page.Manage.BrandsManagePageModel, Models.Page.Configuration.BrandConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 128;
 
@@ -17,6 +17,12 @@ public partial class BrandsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages
     }
 
     protected override double ItemViewRequestWidth { get => 320; }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.BrandViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.BrandCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.BrandEditorPermission;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {

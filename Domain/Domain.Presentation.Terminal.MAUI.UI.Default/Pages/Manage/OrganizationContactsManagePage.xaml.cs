@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class OrganizationContactsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.OrganizationContactDisplayModel, Models.Page.Manage.OrganizationContactsManagePageModel, Models.Page.Configuration.OrganizationContactConfigurationPageModel, Configuration.OrganizationContactConfigurationPage, Detail.OrganizationContactDetailPage>
+public partial class OrganizationContactsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.OrganizationContactDisplayModel, Models.Page.Manage.OrganizationContactsManagePageModel, Models.Page.Configuration.OrganizationContactConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 144;
 
@@ -17,6 +17,12 @@ public partial class OrganizationContactsManagePage : Core.Presentation.Terminal
     }
 
     protected override double ItemViewRequestWidth { get => 420; }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationContactViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationContactCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationContactEditorPermission;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {

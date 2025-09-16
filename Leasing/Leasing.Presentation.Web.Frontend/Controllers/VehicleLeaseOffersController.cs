@@ -3,6 +3,7 @@ using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using MOROPO.Framework.Guama.Location.Persistence.Entities;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
@@ -14,12 +15,14 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
         private readonly IEntityRepository<VehicleLeasePropousal, System.Guid> propousalRepository;
         private readonly IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> organizationPostulationRepository;
         private readonly IEntityRepository<VehicleLeasePersonPostulation, System.Guid> personPostulationRepository;
+        private readonly IEntityRepository<Municipality, System.Guid> municipalityRepository;
 
-        public VehicleLeaseOffersController(IEntityRepository<VehicleLeasePersonPostulation, System.Guid> personPostulationRepository, IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> organizationPostulationRepository, IEntityRepository<VehicleLeasePropousal, System.Guid> propousalRepository, IEntityRepository<VehicleLeaseOffer, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<VehicleLeaseOffersController> localizer, Microsoft.Extensions.Logging.ILogger<VehicleLeaseOffersController> logger) : base(repository, localizer, logger)
+        public VehicleLeaseOffersController(IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<VehicleLeasePersonPostulation, System.Guid> personPostulationRepository, IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> organizationPostulationRepository, IEntityRepository<VehicleLeasePropousal, System.Guid> propousalRepository, IEntityRepository<VehicleLeaseOffer, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<VehicleLeaseOffersController> localizer, Microsoft.Extensions.Logging.ILogger<VehicleLeaseOffersController> logger) : base(repository, localizer, logger)
         {
             this.propousalRepository = propousalRepository;
             this.organizationPostulationRepository = organizationPostulationRepository;
             this.personPostulationRepository = personPostulationRepository;
+            this.municipalityRepository = municipalityRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<VehicleLeaseOffer, bool>> GetGlobalSelector()
@@ -67,6 +70,17 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                     _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Contact.Identity.Image.ContentType);
                 }
 
+                foreach (var __model in _model.Contact.Identity.PostalContacts)
+                {
+                    var municipality = municipalityRepository.Get(__model.Municipality.Id);
+
+                    __model.Municipality = new Core.Interop.API.Common.Models.Display.MunicipalityDisplayModel();
+
+                    __model.Municipality.Import(municipality);
+                }
+
+                _model.MainPostalContactItem = _model.Contact.Identity.PostalContacts.First(_model => _model.Id == _entity.Contact.MainPostalContactId);
+
                 return _model;
             }).ToArray();
             model.PersonPostulations = personPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id).ToArray().Select(_entity =>
@@ -79,6 +93,17 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                 {
                     _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Contact.Identity.Image.ContentType);
                 }
+
+                foreach (var __model in _model.Contact.Identity.PostalContacts)
+                {
+                    var municipality = municipalityRepository.Get(__model.Municipality.Id);
+
+                    __model.Municipality = new Core.Interop.API.Common.Models.Display.MunicipalityDisplayModel();
+
+                    __model.Municipality.Import(municipality);
+                }
+
+                _model.MainPostalContactItem = _model.Contact.Identity.PostalContacts.First(_model => _model.Id == _entity.Contact.MainPostalContactId);
 
                 return _model;
             }).ToArray();

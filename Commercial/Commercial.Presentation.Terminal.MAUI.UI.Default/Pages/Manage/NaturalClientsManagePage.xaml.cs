@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class NaturalClientsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.NaturalClientDisplayModel, Models.Page.Manage.NaturalClientsManagePageModel, Models.Page.Configuration.NaturalClientConfigurationPageModel, Configuration.NaturalClientConfigurationPage, Detail.NaturalClientDetailPage>
+public partial class NaturalClientsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.NaturalClientDisplayModel, Models.Page.Manage.NaturalClientsManagePageModel, Models.Page.Configuration.NaturalClientConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 144;
 
@@ -17,6 +17,12 @@ public partial class NaturalClientsManagePage : Core.Presentation.Terminal.MAUI.
     }
 
     protected override double ItemViewRequestWidth { get => 420; }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientEditorPermission;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {

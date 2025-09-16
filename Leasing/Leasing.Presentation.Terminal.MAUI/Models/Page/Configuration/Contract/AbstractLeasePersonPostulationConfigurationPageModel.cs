@@ -7,6 +7,7 @@
         private Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel contact;
         private string taxIdentificationNumber;
         private Domain.Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel businessKind;
+        private Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel mainPostalContactItem;
         private string argument;
 
         public AbstractLeasePersonPostulationConfigurationPageModel(System.Guid offerId, TModel model) : base(model)
@@ -16,10 +17,11 @@
             if (model != null)
             {
                 Id = model.Id;
-                Contact = model.Contact;
-                TaxIdentificationNumber = model.TaxIdentificationNumber;
-                BusinessKind = model.BusinessKind;
-                Argument = model.Argument;
+                contact = model.Contact;
+                taxIdentificationNumber = model.TaxIdentificationNumber;
+                businessKind = model.BusinessKind;
+                mainPostalContactItem = model.MainPostalContactItem;
+                argument = model.Argument;
             }
         }
 
@@ -32,6 +34,8 @@
         public string TaxIdentificationNumber { get => taxIdentificationNumber; set => SetProperty(ref taxIdentificationNumber, value); }
 
         public Domain.Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel BusinessKind { get => businessKind; set => SetProperty(ref businessKind, value); }
+
+        public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContactItem { get => mainPostalContactItem; set => SetProperty(ref mainPostalContactItem, value); }
 
         public string Argument { get => argument; set => SetProperty(ref argument, value); }
 

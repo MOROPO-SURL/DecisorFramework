@@ -2,7 +2,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class VacantPostulationOcupationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.VacantPostulationOcupationDisplayModel, Interop.API.Common.Models.Display.VacantPostulationOcupationDisplayModel, Models.Page.Configuration.VacantPostulationOcupationConfigurationPageModel>
 {
-    public VacantPostulationOcupationConfigurationPage(System.Action<Interop.API.Common.Models.Display.VacantPostulationOcupationDisplayModel> successAction, Models.Page.Configuration.VacantPostulationOcupationConfigurationPageModel model) : base(successAction, model)
+    public VacantPostulationOcupationConfigurationPage(System.Action<Interop.API.Common.Models.Display.VacantPostulationOcupationDisplayModel> successAction, Models.Page.Configuration.VacantPostulationOcupationConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

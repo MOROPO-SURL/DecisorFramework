@@ -85,6 +85,15 @@
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Dirección postal primaria" />
+                    <Picker 
+                        x:Name="PostalContactItemPicker"
+                        IsEnabled="{Binding Contact, Converter={StaticResource IsNotNullConverter}}"
+                        ItemsSource="{Binding Contact.Identity.PostalContacts}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                </VerticalStackLayout><VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Espacios específicos" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">

@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class PostalContactConfigurationPage : UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.PostalContactItemDisplayModel, Interop.API.Common.Models.Display.PostalContactItemDisplayModel, Models.Page.Configuration.PostalContactConfigurationPageModel>
 {
-    public PostalContactConfigurationPage(System.Action<Interop.API.Common.Models.Display.PostalContactItemDisplayModel> successAction, Models.Page.Configuration.PostalContactConfigurationPageModel model) : base(successAction, model)
+    public PostalContactConfigurationPage(System.Action<Interop.API.Common.Models.Display.PostalContactItemDisplayModel> successAction, Models.Page.Configuration.PostalContactConfigurationPageModel model) : base(successAction, model, null)
     {
         IsEnabled = false;
 

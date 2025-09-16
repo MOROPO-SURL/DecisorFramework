@@ -12,6 +12,8 @@
 
         public System.Guid BusinessKindId { get; set; }
 
+        public System.Guid MainPostalContactItemId { get; set; }
+
         [System.ComponentModel.DataAnnotations.Required]
         public string Argument { get; set; }
 
@@ -24,19 +26,12 @@
 
         public virtual void Mergue(TEntity entity)
         {
-            entity.TaxIdentificationNumber = TaxIdentificationNumber;
             entity.Argument = Argument;
 
             if (entity.ContactId != ContactId)
             {
                 entity.Contact = null;
                 entity.ContactId = ContactId;
-            }
-
-            if (entity.BusinessKindId != BusinessKindId)
-            {
-                entity.BusinessKind = null;
-                entity.BusinessKindId = BusinessKindId;
             }
         }
     }

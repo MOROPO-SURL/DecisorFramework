@@ -12,12 +12,13 @@
 
         public string TaxIdentificationNumber { get; set; }
 
+        public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContactItem { get; set; }
+
         public string Argument { get; set; }
 
         public virtual void Import(TEntity entity)
         {
             Id = entity.Id;
-            TaxIdentificationNumber = entity.TaxIdentificationNumber;
             Argument = entity.Argument;
 
             if (entity.Contact != null)
@@ -27,11 +28,11 @@
                 Contact.Import(entity.Contact);
             }
 
-            if (entity.BusinessKind != null)
+            if (entity.Contact.MainPostalContact != null)
             {
-                BusinessKind = new Domain.Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel();
+                MainPostalContactItem = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
 
-                BusinessKind.Import(entity.BusinessKind);
+                MainPostalContactItem.Import(entity.Contact.MainPostalContact);
             }
         }
     }

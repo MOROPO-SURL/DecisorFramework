@@ -9,7 +9,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default
 
 public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<VehicleLeasePersonPostulationDisplayModel, VehicleLeasePersonPostulationDisplayModel, Models.Page.Configuration.VehicleLeasePersonPostulationConfigurationPageModel>
 {
-    public VehicleLeasePersonPostulationConfigurationPage(System.Action<VehicleLeasePersonPostulationDisplayModel> successAction, Models.Page.Configuration.VehicleLeasePersonPostulationConfigurationPageModel model) : base(successAction, model)
+    public VehicleLeasePersonPostulationConfigurationPage(System.Action<VehicleLeasePersonPostulationDisplayModel> successAction, Models.Page.Configuration.VehicleLeasePersonPostulationConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 
@@ -22,6 +22,20 @@ public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Prese
                 if (model.BusinessKind.Id != current.Id) continue;
 
                 BusinessKindPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
+
+        if (model.MainPostalContactItem != null)
+        {
+            for (int i = 0; i < model.Contact.Identity.PostalContacts.Length; i++)
+            {
+                var current = model.Contact.Identity.PostalContacts[i];
+
+                if (model.MainPostalContactItem.Id != current.Id) continue;
+
+                PostalContactItemPicker.SelectedIndex = i;
 
                 break;
             }
@@ -41,6 +55,7 @@ public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Prese
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument
         };
 
@@ -60,6 +75,7 @@ public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Prese
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument
         };
 
@@ -91,5 +107,6 @@ public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Prese
     private void ContactPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
     {
         ConcreteBindingContext.Contact = model;
+        ConcreteBindingContext.TaxIdentificationNumber = model.PersonalIdentificationNumber;
     }
 }

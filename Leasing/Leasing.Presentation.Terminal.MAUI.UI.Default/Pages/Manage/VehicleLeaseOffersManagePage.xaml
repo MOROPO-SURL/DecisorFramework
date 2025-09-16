@@ -4,8 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
-    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
-    xmlns:local_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
@@ -13,7 +11,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.VehicleLeaseOffersManagePage"
-    x:TypeArguments="interop_common_display_models:VehicleLeaseOfferDisplayModel,presentation_manage_page_models:VehicleLeaseOffersManagePageModel,presentation_configuration_page_models:VehicleLeaseOfferConfigurationPageModel,local_configuration_pages:VehicleLeaseOfferConfigurationPage,local_detail_pages:VehicleLeaseOfferDetailPage"
+    x:TypeArguments="interop_common_display_models:VehicleLeaseOfferDisplayModel,presentation_manage_page_models:VehicleLeaseOffersManagePageModel,presentation_configuration_page_models:VehicleLeaseOfferConfigurationPageModel"
     x:DataType="presentation_manage_page_models:VehicleLeaseOffersManagePageModel"
     Title="Ofertas de Arrendamiento de Vehículos">
     <ContentPage.Resources>

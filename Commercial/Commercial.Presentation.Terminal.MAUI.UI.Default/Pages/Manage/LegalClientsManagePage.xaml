@@ -3,8 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Views.Card"
-    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
-    xmlns:local_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Commercial.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI"
@@ -12,7 +10,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.LegalClientsManagePage"
-    x:TypeArguments="interop_common_display_models:LegalClientDisplayModel,presentation_manage_page_models:LegalClientsManagePageModel,presentation_configuration_page_models:LegalClientConfigurationPageModel,local_configuration_pages:LegalClientConfigurationPage,local_detail_pages:LegalClientDetailPage"
+    x:TypeArguments="interop_common_display_models:LegalClientDisplayModel,presentation_manage_page_models:LegalClientsManagePageModel,presentation_configuration_page_models:LegalClientConfigurationPageModel"
     x:DataType="presentation_manage_page_models:LegalClientsManagePageModel"
     Title="Gestión de Clientes Jurídicos">
     <ContentPage.Resources>

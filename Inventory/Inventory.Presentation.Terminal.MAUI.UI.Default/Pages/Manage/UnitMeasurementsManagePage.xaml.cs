@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class UnitMeasurementsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, Models.Page.Manage.UnitMeasurementsManagePageModel, Models.Page.Configuration.UnitMeasurementConfigurationPageModel, Configuration.UnitMeasurementConfigurationPage, Detail.UnitMeasurementDetailPage>
+public partial class UnitMeasurementsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, Models.Page.Manage.UnitMeasurementsManagePageModel, Models.Page.Configuration.UnitMeasurementConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 116;
 

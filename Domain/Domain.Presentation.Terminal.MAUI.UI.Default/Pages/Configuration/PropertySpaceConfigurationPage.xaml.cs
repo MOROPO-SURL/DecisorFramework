@@ -7,7 +7,7 @@ public partial class PropertySpaceConfigurationPage : Core.Presentation.Terminal
 {
     private ImageInputModel featureImagePickedModel;
 
-    public PropertySpaceConfigurationPage(System.Action<Interop.API.Common.Models.Input.PropertySpaceInputModel> successAction, Models.Page.Configuration.PropertySpaceConfigurationPageModel model) : base(successAction, model)
+    public PropertySpaceConfigurationPage(System.Action<Interop.API.Common.Models.Input.PropertySpaceInputModel> successAction, Models.Page.Configuration.PropertySpaceConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

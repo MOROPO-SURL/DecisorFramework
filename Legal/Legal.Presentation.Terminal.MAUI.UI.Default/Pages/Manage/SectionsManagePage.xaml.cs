@@ -3,7 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class SectionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.SectionDisplayModel, Models.Page.Manage.SectionsManagePageModel, Models.Page.Configuration.SectionConfigurationPageModel, Configuration.SectionConfigurationPage, Detail.SectionDetailPage>
+public partial class SectionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.SectionDisplayModel, Models.Page.Manage.SectionsManagePageModel, Models.Page.Configuration.SectionConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 120;
 

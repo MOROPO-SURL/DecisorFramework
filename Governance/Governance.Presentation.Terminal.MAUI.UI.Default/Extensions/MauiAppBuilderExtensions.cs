@@ -4,8 +4,6 @@ using MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.Page.Configuration;
 using MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Factories.Configuration;
 using MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Factories.Detail;
-using MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
-using MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 
 namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Extensions
 {
@@ -15,12 +13,12 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Defa
         {
             builder.Services
                 // DetailPage factory resgistration !!!
-                .AddSingleton<IDetailContentPageFactoryFacade<DecisionMakingGroupDisplayModel, DecisionMakingGroupDetailPage>, DecisionMakingGroupDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<MeetingDisplayModel, MeetingDetailPage>, MeetingDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<DecisionMakingGroupDisplayModel>, DecisionMakingGroupDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<MeetingDisplayModel>, MeetingDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
-                .AddSingleton<IConfigurationContentPageFactoryFacade<DecisionMakingGroupDisplayModel, DecisionMakingGroupConfigurationPageModel, DecisionMakingGroupConfigurationPage>, DecisionMakingGroupConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<MeetingDisplayModel, MeetingConfigurationPageModel, MeetingConfigurationPage>, MeetingConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<DecisionMakingGroupDisplayModel, DecisionMakingGroupConfigurationPageModel>, DecisionMakingGroupConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<MeetingDisplayModel, MeetingConfigurationPageModel>, MeetingConfigurationPageFactory>();
 
             return builder;
         }

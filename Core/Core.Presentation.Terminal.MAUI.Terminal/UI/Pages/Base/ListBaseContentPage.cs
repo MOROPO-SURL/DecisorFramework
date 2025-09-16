@@ -1,17 +1,19 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 {
-    public class ListBaseContentPage<TModel, TListPageModel, TDetailContentPage> : Caney.MVVM.Core.Pages.ContentPage
+    public class ListBaseContentPage<TModel, TListPageModel> : Caney.MVVM.Core.Pages.ContentPage
         where TModel : class
         where TListPageModel : Models.Page.Contract.AbstractListEntityPageModel<TModel>, new()
-        where TDetailContentPage : DetailBaseContentPage<TModel>
     {
         public ListBaseContentPage()
         {
             BindingContext = new TListPageModel();
         }
+
+        protected virtual string ViewerPermissionCode => null;
 
         protected int CurrentItemsPageNumber { get; private set; }
 
@@ -31,7 +33,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<UI.Factories.Facade.IDetailContentPageFactoryFacade<TModel, TDetailContentPage>>();
+                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<UI.Factories.Facade.IDetailContentPageFactoryFacade<TModel>>();
 
                     this.NavigationPushModalPageAsync(factory.Build(task.Result));
                 });
@@ -41,6 +43,8 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
         protected void OnReload(object sender, System.EventArgs eventArgs)
         {
             if (((TListPageModel)BindingContext).IsBusy) return;
+
+            IsEnabled = true;
 
             LoadItems(true);
         }
@@ -52,6 +56,8 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected void OnItemsCollectionViewLayoutResize(object sender, System.EventArgs eventArgs)
         {
+            if (!IsEnabled) return;
+
             if (GetItemsCollectionView().ItemsLayout is Microsoft.Maui.Controls.GridItemsLayout)
             {
                 var itemsCollectionViewItemsLayout = GetItemsCollectionView().ItemsLayout as Microsoft.Maui.Controls.GridItemsLayout;
@@ -84,6 +90,22 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected void LoadItems(bool restart = false)
         {
+            if (BindingContext == null) return;
+
+            if (ViewerPermissionCode != null)
+            {
+                var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+                if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == ViewerPermissionCode)))
+                {
+                    DisplayAlert("Aviso", "Su usuario no cuenta con permisos para visualizar esta información. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                    IsEnabled = false;
+
+                    return;
+                }
+            }
+
             var concreteBindingContext = (TListPageModel)BindingContext;
 
             concreteBindingContext.IsBusy = true;

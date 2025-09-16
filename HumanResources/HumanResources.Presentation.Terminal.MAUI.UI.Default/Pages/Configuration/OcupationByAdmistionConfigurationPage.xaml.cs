@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class OcupationByAdmistionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<OcupationDisplayModel, OcupationDisplayModel, Models.Page.Configuration.OcupationByAdmisionConfigurationPageModel>
 {
-    public OcupationByAdmistionConfigurationPage(System.Action<OcupationDisplayModel> successAction, Models.Page.Configuration.OcupationByAdmisionConfigurationPageModel model) : base(successAction, model)
+    public OcupationByAdmistionConfigurationPage(System.Action<OcupationDisplayModel> successAction, Models.Page.Configuration.OcupationByAdmisionConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

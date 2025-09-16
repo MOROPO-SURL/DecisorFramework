@@ -12,13 +12,13 @@
 
         public string StateIdentificationCode { get; set; }
 
+        public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContactItem { get; set; }
+
         public string Argument { get; set; }
 
         public virtual void Import(TEntity entity)
         {
             Id = entity.Id;
-            TaxIdentificationNumber = entity.TaxIdentificationNumber;
-            StateIdentificationCode = entity.StateIdentificationCode;
             Argument = entity.Argument;
 
             if (entity.Contact != null)
@@ -26,6 +26,13 @@
                 Contact = new Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel();
 
                 Contact.Import(entity.Contact);
+            }
+
+            if (entity.Contact.MainPostalContact != null)
+            {
+                MainPostalContactItem = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
+
+                MainPostalContactItem.Import(entity.Contact.MainPostalContact);
             }
         }
     }

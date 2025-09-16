@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.VehicleDisplayModel, Models.Page.Manage.VehiclesManagePageModel, Models.Page.Configuration.VehicleConfigurationPageModel, Configuration.VehicleConfigurationPage, Detail.VehicleDetailPage>
+public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.VehicleDisplayModel, Models.Page.Manage.VehiclesManagePageModel, Models.Page.Configuration.VehicleConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 284;
 
@@ -17,6 +17,12 @@ public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
     }
 
     protected override double ItemViewRequestWidth { get => 320; }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.VehicleViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.VehicleCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.VehicleEditorPermission;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {

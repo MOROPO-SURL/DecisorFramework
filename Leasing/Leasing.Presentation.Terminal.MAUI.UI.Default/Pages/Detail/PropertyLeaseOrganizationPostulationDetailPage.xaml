@@ -27,7 +27,7 @@
                             Text="Contacto" />
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"
-                            Text="{Binding Contact}" />
+                            Text="{Binding Contact.Identity}" />
                         <Label 
                             Style="{StaticResource CaptionPropertyLabelStyle}"
                             Text="Argumento" />

@@ -3,8 +3,6 @@ using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Configuration;
 using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Factories.Configuration;
 using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Factories.Detail;
-using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
-using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Extensions
@@ -15,17 +13,17 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Defa
         {
             builder.Services
                 // DetailPage factory resgistration !!!
-                .AddSingleton<IDetailContentPageFactoryFacade<PaymentTermDisplayModel, PaymentTermDetailPage>, PaymentTermDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<LegalProviderDisplayModel, LegalProviderDetailPage>, LegalProviderDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<LegalClientDisplayModel, LegalClientDetailPage>, LegalClientDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<NaturalProviderDisplayModel, NaturalProviderDetailPage>, NaturalProviderDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<NaturalClientDisplayModel, NaturalClientDetailPage>, NaturalClientDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<PaymentTermDisplayModel>, PaymentTermDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<LegalProviderDisplayModel>, LegalProviderDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<LegalClientDisplayModel>, LegalClientDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<NaturalProviderDisplayModel>, NaturalProviderDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<NaturalClientDisplayModel>, NaturalClientDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
-                .AddSingleton<IConfigurationContentPageFactoryFacade<LegalProviderDisplayModel, LegalProviderConfigurationPageModel, LegalProviderConfigurationPage>, LegalProviderConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<LegalClientDisplayModel, LegalClientConfigurationPageModel, LegalClientConfigurationPage>, LegalClientConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<NaturalProviderDisplayModel, NaturalProviderConfigurationPageModel, NaturalProviderConfigurationPage>, NaturalProviderConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<NaturalClientDisplayModel, NaturalClientConfigurationPageModel, NaturalClientConfigurationPage>, NaturalClientConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<LegalProviderDisplayModel, LegalProviderConfigurationPageModel>, LegalProviderConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<LegalClientDisplayModel, LegalClientConfigurationPageModel>, LegalClientConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<NaturalProviderDisplayModel, NaturalProviderConfigurationPageModel>, NaturalProviderConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<NaturalClientDisplayModel, NaturalClientConfigurationPageModel>, NaturalClientConfigurationPageFactory>();
 
             return builder;
         }

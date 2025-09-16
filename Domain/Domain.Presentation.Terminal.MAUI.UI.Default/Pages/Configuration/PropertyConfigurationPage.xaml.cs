@@ -18,7 +18,7 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
     private readonly List<Interop.API.Common.Models.Input.PropertySpaceInputModel> incomingSpaces = [];
     private readonly List<PropertySpaceDisplayModel> outgoingSpaces = [];
 
-    public PropertyConfigurationPage(System.Action<PropertyDisplayModel> successAction, Models.Page.Configuration.PropertyConfigurationPageModel model) : base(successAction, model)
+    public PropertyConfigurationPage(System.Action<PropertyDisplayModel> successAction, Models.Page.Configuration.PropertyConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

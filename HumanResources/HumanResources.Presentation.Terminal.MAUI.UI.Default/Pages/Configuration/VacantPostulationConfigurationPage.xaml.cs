@@ -18,7 +18,7 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
     private readonly List<VacantPostulationOcupationInputModel> incomingOcupations = [];
     private readonly List<VacantPostulationOcupationDisplayModel> outgoingOcupations = [];
 
-    public VacantPostulationConfigurationPage(System.Action<VacantPostulationDisplayModel> successAction, Models.Page.Configuration.VacantPostulationConfigurationPageModel model) : base(successAction, model)
+    public VacantPostulationConfigurationPage(System.Action<VacantPostulationDisplayModel> successAction, Models.Page.Configuration.VacantPostulationConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

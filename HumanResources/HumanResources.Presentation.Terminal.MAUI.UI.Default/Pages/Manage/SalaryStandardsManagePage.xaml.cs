@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class SalaryStandardsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.SalaryStandardDisplayModel, Models.Page.Manage.SalaryStandardsManagePageModel, Models.Page.Configuration.SalaryStandardConfigurationPageModel, Configuration.SalaryStandardConfigurationPage, Detail.SalaryStandardDetailPage>
+public partial class SalaryStandardsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.SalaryStandardDisplayModel, Models.Page.Manage.SalaryStandardsManagePageModel, Models.Page.Configuration.SalaryStandardConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
 

@@ -13,7 +13,7 @@ public partial class UnitMeasurementConfigurationPage : Core.Presentation.Termin
     private readonly List<Interop.API.Common.Models.Bridge.UnitMeasurementConvertionBridgeModel> outgoingConvetions = [];
 
 
-    public UnitMeasurementConfigurationPage(System.Action<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel> successAction, Models.Page.Configuration.UnitMeasurementConfigurationPageModel model) : base(successAction, model)
+    public UnitMeasurementConfigurationPage(System.Action<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel> successAction, Models.Page.Configuration.UnitMeasurementConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }
