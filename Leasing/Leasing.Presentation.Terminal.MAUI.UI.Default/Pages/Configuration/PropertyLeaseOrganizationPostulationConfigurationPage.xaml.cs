@@ -13,7 +13,7 @@ public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Cor
     private readonly List<PropertySpaceLeasePropousalDisplayModel> incomingSpaces = [];
     private readonly List<PropertySpaceLeasePropousalDisplayModel> outgoingSpaces = [];
 
-    public PropertyLeaseOrganizationPostulationConfigurationPage(System.Action<PropertyLeaseOrganizationPostulationDisplayModel> successAction, Models.Page.Configuration.PropertyLeaseOrganizationPostulationConfigurationPageModel model) : base(successAction, model)
+    public PropertyLeaseOrganizationPostulationConfigurationPage(System.Action<PropertyLeaseOrganizationPostulationDisplayModel> successAction, Models.Page.Configuration.PropertyLeaseOrganizationPostulationConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

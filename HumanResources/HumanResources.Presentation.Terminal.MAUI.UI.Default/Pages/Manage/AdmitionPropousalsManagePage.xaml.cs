@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class AdmitionPropousalsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel, Models.Page.Manage.AdmitionPropousalsManagePageModel, Models.Page.Configuration.AdmitionPropousalConfigurationPageModel, Configuration.AdmitionPropousalConfigurationPage, Detail.AdmitionPropousalDetailPage>
+public partial class AdmitionPropousalsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel, Models.Page.Manage.AdmitionPropousalsManagePageModel, Models.Page.Configuration.AdmitionPropousalConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 236;
 

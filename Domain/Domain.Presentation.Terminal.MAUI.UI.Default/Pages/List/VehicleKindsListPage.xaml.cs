@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;
 
-public partial class VehicleKindsListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.VehicleKindDisplayModel, Models.Page.List.VehicleKindsListPageModel, Detail.VehicleKindDetailPage>
+public partial class VehicleKindsListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.VehicleKindDisplayModel, Models.Page.List.VehicleKindsListPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 128;
 

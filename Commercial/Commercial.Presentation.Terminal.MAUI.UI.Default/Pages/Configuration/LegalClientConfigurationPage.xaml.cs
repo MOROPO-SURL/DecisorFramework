@@ -21,7 +21,7 @@ public partial class LegalClientConfigurationPage : Core.Presentation.Terminal.M
     private readonly List<DocumentInputModel> incomingDocuments = [];
     private readonly List<DocumentDisplayModel> outgoingDocuments = [];
 
-    public LegalClientConfigurationPage(System.Action<Interop.API.Common.Models.Display.LegalClientDisplayModel> successAction, Models.Page.Configuration.LegalClientConfigurationPageModel model) : base(successAction, model)
+    public LegalClientConfigurationPage(System.Action<Interop.API.Common.Models.Display.LegalClientDisplayModel> successAction, Models.Page.Configuration.LegalClientConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.LegalClientConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 

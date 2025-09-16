@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class BrandsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.BrandDisplayModel, Models.Page.Manage.BrandsManagePageModel, Models.Page.Configuration.BrandConfigurationPageModel, Configuration.BrandConfigurationPage, Detail.BrandDetailPage>
+public partial class BrandsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.BrandDisplayModel, Models.Page.Manage.BrandsManagePageModel, Models.Page.Configuration.BrandConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 128;
 

@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class PersonContactsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PersonContactDisplayModel, Models.Page.Manage.PersonContactsManagePageModel, Models.Page.Configuration.PersonContactConfigurationPageModel, Configuration.PersonContactConfigurationPage, Detail.PersonContactDetailPage>
+public partial class PersonContactsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PersonContactDisplayModel, Models.Page.Manage.PersonContactsManagePageModel, Models.Page.Configuration.PersonContactConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
 

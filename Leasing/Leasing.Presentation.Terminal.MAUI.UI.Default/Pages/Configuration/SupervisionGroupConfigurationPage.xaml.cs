@@ -7,7 +7,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default
 
 public partial class SupervisionGroupConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.SupervisionGroupDisplayModel, Interop.API.Common.Models.Display.SupervisionGroupDisplayModel, Models.Page.Configuration.SupervisionGroupConfigurationPageModel>
 {
-    public SupervisionGroupConfigurationPage(System.Action<Interop.API.Common.Models.Display.SupervisionGroupDisplayModel> successAction, Models.Page.Configuration.SupervisionGroupConfigurationPageModel model) : base(successAction, model)
+    public SupervisionGroupConfigurationPage(System.Action<Interop.API.Common.Models.Display.SupervisionGroupDisplayModel> successAction, Models.Page.Configuration.SupervisionGroupConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

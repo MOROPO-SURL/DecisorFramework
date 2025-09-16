@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
-    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:presentation_list_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.List;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
@@ -12,7 +11,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.List.VehicleLeaseOfferTenderListPage"
-    x:TypeArguments="interop_common_display_models:VehicleLeaseOfferDisplayModel,presentation_list_page_models:VehicleLeaseOfferTenderListPageModel,local_detail_pages:VehicleLeaseOfferDetailPage"
+    x:TypeArguments="interop_common_display_models:VehicleLeaseOfferDisplayModel,presentation_list_page_models:VehicleLeaseOfferTenderListPageModel"
     x:DataType="presentation_list_page_models:VehicleLeaseOfferTenderListPageModel"
     Title="Licitaciones de Arrendamiento de Vehículos">
     <ContentPage.Resources>

@@ -1,10 +1,9 @@
 ﻿namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade
 {
-    public interface IConfigurationContentPageFactoryFacade<TModel, TConfigurationPageModel, TConfigurationContentPage>
+    public interface IConfigurationContentPageFactoryFacade<TModel, TConfigurationPageModel>
         where TModel : class
-        where TConfigurationPageModel : Models.Page.Contract.AbstractConfigurationPageModel<TModel>
-        where TConfigurationContentPage : Pages.Base.ConfigurationBaseContentPage<TModel, TModel, TConfigurationPageModel>
+        where TConfigurationPageModel : Models.Page.Contract.AbstractConfigurationPageModel<TModel> 
     {
-        TConfigurationContentPage Build(System.Action<TModel> configurationSuccessAction, TConfigurationPageModel model);
+        Pages.Base.ConfigurationBaseContentPage<TModel, TModel, TConfigurationPageModel> Build(System.Action<TModel> configurationSuccessAction, TConfigurationPageModel model);
     }
 }

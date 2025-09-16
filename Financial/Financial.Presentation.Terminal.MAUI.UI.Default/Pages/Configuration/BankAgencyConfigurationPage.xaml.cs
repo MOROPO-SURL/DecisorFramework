@@ -8,7 +8,7 @@ public partial class BankAgencyConfigurationPage : Core.Presentation.Terminal.MA
 {
     private ImageInputModel imagePickedModel;
 
-    public BankAgencyConfigurationPage(System.Action<Interop.API.Common.Models.Display.BankAgencyDisplayModel> successAction, Models.Page.Configuration.BankAgencyConfigurationPageModel model) : base(successAction, model)
+    public BankAgencyConfigurationPage(System.Action<Interop.API.Common.Models.Display.BankAgencyDisplayModel> successAction, Models.Page.Configuration.BankAgencyConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

@@ -12,7 +12,7 @@ public partial class WarehouseConfigurationPage : Core.Presentation.Terminal.MAU
     private readonly List<Interop.API.Common.Models.Input.WarehousingAreaInputModel> incomingAreas = [];
     private readonly List<Interop.API.Common.Models.Display.WarehousingAreaDisplayModel> outgoingAreas = [];
 
-    public WarehouseConfigurationPage(System.Action<Interop.API.Common.Models.Display.WarehouseDisplayModel> successAction, Models.Page.Configuration.WarehouseConfigurationPageModel model) : base(successAction, model)
+    public WarehouseConfigurationPage(System.Action<Interop.API.Common.Models.Display.WarehouseDisplayModel> successAction, Models.Page.Configuration.WarehouseConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }

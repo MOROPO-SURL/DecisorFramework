@@ -7934,19 +7934,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("postulationid");
 
-                    b.Property<Guid>("PropertyId")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("uuid")
-                        .HasColumnName("propertyid");
-
                     b.HasIndex("ClientId")
                         .HasDatabaseName("ix_leasecontracts_clientid");
 
                     b.HasIndex("PostulationId")
                         .HasDatabaseName("ix_leasecontracts_postulationid");
-
-                    b.HasIndex("PropertyId")
-                        .HasDatabaseName("ix_leasecontracts_propertyid");
 
                     b.ToTable("leasecontracts");
 
@@ -7967,19 +7959,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("postulationid");
 
-                    b.Property<Guid>("PropertyId")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("uuid")
-                        .HasColumnName("propertyid");
-
                     b.HasIndex("ClientId")
                         .HasDatabaseName("ix_leasecontracts_clientid");
 
                     b.HasIndex("PostulationId")
                         .HasDatabaseName("ix_leasecontracts_postulationid");
-
-                    b.HasIndex("PropertyId")
-                        .HasDatabaseName("ix_leasecontracts_propertyid");
 
                     b.ToTable("leasecontracts");
 
@@ -12255,18 +12239,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_leasecontracts_propleasorgpostulations_postulationid");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Property", "Property")
-                        .WithMany()
-                        .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_leasecontracts_properties_propertyid");
-
                     b.Navigation("Client");
 
                     b.Navigation("Postulation");
-
-                    b.Navigation("Property");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.NaturalClientPropertyLeaseContract", b =>
@@ -12285,18 +12260,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_leasecontracts_propleaspersonpostulations_postulationid");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Property", "Property")
-                        .WithMany()
-                        .HasForeignKey("PropertyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_leasecontracts_properties_propertyid");
-
                     b.Navigation("Client");
 
                     b.Navigation("Postulation");
-
-                    b.Navigation("Property");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.NamingResolution", b =>

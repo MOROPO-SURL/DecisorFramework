@@ -2,8 +2,6 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
-    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
-    xmlns:local_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Legal.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI"
@@ -11,7 +9,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.SectionsManagePage"
-    x:TypeArguments="interop_common_display_models:SectionDisplayModel,presentation_manage_page_models:SectionsManagePageModel,presentation_configuration_page_models:SectionConfigurationPageModel,local_configuration_pages:SectionConfigurationPage,local_detail_pages:SectionDetailPage"
+    x:TypeArguments="interop_common_display_models:SectionDisplayModel,presentation_manage_page_models:SectionsManagePageModel,presentation_configuration_page_models:SectionConfigurationPageModel"
     x:DataType="presentation_manage_page_models:SectionsManagePageModel"
     Title="Gestión de Secciones Contractuales">
     <ContentPage.Resources>

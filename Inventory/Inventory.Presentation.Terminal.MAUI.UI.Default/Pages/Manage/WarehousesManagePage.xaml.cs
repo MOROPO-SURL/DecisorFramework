@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class WarehousesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.WarehouseDisplayModel, Models.Page.Manage.WarehousesManagePageModel, Models.Page.Configuration.WarehouseConfigurationPageModel, Configuration.WarehouseConfigurationPage, Detail.WarehouseDetailPage>
+public partial class WarehousesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.WarehouseDisplayModel, Models.Page.Manage.WarehousesManagePageModel, Models.Page.Configuration.WarehouseConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 136;
 

@@ -3,7 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class VehiclePickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.VehicleDisplayModel, Models.Page.Pick.VehiclePickPageModel, Detail.VehicleDetailPage>
+public partial class VehiclePickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.VehicleDisplayModel, Models.Page.Pick.VehiclePickPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 284;
 

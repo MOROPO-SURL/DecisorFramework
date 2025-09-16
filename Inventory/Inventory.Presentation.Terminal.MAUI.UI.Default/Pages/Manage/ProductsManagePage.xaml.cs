@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProductDisplayModel, Models.Page.Manage.ProductsManagePageModel, Models.Page.Configuration.ProductConfigurationPageModel, Configuration.ProductConfigurationPage, Detail.ProductDetailPage>
+public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProductDisplayModel, Models.Page.Manage.ProductsManagePageModel, Models.Page.Configuration.ProductConfigurationPageModel>
 {
     public ProductsManagePage()
     {
