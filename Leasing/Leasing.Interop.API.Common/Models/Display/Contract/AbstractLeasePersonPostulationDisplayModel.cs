@@ -16,6 +16,8 @@
 
         public string Argument { get; set; }
 
+        public Core.Interop.API.Common.Models.Display.DocumentDisplayModel[] Documents { get; set; }
+
         public virtual void Import(TEntity entity)
         {
             Id = entity.Id;
@@ -26,13 +28,22 @@
                 Contact = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
 
                 Contact.Import(entity.Contact);
-            }
 
-            if (entity.Contact.MainPostalContact != null)
-            {
-                MainPostalContactItem = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
+                TaxIdentificationNumber = entity.Contact.PersonalIdentificationNumber;
+                
+                if (entity.Contact.BusinessKind != null)
+                {
+                    BusinessKind = new Domain.Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel();
 
-                MainPostalContactItem.Import(entity.Contact.MainPostalContact);
+                    BusinessKind.Import(entity.Contact.BusinessKind);
+                }
+
+                if (entity.Contact.MainPostalContact != null)
+                {
+                    MainPostalContactItem = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
+
+                    MainPostalContactItem.Import(entity.Contact.MainPostalContact);
+                }
             }
         }
     }

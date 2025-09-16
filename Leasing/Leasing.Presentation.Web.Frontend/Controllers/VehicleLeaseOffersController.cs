@@ -81,6 +81,17 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
                 _model.MainPostalContactItem = _model.Contact.Identity.PostalContacts.First(_model => _model.Id == _entity.Contact.MainPostalContactId);
 
+                _model.Documents = _entity.DocumentBridges.Select(bridge =>
+                {
+                    var _model = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+
+                    _model.Import(bridge.Stern);
+
+                    _model.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.ContentType);
+
+                    return _model;
+                }).ToArray();
+
                 return _model;
             }).ToArray();
             model.PersonPostulations = personPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id).ToArray().Select(_entity =>
@@ -104,6 +115,17 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                 }
 
                 _model.MainPostalContactItem = _model.Contact.Identity.PostalContacts.First(_model => _model.Id == _entity.Contact.MainPostalContactId);
+
+                _model.Documents = _entity.DocumentBridges.Select(bridge =>
+                {
+                    var _model = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+
+                    _model.Import(bridge.Stern);
+
+                    _model.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.ContentType);
+
+                    return _model;
+                }).ToArray();
 
                 return _model;
             }).ToArray();

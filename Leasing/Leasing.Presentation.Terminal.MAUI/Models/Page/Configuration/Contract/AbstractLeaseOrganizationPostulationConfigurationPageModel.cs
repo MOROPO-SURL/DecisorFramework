@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration.Contract
+﻿using System.Collections.ObjectModel;
+
+namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration.Contract
 {
     public abstract class AbstractLeaseOrganizationPostulationConfigurationPageModel<TModel, TEntity> : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<TModel>
         where TModel : Interop.API.Common.Models.Display.Contract.AbstractLeaseOrganizationPostulationDisplayModel<TEntity>
@@ -22,6 +24,7 @@
                 stateIdentificationCode = model.StateIdentificationCode;
                 mainPostalContactItem = model.MainPostalContactItem;
                 argument = model.Argument;
+                Documents = new ObservableCollection<Core.Interop.API.Common.Models.Display.DocumentDisplayModel>(model.Documents);
             }
         }
 
@@ -38,5 +41,7 @@
         public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContactItem { get => mainPostalContactItem; set => SetProperty(ref mainPostalContactItem, value); }
 
         public string Argument { get => argument; set => SetProperty(ref argument, value); }
+
+        public ObservableCollection<Core.Interop.API.Common.Models.Display.DocumentDisplayModel> Documents { get; set; } = [];
     }
 }

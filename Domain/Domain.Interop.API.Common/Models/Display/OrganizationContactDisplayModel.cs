@@ -7,11 +7,20 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
     {
         public Core.Interop.API.Common.Models.Display.OrganizationIdentityDisplayModel Identity { get; set; }
 
+        public string TaxIdentificationNumber { get; set; }
+
+        public string StateIdentificationCode { get; set; }
+
+        public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContactItem { get; set; }
+
         public LegalBusinessKindDisplayModel BusinessKind { get; set; }
 
         public override void Import(OrganizationContact entity)
         {
             base.Import(entity);
+
+            TaxIdentificationNumber = entity.TaxIdentificationNumber;
+            StateIdentificationCode = entity.StateIdentificationCode;
 
             if (entity.Identity != null)
             {
@@ -25,6 +34,13 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
                 BusinessKind = new LegalBusinessKindDisplayModel();
 
                 BusinessKind.Import(entity.BusinessKind);
+            }
+
+            if (entity.MainPostalContact != null)
+            {
+                MainPostalContactItem = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
+
+                MainPostalContactItem.Import(entity.MainPostalContact);
             }
         }
 
