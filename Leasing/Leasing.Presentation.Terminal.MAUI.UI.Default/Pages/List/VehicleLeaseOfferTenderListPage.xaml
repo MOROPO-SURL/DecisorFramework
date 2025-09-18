@@ -100,7 +100,7 @@
                                                                     <Frame 
                                                                         Margin="0,8,0,0"
                                                                         Padding="8"
-                                                                        HeightRequest="156">
+                                                                        HeightRequest="172">
                                                                         <Frame.GestureRecognizers>
                                                                             <TapGestureRecognizer Tapped="OganizationPostulationViewLayoutTapGestureRecognizer_Tapped" />
                                                                         </Frame.GestureRecognizers>
@@ -113,11 +113,13 @@
                                                                                 <RowDefinition Height="Auto" />
                                                                                 <RowDefinition Height="Auto" />
                                                                                 <RowDefinition Height="Auto" />
+                                                                                <RowDefinition Height="Auto" />
                                                                             </Grid.RowDefinitions>
                                                                             <Frame 
-                                                                                Grid.Column="0" Grid.RowSpan="3"
+                                                                                Grid.Column="0" Grid.RowSpan="4"
                                                                                 VerticalOptions="Start"
-                                                                                Padding="0">
+                                                                                Padding="0"
+                                                                                HeightRequest="152">
                                                                                 <Grid>
                                                                                     <Grid.ColumnDefinitions>
                                                                                         <ColumnDefinition Width="Auto" />
@@ -126,7 +128,7 @@
                                                                                     <Image
                                                                                         Grid.Column="0" Grid.RowSpan="3"
                                                                                         Aspect="AspectFill"
-                                                                                        WidthRequest="136" HeightRequest="136"
+                                                                                        WidthRequest="152" HeightRequest="152"
                                                                                         Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
                                                                                     <StackLayout 
                                                                                         Grid.Column="1"
@@ -146,7 +148,6 @@
                                                                                             Margin="0,8,0,0"
                                                                                             Text="Argumento"
                                                                                             TextColor="DimGray"
-                                                                                            FontSize="Caption"
                                                                                             FontAttributes="Bold" />
                                                                                         <Label
                                                                                             VerticalOptions="FillAndExpand"
@@ -159,14 +160,25 @@
                                                                             </Frame>
                                                                             <Button
                                                                                 Grid.Column="1" Grid.Row="0"
+                                                                                Padding="0"
+                                                                                FontSize="21"
                                                                                 FontFamily="MaterialDesignIcons" 
                                                                                 Text="&#xF90B;"
                                                                                 Clicked="OrganizationPostulationEditionButton_Clicked" />
                                                                             <Button
                                                                                 Grid.Column="1" Grid.Row="1"
+                                                                                Padding="0"
+                                                                                FontSize="21"
                                                                                 FontFamily="MaterialDesignIcons" 
                                                                                 Text="&#xFA78;"
                                                                                 Clicked="OrganizationPostulationRemotionButton_Clicked" />
+                                                                            <Button
+                                                                                Grid.Column="1" Grid.Row="2"
+                                                                                Padding="0"
+                                                                                FontSize="21"
+                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Text="&#xFE70;"
+                                                                                Clicked="OrganizationPostulationApproveButton_Clicked" />
                                                                         </Grid>
                                                                     </Frame>
                                                                 </DataTemplate>
@@ -214,7 +226,7 @@
                                                                     <Frame 
                                                                         Margin="0,8,0,0"
                                                                         Padding="8"
-                                                                        HeightRequest="156">
+                                                                        HeightRequest="172">
                                                                         <Frame.GestureRecognizers>
                                                                             <TapGestureRecognizer Tapped="PersonPostulationViewLayoutTapGestureRecognizer_Tapped" />
                                                                         </Frame.GestureRecognizers>
@@ -227,11 +239,13 @@
                                                                                 <RowDefinition Height="Auto" />
                                                                                 <RowDefinition Height="Auto" />
                                                                                 <RowDefinition Height="Auto" />
+                                                                                <RowDefinition Height="Auto" />
                                                                             </Grid.RowDefinitions>
                                                                             <Frame 
                                                                                 Grid.Column="0" Grid.RowSpan="3"
                                                                                 VerticalOptions="Start"
-                                                                                Padding="0">
+                                                                                Padding="0"
+                                                                                HeightRequest="152">
                                                                                 <Grid>
                                                                                     <Grid.ColumnDefinitions>
                                                                                         <ColumnDefinition Width="Auto" />
@@ -240,7 +254,7 @@
                                                                                     <Image
                                                                                         Grid.Column="0" Grid.RowSpan="3"
                                                                                         Aspect="AspectFill"
-                                                                                        WidthRequest="136" HeightRequest="136"
+                                                                                        WidthRequest="152" HeightRequest="152"
                                                                                         Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
                                                                                     <StackLayout 
                                                                                         Grid.Column="1"
@@ -279,14 +293,24 @@
                                                                             </Frame>
                                                                             <Button
                                                                                 Grid.Column="1" Grid.Row="0"
+                                                                                Padding="0"
+                                                                                FontSize="21"
                                                                                 FontFamily="MaterialDesignIcons" 
                                                                                 Text="&#xF90B;"
                                                                                 Clicked="PersonPostulationEditionButton_Clicked" />
                                                                             <Button
                                                                                 Grid.Column="1" Grid.Row="1"
+                                                                                Padding="0"
+                                                                                FontSize="21"
                                                                                 FontFamily="MaterialDesignIcons" 
                                                                                 Text="&#xFA78;"
                                                                                 Clicked="PersonPostulationRemotionButton_Clicked" />
+                                                                            <Button
+                                                                                Grid.Column="1" Grid.Row="2"
+                                                                                Padding="0"
+                                                                                FontSize="21"
+                                                                                FontFamily="MaterialDesignIcons" 
+                                                                                Text="&#xFE70;" />
                                                                         </Grid>
                                                                     </Frame>
                                                                 </DataTemplate>

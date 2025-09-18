@@ -48,6 +48,35 @@ public partial class VehicleLeaseOfferTenderListPage : Core.Presentation.Termina
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 
+    private void OrganizationPostulationApproveButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var apiConnectClient = new Commercial.Interop.API.Connect.Clients.PaymentTermsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        (BindingContext as Models.Page.List.VehicleLeaseOfferTenderListPageModel).IsBusy = true;
+
+        apiConnectClient.GetEnabledAsync().ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                if (task.IsCanceled || task.Exception != null)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    var model = new Models.Page.Configuration.LegalClientVehicleLeasingConfigurationPageModel((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as VehicleLeaseOrganizationPostulationDisplayModel, null)
+                    {
+                        AvailablePaymentTerms = task.Result
+                    };
+
+                    this.NavigationPushPageAsync(new Configuration.LegalClientVehicleLeasingConfigurationPage(model => LoadItems(), model));
+                }
+
+                (BindingContext as Models.Page.List.VehicleLeaseOfferTenderListPageModel).IsBusy = false;
+            });
+        });
+    }
+
     private void OganizationPostulationViewLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         this.NavigationPushModalPageAsync(new Detail.VehicleLeaseOrganizationPostulationDetailPage(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as VehicleLeaseOrganizationPostulationDisplayModel));

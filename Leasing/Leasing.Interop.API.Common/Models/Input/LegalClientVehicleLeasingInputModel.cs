@@ -15,18 +15,22 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 
         public int Priority { get; set; }
 
+        public int Index { get; set; }
+
         [System.ComponentModel.DataAnnotations.Required]
         public string Objective { get; set; }
 
         public System.DateTime StartAt { get; set; }
 
-        public double Feed { get; set; }
+        public int DurationUnitCount { get; set; }
 
-        public Legal.Persistence.Enumerations.DurationUnitMeasureKind FeedDurationUnitMeasureKind { get; set; }
+        public Legal.Persistence.Enumerations.DurationUnitMeasureKind DurationUnitMeasureKind { get; set; }
+
+        public double Feed { get; set; }
 
         public System.Guid PaymentTermId { get; set; }
 
-        public System.Collections.Generic.List<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel> Contacts { get; set; } = new System.Collections.Generic.List<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel>();
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel[] Contacts { get; set; }
 
         public Persistence.Entities.LegalClientVehicleLeasing Export()
         {
@@ -45,6 +49,12 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
         public void Mergue(Persistence.Entities.LegalClientVehicleLeasing entity)
         {
             entity.OperativeLicenceCode = OperativeLicenceCode;
+
+            if (entity.AgreementId != AgreementId)
+            {
+                entity.Agreement = null;
+                entity.AgreementId = AgreementId;
+            }
 
             entity.ContactBridges.Clear();
 

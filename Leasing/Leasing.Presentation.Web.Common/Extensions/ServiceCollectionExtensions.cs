@@ -19,6 +19,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<PropertyLeaseOrganizationPostulation, System.Guid>, PropertyLeaseOrganizationPostulationRepository>();
             services.AddScoped<IEntityRepository<PropertyLeasePersonPostulation, System.Guid>, PropertyLeasePersonPostulationRepository>();
             services.AddScoped<IEntityRepository<SupervisionGroup, System.Guid>, SupervisionGroupRepository>();
+            services.AddScoped<IEntityRepository<LegalClientVehicleLeaseContract, int>, LegalClientVehicleLeaseContractRepository>();
             services.AddScoped<IEntityRepository<LegalClientVehicleLeasing, System.Guid>, LegalClientVehicleLeasingRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.LeasingDbSchemaConfigurationProvider>();

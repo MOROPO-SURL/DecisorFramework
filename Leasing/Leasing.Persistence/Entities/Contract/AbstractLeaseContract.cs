@@ -4,8 +4,6 @@
     {
         public double Feed { get; set; }
 
-        public Legal.Persistence.Enumerations.DurationUnitMeasureKind FeedDurationUnitMeasureKind { get; set; }
-
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(PaymentTermId))]
         public Commercial.Persistence.Entities.PaymentTerm PaymentTerm { get; set; }
         public System.Guid PaymentTermId { get; set; }

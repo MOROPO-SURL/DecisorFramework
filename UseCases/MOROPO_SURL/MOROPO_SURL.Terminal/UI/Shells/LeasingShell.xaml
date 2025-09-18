@@ -119,7 +119,7 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Clientes Jurídicos"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:LegalClientVehicleLeasingListPage}" />
         <ShellContent
             Title="Clientes Naturales"
             ContentTemplate="{DataTemplate ContentPage}" />

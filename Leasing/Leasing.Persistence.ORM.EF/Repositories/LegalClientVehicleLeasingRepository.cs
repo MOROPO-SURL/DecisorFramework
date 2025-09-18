@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Repositories
 {
@@ -10,7 +8,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Repositories
         {
         }
 
-        protected override IQueryable<LegalClientVehicleLeasing> GetQueryableDbSet()
+        protected override System.Linq.IQueryable<Entities.LegalClientVehicleLeasing> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
                 .Include(entity => entity.Contract).ThenInclude(entity => entity.Client).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)

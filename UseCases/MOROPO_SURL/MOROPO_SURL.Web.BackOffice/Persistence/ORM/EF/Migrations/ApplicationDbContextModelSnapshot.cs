@@ -3867,10 +3867,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("double precision")
                         .HasColumnName("feed");
 
-                    b.Property<int>("FeedDurationUnitMeasureKind")
-                        .HasColumnType("integer")
-                        .HasColumnName("feeddurationunitmeasurekind");
-
                     b.Property<string>("Objective")
                         .IsRequired()
                         .HasColumnType("text")
@@ -3898,7 +3894,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("PaymentTermId")
                         .HasDatabaseName("ix_leasecontracts_paymenttermid");
 
-                    b.ToTable("leasecontracts", (string)null);
+                    b.ToTable("leasecontracts", "decisorframework_leasing");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("AbstractLeaseContract");
 
@@ -4100,6 +4096,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("AgreementId")
                         .HasDatabaseName("ix_legalclientvehicleleasings_agreementid");
+
+                    b.HasIndex("ContractId")
+                        .HasDatabaseName("ix_legalclientvehicleleasings_contractid");
 
                     b.ToTable("legalclientvehicleleasings", "decisorframework_leasing");
                 });
@@ -4416,6 +4415,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("AgreementId")
                         .HasDatabaseName("ix_naturalclientvehicleleasings_agreementid");
 
+                    b.HasIndex("ContractId")
+                        .HasDatabaseName("ix_naturalclientvehicleleasings_contractid");
+
                     b.ToTable("naturalclientvehicleleasings", "decisorframework_leasing");
                 });
 
@@ -4565,6 +4567,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
+
+                    b.Property<DateTime?>("LeasedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("leasedat");
 
                     b.Property<DateTime>("OpenAt")
                         .HasColumnType("timestamp without time zone")
@@ -4929,6 +4935,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
+
+                    b.Property<DateTime?>("LeasedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("leasedat");
 
                     b.Property<DateTime>("OpenAt")
                         .HasColumnType("timestamp without time zone")
@@ -7924,50 +7934,92 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 {
                     b.HasBaseType("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.Contract.AbstractLeaseContract");
 
-                    b.Property<Guid>("ClientId")
-                        .ValueGeneratedOnUpdateSometimes()
+                    b.Property<Guid?>("PropertyLeaseLegalClientId")
                         .HasColumnType("uuid")
-                        .HasColumnName("clientid");
+                        .HasColumnName("propertyleaselegalclientid");
 
-                    b.Property<Guid>("PostulationId")
-                        .ValueGeneratedOnUpdateSometimes()
+                    b.Property<Guid?>("PropertyLeaseLegalPostulationId")
                         .HasColumnType("uuid")
-                        .HasColumnName("postulationid");
+                        .HasColumnName("propertyleaselegalpostulationid");
 
-                    b.HasIndex("ClientId")
-                        .HasDatabaseName("ix_leasecontracts_clientid");
+                    b.HasIndex("PropertyLeaseLegalClientId")
+                        .HasDatabaseName("ix_leasecontracts_propertyleaselegalclientid");
 
-                    b.HasIndex("PostulationId")
-                        .HasDatabaseName("ix_leasecontracts_postulationid");
+                    b.HasIndex("PropertyLeaseLegalPostulationId")
+                        .HasDatabaseName("ix_leasecontracts_propertyleaselegalpostulationid");
 
-                    b.ToTable("leasecontracts");
+                    b.ToTable("leasecontracts", "decisorframework_leasing");
 
                     b.HasDiscriminator().HasValue("LegalClientPropertyLeaseContract");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.LegalClientVehicleLeaseContract", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.Contract.AbstractLeaseContract");
+
+                    b.Property<Guid?>("VehicleLeaseLegalClientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vehicleleaselegalclientid");
+
+                    b.Property<Guid?>("VehicleLeaseLegalPostulationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vehicleleaselegalpostulationid");
+
+                    b.HasIndex("VehicleLeaseLegalClientId")
+                        .HasDatabaseName("ix_leasecontracts_vehicleleaselegalclientid");
+
+                    b.HasIndex("VehicleLeaseLegalPostulationId")
+                        .HasDatabaseName("ix_leasecontracts_vehicleleaselegalpostulationid");
+
+                    b.ToTable("leasecontracts", "decisorframework_leasing");
+
+                    b.HasDiscriminator().HasValue("LegalClientVehicleLeaseContract");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.NaturalClientPropertyLeaseContract", b =>
                 {
                     b.HasBaseType("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.Contract.AbstractLeaseContract");
 
-                    b.Property<Guid>("ClientId")
-                        .ValueGeneratedOnUpdateSometimes()
+                    b.Property<Guid?>("PropertyLeaseNaturalClientId")
                         .HasColumnType("uuid")
-                        .HasColumnName("clientid");
+                        .HasColumnName("propertyleasenaturalclientid");
 
-                    b.Property<Guid>("PostulationId")
-                        .ValueGeneratedOnUpdateSometimes()
+                    b.Property<Guid?>("PropertyLeaseNaturalPostulationId")
                         .HasColumnType("uuid")
-                        .HasColumnName("postulationid");
+                        .HasColumnName("propertyleasenaturalpostulationid");
 
-                    b.HasIndex("ClientId")
-                        .HasDatabaseName("ix_leasecontracts_clientid");
+                    b.HasIndex("PropertyLeaseNaturalClientId")
+                        .HasDatabaseName("ix_leasecontracts_propertyleasenaturalclientid");
 
-                    b.HasIndex("PostulationId")
-                        .HasDatabaseName("ix_leasecontracts_postulationid");
+                    b.HasIndex("PropertyLeaseNaturalPostulationId")
+                        .HasDatabaseName("ix_leasecontracts_propertyleasenaturalpostulationid");
 
-                    b.ToTable("leasecontracts");
+                    b.ToTable("leasecontracts", "decisorframework_leasing");
 
                     b.HasDiscriminator().HasValue("NaturalClientPropertyLeaseContract");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.NaturalClientVehicleLeaseContract", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.Contract.AbstractLeaseContract");
+
+                    b.Property<Guid?>("VehicleLeaseNaturalClientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vehicleleasenaturalclientid");
+
+                    b.Property<Guid?>("VehicleLeaseNaturalPostulationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("vehicleleasenaturalpostulationid");
+
+                    b.HasIndex("VehicleLeaseNaturalClientId")
+                        .HasDatabaseName("ix_leasecontracts_vehicleleasenaturalclientid");
+
+                    b.HasIndex("VehicleLeaseNaturalPostulationId")
+                        .HasDatabaseName("ix_leasecontracts_vehicleleasenaturalpostulationid");
+
+                    b.ToTable("leasecontracts", "decisorframework_leasing");
+
+                    b.HasDiscriminator().HasValue("NaturalClientVehicleLeaseContract");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.NamingResolution", b =>
@@ -10049,7 +10101,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_legalclientvehicleleasings_agreements_agreementid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.LegalClientVehicleLeaseContract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientvehicleleasings_leasecontracts_contractid");
+
                     b.Navigation("Agreement");
+
+                    b.Navigation("Contract");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.LegalClientVehicleLeasingCompensation", b =>
@@ -10271,7 +10332,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_naturalclientvehicleleasings_agreements_agreementid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.NaturalClientVehicleLeaseContract", "Contract")
+                        .WithMany()
+                        .HasForeignKey("ContractId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientvehicleleasings_leasecontracts_contractid");
+
                     b.Navigation("Agreement");
+
+                    b.Navigation("Contract");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.NaturalClientVehicleLeasingCompensation", b =>
@@ -12227,17 +12297,30 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_leasecontracts_legalclients_clientid");
+                        .HasForeignKey("PropertyLeaseLegalClientId")
+                        .HasConstraintName("fk_leasecontracts_legalclients_propertyleaselegalclientid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOrganizationPostulation", "Postulation")
                         .WithMany()
-                        .HasForeignKey("PostulationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_leasecontracts_propleasorgpostulations_postulationid");
+                        .HasForeignKey("PropertyLeaseLegalPostulationId")
+                        .HasConstraintName("fk_leasecontracts_propleasorgpostulations_propertyleaselegalpo~");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Postulation");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.LegalClientVehicleLeaseContract", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("VehicleLeaseLegalClientId")
+                        .HasConstraintName("fk_leasecontracts_legalclients_vehicleleaselegalclientid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeaseOrganizationPostulation", "Postulation")
+                        .WithMany()
+                        .HasForeignKey("VehicleLeaseLegalPostulationId")
+                        .HasConstraintName("fk_leasecontracts_vehleasorgpostulations_vehicleleaselegalpost~");
 
                     b.Navigation("Client");
 
@@ -12248,17 +12331,30 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClient", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_leasecontracts_naturalclients_clientid");
+                        .HasForeignKey("PropertyLeaseNaturalClientId")
+                        .HasConstraintName("fk_leasecontracts_naturalclients_propertyleasenaturalclientid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeasePersonPostulation", "Postulation")
                         .WithMany()
-                        .HasForeignKey("PostulationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_leasecontracts_propleaspersonpostulations_postulationid");
+                        .HasForeignKey("PropertyLeaseNaturalPostulationId")
+                        .HasConstraintName("fk_leasecontracts_propleaspersonpostulations_propertyleasenatu~");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Postulation");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.NaturalClientVehicleLeaseContract", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("VehicleLeaseNaturalClientId")
+                        .HasConstraintName("fk_leasecontracts_naturalclients_vehicleleasenaturalclientid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.VehicleLeasePersonPostulation", "Postulation")
+                        .WithMany()
+                        .HasForeignKey("VehicleLeaseNaturalPostulationId")
+                        .HasConstraintName("fk_leasecontracts_vehleaspersonpostulations_vehicleleasenatura~");
 
                     b.Navigation("Client");
 

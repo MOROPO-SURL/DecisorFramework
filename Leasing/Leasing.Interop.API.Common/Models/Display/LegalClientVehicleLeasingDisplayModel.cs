@@ -23,13 +23,6 @@
 
                 Agreement.Import(entity.Agreement);
             }
-
-            if (entity.Contract != null)
-            {
-                Contract = new LegalClientVehicleLeaseContractDisplayModel();
-
-                Contract.Import(entity.Contract);
-            }
         }
     }
 }

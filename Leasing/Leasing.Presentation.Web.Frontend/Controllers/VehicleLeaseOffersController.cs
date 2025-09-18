@@ -27,7 +27,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
         protected override System.Linq.Expressions.Expression<System.Func<VehicleLeaseOffer, bool>> GetGlobalSelector()
         {
-            return entity => !entity.Archived;
+            return entity => !entity.Archived && entity.LeasedAt == null;
         }
 
         protected override System.Func<VehicleLeaseOffer, object> GetOrderSelector()
