@@ -1375,6 +1375,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("numeric")
                         .HasColumnName("area");
 
+                    b.Property<int?>("Assignment")
+                        .HasColumnType("integer")
+                        .HasColumnName("assignment");
+
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");

@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ListBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.List"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
+    xmlns:presentation_list_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.List;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.List.NaturalClientVehicleLeasingListPage"
+    x:TypeArguments="interop_common_display_models:NaturalClientVehicleLeasingDisplayModel,presentation_list_page_models:NaturalClientVehicleLeasingListPageModel"
+    x:DataType="presentation_list_page_models:NaturalClientVehicleLeasingListPageModel"
+    Title="Expedientes de Arrendamiento de Vehículos a Clientes Naturales">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <SearchBar Margin="20,20,20,0" />
+                <Grid 
+                    VerticalOptions="FillAndExpand"
+                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
+                    <CollectionView
+                        x:Name="ItemsCollectionView"
+                        Margin="10"
+                        ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_common_display_models:NaturalClientVehicleLeasingDisplayModel">
+                                <Frame 
+                                    Padding="0"
+                                    HeightRequest="{Static local:NaturalClientVehicleLeasingListPage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                    </Frame.GestureRecognizers>
+                                    <Grid ColumnSpacing="0">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="2*" />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Grid.Column="0"
+                                            Aspect="AspectFill"               
+                                            Source="{Binding Contract.Vehicle.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                        <StackLayout 
+                                            Grid.Column="1"
+                                            Padding="16">
+                                            <Label 
+                                                FontAttributes="Bold"
+                                                FontSize="Medium"
+                                                LineBreakMode="TailTruncation">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Contract.Vehicle.Brand.Name}" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding Contract.Vehicle.Model}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                            <Label
+                                                FontAttributes="Bold"
+                                                Text="{Binding Contract.Vehicle.Plate}" />
+                                            <Label 
+                                                Margin="0,8,0,0"
+                                                Text="Entidad Administrativa"
+                                                TextColor="DimGray"
+                                                FontSize="Caption"
+                                                FontAttributes="Bold" />
+                                            <Label
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Contract.Vehicle.Structure.Identity.Name}" />
+                                            <Label 
+                                                Margin="0,8,0,4"
+                                                Text="Arrendatario"
+                                                TextColor="DimGray"
+                                                FontSize="Caption"
+                                                FontAttributes="Bold" />
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Border 
+                                                    Grid.Column="0"
+                                                    VerticalOptions="Center"
+                                                    StrokeThickness="4"
+                                                    StrokeLineJoin="Bevel">
+                                                    <Border.StrokeShape>
+                                                        <RoundRectangle CornerRadius="32" />
+                                                    </Border.StrokeShape>
+                                                    <Image
+                                                        WidthRequest="64" HeightRequest="64"
+                                                        Source="{Binding Contract.Client.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                                </Border>
+                                                <StackLayout 
+                                                    Grid.Column="1"
+                                                    VerticalOptions="Center"
+                                                    Padding="10,0">
+                                                    <Label
+                                                        ToolTipProperties.Text="{Binding Contract.Client.Contact.Identity.Name}"
+                                                        Text="{Binding Contract.Client.Contact.Identity.Name}"
+                                                        FontSize="Medium"
+                                                        LineBreakMode="TailTruncation" />
+                                                    <Label
+                                                        IsVisible="{Binding Contract.Client.Contact.Identity.LastName, Converter={StaticResource IsNotNullConverter}}"
+                                                        ToolTipProperties.Text="{Binding Contract.Client.Contact.Identity.LastName}"
+                                                        Text="{Binding Contract.Client.Contact.Identity.LastName}"
+                                                        LineBreakMode="TailTruncation" />
+                                                    <Label
+                                                        ToolTipProperties.Text="{Binding Contract.Client.Contact.BusinessKind.Name}"
+                                                        Text="{Binding Contract.Client.Contact.BusinessKind.Name}"
+                                                        LineBreakMode="TailTruncation" />
+                                                </StackLayout>
+                                            </Grid>
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Label
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                                HorizontalTextAlignment="Center"
+                                Margin="5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                FontAttributes="Italic" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.Footer>
+                            <StackLayout IsVisible="{Binding HasMoreItems}">
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="5"
+                                    Text="Mostrar más"
+                                    Clicked="LoadMoreBurron_Clicked" />
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</core_ui_base_pages:ListBaseContentPage>

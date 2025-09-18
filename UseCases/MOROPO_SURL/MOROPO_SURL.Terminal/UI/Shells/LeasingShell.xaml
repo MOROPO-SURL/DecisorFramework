@@ -104,10 +104,10 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Clientes Jurídicos"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:LegalClientPropertyLeasingListPage}" />
         <ShellContent
             Title="Clientes Naturales"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:NaturalClientPropertyLeasingListPage}" />
     </FlyoutItem>
     <FlyoutItem
         Title="Expedientes de Arrend. Vehículos">
@@ -122,7 +122,7 @@
             ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:LegalClientVehicleLeasingListPage}" />
         <ShellContent
             Title="Clientes Naturales"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate decisorframework_leasing_list_pages:NaturalClientVehicleLeasingListPage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent

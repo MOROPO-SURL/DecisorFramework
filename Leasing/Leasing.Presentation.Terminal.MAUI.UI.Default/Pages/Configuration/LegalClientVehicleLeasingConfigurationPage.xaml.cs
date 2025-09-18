@@ -80,8 +80,42 @@ public partial class LegalClientVehicleLeasingConfigurationPage : Core.Presentat
         hasChangesFlag = true;
     }
 
+    private void DriverAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(DriverPickComplete_Callback)));
+    }
+
+    private void DriverDetailButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel;
+
+        this.NavigationPushModalPageAsync(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.PersonContactDetailPage(target, null));
+    }
+
+    private void DriverRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este conductor?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel;
+
+                ConcreteBindingContext.Contacts.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
     private void MeetingAgreementPickComplete_Callback(Governance.Interop.API.Common.Models.Display.AgreementDisplayModel model)
     {
         ConcreteBindingContext.Agreement = model;
+    }
+
+    private void DriverPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
+    {
+        ConcreteBindingContext.Contacts.Add(model);
     }
 }

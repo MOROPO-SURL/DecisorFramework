@@ -19,6 +19,9 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default
                 .AddSingleton<IDetailContentPageFactoryFacade<PropertyLeaseOfferDisplayModel>, PropertyLeaseOfferDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<SupervisionGroupDisplayModel>, SupervisionGroupDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<LegalClientVehicleLeasingDisplayModel>, LegalClientVehicleLeasingDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<NaturalClientVehicleLeasingDisplayModel>, NaturalClientVehicleLeasingDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<LegalClientPropertyLeasingDisplayModel>, LegalClientPropertyLeasingDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<NaturalClientPropertyLeasingDisplayModel>, NaturalClientPropertyLeasingDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<VehicleLeasePropousalDisplayModel, VehicleLeasePropousalConfigurationPageModel>, VehicleLeasePropousalConfigurationPageFactory>()

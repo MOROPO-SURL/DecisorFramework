@@ -178,7 +178,8 @@
                                                                                 Padding="0"
                                                                                 FontSize="21"
                                                                                 FontFamily="MaterialDesignIcons" 
-                                                                                Text="&#xFE70;" />
+                                                                                Text="&#xFE70;"
+                                                                                Clicked="OrganizationPostulationApproveButton_Clicked" />
                                                                         </Grid>
                                                                     </Frame>
                                                                 </DataTemplate>
@@ -310,7 +311,8 @@
                                                                                 Padding="0"
                                                                                 FontSize="21"
                                                                                 FontFamily="MaterialDesignIcons" 
-                                                                                Text="&#xFE70;" />
+                                                                                Text="&#xFE70;"
+                                                                                Clicked="PersonPostulationApproveButton_Clicked" />
                                                                         </Grid>
                                                                     </Frame>
                                                                 </DataTemplate>

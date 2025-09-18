@@ -2,37 +2,12 @@
 
 namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 {
-    public class LegalClientVehicleLeasingInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.LegalClientVehicleLeasing, System.Guid>
+    public class LegalClientVehicleLeasingInputModel : Contract.AbstractLeasingInputModel<Persistence.Entities.LegalClientVehicleLeasing>
     {
-        public System.Guid Id { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string OperativeLicenceCode { get; set; }
 
-        public System.Guid PostulationId { get; set; }
-
-        public System.Guid AgreementId { get; set; }
-
-        public int Priority { get; set; }
-
-        public int Index { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Required]
-        public string Objective { get; set; }
-
-        public System.DateTime StartAt { get; set; }
-
-        public int DurationUnitCount { get; set; }
-
-        public Legal.Persistence.Enumerations.DurationUnitMeasureKind DurationUnitMeasureKind { get; set; }
-
-        public double Feed { get; set; }
-
-        public System.Guid PaymentTermId { get; set; }
-
-        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel[] Contacts { get; set; }
-
-        public Persistence.Entities.LegalClientVehicleLeasing Export()
+        public override Persistence.Entities.LegalClientVehicleLeasing Export()
         {
             var entity = new Persistence.Entities.LegalClientVehicleLeasing { Id = Id };
 
@@ -41,20 +16,11 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.LegalClientVehicleLeasing entity)
+        public override void Mergue(Persistence.Entities.LegalClientVehicleLeasing entity)
         {
-            throw new System.NotImplementedException();
-        }
+            base.Mergue(entity);
 
-        public void Mergue(Persistence.Entities.LegalClientVehicleLeasing entity)
-        {
             entity.OperativeLicenceCode = OperativeLicenceCode;
-
-            if (entity.AgreementId != AgreementId)
-            {
-                entity.Agreement = null;
-                entity.AgreementId = AgreementId;
-            }
 
             entity.ContactBridges.Clear();
 

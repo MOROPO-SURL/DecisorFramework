@@ -69,7 +69,36 @@ public partial class VehicleLeaseOfferTenderListPage : Core.Presentation.Termina
                         AvailablePaymentTerms = task.Result
                     };
 
-                    this.NavigationPushPageAsync(new Configuration.LegalClientVehicleLeasingConfigurationPage(model => LoadItems(), model));
+                    this.NavigationPushPageAsync(new Configuration.LegalClientVehicleLeasingConfigurationPage(OrganizationPostulationLeasingConfigurationSuccess_Callback, model));
+                }
+
+                (BindingContext as Models.Page.List.VehicleLeaseOfferTenderListPageModel).IsBusy = false;
+            });
+        });
+    }
+
+    private void PersonPostulationApproveButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var apiConnectClient = new Commercial.Interop.API.Connect.Clients.PaymentTermsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        (BindingContext as Models.Page.List.VehicleLeaseOfferTenderListPageModel).IsBusy = true;
+
+        apiConnectClient.GetEnabledAsync().ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                if (task.IsCanceled || task.Exception != null)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    var model = new Models.Page.Configuration.NaturalClientVehicleLeasingConfigurationPageModel((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as VehicleLeasePersonPostulationDisplayModel, null)
+                    {
+                        AvailablePaymentTerms = task.Result
+                    };
+
+                    this.NavigationPushPageAsync(new Configuration.NaturalClientVehicleLeasingConfigurationPage(PersonPostulationLeasingConfigurationSuccess_Callback, model));
                 }
 
                 (BindingContext as Models.Page.List.VehicleLeaseOfferTenderListPageModel).IsBusy = false;
@@ -209,6 +238,16 @@ public partial class VehicleLeaseOfferTenderListPage : Core.Presentation.Termina
     }
 
     private void PersonPostulationConfigurationSuccess_Callback(VehicleLeasePersonPostulationDisplayModel model)
+    {
+        LoadItems(true);
+    }
+
+    protected void OrganizationPostulationLeasingConfigurationSuccess_Callback(LegalClientVehicleLeasingDisplayModel model)
+    {
+        LoadItems(true);
+    }
+
+    protected void PersonPostulationLeasingConfigurationSuccess_Callback(NaturalClientVehicleLeasingDisplayModel model)
     {
         LoadItems(true);
     }

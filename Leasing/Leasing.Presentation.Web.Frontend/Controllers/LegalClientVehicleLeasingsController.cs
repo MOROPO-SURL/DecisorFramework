@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
@@ -12,17 +13,19 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
     [ApiController]
     public class LegalClientVehicleLeasingsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<LegalClientVehicleLeasing, System.Guid, LegalClientVehicleLeasingInputModel, LegalClientVehicleLeasingDisplayModel>
     {
-        private readonly IEntityRepository<LegalClient, System.Guid> legalClientRepository;
+        private readonly IEntityRepository<LegalClient, System.Guid> clientRepository;
         private readonly IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> postulationRepository;
         private readonly IEntityRepository<VehicleLeaseOffer, System.Guid> offerRepository;
         private readonly IEntityRepository<LegalClientVehicleLeaseContract, int> contractRepository;
+        private readonly IEntityRepository<Vehicle, System.Guid> vehicleRepository;
 
-        public LegalClientVehicleLeasingsController(IEntityRepository<LegalClientVehicleLeaseContract, int> contractRepository, IEntityRepository<VehicleLeaseOffer, System.Guid> offerRepository, IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> postulationRepository, IEntityRepository<LegalClient, System.Guid> legalClientRepository, IEntityRepository<LegalClientVehicleLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientVehicleLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientVehicleLeasingsController> logger) : base(repository, localizer, logger)
+        public LegalClientVehicleLeasingsController(IEntityRepository<Vehicle, System.Guid> vehicleRepository, IEntityRepository<LegalClientVehicleLeaseContract, int> contractRepository, IEntityRepository<VehicleLeaseOffer, System.Guid> offerRepository, IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> postulationRepository, IEntityRepository<LegalClient, System.Guid> clientRepository, IEntityRepository<LegalClientVehicleLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientVehicleLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientVehicleLeasingsController> logger) : base(repository, localizer, logger)
         {
-            this.legalClientRepository = legalClientRepository;
+            this.clientRepository = clientRepository;
             this.postulationRepository = postulationRepository;
             this.offerRepository = offerRepository;
             this.contractRepository = contractRepository;
+            this.vehicleRepository = vehicleRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<LegalClientVehicleLeasing, bool>> GetGlobalSelector()
@@ -88,7 +91,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
             var postulation = postulationRepository.Get(model.PostulationId);
 
-            var client = legalClientRepository.FindOneBy(_entity => _entity.ContactId == postulation.ContactId);
+            var client = clientRepository.FindOneBy(_entity => _entity.ContactId == postulation.ContactId);
 
             entity.Contract = contractRepository.Add(new LegalClientVehicleLeaseContract
             {
@@ -112,7 +115,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
             {
                 var clientId = System.Guid.NewGuid();
 
-                entity.Contract.Client = new LegalClient
+                entity.Contract.Client = clientRepository.Add(new LegalClient
                 {
                     Id = clientId,
                     Enabled = true,
@@ -124,7 +127,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                         ProwId = clientId,
                         SternId = bridge.SternId
                     }).ToList()
-                };
+                }, User.Identity.Name, false);
             }
 
             var offer = offerRepository.Get(postulation.OfferId); 
@@ -132,7 +135,13 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
             offer.Archived = true;
             offer.LeasedAt = System.DateTime.Now;
 
-            offerRepository.Update(postulation.Offer, User.Identity.Name, false);
+            offerRepository.Update(offer, User.Identity.Name, false);
+
+            var vehicle = vehicleRepository.Get(offer.Propousal.VehicleId);
+
+            vehicle.Assignment = Domain.Persistence.Enumerations.VehicleAssignment.Leasing;
+
+            vehicleRepository.Update(vehicle, User.Identity.Name, false);
         }
     }
 }

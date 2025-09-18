@@ -1,12 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.List;
 
 public partial class LegalClientVehicleLeasingListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<LegalClientVehicleLeasingDisplayModel, Models.Page.List.LegalClientVehicleLeasingListPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 248;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 236;
 
     public LegalClientVehicleLeasingListPage()
     {
@@ -50,15 +49,5 @@ public partial class LegalClientVehicleLeasingListPage : Core.Presentation.Termi
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
-    }
-
-    private void OganizationPostulationViewLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
-    {
-        this.NavigationPushModalPageAsync(new Detail.PropertyLeaseOrganizationPostulationDetailPage(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PropertyLeaseOrganizationPostulationDisplayModel));
-    }
-
-    private void PersonPostulationViewLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
-    {
-        this.NavigationPushModalPageAsync(new Detail.PropertyLeasePersonPostulationDetailPage(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PropertyLeasePersonPostulationDisplayModel));
     }
 }
