@@ -30,11 +30,6 @@ public partial class OcupationCandidatesManagePage : Core.Presentation.Terminal.
         return apiConnectClient.GetPaginateAsync();
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.OcupationCandidateConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.OcupationCandidateDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.OcupationCandidateConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.OcupationCandidateDisplayModel target, int discriminator)
     {
         switch (discriminator)

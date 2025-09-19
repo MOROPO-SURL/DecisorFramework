@@ -16,6 +16,8 @@ public partial class VacantPostulationsManagePage : Core.Presentation.Terminal.M
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 392; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
@@ -28,17 +30,6 @@ public partial class VacantPostulationsManagePage : Core.Presentation.Terminal.M
         var apiConnectClient = new Interop.API.Connect.Clients.VacantPostulationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync();
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.VacantPostulationConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.VacantPostulationDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.VacantPostulationConfigurationPageModel(model);
-
-        var apiConnectClient = new Interop.API.Connect.Clients.SchoolingsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-        result.AvailableSchoolings = await apiConnectClient.GetAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.VacantPostulationDisplayModel target, int discriminator)

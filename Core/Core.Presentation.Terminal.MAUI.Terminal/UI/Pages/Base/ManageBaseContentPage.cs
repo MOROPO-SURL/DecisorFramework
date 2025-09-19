@@ -63,15 +63,17 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             {
                 try
                 {
-                    var model = await GetConfigurationPageModelAsync();
+                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IConfigurationContentPageFactoryFacade<TModel, TConfigurationPageModel>>();
+
+                    var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
+
+                    ComplementConfigurationPage(page);
 
                     Dispatcher.Dispatch(() =>
                     {
                         concreteBindingContext.IsBusy = false;
 
-                        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IConfigurationContentPageFactoryFacade<TModel, TConfigurationPageModel>>();
-
-                        this.NavigationPushPageAsync(factory.Build(ConfigurationSuccess_Callback, model));
+                        this.NavigationPushPageAsync(page);
                     });
                 }
                 catch (System.Exception exception)
@@ -110,15 +112,17 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 {
                     try
                     {
-                        var model = await GetConfigurationPageModelAsync(target);
+                        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IConfigurationContentPageFactoryFacade<TModel, TConfigurationPageModel>>();
+
+                        var page = await factory.BuildAsync(ConfigurationSuccess_Callback, target);
+
+                        ComplementConfigurationPage(page, target);
 
                         Dispatcher.Dispatch(() =>
                         {
                             concreteBindingContext.IsBusy = false;
 
-                            var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Factories.Facade.IConfigurationContentPageFactoryFacade<TModel, TConfigurationPageModel>>();
-
-                            this.NavigationPushPageAsync(factory.Build(ConfigurationSuccess_Callback, model));
+                            this.NavigationPushPageAsync(page);
                         });
                     }
                     catch (System.Exception exception)
@@ -140,9 +144,8 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             LoadItems(true);
         }
 
-        protected virtual System.Threading.Tasks.Task<TConfigurationPageModel> GetConfigurationPageModelAsync(TModel model = null)
+        protected virtual void ComplementConfigurationPage(ConfigurationBaseContentPage<TModel, TModel, TConfigurationPageModel> page, TModel model = null)
         {
-            throw new System.NotImplementedException();
         }
     }
 }

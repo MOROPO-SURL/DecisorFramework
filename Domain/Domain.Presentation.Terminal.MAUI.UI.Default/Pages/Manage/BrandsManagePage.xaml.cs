@@ -30,11 +30,6 @@ public partial class BrandsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.BrandConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.BrandDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.BrandConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.BrandDisplayModel target, int discriminator)
     {
         switch (discriminator)

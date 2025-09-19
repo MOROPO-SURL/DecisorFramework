@@ -64,26 +64,34 @@ public partial class OrganizationContactPickPage : Core.Presentation.Terminal.MA
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = BindingContext as Models.Page.Pick.OrganizationContactPickPageModel;
-
-        var apiConnectClient = new Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+        var concreteBindingContext = BindingContext as Models.Page.Pick.OrganizationalUnityPickPageModel;
 
         concreteBindingContext.IsBusy = true;
 
-        apiConnectClient.GetEnabledAsync().ContinueWith(task =>
+        System.Threading.Tasks.Task.Run(async () =>
         {
-            var model = new Models.Page.Configuration.OrganizationContactConfigurationPageModel(null)
+            try
             {
-                AvailableBusinessKinds = task.Result
-            };
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.OrganizationContactDisplayModel, Models.Page.Configuration.OrganizationContactConfigurationPageModel>>();
 
-            Dispatcher.Dispatch(() =>
+                var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
+
+                Dispatcher.Dispatch(() =>
+                {
+                    concreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(page);
+                });
+            }
+            catch (System.Exception exception)
             {
-                concreteBindingContext.IsBusy = false;
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
 
-                this.NavigationPushPageAsync(new Configuration.OrganizationContactConfigurationPage(ConfigurationSuccess_Callback, model));
-            });
-
+                    concreteBindingContext.IsBusy = false;
+                });
+            }
         });
     }
 

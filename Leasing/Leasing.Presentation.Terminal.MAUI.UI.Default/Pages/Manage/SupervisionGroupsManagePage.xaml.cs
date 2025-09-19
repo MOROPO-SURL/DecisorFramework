@@ -30,11 +30,6 @@ public partial class SupervisionGroupsManagePage : Core.Presentation.Terminal.MA
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.SupervisionGroupConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.SupervisionGroupDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.SupervisionGroupConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.SupervisionGroupDisplayModel target, int discriminator)
     {
         switch (discriminator)

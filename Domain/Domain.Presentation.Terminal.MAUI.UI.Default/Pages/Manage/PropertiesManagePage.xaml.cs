@@ -16,6 +16,8 @@ public partial class PropertiesManagePage : Core.Presentation.Terminal.MAUI.UI.P
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 320; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
@@ -28,21 +30,6 @@ public partial class PropertiesManagePage : Core.Presentation.Terminal.MAUI.UI.P
         var apiConnectClient = new Interop.API.Connect.Clients.PropertiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.PropertyConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.PropertyDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.PropertyConfigurationPageModel(model);
-
-        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
-
-        var kindsAPIConnectClient = new Interop.API.Connect.Clients.PropertyKindsAPIConnectClient(httpClientHelperProvider);
-        var structuresAPIConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(httpClientHelperProvider);
-
-        result.AvailableKinds = await kindsAPIConnectClient.GetAsync();
-        result.AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.PropertyDisplayModel target, int discriminator)

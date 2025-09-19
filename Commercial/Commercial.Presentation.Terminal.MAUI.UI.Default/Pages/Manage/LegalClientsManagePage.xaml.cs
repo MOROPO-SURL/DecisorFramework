@@ -17,6 +17,8 @@ public partial class LegalClientsManagePage : Core.Presentation.Terminal.MAUI.UI
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 420; }
 
     protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalClientViewerPermission;
@@ -35,17 +37,6 @@ public partial class LegalClientsManagePage : Core.Presentation.Terminal.MAUI.UI
         var apiConnectClient = new Interop.API.Connect.Clients.LegalClientsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.LegalClientConfigurationPageModel> GetConfigurationPageModelAsync(LegalClientDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.LegalClientConfigurationPageModel(model);
-
-        var apiConnectClient = new Interop.API.Connect.Clients.PaymentTermsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-        result.AvailablePaymentTerms = await apiConnectClient.GetEnabledAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(LegalClientDisplayModel target, int discriminator)

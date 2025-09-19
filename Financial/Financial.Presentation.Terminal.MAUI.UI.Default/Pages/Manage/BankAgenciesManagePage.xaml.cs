@@ -30,11 +30,6 @@ public partial class BankAgenciesManagePage : Core.Presentation.Terminal.MAUI.UI
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.BankAgencyConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.BankAgencyDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.BankAgencyConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.BankAgencyDisplayModel target, int discriminator)
     {
         switch (discriminator)

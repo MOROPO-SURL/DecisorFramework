@@ -30,11 +30,6 @@ public partial class SalaryStandardsManagePage : Core.Presentation.Terminal.MAUI
         return apiConnectClient.GetPaginateAsync();
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.SalaryStandardConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.SalaryStandardDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.SalaryStandardConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.SalaryStandardDisplayModel target, int discriminator)
     {
         switch (discriminator)

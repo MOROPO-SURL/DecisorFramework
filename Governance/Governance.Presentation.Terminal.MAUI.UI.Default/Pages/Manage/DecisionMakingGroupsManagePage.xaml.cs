@@ -16,6 +16,8 @@ public partial class DecisionMakingGroupsManagePage : Core.Presentation.Terminal
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 320; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
@@ -28,17 +30,6 @@ public partial class DecisionMakingGroupsManagePage : Core.Presentation.Terminal
         var apiConnectClient = new Interop.API.Connect.Clients.DecisionMakingGroupsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.DecisionMakingGroupConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.DecisionMakingGroupConfigurationPageModel(model);
-
-        var structuresAPIConnectClient = new Domain.Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-        result.AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel target, int discriminator)

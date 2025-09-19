@@ -17,6 +17,8 @@ public partial class LegalProvidersManagePage : Core.Presentation.Terminal.MAUI.
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 420; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
@@ -29,17 +31,6 @@ public partial class LegalProvidersManagePage : Core.Presentation.Terminal.MAUI.
         var apiConnectClient = new Interop.API.Connect.Clients.LegalProvidersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.LegalProviderConfigurationPageModel> GetConfigurationPageModelAsync(LegalProviderDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.LegalProviderConfigurationPageModel(model);
-
-        var apiConnectClient = new Interop.API.Connect.Clients.PaymentTermsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-        result.AvailablePaymentTerms = await apiConnectClient.GetEnabledAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(LegalProviderDisplayModel target, int discriminator)
