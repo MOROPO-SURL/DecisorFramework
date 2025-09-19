@@ -21,6 +21,12 @@ public partial class NaturalProvidersManagePage : Core.Presentation.Terminal.MAU
 
     protected override double ItemViewRequestWidth { get => 420; }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalProviderViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalProviderCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalProviderEditorPermission;
+
     protected override double MeasureCollectionViewCellHeight(double width)
     {
         return ITEM_VIEW_REQUEST_HEIGHT;

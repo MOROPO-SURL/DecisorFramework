@@ -20,6 +20,12 @@ public partial class NaturalClientsManagePage : Core.Presentation.Terminal.MAUI.
 
     protected override double ItemViewRequestWidth { get => 420; }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalClientEditorPermission;
+
     protected override double MeasureCollectionViewCellHeight(double width)
     {
         return ITEM_VIEW_REQUEST_HEIGHT;
