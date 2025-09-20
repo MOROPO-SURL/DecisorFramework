@@ -4,6 +4,10 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
 {
     public class VehicleLeaseOfferConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<VehicleLeaseOfferDisplayModel>
     {
+        public static string PropousalValidableProperty => nameof(Propousal);
+        public static string AgreementValidableProperty => nameof(Agreement);
+        public static string DescriptionValidableProperty => nameof(Description);
+
         private int priority = 1;
         private System.DateTime openAt = System.DateTime.Now;
         private System.DateTime closedAt = System.DateTime.Now;

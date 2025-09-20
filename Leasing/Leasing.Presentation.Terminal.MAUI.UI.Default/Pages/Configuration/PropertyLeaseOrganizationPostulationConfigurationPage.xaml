@@ -68,7 +68,7 @@
                         <Label
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeaseOrganizationPostulationConfigurationPageModel.ContactValidableProperty}}"
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeaseOrganizationPostulationConfigurationPageModel.ContactValidableProperty}}"
-                            TextColor="IndianRed" />
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <FlexLayout 
@@ -83,7 +83,7 @@
                         <Label
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeaseOrganizationPostulationConfigurationPageModel.TaxIdentificationNumberValidableProperty}}"
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeaseOrganizationPostulationConfigurationPageModel.TaxIdentificationNumberValidableProperty}}"
-                            TextColor="IndianRed" />
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
@@ -106,7 +106,7 @@
                     <Label
                         IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeaseOrganizationPostulationConfigurationPageModel.MainPostalContactItemValidableProperty}}"
                         Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeaseOrganizationPostulationConfigurationPageModel.MainPostalContactItemValidableProperty}}"
-                        TextColor="IndianRed" />
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8"
@@ -203,6 +203,10 @@
                             </FlexLayout>
                         </Grid>
                     </Frame>
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeaseOrganizationPostulationConfigurationPageModel.SpacesValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeaseOrganizationPostulationConfigurationPageModel.SpacesValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8"
@@ -316,7 +320,7 @@
                     <Label
                         IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeaseOrganizationPostulationConfigurationPageModel.ArgumentValidableProperty}}"
                         Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeaseOrganizationPostulationConfigurationPageModel.ArgumentValidableProperty}}"
-                        TextColor="IndianRed" />
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>

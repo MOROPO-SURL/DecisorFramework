@@ -59,7 +59,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                 model.Propousal.Vehicle.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Propousal.Vehicle.FeatureImage.ContentType);
             }
 
-            model.OrganizationPostulations = organizationPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id).ToArray().Select(_entity =>
+            model.OrganizationPostulations = organizationPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id && !_entity.Archived).ToArray().Select(_entity =>
             {
                 var _model = new VehicleLeaseOrganizationPostulationDisplayModel();
 
@@ -94,7 +94,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
                 return _model;
             }).ToArray();
-            model.PersonPostulations = personPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id).ToArray().Select(_entity =>
+            model.PersonPostulations = personPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id && !_entity.Archived).ToArray().Select(_entity =>
             {
                 var _model = new VehicleLeasePersonPostulationDisplayModel();
 

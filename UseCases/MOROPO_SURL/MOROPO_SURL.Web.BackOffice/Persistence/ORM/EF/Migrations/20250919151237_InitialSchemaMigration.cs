@@ -52,10 +52,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 name: "guamaframework_identity");
 
             migrationBuilder.EnsureSchema(
-                name: "guamaframework_core_security_common");
+                name: "decisorframework_leasing");
 
             migrationBuilder.EnsureSchema(
-                name: "decisorframework_leasing");
+                name: "guamaframework_core_security_common");
 
             migrationBuilder.EnsureSchema(
                 name: "guamaframework_security_personal");
@@ -2694,6 +2694,32 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "supervisiongroups",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    name = table.Column<string>(type: "text", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true),
+                    representativeid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_supervisiongroups", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_supervisiongroups_employees_representativeid",
+                        column: x => x.representativeid,
+                        principalSchema: "decisorframework_domain",
+                        principalTable: "employees",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "naturalclientbankaccountbridges",
                 schema: "decisorframework_commercial",
                 columns: table => new
@@ -3222,6 +3248,33 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         principalSchema: "decisorframework_purchasing",
                         principalTable: "purchasezones",
                         principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "supervisiongroupemployeebridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_supervisiongroupemployeebridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_supervisiongroupemployeebridges_employees_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "decisorframework_domain",
+                        principalTable: "employees",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_supervisiongroupemployeebridges_supervisiongroups_prowid",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "supervisiongroups",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -4440,6 +4493,691 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "leasecontracts",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<int>(type: "integer", nullable: false)
+                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    feed = table.Column<double>(type: "double precision", nullable: false),
+                    paymenttermid = table.Column<Guid>(type: "uuid", nullable: false),
+                    discriminator = table.Column<string>(type: "text", nullable: false),
+                    propertyleaselegalpostulationid = table.Column<Guid>(type: "uuid", nullable: true),
+                    propertyleaselegalclientid = table.Column<Guid>(type: "uuid", nullable: true),
+                    vehicleleaselegalpostulationid = table.Column<Guid>(type: "uuid", nullable: true),
+                    vehicleleaselegalclientid = table.Column<Guid>(type: "uuid", nullable: true),
+                    propertyleasenaturalpostulationid = table.Column<Guid>(type: "uuid", nullable: true),
+                    propertyleasenaturalclientid = table.Column<Guid>(type: "uuid", nullable: true),
+                    vehicleleasenaturalpostulationid = table.Column<Guid>(type: "uuid", nullable: true),
+                    vehicleleasenaturalclientid = table.Column<Guid>(type: "uuid", nullable: true),
+                    year = table.Column<int>(type: "integer", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    objective = table.Column<string>(type: "text", nullable: false),
+                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    durationunitcount = table.Column<int>(type: "integer", nullable: true),
+                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_leasecontracts", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_leasecontracts_legalclients_propertyleaselegalclientid",
+                        column: x => x.propertyleaselegalclientid,
+                        principalSchema: "decisorframework_commercial",
+                        principalTable: "legalclients",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_leasecontracts_legalclients_vehicleleaselegalclientid",
+                        column: x => x.vehicleleaselegalclientid,
+                        principalSchema: "decisorframework_commercial",
+                        principalTable: "legalclients",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_leasecontracts_naturalclients_propertyleasenaturalclientid",
+                        column: x => x.propertyleasenaturalclientid,
+                        principalSchema: "decisorframework_commercial",
+                        principalTable: "naturalclients",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_leasecontracts_naturalclients_vehicleleasenaturalclientid",
+                        column: x => x.vehicleleasenaturalclientid,
+                        principalSchema: "decisorframework_commercial",
+                        principalTable: "naturalclients",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_leasecontracts_paymentterms_paymenttermid",
+                        column: x => x.paymenttermid,
+                        principalSchema: "decisorframework_commercial",
+                        principalTable: "paymentterms",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legalclientpropertyleasings",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    agreementid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legalclientpropertyleasings", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_legalclientpropertyleasings_agreements_agreementid",
+                        column: x => x.agreementid,
+                        principalSchema: "decisorframework_governance",
+                        principalTable: "agreements",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legalclientpropertyleasings_leasecontracts_contractid",
+                        column: x => x.contractid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "leasecontracts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legalclientvehicleleasings",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    agreementid = table.Column<Guid>(type: "uuid", nullable: false),
+                    operativelicencecode = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legalclientvehicleleasings", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_legalclientvehicleleasings_agreements_agreementid",
+                        column: x => x.agreementid,
+                        principalSchema: "decisorframework_governance",
+                        principalTable: "agreements",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legalclientvehicleleasings_leasecontracts_contractid",
+                        column: x => x.contractid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "leasecontracts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "naturalclientpropertyleasings",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    agreementid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_naturalclientpropertyleasings", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_naturalclientpropertyleasings_agreements_agreementid",
+                        column: x => x.agreementid,
+                        principalSchema: "decisorframework_governance",
+                        principalTable: "agreements",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_naturalclientpropertyleasings_leasecontracts_contractid",
+                        column: x => x.contractid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "leasecontracts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "naturalclientvehicleleasings",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    agreementid = table.Column<Guid>(type: "uuid", nullable: false),
+                    operativelicencecode = table.Column<string>(type: "text", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_naturalclientvehicleleasings", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_naturalclientvehicleleasings_agreements_agreementid",
+                        column: x => x.agreementid,
+                        principalSchema: "decisorframework_governance",
+                        principalTable: "agreements",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_naturalclientvehicleleasings_leasecontracts_contractid",
+                        column: x => x.contractid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "leasecontracts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legalclientpropertyleasingcompensations",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    leasingid = table.Column<Guid>(type: "uuid", nullable: false),
+                    agreementid = table.Column<Guid>(type: "uuid", nullable: false),
+                    startat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    endat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    discountfraction = table.Column<double>(type: "double precision", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legalclientpropertyleasingcompensations", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_legalclientpropertyleasingcompensations_agreements_agreemen~",
+                        column: x => x.agreementid,
+                        principalSchema: "decisorframework_governance",
+                        principalTable: "agreements",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legalclientpropertyleasingcompensations_legalclientproperty~",
+                        column: x => x.leasingid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "legalclientpropertyleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legclientpropleaspersoncontactbridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legclientpropleaspersoncontactbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_legclientpropleaspersoncontactbridges_legalclientpropertyle~",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "legalclientpropertyleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legclientpropleaspersoncontactbridges_personcontacts_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "decisorframework_domain",
+                        principalTable: "personcontacts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legclientpropsupervcontrolactions",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    leasingid = table.Column<Guid>(type: "uuid", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true),
+                    supervisiongroupid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legclientpropsupervcontrolactions", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_legclientpropsupervcontrolactions_legalclientpropertyleasin~",
+                        column: x => x.leasingid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "legalclientpropertyleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legclientpropsupervcontrolactions_supervisiongroups_supervi~",
+                        column: x => x.supervisiongroupid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "supervisiongroups",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legalclientvehicleleasingcompensations",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    leasingid = table.Column<Guid>(type: "uuid", nullable: false),
+                    agreementid = table.Column<Guid>(type: "uuid", nullable: false),
+                    startat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    endat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    discountfraction = table.Column<double>(type: "double precision", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legalclientvehicleleasingcompensations", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_legalclientvehicleleasingcompensations_agreements_agreement~",
+                        column: x => x.agreementid,
+                        principalSchema: "decisorframework_governance",
+                        principalTable: "agreements",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legalclientvehicleleasingcompensations_legalclientvehiclele~",
+                        column: x => x.leasingid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "legalclientvehicleleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legclientvehleaspersoncontactbridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legclientvehleaspersoncontactbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_legclientvehleaspersoncontactbridges_legalclientvehicleleas~",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "legalclientvehicleleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legclientvehleaspersoncontactbridges_personcontacts_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "decisorframework_domain",
+                        principalTable: "personcontacts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legclientvehsupervcontrolactions",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    leasingid = table.Column<Guid>(type: "uuid", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true),
+                    supervisiongroupid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legclientvehsupervcontrolactions", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_legclientvehsupervcontrolactions_legalclientvehicleleasings~",
+                        column: x => x.leasingid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "legalclientvehicleleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legclientvehsupervcontrolactions_supervisiongroups_supervis~",
+                        column: x => x.supervisiongroupid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "supervisiongroups",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "natclientpropleaspersoncontactbridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_natclientpropleaspersoncontactbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_natclientpropleaspersoncontactbridges_naturalclientproperty~",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "naturalclientpropertyleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_natclientpropleaspersoncontactbridges_personcontacts_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "decisorframework_domain",
+                        principalTable: "personcontacts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "natclientpropsupervcontrolactions",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    leasingid = table.Column<Guid>(type: "uuid", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true),
+                    supervisiongroupid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_natclientpropsupervcontrolactions", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_natclientpropsupervcontrolactions_naturalclientpropertyleas~",
+                        column: x => x.leasingid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "naturalclientpropertyleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_natclientpropsupervcontrolactions_supervisiongroups_supervi~",
+                        column: x => x.supervisiongroupid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "supervisiongroups",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "naturalclientpropertyleasingcompensations",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    leasingid = table.Column<Guid>(type: "uuid", nullable: false),
+                    agreementid = table.Column<Guid>(type: "uuid", nullable: false),
+                    startat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    endat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    discountfraction = table.Column<double>(type: "double precision", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_naturalclientpropertyleasingcompensations", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_naturalclientpropertyleasingcompensations_agreements_agreem~",
+                        column: x => x.agreementid,
+                        principalSchema: "decisorframework_governance",
+                        principalTable: "agreements",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_naturalclientpropertyleasingcompensations_naturalclientprop~",
+                        column: x => x.leasingid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "naturalclientpropertyleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "natclientvehleaspersoncontactbridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_natclientvehleaspersoncontactbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_natclientvehleaspersoncontactbridges_naturalclientvehiclele~",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "naturalclientvehicleleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_natclientvehleaspersoncontactbridges_personcontacts_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "decisorframework_domain",
+                        principalTable: "personcontacts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "natclientvehsupervcontrolactions",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    leasingid = table.Column<Guid>(type: "uuid", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true),
+                    supervisiongroupid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_natclientvehsupervcontrolactions", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_natclientvehsupervcontrolactions_naturalclientvehicleleasin~",
+                        column: x => x.leasingid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "naturalclientvehicleleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_natclientvehsupervcontrolactions_supervisiongroups_supervis~",
+                        column: x => x.supervisiongroupid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "supervisiongroups",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "naturalclientvehicleleasingcompensations",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    leasingid = table.Column<Guid>(type: "uuid", nullable: false),
+                    agreementid = table.Column<Guid>(type: "uuid", nullable: false),
+                    startat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    endat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    discountfraction = table.Column<double>(type: "double precision", nullable: false),
+                    description = table.Column<string>(type: "text", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_naturalclientvehicleleasingcompensations", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_naturalclientvehicleleasingcompensations_agreements_agreeme~",
+                        column: x => x.agreementid,
+                        principalSchema: "decisorframework_governance",
+                        principalTable: "agreements",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_naturalclientvehicleleasingcompensations_naturalclientvehic~",
+                        column: x => x.leasingid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "naturalclientvehicleleasings",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legclientpropleascompdocumentbridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legclientpropleascompdocumentbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_legclientpropleascompdocumentbridges_documents_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legclientpropleascompdocumentbridges_legalclientpropertylea~",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "legalclientpropertyleasingcompensations",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legclientvehleascompdocumentbridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legclientvehleascompdocumentbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_legclientvehleascompdocumentbridges_documents_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_legclientvehleascompdocumentbridges_legalclientvehicleleasi~",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "legalclientvehicleleasingcompensations",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "natclientpropleascompdocumentbridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_natclientpropleascompdocumentbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_natclientpropleascompdocumentbridges_documents_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_natclientpropleascompdocumentbridges_naturalclientpropertyl~",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "naturalclientpropertyleasingcompensations",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "natclientvehleascompdocumentbridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_natclientvehleascompdocumentbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_natclientvehleascompdocumentbridges_documents_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_natclientvehleascompdocumentbridges_naturalclientvehiclelea~",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "naturalclientvehicleleasingcompensations",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "legclientpropleascontractspacebridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<int>(type: "integer", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_legclientpropleascontractspacebridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_legclientpropleascontractspacebridges_leasecontracts_prowid",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "leasecontracts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "natclientpropeleascontractspacebridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<int>(type: "integer", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_natclientpropeleascontractspacebridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_natclientpropeleascontractspacebridges_leasecontracts_prowid",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "leasecontracts",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ocupationcandidates",
                 schema: "decisorframework_humanresources",
                 columns: table => new
@@ -4541,7 +5279,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     featureimageid = table.Column<Guid>(type: "uuid", nullable: true),
                     structureid = table.Column<Guid>(type: "uuid", nullable: false),
                     reference = table.Column<string>(type: "text", nullable: false),
-                    area = table.Column<decimal>(type: "numeric", nullable: false),
                     description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -4735,6 +5472,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     openat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     agreementid = table.Column<Guid>(type: "uuid", nullable: false),
                     closedat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    leasedat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -4906,29 +5644,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "propertyleaseorganizationpostulations",
+                name: "propleasorgpostulations",
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     offerid = table.Column<Guid>(type: "uuid", nullable: false),
                     contactid = table.Column<Guid>(type: "uuid", nullable: false),
-                    taxidentificationnumber = table.Column<string>(type: "text", nullable: false),
-                    stateidentificationcode = table.Column<string>(type: "text", nullable: true),
                     argument = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_propertyleaseorganizationpostulations", x => x.id);
+                    table.PrimaryKey("pk_propleasorgpostulations", x => x.id);
                     table.ForeignKey(
-                        name: "fk_propertyleaseorganizationpostulations_organizationcontacts_~",
+                        name: "fk_propleasorgpostulations_organizationcontacts_contactid",
                         column: x => x.contactid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "organizationcontacts",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_propertyleaseorganizationpostulations_propertyleaseoffers_o~",
+                        name: "fk_propleasorgpostulations_propertyleaseoffers_offerid",
                         column: x => x.offerid,
                         principalSchema: "decisorframework_leasing",
                         principalTable: "propertyleaseoffers",
@@ -4937,36 +5673,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "propertyleasepersonpostulations",
+                name: "propleaspersonpostulations",
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     offerid = table.Column<Guid>(type: "uuid", nullable: false),
                     contactid = table.Column<Guid>(type: "uuid", nullable: false),
-                    businesskindid = table.Column<Guid>(type: "uuid", nullable: false),
-                    taxidentificationnumber = table.Column<string>(type: "text", nullable: false),
                     argument = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_propertyleasepersonpostulations", x => x.id);
+                    table.PrimaryKey("pk_propleaspersonpostulations", x => x.id);
                     table.ForeignKey(
-                        name: "fk_propertyleasepersonpostulations_naturalbusinesskinds_busine~",
-                        column: x => x.businesskindid,
-                        principalSchema: "decisorframework_domain",
-                        principalTable: "naturalbusinesskinds",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_propertyleasepersonpostulations_personcontacts_contactid",
+                        name: "fk_propleaspersonpostulations_personcontacts_contactid",
                         column: x => x.contactid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "personcontacts",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_propertyleasepersonpostulations_propertyleaseoffers_offerid",
+                        name: "fk_propleaspersonpostulations_propertyleaseoffers_offerid",
                         column: x => x.offerid,
                         principalSchema: "decisorframework_leasing",
                         principalTable: "propertyleaseoffers",
@@ -5050,7 +5777,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "propertyleaseorganizationpostulationdocumentbridges",
+                name: "propleaseorgpostspacepropousalbridges",
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
@@ -5059,46 +5786,46 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_propertyleaseorganizationpostulationdocumentbridges", x => new { x.prowid, x.sternid });
+                    table.PrimaryKey("pk_propleaseorgpostspacepropousalbridges", x => new { x.prowid, x.sternid });
                     table.ForeignKey(
-                        name: "fk_propertyleaseorganizationpostulationdocumentbridges_documen~",
+                        name: "fk_propleaseorgpostspacepropousalbridges_propertyspaceleasepro~",
+                        column: x => x.sternid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "propertyspaceleasepropousals",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_propleaseorgpostspacepropousalbridges_propleasorgpostulatio~",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "propleasorgpostulations",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "propleasorgpostdocumentbridges",
+                schema: "decisorframework_leasing",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_propleasorgpostdocumentbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_propleasorgpostdocumentbridges_documents_sternid",
                         column: x => x.sternid,
                         principalSchema: "guamaframework_media",
                         principalTable: "documents",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_propertyleaseorganizationpostulationdocumentbridges_propert~",
+                        name: "fk_propleasorgpostdocumentbridges_propleasorgpostulations_prow~",
                         column: x => x.prowid,
                         principalSchema: "decisorframework_leasing",
-                        principalTable: "propertyleaseorganizationpostulations",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "propertyleaseorgpostulationspacepropousalbridges",
-                schema: "decisorframework_leasing",
-                columns: table => new
-                {
-                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
-                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_propertyleaseorgpostulationspacepropousalbridges", x => new { x.prowid, x.sternid });
-                    table.ForeignKey(
-                        name: "fk_propertyleaseorgpostulationspacepropousalbridges_propertyle~",
-                        column: x => x.prowid,
-                        principalSchema: "decisorframework_leasing",
-                        principalTable: "propertyleaseorganizationpostulations",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_propertyleaseorgpostulationspacepropousalbridges_propertysp~",
-                        column: x => x.sternid,
-                        principalSchema: "decisorframework_leasing",
-                        principalTable: "propertyspaceleasepropousals",
+                        principalTable: "propleasorgpostulations",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -5122,16 +5849,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_propertyleasepersonpostulationdocumentbridges_propertylease~",
+                        name: "fk_propertyleasepersonpostulationdocumentbridges_propleasperso~",
                         column: x => x.prowid,
                         principalSchema: "decisorframework_leasing",
-                        principalTable: "propertyleasepersonpostulations",
+                        principalTable: "propleaspersonpostulations",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "propertyleaseperspostulationspacepropousalbridges",
+                name: "propleasperspostspacepropbridges",
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
@@ -5140,19 +5867,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_propertyleaseperspostulationspacepropousalbridges", x => new { x.prowid, x.sternid });
+                    table.PrimaryKey("pk_propleasperspostspacepropbridges", x => new { x.prowid, x.sternid });
                     table.ForeignKey(
-                        name: "fk_propertyleaseperspostulationspacepropousalbridges_propertyl~",
-                        column: x => x.prowid,
-                        principalSchema: "decisorframework_leasing",
-                        principalTable: "propertyleasepersonpostulations",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_propertyleaseperspostulationspacepropousalbridges_propertys~",
+                        name: "fk_propleasperspostspacepropbridges_propertyspaceleasepropousa~",
                         column: x => x.sternid,
                         principalSchema: "decisorframework_leasing",
                         principalTable: "propertyspaceleasepropousals",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_propleasperspostspacepropbridges_propleaspersonpostulations~",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_leasing",
+                        principalTable: "propleaspersonpostulations",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -5171,6 +5898,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     openat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     agreementid = table.Column<Guid>(type: "uuid", nullable: false),
                     closedat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    leasedat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
@@ -5220,29 +5948,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "vehicleleaseorganizationpostulations",
+                name: "vehleasorgpostulations",
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     offerid = table.Column<Guid>(type: "uuid", nullable: false),
                     contactid = table.Column<Guid>(type: "uuid", nullable: false),
-                    taxidentificationnumber = table.Column<string>(type: "text", nullable: false),
-                    stateidentificationcode = table.Column<string>(type: "text", nullable: true),
                     argument = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_vehicleleaseorganizationpostulations", x => x.id);
+                    table.PrimaryKey("pk_vehleasorgpostulations", x => x.id);
                     table.ForeignKey(
-                        name: "fk_vehicleleaseorganizationpostulations_organizationcontacts_c~",
+                        name: "fk_vehleasorgpostulations_organizationcontacts_contactid",
                         column: x => x.contactid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "organizationcontacts",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_vehicleleaseorganizationpostulations_vehicleleaseoffers_off~",
+                        name: "fk_vehleasorgpostulations_vehicleleaseoffers_offerid",
                         column: x => x.offerid,
                         principalSchema: "decisorframework_leasing",
                         principalTable: "vehicleleaseoffers",
@@ -5251,36 +5977,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "vehicleleasepersonpostulations",
+                name: "vehleaspersonpostulations",
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     offerid = table.Column<Guid>(type: "uuid", nullable: false),
                     contactid = table.Column<Guid>(type: "uuid", nullable: false),
-                    businesskindid = table.Column<Guid>(type: "uuid", nullable: false),
-                    taxidentificationnumber = table.Column<string>(type: "text", nullable: false),
                     argument = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_vehicleleasepersonpostulations", x => x.id);
+                    table.PrimaryKey("pk_vehleaspersonpostulations", x => x.id);
                     table.ForeignKey(
-                        name: "fk_vehicleleasepersonpostulations_naturalbusinesskinds_busines~",
-                        column: x => x.businesskindid,
-                        principalSchema: "decisorframework_domain",
-                        principalTable: "naturalbusinesskinds",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_vehicleleasepersonpostulations_personcontacts_contactid",
+                        name: "fk_vehleaspersonpostulations_personcontacts_contactid",
                         column: x => x.contactid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "personcontacts",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_vehicleleasepersonpostulations_vehicleleaseoffers_offerid",
+                        name: "fk_vehleaspersonpostulations_vehicleleaseoffers_offerid",
                         column: x => x.offerid,
                         principalSchema: "decisorframework_leasing",
                         principalTable: "vehicleleaseoffers",
@@ -5289,7 +6006,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "vehicleleaseorganizationpostulationdocumentbridges",
+                name: "vehleasorgpostdocumentbridges",
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
@@ -5298,25 +6015,25 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_vehicleleaseorganizationpostulationdocumentbridges", x => new { x.prowid, x.sternid });
+                    table.PrimaryKey("pk_vehleasorgpostdocumentbridges", x => new { x.prowid, x.sternid });
                     table.ForeignKey(
-                        name: "fk_vehicleleaseorganizationpostulationdocumentbridges_document~",
+                        name: "fk_vehleasorgpostdocumentbridges_documents_sternid",
                         column: x => x.sternid,
                         principalSchema: "guamaframework_media",
                         principalTable: "documents",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_vehicleleaseorganizationpostulationdocumentbridges_vehiclel~",
+                        name: "fk_vehleasorgpostdocumentbridges_vehleasorgpostulations_prowid",
                         column: x => x.prowid,
                         principalSchema: "decisorframework_leasing",
-                        principalTable: "vehicleleaseorganizationpostulations",
+                        principalTable: "vehleasorgpostulations",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "vehicleleasepersonpostulationdocumentbridges",
+                name: "vehleaspersonpostdocumentbridges",
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
@@ -5325,19 +6042,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_vehicleleasepersonpostulationdocumentbridges", x => new { x.prowid, x.sternid });
+                    table.PrimaryKey("pk_vehleaspersonpostdocumentbridges", x => new { x.prowid, x.sternid });
                     table.ForeignKey(
-                        name: "fk_vehicleleasepersonpostulationdocumentbridges_documents_ster~",
+                        name: "fk_vehleaspersonpostdocumentbridges_documents_sternid",
                         column: x => x.sternid,
                         principalSchema: "guamaframework_media",
                         principalTable: "documents",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_vehicleleasepersonpostulationdocumentbridges_vehicleleasepe~",
+                        name: "fk_vehleaspersonpostdocumentbridges_vehleaspersonpostulations_~",
                         column: x => x.prowid,
                         principalSchema: "decisorframework_leasing",
-                        principalTable: "vehicleleasepersonpostulations",
+                        principalTable: "vehleaspersonpostulations",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -5353,10 +6070,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     summary = table.Column<string>(type: "text", nullable: false),
                     discriminator = table.Column<string>(type: "text", nullable: false),
-                    contactid = table.Column<Guid>(type: "uuid", nullable: true),
+                    agreementid = table.Column<Guid>(type: "uuid", nullable: true),
                     vacantid = table.Column<Guid>(type: "uuid", nullable: true),
                     staffid = table.Column<Guid>(type: "uuid", nullable: true),
-                    agreementid = table.Column<Guid>(type: "uuid", nullable: true),
+                    contactid = table.Column<Guid>(type: "uuid", nullable: true),
+                    candidateid = table.Column<Guid>(type: "uuid", nullable: true),
                     concretedat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     ocupationid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
@@ -5371,6 +6089,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
+                        name: "fk_resolutions_ocupationcandidates_candidateid",
+                        column: x => x.candidateid,
+                        principalSchema: "decisorframework_humanresources",
+                        principalTable: "ocupationcandidates",
+                        principalColumn: "id");
+                    table.ForeignKey(
                         name: "fk_resolutions_ocupations_ocupationid",
                         column: x => x.ocupationid,
                         principalSchema: "decisorframework_humanresources",
@@ -5382,8 +6106,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         column: x => x.contactid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "personcontacts",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -6005,6 +6728,60 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "thumbnailid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_paymenttermid",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "paymenttermid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_propertyleaselegalclientid",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "propertyleaselegalclientid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_propertyleaselegalpostulationid",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "propertyleaselegalpostulationid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_propertyleasenaturalclientid",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "propertyleasenaturalclientid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_propertyleasenaturalpostulationid",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "propertyleasenaturalpostulationid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_vehicleleaselegalclientid",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "vehicleleaselegalclientid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_vehicleleaselegalpostulationid",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "vehicleleaselegalpostulationid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_vehicleleasenaturalclientid",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "vehicleleasenaturalclientid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_vehicleleasenaturalpostulationid",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "vehicleleasenaturalpostulationid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_legalclientbankaccountbridges_sternid",
                 schema: "decisorframework_commercial",
                 table: "legalclientbankaccountbridges",
@@ -6015,6 +6792,30 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial",
                 table: "legalclientdocumentbridges",
                 column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalclientpropertyleasingcompensations_agreementid",
+                schema: "decisorframework_leasing",
+                table: "legalclientpropertyleasingcompensations",
+                column: "agreementid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalclientpropertyleasingcompensations_leasingid",
+                schema: "decisorframework_leasing",
+                table: "legalclientpropertyleasingcompensations",
+                column: "leasingid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalclientpropertyleasings_agreementid",
+                schema: "decisorframework_leasing",
+                table: "legalclientpropertyleasings",
+                column: "agreementid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalclientpropertyleasings_contractid",
+                schema: "decisorframework_leasing",
+                table: "legalclientpropertyleasings",
+                column: "contractid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_legalclients_contactid",
@@ -6040,6 +6841,30 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial",
                 table: "legalclientsalecontracts",
                 column: "proformaid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalclientvehicleleasingcompensations_agreementid",
+                schema: "decisorframework_leasing",
+                table: "legalclientvehicleleasingcompensations",
+                column: "agreementid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalclientvehicleleasingcompensations_leasingid",
+                schema: "decisorframework_leasing",
+                table: "legalclientvehicleleasingcompensations",
+                column: "leasingid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalclientvehicleleasings_agreementid",
+                schema: "decisorframework_leasing",
+                table: "legalclientvehicleleasings",
+                column: "agreementid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalclientvehicleleasings_contractid",
+                schema: "decisorframework_leasing",
+                table: "legalclientvehicleleasings",
+                column: "contractid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_legalproviderbankaccountbridges_sternid",
@@ -6077,6 +6902,60 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial",
                 table: "legalproviders",
                 column: "defaultpaymenttermid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legclientpropleascompdocumentbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "legclientpropleascompdocumentbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legclientpropleascontractspacebridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "legclientpropleascontractspacebridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legclientpropleaspersoncontactbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "legclientpropleaspersoncontactbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legclientpropsupervcontrolactions_leasingid",
+                schema: "decisorframework_leasing",
+                table: "legclientpropsupervcontrolactions",
+                column: "leasingid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legclientpropsupervcontrolactions_supervisiongroupid",
+                schema: "decisorframework_leasing",
+                table: "legclientpropsupervcontrolactions",
+                column: "supervisiongroupid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legclientvehleascompdocumentbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "legclientvehleascompdocumentbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legclientvehleaspersoncontactbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "legclientvehleaspersoncontactbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legclientvehsupervcontrolactions_leasingid",
+                schema: "decisorframework_leasing",
+                table: "legclientvehsupervcontrolactions",
+                column: "leasingid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legclientvehsupervcontrolactions_supervisiongroupid",
+                schema: "decisorframework_leasing",
+                table: "legclientvehsupervcontrolactions",
+                column: "supervisiongroupid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_localities_municipalityid",
@@ -6160,6 +7039,60 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "stateid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_natclientpropeleascontractspacebridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "natclientpropeleascontractspacebridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_natclientpropleascompdocumentbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "natclientpropleascompdocumentbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_natclientpropleaspersoncontactbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "natclientpropleaspersoncontactbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_natclientpropsupervcontrolactions_leasingid",
+                schema: "decisorframework_leasing",
+                table: "natclientpropsupervcontrolactions",
+                column: "leasingid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_natclientpropsupervcontrolactions_supervisiongroupid",
+                schema: "decisorframework_leasing",
+                table: "natclientpropsupervcontrolactions",
+                column: "supervisiongroupid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_natclientvehleascompdocumentbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "natclientvehleascompdocumentbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_natclientvehleaspersoncontactbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "natclientvehleaspersoncontactbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_natclientvehsupervcontrolactions_leasingid",
+                schema: "decisorframework_leasing",
+                table: "natclientvehsupervcontrolactions",
+                column: "leasingid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_natclientvehsupervcontrolactions_supervisiongroupid",
+                schema: "decisorframework_leasing",
+                table: "natclientvehsupervcontrolactions",
+                column: "supervisiongroupid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_naturalclientbankaccountbridges_sternid",
                 schema: "decisorframework_commercial",
                 table: "naturalclientbankaccountbridges",
@@ -6170,6 +7103,30 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial",
                 table: "naturalclientdocumentbridge",
                 column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalclientpropertyleasingcompensations_agreementid",
+                schema: "decisorframework_leasing",
+                table: "naturalclientpropertyleasingcompensations",
+                column: "agreementid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalclientpropertyleasingcompensations_leasingid",
+                schema: "decisorframework_leasing",
+                table: "naturalclientpropertyleasingcompensations",
+                column: "leasingid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalclientpropertyleasings_agreementid",
+                schema: "decisorframework_leasing",
+                table: "naturalclientpropertyleasings",
+                column: "agreementid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalclientpropertyleasings_contractid",
+                schema: "decisorframework_leasing",
+                table: "naturalclientpropertyleasings",
+                column: "contractid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_naturalclients_contactid",
@@ -6195,6 +7152,30 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial",
                 table: "naturalclientsalecontracts",
                 column: "proformaid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalclientvehicleleasingcompensations_agreementid",
+                schema: "decisorframework_leasing",
+                table: "naturalclientvehicleleasingcompensations",
+                column: "agreementid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalclientvehicleleasingcompensations_leasingid",
+                schema: "decisorframework_leasing",
+                table: "naturalclientvehicleleasingcompensations",
+                column: "leasingid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalclientvehicleleasings_agreementid",
+                schema: "decisorframework_leasing",
+                table: "naturalclientvehicleleasings",
+                column: "agreementid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalclientvehicleleasings_contractid",
+                schema: "decisorframework_leasing",
+                table: "naturalclientvehicleleasings",
+                column: "contractid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_naturalproviderbankaccountbridges_sternid",
@@ -6691,57 +7672,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "propousalid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_propertyleaseorganizationpostulationdocumentbridges_sternid",
-                schema: "decisorframework_leasing",
-                table: "propertyleaseorganizationpostulationdocumentbridges",
-                column: "sternid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_propertyleaseorganizationpostulations_contactid",
-                schema: "decisorframework_leasing",
-                table: "propertyleaseorganizationpostulations",
-                column: "contactid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_propertyleaseorganizationpostulations_offerid",
-                schema: "decisorframework_leasing",
-                table: "propertyleaseorganizationpostulations",
-                column: "offerid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_propertyleaseorgpostulationspacepropousalbridges_sternid",
-                schema: "decisorframework_leasing",
-                table: "propertyleaseorgpostulationspacepropousalbridges",
-                column: "sternid");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_propertyleasepersonpostulationdocumentbridges_sternid",
                 schema: "decisorframework_leasing",
                 table: "propertyleasepersonpostulationdocumentbridges",
-                column: "sternid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_propertyleasepersonpostulations_businesskindid",
-                schema: "decisorframework_leasing",
-                table: "propertyleasepersonpostulations",
-                column: "businesskindid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_propertyleasepersonpostulations_contactid",
-                schema: "decisorframework_leasing",
-                table: "propertyleasepersonpostulations",
-                column: "contactid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_propertyleasepersonpostulations_offerid",
-                schema: "decisorframework_leasing",
-                table: "propertyleasepersonpostulations",
-                column: "offerid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_propertyleaseperspostulationspacepropousalbridges_sternid",
-                schema: "decisorframework_leasing",
-                table: "propertyleaseperspostulationspacepropousalbridges",
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
@@ -6786,6 +7719,48 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_domain",
                 table: "propertyspaces",
                 column: "propertyid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_propleaseorgpostspacepropousalbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "propleaseorgpostspacepropousalbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_propleasorgpostdocumentbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "propleasorgpostdocumentbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_propleasorgpostulations_contactid",
+                schema: "decisorframework_leasing",
+                table: "propleasorgpostulations",
+                column: "contactid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_propleasorgpostulations_offerid",
+                schema: "decisorframework_leasing",
+                table: "propleasorgpostulations",
+                column: "offerid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_propleaspersonpostulations_contactid",
+                schema: "decisorframework_leasing",
+                table: "propleaspersonpostulations",
+                column: "contactid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_propleaspersonpostulations_offerid",
+                schema: "decisorframework_leasing",
+                table: "propleaspersonpostulations",
+                column: "offerid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_propleasperspostspacepropbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "propleasperspostspacepropbridges",
+                column: "sternid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_provisionableservices_featureimageid",
@@ -7056,6 +8031,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "agreementid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_resolutions_candidateid",
+                table: "resolutions",
+                column: "candidateid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_resolutions_contactid",
                 table: "resolutions",
                 column: "contactid");
@@ -7063,7 +8043,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             migrationBuilder.CreateIndex(
                 name: "ix_resolutions_index_year",
                 table: "resolutions",
-                columns: new[] { "index", "year" });
+                columns: new[] { "index", "year" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_resolutions_ocupationid",
@@ -7182,6 +8163,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_domain",
                 table: "structures",
                 column: "socialpropertyid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_supervisiongroupemployeebridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "supervisiongroupemployeebridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_supervisiongroups_representativeid",
+                schema: "decisorframework_leasing",
+                table: "supervisiongroups",
+                column: "representativeid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_unitmeasurementconversionbridges_sternid",
@@ -7317,48 +8310,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "propousalid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_vehicleleaseorganizationpostulationdocumentbridges_sternid",
-                schema: "decisorframework_leasing",
-                table: "vehicleleaseorganizationpostulationdocumentbridges",
-                column: "sternid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vehicleleaseorganizationpostulations_contactid",
-                schema: "decisorframework_leasing",
-                table: "vehicleleaseorganizationpostulations",
-                column: "contactid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vehicleleaseorganizationpostulations_offerid",
-                schema: "decisorframework_leasing",
-                table: "vehicleleaseorganizationpostulations",
-                column: "offerid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vehicleleasepersonpostulationdocumentbridges_sternid",
-                schema: "decisorframework_leasing",
-                table: "vehicleleasepersonpostulationdocumentbridges",
-                column: "sternid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vehicleleasepersonpostulations_businesskindid",
-                schema: "decisorframework_leasing",
-                table: "vehicleleasepersonpostulations",
-                column: "businesskindid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vehicleleasepersonpostulations_contactid",
-                schema: "decisorframework_leasing",
-                table: "vehicleleasepersonpostulations",
-                column: "contactid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vehicleleasepersonpostulations_offerid",
-                schema: "decisorframework_leasing",
-                table: "vehicleleasepersonpostulations",
-                column: "offerid");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_vehicleleasepropousals_agreementid",
                 schema: "decisorframework_leasing",
                 table: "vehicleleasepropousals",
@@ -7433,6 +8384,42 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 table: "vehicles",
                 column: "trafficcirculationidentifier",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vehleasorgpostdocumentbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "vehleasorgpostdocumentbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vehleasorgpostulations_contactid",
+                schema: "decisorframework_leasing",
+                table: "vehleasorgpostulations",
+                column: "contactid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vehleasorgpostulations_offerid",
+                schema: "decisorframework_leasing",
+                table: "vehleasorgpostulations",
+                column: "offerid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vehleaspersonpostdocumentbridges_sternid",
+                schema: "decisorframework_leasing",
+                table: "vehleaspersonpostdocumentbridges",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vehleaspersonpostulations_contactid",
+                schema: "decisorframework_leasing",
+                table: "vehleaspersonpostulations",
+                column: "contactid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vehleaspersonpostulations_offerid",
+                schema: "decisorframework_leasing",
+                table: "vehleaspersonpostulations",
+                column: "offerid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_videos_thumbnailid",
@@ -7598,6 +8585,62 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
+                name: "fk_leasecontracts_propleasorgpostulations_propertyleaselegalpo~",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "propertyleaselegalpostulationid",
+                principalSchema: "decisorframework_leasing",
+                principalTable: "propleasorgpostulations",
+                principalColumn: "id");
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_leasecontracts_propleaspersonpostulations_propertyleasenatu~",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "propertyleasenaturalpostulationid",
+                principalSchema: "decisorframework_leasing",
+                principalTable: "propleaspersonpostulations",
+                principalColumn: "id");
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_leasecontracts_vehleasorgpostulations_vehicleleaselegalpost~",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "vehicleleaselegalpostulationid",
+                principalSchema: "decisorframework_leasing",
+                principalTable: "vehleasorgpostulations",
+                principalColumn: "id");
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_leasecontracts_vehleaspersonpostulations_vehicleleasenatura~",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "vehicleleasenaturalpostulationid",
+                principalSchema: "decisorframework_leasing",
+                principalTable: "vehleaspersonpostulations",
+                principalColumn: "id");
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_legclientpropleascontractspacebridges_propertyspaces_sternid",
+                schema: "decisorframework_leasing",
+                table: "legclientpropleascontractspacebridges",
+                column: "sternid",
+                principalSchema: "decisorframework_domain",
+                principalTable: "propertyspaces",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_natclientpropeleascontractspacebridges_propertyspaces_stern~",
+                schema: "decisorframework_leasing",
+                table: "natclientpropeleascontractspacebridges",
+                column: "sternid",
+                principalSchema: "decisorframework_domain",
+                principalTable: "propertyspaces",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
                 name: "fk_ocupationcandidates_vacantpostulations_postulationid",
                 schema: "decisorframework_humanresources",
                 table: "ocupationcandidates",
@@ -7643,8 +8686,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "staffid",
                 principalSchema: "decisorframework_humanresources",
                 principalTable: "staffs",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "id");
 
             migrationBuilder.AddForeignKey(
                 name: "fk_resolutions_vacants_vacantid",
@@ -7652,8 +8694,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "vacantid",
                 principalSchema: "decisorframework_humanresources",
                 principalTable: "vacants",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
+                principalColumn: "id");
 
             migrationBuilder.AddForeignKey(
                 name: "fk_staffs_workforces_mainworkforceid",
@@ -7771,6 +8812,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 name: "fk_admitionpropousals_ocupationcandidates_ocupationcandidateid",
                 schema: "decisorframework_humanresources",
                 table: "admitionpropousals");
+
+            migrationBuilder.DropForeignKey(
+                name: "fk_resolutions_ocupationcandidates_candidateid",
+                table: "resolutions");
 
             migrationBuilder.DropForeignKey(
                 name: "fk_organizationidentities_images_imageid",
@@ -7907,6 +8952,34 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial");
 
             migrationBuilder.DropTable(
+                name: "legclientpropleascompdocumentbridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "legclientpropleascontractspacebridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "legclientpropleaspersoncontactbridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "legclientpropsupervcontrolactions",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "legclientvehleascompdocumentbridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "legclientvehleaspersoncontactbridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "legclientvehsupervcontrolactions",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
                 name: "meetingcontactbridges",
                 schema: "decisorframework_governance");
 
@@ -7917,6 +8990,34 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             migrationBuilder.DropTable(
                 name: "meetingemployeebridges",
                 schema: "decisorframework_governance");
+
+            migrationBuilder.DropTable(
+                name: "natclientpropeleascontractspacebridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "natclientpropleascompdocumentbridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "natclientpropleaspersoncontactbridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "natclientpropsupervcontrolactions",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "natclientvehleascompdocumentbridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "natclientvehleaspersoncontactbridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "natclientvehsupervcontrolactions",
+                schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
                 name: "naturalclientbankaccountbridges",
@@ -8027,19 +9128,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
-                name: "propertyleaseorganizationpostulationdocumentbridges",
-                schema: "decisorframework_leasing");
-
-            migrationBuilder.DropTable(
-                name: "propertyleaseorgpostulationspacepropousalbridges",
-                schema: "decisorframework_leasing");
-
-            migrationBuilder.DropTable(
                 name: "propertyleasepersonpostulationdocumentbridges",
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
-                name: "propertyleaseperspostulationspacepropousalbridges",
+                name: "propleaseorgpostspacepropousalbridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "propleasorgpostdocumentbridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "propleasperspostspacepropbridges",
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
@@ -8119,6 +9220,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_domain");
 
             migrationBuilder.DropTable(
+                name: "supervisiongroupemployeebridges",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
                 name: "traces");
 
             migrationBuilder.DropTable(
@@ -8146,11 +9251,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
-                name: "vehicleleaseorganizationpostulationdocumentbridges",
+                name: "vehleasorgpostdocumentbridges",
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
-                name: "vehicleleasepersonpostulationdocumentbridges",
+                name: "vehleaspersonpostdocumentbridges",
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
@@ -8194,6 +9299,22 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_legal");
 
             migrationBuilder.DropTable(
+                name: "legalclientpropertyleasingcompensations",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "legalclientvehicleleasingcompensations",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "naturalclientpropertyleasingcompensations",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "naturalclientvehicleleasingcompensations",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
                 name: "emailcontactitems",
                 schema: "guamaframework_identity");
 
@@ -8224,14 +9345,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             migrationBuilder.DropTable(
                 name: "sections",
                 schema: "decisorframework_legal");
-
-            migrationBuilder.DropTable(
-                name: "propertyleaseorganizationpostulations",
-                schema: "decisorframework_leasing");
-
-            migrationBuilder.DropTable(
-                name: "propertyleasepersonpostulations",
-                schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
                 name: "propertyspaceleasepropousals",
@@ -8269,28 +9382,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial");
 
             migrationBuilder.DropTable(
+                name: "supervisiongroups",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
                 name: "roles",
                 schema: "guamaframework_core_security_common");
 
             migrationBuilder.DropTable(
                 name: "clauses",
                 schema: "decisorframework_legal");
-
-            migrationBuilder.DropTable(
-                name: "vehicleleaseorganizationpostulations",
-                schema: "decisorframework_leasing");
-
-            migrationBuilder.DropTable(
-                name: "vehicleleasepersonpostulations",
-                schema: "decisorframework_leasing");
-
-            migrationBuilder.DropTable(
-                name: "legalclients",
-                schema: "decisorframework_commercial");
-
-            migrationBuilder.DropTable(
-                name: "naturalclients",
-                schema: "decisorframework_commercial");
 
             migrationBuilder.DropTable(
                 name: "proformas",
@@ -8301,7 +9402,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_legal");
 
             migrationBuilder.DropTable(
-                name: "propertyleaseoffers",
+                name: "legalclientpropertyleasings",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "legalclientvehicleleasings",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "naturalclientpropertyleasings",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "naturalclientvehicleleasings",
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
@@ -8324,18 +9437,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial");
 
             migrationBuilder.DropTable(
-                name: "vehicleleaseoffers",
-                schema: "decisorframework_leasing");
-
-            migrationBuilder.DropTable(
-                name: "organizationcontacts",
-                schema: "decisorframework_domain");
-
-            migrationBuilder.DropTable(
-                name: "paymentterms",
-                schema: "decisorframework_commercial");
-
-            migrationBuilder.DropTable(
                 name: "proclamations",
                 schema: "decisorframework_legal");
 
@@ -8344,7 +9445,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_legal");
 
             migrationBuilder.DropTable(
-                name: "propertyleasepropousals",
+                name: "leasecontracts",
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
@@ -8364,20 +9465,32 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_inventory");
 
             migrationBuilder.DropTable(
-                name: "vehicleleasepropousals",
+                name: "proclamationkinds",
+                schema: "decisorframework_legal");
+
+            migrationBuilder.DropTable(
+                name: "legalclients",
+                schema: "decisorframework_commercial");
+
+            migrationBuilder.DropTable(
+                name: "naturalclients",
+                schema: "decisorframework_commercial");
+
+            migrationBuilder.DropTable(
+                name: "propleasorgpostulations",
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
-                name: "centralstatestructures",
-                schema: "decisorframework_legal");
+                name: "propleaspersonpostulations",
+                schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
-                name: "legalbusinesskinds",
-                schema: "decisorframework_domain");
+                name: "vehleasorgpostulations",
+                schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
-                name: "proclamationkinds",
-                schema: "decisorframework_legal");
+                name: "vehleaspersonpostulations",
+                schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
                 name: "bankbranches",
@@ -8396,8 +9509,20 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
-                name: "vehicles",
+                name: "paymentterms",
+                schema: "decisorframework_commercial");
+
+            migrationBuilder.DropTable(
+                name: "propertyleaseoffers",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "organizationcontacts",
                 schema: "decisorframework_domain");
+
+            migrationBuilder.DropTable(
+                name: "vehicleleaseoffers",
+                schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
                 name: "bankagencies",
@@ -8412,6 +9537,34 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
+                name: "propertyleasepropousals",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "centralstatestructures",
+                schema: "decisorframework_legal");
+
+            migrationBuilder.DropTable(
+                name: "legalbusinesskinds",
+                schema: "decisorframework_domain");
+
+            migrationBuilder.DropTable(
+                name: "vehicleleasepropousals",
+                schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "classifications",
+                schema: "decisorframework_inventory");
+
+            migrationBuilder.DropTable(
+                name: "vehicles",
+                schema: "decisorframework_domain");
+
+            migrationBuilder.DropTable(
+                name: "products",
+                schema: "decisorframework_inventory");
+
+            migrationBuilder.DropTable(
                 name: "brands",
                 schema: "decisorframework_domain");
 
@@ -8422,14 +9575,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             migrationBuilder.DropTable(
                 name: "vehiclekinds",
                 schema: "decisorframework_domain");
-
-            migrationBuilder.DropTable(
-                name: "classifications",
-                schema: "decisorframework_inventory");
-
-            migrationBuilder.DropTable(
-                name: "products",
-                schema: "decisorframework_inventory");
 
             migrationBuilder.DropTable(
                 name: "families",

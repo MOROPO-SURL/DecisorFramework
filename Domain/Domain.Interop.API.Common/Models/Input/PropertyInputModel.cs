@@ -25,8 +25,6 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         [System.ComponentModel.DataAnnotations.Required]
         public string Reference { get; set; }
 
-        public decimal Area { get; set; }
-
         public string Description { get; set; }
 
         public List<ImageInputModel> IncomingImageItems { get; set; } = new List<ImageInputModel>();
@@ -55,7 +53,6 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             entity.Priority = Priority;
             entity.Name = Name;
             entity.Reference = Reference;
-            entity.Area = Area;
             entity.Description = Description;
 
             if (entity.KindId != KindId)

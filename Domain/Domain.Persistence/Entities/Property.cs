@@ -11,8 +11,6 @@
 
         public int Priority { get; set; }
 
-        public Enumerations.PropertyAssignment? Assignment { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -34,8 +32,6 @@
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Reference { get; set; }
-
-        public decimal Area { get; set; }
 
         public string Description { get; set; }
 

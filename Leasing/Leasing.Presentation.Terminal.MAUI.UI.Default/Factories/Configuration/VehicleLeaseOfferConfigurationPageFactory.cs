@@ -4,7 +4,7 @@
     {
         public async System.Threading.Tasks.Task<Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel, Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel, Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.VehicleLeaseOfferDisplayModel model)
         {
-            return new Pages.Configuration.VehicleLeaseOfferConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel(model));
+            return new Pages.Configuration.VehicleLeaseOfferConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel(model), new Validators.VehicleLeaseOfferConfigurationValidator());
         }
     }
 }

@@ -64,7 +64,12 @@ public partial class PropertyLeasePropousalPickPage : Core.Presentation.Terminal
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new Configuration.PropertyLeasePropousalConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel(null)));
+        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.PropertyLeasePropousalDisplayModel, Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel>>();
+
+        factory.BuildAsync(ConfigurationSuccess_Callback, null).ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() => this.NavigationPushPageAsync(task.Result));
+        });
     }
 
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)

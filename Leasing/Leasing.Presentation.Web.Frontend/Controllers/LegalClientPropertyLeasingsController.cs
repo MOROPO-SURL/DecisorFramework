@@ -17,15 +17,17 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
         private readonly IEntityRepository<PropertyLeaseOrganizationPostulation, System.Guid> postulationRepository;
         private readonly IEntityRepository<PropertyLeaseOffer, System.Guid> offerRepository;
         private readonly IEntityRepository<LegalClientPropertyLeaseContract, int> contractRepository;
-        private readonly IEntityRepository<Property, System.Guid> propertyRepository;
+        private readonly IEntityRepository<PropertySpace, System.Guid> propertySpaceRepository;
+        private readonly IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository;
 
-        public LegalClientPropertyLeasingsController(IEntityRepository<Property, System.Guid> vehicleRepository, IEntityRepository<LegalClientPropertyLeaseContract, int> contractRepository, IEntityRepository<PropertyLeaseOffer, System.Guid> offerRepository, IEntityRepository<PropertyLeaseOrganizationPostulation, System.Guid> postulationRepository, IEntityRepository<LegalClient, System.Guid> clientRepository, IEntityRepository<LegalClientPropertyLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientPropertyLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientPropertyLeasingsController> logger) : base(repository, localizer, logger)
+        public LegalClientPropertyLeasingsController(IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository, IEntityRepository<PropertySpace, System.Guid> propertySpaceRepository, IEntityRepository<LegalClientPropertyLeaseContract, int> contractRepository, IEntityRepository<PropertyLeaseOffer, System.Guid> offerRepository, IEntityRepository<PropertyLeaseOrganizationPostulation, System.Guid> postulationRepository, IEntityRepository<LegalClient, System.Guid> clientRepository, IEntityRepository<LegalClientPropertyLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientPropertyLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientPropertyLeasingsController> logger) : base(repository, localizer, logger)
         {
             this.clientRepository = clientRepository;
             this.postulationRepository = postulationRepository;
             this.offerRepository = offerRepository;
             this.contractRepository = contractRepository;
-            this.propertyRepository = vehicleRepository;
+            this.propertySpaceRepository = propertySpaceRepository;
+            this.spaceLeasePropousalRepository = spaceLeasePropousalRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<LegalClientPropertyLeasing, bool>> GetGlobalSelector()
@@ -91,6 +93,21 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
             var postulation = postulationRepository.Get(model.PostulationId);
 
+            foreach (var bridge in postulation.PropertySpaceBridges)
+            {
+                var space = propertySpaceRepository.Get(bridge.Stern.PropertySpaceId);
+
+                if (space.Assignment != null) throw new Guama.Core.Presentation.Web.Common.Exceptions.NoContinuableActionException("El espacio a contratar ya se encuentra en uso.");
+
+                space.Assignment = Domain.Persistence.Enumerations.PropertyAssignment.Leasing;
+
+                propertySpaceRepository.Update(space, User.Identity.Name, false);
+            }
+
+            postulation.Archived = true;
+
+            postulationRepository.Update(postulation, User.Identity.Name, false);
+
             var client = clientRepository.FindOneBy(_entity => _entity.ContactId == postulation.ContactId);
 
             entity.Contract = contractRepository.Add(new LegalClientPropertyLeaseContract
@@ -130,20 +147,28 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                 }, User.Identity.Name, false);
             }
 
+            var isOfferArchivable = true;
+
             var offer = offerRepository.Get(postulation.OfferId);
+
+            var spaceLeasePropousals = spaceLeasePropousalRepository.FindBy(_entity => _entity.PropertyLeasePropousalId == offer.PropousalId).ToArray();
+
+            foreach (var _entity in spaceLeasePropousals)
+            {
+                if (_entity.PropertySpace.Assignment == null)
+                {
+                    isOfferArchivable = false;
+
+                    break;
+                }
+            }
+
+            if (!isOfferArchivable) return;
 
             offer.Archived = true;
             offer.LeasedAt = System.DateTime.Now;
 
             offerRepository.Update(offer, User.Identity.Name, false);
-
-            var property = propertyRepository.Get(offer.Propousal.PropertyId);
-
-            property.Assignment = Domain.Persistence.Enumerations.PropertyAssignment.Leasing;
-
-            // TODO Assign target spaces
-
-            propertyRepository.Update(property, User.Identity.Name, false);
         }
     }
 }

@@ -64,7 +64,7 @@ public partial class OrganizationContactPickPage : Core.Presentation.Terminal.MA
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = BindingContext as Models.Page.Pick.OrganizationalUnityPickPageModel;
+        var concreteBindingContext = BindingContext as Models.Page.Pick.OrganizationContactPickPageModel;
 
         concreteBindingContext.IsBusy = true;
 

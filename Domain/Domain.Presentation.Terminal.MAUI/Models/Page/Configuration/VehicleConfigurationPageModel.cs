@@ -7,6 +7,21 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 {
     public class VehicleConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<VehicleDisplayModel>
     {
+        public static string BrandValidableProperty => nameof(Brand);
+        public static string ModelValidableProperty => nameof(Model);
+        public static string YearValidableProperty => nameof(Year);
+        public static string KindValidableProperty => nameof(Kind);
+        public static string TrafficCirculationIdentifierValidableProperty => nameof(TrafficCirculationIdentifier);
+        public static string PlateValidableProperty => nameof(Plate);
+        public static string EngineKindCirculationIdentifierValidableProperty => nameof(EngineKind);
+        public static string EngineIdentifierCirculationIdentifierValidableProperty => nameof(EngineIdentifier);
+        public static string BodyIdentifierCirculationIdentifierValidableProperty => nameof(BodyIdentifier);
+        public static string SeatCountCirculationIdentifierValidableProperty => nameof(SeatCount);
+        public static string LoadCapacityCirculationIdentifierValidableProperty => nameof(LoadCapacity);
+        public static string StructureValidableProperty => nameof(Structure);
+        public static string ReferenceValidableProperty => nameof(Reference);
+        public static string TechnicalAvailabilityIndexValidableProperty => nameof(TechnicalAvailabilityIndex);
+
         private int priority = 1;
         private Microsoft.Maui.Controls.ImageSource fatureImageSource;
         private BrandDisplayModel brand;

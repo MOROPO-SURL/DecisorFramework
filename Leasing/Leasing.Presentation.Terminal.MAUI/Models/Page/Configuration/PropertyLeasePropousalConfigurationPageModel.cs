@@ -5,6 +5,12 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
 {
     public class PropertyLeasePropousalConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PropertyLeasePropousalDisplayModel>
     {
+        public static string PropertyValidableProperty => nameof(Property);
+        public static string DescriptionValidableProperty => nameof(Description);
+        public static string SpacePropousalsValidableProperty => nameof(SpacePropousals);
+        public static string AuthorValidableProperty => nameof(Author);
+        public static string AgreementValidableProperty => nameof(Agreement);
+
         private int priority = 1;
         private string description;
         private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel author;

@@ -69,7 +69,7 @@
                                                 FontAttributes="Bold"
                                                 FontSize="Medium"
                                                 LineBreakMode="TailTruncation"
-                                                TextColor="{Binding Contract.Property.Name}" />
+                                                Text="{Binding Contract.Property.Name}" />
                                             <Label
                                                 FontAttributes="Bold"
                                                 Text="{Binding Contract.Property.Kind.Name}" />

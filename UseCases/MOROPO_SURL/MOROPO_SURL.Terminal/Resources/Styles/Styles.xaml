@@ -22,7 +22,7 @@
     </Style>
 
     <Style TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
+        <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
     <Style TargetType="Button">
@@ -451,6 +451,11 @@
 
     <Style TargetType="Label" x:Key="ValuePropertyLabelStyle">
         <Setter Property="FontSize" Value="Default" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="ValidationMessageLabelStyle">
+        <Setter Property="TextColor" Value="IndianRed" />
+        <Setter Property="HeightRequest" Value="20" />
     </Style>
 
     <Style TargetType="ContentView" x:Key="ModalFrameWrapContentViewStyle">

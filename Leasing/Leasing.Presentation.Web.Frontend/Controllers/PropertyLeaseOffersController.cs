@@ -75,7 +75,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                 return _model;
             }).ToArray();
 
-            model.OrganizationPostulations = organizationPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id).ToArray().Select(_entity =>
+            model.OrganizationPostulations = organizationPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id && !_entity.Archived).ToArray().Select(_entity =>
             {
                 var _model = new PropertyLeaseOrganizationPostulationDisplayModel();
 
@@ -124,7 +124,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
                 return _model;
             }).ToArray();
-            model.PersonPostulations = personPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id).ToArray().Select(_entity =>
+            model.PersonPostulations = personPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id && !_entity.Archived).ToArray().Select(_entity =>
             {
                 var _model = new PropertyLeasePersonPostulationDisplayModel();
 

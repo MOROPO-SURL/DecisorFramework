@@ -20,7 +20,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
             _model.AvailableEngineKinds = await engineKindsAPIConnectClient.GetEnabledAsync();
             _model.AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync();
 
-            return new Pages.Configuration.VehicleConfigurationPage(configurationSuccessAction, _model);
+            return new Pages.Configuration.VehicleConfigurationPage(configurationSuccessAction, _model, new Validators.VehicleConfigurationValidator());
         }
     }
 }

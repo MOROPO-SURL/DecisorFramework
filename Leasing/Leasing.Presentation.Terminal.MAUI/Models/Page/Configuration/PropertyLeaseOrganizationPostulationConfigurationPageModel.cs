@@ -8,6 +8,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         public static string MainPostalContactItemValidableProperty => nameof(MainPostalContactItem);
         public static string TaxIdentificationNumberValidableProperty => nameof(TaxIdentificationNumber);
         public static string ArgumentValidableProperty => nameof(Argument);
+        public static string SpacesValidableProperty => nameof(Spaces);
 
         public PropertyLeaseOrganizationPostulationConfigurationPageModel(Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel offer, Interop.API.Common.Models.Display.PropertyLeaseOrganizationPostulationDisplayModel model) : base(offer.Id, model)
         {
