@@ -85,7 +85,7 @@
                             <Label
                                 IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.NameValidableProperty}}"
                                 Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.NameValidableProperty}}"
-                                    Style="{StaticResource ValidationMessageLabelStyle}" />
+                                Style="{StaticResource ValidationMessageLabelStyle}" />
                         </VerticalStackLayout>
                         <FlexLayout
                             Wrap="Wrap">

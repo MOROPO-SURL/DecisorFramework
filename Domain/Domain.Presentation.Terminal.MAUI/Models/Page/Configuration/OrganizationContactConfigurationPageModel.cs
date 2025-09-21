@@ -7,6 +7,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 {
     public class OrganizationContactConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<OrganizationContactDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string BusinessKindValidableProperty => nameof(BusinessKind);
+
         private string name;
         private string alias;
         private string about;

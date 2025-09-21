@@ -12,7 +12,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
             _model.AvailableBusinessKinds = await apiConnectClient.GetEnabledAsync();
 
-            return new Pages.Configuration.OrganizationContactConfigurationPage(configurationSuccessAction, _model);
+            return new Pages.Configuration.OrganizationContactConfigurationPage(configurationSuccessAction, _model, new Validators.OrganizationContactConfigurationValidator());
         }
     }
 }

@@ -26,6 +26,11 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
             this.documentFileManager = documentFileManager;
         }
 
+        protected override System.Linq.Expressions.Expression<System.Func<VehicleLeasePersonPostulation, bool>> GetGlobalSelector()
+        {
+            return entity => !entity.Archived && !entity.Offer.Archived;
+        }
+
         protected override void PreCreate(VehicleLeasePersonPostulation entity, VehicleLeasePersonPostulationInputModel model)
         {
             base.PreCreate(entity, model);

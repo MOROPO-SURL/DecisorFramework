@@ -24,8 +24,6 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Validators
 
             RuleFor(model => model.SeatCount).NotNull().GreaterThan(0);
 
-            RuleFor(model => model.LoadCapacity).NotNull().GreaterThan(0);
-
             RuleFor(model => model.Structure).NotNull();
 
             RuleFor(model => model.TechnicalAvailabilityIndex).NotNull().InclusiveBetween(1,100);

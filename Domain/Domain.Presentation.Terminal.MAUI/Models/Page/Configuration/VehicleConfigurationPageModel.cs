@@ -17,7 +17,6 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public static string EngineIdentifierCirculationIdentifierValidableProperty => nameof(EngineIdentifier);
         public static string BodyIdentifierCirculationIdentifierValidableProperty => nameof(BodyIdentifier);
         public static string SeatCountCirculationIdentifierValidableProperty => nameof(SeatCount);
-        public static string LoadCapacityCirculationIdentifierValidableProperty => nameof(LoadCapacity);
         public static string StructureValidableProperty => nameof(Structure);
         public static string ReferenceValidableProperty => nameof(Reference);
         public static string TechnicalAvailabilityIndexValidableProperty => nameof(TechnicalAvailabilityIndex);
@@ -37,7 +36,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private double loadCapacity;
         private StructureParentalDisplayModel structure;
         private string reference;
-        private double technicalAvailabilityIndex;
+        private double technicalAvailabilityIndex = 100;
         private string description;
 
         public VehicleConfigurationPageModel(VehicleDisplayModel model) : base(model)

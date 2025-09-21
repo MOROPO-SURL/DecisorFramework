@@ -33,8 +33,17 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\Commercial\Commercial.Interop.API.Connect\Commercial.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\..\Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\..\Domain\Domain.Interop.API.Connect\Domain.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\..\Inventory\Inventory.Interop.API.Connect\Inventory.Interop.API.Connect.csproj" />
+		<ProjectReference Include="..\..\Leasing\Leasing.Interop.API.Common\Leasing.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\..\Leasing\Leasing.Interop.API.Connect\Leasing.Interop.API.Connect.csproj" />
+		<ProjectReference Include="..\..\Leasing\Leasing.Persistence\Leasing.Persistence.csproj" />
 		<ProjectReference Include="..\..\Purchasing\Purchasing.Interop.API.Connect\Purchasing.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\Supervision.Presentation.Terminal.MAUI\Supervision.Presentation.Terminal.MAUI.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Pages\LeasingDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>

@@ -12,7 +12,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
             _model.AvailableUsers = await apiConnectClient.GetAsync();
 
-            return new Pages.Configuration.PersonContactConfigurationPage(configurationSuccessAction, _model);
+            return new Pages.Configuration.PersonContactConfigurationPage(configurationSuccessAction, _model, new Validators.PersonContactConfigurationValidator());
         }
     }
 }

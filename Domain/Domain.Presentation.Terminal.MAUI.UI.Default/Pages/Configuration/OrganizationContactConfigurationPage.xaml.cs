@@ -29,7 +29,7 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
     private readonly List<WebContactItemInputModel> incomingWebContactItems = [];
     private readonly List<WebContactItemDisplayModel> outgoingWebContactItems = [];
 
-    public OrganizationContactConfigurationPage(System.Action<OrganizationContactDisplayModel> successAction, Models.Page.Configuration.OrganizationContactConfigurationPageModel model) : base(successAction, model, null)
+    public OrganizationContactConfigurationPage(System.Action<OrganizationContactDisplayModel> successAction, Models.Page.Configuration.OrganizationContactConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.OrganizationContactConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
