@@ -25,6 +25,20 @@ public partial class NaturalClientVehicleLeasingConfigurationPage : Core.Present
                 break;
             }
         }
+
+        if (model.CostCenter != null)
+        {
+            for (int i = 0; i < model.AvailableConstCenters.Length; i++)
+            {
+                var current = model.AvailableConstCenters[i];
+
+                if (model.CostCenter.Id != current.Id) continue;
+
+                CostCenterPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Arrendamiento de Vehículo a Cliente Naturales";
@@ -46,6 +60,7 @@ public partial class NaturalClientVehicleLeasingConfigurationPage : Core.Present
             DurationUnitMeasureKind = ConcreteBindingContext.DurationUnitMeasureKind,
             Feed = ConcreteBindingContext.Feed,
             AgreementId = ConcreteBindingContext.Agreement.Id,
+            CostCenterId = ConcreteBindingContext.AvailableConstCenters[CostCenterPicker.SelectedIndex].Id,
             Priority = ConcreteBindingContext.Priority,
             Contacts = [.. ConcreteBindingContext.Contacts]
         };

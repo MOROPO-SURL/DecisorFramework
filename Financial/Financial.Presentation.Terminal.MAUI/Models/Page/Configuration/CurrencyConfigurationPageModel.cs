@@ -2,6 +2,9 @@
 {
     public class CurrencyConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.CurrencyDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string SymbolValidableProperty => nameof(Symbol);
+
         private string name;
         private string symbol;
         private int priority = 1;

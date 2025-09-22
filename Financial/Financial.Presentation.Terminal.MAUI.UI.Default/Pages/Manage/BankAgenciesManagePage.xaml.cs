@@ -16,7 +16,7 @@ public partial class BankAgenciesManagePage : Core.Presentation.Terminal.MAUI.UI
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 384; }
+    protected override double ItemViewRequestWidth { get => 480; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {

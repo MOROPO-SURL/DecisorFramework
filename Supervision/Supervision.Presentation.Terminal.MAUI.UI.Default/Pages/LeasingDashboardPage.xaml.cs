@@ -21,6 +21,7 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
         VehicleLeasingPieChart.SetAppTheme<LiveChartsCore.Drawing.IPaint<LiveChartsCore.SkiaSharpView.Drawing.SkiaSharpDrawingContext>>(LiveChartsCore.SkiaSharpView.Maui.PieChart.LegendTextPaintProperty, new SolidColorPaint(SkiaSharp.SKColors.Black), new SolidColorPaint(SkiaSharp.SKColors.White));
         PropertySpaceAssignmentPieChart.SetAppTheme<LiveChartsCore.Drawing.IPaint<LiveChartsCore.SkiaSharpView.Drawing.SkiaSharpDrawingContext>>(LiveChartsCore.SkiaSharpView.Maui.PieChart.LegendTextPaintProperty, new SolidColorPaint(SkiaSharp.SKColors.Black), new SolidColorPaint(SkiaSharp.SKColors.White));
         PropertyLeasingPieChart.SetAppTheme<LiveChartsCore.Drawing.IPaint<LiveChartsCore.SkiaSharpView.Drawing.SkiaSharpDrawingContext>>(LiveChartsCore.SkiaSharpView.Maui.PieChart.LegendTextPaintProperty, new SolidColorPaint(SkiaSharp.SKColors.Black), new SolidColorPaint(SkiaSharp.SKColors.White));
+        ClientPaymentPertinenceHeatChart.SetAppTheme<LiveChartsCore.Drawing.IPaint<LiveChartsCore.SkiaSharpView.Drawing.SkiaSharpDrawingContext>>(LiveChartsCore.SkiaSharpView.Maui.CartesianChart.LegendTextPaintProperty, new SolidColorPaint(SkiaSharp.SKColors.Black), new SolidColorPaint(SkiaSharp.SKColors.White));
     }
 
     protected override void OnAppearing()
@@ -65,10 +66,53 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
             var legalClientVehicleLeasings = await legalClientVehicleLeasingAPIConnectClient.GetAsync();
             var naturalClientVehicleLeasings = await naturalClientVehicleLeasingAPIConnectClient.GetAsync();
 
+            var endingContractCount = 0;
+            var endedContractCount = 0;
+
             var vehicleLeasingDictionary = new System.Collections.Generic.Dictionary<Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>, int>();
+
+            var now = System.DateTime.Now;
 
             foreach (var model in legalClientVehicleLeasings)
             {
+                if (model.Contract.DurationUnitCount != null && model.Contract.DurationUnitCount.Value > 0)
+                {
+                    var limitDateTime = model.Contract.StarAt;
+
+                    switch (model.Contract.DurationUnitMeasureKind.Value)
+                    {
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Years:
+                            limitDateTime = limitDateTime.AddYears(model.Contract.DurationUnitCount.Value);
+
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Months:
+                            limitDateTime = limitDateTime.AddMonths(model.Contract.DurationUnitCount.Value);
+
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Days:
+                            limitDateTime = limitDateTime.AddDays(model.Contract.DurationUnitCount.Value);
+                            
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Hours:
+                        default:
+                            limitDateTime = limitDateTime.AddHours(model.Contract.DurationUnitCount.Value);
+
+                            break;
+                    }
+
+                    if (limitDateTime < now)
+                    {
+                        endedContractCount++;
+                    }
+                    else if (limitDateTime - now < System.TimeSpan.FromDays(45))
+                    {
+                        endingContractCount++;
+                    }
+                }
+
                 var prospectKey = $"L-{model.Contract.Client.Contact.BusinessKind.Id}";
 
                 var founded = false;
@@ -94,6 +138,44 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
 
             foreach (var model in naturalClientVehicleLeasings)
             {
+                if (model.Contract.DurationUnitCount != null && model.Contract.DurationUnitCount.Value > 0)
+                {
+                    var limitDateTime = model.Contract.StarAt;
+
+                    switch (model.Contract.DurationUnitMeasureKind.Value)
+                    {
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Years:
+                            limitDateTime = limitDateTime.AddYears(model.Contract.DurationUnitCount.Value);
+
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Months:
+                            limitDateTime = limitDateTime.AddMonths(model.Contract.DurationUnitCount.Value);
+
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Days:
+                            limitDateTime = limitDateTime.AddDays(model.Contract.DurationUnitCount.Value);
+
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Hours:
+                        default:
+                            limitDateTime = limitDateTime.AddHours(model.Contract.DurationUnitCount.Value);
+
+                            break;
+                    }
+
+                    if (limitDateTime < now)
+                    {
+                        endedContractCount++;
+                    }
+                    else if (limitDateTime - now < System.TimeSpan.FromDays(45))
+                    {
+                        endingContractCount++;
+                    }
+                }
+
                 var prospectKey = $"N-{model.Contract.Client.Contact.BusinessKind.Id}";
 
                 var founded = false;
@@ -134,6 +216,44 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
 
             foreach (var model in legalClientPropertyLeasings)
             {
+                if (model.Contract.DurationUnitCount != null && model.Contract.DurationUnitCount.Value > 0)
+                {
+                    var limitDateTime = model.Contract.StarAt;
+
+                    switch (model.Contract.DurationUnitMeasureKind.Value)
+                    {
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Years:
+                            limitDateTime = limitDateTime.AddYears(model.Contract.DurationUnitCount.Value);
+
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Months:
+                            limitDateTime = limitDateTime.AddMonths(model.Contract.DurationUnitCount.Value);
+
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Days:
+                            limitDateTime = limitDateTime.AddDays(model.Contract.DurationUnitCount.Value);
+
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Hours:
+                        default:
+                            limitDateTime.AddHours(model.Contract.DurationUnitCount.Value);
+
+                            break;
+                    }
+
+                    if (limitDateTime < now)
+                    {
+                        endedContractCount++;
+                    }
+                    else if (limitDateTime - now < System.TimeSpan.FromDays(45))
+                    {
+                        endingContractCount++;
+                    }
+                }
+
                 var prospectKey = $"L-{model.Contract.Client.Contact.BusinessKind.Id}";
 
                 var founded = false;
@@ -159,6 +279,44 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
 
             foreach (var model in naturalClientPropertyLeasings)
             {
+                if (model.Contract.DurationUnitCount != null && model.Contract.DurationUnitCount.Value > 0)
+                {
+                    var limitDateTime = model.Contract.StarAt;
+
+                    switch (model.Contract.DurationUnitMeasureKind.Value)
+                    {
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Years:
+                            limitDateTime = limitDateTime.AddYears(model.Contract.DurationUnitCount.Value);
+
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Months:
+                            limitDateTime = limitDateTime.AddMonths(model.Contract.DurationUnitCount.Value);
+
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Days:
+                            limitDateTime = limitDateTime.AddDays(model.Contract.DurationUnitCount.Value);
+
+                            break;
+
+                        case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Hours:
+                        default:
+                            limitDateTime = limitDateTime.AddHours(model.Contract.DurationUnitCount.Value);
+
+                            break;
+                    }
+
+                    if (limitDateTime < now)
+                    {
+                        endedContractCount++;
+                    }
+                    else if (limitDateTime - now < System.TimeSpan.FromDays(45))
+                    {
+                        endingContractCount++;
+                    }
+                }
+
                 var prospectKey = $"N-{model.Contract.Client.Contact.BusinessKind.Id}";
 
                 var founded = false;
@@ -208,50 +366,57 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                 BindingContextPageModel.OfferCount = propertyOfferCount + vehicleOfferCount;
                 BindingContextPageModel.PostulationCount = propertyOrganizationPostulationCount + vehicleOrganizationPostulationCount + propertyPersonPostulationCount + vehiclePersonPostulationCount;
                 BindingContextPageModel.LeasingCount = legalClientPropertyLeasings.LongLength + naturalClientPropertyLeasings.LongLength + legalClientVehicleLeasings.LongLength + naturalClientVehicleLeasings.LongLength;
+                BindingContextPageModel.EndingContractCount = endingContractCount;
+                BindingContextPageModel.EndedContractCount = endedContractCount;
+                BindingContextPageModel.IsVehicleAssignmentPieChartMock = vehicles.Length <= 0;
                 BindingContextPageModel.VehicleAssignmentPieChart.Series = new[]
                 {
                     new LiveChartsCore.SkiaSharpView.PieSeries<int>
                     {
-                        Values = new int[] { vehicles.Where(model => model.Assignment == null).Count() },
+                        Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : vehicles.Where(model => model.Assignment == null).Count() },
                         Name = "Disponibles",
                         Stroke = null
                     },
                     new LiveChartsCore.SkiaSharpView.PieSeries<int>
                     {
-                        Values = new int[] { vehicles.Where(model => model.Assignment == Domain.Persistence.Enumerations.VehicleAssignment.Fleet).Count() },
+                        Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : vehicles.Where(model => model.Assignment == Domain.Persistence.Enumerations.VehicleAssignment.Fleet).Count() },
                         Name = "Operaciones",
                         Stroke = null
                     },
                     new LiveChartsCore.SkiaSharpView.PieSeries<int>
                     {
-                        Values = new int[] { vehicles.Where(model => model.Assignment == Domain.Persistence.Enumerations.VehicleAssignment.Leasing).Count() },
+                        Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : vehicles.Where(model => model.Assignment == Domain.Persistence.Enumerations.VehicleAssignment.Leasing).Count() },
                         Name = "Arrendamiento",
                         Stroke = null
                     }
                 };
+                BindingContextPageModel.IsPropertySpaceAssignmentPieChartMock = propertySpaces.Count <= 0;
                 BindingContextPageModel.PropertySpaceAssignmentPieChart.Series = new[]
                 {
                     new LiveChartsCore.SkiaSharpView.PieSeries<int>
                     {
-                        Values = new int[] { propertySpaces.Where(model => model.Assignment == null).Count() },
+                        Values = new int[] { BindingContextPageModel.IsPropertySpaceAssignmentPieChartMock ? System.Random.Shared.Next(1, 50) : propertySpaces.Where(model => model.Assignment == null).Count() },
                         Name = "Disponibles",
                         Stroke = null
                     },
                     new LiveChartsCore.SkiaSharpView.PieSeries<int>
                     {
-                        Values = new int[] { propertySpaces.Where(model => model.Assignment == Domain.Persistence.Enumerations.PropertyAssignment.Operation).Count() },
+                        Values = new int[] { BindingContextPageModel.IsPropertySpaceAssignmentPieChartMock ? System.Random.Shared.Next(1, 50) : propertySpaces.Where(model => model.Assignment == Domain.Persistence.Enumerations.PropertyAssignment.Operation).Count() },
                         Name = "Operaciones",
                         Stroke = null
                     },
                     new LiveChartsCore.SkiaSharpView.PieSeries<int>
                     {
-                        Values = new int[] { propertySpaces.Where(model => model.Assignment == Domain.Persistence.Enumerations.PropertyAssignment.Leasing).Count() },
+                        Values = new int[] { BindingContextPageModel.IsPropertySpaceAssignmentPieChartMock ? System.Random.Shared.Next(1, 50) : propertySpaces.Where(model => model.Assignment == Domain.Persistence.Enumerations.PropertyAssignment.Leasing).Count() },
                         Name = "Arrendamiento",
                         Stroke = null
                     }
                 };
-                BindingContextPageModel.VehicleLeasingPieChart.Series = vehicleLeasingPieCharSeries.ToArray();
-                BindingContextPageModel.PropertyLeasingPieChart.Series = propertyLeasingPieCharSeries.ToArray();
+                BindingContextPageModel.IsVehicleLeasingPieChartMock = vehicleLeasingPieCharSeries.Count <= 0;
+                BindingContextPageModel.VehicleLeasingPieChart.Series = BindingContextPageModel.IsVehicleLeasingPieChartMock ? GeMockLeasingPieCharSeries() : vehicleLeasingPieCharSeries.ToArray();
+                BindingContextPageModel.IsPropertyLeasingPieChartMock = propertyLeasingPieCharSeries.Count <= 0;
+                BindingContextPageModel.PropertyLeasingPieChart.Series = BindingContextPageModel.IsPropertyLeasingPieChartMock ? GeMockLeasingPieCharSeries() : propertyLeasingPieCharSeries.ToArray();
+                BindingContextPageModel.IsClientPaymentPertinenceHeatChartMock = true;
                 BindingContextPageModel.ClientPaymentPertinenceHeatChart = new Models.View.ChartViewModel
                 {
                     XAxes = [
@@ -339,6 +504,29 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                 };
                 BindingContextPageModel.IsBusy = false;
             });
+        }).ContinueWith(task =>
+        {
+            if (!task.IsCanceled && task.Exception == null) return;
+
+            Dispatcher.Dispatch(() => Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this));
         });
+    }
+
+    private LiveChartsCore.SkiaSharpView.PieSeries<int>[] GeMockLeasingPieCharSeries()
+    {
+        var result = new System.Collections.Generic.List<LiveChartsCore.SkiaSharpView.PieSeries<int>>();
+
+        for (int i = 1; i <= 3; i++)
+        {
+            result.Add(new LiveChartsCore.SkiaSharpView.PieSeries<int>
+            {
+                Values = new int[] { System.Random.Shared.Next(1, 25) },
+                MaxRadialColumnWidth = 48,
+                Name = $"Tipo de cliente {i}",
+                Stroke = null
+            });
+        }
+
+        return result.ToArray();
     }
 }

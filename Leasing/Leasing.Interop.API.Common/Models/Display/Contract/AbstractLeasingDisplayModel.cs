@@ -6,6 +6,8 @@
 
         public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get; set; }
 
+        public Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel CostCenter { get; set; }
+
         public virtual void Import(TEntity entity)
         {
             Id = entity.Id;
@@ -15,6 +17,13 @@
                 Agreement = new Governance.Interop.API.Common.Models.Display.AgreementDisplayModel();
 
                 Agreement.Import(entity.Agreement);
+            }
+
+            if (entity.CostCenter != null)
+            {
+                CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel();
+
+                CostCenter.Import(entity.CostCenter);
             }
         }
     }

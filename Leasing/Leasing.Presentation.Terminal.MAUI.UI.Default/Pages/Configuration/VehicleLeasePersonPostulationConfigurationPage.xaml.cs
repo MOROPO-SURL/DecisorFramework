@@ -65,6 +65,7 @@ public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Prese
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
             MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument,
+            BankAccountId = ConcreteBindingContext.BankAccount.Id,
             IncomingDocuments = incomingDocuments
         };
 
@@ -86,6 +87,7 @@ public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Prese
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
             MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument,
+            BankAccountId = ConcreteBindingContext.BankAccount.Id,
             IncomingDocuments = incomingDocuments,
             EditionDocuments = editionDocuments,
             OutgoingDocuments = outgoingDocuments
@@ -217,6 +219,18 @@ public partial class VehicleLeasePersonPostulationConfigurationPage : Core.Prese
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
     {
+        hasChangesFlag = true;
+    }
+
+    private void BankAccountPickButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.NaturalClientByContactBankAccountPickPage(BankAccountPickComplete_Callback, ConcreteBindingContext.Contact)));
+    }
+
+    private void BankAccountPickComplete_Callback(Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel model)
+    {
+        ConcreteBindingContext.BankAccount = model;
+
         hasChangesFlag = true;
     }
 

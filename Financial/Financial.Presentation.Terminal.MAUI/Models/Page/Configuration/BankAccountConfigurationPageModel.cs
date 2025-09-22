@@ -4,6 +4,11 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.P
 {
     public class BankAccountConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.BankAccountDisplayModel>
     {
+        public static string NumberValidableProperty => nameof(Number);
+        public static string HolderValidableProperty => nameof(Holder);
+        public static string BranchValidableProperty => nameof(Branch);
+        public static string CurrencyValidableProperty => nameof(Currency);
+
         private string number;
         private string holder;
         private BankBranchDisplayModel branch;
@@ -25,7 +30,7 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.P
 
         public System.Guid Id { get; set; }
 
-        public System.Guid AccountId { get; set; }
+        public bool IsExternal { get; set; }
 
         public string Number { get => number; set => SetProperty(ref number, value); }
 

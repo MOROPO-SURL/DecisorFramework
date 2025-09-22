@@ -5,7 +5,6 @@ using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Input;
-using MOROPO.Framework.Decisor.Financial.Interop.API.Connect.Clients;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 using System.Collections.Generic;
 using System.Linq;
@@ -67,7 +66,6 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
-            RepresentativeId = ConcreteBindingContext.Representative.Id,
             MainPostalContactId = ConcreteBindingContext.AvailablePostalContactItems[PostalContactPicker.SelectedIndex].Id,
             DefaultPaymentTermId = ConcreteBindingContext.AvailablePaymentTerms[PaymentTermPicker.SelectedIndex].Id,
             Priority = ConcreteBindingContext.Priority,
@@ -90,7 +88,6 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
-            RepresentativeId = ConcreteBindingContext.Representative.Id,
             MainPostalContactId = ConcreteBindingContext.AvailablePostalContactItems[PostalContactPicker.SelectedIndex].Id,
             DefaultPaymentTermId = ConcreteBindingContext.AvailablePaymentTerms[PaymentTermPicker.SelectedIndex].Id,
             Priority = ConcreteBindingContext.Priority,
@@ -125,11 +122,6 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
     private void ContactPickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationContactPickPage(ContactPickComplete_Callback)));
-    }
-
-    private void RepresentativePickButton_Clicked(object sender, System.EventArgs e)
-    {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(RepresentativePickComplete_Callback)));
     }
 
     private void BankAccountAgregationButton_Clicked(object sender, System.EventArgs e)
@@ -367,11 +359,6 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
         {
             ConcreteBindingContext.AvailablePostalContactItems.Add(item);
         }
-    }
-
-    private void RepresentativePickComplete_Callback(PersonContactDisplayModel model)
-    {
-        ConcreteBindingContext.Representative = model;
     }
 
     private void BankAccountCreateSuccess_Callback(BankAccountDisplayModel model)

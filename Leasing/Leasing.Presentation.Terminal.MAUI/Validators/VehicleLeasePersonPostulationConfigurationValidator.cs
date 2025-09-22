@@ -17,6 +17,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Validators
             RuleFor(model => model.MainPostalContactItem).NotNull();
 
             RuleFor(model => model.Argument).NotNull();
+
+            RuleFor(model => model.BankAccount).NotNull();
         }
     }
 }

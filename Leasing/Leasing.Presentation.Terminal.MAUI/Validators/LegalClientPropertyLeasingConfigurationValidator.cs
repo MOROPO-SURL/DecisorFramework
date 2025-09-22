@@ -10,6 +10,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Validators
 
             RuleFor(model => model.Agreement).NotNull();
 
+            RuleFor(model => model.CostCenter).NotNull();
+
             RuleFor(model => model.DurationUnitCount).NotNull().GreaterThan(0);
 
             RuleFor(model => model.DurationUnitMeasureKind).NotNull();

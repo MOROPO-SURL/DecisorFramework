@@ -3,9 +3,9 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class BankAccountConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.BankAccountDisplayModel>
+public partial class BankAccountConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.BankAccountDisplayModel, Interop.API.Common.Models.Display.BankAccountDisplayModel, Models.Page.Configuration.BankAccountConfigurationPageModel>
 {
-    public BankAccountConfigurationPage(System.Action<Interop.API.Common.Models.Display.BankAccountDisplayModel> successAction, Models.Page.Configuration.BankAccountConfigurationPageModel model) : base(successAction, model)
+    public BankAccountConfigurationPage(System.Action<Interop.API.Common.Models.Display.BankAccountDisplayModel> successAction, Models.Page.Configuration.BankAccountConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.BankAccountConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -46,17 +46,15 @@ public partial class BankAccountConfigurationPage : Core.Presentation.Terminal.M
     {
         var apiConnectClient = new Interop.API.Connect.Clients.BankAccountsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.BankAccountConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.BankAccountInputModel
         {
             Id = System.Guid.NewGuid(),
-            IsExternal = false,
-            Number = concreteBindingContext.Number,
-            Priority = concreteBindingContext.Priority,
-            BranchId = concreteBindingContext.AvailableBankBranches[BankBranchPicker.SelectedIndex].Id,
-            CurrencyId = concreteBindingContext.AvailableCurrencies[CurrencyPicker.SelectedIndex].Id,
-            Holder = concreteBindingContext.Holder
+            IsExternal = ConcreteBindingContext.IsExternal,
+            Number = ConcreteBindingContext.Number,
+            Holder = ConcreteBindingContext.Holder,
+            Priority = ConcreteBindingContext.Priority,
+            BranchId = ConcreteBindingContext.AvailableBankBranches[BankBranchPicker.SelectedIndex].Id,
+            CurrencyId = ConcreteBindingContext.AvailableCurrencies[CurrencyPicker.SelectedIndex].Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -68,21 +66,30 @@ public partial class BankAccountConfigurationPage : Core.Presentation.Terminal.M
     {
         var apiConnectClient = new Interop.API.Connect.Clients.BankAccountsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.BankAccountConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.BankAccountInputModel
         {
-            Id = concreteBindingContext.Id,
-            Number = concreteBindingContext.Number,
-            Priority = concreteBindingContext.Priority,
-            BranchId = concreteBindingContext.AvailableBankBranches[BankBranchPicker.SelectedIndex].Id,
-            CurrencyId = concreteBindingContext.AvailableCurrencies[CurrencyPicker.SelectedIndex].Id,
-            Holder = concreteBindingContext.Holder
+            Id = ConcreteBindingContext.Id,
+            IsExternal = ConcreteBindingContext.IsExternal,
+            Number = ConcreteBindingContext.Number,
+            Holder = ConcreteBindingContext.Holder,
+            Priority = ConcreteBindingContext.Priority,
+            BranchId = ConcreteBindingContext.AvailableBankBranches[BankBranchPicker.SelectedIndex].Id,
+            CurrencyId = ConcreteBindingContext.AvailableCurrencies[CurrencyPicker.SelectedIndex].Id
         };
 
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)

@@ -65,7 +65,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
             if (entity.Contract.Postulation.Offer.Propousal.Property.FeatureImage != null)
             {
-                model.Contract.Property.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Contract.Client.Contact.Identity.Image.ContentType);
+                model.Contract.Property.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Contract.Postulation.Offer.Propousal.Property.FeatureImage.ContentType);
             }
 
             var members = new System.Collections.Generic.List<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel>();
@@ -121,12 +121,20 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                 Priority = model.Priority,
                 Feed = model.Feed,
                 PaymentTermId = model.PaymentTermId,
+                BankAccountId = postulation.BankAccountId,
                 PropertyLeaseNaturalPostulationId = model.PostulationId
             }, User.Identity.Name, false);
 
             if (client != null)
             {
                 entity.Contract.PropertyLeaseNaturalClientId = client.Id;
+
+                if (!client.BankAccountBridges.Any(bridge => bridge.SternId == postulation.BankAccountId))
+                {
+                    client.BankAccountBridges.Add(new NaturalClientBankAccountBridge { ProwId = client.Id, SternId = postulation.BankAccountId });
+
+                    clientRepository.Update(client, User.Identity.Name, false);
+                }
             }
             else
             {
@@ -139,6 +147,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                     Priority = postulation.Contact.Priority,
                     ContactId = postulation.ContactId,
                     DefaultPaymentTermId = model.PaymentTermId,
+                    BankAccountBridges = [new NaturalClientBankAccountBridge { ProwId = clientId, SternId = postulation.BankAccountId }],
                     DocumentBridges = postulation.DocumentBridges.Select(bridge => new NaturalClientDocumentBridge
                     {
                         ProwId = clientId,

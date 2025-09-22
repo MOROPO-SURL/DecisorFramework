@@ -8,7 +8,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.
         private OrganizationContactDisplayModel contact;
         private string taxIdentificationNumber;
         private string stateIdentificationCode;
-        private PersonContactDisplayModel representative;
         private Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel mainPostalContact;
         private PaymentTermDisplayModel defaultPaymentTerm;
         private int priority = 1;
@@ -21,7 +20,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.
                 Contact = model.Contact;
                 TaxIdentificationNumber = model.TaxIdentificationNumber;
                 StateIdentificationCode = model.StateIdentificationCode;
-                Representative = model.Representative;
                 MainPostalContact = model.MainPostalContact;
                 DefaultPaymentTerm = model.DefaultPaymentTerm;
                 BankAccounts = new System.Collections.ObjectModel.ObservableCollection<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel>(model.BankAccounts);
@@ -38,8 +36,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.
         public string TaxIdentificationNumber { get => taxIdentificationNumber; set => SetProperty(ref taxIdentificationNumber, value); }
 
         public string StateIdentificationCode { get => stateIdentificationCode; set => SetProperty(ref stateIdentificationCode, value); }
-
-        public PersonContactDisplayModel Representative { get => representative; set => SetProperty(ref representative, value); }
 
         public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContact { get => mainPostalContact; set => SetProperty(ref mainPostalContact, value); }
 

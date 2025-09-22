@@ -1,4 +1,5 @@
-﻿using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
+﻿using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
+using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -6,6 +7,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
     {
         public static string ObjectiveValidableProperty => nameof(Objective);
         public static string AgreementValidableProperty => nameof(Agreement);
+        public static string CostCenterValidableProperty => nameof(CostCenter);
         public static string DurationUnitCountValidableProperty => nameof(DurationUnitCount);
         public static string DurationUnitMeasureKindValidableProperty => nameof(DurationUnitMeasureKind);
         public static string FeedValidableProperty => nameof(Feed);
@@ -16,6 +18,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         private string objective;
         private System.DateTime startAt = System.DateTime.Now;
         private Governance.Interop.API.Common.Models.Display.AgreementDisplayModel agreement;
+        private Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel costCenter;
         private int durationUnitCount = 1;
         private Legal.Persistence.Enumerations.DurationUnitMeasureKind durationUnitMeasureKind;
         private double feed;
@@ -39,6 +42,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         public System.DateTime StartAt { get => startAt; set => SetProperty(ref startAt, value); }
 
         public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get => agreement; set => SetProperty(ref agreement, value); }
+        public Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel CostCenter { get => costCenter; set => SetProperty(ref costCenter, value); }
 
         public int DurationUnitCount { get => durationUnitCount; set => SetProperty(ref durationUnitCount, value); }
 
@@ -53,5 +57,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         public Legal.Persistence.Enumerations.DurationUnitMeasureKind[] AvailableDurationUnitMeasureKinds { get; } = [Legal.Persistence.Enumerations.DurationUnitMeasureKind.Years, Legal.Persistence.Enumerations.DurationUnitMeasureKind.Months, Legal.Persistence.Enumerations.DurationUnitMeasureKind.Days, Legal.Persistence.Enumerations.DurationUnitMeasureKind.Hours];
 
         public Commercial.Interop.API.Common.Models.Display.PaymentTermDisplayModel[] AvailablePaymentTerms { get; set; } = [];
+
+        public Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel[] AvailableConstCenters { get; set; } = [];
     }
 }

@@ -8,6 +8,8 @@
 
         public System.Guid AgreementId { get; set; }
 
+        public System.Guid CostCenterId { get; set; }
+
         public int Priority { get; set; }
 
         public int Index { get; set; }
@@ -40,6 +42,12 @@
             {
                 entity.Agreement = null;
                 entity.AgreementId = AgreementId;
+            }
+
+            if (entity.CostCenterId != CostCenterId)
+            {
+                entity.CostCenter = null;
+                entity.CostCenterId = CostCenterId;
             }
         }
     }

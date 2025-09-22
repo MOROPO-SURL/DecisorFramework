@@ -9,6 +9,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         public static string TaxIdentificationNumberValidableProperty => nameof(TaxIdentificationNumber);
         public static string BusinessKindNumberValidableProperty => nameof(BusinessKind);
         public static string ArgumentValidableProperty => nameof(Argument);
+        public static string BankAccountValidableProperty => nameof(BankAccount);
         public static string SpacesValidableProperty => nameof(Spaces);
 
         public PropertyLeasePersonPostulationConfigurationPageModel(Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel offer, Interop.API.Common.Models.Display.PropertyLeasePersonPostulationDisplayModel model) : base(offer.Id, model)

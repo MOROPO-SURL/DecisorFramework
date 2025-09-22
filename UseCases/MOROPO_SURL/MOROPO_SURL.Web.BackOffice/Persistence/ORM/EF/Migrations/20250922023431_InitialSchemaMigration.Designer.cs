@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250919221030_LeasingUpgrade1SchemaMigration")]
-    partial class LeasingUpgrade1SchemaMigration
+    [Migration("20250922023431_InitialSchemaMigration")]
+    partial class InitialSchemaMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -3849,6 +3849,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<Guid>("BankAccountId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("bankaccountid");
+
                     b.Property<string>("Discriminator")
                         .IsRequired()
                         .HasColumnType("text")
@@ -3889,6 +3893,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_leasecontracts");
+
+                    b.HasIndex("BankAccountId")
+                        .HasDatabaseName("ix_leasecontracts_bankaccountid");
 
                     b.HasIndex("PaymentTermId")
                         .HasDatabaseName("ix_leasecontracts_paymenttermid");
@@ -3938,6 +3945,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("contractid");
 
+                    b.Property<Guid>("CostCenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("costcenterid");
+
                     b.HasKey("Id")
                         .HasName("pk_legalclientpropertyleasings");
 
@@ -3946,6 +3957,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("ContractId")
                         .HasDatabaseName("ix_legalclientpropertyleasings_contractid");
+
+                    b.HasIndex("CostCenterId")
+                        .HasDatabaseName("ix_legalclientpropertyleasings_costcenterid");
 
                     b.ToTable("legalclientpropertyleasings", "decisorframework_leasing");
                 });
@@ -4085,6 +4099,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("contractid");
 
+                    b.Property<Guid>("CostCenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("costcenterid");
+
                     b.Property<string>("OperativeLicenceCode")
                         .IsRequired()
                         .HasColumnType("text")
@@ -4098,6 +4116,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("ContractId")
                         .HasDatabaseName("ix_legalclientvehicleleasings_contractid");
+
+                    b.HasIndex("CostCenterId")
+                        .HasDatabaseName("ix_legalclientvehicleleasings_costcenterid");
 
                     b.ToTable("legalclientvehicleleasings", "decisorframework_leasing");
                 });
@@ -4256,6 +4277,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("contractid");
 
+                    b.Property<Guid>("CostCenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("costcenterid");
+
                     b.HasKey("Id")
                         .HasName("pk_naturalclientpropertyleasings");
 
@@ -4264,6 +4289,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("ContractId")
                         .HasDatabaseName("ix_naturalclientpropertyleasings_contractid");
+
+                    b.HasIndex("CostCenterId")
+                        .HasDatabaseName("ix_naturalclientpropertyleasings_costcenterid");
 
                     b.ToTable("naturalclientpropertyleasings", "decisorframework_leasing");
                 });
@@ -4403,6 +4431,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("contractid");
 
+                    b.Property<Guid>("CostCenterId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("costcenterid");
+
                     b.Property<string>("OperativeLicenceCode")
                         .IsRequired()
                         .HasColumnType("text")
@@ -4416,6 +4448,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("ContractId")
                         .HasDatabaseName("ix_naturalclientvehicleleasings_contractid");
+
+                    b.HasIndex("CostCenterId")
+                        .HasDatabaseName("ix_naturalclientvehicleleasings_costcenterid");
 
                     b.ToTable("naturalclientvehicleleasings", "decisorframework_leasing");
                 });
@@ -9971,12 +10006,21 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.Contract.AbstractLeaseContract", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.BankAccount", "BankAccount")
+                        .WithMany()
+                        .HasForeignKey("BankAccountId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_leasecontracts_bankaccounts_bankaccountid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.PaymentTerm", "PaymentTerm")
                         .WithMany()
                         .HasForeignKey("PaymentTermId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_leasecontracts_paymentterms_paymenttermid");
+
+                    b.Navigation("BankAccount");
 
                     b.Navigation("PaymentTerm");
                 });
@@ -10018,9 +10062,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_legalclientpropertyleasings_leasecontracts_contractid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", "CostCenter")
+                        .WithMany()
+                        .HasForeignKey("CostCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientpropertyleasings_costcenters_costcenterid");
+
                     b.Navigation("Agreement");
 
                     b.Navigation("Contract");
+
+                    b.Navigation("CostCenter");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.LegalClientPropertyLeasingCompensation", b =>
@@ -10123,9 +10176,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_legalclientvehicleleasings_leasecontracts_contractid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", "CostCenter")
+                        .WithMany()
+                        .HasForeignKey("CostCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientvehicleleasings_costcenters_costcenterid");
+
                     b.Navigation("Agreement");
 
                     b.Navigation("Contract");
+
+                    b.Navigation("CostCenter");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.LegalClientVehicleLeasingCompensation", b =>
@@ -10249,9 +10311,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_naturalclientpropertyleasings_leasecontracts_contractid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", "CostCenter")
+                        .WithMany()
+                        .HasForeignKey("CostCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientpropertyleasings_costcenters_costcenterid");
+
                     b.Navigation("Agreement");
 
                     b.Navigation("Contract");
+
+                    b.Navigation("CostCenter");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.NaturalClientPropertyLeasingCompensation", b =>
@@ -10354,9 +10425,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_naturalclientvehicleleasings_leasecontracts_contractid");
 
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", "CostCenter")
+                        .WithMany()
+                        .HasForeignKey("CostCenterId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientvehicleleasings_costcenters_costcenterid");
+
                     b.Navigation("Agreement");
 
                     b.Navigation("Contract");
+
+                    b.Navigation("CostCenter");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.NaturalClientVehicleLeasingCompensation", b =>

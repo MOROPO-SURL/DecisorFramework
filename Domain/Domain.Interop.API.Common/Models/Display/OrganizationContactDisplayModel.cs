@@ -7,6 +7,8 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
     {
         public Core.Interop.API.Common.Models.Display.OrganizationIdentityDisplayModel Identity { get; set; }
 
+        public PersonContactDisplayModel Representative { get; set; }
+
         public string TaxIdentificationNumber { get; set; }
 
         public string StateIdentificationCode { get; set; }
@@ -27,6 +29,13 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
                 Identity = new Core.Interop.API.Common.Models.Display.OrganizationIdentityDisplayModel();
 
                 Identity.Import(entity.Identity);
+            }
+
+            if (entity.Representative != null) 
+            {
+                Representative = new PersonContactDisplayModel();
+
+                Representative.Import(entity.Representative);
             }
 
             if (entity.BusinessKind != null)

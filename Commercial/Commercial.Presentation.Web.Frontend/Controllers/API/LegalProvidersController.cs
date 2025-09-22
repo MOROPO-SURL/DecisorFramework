@@ -78,11 +78,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
                 _model.Municipality.Import(municipality);
             }
 
-            if (model.Representative.Identity.Image != null)
-            {
-                model.Representative.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Contact.Representative.Identity.Image.ContentType);
-            }
-
             model.MainPostalContact = model.Contact.Identity.PostalContacts.First(_model => _model.Id == entity.Contact.MainPostalContactId);
 
             model.Documents = entity.DocumentBridges.Select(bridge =>
@@ -109,7 +104,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
 
             _entity.TaxIdentificationNumber = model.TaxIdentificationNumber;
             _entity.StateIdentificationCode = model.StateIdentificationCode;
-            _entity.RepresentativeId = model.RepresentativeId;
             _entity.MainPostalContactId = model.MainPostalContactId;
 
             organizationContactRepository.Update(_entity, User.Identity.Name, false);
@@ -158,12 +152,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
 
             entity.Contact.TaxIdentificationNumber = model.TaxIdentificationNumber;
             entity.Contact.StateIdentificationCode = model.StateIdentificationCode;
-
-            if (model.RepresentativeId != entity.Contact.RepresentativeId)
-            {
-                entity.Contact.Representative = null;
-                entity.Contact.RepresentativeId = model.RepresentativeId;
-            }
 
             if (model.MainPostalContactId != entity.Contact.MainPostalContactId)
             {

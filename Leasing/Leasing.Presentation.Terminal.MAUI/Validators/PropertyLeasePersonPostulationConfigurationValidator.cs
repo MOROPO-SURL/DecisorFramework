@@ -18,6 +18,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Validators
 
             RuleFor(model => model.Argument).NotNull();
 
+            RuleFor(model => model.BankAccount).NotNull();
+
             RuleFor(model => model.Spaces).NotEmpty();
         }
     }

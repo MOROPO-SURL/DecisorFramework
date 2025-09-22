@@ -9,6 +9,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:live_charts_controls="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
     xmlns:live_charts_core_skiasharpview_painting="clr-namespace:LiveChartsCore.SkiaSharpView.Painting;assembly=LiveChartsCore.SkiaSharpView"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages.LeasingDashboardPage"
     x:TypeArguments="presentation_page_models:LeasingDashboardPageModel"
     x:DataType="presentation_page_models:LeasingDashboardPageModel"
@@ -16,6 +17,15 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+
+            <communitytoolkit_converters:BoolToObjectConverter x:Key="BoolToMockOpacityObjectConverter">
+                <communitytoolkit_converters:BoolToObjectConverter.TrueObject>
+                    <x:Double>0.15</x:Double>
+                </communitytoolkit_converters:BoolToObjectConverter.TrueObject>
+                <communitytoolkit_converters:BoolToObjectConverter.FalseObject>
+                    <x:Double>1.0</x:Double>
+                </communitytoolkit_converters:BoolToObjectConverter.FalseObject>
+            </communitytoolkit_converters:BoolToObjectConverter>
 
             <Style x:Key="CardHeaderSeparatorBoxViewStyle" TargetType="BoxView">
                 <Setter Property="Color" Value="DimGray" />
@@ -286,11 +296,26 @@
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=12, LargeContainerColumn=6, MediumContainerColumn=12}}"
                                     Margin="4"
                                     Spacing="6">
-                                    <live_charts_controls:PieChart 
-                                        x:Name="VehicleAssignmentPieChart"
-                                        HeightRequest="360"
-                                        Series="{Binding VehicleAssignmentPieChart.Series}"
-                                        LegendPosition="Right" />
+                                    <Grid>
+                                        <live_charts_controls:PieChart 
+                                            x:Name="VehicleAssignmentPieChart"
+                                            Opacity="{Binding IsVehicleAssignmentPieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                            HeightRequest="360"
+                                            Series="{Binding VehicleAssignmentPieChart.Series}"
+                                            LegendPosition="Right" />
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                            IsVisible="{Binding IsVehicleAssignmentPieChartMock}">
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontSize="Medium"
+                                                Text="Sin datos suficientes" />
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                Text="mostrando datos simulados" />
+                                        </VerticalStackLayout>
+                                    </Grid>
                                     <BoxView
                                         HeightRequest="2"
                                         Color="DimGray" />
@@ -304,11 +329,26 @@
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=12, LargeContainerColumn=6, MediumContainerColumn=12}}"
                                     Margin="4"
                                     Spacing="6">
-                                    <live_charts_controls:PieChart 
-                                        x:Name="VehicleLeasingPieChart"
-                                        HeightRequest="360"
-                                        Series="{Binding VehicleLeasingPieChart.Series}"
-                                        LegendPosition="Right" />
+                                    <Grid>
+                                        <live_charts_controls:PieChart 
+                                            x:Name="VehicleLeasingPieChart"
+                                            Opacity="{Binding IsVehicleLeasingPieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                            HeightRequest="360"
+                                            Series="{Binding VehicleLeasingPieChart.Series}"
+                                            LegendPosition="Right" />
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                            IsVisible="{Binding IsVehicleLeasingPieChartMock}">
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontSize="Medium"
+                                                Text="Sin datos suficientes" />
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                Text="mostrando datos simulados" />
+                                        </VerticalStackLayout>
+                                    </Grid>
                                     <BoxView
                                         HeightRequest="2"
                                         Color="DimGray" />
@@ -339,11 +379,26 @@
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=12, LargeContainerColumn=6, MediumContainerColumn=12}}"
                                     Margin="4"
                                     Spacing="6">
-                                    <live_charts_controls:PieChart 
-                                        x:Name="PropertySpaceAssignmentPieChart"
-                                        HeightRequest="360"
-                                        Series="{Binding PropertySpaceAssignmentPieChart.Series}"
-                                        LegendPosition="Right" />
+                                    <Grid>
+                                        <live_charts_controls:PieChart 
+                                            x:Name="PropertySpaceAssignmentPieChart"
+                                            Opacity="{Binding IsPropertySpaceAssignmentPieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                            HeightRequest="360"
+                                            Series="{Binding PropertySpaceAssignmentPieChart.Series}"
+                                            LegendPosition="Right" />
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                            IsVisible="{Binding IsPropertySpaceAssignmentPieChartMock}">
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontSize="Medium"
+                                                Text="Sin datos suficientes" />
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                Text="mostrando datos simulados" />
+                                        </VerticalStackLayout>
+                                    </Grid>
                                     <BoxView
                                         HeightRequest="2"
                                         Color="DimGray" />
@@ -357,11 +412,26 @@
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=12, LargeContainerColumn=6, MediumContainerColumn=12}}"
                                     Margin="4"
                                     Spacing="6">
-                                    <live_charts_controls:PieChart 
-                                        x:Name="PropertyLeasingPieChart"
-                                        HeightRequest="360"
-                                        Series="{Binding PropertyLeasingPieChart.Series}"
-                                        LegendPosition="Right" />
+                                    <Grid>
+                                        <live_charts_controls:PieChart 
+                                            x:Name="PropertyLeasingPieChart"
+                                            Opacity="{Binding IsPropertyLeasingPieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                            HeightRequest="360"
+                                            Series="{Binding PropertyLeasingPieChart.Series}"
+                                            LegendPosition="Right" />
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                            IsVisible="{Binding IsPropertyLeasingPieChartMock}">
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontSize="Medium"
+                                                Text="Sin datos suficientes" />
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                Text="mostrando datos simulados" />
+                                        </VerticalStackLayout>
+                                    </Grid>
                                     <BoxView
                                         HeightRequest="2"
                                         Color="DimGray" />
@@ -383,11 +453,27 @@
                             LineBreakMode="TailTruncation"
                             Text="Cumplimiento de los Pagos (6 meses)" />
                         <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
-                        <live_charts_controls:CartesianChart 
-                            MinimumHeightRequest="420"
-                            Series="{Binding ClientPaymentPertinenceHeatChart.Series}"
-                            XAxes="{Binding ClientPaymentPertinenceHeatChart.XAxes}"
-                            YAxes="{Binding ClientPaymentPertinenceHeatChart.YAxes}" />
+                        <Grid>
+                            <live_charts_controls:CartesianChart 
+                                x:Name="ClientPaymentPertinenceHeatChart"
+                                Opacity="{Binding IsClientPaymentPertinenceHeatChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                MinimumHeightRequest="420"
+                                Series="{Binding ClientPaymentPertinenceHeatChart.Series}"
+                                XAxes="{Binding ClientPaymentPertinenceHeatChart.XAxes}"
+                                YAxes="{Binding ClientPaymentPertinenceHeatChart.YAxes}" />
+                            <VerticalStackLayout 
+                                HorizontalOptions="Center" VerticalOptions="Center"
+                                IsVisible="{Binding IsClientPaymentPertinenceHeatChartMock}">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontSize="Medium"
+                                    Text="Sin datos suficientes" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Italic"
+                                    Text="mostrando datos simulados" />
+                            </VerticalStackLayout>
+                        </Grid>
                     </StackLayout>
                 </Frame>
             </VerticalStackLayout>

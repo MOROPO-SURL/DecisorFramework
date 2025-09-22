@@ -7,6 +7,7 @@
         public static string TaxIdentificationNumberValidableProperty => nameof(TaxIdentificationNumber);
         public static string BusinessKindNumberValidableProperty => nameof(BusinessKind);
         public static string ArgumentValidableProperty => nameof(Argument);
+        public static string BankAccountValidableProperty => nameof(BankAccount);
 
         public VehicleLeasePersonPostulationConfigurationPageModel(System.Guid offerId, Interop.API.Common.Models.Display.VehicleLeasePersonPostulationDisplayModel model) : base(offerId, model)
         {

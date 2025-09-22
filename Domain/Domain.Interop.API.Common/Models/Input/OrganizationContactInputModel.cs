@@ -22,6 +22,8 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public ImageInputModel Image { get; set; }
 
+        public System.Guid RepresentativeId { get; set; }
+
         public System.Guid BusinessKindId { get; set; }
 
         public List<PostalContactItemInputModel> EditionPostalContactItems { get; set; } = new List<PostalContactItemInputModel>();
@@ -61,6 +63,12 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             entity.Identity.BornDate = BornDate;
             entity.Identity.About = About;
             entity.Priority = Priority;
+
+            if (entity.RepresentativeId != RepresentativeId)
+            {
+                entity.Representative = null;
+                entity.RepresentativeId = RepresentativeId;
+            }
 
             if (BusinessKindId != entity.BusinessKindId)
             {

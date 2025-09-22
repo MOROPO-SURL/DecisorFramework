@@ -52,6 +52,7 @@ public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Cor
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
             MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument,
+            BankAccountId = ConcreteBindingContext.BankAccount.Id,
             IncomingDocuments = incomingDocuments,
             IncomingSpaces = incomingSpaces
         };
@@ -74,6 +75,7 @@ public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Cor
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
             MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
             Argument = ConcreteBindingContext.Argument,
+            BankAccountId = ConcreteBindingContext.BankAccount.Id,
             IncomingDocuments = incomingDocuments,
             EditionDocuments = editionDocuments,
             OutgoingDocuments = outgoingDocuments,
@@ -248,6 +250,18 @@ public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Cor
                 hasChangesFlag = true;
             });
         });
+    }
+
+    private void BankAccountPickButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.LegalClientByContactBankAccountPickPage(BankAccountPickComplete_Callback, ConcreteBindingContext.Contact)));
+    }
+
+    private void BankAccountPickComplete_Callback(Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel model)
+    {
+        ConcreteBindingContext.BankAccount = model;
+
+        hasChangesFlag = true;
     }
 
     private void PropertySpacePickComplete_Callback(Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel model)
