@@ -9,6 +9,7 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:live_charts_controls="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
     xmlns:live_charts_core_skiasharpview_painting="clr-namespace:LiveChartsCore.SkiaSharpView.Painting;assembly=LiveChartsCore.SkiaSharpView"
+    xmlns:live_charts_core_skiasharpview_draw="clr-namespace:LiveChartsCore.SkiaSharpView.SKCharts;assembly=LiveChartsCore.SkiaSharpView"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages.LeasingDashboardPage"
     x:TypeArguments="presentation_page_models:LeasingDashboardPageModel"
@@ -34,6 +35,15 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
             <VerticalStackLayout Spacing="4" Margin="8">
@@ -442,6 +452,72 @@
                                         Text="Contrataciones por Tipo de Actor" />
                                 </VerticalStackLayout>
                             </FlexLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=12}}"
+                        VerticalOptions="Start"
+                        Margin="4">    
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                Text="Combro de arrendamientos" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Grid>
+                                <live_charts_controls:CartesianChart 
+                                    x:Name="RunningMonthCollectStatusChart"
+                                    Opacity="{Binding IsRunningMonthCollectStatusChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="400"
+                                    Series="{Binding RunningMonthCollectStatusChart.Series}"
+                                    XAxes="{Binding RunningMonthCollectStatusChart.XAxes}"
+                                    YAxes="{Binding RunningMonthCollectStatusChart.YAxes}" />
+                                <VerticalStackLayout 
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    IsVisible="{Binding IsRunningMonthCollectStatusChartMock}">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="Medium"
+                                        Text="Sin datos suficientes" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Italic"
+                                        Text="mostrando datos simulados" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=8, LargeContainerColumn=12}}"
+                        VerticalOptions="Start"
+                        Margin="4">    
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                Text="Ingresos planificados - recaudación oportuna (6 meses)" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Grid>
+                                <live_charts_controls:CartesianChart 
+                                    x:Name="PertinentCollectAndIncomeStatusCartesianChart"
+                                    Opacity="{Binding IsPertinentCollectAndIncomeStatusCartesianChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="400"
+                                    Series="{Binding PertinentCollectAndIncomeStatusCartesianChart.Series}"
+                                    XAxes="{Binding PertinentCollectAndIncomeStatusCartesianChart.XAxes}"
+                                    LegendPosition="Bottom" />
+                                <VerticalStackLayout 
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    IsVisible="{Binding IsPertinentCollectAndIncomeStatusCartesianChartMock}">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="Medium"
+                                        Text="Sin datos suficientes" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Italic"
+                                        Text="mostrando datos simulados" />
+                                </VerticalStackLayout>
+                            </Grid>
                         </VerticalStackLayout>
                     </Frame>
                 </FlexLayout>

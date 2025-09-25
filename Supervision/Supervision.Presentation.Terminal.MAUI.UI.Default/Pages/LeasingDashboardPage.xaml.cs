@@ -1,3 +1,4 @@
+using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
@@ -7,12 +8,27 @@ namespace MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Def
 
 public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContextedContentPage<Models.Page.LeasingDashboardPageModel>
 {
+    private static string[] LEASING_GROUPS = new string[] { "Inmuebles a jurídicos", "Vehículos a jurídicos", "Inmuebles a naturales", "Vehículos a naturales" };
+
     public LeasingDashboardPage() : base(new Models.Page.LeasingDashboardPageModel
     {
         VehicleAssignmentPieChart = new Models.View.ChartViewModel(),
         VehicleLeasingPieChart = new Models.View.ChartViewModel(),
         PropertySpaceAssignmentPieChart = new Models.View.ChartViewModel(),
-        PropertyLeasingPieChart = new Models.View.ChartViewModel()
+        PropertyLeasingPieChart = new Models.View.ChartViewModel(),
+        RunningMonthCollectStatusChart = new Models.View.ChartViewModel
+        {
+            XAxes =
+            [
+                new Axis
+                {
+                    IsVisible = false,
+                    MinLimit = 0,
+                    MaxLimit = 100
+                }
+            ],
+            YAxes = [ new Axis { IsVisible = false }]
+        }
     })
     {
         InitializeComponent();
@@ -22,11 +38,24 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
         PropertySpaceAssignmentPieChart.SetAppTheme<LiveChartsCore.Drawing.IPaint<LiveChartsCore.SkiaSharpView.Drawing.SkiaSharpDrawingContext>>(LiveChartsCore.SkiaSharpView.Maui.PieChart.LegendTextPaintProperty, new SolidColorPaint(SkiaSharp.SKColors.Black), new SolidColorPaint(SkiaSharp.SKColors.White));
         PropertyLeasingPieChart.SetAppTheme<LiveChartsCore.Drawing.IPaint<LiveChartsCore.SkiaSharpView.Drawing.SkiaSharpDrawingContext>>(LiveChartsCore.SkiaSharpView.Maui.PieChart.LegendTextPaintProperty, new SolidColorPaint(SkiaSharp.SKColors.Black), new SolidColorPaint(SkiaSharp.SKColors.White));
         ClientPaymentPertinenceHeatChart.SetAppTheme<LiveChartsCore.Drawing.IPaint<LiveChartsCore.SkiaSharpView.Drawing.SkiaSharpDrawingContext>>(LiveChartsCore.SkiaSharpView.Maui.CartesianChart.LegendTextPaintProperty, new SolidColorPaint(SkiaSharp.SKColors.Black), new SolidColorPaint(SkiaSharp.SKColors.White));
+        PertinentCollectAndIncomeStatusCartesianChart.SetAppTheme<LiveChartsCore.Drawing.IPaint<LiveChartsCore.SkiaSharpView.Drawing.SkiaSharpDrawingContext>>(LiveChartsCore.SkiaSharpView.Maui.CartesianChart.LegendTextPaintProperty, new SolidColorPaint(SkiaSharp.SKColors.Black), new SolidColorPaint(SkiaSharp.SKColors.White));
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
+
+        Refresh();
+    }
+
+    private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        Refresh();
+    }
+
+    private void Refresh()
+    {
+        if (BindingContextPageModel.IsBusy) return;
 
         BindingContextPageModel.IsBusy = true;
 
@@ -45,7 +74,7 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
             var vehicleOrganizationPostulationAPIConnectClient = new Leasing.Interop.API.Connect.Clients.VehicleLeaseOrganizationPostulationsAPIConnectClient(httpClientHelperProvider);
             var vehiclePersonPostulationAPIConnectClient = new Leasing.Interop.API.Connect.Clients.VehicleLeasePersonPostulationsAPIConnectClient(httpClientHelperProvider);
             var legalClientPropertyLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.LegalClientPropertyLeasingsAPIConnectClient(httpClientHelperProvider);
-            var naturalClientPropertyLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.NaturalClientPropertyLeasingsAPIConnectClient(httpClientHelperProvider);            
+            var naturalClientPropertyLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.NaturalClientPropertyLeasingsAPIConnectClient(httpClientHelperProvider);
             var legalClientVehicleLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.LegalClientVehicleLeasingsAPIConnectClient(httpClientHelperProvider);
             var naturalClientVehicleLeasingAPIConnectClient = new Leasing.Interop.API.Connect.Clients.NaturalClientVehicleLeasingsAPIConnectClient(httpClientHelperProvider);
 
@@ -57,7 +86,7 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
             var propertyPersonPostulationCount = await propertyPersonPostulationAPIConnectClient.CountAsync();
             var vehicleOrganizationPostulationCount = await vehicleOrganizationPostulationAPIConnectClient.CountAsync();
             var vehiclePersonPostulationCount = await vehiclePersonPostulationAPIConnectClient.CountAsync();
-            
+
             var properties = await propertiesAPIConnectClient.GetAsync();
             var vehicles = await vehiclesAPIConnectClient.GetAsync();
 
@@ -93,7 +122,7 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
 
                         case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Days:
                             limitDateTime = limitDateTime.AddDays(model.Contract.DurationUnitCount.Value);
-                            
+
                             break;
 
                         case Legal.Persistence.Enumerations.DurationUnitMeasureKind.Hours:
@@ -199,11 +228,11 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                 }
             }
 
-            var vehicleLeasingPieCharSeries = new System.Collections.Generic.List<LiveChartsCore.SkiaSharpView.PieSeries<int>>();
+            var vehicleLeasingPieCharSeries = new System.Collections.Generic.List<PieSeries<int>>();
 
             foreach (var item in vehicleLeasingDictionary)
             {
-                vehicleLeasingPieCharSeries.Add(new LiveChartsCore.SkiaSharpView.PieSeries<int>
+                vehicleLeasingPieCharSeries.Add(new PieSeries<int>
                 {
                     Values = new int[] { item.Value },
                     MaxRadialColumnWidth = 48,
@@ -326,7 +355,7 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                     var currentKey = $"N-{item.Id}";
 
                     if (!currentKey.Equals(prospectKey)) continue;
-                        
+
                     propertyLeasingDictionary[item] = propertyLeasingDictionary[item] + 1;
 
                     founded = true;
@@ -340,11 +369,11 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                 }
             }
 
-            var propertyLeasingPieCharSeries = new System.Collections.Generic.List<LiveChartsCore.SkiaSharpView.PieSeries<int>>();
+            var propertyLeasingPieCharSeries = new System.Collections.Generic.List<PieSeries<int>>();
 
             foreach (var item in propertyLeasingDictionary)
             {
-                propertyLeasingPieCharSeries.Add(new LiveChartsCore.SkiaSharpView.PieSeries<int>
+                propertyLeasingPieCharSeries.Add(new PieSeries<int>
                 {
                     Values = new int[] { item.Value },
                     MaxRadialColumnWidth = 48,
@@ -355,7 +384,7 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
 
             var propertySpaces = new System.Collections.Generic.List<Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel>();
 
-            foreach ( var property in properties)
+            foreach (var property in properties)
             {
                 propertySpaces.AddRange(property.Spaces);
             }
@@ -371,19 +400,19 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                 BindingContextPageModel.IsVehicleAssignmentPieChartMock = vehicles.Length <= 0;
                 BindingContextPageModel.VehicleAssignmentPieChart.Series = new[]
                 {
-                    new LiveChartsCore.SkiaSharpView.PieSeries<int>
+                    new PieSeries<int>
                     {
                         Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : vehicles.Where(model => model.Assignment == null).Count() },
                         Name = "Disponibles",
                         Stroke = null
                     },
-                    new LiveChartsCore.SkiaSharpView.PieSeries<int>
+                    new PieSeries<int>
                     {
                         Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : vehicles.Where(model => model.Assignment == Domain.Persistence.Enumerations.VehicleAssignment.Fleet).Count() },
                         Name = "Operaciones",
                         Stroke = null
                     },
-                    new LiveChartsCore.SkiaSharpView.PieSeries<int>
+                    new PieSeries<int>
                     {
                         Values = new int[] { BindingContextPageModel.IsVehicleAssignmentPieChartMock ? System.Random.Shared.Next(1, 25) : vehicles.Where(model => model.Assignment == Domain.Persistence.Enumerations.VehicleAssignment.Leasing).Count() },
                         Name = "Arrendamiento",
@@ -393,19 +422,19 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                 BindingContextPageModel.IsPropertySpaceAssignmentPieChartMock = propertySpaces.Count <= 0;
                 BindingContextPageModel.PropertySpaceAssignmentPieChart.Series = new[]
                 {
-                    new LiveChartsCore.SkiaSharpView.PieSeries<int>
+                    new PieSeries<int>
                     {
                         Values = new int[] { BindingContextPageModel.IsPropertySpaceAssignmentPieChartMock ? System.Random.Shared.Next(1, 50) : propertySpaces.Where(model => model.Assignment == null).Count() },
                         Name = "Disponibles",
                         Stroke = null
                     },
-                    new LiveChartsCore.SkiaSharpView.PieSeries<int>
+                    new PieSeries<int>
                     {
                         Values = new int[] { BindingContextPageModel.IsPropertySpaceAssignmentPieChartMock ? System.Random.Shared.Next(1, 50) : propertySpaces.Where(model => model.Assignment == Domain.Persistence.Enumerations.PropertyAssignment.Operation).Count() },
                         Name = "Operaciones",
                         Stroke = null
                     },
-                    new LiveChartsCore.SkiaSharpView.PieSeries<int>
+                    new PieSeries<int>
                     {
                         Values = new int[] { BindingContextPageModel.IsPropertySpaceAssignmentPieChartMock ? System.Random.Shared.Next(1, 50) : propertySpaces.Where(model => model.Assignment == Domain.Persistence.Enumerations.PropertyAssignment.Leasing).Count() },
                         Name = "Arrendamiento",
@@ -416,11 +445,70 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                 BindingContextPageModel.VehicleLeasingPieChart.Series = BindingContextPageModel.IsVehicleLeasingPieChartMock ? GeMockLeasingPieCharSeries() : vehicleLeasingPieCharSeries.ToArray();
                 BindingContextPageModel.IsPropertyLeasingPieChartMock = propertyLeasingPieCharSeries.Count <= 0;
                 BindingContextPageModel.PropertyLeasingPieChart.Series = BindingContextPageModel.IsPropertyLeasingPieChartMock ? GeMockLeasingPieCharSeries() : propertyLeasingPieCharSeries.ToArray();
+                BindingContextPageModel.IsRunningMonthCollectStatusChartMock = true;
+                BindingContextPageModel.RunningMonthCollectStatusChart.Series =
+                [
+                    new RowSeries<int>
+                    {
+                        Values = new int[] { 100, 100, 100, 100 },
+                        IsHoverable = false,
+                        DataLabelsFormatter = (point) =>
+                        {
+                            return $"{LEASING_GROUPS[point.Index]}";
+                        },
+                        IgnoresBarPosition = true,
+                        Fill = new SolidColorPaint(SkiaSharp.SKColors.DimGray),
+                        DataLabelsPaint = new SolidColorPaint(SkiaSharp.SKColors.DimGray),
+                        DataLabelsSize = 16,
+                        DataLabelsPosition= LiveChartsCore.Measure.DataLabelsPosition.Top
+                    },
+                    new RowSeries<int>
+                    {
+                        Values = new int[] { System.Random.Shared.Next(0, 100), System.Random.Shared.Next(0, 100), System.Random.Shared.Next(0, 100), System.Random.Shared.Next(0, 100) },
+                        IsHoverable = false,
+                        IgnoresBarPosition = true,
+                        Stroke = null,
+                        DataLabelsFormatter = (point) => $"{point.Model}%",
+                        DataLabelsPaint = new SolidColorPaint(SkiaSharp.SKColors.White),
+                        DataLabelsSize = 14,
+                        DataLabelsPosition= LiveChartsCore.Measure.DataLabelsPosition.Middle
+                    }
+                ];
+                BindingContextPageModel.IsPertinentCollectAndIncomeStatusCartesianChartMock = true;
+                BindingContextPageModel.PertinentCollectAndIncomeStatusCartesianChart = new Models.View.ChartViewModel
+                {
+                    XAxes = new Axis[]
+                    {
+                        new()
+                        {
+                            ForceStepToMin = true,
+                            MinStep = 1,
+                            Labels = ["Sep", "Ago", "Jul", "Jun", "May", "Abr"]
+                        }
+                    },
+                    Series = new[]
+                    {
+                        new ColumnSeries<decimal>
+                        {
+                            Values = new decimal[] { 300, 300, 360, 450, 450, 280 },
+                            MaxBarWidth = 80,
+                            IgnoresBarPosition = true,
+                            Name = "Ingresos planificados"
+                        },
+                        new ColumnSeries<decimal>
+                        {
+                            Values = new decimal[] { 180, 120, 270, 400, 200, 200 },
+                            MaxBarWidth = 40,
+                            IgnoresBarPosition = true,
+                            Name = "Cobros en tiempo"
+                        }
+                    }
+                };
                 BindingContextPageModel.IsClientPaymentPertinenceHeatChartMock = true;
                 BindingContextPageModel.ClientPaymentPertinenceHeatChart = new Models.View.ChartViewModel
                 {
                     XAxes = [
-                        new LiveChartsCore.SkiaSharpView.Axis
+                        new Axis
                         {
                             LabelsRotation = -45,
                             Labels = ["Cliente 1", "Cliente 2", "Cliente 3", "Cliente 4", "Cliente 5", "Cliente 6", "Cliente 7", "Cliente 8"],
@@ -429,7 +517,7 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                         }
                     ],
                     YAxes = [
-                        new LiveChartsCore.SkiaSharpView.Axis
+                        new Axis
                         {
                             Labels = ["Sep", "Ago", "Jul", "Jun", "May", "Abr"],
                             ForceStepToMin = true,
@@ -438,8 +526,13 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
                     ],
                     Series = new[]
                     {
-                        new LiveChartsCore.SkiaSharpView.HeatSeries<LiveChartsCore.Defaults.WeightedPoint>
+                        new HeatSeries<LiveChartsCore.Defaults.WeightedPoint>
                         {
+                            HeatMap = [
+                                new SkiaSharp.SKColor(255, 241, 118).AsLvcColor(), // the first element is the "coldest"
+                                SkiaSharp.SKColors.DarkSlateGray.AsLvcColor(),
+                                SkiaSharp.SKColors.Blue.AsLvcColor() // the last element is the "hottest"
+                            ],
                             Values = new LiveChartsCore.Defaults.WeightedPoint[] {
                                 // Charles
                                 new(0, 0, System.Random.Shared.Next(1, 30)), // Jan
@@ -512,13 +605,13 @@ public partial class LeasingDashboardPage : Caney.MVVM.Core.Pages.BindingContext
         });
     }
 
-    private LiveChartsCore.SkiaSharpView.PieSeries<int>[] GeMockLeasingPieCharSeries()
+    private PieSeries<int>[] GeMockLeasingPieCharSeries()
     {
-        var result = new System.Collections.Generic.List<LiveChartsCore.SkiaSharpView.PieSeries<int>>();
+        var result = new System.Collections.Generic.List<PieSeries<int>>();
 
         for (int i = 1; i <= 3; i++)
         {
-            result.Add(new LiveChartsCore.SkiaSharpView.PieSeries<int>
+            result.Add(new PieSeries<int>
             {
                 Values = new int[] { System.Random.Shared.Next(1, 25) },
                 MaxRadialColumnWidth = 48,

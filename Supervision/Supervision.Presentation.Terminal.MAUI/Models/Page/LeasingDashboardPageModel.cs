@@ -3,6 +3,7 @@
     public class LeasingDashboardPageModel : Caney.MVVM.Core.Models.Page.BasePageModel
     {
         private View.ChartViewModel clientPaymentPertinenceHeatChart;
+        private View.ChartViewModel pertinentCollectAndIncomeStatusCartesianChart;
         private long propousalCount;
         private long offerCount;
         private long postulationCount;
@@ -14,6 +15,8 @@
         private bool isPropertySpaceAssignmentPieChartMock;
         private bool isPropertyLeasingPieChartMock;
         private bool isClientPaymentPertinenceHeatChartMock;
+        private bool isPertinentCollectAndIncomeStatusCartesianChartMock;
+        private bool isRunningMonthCollectStatusChartMock;
 
         public View.ChartViewModel VehicleAssignmentPieChart { get; set; }
 
@@ -22,6 +25,10 @@
         public View.ChartViewModel PropertySpaceAssignmentPieChart { get; set; }
 
         public View.ChartViewModel PropertyLeasingPieChart { get; set; }
+
+        public View.ChartViewModel RunningMonthCollectStatusChart { get; set; }
+
+        public View.ChartViewModel PertinentCollectAndIncomeStatusCartesianChart { get => pertinentCollectAndIncomeStatusCartesianChart; set => SetProperty(ref pertinentCollectAndIncomeStatusCartesianChart, value); }
 
         public View.ChartViewModel ClientPaymentPertinenceHeatChart { get => clientPaymentPertinenceHeatChart; set => SetProperty(ref clientPaymentPertinenceHeatChart, value); }
 
@@ -46,5 +53,9 @@
         public bool IsPropertyLeasingPieChartMock { get => isPropertyLeasingPieChartMock; set => SetProperty(ref isPropertyLeasingPieChartMock, value); }
 
         public bool IsClientPaymentPertinenceHeatChartMock { get => isClientPaymentPertinenceHeatChartMock; set => SetProperty(ref isClientPaymentPertinenceHeatChartMock, value); }
+        
+        public bool IsPertinentCollectAndIncomeStatusCartesianChartMock { get => isPertinentCollectAndIncomeStatusCartesianChartMock; set => SetProperty(ref isPertinentCollectAndIncomeStatusCartesianChartMock, value); }
+        
+        public bool IsRunningMonthCollectStatusChartMock { get => isRunningMonthCollectStatusChartMock; set => SetProperty(ref isRunningMonthCollectStatusChartMock, value); }
     }
 }
