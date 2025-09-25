@@ -13,6 +13,13 @@
             base.Import(entity);
 
             OperativeLicenceCode = entity.OperativeLicenceCode;
+
+            if (entity.Contract != null)
+            {
+                Contract = new NaturalClientVehicleLeaseContractDisplayModel();
+
+                Contract.Import(entity.Contract);
+            }
         }
     }
 }

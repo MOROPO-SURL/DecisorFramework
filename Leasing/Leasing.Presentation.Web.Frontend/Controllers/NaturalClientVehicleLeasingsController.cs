@@ -52,10 +52,6 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
         {
             var model = base.EntityToDisplayModel(entity);
 
-            model.Contract = new NaturalClientVehicleLeaseContractDisplayModel();
-
-            model.Contract.Import(entity.Contract);
-
             if (entity.Contract.Client.Contact.Identity.Image != null)
             {
                 model.Contract.Client.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Contract.Client.Contact.Identity.Image.ContentType);

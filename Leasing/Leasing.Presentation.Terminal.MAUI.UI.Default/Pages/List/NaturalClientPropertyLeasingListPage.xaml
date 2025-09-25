@@ -47,88 +47,12 @@
                             <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="interop_common_display_models:NaturalClientPropertyLeasingDisplayModel">
-                                <Frame 
-                                    Padding="0"
-                                    HeightRequest="{Static local:NaturalClientPropertyLeasingListPage.ITEM_VIEW_REQUEST_HEIGHT}">
-                                    <Frame.GestureRecognizers>
+                            <DataTemplate>
+                                <local_card_views:NaturalClientPropertyLeasingDefaultCardView HeightRequest="{Static local:NaturalClientPropertyLeasingListPage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                    <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </Frame.GestureRecognizers>
-                                    <Grid ColumnSpacing="0">
-                                        <Grid.ColumnDefinitions>
-                                            <ColumnDefinition />
-                                            <ColumnDefinition Width="2*" />
-                                        </Grid.ColumnDefinitions>
-                                        <Image
-                                            Grid.Column="0"
-                                            Aspect="AspectFill"               
-                                            Source="{Binding Contract.Property.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
-                                        <StackLayout 
-                                            Grid.Column="1"
-                                            Padding="16">
-                                            <Label 
-                                                FontAttributes="Bold"
-                                                FontSize="Medium"
-                                                LineBreakMode="TailTruncation"
-                                                Text="{Binding Contract.Property.Name}" />
-                                            <Label
-                                                FontAttributes="Bold"
-                                                Text="{Binding Contract.Property.Kind.Name}" />
-                                            <Label 
-                                                Margin="0,8,0,0"
-                                                Text="Entidad Administrativa"
-                                                TextColor="DimGray"
-                                                FontSize="Caption"
-                                                FontAttributes="Bold" />
-                                            <Label
-                                                LineBreakMode="TailTruncation"
-                                                Text="{Binding Contract.Property.Structure.Identity.Name}" />
-                                            <Label 
-                                                Margin="0,8,0,4"
-                                                Text="Arrendatario"
-                                                TextColor="DimGray"
-                                                FontSize="Caption"
-                                                FontAttributes="Bold" />
-                                            <Grid>
-                                                <Grid.ColumnDefinitions>
-                                                    <ColumnDefinition Width="Auto" />
-                                                    <ColumnDefinition />
-                                                </Grid.ColumnDefinitions>
-                                                <Border 
-                                                    Grid.Column="0"
-                                                    VerticalOptions="Center"
-                                                    StrokeThickness="4"
-                                                    StrokeLineJoin="Bevel">
-                                                    <Border.StrokeShape>
-                                                        <RoundRectangle CornerRadius="32" />
-                                                    </Border.StrokeShape>
-                                                    <Image
-                                                        WidthRequest="64" HeightRequest="64"
-                                                        Source="{Binding Contract.Client.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
-                                                </Border>
-                                                <StackLayout 
-                                                    Grid.Column="1"
-                                                    VerticalOptions="Center"
-                                                    Padding="10,0">
-                                                    <Label
-                                                        ToolTipProperties.Text="{Binding Contract.Client.Contact.Identity.Name}"
-                                                        Text="{Binding Contract.Client.Contact.Identity.Name}"
-                                                        FontSize="Medium"
-                                                        LineBreakMode="TailTruncation" />
-                                                    <Label
-                                                        IsVisible="{Binding Contract.Client.Contact.Identity.LastName, Converter={StaticResource IsNotNullConverter}}"
-                                                        ToolTipProperties.Text="{Binding Contract.Client.Contact.Identity.LastName}"
-                                                        Text="{Binding Contract.Client.Contact.Identity.LastName}"
-                                                        LineBreakMode="TailTruncation" />
-                                                    <Label
-                                                        ToolTipProperties.Text="{Binding Contract.Client.Contact.BusinessKind.Name}"
-                                                        Text="{Binding Contract.Client.Contact.BusinessKind.Name}"
-                                                        LineBreakMode="TailTruncation" />
-                                                </StackLayout>
-                                            </Grid>
-                                        </StackLayout>
-                                    </Grid>
-                                </Frame>
+                                    </ContentView.GestureRecognizers>
+                                </local_card_views:NaturalClientPropertyLeasingDefaultCardView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

@@ -9,6 +9,13 @@
         public override void Import(Persistence.Entities.NaturalClientPropertyLeasing entity)
         {
             base.Import(entity);
+
+            if (entity.Contract != null)
+            {
+                Contract = new NaturalClientPropertyLeaseContractDisplayModel();
+
+                Contract.Import(entity.Contract);
+            }
         }
     }
 }

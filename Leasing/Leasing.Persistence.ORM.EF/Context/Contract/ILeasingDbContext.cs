@@ -48,5 +48,9 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.LegalClientVehicleLeasingCompensationDocumentBridge> LegClientVehLeasCompDocumentBridges { get; set; }
         public DbSet<Entities.NaturalClientVehicleLeasingCompensation> NaturalClientVehicleLeasingCompensations { get; set; }
         public DbSet<Entities.NaturalClientVehicleLeasingCompensationDocumentBridge> NatClientVehLeasCompDocumentBridges { get; set; }
+        public DbSet<Entities.LegalClientPropertyLeasingCollect> LegClientPropLeasCollects { get; set; }
+        public DbSet<Entities.LegalClientVehicleLeasingCollect> LegClientVehLeasCollects { get; set; }
+        public DbSet<Entities.NaturalClientPropertyLeasingCollect> NatClientPropLeasCollects { get; set; }
+        public DbSet<Entities.NaturalClientVehicleLeasingCollect> NatClientVehLeasCollects { get; set; }
     }
 }

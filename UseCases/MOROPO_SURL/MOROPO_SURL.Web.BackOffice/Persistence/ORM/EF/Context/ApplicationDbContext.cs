@@ -238,6 +238,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<LegalClientVehicleLeasingCompensationDocumentBridge> LegClientVehLeasCompDocumentBridges { get; set; }
         public DbSet<NaturalClientVehicleLeasingCompensation> NaturalClientVehicleLeasingCompensations { get; set; }
         public DbSet<NaturalClientVehicleLeasingCompensationDocumentBridge> NatClientVehLeasCompDocumentBridges { get; set; }
+        public DbSet<LegalClientPropertyLeasingCollect> LegClientPropLeasCollects { get; set; }
+        public DbSet<LegalClientVehicleLeasingCollect> LegClientVehLeasCollects { get; set; }
+        public DbSet<NaturalClientPropertyLeasingCollect> NatClientPropLeasCollects { get; set; }
+        public DbSet<NaturalClientVehicleLeasingCollect> NatClientVehLeasCollects { get; set; }
 
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }

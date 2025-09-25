@@ -9,6 +9,13 @@
         public override void Import(Persistence.Entities.LegalClientPropertyLeasing entity)
         {
             base.Import(entity);
+
+            if (entity.Contract != null)
+            {
+                Contract = new  LegalClientPropertyLeaseContractDisplayModel();
+
+                Contract.Import(entity.Contract);
+            }
         }
     }
 }
