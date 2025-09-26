@@ -29,7 +29,7 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
     private readonly List<WebContactItemInputModel> incomingWebContactItems = [];
     private readonly List<WebContactItemDisplayModel> outgoingWebContactItems = [];
 
-    public OrganizationContactConfigurationPage(System.Action<OrganizationContactDisplayModel> successAction, Models.Page.Configuration.OrganizationContactConfigurationPageModel model) : base(successAction, model, null)
+    public OrganizationContactConfigurationPage(System.Action<OrganizationContactDisplayModel> successAction, Models.Page.Configuration.OrganizationContactConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.OrganizationContactConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -69,6 +69,7 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
             About = ConcreteBindingContext.About,
             Priority = ConcreteBindingContext.Priority,
             BornDate = ConcreteBindingContext.IsSettedBornDate ? ConcreteBindingContext.BornDate : null,
+            RepresentativeId = ConcreteBindingContext.Representative.Id,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
             IncomingPostalContactItems = incomingPostalContactItems,
             IncomingPhoneContactItems = incomingPhoneContactItems,
@@ -101,6 +102,7 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
             About = ConcreteBindingContext.About,
             Priority = ConcreteBindingContext.Priority,
             BornDate = ConcreteBindingContext.IsSettedBornDate ? ConcreteBindingContext.BornDate : null,
+            RepresentativeId = ConcreteBindingContext.Representative.Id,
             BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
             EditionPostalContactItems = editionPostalContactItems,
             IncomingPostalContactItems = incomingPostalContactItems,
@@ -441,6 +443,16 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
                 hasChangesFlag = true;
             });
         });
+    }
+
+    private void RepresentativePickButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PersonContactPickPage(RepresentativePickComplete_Callback)));
+    }
+
+    private void RepresentativePickComplete_Callback(PersonContactDisplayModel model)
+    {
+        ConcreteBindingContext.Representative = model;
     }
 
     private void PostalContactItemCreateSuccess_Callback(PostalContactItemDisplayModel model)

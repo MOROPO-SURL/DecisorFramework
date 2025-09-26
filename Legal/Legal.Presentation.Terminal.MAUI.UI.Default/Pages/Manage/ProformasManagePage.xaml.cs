@@ -31,11 +31,6 @@ public partial class ProformasManagePage : Core.Presentation.Terminal.MAUI.UI.Pa
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.ProformaConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProformaDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.ProformaConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ProformaDisplayModel target, int discriminator)
     {
         switch (discriminator)

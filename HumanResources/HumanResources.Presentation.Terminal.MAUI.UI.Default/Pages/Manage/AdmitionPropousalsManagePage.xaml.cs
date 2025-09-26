@@ -30,11 +30,6 @@ public partial class AdmitionPropousalsManagePage : Core.Presentation.Terminal.M
         return apiConnectClient.GetPaginateAsync();
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.AdmitionPropousalConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.AdmitionPropousalConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel target, int discriminator)
     {
         switch (discriminator)

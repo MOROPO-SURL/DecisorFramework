@@ -11,5 +11,9 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AgreementId))]
         public Governance.Persistence.Entities.Agreement Agreement { get; set; }
         public System.Guid AgreementId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CostCenterId))]
+        public Financial.Persistence.Entities.CostCenter CostCenter { get; set; }
+        public System.Guid CostCenterId { get; set; }
     }
 }

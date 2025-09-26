@@ -48,6 +48,82 @@ public partial class VehicleLeaseOfferTenderListPage : Core.Presentation.Termina
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 
+    private void OrganizationPostulationApproveButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var upstreamTarget = ((Microsoft.Maui.Controls.Button)sender).Parent.Parent.Parent.BindingContext as VehicleLeaseOfferDisplayModel;
+
+        (BindingContext as Models.Page.List.VehicleLeaseOfferTenderListPageModel).IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+            var paymentTermsAPIConnectClient = new Commercial.Interop.API.Connect.Clients.PaymentTermsAPIConnectClient(httpClientHelperProvider);
+            var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(httpClientHelperProvider);
+
+            var model = new Models.Page.Configuration.LegalClientVehicleLeasingConfigurationPageModel((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as VehicleLeaseOrganizationPostulationDisplayModel, null)
+            {
+                AvailablePaymentTerms = await paymentTermsAPIConnectClient.GetEnabledAsync(),
+                AvailableConstCenters = await costCentersAPIConnectClient.FilterAsync(new Financial.Interop.API.Common.Models.Filter.CostCenterFilterModel { StructureId = upstreamTarget.Propousal.Vehicle.Structure.Id })
+            };
+
+            Dispatcher.Dispatch(() =>
+            {
+                this.NavigationPushPageAsync(new Configuration.LegalClientVehicleLeasingConfigurationPage(OrganizationPostulationLeasingConfigurationSuccess_Callback, model));
+
+                (BindingContext as Models.Page.List.VehicleLeaseOfferTenderListPageModel).IsBusy = false;
+            });
+        }).ContinueWith(task =>
+        {
+            if (!task.IsCanceled && task.Exception == null) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+
+                (BindingContext as Models.Page.List.VehicleLeaseOfferTenderListPageModel).IsBusy = false;
+            });
+        });
+    }
+
+    private void PersonPostulationApproveButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var upstreamTarget = ((Microsoft.Maui.Controls.Button)sender).Parent.Parent.Parent.BindingContext as VehicleLeaseOfferDisplayModel;
+
+        (BindingContext as Models.Page.List.VehicleLeaseOfferTenderListPageModel).IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+            var paymentTermsAPIConnectClient = new Commercial.Interop.API.Connect.Clients.PaymentTermsAPIConnectClient(httpClientHelperProvider);
+            var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(httpClientHelperProvider);
+
+            var model = new Models.Page.Configuration.NaturalClientVehicleLeasingConfigurationPageModel((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as VehicleLeasePersonPostulationDisplayModel, null)
+            {
+                AvailablePaymentTerms = await paymentTermsAPIConnectClient.GetEnabledAsync(),
+                AvailableConstCenters = await costCentersAPIConnectClient.FilterAsync(new Financial.Interop.API.Common.Models.Filter.CostCenterFilterModel { StructureId = upstreamTarget.Propousal.Vehicle.Structure.Id })
+            };
+
+            Dispatcher.Dispatch(() =>
+            {
+                this.NavigationPushPageAsync(new Configuration.NaturalClientVehicleLeasingConfigurationPage(PersonPostulationLeasingConfigurationSuccess_Callback, model));
+
+                (BindingContext as Models.Page.List.VehicleLeaseOfferTenderListPageModel).IsBusy = false;
+            });
+        }).ContinueWith(task =>
+        {
+            if (!task.IsCanceled && task.Exception == null) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+
+                (BindingContext as Models.Page.List.VehicleLeaseOfferTenderListPageModel).IsBusy = false;
+            });
+        });
+    }
+
     private void OganizationPostulationViewLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         this.NavigationPushModalPageAsync(new Detail.VehicleLeaseOrganizationPostulationDetailPage(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as VehicleLeaseOrganizationPostulationDisplayModel));
@@ -180,6 +256,16 @@ public partial class VehicleLeaseOfferTenderListPage : Core.Presentation.Termina
     }
 
     private void PersonPostulationConfigurationSuccess_Callback(VehicleLeasePersonPostulationDisplayModel model)
+    {
+        LoadItems(true);
+    }
+
+    protected void OrganizationPostulationLeasingConfigurationSuccess_Callback(LegalClientVehicleLeasingDisplayModel model)
+    {
+        LoadItems(true);
+    }
+
+    protected void PersonPostulationLeasingConfigurationSuccess_Callback(NaturalClientVehicleLeasingDisplayModel model)
     {
         LoadItems(true);
     }

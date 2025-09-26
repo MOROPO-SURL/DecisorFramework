@@ -16,6 +16,8 @@ public partial class FamiliesManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 280; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
@@ -28,24 +30,6 @@ public partial class FamiliesManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         var apiConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.FamilyConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.FamilyDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.FamilyConfigurationPageModel(model);
-
-        var categoriesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-        var families = new System.Collections.Generic.List<Interop.API.Common.Models.Display.FamilyDisplayModel>(await categoriesAPIConnectClient.GetAsync());
-
-        if (model != null)
-        {
-            families.RemoveAll(_model => _model.Id == model.Id);
-        }
-
-        result.AvailableParents = families.ToArray();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.FamilyDisplayModel target, int discriminator)

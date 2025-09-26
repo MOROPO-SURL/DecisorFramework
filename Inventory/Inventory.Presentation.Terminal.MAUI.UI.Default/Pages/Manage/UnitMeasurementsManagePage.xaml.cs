@@ -30,11 +30,6 @@ public partial class UnitMeasurementsManagePage : Core.Presentation.Terminal.MAU
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.UnitMeasurementConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.UnitMeasurementDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.UnitMeasurementConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.UnitMeasurementDisplayModel target, int discriminator)
     {
         switch (discriminator)

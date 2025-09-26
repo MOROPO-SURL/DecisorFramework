@@ -2,9 +2,9 @@
 {
     public class BrandConfigurationPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.BrandDisplayModel, Models.Page.Configuration.BrandConfigurationPageModel>
     {
-        public Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.BrandDisplayModel, Interop.API.Common.Models.Display.BrandDisplayModel, Models.Page.Configuration.BrandConfigurationPageModel> Build(System.Action<Interop.API.Common.Models.Display.BrandDisplayModel> configurationSuccessAction, Models.Page.Configuration.BrandConfigurationPageModel model)
+        public async System.Threading.Tasks.Task<Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.BrandDisplayModel, Interop.API.Common.Models.Display.BrandDisplayModel, Models.Page.Configuration.BrandConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.BrandDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.BrandDisplayModel model)
         {
-            return new Pages.Configuration.BrandConfigurationPage(configurationSuccessAction, model);
+            return new Pages.Configuration.BrandConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.BrandConfigurationPageModel(model), new Validators.BrandConfigurationValidator());
         }
     }
 }

@@ -69,21 +69,21 @@ public partial class LegalClientPickPage : Core.Presentation.Terminal.MAUI.UI.Pa
 
         var concreteBindingContext = BindingContext as Models.Page.Pick.LegalClientPickPageModel;
 
-        concreteBindingContext.IsBusy = false;
+        concreteBindingContext.IsBusy = true;
 
-        System.Threading.Tasks.Task.Run(() =>
+        System.Threading.Tasks.Task.Run(async () =>
         {
             try
             {
-                var model = new Models.Page.Configuration.LegalClientConfigurationPageModel(null);
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.LegalClientDisplayModel, Models.Page.Configuration.LegalClientConfigurationPageModel>>();
+
+                var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
 
                 Dispatcher.Dispatch(() =>
                 {
                     concreteBindingContext.IsBusy = false;
 
-                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.LegalClientDisplayModel, Models.Page.Configuration.LegalClientConfigurationPageModel>>();
-
-                    this.NavigationPushPageAsync(factory.Build(ConfigurationSuccess_Callback, model));
+                    this.NavigationPushPageAsync(page);
                 });
             }
             catch (System.Exception exception)
@@ -91,11 +91,11 @@ public partial class LegalClientPickPage : Core.Presentation.Terminal.MAUI.UI.Pa
                 Dispatcher.Dispatch(() =>
                 {
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+
+                    concreteBindingContext.IsBusy = false;
                 });
             }
         });
-
-        //this.NavigationPushPageAsync(new Configuration.LegalClientConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.LegalClientConfigurationPageModel(null), null));
     }
 
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)

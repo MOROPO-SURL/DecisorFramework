@@ -16,6 +16,8 @@ public partial class PersonContactsManagePage : Core.Presentation.Terminal.MAUI.
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 384; }
 
     protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.PersonContactViewerPermission;
@@ -34,17 +36,6 @@ public partial class PersonContactsManagePage : Core.Presentation.Terminal.MAUI.
         var apiConnectClient = new Interop.API.Connect.Clients.PersonContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.PersonContactConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.PersonContactDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.PersonContactConfigurationPageModel(model);
-
-        var apiConnectClient = new Core.Interop.API.Connect.Clients.UsersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-        result.AvailableUsers = await apiConnectClient.GetAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.PersonContactDisplayModel target, int discriminator)

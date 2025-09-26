@@ -4,6 +4,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 {
     public class PropertySpaceConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<View.PropertySpaceViewModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string AreaValidableProperty => nameof(Area);
+
         private string name;
         private string description;
         private Microsoft.Maui.Controls.ImageSource fatureImageSource;

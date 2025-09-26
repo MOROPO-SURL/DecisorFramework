@@ -1,0 +1,559 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<caneyframework_mvvm_pages:BindingContextedContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_page_models="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.Models.Page;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:live_charts_controls="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    xmlns:live_charts_core_skiasharpview_painting="clr-namespace:LiveChartsCore.SkiaSharpView.Painting;assembly=LiveChartsCore.SkiaSharpView"
+    xmlns:live_charts_core_skiasharpview_draw="clr-namespace:LiveChartsCore.SkiaSharpView.SKCharts;assembly=LiveChartsCore.SkiaSharpView"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages.LeasingDashboardPage"
+    x:TypeArguments="presentation_page_models:LeasingDashboardPageModel"
+    x:DataType="presentation_page_models:LeasingDashboardPageModel"
+    Title="Panel de Control para Arrendamiento">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+
+            <communitytoolkit_converters:BoolToObjectConverter x:Key="BoolToMockOpacityObjectConverter">
+                <communitytoolkit_converters:BoolToObjectConverter.TrueObject>
+                    <x:Double>0.15</x:Double>
+                </communitytoolkit_converters:BoolToObjectConverter.TrueObject>
+                <communitytoolkit_converters:BoolToObjectConverter.FalseObject>
+                    <x:Double>1.0</x:Double>
+                </communitytoolkit_converters:BoolToObjectConverter.FalseObject>
+            </communitytoolkit_converters:BoolToObjectConverter>
+
+            <Style x:Key="CardHeaderSeparatorBoxViewStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="DimGray" />
+                <Setter Property="Margin" Value="0,5,0,10" />
+                <Setter Property="HeightRequest" Value="2" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="4" Margin="8">
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Propuestas" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF64A;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding PropousalCount}" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Ofertas" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF0246;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding OfferCount}" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Postulaciones" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF0032;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding PostulationCount}" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Arrendamientos" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF01C9;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding LeasingCount}" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Cont. Terminales" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF954;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding EndingContractCount}" />
+                        </Grid>
+                    </Frame>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        VerticalOptions="Start">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.ColumnSpan="2" Grid.Row="0"
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="HeadTruncation"
+                                Text="Cont. Vencidos" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Label
+                                Grid.Column="0" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Header"
+                                Text="&#xF030C;" />
+                            <Label
+                                Grid.Column="1" Grid.Row="2"
+                                VerticalOptions="Center"
+                                FontSize="Large"
+                                HorizontalTextAlignment="End"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding EndedContractCount}" />
+                        </Grid>
+                    </Frame>
+                </FlexLayout>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        VerticalOptions="Start"
+                        Margin="4">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Estado de Arrendamiento de Vehículos" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <FlexLayout 
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start">
+                                <VerticalStackLayout
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=12, LargeContainerColumn=6, MediumContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Grid>
+                                        <live_charts_controls:PieChart 
+                                            x:Name="VehicleAssignmentPieChart"
+                                            Opacity="{Binding IsVehicleAssignmentPieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                            HeightRequest="360"
+                                            Series="{Binding VehicleAssignmentPieChart.Series}"
+                                            LegendPosition="Right" />
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                            IsVisible="{Binding IsVehicleAssignmentPieChartMock}">
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontSize="Medium"
+                                                Text="Sin datos suficientes" />
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                Text="mostrando datos simulados" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                    <BoxView
+                                        HeightRequest="2"
+                                        Color="DimGray" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Bold"
+                                        LineBreakMode="TailTruncation"
+                                        Text="Asignación de vehículos" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=12, LargeContainerColumn=6, MediumContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Grid>
+                                        <live_charts_controls:PieChart 
+                                            x:Name="VehicleLeasingPieChart"
+                                            Opacity="{Binding IsVehicleLeasingPieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                            HeightRequest="360"
+                                            Series="{Binding VehicleLeasingPieChart.Series}"
+                                            LegendPosition="Right" />
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                            IsVisible="{Binding IsVehicleLeasingPieChartMock}">
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontSize="Medium"
+                                                Text="Sin datos suficientes" />
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                Text="mostrando datos simulados" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                    <BoxView
+                                        HeightRequest="2"
+                                        Color="DimGray" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Bold"
+                                        LineBreakMode="TailTruncation"
+                                        Text="Contrataciones por Tipo de Actor" />
+                                </VerticalStackLayout>
+                            </FlexLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        VerticalOptions="Start"
+                        Margin="4">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Estado de Arrendamiento de Inmuebles" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <FlexLayout 
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start">
+                                <VerticalStackLayout
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=12, LargeContainerColumn=6, MediumContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Grid>
+                                        <live_charts_controls:PieChart 
+                                            x:Name="PropertySpaceAssignmentPieChart"
+                                            Opacity="{Binding IsPropertySpaceAssignmentPieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                            HeightRequest="360"
+                                            Series="{Binding PropertySpaceAssignmentPieChart.Series}"
+                                            LegendPosition="Right" />
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                            IsVisible="{Binding IsPropertySpaceAssignmentPieChartMock}">
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontSize="Medium"
+                                                Text="Sin datos suficientes" />
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                Text="mostrando datos simulados" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                    <BoxView
+                                        HeightRequest="2"
+                                        Color="DimGray" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Bold"
+                                        LineBreakMode="TailTruncation"
+                                        Text="Asignación de espacios en inmuebles" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=12, LargeContainerColumn=6, MediumContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Grid>
+                                        <live_charts_controls:PieChart 
+                                            x:Name="PropertyLeasingPieChart"
+                                            Opacity="{Binding IsPropertyLeasingPieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                            HeightRequest="360"
+                                            Series="{Binding PropertyLeasingPieChart.Series}"
+                                            LegendPosition="Right" />
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                            IsVisible="{Binding IsPropertyLeasingPieChartMock}">
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontSize="Medium"
+                                                Text="Sin datos suficientes" />
+                                            <Label
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                Text="mostrando datos simulados" />
+                                        </VerticalStackLayout>
+                                    </Grid>
+                                    <BoxView
+                                        HeightRequest="2"
+                                        Color="DimGray" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Bold"
+                                        LineBreakMode="TailTruncation"
+                                        Text="Contrataciones por Tipo de Actor" />
+                                </VerticalStackLayout>
+                            </FlexLayout>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=12}}"
+                        VerticalOptions="Start"
+                        Margin="4">    
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                Text="Combro de arrendamientos" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Grid>
+                                <live_charts_controls:CartesianChart 
+                                    x:Name="RunningMonthCollectStatusChart"
+                                    Opacity="{Binding IsRunningMonthCollectStatusChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="400"
+                                    Series="{Binding RunningMonthCollectStatusChart.Series}"
+                                    XAxes="{Binding RunningMonthCollectStatusChart.XAxes}"
+                                    YAxes="{Binding RunningMonthCollectStatusChart.YAxes}" />
+                                <VerticalStackLayout 
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    IsVisible="{Binding IsRunningMonthCollectStatusChartMock}">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="Medium"
+                                        Text="Sin datos suficientes" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Italic"
+                                        Text="mostrando datos simulados" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=8, LargeContainerColumn=12}}"
+                        VerticalOptions="Start"
+                        Margin="4">    
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                Text="Ingresos planificados - recaudación oportuna (6 meses)" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Grid>
+                                <live_charts_controls:CartesianChart 
+                                    x:Name="PertinentCollectAndIncomeStatusCartesianChart"
+                                    Opacity="{Binding IsPertinentCollectAndIncomeStatusCartesianChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="400"
+                                    Series="{Binding PertinentCollectAndIncomeStatusCartesianChart.Series}"
+                                    XAxes="{Binding PertinentCollectAndIncomeStatusCartesianChart.XAxes}"
+                                    LegendPosition="Bottom" />
+                                <VerticalStackLayout 
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    IsVisible="{Binding IsPertinentCollectAndIncomeStatusCartesianChartMock}">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="Medium"
+                                        Text="Sin datos suficientes" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Italic"
+                                        Text="mostrando datos simulados" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                </FlexLayout>
+                <Frame Margin="8">
+                    <StackLayout>
+                        <Label
+                            FontSize="Medium"
+                            FontAttributes="Bold"
+                            LineBreakMode="TailTruncation"
+                            Text="Cumplimiento de los Pagos (6 meses)" />
+                        <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                        <Grid>
+                            <live_charts_controls:CartesianChart 
+                                x:Name="ClientPaymentPertinenceHeatChart"
+                                Opacity="{Binding IsClientPaymentPertinenceHeatChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                MinimumHeightRequest="420"
+                                Series="{Binding ClientPaymentPertinenceHeatChart.Series}"
+                                XAxes="{Binding ClientPaymentPertinenceHeatChart.XAxes}"
+                                YAxes="{Binding ClientPaymentPertinenceHeatChart.YAxes}" />
+                            <VerticalStackLayout 
+                                HorizontalOptions="Center" VerticalOptions="Center"
+                                IsVisible="{Binding IsClientPaymentPertinenceHeatChartMock}">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontSize="Medium"
+                                    Text="Sin datos suficientes" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Italic"
+                                    Text="mostrando datos simulados" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </StackLayout>
+                </Frame>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}" />
+    </Grid>
+</caneyframework_mvvm_pages:BindingContextedContentPage>

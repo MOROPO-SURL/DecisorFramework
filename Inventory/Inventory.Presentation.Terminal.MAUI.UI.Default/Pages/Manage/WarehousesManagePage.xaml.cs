@@ -30,11 +30,6 @@ public partial class WarehousesManagePage : Core.Presentation.Terminal.MAUI.UI.P
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.WarehouseConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.WarehouseDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.WarehouseConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.WarehouseDisplayModel target, int discriminator)
     {
         switch (discriminator)

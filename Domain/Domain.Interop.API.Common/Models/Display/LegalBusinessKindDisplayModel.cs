@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 {
-    public class LegalBusinessKindDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<LegalBusinessKind, System.Guid>
+    public class LegalBusinessKindDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<LegalBusinessKind, System.Guid>, Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>
     {
         public System.Guid Id { get; set; }
 

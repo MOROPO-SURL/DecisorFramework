@@ -10,5 +10,10 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Connect.Clients
         }
 
         protected override string TargetController => "api/commercial/legalclients";
+
+        public System.Threading.Tasks.Task<LegalClientDisplayModel> GetByContactAsync(System.Guid key)
+        {
+            return httpClientHelperProvider.HttpClientHelper.GetAsync<LegalClientDisplayModel>($"{TargetController}/by/contact/{key}");
+        }
     }
 }

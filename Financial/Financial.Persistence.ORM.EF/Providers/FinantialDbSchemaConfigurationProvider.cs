@@ -17,7 +17,8 @@ namespace MOROPO.Framework.Decisor.Financial.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.BankDebitCard>(),
                     // TODO Review if required !!
 		            //new BaseEntityTypeConfigurator<Entities.Contract.AbstractCashAdvance>(),
-                    new BaseEntityTypeConfigurator<Entities.CostCenter>()
+                    new BaseEntityTypeConfigurator<Entities.CostCenter>(),
+                    new Configurators.CollectEntityTypeConfigurator()
                 };
             }
         }

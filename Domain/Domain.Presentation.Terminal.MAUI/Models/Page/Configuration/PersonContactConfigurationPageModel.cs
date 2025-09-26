@@ -8,6 +8,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 {
     public class PersonContactConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PersonContactDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+
         private string name;
         private string lastName;
         private string alias;

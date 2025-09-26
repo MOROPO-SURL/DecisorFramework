@@ -21,8 +21,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input.Co
 
         public string StateIdentificationCode { get; set; }
 
-        public System.Guid RepresentativeId { get; set; }
-
         public System.Guid MainPostalContactId { get; set; }
 
         public System.Guid DefaultPaymentTermId { get; set; }

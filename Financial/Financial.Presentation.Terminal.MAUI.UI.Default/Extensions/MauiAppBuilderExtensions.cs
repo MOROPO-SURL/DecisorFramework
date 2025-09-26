@@ -14,9 +14,17 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Defau
             builder.Services
                 // DetailPage factory resgistration !!!
                 .AddSingleton<IDetailContentPageFactoryFacade<BankAgencyDisplayModel>, BankAgencyDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<CurrencyDisplayModel>, CurrencyDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<BankBranchDisplayModel>, BankBranchDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<BankAccountDisplayModel>, BankAccountDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<CostCenterDisplayModel>, CostCenterDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
-                .AddSingleton<IConfigurationContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyConfigurationPageModel>, BankAgencyConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyConfigurationPageModel>, BankAgencyConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<CurrencyDisplayModel, CurrencyConfigurationPageModel>, CurrencyConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<BankBranchDisplayModel, BankBranchConfigurationPageModel>, BankBranchConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<BankAccountDisplayModel, BankAccountConfigurationPageModel>, BankAccountConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<CostCenterDisplayModel, CostCenterConfigurationPageModel>, CostCenterConfigurationPageFactory>();
 
             return builder;
         }

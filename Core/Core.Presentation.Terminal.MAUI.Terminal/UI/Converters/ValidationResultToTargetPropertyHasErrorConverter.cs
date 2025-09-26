@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters
     {
         public object Convert(object value, System.Type targetType, object parameter, System.Globalization.CultureInfo culture)
         {
-            if (value is not FluentValidation.Results.ValidationResult concreteValue || parameter == null || concreteValue.IsValid) return null;
+            if (value is not FluentValidation.Results.ValidationResult concreteValue || parameter == null || concreteValue.IsValid) return false;
 
             return concreteValue.Errors.Any(item => item.PropertyName.Split(".").LastOrDefault().Equals(parameter));
         }

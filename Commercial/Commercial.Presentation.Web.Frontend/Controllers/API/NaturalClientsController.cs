@@ -231,5 +231,13 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
             }
             #endregion
         }
+
+        [HttpGet("by/contact/{key}")]
+        public ActionResult GetByContact(System.Guid key)
+        {
+            var entity = Repository.FindOneBy(entity => entity.ContactId == key);
+
+            return Ok(entity == null ? null : EntityToDisplayModel(entity));
+        }
     }
 }

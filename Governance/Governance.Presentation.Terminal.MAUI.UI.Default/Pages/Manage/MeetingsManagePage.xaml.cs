@@ -16,6 +16,8 @@ public partial class MeetingsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 400; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
@@ -28,17 +30,6 @@ public partial class MeetingsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         var apiConnectClient = new Interop.API.Connect.Clients.MeetingsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.MeetingConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.MeetingDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.MeetingConfigurationPageModel(model);
-
-        var groupsAPIConnectClient = new Interop.API.Connect.Clients.DecisionMakingGroupsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-        result.AvailableGroups = await groupsAPIConnectClient.GetAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.MeetingDisplayModel target, int discriminator)

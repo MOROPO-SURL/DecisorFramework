@@ -7,7 +7,7 @@
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.LegalClientVehicleLeasingDetailPage"
     x:TypeArguments="interop_common_display_models:LegalClientVehicleLeasingDisplayModel"
     x:DataType="interop_common_display_models:LegalClientVehicleLeasingDisplayModel"
-    Title="Detalles de Exoediente de Arrendamiento de Vehículo"
+    Title="Detalles de Expediente de Arrendamiento de Vehículo"
     Background="{StaticResource OverlayBackgroundBrush}">
     <ScrollView Orientation="Vertical">
         <Grid>
@@ -15,45 +15,31 @@
                 Style="{StaticResource PopupFrameStyle}"
                 WidthRequest="400">
                 <Grid>
-                    <StackLayout Margin="20" Spacing="20">
-                        <StackLayout>
-                            <Label 
-                                Margin="0,0,0,20"
-                                Text="Detalles"
-                                FontAttributes="Bold"
-                                FontSize="Medium" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Margin="0"
-                                Text="Cliente" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Contract.Client.Contact.Identity}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Fecha Inicial" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Contract.At}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Objeto" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Contract.Objective}" />
-                        </StackLayout>
-                        <StackLayout
-                            Orientation="Horizontal"
-                            Spacing="20">
-                            <Button 
-                                HorizontalOptions="FillAndExpand"
-                                Text="Modificar"
-                                Clicked="EditButton_Clicked" />
-                            <Button 
-                                HorizontalOptions="FillAndExpand"
-                                Text="Eliminar"
-                                Clicked="DeleteButton_Clicked" />
-                        </StackLayout>
+                    <StackLayout Margin="20">
+                        <Label 
+                            Margin="0,0,0,20"
+                            Text="Detalles"
+                            FontAttributes="Bold"
+                            FontSize="Medium" />
+                        <Label
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Margin="0"
+                            Text="Cliente" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Contract.Client.Contact.Identity}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Fecha Inicial" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Contract.At}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Objeto" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Contract.Objective}" />
                     </StackLayout>
                     <Button
                         HorizontalOptions="End" VerticalOptions="Start"

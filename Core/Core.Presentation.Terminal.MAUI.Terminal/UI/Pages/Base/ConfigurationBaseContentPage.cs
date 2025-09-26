@@ -40,7 +40,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected virtual string EntityTypeName { get; } = "Elemento";
 
-        protected TConfigurationPageModel ConcreteBindingContext => (TConfigurationPageModel)BindingContext;
+        public TConfigurationPageModel ConcreteBindingContext => (TConfigurationPageModel)BindingContext;
 
         protected virtual System.Threading.Tasks.Task<TOutModel> PerformCreationAsync() => throw new System.NotImplementedException();
 
@@ -53,7 +53,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected void OnApply(object sender, System.EventArgs eventArgs)
         {
-            if (!hasChangesFlag)
+            if (ConcreteBindingContext.OnEditionMode && !hasChangesFlag)
             {
                 this.NavigationPopPageAsync();
 
@@ -66,7 +66,12 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
                 ConcreteBindingContext.ValidationResult = validator.Validate(ConcreteBindingContext);
 
-                if (!ConcreteBindingContext.ValidationResult.IsValid) return;
+                if (!ConcreteBindingContext.ValidationResult.IsValid)
+                {
+                    DisplayAlert("Aviso", "La información especificada no es válida para aplicar los cambios en el sistema.", "Aceptar");
+
+                    return;
+                }
             }
 
             ConcreteBindingContext.IsBusy = true;

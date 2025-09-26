@@ -9,9 +9,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Validat
             RuleFor(model => model.Contact)
                 .NotNull();
 
-            RuleFor(model => model.Representative)
-                .NotNull();
-
             RuleFor(model => model.MainPostalContact)
                 .NotNull();
 

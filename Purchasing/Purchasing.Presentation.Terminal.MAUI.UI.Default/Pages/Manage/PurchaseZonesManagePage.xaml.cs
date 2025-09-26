@@ -30,11 +30,6 @@ public partial class PurchaseZonesManagePage : Core.Presentation.Terminal.MAUI.U
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.PurchaseZoneConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.PurchaseZoneDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.PurchaseZoneConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.PurchaseZoneDisplayModel target, int discriminator)
     {
         switch (discriminator)

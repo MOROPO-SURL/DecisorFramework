@@ -33,8 +33,6 @@
         [System.ComponentModel.DataAnnotations.Required]
         public string Reference { get; set; }
 
-        public decimal Area { get; set; }
-
         public string Description { get; set; }
 
         public System.Collections.Generic.ICollection<PropertySpace> Spaces { get; set; }

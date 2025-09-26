@@ -4,6 +4,6 @@
         where TModel : class
         where TConfigurationPageModel : Models.Page.Contract.AbstractConfigurationPageModel<TModel> 
     {
-        Pages.Base.ConfigurationBaseContentPage<TModel, TModel, TConfigurationPageModel> Build(System.Action<TModel> configurationSuccessAction, TConfigurationPageModel model);
+        System.Threading.Tasks.Task<Pages.Base.ConfigurationBaseContentPage<TModel, TModel, TConfigurationPageModel>> BuildAsync(System.Action<TModel> configurationSuccessAction, TModel model);
     }
 }

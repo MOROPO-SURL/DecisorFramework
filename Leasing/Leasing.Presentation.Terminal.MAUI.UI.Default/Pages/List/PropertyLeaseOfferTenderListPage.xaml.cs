@@ -58,6 +58,82 @@ public partial class PropertyLeaseOfferTenderListPage : Core.Presentation.Termin
         this.NavigationPushModalPageAsync(new Detail.PropertyLeasePersonPostulationDetailPage(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PropertyLeasePersonPostulationDisplayModel));
     }
 
+    private void OrganizationPostulationApproveButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var upstreamTarget = ((Microsoft.Maui.Controls.Button)sender).Parent.Parent.Parent.BindingContext as PropertyLeaseOfferDisplayModel;
+
+        (BindingContext as Models.Page.List.PropertyLeaseOfferTenderListPageModel).IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+            var paymentTermsAPIConnectClient = new Commercial.Interop.API.Connect.Clients.PaymentTermsAPIConnectClient(httpClientHelperProvider);
+            var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(httpClientHelperProvider);
+
+            var model = new Models.Page.Configuration.LegalClientPropertyLeasingConfigurationPageModel((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as PropertyLeaseOrganizationPostulationDisplayModel, null)
+            {
+                AvailablePaymentTerms = await paymentTermsAPIConnectClient.GetEnabledAsync(),
+                AvailableConstCenters = await costCentersAPIConnectClient.FilterAsync(new Financial.Interop.API.Common.Models.Filter.CostCenterFilterModel { StructureId = upstreamTarget.Propousal.Property.Structure.Id })
+            };
+
+            Dispatcher.Dispatch(() =>
+            {
+                this.NavigationPushPageAsync(new Configuration.LegalClientPropertyLeasingConfigurationPage(OrganizationPostulationLeasingConfigurationSuccess_Callback, model));
+
+                (BindingContext as Models.Page.List.PropertyLeaseOfferTenderListPageModel).IsBusy = false;
+            });
+        }).ContinueWith(task =>
+        {
+            if (!task.IsCanceled && task.Exception == null) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+
+                (BindingContext as Models.Page.List.PropertyLeaseOfferTenderListPageModel).IsBusy = false;
+            });
+        });
+    }
+
+    private void PersonPostulationApproveButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var upstreamTarget = ((Microsoft.Maui.Controls.Button)sender).Parent.Parent.Parent.BindingContext as PropertyLeaseOfferDisplayModel;
+
+        (BindingContext as Models.Page.List.PropertyLeaseOfferTenderListPageModel).IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+            var paymentTermsAPIConnectClient = new Commercial.Interop.API.Connect.Clients.PaymentTermsAPIConnectClient(httpClientHelperProvider);
+            var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(httpClientHelperProvider);
+
+            var model = new Models.Page.Configuration.NaturalClientPropertyLeasingConfigurationPageModel((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as PropertyLeasePersonPostulationDisplayModel, null)
+            {
+                AvailablePaymentTerms = await paymentTermsAPIConnectClient.GetEnabledAsync(),
+                AvailableConstCenters = await costCentersAPIConnectClient.FilterAsync(new Financial.Interop.API.Common.Models.Filter.CostCenterFilterModel { StructureId = upstreamTarget.Propousal.Property.Structure.Id })
+            };
+
+            Dispatcher.Dispatch(() =>
+            {
+                this.NavigationPushPageAsync(new Configuration.NaturalClientPropertyLeasingConfigurationPage(PersonPostulationLeasingConfigurationSuccess_Callback, model));
+
+                (BindingContext as Models.Page.List.PropertyLeaseOfferTenderListPageModel).IsBusy = false;
+            });
+        }).ContinueWith(task =>
+        {
+            if (!task.IsCanceled && task.Exception == null) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+
+                (BindingContext as Models.Page.List.PropertyLeaseOfferTenderListPageModel).IsBusy = false;
+            });
+        });
+    }
+
     private void OrganizationPostulationAgregationButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushPageAsync(new Configuration.PropertyLeaseOrganizationPostulationConfigurationPage(OrganizationPostulationConfigurationSuccess_Callback, new Models.Page.Configuration.PropertyLeaseOrganizationPostulationConfigurationPageModel((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as PropertyLeaseOfferDisplayModel, null)));
@@ -180,6 +256,15 @@ public partial class PropertyLeaseOfferTenderListPage : Core.Presentation.Termin
     }
 
     private void PersonPostulationConfigurationSuccess_Callback(PropertyLeasePersonPostulationDisplayModel model)
+    {
+        LoadItems(true);
+    }
+    protected void OrganizationPostulationLeasingConfigurationSuccess_Callback(LegalClientPropertyLeasingDisplayModel model)
+    {
+        LoadItems(true);
+    }
+
+    protected void PersonPostulationLeasingConfigurationSuccess_Callback(NaturalClientPropertyLeasingDisplayModel model)
     {
         LoadItems(true);
     }
