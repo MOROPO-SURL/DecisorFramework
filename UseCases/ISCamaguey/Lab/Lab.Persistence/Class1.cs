@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Lab.Persistence
+namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence
 {
     public class Class1
     {

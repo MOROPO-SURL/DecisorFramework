@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace IDi.Persistence
+namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence
 {
     public class Class1
     {

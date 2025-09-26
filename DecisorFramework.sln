@@ -313,13 +313,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Servicing", "Servicing", "{
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Recommending", "Recommending", "{31A8E721-42E7-4D78-BB61-D51094A77FF4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDi.Persistence", "UseCases\ISCamaguey\IDi\IDi.Persistence\IDi.Persistence.csproj", "{AC81243E-71AB-4883-BEB9-C650B9168D97}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDi.Persistence", "UseCases\ISCamaguey\IDi\IDi.Persistence\IDi.Persistence.csproj", "{AC81243E-71AB-4883-BEB9-C650B9168D97}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Persistence", "UseCases\ISCamaguey\Lab\Lab.Persistence\Lab.Persistence.csproj", "{AD939871-E3C0-4A8F-9A26-B97A26244A2C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab.Persistence", "UseCases\ISCamaguey\Lab\Lab.Persistence\Lab.Persistence.csproj", "{AD939871-E3C0-4A8F-9A26-B97A26244A2C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Recommending.Persistence", "UseCases\ISCamaguey\Recommending\Recommending.Persistence\Recommending.Persistence.csproj", "{9070DCBA-4E69-45E9-B5DD-5041770E4BE9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Recommending.Persistence", "UseCases\ISCamaguey\Recommending\Recommending.Persistence\Recommending.Persistence.csproj", "{9070DCBA-4E69-45E9-B5DD-5041770E4BE9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Persistence", "UseCases\ISCamaguey\Servicing\Servicing.Persistence\Servicing.Persistence.csproj", "{98438313-1DC2-400C-9704-FA308F2EE9F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Persistence", "UseCases\ISCamaguey\Servicing\Servicing.Persistence\Servicing.Persistence.csproj", "{98438313-1DC2-400C-9704-FA308F2EE9F9}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quality.Persistence.ORM.EF", "UseCases\ISCamaguey\Quality\Quality.Persistence.ORM.EF\Quality.Persistence.ORM.EF.csproj", "{EBC87056-6945-4C68-9035-6BDBBE4E2836}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{A1218469-B79A-4984-A7C9-AD4419BF3375}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Persistence", "UseCases\ISCamaguey\Domain\Domain.Persistence\Domain.Persistence.csproj", "{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -875,6 +881,14 @@ Global
 		{98438313-1DC2-400C-9704-FA308F2EE9F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{98438313-1DC2-400C-9704-FA308F2EE9F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{98438313-1DC2-400C-9704-FA308F2EE9F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC87056-6945-4C68-9035-6BDBBE4E2836}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC87056-6945-4C68-9035-6BDBBE4E2836}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC87056-6945-4C68-9035-6BDBBE4E2836}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC87056-6945-4C68-9035-6BDBBE4E2836}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1023,6 +1037,9 @@ Global
 		{AD939871-E3C0-4A8F-9A26-B97A26244A2C} = {C0173AC3-6E50-4868-9B11-AA9FD57DC433}
 		{9070DCBA-4E69-45E9-B5DD-5041770E4BE9} = {31A8E721-42E7-4D78-BB61-D51094A77FF4}
 		{98438313-1DC2-400C-9704-FA308F2EE9F9} = {41168DF6-3984-480B-8FA1-A67C3CC11D37}
+		{EBC87056-6945-4C68-9035-6BDBBE4E2836} = {F95787C9-E7B9-4EC1-B376-2BA9F62C0859}
+		{A1218469-B79A-4984-A7C9-AD4419BF3375} = {61391AF6-690D-4B65-9D6B-261E112E38D6}
+		{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682} = {A1218469-B79A-4984-A7C9-AD4419BF3375}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {747B719B-EA48-4793-98E6-ECCB62300F19}

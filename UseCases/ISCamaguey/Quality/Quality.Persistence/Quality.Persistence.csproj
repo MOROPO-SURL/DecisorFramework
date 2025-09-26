@@ -1,11 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.ISCamaguey.Decisor.Quality.Persistence</AssemblyName>
+		<RootNamespace>MOROPO.ISCamaguey.Decisor.Quality.Persistence</RootNamespace>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Core\Core.Persistence\Core.Persistence.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Core\Core.Persistence\Core.Persistence.csproj" />
+	</ItemGroup>
 
 </Project>
