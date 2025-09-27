@@ -22,7 +22,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
         public int Priority { get ; set ; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AbstracBaseResultId))]
-        public AbstractBaseResult AbstracBaseResult { get ; set ; }
+        public AbstractResult AbstracBaseResult { get ; set ; }
         public System.Guid AbstracBaseResultId { get ; set ; }
 
 

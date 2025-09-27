@@ -25,7 +25,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
         public System.Guid ProjectReportId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AbstractBaseResearcherId))]
-        public AbstractBaseResearcher AbstractBaseResearcher { get; set; }
+        public AbstractResearcher AbstractBaseResearcher { get; set; }
         public System.Guid AbstractBaseResearcherId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ReferenceId))]

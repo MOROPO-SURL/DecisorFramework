@@ -1,0 +1,9 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.ISCamaguey.Decisor.Domain.Persistence.ORM.EF</AssemblyName>
+		<RootNamespace>MOROPO.ISCamaguey.Decisor.Domain.Persistence.ORM.EF</RootNamespace>
+	</PropertyGroup>
+
+</Project>

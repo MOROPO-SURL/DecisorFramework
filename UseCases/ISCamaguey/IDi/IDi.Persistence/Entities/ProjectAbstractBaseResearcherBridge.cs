@@ -5,12 +5,12 @@ using System.Text;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
 {
-    public class ProjectAbstractBaseResearcherBridge : Framework.Guama.Core.Persistence.Entities.Contract.IBridge<Project, Guid, AbstractBaseResearcher, Guid>
+    public class ProjectAbstractBaseResearcherBridge : Framework.Guama.Core.Persistence.Entities.Contract.IBridge<Project, Guid, AbstractResearcher, Guid>
     {
         public Guid ProwId { get ; set ; }
         public Project Prow { get ; set ; }
         
         public Guid SternId { get ; set ; }
-        public AbstractBaseResearcher Stern { get ; set ; }
+        public AbstractResearcher Stern { get ; set ; }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
 {
-    public class ExternalInvestigatorResearcher : Contract.AbstractBaseResearcher
+    public class ExternalInvestigatorResearcher : Contract.AbstractResearcher
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ParticipatingEntityId))]
         public ParticipatingEntity ParticipatingEntity { get; set; }

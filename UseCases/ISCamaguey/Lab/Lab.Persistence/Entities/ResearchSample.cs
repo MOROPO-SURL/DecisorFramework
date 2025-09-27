@@ -15,7 +15,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities
 
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AbstracBaseResearcherId))]
-        public AbstractBaseResearcher AbstracBaseResearcher { get; set; }
+        public AbstractResearcher AbstracBaseResearcher { get; set; }
         public System.Guid AbstracBaseResearcherId { get; set; }
     }
 }

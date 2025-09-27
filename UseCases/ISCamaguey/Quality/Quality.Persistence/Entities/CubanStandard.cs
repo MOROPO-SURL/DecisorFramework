@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities
+﻿namespace MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities
 {
     public class CubanStandard : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<int>
     {

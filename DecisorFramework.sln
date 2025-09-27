@@ -325,7 +325,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quality.Persistence.ORM.EF"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{A1218469-B79A-4984-A7C9-AD4419BF3375}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Persistence", "UseCases\ISCamaguey\Domain\Domain.Persistence\Domain.Persistence.csproj", "{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Persistence", "UseCases\ISCamaguey\Domain\Domain.Persistence\Domain.Persistence.csproj", "{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Persistence.ORM.EF", "UseCases\ISCamaguey\Domain\Domain.Persistence.ORM.EF\Domain.Persistence.ORM.EF.csproj", "{CC5856ED-7ACC-4F21-B54E-BEA6E57F364F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quality.Presentation.Web.Common", "UseCases\ISCamaguey\Quality\Quality.Presentation.Web.Common\Quality.Presentation.Web.Common.csproj", "{433756CA-AF0A-41A7-B4F3-4F83BDCDD41E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Quality.Presentation.Web.Frontend", "UseCases\ISCamaguey\Quality\Quality.Presentation.Web.Frontend\Quality.Presentation.Web.Frontend.csproj", "{172C9095-CDAB-48BB-A9F4-AEFC7E0F5DE7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -889,6 +895,18 @@ Global
 		{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC5856ED-7ACC-4F21-B54E-BEA6E57F364F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC5856ED-7ACC-4F21-B54E-BEA6E57F364F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC5856ED-7ACC-4F21-B54E-BEA6E57F364F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC5856ED-7ACC-4F21-B54E-BEA6E57F364F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{433756CA-AF0A-41A7-B4F3-4F83BDCDD41E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{433756CA-AF0A-41A7-B4F3-4F83BDCDD41E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{433756CA-AF0A-41A7-B4F3-4F83BDCDD41E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{433756CA-AF0A-41A7-B4F3-4F83BDCDD41E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{172C9095-CDAB-48BB-A9F4-AEFC7E0F5DE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{172C9095-CDAB-48BB-A9F4-AEFC7E0F5DE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{172C9095-CDAB-48BB-A9F4-AEFC7E0F5DE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{172C9095-CDAB-48BB-A9F4-AEFC7E0F5DE7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1040,6 +1058,9 @@ Global
 		{EBC87056-6945-4C68-9035-6BDBBE4E2836} = {F95787C9-E7B9-4EC1-B376-2BA9F62C0859}
 		{A1218469-B79A-4984-A7C9-AD4419BF3375} = {61391AF6-690D-4B65-9D6B-261E112E38D6}
 		{1A2F4AE4-47CD-4D34-B1B1-776EBCEF8682} = {A1218469-B79A-4984-A7C9-AD4419BF3375}
+		{CC5856ED-7ACC-4F21-B54E-BEA6E57F364F} = {A1218469-B79A-4984-A7C9-AD4419BF3375}
+		{433756CA-AF0A-41A7-B4F3-4F83BDCDD41E} = {F95787C9-E7B9-4EC1-B376-2BA9F62C0859}
+		{172C9095-CDAB-48BB-A9F4-AEFC7E0F5DE7} = {F95787C9-E7B9-4EC1-B376-2BA9F62C0859}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {747B719B-EA48-4793-98E6-ECCB62300F19}

@@ -6,7 +6,7 @@ using System.Text;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
 {
-    public class NewTechniqueResult : Contract.AbstractBaseResult
+    public class NewTechniqueResult : Contract.AbstractResult
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(TechniqueId))]
         public Technique Technique { get; set; }
