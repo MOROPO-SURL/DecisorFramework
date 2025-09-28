@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
+﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
 {
     public class ThesisResult : Contract.AbstractResult
     {
-        System.Collections.Generic.List<ThesisResultAbstractBaseResearcherBridge> AbstractBaseResearcherBridges { get; set; } = new System.Collections.Generic.List<ThesisResultAbstractBaseResearcherBridge>();
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(Title))]
+        public string Title { get; set; }
+
+        public System.Collections.Generic.List<ThesisResultResearcherBridge> ResearcherBridges { get; set; } = new System.Collections.Generic.List<ThesisResultResearcherBridge>();
     }
 }

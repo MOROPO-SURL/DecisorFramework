@@ -1,12 +1,7 @@
-﻿using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
+﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
 {
     public class TrainingResult : Contract.AbstractResult
     {
-        public System.Collections.Generic.List<TrainingResultAbstractBaseResearcherBridge> AbstractBaseResearcherBridges { get; set; } = new System.Collections.Generic.List<TrainingResultAbstractBaseResearcherBridge>();
+        public System.Collections.Generic.List<TrainingResultResearcherBridge> ResearcherBridges { get; set; } = new System.Collections.Generic.List<TrainingResultResearcherBridge>();
     }
 }

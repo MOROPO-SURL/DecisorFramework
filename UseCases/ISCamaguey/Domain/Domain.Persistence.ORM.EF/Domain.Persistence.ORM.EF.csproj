@@ -6,4 +6,9 @@
 		<RootNamespace>MOROPO.ISCamaguey.Decisor.Domain.Persistence.ORM.EF</RootNamespace>
 	</PropertyGroup>
 
+	<ItemGroup>
+		<ProjectReference Include="..\..\Quality\Quality.Persistence.ORM.EF\Quality.Persistence.ORM.EF.csproj" />
+		<ProjectReference Include="..\Domain.Persistence\Domain.Persistence.csproj" />
+	</ItemGroup>
+
 </Project>

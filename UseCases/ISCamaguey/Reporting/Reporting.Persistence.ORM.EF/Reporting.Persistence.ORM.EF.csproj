@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.ISCamaguey.Decisor.Reporting.Persistence.ORM.EF</AssemblyName>
+		<RootNamespace>MOROPO.ISCamaguey.Decisor.Reporting.Persistence.ORM.EF</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\..\Lab\Lab.Persistence.ORM.EF\Lab.Persistence.ORM.EF.csproj" />
+		<ProjectReference Include="..\Reporting.Persistence\Reporting.Persistence.csproj" />
+	</ItemGroup>
+
+</Project>

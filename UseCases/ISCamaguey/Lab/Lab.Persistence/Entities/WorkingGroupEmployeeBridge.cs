@@ -1,16 +1,11 @@
-﻿using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities
+﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities
 {
-    public class WorkingGroupEmployeeBridge : Framework.Guama.Core.Persistence.Entities.Contract.IBridge<WorkingGroup, System.Guid, Employee, System.Guid>
+    public class WorkingGroupEmployeeBridge : Framework.Guama.Core.Persistence.Entities.Contract.IBridge<WorkingGroup, System.Guid, Framework.Decisor.Domain.Persistence.Entities.Employee, System.Guid>
     {
-        public Guid ProwId { get ; set ; }
+        public System.Guid ProwId { get ; set ; }
         public WorkingGroup Prow { get ; set ; }
         
-        public Guid SternId { get ; set ; }
-        public Employee Stern { get ; set ; }
+        public System.Guid SternId { get ; set ; }
+        public Framework.Decisor.Domain.Persistence.Entities.Employee Stern { get ; set ; }
     }
 }

@@ -1,19 +1,30 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract
+﻿using System.Collections.Generic;
+
+namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract
 {
     public abstract class AbstractResearcher : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
         public bool Archived { get ; set ; }
         
         public bool Enabled { get ; set ; }
         
-        public int Priority { get ; set ; }       
+        public int Priority { get ; set ; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CategoryId))]
+        public ResearcherCategory Category { get ; set ; }
+        public System.Guid? CategoryId { get; set ; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(TeachingCategoryId))]
+        public TeachingCategory TeachingCategory { get; set; }
+        public System.Guid? TeachingCategoryId { get; set; }
+
+        public List<ResearcherResearchAreaSpecializationBridge> ResearchAreaSpecializationBridges { get; set; }
+
+        public List<ResearcherResearchAreaMasteryBridge> ResearchAreaMasteryBridges { get; set; }
+
+        public List<ResearcherResearchAreaDoctorateBridge> ResearchAreaDoctorateBridges { get; set; }
     }
 }

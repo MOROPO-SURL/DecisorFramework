@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
+﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
 {
     public class Financier : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
-        public Guid Id { get; set; }
+        public System.Guid Id { get; set; }
 
         public bool Archived { get ; set ; }
         
@@ -15,10 +11,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
         
         public int Priority { get ; set ; }
 
-        [System.ComponentModel.DataAnnotations.Required]
-        public string Name { get ; set ; }
-
-        public string Description { get ; set ; }
-        
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ContactId))]
+        public Framework.Decisor.Domain.Persistence.Entities.OrganizationContact Contact { get; set; }
+        public System.Guid ContactId { get; set; }        
     }
 }

@@ -1,21 +1,13 @@
-﻿using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
-using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract;
-using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities
+﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities
 {
-    public class ResearchSample: Contract.AbstractBaseSample
+    public class ResearchSample: Contract.AbstractSample
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProjectId))]
-        public Project Project { get; set; }
+        public IDi.Persistence.Entities.Project Project { get; set; }
         public System.Guid ProjectId { get; set; }
 
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AbstracBaseResearcherId))]
-        public AbstractResearcher AbstracBaseResearcher { get; set; }
-        public System.Guid AbstracBaseResearcherId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResearcherId))]
+        public IDi.Persistence.Entities.Contract.AbstractResearcher Researcher { get; set; }
+        public System.Guid ResearcherId { get; set; }
     }
 }

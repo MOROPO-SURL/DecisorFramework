@@ -18,7 +18,12 @@ using MOROPO.Framework.Guama.Location.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Security.Personal.Persistence.ORM.EF.Extensions;
 using MOROPO.Framework.Guama.Security.Personal.Presentation.Web.Backend.Extensions;
+using MOROPO.ISCamaguey.Decisor.Domain.Presentation.Web.Common.Extensions;
+using MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Common.Extensions;
+using MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Common.Extensions;
 using MOROPO.ISCamaguey.Decisor.Quality.Presentation.Web.Common.Extensions;
+using MOROPO.ISCamaguey.Decisor.Reporting.Presentation.Web.Common.Extensions;
+using MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Web.Common.Extensions;
 using MOROPO.ISCamaguey.Decisor.Web.BackOffice.Helpers;
 using MOROPO.ISCamaguey.Decisor.Web.BackOffice.Managers;
 using MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context;
@@ -63,7 +68,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice
             builder.Services.AddDecisorInventoryPresentationWebCommon();
             builder.Services.AddDecisorCommercialPresentationWebCommon();
 
-            //builder.Services.AddISCamagueyDecisorQualityPresentationWebCommon();
+            builder.Services.AddISCamagueyDecisorQualityPresentationWebCommon();
+            builder.Services.AddISCamagueyDecisorDomainPresentationWebCommon();
+            builder.Services.AddISCamagueyDecisorServicingPresentationWebCommon();
+            builder.Services.AddISCamagueyDecisorIDiPresentationWebCommon();
+            builder.Services.AddISCamagueyDecisorLabPresentationWebCommon();
+            builder.Services.AddISCamagueyDecisorReportingPresentationWebCommon();
 
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Framework.Guama.Core.Persistence.ORM.EF.Entities.Trace, long>, Framework.Guama.Core.Persistence.ORM.EF.Repositories.TraceRepository>();
 

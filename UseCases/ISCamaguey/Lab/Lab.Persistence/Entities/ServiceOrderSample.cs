@@ -1,15 +1,9 @@
-﻿using MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities;
-using MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities
+﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities
 {
-    public class ServiceOrderSample : Contract.AbstractBaseSample
+    public class ServiceOrderSample : Contract.AbstractSample
     {
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AbstractBaseSampleAnalysisServiceOrderId))]
-        public AbstractBaseSampleAnalysisServiceOrder AbstractBaseSampleAnalysisServiceOrder { get; set; }
-        public long AbstractBaseSampleAnalysisServiceOrderId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ServiceOrderId))]
+        public Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder ServiceOrder { get; set; }
+        public long ServiceOrderId { get; set; }
     }
 }

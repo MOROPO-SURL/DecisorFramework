@@ -1,42 +1,70 @@
-﻿using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
+﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
 {
     public class Project : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
-        public Guid Id { get; set; }
+        public System.Guid Id { get; set; }
+
+        public bool Archived { get; set; }
+
+        public bool Enabled { get; set; }
+
+        public int Priority { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
-        public string Description { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Code { get; set; }
 
-        public bool Archived { get ; set ; }
-        
-        public bool Enabled { get ; set ; }
-        public int Priority { get ; set ; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CategoryId))]
+        public ProjectCategory Category { get; set; }
+        public System.Guid CategoryId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProjectReportId))]
-        public ProjectReport ProjectReport { get; set; }
-        public System.Guid ProjectReportId { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Summary { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AbstractBaseResearcherId))]
-        public AbstractResearcher AbstractBaseResearcher { get; set; }
-        public System.Guid AbstractBaseResearcherId { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Problem { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ReferenceId))]
-        public Project Reference { get; set; }
-        public System.Guid? ReferenceId { get; set; }
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Context { get; set; }
 
-        public System.Collections.Generic.List<ProjectFinancierBridge> FinancierBridges {  get; set; } = new System.Collections.Generic.List<ProjectFinancierBridge>();
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Beneficiary { get; set; }
 
-        public System.Collections.Generic.List<ProjectParticipatingEntityBridge> ParticipatingEntityBridges { get; set; } = new System.Collections.Generic.List<ProjectParticipatingEntityBridge>();
+        [System.ComponentModel.DataAnnotations.Required]
+        public string MainObjetive { get; set; }
 
-        public System.Collections.Generic.List<ProjectAbstractBaseResearcherBridge> AbstractBaseResearcherBridges { get; set; } = new System.Collections.Generic.List<ProjectAbstractBaseResearcherBridge>();
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProgramId))]
+        public Program Program { get; set; }
+        public System.Guid? ProgramId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProposalId))]
+        public ProjectProposal Proposal { get; set; }
+        public System.Guid ProposalId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ChiefId))]
+        public Contract.AbstractResearcher Chief { get; set; }
+        public System.Guid ChiefId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(PredecessorId))]
+        public Project Predecessor { get; set; }
+        public System.Guid? PredecessorId { get; set; }
+
+        public System.DateTime StartAt { get; set; }
+
+        public System.DateTime EndAt { get; set; }
+
+        public System.Collections.Generic.ICollection<ProjectSpecificObjective> SpecificObjectives { get; set; }
+
+        public System.Collections.Generic.ICollection<ProjectBudgetFunancing> BudgetFunancings { get; set; }
+
+        public System.Collections.Generic.List<ProjectBudgetCurrencyBridge> BudgetCurrencyBridges { get; set; } = new System.Collections.Generic.List<ProjectBudgetCurrencyBridge>();
+
+        public System.Collections.Generic.List<ProjectParticipatingOrganizationBridge> ParticipatingOrganizationBridges { get; set; } = new System.Collections.Generic.List<ProjectParticipatingOrganizationBridge>();
+
+        public System.Collections.Generic.List<ProjectResearcherBridge> ResearcherBridges { get; set; } = new System.Collections.Generic.List<ProjectResearcherBridge>();
 
     }
 }

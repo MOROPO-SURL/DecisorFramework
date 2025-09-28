@@ -1,15 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
+﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
 {
     public class ProjectReport : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
-        public Guid Id { get; set; }
+        public System.Guid Id { get; set; }
 
-        public DateTime At {  get; set; }
+        public System.DateTime At {  get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
@@ -20,8 +16,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
         
         public int Priority { get ; set ; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(OppositionReportId))]
-        public OppositionReport OppositionReport { get ; set ; }
-        public System.Guid OppositionReportId { get ; set ; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DocumentId))]
+        public Framework.Guama.Media.Persistence.Entities.Document Document { get; set; }
+        public System.Guid? DocumentId { get; set; }
     }
 }

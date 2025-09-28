@@ -60,7 +60,12 @@
 		<ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Web.Common\Inventory.Presentation.Web.Common.csproj" />
 		<ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Backend\Commercial.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Frontend\Commercial.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\Domain\Domain.Presentation.Web.Frontend\Domain.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\IDi\IDi.Presentation.Web.Frontend\IDi.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\Lab\Lab.Presentation.Web.Frontend\Lab.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Quality\Quality.Presentation.Web.Frontend\Quality.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\Reporting\Reporting.Presentation.Web.Frontend\Reporting.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\Servicing\Servicing.Presentation.Web.Frontend\Servicing.Presentation.Web.Frontend.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <None Update="Properties\launchSettings.json">
