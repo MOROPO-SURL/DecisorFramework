@@ -42,15 +42,15 @@
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProposalId))]
         public ProjectProposal Proposal { get; set; }
-        public System.Guid ProposalId { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ChiefId))]
-        public Contract.AbstractResearcher Chief { get; set; }
-        public System.Guid ChiefId { get; set; }
+        public System.Guid? ProposalId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(PredecessorId))]
         public Project Predecessor { get; set; }
         public System.Guid? PredecessorId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ChiefId))]
+        public Contract.AbstractResearcher Chief { get; set; }
+        public System.Guid ChiefId { get; set; }
 
         public System.DateTime StartAt { get; set; }
 

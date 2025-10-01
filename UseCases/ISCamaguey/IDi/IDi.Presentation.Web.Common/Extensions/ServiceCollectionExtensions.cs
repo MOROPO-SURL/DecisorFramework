@@ -1,4 +1,7 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
+using MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Repositories;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Common.Extensions
 {
@@ -6,6 +9,10 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Common.Extensions
     {
         public static void AddISCamagueyDecisorIDiPresentationWebCommon(this IServiceCollection services)
         {
+            services.AddScoped<IEntityRepository<ResearchArea, System.Guid>, ResearchAreaRepository>();
+            services.AddScoped<IEntityRepository<Program, System.Guid>, ProgramRepository>();
+            services.AddScoped<IEntityRepository<ProgramExpectResult, System.Guid>, ProgramExpectResultRepository>();
+
             services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.IDiDbSchemaConfigurationProvider>();
         }
     }
