@@ -5,6 +5,8 @@
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; }
 
+        public int Index { get; set; }
+
         [System.ComponentModel.DataAnnotations.Required]
         public string Title { get; set; }
 

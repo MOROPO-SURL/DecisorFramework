@@ -5735,9 +5735,17 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<string>("Alias")
+                        .HasColumnType("text")
+                        .HasColumnName("alias");
+
                     b.Property<bool>("Archived")
                         .HasColumnType("boolean")
                         .HasColumnName("archived");
+
+                    b.Property<Guid>("ChiefId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("chiefid");
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -5752,6 +5760,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
+                    b.Property<Guid>("ManagerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("managerid");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
@@ -5763,6 +5775,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_programs");
+
+                    b.HasIndex("ChiefId")
+                        .HasDatabaseName("ix_programs_chiefid");
+
+                    b.HasIndex("ManagerId")
+                        .HasDatabaseName("ix_programs_managerid");
 
                     b.ToTable("programs", "decisoriscamaguey_idi");
                 });
@@ -5779,6 +5797,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
+
                     b.Property<Guid>("ProgramId")
                         .HasColumnType("uuid")
                         .HasColumnName("programid");
@@ -5790,6 +5812,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_programexpectresults");
+
+                    b.HasIndex("Index")
+                        .IsUnique()
+                        .HasDatabaseName("ix_programexpectresults_index");
 
                     b.HasIndex("ProgramId")
                         .HasDatabaseName("ix_programexpectresults_programid");
@@ -5866,7 +5892,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("programid");
 
-                    b.Property<Guid>("ProposalId")
+                    b.Property<Guid?>("ProposalId")
                         .HasColumnType("uuid")
                         .HasColumnName("proposalid");
 
@@ -10168,6 +10194,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Contact");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Program", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Chief")
+                        .WithMany()
+                        .HasForeignKey("ChiefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_programs_personcontacts_chiefid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Manager")
+                        .WithMany()
+                        .HasForeignKey("ManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_programs_organizationcontacts_managerid");
+
+                    b.Navigation("Chief");
+
+                    b.Navigation("Manager");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProgramExpectResult", b =>
                 {
                     b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Program", "Program")
@@ -10209,8 +10256,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectProposal", "Proposal")
                         .WithMany()
                         .HasForeignKey("ProposalId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_projects_projectproposals_proposalid");
 
                     b.Navigation("Category");

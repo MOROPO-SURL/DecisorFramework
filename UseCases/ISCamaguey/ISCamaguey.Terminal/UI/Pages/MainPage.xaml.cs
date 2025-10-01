@@ -54,17 +54,17 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
 
     private void ResearchSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        //Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.CommercialShell();
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.IDiShell();
     }
 
     private void ServiceSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        //Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.CommercialShell();
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.ServicingShell();
     }
 
     private void LabSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        //Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.CommercialShell();
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.LabShell();
     }
 
     private void RecomendationSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
@@ -74,6 +74,6 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
 
     private void QualitySectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        //Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.CommercialShell();
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.QualityShell();
     }
 }

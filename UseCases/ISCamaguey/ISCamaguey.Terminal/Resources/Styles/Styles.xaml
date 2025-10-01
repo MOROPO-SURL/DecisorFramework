@@ -471,6 +471,11 @@
         <Setter Property="FontSize" Value="Default" />
     </Style>
 
+    <Style TargetType="Label" x:Key="ValidationMessageLabelStyle">
+        <Setter Property="TextColor" Value="IndianRed" />
+        <Setter Property="HeightRequest" Value="20" />
+    </Style>
+
     <Style TargetType="ContentView" x:Key="ModalFrameWrapContentViewStyle">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#A9000000, Dark=#A9333333}" />
     </Style>
