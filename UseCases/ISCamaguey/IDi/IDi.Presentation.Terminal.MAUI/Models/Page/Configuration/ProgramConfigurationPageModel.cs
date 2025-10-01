@@ -6,6 +6,7 @@
         public static string CodeValidableProperty => nameof(Code);
         public static string ChiefValidableProperty => nameof(Chief);
         public static string ManagerValidableProperty => nameof(Manager);
+        public static string ExpectResultsValidableProperty => nameof(ExpectResults);
 
         private string name;
         private string alias;
