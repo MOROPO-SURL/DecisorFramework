@@ -225,11 +225,6 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.AdmitionPropousalPickPage(pickContactVacantBindingContext.WorkPosition, ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex], AdmitionPropousalPickComplete_Callback)));
         }
-
-        //System.Threading.Tasks.Task.Delay(100).ContinueWith(_ =>
-        //{
-        //    Dispatcher.Dispatch(() => this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback))).ContinueWith(_ => Dispatcher.Dispatch(() => ConcreteBindingContext.IsBusy = false)));
-        //});
     }
 
     private void RemoveOcupationButton_Clicked(object sender, System.EventArgs e)

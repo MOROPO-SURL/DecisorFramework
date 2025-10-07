@@ -121,7 +121,7 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
 
             var ocupations = new System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel>(await ocupationsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.OcupationFilterModel { StaffId = staff.Id, WorkforceId = staff.MainWorkforce.Id }));
 
-            var _models = targetWorkforce.OrganizationalUnities.ToVacantPickOrganizationalUnityViewModelChildren(ocupations);
+            var _models = targetWorkforce.OrganizationalUnities.ToVacantPickOrganizationalUnityViewModelChildren(ocupations, vacantOcupationModes);
 
             foreach (var _model in _models)
             {
