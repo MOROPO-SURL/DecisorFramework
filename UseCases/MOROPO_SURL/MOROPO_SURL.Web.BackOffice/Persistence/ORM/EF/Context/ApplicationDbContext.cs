@@ -152,7 +152,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<WorkPosition> WorkPositions { get; set; }
         public DbSet<WorkPositionResponsability> WorkPositionResponsabilities { get; set; }
         public DbSet<Workforce> Workforces { get; set; }
-        public DbSet<WorkforceOrganizationalUnityBridge> WorkforceOrganizationalUnityBridges { get; set; }
+        public DbSet<WorkforceOrganizationalUnity> WorkforceOrganizationalUnities { get; set; }
         public DbSet<Vacant> Vacants { get; set; }
         public DbSet<VacantPostulation> VacantPostulations { get; set; }
         public DbSet<VacantPostulationOcupation> VacantPostulationOcupations { get; set; }

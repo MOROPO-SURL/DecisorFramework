@@ -34,6 +34,9 @@
 	  <Compile Update="Pages\Detail\EmployeeDetailPage.xaml.cs">
 	    <DependentUpon>EmployeeDetailPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Manage\OcupationsManagePage.xaml.cs">
+	    <DependentUpon>OcupationsManagePage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="Pages\Configuration\AdmitionPropousalConfigurationPage.xaml">

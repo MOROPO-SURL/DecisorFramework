@@ -4,24 +4,31 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
 {
     public static class OrganizationalUnityDisplayModelExtensions
     {
-        public static Models.View.WorkforceConfigurationOrganizationalUnityViewModel[] ToOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.OrganizationalUnityDisplayModel target)
+        public static Models.View.WorkforceConfigurationOrganizationalUnityViewModel[] ToOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel[] targets)
         {
             var result = new System.Collections.Generic.List<Models.View.WorkforceConfigurationOrganizationalUnityViewModel>();
 
-            foreach (var item in target.Children)
+            foreach (var item in targets)
             {
                 var model = new Models.View.WorkforceConfigurationOrganizationalUnityViewModel
                 {
                     Id = item.Id,
-                    Name = item.Name,
-                    Enabled = item.Enabled,
-                    Priority = item.Priority,
-                    Reference = item.Reference
+                    Domain = item.OrganizationalUnity
+                };
+
+                model.ChiefVacant = item.ChiefVacant == null ? null : new Models.View.WorkforceConfigurationVacantViewModel
+                {
+                    Id = item.ChiefVacant.Id,
+                    Priority = item.ChiefVacant.Priority,
+                    OcupationMode = item.ChiefVacant.OcupationMode,
+                    WorkPosition = item.ChiefVacant.WorkPosition,
+                    SalaryStandard = item.ChiefVacant.SalaryStandard,
+                    OrganizationUnity = model
                 };
 
                 if (item.Children != null)
                 {
-                    model.Children = item.ToOrganizationalUnityViewModelChildren();
+                    model.Children = item.Children.ToOrganizationalUnityViewModelChildren();
                 }
 
                 if (item.Vacants != null)
@@ -40,27 +47,27 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                 result.Add(model);
             }
 
-            return result.OrderBy(model => model.Priority).ToArray();
+            return result.OrderBy(model => model.Domain.Priority).ToArray();
         }
 
-        public static Models.View.OcupationsRawManageOrganizationalUnityViewModel[] ToOcupationsRawManageOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.OrganizationalUnityDisplayModel target, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
+        public static Models.View.OcupationsRawManageOrganizationalUnityViewModel[] ToOcupationsRawManageOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
         {
             var result = new System.Collections.Generic.List<Models.View.OcupationsRawManageOrganizationalUnityViewModel>();
 
-            foreach (var item in target.Children)
+            foreach (var target in targets)
             {
                 var model = new Models.View.OcupationsRawManageOrganizationalUnityViewModel
                 {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Enabled = item.Enabled,
-                    Priority = item.Priority,
-                    Reference = item.Reference
+                    Id = target.Id,
+                    Name = target.OrganizationalUnity.Name,
+                    Enabled = target.OrganizationalUnity.Enabled,
+                    Priority = target.OrganizationalUnity.Priority,
+                    Reference = target.OrganizationalUnity.Reference
                 };
 
-                if (item.Vacants != null)
+                if (target.Vacants != null)
                 {
-                    model.Vacants = item.Vacants.Select(_model =>
+                    model.Vacants = target.Vacants.Select(_model =>
                     {
                         var ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == _model.Id);
 
@@ -79,9 +86,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                     }).ToArray();
                 }
 
-                if (item.Children != null)
+                if (target.OrganizationalUnity.Children != null)
                 {
-                    model.Children = item.ToOcupationsRawManageOrganizationalUnityViewModelChildren(ocupations);
+                    model.Children = target.Children.ToOcupationsRawManageOrganizationalUnityViewModelChildren(ocupations);
                 }
 
                 result.Add(model);
@@ -90,26 +97,26 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
             return result.OrderBy(model => model.Priority).ToArray();
         }
 
-        public static Models.View.VacantPickOrganizationalUnityViewModel[] ToVacantPickOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.OrganizationalUnityDisplayModel target, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
+        public static Models.View.VacantPickOrganizationalUnityViewModel[] ToVacantPickOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
         {
             var result = new System.Collections.Generic.List<Models.View.VacantPickOrganizationalUnityViewModel>();
 
-            foreach (var item in target.Children)
+            foreach (var target in targets)
             {
                 var model = new Models.View.VacantPickOrganizationalUnityViewModel
                 {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Enabled = item.Enabled,
-                    Priority = item.Priority,
-                    Reference = item.Reference
+                    Id = target.Id,
+                    Name = target.OrganizationalUnity.Name,
+                    Enabled = target.OrganizationalUnity.Enabled,
+                    Priority = target.OrganizationalUnity.Priority,
+                    Reference = target.OrganizationalUnity.Reference
                 };
 
-                if (item.Vacants != null)
+                if (target.Vacants != null)
                 {
                     var vacants = new System.Collections.Generic.List<Interop.API.Common.Models.Display.VacantDisplayModel>();
 
-                    foreach (var vacant in item.Vacants)
+                    foreach (var vacant in target.Vacants)
                     {
                         var ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == vacant.Id);
 
@@ -126,9 +133,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                     model.Vacants = vacants.ToArray();
                 }
 
-                if (item.Children != null)
+                if (target.OrganizationalUnity.Children != null)
                 {
-                    model.Children = item.ToVacantPickOrganizationalUnityViewModelChildren(ocupations);
+                    model.Children = target.Children.ToVacantPickOrganizationalUnityViewModelChildren(ocupations);
                 }
 
                 result.Add(model);

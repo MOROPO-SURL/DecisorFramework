@@ -10,17 +10,54 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <Frame>
         <VerticalStackLayout>
             <Label
                 FontSize="Medium"
-                Text="{Binding Name}" />
+                Text="{Binding Domain.Name}" />
             <Label 
                 Style="{StaticResource CaptionFieldLabelStyle}"
                 Margin="0,8"
-                Text="Vacantes" />
+                Text="Vacante superior" />
+            <Frame 
+                IsVisible="{Binding ChiefVacant, Converter={StaticResource IsNotNullConverter}}"
+                Padding="8">
+                <StackLayout Orientation="Horizontal">
+                    <VerticalStackLayout 
+                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                        Padding="8">
+                        <Label
+                            Text="{Binding ChiefVacant.WorkPosition.Name}"
+                            LineBreakMode="TailTruncation"
+                            FontSize="Medium" />
+                        <Label
+                            Style="{StaticResource CaptionFieldLabelStyle}"
+                            Margin="0,8,0,0"
+                            Text="Referencia" />
+                        <Label
+                            Text="{Binding ChiefVacant.WorkPosition.Reference, TargetNullValue='---'}"
+                            LineBreakMode="TailTruncation" />
+                    </VerticalStackLayout>
+                    <Button
+                        VerticalOptions="Start"
+                        FontFamily="MaterialDesignIcons" 
+                        Text="&#xF90B;"
+                        Clicked="ChiefVacantEditionButton_Clicked" />
+                </StackLayout>
+            </Frame>
+            <Button
+                IsVisible="{Binding ChiefVacant, Converter={StaticResource IsNullConverter}}"
+                HorizontalOptions="Start"                
+                Text="Definir"
+                Clicked="DefineChiefVacantButton_Clicked" />
+            <Label 
+                Style="{StaticResource CaptionFieldLabelStyle}"
+                Margin="0,16,0,8"
+                Text="Vacantes subalternas" />
             <Frame Padding="8">
                 <Grid RowSpacing="8">
                     <Grid.ColumnDefinitions>
@@ -51,10 +88,13 @@
                         </CollectionView.EmptyView>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:VacantDisplayModel">
-                                <Frame Padding="8"
-                                        Margin="0,12,0,0">
+                                <Frame 
+                                    Padding="8"
+                                    Margin="0,12,0,0">
                                     <StackLayout Orientation="Horizontal">
-                                        <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                        <VerticalStackLayout 
+                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                            Padding="8">
                                             <Label
                                                 Text="{Binding WorkPosition.Name}"
                                                 LineBreakMode="TailTruncation"
@@ -94,6 +134,8 @@
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <local_card_views:WorkforceConfigurationOrganizationalUnityAndVacantsCardView 
+                            DefineChiefVacantButtonClick="DefineChiefVacantButton_Clicked"
+                            ChiefVacantEditionButtonClick="ChiefVacantEditionButton_Clicked"
                             AddVacantButtonClick="AddVacantButton_Clicked"
                             VacantEditionButtonClick="VacantEditionButton_Clicked"
                             VacantRemoveButtonClick="VacantRemoveButton_Clicked"
