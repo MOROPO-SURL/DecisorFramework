@@ -20,7 +20,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
                 .AddSingleton<IDetailContentPageFactoryFacade<OcupationCandidateDisplayModel>, OcupationCandidateDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<AdmitionPropousalDisplayModel>, AdmitionPropousalDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<NamingResolutionDisplayModel>, NamingResolutionDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel>, EmployeeDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<Models.View.EmployeeViewModel>, EmployeeDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel>, SalaryConfigurationPageFactory>()

@@ -3,18 +3,20 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List"
+    xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:presentation_list_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.List;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
-    xmlns:domain_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
-    xmlns:domain_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List.EmployeesListPage"
-    x:TypeArguments="domain_interop_common_display_models:EmployeeDisplayModel,presentation_list_page_models:EmployeesListPageModel"
+    x:TypeArguments="presentation_view_models:EmployeeViewModel,presentation_list_page_models:EmployeesListPageModel"
     x:DataType="presentation_list_page_models:EmployeesListPageModel"
     Title="Expedientes laborales">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -42,12 +44,48 @@
                             <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <domain_card_views:EmployeeDefaultCardView HeightRequest="{Static local:EmployeesListPage.ITEM_VIEW_REQUEST_HEIGHT}">
-                                    <ContentView.GestureRecognizers>
+                            <DataTemplate x:DataType="presentation_view_models:EmployeeViewModel">
+                                <Frame 
+                                    HeightRequest="{Static local:EmployeesListPage.ITEM_VIEW_REQUEST_HEIGHT}"
+                                    Padding="0">
+                                    <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </ContentView.GestureRecognizers>
-                                </domain_card_views:EmployeeDefaultCardView>
+                                    </Frame.GestureRecognizers>
+                                    <Grid ColumnSpacing="4">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image
+                                            Grid.Column="0"
+                                            Aspect="AspectFill"
+                                            WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                                            Source="{Binding Domain.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                        <StackLayout 
+                                            Grid.Column="1"
+                                            Padding="10">
+                                            <Label 
+                                                FontSize="Medium"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Domain.Contact.Identity.Name}" />
+                                            <Label
+                                                IsVisible="{Binding Domain.Contact.Identity.LastName, Converter={StaticResource IsNotNullConverter}}"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Domain.Contact.Identity.LastName}" />
+                                            <Label 
+                                                Margin="0,6,0,0"
+                                                Text="Descripción"
+                                                TextColor="DimGray"
+                                                FontSize="Caption"
+                                                FontAttributes="Bold" />
+                                            <Label
+                                                VerticalOptions="FillAndExpand"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="2"
+                                                Text="{Binding Domain.Contact.Identity.About, TargetNullValue='---'}" />
+                                        </StackLayout>
+                                    </Grid>
+                                </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>
@@ -62,10 +100,10 @@
                         <CollectionView.Footer>
                             <StackLayout IsVisible="{Binding HasMoreItems}">
                                 <Button
-                                HorizontalOptions="Center"
-                                Margin="5"
-                                Text="Mostrar más"
-                                Clicked="LoadMoreBurron_Clicked" />
+                                    HorizontalOptions="Center"
+                                    Margin="5"
+                                    Text="Mostrar más"
+                                    Clicked="LoadMoreBurron_Clicked" />
                             </StackLayout>
                         </CollectionView.Footer>
                     </CollectionView>

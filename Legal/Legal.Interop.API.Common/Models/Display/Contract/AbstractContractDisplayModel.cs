@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display.Contract
 {
-    public abstract class AbstractContractDisplayModel<TEntity> : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<TEntity, int> where TEntity : Persistence.Entities.Contract.AbstractContract
+    public abstract class AbstractContractDisplayModel<TEntity> : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<TEntity, int>, Guama.Core.Persistence.Entities.Contract.IPriorizableEntity<int> where TEntity : Persistence.Entities.Contract.AbstractContract
     {
         public int Id { get; set; }
 
