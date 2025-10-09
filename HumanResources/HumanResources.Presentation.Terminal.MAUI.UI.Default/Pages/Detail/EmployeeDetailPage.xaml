@@ -2,24 +2,29 @@
 <core_ui_base_pages:DetailBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_converters="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Converters"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
+    xmlns:presentation_detail_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Detail;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:local_datatemplate_selectors="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Template.Selector"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:uraniumui_material_controls="clr-namespace:UraniumUI.Material.Controls;assembly=UraniumUI.Material"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.EmployeeDetailPage"
-    x:TypeArguments="presentation_view_models:EmployeeViewModel"
-    x:DataType="presentation_view_models:EmployeeViewModel"
+    x:TypeArguments="presentation_detail_page_models:EmployeeDetailPageModel"
+    x:DataType="presentation_detail_page_models:EmployeeDetailPageModel"
     Title="Detalles de Empleado"
     Background="{StaticResource OverlayBackgroundBrush}">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local_converters:IntToMonthNameStringConverter x:Key="IntToMonthNameStringConverter" />
+
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
 
             <Style TargetType="Frame" x:Key="OcupationOverviewFrameStyle">
-                <Setter Property="WidthRequest" Value="480" />
                 <Setter Property="Padding" Value="4" />
             </Style>
 
@@ -245,7 +250,7 @@
                 <Grid>
                     <StackLayout 
                         Margin="20" Padding="8"
-                        Spacing="0">
+                        Spacing="16">
                         <FlexLayout 
                             Wrap="Wrap"
                             AlignItems="Start" AlignContent="Start">
@@ -288,17 +293,256 @@
                                 </VerticalStackLayout>
                             </VerticalStackLayout>
                         </FlexLayout>
-                        <VerticalStackLayout>
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Ocupaciones" />
-                            <ScrollView Orientation="Horizontal">
-                                <FlexLayout
-                                    Padding="8"
-                                    BindableLayout.ItemsSource="{Binding EmploymentContracts}"
-                                    BindableLayout.ItemTemplateSelector="{StaticResource EmploymentContractTemplateSelector}" />
-                            </ScrollView>
-                        </VerticalStackLayout>                        
+                        <uraniumui_material_controls:TabView>
+                            <uraniumui_material_controls:TabItem Title="Ocupaciones">
+                                <uraniumui_material_controls:TabItem.ContentTemplate>
+                                    <DataTemplate>
+                                        <CollectionView
+                                            Margin="0,12,0,0"
+                                            ItemsSource="{Binding EmploymentContracts}"
+                                            ItemTemplate="{StaticResource EmploymentContractTemplateSelector}">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                                            </CollectionView.ItemsLayout>
+                                        </CollectionView>
+                                    </DataTemplate>
+                                </uraniumui_material_controls:TabItem.ContentTemplate>
+                            </uraniumui_material_controls:TabItem>
+                            <uraniumui_material_controls:TabItem Title="Reg. de Asistencia">
+                                <uraniumui_material_controls:TabItem.ContentTemplate>
+                                    <DataTemplate>
+                                        <VerticalStackLayout Spacing="0">
+                                            <StackLayout 
+                                                Padding="8"
+                                                Spacing="4"
+                                                Orientation="Horizontal">
+                                                <Label
+                                                    VerticalOptions="Center"
+                                                    FontAttributes="Bold"
+                                                    Text="Año:" />
+                                                <Picker
+                                                    VerticalOptions="Center"
+                                                    ItemsSource="{Binding AvailableYears}"
+                                                    SelectedItem="{Binding DailyCheckingYear}" />
+                                                <Label
+                                                    VerticalOptions="Center"
+                                                    Margin="4,0,0,0"
+                                                    FontAttributes="Bold"
+                                                    Text="Mes:" />
+                                                <Picker
+                                                    x:Name="Month"
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    ItemsSource="{Binding AvailableMonths}"
+                                                    ItemDisplayBinding="{Binding Converter={StaticResource IntToMonthNameStringConverter}}"
+                                                    SelectedItem="{Binding DailyCheckingMonth}" />
+                                                <Button
+                                                    VerticalOptions="Center"
+                                                    Margin="4,0,0,0"
+                                                    Text="Mostrar"
+                                                    Clicked="DailyCheckingsFilterButtonn_Clicked" />
+                                            </StackLayout>
+                                            <Grid 
+                                                Margin="0,8,0,0"
+                                                ColumnSpacing="8" RowSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="32" />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="96" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="1" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Label
+                                                    Grid.Column="0" Grid.RowSpan="3"
+                                                    VerticalOptions="Center"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    Text="No." />
+                                                <Label
+                                                    Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="Mañana" />
+                                                <BoxView 
+                                                    Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
+                                                    Color="DimGray" />
+                                                <Label
+                                                    Grid.Column="1" Grid.Row="2"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="Entrada" />
+                                                <Label
+                                                    Grid.Column="2" Grid.Row="2"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="Salida" />
+                                                <Label
+                                                    Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="0"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="Tarde" />
+                                                <BoxView 
+                                                    Grid.Column="3" Grid.ColumnSpan="2" Grid.Row="1"
+                                                    Color="DimGray" />
+                                                <Label
+                                                    Grid.Column="3" Grid.Row="2"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="Entrada" />
+                                                <Label
+                                                    Grid.Column="4" Grid.Row="2"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="Salida" />
+                                                <Label
+                                                    Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="0"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="Extra" />
+                                                <BoxView 
+                                                    Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="1"
+                                                    Color="DimGray" />
+                                                <Label
+                                                    Grid.Column="5" Grid.Row="2"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="Entrada" />
+                                                <Label
+                                                    Grid.Column="6" Grid.Row="2"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="Salida" />
+                                                <Label
+                                                    Grid.Column="7" Grid.RowSpan="3"
+                                                    VerticalOptions="Center"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="Opciones" />
+                                            </Grid>
+                                            <BoxView 
+                                                Margin="0,8,0,0"
+                                                HeightRequest="1"
+                                                Color="DimGray" />
+                                            <CollectionView
+                                                ItemsSource="{Binding DailyCheckings}">
+                                                <CollectionView.ItemsLayout>
+                                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="0" />
+                                                </CollectionView.ItemsLayout>
+                                                <CollectionView.ItemTemplate>
+                                                    <DataTemplate x:DataType="presentation_view_models:EmployeeDailyCheckingViewModel">
+                                                        <VerticalStackLayout Spacing="0">
+                                                            <BoxView Color="DimGray" HeightRequest="1" />
+                                                            <Grid ColumnSpacing="8">
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="32" />
+                                                                    <ColumnDefinition />
+                                                                    <ColumnDefinition />
+                                                                    <ColumnDefinition />
+                                                                    <ColumnDefinition />
+                                                                    <ColumnDefinition />
+                                                                    <ColumnDefinition />
+                                                                    <ColumnDefinition Width="96" />
+                                                                </Grid.ColumnDefinitions>
+                                                                <Label
+                                                                    Grid.Column="0"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalTextAlignment="Center"
+                                                                    FontAttributes="Bold"
+                                                                    FontSize="Medium"
+                                                                    Text="{Binding Day}" />
+                                                                <Label
+                                                                    Grid.Column="1"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalTextAlignment="Center"
+                                                                    FontAttributes="Bold"
+                                                                    LineBreakMode="TailTruncation"
+                                                                    Text="{Binding Model.CheckIn, StringFormat='{0:hh\\:mm}'}" />
+                                                                <Label
+                                                                    Grid.Column="2"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalTextAlignment="Center"
+                                                                    FontAttributes="Bold"
+                                                                    LineBreakMode="TailTruncation"
+                                                                    Text="{Binding Model.PartialCheckOut, StringFormat='{0:hh\\:mm}'}" />
+                                                                <Label
+                                                                    Grid.Column="3"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalTextAlignment="Center"
+                                                                    FontAttributes="Bold"
+                                                                    LineBreakMode="TailTruncation"
+                                                                    Text="{Binding Model.PartialCheckIn, StringFormat='{0:hh\\:mm}'}" />
+                                                                <Label
+                                                                    Grid.Column="4"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalTextAlignment="Center"
+                                                                    FontAttributes="Bold"
+                                                                    LineBreakMode="TailTruncation"
+                                                                    Text="{Binding Model.CheckOut, StringFormat='{0:hh\\:mm}'}" />
+                                                                <Label
+                                                                    Grid.Column="5"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalTextAlignment="Center"
+                                                                    FontAttributes="Bold"
+                                                                    LineBreakMode="TailTruncation"
+                                                                    Text="{Binding Model.ExtraCheckIn, StringFormat='{0:hh\\:mm}'}" />
+                                                                <Label
+                                                                    Grid.Column="6"
+                                                                    VerticalOptions="Center"
+                                                                    HorizontalTextAlignment="Center"
+                                                                    FontAttributes="Bold"
+                                                                    LineBreakMode="TailTruncation"
+                                                                    Text="{Binding Model.ExtraCheckOut, StringFormat='{0:hh\\:mm}'}" />
+                                                                <HorizontalStackLayout
+                                                                    Grid.Column="7"
+                                                                    HorizontalOptions="Center"
+                                                                    Padding="4"
+                                                                    Spacing="4">
+                                                                    <Button
+                                                                        Padding="0"
+                                                                        FontSize="21"
+                                                                        FontFamily="MaterialDesignIcons" 
+                                                                        Text="&#xF90B;"
+                                                                        Clicked="DailyCheckingConfigureButton_Clicked" />
+                                                                    <Button
+                                                                        Padding="0"
+                                                                        FontSize="21"
+                                                                        FontFamily="MaterialDesignIcons" 
+                                                                        Text="&#xFA78;" />
+                                                                </HorizontalStackLayout>
+                                                            </Grid>
+                                                        </VerticalStackLayout>
+                                                    </DataTemplate>
+                                                </CollectionView.ItemTemplate>
+                                            </CollectionView>
+                                        </VerticalStackLayout>
+                                    </DataTemplate>
+                                </uraniumui_material_controls:TabItem.ContentTemplate>
+                            </uraniumui_material_controls:TabItem>
+                            <uraniumui_material_controls:TabItem Title="Certificados Médicos">
+                                <uraniumui_material_controls:TabItem.ContentTemplate>
+                                    <DataTemplate>
+                                        <Label Text="..." />
+                                    </DataTemplate>
+                                </uraniumui_material_controls:TabItem.ContentTemplate>
+                            </uraniumui_material_controls:TabItem>
+                        </uraniumui_material_controls:TabView>        
                     </StackLayout>
                     <Button
                         HorizontalOptions="End" VerticalOptions="Start"
@@ -311,6 +555,7 @@
                         BorderWidth="0"
                         WidthRequest="48" HeightRequest="48"
                         Clicked="DismissControl_Invoked" />
+                    <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
                 </Grid>
             </Frame>
         </Grid>

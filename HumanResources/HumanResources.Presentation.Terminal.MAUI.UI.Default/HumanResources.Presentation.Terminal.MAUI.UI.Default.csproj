@@ -25,6 +25,7 @@
 	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
+		<PackageReference Include="UraniumUI.Material" Version="2.12.1" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Governance\Governance.Presentation.Terminal.MAUI.UI.Default\Governance.Presentation.Terminal.MAUI.UI.Default.csproj" />
@@ -40,6 +41,9 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="Pages\Configuration\AdmitionPropousalConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\EmployeeDailyCheckingConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\OcupationByAdmistionConfigurationPage.xaml">

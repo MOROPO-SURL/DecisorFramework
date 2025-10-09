@@ -20,7 +20,14 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
                 .AddSingleton<IDetailContentPageFactoryFacade<OcupationCandidateDisplayModel>, OcupationCandidateDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<AdmitionPropousalDisplayModel>, AdmitionPropousalDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<NamingResolutionDisplayModel>, NamingResolutionDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<Models.View.EmployeeViewModel>, EmployeeDetailPageFactory>()
+
+/* Cambio no fusionado mediante combinación del proyecto 'HumanResources.Presentation.Terminal.MAUI.UI.Default (net8.0-android)'
+Antes:
+                .AddSingleton<IDetailContentPageFactoryFacade<Models.View.EmployeeDetailPageModel>, EmployeeDetailPageFactory>()
+Después:
+                .AddSingleton<IDetailContentPageFactoryFacade<EmployeeDetailPageModel>, EmployeeDetailPageFactory>()
+*/
+                .AddSingleton<IDetailContentPageFactoryFacade<Models.Page.Detail.EmployeeDetailPageModel>, EmployeeDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<SalaryStandardDisplayModel, SalaryStandardConfigurationPageModel>, SalaryConfigurationPageFactory>()

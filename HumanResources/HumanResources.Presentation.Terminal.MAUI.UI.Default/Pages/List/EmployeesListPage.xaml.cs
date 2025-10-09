@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List;
 
-public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Models.View.EmployeeViewModel, Models.Page.List.EmployeesListPageModel>
+public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Models.Page.Detail.EmployeeDetailPageModel, Models.Page.List.EmployeesListPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
 
@@ -26,20 +26,21 @@ public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Page
         return ITEM_VIEW_REQUEST_HEIGHT;
     }
 
-    protected override async System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Models.View.EmployeeViewModel>> FetchItemsAsync()
+
+    protected override async System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Models.Page.Detail.EmployeeDetailPageModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         var result = await apiConnectClient.GetPaginateAsync();
 
-        return new Guama.Core.Presentation.Models.PaginationModel<Models.View.EmployeeViewModel>
+        return new Guama.Core.Presentation.Models.PaginationModel<Models.Page.Detail.EmployeeDetailPageModel>
         {
             HasNext = result.HasNext,
             HasPrevious = result.HasPrevious,
             Limit = result.Limit,
             MaxPageCount = result.MaxPageCount,
             Page = result.Page,
-            List = result.List.Select(item => new Models.View.EmployeeViewModel { Domain = item }).ToList()
+            List = result.List.Select(item => new Models.Page.Detail.EmployeeDetailPageModel { Domain = item }).ToList()
         };
     }
 
@@ -63,7 +64,8 @@ public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Page
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 
-    protected override async System.Threading.Tasks.Task<Models.View.EmployeeViewModel> FillItemDataAsync(Models.View.EmployeeViewModel model)
+
+    protected override async System.Threading.Tasks.Task<Models.Page.Detail.EmployeeDetailPageModel> FillItemDataAsync(Models.Page.Detail.EmployeeDetailPageModel model)
     {
         var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
@@ -76,6 +78,8 @@ public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Page
         list.AddRange(await admitionEmploymentContractsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.AdmitionEmploymentContractFilterModel { EmployeeId = model.Domain.Id }));
 
         model.EmploymentContracts = [.. list.OrderBy(_model => _model.Priority)];
+
+        await model.FillDailyCheckingsAsync();
 
         return model;
     }

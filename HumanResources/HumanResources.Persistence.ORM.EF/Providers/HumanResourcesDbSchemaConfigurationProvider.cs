@@ -26,7 +26,8 @@
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.AdmitionEmploymentContract>(),
                     new Configurators.StaffEntityTypeConfigurator(),
                     new Configurators.StaffWorkforceBridgeEntityTypeConfigurator(),
-                    new Configurators.OcupationEntityTypeConfigurator()
+                    new Configurators.OcupationEntityTypeConfigurator(),
+                    new Configurators.EmployeeDailyCheckingEntityTypeConfigurator()
                 };
             }
         }

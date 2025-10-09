@@ -167,6 +167,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<StaffWorkforceBridge> StaffWorkforceBridges { get; set; }
         public DbSet<Ocupation> Ocupations { get; set; }
+        public DbSet<EmployeeDailyChecking> EmployeeDailyCheckings { get; set; }
 
         public DbSet<Tag> ClauseTags { get; set; }
         public DbSet<Clause> Clauses { get; set; }

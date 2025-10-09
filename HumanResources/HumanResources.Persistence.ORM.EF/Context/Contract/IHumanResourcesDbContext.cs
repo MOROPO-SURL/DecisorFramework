@@ -25,5 +25,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Context.Con
         public DbSet<Entities.Staff> Staffs { get; set; }
         public DbSet<Entities.StaffWorkforceBridge> StaffWorkforceBridges { get; set; }
         public DbSet<Entities.Ocupation> Ocupations { get; set; }
+        public DbSet<Entities.EmployeeDailyChecking> EmployeeDailyCheckings { get; set; }
     }
 }

@@ -2645,6 +2645,69 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.UseTphMappingStrategy();
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.EmployeeDailyChecking", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<TimeSpan>("CheckIn")
+                        .HasColumnType("interval")
+                        .HasColumnName("checkin");
+
+                    b.Property<TimeSpan?>("CheckOut")
+                        .HasColumnType("interval")
+                        .HasColumnName("checkout");
+
+                    b.Property<int>("Day")
+                        .HasColumnType("integer")
+                        .HasColumnName("day");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("employeeid");
+
+                    b.Property<TimeSpan?>("ExtraCheckIn")
+                        .HasColumnType("interval")
+                        .HasColumnName("extracheckin");
+
+                    b.Property<TimeSpan?>("ExtraCheckOut")
+                        .HasColumnType("interval")
+                        .HasColumnName("extracheckout");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("integer")
+                        .HasColumnName("month");
+
+                    b.Property<TimeSpan?>("PartialCheckIn")
+                        .HasColumnType("interval")
+                        .HasColumnName("partialcheckin");
+
+                    b.Property<TimeSpan?>("PartialCheckOut")
+                        .HasColumnType("interval")
+                        .HasColumnName("partialcheckout");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
+                    b.HasKey("Id")
+                        .HasName("pk_employeedailycheckings");
+
+                    b.HasIndex("EmployeeId", "Day", "Month", "Year")
+                        .IsUnique()
+                        .HasDatabaseName("ix_employeedailycheckings_employeeid_day_month_year");
+
+                    b.ToTable("employeedailycheckings", "decisorframework_humanresources");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", b =>
                 {
                     b.Property<Guid>("Id")
@@ -9563,6 +9626,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Staff");
 
                     b.Navigation("Vacant");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.EmployeeDailyChecking", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_employeedailycheckings_employees_employeeid");
+
+                    b.Navigation("Employee");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", b =>
