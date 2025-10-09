@@ -13,6 +13,10 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             BindingContext = new TListPageModel();
         }
 
+        protected TListPageModel ConcreteBindingContext => BindingContext as TListPageModel;
+
+        protected virtual bool DetailRequiredAsyncWorkPresentation => false;
+
         protected virtual string ViewerPermissionCode => null;
 
         protected int CurrentItemsPageNumber { get; private set; }
@@ -27,7 +31,9 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected virtual void ItemDetailRequestControl_Invoked(object sender, System.EventArgs eventArgs)
         {
-            if (((TListPageModel)BindingContext).IsBusy) return;
+            if (ConcreteBindingContext.IsBusy) return;
+
+            ConcreteBindingContext.IsBusy = DetailRequiredAsyncWorkPresentation;
 
             FillItemDataAsync((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as TModel).ContinueWith(task =>
             {
@@ -35,7 +41,11 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 {
                     var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<UI.Factories.Facade.IDetailContentPageFactoryFacade<TModel>>();
 
-                    this.NavigationPushModalPageAsync(factory.Build(task.Result));
+                    var page = factory.Build(task.Result);
+
+                    this.NavigationPushModalPageAsync(page);
+
+                    ConcreteBindingContext.IsBusy = false;
                 });
             });
         }
@@ -106,9 +116,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 }
             }
 
-            var concreteBindingContext = (TListPageModel)BindingContext;
-
-            concreteBindingContext.IsBusy = true;
+            ConcreteBindingContext.IsBusy = true;
 
             if (restart)
             {
@@ -116,14 +124,14 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
                 CurrentItemsPageNumber = 0;
 
-                foreach (var item in concreteBindingContext.Items)
+                foreach (var item in ConcreteBindingContext.Items)
                 {
                     if (item == null || item is not System.IDisposable) continue;
 
                     (item as System.IDisposable).Dispose();
                 }
 
-                concreteBindingContext.Items.Clear();
+                ConcreteBindingContext.Items.Clear();
             }
 
             CurrentItemsPageNumber++;
@@ -132,7 +140,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    if (concreteBindingContext == null) return;
+                    if (ConcreteBindingContext == null) return;
 
                     if (task.Exception != null || task.IsCanceled)
                     {
@@ -144,13 +152,13 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                     {
                         foreach (var model in task.Result.List)
                         {
-                            concreteBindingContext.Items.Add(model);
+                            ConcreteBindingContext.Items.Add(model);
                         }
 
-                        concreteBindingContext.HasMoreItems = task.Result.HasNext && task.Result.List.Count > 0;
+                        ConcreteBindingContext.HasMoreItems = task.Result.HasNext && task.Result.List.Count > 0;
                     }
 
-                    concreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.IsBusy = false;
                 });
             });
         }

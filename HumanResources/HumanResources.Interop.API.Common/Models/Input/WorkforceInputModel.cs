@@ -1,6 +1,5 @@
 ﻿using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input
 {
@@ -15,13 +14,15 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
 
         public System.DateTime At { get; set; }
 
-        public List<Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel> OrganizationalUnities { get; set; } = new List<Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel>();
+        public List<System.Guid> RootOrganizationalUnityIds { get; set; } = new List<System.Guid>();
+        
+        public List<KeyValuePair<System.Guid, VacantInputModel>> OrganizationalUnityVacants { get; set; } = new List<KeyValuePair<System.Guid, VacantInputModel>>();
 
-        public List<VacantInputModel> EditionVacants { get; set; } = new List<VacantInputModel>();
+        public List<WorkforceOrganizationalUnityInputModel> EditionOrganizationalUnities { get; set; } = new List<WorkforceOrganizationalUnityInputModel>();
 
-        public List<VacantInputModel> IncomingVacants { get; set; } = new List<VacantInputModel>();
+        public List<WorkforceOrganizationalUnityInputModel> IncomingOrganizationalUnities { get; set; } = new List<WorkforceOrganizationalUnityInputModel>();
 
-        public List<VacantDisplayModel> OutgoingVacants { get; set; } = new List<VacantDisplayModel>();
+        public List<WorkforceOrganizationalUnityDisplayModel> OutgoingOrganizationalUnities { get; set; } = new List<WorkforceOrganizationalUnityDisplayModel>();
 
         public Persistence.Entities.Workforce Export()
         {
@@ -42,11 +43,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
             entity.At = System.DateTime.Now;
             entity.Name = Name;
             entity.Priority = Priority;
-            entity.OrganizationalUnityBridges = OrganizationalUnities.Select(model => new Persistence.Entities.WorkforceOrganizationalUnityBridge
-            {
-                ProwId = entity.Id,
-                SternId = model.Id
-            }).ToList();
         }
     }
 }

@@ -7,11 +7,11 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
+public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
 {
     private Models.View.OcupationsRawManageVacantViewModel pickContactVacantBindingContext;
 
-	public OcupationsRawManagePage()
+	public OcupationsManagePage()
 	{
 		InitializeComponent();
 
@@ -119,46 +119,13 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
 
             var ocupations = new System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel>(await ocupationsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.OcupationFilterModel { StaffId = staffId, WorkforceId = targetWorkforceId }));
 
+            var _models = targetWorkforce.OrganizationalUnities.ToOcupationsRawManageOrganizationalUnityViewModelChildren(ocupations);
+
             Dispatcher.Dispatch(() =>
             {
-                foreach (var item in targetWorkforce.OrganizationalUnities)
+                foreach (var _model in _models)
                 {
-                    var result = new Models.View.OcupationsRawManageOrganizationalUnityViewModel
-                    {
-                        Id = item.Id,
-                        Name = item.Name,
-                        Enabled = item.Enabled,
-                        Priority = item.Priority,
-                        Reference = item.Reference
-                    };
-
-                    if (item.Vacants != null)
-                    {
-                        result.Vacants = item.Vacants.Select(_model =>
-                        {
-                            var ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == _model.Id);
-
-                            var result = new Models.View.OcupationsRawManageVacantViewModel
-                            {
-                                Id = _model.Id,
-                                VacantOcupationMode = _model.OcupationMode,
-                                WorkPosition = _model.WorkPosition,
-                                SalaryStandard = _model.SalaryStandard,
-                                Ocupation = ocupation
-                            };
-
-                            if (ocupation != null) ocupations.Remove(ocupation);
-
-                            return result;
-                        }).ToArray();
-                    }
-
-                    if (item.Children != null)
-                    {
-                        result.Children = item.ToOcupationsRawManageOrganizationalUnityViewModelChildren(ocupations);
-                    }
-
-                    ConcreteBindingContext.OrganizationalUnities.Add(result);
+                    ConcreteBindingContext.OrganizationalUnities.Add(_model);
                 }
             });
         }).ContinueWith(task => 
@@ -258,11 +225,6 @@ public partial class OcupationsRawManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.AdmitionPropousalPickPage(pickContactVacantBindingContext.WorkPosition, ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex], AdmitionPropousalPickComplete_Callback)));
         }
-
-        //System.Threading.Tasks.Task.Delay(100).ContinueWith(_ =>
-        //{
-        //    Dispatcher.Dispatch(() => this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback))).ContinueWith(_ => Dispatcher.Dispatch(() => ConcreteBindingContext.IsBusy = false)));
-        //});
     }
 
     private void RemoveOcupationButton_Clicked(object sender, System.EventArgs e)

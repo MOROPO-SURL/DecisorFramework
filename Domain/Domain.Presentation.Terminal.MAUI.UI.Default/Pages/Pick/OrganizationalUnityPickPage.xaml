@@ -56,12 +56,18 @@
                             <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <local_card_views:OrganizationalUnityTreeCardView HeightRequest="{Static local:OrganizationalUnityPickPage.ITEM_VIEW_REQUEST_HEIGHT}">
-                                    <ContentView.GestureRecognizers>
+                            <DataTemplate x:DataType="interop_common_display_models:OrganizationalUnityTreeDisplayModel">
+                                <Frame HeightRequest="{Static local:OrganizationalUnityPickPage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                    <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </ContentView.GestureRecognizers>
-                                </local_card_views:OrganizationalUnityTreeCardView>
+                                    </Frame.GestureRecognizers>
+                                    <VerticalStackLayout>
+                                        <Label
+                                            LineBreakMode="TailTruncation"
+                                            FontSize="Medium"
+                                            Text="{Binding Name}" />
+                                    </VerticalStackLayout>
+                                </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

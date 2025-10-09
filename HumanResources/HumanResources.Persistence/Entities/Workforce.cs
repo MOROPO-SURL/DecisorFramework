@@ -16,10 +16,6 @@
 
         public System.DateTime At { get; set; }
 
-        public System.Collections.Generic.List<WorkforceOrganizationalUnityBridge> OrganizationalUnityBridges { get; set; } = new System.Collections.Generic.List<WorkforceOrganizationalUnityBridge>();
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResponsibleVacantId))]
-        public Vacant ChiefVacant { get; set; }
-        public System.Guid? ResponsibleVacantId { get; set; }
+        public System.Collections.Generic.ICollection<WorkforceOrganizationalUnity> OrganizationalUnities { get; set; }
     }
 }

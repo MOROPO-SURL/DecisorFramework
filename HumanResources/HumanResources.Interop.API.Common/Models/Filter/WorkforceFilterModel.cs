@@ -8,7 +8,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filt
 
         public System.Linq.Expressions.Expression<System.Func<Persistence.Entities.Workforce, bool>> GetSelector()
         {
-            return entity => entity.OrganizationalUnityBridges.Select(bridge => bridge.SternId).SequenceEqual(OrganizationalUnities.Select(model => model.Id));
+            return entity => entity.OrganizationalUnities.Select(bridge => bridge.OrganizationalUnityId).SequenceEqual(OrganizationalUnities.Select(model => model.Id));
         }
     }
 }
