@@ -279,21 +279,27 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Leasing.Presentation.Termin
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Governance", "Governance", "{CD3C0B2B-AC82-4553-AFCD-B46694AA9FA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Governance.Persistence", "Governance\Governance.Persistence\Governance.Persistence.csproj", "{CE438011-6B95-4C45-B3B6-D8E359CB4B18}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Governance.Persistence", "Governance\Governance.Persistence\Governance.Persistence.csproj", "{CE438011-6B95-4C45-B3B6-D8E359CB4B18}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Governance.Persistence.ORM.EF", "Governance\Governance.Persistence.ORM.EF\Governance.Persistence.ORM.EF.csproj", "{AE7D638C-E252-49ED-9A8C-808618111F59}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Governance.Persistence.ORM.EF", "Governance\Governance.Persistence.ORM.EF\Governance.Persistence.ORM.EF.csproj", "{AE7D638C-E252-49ED-9A8C-808618111F59}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Governance.Presentation.Web.Common", "Governance\Governance.Presentation.Web.Common\Governance.Presentation.Web.Common.csproj", "{9C94FF5B-A321-4054-9422-08B171E17E4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Governance.Presentation.Web.Common", "Governance\Governance.Presentation.Web.Common\Governance.Presentation.Web.Common.csproj", "{9C94FF5B-A321-4054-9422-08B171E17E4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Governance.Interop.API.Common", "Governance\Governance.Interop.API.Common\Governance.Interop.API.Common.csproj", "{82FA68B6-2A3C-445E-A3D2-338CA1BB0560}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Governance.Interop.API.Common", "Governance\Governance.Interop.API.Common\Governance.Interop.API.Common.csproj", "{82FA68B6-2A3C-445E-A3D2-338CA1BB0560}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Governance.Presentation.Web.Frontend", "Governance\Governance.Presentation.Web.Frontend\Governance.Presentation.Web.Frontend.csproj", "{A9E716D6-EA76-4809-B8EB-2520873FFE8F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Governance.Presentation.Web.Frontend", "Governance\Governance.Presentation.Web.Frontend\Governance.Presentation.Web.Frontend.csproj", "{A9E716D6-EA76-4809-B8EB-2520873FFE8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Governance.Interop.API.Connect", "Governance\Governance.Interop.API.Connect\Governance.Interop.API.Connect.csproj", "{1F92B294-D917-4751-929D-4FBAF321426F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Governance.Interop.API.Connect", "Governance\Governance.Interop.API.Connect\Governance.Interop.API.Connect.csproj", "{1F92B294-D917-4751-929D-4FBAF321426F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Governance.Presentation.Terminal.MAUI", "Governance\Governance.Presentation.Terminal.MAUI\Governance.Presentation.Terminal.MAUI.csproj", "{86503A2A-AC25-4CBD-8540-E9C4DFE6BA30}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Governance.Presentation.Terminal.MAUI", "Governance\Governance.Presentation.Terminal.MAUI\Governance.Presentation.Terminal.MAUI.csproj", "{86503A2A-AC25-4CBD-8540-E9C4DFE6BA30}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Governance.Presentation.Terminal.MAUI.UI.Default", "Governance\Governance.Presentation.Terminal.MAUI.UI.Default\Governance.Presentation.Terminal.MAUI.UI.Default.csproj", "{A55DA8EC-B19D-41CA-BFB4-7A05E1E1FE7A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Governance.Presentation.Terminal.MAUI.UI.Default", "Governance\Governance.Presentation.Terminal.MAUI.UI.Default\Governance.Presentation.Terminal.MAUI.UI.Default.csproj", "{A55DA8EC-B19D-41CA-BFB4-7A05E1E1FE7A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "CITMA_CMG", "CITMA_CMG", "{EA5538DC-AD46-4ECD-A25F-5D57550DAC53}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CITMACamaguey.Web.BackOffice", "UseCases\CITMACamaguey\CITMACamaguey.Web.BackOffice\CITMACamaguey.Web.BackOffice.csproj", "{C43968B0-C6AF-4A45-9EC8-9C56F9012698}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CITMACamaguey.Terminal", "UseCases\CITMACamaguey\CITMACamaguey.Terminal\CITMACamaguey.Terminal.csproj", "{C186D034-36F7-45B8-B700-1165484977B4}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -819,6 +825,16 @@ Global
 		{A55DA8EC-B19D-41CA-BFB4-7A05E1E1FE7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A55DA8EC-B19D-41CA-BFB4-7A05E1E1FE7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A55DA8EC-B19D-41CA-BFB4-7A05E1E1FE7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C43968B0-C6AF-4A45-9EC8-9C56F9012698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C43968B0-C6AF-4A45-9EC8-9C56F9012698}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C43968B0-C6AF-4A45-9EC8-9C56F9012698}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C43968B0-C6AF-4A45-9EC8-9C56F9012698}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C186D034-36F7-45B8-B700-1165484977B4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C186D034-36F7-45B8-B700-1165484977B4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C186D034-36F7-45B8-B700-1165484977B4}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{C186D034-36F7-45B8-B700-1165484977B4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C186D034-36F7-45B8-B700-1165484977B4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C186D034-36F7-45B8-B700-1165484977B4}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -954,6 +970,9 @@ Global
 		{1F92B294-D917-4751-929D-4FBAF321426F} = {CD3C0B2B-AC82-4553-AFCD-B46694AA9FA7}
 		{86503A2A-AC25-4CBD-8540-E9C4DFE6BA30} = {CD3C0B2B-AC82-4553-AFCD-B46694AA9FA7}
 		{A55DA8EC-B19D-41CA-BFB4-7A05E1E1FE7A} = {CD3C0B2B-AC82-4553-AFCD-B46694AA9FA7}
+		{EA5538DC-AD46-4ECD-A25F-5D57550DAC53} = {819B58F2-8E2A-4EDE-ADCF-52B55F2A2D7F}
+		{C43968B0-C6AF-4A45-9EC8-9C56F9012698} = {EA5538DC-AD46-4ECD-A25F-5D57550DAC53}
+		{C186D034-36F7-45B8-B700-1165484977B4} = {EA5538DC-AD46-4ECD-A25F-5D57550DAC53}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {747B719B-EA48-4793-98E6-ECCB62300F19}

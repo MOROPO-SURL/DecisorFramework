@@ -1,0 +1,22 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:uraniumui_material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
+    x:Class="MOROPO.CITMACamaguey.Decisor.Terminal.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="Resources/Styles/Values.xaml" />
+                <ResourceDictionary x:Name="appColors" Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary x:Name="appStyles" Source="Resources/Styles/Styles.xaml" />
+
+                <uraniumui_material:StyleResource ColorsOverride="{Reference appColors}" BasedOn="{Reference appStyles}" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <Style x:Key="LogoImageViewStyle" TargetType="Image">
+                <Setter Property="Source" Value="{AppThemeBinding Light='identity_color.png', Dark='identity_white.png'}" />
+            </Style>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

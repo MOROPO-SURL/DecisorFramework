@@ -1,0 +1,98 @@
+<Shell 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:decisorframework_domain_list_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_commercial_list_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_commercial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
+    x:Class="MOROPO.CITMACamaguey.Decisor.Terminal.UI.Shells.CommercialShell">
+    <Shell.FlyoutBehavior>
+        <OnIdiom Default="Flyout" Desktop="Locked" />
+    </Shell.FlyoutBehavior>
+    <Shell.FlyoutHeader>
+        <Grid HeightRequest="180">
+            <Image 
+                Aspect="AspectFill"
+                Source="commercial.jpg" />
+            <BoxView
+                Color="#A7000000" />
+            <Grid
+                Padding="16">
+                <Button
+                    HorizontalOptions="Start" VerticalOptions="Start"
+                    Text="&#xF2DE;"
+                    FontFamily="MaterialDesignIcons"
+                    FontSize="Medium"
+                    Padding="4"
+                    BackgroundColor="#60FFFFFF"
+                    Clicked="BackHomeButton_Clicked" />
+                <Label
+                    Text="Comercial"
+                    TextColor="White"
+                    HorizontalTextAlignment="Center" VerticalOptions="Center"
+                    FontSize="Large"
+                    FontAttributes="Bold" />
+            </Grid>
+        </Grid>
+    </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Gestión" />
+    <FlyoutItem Title="Contactos">
+        <FlyoutItem.Icon>
+            <FontImageSource
+             FontFamily="MaterialDesignIcons"
+             Glyph="&#xF5D2;"
+             Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+             Title="Organizaciones"
+             ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationContactsManagePage}" />
+        <ShellContent
+            Title="Personas"
+            ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Proveedores">
+        <FlyoutItem.Icon>
+            <FontImageSource
+             FontFamily="MaterialDesignIcons"
+             Glyph="&#xF6D8;"
+             Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+             Title="Jurídicos"
+             ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:LegalProvidersManagePage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:NaturalProvidersManagePage}" />
+    </FlyoutItem>
+    <MenuFlyoutItem Text="Configuración" />
+    <ShellContent
+        Title="Tipos de Negocio Legal"
+        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:LegalBusinessKindsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF070;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tipos de Negocio Personal"
+        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:NaturalBusinessKindsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF00F5;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Términos de Pago"
+        ContentTemplate="{DataTemplate decisorframework_commercial_list_pages:PaymentTermsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0F0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+</Shell>
