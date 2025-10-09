@@ -40,13 +40,13 @@
     <FlyoutItem Title="Plantilla">
         <FlyoutItem.Icon>
             <FontImageSource
-             FontFamily="MaterialDesignIcons"
-             Glyph="&#xF002C;"
-             Color="{AppThemeBinding Light=Black, Dark=White}" />
+                 FontFamily="MaterialDesignIcons"
+                 Glyph="&#xF002C;"
+                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
             Title="Personal"
-            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsRawManagePage}" />
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsManagePage}" />
         <ShellContent
              Title="Estructuras"
              ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}" />

@@ -11,7 +11,7 @@
         <Grid HeightRequest="180">
             <Image 
                 Aspect="AspectFill"
-                Source="elaboration.jpg" />
+                Source="production.jpg" />
             <BoxView
                 BackgroundColor="Black"
                 Opacity="0.5" />

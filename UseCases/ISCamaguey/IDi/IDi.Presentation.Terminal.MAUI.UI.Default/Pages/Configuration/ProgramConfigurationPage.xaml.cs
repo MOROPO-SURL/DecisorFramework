@@ -142,12 +142,7 @@ public partial class ProgramConfigurationPage : Framework.Decisor.Core.Presentat
 
                 ConcreteBindingContext.ExpectResults.Remove(target);
 
-                var index = 1;
-
-                foreach (var item in ConcreteBindingContext.ExpectResults)
-                {
-                    item.Index = index++;
-                }
+                // TODO Order by index !!!
 
                 hasChangesFlag = true;
             });
@@ -156,7 +151,7 @@ public partial class ProgramConfigurationPage : Framework.Decisor.Core.Presentat
 
     private void ProgramExpectResultCreateSuccess_Callback(Interop.API.Common.Models.Display.ProgramExpectResultDisplayModel model)
     {
-        model.Index = ConcreteBindingContext.ExpectResults.Count + 1;
+        // TODO Order by index !!!
 
         incomingProgramExpectResults.Add(new Interop.API.Common.Models.Input.ProgramExpectResultInputModel
         {
