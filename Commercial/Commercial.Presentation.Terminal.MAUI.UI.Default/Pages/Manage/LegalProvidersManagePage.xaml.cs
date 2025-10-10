@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class LegalProvidersManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<LegalProviderDisplayModel, Models.Page.Manage.LegalProvidersManagePageModel, Models.Page.Configuration.LegalProviderConfigurationPageModel, Configuration.LegalProviderConfigurationPage, Detail.LegalProviderDetailPage>
+public partial class LegalProvidersManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<LegalProviderDisplayModel, Models.Page.Manage.LegalProvidersManagePageModel, Models.Page.Configuration.LegalProviderConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 144;
 
@@ -17,7 +17,15 @@ public partial class LegalProvidersManagePage : Core.Presentation.Terminal.MAUI.
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 420; }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalProviderViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalProviderCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.LegalProviderEditorPermission;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
@@ -29,17 +37,6 @@ public partial class LegalProvidersManagePage : Core.Presentation.Terminal.MAUI.
         var apiConnectClient = new Interop.API.Connect.Clients.LegalProvidersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.LegalProviderConfigurationPageModel> GetConfigurationPageModelAsync(LegalProviderDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.LegalProviderConfigurationPageModel(model);
-
-        var apiConnectClient = new Interop.API.Connect.Clients.PaymentTermsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-        result.AvailablePaymentTerms = await apiConnectClient.GetEnabledAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(LegalProviderDisplayModel target, int discriminator)

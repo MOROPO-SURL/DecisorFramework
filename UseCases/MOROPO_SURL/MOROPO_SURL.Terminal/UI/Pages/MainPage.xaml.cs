@@ -79,7 +79,7 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
 
     private void GovernanceSectionCardFrameTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        //Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.LeasingShell();
+        Microsoft.Maui.Controls.Application.Current.MainPage = new Shells.GovernanceShell();
     }
 
     private void SupervisionSectionCardFrameTapGEstureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)

@@ -1,4 +1,8 @@
-﻿namespace MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Input
+﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Input
 {
     public class DecisionMakingGroupInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.DecisionMakingGroup, System.Guid>
     {
@@ -15,9 +19,13 @@
 
         public int Priority { get; set; }
 
+        public List<EmployeeDisplayModel> Members { get; set; } = new List<EmployeeDisplayModel>();
+
+        public List<PersonContactDisplayModel> Collaborators { get; set; } = new List<PersonContactDisplayModel>();
+
         public Persistence.Entities.DecisionMakingGroup Export()
         {
-            var entity = new Persistence.Entities.DecisionMakingGroup { Id = System.Guid.NewGuid(), Enabled = true };
+            var entity = new Persistence.Entities.DecisionMakingGroup { Id = Id, Enabled = true };
 
             Mergue(entity);
 
@@ -46,6 +54,22 @@
                 entity.Leader = null;
                 entity.LeaderId = LeaderId;
             }
+
+            entity.EmployeeBridges.Clear();
+
+            entity.EmployeeBridges = Members.Select(model => new Persistence.Entities.DecisionMakingGroupEmployeeBridge
+            {
+                ProwId = entity.Id,
+                SternId = model.Id
+            }).ToList();
+
+            entity.ContactBridges.Clear();
+
+            entity.ContactBridges = Collaborators.Select(model => new Persistence.Entities.DecisionMakingGroupContactBridge
+            {
+                ProwId = entity.Id,
+                SternId = model.Id
+            }).ToList();
         }
     }
 }

@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class WarehousesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.WarehouseDisplayModel, Models.Page.Manage.WarehousesManagePageModel, Models.Page.Configuration.WarehouseConfigurationPageModel, Configuration.WarehouseConfigurationPage, Detail.WarehouseDetailPage>
+public partial class WarehousesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.WarehouseDisplayModel, Models.Page.Manage.WarehousesManagePageModel, Models.Page.Configuration.WarehouseConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 136;
 
@@ -28,11 +28,6 @@ public partial class WarehousesManagePage : Core.Presentation.Terminal.MAUI.UI.P
         var apiConnectClient = new Interop.API.Connect.Clients.WarehousesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.WarehouseConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.WarehouseDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.WarehouseConfigurationPageModel(model));
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.WarehouseDisplayModel target, int discriminator)

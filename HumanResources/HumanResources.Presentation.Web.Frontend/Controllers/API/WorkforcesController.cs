@@ -12,9 +12,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
     public class WorkforcesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<Workforce, System.Guid, WorkforceInputModel, WorkforceDisplayModel, WorkforceFilterModel>
     {
         private readonly IEntityRepository<Vacant, System.Guid> vacantRepository;
-        private readonly IEntityRepository<Domain.Persistence.Entities.OrganizationalUnity, System.Guid> organizationalUnityRepository;
+        private readonly IEntityRepository<WorkforceOrganizationalUnity, System.Guid> organizationalUnityRepository;
 
-        public WorkforcesController(IEntityRepository<Domain.Persistence.Entities.OrganizationalUnity, System.Guid> organizationalUnityRepository, IEntityRepository<Vacant, System.Guid> vacantRepository, IEntityRepository<Workforce, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<WorkforcesController> localizer, Microsoft.Extensions.Logging.ILogger<WorkforcesController> logger)
+        public WorkforcesController(IEntityRepository<WorkforceOrganizationalUnity, System.Guid> organizationalUnityRepository, IEntityRepository<Vacant, System.Guid> vacantRepository, IEntityRepository<Workforce, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<WorkforcesController> localizer, Microsoft.Extensions.Logging.ILogger<WorkforcesController> logger)
             : base(repository, localizer, logger)
         {
             this.vacantRepository = vacantRepository;
@@ -40,29 +40,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         {
             var result = base.EntityToDisplayModel(entity);
 
-            var organizationalUnityModels = new System.Collections.Generic.List<OrganizationalUnityDisplayModel>();
-
-            foreach (var bridge in entity.OrganizationalUnityBridges)
-            {
-                var model = new OrganizationalUnityDisplayModel();
-
-                model.Import(bridge.Stern);
-
-                model.Vacants = vacantRepository.FindBy(_entity => _entity.WorkforceId == entity.Id && _entity.OrganizationUnityId == bridge.SternId).OrderBy(_entity => _entity.Priority).ToArray().Select(_entity =>
-                {
-                    var _model = new VacantDisplayModel();
-
-                    _model.Import(_entity);
-
-                    return _model;
-                }).ToArray();
-
-                model.Children = GetOrganizationalUnityChildren(entity, bridge.Stern);
-
-                organizationalUnityModels.Add(model);
-            }
-
-            result.OrganizationalUnities = organizationalUnityModels.OrderBy(model => model.Priority).ToArray();
+            result.OrganizationalUnities = GetOrganizationalUnityChildren(entity.OrganizationalUnities.Where(_entity => _entity.ParentId == null).OrderBy(_entity => _entity.OrganizationalUnity.Priority).ToArray());
 
             return result;
         }
@@ -71,19 +49,128 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         {
             base.PreCreate(entity, model);
 
-            foreach (var _model in model.IncomingVacants)
+            foreach (var _model in model.IncomingOrganizationalUnities)
             {
                 var _entity = _model.Export();
 
                 _entity.WorkforceId = entity.Id;
 
-                vacantRepository.Add(_entity, User.Identity.Name, false);
+                organizationalUnityRepository.Add(_entity, User.Identity.Name, false);
+
+                PreCreate(_entity, _model);
             }
+        }
+
+        protected override void PostCreate(Workforce entity, WorkforceInputModel model)
+        {
+            base.PostCreate(entity, model);
+
+            foreach (var _model in model.IncomingOrganizationalUnities)
+            {
+                PostCreate(organizationalUnityRepository.Get(_model.Id), _model);
+            }
+
+            Repository.Update(entity, User.Identity.Name);
         }
 
         protected override void PreEdit(Workforce entity, WorkforceInputModel model)
         {
             base.PreEdit(entity, model);
+
+            foreach (var _model in model.OutgoingOrganizationalUnities)
+            {
+                organizationalUnityRepository.Delete(new WorkforceOrganizationalUnity { Id = _model.Id }, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingOrganizationalUnities)
+            {
+                var _entity = _model.Export();
+
+                _entity.WorkforceId = entity.Id;
+
+                organizationalUnityRepository.Add(_entity, User.Identity.Name, false);
+
+                PreCreate(_entity, _model);
+            }
+        }
+
+        protected override void PostEdit(Workforce entity, WorkforceInputModel model)
+        {
+            base.PostEdit(entity, model);
+
+            foreach (var _model in model.EditionOrganizationalUnities)
+            {
+                PostEdit(organizationalUnityRepository.Get(_model.Id), _model);
+            }
+
+            foreach (var _model in model.IncomingOrganizationalUnities)
+            {
+                PostCreate(organizationalUnityRepository.Get(_model.Id), _model);
+            }
+
+            Repository.Update(entity, User.Identity.Name);
+        }
+
+        private void PreCreate(WorkforceOrganizationalUnity entity, WorkforceOrganizationalUnityInputModel model)
+        {
+            foreach (var _model in model.Children)
+            {
+                var _entity = _model.Export();
+
+                _entity.ParentId = entity.Id;
+                _entity.WorkforceId = entity.WorkforceId;
+
+                organizationalUnityRepository.Add(_entity, User.Identity.Name, false);
+
+                PreCreate(_entity, _model);
+            }
+        }
+
+        private void PostCreate(WorkforceOrganizationalUnity entity, WorkforceOrganizationalUnityInputModel model)
+        {
+            if (model.ChiefVacant != null)
+            {
+                entity.ChiefVacant = model.ChiefVacant.Export();
+                entity.ChiefVacantId = entity.ChiefVacant.Id;
+                entity.ChiefVacant.WorkforceOrganizationalUnityId = entity.Id;
+
+                vacantRepository.Add(entity.ChiefVacant, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingVacants)
+            {
+                var _entity = _model.Export();
+
+                _entity.WorkforceOrganizationalUnityId = entity.Id;
+
+                vacantRepository.Add(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.Children)
+            {
+                PostCreate(organizationalUnityRepository.Get(_model.Id), _model);
+            }
+        }
+
+        private void PostEdit(WorkforceOrganizationalUnity entity, WorkforceOrganizationalUnityInputModel model)
+        {
+            if (model.ChiefVacant != null)
+            {
+                if (entity.ChiefVacant != null)
+                {
+                    model.ChiefVacant.Mergue(entity.ChiefVacant);
+
+                    vacantRepository.Update(entity.ChiefVacant, User.Identity.Name, false);
+                }
+                else
+                {
+                    entity.ChiefVacant = model.ChiefVacant.Export();
+                    entity.ChiefVacantId = entity.ChiefVacant.Id;
+                    entity.ChiefVacant.WorkforceOrganizationalUnityId = entity.Id;
+
+                    vacantRepository.Add(entity.ChiefVacant, User.Identity.Name, false);
+                }
+            }
 
             foreach (var _model in model.OutgoingVacants)
             {
@@ -92,9 +179,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
             foreach (var _model in model.EditionVacants)
             {
-                var _entity = _model.Export();
+                var _entity = vacantRepository.Get(_model.Id);
 
-                _entity.WorkforceId = entity.Id;
+                _model.Mergue(_entity);
 
                 vacantRepository.Update(_entity, User.Identity.Name, false);
             }
@@ -103,38 +190,58 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
             {
                 var _entity = _model.Export();
 
-                _entity.WorkforceId = entity.Id;
+                _entity.WorkforceOrganizationalUnityId = entity.Id;
 
                 vacantRepository.Add(_entity, User.Identity.Name, false);
             }
+
+            foreach (var _model in model.Children)
+            {
+                PostEdit(organizationalUnityRepository.Get(_model.Id), _model);
+            }
         }
 
-        private OrganizationalUnityDisplayModel[] GetOrganizationalUnityChildren(Workforce workforce, Domain.Persistence.Entities.OrganizationalUnity entity)
+        private WorkforceOrganizationalUnityDisplayModel[] GetOrganizationalUnityChildren(WorkforceOrganizationalUnity[] organizationalUnities)
         {
-            var result = new System.Collections.Generic.List<OrganizationalUnityDisplayModel>();
+            var result = new System.Collections.Generic.List<WorkforceOrganizationalUnityDisplayModel>();
 
-            var children = organizationalUnityRepository.FindBy(_entity => !_entity.Archived && _entity.ParentId == entity.Id).OrderBy(_entity => _entity.Priority).ToArray();
-
-            foreach (var child in children)
+            foreach (var entity in organizationalUnities)
             {
-                var model = new OrganizationalUnityDisplayModel();
-                model.Import(child);
+                var model = new WorkforceOrganizationalUnityDisplayModel();
 
-                model.Vacants = vacantRepository.FindBy(_entity => _entity.WorkforceId == workforce.Id && _entity.OrganizationUnityId == child.Id).OrderBy(_entity => _entity.Priority).ToArray().Select(_entity =>
+                model.Import(entity);
+
+                if (entity.ChiefVacant != null)
                 {
-                    var _model = new VacantDisplayModel();
+                    model.Vacants = vacantRepository.FindBy(_entity => _entity.WorkforceOrganizationalUnityId == entity.Id && _entity.Id != entity.ChiefVacant.Id).OrderBy(_entity => _entity.Priority).ToArray().Select(_entity =>
+                    {
+                        var _model = new VacantDisplayModel();
 
-                    _model.Import(_entity);
+                        _model.Import(_entity);
 
-                    return _model;
-                }).ToArray();
+                        return _model;
+                    }).ToArray();
+                }
+                else
+                {
+                    model.Vacants = vacantRepository.FindBy(_entity => _entity.WorkforceOrganizationalUnityId == entity.Id).OrderBy(_entity => _entity.Priority).ToArray().Select(_entity =>
+                    {
+                        var _model = new VacantDisplayModel();
 
-                model.Children = GetOrganizationalUnityChildren(workforce, child);
+                        _model.Import(_entity);
+
+                        return _model;
+                    }).ToArray();
+                }
+
+                var children = organizationalUnityRepository.FindBy(_entity => _entity.ParentId == entity.Id).OrderBy(_entity => _entity.OrganizationalUnity.Priority).ToArray();
+
+                model.Children = GetOrganizationalUnityChildren(children);
 
                 result.Add(model);
             }
 
-            return result.ToArray();
+            return [.. result.OrderBy(model => model.OrganizationalUnity.Priority)];
         }
     }
 }

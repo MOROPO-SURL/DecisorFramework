@@ -42,7 +42,7 @@
                                 Text="{Binding Kind.Name}" />
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Unidad Administrativa" />
+                                Text="Entidad Administrativa" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Structure.Identity.Name}" />

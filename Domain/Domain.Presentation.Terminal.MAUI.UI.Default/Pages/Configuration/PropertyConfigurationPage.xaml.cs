@@ -14,8 +14,11 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
 
     private readonly List<ImageInputModel> incomingImages = [];
     private readonly List<ImageDisplayModel> outgoingImages = [];
+    private readonly List<Interop.API.Common.Models.Input.PropertySpaceInputModel> editionSpaces = [];
+    private readonly List<Interop.API.Common.Models.Input.PropertySpaceInputModel> incomingSpaces = [];
+    private readonly List<PropertySpaceDisplayModel> outgoingSpaces = [];
 
-    public PropertyConfigurationPage(System.Action<PropertyDisplayModel> successAction, Models.Page.Configuration.PropertyConfigurationPageModel model) : base(successAction, model)
+    public PropertyConfigurationPage(System.Action<PropertyDisplayModel> successAction, Models.Page.Configuration.PropertyConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.PropertyConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -69,7 +72,6 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
             StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
             Reference = ConcreteBindingContext.Reference,
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
-            Area = ConcreteBindingContext.Area,
             Description = ConcreteBindingContext.Description,
             PostalContact = new PostalContactItemInputModel
             {
@@ -80,7 +82,8 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
                 Latitude = ConcreteBindingContext.PostalContact.Latitude,
                 Longitude = ConcreteBindingContext.PostalContact.Longitude
             },
-            IncomingImageItems = incomingImages
+            IncomingImageItems = incomingImages,
+            IncomingSpaces = incomingSpaces
         };
 
         if (featureImagePickedModel != null)
@@ -108,7 +111,6 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
             StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
             Reference = ConcreteBindingContext.Reference,
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
-            Area = ConcreteBindingContext.Area,
             Description = ConcreteBindingContext.Description,
             PostalContact = new PostalContactItemInputModel
             {
@@ -120,7 +122,10 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
                 Longitude = ConcreteBindingContext.PostalContact.Longitude
             },
             IncomingImageItems = incomingImages,
-            OutgoingImagetItems = outgoingImages
+            OutgoingImagetItems = outgoingImages,
+            IncomingSpaces = incomingSpaces,
+            EditionSpaces = editionSpaces,
+            OutgoingSpaces = outgoingSpaces
         };
 
         if (featureImagePickedModel != null)
@@ -244,6 +249,161 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
                 hasChangesFlag = true;
             });
         });
+    }
+
+    private void SpaceAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new PropertySpaceConfigurationPage(SpaceCreateSuccess_Callback, new Models.Page.Configuration.PropertySpaceConfigurationPageModel(null)));
+    }
+
+    private void SpaceEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.PropertySpaceViewModel;
+
+        this.NavigationPushPageAsync(new PropertySpaceConfigurationPage(SpaceEditSuccess_Callback, new Models.Page.Configuration.PropertySpaceConfigurationPageModel(target)));
+    }
+
+    private void SpaceRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este espacio?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.PropertySpaceViewModel;
+
+                var handled = false;
+
+                foreach (var item in incomingSpaces)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingSpaces.Remove(incomingSpaces.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionSpaces)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionSpaces.Remove(editionSpaces.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingSpaces.Add(new PropertySpaceDisplayModel
+                    {
+                        Id = target.Id,
+                        Name = target.Name,
+                        Area = target.Area,
+                        Description = target.Description
+                    });
+                }
+
+                ConcreteBindingContext.Spaces.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void SpaceCreateSuccess_Callback(Interop.API.Common.Models.Input.PropertySpaceInputModel model)
+    {
+        incomingSpaces.Add(model);
+
+        ConcreteBindingContext.Spaces.Add(new Models.View.PropertySpaceViewModel
+        {
+            Id = model.Id,
+            Name = model.Name,
+            Description = model.Description,
+            Area = model.Area,
+            InputFeatureImage = model.FeatureImage
+        });
+
+        hasChangesFlag = true;
+    }
+
+    private void SpaceEditSuccess_Callback(Interop.API.Common.Models.Input.PropertySpaceInputModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingSpaces)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.Name = model.Name;
+            item.Description = model.Description;
+            item.Area = model.Area;
+
+            if (model.FeatureImage != null)
+            {
+                item.FeatureImage = model.FeatureImage;
+            }
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionSpaces)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.Name = model.Name;
+                item.Description = model.Description;
+                item.Area = model.Area;
+
+                if (model.FeatureImage != null)
+                {
+                    item.FeatureImage = model.FeatureImage;
+                }
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionSpaces.Add(model);
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.Spaces)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            var oldTarget = ConcreteBindingContext.Spaces[index];
+
+            ConcreteBindingContext.Spaces[index] = new Models.View.PropertySpaceViewModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description,
+                Area = model.Area,
+                InputFeatureImage = model.FeatureImage ?? oldTarget.InputFeatureImage,
+                CurrentFeatureImage = oldTarget.CurrentFeatureImage
+            };
+
+            break;
+        }
+
+        hasChangesFlag = true;
     }
 
     private void FeatureImagePickSuccess_Callback(ImageInputModel model)

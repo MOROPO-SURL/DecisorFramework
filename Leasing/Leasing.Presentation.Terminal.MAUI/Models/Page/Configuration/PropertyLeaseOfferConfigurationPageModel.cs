@@ -1,43 +1,49 @@
-﻿using CommunityToolkit.Maui.Core.Extensions;
-using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
+﻿using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class PropertyLeaseOfferConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PropertyLeaseOfferDisplayModel>
     {
-        private int priority;
-        private System.DateTime? openAt;
-        private System.DateTime? closedAt;
+        public static string PropousalValidableProperty => nameof(Propousal);
+        public static string AgreementValidableProperty => nameof(Agreement);
+        public static string DescriptionValidableProperty => nameof(Description);
+
+        private int priority = 1;
+        private System.DateTime openAt = System.DateTime.Now;
+        private System.DateTime closedAt = System.DateTime.Now;
+        private bool hasClosetAtDate;
         private string description;
-        private Domain.Interop.API.Common.Models.Display.PropertyDisplayModel vehicle;
+        private PropertyLeasePropousalDisplayModel propousal;
+        private Governance.Interop.API.Common.Models.Display.AgreementDisplayModel agreement;
 
         public PropertyLeaseOfferConfigurationPageModel(PropertyLeaseOfferDisplayModel model) : base(model)
         {
             if (model == null) return;
 
+            Id = model.Id;
             Priority = model.Priority;
             OpenAt = model.OpenAt;
-            ClosedAt = model.ClosedAt;
+            ClosedAt = model.ClosedAt ?? System.DateTime.Now;
+            hasClosetAtDate = model.ClosedAt != null;
             Description = model.Description;
-            Property = model.Property;
-            OrganizationPostulations = model.OrganizationPostulations.ToObservableCollection();
-            PersonPostulations = model.PersonPostulations.ToObservableCollection();
+            Propousal = model.Propousal;
+            Agreement = model.Agreement;
         }
 
         public System.Guid Id { get; set; }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public System.DateTime? OpenAt { get => openAt; set => SetProperty(ref openAt, value); }
+        public System.DateTime OpenAt { get => openAt; set => SetProperty(ref openAt, value); }
 
-        public System.DateTime? ClosedAt { get => closedAt; set => SetProperty(ref closedAt, value); }
+        public System.DateTime ClosedAt { get => closedAt; set => SetProperty(ref closedAt, value); }
+
+        public bool HasClosetAtDate { get => hasClosetAtDate; set => SetProperty(ref hasClosetAtDate, value); }
 
         public string Description { get => description; set => SetProperty(ref description, value); }
 
-        public Domain.Interop.API.Common.Models.Display.PropertyDisplayModel Property { get => vehicle; set => SetProperty(ref vehicle, value); }
+        public PropertyLeasePropousalDisplayModel Propousal { get => propousal; set => SetProperty(ref propousal, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<CommonLeaseOrganizationPostulationDisplayModel> OrganizationPostulations { get; set; } = [];
-
-        public System.Collections.ObjectModel.ObservableCollection<CommonLeasePersonPostulationDisplayModel> PersonPostulations { get; set; } = [];
+        public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get => agreement; set => SetProperty(ref agreement, value); }
     }
 }

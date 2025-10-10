@@ -17,8 +17,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.
 
         public string StateIdentificationCode { get; set; }
 
-        public PersonContactDisplayModel Representative { get; set; }
-
         public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContact { get; set; }
 
         public PaymentTermDisplayModel DefaultPaymentTerm { get; set; }
@@ -40,13 +38,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.
                 Contact = new OrganizationContactDisplayModel();
 
                 Contact.Import(entity.Contact);
-            }
-
-            if (entity.Contact.Representative != null)
-            {
-                Representative = new PersonContactDisplayModel();
-
-                Representative.Import(entity.Contact.Representative);
             }
 
             if (entity.Contact.MainPostalContact != null)

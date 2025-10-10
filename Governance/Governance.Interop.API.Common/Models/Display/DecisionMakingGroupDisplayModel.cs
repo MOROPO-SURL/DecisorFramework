@@ -10,11 +10,17 @@
 
         public string Name { get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Leader { get; set; }
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel Leader { get; set; }
 
         public string Description { get; set; }
 
         public int Priority { get; set; }
+
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel[] Members { get; set; }
+
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel[] Collaborators { get; set; }
+
+        public string CanonicalName => $"{Structure.Identity.Name}, {Name}";
 
         public void Import(Persistence.Entities.DecisionMakingGroup entity)
         {
@@ -33,7 +39,7 @@
 
             if (entity.Leader != null)
             {
-                Leader = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Leader = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
 
                 Leader.Import(entity.Leader);
             }

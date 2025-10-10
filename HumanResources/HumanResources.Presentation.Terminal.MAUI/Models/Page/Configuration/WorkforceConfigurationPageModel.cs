@@ -1,5 +1,4 @@
 ﻿using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Extensions;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -18,36 +17,11 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
                 At = model.At;
                 Priority = model.Priority;
 
-                foreach (var item in model.OrganizationalUnities)
+                var result = model.OrganizationalUnities.ToOrganizationalUnityViewModelChildren();
+
+                foreach (var _item in result)
                 {
-                    var result = new View.WorkforceConfigurationOrganizationalUnityViewModel
-                    {
-                        Id = item.Id,
-                        Name = item.Name,
-                        Enabled = item.Enabled,
-                        Priority = item.Priority,
-                        Reference = item.Reference
-                    };
-
-                    if (item.Children != null)
-                    {
-                        result.Children = item.ToOrganizationalUnityViewModelChildren();
-                    }
-
-                    if (item.Vacants != null)
-                    {
-                        result.Vacants = new System.Collections.ObjectModel.ObservableCollection<Models.View.WorkforceConfigurationVacantViewModel>(item.Vacants.Select(__model => new View.WorkforceConfigurationVacantViewModel
-                        {
-                            Id = __model.Id,
-                            Priority = __model.Priority,
-                            NamingResolutionRequired = __model.NamingResolutionRequired,
-                            WorkPosition = __model.WorkPosition,
-                            SalaryStandard = __model.SalaryStandard,
-                            OrganizationUnity = result
-                        }));
-                    }
-
-                    OrganizationalUnities.Add(result);
+                    OrganizationalUnities.Add(_item);
                 }
             }
         }

@@ -3,7 +3,7 @@
     public class VacantConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<View.WorkforceConfigurationVacantViewModel>
     {
         private int priority = 1;
-        private bool namingResolutionRequired;
+        private Persistence.Enumerations.VacantOcupationMode ocupationMode;
         private Interop.API.Common.Models.Display.WorkPositionDisplayModel workPosition;
         private Interop.API.Common.Models.Display.SalaryStandardDisplayModel salaryStandard;
 
@@ -13,10 +13,10 @@
             {
                 Id = model.Id;
                 OrganizationUnity = model.OrganizationUnity;
-                Priority = model.Priority;
-                NamingResolutionRequired = model.NamingResolutionRequired;                
-                WorkPosition = model.WorkPosition;
-                SalaryStandard = model.SalaryStandard;
+                priority = model.Priority;
+                ocupationMode = model.OcupationMode;                
+                workPosition = model.WorkPosition;
+                salaryStandard = model.SalaryStandard;
             }
         }
 
@@ -31,7 +31,7 @@
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public bool NamingResolutionRequired { get => namingResolutionRequired; set => SetProperty(ref namingResolutionRequired, value); }
+        public Persistence.Enumerations.VacantOcupationMode OcupationMode { get => ocupationMode; set => SetProperty(ref ocupationMode, value); }
 
         public Interop.API.Common.Models.Display.WorkPositionDisplayModel WorkPosition { get => workPosition; set => SetProperty(ref workPosition, value); }
 
@@ -40,5 +40,7 @@
         public Interop.API.Common.Models.Display.WorkPositionDisplayModel[] AvailableWorkPositions { get; set; }
 
         public Interop.API.Common.Models.Display.SalaryStandardDisplayModel[] AvailableSalaryStandards { get; set; }
+
+        public Persistence.Enumerations.VacantOcupationMode[] AvailableVacantOcupationModes => [Persistence.Enumerations.VacantOcupationMode.Admision, Persistence.Enumerations.VacantOcupationMode.Naming, Persistence.Enumerations.VacantOcupationMode.Hybrid];
     }
 }

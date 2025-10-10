@@ -1,12 +1,15 @@
 ﻿namespace MOROPO.Framework.Decisor.Legal.Persistence.Entities.Contract
 {
-    [System.ComponentModel.DataAnnotations.Schema.NotMapped]
-    public abstract class AbstractResolution : Guama.Core.Persistence.Entities.Contract.IArchivableEntity<long>
+    public abstract class AbstractResolution : Guama.Core.Persistence.Entities.Contract.IArchivableEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
-        public long Id { get; set; }
+        public System.Guid Id { get; set; }
 
         public bool Archived { get; set; }
+
+        public int Index { get; set; }
+
+        public int Year { get; set; }
 
         public System.DateTime At { get; set;}
 

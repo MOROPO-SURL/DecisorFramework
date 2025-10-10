@@ -3,7 +3,7 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;
 
-public partial class VehicleEngineKindsListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.VehicleEngineKindDisplayModel, Models.Page.List.VehicleEngineKindsListPageModel, Detail.VehicleEngineKindDetailPage>
+public partial class VehicleEngineKindsListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.VehicleEngineKindDisplayModel, Models.Page.List.VehicleEngineKindsListPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 128;
 

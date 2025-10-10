@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class SalaryStandardsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.SalaryStandardDisplayModel, Models.Page.Manage.SalaryStandardsManagePageModel, Models.Page.Configuration.SalaryStandardConfigurationPageModel, Configuration.SalaryStandardConfigurationPage, Detail.SalaryStandardDetailPage>
+public partial class SalaryStandardsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.SalaryStandardDisplayModel, Models.Page.Manage.SalaryStandardsManagePageModel, Models.Page.Configuration.SalaryStandardConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
 
@@ -28,11 +28,6 @@ public partial class SalaryStandardsManagePage : Core.Presentation.Terminal.MAUI
         var apiConnectClient = new Interop.API.Connect.Clients.SalaryStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync();
-    }
-
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.SalaryStandardConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.SalaryStandardDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.SalaryStandardConfigurationPageModel(model));
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.SalaryStandardDisplayModel target, int discriminator)

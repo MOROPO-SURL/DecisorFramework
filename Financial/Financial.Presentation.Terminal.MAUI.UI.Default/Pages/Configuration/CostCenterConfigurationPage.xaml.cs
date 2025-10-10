@@ -4,9 +4,9 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class CostCenterConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.CostCenterDisplayModel>
+public partial class CostCenterConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.CostCenterDisplayModel, Interop.API.Common.Models.Display.CostCenterDisplayModel, Models.Page.Configuration.CostCenterConfigurationPageModel>
 {
-    public CostCenterConfigurationPage(System.Action<Interop.API.Common.Models.Display.CostCenterDisplayModel> successAction, Models.Page.Configuration.CostCenterConfigurationPageModel model) : base(successAction, model)
+    public CostCenterConfigurationPage(System.Action<Interop.API.Common.Models.Display.CostCenterDisplayModel> successAction, Models.Page.Configuration.CostCenterConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.CostCenterConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -31,16 +31,14 @@ public partial class CostCenterConfigurationPage : Core.Presentation.Terminal.MA
     {
         var apiConnectClient = new Interop.API.Connect.Clients.CostCentersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.CostCenterConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.CostCenterInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority,
-            DefaultBankAccountId = concreteBindingContext.DefaultBankAccount.Id,
-            StructureId = concreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority,
+            DefaultBankAccountId = ConcreteBindingContext.DefaultBankAccount.Id,
+            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -52,16 +50,14 @@ public partial class CostCenterConfigurationPage : Core.Presentation.Terminal.MA
     {
         var apiConnectClient = new Interop.API.Connect.Clients.CostCentersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.CostCenterConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.CostCenterInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority,
-            DefaultBankAccountId = concreteBindingContext.DefaultBankAccount.Id,
-            StructureId = concreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority,
+            DefaultBankAccountId = ConcreteBindingContext.DefaultBankAccount.Id,
+            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id
         };
 
         await apiConnectClient.EditAsync(model);
@@ -69,14 +65,24 @@ public partial class CostCenterConfigurationPage : Core.Presentation.Terminal.MA
         return await apiConnectClient.GetAsync(model.Id);
     }
 
-    private void DefaultBankAccountPickButton_Clicked(object sender, System.EventArgs e)
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.InternalBankAccountPickPage(DefaultBankAccountPickComplete_Callback)));
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
     {
         hasChangesFlag = true;
+    }
+
+    private void DefaultBankAccountPickButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.InternalBankAccountPickPage(DefaultBankAccountPickComplete_Callback, false)));
     }
 
     private void DefaultBankAccountPickComplete_Callback(Interop.API.Common.Models.Display.BankAccountDisplayModel model)

@@ -3,9 +3,9 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class BankBranchConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.BankBranchDisplayModel>
+public partial class BankBranchConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.BankBranchDisplayModel, Interop.API.Common.Models.Display.BankBranchDisplayModel, Models.Page.Configuration.BankBranchConfigurationPageModel>
 {
-    public BankBranchConfigurationPage(System.Action<Interop.API.Common.Models.Display.BankBranchDisplayModel> successAction, Models.Page.Configuration.BankBranchConfigurationPageModel model) : base(successAction, model)
+    public BankBranchConfigurationPage(System.Action<Interop.API.Common.Models.Display.BankBranchDisplayModel> successAction, Models.Page.Configuration.BankBranchConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.BankBranchConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -31,14 +31,12 @@ public partial class BankBranchConfigurationPage : Core.Presentation.Terminal.MA
     {
         var apiConnectClient = new Interop.API.Connect.Clients.BankBranchesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.BankBranchConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.BankBranchInputModel
         {
             Id = System.Guid.NewGuid(),
-            Number = concreteBindingContext.Number,
-            Priority = concreteBindingContext.Priority,
-            AgencyId = concreteBindingContext.AvailableAgencies[AgencyPicker.SelectedIndex].Id
+            Number = ConcreteBindingContext.Number,
+            Priority = ConcreteBindingContext.Priority,
+            AgencyId = ConcreteBindingContext.AvailableAgencies[AgencyPicker.SelectedIndex].Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -50,19 +48,27 @@ public partial class BankBranchConfigurationPage : Core.Presentation.Terminal.MA
     {
         var apiConnectClient = new Interop.API.Connect.Clients.BankBranchesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.BankBranchConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.BankBranchInputModel
         {
-            Id = concreteBindingContext.Id,
-            Number = concreteBindingContext.Number,
-            Priority = concreteBindingContext.Priority,
-            AgencyId = concreteBindingContext.AvailableAgencies[AgencyPicker.SelectedIndex].Id
+            Id = ConcreteBindingContext.Id,
+            Number = ConcreteBindingContext.Number,
+            Priority = ConcreteBindingContext.Priority,
+            AgencyId = ConcreteBindingContext.AvailableAgencies[AgencyPicker.SelectedIndex].Id
         };
 
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)

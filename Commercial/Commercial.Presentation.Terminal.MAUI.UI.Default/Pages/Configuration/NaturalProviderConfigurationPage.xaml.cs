@@ -21,7 +21,7 @@ public partial class NaturalProviderConfigurationPage : Core.Presentation.Termin
     private readonly List<DocumentInputModel> incomingDocuments = [];
     private readonly List<DocumentDisplayModel> outgoingDocuments = [];
 
-    public NaturalProviderConfigurationPage(System.Action<Interop.API.Common.Models.Display.NaturalProviderDisplayModel> successAction, Models.Page.Configuration.NaturalProviderConfigurationPageModel model) : base(successAction, model)
+    public NaturalProviderConfigurationPage(System.Action<Interop.API.Common.Models.Display.NaturalProviderDisplayModel> successAction, Models.Page.Configuration.NaturalProviderConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
 

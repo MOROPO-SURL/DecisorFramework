@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class UnitMeasurementsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, Models.Page.Manage.UnitMeasurementsManagePageModel, Models.Page.Configuration.UnitMeasurementConfigurationPageModel, Configuration.UnitMeasurementConfigurationPage, Detail.UnitMeasurementDetailPage>
+public partial class UnitMeasurementsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.UnitMeasurementDisplayModel, Models.Page.Manage.UnitMeasurementsManagePageModel, Models.Page.Configuration.UnitMeasurementConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 116;
 
@@ -28,11 +28,6 @@ public partial class UnitMeasurementsManagePage : Core.Presentation.Terminal.MAU
         var apiConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.UnitMeasurementConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.UnitMeasurementDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.UnitMeasurementConfigurationPageModel(model));
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.UnitMeasurementDisplayModel target, int discriminator)

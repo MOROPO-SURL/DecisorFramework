@@ -102,6 +102,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
 
             var _entity = personContactRepository.Get(entity.ContactId);
 
+            _entity.PersonalIdentificationNumber = model.PersonalIdentificationNumber;
             _entity.BusinessKindId = model.BusinessKindId;
             _entity.MainPostalContactId = model.MainPostalContactId;
 
@@ -148,6 +149,8 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
                 entity.ContactId = model.ContactId;
                 entity.Contact = personContactRepository.Get(entity.ContactId);
             }
+
+            entity.Contact.PersonalIdentificationNumber = model.PersonalIdentificationNumber;
 
             if (entity.Contact.BusinessKindId != model.BusinessKindId)
             {
@@ -227,6 +230,14 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
                 documentFileManager.SaveDocumentFileContent(_entity.Id, _model.ContentData, _entity.ContentType);
             }
             #endregion
+        }
+
+        [HttpGet("by/contact/{key}")]
+        public ActionResult GetByContact(System.Guid key)
+        {
+            var entity = Repository.FindOneBy(entity => entity.ContactId == key);
+
+            return Ok(entity == null ? null : EntityToDisplayModel(entity));
         }
     }
 }

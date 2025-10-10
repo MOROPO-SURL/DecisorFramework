@@ -4,8 +4,6 @@ using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Configuration;
 using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Factories.Configuration;
 using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Factories.Detail;
-using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
-using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Extensions
 {
@@ -15,10 +13,18 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Defau
         {
             builder.Services
                 // DetailPage factory resgistration !!!
-                .AddSingleton<IDetailContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyDetailPage>, BankAgencyDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<BankAgencyDisplayModel>, BankAgencyDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<CurrencyDisplayModel>, CurrencyDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<BankBranchDisplayModel>, BankBranchDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<BankAccountDisplayModel>, BankAccountDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<CostCenterDisplayModel>, CostCenterDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
-                .AddSingleton<IConfigurationContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyConfigurationPageModel, BankAgencyConfigurationPage>, BankAgencyConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<BankAgencyDisplayModel, BankAgencyConfigurationPageModel>, BankAgencyConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<CurrencyDisplayModel, CurrencyConfigurationPageModel>, CurrencyConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<BankBranchDisplayModel, BankBranchConfigurationPageModel>, BankBranchConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<BankAccountDisplayModel, BankAccountConfigurationPageModel>, BankAccountConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<CostCenterDisplayModel, CostCenterConfigurationPageModel>, CostCenterConfigurationPageFactory>();
 
             return builder;
         }

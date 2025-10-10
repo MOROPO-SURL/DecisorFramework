@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class BrandConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<BrandDisplayModel, BrandDisplayModel, Models.Page.Configuration.BrandConfigurationPageModel>
 {
-    public BrandConfigurationPage(System.Action<BrandDisplayModel> successAction, Models.Page.Configuration.BrandConfigurationPageModel model) : base(successAction, model)
+    public BrandConfigurationPage(System.Action<BrandDisplayModel> successAction, Models.Page.Configuration.BrandConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.BrandConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }

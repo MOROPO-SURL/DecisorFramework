@@ -5,28 +5,32 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.
 {
     public class LegalClientConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<LegalClientDisplayModel>
     {
+        public static string ContactValidableProperty => nameof(Contact);
+        public static string MainPostalContactValidableProperty => nameof(MainPostalContact);
+        public static string TaxIdentificationNumberValidableProperty => nameof(TaxIdentificationNumber);
+        public static string DefaultPaymentTermValidableProperty => nameof(DefaultPaymentTerm);
+        public static string BankAccountsValidableProperty => nameof(BankAccounts);
+
         private OrganizationContactDisplayModel contact;
         private string taxIdentificationNumber;
         private string stateIdentificationCode;
-        private PersonContactDisplayModel representative;
         private Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel mainPostalContact;
         private PaymentTermDisplayModel defaultPaymentTerm;
-        private int priority;
+        private int priority = 1;
 
         public LegalClientConfigurationPageModel(LegalClientDisplayModel model) : base(model)
         {
             if (model != null)
             {
                 Id = model.Id;
-                Contact = model.Contact;
-                TaxIdentificationNumber = model.TaxIdentificationNumber;
-                StateIdentificationCode = model.StateIdentificationCode;
-                Representative = model.Representative;
-                MainPostalContact = model.MainPostalContact;
-                DefaultPaymentTerm = model.DefaultPaymentTerm;
+                contact = model.Contact;
+                taxIdentificationNumber = model.TaxIdentificationNumber;
+                stateIdentificationCode = model.StateIdentificationCode;
+                mainPostalContact = model.MainPostalContact;
+                defaultPaymentTerm = model.DefaultPaymentTerm;
                 BankAccounts = new System.Collections.ObjectModel.ObservableCollection<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel>(model.BankAccounts);
                 Documents = new System.Collections.ObjectModel.ObservableCollection<Core.Interop.API.Common.Models.Display.DocumentDisplayModel>(model.Documents);
-                Priority = model.Priority;
+                priority = model.Priority;
                 AvailablePostalContactItems = new System.Collections.ObjectModel.ObservableCollection<Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel>(Contact.Identity.PostalContacts);
             }
         }
@@ -38,8 +42,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.
         public string TaxIdentificationNumber { get => taxIdentificationNumber; set => SetProperty(ref taxIdentificationNumber, value); }
 
         public string StateIdentificationCode { get => stateIdentificationCode; set => SetProperty(ref stateIdentificationCode, value); }
-
-        public PersonContactDisplayModel Representative { get => representative; set => SetProperty(ref representative, value); }
 
         public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContact { get => mainPostalContact; set => SetProperty(ref mainPostalContact, value); }
 

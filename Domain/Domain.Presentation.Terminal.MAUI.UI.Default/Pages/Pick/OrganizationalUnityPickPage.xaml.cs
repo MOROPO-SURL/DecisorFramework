@@ -3,9 +3,9 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class OrganizationalUnityPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel, Models.Page.Pick.OrganizationalUnityPickPageModel, Detail.OrganizationalUnityTreeDetailPage>
+public partial class OrganizationalUnityPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel, Models.Page.Pick.OrganizationalUnityPickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 72;
 
     private System.Action<Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel> pickCompleteAction;
 
@@ -104,7 +104,7 @@ public partial class OrganizationalUnityPickPage : Core.Presentation.Terminal.MA
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        pickCompleteAction.Invoke(null);
+        pickCompleteAction.Invoke((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel);
 
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }

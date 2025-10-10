@@ -2,10 +2,12 @@
 
 namespace MOROPO.Framework.Decisor.Governance.Persistence.Entities
 {
-    public class Meeting : Guama.Core.Persistence.Entities.Contract.IEntity<System.Guid>
+    public class Meeting : Guama.Core.Persistence.Entities.Contract.IArchivableEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; }
+
+        public bool Archived { get; set; }
 
         public int Index { get; set; }
 
@@ -16,7 +18,7 @@ namespace MOROPO.Framework.Decisor.Governance.Persistence.Entities
         public System.Guid DecisionMakingGroupId { get; set; }
         
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AuthorId))]
-        public HumanResources.Persistence.Entities.Employee Author { get; set; }
+        public Domain.Persistence.Entities.PersonContact Author { get; set; }
         public System.Guid AuthorId { get; set; }
 
         public string Summary { get; set; }
@@ -28,9 +30,5 @@ namespace MOROPO.Framework.Decisor.Governance.Persistence.Entities
         public List<MeetingContactBridge> ContactBridges { get; set; } = new List<MeetingContactBridge>();
 
         public List<MeetingDocumentBridge> DocumentBridges { get; set; } = new List<MeetingDocumentBridge>();
-
-        public Agreement[] Agreements { get; set; }
-
-        public Statement[] Statements { get; set; }
     }
 }

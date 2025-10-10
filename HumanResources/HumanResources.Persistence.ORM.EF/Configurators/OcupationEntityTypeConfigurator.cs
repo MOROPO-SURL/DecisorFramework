@@ -7,6 +7,8 @@
             base.ApplayRules(entityTypeBuilder);
 
             entityTypeBuilder.HasIndex(entity => new { entity.StaffId, entity.VacantId }).IsUnique();
+
+            entityTypeBuilder.HasOne(entity => entity.Contract).WithOne(entity => entity.RefereceOcupation).HasForeignKey<Entities.Ocupation>(entity => entity.ContractId).OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Restrict);
         }
     }
 }

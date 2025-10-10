@@ -22,7 +22,8 @@ namespace MOROPO.Framework.Decisor.Legal.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.RegulationKind>(),
                     new BaseEntityTypeConfigurator<Entities.Regulation>(),
                     new BaseEntityTypeConfigurator<Entities.Disposition>(),
-                    new Configurators.DispositionTagBridgeEntityTypeConfigurator()
+                    new Configurators.DispositionTagBridgeEntityTypeConfigurator(),
+                    new Configurators.ResolutionEntityTypeConfigurator()
                 };
             }
         }

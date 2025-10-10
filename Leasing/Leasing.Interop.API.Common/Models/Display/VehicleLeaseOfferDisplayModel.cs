@@ -12,23 +12,19 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        public System.DateTime? OpenAt { get; set; }
+        public System.DateTime OpenAt { get; set; }
 
         public System.DateTime? ClosedAt { get; set; }
 
         public string Description { get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get; set; }
+        public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Decisor { get; set; }
+        public VehicleLeasePropousalDisplayModel Propousal { get; set; }
 
-        public string ApprovationReference { get; set; }
+        public VehicleLeaseOrganizationPostulationDisplayModel[] OrganizationPostulations { get; set; }
 
-        public Domain.Interop.API.Common.Models.Display.VehicleDisplayModel Vehicle { get; set; }
-
-        public CommonLeaseOrganizationPostulationDisplayModel[] OrganizationPostulations { get; set; }
-
-        public CommonLeasePersonPostulationDisplayModel[] PersonPostulations { get; set; }
+        public VehicleLeasePersonPostulationDisplayModel[] PersonPostulations { get; set; }
 
         public void Import(Persistence.Entities.VehicleLeaseOffer entity)
         {
@@ -39,69 +35,19 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
             OpenAt = entity.OpenAt;
             ClosedAt = entity.ClosedAt;
             Description = entity.Description;
-            OrganizationPostulations = entity.OrganizationPostulations.Select(bridge =>
+
+            if (entity.Agreement != null)
             {
-                var result = new CommonLeaseOrganizationPostulationDisplayModel
-                {
-                    TaxIdentificationNumber = bridge.TaxIdentificationNumber,
-                    StateIdentificationCode = bridge.StateIdentificationCode,
-                    Argument = bridge.Argument
-                };
+                Agreement = new Governance.Interop.API.Common.Models.Display.AgreementDisplayModel();
 
-                if (bridge.Contact != null)
-                {
-                    result.Contact = new Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel();
-
-                    result.Contact.Import(bridge.Contact);
-                }
-
-                return result;
-            }).ToArray();
-            PersonPostulations = entity.PersonPostulations.Select(bridge =>
-            {
-                var result = new CommonLeasePersonPostulationDisplayModel
-                {
-                    TaxIdentificationNumber = bridge.TaxIdentificationNumber,
-                    Argument = bridge.Argument
-                };
-
-                if (bridge.Contact != null)
-                {
-                    result.Contact = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
-
-                    result.Contact.Import(bridge.Contact);
-                }
-
-                if (bridge.BusinessKind != null)
-                {
-                    result.BusinessKind = new Domain.Interop.API.Common.Models.Display.NaturalBusinessKindDisplayModel();
-
-                    result.BusinessKind.Import(bridge.BusinessKind);
-                }
-
-                return result;
-            }).ToArray();
-            ApprovationReference = entity.ApprovationReference;
-
-            if (entity.Author != null)
-            {
-                Author = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
-
-                Author.Import(entity.Author);
+                Agreement.Import(entity.Agreement);
             }
 
-            if (entity.Decisor != null)
+            if (entity.Propousal != null)
             {
-                Decisor = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Propousal = new VehicleLeasePropousalDisplayModel();
 
-                Decisor.Import(entity.Decisor);
-            }
-
-            if (entity.Vehicle != null)
-            {
-                Vehicle = new Domain.Interop.API.Common.Models.Display.VehicleDisplayModel();
-
-                Vehicle.Import(entity.Vehicle);
+                Propousal.Import(entity.Propousal);
             }
         }
     }

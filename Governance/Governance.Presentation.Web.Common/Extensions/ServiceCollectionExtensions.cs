@@ -11,6 +11,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Common.Extensions
         {
             services.AddScoped<IEntityRepository<DecisionMakingGroup, System.Guid>, DecisionMakingGroupRepository>();
             services.AddScoped<IEntityRepository<Meeting, System.Guid>, MeetingRepository>();
+            services.AddScoped<IEntityRepository<Agreement, System.Guid>, AgreementRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.GovernanceDbSchemaConfigurationProvider>();
         }

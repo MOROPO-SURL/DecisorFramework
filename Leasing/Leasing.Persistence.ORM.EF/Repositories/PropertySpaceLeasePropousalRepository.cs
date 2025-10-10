@@ -1,0 +1,18 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
+using System.Linq;
+
+namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Repositories
+{
+    public class PropertySpaceLeasePropousalRepository : Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Entities.PropertySpaceLeasePropousal, System.Guid>
+    {
+        public PropertySpaceLeasePropousalRepository(Microsoft.EntityFrameworkCore.DbContext dbContext) : base(dbContext)
+        {
+        }
+
+        protected override IQueryable<PropertySpaceLeasePropousal> GetQueryableDbSet()
+        {
+            return base.GetQueryableDbSet().Include(entity => entity.PropertySpace).ThenInclude(entity => entity.FeatureImage);
+        }
+    }
+}

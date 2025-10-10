@@ -3,19 +3,22 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.PropertyDisplayModel, Models.Page.Pick.PropertyPickPageModel, Detail.PropertyDetailPage>
+public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.PropertyDisplayModel, Models.Page.Pick.PropertyPickPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 320;
+
+    private readonly Interop.API.Common.Models.Filter.PropertyFilterModel filter;
 
     private System.Action<Interop.API.Common.Models.Display.PropertyDisplayModel> pickCompleteAction;
 
     private bool pickedFlag = false;
 
-    public PropertyPickPage(System.Action<Interop.API.Common.Models.Display.PropertyDisplayModel> pickCompleteAction)
+    public PropertyPickPage(System.Action<Interop.API.Common.Models.Display.PropertyDisplayModel> pickCompleteAction, Interop.API.Common.Models.Filter.PropertyFilterModel filter = null)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
+        this.filter = filter;
 
         IsEnabled = false;
     }
@@ -54,6 +57,8 @@ public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages
     {
         var apiConnectClient = new Interop.API.Connect.Clients.PropertiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
+        if (filter != null) return apiConnectClient.FilterPaginateAsync(filter, CurrentItemsPageNumber, CurrentItemsPageLimit);
+
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
@@ -64,7 +69,35 @@ public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new Configuration.PropertyConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.PropertyConfigurationPageModel(null)));
+        var concreteBindingContext = BindingContext as Models.Page.Pick.PropertyPickPageModel;
+
+        concreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.PropertyDisplayModel, Models.Page.Configuration.PropertyConfigurationPageModel>>();
+
+                var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
+
+                Dispatcher.Dispatch(() =>
+                {
+                    concreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(page);
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+
+                    concreteBindingContext.IsBusy = false;
+                });
+            }
+        });
     }
 
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)

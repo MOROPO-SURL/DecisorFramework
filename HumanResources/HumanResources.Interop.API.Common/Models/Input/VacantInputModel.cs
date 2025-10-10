@@ -6,17 +6,17 @@
 
         public int Priority { get; set; }
 
-        public bool NamingResolutionRequired { get; set; }
+        public Persistence.Enumerations.VacantOcupationMode OcupationMode { get; set; }
 
         public System.Guid WorkPositionId { get; set; }
 
         public System.Guid SalaryStandardId { get; set; }
 
-        public System.Guid OrganizationUnityId { get; set; }
+        public System.Guid WorkforceOrganizationalUnityId { get; set; }
 
         public Persistence.Entities.Vacant Export()
         {
-            var entity = new Persistence.Entities.Vacant {Id = Id, Enabled = true, OrganizationUnityId = OrganizationUnityId };
+            var entity = new Persistence.Entities.Vacant {Id = Id, Enabled = true, WorkforceOrganizationalUnityId = WorkforceOrganizationalUnityId };
 
             Mergue(entity);
 
@@ -31,7 +31,7 @@
         public void Mergue(Persistence.Entities.Vacant entity)
         {
             entity.Priority = Priority;
-            entity.NamingResolutionRequired = NamingResolutionRequired;
+            entity.OcupationMode = OcupationMode;
 
             if (entity.WorkPositionId != WorkPositionId)
             {

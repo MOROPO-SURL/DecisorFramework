@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.VehicleDisplayModel, Models.Page.Manage.VehiclesManagePageModel, Models.Page.Configuration.VehicleConfigurationPageModel, Configuration.VehicleConfigurationPage, Detail.VehicleDetailPage>
+public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.VehicleDisplayModel, Models.Page.Manage.VehiclesManagePageModel, Models.Page.Configuration.VehicleConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 284;
 
@@ -16,7 +16,15 @@ public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 320; }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.VehicleViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.VehicleCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.VehicleEditorPermission;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
@@ -28,25 +36,6 @@ public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         var apiConnectClient = new Interop.API.Connect.Clients.VehiclesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.VehicleConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.VehicleDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.VehicleConfigurationPageModel(model);
-
-        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
-
-        var brandsAPIConnectClient = new Interop.API.Connect.Clients.BrandsAPIConnectClient(httpClientHelperProvider);
-        var kindsAPIConnectClient = new Interop.API.Connect.Clients.VehicleKindsAPIConnectClient(httpClientHelperProvider);
-        var engineKindsAPIConnectClient = new Interop.API.Connect.Clients.VehicleEngineKindsAPIConnectClient(httpClientHelperProvider);
-        var structuresAPIConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(httpClientHelperProvider);
-
-        result.AvailableBrands = await brandsAPIConnectClient.GetEnabledAsync();
-        result.AvailableKinds = await kindsAPIConnectClient.GetEnabledAsync();
-        result.AvailableEngineKinds = await engineKindsAPIConnectClient.GetEnabledAsync();
-        result.AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.VehicleDisplayModel target, int discriminator)

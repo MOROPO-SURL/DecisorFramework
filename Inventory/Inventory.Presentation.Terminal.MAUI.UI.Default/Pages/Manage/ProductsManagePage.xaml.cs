@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProductDisplayModel, Models.Page.Manage.ProductsManagePageModel, Models.Page.Configuration.ProductConfigurationPageModel, Configuration.ProductConfigurationPage, Detail.ProductDetailPage>
+public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProductDisplayModel, Models.Page.Manage.ProductsManagePageModel, Models.Page.Configuration.ProductConfigurationPageModel>
 {
     public ProductsManagePage()
     {
@@ -13,6 +13,8 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
     {
         return ItemsCollectionView;
     }
+
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
 
     protected override double ItemViewRequestWidth { get => 240; }
 
@@ -26,24 +28,6 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
         var apiConnectClient = new Interop.API.Connect.Clients.ProductsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.ProductConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProductDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.ProductConfigurationPageModel(model);
-
-        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
-
-        var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
-        var familiesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(httpClientHelperProvider);
-
-        // TODO complete fallow behavior
-        //var warehousingDecreasesAPIConnectClient = new Web.API.Connect.Clients.WarehousingDecreasesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        result.AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync();
-        result.AvailableCategories = await familiesAPIConnectClient.GetAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ProductDisplayModel target, int discriminator)

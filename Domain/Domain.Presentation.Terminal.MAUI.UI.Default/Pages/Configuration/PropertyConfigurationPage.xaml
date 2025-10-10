@@ -2,6 +2,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
+    xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
@@ -17,10 +18,16 @@
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="RootFlexLayoutItemResponsiveWithConverter" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrappedFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="PostalContactDetailFlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            <core_ui_converters:ImageInputModelToImageSourceConverter x:Key="ImageInputModelToImageSourceConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
 
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="480" AbsoluteHorizontalSeparation="16" />
             <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
             
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -75,6 +82,10 @@
                             Spacing="6">
                             <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                             <Entry Text="{Binding Name}" />
+                            <Label
+                                IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.NameValidableProperty}}"
+                                Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.NameValidableProperty}}"
+                                Style="{StaticResource ValidationMessageLabelStyle}" />
                         </VerticalStackLayout>
                         <FlexLayout
                             Wrap="Wrap">
@@ -82,12 +93,17 @@
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
                                 Margin="4"
                                 Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad Administrativa" />
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Entidad Administrativa" />
                                 <Picker 
                                     x:Name="StructurePicker" 
                                     ItemsSource="{Binding AvailableStructures}"
                                     ItemDisplayBinding="{Binding Identity.Name}"
+                                    SelectedItem="{Binding Structure}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                                <Label
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.StructureValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.StructureValidableProperty}}"
+                                    Style="{StaticResource ValidationMessageLabelStyle}" />
                             </VerticalStackLayout>
                             <VerticalStackLayout 
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
@@ -98,7 +114,12 @@
                                     x:Name="KindPicker" 
                                     ItemsSource="{Binding AvailableKinds}"
                                     ItemDisplayBinding="{Binding Name}"
+                                    SelectedItem="{Binding Kind}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                                <Label
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.KindValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.KindValidableProperty}}"
+                                    Style="{StaticResource ValidationMessageLabelStyle}" />
                             </VerticalStackLayout>
                             <VerticalStackLayout 
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
@@ -106,32 +127,11 @@
                                 Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. Activo Fijo" />
                                 <Entry Text="{Binding Reference}" />
-                            </VerticalStackLayout>
-                            <Grid 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrappedFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4"
-                                ColumnSpacing="6" RowSpacing="6">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Label 
-                                    Grid.ColumnSpan="2" Grid.Row="0"
-                                    Style="{StaticResource CaptionFieldLabelStyle}" 
-                                    Text="Espacio útil" />
-                                <Entry 
-                                    Grid.Column="0" Grid.Row="1"
-                                    Text="{Binding Area, StringFormat='{0:F2}'}" />
                                 <Label
-                                    Grid.Column="1" Grid.Row="1"
-                                    VerticalOptions="Center"
-                                    Text="m²"
-                                    FontSize="Medium" />
-                            </Grid>
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.ReferenceValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.ReferenceValidableProperty}}"
+                                    Style="{StaticResource ValidationMessageLabelStyle}" />
+                            </VerticalStackLayout>
                         </FlexLayout>
                         <VerticalStackLayout 
                             Margin="8"
@@ -173,13 +173,17 @@
                                 HorizontalOptions="Start"
                                 Text="Configurar ..."
                                 Clicked="ConfiguratePostalContactButton_Clicked" />
+                            <Label
+                                IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.PostalContactItemValidableProperty}}"
+                                Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.PostalContactItemValidableProperty}}"
+                                Style="{StaticResource ValidationMessageLabelStyle}" />
                         </VerticalStackLayout>
                     </StackLayout>
                 </FlexLayout>
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Áreas" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Espacios" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
                             <Grid.ColumnDefinitions>
@@ -194,22 +198,97 @@
                             <Button
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
-                                Text="Agregar" />
+                                Text="Agregar"
+                                Clicked="SpaceAgregationButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
                                 Color="{StaticResource Gray050}" />
-                            <CollectionView
+                            <FlexLayout
+                                Grid.ColumnSpan="2" Grid.Row="2"
                                 Margin="4"
-                                Grid.ColumnSpan="2" Grid.Row="2">
-                                <CollectionView.ItemsLayout>
-                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
-                                </CollectionView.ItemsLayout>
-                                <CollectionView.EmptyView>
-                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
-                                </CollectionView.EmptyView>
-                            </CollectionView>
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start"
+                                BindableLayout.ItemsSource="{Binding Spaces}">
+                                <BindableLayout.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </BindableLayout.EmptyView>
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="presentation_view_models:PropertySpaceViewModel">
+                                        <Frame
+                                            Padding="0" Margin="4"
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}"
+                                            HeightRequest="196">
+                                            <Grid ColumnSpacing="0">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="2*" />
+                                                    <ColumnDefinition Width="3*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Image
+                                                    IsVisible="{Binding InputFeatureImage, Converter={StaticResource IsNullConverter}}"
+                                                    Grid.Column="0"
+                                                    Aspect="AspectFill"               
+                                                    Source="{Binding CurrentFeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                                <Image
+                                                    IsVisible="{Binding InputFeatureImage, Converter={StaticResource IsNotNullConverter}}"
+                                                    Grid.Column="0"
+                                                    Aspect="AspectFill"
+                                                    Source="{Binding InputFeatureImage, Converter={StaticResource ImageInputModelToImageSourceConverter}}" />
+                                                <StackLayout 
+                                                    Grid.Column="1"
+                                                    Padding="8">
+                                                    <Label 
+                                                        FontAttributes="Bold"
+                                                        FontSize="Medium"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="2"
+                                                        Text="{Binding Name}" />
+                                                    <Label 
+                                                        Margin="0,8,0,0"
+                                                        Text="Espacio útil"
+                                                        TextColor="DimGray"
+                                                        FontSize="Caption"
+                                                        FontAttributes="Bold" />
+                                                    <Label
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Area, StringFormat='{0:F2} m²'}" />
+                                                    <Label 
+                                                        Margin="0,8,0,0"
+                                                        Text="Descripción"
+                                                        TextColor="DimGray"
+                                                        FontSize="Caption"
+                                                        FontAttributes="Bold" />
+                                                    <Label
+                                                        VerticalOptions="FillAndExpand"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="4"
+                                                        Text="{Binding Description, TargetNullValue='---'}" />
+                                                </StackLayout>
+                                                <VerticalStackLayout 
+                                                    Grid.Column="2"
+                                                    Padding="8"
+                                                    Spacing="8">
+                                                    <Button
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xF90B;"
+                                                        Clicked="SpaceEditionButton_Clicked" />
+                                                    <Button
+                                                        VerticalOptions="Start"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="SpaceRemotionButton_Clicked" />
+                                                </VerticalStackLayout>
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
                         </Grid>
                     </Frame>
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.SpacesValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyConfigurationPageModel.SpacesValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8"

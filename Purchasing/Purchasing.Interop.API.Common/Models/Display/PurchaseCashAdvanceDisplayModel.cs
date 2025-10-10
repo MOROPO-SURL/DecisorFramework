@@ -10,7 +10,7 @@
 
         public PurchasePlanDisplayModel PurchasePlan { get; set; }
 
-        public HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get; set; }
 
         public void Import(Persistence.Entities.PurchaseCashAdvance entity)
         {
@@ -27,7 +27,7 @@
 
             if (entity.Responsible != null)
             {
-                Responsible = new HumanResources.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Responsible = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
 
                 Responsible.Import(entity.Responsible);
             }

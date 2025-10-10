@@ -3,7 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class ClausesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ClauseDisplayModel, Models.Page.Manage.ClausesManagePageModel, Models.Page.Configuration.ClauseConfigurationPageModel, Configuration.ClauseConfigurationPage, Detail.ClauseDetailPage>
+public partial class ClausesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ClauseDisplayModel, Models.Page.Manage.ClausesManagePageModel, Models.Page.Configuration.ClauseConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 136;
 
@@ -29,11 +29,6 @@ public partial class ClausesManagePage : Core.Presentation.Terminal.MAUI.UI.Page
         var apiConnectClient = new Interop.API.Connect.Clients.ClausesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.ClauseConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.ClauseDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.ClauseConfigurationPageModel(model));
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ClauseDisplayModel target, int discriminator)

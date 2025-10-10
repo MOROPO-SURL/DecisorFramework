@@ -9,7 +9,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        public HumanResources.Persistence.Entities.Employee Responsible { get; set; }
+        public Domain.Persistence.Entities.Employee Responsible { get; set; }
         public System.Guid ResponsibleId { get; set; }
 
         public string Description { get; set; }

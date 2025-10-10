@@ -4,8 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
-    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
-    xmlns:local_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
@@ -13,12 +11,11 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.WorkPositionsManagePage"   
-    x:TypeArguments="interop_common_display_models:WorkPositionDisplayModel,presentation_manage_page_models:WorkPositionsManagePageModel,presentation_configuration_page_models:WorkPositionConfigurationPageModel,local_configuration_pages:WorkPositionConfigurationPage,local_detail_pages:WorkPositionDetailPage"
+    x:TypeArguments="interop_common_display_models:WorkPositionDisplayModel,presentation_manage_page_models:WorkPositionsManagePageModel,presentation_configuration_page_models:WorkPositionConfigurationPageModel"
     x:DataType="presentation_manage_page_models:WorkPositionsManagePageModel"
     Title="Gestión de Plazas Laborales">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <communitytoolkit_converters:BoolToObjectConverter x:Key="IsNotNullConverter"/>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -65,7 +62,6 @@
                                             LineBreakMode="TailTruncation"
                                             Text="{Binding Name}" />
                                         <Label 
-                                            IsVisible="{Binding Enabled, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
                                             FontAttributes="Bold"
                                             LineBreakMode="TailTruncation"
                                             Text="{Binding Kind.Name}" />

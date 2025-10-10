@@ -2,7 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class PropertiesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PropertyDisplayModel, Models.Page.Manage.PropertiesManagePageModel, Models.Page.Configuration.PropertyConfigurationPageModel, Configuration.PropertyConfigurationPage, Detail.PropertyDetailPage>
+public partial class PropertiesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PropertyDisplayModel, Models.Page.Manage.PropertiesManagePageModel, Models.Page.Configuration.PropertyConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 320;
 
@@ -16,7 +16,15 @@ public partial class PropertiesManagePage : Core.Presentation.Terminal.MAUI.UI.P
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 320; }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.PropertyViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.PropertyCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.PropertyEditorPermission;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
@@ -28,21 +36,6 @@ public partial class PropertiesManagePage : Core.Presentation.Terminal.MAUI.UI.P
         var apiConnectClient = new Interop.API.Connect.Clients.PropertiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.PropertyConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.PropertyDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.PropertyConfigurationPageModel(model);
-
-        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
-
-        var kindsAPIConnectClient = new Interop.API.Connect.Clients.PropertyKindsAPIConnectClient(httpClientHelperProvider);
-        var structuresAPIConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(httpClientHelperProvider);
-
-        result.AvailableKinds = await kindsAPIConnectClient.GetAsync();
-        result.AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.PropertyDisplayModel target, int discriminator)

@@ -3,7 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class ProformasManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProformaDisplayModel, Models.Page.Manage.ProformasManagePageModel, Models.Page.Configuration.ProformaConfigurationPageModel, Configuration.ProformaConfigurationPage, Detail.ProformaDetailPage>
+public partial class ProformasManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProformaDisplayModel, Models.Page.Manage.ProformasManagePageModel, Models.Page.Configuration.ProformaConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
 
@@ -29,11 +29,6 @@ public partial class ProformasManagePage : Core.Presentation.Terminal.MAUI.UI.Pa
         var apiConnectClient = new Interop.API.Connect.Clients.ProformasAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.ProformaConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.ProformaDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.ProformaConfigurationPageModel(model));
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ProformaDisplayModel target, int discriminator)

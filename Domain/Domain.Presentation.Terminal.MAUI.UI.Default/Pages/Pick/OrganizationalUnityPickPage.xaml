@@ -4,14 +4,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card"
-    xmlns:local_detail_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:presentation_pick_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Pick;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationalUnityPickPage"
-    x:TypeArguments="interop_common_display_models:OrganizationalUnityTreeDisplayModel,presentation_pick_page_models:OrganizationalUnityPickPageModel,local_detail_pages:OrganizationalUnityTreeDetailPage"
+    x:TypeArguments="interop_common_display_models:OrganizationalUnityTreeDisplayModel,presentation_pick_page_models:OrganizationalUnityPickPageModel"
     x:DataType="presentation_pick_page_models:OrganizationalUnityPickPageModel"
     Title="Seleccionar Unidad Organizativa">
     <ContentPage.Resources>
@@ -57,12 +56,18 @@
                             <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <local_card_views:OrganizationContactDefaultCardView HeightRequest="{Static local:OrganizationalUnityPickPage.ITEM_VIEW_REQUEST_HEIGHT}">
-                                    <ContentView.GestureRecognizers>
+                            <DataTemplate x:DataType="interop_common_display_models:OrganizationalUnityTreeDisplayModel">
+                                <Frame HeightRequest="{Static local:OrganizationalUnityPickPage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                    <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </ContentView.GestureRecognizers>
-                                </local_card_views:OrganizationContactDefaultCardView>
+                                    </Frame.GestureRecognizers>
+                                    <VerticalStackLayout>
+                                        <Label
+                                            LineBreakMode="TailTruncation"
+                                            FontSize="Medium"
+                                            Text="{Binding Name}" />
+                                    </VerticalStackLayout>
+                                </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

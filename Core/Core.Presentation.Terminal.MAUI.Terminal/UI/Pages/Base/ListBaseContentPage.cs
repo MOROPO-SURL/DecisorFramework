@@ -1,17 +1,23 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 {
-    public class ListBaseContentPage<TModel, TListPageModel, TDetailContentPage> : Caney.MVVM.Core.Pages.ContentPage
+    public class ListBaseContentPage<TModel, TListPageModel> : Caney.MVVM.Core.Pages.ContentPage
         where TModel : class
         where TListPageModel : Models.Page.Contract.AbstractListEntityPageModel<TModel>, new()
-        where TDetailContentPage : DetailBaseContentPage<TModel>
     {
         public ListBaseContentPage()
         {
             BindingContext = new TListPageModel();
         }
+
+        protected TListPageModel ConcreteBindingContext => BindingContext as TListPageModel;
+
+        protected virtual bool DetailRequiredAsyncWorkPresentation => false;
+
+        protected virtual string ViewerPermissionCode => null;
 
         protected int CurrentItemsPageNumber { get; private set; }
 
@@ -25,15 +31,21 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected virtual void ItemDetailRequestControl_Invoked(object sender, System.EventArgs eventArgs)
         {
-            if (((TListPageModel)BindingContext).IsBusy) return;
+            if (ConcreteBindingContext.IsBusy) return;
+
+            ConcreteBindingContext.IsBusy = DetailRequiredAsyncWorkPresentation;
 
             FillItemDataAsync((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as TModel).ContinueWith(task =>
             {
                 Dispatcher.Dispatch(() =>
                 {
-                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<UI.Factories.Facade.IDetailContentPageFactoryFacade<TModel, TDetailContentPage>>();
+                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<UI.Factories.Facade.IDetailContentPageFactoryFacade<TModel>>();
 
-                    this.NavigationPushModalPageAsync(factory.Build(task.Result));
+                    var page = factory.Build(task.Result);
+
+                    this.NavigationPushModalPageAsync(page);
+
+                    ConcreteBindingContext.IsBusy = false;
                 });
             });
         }
@@ -41,6 +53,8 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
         protected void OnReload(object sender, System.EventArgs eventArgs)
         {
             if (((TListPageModel)BindingContext).IsBusy) return;
+
+            IsEnabled = true;
 
             LoadItems(true);
         }
@@ -52,6 +66,8 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected void OnItemsCollectionViewLayoutResize(object sender, System.EventArgs eventArgs)
         {
+            if (!IsEnabled) return;
+
             if (GetItemsCollectionView().ItemsLayout is Microsoft.Maui.Controls.GridItemsLayout)
             {
                 var itemsCollectionViewItemsLayout = GetItemsCollectionView().ItemsLayout as Microsoft.Maui.Controls.GridItemsLayout;
@@ -84,9 +100,23 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected void LoadItems(bool restart = false)
         {
-            var concreteBindingContext = (TListPageModel)BindingContext;
+            if (BindingContext == null) return;
 
-            concreteBindingContext.IsBusy = true;
+            if (ViewerPermissionCode != null)
+            {
+                var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+                if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == ViewerPermissionCode)))
+                {
+                    DisplayAlert("Aviso", "Su usuario no cuenta con permisos para visualizar esta información. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                    IsEnabled = false;
+
+                    return;
+                }
+            }
+
+            ConcreteBindingContext.IsBusy = true;
 
             if (restart)
             {
@@ -94,14 +124,14 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
                 CurrentItemsPageNumber = 0;
 
-                foreach (var item in concreteBindingContext.Items)
+                foreach (var item in ConcreteBindingContext.Items)
                 {
                     if (item == null || item is not System.IDisposable) continue;
 
                     (item as System.IDisposable).Dispose();
                 }
 
-                concreteBindingContext.Items.Clear();
+                ConcreteBindingContext.Items.Clear();
             }
 
             CurrentItemsPageNumber++;
@@ -110,6 +140,8 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             {
                 Dispatcher.Dispatch(() =>
                 {
+                    if (ConcreteBindingContext == null) return;
+
                     if (task.Exception != null || task.IsCanceled)
                     {
                         CurrentItemsPageNumber--;
@@ -120,13 +152,13 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                     {
                         foreach (var model in task.Result.List)
                         {
-                            concreteBindingContext.Items.Add(model);
+                            ConcreteBindingContext.Items.Add(model);
                         }
 
-                        concreteBindingContext.HasMoreItems = task.Result.HasNext && task.Result.List.Count > 0;
+                        ConcreteBindingContext.HasMoreItems = task.Result.HasNext && task.Result.List.Count > 0;
                     }
 
-                    concreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.IsBusy = false;
                 });
             });
         }
@@ -153,28 +185,28 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 columnCount = itemsCollectionViewItemsLayout.Span;
 
                 itemsCollectionViewItemsLayoutHorizontalItemSpacing = itemsCollectionViewItemsLayout.HorizontalItemSpacing;
+
+                var collectionViewCellWidth = (itemsCollectionViewLayout.Width - ((columnCount - 1) * itemsCollectionViewItemsLayoutHorizontalItemSpacing)) / columnCount;
+
+                var collectionViewCellHeight = MeasureCollectionViewCellHeight(collectionViewCellWidth);
+
+                var availableVerticalHeight = itemsCollectionViewLayout.Height;
+
+                var rowCount = 0;
+
+                while (availableVerticalHeight > 0)
+                {
+                    rowCount++;
+
+                    availableVerticalHeight -= collectionViewCellHeight + itemsCollectionViewItemsLayoutHorizontalItemSpacing;
+                }
+
+                CurrentItemsPageLimit = columnCount * rowCount;
             }
             else
             {
-                itemsCollectionViewItemsLayoutHorizontalItemSpacing = (GetItemsCollectionView().ItemsLayout as Microsoft.Maui.Controls.LinearItemsLayout).ItemSpacing;
+                CurrentItemsPageLimit = 10;
             }
-
-            var collectionViewCellWidth = (itemsCollectionViewLayout.Width - ((columnCount - 1) * itemsCollectionViewItemsLayoutHorizontalItemSpacing)) / columnCount;
-
-            var collectionViewCellHeight = MeasureCollectionViewCellHeight(collectionViewCellWidth);
-
-            var availableVerticalHeight = itemsCollectionViewLayout.Height;
-
-            var rowCount = 0;
-
-            while (availableVerticalHeight > 0)
-            {
-                rowCount++;
-
-                availableVerticalHeight -= collectionViewCellHeight + itemsCollectionViewItemsLayoutHorizontalItemSpacing;
-            }
-
-            CurrentItemsPageLimit = columnCount * rowCount;
         }
     }
 }

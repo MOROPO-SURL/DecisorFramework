@@ -14,7 +14,7 @@ public partial class VehicleConfigurationPage : Core.Presentation.Terminal.MAUI.
     private readonly List<ImageInputModel> incomingImages = [];
     private readonly List<ImageDisplayModel> outgoingImages = [];
 
-    public VehicleConfigurationPage(System.Action<VehicleDisplayModel> successAction, Models.Page.Configuration.VehicleConfigurationPageModel model) : base(successAction, model)
+    public VehicleConfigurationPage(System.Action<VehicleDisplayModel> successAction, Models.Page.Configuration.VehicleConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.VehicleConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -182,6 +182,7 @@ public partial class VehicleConfigurationPage : Core.Presentation.Terminal.MAUI.
     {
         Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, FeatureImagePickSuccess_Callback);
     }
+
     private void ImageItemAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, ItemImagePickSuccess_Callback);

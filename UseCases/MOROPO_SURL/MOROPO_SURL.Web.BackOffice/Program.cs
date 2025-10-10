@@ -16,6 +16,7 @@ using MOROPO.Framework.Decisor.Legal.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Production.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Sales.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Governance.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Core.Security.Common.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Location.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Extensions;
@@ -64,6 +65,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
             builder.Services.AddDecisorPurchasingPresentationWebCommon();
             builder.Services.AddDecisorSalesPresentationWebCommon();
             builder.Services.AddDecisorLeasingPresentationWebCommon();
+            builder.Services.AddDecisorGovernancePresentationWebCommon();
 
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Framework.Guama.Core.Persistence.ORM.EF.Entities.Trace, long>, Framework.Guama.Core.Persistence.ORM.EF.Repositories.TraceRepository>();
 

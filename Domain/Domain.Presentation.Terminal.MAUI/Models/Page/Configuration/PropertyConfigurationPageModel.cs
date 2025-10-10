@@ -8,6 +8,13 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 {
     public class PropertyConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PropertyDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string KindValidableProperty => nameof(Kind);
+        public static string StructureValidableProperty => nameof(Structure);
+        public static string ReferenceValidableProperty => nameof(Reference);
+        public static string PostalContactItemValidableProperty => nameof(PostalContact);
+        public static string SpacesValidableProperty => nameof(Spaces);
+
         private int priority = 1;
         private Microsoft.Maui.Controls.ImageSource fatureImageSource;
         private string name;
@@ -15,7 +22,6 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private StructureParentalDisplayModel structure;
         private PostalContactItemDisplayModel postalContact;
         private string reference;
-        private decimal area;
         private string description;
 
         public PropertyConfigurationPageModel(PropertyDisplayModel model) : base(model)
@@ -29,7 +35,6 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
                 Structure = model.Structure;
                 PostalContact = model.PostalContact;
                 Reference = model.Reference;
-                Area = model.Area;
                 Description = model.Description;
 
                 if (model.FeatureImage != null)
@@ -40,6 +45,14 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
                 ItemImageSources = new ObservableCollection<Microsoft.Maui.Controls.ImageSource>(model.Images.Select(_model => _model.ToImageSource()));
                 ItemImageModels = model.Images.ToList();
+                Spaces = new ObservableCollection<View.PropertySpaceViewModel>(model.Spaces.Select(_model => new View.PropertySpaceViewModel
+                {
+                    Id = _model.Id,
+                    Name = _model.Name,
+                    Description = _model.Description,
+                    Area = _model.Area,
+                    CurrentFeatureImage = _model.FeatureImage
+                }));
             }
         }
 
@@ -61,13 +74,13 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public string Reference { get => reference; set => SetProperty(ref reference, value); }
 
-        public decimal Area { get => area; set => SetProperty(ref area, value); }
-
         public string Description { get => description; set => SetProperty(ref description, value); }
 
         public ObservableCollection<Microsoft.Maui.Controls.ImageSource> ItemImageSources { get; set; } = [];
 
         public System.Collections.Generic.List<ImageDisplayModel> ItemImageModels { get; set; }
+
+        public ObservableCollection<View.PropertySpaceViewModel> Spaces { get; set; } = [];
 
         public PropertyKindDisplayModel[] AvailableKinds { get; set; }
 

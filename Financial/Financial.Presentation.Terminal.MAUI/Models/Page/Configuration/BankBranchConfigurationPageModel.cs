@@ -6,7 +6,10 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.P
 {
     public class BankBranchConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<BankBranchDisplayModel>
     {
-        private Interop.API.Common.Models.Display.BankAgencyDisplayModel agency;
+        public static string AgencyValidableProperty => nameof(Agency);
+        public static string NumberValidableProperty => nameof(Number);
+
+        private BankAgencyDisplayModel agency;
         private int number;
         private int priority = 1;
         private MunicipalityDisplayModel contactMunicipality;

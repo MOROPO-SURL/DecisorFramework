@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class BankAgenciesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.BankAgencyDisplayModel, Models.Page.Manage.BankAgenciesManagePageModel, Models.Page.Configuration.BankAgencyConfigurationPageModel, Configuration.BankAgencyConfigurationPage, Detail.BankAgencyDetailPage>
+public partial class BankAgenciesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.BankAgencyDisplayModel, Models.Page.Manage.BankAgenciesManagePageModel, Models.Page.Configuration.BankAgencyConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
 
@@ -16,7 +16,7 @@ public partial class BankAgenciesManagePage : Core.Presentation.Terminal.MAUI.UI
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 384; }
+    protected override double ItemViewRequestWidth { get => 480; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
@@ -28,11 +28,6 @@ public partial class BankAgenciesManagePage : Core.Presentation.Terminal.MAUI.UI
         var apiConnectClient = new Interop.API.Connect.Clients.BankAgenciesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.BankAgencyConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.BankAgencyDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.BankAgencyConfigurationPageModel(model));
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.BankAgencyDisplayModel target, int discriminator)

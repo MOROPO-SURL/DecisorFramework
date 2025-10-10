@@ -3,7 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class OrganizationContactPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.OrganizationContactDisplayModel, Models.Page.Pick.OrganizationContactPickPageModel, Detail.OrganizationContactDetailPage>
+public partial class OrganizationContactPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.OrganizationContactDisplayModel, Models.Page.Pick.OrganizationContactPickPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
 
@@ -66,24 +66,32 @@ public partial class OrganizationContactPickPage : Core.Presentation.Terminal.MA
     {
         var concreteBindingContext = BindingContext as Models.Page.Pick.OrganizationContactPickPageModel;
 
-        var apiConnectClient = new Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
         concreteBindingContext.IsBusy = true;
 
-        apiConnectClient.GetEnabledAsync().ContinueWith(task =>
+        System.Threading.Tasks.Task.Run(async () =>
         {
-            var model = new Models.Page.Configuration.OrganizationContactConfigurationPageModel(null)
+            try
             {
-                AvailableBusinessKinds = task.Result
-            };
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.OrganizationContactDisplayModel, Models.Page.Configuration.OrganizationContactConfigurationPageModel>>();
 
-            Dispatcher.Dispatch(() =>
+                var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
+
+                Dispatcher.Dispatch(() =>
+                {
+                    concreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(page);
+                });
+            }
+            catch (System.Exception exception)
             {
-                concreteBindingContext.IsBusy = false;
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
 
-                this.NavigationPushPageAsync(new Configuration.OrganizationContactConfigurationPage(ConfigurationSuccess_Callback, model));
-            });
-
+                    concreteBindingContext.IsBusy = false;
+                });
+            }
         });
     }
 

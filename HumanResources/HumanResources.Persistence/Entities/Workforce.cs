@@ -16,8 +16,6 @@
 
         public System.DateTime At { get; set; }
 
-        public System.Collections.Generic.List<WorkforceOrganizationalUnityBridge> OrganizationalUnityBridges { get; set; } = new System.Collections.Generic.List<WorkforceOrganizationalUnityBridge>();
-
-        public System.Collections.Generic.IEnumerable<Vacant> Vacants { get; set; }
+        public System.Collections.Generic.ICollection<WorkforceOrganizationalUnity> OrganizationalUnities { get; set; }
     }
 }

@@ -1,0 +1,54 @@
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.EmployeeDetailPage"
+    x:TypeArguments="interop_common_display_models:EmployeeDisplayModel"
+    x:DataType="interop_common_display_models:EmployeeDisplayModel"
+    Title="Detalles de Empleado"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Frame
+                Style="{StaticResource PopupFrameStyle}"
+                WidthRequest="400">
+                <Grid>
+                    <StackLayout Margin="20" Spacing="20">
+                        <StackLayout>
+                            <Label 
+                                Margin="0,0,0,20"
+                                Text="Detalles"
+                                FontAttributes="Bold"
+                                FontSize="Medium" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
+                                Text="Nombre" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Contact.Identity.Name}" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Apellidos" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Contact.Identity.LastName, TargetNullValue='---'}" />
+                        </StackLayout>
+                    </StackLayout>
+                    <Button
+                        HorizontalOptions="End" VerticalOptions="Start"
+                        Padding="10"
+                        BackgroundColor="Transparent"
+                        Text="&#xf5ad;"
+                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+                        FontSize="Medium"
+                        FontFamily="MaterialDesignIcons"
+                        BorderWidth="0"
+                        WidthRequest="48" HeightRequest="48"
+                        Clicked="DismissControl_Invoked" />
+                </Grid>
+            </Frame>
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

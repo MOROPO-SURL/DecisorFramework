@@ -59,6 +59,11 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                 model.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Identity.Image.ContentType);
             }
 
+            if (model.Representative.Identity.Image != null)
+            {
+                model.Representative.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Representative.Identity.Image.ContentType);
+            }
+
             foreach (var _model in model.Identity.PostalContacts)
             {
                 var municipality = municipalityRepository.Get(_model.Municipality.Id);

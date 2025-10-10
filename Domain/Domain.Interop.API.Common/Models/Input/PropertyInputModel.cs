@@ -25,12 +25,14 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         [System.ComponentModel.DataAnnotations.Required]
         public string Reference { get; set; }
 
-        public decimal Area { get; set; }
-
         public string Description { get; set; }
 
         public List<ImageInputModel> IncomingImageItems { get; set; } = new List<ImageInputModel>();
         public List<ImageDisplayModel> OutgoingImagetItems { get; set; } = new List<ImageDisplayModel>();
+
+        public List<PropertySpaceInputModel> EditionSpaces { get; set; } = new List<PropertySpaceInputModel>();
+        public List<PropertySpaceInputModel> IncomingSpaces { get; set; } = new List<PropertySpaceInputModel>();
+        public List<Display.PropertySpaceDisplayModel> OutgoingSpaces { get; set; } = new List<Display.PropertySpaceDisplayModel>();
 
         public Persistence.Entities.Property Export()
         {
@@ -51,7 +53,6 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             entity.Priority = Priority;
             entity.Name = Name;
             entity.Reference = Reference;
-            entity.Area = Area;
             entity.Description = Description;
 
             if (entity.KindId != KindId)

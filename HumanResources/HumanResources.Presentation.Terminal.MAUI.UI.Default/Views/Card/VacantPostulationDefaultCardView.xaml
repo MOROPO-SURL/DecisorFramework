@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.VacantPostulationDefaultCardView"
+    x:DataType="interop_common_display_models:VacantPostulationDisplayModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <communitytoolkit_converters:IsStringNotNullOrEmptyConverter x:Key="IsStringNotNullOrEmptyConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame Padding="0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0" Grid.RowSpan="3"
+                Aspect="AspectFill"
+                WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+            <StackLayout 
+                Grid.Column="1"
+                Padding="10">
+                <Label 
+                    FontSize="Medium"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Contact.Identity.Name}" />
+                <Label 
+                    IsVisible="{Binding Contact.Identity.LastName, Converter={StaticResource IsStringNotNullOrEmptyConverter}}"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Contact.Identity.LastName}" />
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Vacante"
+                    TextColor="DimGray"
+                    FontAttributes="Bold" />
+                <Label
+                    VerticalOptions="FillAndExpand"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Vacant.WorkPosition.Name}" />
+                <Label
+                    VerticalOptions="FillAndExpand"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Staff.Structure.Identity.Name}" />
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentView>

@@ -2,6 +2,8 @@
 {
     public class BrandConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.BrandDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+
         private string name;
         private string description;
         private int priority = 1;

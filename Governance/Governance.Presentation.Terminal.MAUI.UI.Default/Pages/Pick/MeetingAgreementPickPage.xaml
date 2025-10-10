@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ListBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Governance.Interop.API.Common"
+    xmlns:presentation_pick_page_models="clr-namespace:MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.Page.Pick;assembly=MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.MeetingAgreementPickPage"
+    x:TypeArguments="interop_common_display_models:MeetingDisplayModel,presentation_pick_page_models:MeetingAgreementPickPageModel"
+    x:DataType="presentation_pick_page_models:MeetingAgreementPickPageModel"
+    Title="Seleccionar Acuerdo de Reunión">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <SearchBar Margin="20,20,20,0" />
+                <Grid 
+                    VerticalOptions="FillAndExpand"
+                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
+                    <CollectionView
+                        x:Name="ItemsCollectionView"
+                        Margin="10"
+                        ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_common_display_models:MeetingDisplayModel">
+                                <ContentView Margin="5">
+                                    <Frame Margin="5">
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Label
+                                                Grid.Column="0" Grid.Row="0"
+                                                Text="No." />
+                                            <Label
+                                                Grid.Column="1" Grid.RowSpan="2"
+                                                Margin="0,0,8,0"
+                                                FontSize="Large"
+                                                Text="{Binding Index}" />
+                                            <Label 
+                                                Grid.Column="2" Grid.Row="0"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding At}" />
+                                            <Label 
+                                                Grid.Column="2" Grid.Row="1"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding DecisionMakingGroup.CanonicalName}" />
+                                            <Label 
+                                                Grid.ColumnSpan="3" Grid.Row="2"
+                                                Margin="0,8,0,0"
+                                                Text="Sumario"
+                                                TextColor="DimGray"
+                                                FontSize="Caption"
+                                                FontAttributes="Bold" />
+                                            <Label 
+                                                Grid.ColumnSpan="3" Grid.Row="3"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="2"
+                                                Text="{Binding Summary, TargetNullValue='---'}" />
+                                            <Label 
+                                                Grid.ColumnSpan="3" Grid.Row="4"
+                                                Margin="0,8,0,0"
+                                                Text="Acuerdos"
+                                                TextColor="DimGray"
+                                                FontSize="Caption"
+                                                FontAttributes="Bold" />
+                                            <VerticalStackLayout
+                                                Grid.ColumnSpan="3" Grid.Row="5"
+                                                BindableLayout.ItemsSource="{Binding Agreements}">
+                                                <BindableLayout.EmptyView>
+                                                    <Label Margin="4" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                                </BindableLayout.EmptyView>
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate x:DataType="interop_common_display_models:AgreementDisplayModel">
+                                                        <Frame 
+                                                            Padding="8"
+                                                            Margin="0,12,0,0">
+                                                            <Frame.GestureRecognizers>
+                                                                <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                                            </Frame.GestureRecognizers>
+                                                            <Grid>
+                                                                <Grid.ColumnDefinitions>
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition Width="Auto" />
+                                                                    <ColumnDefinition />
+                                                                </Grid.ColumnDefinitions>
+                                                                <Grid.RowDefinitions>
+                                                                    <RowDefinition Height="Auto" />
+                                                                    <RowDefinition Height="Auto" />
+                                                                </Grid.RowDefinitions>
+                                                                <Label
+                                                                    Grid.Column="0" Grid.Row="0"
+                                                                    Text="No." />
+                                                                <Label
+                                                                    Grid.Column="1" Grid.RowSpan="2"
+                                                                    Margin="0,0,4,0"
+                                                                    FontSize="Large"
+                                                                    Text="{Binding Index}" />
+                                                                <Label
+                                                                    Grid.Column="2" Grid.ColumnSpan="4"
+                                                                    FontAttributes="Bold"
+                                                                    Text="{Binding Title}" />
+                                                                <Label
+                                                                    Grid.Column="2" Grid.Row="1"
+                                                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                                                    Margin="0"
+                                                                    Text="Fecha de cumplimiento:" />
+                                                                <Label
+                                                                    Grid.Column="3" Grid.Row="1"
+                                                                    Margin="4,0,8,0"
+                                                                    Text="{Binding EndAt, TargetNullValue='No', StringFormat='{0:dd/MM/yyyy}'}" />
+                                                                <Label
+                                                                    Grid.Column="4" Grid.Row="1"
+                                                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                                                    Margin="0"
+                                                                    Text="Responsable:" />
+                                                                <Label
+                                                                    Grid.Column="5" Grid.Row="1"
+                                                                    Margin="4,0"
+                                                                    Text="{Binding Responsible, TargetNullValue='No'}" />
+                                                            </Grid>
+                                                        </Frame>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </Frame>
+                                </ContentView>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Label
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                                HorizontalTextAlignment="Center"
+                                Margin="5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                FontAttributes="Italic" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.Footer>
+                            <StackLayout IsVisible="{Binding HasMoreItems}">
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="5"
+                                    Text="Mostrar más"
+                                    Clicked="LoadMoreBurron_Clicked" />
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</core_ui_base_pages:ListBaseContentPage>

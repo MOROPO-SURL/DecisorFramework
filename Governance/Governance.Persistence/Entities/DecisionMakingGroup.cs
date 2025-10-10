@@ -21,7 +21,7 @@ namespace MOROPO.Framework.Decisor.Governance.Persistence.Entities
         public System.Guid StructureId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(LeaderId))]
-        public HumanResources.Persistence.Entities.Employee Leader { get; set; }
+        public Domain.Persistence.Entities.PersonContact Leader { get; set; }
         public System.Guid LeaderId { get; set; }
 
         public string Description { get; set; }
@@ -29,7 +29,5 @@ namespace MOROPO.Framework.Decisor.Governance.Persistence.Entities
         public List<DecisionMakingGroupEmployeeBridge> EmployeeBridges { get; set; } = new List<DecisionMakingGroupEmployeeBridge>();
 
         public List<DecisionMakingGroupContactBridge> ContactBridges { get; set; } = new List<DecisionMakingGroupContactBridge>();
-
-        public Meeting[] Meetings { get; set; }
     }
 }

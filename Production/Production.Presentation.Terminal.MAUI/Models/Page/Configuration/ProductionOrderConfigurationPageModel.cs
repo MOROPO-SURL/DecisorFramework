@@ -1,4 +1,4 @@
-﻿using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
+﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration
 {

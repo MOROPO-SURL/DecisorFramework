@@ -46,7 +46,7 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Procesos" />
+    <MenuFlyoutItem Text="Operaciones" />
     <ShellContent
         Title="Elaboración de pre-nóminas"
         ContentTemplate="{DataTemplate ContentPage}">
@@ -57,16 +57,24 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <ShellContent
-        Title="Procedimientos de alta"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
+    <FlyoutItem
+        Title="Admisión al empleo">
+        <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF014;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Postulaciones"
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:VacantPostulationsManagePage}" />
+        <ShellContent
+            Title="Candidatos"
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationCandidatesManagePage}" />
+        <ShellContent
+            Title="Propuestas"
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:AdmitionPropousalsManagePage}" />
+    </FlyoutItem>
     <ShellContent
         Title="Solicitudes de baja"
         ContentTemplate="{DataTemplate ContentPage}">
@@ -97,7 +105,7 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Personal"
-            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsRawManagePage}" />
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsManagePage}" />
         <ShellContent
              Title="Estructuras"
              ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}" />
@@ -106,12 +114,12 @@
             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}" />
     </FlyoutItem>
     <ShellContent
-        Title="Contactos"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}">
+        Title="Expedientes laborales"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:EmployeesListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF5D2;"
+                Glyph="&#xFDF0;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -132,6 +140,16 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF00C2;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Contactos"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF5D2;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

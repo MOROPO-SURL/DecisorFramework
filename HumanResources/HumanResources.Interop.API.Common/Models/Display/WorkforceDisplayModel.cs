@@ -13,7 +13,7 @@
 
         public System.DateTime At { get; set; }
 
-        public OrganizationalUnityDisplayModel[] OrganizationalUnities { get; set; }
+        public WorkforceOrganizationalUnityDisplayModel[] OrganizationalUnities { get; set; }
 
         public void Import(Persistence.Entities.Workforce entity)
         {

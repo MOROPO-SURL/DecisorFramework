@@ -8,13 +8,11 @@
 
         public int Priority { get; set; }
 
-        public bool NamingResolutionRequired { get; set; }
+        public Persistence.Enumerations.VacantOcupationMode OcupationMode { get; set; }
 
         public WorkPositionDisplayModel WorkPosition { get; set; }
 
-        public System.Guid WorkforceId { get; set; }
-
-        public System.Guid OrganizationUnityId { get; set; }
+        public System.Guid WorkforceOrganizationUnityId { get; set; }
 
         public SalaryStandardDisplayModel SalaryStandard { get; set; }
 
@@ -23,9 +21,8 @@
             Id = entity.Id;
             Enabled = entity.Enabled;
             Priority = entity.Priority;
-            NamingResolutionRequired = entity.NamingResolutionRequired;
-            WorkforceId = entity.WorkforceId;
-            OrganizationUnityId = entity.OrganizationUnityId;
+            OcupationMode = entity.OcupationMode;
+            WorkforceOrganizationUnityId = entity.WorkforceOrganizationalUnityId;
 
             if (entity.WorkPosition != null)
             {

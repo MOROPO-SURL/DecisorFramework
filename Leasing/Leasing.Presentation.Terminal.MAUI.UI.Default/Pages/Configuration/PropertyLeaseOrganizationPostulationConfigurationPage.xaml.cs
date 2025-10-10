@@ -1,0 +1,358 @@
+using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;
+using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
+
+public partial class PropertyLeaseOrganizationPostulationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<PropertyLeaseOrganizationPostulationDisplayModel, PropertyLeaseOrganizationPostulationDisplayModel, Models.Page.Configuration.PropertyLeaseOrganizationPostulationConfigurationPageModel>
+{
+    private readonly List<PropertySpaceLeasePropousalDisplayModel> incomingSpaces = [];
+    private readonly List<PropertySpaceLeasePropousalDisplayModel> outgoingSpaces = [];
+    private readonly List<DocumentInputModel> editionDocuments = [];
+    private readonly List<DocumentInputModel> incomingDocuments = [];
+    private readonly List<DocumentDisplayModel> outgoingDocuments = [];
+
+    public PropertyLeaseOrganizationPostulationConfigurationPage(System.Action<PropertyLeaseOrganizationPostulationDisplayModel> successAction, Models.Page.Configuration.PropertyLeaseOrganizationPostulationConfigurationPageModel model) : base(successAction, model, new Validators.PropertyLeaseOrganizationPostulationConfigurationValidator())
+    {
+        InitializeComponent();
+
+        if (model.MainPostalContactItem != null)
+        {
+            for (int i = 0; i < model.Contact.Identity.PostalContacts.Length; i++)
+            {
+                var current = model.Contact.Identity.PostalContacts[i];
+
+                if (model.MainPostalContactItem.Id != current.Id) continue;
+
+                PostalContactItemPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
+    }
+
+    protected override string EntityTypeName => "Postulante Jurídico";
+
+    protected override async System.Threading.Tasks.Task<PropertyLeaseOrganizationPostulationDisplayModel> PerformCreationAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.PropertyLeaseOrganizationPostulationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+        var model = new PropertyLeaseOrganizationPostulationInputModel
+        {
+            Id = System.Guid.NewGuid(),
+            OfferId = ConcreteBindingContext.OfferId,
+            ContactId = ConcreteBindingContext.Contact.Id,
+            TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
+            StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
+            Argument = ConcreteBindingContext.Argument,
+            BankAccountId = ConcreteBindingContext.BankAccount.Id,
+            IncomingDocuments = incomingDocuments,
+            IncomingSpaces = incomingSpaces
+        };
+
+        await apiConnectClient.CreateAsync(model);
+
+        return null;
+    }
+
+    protected override async System.Threading.Tasks.Task<PropertyLeaseOrganizationPostulationDisplayModel> PerformEditionAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.PropertyLeaseOrganizationPostulationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+        var model = new PropertyLeaseOrganizationPostulationInputModel
+        {
+            Id = ConcreteBindingContext.Id,
+            OfferId = ConcreteBindingContext.OfferId,
+            ContactId = ConcreteBindingContext.Contact.Id,
+            TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
+            StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
+            MainPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[PostalContactItemPicker.SelectedIndex].Id,
+            Argument = ConcreteBindingContext.Argument,
+            BankAccountId = ConcreteBindingContext.BankAccount.Id,
+            IncomingDocuments = incomingDocuments,
+            EditionDocuments = editionDocuments,
+            OutgoingDocuments = outgoingDocuments,
+            IncomingSpaces = incomingSpaces,
+            OutgoingSpaces = outgoingSpaces
+        };
+
+        await apiConnectClient.EditAsync(model);
+
+        return null;
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
+
+    private void ContactPickButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationContactPickPage(ContactPickComplete_Callback)));
+    }
+
+    private void SpaceAgregationButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PropertySpaceForLeasePropousalPickPage(PropertySpacePickComplete_Callback, ConcreteBindingContext.Propousal.SpacePropousals.Except(ConcreteBindingContext.Spaces).Select(item => item.Space).ToArray())));
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
+    }
+
+    private void SpaceRemotionButton_Clicked(object sender, System.EventArgs e)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este espacio?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PropertySpaceLeasePropousalDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingSpaces)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingSpaces.Remove(incomingSpaces.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    outgoingSpaces.Add(target);
+                }
+
+                ConcreteBindingContext.Spaces.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void DocumentAgregationButton_Clicked(object sender, System.EventArgs e)
+    {
+        Microsoft.Maui.Storage.FilePicker.Default.PickAsync(new Microsoft.Maui.Storage.PickOptions
+        {
+            PickerTitle = "Seleccionar archivo",
+            FileTypes = new Microsoft.Maui.Storage.FilePickerFileType(
+                new Dictionary<Microsoft.Maui.Devices.DevicePlatform, IEnumerable<string>>
+                {
+                    { Microsoft.Maui.Devices.DevicePlatform.iOS, [ "public.my.comic.extension" ] }, // UTType values
+                    { Microsoft.Maui.Devices.DevicePlatform.Android, [ "application/comics" ] }, // MIME type
+                    { Microsoft.Maui.Devices.DevicePlatform.WinUI, [ ".doc", ".docx", ".dot", ".pdf", ".xls", ".xlsx", ".ppt", ".pptx", ".txt", ".png", ".jpg", ".jpeg", ".bmp"] }, // file extension
+                    { Microsoft.Maui.Devices.DevicePlatform.macOS, [ "cbr", "cbz" ] }, // UTType values
+                })
+        }).ContinueWith(async task =>
+        {
+            if (task.Result == null) return;
+
+            var filePickResult = task.Result;
+
+            using var stream = await filePickResult.OpenReadAsync();
+
+            var name = System.IO.Path.GetFileNameWithoutExtension(filePickResult.FileName);
+            var data = new byte[stream.Length];
+
+            stream.Read(data, 0, (int)stream.Length);
+
+            Dispatcher.Dispatch(() =>
+            {
+                var model = new DocumentInputModel
+                {
+                    Id = System.Guid.NewGuid(),
+                    Name = name,
+                    ContentData = data,
+                    ContentType = filePickResult.ContentType
+                };
+
+                incomingDocuments.Add(model);
+
+                ConcreteBindingContext.Documents.Add(new DocumentDisplayModel
+                {
+                    Name = name,
+                    Extension = System.IO.Path.GetExtension(filePickResult.FileName),
+                    Length = data.Length
+                });
+            });
+        });
+    }
+
+    private void DocumentEditionButton_Clicked(object sender, System.EventArgs e)
+    {
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as DocumentDisplayModel;
+
+        var model = new Core.Presentation.Terminal.MAUI.Models.Page.Configuration.DocumentConfigurationPageModel(target);
+
+        this.NavigationPushPageAsync(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.DocumentConfigurationPage(DocumentEditSuccess_Callback, model));
+    }
+
+    private void DocumentRemotionButton_Clicked(object sender, System.EventArgs e)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este documento?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as DocumentDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingDocuments)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingDocuments.Remove(incomingDocuments.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionDocuments)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionDocuments.Remove(editionDocuments.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingDocuments.Add(target);
+                }
+
+                ConcreteBindingContext.Documents.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void BankAccountPickButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.LegalClientByContactBankAccountPickPage(BankAccountPickComplete_Callback, ConcreteBindingContext.Contact)));
+    }
+
+    private void BankAccountPickComplete_Callback(Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel model)
+    {
+        ConcreteBindingContext.BankAccount = model;
+
+        hasChangesFlag = true;
+    }
+
+    private void PropertySpacePickComplete_Callback(Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel model)
+    {
+        var target = ConcreteBindingContext.Propousal.SpacePropousals.First(item => item.Space.Id == model.Id);
+
+        incomingSpaces.Add(target);
+
+        ConcreteBindingContext.Spaces.Add(target);
+
+        hasChangesFlag = true;
+    }
+
+    private void ContactPickComplete_Callback(Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel model)
+    {
+        ConcreteBindingContext.Contact = model;
+        ConcreteBindingContext.TaxIdentificationNumber = model.TaxIdentificationNumber;
+        ConcreteBindingContext.StateIdentificationCode = model.StateIdentificationCode;
+
+        if (model.MainPostalContactItem != null)
+        {
+            for (int i = 0; i < ConcreteBindingContext.Contact.Identity.PostalContacts.Length; i++)
+            {
+                var current = ConcreteBindingContext.Contact.Identity.PostalContacts[i];
+
+                if (model.MainPostalContactItem.Id != current.Id) continue;
+
+                PostalContactItemPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
+    }
+
+    private void DocumentEditSuccess_Callback(DocumentDisplayModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingDocuments)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.Name = model.Name;
+            item.Description = model.Description;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionDocuments)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.Name = model.Name;
+                item.Description = model.Description;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionDocuments.Add(new DocumentInputModel
+            {
+                Id = model.Id,
+                Name = model.Name,
+                Description = model.Description
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.Documents)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            model.Extension = item.Extension;
+            model.Length = item.Length;
+
+            ConcreteBindingContext.Documents[index] = model;
+
+            break;
+        }
+
+        hasChangesFlag = true;
+    }
+}

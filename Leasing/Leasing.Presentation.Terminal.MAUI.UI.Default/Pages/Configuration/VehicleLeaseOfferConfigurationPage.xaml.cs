@@ -7,7 +7,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default
 
 public partial class VehicleLeaseOfferConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<VehicleLeaseOfferDisplayModel, VehicleLeaseOfferDisplayModel, Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel>
 {
-    public VehicleLeaseOfferConfigurationPage(System.Action<VehicleLeaseOfferDisplayModel> successAction, Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel model) : base(successAction, model)
+    public VehicleLeaseOfferConfigurationPage(System.Action<VehicleLeaseOfferDisplayModel> successAction, Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }
@@ -21,8 +21,11 @@ public partial class VehicleLeaseOfferConfigurationPage : Core.Presentation.Term
         var model = new Interop.API.Common.Models.Input.VehicleLeaseOfferInputModel
         {
             Id = System.Guid.NewGuid(),
-            VehicleId = ConcreteBindingContext.Vehicle.Id,
+            PropousalId = ConcreteBindingContext.Propousal.Id,
+            AgreementId = ConcreteBindingContext.Agreement.Id,
             Description = ConcreteBindingContext.Description,
+            OpenAt = ConcreteBindingContext.OpenAt,
+            ClosedAt = ConcreteBindingContext.HasClosetAtDate ? ConcreteBindingContext.ClosedAt : null,
             Priority = ConcreteBindingContext.Priority
         };
 
@@ -40,8 +43,11 @@ public partial class VehicleLeaseOfferConfigurationPage : Core.Presentation.Term
         var model = new Interop.API.Common.Models.Input.VehicleLeaseOfferInputModel
         {
             Id = concreteBindingContext.Id,
-            VehicleId = ConcreteBindingContext.Vehicle.Id,
+            PropousalId = ConcreteBindingContext.Propousal.Id,
+            AgreementId = ConcreteBindingContext.Agreement.Id,
             Description = ConcreteBindingContext.Description,
+            OpenAt = ConcreteBindingContext.OpenAt,
+            ClosedAt = ConcreteBindingContext.HasClosetAtDate ? ConcreteBindingContext.ClosedAt : null,
             Priority = ConcreteBindingContext.Priority
         };
 
@@ -59,14 +65,23 @@ public partial class VehicleLeaseOfferConfigurationPage : Core.Presentation.Term
     {
         OnCancel(sender, eventArgs);
     }
-
-    private void VehiclePickButton_Clicked(object sender, System.EventArgs e)
+    private void PropousalPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.VehiclePickPage(VehiclePickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VehicleLeasePropousalPickPage(PropousalPickComplete_Callback)));
     }
 
-    private void VehiclePickComplete_Callback(Domain.Interop.API.Common.Models.Display.VehicleDisplayModel model)
+    private void AgreementPickButton_Clicked(object sender, System.EventArgs e)
     {
-        ConcreteBindingContext.Vehicle = model;
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.MeetingAgreementPickPage(AgreementPickComplete_Callback)));
+    }
+
+    private void PropousalPickComplete_Callback(VehicleLeasePropousalDisplayModel model)
+    {
+        ConcreteBindingContext.Propousal = model;
+    }
+
+    private void AgreementPickComplete_Callback(Governance.Interop.API.Common.Models.Display.AgreementDisplayModel model)
+    {
+        ConcreteBindingContext.Agreement = model;
     }
 }

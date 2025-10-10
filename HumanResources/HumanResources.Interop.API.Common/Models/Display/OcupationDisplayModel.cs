@@ -8,19 +8,19 @@
 
         public System.DateTime At { get; set; }
 
-        public EmployeeDisplayModel Employee { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Employee { get; set; }
 
         public void Import(Persistence.Entities.Ocupation entity)
         {
             Id = entity.Id;
-            VacantId = entity.VacantId;
+            VacantId = entity.Contract.VacantId;
             At = entity.At;
 
-            if (entity.Employee != null)
+            if (entity.Contract.Employee != null)
             {
-                Employee = new EmployeeDisplayModel();
+                Employee = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
 
-                Employee.Import(entity.Employee);
+                Employee.Import(entity.Contract.Employee);
             }
         }
     }
