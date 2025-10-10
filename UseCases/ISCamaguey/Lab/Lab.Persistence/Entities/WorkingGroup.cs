@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities
 {
-    public class WorkingGroup : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
+    public class WorkingGroup : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>, Framework.Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; }

@@ -7,7 +7,7 @@ using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/usescase/idi/[controller]")]
+    [Route("api/case/idi/[controller]")]
     [ApiController]
     public class ResearchAreasController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<ResearchArea, System.Guid, ResearchAreaInputModel, ResearchAreaDisplayModel, ResearchAreaFilterModel>
     {

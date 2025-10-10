@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/usescase/idi/programs";
+        protected override string TargetController => "api/case/idi/programs";
     }
 }

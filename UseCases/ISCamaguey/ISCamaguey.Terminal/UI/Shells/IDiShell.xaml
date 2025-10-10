@@ -2,7 +2,7 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:decisor_usescase_idi_managet_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisor_usescase_idi_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.IDiShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -48,7 +48,7 @@
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Programas"
-        ContentTemplate="{DataTemplate decisor_usescase_idi_managet_pages:ProgramsManagePage}">
+        ContentTemplate="{DataTemplate decisor_usescase_idi_manage_pages:ProgramsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -58,7 +58,7 @@
     </ShellContent>
     <ShellContent
         Title="Áreas de Investigación"
-        ContentTemplate="{DataTemplate decisor_usescase_idi_managet_pages:ResearchAreasManagePage}">
+        ContentTemplate="{DataTemplate decisor_usescase_idi_manage_pages:ResearchAreasManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
