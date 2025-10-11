@@ -8,7 +8,7 @@ using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/legal/[controller]")]
+    [Route("api/fwrk/legal/[controller]")]
     [ApiController]
     public class ProformasController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Proforma, System.Guid, ProformaInputModel, ProformaDisplayModel>
     {

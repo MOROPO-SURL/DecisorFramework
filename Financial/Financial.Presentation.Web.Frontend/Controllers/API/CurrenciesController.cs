@@ -4,7 +4,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/financial/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/financial/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class CurrenciesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<Currency, System.Guid, Interop.API.Common.Models.Input.CurrencyInputModel, Interop.API.Common.Models.Display.CurrencyDisplayModel>
     {

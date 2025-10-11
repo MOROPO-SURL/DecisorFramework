@@ -9,6 +9,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Connect.Clients
         {
         }
 
-        protected override string TargetController => "api/commercial/naturalproviders";
+        protected override string TargetController => "api/fwrk/commercial/naturalproviders";
     }
 }

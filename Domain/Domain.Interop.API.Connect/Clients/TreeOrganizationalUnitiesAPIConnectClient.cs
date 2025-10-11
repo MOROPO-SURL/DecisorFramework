@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/domain/organizationalunities/tree";
+        protected override string TargetController => "api/fwrk/domain/organizationalunities/tree";
     }
 }

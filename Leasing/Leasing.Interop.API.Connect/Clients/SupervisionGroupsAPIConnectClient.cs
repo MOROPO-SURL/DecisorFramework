@@ -8,6 +8,6 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Connect.Clients
         {
         }
 
-        protected override string TargetController => "api/leasing/supervisiongroups";
+        protected override string TargetController => "api/fwrk/leasing/supervisiongroups";
     }
 }

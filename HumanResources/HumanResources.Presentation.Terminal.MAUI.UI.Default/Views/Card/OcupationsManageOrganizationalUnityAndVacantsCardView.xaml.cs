@@ -1,8 +1,8 @@
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card;
 
-public partial class OcupationsRawManageOrganizationalUnityAndVacantsCardView : Microsoft.Maui.Controls.ContentView
+public partial class OcupationsManageOrganizationalUnityAndVacantsCardView : Microsoft.Maui.Controls.ContentView
 {
-	public OcupationsRawManageOrganizationalUnityAndVacantsCardView()
+	public OcupationsManageOrganizationalUnityAndVacantsCardView()
 	{
 		InitializeComponent();
     }

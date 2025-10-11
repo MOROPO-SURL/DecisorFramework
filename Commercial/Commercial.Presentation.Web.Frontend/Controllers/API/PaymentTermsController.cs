@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/commercial/[controller]")]
+    [Route("api/fwrk/commercial/[controller]")]
     [ApiController]
     public class PaymentTermsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEnableableEntityAPIConsultController<Persistence.Entities.PaymentTerm, System.Guid, Interop.API.Common.Models.Display.PaymentTermDisplayModel>
     {

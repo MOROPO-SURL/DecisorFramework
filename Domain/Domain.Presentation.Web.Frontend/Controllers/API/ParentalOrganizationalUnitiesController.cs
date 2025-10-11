@@ -4,7 +4,7 @@ using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/domain/organizationalunities/parental")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/domain/organizationalunities/parental")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class ParentalOrganizationalUnitiesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<OrganizationalUnity, System.Guid, OrganizationalUnityInputModel, OrganizationalUnityParentalDisplayModel>
     {

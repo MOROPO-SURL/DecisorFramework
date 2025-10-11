@@ -10,7 +10,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Connect.Clients
         {
         }
 
-        protected override string TargetController => "api/purchasing/purchaseplans";
+        protected override string TargetController => "api/fwrk/purchasing/purchaseplans";
 
         public async System.Threading.Tasks.Task ApproveAsync(System.Guid key)
         {

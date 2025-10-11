@@ -9,7 +9,7 @@ using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/hhrr/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/hhrr/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class OcupationCandidatesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<OcupationCandidate, System.Guid, OcupationCandidateInputModel, OcupationCandidateDisplayModel, OcupationCandidateFilterModel>
     {

@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/hhrr/workpositionkinds";
+        protected override string TargetController => "api/fwrk/hhrr/workpositionkinds";
     }
 }

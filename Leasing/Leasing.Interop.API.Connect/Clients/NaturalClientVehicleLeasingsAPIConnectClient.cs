@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/leasing/naturalclientvehicleleasings";
+        protected override string TargetController => "api/fwrk/leasing/naturalclientvehicleleasings";
     }
 }

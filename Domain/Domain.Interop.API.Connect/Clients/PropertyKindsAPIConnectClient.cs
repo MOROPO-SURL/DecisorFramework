@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/domain/propertykinds";
+        protected override string TargetController => "api/fwrk/domain/propertykinds";
     }
 }

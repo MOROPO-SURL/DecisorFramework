@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/domain/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/domain/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class PropertyKindsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultController<Persistence.Entities.PropertyKind, System.Guid, Interop.API.Common.Models.Display.PropertyKindDisplayModel>
     {

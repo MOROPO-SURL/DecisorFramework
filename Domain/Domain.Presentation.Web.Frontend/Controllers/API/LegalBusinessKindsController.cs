@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/domain/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/domain/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class LegalBusinessKindsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEnableableEntityAPIConsultController<LegalBusinessKind, System.Guid, LegalBusinessKindDisplayModel>
     {

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/production/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/production/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class ProductionOrdersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<ProductionOrder, System.Guid, ProductionOrderInputModel, ProductionOrderDisplayModel, ProductionOrderFilterModel>
     {

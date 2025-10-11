@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View
 {
-    public class OcupationsRawManageVacantViewModel : Caney.MVVM.Core.Models.BaseBindableModel
+    public class OcupationsManageVacantViewModel : Caney.MVVM.Core.Models.BaseBindableModel
     {
         private OcupationDisplayModel ocupation;
 
