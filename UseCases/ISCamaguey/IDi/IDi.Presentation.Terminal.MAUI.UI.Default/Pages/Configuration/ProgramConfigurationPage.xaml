@@ -173,16 +173,22 @@
                                                     LineBreakMode="TailTruncation"
                                                     Text="{Binding Title}" />
                                                 <Button
-                                                    FontFamily="MaterialDesignIcons" 
-                                                    Text="&#xF208;"
+                                                    FontFamily="MaterialDesignIcons"
+                                                    Padding="0"
+                                                    FontSize="21"
+                                                    Text="&#xF2FD;"
                                                     Clicked="ProgramExpectResultDetailButton_Clicked" />
                                                 <Button
                                                     FontFamily="MaterialDesignIcons" 
+                                                    Padding="0"
+                                                    FontSize="21"
                                                     Text="&#xF90B;"
                                                     Clicked="ProgramExpectResultEditionButton_Clicked" />
                                                 <Button
                                                     VerticalOptions="Start"
                                                     FontFamily="MaterialDesignIcons" 
+                                                    Padding="0"
+                                                    FontSize="21"
                                                     Text="&#xFA78;"
                                                     Clicked="ProgramExpectResultRemotionButton_Clicked" />
                                             </StackLayout>

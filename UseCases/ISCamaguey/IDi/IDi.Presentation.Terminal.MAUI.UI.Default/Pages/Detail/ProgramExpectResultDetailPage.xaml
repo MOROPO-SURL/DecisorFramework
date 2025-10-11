@@ -8,52 +8,53 @@
     x:TypeArguments="interop_common_display_models:ProgramExpectResultDisplayModel"
     x:DataType="interop_common_display_models:ProgramExpectResultDisplayModel"
     Title="Detalles de Prioridad de Programa"
+    BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
     <ScrollView Orientation="Vertical">
         <Grid>
-            <Frame
-                Style="{StaticResource PopupFrameStyle}"
-                WidthRequest="400">
-                <Grid>
-                    <StackLayout Margin="20">
-                        <Label 
-                            Margin="0,0,0,20"
-                            Text="Detalles"
-                            FontAttributes="Bold"
-                            FontSize="Medium" />
-                        <Label
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
-                            Margin="0"
-                            Text="Título" />
-                        <Label
-                            Style="{StaticResource ValuePropertyLabelStyle}"
-                            Text="{Binding Title}" />
-                        <Label 
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
-                            Text="No." />
-                        <Label
-                            Style="{StaticResource ValuePropertyLabelStyle}"
-                            Text="{Binding Index}" />
-                        <Label 
-                            Style="{StaticResource CaptionPropertyLabelStyle}"
-                            Text="Descripción" />
-                        <Label
-                            Style="{StaticResource ValuePropertyLabelStyle}"
-                            Text="{Binding Description, TargetNullValue='---'}" />
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="400"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <StackLayout Margin="20" Spacing="20">
+                        <StackLayout>
+                            <Label 
+                                Margin="0,0,0,20"
+                                Text="Detalles"
+                                FontAttributes="Bold"
+                                FontSize="Medium" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
+                                Text="Título" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Title}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="No." />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Index}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Descripción" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Description, TargetNullValue='---'}" />
+                        </StackLayout>
                     </StackLayout>
-                    <Button
-                        HorizontalOptions="End" VerticalOptions="Start"
-                        Padding="10"
-                        BackgroundColor="Transparent"
-                        Text="&#xf5ad;"
-                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-                        FontSize="Medium"
-                        FontFamily="MaterialDesignIcons"
-                        BorderWidth="0"
-                        WidthRequest="48" HeightRequest="48"
-                        Clicked="DismissControl_Invoked" />
-                </Grid>
-            </Frame>
+                </Frame>
+                <Button
+                    HorizontalOptions="End" VerticalOptions="Start"
+                    Text="&#xf5ad;"
+                    FontSize="Medium"
+                    FontFamily="MaterialDesignIcons"
+                    BorderWidth="0"
+                    WidthRequest="48" HeightRequest="48"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
         </Grid>
     </ScrollView>
 </core_ui_base_pages:DetailBaseContentPage>

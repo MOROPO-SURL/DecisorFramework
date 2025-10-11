@@ -9,7 +9,7 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<!-- Display name -->
-		<ApplicationTitle>Decisor Instituto de Suelos Camagüey</ApplicationTitle>
+		<ApplicationTitle>Decisor IS Camagüey</ApplicationTitle>
 		<!-- App Identifier -->
 		<ApplicationId>cu.moropo.iscamaguey.decisor.terminal</ApplicationId>
 		<!-- Versions -->
