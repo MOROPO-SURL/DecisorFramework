@@ -143,19 +143,9 @@ public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.
     private void OcupationCreationButton_Clicked(object sender, System.EventArgs e)
     {
         pickContactVacantBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.OcupationsManageVacantViewModel;
+
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Configuration.OcupationConfigurationPage(OcupationConfigurationComplete_Callback, new Models.Page.Configuration.OcupationConfigurationPageModel(ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex].Id))));
     }
-
-    //private void PickContactButton_Clicked(object sender, System.EventArgs e)
-    //{
-    //    pickContactVacantBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.OcupationsRawManageVacantViewModel;
-
-    //    ConcreteBindingContext.IsBusy = true;
-
-    //    System.Threading.Tasks.Task.Delay(100).ContinueWith(_ =>
-    //    {
-    //        Dispatcher.Dispatch(() => this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback))).ContinueWith(_ => Dispatcher.Dispatch(() => ConcreteBindingContext.IsBusy = false)));
-    //    });
-    //}
 
     private void RemoveOcupationButton_Clicked(object sender, System.EventArgs e)
     {
@@ -227,97 +217,4 @@ public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.
 
         pickContactVacantBindingContext = null;
     }
-
-    //private void ContactPickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
-    //{
-    //    if (pickContactVacantBindingContext.Ocupation != null && pickContactVacantBindingContext.Ocupation.Employee.Contact.Id == model.Id)
-    //    {
-    //        pickContactVacantBindingContext = null;
-
-    //        return;
-    //    }
-
-    //    DisplayAlert("Confirmación", "Está seguro que desea asignar la persona seleccionada a esta ocupación en la plantilla?", "Confirmar", "Cancelar").ContinueWith(task =>
-    //    {
-    //        if (!task.Result) return;
-
-    //        Dispatcher.Dispatch(() =>
-    //        {
-    //            ConcreteBindingContext.IsBusy = true;
-
-    //            System.Threading.Tasks.Task.Run(async () =>
-    //            {
-    //                var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
-
-    //                var employeesAPIConnectClient = new Framework.Decisor.Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientHelperProvider);
-
-    //                Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel employee;
-
-    //                try
-    //                {
-    //                    employee = await employeesAPIConnectClient.FindByContactAsync(model.Id);
-    //                }
-    //                catch (Framework.Guama.Core.Presentation.API.Connect.UnspectedHttpStatusException exception)
-    //                {
-    //                    if (exception.HttpStatusCode != System.Net.HttpStatusCode.NoContent) throw;
-
-    //                    var employeeId = System.Guid.NewGuid();
-
-    //                    await employeesAPIConnectClient.CreateAsync(new Framework.Decisor.Domain.Interop.API.Common.Models.Input.EmployeeInputModel
-    //                    {
-    //                        Id = employeeId,
-    //                        ContactId = model.Id,
-    //                        Priority = 1
-    //                    });
-
-    //                    employee = await employeesAPIConnectClient.GetAsync(employeeId);
-    //                }
-    //                catch { throw; }
-
-    //                var ocupationsAPIConnectClient = new Framework.Decisor.HumanResources.Interop.API.Connect.Clients.OcupationsAPIConnectClient(httpClientHelperProvider);
-
-    //                if (pickContactVacantBindingContext.Ocupation != null)
-    //                {
-    //                    await ocupationsAPIConnectClient.EditAsync(new Framework.Decisor.HumanResources.Interop.API.Common.Models.Input.OcupationInputModel
-    //                    {
-    //                        Id = pickContactVacantBindingContext.Ocupation.Id,
-    //                        EmployeeId = employee.Id
-    //                    });
-
-    //                    return await ocupationsAPIConnectClient.GetAsync(pickContactVacantBindingContext.Ocupation.Id);
-    //                }
-
-    //                var newOcupationId = System.Guid.NewGuid();
-
-    //                await ocupationsAPIConnectClient.CreateAsync(new Framework.Decisor.HumanResources.Interop.API.Common.Models.Input.OcupationInputModel
-    //                {
-    //                    Id = newOcupationId,
-    //                    StaffId = ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex].Id,
-    //                    WorkforceId = ConcreteBindingContext.AvailableStaffWorkforces[StaffWorkforcePicker.SelectedIndex].Workforce.Id,
-    //                    VacantId = pickContactVacantBindingContext.Id,
-    //                    EmployeeId = employee.Id
-    //                });
-
-    //                return await ocupationsAPIConnectClient.GetAsync(newOcupationId);
-    //            }).ContinueWith(_task =>
-    //            {
-    //                Dispatcher.Dispatch(() =>
-    //                {
-    //                    if (_task.Exception != null || _task.IsCanceled)
-    //                    {
-    //                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(_task.Exception, this);
-    //                    }
-    //                    else
-    //                    {
-    //                        pickContactVacantBindingContext.Ocupation = _task.Result;
-    //                    }
-
-    //                    pickContactVacantBindingContext = null;
-
-    //                    ConcreteBindingContext.IsBusy = false;
-    //                });
-    //            });
-    //        });
-    //    });
-    //}
 }

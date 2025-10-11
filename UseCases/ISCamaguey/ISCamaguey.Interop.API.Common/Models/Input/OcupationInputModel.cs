@@ -8,6 +8,10 @@
 
         public System.Guid ContactId { get; set; }
 
+        public System.Guid VacantId { get; set; }
+
+        public System.Guid StaffId { get; set; }
+
         public Framework.Decisor.HumanResources.Persistence.Entities.Ocupation Export()
         {
             return new Framework.Decisor.HumanResources.Persistence.Entities.Ocupation { Id = Id, At = System.DateTime.Now };

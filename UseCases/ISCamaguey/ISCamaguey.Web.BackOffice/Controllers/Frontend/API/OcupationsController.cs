@@ -1,9 +1,9 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter;
-using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using MOROPO.ISCamaguey.Decisor.Interop.API.Common.Models.Input;
 
 namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
 {
@@ -11,12 +11,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class OcupationsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementFilteredController<Ocupation, System.Guid, OcupationInputModel, OcupationDisplayModel, OcupationFilterModel>
     {
-        private readonly IEntityRepository<AdmitionPropousal, System.Guid> admisionPropousalRepository;
+        private readonly IEntityRepository<NamingResolution, System.Guid> namingResolutionRepository;
         private readonly IEntityRepository<Employee, System.Guid> employeeRepository;
 
-        public OcupationsController(IEntityRepository<Employee, System.Guid> employeeRepository, IEntityRepository<AdmitionPropousal, System.Guid> admisionPropousalRepository, IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
+        public OcupationsController(IEntityRepository<Employee, System.Guid> employeeRepository, IEntityRepository<NamingResolution, System.Guid> namingResolutionRepository, IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
         {
-            this.admisionPropousalRepository = admisionPropousalRepository;
+            this.namingResolutionRepository = namingResolutionRepository;
             this.employeeRepository = employeeRepository;
         }
 
@@ -41,23 +41,36 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
         {
             base.PreCreate(entity, model);
 
-            var admisionPropousal = admisionPropousalRepository.Get(model.AdmisionPropousalId.Value);
+            var now = System.DateTime.Now;
 
-            var employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == admisionPropousal.OcupationCandidate.Postulation.ContactId);
+            var index = namingResolutionRepository.Count() + 1;
 
-            entity.StaffId = admisionPropousal.OcupationCandidate.Postulation.StaffId;
-            entity.VacantId = admisionPropousal.OcupationCandidate.Postulation.VacantId;
-            entity.Contract = new AdmitionEmploymentContract
+            var namingResolution = namingResolutionRepository.Add(new NamingResolution
             {
-                Year = model.StarAt.Year,
-                StarAt = model.StarAt,
-                Objective = $"Contratación generada a partir de la propuesta de admisión tomada en la reunión No.{admisionPropousal.Agreement.Meeting.Index} con fecha {admisionPropousal.Agreement.Meeting.At:D}",
-                DurationUnitCount = model.DurationUnitCount,
-                DurationUnitMeasureKind = model.DurationUnitMeasureKind,
-                Priority = admisionPropousal.OcupationCandidate.Postulation.Contact.Priority,
-                StaffId = admisionPropousal.OcupationCandidate.Postulation.StaffId,
-                VacantId = admisionPropousal.OcupationCandidate.Postulation.VacantId,
-                AdmitionPropousalId = admisionPropousal.Id
+                Id = System.Guid.NewGuid(),
+                AgreementId = model.AgreementId,
+                ContactId = model.ContactId,
+                Index = index,
+                At = now,
+                Year = now.Year,
+                ConcretedAt = now,
+                StaffId = model.StaffId,
+                VacantId = model.VacantId,
+                Summary = "Automatic naming resolution for simplified ocupation mode"
+            }, User.Identity.Name, false);
+
+            var employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == namingResolution.ContactId.Value);
+
+            entity.StaffId = model.StaffId;
+            entity.Contract = new NamingEmploymentContract
+            {
+                Year = now.Year,
+                StarAt = now,
+                Objective = $"Contratación generada a partir de la resolución de nombramiento \"{namingResolution.Id}/{namingResolution.At.Year}\"",
+                Priority = 1,
+                StaffId = model.StaffId,
+                VacantId = model.VacantId,
+                ResolutionId = namingResolution.Id
             };
 
             if (employee != null)
@@ -76,14 +89,13 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
                 entity.Contract.Employee = new Employee
                 {
                     Enabled = true,
-                    Priority = admisionPropousal.OcupationCandidate.Postulation.Contact.Priority,
-                    ContactId = admisionPropousal.OcupationCandidate.Postulation.ContactId
+                    Priority = 1,
+                    ContactId = model.ContactId
                 };
             }
+            namingResolution.ConcretedAt = System.DateTime.Now;
 
-            admisionPropousal.Archived = true;
-
-            admisionPropousalRepository.Update(admisionPropousal, User.Identity.Name, false);
+            namingResolutionRepository.Update(namingResolution, User.Identity.Name, false);
         }
     }
 }

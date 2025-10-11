@@ -80,6 +80,7 @@
 		<ProjectReference Include="..\..\..\Supervision\Supervision.Presentation.Terminal.MAUI.UI.Default\Supervision.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Domain\Domain.Presentation.Terminal.MAUI.UI.Default\Domain.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\IDi\IDi.Presentation.Terminal.MAUI.UI.Default\IDi.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\ISCamaguey.Interop.API.Common\ISCamaguey.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Lab\Lab.Presentation.Terminal.MAUI.UI.Default\Lab.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	</ItemGroup>
 
@@ -87,7 +88,7 @@
 	  <MauiXaml Update="Resources\Styles\Values.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\Configuration\EmployeeConfigurationPage.xaml">
+	  <MauiXaml Update="UI\Pages\Configuration\OcupationConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Manage\OcupationsSimplifiedManagePage.xaml">
@@ -111,8 +112,8 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <Compile Update="UI\Pages\Configuration\EmployeeConfigurationPage.xaml.cs">
-	    <DependentUpon>%(Filename)</DependentUpon>
+	  <Compile Update="UI\Pages\Configuration\OcupationConfigurationPage.xaml.cs">
+	    <DependentUpon>OcupationConfigurationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Pages\Manage\OcupationsSimplifiedManagePage.xaml.cs">
 	    <DependentUpon>OcupationsSimplifiedManagePage.xaml</DependentUpon>
