@@ -50,13 +50,13 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
             return result.OrderBy(model => model.Domain.Priority).ToArray();
         }
 
-        public static Models.View.OcupationsRawManageOrganizationalUnityViewModel[] ToOcupationsRawManageOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
+        public static Models.View.OcupationsManageOrganizationalUnityViewModel[] ToOcupationsRawManageOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
         {
-            var result = new System.Collections.Generic.List<Models.View.OcupationsRawManageOrganizationalUnityViewModel>();
+            var result = new System.Collections.Generic.List<Models.View.OcupationsManageOrganizationalUnityViewModel>();
 
             foreach (var target in targets)
             {
-                var model = new Models.View.OcupationsRawManageOrganizationalUnityViewModel
+                var model = new Models.View.OcupationsManageOrganizationalUnityViewModel
                 {
                     Id = target.Id,
                     Name = target.OrganizationalUnity.Name,
@@ -71,7 +71,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                     {
                         var ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == _model.Id);
 
-                        var result = new Models.View.OcupationsRawManageVacantViewModel
+                        var result = new Models.View.OcupationsManageVacantViewModel
                         {
                             Id = _model.Id,
                             VacantOcupationMode = _model.OcupationMode,
@@ -87,7 +87,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
 
                     if (target.ChiefVacant != null)
                     {
-                        vacants.Insert(0, new Models.View.OcupationsRawManageVacantViewModel
+                        vacants.Insert(0, new Models.View.OcupationsManageVacantViewModel
                         {
                             Id = target.ChiefVacant.Id,
                             VacantOcupationMode = target.ChiefVacant.OcupationMode,
@@ -103,7 +103,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                 {
                     model.Vacants = 
                     [
-                        new Models.View.OcupationsRawManageVacantViewModel
+                        new Models.View.OcupationsManageVacantViewModel
                         {
                             Id = target.ChiefVacant.Id,
                             VacantOcupationMode = target.ChiefVacant.OcupationMode,

@@ -68,7 +68,7 @@
                         </CollectionView.EmptyView>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <local_card_views:OcupationsRawManageOrganizationalUnityAndVacantsCardView 
+                                <local_card_views:OcupationsManageOrganizationalUnityAndVacantsCardView 
                                     Padding="8,4"
                                     OcupationCreationButtonClick="OcupationCreationButton_Clicked"
                                     RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"

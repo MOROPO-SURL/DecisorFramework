@@ -9,7 +9,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
 {
-    private Models.View.OcupationsRawManageVacantViewModel pickContactVacantBindingContext;
+    private Models.View.OcupationsManageVacantViewModel pickContactVacantBindingContext;
 
 	public OcupationsManagePage()
 	{
@@ -144,7 +144,7 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
 
     private void OcupationCreationButton_Clicked(object sender, System.EventArgs e)
     {
-        pickContactVacantBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Models.View.OcupationsRawManageVacantViewModel;
+        pickContactVacantBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Models.View.OcupationsManageVacantViewModel;
 
         if (pickContactVacantBindingContext.VacantOcupationMode != Persistence.Enumerations.VacantOcupationMode.Admision)
         {
@@ -239,7 +239,7 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                 var ocupationsAPIConnectClient = new Interop.API.Connect.Clients.OcupationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-                var model = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Models.View.OcupationsRawManageVacantViewModel;
+                var model = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Models.View.OcupationsManageVacantViewModel;
 
                 ocupationsAPIConnectClient.DeleteAsync(model.Ocupation.Id).ContinueWith(_task =>
                 {
@@ -263,7 +263,7 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
 
     private void EmployeeDetailButton_Clicked(object sender, System.EventArgs e)
     {
-        var model = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Models.View.OcupationsRawManageVacantViewModel;
+        var model = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Models.View.OcupationsManageVacantViewModel;
 
         var employeesAPIConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 

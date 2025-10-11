@@ -38,6 +38,9 @@
 	  <Compile Update="Pages\Manage\OcupationsManagePage.xaml.cs">
 	    <DependentUpon>OcupationsManagePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Card\OcupationsManageOrganizationalUnityAndVacantsCardView.xaml.cs">
+	    <DependentUpon>OcupationsManageOrganizationalUnityAndVacantsCardView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="Pages\Configuration\AdmitionPropousalConfigurationPage.xaml">
