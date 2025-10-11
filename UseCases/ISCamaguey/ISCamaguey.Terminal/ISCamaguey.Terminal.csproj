@@ -90,6 +90,9 @@
 	  <MauiXaml Update="UI\Pages\Configuration\EmployeeConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Manage\OcupationsSimplifiedManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Shells\IDiShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -102,11 +105,17 @@
 	  <MauiXaml Update="UI\Shells\ServicingShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
 	  <Compile Update="UI\Pages\Configuration\EmployeeConfigurationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Manage\OcupationsSimplifiedManagePage.xaml.cs">
+	    <DependentUpon>OcupationsSimplifiedManagePage.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 

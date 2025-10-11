@@ -387,7 +387,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab.Interop.API.Connect", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab.Presentation.Terminal.MAUI", "UseCases\ISCamaguey\Lab\Lab.Presentation.Terminal.MAUI\Lab.Presentation.Terminal.MAUI.csproj", "{E933D99D-6AAC-48E6-9C21-CAF9B625F26F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Presentation.Terminal.MAUI.UI.Default", "UseCases\ISCamaguey\Lab\Lab.Presentation.Terminal.MAUI.UI.Default\Lab.Presentation.Terminal.MAUI.UI.Default.csproj", "{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab.Presentation.Terminal.MAUI.UI.Default", "UseCases\ISCamaguey\Lab\Lab.Presentation.Terminal.MAUI.UI.Default\Lab.Presentation.Terminal.MAUI.UI.Default.csproj", "{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISCamaguey.Interop.API.Common", "UseCases\ISCamaguey\ISCamaguey.Interop.API.Common\ISCamaguey.Interop.API.Common.csproj", "{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1071,6 +1073,10 @@ Global
 		{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1253,6 +1259,7 @@ Global
 		{8F487D63-8256-433C-A316-5C3E403611F5} = {C0173AC3-6E50-4868-9B11-AA9FD57DC433}
 		{E933D99D-6AAC-48E6-9C21-CAF9B625F26F} = {C0173AC3-6E50-4868-9B11-AA9FD57DC433}
 		{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B} = {C0173AC3-6E50-4868-9B11-AA9FD57DC433}
+		{D3743056-BB71-4BCF-8EE0-92A759F5A6F3} = {61391AF6-690D-4B65-9D6B-261E112E38D6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {747B719B-EA48-4793-98E6-ECCB62300F19}

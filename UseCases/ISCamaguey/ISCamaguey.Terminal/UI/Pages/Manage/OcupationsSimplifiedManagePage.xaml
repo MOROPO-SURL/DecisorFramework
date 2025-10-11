@@ -1,0 +1,84 @@
+<caneyframework_mvvm_pages:ContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.UI.Views.Card"
+    xmlns:fwrk_presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages.Manage.OcupationsSimplifiedManagePage"
+    x:DataType="fwrk_presentation_manage_page_models:OcupationsManagePageModel"
+    Title="Definición de Personal en Plantilla">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="0" Padding="8">            
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Entidad Administrativa" />
+                        <Picker 
+                            x:Name="StaffPicker" 
+                            ItemsSource="{Binding AvailableStaffs}"
+                            ItemDisplayBinding="{Binding Path=Structure.Identity.Name}"
+                            SelectedIndexChanged="StaffPicker_SelectedIndexChanged" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Estructura de Plantilla" />
+                        <Picker 
+                            x:Name="StaffWorkforcePicker" 
+                            ItemsSource="{Binding AvailableStaffWorkforces}"
+                            ItemDisplayBinding="{Binding Path=Title}"
+                            SelectedIndexChanged="StaffWorkforcePicker_SelectedIndexChanged" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout>
+                    <Label 
+                        Style="{StaticResource CaptionFieldLabelStyle}" 
+                        Margin="8,8,8,0" 
+                        Text="Unidades Organizativas" />
+                    <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
+                    <CollectionView ItemsSource="{Binding OrganizationalUnities}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label Text="Seleccione estructura de plantilla de una entidad administrativa ..." FontAttributes="Italic" TextColor="DimGray" Padding="8,4" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <local_card_views:OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView 
+                                    Padding="8,4"
+                                    PickContactButtonClick="PickContactButton_Clicked"
+                                    RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"
+                                    EmployeeDetailButtonClick="EmployeeDetailButton_Clicked" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</caneyframework_mvvm_pages:ContentPage>

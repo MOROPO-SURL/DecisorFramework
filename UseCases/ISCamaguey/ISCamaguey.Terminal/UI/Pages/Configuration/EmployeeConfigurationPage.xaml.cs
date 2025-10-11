@@ -4,9 +4,9 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages.Configuration;
 
-public partial class EmployeeConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel>
+public partial class EmployeeConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel, Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel, Models.Page.Configuration.EmployeeConfigurationPageModel>
 {
-    public EmployeeConfigurationPage(System.Action<Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel> successAction, Models.Page.Configuration.EmployeeConfigurationPageModel model) : base(successAction, model)
+    public EmployeeConfigurationPage(System.Action<Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel> successAction, Models.Page.Configuration.EmployeeConfigurationPageModel model) : base(successAction, model, null)
     {
         InitializeComponent();
     }
@@ -47,6 +47,16 @@ public partial class EmployeeConfigurationPage : Framework.Decisor.Core.Presenta
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void ContactPickButton_Clicked(object sender, System.EventArgs e)
