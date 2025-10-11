@@ -7,7 +7,7 @@ using MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/case/domain/[controller]")]
+    [Route("api/domain/[controller]")]
     [ApiController]
     public class TechniquesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<Technique, System.Guid, TechniqueInputModel, TechniqueDisplayModel, TechniqueFilterModel>
     {

@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/case/lab/[controller]")]
+    [Route("api/lab/[controller]")]
     [ApiController]
     public class WorkingGroupsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<WorkingGroup, System.Guid, WorkingGroupInputModel, WorkingGroupDisplayModel, WorkingGroupFilterModel>
     {

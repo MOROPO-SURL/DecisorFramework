@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/case/domain/techniques";
+        protected override string TargetController => "api/domain/techniques";
     }
 }

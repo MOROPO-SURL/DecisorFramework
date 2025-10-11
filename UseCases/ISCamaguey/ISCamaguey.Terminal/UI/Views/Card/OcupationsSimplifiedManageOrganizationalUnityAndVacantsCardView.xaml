@@ -8,7 +8,7 @@
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Views.Card.OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView"
-    x:DataType="fwrk_domain_presentation_view_models:OcupationsRawManageOrganizationalUnityViewModel">
+    x:DataType="fwrk_domain_presentation_view_models:OcupationsManageOrganizationalUnityViewModel">
     <ContentView.Resources>
         <ResourceDictionary>
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
@@ -36,7 +36,7 @@
                     <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="fwrk_domain_presentation_view_models:OcupationsRawManageVacantViewModel">
+                    <DataTemplate x:DataType="fwrk_domain_presentation_view_models:OcupationsManageVacantViewModel">
                         <Frame Padding="0">
                             <VerticalStackLayout Spacing="0">
                                 <Grid HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
@@ -76,7 +76,7 @@
                                             Text="&#xF016;"
                                             Padding="0"
                                             FontSize="21"
-                                            Clicked="PickContactButton_Clicked" />
+                                            Clicked="CreateOcupationButton_Clicked" />
                                         <Button
                                             IsEnabled="{Binding Ocupation, Converter={StaticResource IsNotNullConverter}}"
                                             ToolTipProperties.Text="Liberar plaza ..."
@@ -110,7 +110,7 @@
                     <DataTemplate>
                         <local_card_views:OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView 
                             Margin="0,8,0,0"
-                            PickContactButtonClick="PickContactButton_Clicked"
+                            CreateOcupationButtonClick="CreateOcupationButton_Clicked"
                             RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"
                             EmployeeDetailButtonClick="EmployeeDetailButton_Clicked">
                         </local_card_views:OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView>

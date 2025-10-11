@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/case/lab/workinggroups";
+        protected override string TargetController => "api/lab/workinggroups";
     }
 }

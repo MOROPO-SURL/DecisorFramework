@@ -7,7 +7,7 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages.Manage;
 
 public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.Pages.ContentPage
 {
-    private Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.OcupationsRawManageVacantViewModel pickContactVacantBindingContext;
+    private Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.OcupationsManageVacantViewModel pickContactVacantBindingContext;
 
 	public OcupationsSimplifiedManagePage()
 	{
@@ -142,7 +142,7 @@ public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.
 
     private void OcupationCreationButton_Clicked(object sender, System.EventArgs e)
     {
-        pickContactVacantBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.OcupationsRawManageVacantViewModel;
+        pickContactVacantBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.OcupationsManageVacantViewModel;
     }
 
     //private void PickContactButton_Clicked(object sender, System.EventArgs e)
@@ -169,7 +169,7 @@ public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.
 
                 var ocupationsAPIConnectClient = new Framework.Decisor.HumanResources.Interop.API.Connect.Clients.OcupationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-                var model = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.OcupationsRawManageVacantViewModel;
+                var model = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.OcupationsManageVacantViewModel;
 
                 ocupationsAPIConnectClient.DeleteAsync(model.Ocupation.Id).ContinueWith(_task =>
                 {
@@ -193,7 +193,7 @@ public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.
 
     private void EmployeeDetailButton_Clicked(object sender, System.EventArgs e)
     {
-        var model = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.OcupationsRawManageVacantViewModel;
+        var model = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.OcupationsManageVacantViewModel;
 
         var employeesAPIConnectClient = new Framework.Decisor.Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 

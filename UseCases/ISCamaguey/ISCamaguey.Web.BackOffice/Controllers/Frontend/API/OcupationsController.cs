@@ -7,7 +7,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/case/hhrr/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/hhrr/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class OcupationsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementFilteredController<Ocupation, System.Guid, OcupationInputModel, OcupationDisplayModel, OcupationFilterModel>
     {
