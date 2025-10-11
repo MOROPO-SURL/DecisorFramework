@@ -8,6 +8,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
         public System.Guid Id { get; set; }
 
+        public System.Guid VacantId { get; set; }
+
         public Persistence.Enumerations.VacantOcupationMode VacantOcupationMode { get; set; }
 
         public WorkPositionDisplayModel WorkPosition { get; set; }

@@ -50,7 +50,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
             return result.OrderBy(model => model.Domain.Priority).ToArray();
         }
 
-        public static Models.View.OcupationsManageOrganizationalUnityViewModel[] ToOcupationsRawManageOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
+        public static Models.View.OcupationsManageOrganizationalUnityViewModel[] ToOcupationsManageOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
         {
             var result = new System.Collections.Generic.List<Models.View.OcupationsManageOrganizationalUnityViewModel>();
 
@@ -74,6 +74,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                         var result = new Models.View.OcupationsManageVacantViewModel
                         {
                             Id = _model.Id,
+                            VacantId = _model.Id,
                             VacantOcupationMode = _model.OcupationMode,
                             WorkPosition = _model.WorkPosition,
                             SalaryStandard = _model.SalaryStandard,
@@ -90,6 +91,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                         vacants.Insert(0, new Models.View.OcupationsManageVacantViewModel
                         {
                             Id = target.ChiefVacant.Id,
+                            VacantId = target.ChiefVacant.Id,
                             VacantOcupationMode = target.ChiefVacant.OcupationMode,
                             WorkPosition = target.ChiefVacant.WorkPosition,
                             SalaryStandard = target.ChiefVacant.SalaryStandard,
@@ -106,6 +108,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                         new Models.View.OcupationsManageVacantViewModel
                         {
                             Id = target.ChiefVacant.Id,
+                            VacantId = target.ChiefVacant.Id,
                             VacantOcupationMode = target.ChiefVacant.OcupationMode,
                             WorkPosition = target.ChiefVacant.WorkPosition,
                             SalaryStandard = target.ChiefVacant.SalaryStandard,
@@ -116,7 +119,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
 
                 if (target.Children != null)
                 {
-                    model.Children = target.Children.ToOcupationsRawManageOrganizationalUnityViewModelChildren(ocupations);
+                    model.Children = target.Children.ToOcupationsManageOrganizationalUnityViewModelChildren(ocupations);
                 }
 
                 result.Add(model);
