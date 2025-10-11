@@ -144,7 +144,6 @@
 
     <Style TargetType="Frame" x:Key="PopupFrameStyle">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
-        <Setter Property="HorizontalOptions" Value="Center" />
         <Setter Property="VerticalOptions" Value="Center" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Margin" Value="20" />
