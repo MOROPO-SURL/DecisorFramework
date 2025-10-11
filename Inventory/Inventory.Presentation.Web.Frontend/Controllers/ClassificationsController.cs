@@ -4,7 +4,7 @@ using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/inventory/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/inventory/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class ClassificationsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Classification, System.Guid, ClassificationInputModel, ClassificationDisplayModel>
     {

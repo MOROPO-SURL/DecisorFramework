@@ -10,6 +10,6 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Connect.Clients
         {
         }
 
-        protected override string TargetController => "api/leasing/vehicleleaseorganizationpostulations";
+        protected override string TargetController => "api/fwrk/leasing/vehicleleaseorganizationpostulations";
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/hhrr/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/hhrr/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class SchoolingsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultController<Persistence.Entities.Schooling, System.Guid, Interop.API.Common.Models.Display.SchoolingDisplayModel>
     {

@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 {
-    [Route("api/leasing/[controller]")]
+    [Route("api/fwrk/leasing/[controller]")]
     [ApiController]
     public class NaturalClientPropertyLeasingsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<NaturalClientPropertyLeasing, System.Guid, NaturalClientPropertyLeasingInputModel, NaturalClientPropertyLeasingDisplayModel>
     {

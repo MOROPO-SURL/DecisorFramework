@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/purchasing/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/purchasing/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class PurchasesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementFilteredController<Purchase, System.Guid, PurchaseInputModel, PurchaseDisplayModel, PurchaseFilterModel>
     {

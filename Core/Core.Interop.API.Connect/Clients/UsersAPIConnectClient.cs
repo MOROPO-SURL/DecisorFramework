@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/users";
+        protected override string TargetController => "api/fwrk/users";
     }
 }

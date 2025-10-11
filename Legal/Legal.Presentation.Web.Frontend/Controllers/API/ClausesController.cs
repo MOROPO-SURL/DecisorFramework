@@ -5,7 +5,7 @@ using MOROPO.Framework.Decisor.Legal.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/legal/[controller]")]
+    [Route("api/fwrk/legal/[controller]")]
     [ApiController]
     public class ClausesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Clause, System.Guid, ClauseInputModel, ClauseDisplayModel>
     {

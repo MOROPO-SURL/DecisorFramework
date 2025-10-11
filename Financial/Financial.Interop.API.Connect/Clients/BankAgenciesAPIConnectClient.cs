@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/financial/bankagencies";
+        protected override string TargetController => "api/fwrk/financial/bankagencies";
     }
 }

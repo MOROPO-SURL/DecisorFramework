@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/inventory/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/inventory/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class WarehousesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Warehouse, System.Guid, WarehouseInputModel, WarehouseDisplayModel>
     {
