@@ -117,7 +117,7 @@ public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.
 
             var ocupations = new System.Collections.Generic.List<Framework.Decisor.HumanResources.Interop.API.Common.Models.Display.OcupationDisplayModel>(await ocupationsAPIConnectClient.FilterAsync(new Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter.OcupationFilterModel { StaffId = staffId, WorkforceId = targetWorkforceId }));
 
-            var _models = targetWorkforce.OrganizationalUnities.ToOcupationsRawManageOrganizationalUnityViewModelChildren(ocupations);
+            var _models = targetWorkforce.OrganizationalUnities.ToOcupationsManageOrganizationalUnityViewModelChildren(ocupations);
 
             Dispatcher.Dispatch(() =>
             {
@@ -140,11 +140,11 @@ public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.
         });
     }
 
-    private void OcupationCreationButton_Clicked(object sender, System.EventArgs e)
+    private void ContactPickButton_Clicked(object sender, System.EventArgs e)
     {
         pickContactVacantBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.OcupationsManageVacantViewModel;
 
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Configuration.OcupationConfigurationPage(OcupationConfigurationComplete_Callback, new Models.Page.Configuration.OcupationConfigurationPageModel(ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex].Id))));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback)));
     }
 
     private void RemoveOcupationButton_Clicked(object sender, System.EventArgs e)
@@ -211,10 +211,54 @@ public partial class OcupationsSimplifiedManagePage : Framework.Caney.MVVM.Core.
         });        
     }
 
-    private void OcupationConfigurationComplete_Callback(Framework.Decisor.HumanResources.Interop.API.Common.Models.Display.OcupationDisplayModel model)
+    private void ContactPickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
     {
-        pickContactVacantBindingContext.Ocupation = model;
+        Dispatcher.Dispatch(() => ConcreteBindingContext.IsBusy = true);
 
-        pickContactVacantBindingContext = null;
+        var apiClientConnect = new Clients.OcupationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+        var ocupationId = System.Guid.NewGuid();
+
+        apiClientConnect.CreateAsync(new Interop.API.Common.Models.Input.OcupationInputModel 
+        {
+            Id = ocupationId,
+            ContactId = model.Id,
+            VacantId = pickContactVacantBindingContext.VacantId,
+            StaffId = ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex].Id
+        }).ContinueWith(task =>
+        {
+            if (task.Exception != null || task.IsCanceled)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+
+                    pickContactVacantBindingContext = null;
+
+                    ConcreteBindingContext.IsBusy = false;
+                });
+            }
+            else
+            {
+                apiClientConnect.GetAsync(ocupationId).ContinueWith(_task =>
+                {
+                    Dispatcher.Dispatch(() =>
+                    {
+                        if (_task.Exception != null || _task.IsCanceled)
+                        {
+                            Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(_task.Exception, this);
+                        }
+                        else
+                        {
+                            pickContactVacantBindingContext.Ocupation = _task.Result;
+                        }
+
+                        pickContactVacantBindingContext = null;
+
+                        ConcreteBindingContext.IsBusy = false;
+                    });
+                });
+            }
+        });
     }
 }

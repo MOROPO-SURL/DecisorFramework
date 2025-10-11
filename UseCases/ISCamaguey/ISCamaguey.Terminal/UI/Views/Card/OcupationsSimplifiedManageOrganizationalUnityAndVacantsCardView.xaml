@@ -15,6 +15,7 @@
 
             <communitytoolkit_converters:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <Frame>
@@ -71,14 +72,15 @@
                                         HorizontalOptions="Center"
                                         Spacing="8">
                                         <Button
+                                            IsVisible="{Binding Ocupation, Converter={StaticResource IsNullConverter}}"
                                             ToolTipProperties.Text="Seleccionar contacto ..."
                                             FontFamily="MaterialDesignIcons" 
                                             Text="&#xF016;"
                                             Padding="0"
                                             FontSize="21"
-                                            Clicked="CreateOcupationButton_Clicked" />
+                                            Clicked="ContactPickButton_Clicked" />
                                         <Button
-                                            IsEnabled="{Binding Ocupation, Converter={StaticResource IsNotNullConverter}}"
+                                            IsVisible="{Binding Ocupation, Converter={StaticResource IsNotNullConverter}}"
                                             ToolTipProperties.Text="Liberar plaza ..."
                                             FontFamily="MaterialDesignIcons" 
                                             Text="&#xF015;"
@@ -110,7 +112,7 @@
                     <DataTemplate>
                         <local_card_views:OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView 
                             Margin="0,8,0,0"
-                            CreateOcupationButtonClick="CreateOcupationButton_Clicked"
+                            ContactPickButtonClick="ContactPickButton_Clicked"
                             RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"
                             EmployeeDetailButtonClick="EmployeeDetailButton_Clicked">
                         </local_card_views:OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView>

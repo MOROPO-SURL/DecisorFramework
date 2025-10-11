@@ -136,20 +136,28 @@ public partial class WorkingGroupConfigurationPage : Framework.Decisor.Core.Pres
     private void ChiefPickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         ConcreteBindingContext.Chief = model;
+
+        hasChangesFlag = true;
     }
 
     private void QualitySpecialistPickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         ConcreteBindingContext.QualitySpecialist = model;
+
+        hasChangesFlag = true;
     }
 
     private void EmployeePickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         ConcreteBindingContext.Employees.Add(model);
+
+        hasChangesFlag = true;
     }
 
     private void TechniquePickComplete_Callback(Domain.Interop.API.Common.Models.Display.TechniqueDisplayModel model)
     {
         ConcreteBindingContext.Techniques.Add(model);
+
+        hasChangesFlag = true;
     }
 }

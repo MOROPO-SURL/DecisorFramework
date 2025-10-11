@@ -218,9 +218,10 @@
                                 <BindableLayout.ItemTemplate>
                                     <DataTemplate x:DataType="domain_interop_common_display_models:TechniqueDisplayModel">
                                         <Frame 
-                                            Padding="0" Margin="4"
+                                            Padding="8" Margin="4" 
+                                            HeightRequest="124"
                                             WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource TechniqueViewChildParentWidthToRelativeWidthConverter}}">
-                                            <Grid ColumnSpacing="8" RowSpacing="4">
+                                            <Grid ColumnSpacing="8" RowSpacing="8">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition />
                                                     <ColumnDefinition Width="Auto" />
@@ -229,7 +230,10 @@
                                                     <RowDefinition Height="Auto" />
                                                     <RowDefinition Height="Auto" />
                                                 </Grid.RowDefinitions>
-                                                <StackLayout Grid.Column="0" Grid.RowSpan="2" VerticalOptions="Start">
+                                                <StackLayout 
+                                                    Grid.Column="0" Grid.RowSpan="2" 
+                                                    VerticalOptions="Start"
+                                                    Padding="8">
                                                     <Label 
                                                         LineBreakMode="TailTruncation"
                                                         FontSize="Medium"
@@ -251,7 +255,7 @@
                                                     Padding="0"
                                                     FontSize="21"
                                                     FontFamily="MaterialDesignIcons"
-                                                    Text="&#xF90B;"
+                                                    Text="&#xF2FD;"
                                                     Clicked="TechniqueDetailButton_Clicked" />
                                                 <Button
                                                     Grid.Column="1" Grid.Row="1" VerticalOptions="Start"

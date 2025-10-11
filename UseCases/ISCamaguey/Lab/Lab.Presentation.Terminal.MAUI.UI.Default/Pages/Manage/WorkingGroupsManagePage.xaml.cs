@@ -4,7 +4,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class WorkingGroupsManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.WorkingGroupDisplayModel, Models.Page.Manage.WorkingGroupsManagePageModel, Models.Page.Configuration.WorkingGroupConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 136;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 116;
 
     public WorkingGroupsManagePage()
     {

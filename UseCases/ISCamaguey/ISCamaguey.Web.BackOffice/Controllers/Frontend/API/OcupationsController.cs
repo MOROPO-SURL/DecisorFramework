@@ -1,4 +1,5 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Governance.Persistence.Entities;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
@@ -13,11 +14,19 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
     {
         private readonly IEntityRepository<NamingResolution, System.Guid> namingResolutionRepository;
         private readonly IEntityRepository<Employee, System.Guid> employeeRepository;
+        private readonly IEntityRepository<DecisionMakingGroup, System.Guid> decisionMakingGroupRepository;
+        private readonly IEntityRepository<Meeting, System.Guid> meetingRepository;
+        private readonly IEntityRepository<Agreement, System.Guid> agreementRepository;
+        private readonly IEntityRepository<Staff, System.Guid> staffRepository;
 
-        public OcupationsController(IEntityRepository<Employee, System.Guid> employeeRepository, IEntityRepository<NamingResolution, System.Guid> namingResolutionRepository, IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
+        public OcupationsController(IEntityRepository<Staff, System.Guid> staffRepository, IEntityRepository<Agreement, System.Guid> agreementRepository, IEntityRepository<Meeting, System.Guid> meetingRepository, IEntityRepository<DecisionMakingGroup, System.Guid> decisionMakingGroupRepository, IEntityRepository<Employee, System.Guid> employeeRepository, IEntityRepository<NamingResolution, System.Guid> namingResolutionRepository, IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
         {
             this.namingResolutionRepository = namingResolutionRepository;
             this.employeeRepository = employeeRepository;
+            this.decisionMakingGroupRepository = decisionMakingGroupRepository;
+            this.meetingRepository = meetingRepository;
+            this.agreementRepository = agreementRepository;
+            this.staffRepository = staffRepository;
         }
 
         protected override OcupationDisplayModel EntityToDisplayModel(Ocupation entity)
@@ -43,12 +52,71 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
 
             var now = System.DateTime.Now;
 
+            Agreement agreement = null;
+
+            try
+            {
+                agreement = agreementRepository.Get(System.Guid.Empty);
+            }
+            catch
+            {
+                Meeting meeting = null;
+
+                try
+                {
+                    meeting = meetingRepository.Get(System.Guid.Empty);
+                }
+                catch
+                {
+                    DecisionMakingGroup decisionMakingGroup = null;
+
+                    try
+                    {
+                        decisionMakingGroup = decisionMakingGroupRepository.Get(System.Guid.Empty);
+                    }
+                    catch
+                    {
+                        var staff = staffRepository.Get(model.StaffId);
+
+                        decisionMakingGroup = decisionMakingGroupRepository.Add(new DecisionMakingGroup
+                        {
+                            Id = System.Guid.Empty,
+                            Enabled = false,
+                            Archived = true,
+                            Name = "Comité Automático de Ocupación Simplificada de Plazas",
+                            Priority = 100,
+                            StructureId = staff.StructureId,
+                            LeaderId = model.ContactId                            
+                        }, User.Identity.Name, false);
+                    }
+
+                    meeting = meetingRepository.Add(new Meeting
+                    {
+                        Id = System.Guid.Empty,
+                        Index = 1,
+                        Archived = true,
+                        At = now,
+                        DecisionMakingGroupId = decisionMakingGroup.Id,
+                        AuthorId = model.ContactId,
+                    }, User.Identity.Name, false);
+                }
+
+                agreement = agreementRepository.Add(new Agreement
+                {
+                    Id = System.Guid.Empty,
+                    Index = 1,
+                    Title = "Acuerdo automático para la ocupación simplificada de plazas",
+                    MeetingId = meeting.Id,
+                    
+                }, User.Identity.Name, false);
+            }
+
             var index = namingResolutionRepository.Count() + 1;
 
             var namingResolution = namingResolutionRepository.Add(new NamingResolution
             {
                 Id = System.Guid.NewGuid(),
-                AgreementId = model.AgreementId,
+                AgreementId = agreement.Id,
                 ContactId = model.ContactId,
                 Index = index,
                 At = now,
@@ -56,7 +124,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
                 ConcretedAt = now,
                 StaffId = model.StaffId,
                 VacantId = model.VacantId,
-                Summary = "Automatic naming resolution for simplified ocupation mode"
+                Summary = "Resolución de nombramiento para la ocupación simplificada de plaza"
             }, User.Identity.Name, false);
 
             var employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == namingResolution.ContactId.Value);
@@ -66,7 +134,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
             {
                 Year = now.Year,
                 StarAt = now,
-                Objective = $"Contratación generada a partir de la resolución de nombramiento \"{namingResolution.Id}/{namingResolution.At.Year}\"",
+                Objective = $"Contratación generada a partir de la resolución de nombramiento \"{namingResolution.Id}/{namingResolution.Year}\"",
                 Priority = 1,
                 StaffId = model.StaffId,
                 VacantId = model.VacantId,
@@ -93,9 +161,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
                     ContactId = model.ContactId
                 };
             }
-            namingResolution.ConcretedAt = System.DateTime.Now;
-
-            namingResolutionRepository.Update(namingResolution, User.Identity.Name, false);
         }
     }
 }

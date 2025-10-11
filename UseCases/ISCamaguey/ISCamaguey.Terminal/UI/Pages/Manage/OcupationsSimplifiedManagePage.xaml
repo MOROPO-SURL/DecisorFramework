@@ -70,7 +70,7 @@
                             <DataTemplate>
                                 <local_card_views:OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView 
                                     Padding="8,4"
-                                    CreateOcupationButtonClick="OcupationCreationButton_Clicked"
+                                    ContactPickButtonClick="ContactPickButton_Clicked"
                                     RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"
                                     EmployeeDetailButtonClick="EmployeeDetailButton_Clicked" />
                             </DataTemplate>

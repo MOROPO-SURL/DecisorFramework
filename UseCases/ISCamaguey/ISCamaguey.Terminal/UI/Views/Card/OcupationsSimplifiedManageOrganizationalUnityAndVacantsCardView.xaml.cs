@@ -7,15 +7,15 @@ public partial class OcupationsSimplifiedManageOrganizationalUnityAndVacantsCard
         InitializeComponent();
     }
 
-    public event System.EventHandler CreateOcupationButtonClick;
+    public event System.EventHandler ContactPickButtonClick;
 
     public event System.EventHandler RemoveOcupationButtonClick;
 
     public event System.EventHandler EmployeeDetailButtonClick;
 
-    private void CreateOcupationButton_Clicked(object sender, System.EventArgs eventArgs)
+    private void ContactPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        CreateOcupationButtonClick?.Invoke(sender, eventArgs);
+        ContactPickButtonClick?.Invoke(sender, eventArgs);
     }
 
     private void RemoveOcupationButton_Clicked(object sender, System.EventArgs eventArgs)

@@ -29,6 +29,14 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
             Priority = entity.Priority;
             Name = entity.Name;
             Description = entity.Description;
+            Techniques = entity.TechniqueBridges.OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
+            {
+                var model = new Domain.Interop.API.Common.Models.Display.TechniqueDisplayModel();
+
+                model.Import(bridge.Stern);
+
+                return model;
+            }).ToArray();
 
             if (entity.Chief != null)
             {
