@@ -4,7 +4,7 @@ using System.Text;
 
 namespace MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities
 {
-    public class IsoStandard : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<int>
+    public class IsoStandard : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<int>,Framework.Guama.Core.Persistence.Entities.Contract.INamedEntity<int>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public int Id { get; set; }

@@ -10,6 +10,8 @@
 		<PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="6.0.25" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Core\Core.Interop.API.Common\Core.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Quality.Interop.API.Common\Quality.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Quality.Presentation.Web.Common\Quality.Presentation.Web.Common.csproj" />
 	</ItemGroup>
 </Project>
