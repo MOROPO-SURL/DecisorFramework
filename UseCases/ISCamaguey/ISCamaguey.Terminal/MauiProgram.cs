@@ -13,6 +13,7 @@ using MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.
 using MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Extensions;
+using MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MOROPO.ISCamaguey.Decisor.Terminal
@@ -24,30 +25,31 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal
             var builder = MauiApp.CreateBuilder();
             builder
                 .UseMauiApp<App>()
-               .UseMauiCommunityToolkit()
-               .UseMauiCommunityToolkitMediaElement()
-               .UseSkiaSharp()
-               .ConfigureFonts(fonts =>
-               {
-                   fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
-                   fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
-                   fonts.AddFont("materialdesignicons-webfont.ttf", "MaterialDesignIcons");
-               })
-               .InitializeFreakyControls()
-               .UseDecisorFrameworkDomain()
-               .UseDecisorFrameworkLegal()
-               .UseDecisorFrameworkHumanResources()
-               .UseDecisorFrameworkFinancial()
-               .UseDecisorFrameworkProduction()
-               .UseDecisorFrameworkCommercial()
-               .UseDecisorUseCaseDomain()
-               .UseDecisorUseCaseLab()
-               .UseDecisorUseCaseIDi()
-               .Services
-                   .AddSingleton<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade, Providers.HttpClientHelperProvider>()
-                   .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Providers.Facade.IRuntimeContextProviderFacade, Providers.SingleRuntimeContextProvider>()
-                   .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade, Helpers.MainExceptionHandlingHelper>()
-                   .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSessionManager>();
+                .UseMauiCommunityToolkit()
+                .UseMauiCommunityToolkitMediaElement()
+                .UseSkiaSharp()
+                .ConfigureFonts(fonts =>
+                {
+                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
+                    fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                    fonts.AddFont("materialdesignicons-webfont.ttf", "MaterialDesignIcons");
+                })
+                .InitializeFreakyControls()
+                .UseDecisorFrameworkDomain()
+                .UseDecisorFrameworkLegal()
+                .UseDecisorFrameworkHumanResources()
+                .UseDecisorFrameworkFinancial()
+                .UseDecisorFrameworkProduction()
+                .UseDecisorFrameworkCommercial()
+                .UseDecisorUseCaseDomain()
+                .UseDecisorUseCaseQuality()
+                .UseDecisorUseCaseLab()
+                .UseDecisorUseCaseIDi()
+                .Services
+                    .AddSingleton<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade, Providers.HttpClientHelperProvider>()
+                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Providers.Facade.IRuntimeContextProviderFacade, Providers.SingleRuntimeContextProvider>()
+                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade, Helpers.MainExceptionHandlingHelper>()
+                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSessionManager>();
 #if DEBUG
             builder.Logging.AddDebug();
 #endif

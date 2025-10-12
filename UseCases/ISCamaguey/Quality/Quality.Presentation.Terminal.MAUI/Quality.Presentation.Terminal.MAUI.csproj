@@ -31,9 +31,5 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\Core\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj" />
 		<ProjectReference Include="..\Quality.Interop.API.Common\Quality.Interop.API.Common.csproj" />
-		<ProjectReference Include="..\Quality.Interop.API.Connect\Quality.Interop.API.Connect.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Validators\" />
 	</ItemGroup>
 </Project>

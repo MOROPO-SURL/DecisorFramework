@@ -29,23 +29,33 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\..\..\..\Domain\Domain.Presentation.Terminal.MAUI.UI.Default\Domain.Presentation.Terminal.MAUI.UI.Default.csproj" />
+	  <ProjectReference Include="..\..\..\..\Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj" />
+	  <ProjectReference Include="..\Quality.Interop.API.Connect\Quality.Interop.API.Connect.csproj" />
 	  <ProjectReference Include="..\Quality.Presentation.Terminal.MAUI\Quality.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
-		<MauiXaml Update="Pages\Configuration\ResearchAreaConfigurationPage.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Pages\Detail\ResearchAreaDetailPage.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
-		<MauiXaml Update="Pages\Manage\ResearchAreasManagePage.xaml">
-			<Generator>MSBuild:Compile</Generator>
-		</MauiXaml>
+	  <Compile Update="Pages\Detail\IsoStandardDetailPage.xaml.cs">
+	    <DependentUpon>IsoStandardDetailPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Extensions\" />
-	  <Folder Include="Factories\" />
-	  <Folder Include="Pages\" />
+	  <MauiXaml Update="Pages\Configuration\CubanStandardConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\IsoStandardConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\CubanStandardDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\IsoStandardDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\CubanStandardManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\IsoStandardManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>

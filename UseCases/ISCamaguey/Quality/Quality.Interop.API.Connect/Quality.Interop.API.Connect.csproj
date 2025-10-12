@@ -9,7 +9,7 @@
 		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.1" />
 	</ItemGroup>
 	<ItemGroup>
-	  <ProjectReference Include="..\UseCases\ISCamaguey\Quality\Quality.Interop.API.Common\Quality.Interop.API.Common.csproj" />
+	  <ProjectReference Include="..\Quality.Interop.API.Common\Quality.Interop.API.Common.csproj" />
 	</ItemGroup>
 
 </Project>

@@ -8,6 +8,7 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.Models.Pa
     {
         public static string NameValidableProperty => nameof(Name);
 
+        private int id;
         private int priority = 1;
         private string name;
         private string description;
@@ -16,13 +17,13 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.Models.Pa
         {
             if (model == null) return;
 
-            Id = model.Id;
+            id = model.Id;
             priority = model.Priority;
             name = model.Name;
             description = model.Description;
         }
 
-        public int Id { get; set; }
+        public int Id { get => id; set => SetProperty(ref id, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
