@@ -90,7 +90,7 @@
     </ShellContent>
     <ShellContent
         Title="Planes de Trabajo (%)"
-        ContentTemplate="{DataTemplate decisor_usescase_lab_manage_pages:WorkingGroupsManagePage}">
+        ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
