@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI"
+    xmlns:fwrk_domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
+    xmlns:domain_interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common"
+    xmlns:fwrk_domain_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.WorkingGroupConfigurationPage"
+    x:TypeArguments="interop_common_display_models:WorkingGroupDisplayModel,interop_common_display_models:WorkingGroupDisplayModel,presentation_configuration_page_models:WorkingGroupConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:WorkingGroupConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="EmployeeViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="180" AbsoluteHorizontalSeparation="12" />
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="TechniqueViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="320" AbsoluteHorizontalSeparation="12" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="4" Padding="8">
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                    <Entry Text="{Binding Name}" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:WorkingGroupConfigurationPageModel.NameValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:WorkingGroupConfigurationPageModel.NameValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
+                </VerticalStackLayout>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=10, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Jefe" />
+                        <ContentView                        
+                            IsVisible="{Binding Chief, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="140">
+                            <fwrk_domain_presentation_card_views:EmployeeDefaultCardView
+                                BindingContext="{Binding Chief}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="ChiefPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:WorkingGroupConfigurationPageModel.ChiefValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:WorkingGroupConfigurationPageModel.ChiefValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Especialista de Calidad" />
+                        <ContentView                        
+                            IsVisible="{Binding QualitySpecialist, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="140">
+                            <fwrk_domain_presentation_card_views:EmployeeDefaultCardView
+                                BindingContext="{Binding QualitySpecialist}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="QualitySpecialistPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:WorkingGroupConfigurationPageModel.QualitySpecialistValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:WorkingGroupConfigurationPageModel.QualitySpecialistValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Miembros" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="EmployeeAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <FlexLayout
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                Margin="4"
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start"
+                                BindableLayout.ItemsSource="{Binding Employees}">
+                                <BindableLayout.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </BindableLayout.EmptyView>
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="fwrk_domain_interop_common_display_models:EmployeeDisplayModel">
+                                        <Frame 
+                                            Padding="0" Margin="4"
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource EmployeeViewChildParentWidthToRelativeWidthConverter}}">                                            
+                                            <VerticalStackLayout Spacing="0">
+                                                <Grid>
+                                                    <Image 
+                                                        BackgroundColor="DimGray"
+                                                        HeightRequest="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Width}"
+                                                        Aspect="AspectFill"
+                                                        Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                                    <Grid
+                                                        VerticalOptions="End"
+                                                        BackgroundColor="{AppThemeBinding Light=#BBDDDDDD, Dark=#A9333333}">
+                                                        <VerticalStackLayout Margin="8">
+                                                            <Label
+                                                                ToolTipProperties.Text="{Binding Contact.Identity.Name}"
+                                                                LineBreakMode="TailTruncation"
+                                                                Text="{Binding Contact.Identity.Name}"
+                                                                FontAttributes="Bold" />
+                                                            <Label
+                                                                ToolTipProperties.Text="{Binding Contact.Identity.LastName}"
+                                                                LineBreakMode="TailTruncation"
+                                                                Text="{Binding Contact.Identity.LastName, TargetNullValue='---'}" />
+                                                        </VerticalStackLayout>
+                                                    </Grid>
+                                                </Grid>
+                                                <Grid Margin="4" ColumnSpacing="4">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Button
+                                                        Grid.Column="0"
+                                                        Text="Detalles"
+                                                        Clicked="EmployeeDetailButton_Clicked" />
+                                                    <Button
+                                                        Grid.Column="1"
+                                                        Text="Eliminar"
+                                                        Clicked="EmployeeRemotionButton_Clicked" />
+                                                </Grid>
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Técnicas" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="TechniqueAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <FlexLayout
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                Margin="4"
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start"
+                                BindableLayout.ItemsSource="{Binding Techniques}">
+                                <BindableLayout.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </BindableLayout.EmptyView>
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="domain_interop_common_display_models:TechniqueDisplayModel">
+                                        <Frame 
+                                            Padding="8" Margin="4" 
+                                            HeightRequest="124"
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource TechniqueViewChildParentWidthToRelativeWidthConverter}}">
+                                            <Grid ColumnSpacing="8" RowSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <StackLayout 
+                                                    Grid.Column="0" Grid.RowSpan="2" 
+                                                    VerticalOptions="Start"
+                                                    Padding="8">
+                                                    <Label 
+                                                        LineBreakMode="TailTruncation"
+                                                        FontSize="Medium"
+                                                        Text="{Binding Name}" />
+                                                    <Label 
+                                                        Margin="0,4,0,0"
+                                                        Text="Descripción"
+                                                        TextColor="DimGray"
+                                                        FontSize="Caption"
+                                                        FontAttributes="Bold" />
+                                                    <Label 
+                                                        VerticalOptions="FillAndExpand"
+                                                        LineBreakMode="TailTruncation"
+                                                        MaxLines="2"
+                                                        Text="{Binding Description, TargetNullValue='---'}" />
+                                                </StackLayout>
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    Padding="0"
+                                                    FontSize="21"
+                                                    FontFamily="MaterialDesignIcons"
+                                                    Text="&#xF2FD;"
+                                                    Clicked="TechniqueDetailButton_Clicked" />
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
+                                                    Padding="0"
+                                                    FontSize="21"
+                                                    FontFamily="MaterialDesignIcons"
+                                                    Text="&#xFA78;"
+                                                    Clicked="TechniqueRemotionButton_Clicked" />
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </FlexLayout>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
+                    <Editor Text="{Binding Description}" HeightRequest="120" />
+                </VerticalStackLayout>
+                <BoxView 
+                    Margin="8,16,8,8"
+                    HeightRequest="1" 
+                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</core_ui_base_pages:ConfigurationBaseContentPage>

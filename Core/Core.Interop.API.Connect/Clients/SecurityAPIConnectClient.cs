@@ -13,12 +13,12 @@ namespace MOROPO.Framework.Decisor.Core.Interop.API.Connect.Clients
 
         public async System.Threading.Tasks.Task<AuthenticatedSessionModel> AuthenticateAsync(AuthenticationIntentModel modelInput)
         {
-            return await httpClientHelper.PostAsync<AuthenticationIntentModel, AuthenticatedSessionModel>("api/security/authenticate", modelInput);
+            return await httpClientHelper.PostAsync<AuthenticationIntentModel, AuthenticatedSessionModel>("api/fwrk/security/authenticate", modelInput);
         }
 
         public async System.Threading.Tasks.Task ChangePasswordAsync(UserPasswordChangeRequestModel model)
         {
-            await httpClientHelper.PostAsync("api/security/changepassword", model);
+            await httpClientHelper.PostAsync("api/fwrk/security/changepassword", model);
         }
     }
 }

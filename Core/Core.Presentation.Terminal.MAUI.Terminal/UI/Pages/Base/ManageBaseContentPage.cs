@@ -55,9 +55,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 }
             }
 
-            var concreteBindingContext = (TManagePageModel)BindingContext;
-
-            concreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation;
+            ConcreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation;
 
             System.Threading.Tasks.Task.Run(async () =>
             {
@@ -71,7 +69,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
                     Dispatcher.Dispatch(() =>
                     {
-                        concreteBindingContext.IsBusy = false;
+                        ConcreteBindingContext.IsBusy = false;
 
                         this.NavigationPushPageAsync(page);
                     });
@@ -90,7 +88,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
         {
             var concreteBindingContext = (TManagePageModel)BindingContext;
 
-            concreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation;
+            ConcreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation;
 
             if (discriminator == null)
             {
@@ -102,7 +100,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                     {
                         DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
 
-                        concreteBindingContext.IsBusy = false;
+                        ConcreteBindingContext.IsBusy = false;
 
                         return;
                     }
@@ -120,7 +118,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
                         Dispatcher.Dispatch(() =>
                         {
-                            concreteBindingContext.IsBusy = false;
+                            ConcreteBindingContext.IsBusy = false;
 
                             this.NavigationPushPageAsync(page);
                         });

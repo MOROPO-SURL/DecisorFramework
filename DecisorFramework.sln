@@ -365,13 +365,31 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reporting.Presentation.Web.
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Reporting.Presentation.Web.Frontend", "UseCases\ISCamaguey\Reporting\Reporting.Presentation.Web.Frontend\Reporting.Presentation.Web.Frontend.csproj", "{AC39A968-9A98-4426-9627-B66858367A8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDi.Interop.API.Common", "UseCases\ISCamaguey\IDi\IDi.Interop.API.Common\IDi.Interop.API.Common.csproj", "{655577F1-495B-4155-9153-A006FFF53B0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDi.Interop.API.Common", "UseCases\ISCamaguey\IDi\IDi.Interop.API.Common\IDi.Interop.API.Common.csproj", "{655577F1-495B-4155-9153-A006FFF53B0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDi.Interop.API.Connect", "UseCases\ISCamaguey\IDi\IDi.Interop.API.Connect\IDi.Interop.API.Connect.csproj", "{70CD124F-7B2F-4784-AD9C-726849F6AAA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDi.Interop.API.Connect", "UseCases\ISCamaguey\IDi\IDi.Interop.API.Connect\IDi.Interop.API.Connect.csproj", "{70CD124F-7B2F-4784-AD9C-726849F6AAA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDi.Presentation.Terminal.MAUI", "UseCases\ISCamaguey\IDi\IDi.Presentation.Terminal.MAUI\IDi.Presentation.Terminal.MAUI.csproj", "{3C9A9576-4883-4521-930B-1BF477A84BCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDi.Presentation.Terminal.MAUI", "UseCases\ISCamaguey\IDi\IDi.Presentation.Terminal.MAUI\IDi.Presentation.Terminal.MAUI.csproj", "{3C9A9576-4883-4521-930B-1BF477A84BCB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDi.Presentation.Terminal.MAUI.UI.Default", "UseCases\ISCamaguey\IDi\IDi.Presentation.Terminal.MAUI.UI.Default\IDi.Presentation.Terminal.MAUI.UI.Default.csproj", "{27E797DC-2C0A-416B-96F3-2167E8C493D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IDi.Presentation.Terminal.MAUI.UI.Default", "UseCases\ISCamaguey\IDi\IDi.Presentation.Terminal.MAUI.UI.Default\IDi.Presentation.Terminal.MAUI.UI.Default.csproj", "{27E797DC-2C0A-416B-96F3-2167E8C493D5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab.Interop.API.Common", "UseCases\ISCamaguey\Lab\Lab.Interop.API.Common\Lab.Interop.API.Common.csproj", "{E6B45B64-2515-4B81-B652-28379C757323}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Interop.API.Common", "UseCases\ISCamaguey\Domain\Domain.Interop.API.Common\Domain.Interop.API.Common.csproj", "{C2060ABB-4320-4E9D-9CF3-0E302C4EDB6B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Interop.API.Connect", "UseCases\ISCamaguey\Domain\Domain.Interop.API.Connect\Domain.Interop.API.Connect.csproj", "{268126BD-8BC4-4BDF-8971-835065B879CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Presentation.Terminal.MAUI", "UseCases\ISCamaguey\Domain\Domain.Presentation.Terminal.MAUI\Domain.Presentation.Terminal.MAUI.csproj", "{815DEFCA-CB58-4D7D-A22D-56368A628180}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain.Presentation.Terminal.MAUI.UI.Default", "UseCases\ISCamaguey\Domain\Domain.Presentation.Terminal.MAUI.UI.Default\Domain.Presentation.Terminal.MAUI.UI.Default.csproj", "{9B04569E-3E07-4499-9269-9866D5E851CD}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab.Interop.API.Connect", "UseCases\ISCamaguey\Lab\Lab.Interop.API.Connect\Lab.Interop.API.Connect.csproj", "{8F487D63-8256-433C-A316-5C3E403611F5}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab.Presentation.Terminal.MAUI", "UseCases\ISCamaguey\Lab\Lab.Presentation.Terminal.MAUI\Lab.Presentation.Terminal.MAUI.csproj", "{E933D99D-6AAC-48E6-9C21-CAF9B625F26F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab.Presentation.Terminal.MAUI.UI.Default", "UseCases\ISCamaguey\Lab\Lab.Presentation.Terminal.MAUI.UI.Default\Lab.Presentation.Terminal.MAUI.UI.Default.csproj", "{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISCamaguey.Interop.API.Common", "UseCases\ISCamaguey\ISCamaguey.Interop.API.Common\ISCamaguey.Interop.API.Common.csproj", "{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1023,6 +1041,42 @@ Global
 		{27E797DC-2C0A-416B-96F3-2167E8C493D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{27E797DC-2C0A-416B-96F3-2167E8C493D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{27E797DC-2C0A-416B-96F3-2167E8C493D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E6B45B64-2515-4B81-B652-28379C757323}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E6B45B64-2515-4B81-B652-28379C757323}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E6B45B64-2515-4B81-B652-28379C757323}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E6B45B64-2515-4B81-B652-28379C757323}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C2060ABB-4320-4E9D-9CF3-0E302C4EDB6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C2060ABB-4320-4E9D-9CF3-0E302C4EDB6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C2060ABB-4320-4E9D-9CF3-0E302C4EDB6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C2060ABB-4320-4E9D-9CF3-0E302C4EDB6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{268126BD-8BC4-4BDF-8971-835065B879CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{268126BD-8BC4-4BDF-8971-835065B879CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{268126BD-8BC4-4BDF-8971-835065B879CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{268126BD-8BC4-4BDF-8971-835065B879CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{815DEFCA-CB58-4D7D-A22D-56368A628180}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815DEFCA-CB58-4D7D-A22D-56368A628180}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815DEFCA-CB58-4D7D-A22D-56368A628180}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815DEFCA-CB58-4D7D-A22D-56368A628180}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B04569E-3E07-4499-9269-9866D5E851CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B04569E-3E07-4499-9269-9866D5E851CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B04569E-3E07-4499-9269-9866D5E851CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B04569E-3E07-4499-9269-9866D5E851CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8F487D63-8256-433C-A316-5C3E403611F5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8F487D63-8256-433C-A316-5C3E403611F5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8F487D63-8256-433C-A316-5C3E403611F5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8F487D63-8256-433C-A316-5C3E403611F5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E933D99D-6AAC-48E6-9C21-CAF9B625F26F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E933D99D-6AAC-48E6-9C21-CAF9B625F26F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E933D99D-6AAC-48E6-9C21-CAF9B625F26F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E933D99D-6AAC-48E6-9C21-CAF9B625F26F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1197,6 +1251,15 @@ Global
 		{70CD124F-7B2F-4784-AD9C-726849F6AAA1} = {23B89D64-C15C-4043-85D2-5A34731E017B}
 		{3C9A9576-4883-4521-930B-1BF477A84BCB} = {23B89D64-C15C-4043-85D2-5A34731E017B}
 		{27E797DC-2C0A-416B-96F3-2167E8C493D5} = {23B89D64-C15C-4043-85D2-5A34731E017B}
+		{E6B45B64-2515-4B81-B652-28379C757323} = {C0173AC3-6E50-4868-9B11-AA9FD57DC433}
+		{C2060ABB-4320-4E9D-9CF3-0E302C4EDB6B} = {A1218469-B79A-4984-A7C9-AD4419BF3375}
+		{268126BD-8BC4-4BDF-8971-835065B879CD} = {A1218469-B79A-4984-A7C9-AD4419BF3375}
+		{815DEFCA-CB58-4D7D-A22D-56368A628180} = {A1218469-B79A-4984-A7C9-AD4419BF3375}
+		{9B04569E-3E07-4499-9269-9866D5E851CD} = {A1218469-B79A-4984-A7C9-AD4419BF3375}
+		{8F487D63-8256-433C-A316-5C3E403611F5} = {C0173AC3-6E50-4868-9B11-AA9FD57DC433}
+		{E933D99D-6AAC-48E6-9C21-CAF9B625F26F} = {C0173AC3-6E50-4868-9B11-AA9FD57DC433}
+		{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B} = {C0173AC3-6E50-4868-9B11-AA9FD57DC433}
+		{D3743056-BB71-4BCF-8EE0-92A759F5A6F3} = {61391AF6-690D-4B65-9D6B-261E112E38D6}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {747B719B-EA48-4793-98E6-ECCB62300F19}

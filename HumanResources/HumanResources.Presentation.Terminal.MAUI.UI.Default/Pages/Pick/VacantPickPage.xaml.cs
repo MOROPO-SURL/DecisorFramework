@@ -121,46 +121,11 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
 
             var ocupations = new System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel>(await ocupationsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.OcupationFilterModel { StaffId = staff.Id, WorkforceId = staff.MainWorkforce.Id }));
 
-            foreach (var item in targetWorkforce.OrganizationalUnities)
+            var _models = targetWorkforce.OrganizationalUnities.ToVacantPickOrganizationalUnityViewModelChildren(ocupations, vacantOcupationModes);
+
+            foreach (var _model in _models)
             {
-                var result = new Models.View.VacantPickOrganizationalUnityViewModel
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    Enabled = item.Enabled,
-                    Priority = item.Priority,
-                    Reference = item.Reference
-                };
-
-                if (item.Vacants != null)
-                {
-                    var vacants = new System.Collections.Generic.List<Interop.API.Common.Models.Display.VacantDisplayModel>();
-
-                    foreach (var vacant in item.Vacants)
-                    {
-                        if (!vacantOcupationModes.Contains(vacant.OcupationMode)) continue;
-
-                        var ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == vacant.Id);
-
-                        if (ocupation != null)
-                        {
-                            ocupations.Remove(ocupation);
-                        }
-                        else
-                        {
-                            vacants.Add(vacant);
-                        }
-                    }
-
-                    result.Vacants = vacants.ToArray();
-                }
-
-                if (item.Children != null)
-                {
-                    result.Children = item.ToVacantPickOrganizationalUnityViewModelChildren(ocupations);
-                }
-
-                Dispatcher.Dispatch(() => ConcreteBindingContext.Items.Add(result));
+                Dispatcher.Dispatch(() => ConcreteBindingContext.Items.Add(_model));
             }
         }).ContinueWith(task =>
         {

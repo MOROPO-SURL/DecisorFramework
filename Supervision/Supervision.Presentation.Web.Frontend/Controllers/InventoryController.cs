@@ -9,7 +9,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.Supervision.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/supervision/inventory")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/supervision/inventory")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class InventoryController : Guama.Core.Presentation.Web.Common.Controllers.BaseWebController
     {

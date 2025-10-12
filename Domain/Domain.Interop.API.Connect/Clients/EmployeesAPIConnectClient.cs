@@ -6,7 +6,7 @@
         {
         }
 
-        protected override string TargetController => "api/domain/employees";
+        protected override string TargetController => "api/fwrk/domain/employees";
 
         public virtual async System.Threading.Tasks.Task<Common.Models.Display.EmployeeDisplayModel> FindByContactAsync(System.Guid key)
         {

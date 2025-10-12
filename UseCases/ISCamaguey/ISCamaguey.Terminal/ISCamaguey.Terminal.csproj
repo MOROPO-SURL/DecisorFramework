@@ -9,7 +9,7 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<!-- Display name -->
-		<ApplicationTitle>Decisor Instituto de Suelos Camagüey</ApplicationTitle>
+		<ApplicationTitle>IS Camagüey Decisor</ApplicationTitle>
 		<!-- App Identifier -->
 		<ApplicationId>cu.moropo.iscamaguey.decisor.terminal</ApplicationId>
 		<!-- Versions -->
@@ -78,11 +78,17 @@
 		<ProjectReference Include="..\..\..\Purchasing\Purchasing.Presentation.Terminal.MAUI.UI.Default\Purchasing.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\..\Sales\Sales.Presentation.Terminal.MAUI.UI.Default\Sales.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\..\Supervision\Supervision.Presentation.Terminal.MAUI.UI.Default\Supervision.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\Domain\Domain.Presentation.Terminal.MAUI.UI.Default\Domain.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\IDi\IDi.Presentation.Terminal.MAUI.UI.Default\IDi.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\ISCamaguey.Interop.API.Common\ISCamaguey.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Lab\Lab.Presentation.Terminal.MAUI.UI.Default\Lab.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Resources\Styles\Values.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Manage\OcupationsSimplifiedManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Shells\IDiShell.xaml">
@@ -97,6 +103,15 @@
 	  <MauiXaml Update="UI\Shells\ServicingShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="UI\Pages\Manage\OcupationsSimplifiedManagePage.xaml.cs">
+	    <DependentUpon>OcupationsSimplifiedManagePage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 
 </Project>

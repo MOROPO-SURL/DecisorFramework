@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/legal/sections";
+        protected override string TargetController => "api/fwrk/legal/sections";
     }
 }

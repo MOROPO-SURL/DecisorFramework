@@ -2,14 +2,13 @@
 using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
-using MOROPO.Framework.Decisor.Servicing.Presentation.Web.Frontend.Controllers;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/commercial/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/commercial/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class ProvisionableServicesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<ProvisionableService, System.Guid, ProvisionableServiceInputModel, ProvisionableServiceDisplayModel, ProvisionableServiceFilterModel>
     {

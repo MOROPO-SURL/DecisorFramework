@@ -2645,6 +2645,69 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.UseTphMappingStrategy();
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.EmployeeDailyChecking", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<TimeSpan>("CheckIn")
+                        .HasColumnType("interval")
+                        .HasColumnName("checkin");
+
+                    b.Property<TimeSpan?>("CheckOut")
+                        .HasColumnType("interval")
+                        .HasColumnName("checkout");
+
+                    b.Property<int>("Day")
+                        .HasColumnType("integer")
+                        .HasColumnName("day");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("employeeid");
+
+                    b.Property<TimeSpan?>("ExtraCheckIn")
+                        .HasColumnType("interval")
+                        .HasColumnName("extracheckin");
+
+                    b.Property<TimeSpan?>("ExtraCheckOut")
+                        .HasColumnType("interval")
+                        .HasColumnName("extracheckout");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("integer")
+                        .HasColumnName("month");
+
+                    b.Property<TimeSpan?>("PartialCheckIn")
+                        .HasColumnType("interval")
+                        .HasColumnName("partialcheckin");
+
+                    b.Property<TimeSpan?>("PartialCheckOut")
+                        .HasColumnType("interval")
+                        .HasColumnName("partialcheckout");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
+                    b.HasKey("Id")
+                        .HasName("pk_employeedailycheckings");
+
+                    b.HasIndex("EmployeeId", "Day", "Month", "Year")
+                        .IsUnique()
+                        .HasDatabaseName("ix_employeedailycheckings_employeeid_day_month_year");
+
+                    b.ToTable("employeedailycheckings", "decisorframework_humanresources");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2930,10 +2993,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("ocupationmode");
 
-                    b.Property<Guid>("OrganizationUnityId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("organizationunityid");
-
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
@@ -2946,15 +3005,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("workpositionid");
 
-                    b.Property<Guid>("WorkforceId")
+                    b.Property<Guid>("WorkforceOrganizationalUnityId")
                         .HasColumnType("uuid")
-                        .HasColumnName("workforceid");
+                        .HasColumnName("workforceorganizationalunityid");
 
                     b.HasKey("Id")
                         .HasName("pk_vacants");
-
-                    b.HasIndex("OrganizationUnityId")
-                        .HasDatabaseName("ix_vacants_organizationunityid");
 
                     b.HasIndex("SalaryStandardId")
                         .HasDatabaseName("ix_vacants_salarystandardid");
@@ -2962,8 +3018,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("WorkPositionId")
                         .HasDatabaseName("ix_vacants_workpositionid");
 
-                    b.HasIndex("WorkforceId")
-                        .HasDatabaseName("ix_vacants_workforceid");
+                    b.HasIndex("WorkforceOrganizationalUnityId")
+                        .HasDatabaseName("ix_vacants_workforceorganizationalunityid");
 
                     b.ToTable("vacants", "decisorframework_humanresources");
                 });
@@ -3279,37 +3335,51 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
-                    b.Property<Guid?>("ResponsibleVacantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("responsiblevacantid");
-
                     b.HasKey("Id")
                         .HasName("pk_workforces");
-
-                    b.HasIndex("ResponsibleVacantId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_workforces_responsiblevacantid");
 
                     b.ToTable("workforces", "decisorframework_humanresources");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnityBridge", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", b =>
                 {
-                    b.Property<Guid>("ProwId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("prowid");
+                        .HasColumnName("id");
 
-                    b.Property<Guid>("SternId")
+                    b.Property<Guid?>("ChiefVacantId")
                         .HasColumnType("uuid")
-                        .HasColumnName("sternid");
+                        .HasColumnName("chiefvacantid");
 
-                    b.HasKey("ProwId", "SternId")
-                        .HasName("pk_workforceorganizationalunitybridges");
+                    b.Property<Guid>("OrganizationalUnityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("organizationalunityid");
 
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_workforceorganizationalunitybridges_sternid");
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("parentid");
 
-                    b.ToTable("workforceorganizationalunitybridges", "decisorframework_humanresources");
+                    b.Property<Guid>("WorkforceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("workforceid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_workforceorganizationalunities");
+
+                    b.HasIndex("ChiefVacantId")
+                        .HasDatabaseName("ix_workforceorganizationalunities_chiefvacantid");
+
+                    b.HasIndex("OrganizationalUnityId")
+                        .HasDatabaseName("ix_workforceorganizationalunities_organizationalunityid");
+
+                    b.HasIndex("ParentId")
+                        .HasDatabaseName("ix_workforceorganizationalunities_parentid");
+
+                    b.HasIndex("WorkforceId")
+                        .HasDatabaseName("ix_workforceorganizationalunities_workforceid");
+
+                    b.ToTable("workforceorganizationalunities", "decisorframework_humanresources");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Batch", b =>
@@ -9558,6 +9628,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Vacant");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.EmployeeDailyChecking", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_employeedailycheckings_employees_employeeid");
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract.AbstractEmploymentContract", "Contract")
@@ -9688,13 +9770,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationalUnity", "OrganizationUnity")
-                        .WithMany()
-                        .HasForeignKey("OrganizationUnityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vacants_organizationalunities_organizationunityid");
-
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.SalaryStandard", "SalaryStandard")
                         .WithMany()
                         .HasForeignKey("SalaryStandardId")
@@ -9709,20 +9784,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_vacants_workpositions_workpositionid");
 
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", "Workforce")
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", "WorkforceOrganizationalUnity")
                         .WithMany()
-                        .HasForeignKey("WorkforceId")
+                        .HasForeignKey("WorkforceOrganizationalUnityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_vacants_workforces_workforceid");
-
-                    b.Navigation("OrganizationUnity");
+                        .HasConstraintName("fk_vacants_workforceorganizationalunities_workforceorganizatio~");
 
                     b.Navigation("SalaryStandard");
 
                     b.Navigation("WorkPosition");
 
-                    b.Navigation("Workforce");
+                    b.Navigation("WorkforceOrganizationalUnity");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.VacantPostulation", b =>
@@ -9860,35 +9933,39 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("WorkPosition");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", "ChiefVacant")
-                        .WithOne()
-                        .HasForeignKey("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", "ResponsibleVacantId")
-                        .HasConstraintName("fk_workforces_vacants_responsiblevacantid");
+                        .WithMany()
+                        .HasForeignKey("ChiefVacantId")
+                        .HasConstraintName("fk_workforceorganizationalunities_vacants_chiefvacantid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationalUnity", "OrganizationalUnity")
+                        .WithMany()
+                        .HasForeignKey("OrganizationalUnityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workforceorganizationalunities_organizationalunities_organi~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .HasConstraintName("fk_workforceorganizationalunities_workforceorganizationaluniti~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", "Workforce")
+                        .WithMany("OrganizationalUnities")
+                        .HasForeignKey("WorkforceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workforceorganizationalunities_workforces_workforceid");
 
                     b.Navigation("ChiefVacant");
-                });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnityBridge", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", "Prow")
-                        .WithMany("OrganizationalUnityBridges")
-                        .HasForeignKey("ProwId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_workforceorganizationalunitybridges_workforces_prowid");
+                    b.Navigation("OrganizationalUnity");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationalUnity", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_workforceorganizationalunitybridges_organizationalunities_s~");
+                    b.Navigation("Parent");
 
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
+                    b.Navigation("Workforce");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Batch", b =>
@@ -12912,7 +12989,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", b =>
                 {
-                    b.Navigation("OrganizationalUnityBridges");
+                    b.Navigation("OrganizationalUnities");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", b =>

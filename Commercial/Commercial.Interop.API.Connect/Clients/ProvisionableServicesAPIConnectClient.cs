@@ -6,7 +6,7 @@
         {
         }
 
-        protected override string TargetController => "api/commercial/provisionableservices";
+        protected override string TargetController => "api/fwrk/commercial/provisionableservices";
     }
 }
 

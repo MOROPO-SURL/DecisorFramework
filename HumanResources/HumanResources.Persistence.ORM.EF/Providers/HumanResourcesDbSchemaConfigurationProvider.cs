@@ -14,7 +14,7 @@
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.WorkPositionResponsability>(),
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.SalaryStandard>(),
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.Workforce>(),
-                    new Configurators.WorkforceOrganizationalUnityBridgeEntityTypeConfigurator(),
+                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.WorkforceOrganizationalUnity>(),
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.Vacant>(),
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.VacantPostulation>(),
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.VacantPostulationOcupation>(),
@@ -26,7 +26,8 @@
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.AdmitionEmploymentContract>(),
                     new Configurators.StaffEntityTypeConfigurator(),
                     new Configurators.StaffWorkforceBridgeEntityTypeConfigurator(),
-                    new Configurators.OcupationEntityTypeConfigurator()
+                    new Configurators.OcupationEntityTypeConfigurator(),
+                    new Configurators.EmployeeDailyCheckingEntityTypeConfigurator()
                 };
             }
         }

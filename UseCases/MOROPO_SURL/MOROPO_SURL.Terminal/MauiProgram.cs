@@ -15,6 +15,7 @@ using MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Exten
 using MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using UraniumUI;
 
 namespace MOROPO.Tool.Decisor.Terminal
 {
@@ -29,6 +30,8 @@ namespace MOROPO.Tool.Decisor.Terminal
                .UseMauiCommunityToolkit()
                .UseMauiCommunityToolkitMediaElement()
                .UseSkiaSharp()
+               .UseUraniumUI()
+               .UseUraniumUIMaterial()
                .ConfigureFonts(fonts =>
                {
                    fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

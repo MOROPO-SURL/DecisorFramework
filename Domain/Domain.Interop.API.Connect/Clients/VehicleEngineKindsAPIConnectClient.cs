@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/domain/vehicleenginekinds";
+        protected override string TargetController => "api/fwrk/domain/vehicleenginekinds";
     }
 }

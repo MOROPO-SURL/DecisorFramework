@@ -8,7 +8,7 @@ using MOROPO.Framework.Guama.Security.Personal.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Core.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/[controller]")]
+    [Route("api/fwrk/[controller]")]
     [ApiController]
     public class SecurityController : Guama.Core.Presentation.Web.Common.Controllers.BaseWebController
     {

@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/production/productions";
+        protected override string TargetController => "api/fwrk/production/productions";
     }
 }

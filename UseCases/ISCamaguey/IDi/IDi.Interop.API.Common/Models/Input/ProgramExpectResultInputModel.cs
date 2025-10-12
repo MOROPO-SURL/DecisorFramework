@@ -9,6 +9,7 @@
 
         public int Index { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
 
         public Persistence.Entities.ProgramExpectResult Export()

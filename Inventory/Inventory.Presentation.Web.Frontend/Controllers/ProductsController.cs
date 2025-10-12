@@ -9,7 +9,7 @@ using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/inventory/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/inventory/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class ProductsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Product, System.Guid, ProductInputModel, ProductDisplayModel>
     {

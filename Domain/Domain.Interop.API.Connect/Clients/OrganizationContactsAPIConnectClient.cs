@@ -10,6 +10,6 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Connect.Clients
         {
         }
 
-        protected override string TargetController => "api/domain/organizationcontacts";
+        protected override string TargetController => "api/fwrk/domain/organizationcontacts";
     }
 }

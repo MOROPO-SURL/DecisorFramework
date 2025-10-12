@@ -10,6 +10,8 @@ using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.E
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Extensions;
+using MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Extensions;
+using MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
@@ -38,6 +40,8 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal
                .UseDecisorFrameworkFinancial()
                .UseDecisorFrameworkProduction()
                .UseDecisorFrameworkCommercial()
+               .UseDecisorUseCaseDomain()
+               .UseDecisorUseCaseLab()
                .UseDecisorUseCaseIDi()
                .Services
                    .AddSingleton<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade, Providers.HttpClientHelperProvider>()

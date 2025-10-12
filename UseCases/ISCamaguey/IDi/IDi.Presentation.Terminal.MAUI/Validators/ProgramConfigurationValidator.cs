@@ -13,6 +13,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Validators
             RuleFor(model => model.Chief).NotNull();
 
             RuleFor(model => model.Manager).NotNull();
+
+            RuleFor(model => model.ExpectResults).NotEmpty();
         }
     }
 }

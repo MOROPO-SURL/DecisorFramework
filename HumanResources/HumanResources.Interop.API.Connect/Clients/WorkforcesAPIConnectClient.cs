@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/hhrr/workforces";
+        protected override string TargetController => "api/fwrk/hhrr/workforces";
     }
 }

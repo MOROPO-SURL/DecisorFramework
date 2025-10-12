@@ -2,6 +2,7 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:decisorframework_commercial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.ServicingShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -33,9 +34,9 @@
             </Grid>
         </Grid>
     </Shell.FlyoutHeader>
-    <MenuFlyoutItem Text="Inicio" />
+    <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
     <ShellContent
-        Title="Panel de Control"
+        Title="Panel de Control (%)"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -44,4 +45,61 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <MenuFlyoutItem Text="Operaciones" IsEnabled="False" />
+    <ShellContent
+        Title="Ordenes de Servicio (%)"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFF75;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Servicios" IsEnabled="False" />
+    <ShellContent
+        Title="Capacitación (%)"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF88F;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Procesamiento de Muestras (%)"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF025C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Estudios Int. de Suelo (%)"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFE49;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
+    <FlyoutItem Title="Clientes">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFAC0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:LegalClientsManagePage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:NaturalClientsManagePage}" />
+    </FlyoutItem>
 </Shell>

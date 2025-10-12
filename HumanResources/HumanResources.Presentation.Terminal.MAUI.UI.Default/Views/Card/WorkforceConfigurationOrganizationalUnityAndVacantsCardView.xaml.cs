@@ -7,11 +7,25 @@ public partial class WorkforceConfigurationOrganizationalUnityAndVacantsCardView
 		InitializeComponent();
 	}
 
-	public event System.EventHandler AddVacantButtonClick;
+	public event System.EventHandler DefineChiefVacantButtonClick;
+
+    public event System.EventHandler ChiefVacantEditionButtonClick;
+
+    public event System.EventHandler AddVacantButtonClick;
 
     public event System.EventHandler VacantEditionButtonClick;
 
     public event System.EventHandler VacantRemoveButtonClick;
+
+    private void DefineChiefVacantButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DefineChiefVacantButtonClick?.Invoke(sender, eventArgs);
+    }
+
+    private void ChiefVacantEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        ChiefVacantEditionButtonClick?.Invoke(sender, eventArgs);
+    }
 
     private void AddVacantButton_Clicked(object sender, System.EventArgs eventArgs)
     {

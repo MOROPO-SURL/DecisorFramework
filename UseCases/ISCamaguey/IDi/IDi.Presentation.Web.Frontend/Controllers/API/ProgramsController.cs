@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/usescase/idi/[controller]")]
+    [Route("api/idi/[controller]")]
     [ApiController]
     public class ProgramsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<Program, System.Guid, ProgramInputModel, ProgramDisplayModel, ProgramFilterModel>
     {

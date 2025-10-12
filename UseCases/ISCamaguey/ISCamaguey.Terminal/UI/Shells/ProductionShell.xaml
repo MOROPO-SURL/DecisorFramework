@@ -11,7 +11,7 @@
         <Grid HeightRequest="180">
             <Image 
                 Aspect="AspectFill"
-                Source="elaboration.jpg" />
+                Source="production.jpg" />
             <BoxView
                 BackgroundColor="Black"
                 Opacity="0.5" />
@@ -36,7 +36,7 @@
     </Shell.FlyoutHeader>
     <MenuFlyoutItem Text="Inicio" />
     <ShellContent
-        Title="Panel de Control"
+        Title="Panel de Control (%)"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -46,9 +46,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
-    <MenuFlyoutItem Text="- Productos -" IsEnabled="False" />
     <FlyoutItem
-        Title="Ordenes">
+        Title="Ordenes (%)">
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -66,7 +65,7 @@
             ContentTemplate="{DataTemplate decisorframework_production_manage_pages:ProductionOrdersToApproveManagePage}" />
     </FlyoutItem>
     <ShellContent
-        Title="Producciones"
+        Title="Producciones (%)"
         ContentTemplate="{DataTemplate decisorframework_production_manage_pages:ProductionsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -75,30 +74,9 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="- Servicios -" IsEnabled="False" />
-    <ShellContent
-        Title="Ordenes"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF14E;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-        Title="Ejecusiones"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF9AB;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
-        Title="Elaboraciones"
+        Title="Elaboraciones (%)"
         ContentTemplate="{DataTemplate decisorframework_production_manage_pages:ElaborationsManagePage}">
         <ShellContent.Icon>
             <FontImageSource

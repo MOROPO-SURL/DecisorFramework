@@ -11,6 +11,6 @@
             await httpClientHelperProvider.HttpClientHelper.PutAsync($"{TargetController}/approve/{key}");
         }
 
-        protected override string TargetController => "api/production/productionorders";
+        protected override string TargetController => "api/fwrk/production/productionorders";
     }
 }

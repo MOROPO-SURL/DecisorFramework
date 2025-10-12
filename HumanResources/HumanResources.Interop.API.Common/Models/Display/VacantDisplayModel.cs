@@ -12,7 +12,7 @@
 
         public WorkPositionDisplayModel WorkPosition { get; set; }
 
-        public System.Guid OrganizationUnityId { get; set; }
+        public System.Guid WorkforceOrganizationUnityId { get; set; }
 
         public SalaryStandardDisplayModel SalaryStandard { get; set; }
 
@@ -22,7 +22,7 @@
             Enabled = entity.Enabled;
             Priority = entity.Priority;
             OcupationMode = entity.OcupationMode;
-            OrganizationUnityId = entity.OrganizationUnityId;
+            WorkforceOrganizationUnityId = entity.WorkforceOrganizationalUnityId;
 
             if (entity.WorkPosition != null)
             {
