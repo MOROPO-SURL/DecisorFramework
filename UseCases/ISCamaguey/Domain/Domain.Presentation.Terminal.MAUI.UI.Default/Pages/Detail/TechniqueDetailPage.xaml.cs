@@ -11,6 +11,8 @@ public partial class TechniqueDetailPage : Framework.Decisor.Core.Presentation.T
         InitializeComponent();
 
         this.delegationAction = delegationAction;
+
+        if (delegationAction == null) OptionButtonLayout.IsVisible = false;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
