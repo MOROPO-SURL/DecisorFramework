@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities
+﻿namespace MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities
 {
-    public class IsoStandard : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<int>,Framework.Guama.Core.Persistence.Entities.Contract.INamedEntity<int>
+    public class IsoStandard : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>,Framework.Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
+
+        public int Index { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }

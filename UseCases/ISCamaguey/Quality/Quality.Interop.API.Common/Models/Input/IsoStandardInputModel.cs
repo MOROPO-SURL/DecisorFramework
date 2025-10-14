@@ -1,13 +1,13 @@
-﻿
-using MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities;
-
-namespace MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Input
+﻿namespace MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Input
 {
-    public class IsoStandardInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.IsoStandard, int>
+    public class IsoStandardInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.IsoStandard, System.Guid>
     {
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
+
+        public int Index { get; set; }
 
         public string Description { get; set; }
 
@@ -30,6 +30,7 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Input
         public void Mergue(Persistence.Entities.IsoStandard entity)
         {
             entity.Name = Name;
+            entity.Index = Index;
             entity.Description = Description;
             entity.Priority = Priority;
         }

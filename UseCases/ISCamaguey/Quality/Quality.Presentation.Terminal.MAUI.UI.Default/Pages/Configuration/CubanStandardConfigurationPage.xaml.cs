@@ -14,12 +14,13 @@ public partial class CubanStandardConfigurationPage : Framework.Decisor.Core.Pre
 
     protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.CubanStandardDisplayModel> PerformCreationAsync()
     {
-        var apiConnectClient = new Interop.API.Connect.Clients.CubanStandardAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.CubanStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
         var model = new Interop.API.Common.Models.Input.CubanStandardInputModel
         {
-            Id = ConcreteBindingContext.Id,
+            Id = System.Guid.NewGuid(),
             Name = ConcreteBindingContext.Name,
+            Index = ConcreteBindingContext.Index,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority
         };
@@ -31,12 +32,13 @@ public partial class CubanStandardConfigurationPage : Framework.Decisor.Core.Pre
 
     protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.CubanStandardDisplayModel> PerformEditionAsync()
     {
-        var apiConnectClient = new Interop.API.Connect.Clients.CubanStandardAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.CubanStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
         var model = new Interop.API.Common.Models.Input.CubanStandardInputModel
         {
             Id = ConcreteBindingContext.Id,
             Name = ConcreteBindingContext.Name,
+            Index = ConcreteBindingContext.Index,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority
         };

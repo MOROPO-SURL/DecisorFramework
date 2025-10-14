@@ -59,9 +59,13 @@
                                         <Label 
                                             LineBreakMode="TailTruncation"
                                             FontSize="Medium"
+                                            Text="{Binding Index}" />
+                                        <Label 
+                                            LineBreakMode="TailTruncation"
+                                            FontAttributes="Bold"
                                             Text="{Binding Name}" />
                                         <Label 
-                                            Margin="0,4,0,0"
+                                            Margin="0,8,0,0"
                                             Text="Descripción"
                                             TextColor="DimGray"
                                             FontSize="Caption"

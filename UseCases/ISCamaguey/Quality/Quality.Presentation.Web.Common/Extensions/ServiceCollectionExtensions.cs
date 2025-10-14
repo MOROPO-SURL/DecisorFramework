@@ -9,8 +9,8 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Presentation.Web.Common.Extensions
     {
         public static void AddISCamagueyDecisorQualityPresentationWebCommon(this IServiceCollection services)
         {
-            services.AddScoped<IEntityRepository<CubanStandard, int>, CubanStandardRepository>();
-            services.AddScoped<IEntityRepository<IsoStandard, int>, IsoStandardRepository>();
+            services.AddScoped<IEntityRepository<CubanStandard, System.Guid>, CubanStandardRepository>();
+            services.AddScoped<IEntityRepository<IsoStandard, System.Guid>, IsoStandardRepository>();
             services.AddScoped<IEntityRepository<Certification, System.Guid>, CertificationRepository>();
 
             services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.QualityDbSchemaConfigurationProvider>();

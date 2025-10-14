@@ -5440,8 +5440,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("prowid");
 
-                    b.Property<int>("SternId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
                         .HasColumnName("sternid");
 
                     b.HasKey("ProwId", "SternId")
@@ -5459,8 +5459,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("prowid");
 
-                    b.Property<int>("SternId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
                         .HasColumnName("sternid");
 
                     b.HasKey("ProwId", "SternId")
@@ -7078,8 +7078,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("prowid");
 
-                    b.Property<int>("SternId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
                         .HasColumnName("sternid");
 
                     b.HasKey("ProwId", "SternId")
@@ -7097,8 +7097,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("prowid");
 
-                    b.Property<int>("SternId")
-                        .HasColumnType("integer")
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
                         .HasColumnName("sternid");
 
                     b.HasKey("ProwId", "SternId")
@@ -7112,12 +7112,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CubanStandard", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Archived")
                         .HasColumnType("boolean")
@@ -7130,6 +7128,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -7143,17 +7145,19 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasKey("Id")
                         .HasName("pk_cubanstandards");
 
+                    b.HasIndex("Index")
+                        .IsUnique()
+                        .HasDatabaseName("ix_cubanstandards_index");
+
                     b.ToTable("cubanstandards", "decisoriscamaguey_quality");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.IsoStandard", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("uuid")
                         .HasColumnName("id");
-
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<bool>("Archived")
                         .HasColumnType("boolean")
@@ -7167,6 +7171,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("text")
@@ -7178,6 +7186,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_isostandards");
+
+                    b.HasIndex("Index")
+                        .IsUnique()
+                        .HasDatabaseName("ix_isostandards_index");
 
                     b.ToTable("isostandards", "decisoriscamaguey_quality");
                 });

@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities
+﻿namespace MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities
 {
-    public class CertificationIsoStandardBridge : Framework.Guama.Core.Persistence.Entities.Contract.IBridge<Certification, Guid, IsoStandard, int>
+    public class CertificationIsoStandardBridge : Framework.Guama.Core.Persistence.Entities.Contract.IBridge<Certification, System.Guid, IsoStandard, System.Guid>
     {
-        public Guid ProwId { get; set; }
+        public System.Guid ProwId { get; set; }
         
         public Certification Prow { get; set; }
         
-        public int SternId { get; set; }
+        public System.Guid SternId { get; set; }
         
         public IsoStandard Stern { get; set; }
     }

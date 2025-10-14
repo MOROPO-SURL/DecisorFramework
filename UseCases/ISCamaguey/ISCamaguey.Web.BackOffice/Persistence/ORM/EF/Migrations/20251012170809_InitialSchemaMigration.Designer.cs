@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250904011955_InitialSchemaMigration")]
+    [Migration("20251012170809_InitialSchemaMigration")]
     partial class InitialSchemaMigration
     {
         /// <inheritdoc />
@@ -1374,10 +1374,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("archived");
 
-                    b.Property<decimal>("Area")
-                        .HasColumnType("numeric")
-                        .HasColumnName("area");
-
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
@@ -2089,6 +2085,48 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("bankdebitcards", "decisorframework_finantial");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Contract.AbstractCollect", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("real")
+                        .HasColumnName("amount");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
+                    b.Property<DateTime>("ExpectedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("expectedat");
+
+                    b.HasKey("Id")
+                        .HasName("pk_collects");
+
+                    b.ToTable("collects", "decisorframework_finantial");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractCollect");
+
+                    b.UseTphMappingStrategy();
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Financial.Persistence.Entities.CostCenter", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2574,6 +2612,69 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.UseTphMappingStrategy();
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.EmployeeDailyChecking", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<TimeSpan>("CheckIn")
+                        .HasColumnType("interval")
+                        .HasColumnName("checkin");
+
+                    b.Property<TimeSpan?>("CheckOut")
+                        .HasColumnType("interval")
+                        .HasColumnName("checkout");
+
+                    b.Property<int>("Day")
+                        .HasColumnType("integer")
+                        .HasColumnName("day");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("employeeid");
+
+                    b.Property<TimeSpan?>("ExtraCheckIn")
+                        .HasColumnType("interval")
+                        .HasColumnName("extracheckin");
+
+                    b.Property<TimeSpan?>("ExtraCheckOut")
+                        .HasColumnType("interval")
+                        .HasColumnName("extracheckout");
+
+                    b.Property<int>("Month")
+                        .HasColumnType("integer")
+                        .HasColumnName("month");
+
+                    b.Property<TimeSpan?>("PartialCheckIn")
+                        .HasColumnType("interval")
+                        .HasColumnName("partialcheckin");
+
+                    b.Property<TimeSpan?>("PartialCheckOut")
+                        .HasColumnType("interval")
+                        .HasColumnName("partialcheckout");
+
+                    b.Property<int>("Year")
+                        .HasColumnType("integer")
+                        .HasColumnName("year");
+
+                    b.HasKey("Id")
+                        .HasName("pk_employeedailycheckings");
+
+                    b.HasIndex("EmployeeId", "Day", "Month", "Year")
+                        .IsUnique()
+                        .HasDatabaseName("ix_employeedailycheckings_employeeid_day_month_year");
+
+                    b.ToTable("employeedailycheckings", "decisorframework_humanresources");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2859,10 +2960,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("ocupationmode");
 
-                    b.Property<Guid>("OrganizationUnityId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("organizationunityid");
-
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
@@ -2875,15 +2972,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("workpositionid");
 
-                    b.Property<Guid>("WorkforceId")
+                    b.Property<Guid>("WorkforceOrganizationalUnityId")
                         .HasColumnType("uuid")
-                        .HasColumnName("workforceid");
+                        .HasColumnName("workforceorganizationalunityid");
 
                     b.HasKey("Id")
                         .HasName("pk_vacants");
-
-                    b.HasIndex("OrganizationUnityId")
-                        .HasDatabaseName("ix_vacants_organizationunityid");
 
                     b.HasIndex("SalaryStandardId")
                         .HasDatabaseName("ix_vacants_salarystandardid");
@@ -2891,8 +2985,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("WorkPositionId")
                         .HasDatabaseName("ix_vacants_workpositionid");
 
-                    b.HasIndex("WorkforceId")
-                        .HasDatabaseName("ix_vacants_workforceid");
+                    b.HasIndex("WorkforceOrganizationalUnityId")
+                        .HasDatabaseName("ix_vacants_workforceorganizationalunityid");
 
                     b.ToTable("vacants", "decisorframework_humanresources");
                 });
@@ -3208,37 +3302,51 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
-                    b.Property<Guid?>("ResponsibleVacantId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("responsiblevacantid");
-
                     b.HasKey("Id")
                         .HasName("pk_workforces");
-
-                    b.HasIndex("ResponsibleVacantId")
-                        .IsUnique()
-                        .HasDatabaseName("ix_workforces_responsiblevacantid");
 
                     b.ToTable("workforces", "decisorframework_humanresources");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnityBridge", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", b =>
                 {
-                    b.Property<Guid>("ProwId")
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
                         .HasColumnType("uuid")
-                        .HasColumnName("prowid");
+                        .HasColumnName("id");
 
-                    b.Property<Guid>("SternId")
+                    b.Property<Guid?>("ChiefVacantId")
                         .HasColumnType("uuid")
-                        .HasColumnName("sternid");
+                        .HasColumnName("chiefvacantid");
 
-                    b.HasKey("ProwId", "SternId")
-                        .HasName("pk_workforceorganizationalunitybridges");
+                    b.Property<Guid>("OrganizationalUnityId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("organizationalunityid");
 
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_workforceorganizationalunitybridges_sternid");
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("parentid");
 
-                    b.ToTable("workforceorganizationalunitybridges", "decisorframework_humanresources");
+                    b.Property<Guid>("WorkforceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("workforceid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_workforceorganizationalunities");
+
+                    b.HasIndex("ChiefVacantId")
+                        .HasDatabaseName("ix_workforceorganizationalunities_chiefvacantid");
+
+                    b.HasIndex("OrganizationalUnityId")
+                        .HasDatabaseName("ix_workforceorganizationalunities_organizationalunityid");
+
+                    b.HasIndex("ParentId")
+                        .HasDatabaseName("ix_workforceorganizationalunities_parentid");
+
+                    b.HasIndex("WorkforceId")
+                        .HasDatabaseName("ix_workforceorganizationalunities_workforceid");
+
+                    b.ToTable("workforceorganizationalunities", "decisorframework_humanresources");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Batch", b =>
@@ -5295,6 +5403,2014 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("userrolebridges", "guamaframework_security_personal");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_techniques");
+
+                    b.ToTable("techniques", "decisoriscamaguey_domain");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.TechniqueCubanStandardBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_techniquecubanstandardbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_techniquecubanstandardbridges_sternid");
+
+                    b.ToTable("techniquecubanstandardbridges", "decisoriscamaguey_domain");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.TechniqueIsoStandardBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_techniqueisostandardbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_techniqueisostandardbridges_sternid");
+
+                    b.ToTable("techniqueisostandardbridges", "decisoriscamaguey_domain");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.AwardKind", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_awardkinds");
+
+                    b.ToTable("awardkinds", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.AwardResult", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid>("KindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("kindid");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_awardresults");
+
+                    b.HasIndex("KindId")
+                        .HasDatabaseName("ix_awardresults_kindid");
+
+                    b.ToTable("awardresults", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<Guid?>("CategoryId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("categoryid");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid?>("TeachingCategoryId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("teachingcategoryid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_researchers");
+
+                    b.HasIndex("CategoryId")
+                        .HasDatabaseName("ix_researchers_categoryid");
+
+                    b.ToTable("researchers", "decisoriscamaguey_idi");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractResearcher");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Extension", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("projectid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_extensions");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_extensions_projectid");
+
+                    b.ToTable("extensions", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Financier", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contactid");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_financiers");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_financiers_contactid");
+
+                    b.ToTable("financiers", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.NewTechniqueResult", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid?>("PredecessorTechniqueId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("predecessortechniqueid");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("ResultingTechniqueId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("resultingtechniqueid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_newtechniqueresults");
+
+                    b.HasIndex("PredecessorTechniqueId")
+                        .HasDatabaseName("ix_newtechniqueresults_predecessortechniqueid");
+
+                    b.HasIndex("ResultingTechniqueId")
+                        .HasDatabaseName("ix_newtechniqueresults_resultingtechniqueid");
+
+                    b.ToTable("newtechniqueresults", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.OppositionReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid?>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("ReportId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("reportid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_oppositionreports");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_oppositionreports_authorid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_oppositionreports_documentid");
+
+                    b.HasIndex("ReportId")
+                        .HasDatabaseName("ix_oppositionreports_reportid");
+
+                    b.ToTable("oppositionreports", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ParticipatingOrganization", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contactid");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_participatingorganizations");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_participatingorganizations_contactid");
+
+                    b.ToTable("participatingorganizations", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Program", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Alias")
+                        .HasColumnType("text")
+                        .HasColumnName("alias");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<Guid>("ChiefId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("chiefid");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid>("ManagerId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("managerid");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_programs");
+
+                    b.HasIndex("ChiefId")
+                        .HasDatabaseName("ix_programs_chiefid");
+
+                    b.HasIndex("ManagerId")
+                        .HasDatabaseName("ix_programs_managerid");
+
+                    b.ToTable("programs", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProgramExpectResult", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
+
+                    b.Property<Guid>("ProgramId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("programid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("pk_programexpectresults");
+
+                    b.HasIndex("Index")
+                        .IsUnique()
+                        .HasDatabaseName("ix_programexpectresults_index");
+
+                    b.HasIndex("ProgramId")
+                        .HasDatabaseName("ix_programexpectresults_programid");
+
+                    b.ToTable("programexpectresults", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Beneficiary")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("beneficiary");
+
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("categoryid");
+
+                    b.Property<Guid>("ChiefId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("chiefid");
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("code");
+
+                    b.Property<string>("Context")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("context");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<DateTime>("EndAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("endat");
+
+                    b.Property<string>("MainObjetive")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("mainobjetive");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<Guid?>("PredecessorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("predecessorid");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<string>("Problem")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("problem");
+
+                    b.Property<Guid?>("ProgramId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("programid");
+
+                    b.Property<Guid?>("ProposalId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("proposalid");
+
+                    b.Property<DateTime>("StartAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("startat");
+
+                    b.Property<string>("Summary")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("summary");
+
+                    b.HasKey("Id")
+                        .HasName("pk_projects");
+
+                    b.HasIndex("CategoryId")
+                        .HasDatabaseName("ix_projects_categoryid");
+
+                    b.HasIndex("ChiefId")
+                        .HasDatabaseName("ix_projects_chiefid");
+
+                    b.HasIndex("PredecessorId")
+                        .HasDatabaseName("ix_projects_predecessorid");
+
+                    b.HasIndex("ProgramId")
+                        .HasDatabaseName("ix_projects_programid");
+
+                    b.HasIndex("ProposalId")
+                        .HasDatabaseName("ix_projects_proposalid");
+
+                    b.ToTable("projects", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectBudgetCurrencyBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("real")
+                        .HasColumnName("amount");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_projectbudgetcurrencybridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_projectbudgetcurrencybridges_sternid");
+
+                    b.ToTable("projectbudgetcurrencybridges", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectBudgetFunancing", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<float>("Amount")
+                        .HasColumnType("real")
+                        .HasColumnName("amount");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<Guid>("CurrencyId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("currencyid");
+
+                    b.Property<Guid>("FinancierId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("financierid");
+
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("projectid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_projectbudgetfunancings");
+
+                    b.HasIndex("FinancierId")
+                        .HasDatabaseName("ix_projectbudgetfunancings_financierid");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_projectbudgetfunancings_projectid");
+
+                    b.ToTable("projectbudgetfunancings", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_projectcategories");
+
+                    b.ToTable("projectcategories", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectParticipatingOrganizationBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_projectparticipatingorganizationbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_projectparticipatingorganizationbridges_sternid");
+
+                    b.ToTable("projectparticipatingorganizationbridges", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectProposal", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_projectproposals");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_projectproposals_documentid");
+
+                    b.ToTable("projectproposals", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid?>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_projectreports");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_projectreports_documentid");
+
+                    b.ToTable("projectreports", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectResearcherBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_projectresearcherbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_projectresearcherbridges_sternid");
+
+                    b.ToTable("projectresearcherbridges", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectSpecificObjective", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("projectid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_projectspecificobjectives");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_projectspecificobjectives_projectid");
+
+                    b.ToTable("projectspecificobjectives", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.PublicationResult", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid>("MainAuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("mainauthorid");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("pk_publicationresults");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_publicationresults_documentid");
+
+                    b.HasIndex("MainAuthorId")
+                        .HasDatabaseName("ix_publicationresults_mainauthorid");
+
+                    b.ToTable("publicationresults", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.PublicationResultResearcherBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_publicationresultresearcherbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_publicationresultresearcherbridges_sternid");
+
+                    b.ToTable("publicationresultresearcherbridges", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearchArea", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_researchareas");
+
+                    b.ToTable("researchareas", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearcherCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_researchercategories");
+
+                    b.ToTable("researchercategories", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearcherResearchAreaDoctorateBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_researcherresearchareadoctoratebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_researcherresearchareadoctoratebridges_sternid");
+
+                    b.ToTable("researcherresearchareadoctoratebridges", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearcherResearchAreaMasteryBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_researcherresearchareamasterybridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_researcherresearchareamasterybridges_sternid");
+
+                    b.ToTable("researcherresearchareamasterybridges", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearcherResearchAreaSpecializationBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_researcherresearchareaspecializationbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_researcherresearchareaspecializationbridges_sternid");
+
+                    b.ToTable("researcherresearchareaspecializationbridges", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResult", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid>("KindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("kindid");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<string>("RegistrationCode")
+                        .HasColumnType("text")
+                        .HasColumnName("registrationcode");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("pk_scientifictechnicalresults");
+
+                    b.HasIndex("KindId")
+                        .HasDatabaseName("ix_scientifictechnicalresults_kindid");
+
+                    b.ToTable("scientifictechnicalresults", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResultIntroduction", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("ResultId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("resultid");
+
+                    b.Property<string>("Scenery")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("scenery");
+
+                    b.HasKey("Id")
+                        .HasName("pk_scientifictechnicalresultintroductions");
+
+                    b.HasIndex("ResultId")
+                        .HasDatabaseName("ix_scientifictechnicalresultintroductions_resultid");
+
+                    b.ToTable("scientifictechnicalresultintroductions", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResultKind", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_scientifictechnicalresultkinds");
+
+                    b.ToTable("scientifictechnicalresultkinds", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ThesisResult", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<string>("Title")
+                        .HasColumnType("text")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("pk_thesisresults");
+
+                    b.ToTable("thesisresults", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ThesisResultResearcherBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_thesisresultresearcherbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_thesisresultresearcherbridges_sternid");
+
+                    b.ToTable("thesisresultresearcherbridges", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.TrainingResult", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_trainingresults");
+
+                    b.ToTable("trainingresults", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.TrainingResultResearcherBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_trainingresultresearcherbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_trainingresultresearcherbridges_sternid");
+
+                    b.ToTable("trainingresultresearcherbridges", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Analysis", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<Guid>("OrderId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("orderid");
+
+                    b.Property<Guid?>("PredecessorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("predecessorid");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("TechniqueId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("techniqueid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_analysises");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_analysises_orderid");
+
+                    b.HasIndex("PredecessorId")
+                        .HasDatabaseName("ix_analysises_predecessorid");
+
+                    b.HasIndex("TechniqueId")
+                        .HasDatabaseName("ix_analysises_techniqueid");
+
+                    b.ToTable("analysises", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AnalysisOrder", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<int>("SampleId")
+                        .HasColumnType("integer")
+                        .HasColumnName("sampleid");
+
+                    b.Property<Guid>("TechniqueId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("techniqueid");
+
+                    b.Property<Guid?>("WorkPlanId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("workplanid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_analysisorders");
+
+                    b.HasIndex("SampleId")
+                        .HasDatabaseName("ix_analysisorders_sampleid");
+
+                    b.HasIndex("TechniqueId")
+                        .HasDatabaseName("ix_analysisorders_techniqueid");
+
+                    b.HasIndex("WorkPlanId")
+                        .HasDatabaseName("ix_analysisorders_workplanid");
+
+                    b.ToTable("analysisorders", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Assessment", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("TargetId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("targetid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_assessments");
+
+                    b.HasIndex("TargetId")
+                        .HasDatabaseName("ix_assessments_targetid");
+
+                    b.ToTable("assessments", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<Guid>("DefaultSampleKindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("defaultsamplekindid");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Observation")
+                        .HasColumnType("text")
+                        .HasColumnName("observation");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<string>("Reference")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("reference");
+
+                    b.HasKey("Id")
+                        .HasName("pk_samples");
+
+                    b.HasIndex("DefaultSampleKindId")
+                        .HasDatabaseName("ix_samples_defaultsamplekindid");
+
+                    b.ToTable("samples", "decisoriscamaguey_lab");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractSample");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.SampleKind", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_samplekinds");
+
+                    b.ToTable("samplekinds", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlan", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_workplans");
+
+                    b.ToTable("workplans", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroup", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<Guid>("ChiefId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("chiefid");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("QualitySpecialistId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("qualityspecialistid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_workinggroups");
+
+                    b.HasIndex("ChiefId")
+                        .HasDatabaseName("ix_workinggroups_chiefid");
+
+                    b.HasIndex("QualitySpecialistId")
+                        .HasDatabaseName("ix_workinggroups_qualityspecialistid");
+
+                    b.ToTable("workinggroups", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroupEmployeeBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_workinggroupemployeebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_workinggroupemployeebridges_sternid");
+
+                    b.ToTable("workinggroupemployeebridges", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroupTechniqueBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_workinggrouptechniquebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_workinggrouptechniquebridges_sternid");
+
+                    b.ToTable("workinggrouptechniquebridges", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.Certification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("Created")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("created");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_certifications");
+
+                    b.ToTable("certifications", "decisoriscamaguey_quality");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CertificationCubanStandardBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_certificationcubanstandardbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_certificationcubanstandardbridges_sternid");
+
+                    b.ToTable("certificationcubanstandardbridges", "decisoriscamaguey_quality");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CertificationIsoStandardBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_certificationisostandardbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_certificationisostandardbridges_sternid");
+
+                    b.ToTable("certificationisostandardbridges", "decisoriscamaguey_quality");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CubanStandard", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_cubanstandards");
+
+                    b.HasIndex("Index")
+                        .IsUnique()
+                        .HasDatabaseName("ix_cubanstandards_index");
+
+                    b.ToTable("cubanstandards", "decisoriscamaguey_quality");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.IsoStandard", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_isostandards");
+
+                    b.HasIndex("Index")
+                        .IsUnique()
+                        .HasDatabaseName("ix_isostandards_index");
+
+                    b.ToTable("isostandards", "decisoriscamaguey_quality");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Reporting.Persistence.Entities.SampleAnalysisReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<Guid>("AnalysisId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("analysisid");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid?>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_sampleanalysisreports");
+
+                    b.HasIndex("AnalysisId")
+                        .HasDatabaseName("ix_sampleanalysisreports_analysisid");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_sampleanalysisreports_authorid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_sampleanalysisreports_documentid");
+
+                    b.ToTable("sampleanalysisreports", "decisoriscamaguey_reporting");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Reporting.Persistence.Entities.SampleAnalysisServiceReport", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid?>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("orderid");
+
+                    b.Property<Guid>("SampleAnalysisReportId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sampleanalysisreportid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_sampleanalysisservicereports");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_sampleanalysisservicereports_authorid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_sampleanalysisservicereports_documentid");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_sampleanalysisservicereports_orderid");
+
+                    b.HasIndex("SampleAnalysisReportId")
+                        .HasDatabaseName("ix_sampleanalysisservicereports_sampleanalysisreportid");
+
+                    b.ToTable("sampleanalysisservicereports", "decisoriscamaguey_reporting");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractServiceOrder", b =>
+                {
+                    b.Property<long>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("bigint")
+                        .HasColumnName("id");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("discriminator");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_serviceorders");
+
+                    b.ToTable("serviceorders", "decisoriscamaguey_servicing");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractServiceOrder");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_sampleanalysisservices");
+
+                    b.ToTable("sampleanalysisservices", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_trainingservices");
+
+                    b.ToTable("trainingservices", "decisoriscamaguey_servicing");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.OrganizationContactBudget", b =>
                 {
                     b.HasBaseType("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.Contract.AbstractBudget");
@@ -5327,6 +7443,22 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("abstractbudget", "decisorframework_commercial");
 
                     b.HasDiscriminator().HasValue("PersonContactBudget");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.ServiceOrderCollect", b =>
+                {
+                    b.HasBaseType("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Contract.AbstractCollect");
+
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("orderid");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_collects_orderid");
+
+                    b.ToTable("collects", "decisorframework_finantial");
+
+                    b.HasDiscriminator().HasValue("ServiceOrderCollect");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.AdmitionEmploymentContract", b =>
@@ -5517,6 +7649,203 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("locations", "guamaframework_location");
 
                     b.HasDiscriminator().HasValue("StateLocation");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ExternalResearcher", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contactid");
+
+                    b.Property<Guid>("ParticipatingOrganizationId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("participatingorganizationid");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_researchers_contactid");
+
+                    b.HasIndex("ParticipatingOrganizationId")
+                        .HasDatabaseName("ix_researchers_participatingorganizationid");
+
+                    b.ToTable("researchers", "decisoriscamaguey_idi");
+
+                    b.HasDiscriminator().HasValue("ExternalResearcher");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.InternalResearcher", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher");
+
+                    b.Property<Guid>("EmployeeId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("employeeid");
+
+                    b.HasIndex("EmployeeId")
+                        .HasDatabaseName("ix_researchers_employeeid");
+
+                    b.ToTable("researchers", "decisoriscamaguey_idi");
+
+                    b.HasDiscriminator().HasValue("InternalResearcher");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ResearchSample", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("projectid");
+
+                    b.Property<Guid>("ResearcherId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("researcherid");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_samples_projectid");
+
+                    b.HasIndex("ResearcherId")
+                        .HasDatabaseName("ix_samples_researcherid");
+
+                    b.ToTable("samples", "decisoriscamaguey_lab");
+
+                    b.HasDiscriminator().HasValue("ResearchSample");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ServiceOrderSample", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample");
+
+                    b.Property<long>("ServiceOrderId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("serviceorderid");
+
+                    b.HasIndex("ServiceOrderId")
+                        .HasDatabaseName("ix_samples_serviceorderid");
+
+                    b.ToTable("samples", "decisoriscamaguey_lab");
+
+                    b.HasDiscriminator().HasValue("ServiceOrderSample");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractServiceOrder");
+
+                    b.Property<Guid?>("RequestedTechniqueId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("requestedtechniqueid");
+
+                    b.Property<Guid>("SampleAnalysisServiceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sampleanalysisserviceid");
+
+                    b.HasIndex("RequestedTechniqueId")
+                        .HasDatabaseName("ix_serviceorders_requestedtechniqueid");
+
+                    b.HasIndex("SampleAnalysisServiceId")
+                        .HasDatabaseName("ix_serviceorders_sampleanalysisserviceid");
+
+                    b.ToTable("serviceorders", "decisoriscamaguey_servicing");
+
+                    b.HasDiscriminator().HasValue("AbstractSampleAnalysisServiceOrder");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientTrainingServiceOrder", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractServiceOrder");
+
+                    b.Property<Guid>("TrainingLegalClientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("traininglegalclientid");
+
+                    b.Property<Guid>("TrainingResponsibleId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("trainingresponsibleid");
+
+                    b.Property<Guid>("TrainingServiceId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("trainingserviceid");
+
+                    b.HasIndex("TrainingLegalClientId")
+                        .HasDatabaseName("ix_serviceorders_traininglegalclientid");
+
+                    b.HasIndex("TrainingResponsibleId")
+                        .HasDatabaseName("ix_serviceorders_trainingresponsibleid");
+
+                    b.HasIndex("TrainingServiceId")
+                        .HasDatabaseName("ix_serviceorders_trainingserviceid");
+
+                    b.ToTable("serviceorders", "decisoriscamaguey_servicing");
+
+                    b.HasDiscriminator().HasValue("LegalClientTrainingServiceOrder");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientTrainingServiceOrder", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractServiceOrder");
+
+                    b.Property<Guid>("TrainingNaturalClientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("trainingnaturalclientid");
+
+                    b.Property<Guid>("TrainingResponsibleId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("trainingresponsibleid");
+
+                    b.Property<Guid>("TrainingServiceId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("trainingserviceid");
+
+                    b.HasIndex("TrainingNaturalClientId")
+                        .HasDatabaseName("ix_serviceorders_trainingnaturalclientid");
+
+                    b.HasIndex("TrainingResponsibleId")
+                        .HasDatabaseName("ix_serviceorders_trainingresponsibleid");
+
+                    b.HasIndex("TrainingServiceId")
+                        .HasDatabaseName("ix_serviceorders_trainingserviceid");
+
+                    b.ToTable("serviceorders", "decisoriscamaguey_servicing");
+
+                    b.HasDiscriminator().HasValue("NaturalClientTrainingServiceOrder");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientSampleAnalysisServiceOrder", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder");
+
+                    b.Property<Guid>("SampleAnalysisLegalClientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sampleanalysislegalclientid");
+
+                    b.HasIndex("SampleAnalysisLegalClientId")
+                        .HasDatabaseName("ix_serviceorders_sampleanalysislegalclientid");
+
+                    b.ToTable("serviceorders", "decisoriscamaguey_servicing");
+
+                    b.HasDiscriminator().HasValue("LegalClientSampleAnalysisServiceOrder");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientSampleAnalysisServiceOrder", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder");
+
+                    b.Property<Guid>("SampleAnalysisNaturalClientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sampleanalysisnaturalclientid");
+
+                    b.HasIndex("SampleAnalysisNaturalClientId")
+                        .HasDatabaseName("ix_serviceorders_sampleanalysisnaturalclientid");
+
+                    b.ToTable("serviceorders", "decisoriscamaguey_servicing");
+
+                    b.HasDiscriminator().HasValue("NaturalClientSampleAnalysisServiceOrder");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.BudgetProductBridge", b =>
@@ -6649,6 +8978,18 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Vacant");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.EmployeeDailyChecking", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_employeedailycheckings_employees_employeeid");
+
+                    b.Navigation("Employee");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Ocupation", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract.AbstractEmploymentContract", "Contract")
@@ -6779,13 +9120,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationalUnity", "OrganizationUnity")
-                        .WithMany()
-                        .HasForeignKey("OrganizationUnityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_vacants_organizationalunities_organizationunityid");
-
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.SalaryStandard", "SalaryStandard")
                         .WithMany()
                         .HasForeignKey("SalaryStandardId")
@@ -6800,20 +9134,18 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_vacants_workpositions_workpositionid");
 
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", "Workforce")
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", "WorkforceOrganizationalUnity")
                         .WithMany()
-                        .HasForeignKey("WorkforceId")
+                        .HasForeignKey("WorkforceOrganizationalUnityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_vacants_workforces_workforceid");
-
-                    b.Navigation("OrganizationUnity");
+                        .HasConstraintName("fk_vacants_workforceorganizationalunities_workforceorganizatio~");
 
                     b.Navigation("SalaryStandard");
 
                     b.Navigation("WorkPosition");
 
-                    b.Navigation("Workforce");
+                    b.Navigation("WorkforceOrganizationalUnity");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.VacantPostulation", b =>
@@ -6951,35 +9283,39 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("WorkPosition");
                 });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", b =>
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", "ChiefVacant")
-                        .WithOne()
-                        .HasForeignKey("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", "ResponsibleVacantId")
-                        .HasConstraintName("fk_workforces_vacants_responsiblevacantid");
+                        .WithMany()
+                        .HasForeignKey("ChiefVacantId")
+                        .HasConstraintName("fk_workforceorganizationalunities_vacants_chiefvacantid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationalUnity", "OrganizationalUnity")
+                        .WithMany()
+                        .HasForeignKey("OrganizationalUnityId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workforceorganizationalunities_organizationalunities_organi~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .HasConstraintName("fk_workforceorganizationalunities_workforceorganizationaluniti~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", "Workforce")
+                        .WithMany("OrganizationalUnities")
+                        .HasForeignKey("WorkforceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workforceorganizationalunities_workforces_workforceid");
 
                     b.Navigation("ChiefVacant");
-                });
 
-            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnityBridge", b =>
-                {
-                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", "Prow")
-                        .WithMany("OrganizationalUnityBridges")
-                        .HasForeignKey("ProwId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_workforceorganizationalunitybridges_workforces_prowid");
+                    b.Navigation("OrganizationalUnity");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationalUnity", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_workforceorganizationalunitybridges_organizationalunities_s~");
+                    b.Navigation("Parent");
 
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
+                    b.Navigation("Workforce");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Batch", b =>
@@ -7803,6 +10139,772 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.TechniqueCubanStandardBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", "Prow")
+                        .WithMany("CubanStandardBridge")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_techniquecubanstandardbridges_techniques_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CubanStandard", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_techniquecubanstandardbridges_cubanstandards_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.TechniqueIsoStandardBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", "Prow")
+                        .WithMany("IsoStandardBridge")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_techniqueisostandardbridges_techniques_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.IsoStandard", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_techniqueisostandardbridges_isostandards_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.AwardResult", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.AwardKind", "Kind")
+                        .WithMany()
+                        .HasForeignKey("KindId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_awardresults_awardkinds_kindid");
+
+                    b.Navigation("Kind");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearcherCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .HasConstraintName("fk_researchers_researchercategories_categoryid");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Extension", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_extensions_projects_projectid");
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Financier", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_financiers_organizationcontacts_contactid");
+
+                    b.Navigation("Contact");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.NewTechniqueResult", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", "PredecessorTechnique")
+                        .WithMany()
+                        .HasForeignKey("PredecessorTechniqueId")
+                        .HasConstraintName("fk_newtechniqueresults_techniques_predecessortechniqueid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", "ResultingTechnique")
+                        .WithMany()
+                        .HasForeignKey("ResultingTechniqueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_newtechniqueresults_techniques_resultingtechniqueid");
+
+                    b.Navigation("PredecessorTechnique");
+
+                    b.Navigation("ResultingTechnique");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.OppositionReport", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_oppositionreports_personcontacts_authorid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .HasConstraintName("fk_oppositionreports_documents_documentid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectReport", "Report")
+                        .WithMany()
+                        .HasForeignKey("ReportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_oppositionreports_projectreports_reportid");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Document");
+
+                    b.Navigation("Report");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ParticipatingOrganization", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_participatingorganizations_organizationcontacts_contactid");
+
+                    b.Navigation("Contact");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Program", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Chief")
+                        .WithMany()
+                        .HasForeignKey("ChiefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_programs_personcontacts_chiefid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Manager")
+                        .WithMany()
+                        .HasForeignKey("ManagerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_programs_organizationcontacts_managerid");
+
+                    b.Navigation("Chief");
+
+                    b.Navigation("Manager");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProgramExpectResult", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Program", "Program")
+                        .WithMany("ExpectResults")
+                        .HasForeignKey("ProgramId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_programexpectresults_programs_programid");
+
+                    b.Navigation("Program");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectCategory", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projects_projectcategories_categoryid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", "Chief")
+                        .WithMany()
+                        .HasForeignKey("ChiefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projects_researchers_chiefid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Predecessor")
+                        .WithMany()
+                        .HasForeignKey("PredecessorId")
+                        .HasConstraintName("fk_projects_projects_predecessorid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Program", "Program")
+                        .WithMany()
+                        .HasForeignKey("ProgramId")
+                        .HasConstraintName("fk_projects_programs_programid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectProposal", "Proposal")
+                        .WithMany()
+                        .HasForeignKey("ProposalId")
+                        .HasConstraintName("fk_projects_projectproposals_proposalid");
+
+                    b.Navigation("Category");
+
+                    b.Navigation("Chief");
+
+                    b.Navigation("Predecessor");
+
+                    b.Navigation("Program");
+
+                    b.Navigation("Proposal");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectBudgetCurrencyBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Prow")
+                        .WithMany("BudgetCurrencyBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectbudgetcurrencybridges_projects_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Currency", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectbudgetcurrencybridges_currencies_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectBudgetFunancing", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Currency", "Currency")
+                        .WithMany()
+                        .HasForeignKey("FinancierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectbudgetfunancings_currencies_financierid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Financier", "Financier")
+                        .WithMany()
+                        .HasForeignKey("FinancierId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectbudgetfunancings_financiers_financierid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", null)
+                        .WithMany("BudgetFunancings")
+                        .HasForeignKey("ProjectId")
+                        .HasConstraintName("fk_projectbudgetfunancings_projects_projectid");
+
+                    b.Navigation("Currency");
+
+                    b.Navigation("Financier");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectParticipatingOrganizationBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Prow")
+                        .WithMany("ParticipatingOrganizationBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectparticipatingorganizationbridges_projects_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ParticipatingOrganization", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectparticipatingorganizationbridges_participatingorgani~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectProposal", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectproposals_documents_documentid");
+
+                    b.Navigation("Document");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectReport", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .HasConstraintName("fk_projectreports_documents_documentid");
+
+                    b.Navigation("Document");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectResearcherBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Prow")
+                        .WithMany("ResearcherBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectresearcherbridges_projects_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectresearcherbridges_researchers_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectSpecificObjective", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
+                        .WithMany("SpecificObjectives")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projectspecificobjectives_projects_projectid");
+
+                    b.Navigation("Project");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.PublicationResult", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_publicationresults_documents_documentid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", "MainAuthor")
+                        .WithMany()
+                        .HasForeignKey("MainAuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_publicationresults_researchers_mainauthorid");
+
+                    b.Navigation("Document");
+
+                    b.Navigation("MainAuthor");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.PublicationResultResearcherBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.PublicationResult", "Prow")
+                        .WithMany("ResearcherBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_publicationresultresearcherbridges_publicationresults_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_publicationresultresearcherbridges_researchers_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearcherResearchAreaDoctorateBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", "Prow")
+                        .WithMany("ResearchAreaDoctorateBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_researcherresearchareadoctoratebridges_researchers_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearchArea", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_researcherresearchareadoctoratebridges_researchareas_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearcherResearchAreaMasteryBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", "Prow")
+                        .WithMany("ResearchAreaMasteryBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_researcherresearchareamasterybridges_researchers_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearchArea", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_researcherresearchareamasterybridges_researchareas_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearcherResearchAreaSpecializationBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", "Prow")
+                        .WithMany("ResearchAreaSpecializationBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_researcherresearchareaspecializationbridges_researchers_pro~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearchArea", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_researcherresearchareaspecializationbridges_researchareas_s~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResult", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResultKind", "Kind")
+                        .WithMany()
+                        .HasForeignKey("KindId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_scientifictechnicalresults_scientifictechnicalresultkinds_k~");
+
+                    b.Navigation("Kind");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResultIntroduction", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResult", "Result")
+                        .WithMany()
+                        .HasForeignKey("ResultId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_scientifictechnicalresultintroductions_scientifictechnicalr~");
+
+                    b.Navigation("Result");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ThesisResultResearcherBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ThesisResult", "Prow")
+                        .WithMany("ResearcherBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_thesisresultresearcherbridges_thesisresults_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_thesisresultresearcherbridges_researchers_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.TrainingResultResearcherBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.TrainingResult", "Prow")
+                        .WithMany("ResearcherBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_trainingresultresearcherbridges_trainingresults_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_trainingresultresearcherbridges_researchers_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Analysis", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AnalysisOrder", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_analysises_analysisorders_orderid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Analysis", "Predecessor")
+                        .WithMany()
+                        .HasForeignKey("PredecessorId")
+                        .HasConstraintName("fk_analysises_analysises_predecessorid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", "Technique")
+                        .WithMany()
+                        .HasForeignKey("TechniqueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_analysises_techniques_techniqueid");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("Predecessor");
+
+                    b.Navigation("Technique");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AnalysisOrder", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", "Sample")
+                        .WithMany()
+                        .HasForeignKey("SampleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_analysisorders_samples_sampleid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", "Technique")
+                        .WithMany()
+                        .HasForeignKey("TechniqueId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_analysisorders_techniques_techniqueid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlan", "WorkPlan")
+                        .WithMany()
+                        .HasForeignKey("WorkPlanId")
+                        .HasConstraintName("fk_analysisorders_workplans_workplanid");
+
+                    b.Navigation("Sample");
+
+                    b.Navigation("Technique");
+
+                    b.Navigation("WorkPlan");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Assessment", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Analysis", "Target")
+                        .WithMany()
+                        .HasForeignKey("TargetId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_assessments_analysises_targetid");
+
+                    b.Navigation("Target");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.SampleKind", "DefaultSampleKind")
+                        .WithMany()
+                        .HasForeignKey("DefaultSampleKindId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_samples_samplekinds_defaultsamplekindid");
+
+                    b.Navigation("DefaultSampleKind");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroup", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Chief")
+                        .WithMany()
+                        .HasForeignKey("ChiefId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workinggroups_employees_chiefid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "QualitySpecialist")
+                        .WithMany()
+                        .HasForeignKey("QualitySpecialistId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workinggroups_employees_qualityspecialistid");
+
+                    b.Navigation("Chief");
+
+                    b.Navigation("QualitySpecialist");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroupEmployeeBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroup", "Prow")
+                        .WithMany("EmployeeBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workinggroupemployeebridges_workinggroups_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workinggroupemployeebridges_employees_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroupTechniqueBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroup", "Prow")
+                        .WithMany("TechniqueBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workinggrouptechniquebridges_workinggroups_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workinggrouptechniquebridges_techniques_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CertificationCubanStandardBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.Certification", "Prow")
+                        .WithMany("CubanStandardBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_certificationcubanstandardbridges_certifications_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CubanStandard", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_certificationcubanstandardbridges_cubanstandards_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CertificationIsoStandardBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.Certification", "Prow")
+                        .WithMany("IsoStandardBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_certificationisostandardbridges_certifications_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.IsoStandard", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_certificationisostandardbridges_isostandards_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Reporting.Persistence.Entities.SampleAnalysisReport", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Analysis", "Analysis")
+                        .WithMany()
+                        .HasForeignKey("AnalysisId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sampleanalysisreports_analysises_analysisid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sampleanalysisreports_employees_authorid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .HasConstraintName("fk_sampleanalysisreports_documents_documentid");
+
+                    b.Navigation("Analysis");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Document");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Reporting.Persistence.Entities.SampleAnalysisServiceReport", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sampleanalysisservicereports_employees_authorid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .HasConstraintName("fk_sampleanalysisservicereports_documents_documentid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sampleanalysisservicereports_serviceorders_orderid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Reporting.Persistence.Entities.SampleAnalysisReport", "SampleAnalysisReport")
+                        .WithMany()
+                        .HasForeignKey("SampleAnalysisReportId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sampleanalysisservicereports_sampleanalysisreports_samplean~");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Document");
+
+                    b.Navigation("Order");
+
+                    b.Navigation("SampleAnalysisReport");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.OrganizationContactBudget", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Contact")
@@ -7821,6 +10923,18 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_abstractbudget_personcontacts_contactid");
 
                     b.Navigation("Contact");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.ServiceOrderCollect", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractServiceOrder", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_collects_serviceorders_orderid");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.AdmitionEmploymentContract", b =>
@@ -7956,6 +11070,175 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("State");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ExternalResearcher", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
+                        .WithMany()
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_researchers_personcontacts_contactid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ParticipatingOrganization", "ParticipatingOrganization")
+                        .WithMany()
+                        .HasForeignKey("ParticipatingOrganizationId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_researchers_participatingorganizations_participatingorganiz~");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("ParticipatingOrganization");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.InternalResearcher", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Employee")
+                        .WithMany()
+                        .HasForeignKey("EmployeeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_researchers_employees_employeeid");
+
+                    b.Navigation("Employee");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ResearchSample", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_samples_projects_projectid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", "Researcher")
+                        .WithMany()
+                        .HasForeignKey("ResearcherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_samples_researchers_researcherid");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Researcher");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ServiceOrderSample", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder", "ServiceOrder")
+                        .WithMany()
+                        .HasForeignKey("ServiceOrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_samples_serviceorders_serviceorderid");
+
+                    b.Navigation("ServiceOrder");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", "RequestedTechnique")
+                        .WithMany()
+                        .HasForeignKey("RequestedTechniqueId")
+                        .HasConstraintName("fk_serviceorders_techniques_requestedtechniqueid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", "Service")
+                        .WithMany()
+                        .HasForeignKey("SampleAnalysisServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_sampleanalysisservices_sampleanalysisserviceid");
+
+                    b.Navigation("RequestedTechnique");
+
+                    b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientTrainingServiceOrder", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("TrainingLegalClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_legalclients_traininglegalclientid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("TrainingResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_employees_trainingresponsibleid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", "Service")
+                        .WithMany()
+                        .HasForeignKey("TrainingServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_trainingservices_trainingserviceid");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Responsible");
+
+                    b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientTrainingServiceOrder", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("TrainingNaturalClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_naturalclients_trainingnaturalclientid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("TrainingResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_employees_trainingresponsibleid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", "Service")
+                        .WithMany()
+                        .HasForeignKey("TrainingServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_trainingservices_trainingserviceid");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Responsible");
+
+                    b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientSampleAnalysisServiceOrder", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("SampleAnalysisLegalClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_legalclients_sampleanalysislegalclientid");
+
+                    b.Navigation("Client");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientSampleAnalysisServiceOrder", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("SampleAnalysisNaturalClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_naturalclients_sampleanalysisnaturalclientid");
+
+                    b.Navigation("Client");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.Contract.AbstractBudget", b =>
                 {
                     b.Navigation("ProductBridges");
@@ -8055,7 +11338,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", b =>
                 {
-                    b.Navigation("OrganizationalUnityBridges");
+                    b.Navigation("OrganizationalUnities");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract.AbstractDeparture", b =>
@@ -8145,6 +11428,69 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             modelBuilder.Entity("MOROPO.Framework.Guama.Security.Personal.Persistence.Entities.User", b =>
                 {
                     b.Navigation("RoleBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", b =>
+                {
+                    b.Navigation("CubanStandardBridge");
+
+                    b.Navigation("IsoStandardBridge");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", b =>
+                {
+                    b.Navigation("ResearchAreaDoctorateBridges");
+
+                    b.Navigation("ResearchAreaMasteryBridges");
+
+                    b.Navigation("ResearchAreaSpecializationBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Program", b =>
+                {
+                    b.Navigation("ExpectResults");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", b =>
+                {
+                    b.Navigation("BudgetCurrencyBridges");
+
+                    b.Navigation("BudgetFunancings");
+
+                    b.Navigation("ParticipatingOrganizationBridges");
+
+                    b.Navigation("ResearcherBridges");
+
+                    b.Navigation("SpecificObjectives");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.PublicationResult", b =>
+                {
+                    b.Navigation("ResearcherBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ThesisResult", b =>
+                {
+                    b.Navigation("ResearcherBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.TrainingResult", b =>
+                {
+                    b.Navigation("ResearcherBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroup", b =>
+                {
+                    b.Navigation("EmployeeBridges");
+
+                    b.Navigation("TechniqueBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.Certification", b =>
+                {
+                    b.Navigation("CubanStandardBridges");
+
+                    b.Navigation("IsoStandardBridges");
                 });
 #pragma warning restore 612, 618
         }

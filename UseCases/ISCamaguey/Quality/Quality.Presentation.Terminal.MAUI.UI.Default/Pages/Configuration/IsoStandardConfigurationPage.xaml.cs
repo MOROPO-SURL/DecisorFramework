@@ -14,12 +14,13 @@ public partial class IsoStandardConfigurationPage : Framework.Decisor.Core.Prese
 
     protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.IsoStandardDisplayModel> PerformCreationAsync()
     {
-        var apiConnectClient = new Interop.API.Connect.Clients.IsoStandardAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.IsoStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
         var model = new Interop.API.Common.Models.Input.IsoStandardInputModel
         {
-            Id = ConcreteBindingContext.Id,
+            Id = System.Guid.NewGuid(),
             Name = ConcreteBindingContext.Name,
+            Index = ConcreteBindingContext.Index,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority
         };
@@ -31,12 +32,13 @@ public partial class IsoStandardConfigurationPage : Framework.Decisor.Core.Prese
 
     protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.IsoStandardDisplayModel> PerformEditionAsync()
     {
-        var apiConnectClient = new Interop.API.Connect.Clients.IsoStandardAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.IsoStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
         var model = new Interop.API.Common.Models.Input.IsoStandardInputModel
         {
             Id = ConcreteBindingContext.Id,
             Name = ConcreteBindingContext.Name,
+            Index = ConcreteBindingContext.Index,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority
         };

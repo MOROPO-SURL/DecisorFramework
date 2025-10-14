@@ -8,14 +8,14 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Persistence.ORM.EF.Providers
         {
             get
             {
-                return new System.Collections.Generic.List<Framework.Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
-                {
-                    new BaseEntityTypeConfigurator<Entities.CubanStandard>(),
-                    new BaseEntityTypeConfigurator<Entities.IsoStandard>(),
+                return
+                [
+                    new Configurators.CubanStandardEntityTypeConfigurator(),
+                    new Configurators.IsoStandardEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Certification>(),
                     new Configurators.CertificationCubanStandardBridgeEntityTypeConfigurator(),
                     new Configurators.CertificationIsoStandardBridgeEntityTypeConfigurator()
-                };
+                ];
             }
         }
 

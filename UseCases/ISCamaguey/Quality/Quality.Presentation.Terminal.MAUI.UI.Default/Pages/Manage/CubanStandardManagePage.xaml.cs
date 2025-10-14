@@ -4,7 +4,7 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.UI.Defaul
 
 public partial class CubanStandardManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.CubanStandardDisplayModel, Models.Page.Manage.CubanStandardManagePageModel, Models.Page.Configuration.CubanStandardConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 136;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 160;
 
     public CubanStandardManagePage()
 	{
@@ -16,7 +16,7 @@ public partial class CubanStandardManagePage : Framework.Decisor.Core.Presentati
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 400; }
+    protected override double ItemViewRequestWidth { get => 360; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
@@ -25,7 +25,7 @@ public partial class CubanStandardManagePage : Framework.Decisor.Core.Presentati
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.CubanStandardDisplayModel>> FetchItemsAsync()
     {
-        var apiConnectClient = new Interop.API.Connect.Clients.CubanStandardAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.CubanStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
@@ -35,7 +35,7 @@ public partial class CubanStandardManagePage : Framework.Decisor.Core.Presentati
         switch (discriminator)
         {
             case 0:
-                var apiConnectClient = new Interop.API.Connect.Clients.CubanStandardAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var apiConnectClient = new Interop.API.Connect.Clients.CubanStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {

@@ -4,7 +4,7 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.UI.Defaul
 
 public partial class IsoStandardManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.IsoStandardDisplayModel, Models.Page.Manage.IsoStandardManagePageModel, Models.Page.Configuration.IsoStandardConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 136;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 160;
 
     public IsoStandardManagePage()
 	{
@@ -16,7 +16,7 @@ public partial class IsoStandardManagePage : Framework.Decisor.Core.Presentation
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 400; }
+    protected override double ItemViewRequestWidth { get => 360; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
@@ -25,7 +25,7 @@ public partial class IsoStandardManagePage : Framework.Decisor.Core.Presentation
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.IsoStandardDisplayModel>> FetchItemsAsync()
     {
-        var apiConnectClient = new Interop.API.Connect.Clients.IsoStandardAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.IsoStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
@@ -35,7 +35,7 @@ public partial class IsoStandardManagePage : Framework.Decisor.Core.Presentation
         switch (discriminator)
         {
             case 0:
-                var apiConnectClient = new Interop.API.Connect.Clients.IsoStandardAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var apiConnectClient = new Interop.API.Connect.Clients.IsoStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {

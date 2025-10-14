@@ -1,5 +1,4 @@
-﻿
-using FluentValidation;
+﻿using FluentValidation;
 
 namespace MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.Validators
 {
@@ -7,6 +6,8 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.Validator
     {
         public CubanStandardConfigurationValidator()
         {
+            RuleFor(model => model.Index).GreaterThan(0);
+
             RuleFor(model => model.Name).NotNull().NotEmpty();
         }
     }

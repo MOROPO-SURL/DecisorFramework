@@ -55,23 +55,27 @@
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </Frame.GestureRecognizers>
-                                    <StackLayout>
-                                        <Label 
-                                            LineBreakMode="TailTruncation"
-                                            FontSize="Medium"
-                                            Text="{Binding Name}" />
-                                        <Label 
-                                            Margin="0,4,0,0"
-                                            Text="Descripción"
-                                            TextColor="DimGray"
-                                            FontSize="Caption"
-                                            FontAttributes="Bold" />
-                                        <Label 
-                                            VerticalOptions="FillAndExpand"
-                                            LineBreakMode="TailTruncation"
-                                            MaxLines="2"
-                                            Text="{Binding Description, TargetNullValue='---'}" />
-                                    </StackLayout>
+                                     <StackLayout>
+                                         <Label 
+                                             LineBreakMode="TailTruncation"
+                                             FontSize="Medium"
+                                             Text="{Binding Index}" />
+                                         <Label 
+                                             LineBreakMode="TailTruncation"
+                                             FontAttributes="Bold"
+                                             Text="{Binding Name}" />
+                                         <Label 
+                                             Margin="0,8,0,0"
+                                             Text="Descripción"
+                                             TextColor="DimGray"
+                                             FontSize="Caption"
+                                             FontAttributes="Bold" />
+                                         <Label 
+                                             VerticalOptions="FillAndExpand"
+                                             LineBreakMode="TailTruncation"
+                                             MaxLines="2"
+                                             Text="{Binding Description, TargetNullValue='---'}" />
+                                     </StackLayout>
                                 </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
