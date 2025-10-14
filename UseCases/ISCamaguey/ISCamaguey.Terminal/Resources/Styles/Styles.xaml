@@ -438,7 +438,6 @@
         <Setter Property="Shell.TabBarForegroundColor" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
         <Setter Property="Shell.TabBarTitleColor" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
         <Setter Property="Shell.TabBarUnselectedColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
-        <!--<Setter Property="Shell.ItemTemplate" Value="{DataTemplate local_views:ModuleShellFlyoutItemView}" />-->
         <Setter Property="Shell.MenuItemTemplate" Value="{DataTemplate local_views:ModuleShellFlyoutMenuItemView}" />
     </Style>
 
