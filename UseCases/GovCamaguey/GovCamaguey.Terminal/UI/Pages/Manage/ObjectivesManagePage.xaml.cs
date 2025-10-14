@@ -34,11 +34,6 @@ public partial class ObjectivesManagePage : Framework.Decisor.Core.Presentation.
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.ObjectiveConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.ObjectiveDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.ObjectiveConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ObjectiveDisplayModel target, int discriminator)
     {
         switch (discriminator)

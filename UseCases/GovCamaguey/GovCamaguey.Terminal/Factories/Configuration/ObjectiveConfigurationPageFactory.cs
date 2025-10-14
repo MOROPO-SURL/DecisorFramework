@@ -2,9 +2,9 @@
 {
     public class ObjectiveConfigurationPageFactory : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.ObjectiveDisplayModel, Models.Page.Configuration.ObjectiveConfigurationPageModel>
     {
-        public Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.ObjectiveDisplayModel, Interop.API.Common.Models.Display.ObjectiveDisplayModel, Models.Page.Configuration.ObjectiveConfigurationPageModel> Build(System.Action<Interop.API.Common.Models.Display.ObjectiveDisplayModel> configurationSuccessAction, Models.Page.Configuration.ObjectiveConfigurationPageModel model)
+        public async System.Threading.Tasks.Task<Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.ObjectiveDisplayModel, Interop.API.Common.Models.Display.ObjectiveDisplayModel, Models.Page.Configuration.ObjectiveConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.ObjectiveDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.ObjectiveDisplayModel model)
         {
-            return new UI.Pages.Configuration.ObjectiveConfigurationPage(configurationSuccessAction, model);
+            return new UI.Pages.Configuration.ObjectiveConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.ObjectiveConfigurationPageModel(model));
         }
     }
 }

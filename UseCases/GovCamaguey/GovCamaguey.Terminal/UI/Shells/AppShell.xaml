@@ -20,8 +20,8 @@
                     HorizontalOptions="End" VerticalOptions="Start"
                     Text="&#xF343;"
                     FontFamily="MaterialDesignIcons"
-                    FontSize="Medium"
-                    Padding="4"
+                    Padding="0"
+                    FontSize="21"
                     BackgroundColor="#60FFFFFF"
                     Clicked="LogOutButton_Clicked" />
                 <Label

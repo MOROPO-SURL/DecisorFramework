@@ -71,19 +71,19 @@ public partial class GuidelinePickPage : Framework.Decisor.Core.Presentation.Ter
 
         concreteBindingContext.IsBusy = false;
 
-        System.Threading.Tasks.Task.Run(() =>
+        System.Threading.Tasks.Task.Run(async () =>
         {
             try
             {
-                var model = new Models.Page.Configuration.GuidelineConfigurationPageModel(null);
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.GuidelineDisplayModel, Models.Page.Configuration.GuidelineConfigurationPageModel>>();
+
+                var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
 
                 Dispatcher.Dispatch(() =>
                 {
                     concreteBindingContext.IsBusy = false;
 
-                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.GuidelineDisplayModel, Models.Page.Configuration.GuidelineConfigurationPageModel>>();
-
-                    this.NavigationPushPageAsync(factory.Build(ConfigurationSuccess_Callback, model));
+                    this.NavigationPushPageAsync(page);
                 });
             }
             catch (System.Exception exception)

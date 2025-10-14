@@ -2,9 +2,9 @@
 {
     public class PersonConfigurationPageFactory : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.PersonDisplayModel, Models.Page.Configuration.PersonConfigurationPageModel>
     {
-        public Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.PersonDisplayModel, Interop.API.Common.Models.Display.PersonDisplayModel, Models.Page.Configuration.PersonConfigurationPageModel> Build(System.Action<Interop.API.Common.Models.Display.PersonDisplayModel> configurationSuccessAction, Models.Page.Configuration.PersonConfigurationPageModel model)
+        public async System.Threading.Tasks.Task<Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.PersonDisplayModel, Interop.API.Common.Models.Display.PersonDisplayModel, Models.Page.Configuration.PersonConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.PersonDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.PersonDisplayModel model)
         {
-            return new UI.Pages.Configuration.PersonConfigurationPage(configurationSuccessAction, model);
+            return new UI.Pages.Configuration.PersonConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.PersonConfigurationPageModel(model));
         }
     }
 }
