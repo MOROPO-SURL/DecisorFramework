@@ -55,7 +55,7 @@ public partial class BankDebitCardConfigurationPage : Core.Presentation.Terminal
 
     private void BankAccountPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.InternalBankAccountPickPage(BankAccountPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.InternalBankAccountPickPage(BankAccountPickComplete_Callback, false)));
     }
 
     private void BankAccountPickComplete_Callback(Interop.API.Common.Models.Display.BankAccountDisplayModel model)

@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -29,21 +28,6 @@ public partial class WorkPositionsManagePage : Core.Presentation.Terminal.MAUI.U
         var apiConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<WorkPositionConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.WorkPositionDisplayModel model = null)
-    {
-        var result = new WorkPositionConfigurationPageModel(model);
-
-        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
-
-        var kindsAPIConnectClient = new Interop.API.Connect.Clients.WorkPositionKindsAPIConnectClient(httpClientHelperProvider);
-        var shoolingsAPIConnectClien = new Interop.API.Connect.Clients.SchoolingsAPIConnectClient(httpClientHelperProvider);
-
-        result.AvailableKinds = await kindsAPIConnectClient.GetAsync();
-        result.AvailableSchoolings = await shoolingsAPIConnectClien.GetAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.WorkPositionDisplayModel target, int discriminator)

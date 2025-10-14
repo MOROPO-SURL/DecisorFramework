@@ -18,7 +18,7 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
     private readonly List<Interop.API.Common.Models.Input.PropertySpaceInputModel> incomingSpaces = [];
     private readonly List<PropertySpaceDisplayModel> outgoingSpaces = [];
 
-    public PropertyConfigurationPage(System.Action<PropertyDisplayModel> successAction, Models.Page.Configuration.PropertyConfigurationPageModel model) : base(successAction, model, null)
+    public PropertyConfigurationPage(System.Action<PropertyDisplayModel> successAction, Models.Page.Configuration.PropertyConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.PropertyConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -72,7 +72,6 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
             StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
             Reference = ConcreteBindingContext.Reference,
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
-            Area = ConcreteBindingContext.Area,
             Description = ConcreteBindingContext.Description,
             PostalContact = new PostalContactItemInputModel
             {
@@ -112,7 +111,6 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
             StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
             Reference = ConcreteBindingContext.Reference,
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
-            Area = ConcreteBindingContext.Area,
             Description = ConcreteBindingContext.Description,
             PostalContact = new PostalContactItemInputModel
             {

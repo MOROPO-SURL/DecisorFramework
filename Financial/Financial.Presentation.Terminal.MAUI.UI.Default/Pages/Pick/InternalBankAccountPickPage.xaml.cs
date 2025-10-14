@@ -9,14 +9,16 @@ public partial class InternalBankAccountPickPage : Core.Presentation.Terminal.MA
     public static double ITEM_VIEW_REQUEST_HEIGHT = 160;
 
     private System.Action<Interop.API.Common.Models.Display.BankAccountDisplayModel> pickCompleteAction;
+    private readonly bool isExternal;
 
     private bool pickedFlag = false;
 
-    public InternalBankAccountPickPage(System.Action<Interop.API.Common.Models.Display.BankAccountDisplayModel> pickCompleteAction)
+    public InternalBankAccountPickPage(System.Action<Interop.API.Common.Models.Display.BankAccountDisplayModel> pickCompleteAction, bool isExternal)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
+        this.isExternal = isExternal;
 
         IsEnabled = false;
     }
@@ -50,7 +52,7 @@ public partial class InternalBankAccountPickPage : Core.Presentation.Terminal.MA
     {
         var apiConnectClient = new Interop.API.Connect.Clients.BankAccountsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.BankAccountFilterModel { IsExternal = false });
+        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.BankAccountFilterModel { IsExternal = isExternal });
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
@@ -60,7 +62,37 @@ public partial class InternalBankAccountPickPage : Core.Presentation.Terminal.MA
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new Configuration.BankAccountConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.BankAccountConfigurationPageModel(null)));
+        var concreteBindingContext = BindingContext as Models.Page.Pick.BankAccountPickPageModel;
+
+        concreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.BankAccountDisplayModel, Models.Page.Configuration.BankAccountConfigurationPageModel>>();
+
+                var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
+
+                page.ConcreteBindingContext.IsExternal = isExternal;
+
+                Dispatcher.Dispatch(() =>
+                {
+                    concreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(page);
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+
+                    concreteBindingContext.IsBusy = false;
+                });
+            }
+        });
     }
 
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)

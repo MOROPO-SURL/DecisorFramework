@@ -2,6 +2,10 @@
 {
     public class CostCenterConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.CostCenterDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string DefaultBankAccountValidableProperty => nameof(DefaultBankAccount);
+        public static string StructureValidableProperty => nameof(Structure);
+
         private string name;
         private string description;
         private int priority = 1;

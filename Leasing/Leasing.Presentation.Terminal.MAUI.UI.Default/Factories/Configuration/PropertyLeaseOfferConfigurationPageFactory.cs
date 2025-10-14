@@ -2,9 +2,9 @@
 {
     public class PropertyLeaseOfferConfigurationPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel, Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel>
     {
-        public Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel, Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel, Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel> Build(System.Action<Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel> configurationSuccessAction, Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel model)
+        public async System.Threading.Tasks.Task<Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel, Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel, Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.PropertyLeaseOfferDisplayModel model)
         {
-            return new Pages.Configuration.PropertyLeaseOfferConfigurationPage(configurationSuccessAction, model);
+            return new Pages.Configuration.PropertyLeaseOfferConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel(model), new Validators.PropertyLeaseOfferConfigurationValidator());
         }
     }
 }

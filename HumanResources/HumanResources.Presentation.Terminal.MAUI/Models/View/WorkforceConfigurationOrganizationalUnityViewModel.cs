@@ -1,16 +1,14 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View
 {
-    public class WorkforceConfigurationOrganizationalUnityViewModel
+    public class WorkforceConfigurationOrganizationalUnityViewModel : Caney.MVVM.Core.Models.BaseBindableModel
     {
+        private WorkforceConfigurationVacantViewModel chiefVacant;
+
         public System.Guid Id { get; set; }
 
-        public bool Enabled { get; set; }
+        public Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel Domain { get; set; }
 
-        public int Priority { get; set; }
-
-        public string Name { get; set; }
-
-        public string Reference { get; set; }
+        public WorkforceConfigurationVacantViewModel ChiefVacant { get => chiefVacant; set => SetProperty(ref chiefVacant, value); }
 
         public System.Collections.ObjectModel.ObservableCollection<WorkforceConfigurationVacantViewModel> Vacants { get; set; } = [];
 

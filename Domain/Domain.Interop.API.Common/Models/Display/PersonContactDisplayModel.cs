@@ -11,6 +11,10 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 
         public string PersonalIdentificationNumber { get; set; }
 
+        public NaturalBusinessKindDisplayModel BusinessKind { get; set; }
+
+        public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContactItem { get; set; }
+
         public override void Import(PersonContact entity)
         {
             base.Import(entity);
@@ -29,6 +33,20 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
                 User = new Core.Interop.API.Common.Models.Display.UserDisplayModel();
 
                 User.Import(entity.User);
+            }
+
+            if (entity.BusinessKind != null)
+            {
+                BusinessKind = new NaturalBusinessKindDisplayModel();
+
+                BusinessKind.Import(entity.BusinessKind);
+            }
+
+            if (entity.MainPostalContact != null)
+            {
+                MainPostalContactItem = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
+
+                MainPostalContactItem.Import(entity.MainPostalContact);
             }
         }
 

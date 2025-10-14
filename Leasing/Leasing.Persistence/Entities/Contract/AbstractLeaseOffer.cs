@@ -21,6 +21,8 @@
 
         public System.DateTime? ClosedAt { get; set; }
 
+        public System.DateTime? LeasedAt { get; set; }
+
         public string Description { get; set; }
     }
 }

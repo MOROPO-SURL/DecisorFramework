@@ -10,7 +10,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/domain/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/domain/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class OrganizationContactsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<OrganizationContact, System.Guid, OrganizationContactInputModel, OrganizationContactDisplayModel>
     {
@@ -57,6 +57,11 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
             if (model.Identity.Image != null)
             {
                 model.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Identity.Image.ContentType);
+            }
+
+            if (model.Representative.Identity.Image != null)
+            {
+                model.Representative.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Representative.Identity.Image.ContentType);
             }
 
             foreach (var _model in model.Identity.PostalContacts)

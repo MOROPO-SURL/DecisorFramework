@@ -1,0 +1,353 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ListBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:local_view_template_selectors="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Views.Template.Selector"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
+    xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
+    xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.LeasingCollectsManagePage"
+    x:TypeArguments="presentation_view_models:LeasingCollectViewModel,presentation_manage_page_models:LeasingCollectsManagePageModel"
+    x:DataType="presentation_manage_page_models:LeasingCollectsManagePageModel"
+    Title="Registros de Cobros de Arrendamiento">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="2" />
+            
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+
+            <local_view_template_selectors:LeasingCollectTemplateSelector x:Key="LeasingCollectTemplateSelector">
+                <local_view_template_selectors:LeasingCollectTemplateSelector.LegalClientPropertyLeasingCollectDataTemplate>
+                    <DataTemplate x:DataType="presentation_view_models:LeasingCollectViewModel">
+                        <ContentView BindingContext="{Binding InteropModel}">
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                            </ContentView.GestureRecognizers>
+                            <Frame 
+                                x:DataType="interop_common_display_models:LegalClientPropertyLeasingCollectDisplayModel"
+                                BindingContext="{Binding InteropModel}">
+                                <VerticalStackLayout Spacing="2" Padding="4">
+                                    <FlexLayout
+                                        Wrap="Wrap"
+                                        AlignItems="Start" AlignContent="Start">
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha" />
+                                            <Label Text="{Binding At, StringFormat='{0:dd/mmmm/yyy}'}" LineBreakMode="TailTruncation" />
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Monto" />
+                                            <Label LineBreakMode="TailTruncation">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding Leasing.CostCenter.DefaultBankAccount.Currency.Symbol}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Centro de Costo" />
+                                            <Label LineBreakMode="TailTruncation">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Leasing.CostCenter.Name}" />
+                                                        <Span Text=", " />
+                                                        <Span Text="{Binding Leasing.CostCenter.Structure.Identity.Name}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cliente" />
+                                            <Label
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Leasing.Contract.Client.Contact.Identity.Name}" />
+                                        </VerticalStackLayout>
+                                    </FlexLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </ContentView>
+                    </DataTemplate>
+                </local_view_template_selectors:LeasingCollectTemplateSelector.LegalClientPropertyLeasingCollectDataTemplate>
+                <local_view_template_selectors:LeasingCollectTemplateSelector.NaturalClientPropertyLeasingCollectDataTemplate>
+                    <DataTemplate x:DataType="presentation_view_models:LeasingCollectViewModel">
+                        <ContentView BindingContext="{Binding InteropModel}">
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                            </ContentView.GestureRecognizers>
+                            <Frame 
+                                x:DataType="interop_common_display_models:NaturalClientPropertyLeasingCollectDisplayModel"
+                                BindingContext="{Binding InteropModel}">
+                                <VerticalStackLayout Spacing="2" Padding="4">
+                                    <FlexLayout
+                                        Wrap="Wrap"
+                                        AlignItems="Start" AlignContent="Start">
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha" />
+                                            <Label Text="{Binding At, StringFormat='{0:dd/mmmm/yyy}'}" LineBreakMode="TailTruncation" />
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Monto" />
+                                            <Label LineBreakMode="TailTruncation">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding Leasing.CostCenter.DefaultBankAccount.Currency.Symbol}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Centro de Costo" />
+                                            <Label LineBreakMode="TailTruncation">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Leasing.CostCenter.Name}" />
+                                                        <Span Text=", " />
+                                                        <Span Text="{Binding Leasing.CostCenter.Structure.Identity.Name}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cliente" />
+                                            <Label
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Leasing.Contract.Client.Contact.Identity}" />
+                                        </VerticalStackLayout>
+                                    </FlexLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </ContentView>
+                    </DataTemplate>
+                </local_view_template_selectors:LeasingCollectTemplateSelector.NaturalClientPropertyLeasingCollectDataTemplate>
+                <local_view_template_selectors:LeasingCollectTemplateSelector.LegalClientVehicleLeasingCollectDataTemplate>
+                    <DataTemplate x:DataType="presentation_view_models:LeasingCollectViewModel">
+                        <ContentView BindingContext="{Binding InteropModel}">
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                            </ContentView.GestureRecognizers>
+                            <Frame 
+                                x:DataType="interop_common_display_models:LegalClientVehicleLeasingCollectDisplayModel"
+                                BindingContext="{Binding InteropModel}">
+                                <VerticalStackLayout Spacing="2" Padding="4">
+                                    <FlexLayout
+                                        Wrap="Wrap"
+                                        AlignItems="Start" AlignContent="Start">
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha" />
+                                            <Label Text="{Binding At, StringFormat='{0:dd/mmmm/yyy}'}" LineBreakMode="TailTruncation" />
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Monto" />
+                                            <Label LineBreakMode="TailTruncation">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding Leasing.CostCenter.DefaultBankAccount.Currency.Symbol}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Centro de Costo" />
+                                            <Label LineBreakMode="TailTruncation">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Leasing.CostCenter.Name}" />
+                                                        <Span Text=", " />
+                                                        <Span Text="{Binding Leasing.CostCenter.Structure.Identity.Name}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cliente" />
+                                            <Label
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Leasing.Contract.Client.Contact.Identity.Name}" />
+                                        </VerticalStackLayout>
+                                    </FlexLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </ContentView>
+                    </DataTemplate>
+                </local_view_template_selectors:LeasingCollectTemplateSelector.LegalClientVehicleLeasingCollectDataTemplate>
+                <local_view_template_selectors:LeasingCollectTemplateSelector.NaturalClientVehicleLeasingCollectDataTemplate>
+                    <DataTemplate x:DataType="presentation_view_models:LeasingCollectViewModel">
+                        <ContentView BindingContext="{Binding InteropModel}">
+                            <ContentView.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                            </ContentView.GestureRecognizers>
+                            <Frame 
+                                x:DataType="interop_common_display_models:NaturalClientVehicleLeasingCollectDisplayModel"
+                                BindingContext="{Binding InteropModel}">
+                                <VerticalStackLayout Spacing="2" Padding="4">
+                                    <FlexLayout
+                                        Wrap="Wrap"
+                                        AlignItems="Start" AlignContent="Start">
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha" />
+                                            <Label Text="{Binding At, StringFormat='{0:dd/mmmm/yyy}'}" LineBreakMode="TailTruncation" />
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Monto" />
+                                            <Label LineBreakMode="TailTruncation">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding Leasing.CostCenter.DefaultBankAccount.Currency.Symbol}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Centro de Costo" />
+                                            <Label LineBreakMode="TailTruncation">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Leasing.CostCenter.Name}" />
+                                                        <Span Text=", " />
+                                                        <Span Text="{Binding Leasing.CostCenter.Structure.Identity.Name}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="2"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cliente" />
+                                            <Label
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Leasing.Contract.Client.Contact.Identity}" />
+                                        </VerticalStackLayout>
+                                    </FlexLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </ContentView>
+                    </DataTemplate>
+                </local_view_template_selectors:LeasingCollectTemplateSelector.NaturalClientVehicleLeasingCollectDataTemplate>
+            </local_view_template_selectors:LeasingCollectTemplateSelector>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Agregar"
+            Clicked="AddItemToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <Grid Padding="12" Background="{StaticResource OverlayBackgroundBrush}">
+                    <HorizontalStackLayout HorizontalOptions="Center" Spacing="6">
+                        <Label 
+                            VerticalOptions="Center"
+                            Text="Período: " 
+                            FontAttributes="Bold" />
+                        <Picker x:Name="MonthPicker" WidthRequest="128" />
+                        <Label 
+                            VerticalOptions="Center"
+                            Text="/" />
+                        <Picker x:Name="YearPicker" />
+                        <Button
+                            VerticalOptions="Center"
+                            Text="Filtrar"
+                            Clicked="ReloadToolbarItem_Clicked" />
+                    </HorizontalStackLayout>
+                </Grid>
+                <Grid 
+                    VerticalOptions="FillAndExpand"
+                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
+                    <CollectionView
+                        x:Name="ItemsCollectionView"
+                        Margin="10"
+                        ItemsSource="{Binding Items}"
+                        ItemTemplate="{StaticResource LeasingCollectTemplateSelector}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                                HorizontalTextAlignment="Center"
+                                Margin="5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                FontAttributes="Italic" />
+                        </CollectionView.EmptyView>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</core_ui_base_pages:ListBaseContentPage>

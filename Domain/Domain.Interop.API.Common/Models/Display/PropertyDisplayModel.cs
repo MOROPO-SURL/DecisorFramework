@@ -19,8 +19,6 @@
         [System.ComponentModel.DataAnnotations.Required]
         public string Reference { get; set; }
 
-        public decimal Area { get; set; }
-
         public string Description { get; set; }
 
         public Core.Interop.API.Common.Models.Display.ImageDisplayModel[] Images { get; set; }
@@ -33,7 +31,6 @@
             Priority = entity.Priority;
             Name = entity.Name;
             Reference = entity.Reference;
-            Area = entity.Area;
             Description = entity.Description;
 
             if (entity.Kind != null)

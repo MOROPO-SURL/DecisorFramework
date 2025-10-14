@@ -19,12 +19,13 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.PropertyLeasePersonPostulation> PropLeasPersonPostulations { get; set; }
         public DbSet<Entities.PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropLeasPersPostSpacePropBridges { get; set; }
         public DbSet<Entities.PropertyLeasePersonPostulationDocumentBridge> PropertyLeasePersonPostulationDocumentBridges { get; set; }
-        public DbSet<Entities.LegalClientPropertyLeaseContract> LegalClientPropertyLeaseContract { get; set; }
-        public DbSet<Entities.NaturalClientPropertyLeaseContract> NaturalClientPropertyLeaseContract { get; set; }
+        public DbSet<Entities.Contract.AbstractLeaseContract> LeaseContracts { get; set; }
+        public DbSet<Entities.LegalClientPropertyLeaseContract> LegalClientPropertyLeaseContracts { get; set; }
+        public DbSet<Entities.NaturalClientPropertyLeaseContract> NaturalClientPropertyLeaseContracts { get; set; }
         public DbSet<Entities.LegalClientPropertyLeaseContractSpaceBridge> LegClientPropLeasContractSpaceBridges { get; set; }
         public DbSet<Entities.NaturalClientPropertyLeaseContractSpaceBridge> NatClientPropeLeasContractSpaceBridges { get; set; }
-        public DbSet<Entities.LegalClientVehicleLeaseContract> LegalClientVehicleLeaseContract { get; set; }
-        public DbSet<Entities.NaturalClientVehicleLeaseContract> NaturalClientVehicleLeaseContract { get; set; }
+        public DbSet<Entities.LegalClientVehicleLeaseContract> LegalClientVehicleLeaseContracts { get; set; }
+        public DbSet<Entities.NaturalClientVehicleLeaseContract> NaturalClientVehicleLeaseContracts { get; set; }
         public DbSet<Entities.LegalClientVehicleLeasing> LegalClientVehicleLeasings { get; set; }
         public DbSet<Entities.LegalClientVehicleLeasingPersonContactBridge> LegClientVehLeasPersonContactBridges { get; set; }
         public DbSet<Entities.NaturalClientVehicleLeasing> NaturalClientVehicleLeasings { get; set; }
@@ -47,5 +48,9 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.LegalClientVehicleLeasingCompensationDocumentBridge> LegClientVehLeasCompDocumentBridges { get; set; }
         public DbSet<Entities.NaturalClientVehicleLeasingCompensation> NaturalClientVehicleLeasingCompensations { get; set; }
         public DbSet<Entities.NaturalClientVehicleLeasingCompensationDocumentBridge> NatClientVehLeasCompDocumentBridges { get; set; }
+        public DbSet<Entities.LegalClientPropertyLeasingCollect> LegClientPropLeasCollects { get; set; }
+        public DbSet<Entities.LegalClientVehicleLeasingCollect> LegClientVehLeasCollects { get; set; }
+        public DbSet<Entities.NaturalClientPropertyLeasingCollect> NatClientPropLeasCollects { get; set; }
+        public DbSet<Entities.NaturalClientVehicleLeasingCollect> NatClientVehLeasCollects { get; set; }
     }
 }

@@ -18,6 +18,12 @@ public partial class BrandsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages
 
     protected override double ItemViewRequestWidth { get => 320; }
 
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.BrandViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.BrandCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.BrandEditorPermission;
+
     protected override double MeasureCollectionViewCellHeight(double width)
     {
         return ITEM_VIEW_REQUEST_HEIGHT;
@@ -28,11 +34,6 @@ public partial class BrandsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages
         var apiConnectClient = new Interop.API.Connect.Clients.BrandsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.BrandConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.BrandDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.BrandConfigurationPageModel(model));
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.BrandDisplayModel target, int discriminator)

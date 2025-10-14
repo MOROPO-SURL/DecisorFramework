@@ -7,7 +7,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default
 
 public partial class PropertyLeaseOfferConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<PropertyLeaseOfferDisplayModel, PropertyLeaseOfferDisplayModel, Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel>
 {
-    public PropertyLeaseOfferConfigurationPage(System.Action<PropertyLeaseOfferDisplayModel> successAction, Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel model) : base(successAction, model, null)
+    public PropertyLeaseOfferConfigurationPage(System.Action<PropertyLeaseOfferDisplayModel> successAction, Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }

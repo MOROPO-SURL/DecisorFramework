@@ -13,12 +13,12 @@ namespace MOROPO.Framework.Decisor.Supervision.Interop.API.Connect.Clients
 
         public virtual async System.Threading.Tasks.Task<InventoryStockOverviewModel[]> GetOverviewsAsync()
         {
-            return await httpClientHelperProvider.HttpClientHelper.GetAsync<InventoryStockOverviewModel[]>("api/supervision/inventory/overviews");
+            return await httpClientHelperProvider.HttpClientHelper.GetAsync<InventoryStockOverviewModel[]>("api/fwrk/supervision/inventory/overviews");
         }
 
         public virtual async System.Threading.Tasks.Task<InventoryStockDetailsModel> GetDetailsAsync(System.Guid productId)
         {
-            return await httpClientHelperProvider.HttpClientHelper.GetAsync<InventoryStockDetailsModel>($"api/supervision/inventory/details/{productId}");
+            return await httpClientHelperProvider.HttpClientHelper.GetAsync<InventoryStockDetailsModel>($"api/fwrk/supervision/inventory/details/{productId}");
         }
     }
 }

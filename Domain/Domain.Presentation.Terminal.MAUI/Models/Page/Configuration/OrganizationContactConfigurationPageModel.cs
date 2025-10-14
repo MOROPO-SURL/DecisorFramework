@@ -7,10 +7,15 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 {
     public class OrganizationContactConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<OrganizationContactDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string RepresentativeValidableProperty => nameof(Representative);
+        public static string BusinessKindValidableProperty => nameof(BusinessKind);
+
         private string name;
         private string alias;
         private string about;
         private int priority = 1;
+        private PersonContactDisplayModel representative;
         private LegalBusinessKindDisplayModel businessKind;
         private bool isSettedBornDate;
         private System.DateTime? bornDate;
@@ -21,13 +26,14 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
             if (model != null)
             {
                 Id = model.Id;
-                Name = model.Identity.Name;
-                Alias = model.Identity.Alias;
-                About = model.Identity.About;
-                Priority = model.Priority;
-                BusinessKind = model.BusinessKind;
+                name = model.Identity.Name;
+                alias = model.Identity.Alias;
+                about = model.Identity.About;
+                priority = model.Priority;
+                representative = model.Representative;
+                businessKind = model.BusinessKind;
                 isSettedBornDate = model.Identity.BornDate != null;
-                BornDate = model.Identity.BornDate;
+                bornDate = model.Identity.BornDate;
 
                 foreach (var item in model.Identity.EmailContacts) EmailContactItems.Add(item);
 
@@ -56,6 +62,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public string About { get => about; set => SetProperty(ref about, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
+
+        public PersonContactDisplayModel Representative { get => representative; set => SetProperty(ref representative, value); }
 
         public LegalBusinessKindDisplayModel BusinessKind { get => businessKind; set => SetProperty(ref businessKind, value); }
 

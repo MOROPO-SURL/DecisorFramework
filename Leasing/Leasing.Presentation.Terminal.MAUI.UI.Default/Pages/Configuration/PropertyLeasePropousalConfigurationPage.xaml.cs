@@ -12,7 +12,7 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
     private readonly List<Interop.API.Common.Models.Input.PropertySpaceLeasePropousalInputModel> incomingSpaces = [];
     private readonly List<PropertySpaceLeasePropousalDisplayModel> outgoingSpaces = [];
 
-    public PropertyLeasePropousalConfigurationPage(System.Action<PropertyLeasePropousalDisplayModel> successAction, Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel model) : base(successAction, model, null)
+    public PropertyLeasePropousalConfigurationPage(System.Action<PropertyLeasePropousalDisplayModel> successAction, Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }
@@ -87,7 +87,7 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
 
     private void SpacePropousalAgregationButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PropertySpaceForLeasePropousalPickPage(PropertySpacePickComplete_Callback, ConcreteBindingContext.Property.Spaces.Except(ConcreteBindingContext.SpacePropousals.Select(item => item.Space)).ToArray())));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PropertySpaceForLeasePropousalPickPage(PropertySpacePickComplete_Callback, ConcreteBindingContext.Property.Spaces.Where(item => item.Assignment == null).Except(ConcreteBindingContext.SpacePropousals.Select(item => item.Space)).ToArray())));
     }
 
     private void SpacePropousalRemotionButton_Clicked(object sender, System.EventArgs e)

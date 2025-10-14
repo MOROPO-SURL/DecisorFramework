@@ -8,7 +8,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Configurators
         {
             base.ApplayRules(entityTypeBuilder);
 
-            entityTypeBuilder.ToTable("leasecontracts");
+            entityTypeBuilder.ToTable("leasecontracts", "decisorframework_leasing");
             entityTypeBuilder.HasDiscriminator();
         }
     }

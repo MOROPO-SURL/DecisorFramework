@@ -7,4 +7,3 @@
         public System.Collections.Generic.List<LegalClientDocumentBridge> DocumentBridges { get; set; } = new System.Collections.Generic.List<LegalClientDocumentBridge>();
     }
 }
-

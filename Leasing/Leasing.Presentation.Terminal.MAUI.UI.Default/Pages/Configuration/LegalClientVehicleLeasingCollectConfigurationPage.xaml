@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
+    xmlns:presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
+    xmlns:domain_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.LegalClientVehicleLeasingCollectConfigurationPage"
+    x:TypeArguments="interop_common_display_models:LegalClientVehicleLeasingCollectDisplayModel,interop_common_display_models:LegalClientVehicleLeasingCollectDisplayModel,presentation_configuration_page_models:LegalClientVehicleLeasingCollectConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:LegalClientVehicleLeasingCollectConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+        Text="Aplicar"
+        Clicked="ApplyToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+        Text="Cancelar"
+        Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="4" Padding="8">
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Arrendamiento" />
+                        <ContentView                        
+                            IsVisible="{Binding Leasing, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="236">
+                            <presentation_card_views:LegalClientVehicleLeasingDefaultCardView
+                                BindingContext="{Binding Leasing}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="LeasingPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientVehicleLeasingCollectConfigurationPageModel.LeasingValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientVehicleLeasingCollectConfigurationPageModel.LeasingValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=8, LargeContainerColumn=6, MediumContainerColumn=12, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Monto recibido" />
+                        <HorizontalStackLayout Spacing="6">
+                            <Entry 
+                                IsEnabled="{Binding Leasing, Converter={StaticResource IsNotNullConverter}}"
+                                WidthRequest="180"
+                                Placeholder="{Binding Leasing.Contract.Feed, StringFormat='{0:F2}'}"
+                                Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                            <Label
+                                IsVisible="{Binding Leasing, Converter={StaticResource IsNotNullConverter}}"
+                                HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Leasing.CostCenter.DefaultBankAccount.Currency.Symbol}" />
+                                        <Span Text=" (" />
+                                        <Span Text="{Binding Leasing.CostCenter.DefaultBankAccount.Currency.Name}" />
+                                        <Span Text=")" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </HorizontalStackLayout>
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientVehicleLeasingCollectConfigurationPageModel.AmountValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientVehicleLeasingCollectConfigurationPageModel.AmountValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                        <Label 
+                            IsVisible="{Binding Leasing, Converter={StaticResource IsNotNullConverter}}"
+                            Style="{StaticResource CaptionFieldLabelStyle}" 
+                            Margin="0,8,0,0" 
+                            Text="Monto pactado" />
+                        <Label
+                            IsVisible="{Binding Leasing, Converter={StaticResource IsNotNullConverter}}"
+                            HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Leasing.Contract.Feed, StringFormat='{0:F2}'}" />
+                                    <Span Text=" " />
+                                    <Span Text="{Binding Leasing.CostCenter.DefaultBankAccount.Currency.Symbol}" />
+                                    <Span Text=" (" />
+                                    <Span Text="{Binding Leasing.CostCenter.DefaultBankAccount.Currency.Name}" />
+                                    <Span Text=")" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label 
+                            Style="{StaticResource CaptionFieldLabelStyle}" 
+                            IsVisible="{Binding Leasing, Converter={StaticResource IsNotNullConverter}}"                                
+                            Margin="0,8,0,0" 
+                            Text="Centro de Costo" />
+                        <Label IsVisible="{Binding Leasing, Converter={StaticResource IsNotNullConverter}}">
+                            <Label.FormattedText>
+                                <FormattedString>
+                                    <Span Text="{Binding Leasing.CostCenter.Name}" />
+                                    <Span Text=" (" />
+                                    <Span Text="{Binding Leasing.CostCenter.Structure.Identity.Name}" />
+                                    <Span Text=")" />
+                                </FormattedString>
+                            </Label.FormattedText>
+                        </Label>
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Margin="0,8,0,0" Text="Período" />
+                        <Label Text="{Binding ExpectedAt, StringFormat='{0:MMMM / yyy}'}" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Margin="0,8,0,0" Text="Descrición (Opcional)" />
+                        <Editor Text="{Binding Description}" HeightRequest="120" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</core_ui_base_pages:ConfigurationBaseContentPage>

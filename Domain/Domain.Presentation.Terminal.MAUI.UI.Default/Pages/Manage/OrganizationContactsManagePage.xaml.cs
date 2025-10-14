@@ -16,7 +16,15 @@ public partial class OrganizationContactsManagePage : Core.Presentation.Terminal
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 420; }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationContactViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationContactCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.OrganizationContactEditorPermission;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
@@ -28,17 +36,6 @@ public partial class OrganizationContactsManagePage : Core.Presentation.Terminal
         var apiConnectClient = new Interop.API.Connect.Clients.OrganizationContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.OrganizationContactConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.OrganizationContactDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.OrganizationContactConfigurationPageModel(model);
-
-        var apiConnectClient = new Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-        result.AvailableBusinessKinds = await apiConnectClient.GetEnabledAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.OrganizationContactDisplayModel target, int discriminator)

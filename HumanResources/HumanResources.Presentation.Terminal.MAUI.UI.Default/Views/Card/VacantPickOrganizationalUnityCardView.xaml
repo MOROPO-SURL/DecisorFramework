@@ -65,7 +65,8 @@
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
                         <local_card_views:VacantPickOrganizationalUnityCardView 
-                            Margin="0,8,0,0" />
+                            Margin="0,8,0,0"
+                            ItemTapped="TapGestureRecognizer_Tapped" />
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </VerticalStackLayout>

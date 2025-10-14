@@ -17,7 +17,15 @@ public partial class NaturalProvidersManagePage : Core.Presentation.Terminal.MAU
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 420; }
+
+    protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalProviderViewerPermission;
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalProviderCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.NaturalProviderEditorPermission;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
@@ -29,21 +37,6 @@ public partial class NaturalProvidersManagePage : Core.Presentation.Terminal.MAU
         var apiConnectClient = new Interop.API.Connect.Clients.NaturalProvidersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
-    }
-
-    protected override async System.Threading.Tasks.Task<Models.Page.Configuration.NaturalProviderConfigurationPageModel> GetConfigurationPageModelAsync(NaturalProviderDisplayModel model = null)
-    {
-        var result = new Models.Page.Configuration.NaturalProviderConfigurationPageModel(model);
-
-        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
-
-        var paymentTermsAPIConnectClient = new Interop.API.Connect.Clients.PaymentTermsAPIConnectClient(httpClientHelperProvider);
-        var businessKindsAPIConnectClient = new Domain.Interop.API.Connect.Clients.NaturalBusinessKindsAPIConnectClient(httpClientHelperProvider);
-
-        result.AvailablePaymentTerms = await paymentTermsAPIConnectClient.GetEnabledAsync();
-        result.AvailableBusinessKinds = await businessKindsAPIConnectClient.GetEnabledAsync();
-
-        return result;
     }
 
     protected override void OnActionDelegationRequest(NaturalProviderDisplayModel target, int discriminator)

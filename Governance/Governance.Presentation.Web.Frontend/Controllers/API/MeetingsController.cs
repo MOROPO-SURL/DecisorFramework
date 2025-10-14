@@ -7,7 +7,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/governance/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/governance/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class MeetingsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Meeting, System.Guid, MeetingInputModel, MeetingDisplayModel>
     {

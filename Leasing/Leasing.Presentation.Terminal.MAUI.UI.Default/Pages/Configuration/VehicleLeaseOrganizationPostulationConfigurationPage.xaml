@@ -4,10 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
     xmlns:domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:financial_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
+    xmlns:core_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Core.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.VehicleLeaseOrganizationPostulationConfigurationPage"
@@ -17,6 +19,8 @@
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
@@ -58,6 +62,10 @@
                             HorizontalOptions="Start"
                             Text="Seleccionar ..."
                             Clicked="ContactPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleLeaseOrganizationPostulationConfigurationPageModel.ContactValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleLeaseOrganizationPostulationConfigurationPageModel.ContactValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <FlexLayout 
@@ -69,6 +77,10 @@
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="NIT" />
                         <Entry Text="{Binding TaxIdentificationNumber}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleLeaseOrganizationPostulationConfigurationPageModel.TaxIdentificationNumberValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleLeaseOrganizationPostulationConfigurationPageModel.TaxIdentificationNumberValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
@@ -86,16 +98,154 @@
                         x:Name="PostalContactItemPicker"
                         IsEnabled="{Binding Contact, Converter={StaticResource IsNotNullConverter}}"
                         ItemsSource="{Binding Contact.Identity.PostalContacts}"
+                        SelectedItem="{Binding MainPostalContactItem}"
                         SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleLeaseOrganizationPostulationConfigurationPageModel.MainPostalContactItemValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleLeaseOrganizationPostulationConfigurationPageModel.MainPostalContactItemValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cuenta Bancaria" />
+                        <ContentView                        
+                            IsVisible="{Binding BankAccount, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="160">
+                            <financial_presentation_card_views:BankAccountDefaultCardView
+                                BindingContext="{Binding BankAccount}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            IsEnabled="{Binding Contact, Converter={StaticResource IsNotNullConverter}}"
+                            Text="Seleccionar ..."
+                            Clicked="BankAccountPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleLeaseOrganizationPostulationConfigurationPageModel.BankAccountValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleLeaseOrganizationPostulationConfigurationPageModel.BankAccountValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>                        
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=8, LargeContainerColumn=6, MediumContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Documentos" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="DocumentAgregationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding Documents}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="core_interop_common_display_models:DocumentDisplayModel">
+                                            <Frame 
+                                                Padding="0"
+                                                Margin="0,12,0,0">
+                                                <StackLayout Orientation="Horizontal">
+                                                    <Grid
+                                                        WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                                                        BackgroundColor="DimGray">
+                                                        <Label
+                                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                                            Text="{Binding Converter={StaticResource DocumentDisplayModelToMaterialDesignFontIconTextConverter}}"
+                                                            TextColor="White"
+                                                            FontSize="80"
+                                                            FontFamily="MaterialDesignIcons" />
+                                                    </Grid>
+                                                    <Grid 
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Padding="16"
+                                                        ColumnSpacing="8" RowSpacing="8">
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition />
+                                                            <ColumnDefinition />
+                                                        </Grid.ColumnDefinitions>
+                                                        <Grid.RowDefinitions>
+                                                            <RowDefinition Height="Auto" />
+                                                            <RowDefinition Height="Auto" />
+                                                        </Grid.RowDefinitions>
+                                                        <VerticalStackLayout
+                                                            Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
+                                                            Spacing="2">
+                                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                                                            <Label Text="{Binding Name}" LineBreakMode="TailTruncation" />
+                                                        </VerticalStackLayout>
+                                                        <VerticalStackLayout
+                                                            Grid.Column="0" Grid.Row="1"
+                                                            Spacing="2">
+                                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
+                                                            <Label Text="{Binding Extension}" />
+                                                        </VerticalStackLayout>
+                                                        <VerticalStackLayout
+                                                            Grid.Column="1" Grid.Row="1"
+                                                            Spacing="2">
+                                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tamaño" />
+                                                            <Label Text="{Binding Length, StringFormat='{0} bytes'}" />
+                                                        </VerticalStackLayout>
+                                                    </Grid>
+                                                    <VerticalStackLayout 
+                                                        Padding="8"
+                                                        Spacing="8">
+                                                        <Button
+                                                            Padding="0"
+                                                            FontSize="21"
+                                                            FontFamily="MaterialDesignIcons" 
+                                                            Text="&#xF90B;"
+                                                            Clicked="DocumentEditionButton_Clicked" />
+                                                        <Button
+                                                            VerticalOptions="Start"
+                                                            Padding="0"
+                                                            FontSize="21"
+                                                            FontFamily="MaterialDesignIcons" 
+                                                            Text="&#xFA78;"
+                                                            Clicked="DocumentRemotionButton_Clicked" />
+                                                    </VerticalStackLayout>
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                </FlexLayout>
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Argumento" />
                     <Editor Text="{Binding Argument}" HeightRequest="180" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleLeaseOrganizationPostulationConfigurationPageModel.ArgumentValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleLeaseOrganizationPostulationConfigurationPageModel.ArgumentValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
-            </VerticalStackLayout>
-            
+            </VerticalStackLayout>            
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>

@@ -30,11 +30,6 @@ public partial class VehicleLeasePropousalsManagePage : Core.Presentation.Termin
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.VehicleLeasePropousalConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.VehicleLeasePropousalDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.VehicleLeasePropousalConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.VehicleLeasePropousalDisplayModel target, int discriminator)
     {
         var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();

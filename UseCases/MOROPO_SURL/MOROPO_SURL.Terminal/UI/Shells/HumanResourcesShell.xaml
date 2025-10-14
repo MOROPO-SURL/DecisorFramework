@@ -105,7 +105,7 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Personal"
-            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsRawManagePage}" />
+            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsManagePage}" />
         <ShellContent
              Title="Estructuras"
              ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}" />

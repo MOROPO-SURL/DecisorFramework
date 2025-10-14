@@ -1,9 +1,7 @@
 ﻿namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input.Contract
 {
-    public abstract class AbstractLeasePersonPostulationInputModel<TEntity> : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractLeasePersonPostulation
+    public abstract class AbstractLeasePersonPostulationInputModel<TEntity> : AbstractLeasePostulationInputModel<TEntity> where TEntity : Persistence.Entities.Contract.AbstractLeasePersonPostulation
     {
-        public System.Guid Id { get; set; }
-
         public System.Guid ContactId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -14,19 +12,9 @@
 
         public System.Guid MainPostalContactItemId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
-        public string Argument { get; set; }
-
-        public abstract TEntity Export();
-
-        public void Import(TEntity entity)
+        public override void Mergue(TEntity entity)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual void Mergue(TEntity entity)
-        {
-            entity.Argument = Argument;
+            base.Mergue(entity);
 
             if (entity.ContactId != ContactId)
             {

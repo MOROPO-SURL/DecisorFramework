@@ -9,6 +9,11 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Connect.Clients
         {
         }
 
-        protected override string TargetController => "api/commercial/naturalclients";
+        protected override string TargetController => "api/fwrk/commercial/naturalclients";
+
+        public System.Threading.Tasks.Task<NaturalClientDisplayModel> GetByContactAsync(System.Guid key)
+        {
+            return httpClientHelperProvider.HttpClientHelper.GetAsync<NaturalClientDisplayModel>($"{TargetController}/by/contact/{key}");
+        }
     }
 }

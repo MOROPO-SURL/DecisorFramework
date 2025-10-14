@@ -152,7 +152,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<WorkPosition> WorkPositions { get; set; }
         public DbSet<WorkPositionResponsability> WorkPositionResponsabilities { get; set; }
         public DbSet<Workforce> Workforces { get; set; }
-        public DbSet<WorkforceOrganizationalUnityBridge> WorkforceOrganizationalUnityBridges { get; set; }
+        public DbSet<WorkforceOrganizationalUnity> WorkforceOrganizationalUnities { get; set; }
         public DbSet<Vacant> Vacants { get; set; }
         public DbSet<VacantPostulation> VacantPostulations { get; set; }
         public DbSet<VacantPostulationOcupation> VacantPostulationOcupations { get; set; }
@@ -167,6 +167,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<StaffWorkforceBridge> StaffWorkforceBridges { get; set; }
         public DbSet<Ocupation> Ocupations { get; set; }
+        public DbSet<EmployeeDailyChecking> EmployeeDailyCheckings { get; set; }
 
         public DbSet<Tag> ClauseTags { get; set; }
         public DbSet<Clause> Clauses { get; set; }
@@ -209,12 +210,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<PropertyLeasePersonPostulation> PropLeasPersonPostulations { get; set; }
         public DbSet<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropLeasPersPostSpacePropBridges { get; set; }
         public DbSet<PropertyLeasePersonPostulationDocumentBridge> PropertyLeasePersonPostulationDocumentBridges { get; set; }
-        public DbSet<LegalClientPropertyLeaseContract> LegalClientPropertyLeaseContract { get; set; }
-        public DbSet<NaturalClientPropertyLeaseContract> NaturalClientPropertyLeaseContract { get; set; }
+        public DbSet<Framework.Decisor.Leasing.Persistence.Entities.Contract.AbstractLeaseContract> LeaseContracts { get; set; }
+        public DbSet<LegalClientPropertyLeaseContract> LegalClientPropertyLeaseContracts { get; set; }
+        public DbSet<NaturalClientPropertyLeaseContract> NaturalClientPropertyLeaseContracts { get; set; }
         public DbSet<LegalClientPropertyLeaseContractSpaceBridge> LegClientPropLeasContractSpaceBridges { get; set; }
         public DbSet<NaturalClientPropertyLeaseContractSpaceBridge> NatClientPropeLeasContractSpaceBridges { get; set; }
-        public DbSet<LegalClientVehicleLeaseContract> LegalClientVehicleLeaseContract { get; set; }
-        public DbSet<NaturalClientVehicleLeaseContract> NaturalClientVehicleLeaseContract { get; set; }
+        public DbSet<LegalClientVehicleLeaseContract> LegalClientVehicleLeaseContracts { get; set; }
+        public DbSet<NaturalClientVehicleLeaseContract> NaturalClientVehicleLeaseContracts { get; set; }
         public DbSet<LegalClientVehicleLeasing> LegalClientVehicleLeasings { get; set; }
         public DbSet<LegalClientVehicleLeasingPersonContactBridge> LegClientVehLeasPersonContactBridges { get; set; }
         public DbSet<NaturalClientVehicleLeasing> NaturalClientVehicleLeasings { get; set; }
@@ -237,6 +239,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<LegalClientVehicleLeasingCompensationDocumentBridge> LegClientVehLeasCompDocumentBridges { get; set; }
         public DbSet<NaturalClientVehicleLeasingCompensation> NaturalClientVehicleLeasingCompensations { get; set; }
         public DbSet<NaturalClientVehicleLeasingCompensationDocumentBridge> NatClientVehLeasCompDocumentBridges { get; set; }
+        public DbSet<LegalClientPropertyLeasingCollect> LegClientPropLeasCollects { get; set; }
+        public DbSet<LegalClientVehicleLeasingCollect> LegClientVehLeasCollects { get; set; }
+        public DbSet<NaturalClientPropertyLeasingCollect> NatClientPropLeasCollects { get; set; }
+        public DbSet<NaturalClientVehicleLeasingCollect> NatClientVehLeasCollects { get; set; }
 
         public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }

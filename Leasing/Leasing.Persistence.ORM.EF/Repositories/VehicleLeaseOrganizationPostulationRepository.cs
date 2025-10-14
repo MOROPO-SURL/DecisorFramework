@@ -12,6 +12,9 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Repositories
         protected override IQueryable<Entities.VehicleLeaseOrganizationPostulation> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
+                .Include(entity => entity.Offer)
+                .Include(entity => entity.BankAccount).ThenInclude(entity => entity.Currency)
+                .Include(entity => entity.BankAccount).ThenInclude(entity => entity.Branch).ThenInclude(entity => entity.Agency)
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.PostalContactItemBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Location)
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.BusinessKind)

@@ -3,9 +3,9 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class CurrencyConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.CurrencyDisplayModel>
+public partial class CurrencyConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.CurrencyDisplayModel, Interop.API.Common.Models.Display.CurrencyDisplayModel, Models.Page.Configuration.CurrencyConfigurationPageModel>
 {
-    public CurrencyConfigurationPage(System.Action<Interop.API.Common.Models.Display.CurrencyDisplayModel> successAction, Models.Page.Configuration.CurrencyConfigurationPageModel model) : base(successAction, model)
+    public CurrencyConfigurationPage(System.Action<Interop.API.Common.Models.Display.CurrencyDisplayModel> successAction, Models.Page.Configuration.CurrencyConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.CurrencyConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }
@@ -16,15 +16,13 @@ public partial class CurrencyConfigurationPage : Core.Presentation.Terminal.MAUI
     {
         var apiConnectClient = new Interop.API.Connect.Clients.CurrenciesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.CurrencyConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.CurrencyInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            Symbol = concreteBindingContext.Symbol,
-            UseEndSymbolPresentation = concreteBindingContext.UseEndSymbolPresentation,
-            Priority = concreteBindingContext.Priority
+            Name = ConcreteBindingContext.Name,
+            Symbol = ConcreteBindingContext.Symbol,
+            UseEndSymbolPresentation = ConcreteBindingContext.UseEndSymbolPresentation,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -36,19 +34,27 @@ public partial class CurrencyConfigurationPage : Core.Presentation.Terminal.MAUI
     {
         var apiConnectClient = new Interop.API.Connect.Clients.CurrenciesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.CurrencyConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.CurrencyInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            Symbol = concreteBindingContext.Symbol,
-            UseEndSymbolPresentation = concreteBindingContext.UseEndSymbolPresentation,
-            Priority = concreteBindingContext.Priority
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            Symbol = ConcreteBindingContext.Symbol,
+            UseEndSymbolPresentation = ConcreteBindingContext.UseEndSymbolPresentation,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 }

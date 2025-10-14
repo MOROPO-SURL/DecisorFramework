@@ -1,188 +1,78 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class BankBranchesManagePage : Caney.MVVM.Core.Pages.ContentPage
+public partial class BankBranchesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.BankBranchDisplayModel, Models.Page.Manage.BankBranchesManagePageModel, Models.Page.Configuration.BankBranchConfigurationPageModel>
 {
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 104;
+
     public BankBranchesManagePage()
     {
         InitializeComponent();
-
-        IsEnabled = false;
-
-        BindingContext = new Models.Page.Manage.BankBranchesManagePageModel();
     }
 
-    protected override void OnAppearing()
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
     {
-        base.OnAppearing();
-
-        if (IsEnabled) return;
-
-        LoadItems();
-
-        IsEnabled = true;
+        return ItemsCollectionView;
     }
 
-    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
+    protected override double ItemViewRequestWidth { get => 384; }
+
+    protected override double MeasureCollectionViewCellHeight(double width)
     {
-        var concreteBindingContext = (Models.Page.Manage.BankBranchesManagePageModel)BindingContext;
+        return ITEM_VIEW_REQUEST_HEIGHT;
+    }
 
-        concreteBindingContext.IsBusy = true;
+    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.BankBranchDisplayModel>> FetchItemsAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.BankBranchesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        System.Threading.Tasks.Task.Run(async () =>
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.BankBranchDisplayModel target, int discriminator)
+    {
+        switch (discriminator)
         {
-            try
-            {
-                var agenciesAPIConnectClient = new Interop.API.Connect.Clients.BankAgenciesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-                var statesAPIConnectClient = new Core.Interop.API.Connect.Clients.StatesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.BankBranchesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-                var model = new Models.Page.Configuration.BankBranchConfigurationPageModel(null)
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {
-                    AvailableAgencies = await agenciesAPIConnectClient.GetAsync(),
-                    AvailableStates = await statesAPIConnectClient.GetAsync()
-                };
-
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    this.NavigationPushPageAsync(new Configuration.BankBranchConfigurationPage(ConfigurationSuccess_Callback, model));
+                    Dispatcher.Dispatch(() => LoadItems(true));
                 });
-            }
-            catch (System.Exception exception)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                });
-            }
-        });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
-    private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (((Models.Page.Manage.BankBranchesManagePageModel)BindingContext).IsBusy) return;
+        AddItem(sender, eventArgs);
+    }
 
-        LoadItems();
+    private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
+    }
+
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
+    }
+
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
+    {
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
     }
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        ((Models.Page.Manage.BankBranchesManagePageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.BankBranchDisplayModel;
-    }
-
-    private void PresentedItemDismissButton_Clicked(object sender, System.EventArgs e)
-    {
-        ((Models.Page.Manage.BankBranchesManagePageModel)BindingContext).PresentedItem = null;
-    }
-
-    private void PresentedItemEditButton_Clicked(object sender, System.EventArgs e)
-    {
-        var concreteBindingContext = (Models.Page.Manage.BankBranchesManagePageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        System.Threading.Tasks.Task.Run(async () =>
-        {
-            try
-            {
-                var agenciesAPIConnectClient = new Interop.API.Connect.Clients.BankAgenciesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-                var statesAPIConnectClient = new Core.Interop.API.Connect.Clients.StatesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-                var model = new Models.Page.Configuration.BankBranchConfigurationPageModel(concreteBindingContext.PresentedItem)
-                {
-                    AvailableAgencies = await agenciesAPIConnectClient.GetAsync(),
-                    AvailableStates = await statesAPIConnectClient.GetAsync()
-                };
-
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    this.NavigationPushPageAsync(new Configuration.BankBranchConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                    PresentedItemDismissButton_Clicked(sender, e);
-                });
-            }
-            catch (System.Exception exception)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                });
-            }
-        });
-    }
-
-    private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)
-    {
-        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
-        {
-            if (!task.Result) return;
-
-            var concreteBindingContext = (Models.Page.Manage.BankBranchesManagePageModel)BindingContext;
-
-            var apiConnectClient = new Interop.API.Connect.Clients.BankBranchesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-            apiConnectClient.ArchiveAsync(concreteBindingContext.PresentedItem.Id).ContinueWith(_task =>
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    if (_task.Exception != null || _task.IsCanceled)
-                    {
-                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                    }
-                    else
-                    {
-                        concreteBindingContext.PresentedItem = null;
-
-                        DisplayAlert("Aviso", "Elemento eliminado con éxito.", "Aceptar");
-
-                        LoadItems();
-                    }
-                });
-            });
-        });
-    }
-
-    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.BankBranchDisplayModel model)
-    {
-        LoadItems();
-    }
-
-    private void LoadItems()
-    {
-        var concreteBindingContext = (Models.Page.Manage.BankBranchesManagePageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        concreteBindingContext.Items.Clear();
-
-        var apiConnectClient = new Interop.API.Connect.Clients.BankBranchesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        apiConnectClient.GetAsync().ContinueWith(task =>
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                concreteBindingContext.IsBusy = false;
-
-                if (task.Exception != null || task.IsCanceled)
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                }
-                else
-                {
-                    foreach (var model in task.Result)
-                    {
-                        concreteBindingContext.Items.Add(model);
-                    }
-                }
-            });
-        });
+        base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 }

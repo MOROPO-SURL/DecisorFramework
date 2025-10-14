@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Views.Card.NaturalClientPropertyLeasingDefaultCardView"
+    x:DataType="interop_common_display_models:NaturalClientPropertyLeasingDisplayModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame Padding="0">
+        <Grid ColumnSpacing="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="2*" />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0"
+                Aspect="AspectFill"               
+                Source="{Binding Contract.Property.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+            <StackLayout 
+                Grid.Column="1"
+                Padding="16">
+                <Label 
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Contract.Property.Name}" />
+                <Label
+                    FontAttributes="Bold"
+                    Text="{Binding Contract.Property.Kind.Name}" />
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Entidad Administrativa"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Contract.Property.Structure.Identity.Name}" />
+                <Label 
+                    Margin="0,8,0,4"
+                    Text="Arrendatario"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border 
+                        Grid.Column="0"
+                        VerticalOptions="Center"
+                        StrokeThickness="4"
+                        StrokeLineJoin="Bevel">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="32" />
+                        </Border.StrokeShape>
+                        <Image
+                            WidthRequest="64" HeightRequest="64"
+                            Source="{Binding Contract.Client.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                    </Border>
+                    <StackLayout 
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        Padding="10,0">
+                        <Label
+                            ToolTipProperties.Text="{Binding Contract.Client.Contact.Identity.Name}"
+                            Text="{Binding Contract.Client.Contact.Identity.Name}"
+                            FontSize="Medium"
+                            LineBreakMode="TailTruncation" />
+                        <Label
+                            IsVisible="{Binding Contract.Client.Contact.Identity.LastName, Converter={StaticResource IsNotNullConverter}}"
+                            ToolTipProperties.Text="{Binding Contract.Client.Contact.Identity.LastName}"
+                            Text="{Binding Contract.Client.Contact.Identity.LastName}"
+                            LineBreakMode="TailTruncation" />
+                        <Label
+                            ToolTipProperties.Text="{Binding Contract.Client.Contact.BusinessKind.Name}"
+                            Text="{Binding Contract.Client.Contact.BusinessKind.Name}"
+                            LineBreakMode="TailTruncation" />
+                    </StackLayout>
+                </Grid>
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentView>

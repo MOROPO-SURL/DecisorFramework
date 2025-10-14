@@ -14,7 +14,7 @@ public partial class VehicleConfigurationPage : Core.Presentation.Terminal.MAUI.
     private readonly List<ImageInputModel> incomingImages = [];
     private readonly List<ImageDisplayModel> outgoingImages = [];
 
-    public VehicleConfigurationPage(System.Action<VehicleDisplayModel> successAction, Models.Page.Configuration.VehicleConfigurationPageModel model) : base(successAction, model, null)
+    public VehicleConfigurationPage(System.Action<VehicleDisplayModel> successAction, Models.Page.Configuration.VehicleConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.VehicleConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 

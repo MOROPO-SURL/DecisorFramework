@@ -19,13 +19,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.Entities
         public WorkPosition WorkPosition { get; set; }
         public System.Guid WorkPositionId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(WorkforceId))]
-        public Workforce Workforce { get; set; }
-        public System.Guid WorkforceId { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(OrganizationUnityId))]
-        public Domain.Persistence.Entities.OrganizationalUnity OrganizationUnity { get; set; }
-        public System.Guid OrganizationUnityId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(WorkforceOrganizationalUnityId))]
+        public WorkforceOrganizationalUnity WorkforceOrganizationalUnity { get; set; }
+        public System.Guid WorkforceOrganizationalUnityId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SalaryStandardId))]
         public SalaryStandard SalaryStandard { get; set; }

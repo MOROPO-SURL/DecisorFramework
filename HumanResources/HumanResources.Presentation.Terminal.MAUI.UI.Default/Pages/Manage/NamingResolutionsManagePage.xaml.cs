@@ -34,9 +34,9 @@ public partial class NamingResolutionsManagePage : Core.Presentation.Terminal.MA
         return apiConnectClient.GetPaginateAsync();
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.NamingResolutionConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.NamingResolutionDisplayModel model = null)
+    protected override void ComplementConfigurationPage(Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel> page, Interop.API.Common.Models.Display.NamingResolutionDisplayModel model)
     {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.NamingResolutionConfigurationPageModel(model) { IsForOcupationCandidate = model.Candidate != null });
+        page.ConcreteBindingContext.IsForOcupationCandidate = model.Candidate != null;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.NamingResolutionDisplayModel target, int discriminator)
@@ -84,19 +84,21 @@ public partial class NamingResolutionsManagePage : Core.Presentation.Terminal.MA
 
             Dispatcher.Dispatch(() => concreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation);
 
-            System.Threading.Tasks.Task.Run(() =>
+            System.Threading.Tasks.Task.Run(async () =>
             {
                 try
                 {
-                    var model = new Models.Page.Configuration.NamingResolutionConfigurationPageModel(null) { IsForOcupationCandidate = isForOcupationCandidate };
+                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel>>();
+
+                    var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
+
+                    page.ConcreteBindingContext.IsForOcupationCandidate = isForOcupationCandidate;
 
                     Dispatcher.Dispatch(() =>
                     {
                         concreteBindingContext.IsBusy = false;
 
-                        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel>>();
-
-                        this.NavigationPushPageAsync(factory.Build(ConfigurationSuccess_Callback, model));
+                        this.NavigationPushPageAsync(page);
                     });
                 }
                 catch (System.Exception exception)

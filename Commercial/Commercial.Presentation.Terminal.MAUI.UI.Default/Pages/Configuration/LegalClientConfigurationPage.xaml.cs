@@ -66,7 +66,6 @@ public partial class LegalClientConfigurationPage : Core.Presentation.Terminal.M
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
-            RepresentativeId = ConcreteBindingContext.Representative.Id,
             MainPostalContactId = ConcreteBindingContext.AvailablePostalContactItems[PostalContactPicker.SelectedIndex].Id,
             DefaultPaymentTermId = ConcreteBindingContext.AvailablePaymentTerms[PaymentTermPicker.SelectedIndex].Id,
             Priority = ConcreteBindingContext.Priority,
@@ -89,7 +88,6 @@ public partial class LegalClientConfigurationPage : Core.Presentation.Terminal.M
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
-            RepresentativeId = ConcreteBindingContext.Representative.Id,
             MainPostalContactId = ConcreteBindingContext.AvailablePostalContactItems[PostalContactPicker.SelectedIndex].Id,
             DefaultPaymentTermId = ConcreteBindingContext.AvailablePaymentTerms[PaymentTermPicker.SelectedIndex].Id,
             Priority = ConcreteBindingContext.Priority,
@@ -124,11 +122,6 @@ public partial class LegalClientConfigurationPage : Core.Presentation.Terminal.M
     private void ContactPickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationContactPickPage(ContactPickComplete_Callback)));
-    }
-
-    private void RepresentativePickButton_Clicked(object sender, System.EventArgs e)
-    {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(RepresentativePickComplete_Callback)));
     }
 
     private void BankAccountAgregationButton_Clicked(object sender, System.EventArgs e)
@@ -366,11 +359,6 @@ public partial class LegalClientConfigurationPage : Core.Presentation.Terminal.M
         {
             ConcreteBindingContext.AvailablePostalContactItems.Add(item);
         }
-    }
-
-    private void RepresentativePickComplete_Callback(PersonContactDisplayModel model)
-    {
-        ConcreteBindingContext.Representative = model;
     }
 
     private void BankAccountCreateSuccess_Callback(BankAccountDisplayModel model)

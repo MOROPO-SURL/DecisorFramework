@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/commercial/[controller]")]
+    [Route("api/fwrk/commercial/[controller]")]
     [ApiController]
     public class NaturalClientsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<NaturalClient, System.Guid, NaturalClientInputModel, NaturalClientDisplayModel>
     {
@@ -230,6 +230,14 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
                 documentFileManager.SaveDocumentFileContent(_entity.Id, _model.ContentData, _entity.ContentType);
             }
             #endregion
+        }
+
+        [HttpGet("by/contact/{key}")]
+        public ActionResult GetByContact(System.Guid key)
+        {
+            var entity = Repository.FindOneBy(entity => entity.ContactId == key);
+
+            return Ok(entity == null ? null : EntityToDisplayModel(entity));
         }
     }
 }

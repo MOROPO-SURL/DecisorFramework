@@ -31,11 +31,6 @@ public partial class PropertyLeasePropousalsManagePage : Core.Presentation.Termi
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    protected override System.Threading.Tasks.Task<Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel> GetConfigurationPageModelAsync(Interop.API.Common.Models.Display.PropertyLeasePropousalDisplayModel model = null)
-    {
-        return System.Threading.Tasks.Task.FromResult(new Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel(model));
-    }
-
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.PropertyLeasePropousalDisplayModel target, int discriminator)
     {
         var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();

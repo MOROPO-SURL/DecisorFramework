@@ -82,6 +82,8 @@
                                     <DataTemplate>
                                         <local_card_views:WorkforceConfigurationOrganizationalUnityAndVacantsCardView
                                             Margin="10"
+                                            DefineChiefVacantButtonClick="DefineChiefVacantButton_Clicked"
+                                            ChiefVacantEditionButtonClick="ChiefVacantEditionButton_Clicked"
                                             AddVacantButtonClick="AddVacantButton_Clicked"
                                             VacantEditionButtonClick="VacantEditionButton_Clicked"
                                             VacantRemoveButtonClick="VacantRemoveButton_Clicked" />

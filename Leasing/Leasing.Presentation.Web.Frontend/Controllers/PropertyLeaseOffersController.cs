@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 {
-    [Route("api/leasing/[controller]")]
+    [Route("api/fwrk/leasing/[controller]")]
     [ApiController]
     public class PropertyLeaseOffersController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<PropertyLeaseOffer, System.Guid, PropertyLeaseOfferInputModel, PropertyLeaseOfferDisplayModel>
     {
@@ -29,7 +29,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
         protected override System.Linq.Expressions.Expression<System.Func<PropertyLeaseOffer, bool>> GetGlobalSelector()
         {
-            return entity => !entity.Archived;
+            return entity => !entity.Archived && entity.LeasedAt == null;
         }
 
         protected override System.Func<PropertyLeaseOffer, object> GetOrderSelector()
@@ -75,7 +75,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                 return _model;
             }).ToArray();
 
-            model.OrganizationPostulations = organizationPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id).ToArray().Select(_entity =>
+            model.OrganizationPostulations = organizationPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id && !_entity.Archived).ToArray().Select(_entity =>
             {
                 var _model = new PropertyLeaseOrganizationPostulationDisplayModel();
 
@@ -111,9 +111,20 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                     return __model;
                 }).ToArray();
 
+                _model.Documents = _entity.DocumentBridges.Select(bridge =>
+                {
+                    var _model = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+
+                    _model.Import(bridge.Stern);
+
+                    _model.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.ContentType);
+
+                    return _model;
+                }).ToArray();
+
                 return _model;
             }).ToArray();
-            model.PersonPostulations = personPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id).ToArray().Select(_entity =>
+            model.PersonPostulations = personPostulationRepository.FindBy(_entity => _entity.OfferId == entity.Id && !_entity.Archived).ToArray().Select(_entity =>
             {
                 var _model = new PropertyLeasePersonPostulationDisplayModel();
 
@@ -147,6 +158,17 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                     }
 
                     return __model;
+                }).ToArray();
+
+                _model.Documents = _entity.DocumentBridges.Select(bridge =>
+                {
+                    var _model = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+
+                    _model.Import(bridge.Stern);
+
+                    _model.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.ContentType);
+
+                    return _model;
                 }).ToArray();
 
                 return _model;

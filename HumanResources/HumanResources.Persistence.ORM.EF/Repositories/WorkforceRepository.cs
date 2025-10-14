@@ -1,6 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositories
 {
@@ -10,9 +8,11 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
         {
         }
 
-        protected override IQueryable<Workforce> GetQueryableDbSet()
+        protected override System.Linq.IQueryable<Entities.Workforce> GetQueryableDbSet()
         {
-            return base.GetQueryableDbSet().Include(entity => entity.OrganizationalUnityBridges).ThenInclude(bridge => bridge.Stern);
+            return base.GetQueryableDbSet()
+                .Include(entity => entity.OrganizationalUnities).ThenInclude(entity => entity.OrganizationalUnity)
+                .Include(entity => entity.OrganizationalUnities).ThenInclude(entity => entity.ChiefVacant).ThenInclude(entity => entity.WorkPosition);
         }
     }
 }

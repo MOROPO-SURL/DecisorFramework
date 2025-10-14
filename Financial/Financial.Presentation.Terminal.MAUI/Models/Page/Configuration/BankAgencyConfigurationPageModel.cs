@@ -5,6 +5,8 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.P
 {
     public class BankAgencyConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<BankAgencyDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+
         private string name;
         private string alias;
         private string about;
