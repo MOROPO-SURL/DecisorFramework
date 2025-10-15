@@ -270,11 +270,15 @@
                                                     Spacing="8">
                                                     <Button
                                                         FontFamily="MaterialDesignIcons" 
+                                                        Padding="0"
+                                                        FontSize="21"
                                                         Text="&#xF90B;"
                                                         Clicked="SpaceEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Start"
                                                         FontFamily="MaterialDesignIcons" 
+                                                        Padding="0"
+                                                        FontSize="21"
                                                         Text="&#xFA78;"
                                                         Clicked="SpaceRemotionButton_Clicked" />
                                                 </VerticalStackLayout>

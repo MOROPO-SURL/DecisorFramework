@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.VehicleDisplayModel, Models.Page.Manage.VehiclesManagePageModel, Models.Page.Configuration.VehicleConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 284;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 320;
 
     public VehiclesManagePage()
     {
