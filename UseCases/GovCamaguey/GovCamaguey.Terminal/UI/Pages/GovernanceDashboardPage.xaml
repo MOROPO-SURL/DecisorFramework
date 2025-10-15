@@ -19,6 +19,15 @@
             <fwrk_core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
         </ResourceDictionary>
     </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
             <VerticalStackLayout Spacing="4" Margin="8">
@@ -117,13 +126,13 @@
                                                     </Label.FormattedText>
                                                 </Label>
                                             </StackLayout>
-                                            <Label
+                                            <!--<Label
                                                 Grid.Column="3"
                                                 Margin="12,0"
                                                 HorizontalTextAlignment="Center" VerticalOptions="Center"
                                                 FontFamily="MaterialDesignIcons"
                                                 FontSize="40"
-                                                Text="{Binding ProgressGlyph}" />
+                                                Text="{Binding ProgressGlyph}" />-->
                                         </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
@@ -160,7 +169,7 @@
                             <Label
                                 FontSize="Medium"
                                 FontAttributes="Bold"
-                                Text="Dist. Acciones" />
+                                Text="Distribución de Acciones" />
                             <BoxView HeightRequest="2" Color="DimGray" />
                             <live_charts_controls:PieChart 
                                 x:Name="ActionDistributionPieChart"
@@ -178,7 +187,7 @@
                             <Label
                                 FontSize="Medium"
                                 FontAttributes="Bold"
-                                Text="Dist. Indicadores" />
+                                Text="Distribución de Indicadores" />
                             <BoxView HeightRequest="2" Color="DimGray" />
                             <live_charts_controls:PieChart 
                                 x:Name="IndicatorDistributionPieChart"
@@ -189,7 +198,7 @@
                         </StackLayout>
                     </Frame>
                 </FlexLayout>
-                <Frame Margin="8">
+                <!--<Frame Margin="8">
                     <StackLayout>
                         <Label
                             FontSize="Medium"
@@ -203,7 +212,7 @@
                             XAxes="{Binding MonthlyObjectivesProgressChart.XAxes}"
                             YAxes="{Binding MonthlyObjectivesProgressChart.YAxes}" />
                     </StackLayout>
-                </Frame>
+                </Frame>-->
             </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}" />
