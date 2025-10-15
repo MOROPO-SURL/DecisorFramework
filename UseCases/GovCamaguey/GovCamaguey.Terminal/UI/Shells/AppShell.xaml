@@ -35,12 +35,22 @@
     </Shell.FlyoutHeader>
     <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
     <ShellContent
-        Title="Estado"
-        ContentTemplate="{DataTemplate local_pages:GovernanceStatusPage}">
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate local_pages:GovernanceDashboardPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Resumen de Objetivo"
+        ContentTemplate="{DataTemplate local_pages:GovernanceStatusPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF6C6;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
