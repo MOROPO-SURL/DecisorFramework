@@ -6,8 +6,8 @@
     xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.OcupationsRawManageOrganizationalUnityAndVacantsCardView"
-    x:DataType="presentation_view_models:OcupationsRawManageOrganizationalUnityViewModel">
+    x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.OcupationsManageOrganizationalUnityAndVacantsCardView"
+    x:DataType="presentation_view_models:OcupationsManageOrganizationalUnityViewModel">
     <ContentView.Resources>
         <ResourceDictionary>
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
@@ -36,7 +36,7 @@
                     <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                 </CollectionView.EmptyView>
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="presentation_view_models:OcupationsRawManageVacantViewModel">
+                    <DataTemplate x:DataType="presentation_view_models:OcupationsManageVacantViewModel">
                         <Frame Padding="0">
                             <VerticalStackLayout Spacing="0">
                                 <Grid HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
@@ -95,12 +95,12 @@
             <VerticalStackLayout BindableLayout.ItemsSource="{Binding Children}">
                 <BindableLayout.ItemTemplate>
                     <DataTemplate>
-                        <local_card_views:OcupationsRawManageOrganizationalUnityAndVacantsCardView 
+                        <local_card_views:OcupationsManageOrganizationalUnityAndVacantsCardView 
                             Margin="0,8,0,0"
                             OcupationCreationButtonClick="OcupationCreationButton_Clicked"
                             RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"
                             EmployeeDetailButtonClick="EmployeeDetailButton_Clicked">
-                        </local_card_views:OcupationsRawManageOrganizationalUnityAndVacantsCardView>
+                        </local_card_views:OcupationsManageOrganizationalUnityAndVacantsCardView>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
             </VerticalStackLayout>

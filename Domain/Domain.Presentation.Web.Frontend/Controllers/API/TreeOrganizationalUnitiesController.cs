@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/domain/organizationalunities/tree")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/domain/organizationalunities/tree")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class TreeOrganizationalUnitiesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultController<OrganizationalUnity, System.Guid, OrganizationalUnityTreeDisplayModel>
     {

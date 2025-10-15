@@ -12,7 +12,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/commercial/[controller]")]
+    [Route("api/fwrk/commercial/[controller]")]
     [ApiController]
     public class LegalClientsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<LegalClient, System.Guid, LegalClientInputModel, LegalClientDisplayModel>
     {

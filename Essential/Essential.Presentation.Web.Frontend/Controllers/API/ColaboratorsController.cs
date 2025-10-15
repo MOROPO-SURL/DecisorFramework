@@ -9,7 +9,7 @@ using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Essential.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/essential/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/essential/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class ColaboratorsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Colaborator, System.Guid, ColaboratorInputModel, ColaboratorDisplayModel>
     {

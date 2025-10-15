@@ -9,7 +9,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Connect.Clients
         {
         }
 
-        protected override string TargetController => "api/commercial/legalclients";
+        protected override string TargetController => "api/fwrk/commercial/legalclients";
 
         public System.Threading.Tasks.Task<LegalClientDisplayModel> GetByContactAsync(System.Guid key)
         {

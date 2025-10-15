@@ -5,7 +5,7 @@ using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/domain/[controller]")]
+    [Route("api/fwrk/domain/[controller]")]
     [ApiController]
     public class BrandsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Brand, System.Guid, BrandInputModel, BrandDisplayModel>
     {

@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/governance/decisionmakinggroups";
+        protected override string TargetController => "api/fwrk/governance/decisionmakinggroups";
     }
 }

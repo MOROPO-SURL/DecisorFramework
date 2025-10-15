@@ -20,15 +20,15 @@
     <Frame Padding="0">
         <StackLayout Spacing="0">
             <Grid 
-                IsClippedToBounds="True"
-                VerticalOptions="FillAndExpand">
+                VerticalOptions="FillAndExpand"
+                IsClippedToBounds="True">
                 <Grid.RowDefinitions>
                     <RowDefinition />
                     <RowDefinition />
                 </Grid.RowDefinitions>
                 <Image
                     Grid.RowSpan="2"
-                    Aspect="AspectFill"
+                    Aspect="AspectFill"                    
                     Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
                 <Grid
                     IsVisible="{Binding Assignment, Converter={StaticResource IsNotNullConverter}}"

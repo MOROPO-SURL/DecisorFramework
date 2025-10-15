@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers
 {
-    [Route("api/inventory/[controller]")]
+    [Route("api/fwrk/inventory/[controller]")]
     [ApiController]
     public class FamiliesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Family, int, FamilyInputModel, FamilyDisplayModel>
     {
