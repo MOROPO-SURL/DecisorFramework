@@ -1,20 +1,20 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
+using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
+using MOROPO.Framework.Decisor.Governance.Persistence.Entities;
+using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
+using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract;
+using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
+using MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract;
+using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
+using MOROPO.Framework.Decisor.Leasing.Persistence.Entities.Contract;
+using MOROPO.Framework.Decisor.Legal.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Security.Common.Persistence.Entities;
 using MOROPO.Framework.Guama.Identity.Persistence.Entities;
 using MOROPO.Framework.Guama.Location.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Security.Personal.Persistence.Entities;
-using MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract;
-using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
-using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
-using MOROPO.Framework.Decisor.Legal.Persistence.Entities;
-using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
-using MOROPO.Framework.Decisor.Essential.Persistence.Entities;
-using MOROPO.Framework.Decisor.Domain.Persistence.Entities.Contract;
-using MOROPO.Framework.Decisor.Production.Persistence.Entities;
-using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
 
 namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
 {
@@ -25,7 +25,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         Framework.Guama.Media.Persistence.ORM.EF.Context.IPersistenceDbContext,
         Framework.Guama.Security.Personal.Persistence.ORM.EF.Contract.IPersistenceDbContext,
         Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract.ICommercialDbContext,
-        Framework.Decisor.Production.Persistence.ORM.EF.Context.Contract.IProductionDbContext
+        Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract.ILeasingDbContext
     {
         public ApplicationDbContext(System.Collections.Generic.IEnumerable<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
         {
@@ -34,6 +34,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RolePermissionBridge> RolePermissionBridges { get; set; }
+
         public DbSet<Region> Regions { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
@@ -43,10 +44,12 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<StateLocation> StateLocations { get; set; }
         public DbSet<MunicipalityLocation> MunicipalityLocations { get; set; }
         public DbSet<LocalityLocation> LocalityLocations { get; set; }
+
         public DbSet<Thumbnail> Thumbnails { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Video> Videos { get; set; }
         public DbSet<Document> Documents { get; set; }
+
         public DbSet<User> Users { get; set; }
         public DbSet<UserRoleBridge> UserRoleBridges { get; set; }
         public DbSet<PersonIdentity> PersonIdentities { get; set; }
@@ -67,11 +70,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<OrganizationPostalContactItemBridge> OrganizationPostalContactItemBridges { get; set; }
         public DbSet<OrganizationSocialContactItemBridge> OrganizationSocialContactItemBridges { get; set; }
         public DbSet<OrganizationWebSiteContactItemBridge> OrganizationWebSiteContactItemBridges { get; set; }
-        public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
-        public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
-        public DbSet<AbstractContact> Contacts { get; set; }
-        public DbSet<OrganizationContact> OrganizationContacts { get; set; }
-        public DbSet<PersonContact> PersonContacts { get; set; }
         public DbSet<PaymentTerm> PaymentTerms { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }
         public DbSet<ProvisionableService> ProvisionableServices { get; set; }
@@ -87,12 +85,14 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<BudgetServiceBridge> BudgetServiceBridges { get; set; }
         public DbSet<LegalProvider> LegalProviders { get; set; }
         public DbSet<LegalProviderBankAccountBridge> LegalProviderBankAccountBridges { get; set; }
+        public DbSet<LegalProviderDocumentBridge> LegalProviderDocumentBridges { get; set; }
         public DbSet<LegalProviderPurchasingContract> LegalProviderPurchasingContracts { get; set; }
         public DbSet<NaturalProvider> NaturalProviders { get; set; }
         public DbSet<NaturalProviderBankAccountBridge> NaturalProviderBankAccountBridges { get; set; }
         public DbSet<NaturalProviderPurchasingContract> NaturalProviderPurchasingContracts { get; set; }
         public DbSet<LegalClient> LegalClients { get; set; }
         public DbSet<LegalClientBankAccountBridge> LegalClientBankAccountBridges { get; set; }
+        public DbSet<LegalClientDocumentBridge> LegalClientDocumentBridges { get; set; }
         public DbSet<LegalClientSaleContract> LegalClientSaleContracts { get; set; }
         public DbSet<NaturalClient> NaturalClients { get; set; }
         public DbSet<NaturalClientBankAccountBridge> NaturalClientBankAccountBridges { get; set; }
@@ -106,7 +106,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Warehouse> Warehouses { get; set; }
         public DbSet<WarehousingArea> WarehousingAreas { get; set; }
         public DbSet<Batch> Batches { get; set; }
-        public DbSet<AbstractReception> Receptions { get; set; }
         public DbSet<TransferReception> TransferReceptions { get; set; }
         public DbSet<AbstractDeparture> Departures { get; set; }
         public DbSet<DepartureBatchBridge> DepartureBatchBridges { get; set; }
@@ -119,10 +118,16 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<BankDebitCard> BankDebitCards { get; set; }
         public DbSet<CostCenter> CostCenters { get; set; }
+        public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
+        public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
+        public DbSet<OrganizationContact> OrganizationContacts { get; set; }
+        public DbSet<PersonContact> PersonContacts { get; set; }
         public DbSet<PropertyKind> PropertyKinds { get; set; }
         public DbSet<Property> Properties { get; set; }
         public DbSet<PropertyImageBridge> PropertyImageBridges { get; set; }
+        public DbSet<PropertySpace> PropertySpaces { get; set; }
         public DbSet<Brand> Brands { get; set; }
+        public DbSet<VehicleKind> VehicleKinds { get; set; }
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleImageBridge> VehicleImageBridges { get; set; }
@@ -130,19 +135,29 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<OrganizationalUnity> OrganizationalUnities { get; set; }
         public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
         public DbSet<Structure> Structures { get; set; }
+        public DbSet<Employee> Employees { get; set; }
         public DbSet<Schooling> Schoolings { get; set; }
+        public DbSet<SalaryStandard> SalaryStandards { get; set; }
         public DbSet<WorkPositionKind> WorkPositionKinds { get; set; }
         public DbSet<WorkPosition> WorkPositions { get; set; }
-        public DbSet<SalaryStandard> SalaryStandards { get; set; }
+        public DbSet<WorkPositionResponsability> WorkPositionResponsabilities { get; set; }
         public DbSet<Workforce> Workforces { get; set; }
-        public DbSet<WorkforceOrganizationalUnityBridge> WorkforceOrganizationalUnityBridges { get; set; }
+        public DbSet<WorkforceOrganizationalUnity> WorkforceOrganizationalUnities { get; set; }
         public DbSet<Vacant> Vacants { get; set; }
-        public DbSet<Employee> Employees { get; set; }
-        public DbSet<EmploymentContract> EmploymentContracts { get; set; }
+        public DbSet<VacantPostulation> VacantPostulations { get; set; }
+        public DbSet<VacantPostulationOcupation> VacantPostulationOcupations { get; set; }
+        public DbSet<VacantPostulationDocumentBridge> VacantPostulationDocumentBridges { get; set; }
+        public DbSet<OcupationCandidate> OcupationCandidates { get; set; }
+        public DbSet<AdmitionPropousal> AdmitionPropousals { get; set; }
+        public DbSet<AbstractEmploymentContract> EmploymentContracts { get; set; }
+        public DbSet<NamingEmploymentContract> NamingEmploymentContracts { get; set; }
+        public DbSet<AdmitionEmploymentContract> AdmitionEmploymentContracts { get; set; }
         public DbSet<NamingResolution> NamingResolutions { get; set; }
+        public DbSet<RemotionResolution> RemotionResolutions { get; set; }
         public DbSet<Staff> Staffs { get; set; }
         public DbSet<StaffWorkforceBridge> StaffWorkforceBridges { get; set; }
         public DbSet<Ocupation> Ocupations { get; set; }
+        public DbSet<EmployeeDailyChecking> EmployeeDailyCheckings { get; set; }
         public DbSet<Tag> ClauseTags { get; set; }
         public DbSet<Clause> Clauses { get; set; }
         public DbSet<ClauseTagBridge> ClauseTagBridges { get; set; }
@@ -156,29 +171,63 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Regulation> Regulations { get; set; }
         public DbSet<Disposition> Dispositions { get; set; }
         public DbSet<DispositionTagBridge> DispositionTagBridges { get; set; }
-        public DbSet<Colaborator> Colaborators { get; set; }
-        public DbSet<LegalProviderDocumentBridge> LegalProviderDocumentBridges { get; set; }
-        public DbSet<LegalClientDocumentBridge> LegalClientDocumentBridges { get; set; }
-        public DbSet<VehicleKind> VehicleKinds { get; set; }
-        public DbSet<Elaboration> Elaborations { get; set; }
-        public DbSet<ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
-        public DbSet<ElaborationInputProductClassificationBridge> ElaborationInputProductClassificationBridges { get; set; }
-        public DbSet<ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
-        public DbSet<ElaborationStep> ElaborationSteps { get; set; }
-        public DbSet<ElaborationStepWorkPositionBridge> ElaborationStepWorkPositionBridges { get; set; }
-        public DbSet<Production> Productions { get; set; }
-        public DbSet<ProductionColaboratorBridge> ProductionColaboratorBridges { get; set; }
-        public DbSet<ProductionEmployeeBridge> ProductionEmployeeBridges { get; set; }
-        public DbSet<ProductionOrder> ProductionOrders { get; set; }
-        public DbSet<ProductionOrderDeparture> ProductionOrderDepartures { get; set; }
-        public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
-        public DbSet<ProductionReception> ProductionReceptions { get; set; }
+        public DbSet<PropertyLeasePropousal> PropertyLeasePropousals { get; set; }
+        public DbSet<PropertySpaceLeasePropousal> PropertySpaceLeasePropousals { get; set; }
+        public DbSet<VehicleLeasePropousal> VehicleLeasePropousals { get; set; }
         public DbSet<PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
-        public DbSet<PropertyLeaseOrganizationPostulation> PropertyLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<PropertyLeasePersonPostulation> PropertyLeaseOfferPersonContactBridges { get; set; }
         public DbSet<VehicleLeaseOffer> VehicleLeaseOffers { get; set; }
-        public DbSet<VehicleLeaseOrganizationPostulation> VehicleLeaseOfferOrganizationContactBridges { get; set; }
-        public DbSet<VehicleLeasePersonPostulation> VehicleLeaseOfferPersonContactBridges { get; set; }
+        public DbSet<VehicleLeaseOrganizationPostulation> VehLeasOrgPostulations { get; set; }
+        public DbSet<VehicleLeaseOrganizationPostulationDocumentBridge> VehLeasOrgPostDocumentBridges { get; set; }
+        public DbSet<VehicleLeasePersonPostulation> VehLeasPersonPostulations { get; set; }
+        public DbSet<VehicleLeasePersonPostulationDocumentBridge> VehLeasPersonPostDocumentBridges { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulation> PropLeasOrgPostulations { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulationPropertySpaceLeasePropousalBridge> PropLeaseOrgPostSpacePropousalBridges { get; set; }
+        public DbSet<PropertyLeaseOrganizationPostulationDocumentBridge> PropLeasOrgPostDocumentBridges { get; set; }
+        public DbSet<PropertyLeasePersonPostulation> PropLeasPersonPostulations { get; set; }
+        public DbSet<PropertyLeasePersonPostulationPropertySpaceLeasePropousalBridge> PropLeasPersPostSpacePropBridges { get; set; }
+        public DbSet<PropertyLeasePersonPostulationDocumentBridge> PropertyLeasePersonPostulationDocumentBridges { get; set; }
+        public DbSet<AbstractLeaseContract> LeaseContracts { get; set; }
+        public DbSet<LegalClientPropertyLeaseContract> LegalClientPropertyLeaseContracts { get; set; }
+        public DbSet<NaturalClientPropertyLeaseContract> NaturalClientPropertyLeaseContracts { get; set; }
+        public DbSet<LegalClientPropertyLeaseContractSpaceBridge> LegClientPropLeasContractSpaceBridges { get; set; }
+        public DbSet<NaturalClientPropertyLeaseContractSpaceBridge> NatClientPropeLeasContractSpaceBridges { get; set; }
+        public DbSet<LegalClientVehicleLeaseContract> LegalClientVehicleLeaseContracts { get; set; }
+        public DbSet<NaturalClientVehicleLeaseContract> NaturalClientVehicleLeaseContracts { get; set; }
+        public DbSet<LegalClientVehicleLeasing> LegalClientVehicleLeasings { get; set; }
+        public DbSet<LegalClientVehicleLeasingPersonContactBridge> LegClientVehLeasPersonContactBridges { get; set; }
+        public DbSet<NaturalClientVehicleLeasing> NaturalClientVehicleLeasings { get; set; }
+        public DbSet<NaturalClientVehicleLeasingPersonContactBridge> NatClientVehLeasPersonContactBridges { get; set; }
+        public DbSet<LegalClientPropertyLeasing> LegalClientPropertyLeasings { get; set; }
+        public DbSet<LegalClientPropertyLeasingPersonContactBridge> LegClientPropLeasPersonContactBridges { get; set; }
+        public DbSet<NaturalClientPropertyLeasing> NaturalClientPropertyLeasings { get; set; }
+        public DbSet<NaturalClientPropertyLeasingPersonContactBridge> NatClientPropLeasPersonContactBridges { get; set; }
+        public DbSet<SupervisionGroup> SupervisionGroups { get; set; }
+        public DbSet<SupervisionGroupEmployeeBridge> SupervisionGroupEmployeeBridges { get; set; }
+        public DbSet<LegalClientPropertySupervisionControlAction> LegClientPropSupervControlActions { get; set; }
+        public DbSet<NaturalClientPropertySupervisionControlAction> NatClientPropSupervControlActions { get; set; }
+        public DbSet<LegalClientVehicleSupervisionControlAction> LegClientVehSupervControlActions { get; set; }
+        public DbSet<NaturalClientVehicleSupervisionControlAction> NatClientVehSupervControlActions { get; set; }
+        public DbSet<LegalClientPropertyLeasingCompensation> LegalClientPropertyLeasingCompensations { get; set; }
+        public DbSet<LegalClientPropertyLeasingCompensationDocumentBridge> LegClientPropLeasCompDocumentBridges { get; set; }
+        public DbSet<NaturalClientPropertyLeasingCompensation> NaturalClientPropertyLeasingCompensations { get; set; }
+        public DbSet<NaturalClientPropertyLeasingCompensationDocumentBridge> NatClientPropLeasCompDocumentBridges { get; set; }
+        public DbSet<LegalClientVehicleLeasingCompensation> LegalClientVehicleLeasingCompensations { get; set; }
+        public DbSet<LegalClientVehicleLeasingCompensationDocumentBridge> LegClientVehLeasCompDocumentBridges { get; set; }
+        public DbSet<NaturalClientVehicleLeasingCompensation> NaturalClientVehicleLeasingCompensations { get; set; }
+        public DbSet<NaturalClientVehicleLeasingCompensationDocumentBridge> NatClientVehLeasCompDocumentBridges { get; set; }
+        public DbSet<LegalClientPropertyLeasingCollect> LegClientPropLeasCollects { get; set; }
+        public DbSet<LegalClientVehicleLeasingCollect> LegClientVehLeasCollects { get; set; }
+        public DbSet<NaturalClientPropertyLeasingCollect> NatClientPropLeasCollects { get; set; }
+        public DbSet<NaturalClientVehicleLeasingCollect> NatClientVehLeasCollects { get; set; }
+        public DbSet<DecisionMakingGroup> DecisionMakingGroups { get; set; }
+        public DbSet<DecisionMakingGroupEmployeeBridge> DecisionMakingGroupEmployeeBridges { get; set; }
+        public DbSet<DecisionMakingGroupContactBridge> DecisionMakingGroupContactBridges { get; set; }
+        public DbSet<Meeting> Meetings { get; set; }
+        public DbSet<MeetingEmployeeBridge> MeetingEmployeeBridges { get; set; }
+        public DbSet<MeetingContactBridge> MeetingContactBridges { get; set; }
+        public DbSet<MeetingDocumentBridge> MeetingDocumentBridges { get; set; }
+        public DbSet<Agreement> Agreements { get; set; }
+        public DbSet<Statement> Statements { get; set; }
     }
 }
 

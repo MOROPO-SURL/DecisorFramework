@@ -108,6 +108,14 @@
 
             if (target.Controller == "paymentterms") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-calendar-clock");
 
+            if (target.Controller == "meetings") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-human-male-male");
+
+            if (target.Controller == "decisionmakinggroups") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-account-group");
+
+            if (target.Controller == "workpositionkinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-account-star");
+
+            if (target.Controller == "schoolings") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-school");
+
             return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
         }
     }

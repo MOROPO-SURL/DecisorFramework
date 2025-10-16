@@ -1,10 +1,10 @@
 namespace MOROPO.EPTCamaguey.Decisor.Terminal.UI.Shells;
 
-public partial class ProductionShell : Microsoft.Maui.Controls.Shell
+public partial class LeasingShell : Microsoft.Maui.Controls.Shell
 {
-	public ProductionShell()
-	{
-		InitializeComponent();
+    public LeasingShell()
+    {
+        InitializeComponent();
     }
 
     private void BackHomeButton_Clicked(object sender, System.EventArgs e)

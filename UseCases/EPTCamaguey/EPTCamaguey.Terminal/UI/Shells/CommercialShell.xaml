@@ -35,32 +35,7 @@
             </Grid>
         </Grid>
     </Shell.FlyoutHeader>
-    <MenuFlyoutItem Text="Inicio" />
-    <ShellContent
-        Title="Panel de Control"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF9E7;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
-    <FlyoutItem Title="Contactos">
-        <FlyoutItem.Icon>
-            <FontImageSource
-             FontFamily="MaterialDesignIcons"
-             Glyph="&#xF5D2;"
-             Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </FlyoutItem.Icon>
-        <ShellContent
-             Title="Organizaciones"
-             ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationContactsManagePage}" />
-        <ShellContent
-            Title="Personas"
-            ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}" />
-    </FlyoutItem>
     <FlyoutItem Title="Clientes">
         <FlyoutItem.Icon>
             <FontImageSource
@@ -74,6 +49,20 @@
         <ShellContent
             Title="Naturales"
             ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:NaturalProvidersManagePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Contactos">
+        <FlyoutItem.Icon>
+            <FontImageSource
+             FontFamily="MaterialDesignIcons"
+             Glyph="&#xF5D2;"
+             Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+             Title="Organizaciones"
+             ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationContactsManagePage}" />
+        <ShellContent
+            Title="Personas"
+            ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Configuración" />
     <ShellContent

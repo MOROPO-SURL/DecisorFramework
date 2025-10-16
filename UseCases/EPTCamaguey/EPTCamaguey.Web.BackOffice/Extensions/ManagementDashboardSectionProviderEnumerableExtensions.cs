@@ -12,11 +12,10 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
             var legalSection = new List<ManagementDashboardSectionViewModel>();
             var domainSection = new List<ManagementDashboardSectionViewModel>();
             var financialSection = new List<ManagementDashboardSectionViewModel>();
-            var purchaseSection = new List<ManagementDashboardSectionViewModel>();
             var humanResourcesSection = new List<ManagementDashboardSectionViewModel>();
-            var inventorySection = new List<ManagementDashboardSectionViewModel>();
-            var saleSection = new List<ManagementDashboardSectionViewModel>();
             var commercialSection = new List<ManagementDashboardSectionViewModel>();
+            var governanceSection = new List<ManagementDashboardSectionViewModel>();
+            var leasingSection = new List<ManagementDashboardSectionViewModel>();
 
             #region Security
             foreach (var provider in self)
@@ -138,66 +137,15 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
             });
             humanResourcesSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Tipos de Plaza",
+                Title = "Categorías ocupacionales",
                 Controller = "workpositionkinds",
                 Action = "Index",
                 Area = "HHRR",
                 Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.WorkPositionKindViewerPermission
             });
-            humanResourcesSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Empleados",
-                Controller = "employees",
-                Action = "Index",
-                Area = "HHRR",
-                Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
-            });
             #endregion
 
-            #region Purchasing
-            purchaseSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Compras",
-                Controller = "purchases",
-                Action = "Index",
-                Area = "purchasing",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            purchaseSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Planes",
-                Controller = "purchaseplans",
-                Action = "Index",
-                Area = "purchasing",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            purchaseSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Zonas",
-                Controller = "purchasezones",
-                Action = "Index",
-                Area = "purchasing",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            purchaseSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Tipos de Gasto",
-                Controller = "purchasespents",
-                Action = "Index",
-                Area = "purchasing",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            #endregion
-
-            #region Sales
-
-            #endregion
-
-            #region Globals
+            #region Commercial
             commercialSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Clientes Jurídicos",
@@ -216,78 +164,12 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
             });
             commercialSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Proveedores Jurídicos",
-                Controller = "legalproviders",
+                Title = "Términos de Pago",
+                Controller = "paymentterms",
                 Action = "Index",
                 Area = "commercial",
-                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            commercialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Proveedores Naturales",
-                Controller = "naturalproviders",
-                Action = "Index",
-                Area = "commercial",
-                Role = Framework.Decisor.Commercial.Interop.API.Common.Constants.Security.Authorization.NaturalProviderViewerPermission
-            });
-            #endregion
-
-            #region Inventory
-            inventorySection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Almacenes",
-                Controller = "warehouses",
-                Action = "Index",
-                Area = "inventory",
-                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.WarehouseViewerPermission
-            });
-            inventorySection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Recepciones",
-                Controller = "receptions",
-                Action = "Index",
-                Area = "inventory",
-                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.ReceptionViewerPermission
-            });
-            inventorySection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Salidas",
-                Controller = "departures",
-                Action = "Index",
-                Area = "inventory",
-                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.DepartureViewerPermission
-            });
-            inventorySection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Productos",
-                Controller = "products",
-                Action = "Index",
-                Area = "inventory",
-                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.ProductViewerPermission
-            });
-            inventorySection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Categorías",
-                Controller = "categories",
-                Action = "Index",
-                Area = "inventory",
-                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.FamilyViewerPermission
-            });
-            inventorySection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Attributos Personalizados",
-                Controller = "customattributes",
-                Action = "Index",
-                Area = "inventory",
-                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.CustomAttributeViewerPermission
-            });
-            inventorySection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Unidades de Medida",
-                Controller = "unitmeasurements",
-                Action = "Index",
-                Area = "inventory",
-                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.UnitMeasurementViewerPermission
+                // TODO Set spected permission
+                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });
             #endregion
 
@@ -330,15 +212,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
             });
             financialSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Tarjetas Bancarias de Débito",
-                Controller = "bankdebitcards",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
                 Title = "Monedas",
                 Controller = "currencies",
                 Action = "Index",
@@ -355,107 +228,65 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
                 // TODO Set spected permission
                 //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });
-            financialSection.Add(new ManagementDashboardSectionViewModel
+            #endregion
+
+            #region Governance
+            governanceSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Pagos",
-                Controller = "payments",
+                Title = "Grupos Decisores",
+                Controller = "decisionmakinggroups",
                 Action = "Index",
-                Area = "financial",
+                Area = "governance",
                 // TODO Set spected permission
                 //Role = Constants.Security.Authorization.LegalProviderViewerPermission
             });
-            financialSection.Add(new ManagementDashboardSectionViewModel
+            governanceSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Recaudaciones",
-                Controller = "cachings",
+                Title = "Reuniones",
+                Controller = "meetings",
                 Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Caja Extra",
-                Controller = "recashes",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Anticipos",
-                Controller = "advances",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Reintegros",
-                Controller = "backs",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Reembolsos",
-                Controller = "refunds",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Depositos Bancarios",
-                Controller = "bankinputs",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Extraciones Bancarias",
-                Controller = "bankoutputs",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Nóminas",
-                Controller = "nomns",
-                Action = "Index",
-                Area = "financial",
-                // TODO Set spected permission
-                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
-            });
-            financialSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Remuneraciones",
-                Controller = "remunerations",
-                Action = "Index",
-                Area = "financial",
+                Area = "governance",
                 // TODO Set spected permission
                 //Role = Constants.Security.Authorization.LegalProviderViewerPermission
             });
             #endregion
 
-            #region Commercial
-            commercialSection.Add(new ManagementDashboardSectionViewModel
+            #region Purchasing
+            leasingSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Términos de Pago",
-                Controller = "paymentterms",
+                Title = "Propuestas",
+                Controller = "propousals",
                 Action = "Index",
-                Area = "commercial",
+                Area = "leasing",
                 // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
+            });
+            leasingSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Ofertas",
+                Controller = "offers",
+                Action = "Index",
+                Area = "leasing",
+                // TODO Set spected permission
+                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
+            });
+            leasingSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Postulaciones",
+                Controller = "postulations",
+                Action = "Index",
+                Area = "leasing",
+                // TODO Set spected permission
+                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
+            });
+            leasingSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Arrendamientos",
+                Controller = "leasings",
+                Action = "Index",
+                Area = "leasing",
+                // TODO Set spected permission
+                //Role = Constants.Security.Authorization.LegalProviderViewerPermission
             });
             #endregion
 
@@ -463,16 +294,14 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Extensions
             {
                 { "Seguridad", securitySection },
                 { "Locación", locationSection },
-                { "Jurídico", legalSection },
+                //{ "Jurídico", legalSection },
                 { "Dominio", domainSection },
                 { "Finanzas", financialSection },
                 { "Recursos Humanos", humanResourcesSection },
-                { "Inventario", inventorySection },
                 { "Comercial", commercialSection },
                 { "jump-0", null },
-                { "Compras", purchaseSection },
-                { "jump-1", null },
-                { "Ventas", saleSection }
+                { "Gobernanza", governanceSection },
+                { "Arrendamiento", leasingSection }
             };
         }
     }

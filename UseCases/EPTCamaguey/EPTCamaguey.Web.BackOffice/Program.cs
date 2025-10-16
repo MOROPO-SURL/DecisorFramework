@@ -13,11 +13,11 @@ using MOROPO.Framework.Decisor.Commercial.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Core.Presentation.Web.Frontend.Options;
 using MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Financial.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Governance.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Decisor.Legal.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Decisor.Production.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Leasing.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Legal.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Core.Security.Common.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Location.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Extensions;
@@ -63,7 +63,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice
             builder.Services.AddDecisorFinancialPresentationWebCommon();
             builder.Services.AddDecisorInventoryPresentationWebCommon();
             builder.Services.AddDecisorCommercialPresentationWebCommon();
-            builder.Services.AddDecisorProductionPresentationWebCommon();
+            builder.Services.AddDecisorGovernancePresentationWebCommon();
             builder.Services.AddDecisorLeasingPresentationWebCommon();
 
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Framework.Guama.Core.Persistence.ORM.EF.Entities.Trace, long>, Framework.Guama.Core.Persistence.ORM.EF.Repositories.TraceRepository>();
