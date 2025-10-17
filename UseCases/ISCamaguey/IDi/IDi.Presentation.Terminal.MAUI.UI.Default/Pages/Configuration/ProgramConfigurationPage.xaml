@@ -196,13 +196,13 @@
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
-                            <Label
-                                Grid.ColumnSpan="2" Grid.Row="3"
-                                IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProgramConfigurationPageModel.ExpectResultsValidableProperty}}"
-                                Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProgramConfigurationPageModel.ExpectResultsValidableProperty}}"
-                                Style="{StaticResource ValidationMessageLabelStyle}" />
                         </Grid>
                     </Frame>
+                    <Label
+                        Grid.ColumnSpan="2" Grid.Row="3"
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProgramConfigurationPageModel.ExpectResultsValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProgramConfigurationPageModel.ExpectResultsValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8"

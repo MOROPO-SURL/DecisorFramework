@@ -26,7 +26,8 @@
                 <Setter Property="Aspect" Value="AspectFill" />
             </Style>
             <Style x:Key="SectionCardOverlayBoxViewStyle" TargetType="BoxView">
-                <Setter Property="BackgroundColor" Value="Black" />
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="Color" Value="Black" />
                 <Setter Property="Opacity" Value="0.5" />
             </Style>
             <Style x:Key="SectionCardNameLabelStyle" TargetType="Label">

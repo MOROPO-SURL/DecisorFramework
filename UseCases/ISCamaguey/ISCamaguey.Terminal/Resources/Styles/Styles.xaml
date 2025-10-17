@@ -5,7 +5,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_views="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.UI.Views"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation">
-
+    
     <Style TargetType="ActivityIndicator">
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource White}}" />
     </Style>
@@ -19,10 +19,6 @@
         <Setter Property="Stroke" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
         <Setter Property="StrokeShape" Value="Rectangle"/>
         <Setter Property="StrokeThickness" Value="1"/>
-    </Style>
-
-    <Style TargetType="BoxView">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
     <Style TargetType="Button">
@@ -115,13 +111,7 @@
 
     <Style TargetType="Entry">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-        <Setter Property="BackgroundColor">
-            <Setter.Value>
-                <OnPlatform Default="Transparent">
-                    <On Platform="UWP" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
-                </OnPlatform>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="BackgroundColor" Value="{OnPlatform Default='Transparent', WinUI={AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14" />
         <Setter Property="PlaceholderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
@@ -146,14 +136,6 @@
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#AFFFFFFF, Dark=#60000000}" />
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
         <Setter Property="CornerRadius" Value="8" />
-    </Style>
-
-    <Style TargetType="Frame" x:Key="PopupFrameStyle">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
-        <Setter Property="HorizontalOptions" Value="Fill" />
-        <Setter Property="VerticalOptions" Value="Center" />
-        <Setter Property="Padding" Value="0" />
-        <Setter Property="Margin" Value="20" />
     </Style> 
 
     <Style TargetType="ImageButton">
@@ -201,20 +183,6 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
     </Style>
 
-    <Style TargetType="Label" x:Key="Headline">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource White}}" />
-        <Setter Property="FontSize" Value="32" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-    </Style>
-
-    <Style TargetType="Label" x:Key="SubHeadline">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource MidnightBlue}, Dark={StaticResource White}}" />
-        <Setter Property="FontSize" Value="24" />
-        <Setter Property="HorizontalOptions" Value="Center" />
-        <Setter Property="HorizontalTextAlignment" Value="Center" />
-    </Style>
-
     <Style TargetType="ListView">
         <Setter Property="SeparatorColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray500}}" />
         <Setter Property="RefreshControlColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
@@ -223,13 +191,7 @@
     <Style TargetType="Picker">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="TitleColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}" />
-        <Setter Property="BackgroundColor">
-            <Setter.Value>
-                <OnPlatform Default="Transparent">
-                    <On Platform="UWP" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
-                </OnPlatform>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="BackgroundColor" Value="{OnPlatform Default='Transparent', WinUI={AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular"/>
         <Setter Property="FontSize" Value="14"/>
         <Setter Property="MinimumHeightRequest" Value="44"/>
@@ -294,13 +256,7 @@
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource White}}" />
         <Setter Property="PlaceholderColor" Value="{StaticResource Gray500}" />
         <Setter Property="CancelButtonColor" Value="{StaticResource Gray500}" />
-        <Setter Property="BackgroundColor">
-            <Setter.Value>
-                <OnPlatform Default="Transparent">
-                    <On Platform="UWP" Value="{AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}" />
-                </OnPlatform>
-            </Setter.Value>
-        </Setter>
+        <Setter Property="BackgroundColor" Value="{OnPlatform Default='Transparent', WinUI={AppThemeBinding Light={StaticResource White}, Dark={StaticResource Black}}}" />
         <Setter Property="FontFamily" Value="OpenSansRegular" />
         <Setter Property="FontSize" Value="14" />
         <Setter Property="MinimumHeightRequest" Value="44"/>
@@ -452,31 +408,6 @@
         <Setter Property="BarTextColor" Value="{AppThemeBinding Light={StaticResource Magenta}, Dark={StaticResource White}}" />
         <Setter Property="UnselectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray950}}" />
         <Setter Property="SelectedTabColor" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
-    </Style>
-
-    <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
-    </Style>
-
-    <Style TargetType="Label" x:Key="CaptionPropertyLabelStyle">
-        <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
-        <Setter Property="FontAttributes" Value="Bold" />
-        <Setter Property="FontSize" Value="Caption" />
-        <Setter Property="Margin" Value="0,16,0,0" />
-    </Style>
-
-    <Style TargetType="Label" x:Key="ValuePropertyLabelStyle">
-        <Setter Property="FontSize" Value="Default" />
-    </Style>
-
-    <Style TargetType="Label" x:Key="ValidationMessageLabelStyle">
-        <Setter Property="TextColor" Value="IndianRed" />
-        <Setter Property="HeightRequest" Value="20" />
-    </Style>
-
-    <Style TargetType="ContentView" x:Key="ModalFrameWrapContentViewStyle">
-        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#A9000000, Dark=#A9333333}" />
     </Style>
 
     <Style TargetType="caneyframework_presentation_views:BusyView">
