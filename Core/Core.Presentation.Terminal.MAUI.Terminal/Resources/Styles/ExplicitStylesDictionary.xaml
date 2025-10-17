@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Resources.Styles.ExplicitStylesDictionary">
+
+    <Style TargetType="Frame" x:Key="PopupFrameStyle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="20" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="CaptionPropertyLabelStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="Caption" />
+        <Setter Property="Margin" Value="0,16,0,0" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="ValuePropertyLabelStyle">
+        <Setter Property="FontSize" Value="Default" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="ValidationMessageLabelStyle">
+        <Setter Property="TextColor" Value="IndianRed" />
+        <Setter Property="HeightRequest" Value="20" />
+    </Style>
+
+    <Style TargetType="ContentView" x:Key="ModalFrameWrapContentViewStyle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#A9000000, Dark=#A9333333}" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="DetailPageCloseButtonStyle">
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="WidthRequest" Value="48" />
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="Medium" />
+        <Setter Property="FontFamily" Value="MaterialDesignIcons" />
+        <Setter Property="Text" Value="&#xf5ad;" />
+        <Setter Property="BorderWidth" Value="0" />
+    </Style>
+
+</ResourceDictionary>
