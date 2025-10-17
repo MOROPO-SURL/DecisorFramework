@@ -75,12 +75,7 @@
                     </StackLayout>
                 </Frame>
                 <Button
-                    HorizontalOptions="End" VerticalOptions="Start"
-                    Text="&#xf5ad;"
-                    FontSize="Medium"
-                    FontFamily="MaterialDesignIcons"
-                    BorderWidth="0"
-                    WidthRequest="48" HeightRequest="48"
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
                     Clicked="DismissControl_Invoked" />
             </Grid>
         </Grid>

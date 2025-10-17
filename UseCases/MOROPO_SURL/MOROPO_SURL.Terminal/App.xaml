@@ -2,6 +2,7 @@
 <Application 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fwrk_core_presentation_dictionary_resources="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Resources.Styles;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:uraniumui_material="http://schemas.enisn-projects.io/dotnet/maui/uraniumui/material"
     x:Class="MOROPO.Tool.Decisor.Terminal.App">
     <Application.Resources>
@@ -9,9 +10,12 @@
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="Resources/Styles/Values.xaml" />
                 <ResourceDictionary x:Name="appColors" Source="Resources/Styles/Colors.xaml" />
+
                 <ResourceDictionary x:Name="appStyles" Source="Resources/Styles/Styles.xaml" />
 
                 <uraniumui_material:StyleResource ColorsOverride="{Reference appColors}" BasedOn="{Reference appStyles}" />
+
+                <fwrk_core_presentation_dictionary_resources:ExplicitStylesDictionary />
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="LogoImageViewStyle" TargetType="Image">
