@@ -63,6 +63,7 @@
 		<ProjectReference Include="..\Domain\Domain.Presentation.Web.Frontend\Domain.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\IDi\IDi.Presentation.Web.Frontend\IDi.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\ISCamaguey.Interop.API.Common\ISCamaguey.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Lab\Lab.Presentation.Web.Backend\Lab.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\Lab\Lab.Presentation.Web.Frontend\Lab.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Quality\Quality.Presentation.Web.Frontend\Quality.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Reporting\Reporting.Presentation.Web.Frontend\Reporting.Presentation.Web.Frontend.csproj" />

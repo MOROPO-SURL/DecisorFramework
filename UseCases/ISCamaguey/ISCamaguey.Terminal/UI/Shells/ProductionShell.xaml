@@ -1,8 +1,8 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:decisorframework_production_list_pages="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
-    xmlns:decisorframework_production_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_production_list_pages="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_production_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.ProductionShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -56,17 +56,17 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Realizadas"
-            ContentTemplate="{DataTemplate decisorframework_production_list_pages:ProductionOrdersHandledListPage}" />
+            ContentTemplate="{DataTemplate frwk_production_list_pages:ProductionOrdersHandledListPage}" />
         <ShellContent
             Title="Por Realizar"
-            ContentTemplate="{DataTemplate decisorframework_production_list_pages:ProductionOrdersToCompleteListPage}" />
+            ContentTemplate="{DataTemplate frwk_production_list_pages:ProductionOrdersToCompleteListPage}" />
         <ShellContent
             Title="Por Aprobar"
-            ContentTemplate="{DataTemplate decisorframework_production_manage_pages:ProductionOrdersToApproveManagePage}" />
+            ContentTemplate="{DataTemplate frwk_production_manage_pages:ProductionOrdersToApproveManagePage}" />
     </FlyoutItem>
     <ShellContent
         Title="Producciones (%)"
-        ContentTemplate="{DataTemplate decisorframework_production_manage_pages:ProductionsManagePage}">
+        ContentTemplate="{DataTemplate frwk_production_manage_pages:ProductionsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -77,7 +77,7 @@
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
         Title="Elaboraciones (%)"
-        ContentTemplate="{DataTemplate decisorframework_production_manage_pages:ElaborationsManagePage}">
+        ContentTemplate="{DataTemplate frwk_production_manage_pages:ElaborationsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

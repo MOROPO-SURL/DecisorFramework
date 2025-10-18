@@ -2,7 +2,7 @@
 <Shell
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:decisorframework_financial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_financial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.FinancialShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -37,7 +37,7 @@
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
         Title="Agencias Bancarias"
-        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankAgenciesManagePage}">
+        ContentTemplate="{DataTemplate frwk_financial_manage_pages:BankAgenciesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -47,7 +47,7 @@
     </ShellContent>
     <ShellContent
         Title="Sucursales Bancarias"
-        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankBranchesManagePage}">
+        ContentTemplate="{DataTemplate frwk_financial_manage_pages:BankBranchesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -57,7 +57,7 @@
     </ShellContent>
     <ShellContent
         Title="Cuentas Bancarias"
-        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankAccountsManagePage}">
+        ContentTemplate="{DataTemplate frwk_financial_manage_pages:BankAccountsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -67,7 +67,7 @@
     </ShellContent>
     <ShellContent
         Title="Tarjetas Bancarias de Débito"
-        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:BankDebitCardsManagePage}">
+        ContentTemplate="{DataTemplate frwk_financial_manage_pages:BankDebitCardsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -77,7 +77,7 @@
     </ShellContent>
     <ShellContent
         Title="Monedas"
-        ContentTemplate="{DataTemplate decisorframework_financial_manage_pages:CurrenciesManagePage}">
+        ContentTemplate="{DataTemplate frwk_financial_manage_pages:CurrenciesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

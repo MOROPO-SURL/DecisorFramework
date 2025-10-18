@@ -168,6 +168,8 @@
 
             if (target.Controller == "serviceorders") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-layers-triple");
 
+            if (target.Controller == "samplekinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-outline");
+
             return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
         }
     }

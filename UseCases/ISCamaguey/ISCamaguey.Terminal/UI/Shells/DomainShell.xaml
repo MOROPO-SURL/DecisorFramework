@@ -2,8 +2,8 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:decisorframework_domain_list_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
-    xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_domain_list_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.DomainShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -38,7 +38,7 @@
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Entidades Administrativas"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:StructuresManagePage}">
+        ContentTemplate="{DataTemplate frwk_domain_manage_pages:StructuresManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -48,7 +48,7 @@
     </ShellContent>
     <ShellContent
         Title="Unidades Organizativas"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationalUnitiesManagePage}">
+        ContentTemplate="{DataTemplate frwk_domain_manage_pages:OrganizationalUnitiesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -59,7 +59,7 @@
     <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
     <ShellContent
         Title="Tipos de Entidad Administrativa"
-        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:StructureKindsListPage}">
+        ContentTemplate="{DataTemplate frwk_domain_list_pages:StructureKindsListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

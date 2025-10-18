@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Backend</AssemblyName>
+		<RootNamespace>MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Backend</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Lab.Presentation.Web.Common\Lab.Presentation.Web.Common.csproj" />
+	</ItemGroup>
+</Project>

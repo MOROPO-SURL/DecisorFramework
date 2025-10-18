@@ -383,7 +383,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Title = "Recepciones de Muestra",
                 Controller = "testreceptions",
                 Action = "Index",
-                Area = "laboratory",
+                Area = "lab",
                 // TODO Set spected permission
                 //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });
@@ -392,7 +392,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Title = "Planes de Trabajo",
                 Controller = "plans",
                 Action = "Index",
-                Area = "laboratory",
+                Area = "lab",
                 // TODO Set spected permission
                 //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });
@@ -401,7 +401,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Title = "Grupos de Trabajo",
                 Controller = "workgroups",
                 Action = "Index",
-                Area = "laboratory",
+                Area = "lab",
                 // TODO Set spected permission
                 //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });
@@ -410,7 +410,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Title = "Procesamientos de Muestra",
                 Controller = "testhandlings",
                 Action = "Index",
-                Area = "laboratory",
+                Area = "lab",
                 // TODO Set spected permission
                 //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });
@@ -419,7 +419,16 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Title = "Técnicas de Laboratorio",
                 Controller = "technicals",
                 Action = "Index",
-                Area = "laboratory",
+                Area = "lab",
+                // TODO Set spected permission
+                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+            });
+            laboratorySection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Tipos de Muestra",
+                Controller = "samplekinds",
+                Action = "Index",
+                Area = "lab",
                 // TODO Set spected permission
                 //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });
@@ -428,7 +437,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Title = "Revisiones de Calidad",
                 Controller = "qualitychecks",
                 Action = "Index",
-                Area = "laboratory",
+                Area = "lab",
                 // TODO Set spected permission
                 //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });

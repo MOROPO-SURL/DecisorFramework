@@ -1,10 +1,10 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:decisorframework_domain_list_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
-    xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
-    xmlns:decisorframework_commercial_list_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
-    xmlns:decisorframework_commercial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_domain_list_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_commercial_list_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_commercial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.CommercialShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -46,10 +46,10 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Jurídicos"
-            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:LegalClientsManagePage}" />
+            ContentTemplate="{DataTemplate frwk_commercial_manage_pages:LegalClientsManagePage}" />
         <ShellContent
             Title="Naturales"
-            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:NaturalClientsManagePage}" />
+            ContentTemplate="{DataTemplate frwk_commercial_manage_pages:NaturalClientsManagePage}" />
     </FlyoutItem>
     <FlyoutItem Title="Contactos">
         <FlyoutItem.Icon>
@@ -60,15 +60,15 @@
         </FlyoutItem.Icon>
         <ShellContent
              Title="Organizaciones"
-             ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationContactsManagePage}" />
+             ContentTemplate="{DataTemplate frwk_domain_manage_pages:OrganizationContactsManagePage}" />
         <ShellContent
             Title="Personas"
-            ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}" />
+            ContentTemplate="{DataTemplate frwk_domain_manage_pages:PersonContactsManagePage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Configuración" />
     <ShellContent
         Title="Tipos de Negocio Legal"
-        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:LegalBusinessKindsListPage}">
+        ContentTemplate="{DataTemplate frwk_domain_list_pages:LegalBusinessKindsListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -78,7 +78,7 @@
     </ShellContent>
     <ShellContent
         Title="Tipos de Negocio Personal"
-        ContentTemplate="{DataTemplate decisorframework_domain_list_pages:NaturalBusinessKindsListPage}">
+        ContentTemplate="{DataTemplate frwk_domain_list_pages:NaturalBusinessKindsListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -88,7 +88,7 @@
     </ShellContent>
     <ShellContent
         Title="Términos de Pago"
-        ContentTemplate="{DataTemplate decisorframework_commercial_list_pages:PaymentTermsListPage}">
+        ContentTemplate="{DataTemplate frwk_commercial_list_pages:PaymentTermsListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

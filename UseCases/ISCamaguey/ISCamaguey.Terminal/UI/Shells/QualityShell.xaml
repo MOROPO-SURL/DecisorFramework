@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages"
-    xmlns:decisor_usescase_quality_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:quality_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.QualityShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -70,7 +70,7 @@
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Normas Cubanas"
-        ContentTemplate="{DataTemplate decisor_usescase_quality_manage_pages:CubanStandardManagePage}">
+        ContentTemplate="{DataTemplate quality_manage_pages:CubanStandardManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -80,7 +80,7 @@
     </ShellContent>
     <ShellContent
         Title="Normas ISO"
-        ContentTemplate="{DataTemplate decisor_usescase_quality_manage_pages:IsoStandardManagePage}">
+        ContentTemplate="{DataTemplate quality_manage_pages:IsoStandardManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

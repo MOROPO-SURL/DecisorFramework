@@ -2,7 +2,8 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:decisorframework_commercial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:fwrk_commercial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:lab_list_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.ServicingShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -97,9 +98,20 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Jurídicos"
-            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:LegalClientsManagePage}" />
+            ContentTemplate="{DataTemplate fwrk_commercial_manage_pages:LegalClientsManagePage}" />
         <ShellContent
             Title="Naturales"
-            ContentTemplate="{DataTemplate decisorframework_commercial_manage_pages:NaturalClientsManagePage}" />
+            ContentTemplate="{DataTemplate fwrk_commercial_manage_pages:NaturalClientsManagePage}" />
     </FlyoutItem>
+    <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
+    <ShellContent
+        Title="Tipos de Muestra"
+        ContentTemplate="{DataTemplate lab_list_pages:SampleKindsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF68F;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
 </Shell>

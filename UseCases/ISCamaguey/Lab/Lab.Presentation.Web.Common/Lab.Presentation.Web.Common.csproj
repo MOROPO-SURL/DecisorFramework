@@ -10,6 +10,7 @@
 		<PackageReference Include="GuamaFramework.Identity.Presentation.Web.Common" Version="6.0.1" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\Lab.Interop.API.Common\Lab.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Lab.Persistence.ORM.EF\Lab.Persistence.ORM.EF.csproj" />
 	</ItemGroup>
 </Project>

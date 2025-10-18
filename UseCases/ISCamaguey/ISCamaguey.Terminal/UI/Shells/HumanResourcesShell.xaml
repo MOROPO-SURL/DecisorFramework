@@ -3,9 +3,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages.Manage"
-    xmlns:decisorframework_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
-    xmlns:decisorframework_humanresources_list_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
-    xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_humanresources_list_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.HumanResourcesShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -50,14 +50,14 @@
             ContentTemplate="{DataTemplate local_manage_pages:OcupationsSimplifiedManagePage}" />
         <ShellContent
              Title="Estructuras"
-             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}" />
+             ContentTemplate="{DataTemplate frwk_humanresources_manage_pages:WorkforcesManagePage}" />
         <ShellContent
             Title="Asignaciones"
-            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}" />
+            ContentTemplate="{DataTemplate frwk_humanresources_manage_pages:StaffsManagePage}" />
     </FlyoutItem>
     <ShellContent
         Title="Plazas laborales"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkPositionsManagePage}">
+        ContentTemplate="{DataTemplate frwk_humanresources_manage_pages:WorkPositionsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -67,7 +67,7 @@
     </ShellContent>
     <ShellContent
         Title="Escalas salariales"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:SalaryStandardsManagePage}">
+        ContentTemplate="{DataTemplate frwk_humanresources_manage_pages:SalaryStandardsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -77,7 +77,7 @@
     </ShellContent>
     <ShellContent
         Title="Contactos"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}">
+        ContentTemplate="{DataTemplate frwk_domain_manage_pages:PersonContactsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -88,7 +88,7 @@
     <MenuFlyoutItem Text="Configuración" />
     <ShellContent
         Title="Categorías ocupacionales"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:WorkPositionKindsListPage}">
+        ContentTemplate="{DataTemplate frwk_humanresources_list_pages:WorkPositionKindsListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -98,7 +98,7 @@
     </ShellContent>
     <ShellContent
         Title="Niveles de preparación"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:SchoolingsListPage}">
+        ContentTemplate="{DataTemplate frwk_humanresources_list_pages:SchoolingsListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

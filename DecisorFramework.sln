@@ -389,7 +389,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab.Presentation.Terminal.M
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab.Presentation.Terminal.MAUI.UI.Default", "UseCases\ISCamaguey\Lab\Lab.Presentation.Terminal.MAUI.UI.Default\Lab.Presentation.Terminal.MAUI.UI.Default.csproj", "{4A55A2AA-6DD9-4307-B6BA-F5E40D7AFE6B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ISCamaguey.Interop.API.Common", "UseCases\ISCamaguey\ISCamaguey.Interop.API.Common\ISCamaguey.Interop.API.Common.csproj", "{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ISCamaguey.Interop.API.Common", "UseCases\ISCamaguey\ISCamaguey.Interop.API.Common\ISCamaguey.Interop.API.Common.csproj", "{D3743056-BB71-4BCF-8EE0-92A759F5A6F3}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quality.Interop.API.Connect", "UseCases\ISCamaguey\Quality\Quality.Interop.API.Connect\Quality.Interop.API.Connect.csproj", "{AB713A04-B6E0-4A3D-A6A8-4531EC9CBEBB}"
 EndProject
@@ -398,6 +398,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quality.Presentation.Terminal.MAUI", "UseCases\ISCamaguey\Quality\Quality.Presentation.Terminal.MAUI\Quality.Presentation.Terminal.MAUI.csproj", "{41989C22-F0A5-4CFD-9204-2228C08A7A48}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quality.Presentation.Terminal.MAUI.UI.Default", "UseCases\ISCamaguey\Quality\Quality.Presentation.Terminal.MAUI.UI.Default\Quality.Presentation.Terminal.MAUI.UI.Default.csproj", "{1300501F-0F0E-4D41-9647-D8CA02F3E901}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lab.Presentation.Web.Backend", "UseCases\ISCamaguey\Lab\Lab.Presentation.Web.Backend\Lab.Presentation.Web.Backend.csproj", "{D3A4F9A6-7D7D-4473-92B5-9C7F22573DBF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1101,6 +1103,10 @@ Global
 		{1300501F-0F0E-4D41-9647-D8CA02F3E901}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1300501F-0F0E-4D41-9647-D8CA02F3E901}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1300501F-0F0E-4D41-9647-D8CA02F3E901}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D3A4F9A6-7D7D-4473-92B5-9C7F22573DBF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D3A4F9A6-7D7D-4473-92B5-9C7F22573DBF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D3A4F9A6-7D7D-4473-92B5-9C7F22573DBF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D3A4F9A6-7D7D-4473-92B5-9C7F22573DBF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1288,6 +1294,7 @@ Global
 		{99142BDB-4FCB-4756-9E48-8D7F42A8F327} = {F95787C9-E7B9-4EC1-B376-2BA9F62C0859}
 		{41989C22-F0A5-4CFD-9204-2228C08A7A48} = {F95787C9-E7B9-4EC1-B376-2BA9F62C0859}
 		{1300501F-0F0E-4D41-9647-D8CA02F3E901} = {F95787C9-E7B9-4EC1-B376-2BA9F62C0859}
+		{D3A4F9A6-7D7D-4473-92B5-9C7F22573DBF} = {C0173AC3-6E50-4868-9B11-AA9FD57DC433}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {747B719B-EA48-4793-98E6-ECCB62300F19}
