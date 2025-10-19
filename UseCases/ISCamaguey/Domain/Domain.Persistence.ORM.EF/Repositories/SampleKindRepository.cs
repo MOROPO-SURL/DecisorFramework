@@ -1,4 +1,4 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.ORM.EF.Repositories
+﻿namespace MOROPO.ISCamaguey.Decisor.Domain.Persistence.ORM.EF.Repositories
 {
     public class SampleKindRepository : Framework.Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Entities.SampleKind, System.Guid>
     {

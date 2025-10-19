@@ -1,4 +1,4 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Backend.Models.View.Display
+﻿namespace MOROPO.ISCamaguey.Decisor.Domain.Presentation.Web.Backend.Models.View.Display
 {
     public class SampleKindDisplayViewModel : Interop.API.Common.Models.Display.SampleKindDisplayModel
     {

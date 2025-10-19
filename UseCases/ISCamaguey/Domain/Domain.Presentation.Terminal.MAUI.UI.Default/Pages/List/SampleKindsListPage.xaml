@@ -2,13 +2,13 @@
 <fwrk_core_ui_base_pages:ListBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.List"
-    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
-    xmlns:presentation_list_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.Models.Page.List;assembly=MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI"
+    xmlns:local="clr-namespace:MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common"
+    xmlns:presentation_list_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.List;assembly=MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI"
     xmlns:fwrk_core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.List.SampleKindsListPage"
+    x:Class="MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List.SampleKindsListPage"
     x:TypeArguments="interop_common_display_models:SampleKindDisplayModel,presentation_list_page_models:SampleKindsListPageModel"
     x:DataType="presentation_list_page_models:SampleKindsListPageModel"
     Title="Listado de Tipos de Muestra">

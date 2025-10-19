@@ -60,6 +60,7 @@
 		<ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Web.Common\Inventory.Presentation.Web.Common.csproj" />
 		<ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Backend\Commercial.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Frontend\Commercial.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\Domain\Domain.Presentation.Web.Backend\Domain.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\Domain\Domain.Presentation.Web.Frontend\Domain.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\IDi\IDi.Presentation.Web.Frontend\IDi.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\ISCamaguey.Interop.API.Common\ISCamaguey.Interop.API.Common.csproj" />
@@ -75,5 +76,8 @@
 	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 	    <CopyToPublishDirectory>Never</CopyToPublishDirectory>
 	  </None>
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Areas\Lab\Views\" />
 	</ItemGroup>
 </Project>

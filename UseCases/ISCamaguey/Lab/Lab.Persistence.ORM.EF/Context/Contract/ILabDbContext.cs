@@ -10,7 +10,6 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.ORM.EF.Context.Contract
         // TODO Uncomment required line!!
         //public DbSet<Entities.ProductionSample> ProductionSamples { get; set; }
         public DbSet<Entities.ResearchSample> ResearchSamples { get; set; }
-        public DbSet<Entities.SampleKind> SampleKinds { get; set; }
         public DbSet<Entities.ServiceOrderSample> ServiceOrderSamples { get; set; }
         public DbSet<Entities.WorkingGroup> WorkingGroups { get; set; }
         public DbSet<Entities.WorkingGroupEmployeeBridge> WorkingGroupEmployeeBridges { get; set; }

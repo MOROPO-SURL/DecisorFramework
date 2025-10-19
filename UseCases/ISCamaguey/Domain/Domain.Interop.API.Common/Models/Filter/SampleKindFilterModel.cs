@@ -1,4 +1,4 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Filter
+﻿namespace MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Filter
 {
     public class SampleKindFilterModel : Framework.Guama.Core.Persistence.Presentation.Models.Filter.Contract.IEntityFilterModel<Persistence.Entities.SampleKind, System.Guid>
     {

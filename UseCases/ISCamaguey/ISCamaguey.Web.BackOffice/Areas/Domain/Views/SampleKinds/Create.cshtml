@@ -1,7 +1,7 @@
-﻿@model MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Backend.Models.View.Input.SampleKindInputViewModel
+﻿@model MOROPO.ISCamaguey.Decisor.Domain.Presentation.Web.Backend.Models.View.Input.SampleKindInputViewModel
 
 @{
-    const string TITLE = "Modificar Tipo de Muestra";
+    const string TITLE = "Agregar Tipo de Muestra";
     const string HEADER = "Administración de Tipos de Muestra";
 
     ViewData["TITLE"] = TITLE;
@@ -37,11 +37,9 @@
 
 <hr class="mt-0 mb-4" />
 
-@using (Html.BeginForm("edit", null, new { key = string.Empty }, FormMethod.Post, true, null))
+@using (Html.BeginForm("create", null, null, FormMethod.Post, true, null))
 {
     @Html.ValidationSummary(true)
-
-    @Html.HiddenFor(model => model.Id)
 
     <div class="card mb-4">
         <div class="card-header"><h5 class="mb-0 font-weight-bold text-primary">@TITLE</h5></div>
@@ -73,10 +71,9 @@
                 @Html.ValidationMessageFor(model => model.Description, null, new { @class = "text-danger" })
             </div>
         </div>
-
         <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Modificar</button>
-            <a class="btn btn-secondary" href="@Url.Action("index")">Regresar al listado</a>
+            <button type="submit" class="btn btn-primary">Agregar</button>
+            <a class="btn btn-secondary" href="@Url.Action("index")">Cancelar</a>
         </div>
     </div>
 }

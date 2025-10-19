@@ -1,6 +1,8 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Backend.Models.View.Input
+﻿using MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities;
+
+namespace MOROPO.ISCamaguey.Decisor.Domain.Presentation.Web.Backend.Models.View.Input
 {
-    public class SampleKindInputViewModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.SampleKind, System.Guid>
+    public class SampleKindInputViewModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<SampleKind, System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; }
@@ -14,16 +16,16 @@
 
         public string Description { get; set; }
 
-        public Persistence.Entities.SampleKind Export()
+        public SampleKind Export()
         {
-            var entity = new Persistence.Entities.SampleKind { Id = Id, Enabled = true };
+            var entity = new SampleKind { Id = Id, Enabled = true };
 
             Mergue(entity);
 
             return entity;
         }
 
-        public void Import(Persistence.Entities.SampleKind entity)
+        public void Import(SampleKind entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;
@@ -32,7 +34,7 @@
             Description = entity.Description;
         }
 
-        public void Mergue(Persistence.Entities.SampleKind entity)
+        public void Mergue(SampleKind entity)
         {
             entity.Name = Name;
             entity.Enabled = Enabled;

@@ -5400,6 +5400,40 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("userrolebridges", "guamaframework_security_personal");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.SampleKind", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_samplekinds");
+
+                    b.ToTable("samplekinds", "decisoriscamaguey_domain");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", b =>
                 {
                     b.Property<Guid>("Id")
@@ -6879,40 +6913,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasDiscriminator<string>("Discriminator").HasValue("AbstractSample");
 
                     b.UseTphMappingStrategy();
-                });
-
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.SampleKind", b =>
-                {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uuid")
-                        .HasColumnName("id");
-
-                    b.Property<bool>("Archived")
-                        .HasColumnType("boolean")
-                        .HasColumnName("archived");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("text")
-                        .HasColumnName("description");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
-
-                    b.HasKey("Id")
-                        .HasName("pk_samplekinds");
-
-                    b.ToTable("samplekinds", "decisoriscamaguey_lab");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlan", b =>
@@ -10880,7 +10880,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", b =>
                 {
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.SampleKind", "DefaultSampleKind")
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.SampleKind", "DefaultSampleKind")
                         .WithMany()
                         .HasForeignKey("DefaultSampleKindId")
                         .OnDelete(DeleteBehavior.Cascade)

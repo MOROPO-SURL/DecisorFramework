@@ -10,6 +10,7 @@ namespace MOROPO.ISCamaguey.Decisor.Domain.Persistence.ORM.EF.Providers
             {
                 return
                 [
+                    new BaseEntityTypeConfigurator<Entities.SampleKind>(),
                     new BaseEntityTypeConfigurator<Entities.Technique>(),
                     new Configurators.TechniqueCubanStandardBridgeEntityTypeConfigurator(),
                     new Configurators.TechniqueIsoStandardBridgeEntityTypeConfigurator()

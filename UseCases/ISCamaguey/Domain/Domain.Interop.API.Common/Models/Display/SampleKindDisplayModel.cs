@@ -1,4 +1,4 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
+﻿namespace MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Display
 {
     public class SampleKindDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.SampleKind, System.Guid>
     {

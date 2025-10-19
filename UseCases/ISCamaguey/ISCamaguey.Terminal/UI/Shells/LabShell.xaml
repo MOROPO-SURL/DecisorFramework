@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:domain_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:lab_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default"
-    xmlns:lab_list_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:domain_list_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.LabShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -112,7 +112,7 @@
     <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
     <ShellContent
         Title="Tipos de Muestra"
-        ContentTemplate="{DataTemplate lab_list_pages:SampleKindsListPage}">
+        ContentTemplate="{DataTemplate domain_list_pages:SampleKindsListPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

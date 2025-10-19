@@ -1,4 +1,6 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract
+﻿using MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities;
+
+namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract
 {
     public abstract class AbstractSample : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<int>
     {

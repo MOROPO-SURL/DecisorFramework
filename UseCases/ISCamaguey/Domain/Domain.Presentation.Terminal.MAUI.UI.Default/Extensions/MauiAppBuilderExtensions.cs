@@ -14,6 +14,7 @@ namespace MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default
             builder.Services
                 // DetailPage factory resgistration !!!
                 .AddSingleton<IDetailContentPageFactoryFacade<TechniqueDisplayModel>, TechniqueDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<SampleKindDisplayModel>, SampleKindDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<TechniqueDisplayModel, TechniqueConfigurationPageModel>, TechniqueConfigurationPageFactory>();

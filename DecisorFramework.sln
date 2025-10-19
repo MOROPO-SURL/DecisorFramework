@@ -401,13 +401,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Quality.Presentation.Termin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lab.Presentation.Web.Backend", "UseCases\ISCamaguey\Lab\Lab.Presentation.Web.Backend\Lab.Presentation.Web.Backend.csproj", "{D3A4F9A6-7D7D-4473-92B5-9C7F22573DBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Interop.API.Common", "UseCases\ISCamaguey\Servicing\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj", "{DC290756-D922-408D-A5A7-F9251D3B6ADF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Interop.API.Common", "UseCases\ISCamaguey\Servicing\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj", "{DC290756-D922-408D-A5A7-F9251D3B6ADF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Interop.API.Connect", "UseCases\ISCamaguey\Servicing\Servicing.Interop.API.Connect\Servicing.Interop.API.Connect.csproj", "{B9E0C8B2-A101-4A70-8488-CC01D39038CF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Interop.API.Connect", "UseCases\ISCamaguey\Servicing\Servicing.Interop.API.Connect\Servicing.Interop.API.Connect.csproj", "{B9E0C8B2-A101-4A70-8488-CC01D39038CF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Presentation.Terminal.MAUI", "UseCases\ISCamaguey\Servicing\Servicing.Presentation.Terminal.MAUI\Servicing.Presentation.Terminal.MAUI.csproj", "{7FCF8A4F-1001-444D-84C2-256E547BF516}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Presentation.Terminal.MAUI", "UseCases\ISCamaguey\Servicing\Servicing.Presentation.Terminal.MAUI\Servicing.Presentation.Terminal.MAUI.csproj", "{7FCF8A4F-1001-444D-84C2-256E547BF516}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Servicing.Presentation.Terminal.MAUI.UI.Default", "UseCases\ISCamaguey\Servicing\Servicing.Presentation.Terminal.MAUI.UI.Default\Servicing.Presentation.Terminal.MAUI.UI.Default.csproj", "{05BADA88-B5A7-4C93-AEA7-C38F45664938}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Servicing.Presentation.Terminal.MAUI.UI.Default", "UseCases\ISCamaguey\Servicing\Servicing.Presentation.Terminal.MAUI.UI.Default\Servicing.Presentation.Terminal.MAUI.UI.Default.csproj", "{05BADA88-B5A7-4C93-AEA7-C38F45664938}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain.Presentation.Web.Backend", "UseCases\ISCamaguey\Domain\Domain.Presentation.Web.Backend\Domain.Presentation.Web.Backend.csproj", "{075C5666-E3E4-46DF-B9AA-2BA60915B2BF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -1131,6 +1133,10 @@ Global
 		{05BADA88-B5A7-4C93-AEA7-C38F45664938}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{05BADA88-B5A7-4C93-AEA7-C38F45664938}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{05BADA88-B5A7-4C93-AEA7-C38F45664938}.Release|Any CPU.Build.0 = Release|Any CPU
+		{075C5666-E3E4-46DF-B9AA-2BA60915B2BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{075C5666-E3E4-46DF-B9AA-2BA60915B2BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{075C5666-E3E4-46DF-B9AA-2BA60915B2BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{075C5666-E3E4-46DF-B9AA-2BA60915B2BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -1323,6 +1329,7 @@ Global
 		{B9E0C8B2-A101-4A70-8488-CC01D39038CF} = {41168DF6-3984-480B-8FA1-A67C3CC11D37}
 		{7FCF8A4F-1001-444D-84C2-256E547BF516} = {41168DF6-3984-480B-8FA1-A67C3CC11D37}
 		{05BADA88-B5A7-4C93-AEA7-C38F45664938} = {41168DF6-3984-480B-8FA1-A67C3CC11D37}
+		{075C5666-E3E4-46DF-B9AA-2BA60915B2BF} = {A1218469-B79A-4984-A7C9-AD4419BF3375}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {747B719B-EA48-4793-98E6-ECCB62300F19}

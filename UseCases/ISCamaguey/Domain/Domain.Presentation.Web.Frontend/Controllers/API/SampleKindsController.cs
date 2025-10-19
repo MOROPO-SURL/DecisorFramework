@@ -1,11 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;
-using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Filter;
-using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
+using MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Display;
+using MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Filter;
+using MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities;
 
-namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.ISCamaguey.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/lab/[controller]")]
+    [Route("api/domain/[controller]")]
     [ApiController]
     public class SampleKindsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultFilteredController<SampleKind, System.Guid, SampleKindDisplayModel, SampleKindFilterModel>
     {

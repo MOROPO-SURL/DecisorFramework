@@ -1,8 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Display;
 
-namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.List;
+namespace MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;
 
-public partial class SampleKindsListPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.SampleKindDisplayModel, Models.Page.List.SampleKindsListPageModel>
+public partial class SampleKindsListPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<SampleKindDisplayModel, Models.Page.List.SampleKindsListPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
 
@@ -23,7 +24,7 @@ public partial class SampleKindsListPage : Framework.Decisor.Core.Presentation.T
         return ITEM_VIEW_REQUEST_HEIGHT;
     }
 
-    protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.SampleKindDisplayModel>> FetchItemsAsync()
+    protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<SampleKindDisplayModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.SampleKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
