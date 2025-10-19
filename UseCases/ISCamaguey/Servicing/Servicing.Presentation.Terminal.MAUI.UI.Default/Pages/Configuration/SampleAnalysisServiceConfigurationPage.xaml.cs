@@ -14,6 +14,20 @@ public partial class SampleAnalysisServiceConfigurationPage : Framework.Decisor.
     public SampleAnalysisServiceConfigurationPage(System.Action<Interop.API.Common.Models.Display.SampleAnalysisServiceDisplayModel> successAction, Models.Page.Configuration.SampleAnalysisServiceConfigurationPageModel model, Validators.SampleAnalysisServiceConfigurationValidator validator) : base(successAction, model, validator)
     {
         InitializeComponent();
+
+        if (model.SampleKind != null)
+        {
+            for (int i = 0; i < model.AvailableSampleKinds.Length; i++)
+            {
+                var current = model.AvailableSampleKinds[i];
+
+                if (model.SampleKind.Id != current.Id) continue;
+
+                SampleKindPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Servicio de Procesamiento de Muestra";
@@ -28,6 +42,7 @@ public partial class SampleAnalysisServiceConfigurationPage : Framework.Decisor.
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
+            SampleKindId = ConcreteBindingContext.SampleKind.Id,
             IncomingSteps = incomingSteps
         };
 
@@ -46,6 +61,7 @@ public partial class SampleAnalysisServiceConfigurationPage : Framework.Decisor.
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
+            SampleKindId = ConcreteBindingContext.SampleKind.Id,
             IncomingSteps = incomingSteps,
             EditionSteps = editionSteps,
             OutgoingSteps = outgoingSteps
@@ -64,6 +80,11 @@ public partial class SampleAnalysisServiceConfigurationPage : Framework.Decisor.
     private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         OnCancel(sender, eventArgs);
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
     }
 
     private void StepAgregationButton_Clicked(object sender, System.EventArgs eventArgs)

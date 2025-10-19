@@ -3,6 +3,7 @@
     public class TrainingServiceStepConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.TrainingServiceStepDisplayModel>
     {
         public static string NameValidableProperty => nameof(Name);
+        public static string DescriptionValidableProperty => nameof(Description);
 
         private string name;
         private string description;

@@ -11,6 +11,7 @@
 
         public int Priority { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
     }
 }

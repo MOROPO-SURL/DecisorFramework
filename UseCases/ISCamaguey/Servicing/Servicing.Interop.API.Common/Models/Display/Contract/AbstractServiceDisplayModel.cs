@@ -12,7 +12,7 @@
 
         public int Priority { get; set; }
 
-        public void Import(TEntity entity)
+        public virtual void Import(TEntity entity)
         {
             Id = entity.Id;
             Name = entity.Name;

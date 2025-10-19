@@ -7352,6 +7352,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("description");
 
@@ -7368,8 +7369,15 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
+                    b.Property<Guid>("SampleKindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("samplekindid");
+
                     b.HasKey("Id")
                         .HasName("pk_sampleanalysisservices");
+
+                    b.HasIndex("SampleKindId")
+                        .HasDatabaseName("ix_sampleanalysisservices_samplekindid");
 
                     b.ToTable("sampleanalysisservices", "decisoriscamaguey_servicing");
                 });
@@ -7382,6 +7390,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("description");
 
@@ -7465,6 +7474,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("description");
 
@@ -7495,6 +7505,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("id");
 
                     b.Property<string>("Description")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("description");
 
@@ -11058,6 +11069,18 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Order");
 
                     b.Navigation("SampleAnalysisReport");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.SampleKind", "SampleKind")
+                        .WithMany()
+                        .HasForeignKey("SampleKindId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sampleanalysisservices_samplekinds_samplekindid");
+
+                    b.Navigation("SampleKind");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceStep", b =>

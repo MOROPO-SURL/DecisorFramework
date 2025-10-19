@@ -41,7 +41,7 @@
                             Text="Descripción" />
                         <Label
                             Style="{StaticResource ValuePropertyLabelStyle}"
-                            Text="{Binding Description, TargetNullValue='---'}" />
+                            Text="{Binding Description}" />
                     </StackLayout>
                 </Frame>
                 <Button

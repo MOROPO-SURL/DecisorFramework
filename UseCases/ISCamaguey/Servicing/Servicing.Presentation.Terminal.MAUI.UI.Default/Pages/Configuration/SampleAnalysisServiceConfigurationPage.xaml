@@ -51,11 +51,36 @@
                         Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:SampleAnalysisServiceConfigurationPageModel.NameValidableProperty}}"
                         Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start"
+                    AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo de Muestra" />
+                        <Picker 
+                            x:Name="SampleKindPicker" 
+                            ItemsSource="{Binding AvailableSampleKinds}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SampleKind}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:SampleAnalysisServiceConfigurationPageModel.SampleKindValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:SampleAnalysisServiceConfigurationPageModel.SampleKindValidableProperty}}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (Opcional)" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción" />
                     <Editor Text="{Binding Description}" HeightRequest="240" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:SampleAnalysisServiceConfigurationPageModel.DescriptionValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:SampleAnalysisServiceConfigurationPageModel.DescriptionValidableProperty}}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Margin="8" Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Etapas" />

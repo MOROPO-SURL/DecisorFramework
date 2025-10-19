@@ -54,8 +54,12 @@
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (Opcional)" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción" />
                     <Editor Text="{Binding Description}" HeightRequest="240" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:TrainingServiceConfigurationPageModel.DescriptionValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:TrainingServiceConfigurationPageModel.DescriptionValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Margin="8" Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Etapas" />
@@ -96,25 +100,33 @@
                                             <StackLayout
                                                 Spacing="8"
                                                 Orientation="Horizontal">
-                                                <Label
-                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                                    FontSize="Medium"
-                                                    LineBreakMode="TailTruncation"
-                                                    Text="{Binding Name}" />
+                                                <VerticalStackLayout 
+                                                    Margin="4,0,0,0"
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                    <Label                                                    
+                                                        FontSize="Medium"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Name}" />
+                                                    <Label                                                    
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Description}" />
+                                                </VerticalStackLayout>
                                                 <Button
+                                                    VerticalOptions="Center"
                                                     FontFamily="MaterialDesignIcons"
                                                     Padding="0"
                                                     FontSize="21"
                                                     Text="&#xF2FD;"
                                                     Clicked="StepDetailButton_Clicked" />
                                                 <Button
+                                                    VerticalOptions="Center"
                                                     FontFamily="MaterialDesignIcons" 
                                                     Padding="0"
                                                     FontSize="21"
                                                     Text="&#xF90B;"
                                                     Clicked="StepEditionButton_Clicked" />
                                                 <Button
-                                                    VerticalOptions="Start"
+                                                    VerticalOptions="Center"
                                                     FontFamily="MaterialDesignIcons" 
                                                     Padding="0"
                                                     FontSize="21"

@@ -7,6 +7,8 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.Validat
         public SampleAnalysisServiceStepConfigurationValidator()
         {
             RuleFor(model => model.Name).NotNull().NotEmpty();
+
+            RuleFor(model => model.Description).NotNull().NotEmpty();
         }
     }
 }

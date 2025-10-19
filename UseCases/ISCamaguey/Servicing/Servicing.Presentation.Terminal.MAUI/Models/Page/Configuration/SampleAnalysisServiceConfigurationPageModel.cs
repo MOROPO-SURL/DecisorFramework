@@ -3,10 +3,13 @@
     public class SampleAnalysisServiceConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.SampleAnalysisServiceDisplayModel>
     {
         public static string NameValidableProperty => nameof(Name);
+        public static string DescriptionValidableProperty => nameof(Description);
+        public static string SampleKindValidableProperty => nameof(SampleKind);
 
         private string name;
         private string description;
         private int priority = 1;
+        private Domain.Interop.API.Common.Models.Display.SampleKindDisplayModel sampleKind;
 
         public SampleAnalysisServiceConfigurationPageModel(Interop.API.Common.Models.Display.SampleAnalysisServiceDisplayModel model) : base(model)
         {
@@ -16,6 +19,7 @@
             name = model.Name;
             description = model.Description;
             priority = model.Priority;
+            sampleKind = model.SampleKind;
             Steps = [.. model.Steps];
         }
 
@@ -27,6 +31,10 @@
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
+        public Domain.Interop.API.Common.Models.Display.SampleKindDisplayModel SampleKind { get => sampleKind; set => SetProperty(ref sampleKind, value); }
+
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.SampleAnalysisServiceStepDisplayModel> Steps { get; set; } = [];
+
+        public Domain.Interop.API.Common.Models.Display.SampleKindDisplayModel[] AvailableSampleKinds { get; set; }
     }
 }

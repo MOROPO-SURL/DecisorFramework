@@ -9,6 +9,7 @@
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
 
         public bool Archived { get ; set ; }

@@ -14,7 +14,7 @@
         <Grid>
             <Grid
                 Padding="10"
-                MaximumWidthRequest="400"
+                MaximumWidthRequest="680"
                 VerticalOptions="Center">
                 <Frame Style="{StaticResource PopupFrameStyle}">
                     <StackLayout Margin="20" Spacing="20">
@@ -33,6 +33,12 @@
                                 Text="{Binding Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Tipo de Muestra" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding SampleKind.Name}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Prioridad" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
@@ -42,11 +48,54 @@
                                 Text="Descripción" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Description, TargetNullValue='---'}" />
+                                Text="{Binding Description}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Etapas" />
+                            <VerticalStackLayout
+                                BindableLayout.ItemsSource="{Binding Steps}">
+                                <BindableLayout.EmptyView>
+                                    <Label
+                                        FontAttributes="Italic"
+                                        TextColor="DimGray"
+                                        Text="Sin elementos que mostrar" />
+                                </BindableLayout.EmptyView>
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:SampleAnalysisServiceStepDisplayModel">
+                                        <Grid ColumnSpacing="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <Label
+                                                Grid.Column="0" Grid.RowSpan="2"
+                                                VerticalOptions="Center"
+                                                FontAttributes="Bold"
+                                                Text="-" />
+                                            <Label         
+                                                Grid.Column="1" Grid.Row="0"
+                                                FontAttributes="Bold"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Name}" />
+                                            <Label                                                    
+                                                Grid.Column="1" Grid.Row="1"
+                                                LineBreakMode="TailTruncation"
+                                                Text="{Binding Description}" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
                         </StackLayout>
                         <StackLayout
                             Orientation="Horizontal"
                             Spacing="20">
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Exportar" />
                             <Button 
                                 HorizontalOptions="FillAndExpand"
                                 Text="Modificar"

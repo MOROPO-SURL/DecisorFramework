@@ -55,8 +55,12 @@
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (Opcional)" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción" />
                     <Editor Text="{Binding Description}" HeightRequest="240" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:SampleAnalysisServiceStepConfigurationPageModel.DescriptionValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:SampleAnalysisServiceStepConfigurationPageModel.DescriptionValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <BoxView 
                     Margin="8,16,8,8"
