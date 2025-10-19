@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common</AssemblyName>
+		<RootNamespace>MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Domain\Domain.Interop.API.Common\Domain.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\..\Domain\Domain.Interop.API.Common\Domain.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Servicing.Persistence\Servicing.Persistence.csproj" />
+	</ItemGroup>
+</Project>

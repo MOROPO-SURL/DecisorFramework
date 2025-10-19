@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>netstandard2.0</TargetFramework>
+		<AssemblyName>MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Connect</AssemblyName>
+		<RootNamespace>MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Connect</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj" />
+	</ItemGroup>
+
+</Project>

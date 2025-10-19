@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:fwrk_commercial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
     xmlns:lab_list_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:servicing_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.ServicingShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -59,8 +60,8 @@
     </ShellContent>
     <MenuFlyoutItem Text="Servicios" IsEnabled="False" />
     <ShellContent
-        Title="Capacitación (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Capacitación"
+        ContentTemplate="{DataTemplate servicing_manage_pages:TrainingServicesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -69,8 +70,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Procesamiento de Muestras (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Procesamiento de Muestras"
+        ContentTemplate="{DataTemplate servicing_manage_pages:SampleAnalysisServicesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

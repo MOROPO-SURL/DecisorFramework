@@ -119,6 +119,7 @@
 		<ProjectReference Include="..\ISCamaguey.Interop.API.Common\ISCamaguey.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Lab\Lab.Presentation.Terminal.MAUI.UI.Default\Lab.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Quality\Quality.Presentation.Terminal.MAUI.UI.Default\Quality.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\Servicing\Servicing.Presentation.Terminal.MAUI.UI.Default\Servicing.Presentation.Terminal.MAUI.UI.Default.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

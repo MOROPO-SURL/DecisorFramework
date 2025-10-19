@@ -11,7 +11,11 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Persistence.ORM.EF.Providers
                 return new System.Collections.Generic.List<Framework.Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
                 {
                     new BaseEntityTypeConfigurator<Entities.TrainingService>(),
+                    new BaseEntityTypeConfigurator<Entities.TrainingServiceStep>(),
+                    new Configurators.TrainingServiceStepWorkPositionBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.SampleAnalysisService>(),
+                    new BaseEntityTypeConfigurator<Entities.SampleAnalysisServiceStep>(),
+                    new Configurators.SampleAnalysisServiceStepWorkPositionBridgeEntityTypeConfigurator(),
                     new Configurators.ServiceOrderEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.LegalClientTrainingServiceOrder>(),
                     new BaseEntityTypeConfigurator<Entities.LegalClientSampleAnalysisServiceOrder>(),

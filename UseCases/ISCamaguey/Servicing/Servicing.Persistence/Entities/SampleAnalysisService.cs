@@ -2,5 +2,6 @@
 {
     public class SampleAnalysisService : Contract.AbstractService
     {
+        public System.Collections.ObjectModel.Collection<SampleAnalysisServiceStep> Steps { get; set; }
     }
 }
