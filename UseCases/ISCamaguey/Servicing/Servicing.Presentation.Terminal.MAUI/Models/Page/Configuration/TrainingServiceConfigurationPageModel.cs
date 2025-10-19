@@ -18,6 +18,7 @@
             description = model.Description;
             priority = model.Priority;
             Steps = [.. model.Steps];
+            Documents = [.. model.Documents];
         }
 
         public System.Guid Id { get; set; }
@@ -29,5 +30,7 @@
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.TrainingServiceStepDisplayModel> Steps { get; set; } = [];
+
+        public System.Collections.ObjectModel.ObservableCollection<Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel> Documents { get; set; } = [];
     }
 }

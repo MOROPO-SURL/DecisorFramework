@@ -12,6 +12,8 @@
 
         public int Priority { get; set; }
 
+        public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel[] Documents { get; set; }
+
         public virtual void Import(TEntity entity)
         {
             Id = entity.Id;

@@ -197,9 +197,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Statement> Statements { get; set; }
 
         public DbSet<TrainingService> TrainingServices { get; set; }
+        public DbSet<TrainingServiceDocumentBridge> TrainingServiceDocumentBridges { get; set; }
         public DbSet<TrainingServiceStep> TrainingServiceSteps { get; set; }
         public DbSet<TrainingServiceStepWorkPositionBridge> TrainingServiceStepWorkPositionBridges { get; set; }
         public DbSet<SampleAnalysisService> SampleAnalysisServices { get; set; }
+        public DbSet<SampleAnalysisServiceDocumentBridge> SampleAnalysisServiceDocumentBridges { get; set; }
         public DbSet<SampleAnalysisServiceStep> SampleAnalysisServiceSteps { get; set; }
         public DbSet<SampleAnalysisServiceStepWorkPositionBridge> SampleAnalysisServiceStepWorkPositionBridges { get; set; }
         public DbSet<LegalClientTrainingServiceOrder> LegalClientTrainingServiceOrders { get; set; }

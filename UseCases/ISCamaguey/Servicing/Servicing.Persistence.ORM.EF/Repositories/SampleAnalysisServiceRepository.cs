@@ -10,7 +10,9 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Persistence.ORM.EF.Repositories
 
         protected override System.Linq.IQueryable<Entities.SampleAnalysisService> GetQueryableDbSet()
         {
-            return base.GetQueryableDbSet().Include(entity => entity.SampleKind);
+            return base.GetQueryableDbSet()
+                .Include(entity => entity.SampleKind)
+                .Include(entity => entity.DocumentBridges).ThenInclude(bridge => bridge.Stern);
         }
     }
 }

@@ -5,9 +5,11 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Persistence.ORM.EF.Context.Contrac
     public interface IServicingDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDomainDbContext
     {
         public DbSet<Entities.TrainingService> TrainingServices { get; set; }
+        public DbSet<Entities.TrainingServiceDocumentBridge> TrainingServiceDocumentBridges { get; set; }
         public DbSet<Entities.TrainingServiceStep> TrainingServiceSteps { get; set; }
         public DbSet<Entities.TrainingServiceStepWorkPositionBridge> TrainingServiceStepWorkPositionBridges { get; set; }
         public DbSet<Entities.SampleAnalysisService> SampleAnalysisServices { get; set; }
+        public DbSet<Entities.SampleAnalysisServiceDocumentBridge> SampleAnalysisServiceDocumentBridges { get; set; }
         public DbSet<Entities.SampleAnalysisServiceStep> SampleAnalysisServiceSteps { get; set; }
         public DbSet<Entities.SampleAnalysisServiceStepWorkPositionBridge> SampleAnalysisServiceStepWorkPositionBridges { get; set; }
         public DbSet<Entities.LegalClientTrainingServiceOrder> LegalClientTrainingServiceOrders { get; set; }

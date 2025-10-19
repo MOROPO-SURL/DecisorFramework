@@ -7382,6 +7382,25 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("sampleanalysisservices", "decisoriscamaguey_servicing");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_sampleanalysisservicedocumentbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_sampleanalysisservicedocumentbridges_sternid");
+
+                    b.ToTable("sampleanalysisservicedocumentbridges", "decisoriscamaguey_servicing");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceStep", b =>
                 {
                     b.Property<Guid>("Id")
@@ -7495,6 +7514,25 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasName("pk_trainingservices");
 
                     b.ToTable("trainingservices", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingServiceDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_trainingservicedocumentbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_trainingservicedocumentbridges_sternid");
+
+                    b.ToTable("trainingservicedocumentbridges", "decisoriscamaguey_servicing");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingServiceStep", b =>
@@ -11083,6 +11121,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("SampleKind");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sampleanalysisservicedocumentbridges_sampleanalysisservices~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sampleanalysisservicedocumentbridges_documents_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceStep", b =>
                 {
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceStep", "Parent")
@@ -11117,6 +11176,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_sampleanalysisservicestepworkpositionbridges_workpositions_~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingServiceDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_trainingservicedocumentbridges_trainingservices_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_trainingservicedocumentbridges_documents_sternid");
 
                     b.Navigation("Prow");
 
@@ -11753,6 +11833,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", b =>
                 {
+                    b.Navigation("DocumentBridges");
+
                     b.Navigation("Steps");
                 });
 
@@ -11763,6 +11845,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", b =>
                 {
+                    b.Navigation("DocumentBridges");
+
                     b.Navigation("Steps");
                 });
 

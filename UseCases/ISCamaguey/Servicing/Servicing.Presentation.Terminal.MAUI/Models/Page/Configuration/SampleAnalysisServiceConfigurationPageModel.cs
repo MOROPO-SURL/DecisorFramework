@@ -21,6 +21,7 @@
             priority = model.Priority;
             sampleKind = model.SampleKind;
             Steps = [.. model.Steps];
+            Documents = [.. model.Documents];
         }
 
         public System.Guid Id { get; set; }
@@ -34,6 +35,8 @@
         public Domain.Interop.API.Common.Models.Display.SampleKindDisplayModel SampleKind { get => sampleKind; set => SetProperty(ref sampleKind, value); }
 
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.SampleAnalysisServiceStepDisplayModel> Steps { get; set; } = [];
+
+        public System.Collections.ObjectModel.ObservableCollection<Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel> Documents { get; set; } = [];
 
         public Domain.Interop.API.Common.Models.Display.SampleKindDisplayModel[] AvailableSampleKinds { get; set; }
     }
