@@ -214,7 +214,7 @@
                                                                 Margin="4"
                                                                 Spacing="6">
                                                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código Postal" />
-                                                                <Label Text="{Binding ZipCode}" />
+                                                                <Label Text="{Binding ZipCode, TargetNullValue='---'}" />
                                                             </VerticalStackLayout>
                                                         </FlexLayout>
                                                     </VerticalStackLayout>
