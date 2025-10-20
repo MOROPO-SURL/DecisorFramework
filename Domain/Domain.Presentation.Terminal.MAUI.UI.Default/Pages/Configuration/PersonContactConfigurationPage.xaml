@@ -185,12 +185,12 @@
                                                     </VerticalStackLayout>
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xF90B;"
                                                         Clicked="PhoneContactItemEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xFA78;"
                                                         Clicked="PhoneContactItemRemotionButton_Clicked" />
                                                 </StackLayout>
@@ -257,12 +257,12 @@
                                                     </VerticalStackLayout>
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xF90B;"
                                                         Clicked="EmailContactItemEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xFA78;"
                                                         Clicked="EmailContactItemRemotionButton_Clicked" />
                                                 </StackLayout>
@@ -348,18 +348,18 @@
                                                                 Margin="4"
                                                                 Spacing="6">
                                                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código Postal" />
-                                                                <Label Text="{Binding ZipCode}" />
+                                                                <Label Text="{Binding ZipCode, TargetNullValue='---'}" />
                                                             </VerticalStackLayout>
                                                         </FlexLayout>
                                                     </VerticalStackLayout>
                                                     <VerticalStackLayout Spacing="8">
                                                         <Button
-                                                            FontFamily="MaterialDesignIcons" 
+                                                            Style="{StaticResource FontIconImageButtonStyle}" 
                                                             Text="&#xF90B;"
                                                             Clicked="PostalContactItemEditionButton_Clicked" />
                                                         <Button
                                                             VerticalOptions="Start"
-                                                            FontFamily="MaterialDesignIcons" 
+                                                            Style="{StaticResource FontIconImageButtonStyle}" 
                                                             Text="&#xFA78;"
                                                             Clicked="PostalContactItemRemotionButton_Clicked" />
                                                     </VerticalStackLayout>
@@ -426,12 +426,12 @@
                                                     </VerticalStackLayout>
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xF90B;"
                                                         Clicked="WebContactItemEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xFA78;"
                                                         Clicked="WebContactItemRemotionButton_Clicked" />
                                                 </StackLayout>

@@ -78,7 +78,7 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
                 Label = ConcreteBindingContext.PostalContact.Label,
                 Address = ConcreteBindingContext.PostalContact.Address,
                 MunicipalityId = ConcreteBindingContext.PostalContact.Municipality.Id,
-                ZipCode = ConcreteBindingContext.PostalContact.ZipCode,
+                ZipCode = ConcreteBindingContext.PostalContact.ZipCode ?? 0,
                 Latitude = ConcreteBindingContext.PostalContact.Latitude,
                 Longitude = ConcreteBindingContext.PostalContact.Longitude
             },
@@ -117,7 +117,7 @@ public partial class PropertyConfigurationPage : Core.Presentation.Terminal.MAUI
                 Label = ConcreteBindingContext.PostalContact.Label,
                 Address = ConcreteBindingContext.PostalContact.Address,
                 MunicipalityId = ConcreteBindingContext.PostalContact.Municipality.Id,
-                ZipCode = ConcreteBindingContext.PostalContact.ZipCode,
+                ZipCode = ConcreteBindingContext.PostalContact.ZipCode ?? 0,
                 Latitude = ConcreteBindingContext.PostalContact.Latitude,
                 Longitude = ConcreteBindingContext.PostalContact.Longitude
             },
