@@ -5618,6 +5618,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("CategoryId")
                         .HasDatabaseName("ix_researchers_categoryid");
 
+                    b.HasIndex("TeachingCategoryId")
+                        .HasDatabaseName("ix_researchers_teachingcategoryid");
+
                     b.ToTable("researchers", "decisoriscamaguey_idi");
 
                     b.HasDiscriminator<string>("Discriminator").HasValue("AbstractResearcher");
@@ -6611,6 +6614,44 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasName("pk_scientifictechnicalresultkinds");
 
                     b.ToTable("scientifictechnicalresultkinds", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.TeachingCategory", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.HasKey("Id")
+                        .HasName("pk_teachingcategories");
+
+                    b.ToTable("teachingcategories", "decisoriscamaguey_idi");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ThesisResult", b =>
@@ -10404,7 +10445,14 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasForeignKey("CategoryId")
                         .HasConstraintName("fk_researchers_researchercategories_categoryid");
 
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.TeachingCategory", "TeachingCategory")
+                        .WithMany()
+                        .HasForeignKey("TeachingCategoryId")
+                        .HasConstraintName("fk_researchers_teachingcategories_teachingcategoryid");
+
                     b.Navigation("Category");
+
+                    b.Navigation("TeachingCategory");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Extension", b =>

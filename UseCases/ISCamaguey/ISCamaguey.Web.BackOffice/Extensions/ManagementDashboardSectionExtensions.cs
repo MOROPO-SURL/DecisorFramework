@@ -170,6 +170,10 @@
 
             if (target.Controller == "samplekinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-outline");
 
+            if (target.Controller == "researchercategories") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-flask-outline");
+
+            if (target.Controller == "teachingcategories") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-google-classroom");
+
             return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
         }
     }

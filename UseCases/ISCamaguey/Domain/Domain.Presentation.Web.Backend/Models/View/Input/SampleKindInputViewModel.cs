@@ -5,7 +5,7 @@ namespace MOROPO.ISCamaguey.Decisor.Domain.Presentation.Web.Backend.Models.View.
     public class SampleKindInputViewModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<SampleKind, System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
-        public System.Guid Id { get; set; }
+        public System.Guid Id { get; set; } = System.Guid.NewGuid();
 
         public int Priority { get; set; }
 
@@ -18,7 +18,7 @@ namespace MOROPO.ISCamaguey.Decisor.Domain.Presentation.Web.Backend.Models.View.
 
         public SampleKind Export()
         {
-            var entity = new SampleKind { Id = Id, Enabled = true };
+            var entity = new SampleKind();
 
             Mergue(entity);
 

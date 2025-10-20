@@ -12,5 +12,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\IDi.Persistence.ORM.EF\IDi.Persistence.ORM.EF.csproj" />
+		<ProjectReference Include="..\IDi.Interop.API.Common\IDi.Interop.API.Common.csproj" />
 	</ItemGroup>
 </Project>

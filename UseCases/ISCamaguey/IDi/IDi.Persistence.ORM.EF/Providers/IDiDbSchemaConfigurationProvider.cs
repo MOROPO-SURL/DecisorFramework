@@ -41,6 +41,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.ScientificTechnicalResult>(),
                     new BaseEntityTypeConfigurator<Entities.ScientificTechnicalResultIntroduction>(),
                     new BaseEntityTypeConfigurator<Entities.ScientificTechnicalResultKind>(),
+                    new BaseEntityTypeConfigurator<Entities.TeachingCategory>(),
                     new BaseEntityTypeConfigurator<Entities.ThesisResult>(),
                     new Configurators.ThesisResultResearcherBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.TrainingResult>(),
