@@ -16,6 +16,7 @@ using MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Extens
 using MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using SkiaSharp.Views.Maui.Controls.Hosting;
+using UraniumUI;
 
 namespace MOROPO.ISCamaguey.Decisor.Terminal
 {
@@ -29,6 +30,8 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal
                 .UseMauiCommunityToolkit()
                 .UseMauiCommunityToolkitMediaElement()
                 .UseSkiaSharp()
+                .UseUraniumUI()
+                .UseUraniumUIMaterial()
                 .ConfigureFonts(fonts =>
                 {
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");

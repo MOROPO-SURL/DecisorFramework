@@ -1,3 +1,4 @@
+using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
@@ -51,5 +52,14 @@ public partial class SampleAnalysisServiceDetailPage : Framework.Decisor.Core.Pr
 
             Dispatcher.Dispatch(() => DisplayAlert("Aviso", "Funcionalidad en desarrollo.", "Aceptar"));
         });
+    }
+
+    private void DocumentDownloadButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var model = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel;
+
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        Microsoft.Maui.ApplicationModel.Browser.OpenAsync($"{httpClientHelperProvider.HttpClientHelper.ClientBaseAddress}media/documents/{model.Id}{model.Extension}", Microsoft.Maui.ApplicationModel.BrowserLaunchMode.SystemPreferred);
     }
 }
