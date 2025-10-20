@@ -84,7 +84,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 {
                     if (task.Exception == null && !task.IsCanceled)
                     {
-                        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.");
+                        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
 
                         successCallbackAction.Invoke(task.Result);
 

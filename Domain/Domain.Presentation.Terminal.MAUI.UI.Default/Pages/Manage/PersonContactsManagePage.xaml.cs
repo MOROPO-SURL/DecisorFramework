@@ -49,7 +49,12 @@ public partial class PersonContactsManagePage : Core.Presentation.Terminal.MAUI.
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+
+                        LoadItems(true);
+                    });
                 });
 
                 break;
