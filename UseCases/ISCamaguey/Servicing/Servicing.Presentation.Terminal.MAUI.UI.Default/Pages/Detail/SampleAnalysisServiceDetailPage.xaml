@@ -25,178 +25,190 @@
                 MaximumWidthRequest="680"
                 VerticalOptions="Center">
                 <Frame Style="{StaticResource PopupFrameStyle}">
-                    <StackLayout Margin="20" Spacing="20">
-                        <StackLayout>
-                            <Label 
-                                Margin="0,0,0,20"
-                                Text="Detalles"
-                                FontAttributes="Bold"
-                                FontSize="Medium" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Margin="0"
-                                Text="Nombre" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Name}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Tipo de Muestra" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding SampleKind.Name}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Prioridad" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Priority}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Descripción" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Description}" />
+                    <Grid>
+                        <StackLayout Margin="20" Spacing="20">
+                            <StackLayout>
+                                <Label 
+                                    Margin="0,0,0,20"
+                                    Text="Detalles"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium" />
+                                <Label
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Margin="0"
+                                    Text="Nombre" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Name}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Tipo de Muestra" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding SampleKind.Name}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Prioridad" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Priority}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Descripción" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Description}" />
+                            </StackLayout>
+                            <uraniumui_material_controls:TabView>
+                                <uraniumui_material_controls:TabItem Title="Etapas">
+                                    <uraniumui_material_controls:TabItem.ContentTemplate>
+                                        <DataTemplate>
+                                            <VerticalStackLayout
+                                                Spacing="8"
+                                                Padding="0,12,0,0"
+                                                BindableLayout.ItemsSource="{Binding Steps}">
+                                                <BindableLayout.EmptyView>
+                                                    <Label
+                                                        FontAttributes="Italic"
+                                                        TextColor="DimGray"
+                                                        Text="Sin elementos que mostrar" />
+                                                </BindableLayout.EmptyView>
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate x:DataType="interop_common_display_models:TrainingServiceStepDisplayModel">
+                                                        <Grid ColumnSpacing="8">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition Width="Auto" />
+                                                                <ColumnDefinition />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="Auto" />
+                                                            </Grid.RowDefinitions>
+                                                            <Label
+                                                                Grid.Column="0" Grid.RowSpan="2"
+                                                                VerticalOptions="Center"
+                                                                FontAttributes="Bold"
+                                                                Text="-" />
+                                                            <Label         
+                                                                Grid.Column="1" Grid.Row="0"
+                                                                FontAttributes="Bold"
+                                                                LineBreakMode="TailTruncation"
+                                                                Text="{Binding Name}" />
+                                                            <Label                                                    
+                                                                Grid.Column="1" Grid.Row="1"
+                                                                LineBreakMode="TailTruncation"
+                                                                Text="{Binding Description}" />
+                                                        </Grid>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </uraniumui_material_controls:TabItem.ContentTemplate>
+                                </uraniumui_material_controls:TabItem>
+                                <uraniumui_material_controls:TabItem Title="Documentos">
+                                    <uraniumui_material_controls:TabItem.ContentTemplate>
+                                        <DataTemplate>
+                                            <VerticalStackLayout
+                                                Spacing="8"
+                                                Padding="0,8,0,0"
+                                                BindableLayout.ItemsSource="{Binding Documents}">
+                                                <BindableLayout.EmptyView>
+                                                    <Label
+                                                        Padding="0,4,0,8"
+                                                        FontAttributes="Italic"
+                                                        TextColor="DimGray"
+                                                        Text="Sin elementos que mostrar" />
+                                                </BindableLayout.EmptyView>
+                                                <BindableLayout.ItemTemplate>
+                                                    <DataTemplate x:DataType="fwrk_core_interop_common_display_models:DocumentDisplayModel">
+                                                        <Frame 
+                                                            Padding="0"
+                                                            Margin="0,12,0,0">
+                                                            <StackLayout Orientation="Horizontal">
+                                                                <Grid
+                                                                    WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                                                                    BackgroundColor="DimGray">
+                                                                    <Label
+                                                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                                                        Text="{Binding Converter={StaticResource DocumentDisplayModelToMaterialDesignFontIconTextConverter}}"
+                                                                        TextColor="White"
+                                                                        FontSize="80"
+                                                                        FontFamily="MaterialDesignIcons" />
+                                                                </Grid>
+                                                                <Grid 
+                                                                    HorizontalOptions="FillAndExpand"
+                                                                    Padding="16"
+                                                                    ColumnSpacing="8" RowSpacing="8">
+                                                                    <Grid.ColumnDefinitions>
+                                                                        <ColumnDefinition />
+                                                                        <ColumnDefinition />
+                                                                    </Grid.ColumnDefinitions>
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="Auto" />
+                                                                        <RowDefinition Height="Auto" />
+                                                                    </Grid.RowDefinitions>
+                                                                    <VerticalStackLayout
+                                                                        Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
+                                                                        Spacing="2">
+                                                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                                                                        <Label Text="{Binding Name}" LineBreakMode="TailTruncation" />
+                                                                    </VerticalStackLayout>
+                                                                    <VerticalStackLayout
+                                                                        Grid.Column="0" Grid.Row="1"
+                                                                        Spacing="2">
+                                                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
+                                                                        <Label Text="{Binding Extension}" />
+                                                                    </VerticalStackLayout>
+                                                                    <VerticalStackLayout
+                                                                        Grid.Column="1" Grid.Row="1"
+                                                                        Spacing="2">
+                                                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tamaño" />
+                                                                        <Label Text="{Binding Length, StringFormat='{0} bytes'}" />
+                                                                    </VerticalStackLayout>
+                                                                </Grid>
+                                                                <Button
+                                                                    VerticalOptions="Start"
+                                                                    Margin="8" Padding="0"
+                                                                    FontSize="21"
+                                                                    FontFamily="MaterialDesignIcons" 
+                                                                    Text="&#xF1DA;"
+                                                                    Clicked="DocumentDownloadButton_Clicked" />
+                                                            </StackLayout>
+                                                        </Frame>
+                                                    </DataTemplate>
+                                                </BindableLayout.ItemTemplate>
+                                            </VerticalStackLayout>
+                                        </DataTemplate>
+                                    </uraniumui_material_controls:TabItem.ContentTemplate>
+                                </uraniumui_material_controls:TabItem>
+                            </uraniumui_material_controls:TabView>
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <Button 
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Exportar" />
+                                <Button 
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Modificar"
+                                    Clicked="EditButton_Clicked" />
+                                <Button 
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Eliminar"
+                                    Clicked="DeleteButton_Clicked" />
+                            </StackLayout>
                         </StackLayout>
-                        <uraniumui_material_controls:TabView>
-                            <uraniumui_material_controls:TabItem Title="Etapas">
-                                <uraniumui_material_controls:TabItem.ContentTemplate>
-                                    <DataTemplate>
-                                        <VerticalStackLayout
-                                            Spacing="8"
-                                            Padding="0,12,0,0"
-                                            BindableLayout.ItemsSource="{Binding Steps}">
-                                            <BindableLayout.EmptyView>
-                                                <Label
-                                                    FontAttributes="Italic"
-                                                    TextColor="DimGray"
-                                                    Text="Sin elementos que mostrar" />
-                                            </BindableLayout.EmptyView>
-                                            <BindableLayout.ItemTemplate>
-                                                <DataTemplate x:DataType="interop_common_display_models:TrainingServiceStepDisplayModel">
-                                                    <Grid ColumnSpacing="8">
-                                                        <Grid.ColumnDefinitions>
-                                                            <ColumnDefinition Width="Auto" />
-                                                            <ColumnDefinition />
-                                                        </Grid.ColumnDefinitions>
-                                                        <Grid.RowDefinitions>
-                                                            <RowDefinition Height="Auto" />
-                                                            <RowDefinition Height="Auto" />
-                                                        </Grid.RowDefinitions>
-                                                        <Label
-                                                            Grid.Column="0" Grid.RowSpan="2"
-                                                            VerticalOptions="Center"
-                                                            FontAttributes="Bold"
-                                                            Text="-" />
-                                                        <Label         
-                                                            Grid.Column="1" Grid.Row="0"
-                                                            FontAttributes="Bold"
-                                                            LineBreakMode="TailTruncation"
-                                                            Text="{Binding Name}" />
-                                                        <Label                                                    
-                                                            Grid.Column="1" Grid.Row="1"
-                                                            LineBreakMode="TailTruncation"
-                                                            Text="{Binding Description}" />
-                                                    </Grid>
-                                                </DataTemplate>
-                                            </BindableLayout.ItemTemplate>
-                                        </VerticalStackLayout>
-                                    </DataTemplate>
-                                </uraniumui_material_controls:TabItem.ContentTemplate>
-                            </uraniumui_material_controls:TabItem>
-                            <uraniumui_material_controls:TabItem Title="Documentos">
-                                <uraniumui_material_controls:TabItem.ContentTemplate>
-                                    <DataTemplate>
-                                        <VerticalStackLayout
-                                            Spacing="8"
-                                            Padding="0,8,0,0"
-                                            BindableLayout.ItemsSource="{Binding Documents}">
-                                            <BindableLayout.EmptyView>
-                                                <Label
-                                                    Padding="0,4,0,8"
-                                                    FontAttributes="Italic"
-                                                    TextColor="DimGray"
-                                                    Text="Sin elementos que mostrar" />
-                                            </BindableLayout.EmptyView>
-                                            <BindableLayout.ItemTemplate>
-                                                <DataTemplate x:DataType="fwrk_core_interop_common_display_models:DocumentDisplayModel">
-                                                    <Frame 
-                                                        Padding="0"
-                                                        Margin="0,12,0,0">
-                                                        <StackLayout Orientation="Horizontal">
-                                                            <Grid
-                                                                WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
-                                                                BackgroundColor="DimGray">
-                                                                <Label
-                                                                    HorizontalOptions="Center" VerticalOptions="Center"
-                                                                    Text="{Binding Converter={StaticResource DocumentDisplayModelToMaterialDesignFontIconTextConverter}}"
-                                                                    TextColor="White"
-                                                                    FontSize="80"
-                                                                    FontFamily="MaterialDesignIcons" />
-                                                            </Grid>
-                                                            <Grid 
-                                                                HorizontalOptions="FillAndExpand"
-                                                                Padding="16"
-                                                                ColumnSpacing="8" RowSpacing="8">
-                                                                <Grid.ColumnDefinitions>
-                                                                    <ColumnDefinition />
-                                                                    <ColumnDefinition />
-                                                                </Grid.ColumnDefinitions>
-                                                                <Grid.RowDefinitions>
-                                                                    <RowDefinition Height="Auto" />
-                                                                    <RowDefinition Height="Auto" />
-                                                                </Grid.RowDefinitions>
-                                                                <VerticalStackLayout
-                                                                    Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
-                                                                    Spacing="2">
-                                                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
-                                                                    <Label Text="{Binding Name}" LineBreakMode="TailTruncation" />
-                                                                </VerticalStackLayout>
-                                                                <VerticalStackLayout
-                                                                    Grid.Column="0" Grid.Row="1"
-                                                                    Spacing="2">
-                                                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
-                                                                    <Label Text="{Binding Extension}" />
-                                                                </VerticalStackLayout>
-                                                                <VerticalStackLayout
-                                                                    Grid.Column="1" Grid.Row="1"
-                                                                    Spacing="2">
-                                                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tamaño" />
-                                                                    <Label Text="{Binding Length, StringFormat='{0} bytes'}" />
-                                                                </VerticalStackLayout>
-                                                            </Grid>
-                                                            <Button
-                                                                VerticalOptions="Start"
-                                                                Margin="8" Padding="0"
-                                                                FontSize="21"
-                                                                FontFamily="MaterialDesignIcons" 
-                                                                Text="&#xF1DA;"
-                                                                Clicked="DocumentDownloadButton_Clicked" />
-                                                        </StackLayout>
-                                                    </Frame>
-                                                </DataTemplate>
-                                            </BindableLayout.ItemTemplate>
-                                        </VerticalStackLayout>
-                                    </DataTemplate>
-                                </uraniumui_material_controls:TabItem.ContentTemplate>
-                            </uraniumui_material_controls:TabItem>
-                        </uraniumui_material_controls:TabView>
-                        <StackLayout
-                            Orientation="Horizontal"
-                            Spacing="20">
-                            <Button 
-                                HorizontalOptions="FillAndExpand"
-                                Text="Exportar" />
-                            <Button 
-                                HorizontalOptions="FillAndExpand"
-                                Text="Modificar"
-                                Clicked="EditButton_Clicked" />
-                            <Button 
-                                HorizontalOptions="FillAndExpand"
-                                Text="Eliminar"
-                                Clicked="DeleteButton_Clicked" />
-                        </StackLayout>
-                    </StackLayout>
+                        <Grid 
+                            x:Name="BusyView" 
+                            IsVisible="False"
+                            BackgroundColor="{AppThemeBinding Light=#A7FFFFFF, Dark=#A7000000}">
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <ActivityIndicator 
+                                    WidthRequest="64.0" HeightRequest="64.0"
+                                    IsRunning="{Binding Source={RelativeSource AncestorType={Type Grid}}, Path=IsVisible}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Grid>
                 </Frame>
                 <Button
                     Style="{StaticResource DetailPageCloseButtonStyle}"
