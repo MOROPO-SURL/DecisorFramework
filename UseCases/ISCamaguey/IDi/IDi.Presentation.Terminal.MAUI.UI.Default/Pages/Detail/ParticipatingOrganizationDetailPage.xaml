@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:DetailBaseContentPage
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Core.Interop.API.Common"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.ParticipatingOrganizationDetailPage"
+    x:TypeArguments="interop_common_display_models:ParticipatingOrganizationDisplayModel"
+    x:DataType="interop_common_display_models:ParticipatingOrganizationDisplayModel"
+    Title="Detalles de Entidad Participante"
+    BackgroundColor="Transparent"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="800"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <StackLayout Margin="4" Spacing="20">
+                        <VerticalStackLayout Spacing="0" Margin="8">
+                            <FlexLayout 
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start">
+                                <Frame
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                                    HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
+                                    VerticalOptions="Start"
+                                    Margin="4"
+                                    Padding="0">
+                                    <Image Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                </Frame>
+                                <VerticalStackLayout WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=10, LargeContainerColumn=9, MediumContainerColumn=8, SmallContainerColumn=12}}">
+                                    <VerticalStackLayout 
+                                        Margin="4"
+                                        Spacing="6">
+                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                                        <Label 
+                                            FontSize="Medium"
+                                            Text="{Binding Contact.Identity.Name}" />
+                                    </VerticalStackLayout>
+                                    <FlexLayout 
+                                        Wrap="Wrap"
+                                        AlignItems="Start" AlignContent="Start">
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="4"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Alias" />
+                                            <Label Text="{Binding Contact.Identity.Alias, TargetNullValue='---'}" />
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=9, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                            Margin="4"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
+                                            <Label Text="{Binding Contact.BusinessKind.Name}" />
+                                        </VerticalStackLayout>
+                                        <VerticalStackLayout 
+                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=12}}"
+                                            Margin="4"
+                                            Spacing="6">
+                                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Representante" />
+                                            <fwrk_domain_presentation_card_views:PersonContactDefaultCardView
+                                                HeightRequest="100"
+                                                BindingContext="{Binding Contact.Representative}" />
+                                        </VerticalStackLayout>
+                                    </FlexLayout>
+                                </VerticalStackLayout>
+                            </FlexLayout>
+                            <FlexLayout
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start">
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Teléfonos" />
+                                    <BoxView Color="DimGray" HeightRequest="2" />
+                                    <CollectionView
+                                        Grid.ColumnSpan="2" Grid.Row="2"
+                                        ItemsSource="{Binding Contact.Identity.PhoneContacts}">
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.EmptyView>
+                                            <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                        </CollectionView.EmptyView>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="core_interop_common_display_models:PhoneContactItemDisplayModel">
+                                                <Frame 
+                                                    Padding="8"
+                                                    Margin="0,12,0,0">
+                                                    <VerticalStackLayout HorizontalOptions="FillAndExpand">
+                                                        <Label 
+                                                            IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                            Margin="4,0"
+                                                            Text="{Binding Label}"
+                                                            LineBreakMode="TailTruncation"
+                                                            FontAttributes="Bold" />
+                                                        <Label 
+                                                            Margin="4,2" 
+                                                            Text="{Binding PhoneNumber}"
+                                                            LineBreakMode="TailTruncation"
+                                                            FontSize="Medium" />
+                                                    </VerticalStackLayout>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Correos electrónicos" />
+                                    <BoxView Color="DimGray" HeightRequest="2" />
+                                    <CollectionView
+                                        Grid.ColumnSpan="2" Grid.Row="2"
+                                        ItemsSource="{Binding Contact.Identity.EmailContacts}">
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.EmptyView>
+                                            <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                        </CollectionView.EmptyView>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="core_interop_common_display_models:EmailContactItemDisplayModel">
+                                                <Frame 
+                                                    Padding="8"
+                                                    Margin="0,12,0,0">
+                                                    <VerticalStackLayout HorizontalOptions="FillAndExpand">
+                                                        <Label 
+                                                            IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                            Margin="4,0"
+                                                            Text="{Binding Label}"
+                                                            LineBreakMode="TailTruncation"
+                                                            FontAttributes="Bold" />
+                                                        <Label 
+                                                            Margin="4,2" 
+                                                            Text="{Binding EmailAddress}"
+                                                            LineBreakMode="TailTruncation"
+                                                            FontSize="Medium" />
+                                                    </VerticalStackLayout>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Direcciones postales" />
+                                    <BoxView Color="DimGray" HeightRequest="2" />
+                                    <CollectionView
+                                        Grid.ColumnSpan="2" Grid.Row="2"
+                                        ItemsSource="{Binding Contact.Identity.PostalContacts}">
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.EmptyView>
+                                            <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                        </CollectionView.EmptyView>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="core_interop_common_display_models:PostalContactItemDisplayModel">
+                                                <Frame 
+                                                    Padding="8"
+                                                    Margin="0,12,0,0">
+                                                    <VerticalStackLayout  HorizontalOptions="FillAndExpand">
+                                                        <Label 
+                                                            IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                            Margin="4,0"
+                                                            Text="{Binding Label}"
+                                                            FontSize="Medium" />
+                                                        <BoxView 
+                                                            IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                            Margin="4,8"
+                                                            HeightRequest="1"
+                                                            Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                                                        <Label Margin="4,2" Text="{Binding Address}" />
+                                                        <FlexLayout
+                                                            Wrap="Wrap"
+                                                            AlignItems="Start" AlignContent="Start">
+                                                            <VerticalStackLayout 
+                                                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
+                                                                Margin="4"
+                                                                Spacing="6">
+                                                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Provincia" />
+                                                                <Label Text="{Binding Municipality.State.Name}" />
+                                                            </VerticalStackLayout>
+                                                            <VerticalStackLayout 
+                                                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
+                                                                Margin="4"
+                                                                Spacing="6">
+                                                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Municipio" />
+                                                                <Label Text="{Binding Municipality.Name}" />
+                                                            </VerticalStackLayout>
+                                                            <VerticalStackLayout 
+                                                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
+                                                                Margin="4"
+                                                                Spacing="6">
+                                                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código Postal" />
+                                                                <Label Text="{Binding ZipCode}" />
+                                                            </VerticalStackLayout>
+                                                        </FlexLayout>
+                                                    </VerticalStackLayout>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sitios de Internet" />
+                                    <BoxView Color="DimGray" HeightRequest="2" />
+                                    <CollectionView
+                                        Grid.ColumnSpan="2" Grid.Row="2"
+                                        ItemsSource="{Binding Contact.Identity.WebContacts}">
+                                        <CollectionView.ItemsLayout>
+                                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                        </CollectionView.ItemsLayout>
+                                        <CollectionView.EmptyView>
+                                            <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                        </CollectionView.EmptyView>
+                                        <CollectionView.ItemTemplate>
+                                            <DataTemplate x:DataType="core_interop_common_display_models:WebContactItemDisplayModel">
+                                                <Frame 
+                                                    Padding="8"
+                                                    Margin="0,12,0,0">
+                                                    <VerticalStackLayout HorizontalOptions="FillAndExpand">
+                                                        <Label 
+                                                            IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                            Margin="4,0"
+                                                            Text="{Binding Label}"
+                                                            LineBreakMode="TailTruncation"
+                                                            FontAttributes="Bold" />
+                                                        <Label 
+                                                            Margin="4,2" 
+                                                            Text="{Binding Url}"
+                                                            FontSize="Medium" />
+                                                    </VerticalStackLayout>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </CollectionView.ItemTemplate>
+                                    </CollectionView>
+                                </VerticalStackLayout>
+                            </FlexLayout>
+                            <VerticalStackLayout 
+                                Margin="8"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición" />
+                                <Label Text="{Binding Contact.Identity.About, TargetNullValue='---'}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout 
+                                Margin="8"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Áreas de Investigación" />
+                                <BoxView Color="DimGray" HeightRequest="2" />
+                                <VerticalStackLayout
+                                    Spacing="8"
+                                    Padding="0,8,0,0"
+                                    BindableLayout.ItemsSource="{Binding ResearchAreas}">
+                                    <BindableLayout.EmptyView>
+                                        <Label
+                                            FontAttributes="Italic"
+                                            TextColor="DimGray"
+                                            Text="Sin elementos que mostrar" />
+                                    </BindableLayout.EmptyView>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_display_models:ResearchAreaDisplayModel">
+                                            <Grid ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Label
+                                                    Grid.Column="0" Grid.RowSpan="2"
+                                                    VerticalOptions="Center"
+                                                    FontAttributes="Bold"
+                                                    Text="-" />
+                                                <Label         
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="{Binding Name}" />
+                                                <Label                                                    
+                                                    Grid.Column="1" Grid.Row="1"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="{Binding Description}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Margin="16,0,16,16"
+                            Spacing="20">
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Modificar"
+                                Clicked="EditButton_Clicked" />
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Eliminar"
+                                Clicked="DeleteButton_Clicked" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

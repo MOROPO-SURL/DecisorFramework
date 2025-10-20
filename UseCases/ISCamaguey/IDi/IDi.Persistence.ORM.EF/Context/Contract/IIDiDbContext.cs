@@ -13,6 +13,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.NewTechniqueResult> NewTechniqueResults { get; set; }
         public DbSet<Entities.OppositionReport> OppositionReports { get; set; }
         public DbSet<Entities.ParticipatingOrganization> ParticipatingOrganizations { get; set; }
+        public DbSet<Entities.ParticipatingOrganizationResearchAreaBridge> ParticipatingOrganizationResearchAreaBridges { get; set; }
         public DbSet<Entities.Program> Programs { get; set; }
         public DbSet<Entities.ProgramExpectResult> ProgramExpectResults { get; set; }
         public DbSet<Entities.Project> Projects { get; set; }

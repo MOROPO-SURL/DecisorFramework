@@ -20,6 +20,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.NewTechniqueResult>(),
                     new BaseEntityTypeConfigurator<Entities.OppositionReport>(),
                     new BaseEntityTypeConfigurator<Entities.ParticipatingOrganization>(),
+                    new Configurators.ParticipatingOrganizationResearchAreaBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Program>(),
                     new Configurators.ProgramExpectResultEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Project>(),

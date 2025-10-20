@@ -5835,6 +5835,25 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("participatingorganizations", "decisoriscamaguey_idi");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ParticipatingOrganizationResearchAreaBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_participatingorganizationresearchareabridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_participatingorganizationresearchareabridges_sternid");
+
+                    b.ToTable("participatingorganizationresearchareabridges", "decisoriscamaguey_idi");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Program", b =>
                 {
                     b.Property<Guid>("Id")
@@ -10538,6 +10557,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Contact");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ParticipatingOrganizationResearchAreaBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ParticipatingOrganization", "Prow")
+                        .WithMany("ResearchAreaBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_participatingorganizationresearchareabridges_participatingo~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearchArea", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_participatingorganizationresearchareabridges_researchareas_~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Program", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Chief")
@@ -11830,6 +11870,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("ResearchAreaMasteryBridges");
 
                     b.Navigation("ResearchAreaSpecializationBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ParticipatingOrganization", b =>
+                {
+                    b.Navigation("ResearchAreaBridges");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Program", b =>

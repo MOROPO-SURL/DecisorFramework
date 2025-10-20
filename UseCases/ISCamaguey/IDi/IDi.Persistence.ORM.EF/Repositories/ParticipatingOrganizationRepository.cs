@@ -1,0 +1,26 @@
+﻿using Microsoft.EntityFrameworkCore;
+using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
+using System.Linq;
+
+namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Repositories
+{
+    public class ParticipatingOrganizationRepository : Framework.Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Entities.ParticipatingOrganization, System.Guid>
+    {
+        public ParticipatingOrganizationRepository(DbContext dbContext) : base(dbContext)
+        {
+        }
+
+        protected override IQueryable<ParticipatingOrganization> GetQueryableDbSet()
+        {
+            return base.GetQueryableDbSet()
+                .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+                .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.PostalContactItemBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Location)
+                .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.PhoneContactItemBridges).ThenInclude(bridge => bridge.Stern)
+                .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.EmailContactItemBridges).ThenInclude(bridge => bridge.Stern)
+                .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.WebSiteContactItemBridges).ThenInclude(bridge => bridge.Stern)
+                .Include(entity => entity.Contact).ThenInclude(entity => entity.BusinessKind)
+                .Include(entity => entity.Contact).ThenInclude(entity => entity.Representative).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+                .Include(entity => entity.ResearchAreaBridges).ThenInclude(bridge => bridge.Stern);
+        }
+    }
+}

@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI"
@@ -55,28 +56,11 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:ResearchAreaDisplayModel">
-                                <Frame HeightRequest="{Static local:ResearchAreasManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
-                                    <Frame.GestureRecognizers>
+                                <local_card_views:ResearchAreaDefaultCardView HeightRequest="{Static local:ResearchAreasManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                    <local_card_views:ResearchAreaDefaultCardView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </Frame.GestureRecognizers>
-                                    <StackLayout>
-                                        <Label 
-                                            LineBreakMode="TailTruncation"
-                                            FontSize="Medium"
-                                            Text="{Binding Name}" />
-                                        <Label 
-                                            Margin="0,4,0,0"
-                                            Text="Descripción"
-                                            TextColor="DimGray"
-                                            FontSize="Caption"
-                                            FontAttributes="Bold" />
-                                        <Label 
-                                            VerticalOptions="FillAndExpand"
-                                            LineBreakMode="TailTruncation"
-                                            MaxLines="2"
-                                            Text="{Binding Description, TargetNullValue='---'}" />
-                                    </StackLayout>
-                                </Frame>
+                                    </local_card_views:ResearchAreaDefaultCardView.GestureRecognizers>
+                                </local_card_views:ResearchAreaDefaultCardView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>
