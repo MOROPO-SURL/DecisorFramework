@@ -9,6 +9,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.Extension> Extensions { get; set; }
         public DbSet<Entities.ExternalResearcher> ExternalResearchers { get; set; }
         public DbSet<Entities.Financier> Financiers { get; set; }
+        public DbSet<Entities.FinancierResearchAreaBridge> FinancierResearchAreaBridges { get; set; }
+        public DbSet<Entities.FinancierDocumentBridge> FinancierDocumentBridges { get; set; }
         public DbSet<Entities.InternalResearcher> InternalResearchers { get; set; }
         public DbSet<Entities.NewTechniqueResult> NewTechniqueResults { get; set; }
         public DbSet<Entities.OppositionReport> OppositionReports { get; set; }

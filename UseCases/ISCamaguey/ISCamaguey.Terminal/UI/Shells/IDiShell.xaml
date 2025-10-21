@@ -48,6 +48,16 @@
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
+        Title="Áreas de Investigación"
+        ContentTemplate="{DataTemplate idi_manage_pages:ResearchAreasManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA2C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
         Title="Propuestas a Proyecto (%)"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
@@ -88,16 +98,6 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Financistas (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF0246;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
         Title="Investigadores (%)"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
@@ -108,12 +108,22 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Áreas de Investigación"
-        ContentTemplate="{DataTemplate idi_manage_pages:ResearchAreasManagePage}">
+        Title="Financistas"
+        ContentTemplate="{DataTemplate idi_manage_pages:FinanciersManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFA2C;"
+                Glyph="&#xF0246;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Convocatorias (%)"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0E6;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

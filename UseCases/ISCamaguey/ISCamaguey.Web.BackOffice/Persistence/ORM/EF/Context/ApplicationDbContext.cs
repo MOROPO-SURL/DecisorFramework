@@ -225,6 +225,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Extension> Extensions { get; set; }
         public DbSet<ExternalResearcher> ExternalResearchers { get; set; }
         public DbSet<Financier> Financiers { get; set; }
+        public DbSet<FinancierResearchAreaBridge> FinancierResearchAreaBridges { get; set; }
+        public DbSet<FinancierDocumentBridge> FinancierDocumentBridges { get; set; }
         public DbSet<InternalResearcher> InternalResearchers { get; set; }
         public DbSet<NewTechniqueResult> NewTechniqueResults { get; set; }
         public DbSet<OppositionReport> OppositionReports { get; set; }

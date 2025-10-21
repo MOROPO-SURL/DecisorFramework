@@ -18,11 +18,13 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Ex
                 .AddSingleton<IDetailContentPageFactoryFacade<ResearcherCategoryDisplayModel>, ResearcherCategoryDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<TeachingCategoryDisplayModel>, TeachingCategoryDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<ParticipatingOrganizationDisplayModel>, ParticipatingOrganizationDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<FinancierDisplayModel>, FinancierDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ResearchAreaDisplayModel, ResearchAreaConfigurationPageModel>, ResearchAreaConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ProgramDisplayModel, ProgramConfigurationPageModel>, ProgramConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<ParticipatingOrganizationDisplayModel, ParticipatingOrganizationConfigurationPageModel>, ParticipatingOrganizationConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<ParticipatingOrganizationDisplayModel, ParticipatingOrganizationConfigurationPageModel>, ParticipatingOrganizationConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<FinancierDisplayModel, FinancierConfigurationPageModel>, FinancierConfigurationPageFactory>();
 
             return builder;
         }
