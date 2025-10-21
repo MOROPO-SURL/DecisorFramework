@@ -7,7 +7,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.ResearcherCategoryDetailPage"
     x:TypeArguments="interop_common_display_models:ResearcherCategoryDisplayModel"
     x:DataType="interop_common_display_models:ResearcherCategoryDisplayModel"
-    Title="Detalles de Categoría de Investigador"
+    Title="Detalles de Categoría Científica"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
     <ScrollView Orientation="Vertical">

@@ -11,7 +11,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.List.ResearcherCategoriesListPage"
     x:TypeArguments="interop_common_display_models:ResearcherCategoryDisplayModel,presentation_list_page_models:ResearcherCategoriesListPageModel"
     x:DataType="presentation_list_page_models:ResearcherCategoriesListPageModel"
-    Title="Listado de Categorías de Investigador">
+    Title="Listado de Categorías Científicas">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />

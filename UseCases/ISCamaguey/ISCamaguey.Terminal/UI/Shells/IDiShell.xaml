@@ -119,7 +119,7 @@
     </ShellContent>
     <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
     <ShellContent
-        Title="Categorías de Investigador"
+        Title="Categorías Científicas"
         ContentTemplate="{DataTemplate idi_list_pages:ResearcherCategoriesListPage}">
         <ShellContent.Icon>
             <FontImageSource

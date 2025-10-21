@@ -284,7 +284,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Categorías de Investigador",
+                Title = "Categorías Científicas",
                 Controller = "researchercategories",
                 Action = "Index",
                 Area = "IDi",
