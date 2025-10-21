@@ -3,6 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:frwk_production_list_pages="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
     xmlns:frwk_production_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:frwk_inventory_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.ProductionShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -56,17 +57,17 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Realizadas"
-            ContentTemplate="{DataTemplate frwk_production_list_pages:ProductionOrdersHandledListPage}" />
+            ContentTemplate="{DataTemplate ContentPage}" />
         <ShellContent
             Title="Por Realizar"
-            ContentTemplate="{DataTemplate frwk_production_list_pages:ProductionOrdersToCompleteListPage}" />
+            ContentTemplate="{DataTemplate ContentPage}" />
         <ShellContent
             Title="Por Aprobar"
-            ContentTemplate="{DataTemplate frwk_production_manage_pages:ProductionOrdersToApproveManagePage}" />
+            ContentTemplate="{DataTemplate ContentPage}" />
     </FlyoutItem>
     <ShellContent
         Title="Producciones (%)"
-        ContentTemplate="{DataTemplate frwk_production_manage_pages:ProductionsManagePage}">
+        ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -76,12 +77,42 @@
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
-        Title="Elaboraciones (%)"
-        ContentTemplate="{DataTemplate frwk_production_manage_pages:ElaborationsManagePage}">
+        Title="Líneas de Producción (%)"
+        ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF093;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Productos"
+        ContentTemplate="{DataTemplate frwk_inventory_manage_pages:ProductsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF2D8;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Familias de Productos"
+        ContentTemplate="{DataTemplate frwk_inventory_manage_pages:FamiliesManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF6E0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Unidades de Medida"
+        ContentTemplate="{DataTemplate frwk_inventory_manage_pages:UnitMeasurementsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF472;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

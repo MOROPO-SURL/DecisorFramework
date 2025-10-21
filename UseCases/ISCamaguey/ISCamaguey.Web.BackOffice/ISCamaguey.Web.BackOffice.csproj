@@ -55,9 +55,9 @@
 		<ProjectReference Include="..\..\..\Governance\Governance.Presentation.Web.Frontend\Governance.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\..\..\HumanResources\HumanResources.Presentation.Web.Backend\HumanResources.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\HumanResources\HumanResources.Presentation.Web.Frontend\HumanResources.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Web.Frontend\Inventory.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Backend\Legal.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Frontend\Legal.Presentation.Web.Frontend.csproj" />
-		<ProjectReference Include="..\..\..\Inventory\Inventory.Presentation.Web.Common\Inventory.Presentation.Web.Common.csproj" />
 		<ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Backend\Commercial.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Frontend\Commercial.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Domain\Domain.Presentation.Web.Backend\Domain.Presentation.Web.Backend.csproj" />
