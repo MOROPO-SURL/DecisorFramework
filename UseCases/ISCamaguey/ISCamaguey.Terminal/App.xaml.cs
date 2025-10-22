@@ -13,7 +13,7 @@
         {
             base.OnStart();
 
-            Windows[0].Title = "Decisor Instituto de Suelos Camagüey";
+            Windows[0].Title = "Instituto de Suelos Camagüey Decisor™";
         }
     }
 }

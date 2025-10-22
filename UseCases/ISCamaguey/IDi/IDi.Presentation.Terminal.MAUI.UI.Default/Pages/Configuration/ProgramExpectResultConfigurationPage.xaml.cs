@@ -9,6 +9,8 @@ public partial class ProgramExpectResultConfigurationPage : Framework.Decisor.Co
 
     protected override string EntityTypeName => "Prioridad de Programa";
 
+    protected override bool IsNotificationRequired => false;
+
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.ProgramExpectResultDisplayModel> PerformCreationAsync()
     {
         return System.Threading.Tasks.Task.FromResult(new Interop.API.Common.Models.Display.ProgramExpectResultDisplayModel

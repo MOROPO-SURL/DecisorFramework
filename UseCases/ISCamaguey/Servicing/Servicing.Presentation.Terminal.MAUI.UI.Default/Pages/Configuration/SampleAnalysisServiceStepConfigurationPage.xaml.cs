@@ -9,6 +9,8 @@ public partial class SampleAnalysisServiceStepConfigurationPage : Framework.Deci
 
     protected override string EntityTypeName => "Etapa de Servicio de Procesamiento de Muestras";
 
+    protected override bool IsNotificationRequired => false;
+
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Input.SampleAnalysisServiceStepInputModel> PerformCreationAsync()
     {
         var model = new Interop.API.Common.Models.Input.SampleAnalysisServiceStepInputModel
