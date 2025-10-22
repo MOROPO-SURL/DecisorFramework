@@ -19,7 +19,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Defau
 
             _model.AvailableParents = families.ToArray();
 
-            return new Pages.Configuration.FamilyConfigurationPage(configurationSuccessAction, _model);
+            return new Pages.Configuration.FamilyConfigurationPage(configurationSuccessAction, _model, new Validators.FamilyConfigurationValidator());
         }
     }
 }

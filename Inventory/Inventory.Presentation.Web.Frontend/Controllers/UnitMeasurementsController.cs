@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
@@ -9,7 +10,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controlle
 {
     [Route("api/fwrk/inventory/[controller]")]
     [ApiController]
-    public class UnitMeasurementsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<UnitMeasurement, System.Guid, UnitMeasurementInputModel, UnitMeasurementDisplayModel>
+    public class UnitMeasurementsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<UnitMeasurement, System.Guid, UnitMeasurementInputModel, UnitMeasurementDisplayModel, UnitMeasurementFilterModel>
     {
         private readonly IBridgeRepository<UnitMeasurementConversionBridge, UnitMeasurement, System.Guid, UnitMeasurement, System.Guid> unitMeasurementConversionBridgeRepository;
 
