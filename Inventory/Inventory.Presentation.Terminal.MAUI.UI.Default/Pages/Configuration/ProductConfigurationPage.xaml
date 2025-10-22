@@ -26,15 +26,15 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-        Text="Aplicar"
-        Clicked="ApplyToolbarItem_Clicked">
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
-        Text="Cancelar"
-        Clicked="CancelToolbarItem_Clicked">
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -162,20 +162,19 @@
                                                 <StackLayout Spacing="8" Orientation="Horizontal">
                                                     <Label 
                                                         HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                        Margin="8,0,0,0"
                                                         Text="{Binding Name}"
-                                                        FontAttributes="Bold"
+                                                        FontSize="Medium"
                                                         LineBreakMode="TailTruncation" />
                                                     <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
                                                         VerticalOptions="Start"
-                                                        Padding="0"
-                                                        FontFamily="MaterialDesignIcons" Text="&#xF90B;"
-                                                        FontSize="21"
+                                                        Text="&#xF90B;"
                                                         Clicked="EditClassificationButton_Clicked" />
                                                     <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
                                                         VerticalOptions="Start"
-                                                        Padding="0"
-                                                        FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
-                                                        FontSize="21"
+                                                        Text="&#xf1c0;"
                                                         Clicked="ClassificationRemoveButton_Clicked" />
                                                 </StackLayout>
                                             </Frame>
@@ -223,7 +222,9 @@
                                         <DataTemplate x:DataType="interop_common_bridge_models:ProductWarehousingDecreaseBridgeModel">
                                             <Frame Padding="8">
                                                 <StackLayout Spacing="8" Orientation="Horizontal">
-                                                    <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                    <VerticalStackLayout 
+                                                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                        Margin="8,0,0,0">
                                                         <Label
                                                             Text="{Binding Kind}"
                                                             FontAttributes="Bold"
@@ -239,16 +240,14 @@
                                                         </Label>
                                                     </VerticalStackLayout>
                                                     <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
                                                         VerticalOptions="Start"
-                                                        Padding="0"
-                                                        FontFamily="MaterialDesignIcons" Text="&#xF90B;"
-                                                        FontSize="21"
+                                                        Text="&#xF90B;"
                                                         Clicked="EditWarehousingDecreaseButton_Clicked" />
                                                     <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
                                                         VerticalOptions="Start"
-                                                        Padding="0"
-                                                        FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
-                                                        FontSize="21"
+                                                        Text="&#xf1c0;"
                                                         Clicked="WarehousingDecreaseRemoveButton_Clicked" />
                                                 </StackLayout>
                                             </Frame>

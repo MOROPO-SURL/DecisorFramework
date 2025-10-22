@@ -54,7 +54,7 @@
                 Margin="8"
                 Spacing="6">
                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Producto" />
-                <Entry IsEnabled="False" Text="{Binding ProductConfigurationPageModel.Name, TargetNullValue='---'}" />
+                <Entry IsReadOnly="True" Text="{Binding ProductConfigurationPageModel.Name, TargetNullValue='---'}" />
             </VerticalStackLayout>
             <BoxView 
                 Margin="8,16,8,8"

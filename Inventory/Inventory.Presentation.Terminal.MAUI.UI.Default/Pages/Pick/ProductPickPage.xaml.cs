@@ -37,7 +37,7 @@ public partial class ProductPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 240; }
+    protected override double ItemViewRequestWidth { get => 328; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {

@@ -16,7 +16,7 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
 
     protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
 
-    protected override double ItemViewRequestWidth { get => 240; }
+    protected override double ItemViewRequestWidth { get => 328; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
