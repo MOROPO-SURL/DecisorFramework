@@ -197,17 +197,26 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Statement> Statements { get; set; }
 
         public DbSet<TrainingService> TrainingServices { get; set; }
+        public DbSet<TrainingServiceEmployeeBridge> TrainingServiceEmployeeBridges { get; set; }
         public DbSet<TrainingServiceDocumentBridge> TrainingServiceDocumentBridges { get; set; }
-        public DbSet<TrainingServiceStep> TrainingServiceSteps { get; set; }
-        public DbSet<TrainingServiceStepWorkPositionBridge> TrainingServiceStepWorkPositionBridges { get; set; }
+        public DbSet<TrainingServiceStep> TrainingServSteps { get; set; }
+        public DbSet<TrainingServiceStepWorkPositionBridge> TrainingServStepWorkPosBridges { get; set; }
         public DbSet<SampleAnalysisService> SampleAnalysisServices { get; set; }
+        public DbSet<SampleAnalysisServiceEmployeeBridge> SampleAnalysisServiceEmployeeBridges { get; set; }
         public DbSet<SampleAnalysisServiceDocumentBridge> SampleAnalysisServiceDocumentBridges { get; set; }
-        public DbSet<SampleAnalysisServiceStep> SampleAnalysisServiceSteps { get; set; }
-        public DbSet<SampleAnalysisServiceStepWorkPositionBridge> SampleAnalysisServiceStepWorkPositionBridges { get; set; }
+        public DbSet<SampleAnalysisServiceStep> SampAnalServSteps { get; set; }
+        public DbSet<SampleAnalysisServiceStepWorkPositionBridge> SampAnalServStepWorkPosBridges { get; set; }
+        public DbSet<GroundIntegralStudyService> GroundIntegralStudyServices { get; set; }
+        public DbSet<GroundIntegralStudyServiceEmployeeBridge> GroundIntegralStudyServiceEmployeeBridges { get; set; }
+        public DbSet<GroundIntegralStudyServiceDocumentBridge> GroundIntegralStudyServiceDocumentBridges { get; set; }
+        public DbSet<GroundIntegralStudyServiceStep> GroundIntStudyServSteps { get; set; }
+        public DbSet<GroundIntegralStudyServiceStepWorkPositionBridge> GroundIntStudyServStepWorkPosBridges { get; set; }
         public DbSet<LegalClientTrainingServiceOrder> LegalClientTrainingServiceOrders { get; set; }
         public DbSet<LegalClientSampleAnalysisServiceOrder> LegalClientSampleAnalysisServiceOrders { get; set; }
+        public DbSet<LegalClientGroundIntegralStudyServiceOrder> LegalClientGroundIntegralStudyServiceOrders { get; set; }
         public DbSet<NaturalClientTrainingServiceOrder> NaturalClientTrainingServiceOrders { get; set; }
         public DbSet<NaturalClientSampleAnalysisServiceOrder> NaturalClientSampleAnalysisServiceOrders { get; set; }
+        public DbSet<NaturalClientGroundIntegralStudyServiceOrder> NaturalClientGroundIntegralStudyServiceOrders { get; set; }
         public DbSet<ServiceOrderCollect> ServiceOrderCollects { get; set; }
 
         public DbSet<Technique> Techniques { get; set; }

@@ -80,8 +80,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Estudios Int. de Suelo (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Estudios Int. de Suelo"
+        ContentTemplate="{DataTemplate servicing_manage_pages:GroundIntegralStudyServicesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

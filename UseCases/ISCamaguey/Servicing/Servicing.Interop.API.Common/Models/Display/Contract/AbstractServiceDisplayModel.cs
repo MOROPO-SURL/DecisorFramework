@@ -12,6 +12,10 @@
 
         public int Priority { get; set; }
 
+        public Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get; set; }
+
+        public Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel[] Members { get; set; }
+
         public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel[] Documents { get; set; }
 
         public virtual void Import(TEntity entity)
@@ -21,6 +25,13 @@
             Description = entity.Description;
             Enabled = entity.Enabled;
             Priority = entity.Priority;
+
+            if (entity.Responsible != null)
+            {
+                Responsible = new Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+
+                Responsible.Import(entity.Responsible);
+            }
         }
     }
 }

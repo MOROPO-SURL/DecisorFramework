@@ -16,6 +16,10 @@
         
         public bool Enabled { get ; set ; }
         
-        public int Priority { get ; set ; }        
+        public int Priority { get ; set ; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResponsibleId))]
+        public Framework.Decisor.Domain.Persistence.Entities.Employee Responsible { get; set ; }
+        public System.Guid ResponsibleId { get; set ; }
     }
 }

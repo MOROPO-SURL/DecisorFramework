@@ -196,7 +196,7 @@
                             </StackLayout>
                         </StackLayout>
                         <Grid 
-                            x:Name="BusyView" 
+                            x:Name="BusyIndicatorGrid" 
                             IsVisible="False"
                             BackgroundColor="{AppThemeBinding Light=#A7FFFFFF, Dark=#A7000000}">
                             <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">

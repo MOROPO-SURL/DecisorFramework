@@ -31,6 +31,8 @@ public partial class TrainingServiceConfigurationPage : Framework.Decisor.Core.P
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
+            ResponsibleId = ConcreteBindingContext.Responsible.Id,
+            Members = ConcreteBindingContext.Members.ToList(),
             IncomingSteps = incomingSteps,
             IncomingDocuments = incomingDocuments
         };
@@ -50,6 +52,8 @@ public partial class TrainingServiceConfigurationPage : Framework.Decisor.Core.P
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
+            ResponsibleId = ConcreteBindingContext.Responsible.Id,
+            Members = ConcreteBindingContext.Members.ToList(),
             IncomingSteps = incomingSteps,
             EditionSteps = editionSteps,
             OutgoingSteps = outgoingSteps,
@@ -71,6 +75,11 @@ public partial class TrainingServiceConfigurationPage : Framework.Decisor.Core.P
     private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         OnCancel(sender, eventArgs);
+    }
+
+    private void ResponsiblePickButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(ResponsiblePickComplete_Callback)));
     }
 
     private void StepAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -243,6 +252,35 @@ public partial class TrainingServiceConfigurationPage : Framework.Decisor.Core.P
         });
     }
 
+    private void MemberAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(MemberPickComplete_Callback)));
+    }
+
+    private void MemberDetailButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel;
+
+        this.NavigationPushModalPageAsync(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.EmployeeDetailPage(target));
+    }
+
+    private void MemberRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta miembro del staff?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel;
+
+                ConcreteBindingContext.Members.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
     private void StepCreateSuccess_Callback(Interop.API.Common.Models.Input.TrainingServiceStepInputModel model)
     {
         // TODO Order by index !!!
@@ -376,6 +414,20 @@ public partial class TrainingServiceConfigurationPage : Framework.Decisor.Core.P
 
             break;
         }
+
+        hasChangesFlag = true;
+    }
+
+    private void MemberPickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    {
+        ConcreteBindingContext.Members.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void ResponsiblePickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    {
+        ConcreteBindingContext.Responsible = model;
 
         hasChangesFlag = true;
     }

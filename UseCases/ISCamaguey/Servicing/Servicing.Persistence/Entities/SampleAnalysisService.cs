@@ -8,6 +8,8 @@
 
         public System.Collections.Generic.ICollection<SampleAnalysisServiceStep> Steps { get; set; }
 
+        public System.Collections.Generic.List<SampleAnalysisServiceEmployeeBridge> EmployeeBridges { get; set; } = new System.Collections.Generic.List<SampleAnalysisServiceEmployeeBridge>();
+
         public System.Collections.Generic.List<SampleAnalysisServiceDocumentBridge> DocumentBridges { get; set; } = new System.Collections.Generic.List<SampleAnalysisServiceDocumentBridge>();
     }
 }

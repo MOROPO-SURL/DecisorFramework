@@ -44,6 +44,25 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Web.Frontend.Controll
         {
             var model = base.EntityToDisplayModel(entity);
 
+            if (model.Responsible.Contact.Identity.Image != null)
+            {
+                model.Responsible.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Responsible.Contact.Identity.Image.ContentType);
+            }
+
+            model.Members = entity.EmployeeBridges.Select(bridge =>
+            {
+                var _model = new Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+
+                _model.Import(bridge.Stern);
+
+                if (bridge.Stern.Contact.Identity.Image != null)
+                {
+                    _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Contact.Identity.Image.ContentType);
+                }
+
+                return _model;
+            }).ToArray();
+
             model.Steps = stepRepository.FindBy(_entity => _entity.ServiceId == entity.Id && _entity.ParentId == null).OrderBy(_entity => _entity.Priority).ToArray().Select(_entity =>
             {
                 var _model = new TrainingServiceStepDisplayModel();

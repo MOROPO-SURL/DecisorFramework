@@ -5,11 +5,13 @@
         public static string NameValidableProperty => nameof(Name);
         public static string DescriptionValidableProperty => nameof(Description);
         public static string SampleKindValidableProperty => nameof(SampleKind);
+        public static string ResponsibleValidableProperty => nameof(Responsible);
 
         private string name;
         private string description;
         private int priority = 1;
         private Domain.Interop.API.Common.Models.Display.SampleKindDisplayModel sampleKind;
+        private Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel responsible;
 
         public SampleAnalysisServiceConfigurationPageModel(Interop.API.Common.Models.Display.SampleAnalysisServiceDisplayModel model) : base(model)
         {
@@ -20,6 +22,8 @@
             description = model.Description;
             priority = model.Priority;
             sampleKind = model.SampleKind;
+            responsible = model.Responsible;
+            Members = [.. model.Members];
             Steps = [.. model.Steps];
             Documents = [.. model.Documents];
         }
@@ -33,6 +37,10 @@
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
         public Domain.Interop.API.Common.Models.Display.SampleKindDisplayModel SampleKind { get => sampleKind; set => SetProperty(ref sampleKind, value); }
+
+        public Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get => responsible; set => SetProperty(ref responsible, value); }
+
+        public System.Collections.ObjectModel.ObservableCollection<Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel> Members { get; set; } = [];
 
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.SampleAnalysisServiceStepDisplayModel> Steps { get; set; } = [];
 

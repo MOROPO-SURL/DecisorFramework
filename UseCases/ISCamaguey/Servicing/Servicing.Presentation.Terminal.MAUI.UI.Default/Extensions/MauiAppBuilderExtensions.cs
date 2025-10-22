@@ -15,10 +15,12 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Defa
                 // DetailPage factory resgistration !!!
                 .AddSingleton<IDetailContentPageFactoryFacade<TrainingServiceDisplayModel>, TrainingServiceDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<SampleAnalysisServiceDisplayModel>, SampleAnalysisServiceDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<GroundIntegralStudyServiceDisplayModel>, GroundIntegralStudyServiceDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<TrainingServiceDisplayModel, TrainingServiceConfigurationPageModel>, TrainingServiceConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<SampleAnalysisServiceDisplayModel, SampleAnalysisServiceConfigurationPageModel>, SampleAnalysisServiceConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<SampleAnalysisServiceDisplayModel, SampleAnalysisServiceConfigurationPageModel>, SampleAnalysisServiceConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<GroundIntegralStudyServiceDisplayModel, GroundIntegralStudyServiceConfigurationPageModel>, GroundIntegralStudyServiceConfigurationPageFactory>();
 
             return builder;
         }

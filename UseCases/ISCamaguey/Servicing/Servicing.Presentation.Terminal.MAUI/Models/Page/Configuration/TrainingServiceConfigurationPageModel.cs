@@ -4,10 +4,12 @@
     {
         public static string NameValidableProperty => nameof(Name);
         public static string DescriptionValidableProperty => nameof(Description);
+        public static string ResponsibleValidableProperty => nameof(Responsible);
 
         private string name;
         private string description;
         private int priority = 1;
+        private Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel responsible;
 
         public TrainingServiceConfigurationPageModel(Interop.API.Common.Models.Display.TrainingServiceDisplayModel model) : base(model)
         {
@@ -17,6 +19,8 @@
             name = model.Name;
             description = model.Description;
             priority = model.Priority;
+            responsible = model.Responsible;
+            Members = [.. model.Members];
             Steps = [.. model.Steps];
             Documents = [.. model.Documents];
         }
@@ -28,6 +32,10 @@
         public string Description { get => description; set => SetProperty(ref description, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
+
+        public Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get => responsible; set => SetProperty(ref responsible, value); }
+
+        public System.Collections.ObjectModel.ObservableCollection<Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel> Members { get; set; } = [];
 
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.TrainingServiceStepDisplayModel> Steps { get; set; } = [];
 

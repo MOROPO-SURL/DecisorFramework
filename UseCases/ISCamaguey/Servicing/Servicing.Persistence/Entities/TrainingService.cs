@@ -4,6 +4,8 @@
     {
         public System.Collections.Generic.ICollection<TrainingServiceStep> Steps { get; set; }
 
+        public System.Collections.Generic.List<TrainingServiceEmployeeBridge> EmployeeBridges { get; set; } = new System.Collections.Generic.List<TrainingServiceEmployeeBridge>();
+
         public System.Collections.Generic.List<TrainingServiceDocumentBridge> DocumentBridges { get; set; } = new System.Collections.Generic.List<TrainingServiceDocumentBridge>();
     }
 }

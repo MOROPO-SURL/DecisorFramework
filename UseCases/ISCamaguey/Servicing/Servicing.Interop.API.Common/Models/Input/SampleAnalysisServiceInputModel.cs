@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input
 {
@@ -28,6 +29,14 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input
                 entity.SampleKind = null;
                 entity.SampleKindId = SampleKindId;
             }
+
+            entity.EmployeeBridges.Clear();
+
+            entity.EmployeeBridges = Members.Select(model => new Persistence.Entities.SampleAnalysisServiceEmployeeBridge
+            {
+                ProwId = entity.Id,
+                SternId = model.Id
+            }).ToList();
         }
     }
 }

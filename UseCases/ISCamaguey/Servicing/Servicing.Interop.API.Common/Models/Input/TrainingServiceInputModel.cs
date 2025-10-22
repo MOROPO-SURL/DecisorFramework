@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input
 {
@@ -15,6 +16,21 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input
             Mergue(entity);
 
             return entity;
+        }
+
+        public override void Mergue(Persistence.Entities.TrainingService entity)
+        {
+            base.Mergue(entity);
+
+            
+
+            entity.EmployeeBridges.Clear();
+
+            entity.EmployeeBridges = Members.Select(model => new Persistence.Entities.TrainingServiceEmployeeBridge
+            {
+                ProwId = entity.Id,
+                SternId = model.Id
+            }).ToList();
         }
     }
 }

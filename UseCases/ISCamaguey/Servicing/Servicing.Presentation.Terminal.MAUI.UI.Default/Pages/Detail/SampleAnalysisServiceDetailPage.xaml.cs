@@ -60,7 +60,7 @@ public partial class SampleAnalysisServiceDetailPage : Framework.Decisor.Core.Pr
 
         var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
-        BusyView.IsVisible = true;
+        BusyIndicatorGrid.IsVisible = true;
 
         var httpClient = new System.Net.Http.HttpClient
         {
@@ -89,7 +89,7 @@ public partial class SampleAnalysisServiceDetailPage : Framework.Decisor.Core.Pr
                     }
                 }
 
-                BusyView.IsVisible = false;
+                BusyIndicatorGrid.IsVisible = false;
             });
         });
     }

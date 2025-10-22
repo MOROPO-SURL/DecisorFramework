@@ -1,6 +1,8 @@
 ﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input.Contract
 {
@@ -14,6 +16,10 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input.Co
         public string Description { get; set; }
 
         public int Priority { get; set; }
+
+        public System.Guid ResponsibleId { get; set; }
+
+        public List<EmployeeDisplayModel> Members { get; set; } = new List<EmployeeDisplayModel>();
 
         public List<DocumentInputModel> EditionDocuments { get; set; } = new List<DocumentInputModel>();
         public List<DocumentInputModel> IncomingDocuments { get; set; } = new List<DocumentInputModel>();
@@ -31,6 +37,12 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input.Co
             entity.Name = Name;
             entity.Description = Description;
             entity.Priority = Priority;
+
+            if (entity.ResponsibleId != ResponsibleId)
+            {
+                entity.Responsible = null;
+                entity.ResponsibleId = ResponsibleId;
+            }
         }
     }
 }

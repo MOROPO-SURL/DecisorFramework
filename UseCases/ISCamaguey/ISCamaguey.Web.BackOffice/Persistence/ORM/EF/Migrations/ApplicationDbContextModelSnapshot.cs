@@ -7438,6 +7438,166 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.UseTphMappingStrategy();
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyService", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("ResponsibleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("responsibleid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_groundintegralstudyservices");
+
+                    b.HasIndex("ResponsibleId")
+                        .HasDatabaseName("ix_groundintegralstudyservices_responsibleid");
+
+                    b.ToTable("groundintegralstudyservices", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyServiceDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_groundintegralstudyservicedocumentbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_groundintegralstudyservicedocumentbridges_sternid");
+
+                    b.ToTable("groundintegralstudyservicedocumentbridges", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyServiceEmployeeBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_groundintegralstudyserviceemployeebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_groundintegralstudyserviceemployeebridges_sternid");
+
+                    b.ToTable("groundintegralstudyserviceemployeebridges", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyServiceStep", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("name");
+
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("parentid");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("ServiceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("serviceid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_groundintstudyservsteps");
+
+                    b.HasIndex("ParentId")
+                        .HasDatabaseName("ix_groundintstudyservsteps_parentid");
+
+                    b.HasIndex("ServiceId")
+                        .HasDatabaseName("ix_groundintstudyservsteps_serviceid");
+
+                    b.ToTable("groundintstudyservsteps", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyServiceStepWorkPositionBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<decimal>("FixedParticipation")
+                        .HasColumnType("numeric")
+                        .HasColumnName("fixedparticipation");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<decimal>("RelativeParticipation")
+                        .HasColumnType("numeric")
+                        .HasColumnName("relativeparticipation");
+
+                    b.Property<decimal>("RequiredTimingEffort")
+                        .HasColumnType("numeric")
+                        .HasColumnName("requiredtimingeffort");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_groundintstudyservstepworkposbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_groundintstudyservstepworkposbridges_sternid");
+
+                    b.ToTable("groundintstudyservstepworkposbridges", "decisoriscamaguey_servicing");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", b =>
                 {
                     b.Property<Guid>("Id")
@@ -7467,12 +7627,19 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
+                    b.Property<Guid>("ResponsibleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("responsibleid");
+
                     b.Property<Guid>("SampleKindId")
                         .HasColumnType("uuid")
                         .HasColumnName("samplekindid");
 
                     b.HasKey("Id")
                         .HasName("pk_sampleanalysisservices");
+
+                    b.HasIndex("ResponsibleId")
+                        .HasDatabaseName("ix_sampleanalysisservices_responsibleid");
 
                     b.HasIndex("SampleKindId")
                         .HasDatabaseName("ix_sampleanalysisservices_samplekindid");
@@ -7497,6 +7664,25 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_sampleanalysisservicedocumentbridges_sternid");
 
                     b.ToTable("sampleanalysisservicedocumentbridges", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceEmployeeBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_sampleanalysisserviceemployeebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_sampleanalysisserviceemployeebridges_sternid");
+
+                    b.ToTable("sampleanalysisserviceemployeebridges", "decisoriscamaguey_servicing");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceStep", b =>
@@ -7529,15 +7715,15 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("serviceid");
 
                     b.HasKey("Id")
-                        .HasName("pk_sampleanalysisservicesteps");
+                        .HasName("pk_sampanalservsteps");
 
                     b.HasIndex("ParentId")
-                        .HasDatabaseName("ix_sampleanalysisservicesteps_parentid");
+                        .HasDatabaseName("ix_sampanalservsteps_parentid");
 
                     b.HasIndex("ServiceId")
-                        .HasDatabaseName("ix_sampleanalysisservicesteps_serviceid");
+                        .HasDatabaseName("ix_sampanalservsteps_serviceid");
 
-                    b.ToTable("sampleanalysisservicesteps", "decisoriscamaguey_servicing");
+                    b.ToTable("sampanalservsteps", "decisoriscamaguey_servicing");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceStepWorkPositionBridge", b =>
@@ -7571,12 +7757,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("requiredtimingeffort");
 
                     b.HasKey("ProwId", "SternId")
-                        .HasName("pk_sampleanalysisservicestepworkpositionbridges");
+                        .HasName("pk_sampanalservstepworkposbridges");
 
                     b.HasIndex("SternId")
-                        .HasDatabaseName("ix_sampleanalysisservicestepworkpositionbridges_sternid");
+                        .HasDatabaseName("ix_sampanalservstepworkposbridges_sternid");
 
-                    b.ToTable("sampleanalysisservicestepworkpositionbridges", "decisoriscamaguey_servicing");
+                    b.ToTable("sampanalservstepworkposbridges", "decisoriscamaguey_servicing");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", b =>
@@ -7608,8 +7794,15 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
+                    b.Property<Guid>("ResponsibleId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("responsibleid");
+
                     b.HasKey("Id")
                         .HasName("pk_trainingservices");
+
+                    b.HasIndex("ResponsibleId")
+                        .HasDatabaseName("ix_trainingservices_responsibleid");
 
                     b.ToTable("trainingservices", "decisoriscamaguey_servicing");
                 });
@@ -7631,6 +7824,25 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_trainingservicedocumentbridges_sternid");
 
                     b.ToTable("trainingservicedocumentbridges", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingServiceEmployeeBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_trainingserviceemployeebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_trainingserviceemployeebridges_sternid");
+
+                    b.ToTable("trainingserviceemployeebridges", "decisoriscamaguey_servicing");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingServiceStep", b =>
@@ -7663,15 +7875,15 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("serviceid");
 
                     b.HasKey("Id")
-                        .HasName("pk_trainingservicesteps");
+                        .HasName("pk_trainingservsteps");
 
                     b.HasIndex("ParentId")
-                        .HasDatabaseName("ix_trainingservicesteps_parentid");
+                        .HasDatabaseName("ix_trainingservsteps_parentid");
 
                     b.HasIndex("ServiceId")
-                        .HasDatabaseName("ix_trainingservicesteps_serviceid");
+                        .HasDatabaseName("ix_trainingservsteps_serviceid");
 
-                    b.ToTable("trainingservicesteps", "decisoriscamaguey_servicing");
+                    b.ToTable("trainingservsteps", "decisoriscamaguey_servicing");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingServiceStepWorkPositionBridge", b =>
@@ -7705,12 +7917,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("requiredtimingeffort");
 
                     b.HasKey("ProwId", "SternId")
-                        .HasName("pk_trainingservicestepworkpositionbridges");
+                        .HasName("pk_trainingservstepworkposbridges");
 
                     b.HasIndex("SternId")
-                        .HasDatabaseName("ix_trainingservicestepworkpositionbridges_sternid");
+                        .HasDatabaseName("ix_trainingservstepworkposbridges_sternid");
 
-                    b.ToTable("trainingservicestepworkpositionbridges", "decisoriscamaguey_servicing");
+                    b.ToTable("trainingservstepworkposbridges", "decisoriscamaguey_servicing");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.OrganizationContactBudget", b =>
@@ -8054,6 +8266,38 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasDiscriminator().HasValue("AbstractSampleAnalysisServiceOrder");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientGroundIntegralStudyServiceOrder", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractServiceOrder");
+
+                    b.Property<Guid>("GroundIntegralStudyLegalClientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("groundintegralstudylegalclientid");
+
+                    b.Property<Guid>("GroundIntegralStudyResponsibleId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("groundintegralstudyresponsibleid");
+
+                    b.Property<Guid>("GroundIntegralStudyServiceId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("groundintegralstudyserviceid");
+
+                    b.HasIndex("GroundIntegralStudyLegalClientId")
+                        .HasDatabaseName("ix_serviceorders_groundintegralstudylegalclientid");
+
+                    b.HasIndex("GroundIntegralStudyResponsibleId")
+                        .HasDatabaseName("ix_serviceorders_groundintegralstudyresponsibleid");
+
+                    b.HasIndex("GroundIntegralStudyServiceId")
+                        .HasDatabaseName("ix_serviceorders_groundintegralstudyserviceid");
+
+                    b.ToTable("serviceorders", "decisoriscamaguey_servicing");
+
+                    b.HasDiscriminator().HasValue("LegalClientGroundIntegralStudyServiceOrder");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientTrainingServiceOrder", b =>
                 {
                     b.HasBaseType("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractServiceOrder");
@@ -8084,6 +8328,38 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("serviceorders", "decisoriscamaguey_servicing");
 
                     b.HasDiscriminator().HasValue("LegalClientTrainingServiceOrder");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientGroundIntegralStudyServiceOrder", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractServiceOrder");
+
+                    b.Property<Guid>("GroundIntegralStudyNaturalClientId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("groundintegralstudynaturalclientid");
+
+                    b.Property<Guid>("GroundIntegralStudyResponsibleId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("groundintegralstudyresponsibleid");
+
+                    b.Property<Guid>("GroundIntegralStudyServiceId")
+                        .ValueGeneratedOnUpdateSometimes()
+                        .HasColumnType("uuid")
+                        .HasColumnName("groundintegralstudyserviceid");
+
+                    b.HasIndex("GroundIntegralStudyNaturalClientId")
+                        .HasDatabaseName("ix_serviceorders_groundintegralstudynaturalclientid");
+
+                    b.HasIndex("GroundIntegralStudyResponsibleId")
+                        .HasDatabaseName("ix_serviceorders_groundintegralstudyresponsibleid");
+
+                    b.HasIndex("GroundIntegralStudyServiceId")
+                        .HasDatabaseName("ix_serviceorders_groundintegralstudyserviceid");
+
+                    b.ToTable("serviceorders", "decisoriscamaguey_servicing");
+
+                    b.HasDiscriminator().HasValue("NaturalClientGroundIntegralStudyServiceOrder");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientTrainingServiceOrder", b =>
@@ -11277,14 +11553,117 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("SampleAnalysisReport");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyService", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_groundintegralstudyservices_employees_responsibleid");
+
+                    b.Navigation("Responsible");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyServiceDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyService", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_groundintegralstudyservicedocumentbridges_groundintegralstu~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_groundintegralstudyservicedocumentbridges_documents_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyServiceEmployeeBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyService", "Prow")
+                        .WithMany("EmployeeBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_groundintegralstudyserviceemployeebridges_groundintegralstu~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_groundintegralstudyserviceemployeebridges_employees_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyServiceStep", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyServiceStep", "Parent")
+                        .WithMany()
+                        .HasForeignKey("ParentId")
+                        .HasConstraintName("fk_groundintstudyservsteps_groundintstudyservsteps_parentid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyService", "Service")
+                        .WithMany("Steps")
+                        .HasForeignKey("ServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_groundintstudyservsteps_groundintegralstudyservices_service~");
+
+                    b.Navigation("Parent");
+
+                    b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyServiceStepWorkPositionBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyServiceStep", "Prow")
+                        .WithMany("WorkPositionBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_groundintstudyservstepworkposbridges_groundintstudyservstep~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkPosition", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_groundintstudyservstepworkposbridges_workpositions_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sampleanalysisservices_employees_responsibleid");
+
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.SampleKind", "SampleKind")
                         .WithMany()
                         .HasForeignKey("SampleKindId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_sampleanalysisservices_samplekinds_samplekindid");
+
+                    b.Navigation("Responsible");
 
                     b.Navigation("SampleKind");
                 });
@@ -11310,19 +11689,40 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceEmployeeBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", "Prow")
+                        .WithMany("EmployeeBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sampleanalysisserviceemployeebridges_sampleanalysisservices~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_sampleanalysisserviceemployeebridges_employees_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceStep", b =>
                 {
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisServiceStep", "Parent")
                         .WithMany()
                         .HasForeignKey("ParentId")
-                        .HasConstraintName("fk_sampleanalysisservicesteps_sampleanalysisservicesteps_paren~");
+                        .HasConstraintName("fk_sampanalservsteps_sampanalservsteps_parentid");
 
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", "Service")
                         .WithMany("Steps")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_sampleanalysisservicesteps_sampleanalysisservices_serviceid");
+                        .HasConstraintName("fk_sampanalservsteps_sampleanalysisservices_serviceid");
 
                     b.Navigation("Parent");
 
@@ -11336,18 +11736,30 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasForeignKey("ProwId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_sampleanalysisservicestepworkpositionbridges_sampleanalysis~");
+                        .HasConstraintName("fk_sampanalservstepworkposbridges_sampanalservsteps_prowid");
 
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkPosition", "Stern")
                         .WithMany()
                         .HasForeignKey("SternId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_sampleanalysisservicestepworkpositionbridges_workpositions_~");
+                        .HasConstraintName("fk_sampanalservstepworkposbridges_workpositions_sternid");
 
                     b.Navigation("Prow");
 
                     b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("ResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_trainingservices_employees_responsibleid");
+
+                    b.Navigation("Responsible");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingServiceDocumentBridge", b =>
@@ -11371,19 +11783,40 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingServiceEmployeeBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", "Prow")
+                        .WithMany("EmployeeBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_trainingserviceemployeebridges_trainingservices_prowid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_trainingserviceemployeebridges_employees_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingServiceStep", b =>
                 {
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingServiceStep", "Parent")
                         .WithMany()
                         .HasForeignKey("ParentId")
-                        .HasConstraintName("fk_trainingservicesteps_trainingservicesteps_parentid");
+                        .HasConstraintName("fk_trainingservsteps_trainingservsteps_parentid");
 
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", "Service")
                         .WithMany("Steps")
                         .HasForeignKey("ServiceId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_trainingservicesteps_trainingservices_serviceid");
+                        .HasConstraintName("fk_trainingservsteps_trainingservices_serviceid");
 
                     b.Navigation("Parent");
 
@@ -11397,14 +11830,14 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasForeignKey("ProwId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_trainingservicestepworkpositionbridges_trainingservicesteps~");
+                        .HasConstraintName("fk_trainingservstepworkposbridges_trainingservsteps_prowid");
 
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkPosition", "Stern")
                         .WithMany()
                         .HasForeignKey("SternId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_trainingservicestepworkpositionbridges_workpositions_sternid");
+                        .HasConstraintName("fk_trainingservstepworkposbridges_workpositions_sternid");
 
                     b.Navigation("Prow");
 
@@ -11661,6 +12094,36 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Service");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientGroundIntegralStudyServiceOrder", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("GroundIntegralStudyLegalClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_legalclients_groundintegralstudylegalclientid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("GroundIntegralStudyResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_employees_groundintegralstudyresponsibleid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyService", "Service")
+                        .WithMany()
+                        .HasForeignKey("GroundIntegralStudyServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_groundintegralstudyservices_groundintegralstu~");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Responsible");
+
+                    b.Navigation("Service");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientTrainingServiceOrder", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalClient", "Client")
@@ -11683,6 +12146,36 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_serviceorders_trainingservices_trainingserviceid");
+
+                    b.Navigation("Client");
+
+                    b.Navigation("Responsible");
+
+                    b.Navigation("Service");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientGroundIntegralStudyServiceOrder", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalClient", "Client")
+                        .WithMany()
+                        .HasForeignKey("GroundIntegralStudyNaturalClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_naturalclients_groundintegralstudynaturalclie~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
+                        .WithMany()
+                        .HasForeignKey("GroundIntegralStudyResponsibleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_employees_groundintegralstudyresponsibleid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyService", "Service")
+                        .WithMany()
+                        .HasForeignKey("GroundIntegralStudyServiceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_serviceorders_groundintegralstudyservices_groundintegralstu~");
 
                     b.Navigation("Client");
 
@@ -12011,9 +12504,25 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("IsoStandardBridges");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyService", b =>
+                {
+                    b.Navigation("DocumentBridges");
+
+                    b.Navigation("EmployeeBridges");
+
+                    b.Navigation("Steps");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyServiceStep", b =>
+                {
+                    b.Navigation("WorkPositionBridges");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", b =>
                 {
                     b.Navigation("DocumentBridges");
+
+                    b.Navigation("EmployeeBridges");
 
                     b.Navigation("Steps");
                 });
@@ -12026,6 +12535,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", b =>
                 {
                     b.Navigation("DocumentBridges");
+
+                    b.Navigation("EmployeeBridges");
 
                     b.Navigation("Steps");
                 });
