@@ -5,11 +5,14 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
 {
     public class ProductConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ProductDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string DefaultUnitMeasurementValidableProperty => nameof(DefaultUnitMeasurement);
+
         private string name;
         private string description;
         private int priority = 1;
         private Interop.API.Common.Models.Display.UnitMeasurementDisplayModel defaultUnitMeasurement;
-        private Interop.API.Common.Models.Display.FamilyDisplayModel category;
+        private Interop.API.Common.Models.Display.FamilyDisplayModel family;
         private Microsoft.Maui.Controls.ImageSource featureImageSource;
 
         public ProductConfigurationPageModel(Interop.API.Common.Models.Display.ProductDisplayModel model) : base(model)
@@ -21,7 +24,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
                 Description = model.Description;
                 Priority = model.Priority;
                 DefaultUnitMeasurement = model.DefaultUnitMeasurement;
-                Category = model.Category;
+                Family = model.Category;
                 Classifications = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ClassificationDisplayModel>(model.Classifications);
                 WarehousingDecreases = new System.Collections.ObjectModel.ObservableCollection<ProductWarehousingDecreaseBridgeModel>(model.WarehousingDecreases);
 
@@ -45,7 +48,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
 
         public Interop.API.Common.Models.Display.UnitMeasurementDisplayModel DefaultUnitMeasurement { get => defaultUnitMeasurement; set => SetProperty(ref defaultUnitMeasurement, value); }
 
-        public Interop.API.Common.Models.Display.FamilyDisplayModel Category { get => category; set => SetProperty(ref category, value); }
+        public Interop.API.Common.Models.Display.FamilyDisplayModel Family { get => family; set => SetProperty(ref family, value); }
 
         public Microsoft.Maui.Controls.ImageSource FeatureImageSource { get => featureImageSource; set => SetProperty(ref featureImageSource, value); }
 
@@ -55,6 +58,6 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
 
         public Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
 
-        public Interop.API.Common.Models.Display.FamilyDisplayModel[] AvailableCategories { get; set; }
+        public Interop.API.Common.Models.Display.FamilyDisplayModel[] AvailableFamilies { get; set; }
     }
 }

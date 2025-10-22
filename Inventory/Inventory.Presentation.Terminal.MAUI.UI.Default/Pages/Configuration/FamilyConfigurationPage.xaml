@@ -5,6 +5,8 @@
     xmlns:local_converters="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Converters"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.FamilyConfigurationPage"
@@ -12,6 +14,10 @@
     x:DataType="presentation_configuration_page_models:FamilyConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+
             <local_converters:FamilyToTreeNameConverter x:Key="FamilyToTreeNameConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -33,14 +39,20 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <VerticalStackLayout 
-                Padding="20"
-                Spacing="16">
-                <VerticalStackLayout Spacing="6">
+            <VerticalStackLayout Spacing="4" Padding="8">
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                     <Entry Text="{Binding Name}" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:FamilyConfigurationPageModel.NameValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:FamilyConfigurationPageModel.NameValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6">
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Superior" />
                     <Picker
                         x:Name="ParentPicker"
@@ -48,18 +60,27 @@
                         ItemDisplayBinding="{Binding Converter={StaticResource FamilyToTreeNameConverter}}"
                         SelectedIndexChanged="Picker_SelectedIndexChanged" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6">
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="200" />
                 </VerticalStackLayout>
                 <BoxView 
-                    Margin="0,8,0,0"
+                    Margin="8,16,8,8"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                </VerticalStackLayout>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1,ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
             </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>

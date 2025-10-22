@@ -27,6 +27,11 @@ public partial class UnitMeasurementsManagePage : Core.Presentation.Terminal.MAU
     {
         var apiConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.UnitMeasurementFilterModel { Parameter = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
+
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
@@ -61,6 +66,8 @@ public partial class UnitMeasurementsManagePage : Core.Presentation.Terminal.MAU
 
     private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
+        ConcreteBindingContext.SearchParameter = null;
+
         OnReload(sender, eventArgs);
     }
 
@@ -77,5 +84,10 @@ public partial class UnitMeasurementsManagePage : Core.Presentation.Terminal.MAU
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
+    }
+
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
     }
 }

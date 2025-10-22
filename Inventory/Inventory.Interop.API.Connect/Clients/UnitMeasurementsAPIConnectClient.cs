@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Connect.Clients
 {
-    public class UnitMeasurementsAPIConnectClient : Guama.Core.Presentation.API.Connect.Clients.Contract.AbstractArchivableEntityManagementAPIConnectClient<Persistence.Entities.UnitMeasurement, System.Guid, Common.Models.Input.UnitMeasurementInputModel, Common.Models.Display.UnitMeasurementDisplayModel>
+    public class UnitMeasurementsAPIConnectClient : Guama.Core.Presentation.API.Connect.Clients.Contract.AbstractArchivableEnableableEntityManagementFilteredAPIConnectClient<Persistence.Entities.UnitMeasurement, System.Guid, Common.Models.Input.UnitMeasurementInputModel, Common.Models.Display.UnitMeasurementDisplayModel, Common.Models.Filter.UnitMeasurementFilterModel>
     {
         public UnitMeasurementsAPIConnectClient(Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade httpClientHelperProvider) : base(httpClientHelperProvider)
         {

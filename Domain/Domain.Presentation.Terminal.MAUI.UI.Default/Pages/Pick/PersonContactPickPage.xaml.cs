@@ -64,9 +64,7 @@ public partial class PersonContactPickPage : Core.Presentation.Terminal.MAUI.UI.
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = BindingContext as Models.Page.Pick.PersonContactPickPageModel;
-
-        concreteBindingContext.IsBusy = true;
+        ConcreteBindingContext.IsBusy = true;
 
         System.Threading.Tasks.Task.Run(async () =>
         {
@@ -78,7 +76,7 @@ public partial class PersonContactPickPage : Core.Presentation.Terminal.MAUI.UI.
 
                 Dispatcher.Dispatch(() =>
                 {
-                    concreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.IsBusy = false;
 
                     this.NavigationPushPageAsync(page);
                 });
@@ -89,7 +87,7 @@ public partial class PersonContactPickPage : Core.Presentation.Terminal.MAUI.UI.
                 {
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
 
-                    concreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.IsBusy = false;
                 });
             }
         });

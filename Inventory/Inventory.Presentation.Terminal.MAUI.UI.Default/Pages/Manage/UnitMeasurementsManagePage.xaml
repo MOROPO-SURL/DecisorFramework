@@ -38,14 +38,18 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Orientation="Vertical">
-                <SearchBar Margin="20,20,20,0" />
+                <SearchBar 
+                    Margin="20,20,20,0"
+                    Text="{Binding SearchParameter}"
+                    Placeholder="-- buscar unidad de medida por nombre o símbolo --"
+                    SearchButtonPressed="SearchBar_SearchButtonPressed" />
                 <Grid 
-                VerticalOptions="FillAndExpand"
-                SizeChanged="ItemsCollectionViewLayout_SizeChanged">
+                    VerticalOptions="FillAndExpand"
+                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
                     <CollectionView
-                    x:Name="ItemsCollectionView"
-                    Margin="10"
-                    ItemsSource="{Binding Items}">
+                        x:Name="ItemsCollectionView"
+                        Margin="10"
+                        ItemsSource="{Binding Items}">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
                         </CollectionView.ItemsLayout>
