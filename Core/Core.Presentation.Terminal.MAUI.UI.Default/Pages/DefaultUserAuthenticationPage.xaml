@@ -38,7 +38,7 @@
                                 HorizontalTextAlignment="Center"
                                 FontSize="Large"
                                 FontAttributes="Bold"
-                                Text="Decisor" />
+                                Text="Decisor™" />
                         </VerticalStackLayout>
                         <Entry
                             Text="{Binding UserName}"
