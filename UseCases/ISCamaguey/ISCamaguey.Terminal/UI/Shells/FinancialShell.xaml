@@ -66,16 +66,6 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Tarjetas Bancarias de Débito"
-        ContentTemplate="{DataTemplate frwk_financial_manage_pages:BankDebitCardsManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF19B;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
         Title="Monedas"
         ContentTemplate="{DataTemplate frwk_financial_manage_pages:CurrenciesManagePage}">
         <ShellContent.Icon>
