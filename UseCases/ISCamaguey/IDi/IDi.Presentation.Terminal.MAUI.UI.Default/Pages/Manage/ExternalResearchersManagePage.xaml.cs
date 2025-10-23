@@ -18,6 +18,8 @@ public partial class ExternalResearchersManagePage : Framework.Decisor.Core.Pres
 
     protected override double ItemViewRequestWidth { get => 400; }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double MeasureCollectionViewCellHeight(double width)
     {
         return ITEM_VIEW_REQUEST_HEIGHT;

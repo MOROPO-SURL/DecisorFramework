@@ -21,6 +21,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Ex
                 .AddSingleton<IDetailContentPageFactoryFacade<FinancierDisplayModel>, FinancierDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<ExternalResearcherDisplayModel>, ExternalResearcherDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<InternalResearcherDisplayModel>, InternalResearcherDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<CallForPropousalDisplayModel>, CallForPropousalDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ResearchAreaDisplayModel, ResearchAreaConfigurationPageModel>, ResearchAreaConfigurationPageFactory>()
@@ -28,7 +29,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Ex
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ParticipatingOrganizationDisplayModel, ParticipatingOrganizationConfigurationPageModel>, ParticipatingOrganizationConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<FinancierDisplayModel, FinancierConfigurationPageModel>, FinancierConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ExternalResearcherDisplayModel, ExternalResearcherConfigurationPageModel>, ExternalResearcherConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<InternalResearcherDisplayModel, InternalResearcherConfigurationPageModel>, InternalResearcherConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<InternalResearcherDisplayModel, InternalResearcherConfigurationPageModel>, InternalResearcherConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<CallForPropousalDisplayModel, CallForPropousalConfigurationPageModel>, CallForPropousalConfigurationPageFactory>();
 
             return builder;
         }
