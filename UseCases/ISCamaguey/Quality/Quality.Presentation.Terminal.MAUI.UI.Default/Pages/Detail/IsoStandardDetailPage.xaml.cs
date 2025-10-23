@@ -11,6 +11,8 @@ public partial class IsoStandardDetailPage : Framework.Decisor.Core.Presentation
 		InitializeComponent();
 
         this.delegationAction = delegationAction;
+
+        if (delegationAction == null) OptionButtonsStackLayout.IsVisible = false;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)

@@ -1,4 +1,6 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Input
+﻿using System.Linq;
+
+namespace MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Input
 {
     public class TechniqueInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Technique, System.Guid>
     {
@@ -10,6 +12,10 @@
         public string Description { get; set; }
 
         public int Priority { get; set; }
+
+        public System.Collections.Generic.List<Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel> CubanStandards { get; set; } = new System.Collections.Generic.List<Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel>();
+
+        public System.Collections.Generic.List<Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel> IsoStandards { get; set; } = new System.Collections.Generic.List<Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel>();
 
         public Persistence.Entities.Technique Export()
         {
@@ -30,6 +36,12 @@
             entity.Name = Name;
             entity.Description = Description;
             entity.Priority = Priority;
+
+            entity.CubanStandardBridge.Clear();
+            entity.CubanStandardBridge = CubanStandards.Select(model => new Persistence.Entities.TechniqueCubanStandardBridge { ProwId = entity.Id, SternId = model.Id }).ToList();
+
+            entity.IsoStandardBridge.Clear();
+            entity.IsoStandardBridge = IsoStandards.Select(model => new Persistence.Entities.TechniqueIsoStandardBridge { ProwId = entity.Id, SternId = model.Id }).ToList();
         }
     }
 }

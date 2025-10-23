@@ -45,6 +45,7 @@
                                 Text="{Binding Description, TargetNullValue='---'}" />
                         </StackLayout>
                         <StackLayout
+                            x:Name="OptionButtonsStackLayout"
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 

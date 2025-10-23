@@ -16,6 +16,8 @@
             priority = model.Priority;
             name = model.Name;
             description = model.Description;
+            CubanStandards = [.. model.CubanStandards];
+            IsoStandards = [.. model.IsoStandards];
         }
 
         public System.Guid Id { get; set; }
@@ -25,5 +27,9 @@
         public string Name { get => name; set => SetProperty(ref name, value); }
 
         public string Description { get => description; set => SetProperty(ref description, value); }
+
+        public System.Collections.ObjectModel.ObservableCollection<Quality.Interop.API.Common.Models.Display.CubanStandardDisplayModel> CubanStandards { get; set; } = [];
+
+        public System.Collections.ObjectModel.ObservableCollection<Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel> IsoStandards { get; set; } = [];
     }
 }

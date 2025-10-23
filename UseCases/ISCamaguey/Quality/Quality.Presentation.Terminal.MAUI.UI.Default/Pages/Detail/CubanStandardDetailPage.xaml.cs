@@ -11,6 +11,8 @@ public partial class CubanStandardDetailPage : Framework.Decisor.Core.Presentati
 		InitializeComponent();
 
         this.delegationAction = delegationAction;
+
+        if (delegationAction == null) OptionButtonsStackLayout.IsVisible = false;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
