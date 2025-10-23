@@ -21,10 +21,10 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract
         public TeachingCategory TeachingCategory { get; set; }
         public System.Guid? TeachingCategoryId { get; set; }
 
-        public List<ResearcherResearchAreaSpecializationBridge> ResearchAreaSpecializationBridges { get; set; }
+        public List<ResearcherResearchAreaSpecializationBridge> ResearchAreaSpecializationBridges { get; set; } = new List<ResearcherResearchAreaSpecializationBridge>();
 
-        public List<ResearcherResearchAreaMasteryBridge> ResearchAreaMasteryBridges { get; set; }
+        public List<ResearcherResearchAreaMasteryBridge> ResearchAreaMasteryBridges { get; set; } = new List<ResearcherResearchAreaMasteryBridge>();
 
-        public List<ResearcherResearchAreaDoctorateBridge> ResearchAreaDoctorateBridges { get; set; }
+        public List<ResearcherResearchAreaDoctorateBridge> ResearchAreaDoctorateBridges { get; set; } = new List<ResearcherResearchAreaDoctorateBridge>();
     }
 }

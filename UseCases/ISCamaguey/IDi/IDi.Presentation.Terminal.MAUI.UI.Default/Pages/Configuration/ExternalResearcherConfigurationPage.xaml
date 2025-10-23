@@ -1,0 +1,407 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<fwrk_core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common"
+    xmlns:fwrk_domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:fwrk_core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:fwrk_domain_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ExternalResearcherConfigurationPage"
+    x:TypeArguments="interop_common_display_models:ExternalResearcherDisplayModel,interop_common_display_models:ExternalResearcherDisplayModel,presentation_configuration_page_models:ExternalResearcherConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:ExternalResearcherConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <fwrk_core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <fwrk_core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <fwrk_core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="4" Padding="8">
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Contacto" />
+                        <ContentView                        
+                            IsVisible="{Binding Contact, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="140">
+                            <fwrk_domain_presentation_card_views:PersonContactDefaultCardView
+                                BindingContext="{Binding Contact}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="ContactPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ExternalResearcherConfigurationPageModel.ContactValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ExternalResearcherConfigurationPageModel.ContactValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=5, LargeContainerColumn=8, MediumContainerColumn=10, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Entidad Participante" />
+                        <ContentView                        
+                            IsVisible="{Binding ParticipatingOrganization, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="144">
+                            <local_card_views:ParticipatingOrganizationDefaultCardView
+                                BindingContext="{Binding ParticipatingOrganization}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="ParticipatingOrganizationPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ExternalResearcherConfigurationPageModel.ParticipatingOrganizationValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ExternalResearcherConfigurationPageModel.ParticipatingOrganizationValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=5, ExtraLargeContainerColumn=12, LargeContainerColumn=12, MediumContainerColumn=12, SmallContainerColumn=12}}">
+                        <FlexLayout 
+                            Wrap="Wrap"
+                            AlignItems="Start" AlignContent="Start">
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=12, ExtraLargeContainerColumn=6, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                Margin="4"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Categoría Cirtífica (opcional)" />
+                                <Picker 
+                                    x:Name="CategoryPicker" 
+                                    ItemsSource="{Binding AvailableResearcherCategories}"
+                                    ItemDisplayBinding="{Binding Name}"
+                                    SelectedItem="{Binding Category}"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=12, ExtraLargeContainerColumn=6, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                Margin="4"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Categoría Docente (opcional)" />
+                                <Picker 
+                                    x:Name="TeachingCategoryPicker" 
+                                    ItemsSource="{Binding AvailableTeachingCategories}"
+                                    ItemDisplayBinding="{Binding Name}"
+                                    SelectedItem="{Binding TeachingCategory}"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                            </VerticalStackLayout>
+                        </FlexLayout>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start"
+                    AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Doctorados" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="DoctorateResearchAreaAgregationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <VerticalStackLayout
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    Margin="4"
+                                    BindableLayout.ItemsSource="{Binding DoctorateResearchAreas}">
+                                    <BindableLayout.EmptyView>
+                                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </BindableLayout.EmptyView>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_display_models:ResearchAreaDisplayModel">
+                                            <Frame 
+                                                Padding="8" Margin="4" 
+                                                HeightRequest="136">
+                                                <Grid ColumnSpacing="8" RowSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <StackLayout 
+                                                        Grid.Column="0" Grid.RowSpan="2" 
+                                                        VerticalOptions="Start"
+                                                        Padding="8">
+                                                        <Label 
+                                                            LineBreakMode="TailTruncation"
+                                                            FontSize="Medium"
+                                                            Text="{Binding Name}" />
+                                                        <Label 
+                                                            Margin="0,4,0,0"
+                                                            Text="Descripción"
+                                                            TextColor="DimGray"
+                                                            FontSize="Caption"
+                                                            FontAttributes="Bold" />
+                                                        <Label 
+                                                            VerticalOptions="FillAndExpand"
+                                                            LineBreakMode="TailTruncation"
+                                                            MaxLines="2"
+                                                            Text="{Binding Description, TargetNullValue='---'}" />
+                                                    </StackLayout>
+                                                    <Button
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        Padding="0"
+                                                        FontSize="21"
+                                                        FontFamily="MaterialDesignIcons"
+                                                        Text="&#xF2FD;"
+                                                        Clicked="ResearchAreaDetailButton_Clicked" />
+                                                    <Button
+                                                        Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
+                                                        Padding="0"
+                                                        FontSize="21"
+                                                        FontFamily="MaterialDesignIcons"
+                                                        Text="&#xFA78;"
+                                                        Clicked="DoctorateResearchAreaRemotionButton_Clicked" />
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Masters" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="MasteryResearchAreaAgregationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <VerticalStackLayout
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    Margin="4"
+                                    BindableLayout.ItemsSource="{Binding MasteryResearchAreas}">
+                                    <BindableLayout.EmptyView>
+                                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </BindableLayout.EmptyView>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_display_models:ResearchAreaDisplayModel">
+                                            <Frame 
+                                                Padding="8" Margin="4" 
+                                                HeightRequest="136">
+                                                <Grid ColumnSpacing="8" RowSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <StackLayout 
+                                                        Grid.Column="0" Grid.RowSpan="2" 
+                                                        VerticalOptions="Start"
+                                                        Padding="8">
+                                                        <Label 
+                                                            LineBreakMode="TailTruncation"
+                                                            FontSize="Medium"
+                                                            Text="{Binding Name}" />
+                                                        <Label 
+                                                            Margin="0,4,0,0"
+                                                            Text="Descripción"
+                                                            TextColor="DimGray"
+                                                            FontSize="Caption"
+                                                            FontAttributes="Bold" />
+                                                        <Label 
+                                                            VerticalOptions="FillAndExpand"
+                                                            LineBreakMode="TailTruncation"
+                                                            MaxLines="2"
+                                                            Text="{Binding Description, TargetNullValue='---'}" />
+                                                    </StackLayout>
+                                                    <Button
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        Padding="0"
+                                                        FontSize="21"
+                                                        FontFamily="MaterialDesignIcons"
+                                                        Text="&#xF2FD;"
+                                                        Clicked="ResearchAreaDetailButton_Clicked" />
+                                                    <Button
+                                                        Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
+                                                        Padding="0"
+                                                        FontSize="21"
+                                                        FontFamily="MaterialDesignIcons"
+                                                        Text="&#xFA78;"
+                                                        Clicked="MasteryResearchAreaRemotionButton_Clicked" />
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Especializaciones" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="SpecializationResearchAreaAgregationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <VerticalStackLayout
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    Margin="4"
+                                    BindableLayout.ItemsSource="{Binding SpecializationResearchAreas}">
+                                    <BindableLayout.EmptyView>
+                                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </BindableLayout.EmptyView>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_display_models:ResearchAreaDisplayModel">
+                                            <Frame 
+                                                Padding="8" Margin="4" 
+                                                HeightRequest="136">
+                                                <Grid ColumnSpacing="8" RowSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <StackLayout 
+                                                        Grid.Column="0" Grid.RowSpan="2" 
+                                                        VerticalOptions="Start"
+                                                        Padding="8">
+                                                        <Label 
+                                                            LineBreakMode="TailTruncation"
+                                                            FontSize="Medium"
+                                                            Text="{Binding Name}" />
+                                                        <Label 
+                                                            Margin="0,4,0,0"
+                                                            Text="Descripción"
+                                                            TextColor="DimGray"
+                                                            FontSize="Caption"
+                                                            FontAttributes="Bold" />
+                                                        <Label 
+                                                            VerticalOptions="FillAndExpand"
+                                                            LineBreakMode="TailTruncation"
+                                                            MaxLines="2"
+                                                            Text="{Binding Description, TargetNullValue='---'}" />
+                                                    </StackLayout>
+                                                    <Button
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        Padding="0"
+                                                        FontSize="21"
+                                                        FontFamily="MaterialDesignIcons"
+                                                        Text="&#xF2FD;"
+                                                        Clicked="ResearchAreaDetailButton_Clicked" />
+                                                    <Button
+                                                        Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
+                                                        Padding="0"
+                                                        FontSize="21"
+                                                        FontFamily="MaterialDesignIcons"
+                                                        Text="&#xFA78;"
+                                                        Clicked="SpecializationResearchAreaRemotionButton_Clicked" />
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <BoxView 
+                    Margin="8,16,8,8"
+                    HeightRequest="1" 
+                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1,ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</fwrk_core_ui_base_pages:ConfigurationBaseContentPage>

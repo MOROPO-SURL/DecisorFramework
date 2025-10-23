@@ -19,12 +19,16 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Ex
                 .AddSingleton<IDetailContentPageFactoryFacade<TeachingCategoryDisplayModel>, TeachingCategoryDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<ParticipatingOrganizationDisplayModel>, ParticipatingOrganizationDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<FinancierDisplayModel>, FinancierDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<ExternalResearcherDisplayModel>, ExternalResearcherDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<InternalResearcherDisplayModel>, InternalResearcherDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ResearchAreaDisplayModel, ResearchAreaConfigurationPageModel>, ResearchAreaConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ProgramDisplayModel, ProgramConfigurationPageModel>, ProgramConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ParticipatingOrganizationDisplayModel, ParticipatingOrganizationConfigurationPageModel>, ParticipatingOrganizationConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<FinancierDisplayModel, FinancierConfigurationPageModel>, FinancierConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<FinancierDisplayModel, FinancierConfigurationPageModel>, FinancierConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<ExternalResearcherDisplayModel, ExternalResearcherConfigurationPageModel>, ExternalResearcherConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<InternalResearcherDisplayModel, InternalResearcherConfigurationPageModel>, InternalResearcherConfigurationPageFactory>();
 
             return builder;
         }

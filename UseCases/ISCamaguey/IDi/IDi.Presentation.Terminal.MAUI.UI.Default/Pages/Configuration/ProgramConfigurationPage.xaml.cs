@@ -229,10 +229,14 @@ public partial class ProgramConfigurationPage : Framework.Decisor.Core.Presentat
     private void ManagerPickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel model)
     {
         ConcreteBindingContext.Manager = model;
+
+        hasChangesFlag = true;
     }
 
     private void ChiefPickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
     {
         ConcreteBindingContext.Chief = model;
+
+        hasChangesFlag = true;
     }
 }

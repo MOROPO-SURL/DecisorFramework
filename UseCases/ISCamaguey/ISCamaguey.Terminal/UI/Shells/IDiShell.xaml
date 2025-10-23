@@ -97,16 +97,20 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <ShellContent
-        Title="Investigadores (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
+    <FlyoutItem Title="Investigadores">
+        <FlyoutItem.Icon>
             <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xFCBF;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
+             FontFamily="MaterialDesignIcons"
+             Glyph="&#xFCBF;"
+             Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Internos"
+            ContentTemplate="{DataTemplate idi_manage_pages:InternalResearchersManagePage}" />
+        <ShellContent
+            Title="Externos"
+            ContentTemplate="{DataTemplate idi_manage_pages:ExternalResearchersManagePage}" />
+    </FlyoutItem>
     <ShellContent
         Title="Financistas"
         ContentTemplate="{DataTemplate idi_manage_pages:FinanciersManagePage}">
