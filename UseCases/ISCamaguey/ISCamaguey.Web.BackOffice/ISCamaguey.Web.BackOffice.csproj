@@ -7,6 +7,9 @@
 		<AssemblyName>MOROPO.ISCamaguey.Decisor.Web.BackOffice</AssemblyName>
 		<RootNamespace>MOROPO.ISCamaguey.Decisor.Web.BackOffice</RootNamespace>
 	</PropertyGroup>
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Pilot' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' " />
+	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Staging' " />
 	<ItemGroup>
 		<Compile Remove="dpkeys\**" />
 		<Compile Remove="logs\**" />
