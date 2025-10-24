@@ -124,6 +124,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="UI\Pages\ServicingDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Manage\OcupationsSimplifiedManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -148,6 +151,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="UI\Pages\ServicingDashboardPage.xaml.cs">
+	    <DependentUpon>ServicingDashboardPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Pages\Manage\OcupationsSimplifiedManagePage.xaml.cs">
 	    <DependentUpon>OcupationsSimplifiedManagePage.xaml</DependentUpon>
 	  </Compile>
