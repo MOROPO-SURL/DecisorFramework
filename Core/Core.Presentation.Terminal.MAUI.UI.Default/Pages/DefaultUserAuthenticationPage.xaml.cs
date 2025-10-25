@@ -94,4 +94,14 @@ public partial class DefaultUserAuthenticationPage : Caney.MVVM.Core.Pages.Bindi
     {
         SignInButton_Clicked(sender, e);
     }
+
+    private void SettingButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new SettingPage(SettingChange_Callback));
+    }
+
+    private void SettingChange_Callback()
+    {
+        (Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>() as Providers.Facade.IReseableHttpClientHelperProviderFacade).Reset();
+    }
 }
