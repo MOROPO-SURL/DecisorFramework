@@ -3,11 +3,18 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:core_presentation_page_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     x:Class="MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.SettingPage"
     x:DataType="core_presentation_page_models:SettingPageModel"
     Title="Configuración"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <Grid>
             <Grid
@@ -16,13 +23,13 @@
                 VerticalOptions="Center">
                 <Frame Style="{StaticResource PopupFrameStyle}">
                     <StackLayout Margin="20" Spacing="20">
-                        <StackLayout>
+                        <StackLayout Spacing="10">
                             <Label 
                                 Margin="0,0,0,20"
                                 Text="Configuración"
                                 FontAttributes="Bold"
                                 FontSize="Medium" />
-                            <StackLayout Orientation="Vertical">
+                            <StackLayout Orientation="Vertical" Spacing="6">
                                 <Label
                                     Style="{StaticResource CaptionFieldLabelStyle}"
                                     HorizontalOptions="FillAndExpand" VerticalOptions="Center"
@@ -31,16 +38,20 @@
                                     VerticalOptions="Center"
                                     IsToggled="{Binding UseProxyServer}" />
                             </StackLayout>
-                            <VerticalStackLayout IsVisible="{Binding UseProxyServer}">
+                            <VerticalStackLayout IsVisible="{Binding UseProxyServer}" Spacing="6">
                                 <Label 
                                     Style="{StaticResource CaptionFieldLabelStyle}"
                                     Text="Dirección del servidor proxy" />
                                 <Entry
                                     Placeholder="http(s)://proxy.address.net(:3128)"
                                     Text="{Binding ProxyServerAddress}" />
+                                <Label
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static core_presentation_page_models:SettingPageModel.ProxyServerAddressValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static core_presentation_page_models:SettingPageModel.ProxyServerAddressValidableProperty}}"
+                                    Style="{StaticResource ValidationMessageLabelStyle}" />
                             </VerticalStackLayout>
-                            <VerticalStackLayout IsVisible="{Binding UseProxyServer}">
-                                <StackLayout Orientation="Horizontal">
+                            <VerticalStackLayout IsVisible="{Binding UseProxyServer}" Spacing="10">
+                                <StackLayout Orientation="Horizontal" Spacing="4">
                                     <Label
                                         Style="{StaticResource CaptionFieldLabelStyle}"
                                         HorizontalOptions="FillAndExpand" VerticalOptions="Center"
@@ -49,17 +60,25 @@
                                         VerticalOptions="Center"
                                         IsToggled="{Binding UseProxyAuthentication}" />
                                 </StackLayout>
-                                <VerticalStackLayout IsVisible="{Binding UseProxyAuthentication}">
+                                <VerticalStackLayout IsVisible="{Binding UseProxyAuthentication}" Spacing="6">
                                     <Label 
                                         Style="{StaticResource CaptionFieldLabelStyle}"
                                         Text="Usuario de proxy" />
                                     <Entry Text="{Binding ProxyUsername}" />
+                                    <Label
+                                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static core_presentation_page_models:SettingPageModel.ProxyUsernameValidableProperty}}"
+                                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static core_presentation_page_models:SettingPageModel.ProxyUsernameValidableProperty}}"
+                                        Style="{StaticResource ValidationMessageLabelStyle}" />
                                 </VerticalStackLayout>
-                                <VerticalStackLayout IsVisible="{Binding UseProxyAuthentication}">
+                                <VerticalStackLayout IsVisible="{Binding UseProxyAuthentication}" Spacing="6">
                                     <Label 
                                         Style="{StaticResource CaptionFieldLabelStyle}"
                                         Text="Contraseña de proxy" />
-                                    <Entry Text="{Binding ProxyPassword}" />
+                                    <Entry Text="{Binding ProxyPassword}" IsPassword="True" />
+                                    <Label
+                                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static core_presentation_page_models:SettingPageModel.ProxyPasswordValidableProperty}}"
+                                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static core_presentation_page_models:SettingPageModel.ProxyPasswordValidableProperty}}"
+                                        Style="{StaticResource ValidationMessageLabelStyle}" />
                                 </VerticalStackLayout>
                             </VerticalStackLayout>
                         </StackLayout>

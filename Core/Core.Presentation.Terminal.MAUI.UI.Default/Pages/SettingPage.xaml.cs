@@ -20,13 +20,15 @@ public partial class SettingPage : Microsoft.Maui.Controls.ContentPage
         CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
 
         settingChangeCallbackAction?.Invoke();
+
+        this.NavigationPopModalPageAsync();
     }
 
     private void Validation_Callback()
 	{
 		var concreteBindingContext = BindingContext as Models.Page.SettingPageModel;
 
-		if (concreteBindingContext.ValidationResult == null && concreteBindingContext.ValidationResult.IsValid) return;
+		if (concreteBindingContext.ValidationResult == null || concreteBindingContext.ValidationResult.IsValid) return;
 
         DisplayAlert("Aviso", "La información especificada no es válida para aplicar los cambios en el sistema.", "Aceptar");
     }

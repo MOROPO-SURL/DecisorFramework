@@ -5,6 +5,10 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page
 {
     public class SettingPageModel : Caney.MVVM.Core.Models.Page.BasePageModel
     {
+        public static string ProxyServerAddressValidableProperty => nameof(ProxyServerAddress);
+        public static string ProxyUsernameValidableProperty => nameof(ProxyUsername);
+        public static string ProxyPasswordValidableProperty => nameof(ProxyPassword);
+
         private bool useProxyServer;
         private string proxyServerAddress;
         private bool useProxyAuthentication;
