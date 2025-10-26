@@ -11,7 +11,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
         private string name;
         private string description;
         private int priority = 1;
-        private Interop.API.Common.Models.Display.UnitMeasurementDisplayModel defaultUnitMeasurement;
+        private Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel defaultUnitMeasurement;
         private Interop.API.Common.Models.Display.FamilyDisplayModel family;
         private Microsoft.Maui.Controls.ImageSource featureImageSource;
 
@@ -46,7 +46,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public Interop.API.Common.Models.Display.UnitMeasurementDisplayModel DefaultUnitMeasurement { get => defaultUnitMeasurement; set => SetProperty(ref defaultUnitMeasurement, value); }
+        public Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel DefaultUnitMeasurement { get => defaultUnitMeasurement; set => SetProperty(ref defaultUnitMeasurement, value); }
 
         public Interop.API.Common.Models.Display.FamilyDisplayModel Family { get => family; set => SetProperty(ref family, value); }
 
@@ -56,7 +56,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.Models.P
 
         public System.Collections.ObjectModel.ObservableCollection<ProductWarehousingDecreaseBridgeModel> WarehousingDecreases { get; set; } = [];
 
-        public Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
+        public Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
 
         public Interop.API.Common.Models.Display.FamilyDisplayModel[] AvailableFamilies { get; set; }
     }

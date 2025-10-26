@@ -12,7 +12,6 @@ using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Decisor.Legal.Persistence.Entities;
 using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Production.Persistence.Entities;
-using MOROPO.Framework.Decisor.Essential.Persistence.Entities;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities.Contract;
 using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
 using MOROPO.Framework.Decisor.Governance.Persistence.Entities;

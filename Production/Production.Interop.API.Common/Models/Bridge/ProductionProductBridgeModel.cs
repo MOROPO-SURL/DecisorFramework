@@ -6,6 +6,6 @@
 
         public decimal Amount { get; set; }
 
-        public Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get; set; }
+        public Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get; set; }
     }
 }

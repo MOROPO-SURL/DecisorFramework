@@ -15,8 +15,6 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<Product, System.Guid>, ProductRepository>();
             services.AddScoped<IEntityRepository<Family, int>, FamiliesRepository>();
             services.AddScoped<IEntityRepository<Classification, System.Guid>, ClassificationRepository>();
-            services.AddScoped<IEntityRepository<UnitMeasurement, System.Guid>, UnitMeasurementRepository>();
-            services.AddScoped<IBridgeRepository<UnitMeasurementConversionBridge, UnitMeasurement, System.Guid, UnitMeasurement, System.Guid>, UnitMeasurementConversionBridgeRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.InventoryDbSchemaConfigurationProvider>();
         }

@@ -8,13 +8,13 @@ namespace MOROPO.Framework.Decisor.Sales.Persistence.ORM.EF.Providers
         {
             get
             {
-                return new Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator[]
-                {                   
+                return
+                [
                     new BaseEntityTypeConfigurator<Entities.Contract.AbstractSale>(),
                     new Configurators.LegalClientWholesaleSaleEntityTypeConfigurator(),
                     new Configurators.NaturalClientWholesaleSaleEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.RetailSale>()
-                };
+                ];
             }
         }
 

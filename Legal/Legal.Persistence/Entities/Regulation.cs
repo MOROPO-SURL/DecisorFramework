@@ -20,7 +20,7 @@
         public System.Guid KindId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(StructureId))]
-        public CentralStateStructure Structure { get; set; }
+        public Domain.Persistence.Entities.CentralStateStructure Structure { get; set; }
         public System.Guid StructureId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]

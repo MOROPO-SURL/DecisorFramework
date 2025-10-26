@@ -3,11 +3,13 @@ using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Context.Contract
 {
-    public interface IDomainDbContext : HumanResources.Persistence.ORM.EF.Context.Contract.IHumanResourcesDbContext
+    public interface IDomainDbContext
     {
         public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
         public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
+        public DbSet<CentralStateStructure> CentralStateStructures { get; set; }
         public DbSet<OrganizationContact> OrganizationContacts { get; set; }
+        public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<PersonContact> PersonContacts { get; set; }
         public DbSet<PropertyKind> PropertyKinds { get; set; }
         public DbSet<Property> Properties { get; set; }
@@ -23,5 +25,7 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Context.Contract
         public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
         public DbSet<Structure> Structures { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
+        public DbSet<UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
     }
 }

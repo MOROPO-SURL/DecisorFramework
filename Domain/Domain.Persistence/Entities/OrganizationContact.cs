@@ -10,7 +10,7 @@
         public System.Guid BusinessKindId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CentralStateStructureId))]
-        public Legal.Persistence.Entities.CentralStateStructure CentralStateStructure { get; set; }
+        public CentralStateStructure CentralStateStructure { get; set; }
         public System.Guid? CentralStateStructureId { get; set; }
 
         [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]+$")]

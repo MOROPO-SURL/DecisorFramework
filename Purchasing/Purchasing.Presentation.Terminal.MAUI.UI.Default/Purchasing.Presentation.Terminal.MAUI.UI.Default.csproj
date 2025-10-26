@@ -30,7 +30,6 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Commercial\Commercial.Presentation.Terminal.MAUI.UI.Default\Commercial.Presentation.Terminal.MAUI.UI.Default.csproj" />
-		<ProjectReference Include="..\..\HumanResources\HumanResources.Interop.API.Connect\HumanResources.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\Purchasing.Presentation.Terminal.MAUI\Purchasing.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 </Project>

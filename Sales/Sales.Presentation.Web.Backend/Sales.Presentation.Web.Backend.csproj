@@ -10,10 +10,5 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Sales.Presentation.Web.Common\Sales.Presentation.Web.Common.csproj" />
-		<ProjectReference Include="..\Sales.Interop.API.Common\Sales.Interop.API.Common.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Controllers\" />
-	  <Folder Include="Models\View\Display\" />
 	</ItemGroup>
 </Project>

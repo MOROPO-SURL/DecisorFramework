@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-
-namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities
+﻿namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities
 {
     public class Product : Core.Persistence.Entities.Contract.AbstractGoods
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DefaultUnitMeasurementId))]
-        public UnitMeasurement UnitMeasurement { get; set; }
+        public Domain.Persistence.Entities.UnitMeasurement UnitMeasurement { get; set; }
         public System.Guid DefaultUnitMeasurementId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(FamilyId))]
@@ -14,11 +12,11 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.Entities
 
         public System.TimeSpan? ExpirationTime { get; set; }
 
-        public virtual ICollection<Classification> Classifications { get; set; }
+        public virtual System.Collections.Generic.ICollection<Classification> Classifications { get; set; }
 
-        public List<ProductCustomAttributeBridge> CustomAttributeBridges { get; set; } = new List<ProductCustomAttributeBridge>();
+        public System.Collections.Generic.List<ProductCustomAttributeBridge> CustomAttributeBridges { get; set; } = new System.Collections.Generic.List<ProductCustomAttributeBridge>();
 
-        public List<ProductWarehousingDecreaseKindBridge> WarehousingDecreaseKindBridges { get; set; } = new List<ProductWarehousingDecreaseKindBridge>();
+        public System.Collections.Generic.List<ProductWarehousingDecreaseKindBridge> WarehousingDecreaseKindBridges { get; set; } = new System.Collections.Generic.List<ProductWarehousingDecreaseKindBridge>();
     }
 }
 

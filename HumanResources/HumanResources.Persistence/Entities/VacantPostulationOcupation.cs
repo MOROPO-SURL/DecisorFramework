@@ -17,7 +17,7 @@
         public string RepresentativeName { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CentralStateStructureId))]
-        public Legal.Persistence.Entities.CentralStateStructure CentralStateStructure { get; set; }
+        public Domain.Persistence.Entities.CentralStateStructure CentralStateStructure { get; set; }
         public System.Guid? CentralStateStructureId { get; set; }
 
         public System.DateTime StartAt { get; set; }

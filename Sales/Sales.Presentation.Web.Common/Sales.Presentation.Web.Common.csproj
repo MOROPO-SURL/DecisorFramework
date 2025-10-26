@@ -6,7 +6,10 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Sales.Presentation.Web.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Core\Core.Presentation.Web.Common\Core.Presentation.Web.Common.csproj" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Persistence.ORM.EF" Version="6.0.1" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Sales.Interop.API.Common\Sales.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Sales.Persistence.ORM.EF\Sales.Persistence.ORM.EF.csproj" />
 	</ItemGroup>
 </Project>

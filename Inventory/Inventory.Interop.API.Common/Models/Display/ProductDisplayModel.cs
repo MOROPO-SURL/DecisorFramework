@@ -16,7 +16,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
 
         public int Priority { get; set; }
 
-        public UnitMeasurementDisplayModel DefaultUnitMeasurement { get; set; }
+        public Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel DefaultUnitMeasurement { get; set; }
 
         public FamilyDisplayModel Category { get; set; }
 
@@ -31,7 +31,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display
             Description = entity.Description;
             At = entity.At;
             Priority = entity.Priority;
-            DefaultUnitMeasurement = new UnitMeasurementDisplayModel();
+            DefaultUnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel();
             
             DefaultUnitMeasurement.Import(entity.UnitMeasurement);
 

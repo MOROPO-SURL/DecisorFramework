@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract
 {
-    public interface ICommercialDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext
+    public interface ICommercialDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext, Legal.Persistence.ORM.EF.Context.Contract.ILegalDbContext
     {
         public DbSet<PaymentTerm> PaymentTerms { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }

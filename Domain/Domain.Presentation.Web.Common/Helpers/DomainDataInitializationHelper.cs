@@ -105,6 +105,25 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Helpers
             }
             #endregion
 
+            #region Colaborator
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ColaboratorViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.ColaboratorViewerPermission.ToPermissionEntity(Authorization.ColaboratorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ColaboratorCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ColaboratorCreatorPermission.ToPermissionEntity(Authorization.ColaboratorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ColaboratorEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ColaboratorEditorPermission.ToPermissionEntity(Authorization.ColaboratorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ColaboratorRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.ColaboratorRemoverPermission.ToPermissionEntity(Authorization.ColaboratorManagementPermissionGroup));
+            }
+            #endregion
+
             #region OrganizationContact
             if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.OrganizationContactViewerPermission)))
             {
@@ -273,6 +292,25 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Helpers
             if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.VehicleKindRemoverPermission)))
             {
                 permissionDbSet.Add(Authorization.VehicleKindRemoverPermission.ToPermissionEntity(Authorization.VehicleKindManagementPermissionGroup));
+            }
+            #endregion
+
+            #region UnitMeasurement
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.UnitMeasurementViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.UnitMeasurementViewerPermission.ToPermissionEntity(Authorization.UnitMeasurementManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.UnitMeasurementCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.UnitMeasurementCreatorPermission.ToPermissionEntity(Authorization.UnitMeasurementManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.UnitMeasurementEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.UnitMeasurementEditorPermission.ToPermissionEntity(Authorization.UnitMeasurementManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.UnitMeasurementRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.UnitMeasurementRemoverPermission.ToPermissionEntity(Authorization.UnitMeasurementManagementPermissionGroup));
             }
             #endregion
 

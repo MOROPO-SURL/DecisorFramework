@@ -1,12 +1,11 @@
-﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class ElaborationConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ElaborationDisplayModel>
     {
-        private ProductDisplayModel product;
-        private ClassificationDisplayModel classification;
+        private Inventory.Interop.API.Common.Models.Display.ProductDisplayModel product;
+        private Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel classification;
         private string description;
         private int priority = 1;
         private decimal referenceAmount;
@@ -36,9 +35,9 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public System.Guid Id { get; set; }
 
-        public ProductDisplayModel Product { get => product; set => SetProperty(ref product, value); }
+        public Inventory.Interop.API.Common.Models.Display.ProductDisplayModel Product { get => product; set => SetProperty(ref product, value); }
 
-        public ClassificationDisplayModel Classification { get => classification; set => SetProperty(ref classification, value); }
+        public Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel Classification { get => classification; set => SetProperty(ref classification, value); }
 
         public string Description { get => description; set => SetProperty(ref description, value); }
 
@@ -50,12 +49,12 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public decimal MaxPerformanceCoefficient { get => maxPerformanceCoefficient; set => SetProperty(ref maxPerformanceCoefficient, value); }
 
-        public ObservableCollection<ProductDisplayModel> InputProducts { get; set; } = [];
+        public ObservableCollection<Inventory.Interop.API.Common.Models.Display.ProductDisplayModel> InputProducts { get; set; } = [];
 
-        public ObservableCollection<ProductDisplayModel> OutputProducts { get; set; } = [];
+        public ObservableCollection<Inventory.Interop.API.Common.Models.Display.ProductDisplayModel> OutputProducts { get; set; } = [];
 
         public ObservableCollection<Interop.API.Common.Models.Display.ElaborationStepDisplayModel> Steps { get; set; } = [];
 
-        public ObservableCollection<ClassificationDisplayModel> AvailableClassifications { get; set; } = [];
+        public ObservableCollection<Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel> AvailableClassifications { get; set; } = [];
     }
 }

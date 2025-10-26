@@ -9,7 +9,7 @@
         public Inventory.Persistence.Entities.Product Product { get; set; }
         public System.Guid ProductId { get; set; }
 
-        public Inventory.Persistence.Entities.UnitMeasurement UnitMeasurement { get; set; }
+        public Domain.Persistence.Entities.UnitMeasurement UnitMeasurement { get; set; }
 
         public decimal UnitPrice { get; set; }
 

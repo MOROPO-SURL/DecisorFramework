@@ -9,6 +9,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions
     {
         public static void AddDecisorDomainPresentationWebCommon(this IServiceCollection services)
         {
+
+            services.AddScoped<IEntityRepository<CentralStateStructure, System.Guid>, CentralStateSctructureRepository>();
+            services.AddScoped<IEntityRepository<Colaborator, System.Guid>, ColaboratorRepository>();
             services.AddScoped<IEntityRepository<PersonContact, System.Guid>, PersonContactRepository>();
             services.AddScoped<IEntityRepository<OrganizationContact, System.Guid>, OrganizationContactRepository>();
             services.AddScoped<IEntityRepository<LegalBusinessKind, System.Guid>, LegalBusinessKindRepository>();
@@ -24,6 +27,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<VehicleKind, System.Guid>, VehicleKindRepository>();
             services.AddScoped<IEntityRepository<Vehicle, System.Guid>, VehicleRepository>();
             services.AddScoped<IEntityRepository<Employee, System.Guid>, EmployeeRepository>();
+            services.AddScoped<IEntityRepository<UnitMeasurement, System.Guid>, UnitMeasurementRepository>();
+            services.AddScoped<IBridgeRepository<UnitMeasurementConversionBridge, UnitMeasurement, System.Guid, UnitMeasurement, System.Guid>, UnitMeasurementConversionBridgeRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.DomainDbSchemaConfigurationProvider>();
 

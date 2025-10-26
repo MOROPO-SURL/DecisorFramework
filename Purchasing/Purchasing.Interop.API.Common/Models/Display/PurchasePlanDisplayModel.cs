@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
@@ -15,11 +13,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public int Priority { get; set; }
 
-        public EmployeeDisplayModel Planner { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Planner { get; set; }
 
-        public EmployeeDisplayModel Responsible { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get; set; }
 
-        public EmployeeDisplayModel Decisor { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Decisor { get; set; }
 
         public PurchaseZoneDisplayModel Zone { get; set; }
 
@@ -50,15 +48,15 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             Zone = new PurchaseZoneDisplayModel();
             Zone.Import(entity.Zone);
 
-            Planner = new EmployeeDisplayModel();
+            Planner = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
             Planner.Import(entity.Planner);
 
-            Responsible = new EmployeeDisplayModel();
+            Responsible = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
             Responsible.Import(entity.Responsible);
 
             if (entity.Decisor != null)
             {
-                Decisor = new EmployeeDisplayModel();
+                Decisor = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
                 Decisor.Import(entity.Decisor);
             }
 
@@ -67,7 +65,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 var model = new PurchasePlanCommonProductBridgeModel
                 {
                     Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    UnitMeasurement = new UnitMeasurementDisplayModel(),
+                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
                     Amount = bridge.Amount
                 };
 
@@ -82,7 +80,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 var model = new PurchasePlanCommonProductBridgeModel
                 {
                     Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    UnitMeasurement = new UnitMeasurementDisplayModel(),
+                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
                     Amount = bridge.Amount
                 };
 

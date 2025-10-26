@@ -73,7 +73,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                     Provider = new Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel(),
                     CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
-                    UnitMeasurement = new Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
                     Cost = bridge.Cost
                 };
 
@@ -93,7 +93,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                     Provider = new Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel(),
                     CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
-                    UnitMeasurement = new Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
                     Cost = bridge.Cost
                 };
 
@@ -146,7 +146,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             {
                 var model = new PurchaseColaboratorBridgeModel
                 {
-                    Colaborator = new Essential.Interop.API.Common.Models.Display.ColaboratorDisplayModel(),
+                    Colaborator = new Domain.Interop.API.Common.Models.Display.ColaboratorDisplayModel(),
                     Role = bridge.Role
                 };
 

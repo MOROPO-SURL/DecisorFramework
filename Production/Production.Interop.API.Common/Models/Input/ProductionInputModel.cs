@@ -1,5 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge;
-using System.Linq;
+﻿using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 {
@@ -17,11 +16,11 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public string Description { get; set; }
 
-        public System.Collections.Generic.List<ProductionProductBridgeModel> ProductBridges { get; set; } = new System.Collections.Generic.List<ProductionProductBridgeModel>();
+        public System.Collections.Generic.List<Bridge.ProductionProductBridgeModel> ProductBridges { get; set; } = new System.Collections.Generic.List<Bridge.ProductionProductBridgeModel>();
 
-        public System.Collections.Generic.List<ProductionEmployeeBridgeModel> EmployeeBridges { get; set; } = new System.Collections.Generic.List<ProductionEmployeeBridgeModel>();
+        public System.Collections.Generic.List<Bridge.ProductionEmployeeBridgeModel> EmployeeBridges { get; set; } = new System.Collections.Generic.List<Bridge.ProductionEmployeeBridgeModel>();
 
-        public System.Collections.Generic.List<ProductionColaboratorBridgeModel> ColaboratorBridges { get; set; } = new System.Collections.Generic.List<ProductionColaboratorBridgeModel>();
+        public System.Collections.Generic.List<Bridge.ProductionColaboratorBridgeModel> ColaboratorBridges { get; set; } = new System.Collections.Generic.List<Bridge.ProductionColaboratorBridgeModel>();
 
         public Persistence.Entities.Production Export()
         {
