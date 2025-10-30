@@ -57,8 +57,8 @@ public partial class PurchaseOrderConfigurationPage : Core.Presentation.Terminal
             ZoneId = ConcreteBindingContext.Zone.Id,
             AdvanceRequired = ConcreteBindingContext.HasAdvanceRequired ? ConcreteBindingContext.AdvanceRequired : null,
             AdvanceRequiredCurrencyId = ConcreteBindingContext.HasAdvanceRequired ? ConcreteBindingContext.AdvanceRequiredCurrency.Id : null,
-            LegalProviderBridges = [.. ConcreteBindingContext.LegalProviderBridges],
-            NaturalProviderBridges = [.. ConcreteBindingContext.NaturalProviderBridges],
+            LegalProviderBudgets = [.. ConcreteBindingContext.LegalProviderBudgets],
+            NaturalProviderBudgets = [.. ConcreteBindingContext.NaturalProviderBudgets],
             ResultProductBridges = [.. ConcreteBindingContext.ResultProductBridges],
             SpentProductBridges = [.. ConcreteBindingContext.SpentProductBridges]
         };
@@ -84,8 +84,8 @@ public partial class PurchaseOrderConfigurationPage : Core.Presentation.Terminal
             ZoneId = ConcreteBindingContext.Zone.Id,
             AdvanceRequired = ConcreteBindingContext.HasAdvanceRequired ? ConcreteBindingContext.AdvanceRequired : null,
             AdvanceRequiredCurrencyId = ConcreteBindingContext.HasAdvanceRequired ? ConcreteBindingContext.AdvanceRequiredCurrency.Id : null,
-            LegalProviderBridges = [.. ConcreteBindingContext.LegalProviderBridges],
-            NaturalProviderBridges = [.. ConcreteBindingContext.NaturalProviderBridges],
+            LegalProviderBudgets = [.. ConcreteBindingContext.LegalProviderBudgets],
+            NaturalProviderBudgets = [.. ConcreteBindingContext.NaturalProviderBudgets],
             ResultProductBridges = [.. ConcreteBindingContext.ResultProductBridges],
             SpentProductBridges = [.. ConcreteBindingContext.SpentProductBridges]
         };
@@ -311,7 +311,7 @@ public partial class PurchaseOrderConfigurationPage : Core.Presentation.Terminal
         {
             if (!task.Result) return;
 
-            Dispatcher.Dispatch(() => ConcreteBindingContext.LegalProviderBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseOrderLegalProviderBridgeModel));
+            Dispatcher.Dispatch(() => ConcreteBindingContext.LegalProviderBudgets.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseOrderLegalProviderBridgeModel));
         });
     }
 
@@ -323,13 +323,13 @@ public partial class PurchaseOrderConfigurationPage : Core.Presentation.Terminal
 
             hasChangesFlag = true;
 
-            Dispatcher.Dispatch(() => ConcreteBindingContext.NaturalProviderBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseOrderNaturalProviderBridgeModel));
+            Dispatcher.Dispatch(() => ConcreteBindingContext.NaturalProviderBudgets.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseOrderNaturalProviderBridgeModel));
         });
     }
 
     private void LegalProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel model)
     {
-        ConcreteBindingContext.LegalProviderBridges.Add(new Interop.API.Common.Models.Bridge.PurchaseOrderLegalProviderBridgeModel
+        ConcreteBindingContext.LegalProviderBudgets.Add(new Interop.API.Common.Models.Bridge.PurchaseOrderLegalProviderBridgeModel
         {
             Provider = model,
             Debt = 0
@@ -340,7 +340,7 @@ public partial class PurchaseOrderConfigurationPage : Core.Presentation.Terminal
 
     private void NaturalProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
     {
-        ConcreteBindingContext.NaturalProviderBridges.Add(new Interop.API.Common.Models.Bridge.PurchaseOrderNaturalProviderBridgeModel
+        ConcreteBindingContext.NaturalProviderBudgets.Add(new Interop.API.Common.Models.Bridge.PurchaseOrderNaturalProviderBridgeModel
         {
             Provider = model,
             Debt = 0

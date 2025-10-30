@@ -28,9 +28,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
 
         public List<Bridge.PurchaseCommonProductBridgeModel> SpentProductBridges { get; set; } = new List<Bridge.PurchaseCommonProductBridgeModel>();
 
-        public List<Bridge.PurchaseOrderLegalProviderBridgeModel> LegalProviderBridges { get; set; } = new List<Bridge.PurchaseOrderLegalProviderBridgeModel>();
+        public List<Display.LegalProviderBudgetDisplayModel> LegalProviderBudgets { get; set; } = new List<Display.LegalProviderBudgetDisplayModel>();
 
-        public List<Bridge.PurchaseOrderNaturalProviderBridgeModel> NaturalProviderBridges { get; set; } = new List<Bridge.PurchaseOrderNaturalProviderBridgeModel>();
+        public List<Display.NaturalProviderBudgetDisplayModel> NaturalProviderBudgets { get; set; } = new List<Display.NaturalProviderBudgetDisplayModel>();
 
         public Persistence.Entities.PurchaseOrder Export()
         {

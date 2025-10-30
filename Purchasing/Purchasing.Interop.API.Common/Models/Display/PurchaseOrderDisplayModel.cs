@@ -33,9 +33,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public List<PurchaseCommonProductBridgeModel> SpentProductBridges { get; set; } = new List<PurchaseCommonProductBridgeModel>();
 
-        public List<PurchaseOrderLegalProviderBridgeModel> LegalProviderBridges { get; set; } = new List<PurchaseOrderLegalProviderBridgeModel>();
+        public List<LegalProviderBudgetDisplayModel> LegalProviderBudgets { get; set; } = new List<LegalProviderBudgetDisplayModel>();
 
-        public List<PurchaseOrderNaturalProviderBridgeModel> NaturalProviderBridges { get; set; } = new List<PurchaseOrderNaturalProviderBridgeModel>();
+        public List<NaturalProviderBudgetDisplayModel> NaturalProviderBudgets { get; set; } = new List<NaturalProviderBudgetDisplayModel>();
 
         public void Import(Persistence.Entities.PurchaseOrder entity)
         {
@@ -80,62 +80,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 AdvanceRequiredCurrency = new Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel();
 
                 AdvanceRequiredCurrency.Import(entity.AdvanceRequiredCurrency);
-            }
-
-            foreach (var bridge in entity.ResultProductBridges)
-            {
-                var model = new PurchaseCommonProductBridgeModel
-                {
-                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
-                    Amount = bridge.Amount
-                };
-
-                model.Product.Import(bridge.Stern);
-                model.UnitMeasurement.Import(bridge.UnitMeasurement);
-
-                ResultProductBridges.Add(model);
-            }
-
-            foreach (var bridge in entity.SpentProductBridges)
-            {
-                var model = new PurchaseCommonProductBridgeModel
-                {
-                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
-                    Amount = bridge.Amount
-                };
-
-                model.Product.Import(bridge.Stern);
-                model.UnitMeasurement.Import(bridge.UnitMeasurement);
-
-                SpentProductBridges.Add(model);
-            }
-
-            foreach (var bridge in entity.LegalProviderBridges)
-            {
-                var model = new PurchaseOrderLegalProviderBridgeModel
-                {
-                    Provider = new Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel(),
-                    Debt = bridge.Debt
-                };
-
-                model.Provider.Import(bridge.Stern);
-
-                LegalProviderBridges.Add(model);
-            }
-
-            foreach (var bridge in entity.NaturalProviderBridges)
-            {
-                var model = new PurchaseOrderNaturalProviderBridgeModel
-                {
-                    Provider = new Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel(),
-                    Debt = bridge.Debt
-                };
-
-                model.Provider.Import(bridge.Stern);
-
-                NaturalProviderBridges.Add(model);
             }
         }
     }

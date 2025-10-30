@@ -1,6 +1,5 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration
@@ -41,8 +40,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
             hasAdvanceRequired = model.AdvanceRequired != null;
             estimatedAdvance = model.AdvanceRequired ?? 0;
             advanceRequiredCurrency = model.AdvanceRequiredCurrency;
-            LegalProviderBridges = [.. model.LegalProviderBridges];
-            NaturalProviderBridges = [.. model.NaturalProviderBridges];
+            LegalProviderBudgets = [.. model.LegalProviderBudgets];
+            NaturalProviderBudgets = [.. model.NaturalProviderBudgets];
             ResultProductBridges = [.. model.ResultProductBridges];
             SpentProductBridges = [.. model.SpentProductBridges];
         }
@@ -69,13 +68,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
 
         public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get => agreement; set => SetProperty(ref agreement, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<PurchaseOrderLegalProviderBridgeModel> LegalProviderBridges { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<LegalProviderBudgetDisplayModel> LegalProviderBudgets { get; set; } = [];
 
-        public System.Collections.ObjectModel.ObservableCollection<PurchaseOrderNaturalProviderBridgeModel> NaturalProviderBridges { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<NaturalProviderBudgetDisplayModel> NaturalProviderBudgets { get; set; } = [];
 
-        public System.Collections.ObjectModel.ObservableCollection<PurchaseCommonProductBridgeModel> ResultProductBridges { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.PurchaseCommonProductBridgeModel> ResultProductBridges { get; set; } = [];
 
-        public System.Collections.ObjectModel.ObservableCollection<PurchaseCommonProductBridgeModel> SpentProductBridges { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.PurchaseCommonProductBridgeModel> SpentProductBridges { get; set; } = [];
 
         public PurchaseZoneDisplayModel[] AvailableZones { get; set; }
 

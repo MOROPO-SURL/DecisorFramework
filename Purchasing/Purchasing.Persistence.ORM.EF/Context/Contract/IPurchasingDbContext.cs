@@ -28,10 +28,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Context.Contrac
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
         public DbSet<PurchaseOrderProductResultBridge> PurchaseOrderProductResultBridges { get; set; }
         public DbSet<PurchaseOrderProductSpentBridge> PurchaseOrderProductSpentBridges { get; set; }
-        public DbSet<PurchaseOrderLegalProviderBridge> PurchasePlanLegalProviderBridges { get; set; }
-        public DbSet<PurchaseOrderNaturalProviderBridge> PurchasePlanNaturalProviderBridges { get; set; }
+        public DbSet<PurchaseOrderLegalProviderBudgetBridge> PurchaseOrderLegalProviderBudgetBridges { get; set; }
+        public DbSet<PurchaseOrderNaturalProviderBudgetBridge> PurchaseOrderNaturalProviderBudgetBridges { get; set; }
         public DbSet<PurchaseCashAdvance> PurchaseCashAdvances { get; set; }
-        public DbSet<PurchaseOrderDeparture> PurchasePlanDepartures { get; set; }
+        public DbSet<PurchaseOrderDeparture> PurchaseOrderDepartures { get; set; }
         public DbSet<PurchaseReception> PurchaseReceptions { get; set; }
         public DbSet<PurchaseReceptionProductWeightBridge> PurchaseReceptionProductWeightBridges { get; set; }
     }
