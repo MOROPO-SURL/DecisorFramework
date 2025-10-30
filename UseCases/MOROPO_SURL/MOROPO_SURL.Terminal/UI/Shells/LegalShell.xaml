@@ -72,16 +72,6 @@
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
-        Title="Organismos"
-        ContentTemplate="{DataTemplate decisorframework_legal_manage_pages:CentralStateStructuresManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xFA35;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
         Title="Publicaciones Legislativas"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>

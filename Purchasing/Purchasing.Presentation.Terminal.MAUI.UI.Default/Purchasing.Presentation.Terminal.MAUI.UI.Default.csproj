@@ -30,7 +30,80 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Commercial\Commercial.Presentation.Terminal.MAUI.UI.Default\Commercial.Presentation.Terminal.MAUI.UI.Default.csproj" />
-		<ProjectReference Include="..\..\HumanResources\HumanResources.Interop.API.Connect\HumanResources.Interop.API.Connect.csproj" />
+		<ProjectReference Include="..\..\Governance\Governance.Presentation.Terminal.MAUI.UI.Default\Governance.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Purchasing.Presentation.Terminal.MAUI\Purchasing.Presentation.Terminal.MAUI.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Pages\Configuration\PurchaseOrderConfigurationPage.xaml.cs">
+	    <DependentUpon>PurchaseOrderConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\PurchaseCommonProductBridgeConfigurationPage.xaml.cs">
+	    <DependentUpon>PurchaseCommonProductBridgeConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\PurchaseSpentDetailPage.xaml.cs">
+	    <DependentUpon>PurchaseSpentDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\PurchaseRequestsManagePage.xaml.cs">
+	    <DependentUpon>PurchaseRequestsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\PurchaseOrdersManagePage.xaml.cs">
+	    <DependentUpon>PurchaseOrdersManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\PurchaseRequestPickPage.xaml.cs">
+	    <DependentUpon>PurchaseRequestPickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\PurchaseOrderDefaultCardView.xaml.cs">
+	    <DependentUpon>PurchaseOrderDefaultCardView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\CommonBugetProductBridgeConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\LegalProviderBudgetConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\NaturalProviderBudgetConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\PurchaseRequestConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\LegalProviderBudgetDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\NaturalProviderBudgetDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\PurchaseOrderDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\PurchaseRequestDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\PurchaseSpentDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\LegalProviderBudgetsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\NaturalProviderBudgetsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\LegalProviderBudgetPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\PurchaseOrderPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\LegalProviderBudgetDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\NaturalProviderBudgetDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\PurchaseRequestDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>

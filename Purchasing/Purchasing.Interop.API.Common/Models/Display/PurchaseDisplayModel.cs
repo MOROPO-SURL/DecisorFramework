@@ -9,9 +9,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public System.DateTime At { get; set; }
 
-        public PurchasePlanDisplayModel Plan { get; set; }
-
-        public PurchaseZoneDisplayModel Zone { get; set; }
+        public PurchaseOrderDisplayModel Order { get; set; }
 
         public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Purchaser { get; set; }
 
@@ -39,18 +37,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             At = entity.At;
             Description = entity.Description;
 
-            if (entity.Plan != null)
+            if (entity.Order != null)
             {
-                Plan = new PurchasePlanDisplayModel();
+                Order = new PurchaseOrderDisplayModel();
 
-                Plan.Import(entity.Plan);
-            }
-
-            if (entity.Zone != null)
-            {
-                Zone = new PurchaseZoneDisplayModel();
-
-                Zone.Import(entity.Zone);
+                Order.Import(entity.Order);
             }
 
             if (entity.Purchaser != null)
@@ -73,7 +64,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                     Provider = new Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel(),
                     CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
-                    UnitMeasurement = new Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
                     Cost = bridge.Cost
                 };
 
@@ -93,7 +84,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                     Provider = new Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel(),
                     CostCenter = new Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel(),
                     Amount = bridge.Amount,
-                    UnitMeasurement = new Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
                     Cost = bridge.Cost
                 };
 
@@ -146,7 +137,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
             {
                 var model = new PurchaseColaboratorBridgeModel
                 {
-                    Colaborator = new Essential.Interop.API.Common.Models.Display.ColaboratorDisplayModel(),
+                    Colaborator = new Domain.Interop.API.Common.Models.Display.ColaboratorDisplayModel(),
                     Role = bridge.Role
                 };
 

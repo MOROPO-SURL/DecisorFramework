@@ -1,6 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge;
-using System.Linq;
+﻿using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 {
@@ -16,15 +14,15 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public decimal Amount { get; set; }
 
-        public UnitMeasurementDisplayModel UnitMeasurement { get; set; }
+        public Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get; set; }
 
         public string Description { get; set; }
 
-        public ProductionProductBridgeModel[] ProductBridges { get; set; }
+        public Bridge.ProductionProductBridgeModel[] ProductBridges { get; set; }
 
-        public ProductionEmployeeBridgeModel[] EmployeeBridges { get; set; }
+        public Bridge.ProductionEmployeeBridgeModel[] EmployeeBridges { get; set; }
 
-        public ProductionColaboratorBridgeModel[] ColaboratorBridges { get; set; }
+        public Bridge.ProductionColaboratorBridgeModel[] ColaboratorBridges { get; set; }
 
         public virtual void Import(Persistence.Entities.Production entity)
         {
@@ -35,11 +33,11 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             Description = entity.Description;
             ProductBridges = entity.ProductBridges.Select(bridge =>
             {
-                var model = new ProductionProductBridgeModel
+                var model = new Bridge.ProductionProductBridgeModel
                 {
-                    Product = new ProductDisplayModel(),
+                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
                     Amount = bridge.Amount,
-                    UnitMeasurement = new UnitMeasurementDisplayModel()
+                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel()
                 };
 
                 model.Product.Import(bridge.Stern);
@@ -49,7 +47,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             }).ToArray();
             EmployeeBridges = entity.EmployeeBridges.Select(bridge =>
             {
-                var model = new ProductionEmployeeBridgeModel
+                var model = new Bridge.ProductionEmployeeBridgeModel
                 {
                     Employee = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel(),
                     WorkPosition = new HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel(),
@@ -64,9 +62,9 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             }).ToArray();
             ColaboratorBridges = entity.ColaboratorBridges.Select(bridge =>
             {
-                var model = new ProductionColaboratorBridgeModel
+                var model = new Bridge.ProductionColaboratorBridgeModel
                 {
-                    Colaborator = new Essential.Interop.API.Common.Models.Display.ColaboratorDisplayModel(),
+                    Colaborator = new Domain.Interop.API.Common.Models.Display.ColaboratorDisplayModel(),
                     WorkPosition = new HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel(),
                     Step = new ElaborationStepDisplayModel()
                 };
@@ -87,7 +85,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
             if (entity.UnitMeasurement != null)
             {
-                UnitMeasurement = new UnitMeasurementDisplayModel();
+                UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel();
 
                 UnitMeasurement.Import(entity.UnitMeasurement);
             }

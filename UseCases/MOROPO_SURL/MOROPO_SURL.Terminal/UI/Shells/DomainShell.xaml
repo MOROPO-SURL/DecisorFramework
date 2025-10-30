@@ -90,12 +90,32 @@
     </ShellContent>
     <MenuFlyoutItem Text="Complementarios" IsEnabled="False" />
     <ShellContent
+        Title="Organismos"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:CentralStateStructuresManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA35;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
         Title="Marcas"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:BrandsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF4CF;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Unidades de Medida"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:UnitMeasurementsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF472;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

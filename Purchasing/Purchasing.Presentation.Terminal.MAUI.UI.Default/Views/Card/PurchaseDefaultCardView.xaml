@@ -21,8 +21,8 @@
                     FontAttributes="Bold"
                     FontSize="Medium"
                     LineBreakMode="TailTruncation"
-                    Text="{Binding Path=At, StringFormat='{0:D}'}" />
-                <Label Text="{Binding Plan.Zone.Name}" />
+                    Text="{Binding At, StringFormat='{0:D}'}" />
+                <Label Text="{Binding Order.Zone.Name}" />
                 <Label 
                     Margin="0,8,0,0"
                     Text="Productos"

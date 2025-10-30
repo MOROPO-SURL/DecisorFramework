@@ -11,6 +11,8 @@ public partial class PurchaseZoneDetailPage : Core.Presentation.Terminal.MAUI.UI
         InitializeComponent();
 
         this.delegationAction = delegationAction;
+
+        if (delegationAction == null) OptionButtonsStackLayout.IsVisible = false;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)

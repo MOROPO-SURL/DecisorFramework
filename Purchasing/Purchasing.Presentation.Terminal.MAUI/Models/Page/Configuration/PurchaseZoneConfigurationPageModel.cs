@@ -1,27 +1,22 @@
-﻿using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
-using System.Collections.ObjectModel;
-
-namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration
+﻿namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class PurchaseZoneConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+
         private string name;
         private string description;
         private int priority = 1;
 
-        public PurchaseZoneConfigurationPageModel() : this(null) { }
-
         public PurchaseZoneConfigurationPageModel(Interop.API.Common.Models.Display.PurchaseZoneDisplayModel model) : base(model)
         {
-            if (model != null)
-            {
-                Id = model.Id;
-                Name = model.Name;
-                Description = model.Description;
-                Priority = model.Priority;
-
-                foreach (var item in model.SpentBridges) SpentBridges.Add(item);
-            }
+            if (model == null) return;
+            
+            Id = model.Id;
+            name = model.Name;
+            description = model.Description;
+            priority = model.Priority;
+            SpentBridges = [.. model.SpentBridges];
         }
 
         public System.Guid Id { get; set; }
@@ -32,6 +27,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public ObservableCollection<PurchaseZoneSpentBridgeModel> SpentBridges { get; set; } = new ObservableCollection<PurchaseZoneSpentBridgeModel>();
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.PurchaseZoneSpentBridgeModel> SpentBridges { get; set; } = [];
     }
 }

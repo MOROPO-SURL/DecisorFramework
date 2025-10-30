@@ -1,9 +1,8 @@
 ﻿using System.Collections.Generic;
-using MOROPO.Framework.Guama.Core.Persistence.Entities.Contract;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
 {
-    public class PurchaseZone : INamedEntity<System.Guid>, Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
+    public class PurchaseZone : Guama.Core.Persistence.Entities.Contract.INamedEntity<System.Guid>, Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; } = System.Guid.NewGuid();

@@ -8,7 +8,7 @@
 
         public decimal Amount { get; set; }
 
-        public PurchasePlanDisplayModel PurchasePlan { get; set; }
+        public PurchaseOrderDisplayModel PurchasePlan { get; set; }
 
         public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get; set; }
 
@@ -18,11 +18,11 @@
             At = entity.At;
             Amount = entity.Amount;
 
-            if (entity.PurchasePlan != null)
+            if (entity.PurchaseOrder != null)
             {
-                PurchasePlan = new PurchasePlanDisplayModel();
+                PurchasePlan = new PurchaseOrderDisplayModel();
 
-                PurchasePlan.Import(entity.PurchasePlan);
+                PurchasePlan.Import(entity.PurchaseOrder);
             }
 
             if (entity.Responsible != null)

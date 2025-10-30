@@ -149,16 +149,6 @@
                                     {
                                         <span>@item.Purchaser.Contact.Identity.Name @item.Purchaser.Contact.Identity.LastName</span>
                                     }
-                                </td>
-                                <td style="vertical-align: middle;" title="Zona">
-                                    @if (item.Archived)
-                                    {
-                                        <span class="display-archived">@item.Zone.Name</span>
-                                    }
-                                    else
-                                    {
-                                        <span>@item.Zone.Name</span>
-                                    }
                                 </td>                                
                                 <td class="fit" style="vertical-align: middle;">
                                     @using (Html.BeginForm(item.Archived ? "unarchive" : "archive", "Purchases", null, FormMethod.Post, true, null))
@@ -205,7 +195,7 @@
                                                         <dt>Descripción</dt>
                                                         <dd>@item.Description</dd>
                                                         <dt>Plan</dt>
-                                                        <dd>@item.Plan.Description</dd>
+                                                        <dd>@item.Order.Description</dd>
                                                     </dl>
                                                 </div>
                                             </div>

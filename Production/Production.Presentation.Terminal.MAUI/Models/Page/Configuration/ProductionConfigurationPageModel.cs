@@ -1,17 +1,16 @@
-﻿using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
-    public class ProductionConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<ProductionDisplayModel>
+    public class ProductionConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ProductionDisplayModel>
     {
         // TODO Resposible?? !!!!!
-        private ProductionOrderDisplayModel order;
+        private Interop.API.Common.Models.Display.ProductionOrderDisplayModel order;
         private decimal amount;
-        private Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel unitMeasurement;
+        private Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel unitMeasurement;
         private string description;
 
-        public ProductionConfigurationPageModel(ProductionDisplayModel model = null) : base(model)
+        public ProductionConfigurationPageModel(Interop.API.Common.Models.Display.ProductionDisplayModel model = null) : base(model)
         {
             if (model != null)
             {
@@ -30,11 +29,11 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public string Description { get => description; set => SetProperty(ref description, value); }
 
-        public ProductionOrderDisplayModel Order { get => order; set => SetProperty(ref order, value); }
+        public Interop.API.Common.Models.Display.ProductionOrderDisplayModel Order { get => order; set => SetProperty(ref order, value); }
 
         public decimal Amount { get => amount; set => SetProperty(ref amount, value); }
 
-        public Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get => unitMeasurement; set => SetProperty(ref unitMeasurement, value); }
+        public Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get => unitMeasurement; set => SetProperty(ref unitMeasurement, value); }
 
         public ObservableCollection<View.ProductionProductBridgeViewModel> ProductBridges { get; set; } = [];
 
@@ -42,6 +41,6 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public ObservableCollection<Interop.API.Common.Models.Bridge.ProductionColaboratorBridgeModel> ColaboratorBridges { get; set; } = [];
 
-        public Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; } = [];
+        public Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; } = [];
     }
 }

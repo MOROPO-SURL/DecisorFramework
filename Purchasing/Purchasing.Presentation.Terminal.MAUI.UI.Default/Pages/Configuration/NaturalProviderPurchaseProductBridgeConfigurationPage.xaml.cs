@@ -91,7 +91,7 @@ public partial class NaturalProviderPurchaseProductBridgeConfigurationPage : Cor
         {
             concreteBindingContext.IsBusy = true;
 
-            var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+            var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
             unitMeasurementsAPIConnectClient.GetReleatedsAsync(model.DefaultUnitMeasurement.Id).ContinueWith(task =>
             {

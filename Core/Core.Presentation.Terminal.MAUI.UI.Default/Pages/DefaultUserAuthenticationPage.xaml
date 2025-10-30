@@ -56,6 +56,12 @@
                     </VerticalStackLayout>
                 </Grid>
             </ScrollView>
+            <Button
+                Style="{StaticResource FontIconImageButtonStyle}"
+                HorizontalOptions="End" VerticalOptions="Start"
+                Margin="16"
+                Text="&#xF66A;"
+                Clicked="SettingButton_Clicked" />
             <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>       
     </ContentPage.Content>

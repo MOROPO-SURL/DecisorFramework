@@ -8,6 +8,6 @@
 
         public decimal Amount { get => amount; set => SetProperty(ref amount, value); }
 
-        public Inventory.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get; set; }
+        public Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get; set; }
     }
 }

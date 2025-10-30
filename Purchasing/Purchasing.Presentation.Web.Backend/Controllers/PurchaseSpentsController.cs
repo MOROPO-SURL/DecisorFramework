@@ -1,17 +1,11 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
-using MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend.Models.View.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
-using MOROPO.Framework.Guama.Media.Persistence.Entities;
-using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Constants.Security;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
-using System;
-using Microsoft.Extensions.Localization;
-using MOROPO.Framework.Guama.Core.Presentation.Web.Backend.Controllers.Contract;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend.Controllers
 {
@@ -24,7 +18,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend.Controlle
         {
         }
 
-        [RequirePermissions(Authorization.PurchaseSpentPermission)]
+        [RequirePermissions(Authorization.PurchaseSpentViewerPermission)]
         public override IActionResult Index(int sheet = 1, int limit = 25)
         {
             return base.Index(sheet, limit);
@@ -50,9 +44,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Backend.Controlle
             return NotFound();
 
         }
-
-
-
 
         [RequirePermissions(Authorization.PurchaseSpentEditorPermission)]
         public override IActionResult Archive(System.Guid key)

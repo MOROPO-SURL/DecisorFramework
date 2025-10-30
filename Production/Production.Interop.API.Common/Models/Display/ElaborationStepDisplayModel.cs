@@ -1,5 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge;
-using System.Linq;
+﻿using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 {
@@ -17,7 +16,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public decimal MaxDecrease { get; set; }
 
-        public ElaborationStepWorkPositionBridgeModel[] WorkPositions { get; set; }
+        public Bridge.ElaborationStepWorkPositionBridgeModel[] WorkPositions { get; set; }
 
         public void Import(Persistence.Entities.ElaborationStep entity)
         {
@@ -29,7 +28,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             MaxDecrease = entity.MaxDecrease;
             WorkPositions = entity.WorkPositionBridges.Select(bridge =>
             {
-                var model = new ElaborationStepWorkPositionBridgeModel
+                var model = new Bridge.ElaborationStepWorkPositionBridgeModel
                 {
                     WorkPosition = new HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel(),
                     Participation = bridge.Participation,

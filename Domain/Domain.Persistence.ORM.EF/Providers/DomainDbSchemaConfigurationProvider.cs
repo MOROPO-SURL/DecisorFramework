@@ -12,6 +12,8 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Providers
                 {
                     new BaseEntityTypeConfigurator<Entities.LegalBusinessKind>(),
                     new BaseEntityTypeConfigurator<Entities.NaturalBusinessKind>(),
+                    new Configurators.CentralStateStructureEntityTypeConfigurator(),
+                    new Configurators.ColaboratorEntityTypeConfigurator(),
                     new Configurators.OrganizationContactEntityTypeConfigurator(),
                     new Configurators.PersonContactEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.PropertyKind>(),
@@ -27,7 +29,9 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.OrganizationalUnity>(),
                     new Configurators.StructureOrganizationalUnityBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Structure>(),
-                    new Configurators.EmployeeEntityTypeConfigurator()
+                    new Configurators.EmployeeEntityTypeConfigurator(),
+                    new BaseEntityTypeConfigurator<Entities.UnitMeasurement>(),
+                    new Configurators.UnitMeasurementConversionBridgeEntityTypeConfigurator()
                 };
             }
         }
