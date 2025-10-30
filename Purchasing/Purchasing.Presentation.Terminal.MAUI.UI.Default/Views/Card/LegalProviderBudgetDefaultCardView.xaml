@@ -38,7 +38,7 @@
                     Text="{Binding Provider.Contact.BusinessKind.Name, Mode=OneTime}" />
                 <Label 
                     Margin="0,8,0,0"
-                    Text="Número/Año"
+                    Text="Número / Año"
                     TextColor="DimGray"
                     FontSize="Caption"
                     FontAttributes="Bold" />
@@ -48,7 +48,7 @@
                     <Label.FormattedText>
                         <FormattedString>
                             <Span Text="{Binding Number}" />
-                            <Span Text="/" />
+                            <Span Text=" / " />
                             <Span Text="{Binding Year}" />
                         </FormattedString>
                     </Label.FormattedText>

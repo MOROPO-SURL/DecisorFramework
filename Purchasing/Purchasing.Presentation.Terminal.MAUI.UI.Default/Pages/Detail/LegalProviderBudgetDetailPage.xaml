@@ -33,12 +33,12 @@
                                 Text="{Binding Provider.Contact.Identity.Name, Mode=OneTime}" />
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Número/Año" />
+                                Text="Número / Año" />
                             <Label Style="{StaticResource ValuePropertyLabelStyle}">
                                 <Label.FormattedText>
                                     <FormattedString>
                                         <Span Text="{Binding Number, Mode=OneTime}" />
-                                        <Span Text="/" />
+                                        <Span Text=" / " />
                                         <Span Text="{Binding Year, Mode=OneTime}" />
                                     </FormattedString>
                                 </Label.FormattedText>

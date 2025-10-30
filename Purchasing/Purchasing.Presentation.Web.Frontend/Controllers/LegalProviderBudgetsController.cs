@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 
@@ -8,7 +9,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
 {
     [Route("api/fwrk/purchasing/[controller]")]
     [ApiController]
-    public class LegalProviderBudgetsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<LegalProviderBudget, System.Guid, LegalProviderBudgetInputModel, LegalProviderBudgetDisplayModel>
+    public class LegalProviderBudgetsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<LegalProviderBudget, System.Guid, LegalProviderBudgetInputModel, LegalProviderBudgetDisplayModel, LegalProviderBudgetFilterModel>
     {
         public LegalProviderBudgetsController(Guama.Core.Persistence.Repositories.IEntityRepository<LegalProviderBudget, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalProviderBudgetsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalProviderBudgetsController> logger) : base(repository, localizer, logger)
         {

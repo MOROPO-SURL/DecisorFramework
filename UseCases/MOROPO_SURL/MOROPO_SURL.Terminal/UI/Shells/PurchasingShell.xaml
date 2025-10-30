@@ -47,18 +47,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
-    <ShellContent
-        Title="Solicitures"
-        ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:PurchaseRequestsManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF64A;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
     <FlyoutItem
-        Title="Ofertas de Proveedores">
+        Title="Ofertas">
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -70,8 +60,18 @@
             ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:LegalProviderBudgetsManagePage}" />
         <ShellContent
             Title="Naturales"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:NaturalProviderBudgetsManagePage}" />
     </FlyoutItem>
+    <ShellContent
+        Title="Solicitures"
+        ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:PurchaseRequestsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF64A;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <ShellContent
         Title="Órdenes"
         ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:PurchaseOrdersManagePage}">

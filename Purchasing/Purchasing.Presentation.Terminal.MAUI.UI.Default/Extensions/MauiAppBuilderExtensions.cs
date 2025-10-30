@@ -18,13 +18,15 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Defa
                 .AddSingleton<IDetailContentPageFactoryFacade<PurchaseRequestDisplayModel>, PurchaseRequestDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<PurchaseOrderDisplayModel>, PurchaseOrderDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<LegalProviderBudgetDisplayModel>, LegalProviderBudgetDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<NaturalProviderBudgetDisplayModel>, NaturalProviderBudgetDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<PurchaseZoneDisplayModel, PurchaseZoneConfigurationPageModel>, PurchaseZoneConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<PurchaseSpentDisplayModel, PurchaseSpentConfigurationPageModel>, PurchaseSpentConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<PurchaseRequestDisplayModel, PurchaseRequestConfigurationPageModel>, PurchaseRequestConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<PurchaseOrderDisplayModel, PurchaseOrderConfigurationPageModel>, PurchaseOrderConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<LegalProviderBudgetDisplayModel, LegalProviderBudgetConfigurationPageModel>, LegalProviderBudgetConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<LegalProviderBudgetDisplayModel, LegalProviderBudgetConfigurationPageModel>, LegalProviderBudgetConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<NaturalProviderBudgetDisplayModel, NaturalProviderBudgetConfigurationPageModel>, NaturalProviderBudgetConfigurationPageFactory>();
 
             return builder;
         }
