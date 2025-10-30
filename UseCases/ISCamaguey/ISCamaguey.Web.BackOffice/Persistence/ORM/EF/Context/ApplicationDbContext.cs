@@ -92,10 +92,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ServiceValueProposition> ServiceValuePropositions { get; set; }
         public DbSet<ServiceValuePropositionRate> ServiceValuePropositionRates { get; set; }
         public DbSet<ServiceValuePropositionImageBridge> ServiceValuePropositionImageBridges { get; set; }
-        public DbSet<OrganizationContactBudget> OrganizationContactBudgets { get; set; }
-        public DbSet<PersonContactBudget> PersonContactBudgets { get; set; }
-        public DbSet<BudgetProductBridge> BudgetProductBridges { get; set; }
-        public DbSet<BudgetServiceBridge> BudgetServiceBridges { get; set; }
         public DbSet<LegalProvider> LegalProviders { get; set; }
         public DbSet<LegalProviderBankAccountBridge> LegalProviderBankAccountBridges { get; set; }
         public DbSet<LegalProviderDocumentBridge> LegalProviderDocumentBridges { get; set; }
@@ -148,6 +144,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
         public DbSet<Structure> Structures { get; set; }
         public DbSet<Employee> Employees { get; set; }
+        public DbSet<Colaborator> Colaborators { get; set; }
 
         public DbSet<Schooling> Schoolings { get; set; }
         public DbSet<SalaryStandard> SalaryStandards { get; set; }

@@ -105,7 +105,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "unitmeasurements",
                 Action = "Index",
                 Area = "inventory",
-                Role = Framework.Decisor.Inventory.Interop.API.Common.Constants.Security.Authorization.UnitMeasurementViewerPermission
+                Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.UnitMeasurementViewerPermission
             });
             #endregion
 

@@ -2,7 +2,7 @@
 
 namespace MOROPO.ISCamaguey.Decisor.Servicing.Persistence.ORM.EF.Context.Contract
 {
-    public interface IServicingDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDomainDbContext
+    public interface IServicingDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDomainDbContext, Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract.ICommercialDbContext, Framework.Decisor.HumanResources.Persistence.ORM.EF.Context.Contract.IHumanResourcesDbContext
     {
         public DbSet<Entities.TrainingService> TrainingServices { get; set; }
         public DbSet<Entities.TrainingServiceEmployeeBridge> TrainingServiceEmployeeBridges { get; set; }

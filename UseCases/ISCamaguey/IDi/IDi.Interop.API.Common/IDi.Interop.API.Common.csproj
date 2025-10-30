@@ -7,6 +7,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\Domain\Domain.Interop.API.Common\Domain.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\..\..\..\Financial\Financial.Interop.API.Common\Financial.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\IDi.Persistence\IDi.Persistence.csproj" />
 	</ItemGroup>
 </Project>
