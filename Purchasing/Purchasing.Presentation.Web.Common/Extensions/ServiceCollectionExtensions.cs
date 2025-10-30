@@ -9,11 +9,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions
 	{
         public static void AddDecisorPurchasingPresentationWebCommon(this IServiceCollection services)
         {
-            services.AddScoped<IEntityRepository<PurchasePlan, System.Guid>, PurchasePlanRepository>();
+            services.AddScoped<IEntityRepository<PurchaseRequest, System.Guid>, PurchaseRequestRepository>();
+            services.AddScoped<IEntityRepository<PurchaseOrder, System.Guid>, PurchaseOrderRepository>();
             services.AddScoped<IEntityRepository<PurchaseReception, System.Guid>, PurchaseReceptionRepository>();
             services.AddScoped<IEntityRepository<Purchase, System.Guid>, PurchaseRepository>();
             services.AddScoped<IEntityRepository<PurchaseSpent, System.Guid>, PurchaseSpentRepository>();
             services.AddScoped<IEntityRepository<PurchaseZone, System.Guid>, PurchaseZoneRepository>();
+            services.AddScoped<IEntityRepository<LegalProviderBudget, System.Guid>, LegalProviderBudgetRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, Helpers.PurchasingDataInitializationHelper>();
 

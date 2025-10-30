@@ -19,17 +19,25 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Providers
                     new Configurators.PurchaseProductLegalProviderBridgeEntityTypeConfigurator(),
                     new Configurators.PurchaseProductNaturalProviderBridgeEntityTypeConfigurator(),
                     new Configurators.PurchasePurchaseSpentBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.PurchasePlan>(),
-                    new Configurators.PurchasePlanInputProductBridgeEntityTypeConfigurator(),
-                    new Configurators.PurchasePlanLegalProviderBridgeEntityTypeConfigurator(),
-                    new Configurators.PurchasePlanNaturalProviderBridgeEntityTypeConfigurator(),
-                    new Configurators.PurchasePlanOutputProductBridgeEntityTypeConfigurator(),
+                    new BaseEntityTypeConfigurator<Entities.PurchaseRequest>(),
+                    new Configurators.PurchaseRequestProductBridgeEntityTypeConfigurator(),
+                    new BaseEntityTypeConfigurator<Entities.PurchaseOrder>(),
+                    new Configurators.PurchaseOrderProductResultBridgeEntityTypeConfigurator(),
+                    new Configurators.PurchaseOrderProductSpentBridgeEntityTypeConfigurator(),
+                    new Configurators.PurchaseOrderLegalProviderBridgeEntityTypeConfigurator(),
+                    new Configurators.PurchaseOrderNaturalProviderBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.PurchaseCashAdvance>(),
-                    new BaseEntityTypeConfigurator<Entities.PurchasePlanDeparture>(),
+                    new BaseEntityTypeConfigurator<Entities.PurchaseOrderDeparture>(),
                     new Configurators.PurchaseReceptionProductWeightBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.PurchaseSpent>(),
                     new Configurators.PurchaseZoneSpentBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.Role>()
+                    new BaseEntityTypeConfigurator<Entities.Role>(),
+                    new Configurators.LegalProviderBudgetEntityTypeConfigurator(),
+                    new Configurators.LegalProviderBudgetProductBridgeEntityTypeConfigurator(),
+                    new Configurators.LegalProviderBudgetServiceBridgeEntityTypeConfigurator(),
+                    new Configurators.NaturalProviderBudgetEntityTypeConfigurator(),
+                    new Configurators.NaturalProviderBudgetProductBridgeEntityTypeConfigurator(),
+                    new Configurators.NaturalProviderBudgetServiceBridgeEntityTypeConfigurator()
                 ];
             }
         }

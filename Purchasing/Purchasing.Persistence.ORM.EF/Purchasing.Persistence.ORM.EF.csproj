@@ -7,6 +7,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Commercial\Commercial.Persistence.ORM.EF\Commercial.Persistence.ORM.EF.csproj" />
+		<ProjectReference Include="..\..\Governance\Governance.Persistence.ORM.EF\Governance.Persistence.ORM.EF.csproj" />
 		<ProjectReference Include="..\Purchasing.Persistence\Purchasing.Persistence.csproj" />
 	</ItemGroup>
 </Project>

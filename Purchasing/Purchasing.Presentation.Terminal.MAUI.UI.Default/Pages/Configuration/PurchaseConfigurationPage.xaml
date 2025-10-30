@@ -8,6 +8,7 @@
     xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
     xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
+    xmlns:domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PurchaseConfigurationPage"
@@ -37,56 +38,33 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <Grid 
-                Padding="20"
-                ColumnSpacing="16" RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0">
+            <VerticalStackLayout Spacing="4" Padding="8">
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Comprador" />
-                    <Picker 
-                        x:Name="PurchaserPicker" 
-                        ItemsSource="{Binding AvailablePurchasers}"
-                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    <ContentView IsVisible="{Binding Purchaser, Converter={StaticResource IsNotNullConverter}}">
+                        <domain_presentation_card_views:EmployeeDefaultCardView BindingContext="{Binding Purchaser}" />
+                    </ContentView>
+                    <Button
+                        HorizontalOptions="Start"
+                        Text="Seleccionar ..." />
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="1">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Plan" />
-                    <ContentView                        
-                        IsVisible="{Binding Plan, Converter={StaticResource IsNotNullConverter}}">
-                        <local_card_views:PurchasePlanToCompleteDefaultCardView
-                            BindingContext="{Binding Plan}" />
+                <VerticalStackLayout
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Orden" />
+                    <ContentView IsVisible="{Binding Order, Converter={StaticResource IsNotNullConverter}}">
+                        <local_card_views:PurchaseOrderDefaultCardView BindingContext="{Binding Order}" />
                     </ContentView>
                     <Button
                         HorizontalOptions="Start"
                         Text="Seleccionar ..."
-                        Clicked="PlanPickButton_Clicked" />
+                        Clicked="OrderPickButton_Clicked" />
                 </VerticalStackLayout>
-                <VerticalStackLayout 
-                    Spacing="6" 
-                    Grid.Column="1" Grid.Row="1"
-                    VerticalOptions="Start">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Zona" />
-                    <Picker 
-                        x:Name="ZonePicker"
-                        ItemsSource="{Binding AvailableZones}"
-                        SelectedIndexChanged="ZonePicker_SelectedIndexChanged" />
-                    <Label
-                        FontAttributes="Italic"
-                        TextColor="DimGray"
-                        Text="Solo especificar para compras no planificadas!" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="2">
+                <VerticalStackLayout
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Gastos Regulares" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
@@ -179,7 +157,9 @@
                         </Grid>
                     </Frame>
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="3">
+                <VerticalStackLayout
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Gastos Extras" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
@@ -277,11 +257,15 @@
                         </Grid>
                     </Frame>
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="4">
+                <VerticalStackLayout
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="120" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="5">
+                <VerticalStackLayout
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Compras a Proveedores Jurídicos" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
@@ -369,7 +353,9 @@
                         </Grid>
                     </Frame>
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="2" Grid.Row="6">
+                <VerticalStackLayout
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Compras a Proveedores Naturales" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
@@ -464,7 +450,7 @@
                         </Grid>
                     </Frame>
                 </VerticalStackLayout>
-            </Grid>
+            </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>

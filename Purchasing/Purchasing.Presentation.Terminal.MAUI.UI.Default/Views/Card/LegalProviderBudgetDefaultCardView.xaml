@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card.LegalProviderBudgetDefaultCardView"
+    x:DataType="interop_common_display_models:LegalProviderBudgetDisplayModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <communitytoolkit_converters:ListToStringConverter x:Key="ListToStringConverter" Separator=", " />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame Padding="0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0" Grid.RowSpan="3"
+                Aspect="AspectFill"
+                WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                Source="{Binding Provider.Contact.Identity.Image, Mode=OneTime, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+            <StackLayout 
+                Grid.Column="1"
+                Padding="10">
+                <Label 
+                    FontAttributes="Bold"
+                    FontSize="Medium"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Provider.Contact.Identity.Name, Mode=OneTime}" />
+                <Label 
+                    Margin="0,2,0,0"
+                    Text="{Binding Provider.Contact.BusinessKind.Name, Mode=OneTime}" />
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Número/Año"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label 
+                    LineBreakMode="TailTruncation"
+                    FontSize="Medium">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Number}" />
+                            <Span Text="/" />
+                            <Span Text="{Binding Year}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Comprador"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label 
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Commercial.Contact.Identity, Mode=OneTime}" />
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Productos"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding ProductBridges, Converter={StaticResource ListToStringConverter}}" />
+            </StackLayout>
+        </Grid>
+    </Frame>
+</ContentView>

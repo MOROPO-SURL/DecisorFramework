@@ -39,9 +39,10 @@
                                 Text="Descripción" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Description, TargetNullValue='---'}" />
+                                Text="{Binding Description, TargetNullValue='---', FallbackValue='---'}" />
                         </StackLayout>
                         <StackLayout
+                            x:Name="OptionButtonsStackLayout"
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 

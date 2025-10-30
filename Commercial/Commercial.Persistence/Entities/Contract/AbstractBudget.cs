@@ -1,16 +1,18 @@
 ﻿namespace MOROPO.Framework.Decisor.Commercial.Persistence.Entities.Contract
 {
-    public abstract class AbstractBudget
+    [System.ComponentModel.DataAnnotations.Schema.NotMapped]
+    public abstract class AbstractBudget : Guama.Core.Persistence.Entities.Contract.IArchivableEntity<System.Guid>, Guama.Core.Persistence.Entities.Contract.IEnableableEntity<System.Guid>
     {
-        public int Number { get; set; }
-
-        public int Year { get; set; }
+        [System.ComponentModel.DataAnnotations.Key]
+        public System.Guid Id { get; set; }
 
         public bool Enabled { get; set; }
 
         public bool Archived { get; set; }
 
-        public int Priority { get; set; }
+        public int Number { get; set; }
+
+        public int Year { get; set; }
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
@@ -23,10 +25,6 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CommercialId))]
         public Domain.Persistence.Entities.Employee Commercial { get; set; }
         public System.Guid CommercialId { get; set; }
-
-        public System.Collections.Generic.List<BudgetServiceBridge> ServiceBridges { get; set; } = new System.Collections.Generic.List<BudgetServiceBridge>();
-
-        public System.Collections.Generic.List<BudgetProductBridge> ProductBridges { get; set; } = new System.Collections.Generic.List<BudgetProductBridge>();
     }
 }
 

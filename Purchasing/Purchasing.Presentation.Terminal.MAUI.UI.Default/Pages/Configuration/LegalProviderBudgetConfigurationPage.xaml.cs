@@ -1,0 +1,198 @@
+using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using System.Linq;
+
+namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
+
+public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel, Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel, Models.Page.Configuration.LegalProviderBudgetConfigurationPageModel>
+{
+    public LegalProviderBudgetConfigurationPage(System.Action<Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel> successCallbackAction, Models.Page.Configuration.LegalProviderBudgetConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.LegalProviderBudgetConfigurationPageModel> validator) : base(successCallbackAction, model, validator)
+    {
+		InitializeComponent();
+    }
+
+    protected override string EntityTypeName => "Oferta de Proveedor Jurídico";
+
+    protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel> PerformCreationAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.LegalProviderBudgetsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        var model = new Interop.API.Common.Models.Input.LegalProviderBudgetInputModel
+        {
+            Id = System.Guid.NewGuid(),
+            Number = ConcreteBindingContext.Number,
+            Year = ConcreteBindingContext.Year,
+            ProviderId = ConcreteBindingContext.Provider.Id,
+            CommercialId = ConcreteBindingContext.Commercial.Id,
+            Description = ConcreteBindingContext.Description,
+            ProductBridges = [.. ConcreteBindingContext.ProductBridges]
+        };
+
+        await apiConnectClient.CreateAsync(model);
+
+        return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    protected async override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel> PerformEditionAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.LegalProviderBudgetsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        var model = new Interop.API.Common.Models.Input.LegalProviderBudgetInputModel
+        {
+            Id = ConcreteBindingContext.Id,
+            Number = ConcreteBindingContext.Number,
+            Year = ConcreteBindingContext.Year,
+            ProviderId = ConcreteBindingContext.Provider.Id,
+            CommercialId = ConcreteBindingContext.Commercial.Id,
+            Description = ConcreteBindingContext.Description,
+            ProductBridges = [.. ConcreteBindingContext.ProductBridges]
+        };
+
+        await apiConnectClient.EditAsync(model);
+
+        return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
+
+    private void ProviderPickButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.LegalProviderPickPage(ProviderPickComplete_Callback)));
+    }
+
+    private void CommercialPickButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(CommercialPickComplete_Callback)));
+    }
+
+    private void AddProductBridgeButton_Clicked(object sender, System.EventArgs e)
+    {
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var apiConnectClient = new Financial.Interop.API.Connect.Clients.CurrenciesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                var model = new Models.Page.Configuration.CommonBugetProductBridgeConfigurationPageModel(null)
+                {
+                    AvailableCurrencies = await apiConnectClient.GetAsync()
+                };
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(new CommonBugetProductBridgeConfigurationPage(ProductBridgeCreateSuccess_Callback, model));
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        });
+    }
+
+    private void EditProductBridgeButton_Clicked(object sender, System.EventArgs e)
+    {
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var httpClientProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+                var currenciesAPIConnectClient = new Financial.Interop.API.Connect.Clients.CurrenciesAPIConnectClient(httpClientProvider);
+                var classificationsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.ClassificationsAPIConnectClient(httpClientProvider);
+                var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientProvider);
+
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel;
+
+                var model = new Models.Page.Configuration.CommonBugetProductBridgeConfigurationPageModel(target)
+                {
+                    AvailableCurrencies = await currenciesAPIConnectClient.GetAsync(),
+                    AvailableClassifications = [.. await classificationsAPIConnectClient.FilterAsync(new Inventory.Interop.API.Common.Models.Filter.ClassificationFilterModel { ProductId = target.Product.Id })],
+                    AvailableUnitMeasurements = [.. await unitMeasurementsAPIConnectClient.GetReleatedsAsync(target.Product.DefaultUnitMeasurement.Id)],
+                };
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(new CommonBugetProductBridgeConfigurationPage(ProductBridgeEditSuccess_Callback, model));
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        });
+    }
+
+    private void ProductBridgeRemoveButton_Clicked(object sender, System.EventArgs e)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este producto en oferta?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            hasChangesFlag = true;
+
+            Dispatcher.Dispatch(() => ConcreteBindingContext.ProductBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel));
+        });
+    }
+
+    private void ProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel model)
+    {
+        ConcreteBindingContext.Provider = model;
+
+        hasChangesFlag = true;
+    }
+
+    private void CommercialPickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    {
+        ConcreteBindingContext.Commercial = model;
+
+        hasChangesFlag = true;
+    }
+
+    private void ProductBridgeCreateSuccess_Callback(Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel model)
+    {
+        if (ConcreteBindingContext.ProductBridges.Any(_model => _model.Product.Id == model.Product.Id && ((_model.Classification == null && model.Classification == null ) || _model.Classification.Id == model.Classification.Id)))
+        {
+            DisplayAlert("Aviso", "Ya se ha definido oferta para este producto y solo puede especificarse una vez.", "Aceptar");
+
+            return;
+        }
+
+        ConcreteBindingContext.ProductBridges.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void ProductBridgeEditSuccess_Callback(Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel model)
+    {
+        var reference = ConcreteBindingContext.ProductBridges.First(item => item.Product.Id == model.Product.Id);
+
+        var index = ConcreteBindingContext.ProductBridges.IndexOf(reference);
+
+        ConcreteBindingContext.ProductBridges[index] = model;
+
+        hasChangesFlag = true;
+    }
+}

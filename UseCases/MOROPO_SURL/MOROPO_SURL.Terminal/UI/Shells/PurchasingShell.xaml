@@ -47,24 +47,41 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
+    <ShellContent
+        Title="Solicitures"
+        ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:PurchaseRequestsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF64A;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <FlyoutItem
-        Title="Planes">
+        Title="Ofertas de Proveedores">
         <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0246;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:LegalProviderBudgetsManagePage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
+    <ShellContent
+        Title="Órdenes"
+        ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:PurchaseOrdersManagePage}">
+        <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF787;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </FlyoutItem.Icon>
-        <ShellContent
-            Title="Realizados"
-            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:FilledPurchasePlansManagePage}" />
-        <ShellContent
-            Title="Por Realizar"
-            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:ToCompletePurchasePlansManagePage}" />
-        <ShellContent
-            Title="Por Aprobar"
-            ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:ToApprovePurchasePlansManagePage}" />
-    </FlyoutItem>
+        </ShellContent.Icon>
+    </ShellContent>
     <ShellContent
         Title="Compras"
         ContentTemplate="{DataTemplate decisorframework_purchasing_manage_pages:PurchasesManagePage}">

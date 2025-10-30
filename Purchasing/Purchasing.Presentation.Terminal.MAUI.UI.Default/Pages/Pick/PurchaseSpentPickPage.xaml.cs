@@ -1,12 +1,15 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
-public partial class PurchaseSpentPickPage : Caney.MVVM.Core.Pages.ContentPage
+public partial class PurchaseSpentPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel, Models.Page.Pick.PurchaseSpentPickPageModel>
 {
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
+
     private System.Action<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel> pickCompleteAction;
+
+    private bool pickedFlag = false;
 
     public PurchaseSpentPickPage(System.Action<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel> pickCompleteAction)
     {
@@ -15,20 +18,25 @@ public partial class PurchaseSpentPickPage : Caney.MVVM.Core.Pages.ContentPage
         this.pickCompleteAction = pickCompleteAction;
 
         IsEnabled = false;
-
-        BindingContext = new Models.Page.Pick.PurchaseSpentPickPageModel();
     }
 
     protected override void OnAppearing()
     {
         base.OnAppearing();
 
-        if (IsEnabled) return;
+        if (IsEnabled && pickedFlag)
+        {
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
 
-        LoadItems();
+            return;
+        }
 
         IsEnabled = true;
     }
+
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
+
+    protected override double ItemViewRequestWidth => 320;
 
     protected override void DisposeUnmanagementResources()
     {
@@ -37,16 +45,67 @@ public partial class PurchaseSpentPickPage : Caney.MVVM.Core.Pages.ContentPage
         pickCompleteAction = null;
     }
 
+    protected override double MeasureCollectionViewCellHeight(double width)
+    {
+        return ITEM_VIEW_REQUEST_HEIGHT;
+    }
+
+    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel>> FetchItemsAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.PurchaseSpentsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
+    }
+
+    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    {
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel, Models.Page.Configuration.PurchaseSpentConfigurationPageModel>>();
+
+                var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(page);
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+
+                    ConcreteBindingContext.IsBusy = false;
+                });
+            }
+        });
+    }
+
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (((Models.Page.Pick.PurchaseSpentPickPageModel)BindingContext).IsBusy) return;
-
-        LoadItems();
+        OnReload(sender, eventArgs);
     }
 
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
+    }
+
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
+    {
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
     }
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
@@ -56,34 +115,10 @@ public partial class PurchaseSpentPickPage : Caney.MVVM.Core.Pages.ContentPage
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }
 
-    private void LoadItems()
+    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.PurchaseSpentDisplayModel model)
     {
-        var concreteBindingContext = (Models.Page.Pick.PurchaseSpentPickPageModel)BindingContext;
+        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
 
-        concreteBindingContext.IsBusy = true;
-
-        concreteBindingContext.Items.Clear();
-
-        var apiConnectClient = new Interop.API.Connect.Clients.PurchaseSpentsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        apiConnectClient.GetAsync().ContinueWith(task =>
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                concreteBindingContext.IsBusy = false;
-
-                if (task.Exception != null || task.IsCanceled)
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                }
-                else
-                {
-                    foreach (var model in task.Result)
-                    {
-                        concreteBindingContext.Items.Add(model);
-                    }
-                }
-            });
-        });
+        pickedFlag = true;
     }
 }

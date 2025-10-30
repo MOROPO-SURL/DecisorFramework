@@ -13,7 +13,13 @@ namespace MOROPO.Framework.Decisor.Sales.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.Contract.AbstractSale>(),
                     new Configurators.LegalClientWholesaleSaleEntityTypeConfigurator(),
                     new Configurators.NaturalClientWholesaleSaleEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.RetailSale>()
+                    new BaseEntityTypeConfigurator<Entities.RetailSale>(),
+                    new Configurators.LegalClientBudgetEntityTypeConfigurator(),
+                    new Configurators.LegalClientBudgetProductBridgeEntityTypeConfigurator(),
+                    new Configurators.LegalClientBudgetServiceBridgeEntityTypeConfigurator(),
+                    new Configurators.NaturalClientBudgetEntityTypeConfigurator(),
+                    new Configurators.NaturalClientBudgetProductBridgeEntityTypeConfigurator(),
+                    new Configurators.NaturalClientBudgetServiceBridgeEntityTypeConfigurator()
                 ];
             }
         }
