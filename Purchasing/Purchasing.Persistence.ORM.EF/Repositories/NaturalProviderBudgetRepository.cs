@@ -19,7 +19,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Repositories
                 .Include(entity => entity.ProductBridges).ThenInclude(bridge => bridge.UnitMeasurement)
                 .Include(entity => entity.ProductBridges).ThenInclude(bridge => bridge.Currenty)
                 .Include(entity => entity.ServiceBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.FeatureImage)
-                .Include(entity => entity.ServiceBridges).ThenInclude(bridge => bridge.Currenty);
+                .Include(entity => entity.ServiceBridges).ThenInclude(bridge => bridge.Currenty)
+                .Include(entity => entity.Document);
         }
     }
 }

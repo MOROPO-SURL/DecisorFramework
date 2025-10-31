@@ -24,6 +24,8 @@
 
         public System.Collections.Generic.List<Bridge.CommonBugetProductBridgeModel> ProductBridges { get; set; } = new System.Collections.Generic.List<Bridge.CommonBugetProductBridgeModel>();
 
+        public Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get; set; }
+
         public void Import(Persistence.Entities.LegalProviderBudget entity)
         {
             Id = entity.Id;
@@ -47,6 +49,13 @@
                 Provider = new Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel();
 
                 Provider.Import(entity.Provider);
+            }
+
+            if (entity.Document != null)
+            {
+                Document = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+
+                Document.Import(entity.Document);
             }
         }
     }

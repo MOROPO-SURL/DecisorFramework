@@ -6159,6 +6159,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
+                    b.Property<Guid?>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
@@ -6184,6 +6188,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("CommercialId")
                         .HasDatabaseName("ix_legalproviderbudgets_commercialid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_legalproviderbudgets_documentid");
 
                     b.HasIndex("ProviderId")
                         .HasDatabaseName("ix_legalproviderbudgets_providerid");
@@ -6309,6 +6316,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
+                    b.Property<Guid?>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
@@ -6334,6 +6345,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("CommercialId")
                         .HasDatabaseName("ix_naturalproviderbudgets_commercialid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_naturalproviderbudgets_documentid");
 
                     b.HasIndex("ProviderId")
                         .HasDatabaseName("ix_naturalproviderbudgets_providerid");
@@ -7236,6 +7250,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
+                    b.Property<Guid?>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
@@ -7256,6 +7274,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("CommercialId")
                         .HasDatabaseName("ix_legalclientbudget_commercialid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_legalclientbudget_documentid");
 
                     b.ToTable("legalclientbudget", "decisorframework_sales");
                 });
@@ -7383,6 +7404,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
+                    b.Property<Guid?>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
@@ -7403,6 +7428,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("CommercialId")
                         .HasDatabaseName("ix_naturalclientbudget_commercialid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_naturalclientbudget_documentid");
 
                     b.ToTable("naturalclientbudget", "decisorframework_sales");
                 });
@@ -12063,6 +12091,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_legalproviderbudgets_employees_commercialid");
 
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .HasConstraintName("fk_legalproviderbudgets_documents_documentid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.LegalProvider", "Provider")
                         .WithMany()
                         .HasForeignKey("ProviderId")
@@ -12071,6 +12104,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_legalproviderbudgets_legalproviders_providerid");
 
                     b.Navigation("Commercial");
+
+                    b.Navigation("Document");
 
                     b.Navigation("Provider");
                 });
@@ -12160,6 +12195,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_naturalproviderbudgets_employees_commercialid");
 
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .HasConstraintName("fk_naturalproviderbudgets_documents_documentid");
+
                     b.HasOne("MOROPO.Framework.Decisor.Commercial.Persistence.Entities.NaturalProvider", "Provider")
                         .WithMany()
                         .HasForeignKey("ProviderId")
@@ -12168,6 +12208,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_naturalproviderbudgets_naturalproviders_providerid");
 
                     b.Navigation("Commercial");
+
+                    b.Navigation("Document");
 
                     b.Navigation("Provider");
                 });
@@ -12792,9 +12834,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_legalclientbudget_employees_commercialid");
 
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .HasConstraintName("fk_legalclientbudget_documents_documentid");
+
                     b.Navigation("Client");
 
                     b.Navigation("Commercial");
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.LegalClientBudgetProductBridge", b =>
@@ -12873,9 +12922,16 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_naturalclientbudget_employees_commercialid");
 
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .HasConstraintName("fk_naturalclientbudget_documents_documentid");
+
                     b.Navigation("Client");
 
                     b.Navigation("Commercial");
+
+                    b.Navigation("Document");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Sales.Persistence.Entities.NaturalClientBudgetProductBridge", b =>

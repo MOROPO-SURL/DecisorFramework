@@ -4,6 +4,9 @@ using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
+using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using MOROPO.Framework.Guama.Media.Persistence.Entities;
+using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
@@ -11,8 +14,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
     [ApiController]
     public class LegalProviderBudgetsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<LegalProviderBudget, System.Guid, LegalProviderBudgetInputModel, LegalProviderBudgetDisplayModel, LegalProviderBudgetFilterModel>
     {
-        public LegalProviderBudgetsController(Guama.Core.Persistence.Repositories.IEntityRepository<LegalProviderBudget, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalProviderBudgetsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalProviderBudgetsController> logger) : base(repository, localizer, logger)
+        private readonly IEntityRepository<Document, System.Guid> documentRepository;
+        private readonly IDocumentFileManagerFacade documentFileManager;
+
+        public LegalProviderBudgetsController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<LegalProviderBudget, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalProviderBudgetsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalProviderBudgetsController> logger) : base(repository, localizer, logger)
         {
+            this.documentRepository = documentRepository;
+            this.documentFileManager = documentFileManager;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<LegalProviderBudget, bool>> GetGlobalSelector()
@@ -79,6 +87,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 model.ProductBridges.Add(_model);
             }
 
+            if (model.Document != null)
+            {
+                model.Document.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Document.ContentType);
+            }
+
             return model;
         }
 
@@ -101,6 +114,19 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                         ClassificationId = item.Classification?.Id ?? null
                     });
                 }
+            }
+
+            if (model.Document != null)
+            {
+                entity.Document = documentRepository.Add(new Document
+                {
+                    ContentType = model.Document.ContentType,
+                    Length = model.Document.ContentData.LongLength,
+                    Name = model.Document.Name,
+                    Description = model.Document.Description
+                }, User.Identity.Name, false);
+
+                documentFileManager.SaveDocumentFileContent(entity.Document.Id, model.Document.ContentData, model.Document.ContentType);
             }
         }
 
@@ -125,6 +151,43 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                         ClassificationId = item.Classification?.Id ?? null
                     });
                 }
+            }
+
+            if (model.Document != null)
+            {
+                if (model.Document.ContentData == null)
+                {
+                    entity.Document.Name = model.Document.Name;
+                    entity.Document.Description = model.Document.Description;
+
+                    documentRepository.Update(entity.Document, User.Identity.Name, false);
+                }
+                else
+                {
+                    entity.Document = documentRepository.Add(new Document
+                    {
+                        ContentType = model.Document.ContentType,
+                        Length = model.Document.ContentData.LongLength,
+                        Name = model.Document.Name,
+                        Description = model.Document.Description
+                    }, User.Identity.Name, false);
+
+                    documentFileManager.SaveDocumentFileContent(entity.Document.Id, model.Document.ContentData, model.Document.ContentType);
+                }
+            }
+        }
+
+        protected override void PostEdit(LegalProviderBudget entity, LegalProviderBudgetInputModel model)
+        {
+            base.PostEdit(entity, model);
+
+            if (model.Document != null && model.Document.Id != default && model.Document.ContentData != null)
+            {
+                var oldRawDocument = documentRepository.Get(model.Document.Id);
+
+                documentRepository.Delete(oldRawDocument, User.Identity.Name);
+
+                documentFileManager.DeleteDocumentFile(oldRawDocument);
             }
         }
     }

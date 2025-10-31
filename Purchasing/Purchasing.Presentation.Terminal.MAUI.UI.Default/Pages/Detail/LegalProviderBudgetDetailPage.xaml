@@ -5,11 +5,21 @@
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
     xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.LegalProviderBudgetDetailPage"
     x:TypeArguments="interop_common_display_models:LegalProviderBudgetDisplayModel"
     x:DataType="interop_common_display_models:LegalProviderBudgetDisplayModel"
     Title="Detalles de Oferta de Proveedor Jurídico"
     Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
+            
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <Grid>
             <Grid
@@ -17,97 +27,144 @@
                 MaximumWidthRequest="600"
                 VerticalOptions="Center">
                 <Frame Style="{StaticResource PopupFrameStyle}">
-                    <StackLayout Margin="20" Spacing="20">
-                        <StackLayout>
-                            <Label 
-                                Margin="0,0,0,20"
-                                Text="Detalles"
-                                FontAttributes="Bold"
-                                FontSize="Medium" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Margin="0"
-                                Text="Proveedor" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Provider.Contact.Identity.Name, Mode=OneTime}" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Número / Año" />
-                            <Label Style="{StaticResource ValuePropertyLabelStyle}">
-                                <Label.FormattedText>
-                                    <FormattedString>
-                                        <Span Text="{Binding Number, Mode=OneTime}" />
-                                        <Span Text=" / " />
-                                        <Span Text="{Binding Year, Mode=OneTime}" />
-                                    </FormattedString>
-                                </Label.FormattedText>
-                            </Label>
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Comprador" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Commercial.Contact.Identity, Mode=OneTime}" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Productos en oferta" />
-                            <VerticalStackLayout
-                                BindableLayout.ItemsSource="{Binding ProductBridges, Mode=OneTime}">
-                                <BindableLayout.ItemTemplate>
-                                    <DataTemplate x:DataType="interop_common_bridge_models:CommonBugetProductBridgeModel">
-                                        <StackLayout Orientation="Horizontal" Spacing="8">
-                                            <Label
-                                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                                VerticalOptions="Center"
-                                                FontAttributes="Bold"
-                                                Text="-" />
-                                            <Label 
-                                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center">
-                                                <Label.FormattedText>
-                                                    <FormattedString>
-                                                        <Span Text="{Binding Product.Name, Mode=OneTime}" />
-                                                        <Span Text=" (" />
-                                                        <Span Text="{Binding Amount, StringFormat='{0:F2}', Mode=OneTime}" />
-                                                        <Span Text=" " />
-                                                        <Span Text="{Binding UnitMeasurement.Symbol, Mode=OneTime}" />
-                                                        <Span Text=" => " />
-                                                        <Span Text="{Binding UnitPrice, StringFormat='{0:F2}', Mode=OneTime}" />
-                                                        <Span Text=" " />
-                                                        <Span Text="{Binding Currency.Symbol, Mode=OneTime}" />
-                                                        <Span Text=")" />
-                                                    </FormattedString>
-                                                </Label.FormattedText>
-                                            </Label>
-                                        </StackLayout>
-                                    </DataTemplate>
-                                </BindableLayout.ItemTemplate>
+                    <Grid>
+                        <StackLayout Margin="20" Spacing="20">
+                            <StackLayout>
+                                <Label 
+                                    Margin="0,0,0,20"
+                                    Text="Detalles"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium" />
+                                <Label
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Margin="0"
+                                    Text="Proveedor" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Provider.Contact.Identity.Name, Mode=OneTime}" />
+                                <Label
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Número / Año" />
+                                <Label Style="{StaticResource ValuePropertyLabelStyle}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Number, Mode=OneTime}" />
+                                            <Span Text=" / " />
+                                            <Span Text="{Binding Year, Mode=OneTime}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Comprador" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Commercial.Contact.Identity, Mode=OneTime}" />
+                                <Label
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Productos en oferta" />
+                                <VerticalStackLayout
+                                    BindableLayout.ItemsSource="{Binding ProductBridges, Mode=OneTime}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_bridge_models:CommonBugetProductBridgeModel">
+                                            <StackLayout Orientation="Horizontal" Spacing="8">
+                                                <Label
+                                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                                    VerticalOptions="Center"
+                                                    FontAttributes="Bold"
+                                                    Text="-" />
+                                                <Label 
+                                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding Product.Name, Mode=OneTime}" />
+                                                            <Span Text=" (" />
+                                                            <Span Text="{Binding Amount, StringFormat='{0:F2}', Mode=OneTime}" />
+                                                            <Span Text=" " />
+                                                            <Span Text="{Binding UnitMeasurement.Symbol, Mode=OneTime}" />
+                                                            <Span Text=" => " />
+                                                            <Span Text="{Binding UnitPrice, StringFormat='{0:F2}', Mode=OneTime}" />
+                                                            <Span Text=" " />
+                                                            <Span Text="{Binding Currency.Symbol, Mode=OneTime}" />
+                                                            <Span Text=")" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </StackLayout>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                                <Label
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Descripción" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Description, TargetNullValue='---', FallbackValue='---', Mode=OneTime}" />
+                                <Label
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Documento" />
+                                <Label
+                                    IsVisible="{Binding Document, Converter={StaticResource IsNullConverter}}"
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="---" />
+                                <StackLayout 
+                                    IsVisible="{Binding Document, Converter={StaticResource IsNotNullConverter}}"
+                                    Orientation="Horizontal"
+                                    Spacing="8">
+                                    <Label
+                                        VerticalOptions="Center"
+                                        Text="{Binding Document, Converter={StaticResource DocumentDisplayModelToMaterialDesignFontIconTextConverter}}"
+                                        TextColor="White"
+                                        FontSize="32"
+                                        FontFamily="MaterialDesignIcons" />
+                                    <Label
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                        <Label.FormattedText>
+                                            <FormattedString>
+                                                <Span Text="{Binding Document.Name}" />
+                                                <Span Text=" (" />
+                                                <Span Text="{Binding Document.Extension}" />
+                                                <Span Text=")" />
+                                            </FormattedString>
+                                        </Label.FormattedText>
+                                    </Label>
+                                    <Button
+                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                        VerticalOptions="Center"
+                                        Text="&#xF1DA;"
+                                        Clicked="DocumentDownloadButton_Clicked" />
+                                </StackLayout>
+                            </StackLayout>
+                            <StackLayout
+                                x:Name="OptionButtonsStackLayout"
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <Button 
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Exportar" />
+                                <Button 
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Modificar"
+                                    Clicked="EditButton_Clicked" />
+                                <Button 
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Eliminar"
+                                    Clicked="DeleteButton_Clicked" />
+                            </StackLayout>
+                        </StackLayout>
+                        <Grid 
+                            x:Name="BusyIndicatorGrid" 
+                            IsVisible="False"
+                            BackgroundColor="{AppThemeBinding Light=#A7FFFFFF, Dark=#A7000000}">
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <ActivityIndicator 
+                                    WidthRequest="64.0" HeightRequest="64.0"
+                                    IsRunning="{Binding Source={RelativeSource AncestorType={Type Grid}}, Path=IsVisible}" />
                             </VerticalStackLayout>
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Descripción" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Description, TargetNullValue='---', FallbackValue='---', Mode=OneTime}" />
-                        </StackLayout>
-                        <StackLayout
-                            x:Name="OptionButtonsStackLayout"
-                            Orientation="Horizontal"
-                            Spacing="20">
-                            <Button 
-                                HorizontalOptions="FillAndExpand"
-                                Text="Exportar" />
-                            <Button 
-                                HorizontalOptions="FillAndExpand"
-                                Text="Modificar"
-                                Clicked="EditButton_Clicked" />
-                            <Button 
-                                HorizontalOptions="FillAndExpand"
-                                Text="Eliminar"
-                                Clicked="DeleteButton_Clicked" />
-                        </StackLayout>
-                    </StackLayout>
+                        </Grid>
+                    </Grid>
                 </Frame>
                 <Button
                     Style="{StaticResource DetailPageCloseButtonStyle}"

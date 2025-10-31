@@ -6,6 +6,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.NaturalProviderBudgetDisplayModel, Interop.API.Common.Models.Display.NaturalProviderBudgetDisplayModel, Models.Page.Configuration.NaturalProviderBudgetConfigurationPageModel>
 {
+    private Microsoft.Maui.Storage.FileResult documentFilePickResult;
+
+    private bool documentEditionFlag;
+
     public NaturalProviderBudgetConfigurationPage(System.Action<Interop.API.Common.Models.Display.NaturalProviderBudgetDisplayModel> successCallbackAction, Models.Page.Configuration.NaturalProviderBudgetConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.NaturalProviderBudgetConfigurationPageModel> validator) : base(successCallbackAction, model, validator)
     {
         InitializeComponent();
@@ -28,6 +32,22 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
             ProductBridges = [.. ConcreteBindingContext.ProductBridges]
         };
 
+        if (documentFilePickResult != null)
+        {
+            using var stream = await documentFilePickResult.OpenReadAsync();
+
+            model.Document = new Core.Interop.API.Common.Models.Input.DocumentInputModel
+            {
+                Id = System.Guid.NewGuid(),
+                Name = ConcreteBindingContext.Document.Name,
+                Description = ConcreteBindingContext.Document.Description,
+                ContentData = new byte[stream.Length],
+                ContentType = documentFilePickResult.ContentType
+            };
+
+            stream.Read(model.Document.ContentData, 0, (int)stream.Length);
+        }
+
         await apiConnectClient.CreateAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
@@ -47,6 +67,31 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
             Description = ConcreteBindingContext.Description,
             ProductBridges = [.. ConcreteBindingContext.ProductBridges]
         };
+
+        if (documentFilePickResult != null)
+        {
+            using var stream = await documentFilePickResult.OpenReadAsync();
+
+            model.Document = new Core.Interop.API.Common.Models.Input.DocumentInputModel
+            {
+                Id = model.Document?.Id ?? default,
+                Name = ConcreteBindingContext.Document.Name,
+                Description = ConcreteBindingContext.Document.Description,
+                ContentData = new byte[stream.Length],
+                ContentType = documentFilePickResult.ContentType
+            };
+
+            stream.Read(model.Document.ContentData, 0, (int)stream.Length);
+        }
+        else if (documentEditionFlag)
+        {
+            model.Document = new Core.Interop.API.Common.Models.Input.DocumentInputModel
+            {
+                Id = ConcreteBindingContext.Document.Id,
+                Name = ConcreteBindingContext.Document.Name,
+                Description = ConcreteBindingContext.Document.Description
+            };
+        }
 
         await apiConnectClient.EditAsync(model);
 
@@ -157,6 +202,48 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
         });
     }
 
+    private void DocumentPickButton_Clicked(object sender, System.EventArgs e)
+    {
+        Microsoft.Maui.Storage.FilePicker.Default.PickAsync(new Microsoft.Maui.Storage.PickOptions
+        {
+            PickerTitle = "Seleccionar archivo",
+            FileTypes = new Microsoft.Maui.Storage.FilePickerFileType(
+                new System.Collections.Generic.Dictionary<Microsoft.Maui.Devices.DevicePlatform, System.Collections.Generic.IEnumerable<string>>
+                {
+                    { Microsoft.Maui.Devices.DevicePlatform.iOS, new[] { "public.my.comic.extension" } }, // UTType values
+                    { Microsoft.Maui.Devices.DevicePlatform.Android, new[] { "application/comics" } }, // MIME type
+                    { Microsoft.Maui.Devices.DevicePlatform.WinUI, new[] { ".doc", ".docx", ".dot", ".pdf" } }, // file extension
+                    { Microsoft.Maui.Devices.DevicePlatform.macOS, new[] { "cbr", "cbz" } }, // UTType values
+                })
+        }).ContinueWith(async task =>
+        {
+            if (task.Result == null) return;
+
+            documentFilePickResult = task.Result;
+
+            using var stream = await documentFilePickResult.OpenReadAsync();
+
+            var lenght = stream.Length;
+
+            Dispatcher.Dispatch(() =>
+            {
+                ConcreteBindingContext.Document = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel
+                {
+                    Name = System.IO.Path.GetFileNameWithoutExtension(documentFilePickResult.FileName),
+                    Extension = System.IO.Path.GetExtension(documentFilePickResult.FileName),
+                    Length = lenght
+                };
+            });
+        });
+    }
+
+    private void DocumentEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var model = new Core.Presentation.Terminal.MAUI.Models.Page.Configuration.DocumentConfigurationPageModel(ConcreteBindingContext.Document);
+
+        this.NavigationPushPageAsync(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.DocumentConfigurationPage(DocumentEditSuccess_Callback, model));
+    }
+
     private void ProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
     {
         ConcreteBindingContext.Provider = model;
@@ -193,6 +280,14 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
 
         ConcreteBindingContext.ProductBridges[index] = model;
 
+        hasChangesFlag = true;
+    }
+
+    private void DocumentEditSuccess_Callback(Core.Interop.API.Common.Models.Display.DocumentDisplayModel model)
+    {
+        ConcreteBindingContext.Document = model;
+
+        documentEditionFlag = true;
         hasChangesFlag = true;
     }
 }

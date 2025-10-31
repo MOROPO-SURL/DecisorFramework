@@ -13,6 +13,7 @@
         private string description;
         private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel commercial;
         private Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel provider;
+        private Core.Interop.API.Common.Models.Display.DocumentDisplayModel document;
 
         public NaturalProviderBudgetConfigurationPageModel(Interop.API.Common.Models.Display.NaturalProviderBudgetDisplayModel model) : base(model)
         {
@@ -33,6 +34,7 @@
             commercial = model.Commercial;
             provider = model.Provider;
             ProductBridges = [.. model.ProductBridges];
+            document = model.Document;
         }
 
         public System.Guid Id { get; set; }
@@ -48,6 +50,8 @@
         public Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel Provider { get => provider; set => SetProperty(ref provider, value); }
 
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel> ProductBridges { get; set; } = [];
+
+        public Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get => document; set => SetProperty(ref document, value); }
 
         public System.Collections.Generic.List<int> AvailableYears { get; private set; } = [];
     }

@@ -16,6 +16,8 @@
 
         public System.Collections.Generic.List<Bridge.CommonBugetProductBridgeModel> ProductBridges { get; set; } = new System.Collections.Generic.List<Bridge.CommonBugetProductBridgeModel>();
 
+        public Core.Interop.API.Common.Models.Input.DocumentInputModel Document { get; set; }
+
         public Persistence.Entities.LegalProviderBudget Export()
         {
             var entity = new Persistence.Entities.LegalProviderBudget { Id = Id, Enabled = true };
