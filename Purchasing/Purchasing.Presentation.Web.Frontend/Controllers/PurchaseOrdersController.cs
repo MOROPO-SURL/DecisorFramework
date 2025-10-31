@@ -89,18 +89,102 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
 
             foreach (var bridge in entity.LegalProviderBudgetBridges)
             {
+                var _entity = legalProviderBudgetRepository.Get(bridge.SternId);
+
                 var _model = new LegalProviderBudgetDisplayModel();
 
-                _model.Import(legalProviderBudgetRepository.Get(bridge.SternId));
+                _model.Import(_entity);
+
+                if (_entity.Provider.Contact.Identity.Image != null)
+                {
+                    _model.Provider.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Provider.Contact.Identity.Image.ContentType);
+                }
+
+                if (_entity.Commercial.Contact.Identity.Image != null)
+                {
+                    _model.Commercial.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Commercial.Contact.Identity.Image.ContentType);
+                }
+
+                foreach (var _bridge in _entity.ProductBridges)
+                {
+                    var __model = new CommonBugetProductBridgeModel
+                    {
+                        Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
+                        Amount = _bridge.Amount,
+                        UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                        UnitPrice = _bridge.UnitPrice,
+                        Currency = new Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel()
+                    };
+
+                    __model.Product.Import(_bridge.Stern);
+                    __model.UnitMeasurement.Import(_bridge.UnitMeasurement);
+                    __model.Currency.Import(_bridge.Currenty);
+
+                    if (_bridge.Classification != null)
+                    {
+                        __model.Classification = new Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel();
+
+                        __model.Classification.Import(_bridge.Classification);
+                    }
+
+                    if (__model.Product.FeatureImage != null)
+                    {
+                        __model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_bridge.Stern.FeatureImage.ContentType);
+                    }
+
+                    _model.ProductBridges.Add(__model);
+                }
 
                 model.LegalProviderBudgets.Add(_model);
             }
 
             foreach (var bridge in entity.NaturalProviderBudgetBridges)
             {
+                var _entity = naturalProviderBudgetRepository.Get(bridge.SternId);
+
                 var _model = new NaturalProviderBudgetDisplayModel();
 
-                _model.Import(naturalProviderBudgetRepository.Get(bridge.SternId));
+                _model.Import(_entity);
+
+                if (_entity.Provider.Contact.Identity.Image != null)
+                {
+                    _model.Provider.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Provider.Contact.Identity.Image.ContentType);
+                }
+
+                if (_entity.Commercial.Contact.Identity.Image != null)
+                {
+                    _model.Commercial.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Commercial.Contact.Identity.Image.ContentType);
+                }
+
+                foreach (var _bridge in _entity.ProductBridges)
+                {
+                    var __model = new CommonBugetProductBridgeModel
+                    {
+                        Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
+                        Amount = _bridge.Amount,
+                        UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
+                        UnitPrice = _bridge.UnitPrice,
+                        Currency = new Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel()
+                    };
+
+                    __model.Product.Import(_bridge.Stern);
+                    __model.UnitMeasurement.Import(_bridge.UnitMeasurement);
+                    __model.Currency.Import(_bridge.Currenty);
+
+                    if (_bridge.Classification != null)
+                    {
+                        __model.Classification = new Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel();
+
+                        __model.Classification.Import(_bridge.Classification);
+                    }
+
+                    if (__model.Product.FeatureImage != null)
+                    {
+                        __model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_bridge.Stern.FeatureImage.ContentType);
+                    }
+
+                    _model.ProductBridges.Add(__model);
+                }
 
                 model.NaturalProviderBudgets.Add(_model);
             }
@@ -116,7 +200,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             {
                 foreach (var item in model.LegalProviderBudgets)
                 {
-                    entity.LegalProviderBudgetBridges.Add(new PurchaseOrderLegalProviderBudgetBridge { ProwId = entity.Id, SternId = item.Provider.Id });
+                    entity.LegalProviderBudgetBridges.Add(new PurchaseOrderLegalProviderBudgetBridge { ProwId = entity.Id, SternId = item.Id });
                 }
             }
 
@@ -124,7 +208,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
             {
                 foreach (var item in model.NaturalProviderBudgets)
                 {
-                    entity.NaturalProviderBudgetBridges.Add(new PurchaseOrderNaturalProviderBudgetBridge { ProwId = entity.Id, SternId = item.Provider.Id });
+                    entity.NaturalProviderBudgetBridges.Add(new PurchaseOrderNaturalProviderBudgetBridge { ProwId = entity.Id, SternId = item.Id });
                 }
             }
 
@@ -164,7 +248,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
 
                 foreach (var item in model.LegalProviderBudgets)
                 {
-                    entity.LegalProviderBudgetBridges.Add(new PurchaseOrderLegalProviderBudgetBridge { ProwId = entity.Id, SternId = item.Provider.Id });
+                    entity.LegalProviderBudgetBridges.Add(new PurchaseOrderLegalProviderBudgetBridge { ProwId = entity.Id, SternId = item.Id });
                 }
             }
 
@@ -174,7 +258,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
 
                 foreach (var item in model.NaturalProviderBudgets)
                 {
-                    entity.NaturalProviderBudgetBridges.Add(new PurchaseOrderNaturalProviderBudgetBridge { ProwId = entity.Id, SternId = item.Provider.Id });
+                    entity.NaturalProviderBudgetBridges.Add(new PurchaseOrderNaturalProviderBudgetBridge { ProwId = entity.Id, SternId = item.Id });
                 }
             }
 
