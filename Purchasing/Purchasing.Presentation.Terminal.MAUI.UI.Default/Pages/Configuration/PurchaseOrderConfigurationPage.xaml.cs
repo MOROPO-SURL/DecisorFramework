@@ -115,27 +115,37 @@ public partial class PurchaseOrderConfigurationPage : Core.Presentation.Terminal
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PurchaseRequestPickPage(RequestPickComplete_Callback)));
     }
 
-    private void AgreementPickButton_Clicked(object sender, System.EventArgs e)
+    private void AgreementPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.MeetingAgreementPickPage(AgreementPickComplete_Callback)));
     }
 
-    private void ResponsiblePickButton_Clicked(object sender, System.EventArgs e)
+    private void ResponsiblePickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(ResponsiblePickComplete_Callback)));
     }
 
-    private void AddLegalProviderButton_Clicked(object sender, System.EventArgs e)
+    private void AddLegalProviderBudgetButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.LegalProviderPickPage(LegalProviderPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.LegalProviderBudgetPickPage(LegalProviderBudgetPickComplete_Callback)));
     }
 
-    private void AddNaturalProviderButton_Clicked(object sender, System.EventArgs e)
+    private void AddNaturalProviderBudgetButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.NaturalProviderPickPage(NaturalProviderPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.NaturalProviderBudgetPickPage(NaturalProviderBudgetPickComplete_Callback)));
     }
 
-    private void AddSpentProductBridgeButton_Clicked(object sender, System.EventArgs e)
+    private void DetailLegalProviderBudgetButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Detail.LegalProviderBudgetDetailPage((((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel), null));
+    }
+
+    private void DetailNaturalProviderBudgetButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Detail.NaturalProviderBudgetDetailPage((((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.NaturalProviderBudgetDisplayModel), null));
+    }
+
+    private void AddSpentProductBridgeButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         ConcreteBindingContext.IsBusy = true;
 
@@ -305,46 +315,38 @@ public partial class PurchaseOrderConfigurationPage : Core.Presentation.Terminal
         });
     }
 
-    private void LegalProviderRemoveButton_Clicked(object sender, System.EventArgs e)
+    private void LegalProviderBudgetRemoveButton_Clicked(object sender, System.EventArgs e)
     {
-        DisplayAlert("Confirmación", "Está seguro que desea retirar este proveedor legal del listado?", "Confirmar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta oferta de proveedor legal del listado?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
-            Dispatcher.Dispatch(() => ConcreteBindingContext.LegalProviderBudgets.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseOrderLegalProviderBridgeModel));
+            Dispatcher.Dispatch(() => ConcreteBindingContext.LegalProviderBudgets.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel));
         });
     }
 
-    private void NaturalProviderRemoveButton_Clicked(object sender, System.EventArgs e)
+    private void NaturalProviderBudgetRemoveButton_Clicked(object sender, System.EventArgs e)
     {
-        DisplayAlert("Confirmación", "Está seguro que desea retirar este proveedor natural del listado?", "Confirmar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta oferta de proveedor natural del listado?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
             hasChangesFlag = true;
 
-            Dispatcher.Dispatch(() => ConcreteBindingContext.NaturalProviderBudgets.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseOrderNaturalProviderBridgeModel));
+            Dispatcher.Dispatch(() => ConcreteBindingContext.NaturalProviderBudgets.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.NaturalProviderBudgetDisplayModel));
         });
     }
 
-    private void LegalProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel model)
+    private void LegalProviderBudgetPickComplete_Callback(Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel model)
     {
-        ConcreteBindingContext.LegalProviderBudgets.Add(new Interop.API.Common.Models.Bridge.PurchaseOrderLegalProviderBridgeModel
-        {
-            Provider = model,
-            Debt = 0
-        });
+        ConcreteBindingContext.LegalProviderBudgets.Add(model);
 
         hasChangesFlag = true;
     }
 
-    private void NaturalProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel model)
+    private void NaturalProviderBudgetPickComplete_Callback(Interop.API.Common.Models.Display.NaturalProviderBudgetDisplayModel model)
     {
-        ConcreteBindingContext.NaturalProviderBudgets.Add(new Interop.API.Common.Models.Bridge.PurchaseOrderNaturalProviderBridgeModel
-        {
-            Provider = model,
-            Debt = 0
-        });
+        ConcreteBindingContext.NaturalProviderBudgets.Add(model);
 
         hasChangesFlag = true;
     }

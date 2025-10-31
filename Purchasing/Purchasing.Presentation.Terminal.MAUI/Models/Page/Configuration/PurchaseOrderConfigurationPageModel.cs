@@ -9,7 +9,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
         public static string AgreementValidableProperty => nameof(Agreement);
         public static string ResponsibleValidableProperty => nameof(Responsible);
         public static string ZoneValidableProperty => nameof(Zone);
-        public static string PlannedForValidableProperty => nameof(PlannedFor);
         public static string ResultProductBridgesForValidableProperty => nameof(ResultProductBridges);
         public static string AdvanceRequiredForValidableProperty => nameof(AdvanceRequired);
         public static string AdvanceRequiredCurrencyForValidableProperty => nameof(AdvanceRequiredCurrency);

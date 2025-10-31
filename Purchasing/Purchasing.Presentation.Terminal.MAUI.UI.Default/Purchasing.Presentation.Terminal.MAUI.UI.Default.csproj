@@ -49,6 +49,9 @@
 	  <Compile Update="Pages\Manage\PurchaseOrdersManagePage.xaml.cs">
 	    <DependentUpon>PurchaseOrdersManagePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Pick\NaturalProviderBudgetPickPage.xaml.cs">
+	    <DependentUpon>NaturalProviderBudgetPickPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Pick\PurchaseRequestPickPage.xaml.cs">
 	    <DependentUpon>PurchaseRequestPickPage.xaml</DependentUpon>
 	  </Compile>
@@ -91,6 +94,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\LegalProviderBudgetPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\NaturalProviderBudgetPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\PurchaseOrderPickPage.xaml">
