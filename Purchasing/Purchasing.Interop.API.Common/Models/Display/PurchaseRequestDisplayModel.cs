@@ -1,5 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 {
@@ -17,7 +16,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public string Argument { get; set; }
 
-        public List<PurchaseCommonProductBridgeModel> ProductBridges { get; set; } = new List<PurchaseCommonProductBridgeModel>();
+        public List<PurchaseRequestExpectedProductAdquisitionDisplayModel> ExpectedProductAdquisitions { get; set; } = new List<PurchaseRequestExpectedProductAdquisitionDisplayModel>();
 
         public void Import(Persistence.Entities.PurchaseRequest entity)
         {
@@ -32,21 +31,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
                 Author = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
                 
                 Author.Import(entity.Author);
-            }
-
-            foreach (var bridge in entity.ProductBridges)
-            {
-                var model = new PurchaseCommonProductBridgeModel
-                {
-                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
-                    Amount = bridge.Amount
-                };
-
-                model.Product.Import(bridge.Stern);
-                model.UnitMeasurement.Import(bridge.UnitMeasurement);
-
-                ProductBridges.Add(model);
             }
         }
     }

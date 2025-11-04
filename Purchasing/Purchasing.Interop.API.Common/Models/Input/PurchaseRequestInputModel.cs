@@ -13,7 +13,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
         [System.ComponentModel.DataAnnotations.Required]
         public string Argument { get; set; }
 
-        public List<Bridge.PurchaseCommonProductBridgeModel> ProductBridges { get; set; } = new List<Bridge.PurchaseCommonProductBridgeModel>();
+        public List<PurchaseRequestExpectedProductAdquisitionInputModel> EditionExpectedProducttAdquisitions { get; set; } = new List<PurchaseRequestExpectedProductAdquisitionInputModel>();
+        public List<PurchaseRequestExpectedProductAdquisitionInputModel> IncomingExpectedProducttAdquisitions { get; set; } = new List<PurchaseRequestExpectedProductAdquisitionInputModel>();
+        public List<Display.PurchaseRequestExpectedProductAdquisitionDisplayModel> OutgoingExpectedProducttAdquisitions { get; set; } = new List<Display.PurchaseRequestExpectedProductAdquisitionDisplayModel>();
 
         public Persistence.Entities.PurchaseRequest Export()
         {

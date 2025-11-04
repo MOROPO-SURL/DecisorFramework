@@ -6,7 +6,7 @@
         public static string YearValidableProperty => nameof(Year);
         public static string CommercialValidableProperty => nameof(Commercial);
         public static string ProviderValidableProperty => nameof(Provider);
-        public static string ProductBridgesValidableProperty => nameof(ProductBridges);
+        public static string BudgetProductsValidableProperty => nameof(BudgetProducts);
 
         private int number;
         private int year;
@@ -33,7 +33,7 @@
             description = model.Description;
             commercial = model.Commercial;
             provider = model.Provider;
-            ProductBridges = [.. model.ProductBridges];
+            BudgetProducts = [.. model.BudgetProducts];
             document = model.Document;
         }
 
@@ -49,7 +49,7 @@
 
         public Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel Provider { get => provider; set => SetProperty(ref provider, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel> ProductBridges { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.NaturalProviderBudgetProductDisplayModel> BudgetProducts { get; set; } = [];
 
         public Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get => document; set => SetProperty(ref document, value); }
 

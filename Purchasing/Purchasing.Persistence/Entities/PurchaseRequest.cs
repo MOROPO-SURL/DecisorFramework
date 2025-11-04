@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
+﻿namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
 {
     public class PurchaseRequest : Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
@@ -22,6 +20,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
         public Domain.Persistence.Entities.Employee Author { get; set; }
         public System.Guid AuthorId { get; set; }
 
-        public List<PurchaseRequestProductBridge> ProductBridges { get; set; } = new List<PurchaseRequestProductBridge>();
+        public System.Collections.Generic.ICollection<PurchaseRequestExpectedProductAdquisition> ExpectedProductAdquisitions { get; set; }
     }
 }

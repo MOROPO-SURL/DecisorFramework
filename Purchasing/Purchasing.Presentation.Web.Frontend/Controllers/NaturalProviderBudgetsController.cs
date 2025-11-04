@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input;
@@ -14,11 +13,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
     [ApiController]
     public class NaturalProviderBudgetsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<NaturalProviderBudget, System.Guid, NaturalProviderBudgetInputModel, NaturalProviderBudgetDisplayModel, NaturalProviderBudgetFilterModel>
     {
+        private readonly IEntityRepository<NaturalProviderBudgetProduct, System.Guid> budgetProductRepository;
         private readonly IEntityRepository<Document, System.Guid> documentRepository;
         private readonly IDocumentFileManagerFacade documentFileManager;
 
-        public NaturalProviderBudgetsController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<NaturalProviderBudget, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<NaturalProviderBudgetsController> localizer, Microsoft.Extensions.Logging.ILogger<NaturalProviderBudgetsController> logger) : base(repository, localizer, logger)
+        public NaturalProviderBudgetsController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<NaturalProviderBudgetProduct, System.Guid> budgetProductRepository, IEntityRepository<NaturalProviderBudget, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<NaturalProviderBudgetsController> localizer, Microsoft.Extensions.Logging.ILogger<NaturalProviderBudgetsController> logger) : base(repository, localizer, logger)
         {
+            this.budgetProductRepository = budgetProductRepository;
             this.documentRepository = documentRepository;
             this.documentFileManager = documentFileManager;
         }
@@ -57,34 +58,18 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 model.Commercial.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Commercial.Contact.Identity.Image.ContentType);
             }
 
-            foreach (var bridge in entity.ProductBridges)
+            foreach (var _entity in entity.BudgetProducts)
             {
-                var _model = new CommonBugetProductBridgeModel
-                {
-                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    Amount = bridge.Amount,
-                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
-                    UnitPrice = bridge.UnitPrice,
-                    Currency = new Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel()
-                };
+                var _model = new NaturalProviderBudgetProductDisplayModel();
 
-                _model.Product.Import(bridge.Stern);
-                _model.UnitMeasurement.Import(bridge.UnitMeasurement);
-                _model.Currency.Import(bridge.Currenty);
-
-                if (bridge.Classification != null)
-                {
-                    _model.Classification = new Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel();
-
-                    _model.Classification.Import(bridge.Classification);
-                }
+                _model.Import(_entity);
 
                 if (_model.Product.FeatureImage != null)
                 {
-                    _model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.FeatureImage.ContentType);
+                    _model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Product.FeatureImage.ContentType);
                 }
 
-                model.ProductBridges.Add(_model);
+                model.BudgetProducts.Add(_model);
             }
 
             if (model.Document != null)
@@ -99,21 +84,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
         {
             base.PreCreate(entity, model);
 
-            if (model.ProductBridges != null)
+            foreach (var _model in model.IncomingBudgetProducts)
             {
-                foreach (var item in model.ProductBridges)
-                {
-                    entity.ProductBridges.Add(new NaturalProviderBudgetProductBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = item.Product.Id,
-                        Amount = item.Amount,
-                        UnitMeasurementId = item.UnitMeasurement.Id,
-                        UnitPrice = item.UnitPrice,
-                        CurrentyId = item.Currency.Id,
-                        ClassificationId = item.Classification?.Id ?? null
-                    });
-                }
+                var _entity = _model.Export();
+
+                _entity.BudgetId = entity.Id;
+
+                budgetProductRepository.Add(_entity, User.Identity.Name, false);
             }
 
             if (model.Document != null)
@@ -134,23 +111,29 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
         {
             base.PreEdit(entity, model);
 
-            if (model.ProductBridges != null)
+            foreach (var _model in model.OutgoingBudgetProducts)
             {
-                entity.ProductBridges.Clear();
+                var _entity = budgetProductRepository.Get(_model.Id);
 
-                foreach (var item in model.ProductBridges)
-                {
-                    entity.ProductBridges.Add(new NaturalProviderBudgetProductBridge
-                    {
-                        ProwId = entity.Id,
-                        SternId = item.Product.Id,
-                        Amount = item.Amount,
-                        UnitMeasurementId = item.UnitMeasurement.Id,
-                        UnitPrice = item.UnitPrice,
-                        CurrentyId = item.Currency.Id,
-                        ClassificationId = item.Classification?.Id ?? null
-                    });
-                }
+                budgetProductRepository.Delete(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionBudgetProducts)
+            {
+                var _entity = budgetProductRepository.Get(_model.Id);
+
+                _model.Mergue(_entity);
+
+                budgetProductRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingBudgetProducts)
+            {
+                var _entity = _model.Export();
+
+                _entity.BudgetId = entity.Id;
+
+                budgetProductRepository.Add(_entity, User.Identity.Name, false);
             }
 
             if (model.Document != null)

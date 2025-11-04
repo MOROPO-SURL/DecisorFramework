@@ -6,6 +6,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.NaturalProviderBudgetDisplayModel, Interop.API.Common.Models.Display.NaturalProviderBudgetDisplayModel, Models.Page.Configuration.NaturalProviderBudgetConfigurationPageModel>
 {
+    private readonly System.Collections.Generic.List<Interop.API.Common.Models.Input.NaturalProviderBudgetProductInputModel> editionBudgetProducts = [];
+    private readonly System.Collections.Generic.List<Interop.API.Common.Models.Input.NaturalProviderBudgetProductInputModel> incomingBudgetProducts = [];
+    private readonly System.Collections.Generic.List<Interop.API.Common.Models.Display.NaturalProviderBudgetProductDisplayModel> outgoingBudgetProducts = [];
+
     private Microsoft.Maui.Storage.FileResult documentFilePickResult;
 
     private bool documentEditionFlag;
@@ -29,7 +33,7 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
             ProviderId = ConcreteBindingContext.Provider.Id,
             CommercialId = ConcreteBindingContext.Commercial.Id,
             Description = ConcreteBindingContext.Description,
-            ProductBridges = [.. ConcreteBindingContext.ProductBridges]
+            IncomingBudgetProducts = incomingBudgetProducts
         };
 
         if (documentFilePickResult != null)
@@ -65,7 +69,9 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
             ProviderId = ConcreteBindingContext.Provider.Id,
             CommercialId = ConcreteBindingContext.Commercial.Id,
             Description = ConcreteBindingContext.Description,
-            ProductBridges = [.. ConcreteBindingContext.ProductBridges]
+            EditionBudgetProducts = editionBudgetProducts,
+            IncomingBudgetProducts = incomingBudgetProducts,
+            OutgoingBudgetProducts = outgoingBudgetProducts
         };
 
         if (documentFilePickResult != null)
@@ -118,7 +124,7 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(CommercialPickComplete_Callback)));
     }
 
-    private void AddProductBridgeButton_Clicked(object sender, System.EventArgs e)
+    private void AddBudgetProductButton_Clicked(object sender, System.EventArgs e)
     {
         ConcreteBindingContext.IsBusy = true;
 
@@ -128,7 +134,7 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
             {
                 var apiConnectClient = new Financial.Interop.API.Connect.Clients.CurrenciesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-                var model = new Models.Page.Configuration.CommonBugetProductBridgeConfigurationPageModel(null)
+                var model = new Models.Page.Configuration.NaturalProviderBudgetProductConfigurationPageModel(null)
                 {
                     AvailableCurrencies = await apiConnectClient.GetAsync()
                 };
@@ -137,7 +143,7 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new CommonBugetProductBridgeConfigurationPage(ProductBridgeCreateSuccess_Callback, model));
+                    this.NavigationPushPageAsync(new NaturalProviderBudgetProductConfigurationPage(BudgetProductCreateSuccess_Callback, model));
                 });
             }
             catch (System.Exception exception)
@@ -150,7 +156,7 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
         });
     }
 
-    private void EditProductBridgeButton_Clicked(object sender, System.EventArgs e)
+    private void EditBudgetProductButton_Clicked(object sender, System.EventArgs e)
     {
         ConcreteBindingContext.IsBusy = true;
 
@@ -164,9 +170,9 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
                 var classificationsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.ClassificationsAPIConnectClient(httpClientProvider);
                 var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientProvider);
 
-                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel;
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.NaturalProviderBudgetProductDisplayModel;
 
-                var model = new Models.Page.Configuration.CommonBugetProductBridgeConfigurationPageModel(target)
+                var model = new Models.Page.Configuration.NaturalProviderBudgetProductConfigurationPageModel(target)
                 {
                     AvailableCurrencies = await currenciesAPIConnectClient.GetAsync(),
                     AvailableClassifications = [.. await classificationsAPIConnectClient.FilterAsync(new Inventory.Interop.API.Common.Models.Filter.ClassificationFilterModel { ProductId = target.Product.Id })],
@@ -177,7 +183,7 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new CommonBugetProductBridgeConfigurationPage(ProductBridgeEditSuccess_Callback, model));
+                    this.NavigationPushPageAsync(new NaturalProviderBudgetProductConfigurationPage(BudgetProductEditSuccess_Callback, model));
                 });
             }
             catch (System.Exception exception)
@@ -190,15 +196,50 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
         });
     }
 
-    private void ProductBridgeRemoveButton_Clicked(object sender, System.EventArgs e)
+    private void BudgetProductRemoveButton_Clicked(object sender, System.EventArgs e)
     {
         DisplayAlert("Confirmación", "Está seguro que desea retirar este producto en oferta?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
-            hasChangesFlag = true;
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.NaturalProviderBudgetProductDisplayModel;
 
-            Dispatcher.Dispatch(() => ConcreteBindingContext.ProductBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel));
+                var handled = false;
+
+                foreach (var item in incomingBudgetProducts)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingBudgetProducts.Remove(editionBudgetProducts.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionBudgetProducts)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionBudgetProducts.Remove(editionBudgetProducts.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingBudgetProducts.Add(target);
+                }
+
+                ConcreteBindingContext.BudgetProducts.Remove(target);
+
+                hasChangesFlag = true;
+            });
         });
     }
 
@@ -258,27 +299,96 @@ public partial class NaturalProviderBudgetConfigurationPage : Core.Presentation.
         hasChangesFlag = true;
     }
 
-    private void ProductBridgeCreateSuccess_Callback(Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel model)
+    private void BudgetProductCreateSuccess_Callback(Interop.API.Common.Models.Display.NaturalProviderBudgetProductDisplayModel model)
     {
-        if (ConcreteBindingContext.ProductBridges.Any(_model => _model.Product.Id == model.Product.Id && ((_model.Classification == null && model.Classification == null) || _model.Classification.Id == model.Classification.Id)))
+        if (ConcreteBindingContext.BudgetProducts.Any(_model => _model.Product.Id == model.Product.Id && ((_model.Classification == null && model.Classification == null) || _model.Classification.Id == model.Classification.Id)))
         {
             DisplayAlert("Aviso", "Ya se ha definido oferta para este producto y solo puede especificarse una vez.", "Aceptar");
 
             return;
         }
 
-        ConcreteBindingContext.ProductBridges.Add(model);
+        incomingBudgetProducts.Add(new Interop.API.Common.Models.Input.NaturalProviderBudgetProductInputModel
+        {
+            Id = model.Id,
+            ProductId = model.Product.Id,
+            ClassificationId = model.Classification.Id,
+            UnitPrice = model.UnitPrice,
+            CurrentyId = model.Currency.Id,
+            Amount = model.Amount,
+            UnitMeasurementId = model.UnitMeasurement.Id,
+        });
+
+        ConcreteBindingContext.BudgetProducts.Add(model);
 
         hasChangesFlag = true;
     }
 
-    private void ProductBridgeEditSuccess_Callback(Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel model)
+    private void BudgetProductEditSuccess_Callback(Interop.API.Common.Models.Display.NaturalProviderBudgetProductDisplayModel model)
     {
-        var reference = ConcreteBindingContext.ProductBridges.First(item => item.Product.Id == model.Product.Id);
+        var handled = false;
 
-        var index = ConcreteBindingContext.ProductBridges.IndexOf(reference);
+        foreach (var item in incomingBudgetProducts)
+        {
+            if (item.Id != model.Id) continue;
 
-        ConcreteBindingContext.ProductBridges[index] = model;
+            item.ProductId = model.Product.Id;
+            item.ClassificationId = model.Classification.Id;
+            item.UnitPrice = model.UnitPrice;
+            item.CurrentyId = model.Currency.Id;
+            item.Amount = model.Amount;
+            item.UnitMeasurementId = model.UnitMeasurement.Id;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionBudgetProducts)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.ProductId = model.Product.Id;
+                item.ClassificationId = model.Classification.Id;
+                item.UnitPrice = model.UnitPrice;
+                item.CurrentyId = model.Currency.Id;
+                item.Amount = model.Amount;
+                item.UnitMeasurementId = model.UnitMeasurement.Id;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionBudgetProducts.Add(new Interop.API.Common.Models.Input.NaturalProviderBudgetProductInputModel
+            {
+                Id = model.Id,
+                ProductId = model.Product.Id,
+                ClassificationId = model.Classification.Id,
+                UnitPrice = model.UnitPrice,
+                CurrentyId = model.Currency.Id,
+                Amount = model.Amount,
+                UnitMeasurementId = model.UnitMeasurement.Id,
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.BudgetProducts)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.BudgetProducts[index] = model;
+
+            break;
+        }
 
         hasChangesFlag = true;
     }

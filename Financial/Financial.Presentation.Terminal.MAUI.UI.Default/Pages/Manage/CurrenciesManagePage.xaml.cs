@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Defau
 
 public partial class CurrenciesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.CurrencyDisplayModel, Models.Page.Manage.CurrenciesManagePageModel, Models.Page.Configuration.CurrencyConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 120;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 116;
 
     public CurrenciesManagePage()
     {

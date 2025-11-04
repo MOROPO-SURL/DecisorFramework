@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
-    public class LegalProviderPurchaseProductBridgeConfigurationPageModel : Contract.AbstractCommonProviderPurchaseProductBridgeModel<Interop.API.Common.Models.Bridge.PurchaseProductLegalProviderBridgeModel>
+    public class LegalProviderPurchaseProductBridgeConfigurationPageModel : Contract.AbstractProviderPurchaseProductBridgeModel<Interop.API.Common.Models.Bridge.PurchaseProductLegalProviderBridgeModel>
     {
         private Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel provider;
 

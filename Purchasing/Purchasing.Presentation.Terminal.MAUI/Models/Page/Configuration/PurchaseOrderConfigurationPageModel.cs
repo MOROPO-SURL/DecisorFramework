@@ -41,8 +41,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
             advanceRequiredCurrency = model.AdvanceRequiredCurrency;
             LegalProviderBudgets = [.. model.LegalProviderBudgets];
             NaturalProviderBudgets = [.. model.NaturalProviderBudgets];
-            ResultProductBridges = [.. model.ResultProductBridges];
-            SpentProductBridges = [.. model.SpentProductBridges];
+            ResultProductBridges = [.. model.ExpectedProductResults];
+            SpentProductBridges = [.. model.PlannedProductSpents];
         }
 
         public System.Guid Id { get; set; }

@@ -8,6 +8,6 @@
 
         public System.Collections.Generic.List<NaturalProviderBudgetServiceBridge> ServiceBridges { get; set; } = new System.Collections.Generic.List<NaturalProviderBudgetServiceBridge>();
 
-        public System.Collections.Generic.List<NaturalProviderBudgetProductBridge> ProductBridges { get; set; } = new System.Collections.Generic.List<NaturalProviderBudgetProductBridge>();
+        public System.Collections.Generic.ICollection<NaturalProviderBudgetProduct> BudgetProducts { get; set; }
     }
 }

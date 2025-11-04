@@ -22,7 +22,7 @@
 
         public Commercial.Interop.API.Common.Models.Display.NaturalProviderDisplayModel Provider { get; set; }
 
-        public System.Collections.Generic.List<Bridge.CommonBugetProductBridgeModel> ProductBridges { get; set; } = new System.Collections.Generic.List<Bridge.CommonBugetProductBridgeModel>();
+        public System.Collections.Generic.List<NaturalProviderBudgetProductDisplayModel> BudgetProducts { get; set; } = new System.Collections.Generic.List<NaturalProviderBudgetProductDisplayModel>();
 
         public Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get; set; }
 

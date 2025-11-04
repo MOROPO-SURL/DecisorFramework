@@ -1,10 +1,8 @@
 ﻿using Microsoft.Extensions.Logging;
-using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
@@ -15,12 +13,16 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
         private readonly IEntityRepository<PurchaseRequest, System.Guid> requestRepository;
         private readonly IEntityRepository<LegalProviderBudget, System.Guid> legalProviderBudgetRepository;
         private readonly IEntityRepository<NaturalProviderBudget, System.Guid> naturalProviderBudgetRepository;
+        private readonly IEntityRepository<PurchaseOrderExpectedProductResult, System.Guid> expectedProductResultRepository;
+        private readonly IEntityRepository<PurchaseOrderPlannedProductSpent, System.Guid> plannedProductSpentRepository;
 
-        public PurchaseOrdersController(IEntityRepository<NaturalProviderBudget, System.Guid> naturalProviderBudgetRepository, IEntityRepository<LegalProviderBudget, System.Guid> legalProviderBudgetRepository, IEntityRepository<PurchaseRequest, System.Guid> requestRepository, IEntityRepository<PurchaseOrder, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchaseOrdersController> localizer, ILogger<PurchaseOrdersController> logger) : base(repository, localizer, logger)
+        public PurchaseOrdersController(IEntityRepository<PurchaseOrderPlannedProductSpent, System.Guid> plannedProductSpentRepository, IEntityRepository<PurchaseOrderExpectedProductResult, System.Guid> expectedProductResultRepository, IEntityRepository<NaturalProviderBudget, System.Guid> naturalProviderBudgetRepository, IEntityRepository<LegalProviderBudget, System.Guid> legalProviderBudgetRepository, IEntityRepository<PurchaseRequest, System.Guid> requestRepository, IEntityRepository<PurchaseOrder, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchaseOrdersController> localizer, ILogger<PurchaseOrdersController> logger) : base(repository, localizer, logger)
         {
             this.requestRepository = requestRepository;
             this.legalProviderBudgetRepository = legalProviderBudgetRepository;
             this.naturalProviderBudgetRepository = naturalProviderBudgetRepository;
+            this.expectedProductResultRepository = expectedProductResultRepository;
+            this.plannedProductSpentRepository = plannedProductSpentRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<PurchaseOrder, bool>> GetGlobalSelector()
@@ -47,44 +49,32 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 model.Responsible.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Responsible.Contact.Identity.Image.ContentType);
             }
 
-            foreach (var bridge in entity.ResultProductBridges)
+            foreach (var _entity in entity.ExpectedProductResults)
             {
-                var _model = new PurchaseCommonProductBridgeModel
-                {
-                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
-                    Amount = bridge.Amount
-                };
+                var _model = new PurchaseOrderExpectedProductResultDisplayModel();
 
-                _model.Product.Import(bridge.Stern);
-                _model.UnitMeasurement.Import(bridge.UnitMeasurement);
+                _model.Import(_entity);
 
-                if (bridge.Stern.FeatureImage != null)
+                if (_model.Product.FeatureImage != null)
                 {
-                    _model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.FeatureImage.ContentType);
+                    _model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Product.FeatureImage.ContentType);
                 }
 
-                model.ResultProductBridges.Add(_model);
+                model.ExpectedProductResults.Add(_model);
             }
 
-            foreach (var bridge in entity.SpentProductBridges)
+            foreach (var _entity in entity.PlannedProductSpents)
             {
-                var _model = new PurchaseCommonProductBridgeModel
-                {
-                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
-                    Amount = bridge.Amount
-                };
+                var _model = new PurchaseOrderPlannedProductSpentDisplayModel();
 
-                _model.Product.Import(bridge.Stern);
-                _model.UnitMeasurement.Import(bridge.UnitMeasurement);
+                _model.Import(_entity);
 
-                if (bridge.Stern.FeatureImage != null)
+                if (_model.Product.FeatureImage != null)
                 {
-                    _model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.FeatureImage.ContentType);
+                    _model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Product.FeatureImage.ContentType);
                 }
 
-                model.SpentProductBridges.Add(_model);
+                model.PlannedProductSpents.Add(_model);
             }
 
             foreach (var bridge in entity.LegalProviderBudgetBridges)
@@ -105,34 +95,18 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                     _model.Commercial.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Commercial.Contact.Identity.Image.ContentType);
                 }
 
-                foreach (var _bridge in _entity.ProductBridges)
+                foreach (var __entity in _entity.BudgetProducts)
                 {
-                    var __model = new CommonBugetProductBridgeModel
-                    {
-                        Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                        Amount = _bridge.Amount,
-                        UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
-                        UnitPrice = _bridge.UnitPrice,
-                        Currency = new Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel()
-                    };
+                    var __model = new LegalProviderBudgetProductDisplayModel();
 
-                    __model.Product.Import(_bridge.Stern);
-                    __model.UnitMeasurement.Import(_bridge.UnitMeasurement);
-                    __model.Currency.Import(_bridge.Currenty);
-
-                    if (_bridge.Classification != null)
-                    {
-                        __model.Classification = new Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel();
-
-                        __model.Classification.Import(_bridge.Classification);
-                    }
+                    __model.Import(__entity);
 
                     if (__model.Product.FeatureImage != null)
                     {
-                        __model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_bridge.Stern.FeatureImage.ContentType);
+                        __model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(__entity.Product.FeatureImage.ContentType);
                     }
 
-                    _model.ProductBridges.Add(__model);
+                    _model.BudgetProducts.Add(__model);
                 }
 
                 model.LegalProviderBudgets.Add(_model);
@@ -156,34 +130,18 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                     _model.Commercial.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Commercial.Contact.Identity.Image.ContentType);
                 }
 
-                foreach (var _bridge in _entity.ProductBridges)
+                foreach (var __entity in _entity.BudgetProducts)
                 {
-                    var __model = new CommonBugetProductBridgeModel
-                    {
-                        Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
-                        Amount = _bridge.Amount,
-                        UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel(),
-                        UnitPrice = _bridge.UnitPrice,
-                        Currency = new Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel()
-                    };
+                    var __model = new NaturalProviderBudgetProductDisplayModel();
 
-                    __model.Product.Import(_bridge.Stern);
-                    __model.UnitMeasurement.Import(_bridge.UnitMeasurement);
-                    __model.Currency.Import(_bridge.Currenty);
-
-                    if (_bridge.Classification != null)
-                    {
-                        __model.Classification = new Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel();
-
-                        __model.Classification.Import(_bridge.Classification);
-                    }
+                    __model.Import(__entity);
 
                     if (__model.Product.FeatureImage != null)
                     {
-                        __model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_bridge.Stern.FeatureImage.ContentType);
+                        __model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(__entity.Product.FeatureImage.ContentType);
                     }
 
-                    _model.ProductBridges.Add(__model);
+                    _model.BudgetProducts.Add(__model);
                 }
 
                 model.NaturalProviderBudgets.Add(_model);
@@ -212,20 +170,22 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 }
             }
 
-            if (model.ResultProductBridges != null)
+            foreach (var _model in model.IncomingExpectedProductResults)
             {
-                foreach (var item in model.ResultProductBridges)
-                {
-                    entity.ResultProductBridges.Add(new PurchaseOrderProductResultBridge { ProwId = entity.Id, SternId = item.Product.Id, UnitMeasurementId = item.UnitMeasurement.Id, Amount = item.Amount });
-                }
+                var _entity = _model.Export();
+
+                _entity.OrderId = entity.Id;
+
+                expectedProductResultRepository.Add(_entity, User.Identity.Name, false);
             }
 
-            if (model.SpentProductBridges != null)
+            foreach (var _model in model.IncomingPlannedProductSpents)
             {
-                foreach (var item in model.SpentProductBridges)
-                {
-                    entity.SpentProductBridges.Add(new PurchaseOrderProductSpentBridge { ProwId = entity.Id, SternId = item.Product.Id, UnitMeasurementId = item.UnitMeasurement.Id, Amount = item.Amount });
-                }
+                var _entity = _model.Export();
+
+                _entity.OrderId = entity.Id;
+
+                plannedProductSpentRepository.Add(_entity, User.Identity.Name, false);
             }
 
             if (entity.RequestId != null)
@@ -262,24 +222,54 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 }
             }
 
-            if (model.ResultProductBridges != null)
+            foreach (var _model in model.OutgoingExpectedProductResults)
             {
-                entity.ResultProductBridges.Clear();
+                var _entity = expectedProductResultRepository.Get(_model.Id);
 
-                foreach (var item in model.ResultProductBridges)
-                {
-                    entity.ResultProductBridges.Add(new PurchaseOrderProductResultBridge { ProwId = entity.Id, SternId = item.Product.Id, UnitMeasurementId = item.UnitMeasurement.Id, Amount = item.Amount });
-                }
+                expectedProductResultRepository.Delete(_entity, User.Identity.Name, false);
             }
 
-            if (model.SpentProductBridges != null)
+            foreach (var _model in model.EditionExpectedProductResults)
             {
-                entity.SpentProductBridges.Clear();
+                var _entity = expectedProductResultRepository.Get(_model.Id);
 
-                foreach (var item in model.SpentProductBridges)
-                {
-                    entity.SpentProductBridges.Add(new PurchaseOrderProductSpentBridge { ProwId = entity.Id, SternId = item.Product.Id, UnitMeasurementId = item.UnitMeasurement.Id, Amount = item.Amount });
-                }
+                _model.Mergue(_entity);
+
+                expectedProductResultRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingExpectedProductResults)
+            {
+                var _entity = _model.Export();
+
+                _entity.OrderId = entity.Id;
+
+                expectedProductResultRepository.Add(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.OutgoingPlannedProductSpents)
+            {
+                var _entity = plannedProductSpentRepository.Get(_model.Id);
+
+                plannedProductSpentRepository.Delete(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionPlannedProductSpents)
+            {
+                var _entity = plannedProductSpentRepository.Get(_model.Id);
+
+                _model.Mergue(_entity);
+
+                plannedProductSpentRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingPlannedProductSpents)
+            {
+                var _entity = _model.Export();
+
+                _entity.OrderId = entity.Id;
+
+                plannedProductSpentRepository.Add(_entity, User.Identity.Name, false);
             }
 
             if (entity.RequestId != model.RequestId)

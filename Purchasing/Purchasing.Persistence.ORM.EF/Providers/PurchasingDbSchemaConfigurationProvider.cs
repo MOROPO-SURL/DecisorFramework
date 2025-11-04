@@ -20,10 +20,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Providers
                     new Configurators.PurchaseProductNaturalProviderBridgeEntityTypeConfigurator(),
                     new Configurators.PurchasePurchaseSpentBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.PurchaseRequest>(),
-                    new Configurators.PurchaseRequestProductBridgeEntityTypeConfigurator(),
+                    new Configurators.PurchaseRequestExpectedProductAdquisitionEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.PurchaseOrder>(),
-                    new Configurators.PurchaseOrderProductResultBridgeEntityTypeConfigurator(),
-                    new Configurators.PurchaseOrderProductSpentBridgeEntityTypeConfigurator(),
+                    new Configurators.PurchaseOrderExpectedProductResultEntityTypeConfigurator(),
+                    new Configurators.PurchaseOrderPlannedProductSpentEntityTypeConfigurator(),
                     new Configurators.PurchaseOrderLegalProviderBudgetBridgeEntityTypeConfigurator(),
                     new Configurators.PurchaseOrderNaturalProviderBudgetBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.PurchaseCashAdvance>(),
@@ -33,10 +33,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Providers
                     new Configurators.PurchaseZoneSpentBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Role>(),
                     new Configurators.LegalProviderBudgetEntityTypeConfigurator(),
-                    new Configurators.LegalProviderBudgetProductBridgeEntityTypeConfigurator(),
+                    new Configurators.LegalProviderBudgetProductEntityTypeConfigurator(),
                     new Configurators.LegalProviderBudgetServiceBridgeEntityTypeConfigurator(),
                     new Configurators.NaturalProviderBudgetEntityTypeConfigurator(),
-                    new Configurators.NaturalProviderBudgetProductBridgeEntityTypeConfigurator(),
+                    new Configurators.NaturalProviderBudgetProductEntityTypeConfigurator(),
                     new Configurators.NaturalProviderBudgetServiceBridgeEntityTypeConfigurator()
                 ];
             }

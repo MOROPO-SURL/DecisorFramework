@@ -3,7 +3,6 @@ using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controllers
 {
@@ -11,8 +10,11 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class PurchaseRequestsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<PurchaseRequest, System.Guid, PurchaseRequestInputModel, PurchaseRequestDisplayModel>
     {
-        public PurchaseRequestsController(IEntityRepository<PurchaseRequest, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchaseRequestsController> localizer, ILogger<PurchaseRequestsController> logger) : base(repository, localizer, logger)
+        private readonly IEntityRepository<PurchaseRequestExpectedProductAdquisition, System.Guid> expectedProductAdquisitionRepository;
+
+        public PurchaseRequestsController(IEntityRepository<PurchaseRequestExpectedProductAdquisition, System.Guid> expectedProductAdquisitionRepository, IEntityRepository<PurchaseRequest, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PurchaseRequestsController> localizer, ILogger<PurchaseRequestsController> logger) : base(repository, localizer, logger)
         {
+            this.expectedProductAdquisitionRepository = expectedProductAdquisitionRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<PurchaseRequest, bool>> GetGlobalSelector()
@@ -39,12 +41,18 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 model.Author.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Author.Contact.Identity.Image.ContentType);
             }
 
-            foreach (var item in model.ProductBridges)
+            foreach (var _entity in entity.ExpectedProductAdquisitions)
             {
-                if (item.Product.FeatureImage != null)
+                var _model = new PurchaseRequestExpectedProductAdquisitionDisplayModel();
+
+                _model.Import(_entity);
+
+                if (_model.Product.FeatureImage != null)
                 {
-                    item.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.ProductBridges.First(bridge => bridge.SternId == item.Product.Id).Stern.FeatureImage.ContentType);
+                    _model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Product.FeatureImage.ContentType);
                 }
+
+                model.ExpectedProductAdquisitions.Add(_model);
             }
 
             return model;
@@ -54,12 +62,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
         {
             base.PreCreate(entity, model);
 
-            if (model.ProductBridges != null)
+            foreach (var _model in model.IncomingExpectedProducttAdquisitions)
             {
-                foreach (var item in model.ProductBridges)
-                {
-                    entity.ProductBridges.Add(new PurchaseRequestProductBridge { ProwId = entity.Id, SternId = item.Product.Id, UnitMeasurementId = item.UnitMeasurement.Id, Amount = item.Amount });
-                }
+                var _entity = _model.Export();
+
+                _entity.RequestId = entity.Id;
+
+                expectedProductAdquisitionRepository.Add(_entity, User.Identity.Name, false);
             }
         }
 
@@ -67,14 +76,29 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
         {
             base.PreEdit(entity, model);
 
-            if (model.ProductBridges != null)
+            foreach (var _model in model.OutgoingExpectedProducttAdquisitions)
             {
-                entity.ProductBridges.Clear();
+                var _entity = expectedProductAdquisitionRepository.Get(_model.Id);
 
-                foreach (var item in model.ProductBridges)
-                {
-                    entity.ProductBridges.Add(new PurchaseRequestProductBridge { ProwId = entity.Id, SternId = item.Product.Id, UnitMeasurementId = item.UnitMeasurement.Id, Amount = item.Amount });
-                }
+                expectedProductAdquisitionRepository.Delete(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.EditionExpectedProducttAdquisitions)
+            {
+                var _entity = expectedProductAdquisitionRepository.Get(_model.Id);
+
+                _model.Mergue(_entity);
+
+                expectedProductAdquisitionRepository.Update(_entity, User.Identity.Name, false);
+            }
+
+            foreach (var _model in model.IncomingExpectedProducttAdquisitions)
+            {
+                var _entity = _model.Export();
+
+                _entity.RequestId = entity.Id;
+
+                expectedProductAdquisitionRepository.Add(_entity, User.Identity.Name, false);
             }
         }
     }

@@ -6,10 +6,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Context.Contrac
     public interface IPurchasingDbContext : Commercial.Persistence.ORM.EF.Context.Contract.ICommercialDbContext, Governance.Persistence.ORM.EF.Context.Contract.IGovernanceDbContext
     {
         public DbSet<LegalProviderBudget> LegalProviderBudgets { get; set; }
-        public DbSet<LegalProviderBudgetProductBridge> LegalProviderBudgetProductBridge { get; set; }
-        public DbSet<LegalProviderBudgetServiceBridge> LegalProviderBudgetServiceBridge { get; set; }
+        public DbSet<LegalProviderBudgetProduct> LegalProviderBudgetProducts { get; set; }
+        public DbSet<LegalProviderBudgetServiceBridge> LegalProviderBudgetServiceBridges { get; set; }
         public DbSet<NaturalProviderBudget> NaturalProviderBudgets { get; set; }
-        public DbSet<NaturalProviderBudgetProductBridge> NaturalProviderBudgetProductBridges { get; set; }
+        public DbSet<NaturalProviderBudgetProduct> NaturalProviderBudgetProducts { get; set; }
         public DbSet<NaturalProviderBudgetServiceBridge> NaturalProviderBudgetServiceBridges { get; set; }
         public DbSet<Role> PurchasingRoles { get; set; }
         public DbSet<PurchaseSpent> PurchaseSpents { get; set; }
@@ -24,10 +24,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Context.Contrac
         public DbSet<PurchaseProductNaturalProviderBridge> PurchaseProductNaturalProviderBridges { get; set; }
         public DbSet<PurchasePurchaseSpentBridge> PurchasePurchaseSpentBridges { get; set; }
         public DbSet<PurchaseRequest> PurchaseRequests { get; set; }
-        public DbSet<PurchaseRequestProductBridge> PurchaseRequestProductBridges { get; set; }
+        public DbSet<PurchaseRequestExpectedProductAdquisition> PurchaseRequestExpectedProductAdquisitions { get; set; }
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
-        public DbSet<PurchaseOrderProductResultBridge> PurchaseOrderProductResultBridges { get; set; }
-        public DbSet<PurchaseOrderProductSpentBridge> PurchaseOrderProductSpentBridges { get; set; }
+        public DbSet<PurchaseOrderExpectedProductResult> PurchaseOrderExpectedProductResults { get; set; }
+        public DbSet<PurchaseOrderPlannedProductSpent> PurchaseOrderPlannedProductSpents { get; set; }
         public DbSet<PurchaseOrderLegalProviderBudgetBridge> PurchaseOrderLegalProviderBudgetBridges { get; set; }
         public DbSet<PurchaseOrderNaturalProviderBudgetBridge> PurchaseOrderNaturalProviderBudgetBridges { get; set; }
         public DbSet<PurchaseCashAdvance> PurchaseCashAdvances { get; set; }

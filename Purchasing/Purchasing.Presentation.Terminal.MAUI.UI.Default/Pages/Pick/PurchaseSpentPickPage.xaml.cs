@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class PurchaseSpentPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel, Models.Page.Pick.PurchaseSpentPickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 136;
 
     private System.Action<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel> pickCompleteAction;
 

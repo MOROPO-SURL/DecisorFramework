@@ -70,7 +70,7 @@
                     FontAttributes="Bold" />
                 <Label
                     LineBreakMode="TailTruncation"
-                    Text="{Binding ProductBridges, Converter={StaticResource ListToStringConverter}}" />
+                    Text="{Binding BudgetProducts, Converter={StaticResource ListToStringConverter}}" />
             </StackLayout>
         </Grid>
     </Frame>

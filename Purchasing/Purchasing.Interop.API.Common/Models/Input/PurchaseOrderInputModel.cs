@@ -24,9 +24,13 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
 
         public string Description { get; set; }
 
-        public List<Bridge.PurchaseCommonProductBridgeModel> ResultProductBridges { get; set; } = new List<Bridge.PurchaseCommonProductBridgeModel>();
+        public List<PurchaseOrderExpectedProductResultInputModel> EditionExpectedProductResults { get; set; } = new List<PurchaseOrderExpectedProductResultInputModel>();
+        public List<PurchaseOrderExpectedProductResultInputModel> IncomingExpectedProductResults { get; set; } = new List<PurchaseOrderExpectedProductResultInputModel>();
+        public List<Display.PurchaseOrderExpectedProductResultDisplayModel> OutgoingExpectedProductResults { get; set; } = new List<Display.PurchaseOrderExpectedProductResultDisplayModel>();
 
-        public List<Bridge.PurchaseCommonProductBridgeModel> SpentProductBridges { get; set; } = new List<Bridge.PurchaseCommonProductBridgeModel>();
+        public List<PurchaseOrderPlannedProductSpentInputModel> EditionPlannedProductSpents { get; set; } = new List<PurchaseOrderPlannedProductSpentInputModel>();
+        public List<PurchaseOrderPlannedProductSpentInputModel> IncomingPlannedProductSpents { get; set; } = new List<PurchaseOrderPlannedProductSpentInputModel>();
+        public List<Display.PurchaseOrderPlannedProductSpentDisplayModel> OutgoingPlannedProductSpents { get; set; } = new List<Display.PurchaseOrderPlannedProductSpentDisplayModel>();
 
         public List<Display.LegalProviderBudgetDisplayModel> LegalProviderBudgets { get; set; } = new List<Display.LegalProviderBudgetDisplayModel>();
 

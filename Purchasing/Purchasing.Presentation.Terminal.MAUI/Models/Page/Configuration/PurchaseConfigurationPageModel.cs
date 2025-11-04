@@ -8,7 +8,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
     public class PurchaseConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PurchaseDisplayModel>
     {
         public static string PurchaserValidableProperty => nameof(Purchaser);
-        public static string CostCenterValidableProperty => nameof(CostCenter);
         public static string OrderValidableProperty => nameof(Order);
         public static string LegalProviderProductBridgesValidableProperty => nameof(LegalProviderProductBridges);
         public static string NaturalProviderProductBridgesValidableProperty => nameof(NaturalProviderProductBridges);
@@ -29,8 +28,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
         public PurchaseOrderDisplayModel Order { get => order; set => SetProperty(ref order, value); }
 
         public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Purchaser { get => purchaser; set => SetProperty(ref purchaser, value); }
-
-        public Financial.Interop.API.Common.Models.Display.CostCenterDisplayModel CostCenter { get => costCenter; set => SetProperty(ref costCenter, value); }
 
         public ObservableCollection<PurchaseProductLegalProviderBridgeModel> LegalProviderProductBridges { get; set; } = [];
 

@@ -45,9 +45,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
 
         public Purchase Purchase { get; set; }
 
-        public List<PurchaseOrderProductResultBridge> ResultProductBridges { get; set; } = new List<PurchaseOrderProductResultBridge>();
+        public ICollection<PurchaseOrderExpectedProductResult> ExpectedProductResults { get; set; }
 
-        public List<PurchaseOrderProductSpentBridge> SpentProductBridges { get; set; } = new List<PurchaseOrderProductSpentBridge>();
+        public ICollection<PurchaseOrderPlannedProductSpent> PlannedProductSpents { get; set; }
 
         public List<PurchaseOrderLegalProviderBudgetBridge> LegalProviderBudgetBridges { get; set; } = new List<PurchaseOrderLegalProviderBudgetBridge>();
 

@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 {
@@ -29,9 +28,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display
 
         public string Description { get; set; }
 
-        public List<PurchaseCommonProductBridgeModel> ResultProductBridges { get; set; } = new List<PurchaseCommonProductBridgeModel>();
+        public List<PurchaseOrderExpectedProductResultDisplayModel> ExpectedProductResults { get; set; } = new List<PurchaseOrderExpectedProductResultDisplayModel>();
 
-        public List<PurchaseCommonProductBridgeModel> SpentProductBridges { get; set; } = new List<PurchaseCommonProductBridgeModel>();
+        public List<PurchaseOrderPlannedProductSpentDisplayModel> PlannedProductSpents { get; set; } = new List<PurchaseOrderPlannedProductSpentDisplayModel>();
 
         public List<LegalProviderBudgetDisplayModel> LegalProviderBudgets { get; set; } = new List<LegalProviderBudgetDisplayModel>();
 

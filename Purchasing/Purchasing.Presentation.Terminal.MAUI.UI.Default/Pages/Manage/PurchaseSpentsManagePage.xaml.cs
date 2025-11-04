@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class PurchaseSpentsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel, Models.Page.Manage.PurchaseSpentsManagePageModel, Models.Page.Configuration.PurchaseSpentConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 136;
 
     public PurchaseSpentsManagePage()
     {
