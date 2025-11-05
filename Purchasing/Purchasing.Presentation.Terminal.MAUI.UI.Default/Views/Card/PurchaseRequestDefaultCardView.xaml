@@ -26,7 +26,7 @@
                 FontAttributes="Bold" />
             <Label
                 LineBreakMode="TailTruncation"
-                Text="{Binding ProductBridges, Converter={StaticResource ListToStringConverter}}" />
+                Text="{Binding ExpectedProductAdquisitions, Converter={StaticResource ListToStringConverter}}" />
             <Label 
                 Margin="0,8,0,0"
                 Text="Solicitante"

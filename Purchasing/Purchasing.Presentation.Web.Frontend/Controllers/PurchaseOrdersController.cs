@@ -147,6 +147,23 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Frontend.Controll
                 model.NaturalProviderBudgets.Add(_model);
             }
 
+            if (entity.Request != null)
+            {
+                foreach (var _entity in entity.Request.ExpectedProductAdquisitions)
+                {
+                    var _model = new PurchaseRequestExpectedProductAdquisitionDisplayModel();
+
+                    _model.Import(_entity);
+
+                    if (_model.Product.FeatureImage != null)
+                    {
+                        _model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Product.FeatureImage.ContentType);
+                    }
+
+                    model.Request.ExpectedProductAdquisitions.Add(_model);
+                }
+            }
+
             return model;
         }
 

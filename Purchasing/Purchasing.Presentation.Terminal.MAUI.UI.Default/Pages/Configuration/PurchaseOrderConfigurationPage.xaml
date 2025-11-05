@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
-    xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
@@ -234,7 +233,7 @@
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Productos a adquirir" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Productos Requeridos" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
                             <Grid.ColumnDefinitions>
@@ -252,11 +251,11 @@
                                 Spacing="8">
                                 <Button
                                     Text="Agregar"
-                                    Clicked="AddResultProductBridgeButton_Clicked" />
+                                    Clicked="AddExpectedProductResultButton_Clicked" />
                                 <Button
                                     IsEnabled="{Binding Request, Converter={StaticResource IsNotNullConverter}}"
                                     Text="Reiniciar"
-                                    Clicked="ResetResultProductBridgesButton_Clicked" />
+                                    Clicked="ResetExpectedProductResultsButton_Clicked" />
                             </HorizontalStackLayout>
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
@@ -266,12 +265,12 @@
                                 Margin="4"
                                 Wrap="Wrap"
                                 AlignItems="Start" AlignContent="Start"
-                                BindableLayout.ItemsSource="{Binding ResultProductBridges}">
+                                BindableLayout.ItemsSource="{Binding ExpectedProductResults}">
                                 <BindableLayout.EmptyView>
                                     <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                 </BindableLayout.EmptyView>
                                 <BindableLayout.ItemTemplate>
-                                    <DataTemplate x:DataType="interop_common_bridge_models:PurchaseCommonProductBridgeModel">
+                                    <DataTemplate x:DataType="interop_common_display_models:PurchaseOrderExpectedProductResultDisplayModel">
                                         <Frame 
                                             WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}"
                                             Padding="8" Margin="4">
@@ -281,9 +280,15 @@
                                                     Margin="8,0,0,0"
                                                     Spacing="4">
                                                     <Label
-                                                        Text="{Binding Product.Name}"
                                                         FontSize="Medium"
-                                                        LineBreakMode="TailTruncation" />
+                                                        LineBreakMode="TailTruncation">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding Product.Name}" />
+                                                                <Span Text="{Binding Classification.Name, StringFormat=' ({0})'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
                                                     <Label>
                                                         <Label.FormattedText>
                                                             <FormattedString>
@@ -298,12 +303,12 @@
                                                     Style="{StaticResource FontIconImageButtonStyle}"
                                                     VerticalOptions="Start"
                                                     Text="&#xF90B;"
-                                                    Clicked="EditResultProductBridgeButton_Clicked" />
+                                                    Clicked="EditExpectedProductResultButton_Clicked" />
                                                 <Button
                                                     Style="{StaticResource FontIconImageButtonStyle}"
                                                     VerticalOptions="Start"
                                                     Text="&#xFA79;"
-                                                    Clicked="ResultProductBridgeRemoveButton_Clicked" />
+                                                    Clicked="ExpectedProductResultRemoveButton_Clicked" />
                                             </StackLayout>
                                         </Frame>
                                     </DataTemplate>
@@ -312,8 +317,8 @@
                         </Grid>
                     </Frame>
                     <Label
-                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PurchaseOrderConfigurationPageModel.ResultProductBridgesForValidableProperty}}"
-                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PurchaseOrderConfigurationPageModel.ResultProductBridgesForValidableProperty}}"
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PurchaseOrderConfigurationPageModel.ExpectedProductResultsForValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PurchaseOrderConfigurationPageModel.ExpectedProductResultsForValidableProperty}}"
                         Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <FlexLayout
@@ -439,7 +444,7 @@
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Insumos asignados" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Insumos Asignados" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
                             <Grid.ColumnDefinitions>
@@ -455,7 +460,7 @@
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
                                 Text="Agregar"
-                                Clicked="AddSpentProductBridgeButton_Clicked" />
+                                Clicked="AddPlannedProductSpentButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
                                 Color="{StaticResource Gray050}" />
@@ -464,12 +469,12 @@
                                 Margin="4"
                                 Wrap="Wrap"
                                 AlignItems="Start" AlignContent="Start"
-                                BindableLayout.ItemsSource="{Binding SpentProductBridges}">
+                                BindableLayout.ItemsSource="{Binding PlannedProductSpents}">
                                 <BindableLayout.EmptyView>
                                     <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                 </BindableLayout.EmptyView>
                                 <BindableLayout.ItemTemplate>
-                                    <DataTemplate x:DataType="interop_common_bridge_models:PurchaseCommonProductBridgeModel">
+                                    <DataTemplate x:DataType="interop_common_display_models:PurchaseOrderPlannedProductSpentDisplayModel">
                                         <Frame 
                                             WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}"
                                             Padding="8" Margin="4">
@@ -479,9 +484,15 @@
                                                     Margin="8,0,0,0"
                                                     Spacing="4">
                                                     <Label
-                                                        Text="{Binding Product.Name}"
                                                         FontSize="Medium"
-                                                        LineBreakMode="TailTruncation" />
+                                                        LineBreakMode="TailTruncation">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding Product.Name}" />
+                                                                <Span Text="{Binding Classification.Name, StringFormat=' ({0})'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
                                                     <Label>
                                                         <Label.FormattedText>
                                                             <FormattedString>
@@ -496,7 +507,7 @@
                                                     Style="{StaticResource FontIconImageButtonStyle}"
                                                     VerticalOptions="Start"
                                                     Text="&#xF90B;"
-                                                    Clicked="EditSpentProductBridgeButton_Clicked" />
+                                                    Clicked="EditPlannedProductSpentButton_Clicked" />
                                                 <Button
                                                     Style="{StaticResource FontIconImageButtonStyle}"
                                                     VerticalOptions="Start"

@@ -43,8 +43,8 @@
 	  <Compile Update="Pages\Configuration\PurchaseOrderConfigurationPage.xaml.cs">
 	    <DependentUpon>PurchaseOrderConfigurationPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Pages\Configuration\PurchaseCommonProductBridgeConfigurationPage.xaml.cs">
-	    <DependentUpon>PurchaseCommonProductBridgeConfigurationPage.xaml</DependentUpon>
+	  <Compile Update="Pages\Configuration\PurchaseRequestExpectedProductAdquisitionConfigurationPage.xaml.cs">
+	    <DependentUpon>PurchaseRequestExpectedProductAdquisitionConfigurationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Detail\PurchaseSpentDetailPage.xaml.cs">
 	    <DependentUpon>PurchaseSpentDetailPage.xaml</DependentUpon>
@@ -76,6 +76,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\NaturalProviderBudgetProductConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\PurchaseOrderExpectedProductResultConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\PurchaseOrderPlannedProductSpentConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\PurchaseRequestConfigurationPage.xaml">

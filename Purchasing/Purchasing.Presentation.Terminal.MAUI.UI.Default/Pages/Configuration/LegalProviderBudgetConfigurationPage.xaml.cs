@@ -312,7 +312,7 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
         {
             Id = model.Id,
             ProductId = model.Product.Id,
-            ClassificationId = model.Classification.Id,
+            ClassificationId = model.Classification?.Id,
             UnitPrice = model.UnitPrice,
             CurrentyId = model.Currency.Id,
             Amount = model.Amount,
@@ -333,7 +333,7 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
             if (item.Id != model.Id) continue;
 
             item.ProductId = model.Product.Id;
-            item.ClassificationId = model.Classification.Id;
+            item.ClassificationId = model.Classification?.Id;
             item.UnitPrice = model.UnitPrice;
             item.CurrentyId = model.Currency.Id;
             item.Amount = model.Amount;
@@ -351,7 +351,7 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
                 if (item.Id != model.Id) continue;
 
                 item.ProductId = model.Product.Id;
-                item.ClassificationId = model.Classification.Id;
+                item.ClassificationId = model.Classification?.Id;
                 item.UnitPrice = model.UnitPrice;
                 item.CurrentyId = model.Currency.Id;
                 item.Amount = model.Amount;
@@ -369,7 +369,7 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
             {
                 Id = model.Id,
                 ProductId = model.Product.Id,
-                ClassificationId = model.Classification.Id,
+                ClassificationId = model.Classification?.Id,
                 UnitPrice = model.UnitPrice,
                 CurrentyId = model.Currency.Id,
                 Amount = model.Amount,
