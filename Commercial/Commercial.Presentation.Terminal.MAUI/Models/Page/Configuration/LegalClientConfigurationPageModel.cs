@@ -1,5 +1,6 @@
 ﻿using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -26,12 +27,12 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.
                 contact = model.Contact;
                 taxIdentificationNumber = model.TaxIdentificationNumber;
                 stateIdentificationCode = model.StateIdentificationCode;
-                mainPostalContact = model.MainPostalContact;
+                mainPostalContact = Contact.Identity.PostalContacts.First(item => item.Id == model.MainPostalContact.Id);
                 defaultPaymentTerm = model.DefaultPaymentTerm;
-                BankAccounts = new System.Collections.ObjectModel.ObservableCollection<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel>(model.BankAccounts);
-                Documents = new System.Collections.ObjectModel.ObservableCollection<Core.Interop.API.Common.Models.Display.DocumentDisplayModel>(model.Documents);
+                BankAccounts = [.. model.BankAccounts];
+                Documents = [.. model.Documents];
                 priority = model.Priority;
-                AvailablePostalContactItems = new System.Collections.ObjectModel.ObservableCollection<Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel>(Contact.Identity.PostalContacts);
+                AvailablePostalContactItems = [.. Contact.Identity.PostalContacts];
             }
         }
 

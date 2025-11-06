@@ -26,15 +26,15 @@
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-        Text="Aplicar"
-        Clicked="ApplyToolbarItem_Clicked">
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
-        Text="Cancelar"
-        Clicked="CancelToolbarItem_Clicked">
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -42,12 +42,12 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <VerticalStackLayout Spacing="0" Padding="8">
+            <VerticalStackLayout Spacing="4" Padding="8">
                 <FlexLayout 
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=8, MediumContainerColumn=10}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=6, LargeContainerColumn=8, MediumContainerColumn=10}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Contacto" />
@@ -72,7 +72,6 @@
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Dirección postal primaria" />
                         <Picker 
-                            x:Name="PostalContactPicker"
                             ItemsSource="{Binding AvailablePostalContactItems}"
                             SelectedItem="{Binding MainPostalContact}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
@@ -96,7 +95,7 @@
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código REUP" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código REUP (opcional)" />
                         <Entry Text="{Binding StateIdentificationCode}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
@@ -203,17 +202,13 @@
                                                         Padding="8"
                                                         Spacing="8">
                                                         <Button
-                                                            Padding="0"
-                                                            FontSize="21"
-                                                            FontFamily="MaterialDesignIcons" 
+                                                            Style="{StaticResource FontIconImageButtonStyle}"
                                                             Text="&#xF90B;"
                                                             Clicked="DocumentEditionButton_Clicked" />
                                                         <Button
+                                                            Style="{StaticResource FontIconImageButtonStyle}"
                                                             VerticalOptions="Start"
-                                                            Padding="0"
-                                                            FontSize="21"
-                                                            FontFamily="MaterialDesignIcons" 
-                                                            Text="&#xFA78;"
+                                                            Text="&#xFA79;"
                                                             Clicked="DocumentRemotionButton_Clicked" />
                                                     </VerticalStackLayout>
                                                 </StackLayout>
@@ -297,17 +292,13 @@
                                                     </VerticalStackLayout>
                                                     <VerticalStackLayout Spacing="8">
                                                         <Button
-                                                            Padding="0"
-                                                            FontSize="21"
-                                                            FontFamily="MaterialDesignIcons" 
+                                                            Style="{StaticResource FontIconImageButtonStyle}"
                                                             Text="&#xF90B;"
                                                             Clicked="BankAccountEditionButton_Clicked" />
                                                         <Button
+                                                            Style="{StaticResource FontIconImageButtonStyle}"
                                                             VerticalOptions="Start"
-                                                            Padding="0"
-                                                            FontSize="21"
-                                                            FontFamily="MaterialDesignIcons" 
-                                                            Text="&#xFA78;"
+                                                            Text="&#xFA79;"
                                                             Clicked="BankAccountRemotionButton_Clicked" />
                                                     </VerticalStackLayout>
                                                 </StackLayout>
@@ -331,7 +322,7 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />

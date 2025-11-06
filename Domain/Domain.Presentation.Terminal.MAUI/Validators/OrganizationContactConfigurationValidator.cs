@@ -11,6 +11,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Validators
             RuleFor(model => model.Representative).NotNull();
 
             RuleFor(model => model.BusinessKind).NotNull();
+
+            RuleFor(model => model.TaxIdentificationNumber).Matches("^[0-9]+$");
         }
     }
 }

@@ -19,21 +19,23 @@
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-        Text="Aplicar"
-        Clicked="ApplyToolbarItem_Clicked">
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
-        Text="Cancelar"
-        Clicked="CancelToolbarItem_Clicked">
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -41,12 +43,12 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <VerticalStackLayout Spacing="0" Padding="8">
+            <VerticalStackLayout Spacing="4" Padding="8">
                 <FlexLayout 
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=8, MediumContainerColumn=10}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=6, LargeContainerColumn=8, MediumContainerColumn=10}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Contacto" />
@@ -60,6 +62,10 @@
                             HorizontalOptions="Start"
                             Text="Seleccionar ..."
                             Clicked="ContactPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.ContactValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.ContactValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=12}}"
@@ -67,9 +73,13 @@
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Dirección postal primaria" />
                         <Picker 
-                            x:Name="PostalContactPicker"
                             ItemsSource="{Binding AvailablePostalContactItems}"
+                            SelectedItem="{Binding MainPostalContact}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.MainPostalContactValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.MainPostalContactValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
@@ -77,6 +87,10 @@
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. de Identidad (NIT)" />
                         <Entry Text="{Binding PersonalIdentificationNumber}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.PersonalIdentificationNumberValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.PersonalIdentificationNumberValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
@@ -86,8 +100,13 @@
                         <Picker 
                             x:Name="BusinessKindPicker"
                             ItemsSource="{Binding AvailableBusinessKinds, Mode=OneTime}" 
-                            ItemDisplayBinding="{Binding Name}"
+                            ItemDisplayBinding="{Binding Path=Name}"
+                            SelectedItem="{Binding BusinessKind}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.BusinessKindValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.BusinessKindValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
@@ -97,8 +116,13 @@
                         <Picker 
                             x:Name="PaymentTermPicker"
                             ItemsSource="{Binding AvailablePaymentTerms, Mode=OneTime}" 
-                            ItemDisplayBinding="{Binding Name}"
+                            ItemDisplayBinding="{Binding Path=Name}"
+                            SelectedItem="{Binding DefaultPaymentTerm}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.DefaultPaymentTermValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.DefaultPaymentTermValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <FlexLayout 
@@ -188,17 +212,13 @@
                                                         Padding="8"
                                                         Spacing="8">
                                                         <Button
-                                                            Padding="0"
-                                                            FontSize="21"
-                                                            FontFamily="MaterialDesignIcons" 
+                                                            Style="{StaticResource FontIconImageButtonStyle}"
                                                             Text="&#xF90B;"
                                                             Clicked="DocumentEditionButton_Clicked" />
                                                         <Button
+                                                            Style="{StaticResource FontIconImageButtonStyle}"
                                                             VerticalOptions="Start"
-                                                            Padding="0"
-                                                            FontSize="21"
-                                                            FontFamily="MaterialDesignIcons" 
-                                                            Text="&#xFA78;"
+                                                            Text="&#xFA79;"
                                                             Clicked="DocumentRemotionButton_Clicked" />
                                                     </VerticalStackLayout>
                                                 </StackLayout>
@@ -282,17 +302,13 @@
                                                     </VerticalStackLayout>
                                                     <VerticalStackLayout Spacing="8">
                                                         <Button
-                                                            Padding="0"
-                                                            FontSize="21"
-                                                            FontFamily="MaterialDesignIcons" 
+                                                            Style="{StaticResource FontIconImageButtonStyle}"
                                                             Text="&#xF90B;"
                                                             Clicked="BankAccountEditionButton_Clicked" />
                                                         <Button
+                                                            Style="{StaticResource FontIconImageButtonStyle}"
                                                             VerticalOptions="Start"
-                                                            Padding="0"
-                                                            FontSize="21"
-                                                            FontFamily="MaterialDesignIcons" 
-                                                            Text="&#xFA78;"
+                                                            Text="&#xFA79;"
                                                             Clicked="BankAccountRemotionButton_Clicked" />
                                                     </VerticalStackLayout>
                                                 </StackLayout>
@@ -302,6 +318,10 @@
                                 </CollectionView>
                             </Grid>
                         </Frame>
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.BankAccountsValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientConfigurationPageModel.BankAccountsValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <BoxView 
@@ -312,7 +332,7 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />

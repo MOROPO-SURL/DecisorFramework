@@ -8,9 +8,13 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
         {
             var _model = new Models.Page.Configuration.OrganizationContactConfigurationPageModel(model);
 
-            var apiConnectClient = new Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+            var httpClientProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
-            _model.AvailableBusinessKinds = await apiConnectClient.GetEnabledAsync();
+            var businessKindsAPIConnectClient = new Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(httpClientProvider);
+            var centralStateStructuresAPIConnectClient = new Interop.API.Connect.Clients.CentralStateStructuresAPIConnectClient(httpClientProvider);
+
+            _model.AvailableBusinessKinds = await businessKindsAPIConnectClient.GetEnabledAsync();
+            _model.AvailableCentralStateStructures = await centralStateStructuresAPIConnectClient.GetAsync();
 
             return new Pages.Configuration.OrganizationContactConfigurationPage(configurationSuccessAction, _model, new Validators.OrganizationContactConfigurationValidator());
         }

@@ -47,17 +47,59 @@ public partial class LegalProviderPickPage : Core.Presentation.Terminal.MAUI.UI.
     {
         var apiConnectClient = new Interop.API.Connect.Clients.LegalProvidersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.LegalProviderFilterModel { Name = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
+
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
+        ConcreteBindingContext.SearchParameter = null;
+
         OnReload(sender, eventArgs);
     }
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new Configuration.LegalProviderConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.LegalProviderConfigurationPageModel(null)));
+        //var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        //if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.LegalClientCreatorPermission)))
+        //{
+        //    DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+        //    return;
+        //}
+
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.LegalProviderDisplayModel, Models.Page.Configuration.LegalProviderConfigurationPageModel>>();
+
+                var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(page);
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+
+                    ConcreteBindingContext.IsBusy = false;
+                });
+            }
+        });
     }
 
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
@@ -80,6 +122,11 @@ public partial class LegalProviderPickPage : Core.Presentation.Terminal.MAUI.UI.
         pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.LegalProviderDisplayModel);
 
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
     }
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.LegalProviderDisplayModel model)

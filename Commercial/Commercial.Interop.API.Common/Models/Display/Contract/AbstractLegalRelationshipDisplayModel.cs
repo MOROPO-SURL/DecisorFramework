@@ -1,6 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
-
-namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.Contract
+﻿namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.Contract
 {
     public abstract class AbstractLegalRelationshipDisplayModel<TEntity> : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<TEntity, System.Guid>
         where TEntity : Persistence.Entities.Contract.AbstractLegalRelationship
@@ -11,7 +9,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.
 
         public System.DateTime At { get; set; }
 
-        public OrganizationContactDisplayModel Contact { get; set; }
+        public Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel Contact { get; set; }
 
         public string TaxIdentificationNumber { get; set; }
 
@@ -35,7 +33,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display.
 
             if (entity.Contact != null)
             {
-                Contact = new OrganizationContactDisplayModel();
+                Contact = new Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel();
 
                 Contact.Import(entity.Contact);
             }

@@ -2,7 +2,6 @@ using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
-using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,6 +45,20 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
                 break;
             }
         }
+
+        if (model.CentralStateStructure != null)
+        {
+            for (int i = 0; i < model.AvailableCentralStateStructures.Length; i++)
+            {
+                var current = model.AvailableCentralStateStructures[i];
+
+                if (model.CentralStateStructure.Id != current.Id) continue;
+
+                CentralStateStructurePicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Contacto (Organización)";
@@ -70,7 +83,10 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
             Priority = ConcreteBindingContext.Priority,
             BornDate = ConcreteBindingContext.IsSettedBornDate ? ConcreteBindingContext.BornDate : null,
             RepresentativeId = ConcreteBindingContext.Representative.Id,
-            BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            BusinessKindId = ConcreteBindingContext.BusinessKind.Id,
+            TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
+            StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
+            CentralStateStructureId = ConcreteBindingContext.CentralStateStructure?.Id,
             IncomingPostalContactItems = incomingPostalContactItems,
             IncomingPhoneContactItems = incomingPhoneContactItems,
             IncomingEmailContactItems = incomingEmailContactItems,
@@ -103,7 +119,10 @@ public partial class OrganizationContactConfigurationPage : Core.Presentation.Te
             Priority = ConcreteBindingContext.Priority,
             BornDate = ConcreteBindingContext.IsSettedBornDate ? ConcreteBindingContext.BornDate : null,
             RepresentativeId = ConcreteBindingContext.Representative.Id,
-            BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            BusinessKindId = ConcreteBindingContext.BusinessKind.Id,
+            TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
+            StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
+            CentralStateStructureId = ConcreteBindingContext.CentralStateStructure?.Id,
             EditionPostalContactItems = editionPostalContactItems,
             IncomingPostalContactItems = incomingPostalContactItems,
             OutgoingPostalContactItems = outgoingPostalContactItems,

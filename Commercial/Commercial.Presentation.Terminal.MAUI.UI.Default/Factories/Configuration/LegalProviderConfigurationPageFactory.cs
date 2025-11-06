@@ -12,7 +12,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Defa
 
             _model.AvailablePaymentTerms = await apiConnectClient.GetEnabledAsync();
 
-            return new Pages.Configuration.LegalProviderConfigurationPage(configurationSuccessAction, _model);
+            return new Pages.Configuration.LegalProviderConfigurationPage(configurationSuccessAction, _model, new Validators.LegalProviderConfigurationValidator());
         }
     }
 }

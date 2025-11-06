@@ -17,6 +17,7 @@ public class OrganizationContactRepository : Guama.Core.Persistence.ORM.EF.Repos
             .Include(entity => entity.Identity).ThenInclude(entity => entity.PhoneContactItemBridges).ThenInclude(bridge => bridge.Stern)
             .Include(entity => entity.Identity).ThenInclude(entity => entity.EmailContactItemBridges).ThenInclude(bridge => bridge.Stern)
             .Include(entity => entity.Identity).ThenInclude(entity => entity.WebSiteContactItemBridges).ThenInclude(bridge => bridge.Stern)
+            .Include(entity => entity.CentralStateStructure)
             .Include(entity => entity.Representative).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
             .Include(entity => entity.MainPostalContact).ThenInclude(entity => entity.Location)
             .Include(entity => entity.BusinessKind);
