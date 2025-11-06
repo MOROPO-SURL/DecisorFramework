@@ -243,10 +243,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<NaturalClientVehicleLeasingCollect> NatClientVehLeasCollects { get; set; }
 
         public DbSet<LegalProviderBudget> LegalProviderBudgets { get; set; }
-        public DbSet<LegalProviderBudgetProductBridge> LegalProviderBudgetProductBridge { get; set; }
-        public DbSet<LegalProviderBudgetServiceBridge> LegalProviderBudgetServiceBridge { get; set; }
+        public DbSet<LegalProviderBudgetProduct> LegalProviderBudgetProducts { get; set; }
+        public DbSet<LegalProviderBudgetServiceBridge> LegalProviderBudgetServiceBridges { get; set; }
         public DbSet<NaturalProviderBudget> NaturalProviderBudgets { get; set; }
-        public DbSet<NaturalProviderBudgetProductBridge> NaturalProviderBudgetProductBridges { get; set; }
+        public DbSet<NaturalProviderBudgetProduct> NaturalProviderBudgetProducts { get; set; }
         public DbSet<NaturalProviderBudgetServiceBridge> NaturalProviderBudgetServiceBridges { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }
         public DbSet<PurchaseSpent> PurchaseSpents { get; set; }
@@ -261,10 +261,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<PurchaseProductNaturalProviderBridge> PurchaseProductNaturalProviderBridges { get; set; }
         public DbSet<PurchasePurchaseSpentBridge> PurchasePurchaseSpentBridges { get; set; }
         public DbSet<PurchaseRequest> PurchaseRequests { get; set; }
-        public DbSet<PurchaseRequestProductBridge> PurchaseRequestProductBridges { get; set; }
+        public DbSet<PurchaseRequestExpectedProductAdquisition> PurchaseRequestExpectedProductAdquisitions { get; set; }
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
-        public DbSet<PurchaseOrderProductResultBridge> PurchaseOrderProductResultBridges { get; set; }
-        public DbSet<PurchaseOrderProductSpentBridge> PurchaseOrderProductSpentBridges { get; set; }
+        public DbSet<PurchaseOrderExpectedProductResult> PurchaseOrderExpectedProductResults { get; set; }
+        public DbSet<PurchaseOrderPlannedProductSpent> PurchaseOrderPlannedProductSpents { get; set; }
         public DbSet<PurchaseOrderLegalProviderBudgetBridge> PurchaseOrderLegalProviderBudgetBridges { get; set; }
         public DbSet<PurchaseOrderNaturalProviderBudgetBridge> PurchaseOrderNaturalProviderBudgetBridges { get; set; }
         public DbSet<PurchaseCashAdvance> PurchaseCashAdvances { get; set; }

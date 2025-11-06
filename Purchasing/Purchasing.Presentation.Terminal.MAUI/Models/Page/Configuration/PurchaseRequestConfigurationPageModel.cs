@@ -1,20 +1,16 @@
-﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
-using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;
-
-namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration
+﻿namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
-    public class PurchaseRequestConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PurchaseRequestDisplayModel>
+    public class PurchaseRequestConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.PurchaseRequestDisplayModel>
     {
         public static string AuthorValidableProperty => nameof(Author);
         public static string ArgumentValidableProperty => nameof(Argument);
-        public static string ProductBridgesValidableProperty => nameof(ProductBridges);
+        public static string ExpectedProductAdquisitionsValidableProperty => nameof(ExpectedProductAdquisitions);
 
         private string argument;
         private int priority = 1;
-        private EmployeeDisplayModel author;
+        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel author;
 
-        public PurchaseRequestConfigurationPageModel(PurchaseRequestDisplayModel model = null) : base(model)
+        public PurchaseRequestConfigurationPageModel(Interop.API.Common.Models.Display.PurchaseRequestDisplayModel model = null) : base(model)
         {
             if (model == null) return;
 
@@ -22,7 +18,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
             argument = model.Argument;
             priority = model.Priority;
             author = model.Author;
-            ProductBridges = [.. model.ProductBridges];
+            ExpectedProductAdquisitions = [.. model.ExpectedProductAdquisitions];
         }
 
         public System.Guid Id { get; set; }
@@ -31,8 +27,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<PurchaseCommonProductBridgeModel> ProductBridges { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.PurchaseRequestExpectedProductAdquisitionDisplayModel> ExpectedProductAdquisitions { get; set; } = [];
     }
 }

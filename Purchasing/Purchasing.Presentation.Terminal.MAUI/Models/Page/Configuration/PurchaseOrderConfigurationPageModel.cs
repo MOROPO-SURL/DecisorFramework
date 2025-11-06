@@ -9,7 +9,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
         public static string AgreementValidableProperty => nameof(Agreement);
         public static string ResponsibleValidableProperty => nameof(Responsible);
         public static string ZoneValidableProperty => nameof(Zone);
-        public static string ResultProductBridgesForValidableProperty => nameof(ResultProductBridges);
+        public static string ExpectedProductResultsForValidableProperty => nameof(ExpectedProductResults);
         public static string AdvanceRequiredForValidableProperty => nameof(AdvanceRequired);
         public static string AdvanceRequiredCurrencyForValidableProperty => nameof(AdvanceRequiredCurrency);
 
@@ -41,8 +41,8 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
             advanceRequiredCurrency = model.AdvanceRequiredCurrency;
             LegalProviderBudgets = [.. model.LegalProviderBudgets];
             NaturalProviderBudgets = [.. model.NaturalProviderBudgets];
-            ResultProductBridges = [.. model.ResultProductBridges];
-            SpentProductBridges = [.. model.SpentProductBridges];
+            ExpectedProductResults = [.. model.ExpectedProductResults];
+            PlannedProductSpents = [.. model.PlannedProductSpents];
         }
 
         public System.Guid Id { get; set; }
@@ -71,9 +71,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.
 
         public System.Collections.ObjectModel.ObservableCollection<NaturalProviderBudgetDisplayModel> NaturalProviderBudgets { get; set; } = [];
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.PurchaseCommonProductBridgeModel> ResultProductBridges { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<PurchaseOrderExpectedProductResultDisplayModel> ExpectedProductResults { get; set; } = [];
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.PurchaseCommonProductBridgeModel> SpentProductBridges { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<PurchaseOrderPlannedProductSpentDisplayModel> PlannedProductSpents { get; set; } = [];
 
         public PurchaseZoneDisplayModel[] AvailableZones { get; set; }
 

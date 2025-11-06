@@ -6,13 +6,14 @@
         public static string YearValidableProperty => nameof(Year);
         public static string CommercialValidableProperty => nameof(Commercial);
         public static string ProviderValidableProperty => nameof(Provider);
-        public static string ProductBridgesValidableProperty => nameof(ProductBridges);
+        public static string BudgetProductsValidableProperty => nameof(BudgetProducts);
 
         private int number;
         private int year;
         private string description;
         private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel commercial;
         private Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel provider;
+        private Core.Interop.API.Common.Models.Display.DocumentDisplayModel document;
 
         public LegalProviderBudgetConfigurationPageModel(Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel model) : base(model)
         {
@@ -32,7 +33,8 @@
             description = model.Description;
             commercial = model.Commercial;
             provider = model.Provider;
-            ProductBridges = [.. model.ProductBridges];
+            BudgetProducts = [.. model.BudgetProducts];
+            document = model.Document;
         }
 
         public System.Guid Id { get; set; }
@@ -47,7 +49,9 @@
 
         public Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel Provider { get => provider; set => SetProperty(ref provider, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel> ProductBridges { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.LegalProviderBudgetProductDisplayModel> BudgetProducts { get; set; } = [];
+
+        public Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get => document; set => SetProperty(ref document, value); }
 
         public System.Collections.Generic.List<int> AvailableYears { get; private set; } = [];
     }

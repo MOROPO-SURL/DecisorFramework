@@ -6,6 +6,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class PurchaseRequestConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.PurchaseRequestDisplayModel, Interop.API.Common.Models.Display.PurchaseRequestDisplayModel, Models.Page.Configuration.PurchaseRequestConfigurationPageModel>
 {
+    private readonly System.Collections.Generic.List<Interop.API.Common.Models.Input.PurchaseRequestExpectedProductAdquisitionInputModel> editionExpectedProducttAdquisitions = [];
+    private readonly System.Collections.Generic.List<Interop.API.Common.Models.Input.PurchaseRequestExpectedProductAdquisitionInputModel> incomingExpectedProducttAdquisitions = [];
+    private readonly System.Collections.Generic.List<Interop.API.Common.Models.Display.PurchaseRequestExpectedProductAdquisitionDisplayModel> outgoingExpectedProducttAdquisitions = [];
+
     public PurchaseRequestConfigurationPage(System.Action<Interop.API.Common.Models.Display.PurchaseRequestDisplayModel> successAction, Models.Page.Configuration.PurchaseRequestConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.PurchaseRequestConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
@@ -23,7 +27,7 @@ public partial class PurchaseRequestConfigurationPage : Core.Presentation.Termin
             Argument = ConcreteBindingContext.Argument,
             AuthorId = ConcreteBindingContext.Author.Id,
             Priority = ConcreteBindingContext.Priority,
-            ProductBridges = [.. ConcreteBindingContext.ProductBridges]
+            IncomingExpectedProducttAdquisitions = incomingExpectedProducttAdquisitions
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -41,7 +45,9 @@ public partial class PurchaseRequestConfigurationPage : Core.Presentation.Termin
             Argument = ConcreteBindingContext.Argument,
             AuthorId = ConcreteBindingContext.Author.Id,
             Priority = ConcreteBindingContext.Priority,
-            ProductBridges = [.. ConcreteBindingContext.ProductBridges]
+            EditionExpectedProducttAdquisitions = editionExpectedProducttAdquisitions,
+            IncomingExpectedProducttAdquisitions = incomingExpectedProducttAdquisitions,
+            OutgoingExpectedProducttAdquisitions = outgoingExpectedProducttAdquisitions
         };
 
         await apiConnectClient.EditAsync(model);
@@ -69,26 +75,37 @@ public partial class PurchaseRequestConfigurationPage : Core.Presentation.Termin
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(AuthorPickComplete_Callback)));
     }
 
-    private void AddProductBridgeButton_Clicked(object sender, System.EventArgs e)
+    private void AddExpectedProductAdquisitioButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushPageAsync(new PurchaseRequestExpectedProductAdquisitionConfigurationPage(ExpectedProductAdquisitioCreateSuccess_Callback, new Models.Page.Configuration.PurchaseRequestExpectedProductAdquisitionConfigurationPageModel(null)));
+    }
+
+    private void EditExpectedProductAdquisitioButton_Clicked(object sender, System.EventArgs e)
     {
         ConcreteBindingContext.IsBusy = true;
 
-        System.Threading.Tasks.Task.Run(async () =>
+        System.Threading.Tasks.Task.Run((System.Func<System.Threading.Tasks.Task>)(async () =>
         {
             try
             {
-                var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var httpClientProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
-                var model = new Models.Page.Configuration.PurchaseCommonProductBridgeConfigurationPageModel(null)
+                var classificationsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.ClassificationsAPIConnectClient(httpClientProvider);
+                var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientProvider);
+
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.PurchaseRequestExpectedProductAdquisitionDisplayModel;
+
+                var model = new Models.Page.Configuration.PurchaseRequestExpectedProductAdquisitionConfigurationPageModel(target)
                 {
-                    AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync()
+                    AvailableClassifications = [.. await classificationsAPIConnectClient.FilterAsync(new Inventory.Interop.API.Common.Models.Filter.ClassificationFilterModel { ProductId = target.Product.Id })],
+                    AvailableUnitMeasurements = [.. await unitMeasurementsAPIConnectClient.GetReleatedsAsync(target.Product.DefaultUnitMeasurement.Id)],
                 };
 
                 Dispatcher.Dispatch(() =>
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new PurchaseCommonProductBridgeConfigurationPage("Producto", ProductBridgeCreateSuccess_Callback, model));
+                    this.NavigationPushPageAsync(new PurchaseRequestExpectedProductAdquisitionConfigurationPage(ExpectedProductAdquisitioEditSuccess_Callback, model));
                 });
             }
             catch (System.Exception exception)
@@ -98,50 +115,53 @@ public partial class PurchaseRequestConfigurationPage : Core.Presentation.Termin
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
-        });
+        }));
     }
 
-    private void EditProductBridgeButton_Clicked(object sender, System.EventArgs e)
+    private void ExpectedProductAdquisitioRemoveButton_Clicked(object sender, System.EventArgs e)
     {
-        ConcreteBindingContext.IsBusy = true;
-
-        System.Threading.Tasks.Task.Run(async () =>
-        {
-            try
-            {
-                var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-                var model = new Models.Page.Configuration.PurchaseCommonProductBridgeConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseCommonProductBridgeModel)
-                {
-                    AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync()
-                };
-
-                Dispatcher.Dispatch(() =>
-                {
-                    ConcreteBindingContext.IsBusy = false;
-
-                    this.NavigationPushPageAsync(new PurchaseCommonProductBridgeConfigurationPage("Producto", ProductBridgeEditSuccess_Callback, model));
-                });
-            }
-            catch (System.Exception exception)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                });
-            }
-        });
-    }
-
-    private void ProductBridgeRemoveButton_Clicked(object sender, System.EventArgs e)
-    {
-        DisplayAlert("Confirmación", "Está seguro que desea retirar este producto?", "Confirmar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este producto solictado?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
-            hasChangesFlag = true;
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.PurchaseRequestExpectedProductAdquisitionDisplayModel;
 
-            Dispatcher.Dispatch(() => ((Models.Page.Configuration.PurchaseRequestConfigurationPageModel)BindingContext).ProductBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseCommonProductBridgeModel));
+                var handled = false;
+
+                foreach (var item in incomingExpectedProducttAdquisitions)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingExpectedProducttAdquisitions.Remove(incomingExpectedProducttAdquisitions.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionExpectedProducttAdquisitions)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionExpectedProducttAdquisitions.Remove(editionExpectedProducttAdquisitions.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingExpectedProducttAdquisitions.Add(target);
+                }
+
+                ConcreteBindingContext.ExpectedProductAdquisitions.Remove(target);
+
+                hasChangesFlag = true;
+            });
         });
     }
 
@@ -152,22 +172,88 @@ public partial class PurchaseRequestConfigurationPage : Core.Presentation.Termin
         hasChangesFlag = true;
     }
 
-    private void ProductBridgeCreateSuccess_Callback(Interop.API.Common.Models.Bridge.PurchaseCommonProductBridgeModel model)
+    private void ExpectedProductAdquisitioCreateSuccess_Callback(Interop.API.Common.Models.Display.PurchaseRequestExpectedProductAdquisitionDisplayModel model)
     {
-        ((Models.Page.Configuration.PurchaseRequestConfigurationPageModel)BindingContext).ProductBridges.Add(model);
+        if (ConcreteBindingContext.ExpectedProductAdquisitions.Any(_model => _model.Product.Id == model.Product.Id && ((_model.Classification == null && model.Classification == null) || _model.Classification.Id == model.Classification.Id)))
+        {
+            DisplayAlert("Aviso", "Ya se ha definido oferta para este producto y solo puede especificarse una vez.", "Aceptar");
+
+            return;
+        }
+
+        incomingExpectedProducttAdquisitions.Add(new Interop.API.Common.Models.Input.PurchaseRequestExpectedProductAdquisitionInputModel
+        {
+            Id = model.Id,
+            ProductId = model.Product.Id,
+            ClassificationId = model.Classification?.Id,
+            Amount = model.Amount,
+            UnitMeasurementId = model.UnitMeasurement.Id,
+        });
+
+        ConcreteBindingContext.ExpectedProductAdquisitions.Add(model);
 
         hasChangesFlag = true;
     }
 
-    private void ProductBridgeEditSuccess_Callback(Interop.API.Common.Models.Bridge.PurchaseCommonProductBridgeModel model)
+    private void ExpectedProductAdquisitioEditSuccess_Callback(Interop.API.Common.Models.Display.PurchaseRequestExpectedProductAdquisitionDisplayModel model)
     {
-        var concreteBindingContext = (Models.Page.Configuration.PurchaseRequestConfigurationPageModel)BindingContext;
+        var handled = false;
 
-        var reference = concreteBindingContext.ProductBridges.First(item => item.Product.Id == model.Product.Id);
+        foreach (var item in incomingExpectedProducttAdquisitions)
+        {
+            if (item.Id != model.Id) continue;
 
-        var index = concreteBindingContext.ProductBridges.IndexOf(reference);
+            item.ProductId = model.Product.Id;
+            item.ClassificationId = model.Classification?.Id;
+            item.Amount = model.Amount;
+            item.UnitMeasurementId = model.UnitMeasurement.Id;
 
-        concreteBindingContext.ProductBridges[index] = model;
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionExpectedProducttAdquisitions)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.ProductId = model.Product.Id;
+                item.ClassificationId = model.Classification?.Id;
+                item.Amount = model.Amount;
+                item.UnitMeasurementId = model.UnitMeasurement.Id;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionExpectedProducttAdquisitions.Add(new Interop.API.Common.Models.Input.PurchaseRequestExpectedProductAdquisitionInputModel
+            {
+                Id = model.Id,
+                ProductId = model.Product.Id,
+                ClassificationId = model.Classification?.Id,
+                Amount = model.Amount,
+                UnitMeasurementId = model.UnitMeasurement.Id,
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.ExpectedProductAdquisitions)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.ExpectedProductAdquisitions[index] = model;
+
+            break;
+        }
 
         hasChangesFlag = true;
     }

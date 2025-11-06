@@ -10,7 +10,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Validat
 
             RuleFor(model => model.Author).NotNull();
 
-            RuleFor(model => model.ProductBridges).NotEmpty();
+            RuleFor(model => model.ExpectedProductAdquisitions).NotEmpty();
         }
     }
 }

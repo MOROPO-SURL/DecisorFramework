@@ -25,6 +25,10 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CommercialId))]
         public Domain.Persistence.Entities.Employee Commercial { get; set; }
         public System.Guid CommercialId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DocumentId))]
+        public Guama.Media.Persistence.Entities.Document Document { get; set; }
+        public System.Guid? DocumentId { get; set; }
     }
 }
 

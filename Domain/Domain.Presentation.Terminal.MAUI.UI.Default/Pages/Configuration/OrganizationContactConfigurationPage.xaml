@@ -15,7 +15,7 @@
     x:DataType="presentation_configuration_page_models:OrganizationContactConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="RootFlexLayoutItemResponsiveWithConverter" SingleSpacing="4" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="RootFlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrappedFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="PostalContactDetailFlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
@@ -42,7 +42,7 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <VerticalStackLayout Spacing="0" Margin="8">
+            <VerticalStackLayout Spacing="4" Margin="8">
                 <FlexLayout 
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
@@ -96,7 +96,7 @@
                                 <Picker 
                                     x:Name="BusinessKindPicker"
                                     ItemsSource="{Binding AvailableBusinessKinds, Mode=OneTime}" 
-                                    ItemDisplayBinding="{Binding Name}"
+                                    ItemDisplayBinding="{Binding Path=Name}"
                                     SelectedItem="{Binding BusinessKind}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
                                 <Label
@@ -125,6 +125,40 @@
                                     Style="{StaticResource ValidationMessageLabelStyle}" />
                             </VerticalStackLayout>
                         </FlexLayout>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="NIT (opcional)" />
+                        <Entry Text="{Binding TaxIdentificationNumber}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:OrganizationContactConfigurationPageModel.TaxIdentificationNumberValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:OrganizationContactConfigurationPageModel.TaxIdentificationNumberValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código REUP (opcional)" />
+                        <Entry Text="{Binding StateIdentificationCode}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Organismo (opcional)" />
+                        <Picker 
+                            x:Name="CentralStateStructurePicker"
+                            ItemsSource="{Binding AvailableCentralStateStructures, Mode=OneTime}"
+                            ItemDisplayBinding="{Binding Path=Identity.Name}"
+                            SelectedItem="{Binding CentralStateStructure}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <FlexLayout
@@ -458,7 +492,7 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1,ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />

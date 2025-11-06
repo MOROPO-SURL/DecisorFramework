@@ -6,6 +6,14 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel, Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel, Models.Page.Configuration.LegalProviderBudgetConfigurationPageModel>
 {
+    private readonly System.Collections.Generic.List<Interop.API.Common.Models.Input.LegalProviderBudgetProductInputModel> editionBudgetProducts = [];
+    private readonly System.Collections.Generic.List<Interop.API.Common.Models.Input.LegalProviderBudgetProductInputModel> incomingBudgetProducts = [];
+    private readonly System.Collections.Generic.List<Interop.API.Common.Models.Display.LegalProviderBudgetProductDisplayModel> outgoingBudgetProducts = [];
+
+    private Microsoft.Maui.Storage.FileResult documentFilePickResult;
+
+    private bool documentEditionFlag;
+
     public LegalProviderBudgetConfigurationPage(System.Action<Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel> successCallbackAction, Models.Page.Configuration.LegalProviderBudgetConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.LegalProviderBudgetConfigurationPageModel> validator) : base(successCallbackAction, model, validator)
     {
 		InitializeComponent();
@@ -25,8 +33,24 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
             ProviderId = ConcreteBindingContext.Provider.Id,
             CommercialId = ConcreteBindingContext.Commercial.Id,
             Description = ConcreteBindingContext.Description,
-            ProductBridges = [.. ConcreteBindingContext.ProductBridges]
+            IncomingBudgetProducts = incomingBudgetProducts
         };
+
+        if (documentFilePickResult != null)
+        {
+            using var stream = await documentFilePickResult.OpenReadAsync();
+
+            model.Document = new Core.Interop.API.Common.Models.Input.DocumentInputModel
+            {
+                Id = System.Guid.NewGuid(),
+                Name = ConcreteBindingContext.Document.Name,
+                Description = ConcreteBindingContext.Document.Description,
+                ContentData = new byte[stream.Length],
+                ContentType = documentFilePickResult.ContentType
+            };
+
+            stream.Read(model.Document.ContentData, 0, (int)stream.Length);
+        }
 
         await apiConnectClient.CreateAsync(model);
 
@@ -45,8 +69,35 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
             ProviderId = ConcreteBindingContext.Provider.Id,
             CommercialId = ConcreteBindingContext.Commercial.Id,
             Description = ConcreteBindingContext.Description,
-            ProductBridges = [.. ConcreteBindingContext.ProductBridges]
+            EditionBudgetProducts = editionBudgetProducts,
+            IncomingBudgetProducts = incomingBudgetProducts,
+            OutgoingBudgetProducts = outgoingBudgetProducts
         };
+
+        if (documentFilePickResult != null)
+        {
+            using var stream = await documentFilePickResult.OpenReadAsync();
+
+            model.Document = new Core.Interop.API.Common.Models.Input.DocumentInputModel
+            {
+                Id = model.Document?.Id ?? default,
+                Name = ConcreteBindingContext.Document.Name,
+                Description = ConcreteBindingContext.Document.Description,
+                ContentData = new byte[stream.Length],
+                ContentType = documentFilePickResult.ContentType
+            };
+
+            stream.Read(model.Document.ContentData, 0, (int)stream.Length);
+        }
+        else if (documentEditionFlag)
+        {
+            model.Document = new Core.Interop.API.Common.Models.Input.DocumentInputModel
+            {
+                Id = ConcreteBindingContext.Document.Id,
+                Name = ConcreteBindingContext.Document.Name,
+                Description = ConcreteBindingContext.Document.Description
+            };
+        }
 
         await apiConnectClient.EditAsync(model);
 
@@ -73,27 +124,27 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(CommercialPickComplete_Callback)));
     }
 
-    private void AddProductBridgeButton_Clicked(object sender, System.EventArgs e)
+    private void AddBudgetProductButton_Clicked(object sender, System.EventArgs e)
     {
         ConcreteBindingContext.IsBusy = true;
 
-        System.Threading.Tasks.Task.Run(async () =>
+        System.Threading.Tasks.Task.Run((System.Func<System.Threading.Tasks.Task>)(async () =>
         {
             try
             {
                 var apiConnectClient = new Financial.Interop.API.Connect.Clients.CurrenciesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-                var model = new Models.Page.Configuration.CommonBugetProductBridgeConfigurationPageModel(null)
+                var model = new Models.Page.Configuration.LegalProviderBudgetProductConfigurationPageModel(null)
                 {
                     AvailableCurrencies = await apiConnectClient.GetAsync()
                 };
 
-                Dispatcher.Dispatch(() =>
+                Dispatcher.Dispatch((System.Action)(() =>
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new CommonBugetProductBridgeConfigurationPage(ProductBridgeCreateSuccess_Callback, model));
-                });
+                    this.NavigationPushPageAsync(new LegalProviderBudgetProductConfigurationPage(BudgetProductCreateSuccess_Callback, model));
+                }));
             }
             catch (System.Exception exception)
             {
@@ -102,14 +153,14 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
-        });
+        }));
     }
 
-    private void EditProductBridgeButton_Clicked(object sender, System.EventArgs e)
+    private void EditBudgetProductButton_Clicked(object sender, System.EventArgs e)
     {
         ConcreteBindingContext.IsBusy = true;
 
-        System.Threading.Tasks.Task.Run(async () =>
+        System.Threading.Tasks.Task.Run((System.Func<System.Threading.Tasks.Task>)(async () =>
         {
             try
             {
@@ -119,9 +170,9 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
                 var classificationsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.ClassificationsAPIConnectClient(httpClientProvider);
                 var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientProvider);
 
-                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel;
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.LegalProviderBudgetProductDisplayModel;
 
-                var model = new Models.Page.Configuration.CommonBugetProductBridgeConfigurationPageModel(target)
+                var model = new Models.Page.Configuration.LegalProviderBudgetProductConfigurationPageModel(target)
                 {
                     AvailableCurrencies = await currenciesAPIConnectClient.GetAsync(),
                     AvailableClassifications = [.. await classificationsAPIConnectClient.FilterAsync(new Inventory.Interop.API.Common.Models.Filter.ClassificationFilterModel { ProductId = target.Product.Id })],
@@ -132,7 +183,7 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new CommonBugetProductBridgeConfigurationPage(ProductBridgeEditSuccess_Callback, model));
+                    this.NavigationPushPageAsync(new LegalProviderBudgetProductConfigurationPage(BudgetProductEditSuccess_Callback, model));
                 });
             }
             catch (System.Exception exception)
@@ -142,19 +193,96 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
-        });
+        }));
     }
 
-    private void ProductBridgeRemoveButton_Clicked(object sender, System.EventArgs e)
+    private void BudgetProductRemoveButton_Clicked(object sender, System.EventArgs e)
     {
         DisplayAlert("Confirmación", "Está seguro que desea retirar este producto en oferta?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
-            hasChangesFlag = true;
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.LegalProviderBudgetProductDisplayModel;
 
-            Dispatcher.Dispatch(() => ConcreteBindingContext.ProductBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel));
+                var handled = false;
+
+                foreach (var item in incomingBudgetProducts)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingBudgetProducts.Remove(editionBudgetProducts.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionBudgetProducts)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionBudgetProducts.Remove(editionBudgetProducts.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingBudgetProducts.Add(target);
+                }
+
+                ConcreteBindingContext.BudgetProducts.Remove(target);
+
+                hasChangesFlag = true;
+            });
         });
+    }
+
+    private void DocumentPickButton_Clicked(object sender, System.EventArgs e)
+    {
+        Microsoft.Maui.Storage.FilePicker.Default.PickAsync(new Microsoft.Maui.Storage.PickOptions
+        {
+            PickerTitle = "Seleccionar archivo",
+            FileTypes = new Microsoft.Maui.Storage.FilePickerFileType(
+                new System.Collections.Generic.Dictionary<Microsoft.Maui.Devices.DevicePlatform, System.Collections.Generic.IEnumerable<string>>
+                {
+                    { Microsoft.Maui.Devices.DevicePlatform.iOS, new[] { "public.my.comic.extension" } }, // UTType values
+                    { Microsoft.Maui.Devices.DevicePlatform.Android, new[] { "application/comics" } }, // MIME type
+                    { Microsoft.Maui.Devices.DevicePlatform.WinUI, new[] { ".doc", ".docx", ".dot", ".pdf" } }, // file extension
+                    { Microsoft.Maui.Devices.DevicePlatform.macOS, new[] { "cbr", "cbz" } }, // UTType values
+                })
+        }).ContinueWith(async task =>
+        {
+            if (task.Result == null) return;
+
+            documentFilePickResult = task.Result;
+
+            using var stream = await documentFilePickResult.OpenReadAsync();
+
+            var lenght = stream.Length;
+
+            Dispatcher.Dispatch(() =>
+            {
+                ConcreteBindingContext.Document = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel
+                {
+                    Name = System.IO.Path.GetFileNameWithoutExtension(documentFilePickResult.FileName),
+                    Extension = System.IO.Path.GetExtension(documentFilePickResult.FileName),
+                    Length = lenght
+                };
+            });
+        });
+    }
+
+    private void DocumentEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var model = new Core.Presentation.Terminal.MAUI.Models.Page.Configuration.DocumentConfigurationPageModel(ConcreteBindingContext.Document);
+
+        this.NavigationPushPageAsync(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.DocumentConfigurationPage(DocumentEditSuccess_Callback, model));
     }
 
     private void ProviderPickComplete_Callback(Commercial.Interop.API.Common.Models.Display.LegalProviderDisplayModel model)
@@ -171,28 +299,105 @@ public partial class LegalProviderBudgetConfigurationPage : Core.Presentation.Te
         hasChangesFlag = true;
     }
 
-    private void ProductBridgeCreateSuccess_Callback(Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel model)
+    private void BudgetProductCreateSuccess_Callback(Interop.API.Common.Models.Display.LegalProviderBudgetProductDisplayModel model)
     {
-        if (ConcreteBindingContext.ProductBridges.Any(_model => _model.Product.Id == model.Product.Id && ((_model.Classification == null && model.Classification == null ) || _model.Classification.Id == model.Classification.Id)))
+        if (ConcreteBindingContext.BudgetProducts.Any(_model => _model.Product.Id == model.Product.Id && ((_model.Classification == null && model.Classification == null ) || _model.Classification.Id == model.Classification.Id)))
         {
             DisplayAlert("Aviso", "Ya se ha definido oferta para este producto y solo puede especificarse una vez.", "Aceptar");
 
             return;
         }
 
-        ConcreteBindingContext.ProductBridges.Add(model);
+        incomingBudgetProducts.Add(new Interop.API.Common.Models.Input.LegalProviderBudgetProductInputModel
+        {
+            Id = model.Id,
+            ProductId = model.Product.Id,
+            ClassificationId = model.Classification?.Id,
+            UnitPrice = model.UnitPrice,
+            CurrentyId = model.Currency.Id,
+            Amount = model.Amount,
+            UnitMeasurementId = model.UnitMeasurement.Id,
+        });
+
+        ConcreteBindingContext.BudgetProducts.Add(model);
 
         hasChangesFlag = true;
     }
 
-    private void ProductBridgeEditSuccess_Callback(Interop.API.Common.Models.Bridge.CommonBugetProductBridgeModel model)
+    private void BudgetProductEditSuccess_Callback(Interop.API.Common.Models.Display.LegalProviderBudgetProductDisplayModel model)
     {
-        var reference = ConcreteBindingContext.ProductBridges.First(item => item.Product.Id == model.Product.Id);
+        var handled = false;
 
-        var index = ConcreteBindingContext.ProductBridges.IndexOf(reference);
+        foreach (var item in incomingBudgetProducts)
+        {
+            if (item.Id != model.Id) continue;
 
-        ConcreteBindingContext.ProductBridges[index] = model;
+            item.ProductId = model.Product.Id;
+            item.ClassificationId = model.Classification?.Id;
+            item.UnitPrice = model.UnitPrice;
+            item.CurrentyId = model.Currency.Id;
+            item.Amount = model.Amount;
+            item.UnitMeasurementId = model.UnitMeasurement.Id;
 
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionBudgetProducts)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.ProductId = model.Product.Id;
+                item.ClassificationId = model.Classification?.Id;
+                item.UnitPrice = model.UnitPrice;
+                item.CurrentyId = model.Currency.Id;
+                item.Amount = model.Amount;
+                item.UnitMeasurementId = model.UnitMeasurement.Id;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionBudgetProducts.Add(new Interop.API.Common.Models.Input.LegalProviderBudgetProductInputModel
+            {
+                Id = model.Id,
+                ProductId = model.Product.Id,
+                ClassificationId = model.Classification?.Id,
+                UnitPrice = model.UnitPrice,
+                CurrentyId = model.Currency.Id,
+                Amount = model.Amount,
+                UnitMeasurementId = model.UnitMeasurement.Id,
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.BudgetProducts)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.BudgetProducts[index] = model;
+
+            break;
+        }
+
+        hasChangesFlag = true;
+    }
+
+    private void DocumentEditSuccess_Callback(Core.Interop.API.Common.Models.Display.DocumentDisplayModel model)
+    {
+        ConcreteBindingContext.Document = model;
+
+        documentEditionFlag = true;
         hasChangesFlag = true;
     }
 }

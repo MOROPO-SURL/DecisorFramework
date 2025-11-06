@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
@@ -14,7 +15,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
 {
     [Route("api/fwrk/commercial/[controller]")]
     [ApiController]
-    public class LegalClientsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<LegalClient, System.Guid, LegalClientInputModel, LegalClientDisplayModel>
+    public class LegalClientsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<LegalClient, System.Guid, LegalClientInputModel, LegalClientDisplayModel, LegalClientFilterModel>
     {
         private readonly IEntityRepository<BankAccount, System.Guid> bankAccountRepository;
         private readonly IEntityRepository<Municipality, System.Guid> municipalityRepository;

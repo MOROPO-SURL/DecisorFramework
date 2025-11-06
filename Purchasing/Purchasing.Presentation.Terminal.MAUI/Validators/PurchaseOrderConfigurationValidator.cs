@@ -12,7 +12,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Validat
 
             RuleFor(model => model.Zone).NotNull();
 
-            RuleFor(model => model.ResultProductBridges).NotEmpty();
+            RuleFor(model => model.ExpectedProductResults).NotEmpty();
 
             RuleFor(model => model.AdvanceRequired).Must((model, value) =>
             {

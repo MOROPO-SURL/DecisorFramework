@@ -14,7 +14,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Validat
 
             RuleFor(model => model.Commercial).NotNull();
 
-            RuleFor(model => model.ProductBridges).NotEmpty();
+            RuleFor(model => model.BudgetProducts).NotEmpty();
         }
     }
 }

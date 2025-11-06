@@ -12,8 +12,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Repositories
         {
             return base.GetQueryableDbSet()
                 .Include(entity => entity.Author).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
-                .Include(entity => entity.ProductBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.FeatureImage)
-                .Include(entity => entity.ProductBridges).ThenInclude(bridge => bridge.UnitMeasurement);
+                .Include(entity => entity.ExpectedProductAdquisitions).ThenInclude(bridge => bridge.Product).ThenInclude(entity => entity.FeatureImage)
+                .Include(entity => entity.ExpectedProductAdquisitions).ThenInclude(bridge => bridge.Classification)
+                .Include(entity => entity.ExpectedProductAdquisitions).ThenInclude(bridge => bridge.UnitMeasurement);
         }
     }
 }

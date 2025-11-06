@@ -3,7 +3,6 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
-    xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
@@ -19,6 +18,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
 
@@ -155,19 +155,19 @@
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
                                 Text="Agregar"
-                                Clicked="AddProductBridgeButton_Clicked" />
+                                Clicked="AddBudgetProductButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
                                 Color="{StaticResource Gray050}" />
                             <VerticalStackLayout
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 Margin="4"
-                                BindableLayout.ItemsSource="{Binding ProductBridges}">
+                                BindableLayout.ItemsSource="{Binding BudgetProducts}">
                                 <BindableLayout.EmptyView>
                                     <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                 </BindableLayout.EmptyView>
                                 <BindableLayout.ItemTemplate>
-                                    <DataTemplate x:DataType="interop_common_bridge_models:CommonBugetProductBridgeModel">
+                                    <DataTemplate x:DataType="interop_common_display_models:LegalProviderBudgetProductDisplayModel">
                                         <Frame Padding="8" Margin="8">
                                             <Grid 
                                                 ColumnSpacing="8" RowSpacing="0"
@@ -185,9 +185,15 @@
                                                 </Grid.RowDefinitions>
                                                 <Label
                                                     Grid.ColumnSpan="2" Grid.Row="0"
-                                                    Text="{Binding Product.Name}"
                                                     FontSize="Medium"
-                                                    LineBreakMode="TailTruncation" />
+                                                    LineBreakMode="TailTruncation">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding Product.Name}" />
+                                                            <Span Text="{Binding Classification.Name, StringFormat=' ({0})'}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
                                                 <Label
                                                     Grid.Column="0" Grid.Row="1"
                                                     Style="{StaticResource CaptionPropertyLabelStyle}"
@@ -221,13 +227,13 @@
                                                     Style="{StaticResource FontIconImageButtonStyle}"
                                                     VerticalOptions="Start"
                                                     Text="&#xF90B;"
-                                                    Clicked="EditProductBridgeButton_Clicked" />
+                                                    Clicked="EditBudgetProductButton_Clicked" />
                                                 <Button
                                                     Grid.Column="3" Grid.RowSpan="2"
                                                     Style="{StaticResource FontIconImageButtonStyle}"
                                                     VerticalOptions="Start"
                                                     Text="&#xFA79;"
-                                                    Clicked="ProductBridgeRemoveButton_Clicked" />
+                                                    Clicked="BudgetProductRemoveButton_Clicked" />
                                             </Grid>
                                         </Frame>
                                     </DataTemplate>
@@ -236,8 +242,8 @@
                         </Grid>
                     </Frame>
                     <Label
-                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalProviderBudgetConfigurationPageModel.ProductBridgesValidableProperty}}"
-                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalProviderBudgetConfigurationPageModel.ProductBridgesValidableProperty}}"
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalProviderBudgetConfigurationPageModel.BudgetProductsValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalProviderBudgetConfigurationPageModel.BudgetProductsValidableProperty}}"
                         Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout 
@@ -246,6 +252,50 @@
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="120" />
                 </VerticalStackLayout>
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start"
+                    AlignContent="Start">                    
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4,ExtraLargeContainerColumn=6, LargeContainerColumn=8, MediumContainerColumn=10, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Documento (opcional)" />
+                        <Frame
+                            IsVisible="{Binding Document, Converter={StaticResource IsNotNullConverter}}"
+                            Padding="0">
+                            <StackLayout Orientation="Horizontal">
+                                <Grid
+                                    WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                                    BackgroundColor="DimGray">
+                                    <Label
+                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                        Text="{Binding Document, Converter={StaticResource DocumentDisplayModelToMaterialDesignFontIconTextConverter}}"
+                                        TextColor="White"
+                                        FontSize="80"
+                                        FontFamily="MaterialDesignIcons" />
+                                </Grid>
+                                <VerticalStackLayout Padding="8">
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                                    <Label Text="{Binding Document.Name, FallbackValue='---'}" />
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Margin="0,8,0,0" Text="Tipo" />
+                                    <Label Text="{Binding Document.Extension, FallbackValue='---'}" />
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Margin="0,8,0,0" Text="Tamaño" />
+                                    <Label Text="{Binding Document.Length, FallbackValue='---', StringFormat='{0} bytes'}" />
+                                </VerticalStackLayout>
+                            </StackLayout>
+                        </Frame>
+                        <HorizontalStackLayout Spacing="8">
+                            <Button
+                                IsVisible="{Binding Document, Converter={StaticResource IsNotNullConverter}}"
+                                Text="Modificar"
+                                Clicked="DocumentEditionButton_Clicked" />
+                            <Button
+                                Text="Seleccionar ..."
+                                Clicked="DocumentPickButton_Clicked" />
+                        </HorizontalStackLayout>
+                    </VerticalStackLayout>
+                </FlexLayout>
             </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>

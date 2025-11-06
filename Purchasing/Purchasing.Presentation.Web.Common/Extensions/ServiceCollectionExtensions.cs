@@ -10,6 +10,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions
         public static void AddDecisorPurchasingPresentationWebCommon(this IServiceCollection services)
         {
             services.AddScoped<IEntityRepository<PurchaseRequest, System.Guid>, PurchaseRequestRepository>();
+            services.AddScoped<IEntityRepository<PurchaseRequestExpectedProductAdquisition, System.Guid>, PurchaseRequestExpectedProductAdquisitionRepository>();
             services.AddScoped<IEntityRepository<PurchaseOrder, System.Guid>, PurchaseOrderRepository>();
             services.AddScoped<IEntityRepository<PurchaseReception, System.Guid>, PurchaseReceptionRepository>();
             services.AddScoped<IEntityRepository<Purchase, System.Guid>, PurchaseRepository>();
@@ -17,6 +18,10 @@ namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<PurchaseZone, System.Guid>, PurchaseZoneRepository>();
             services.AddScoped<IEntityRepository<LegalProviderBudget, System.Guid>, LegalProviderBudgetRepository>();
             services.AddScoped<IEntityRepository<NaturalProviderBudget, System.Guid>, NaturalProviderBudgetRepository>();
+            services.AddScoped<IEntityRepository<LegalProviderBudgetProduct, System.Guid>, LegalProviderBudgetProductRepository>();
+            services.AddScoped<IEntityRepository<NaturalProviderBudgetProduct, System.Guid>, NaturalProviderBudgetProductRepository>();
+            services.AddScoped<IEntityRepository<PurchaseOrderExpectedProductResult, System.Guid>, PurchaseOrderExpectedProductResultRepository>();
+            services.AddScoped<IEntityRepository<PurchaseOrderPlannedProductSpent, System.Guid>, PurchaseOrderPlannedProductSpentRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, Helpers.PurchasingDataInitializationHelper>();
 

@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
+﻿using System.Collections.Generic;
+
+namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
 {
     public class LegalProviderBudgetInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.LegalProviderBudget, System.Guid>
     {
@@ -14,7 +16,11 @@
 
         public System.Guid ProviderId { get; set; }
 
-        public System.Collections.Generic.List<Bridge.CommonBugetProductBridgeModel> ProductBridges { get; set; } = new System.Collections.Generic.List<Bridge.CommonBugetProductBridgeModel>();
+        public List<LegalProviderBudgetProductInputModel> EditionBudgetProducts { get; set; } = new List<LegalProviderBudgetProductInputModel>();
+        public List<LegalProviderBudgetProductInputModel> IncomingBudgetProducts { get; set; } = new List<LegalProviderBudgetProductInputModel>();
+        public List<Display.LegalProviderBudgetProductDisplayModel> OutgoingBudgetProducts { get; set; } = new List<Display.LegalProviderBudgetProductDisplayModel>();
+
+        public Core.Interop.API.Common.Models.Input.DocumentInputModel Document { get; set; }
 
         public Persistence.Entities.LegalProviderBudget Export()
         {

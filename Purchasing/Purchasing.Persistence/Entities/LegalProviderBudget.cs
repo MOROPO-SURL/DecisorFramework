@@ -8,7 +8,7 @@
 
         public System.Collections.Generic.List<LegalProviderBudgetServiceBridge> ServiceBridges { get; set; } = new System.Collections.Generic.List<LegalProviderBudgetServiceBridge>();
 
-        public System.Collections.Generic.List<LegalProviderBudgetProductBridge> ProductBridges { get; set; } = new System.Collections.Generic.List<LegalProviderBudgetProductBridge>();
+        public System.Collections.Generic.ICollection<LegalProviderBudgetProduct> BudgetProducts { get; set; }
     }
 }
 

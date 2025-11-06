@@ -1,9 +1,6 @@
-﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display.Contract;
-using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
-
-namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
+﻿namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 {
-    public class OrganizationContactDisplayModel : AbstractContactDisplayModel<OrganizationContact>
+    public class OrganizationContactDisplayModel : Contract.AbstractContactDisplayModel<Persistence.Entities.OrganizationContact>
     {
         public Core.Interop.API.Common.Models.Display.OrganizationIdentityDisplayModel Identity { get; set; }
 
@@ -13,11 +10,13 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 
         public string StateIdentificationCode { get; set; }
 
+        public CentralStateStructureDisplayModel CentralStateStructure { get; set; }
+
         public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContactItem { get; set; }
 
         public LegalBusinessKindDisplayModel BusinessKind { get; set; }
 
-        public override void Import(OrganizationContact entity)
+        public override void Import(Persistence.Entities.OrganizationContact entity)
         {
             base.Import(entity);
 
@@ -29,6 +28,13 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
                 Identity = new Core.Interop.API.Common.Models.Display.OrganizationIdentityDisplayModel();
 
                 Identity.Import(entity.Identity);
+            }
+
+            if (entity.CentralStateStructure != null)
+            {
+                CentralStateStructure = new CentralStateStructureDisplayModel();
+
+                CentralStateStructure.Import(entity.CentralStateStructure);
             }
 
             if (entity.Representative != null) 
