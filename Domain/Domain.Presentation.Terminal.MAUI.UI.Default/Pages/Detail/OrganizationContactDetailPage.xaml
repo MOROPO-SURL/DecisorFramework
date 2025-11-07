@@ -4,53 +4,109 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.OrganizationContactDetailPage"
     x:TypeArguments="interop_common_display_models:OrganizationContactDisplayModel"
     x:DataType="interop_common_display_models:OrganizationContactDisplayModel"
     Title="Detalles de Contacto (Organización)"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <Grid>
             <Grid
                 Padding="10"
-                MaximumWidthRequest="400"
+                MaximumWidthRequest="680"
                 VerticalOptions="Center">
                 <Frame Style="{StaticResource PopupFrameStyle}">
-                    <StackLayout Margin="20" Spacing="20">
-                        <StackLayout>
-                            <Label 
-                                Margin="0,0,0,20"
-                                Text="Detalles"
-                                FontAttributes="Bold"
-                                FontSize="Medium" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Margin="0"
-                                Text="Nombre" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Identity.Name}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Alias" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Identity.Alias, TargetNullValue='---'}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Prioridad" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Priority}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Acerca de" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Identity.About, TargetNullValue='---'}" />
-                        </StackLayout>
+                    <VerticalStackLayout Margin="12" Padding="8">
+                        <VerticalStackLayout>
+                            <FlexLayout 
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start">
+                                <Frame
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"                        
+                                    Margin="4"
+                                    Padding="0">
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Width}"
+                                        Source="{Binding Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                </Frame>
+                                <VerticalStackLayout
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=10, ExtraLargeContainerColumn=10, LargeContainerColumn=9, MediumContainerColumn=8, SmallContainerColumn=6}}"                        
+                                    Margin="4">
+                                    <Label
+                                        FontSize="Medium"
+                                        Text="{Binding Identity.Name}" />
+                                    <Label Text="{Binding BusinessKind.Name}" />
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                                        Text="Alias" />
+                                    <Label
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        Text="{Binding Identity.Alias, TargetNullValue='---'}" />
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                                        Text="Representante" />
+                                    <Label
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        Text="{Binding Representative.Identity}" />
+                                </VerticalStackLayout>
+                            </FlexLayout>
+                            <FlexLayout>
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                        Text="NIT" />
+                                    <Label 
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        Text="{Binding TaxIdentificationNumber, TargetNullValue='---'}" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                        Text="Código REUP" />
+                                    <Label 
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        Text="{Binding StateIdentificationCode, TargetNullValue='---'}" />
+                                </VerticalStackLayout>
+                            </FlexLayout>
+                            <VerticalStackLayout Margin="8,0">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Organismo" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding BusinessKind.Name, TargetNullValue='---', FallbackValue='---'}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Acerca de" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Identity.About, TargetNullValue='---'}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Prioridad" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Priority}" />
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
                         <StackLayout
+                            Margin="8,16,8,8"
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 
@@ -62,7 +118,7 @@
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />
                         </StackLayout>
-                    </StackLayout>
+                    </VerticalStackLayout>
                 </Frame>
                 <Button
                     Style="{StaticResource DetailPageCloseButtonStyle}"
