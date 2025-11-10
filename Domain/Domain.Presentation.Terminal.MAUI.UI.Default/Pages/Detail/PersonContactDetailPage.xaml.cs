@@ -13,6 +13,8 @@ public partial class PersonContactDetailPage : Core.Presentation.Terminal.MAUI.U
         InitializeComponent();
 
         this.delegationAction = delegationAction;
+
+        OptionsStackLayout.IsVisible = delegationAction != null;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)

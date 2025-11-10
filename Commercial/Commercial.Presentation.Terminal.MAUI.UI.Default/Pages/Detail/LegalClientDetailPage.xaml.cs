@@ -13,6 +13,8 @@ public partial class LegalClientDetailPage : Core.Presentation.Terminal.MAUI.UI.
         InitializeComponent();
 
         this.delegationAction = delegationAction;
+
+        OptionsStackLayout.IsVisible = delegationAction != null;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -52,5 +54,14 @@ public partial class LegalClientDetailPage : Core.Presentation.Terminal.MAUI.UI.
                 });
             });
         });
+    }
+
+    private void ContactDetailButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel>>();
+
+        var page = factory.Build((BindingContext as Interop.API.Common.Models.Display.LegalClientDisplayModel).Contact);
+
+        this.NavigationPushModalPageAsync(page);
     }
 }

@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class NaturalProviderPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.NaturalProviderDisplayModel, Models.Page.Pick.NaturalProviderPickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 160;
 
     private System.Action<Interop.API.Common.Models.Display.NaturalProviderDisplayModel> pickCompleteAction;
 
@@ -33,6 +33,8 @@ public partial class NaturalProviderPickPage : Core.Presentation.Terminal.MAUI.U
 
         IsEnabled = true;
     }
+
+    protected override double ItemViewRequestWidth { get => 420; }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 

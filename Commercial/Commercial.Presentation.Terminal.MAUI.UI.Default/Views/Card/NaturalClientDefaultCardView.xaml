@@ -40,7 +40,7 @@
                     Text="{Binding Contact.Identity.LastName}" />
                 <Label 
                     Margin="0,2,0,0"
-                    Text="{Binding BusinessKind.Name}" />
+                    Text="{Binding Contact.BusinessKind.Name}" />
                 <Label 
                     Margin="0,8,0,0"
                     Text="Descripción"
