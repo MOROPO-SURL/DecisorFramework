@@ -6,6 +6,7 @@
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:core_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Core.Interop.API.Common"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.PersonContactDetailPage"
     x:TypeArguments="interop_common_display_models:PersonContactDisplayModel"
@@ -89,7 +90,192 @@
                                         Text="{Binding Identity.CivilStatus}" />
                                 </VerticalStackLayout>
                             </FlexLayout>
+                            <FlexLayout
+                                Wrap="Wrap"
+                                AlignItems="Start"
+                                AlignContent="Start">
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                        Text="Teléfonos" />
+                                    <VerticalStackLayout
+                                        Margin="0,2,0,0"
+                                        BindableLayout.ItemsSource="{Binding Identity.PhoneContacts}">
+                                        <BindableLayout.EmptyView>
+                                            <Label
+                                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                                Text="---" />
+                                        </BindableLayout.EmptyView>
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="core_interop_common_display_models:PhoneContactItemDisplayModel">
+                                                <Grid Margin="0,2" ColumnSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Label
+                                                        Grid.Column="0" Grid.RowSpan="2"
+                                                        VerticalOptions="Center"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Medium"
+                                                        Text="-" />
+                                                    <Label
+                                                        IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        Text="{Binding Label}" />
+                                                    <Label
+                                                        Grid.Column="1" Grid.Row="1"
+                                                        Text="{Binding PhoneNumber}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                        Text="Emails" />
+                                    <VerticalStackLayout
+                                        Margin="0,2,0,0"
+                                        BindableLayout.ItemsSource="{Binding Identity.EmailContacts}">
+                                        <BindableLayout.EmptyView>
+                                            <Label
+                                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                                Text="---" />
+                                        </BindableLayout.EmptyView>
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="core_interop_common_display_models:EmailContactItemDisplayModel">
+                                                <Grid Margin="0,2" ColumnSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Label
+                                                        Grid.Column="0" Grid.RowSpan="2"
+                                                        VerticalOptions="Center"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Medium"
+                                                        Text="-" />
+                                                    <Label
+                                                        IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        Text="{Binding Label}" />
+                                                    <Label
+                                                        Grid.Column="1" Grid.Row="1"
+                                                        Text="{Binding EmailAddress}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                            </FlexLayout>                            
                             <VerticalStackLayout Margin="8,0">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Sitios de Internet" />
+                                <VerticalStackLayout
+                                    Margin="0,2,0,0"
+                                    BindableLayout.ItemsSource="{Binding Identity.WebContacts}">
+                                    <BindableLayout.EmptyView>
+                                        <Label
+                                            Style="{StaticResource ValuePropertyLabelStyle}"
+                                            Text="---" />
+                                    </BindableLayout.EmptyView>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="core_interop_common_display_models:WebContactItemDisplayModel">
+                                            <Grid Margin="0,2" ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Label
+                                                    Grid.Column="0" Grid.RowSpan="2"
+                                                    VerticalOptions="Center"
+                                                    FontAttributes="Bold"
+                                                    FontSize="Medium"
+                                                    Text="-" />
+                                                <Label
+                                                    IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    FontAttributes="Bold"
+                                                    FontSize="Caption"
+                                                    Text="{Binding Label}" />
+                                                <Label
+                                                    Grid.Column="1" Grid.Row="1"
+                                                    Text="{Binding Url}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Direcciones postales" />
+                                <VerticalStackLayout
+                                    Margin="0,2,0,0"
+                                    BindableLayout.ItemsSource="{Binding Identity.PostalContacts}">
+                                    <BindableLayout.EmptyView>
+                                        <Label
+                                            Style="{StaticResource ValuePropertyLabelStyle}"
+                                            Text="---" />
+                                    </BindableLayout.EmptyView>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="core_interop_common_display_models:PostalContactItemDisplayModel">
+                                            <Grid Margin="0,2" ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Label
+                                                    Grid.Column="0" Grid.RowSpan="2"
+                                                    VerticalOptions="Center"
+                                                    FontAttributes="Bold"
+                                                    FontSize="Medium"
+                                                    Text="-" />
+                                                <Label
+                                                    IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    FontAttributes="Bold"
+                                                    FontSize="Caption"
+                                                    Text="{Binding Label}" />
+                                                <Label Grid.Column="1" Grid.Row="1">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding Address}" />
+                                                            <Span Text="{Binding Municipality.Name, StringFormat=', {0}'}" />
+                                                            <Span Text="{Binding Municipality.State.Name, StringFormat=', {0}'}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
                                 <Label 
                                     Style="{StaticResource CaptionPropertyLabelStyle}"
                                     Text="Usuario" />
@@ -111,6 +297,7 @@
                             </VerticalStackLayout>
                         </VerticalStackLayout>
                         <StackLayout
+                            x:Name="OptionsStackLayout"
                             Margin="8,16,8,8"
                             Orientation="Horizontal"
                             Spacing="20">

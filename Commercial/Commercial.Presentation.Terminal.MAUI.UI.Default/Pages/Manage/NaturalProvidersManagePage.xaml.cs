@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class NaturalProvidersManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<NaturalProviderDisplayModel, Models.Page.Manage.NaturalProvidersManagePageModel, Models.Page.Configuration.NaturalProviderConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 144;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 160;
 
     public NaturalProvidersManagePage()
     {

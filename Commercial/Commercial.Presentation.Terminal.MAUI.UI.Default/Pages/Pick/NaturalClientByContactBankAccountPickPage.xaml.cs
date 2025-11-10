@@ -37,7 +37,7 @@ public partial class NaturalClientByContactBankAccountPickPage : Core.Presentati
         IsEnabled = true;
     }
 
-    protected override double ItemViewRequestWidth { get => 360; }
+    protected override double ItemViewRequestWidth { get => 420; }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
