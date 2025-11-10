@@ -64,4 +64,44 @@ public partial class LegalClientDetailPage : Core.Presentation.Terminal.MAUI.UI.
 
         this.NavigationPushModalPageAsync(page);
     }
+
+    private void DocumentDownloadButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var model = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Core.Interop.API.Common.Models.Display.DocumentDisplayModel;
+
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        BusyIndicatorGrid.IsVisible = true;
+
+        var httpClient = new System.Net.Http.HttpClient
+        {
+            Timeout = System.TimeSpan.FromSeconds(30.0)
+        };
+
+        httpClient.GetByteArrayAsync($"{httpClientHelperProvider.HttpClientHelper.ClientBaseAddress}media/documents/{model.Id}{model.Extension}").ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(async () =>
+            {
+                if (task.IsCanceled || task.Exception != null)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    var fileSaverResult = await CommunityToolkit.Maui.Storage.FileSaver.Default.SaveAsync($"{model.Name}{model.Extension}", new System.IO.MemoryStream(task.Result));
+
+                    if (fileSaverResult.IsSuccessful)
+                    {
+                        await CommunityToolkit.Maui.Alerts.Toast.Make("Archivo descargado con éxito.").Show();
+                    }
+                    else if (fileSaverResult.FilePath != null)
+                    {
+                        await CommunityToolkit.Maui.Alerts.Toast.Make("No fue posible salvar el archivo.").Show();
+                    }
+                }
+
+                BusyIndicatorGrid.IsVisible = false;
+            });
+        });
+    }
 }
