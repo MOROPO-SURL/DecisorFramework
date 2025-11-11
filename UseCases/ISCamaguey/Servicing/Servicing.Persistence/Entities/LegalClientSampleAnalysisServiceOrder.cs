@@ -2,8 +2,8 @@
 {
     public class LegalClientSampleAnalysisServiceOrder : Contract.AbstractSampleAnalysisServiceOrder
     {
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SampleAnalysisLegalClientId))]
-        public Framework.Decisor.Commercial.Persistence.Entities.LegalClient Client { get; set; }
-        public System.Guid SampleAnalysisLegalClientId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SampleAnalysisLegalClientContractId))]
+        public LegalClientServicingContract Contract { get; set; }
+        public int SampleAnalysisLegalClientContractId { get; set; }
     }
 }

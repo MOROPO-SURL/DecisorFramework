@@ -48,7 +48,7 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" IsEnabled="False" />
-    <!--<ShellContent
+    <ShellContent
         Title="Recepción de Muestra (%)"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
@@ -57,7 +57,7 @@
                 Glyph="&#xF0254;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
-    </ShellContent>-->
+    </ShellContent>
     <ShellContent
         Title="Procesamiento de Muestra (%)"
         ContentTemplate="{DataTemplate ContentPage}">

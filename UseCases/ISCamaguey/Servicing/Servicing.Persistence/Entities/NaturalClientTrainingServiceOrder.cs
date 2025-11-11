@@ -2,8 +2,8 @@
 {
     public class NaturalClientTrainingServiceOrder : Contract.AbstractTrainingServiceOrder
     {
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(TrainingNaturalClientId))]
-        public Framework.Decisor.Commercial.Persistence.Entities.NaturalClient Client { get; set; }
-        public System.Guid TrainingNaturalClientId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(TrainingNaturalClientContractId))]
+        public NaturalClientServicingContract Contract { get; set; }
+        public int TrainingNaturalClientContractId { get; set; }
     }
 }

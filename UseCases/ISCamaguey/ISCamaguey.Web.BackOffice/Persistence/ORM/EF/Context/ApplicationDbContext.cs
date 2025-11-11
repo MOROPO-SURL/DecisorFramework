@@ -208,6 +208,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<GroundIntegralStudyServiceDocumentBridge> GroundIntegralStudyServiceDocumentBridges { get; set; }
         public DbSet<GroundIntegralStudyServiceStep> GroundIntStudyServSteps { get; set; }
         public DbSet<GroundIntegralStudyServiceStepWorkPositionBridge> GroundIntStudyServStepWorkPosBridges { get; set; }
+        public DbSet<Servicing.Persistence.Entities.Contract.AbstractServicingContract> ServicingContracts { get; set; }
+        public DbSet<ServicingContractTrainingServiceBridge> ServicingContractTrainingServiceBridges { get; set; }
+        public DbSet<ServicingContractSampleAnalysisServiceBridge> ServicingContractSampleAnalysisServiceBridges { get; set; }
+        public DbSet<ServicingContractGroundIntegralStudyServiceBridge> ServicingContractGroundIntegralStudyServiceBridges { get; set; }
+        public DbSet<LegalClientServicingContract> LegalClientServicingContracts { get; set; }
+        public DbSet<NaturalClientServicingContract> NaturalClientServicingContracts { get; set; }
         public DbSet<LegalClientTrainingServiceOrder> LegalClientTrainingServiceOrders { get; set; }
         public DbSet<LegalClientSampleAnalysisServiceOrder> LegalClientSampleAnalysisServiceOrders { get; set; }
         public DbSet<LegalClientGroundIntegralStudyServiceOrder> LegalClientGroundIntegralStudyServiceOrders { get; set; }
