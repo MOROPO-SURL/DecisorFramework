@@ -137,14 +137,12 @@
                                     <Label 
                                         Style="{StaticResource CaptionPropertyLabelStyle}" 
                                         Text="Cuentas bancarias" />
+                                    <BoxView Margin="0,6" Color="DimGray" HeightRequest="2" />
                                     <VerticalStackLayout
-                                        Margin="0,6,0,0"
                                         Spacing="6"
                                         BindableLayout.ItemsSource="{Binding BankAccounts}">
                                         <BindableLayout.EmptyView>
-                                            <Label
-                                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                                Text="---" />
+                                            <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                         </BindableLayout.EmptyView>
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="financial_interop_common_display_models:BankAccountDisplayModel">
@@ -189,14 +187,12 @@
                                     <Label 
                                         Style="{StaticResource CaptionPropertyLabelStyle}" 
                                         Text="Documentos" />
+                                    <BoxView Margin="0,6" Color="DimGray" HeightRequest="2" />
                                     <VerticalStackLayout
-                                        Margin="0,6,0,0"
                                         Spacing="6"
                                         BindableLayout.ItemsSource="{Binding Documents}">
                                         <BindableLayout.EmptyView>
-                                            <Label
-                                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                                Text="---" />
+                                            <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                         </BindableLayout.EmptyView>
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="core_interop_common_display_models:DocumentDisplayModel">
