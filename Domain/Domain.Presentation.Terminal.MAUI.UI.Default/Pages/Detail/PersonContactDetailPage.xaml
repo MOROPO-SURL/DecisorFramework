@@ -101,13 +101,12 @@
                                     <Label 
                                         Style="{StaticResource CaptionPropertyLabelStyle}" 
                                         Text="Teléfonos" />
+                                    <BoxView Color="DimGray" HeightRequest="2" />
                                     <VerticalStackLayout
                                         Margin="0,2,0,0"
                                         BindableLayout.ItemsSource="{Binding Identity.PhoneContacts}">
                                         <BindableLayout.EmptyView>
-                                            <Label
-                                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                                Text="---" />
+                                            <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                         </BindableLayout.EmptyView>
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="core_interop_common_display_models:PhoneContactItemDisplayModel">
@@ -147,13 +146,12 @@
                                     <Label 
                                         Style="{StaticResource CaptionPropertyLabelStyle}" 
                                         Text="Emails" />
+                                    <BoxView Color="DimGray" HeightRequest="2" />
                                     <VerticalStackLayout
                                         Margin="0,2,0,0"
                                         BindableLayout.ItemsSource="{Binding Identity.EmailContacts}">
                                         <BindableLayout.EmptyView>
-                                            <Label
-                                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                                Text="---" />
+                                            <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                         </BindableLayout.EmptyView>
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="core_interop_common_display_models:EmailContactItemDisplayModel">
@@ -191,13 +189,12 @@
                                 <Label 
                                     Style="{StaticResource CaptionPropertyLabelStyle}" 
                                     Text="Sitios de Internet" />
+                                <BoxView Margin="0,6" Color="DimGray" HeightRequest="2" />
                                 <VerticalStackLayout
                                     Margin="0,2,0,0"
                                     BindableLayout.ItemsSource="{Binding Identity.WebContacts}">
                                     <BindableLayout.EmptyView>
-                                        <Label
-                                            Style="{StaticResource ValuePropertyLabelStyle}"
-                                            Text="---" />
+                                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                     </BindableLayout.EmptyView>
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate x:DataType="core_interop_common_display_models:WebContactItemDisplayModel">
@@ -232,13 +229,12 @@
                                 <Label 
                                     Style="{StaticResource CaptionPropertyLabelStyle}" 
                                     Text="Direcciones postales" />
+                                <BoxView Margin="0,6" Color="DimGray" HeightRequest="2" />
                                 <VerticalStackLayout
                                     Margin="0,2,0,0"
                                     BindableLayout.ItemsSource="{Binding Identity.PostalContacts}">
                                     <BindableLayout.EmptyView>
-                                        <Label
-                                            Style="{StaticResource ValuePropertyLabelStyle}"
-                                            Text="---" />
+                                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                     </BindableLayout.EmptyView>
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate x:DataType="core_interop_common_display_models:PostalContactItemDisplayModel">
