@@ -41,6 +41,9 @@
 	  <MauiXaml Update="Pages\Configuration\GroundIntegralStudyServiceStepConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\LegalClientServicingContractConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\SampleAnalysisServiceConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
