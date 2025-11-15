@@ -7,6 +7,8 @@ public partial class EmailContactItemConfigurationPage : UI.Pages.Base.Configura
         InitializeComponent();
     }
 
+    protected override bool IsNotificationRequired => false;
+
     protected override string EntityTypeName => "Correo Electrónico";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.EmailContactItemDisplayModel> PerformCreationAsync()

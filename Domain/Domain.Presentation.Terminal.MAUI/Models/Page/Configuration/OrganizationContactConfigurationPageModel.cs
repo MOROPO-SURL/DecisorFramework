@@ -10,13 +10,17 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public static string NameValidableProperty => nameof(Name);
         public static string RepresentativeValidableProperty => nameof(Representative);
         public static string BusinessKindValidableProperty => nameof(BusinessKind);
+        public static string TaxIdentificationNumberValidableProperty => nameof(TaxIdentificationNumber);
 
         private string name;
         private string alias;
         private string about;
         private int priority = 1;
+        private string taxIdentificationNumber;
+        private string stateIdentificationCode;
         private PersonContactDisplayModel representative;
         private LegalBusinessKindDisplayModel businessKind;
+        private CentralStateStructureDisplayModel centralStateStructure;
         private bool isSettedBornDate;
         private System.DateTime? bornDate;
         private Microsoft.Maui.Controls.ImageSource imageSource;
@@ -30,6 +34,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
                 alias = model.Identity.Alias;
                 about = model.Identity.About;
                 priority = model.Priority;
+                taxIdentificationNumber = model.TaxIdentificationNumber;
+                stateIdentificationCode = model.StateIdentificationCode;
+                centralStateStructure = model.CentralStateStructure;
                 representative = model.Representative;
                 businessKind = model.BusinessKind;
                 isSettedBornDate = model.Identity.BornDate != null;
@@ -63,6 +70,12 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
+        public string TaxIdentificationNumber { get => taxIdentificationNumber; set => SetProperty(ref taxIdentificationNumber, value); }
+
+        public string StateIdentificationCode { get => stateIdentificationCode; set => SetProperty(ref stateIdentificationCode, value); }
+
+        public CentralStateStructureDisplayModel CentralStateStructure { get => centralStateStructure; set => SetProperty(ref centralStateStructure, value); }
+
         public PersonContactDisplayModel Representative { get => representative; set => SetProperty(ref representative, value); }
 
         public LegalBusinessKindDisplayModel BusinessKind { get => businessKind; set => SetProperty(ref businessKind, value); }
@@ -82,5 +95,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public ObservableCollection<PostalContactItemDisplayModel> PostalContactItems { get; set; } = [];
 
         public LegalBusinessKindDisplayModel[] AvailableBusinessKinds { get; set; }
+
+        public CentralStateStructureDisplayModel[] AvailableCentralStateStructures { get; set; }
     }
 }

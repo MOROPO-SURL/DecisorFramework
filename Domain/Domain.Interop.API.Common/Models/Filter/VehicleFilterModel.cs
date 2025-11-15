@@ -33,11 +33,11 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Filter
             {
                 if (result == null)
                 {
-                    result = entity => entity.Model.Contains(Parameter) || entity.Brand.Name.Contains(Parameter);
+                    result = entity => entity.Model.ToLower().Contains(Parameter.ToLower()) || entity.Brand.Name.ToLower().Contains(Parameter.ToLower());
                 }
                 else
                 {
-                    result.CombineForAndCondition(entity => entity.Model.Contains(Parameter) || entity.Brand.Name.Contains(Parameter));
+                    result.CombineForAndCondition(entity => entity.Model.ToLower().Contains(Parameter.ToLower()) || entity.Brand.Name.Contains(Parameter));
                 }
             }
 

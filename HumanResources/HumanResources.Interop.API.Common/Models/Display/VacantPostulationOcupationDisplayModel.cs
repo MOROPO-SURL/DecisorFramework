@@ -10,7 +10,7 @@
 
         public string RepresentativeName { get; set; }
 
-        public Legal.Interop.API.Common.Models.Display.CentralStateStructureDisplayModel CentralStateStructure { get; set; }
+        public Domain.Interop.API.Common.Models.Display.CentralStateStructureDisplayModel CentralStateStructure { get; set; }
 
         public System.DateTime StartAt { get; set; }
 
@@ -27,7 +27,7 @@
 
             if (entity.CentralStateStructure != null) 
             {
-                CentralStateStructure = new Legal.Interop.API.Common.Models.Display.CentralStateStructureDisplayModel();
+                CentralStateStructure = new Domain.Interop.API.Common.Models.Display.CentralStateStructureDisplayModel();
 
                 CentralStateStructure.Import(entity.CentralStateStructure);
             }

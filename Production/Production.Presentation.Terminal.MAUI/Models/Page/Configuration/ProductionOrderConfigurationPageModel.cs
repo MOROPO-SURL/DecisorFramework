@@ -1,6 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
-
-namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration
+﻿namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class ProductionOrderConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ProductionOrderDisplayModel>
     {
@@ -8,9 +6,9 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
         private string description;
         private int priority = 1;
         private Interop.API.Common.Models.Display.ElaborationDisplayModel elaboration;
-        private EmployeeDisplayModel author;
-        private EmployeeDisplayModel responsible;
-        private EmployeeDisplayModel decisor;
+        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel author;
+        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel responsible;
+        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel decisor;
         private decimal amount;
 
         public ProductionOrderConfigurationPageModel(Interop.API.Common.Models.Display.ProductionOrderDisplayModel model) : base(model)
@@ -45,18 +43,18 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public Interop.API.Common.Models.Display.ElaborationDisplayModel Elaboration { get => elaboration; set => SetProperty(ref elaboration, value); }
 
-        public EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
 
-        public EmployeeDisplayModel Responsible { get => responsible; set => SetProperty(ref responsible, value); }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get => responsible; set => SetProperty(ref responsible, value); }
 
-        public EmployeeDisplayModel Decisor { get => decisor; set => SetProperty(ref decisor, value); }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Decisor { get => decisor; set => SetProperty(ref decisor, value); }
 
         public decimal Amount { get => amount; set => SetProperty(ref amount, value); }
 
-        public EmployeeDisplayModel[] AvailableAuthors { get; set; } = [];
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel[] AvailableAuthors { get; set; } = [];
 
-        public EmployeeDisplayModel[] AvailableResponsibles { get; set; } = [];
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel[] AvailableResponsibles { get; set; } = [];
 
-        public EmployeeDisplayModel[] AvailableDecisors { get; set; } = [];
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel[] AvailableDecisors { get; set; } = [];
     }
 }

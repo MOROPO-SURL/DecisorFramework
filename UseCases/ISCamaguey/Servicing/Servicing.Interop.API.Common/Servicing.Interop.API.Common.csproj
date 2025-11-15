@@ -6,7 +6,9 @@
 		<RootNamespace>MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Commercial\Commercial.Interop.API.Common\Commercial.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\..\..\..\Domain\Domain.Interop.API.Common\Domain.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\..\..\..\HumanResources\HumanResources.Interop.API.Common\HumanResources.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\..\Domain\Domain.Interop.API.Common\Domain.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Servicing.Persistence\Servicing.Persistence.csproj" />
 	</ItemGroup>

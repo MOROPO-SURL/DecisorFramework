@@ -2,7 +2,7 @@
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Context.Contract
 {
-    public interface IIDiDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDomainDbContext
+    public interface IIDiDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDomainDbContext, Framework.Decisor.Financial.Persistence.ORM.EF.Context.Contract.IFinancialDbContext
     {
         public DbSet<Entities.AwardKind> AwardKinds { get; set; }
         public DbSet<Entities.AwardResult> AwardResults { get; set; }

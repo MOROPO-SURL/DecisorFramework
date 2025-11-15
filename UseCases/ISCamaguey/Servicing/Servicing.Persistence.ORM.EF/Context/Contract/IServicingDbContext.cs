@@ -2,7 +2,7 @@
 
 namespace MOROPO.ISCamaguey.Decisor.Servicing.Persistence.ORM.EF.Context.Contract
 {
-    public interface IServicingDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDomainDbContext
+    public interface IServicingDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDomainDbContext, Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract.ICommercialDbContext, Framework.Decisor.HumanResources.Persistence.ORM.EF.Context.Contract.IHumanResourcesDbContext
     {
         public DbSet<Entities.TrainingService> TrainingServices { get; set; }
         public DbSet<Entities.TrainingServiceEmployeeBridge> TrainingServiceEmployeeBridges { get; set; }
@@ -19,6 +19,12 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Persistence.ORM.EF.Context.Contrac
         public DbSet<Entities.GroundIntegralStudyServiceDocumentBridge> GroundIntegralStudyServiceDocumentBridges { get; set; }
         public DbSet<Entities.GroundIntegralStudyServiceStep> GroundIntStudyServSteps { get; set; }
         public DbSet<Entities.GroundIntegralStudyServiceStepWorkPositionBridge> GroundIntStudyServStepWorkPosBridges { get; set; }
+        public DbSet<Entities.Contract.AbstractServicingContract> ServicingContracts { get; set; }
+        public DbSet<Entities.ServicingContractTrainingServiceBridge> ServicingContractTrainingServiceBridges { get; set; }
+        public DbSet<Entities.ServicingContractSampleAnalysisServiceBridge> ServicingContractSampleAnalysisServiceBridges { get; set; }
+        public DbSet<Entities.ServicingContractGroundIntegralStudyServiceBridge> ServicingContractGroundIntegralStudyServiceBridges { get; set; }
+        public DbSet<Entities.LegalClientServicingContract> LegalClientServicingContracts { get; set; }
+        public DbSet<Entities.NaturalClientServicingContract> NaturalClientServicingContracts { get; set; }
         public DbSet<Entities.LegalClientTrainingServiceOrder> LegalClientTrainingServiceOrders { get; set; }
         public DbSet<Entities.LegalClientSampleAnalysisServiceOrder> LegalClientSampleAnalysisServiceOrders { get; set; }
         public DbSet<Entities.LegalClientGroundIntegralStudyServiceOrder> LegalClientGroundIntegralStudyServiceOrders { get; set; }

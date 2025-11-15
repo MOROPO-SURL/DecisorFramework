@@ -2,8 +2,8 @@
 {
     public class LegalClientGroundIntegralStudyServiceOrder : Contract.AbstractGroundIntegralStudyServiceOrder
     {
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(GroundIntegralStudyLegalClientId))]
-        public Framework.Decisor.Commercial.Persistence.Entities.LegalClient Client { get; set; }
-        public System.Guid GroundIntegralStudyLegalClientId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(GroundIntegralStudyLegalClientContractId))]
+        public LegalClientServicingContract Contract { get; set; }
+        public int GroundIntegralStudyLegalClientContractId { get; set; }
     }
 }

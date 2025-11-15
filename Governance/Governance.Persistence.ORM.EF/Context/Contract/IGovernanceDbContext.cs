@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Governance.Persistence.ORM.EF.Context.Contract
 {
-    public interface IGovernanceDbContext : HumanResources.Persistence.ORM.EF.Context.Contract.IHumanResourcesDbContext
+    public interface IGovernanceDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDomainDbContext
     {
         public Microsoft.EntityFrameworkCore.DbSet<Entities.DecisionMakingGroup> DecisionMakingGroups { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.DecisionMakingGroupEmployeeBridge> DecisionMakingGroupEmployeeBridges { get; set; }

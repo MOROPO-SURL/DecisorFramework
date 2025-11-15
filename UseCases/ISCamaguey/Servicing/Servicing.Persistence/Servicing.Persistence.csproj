@@ -8,8 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\..\..\..\Commercial\Commercial.Persistence\Commercial.Persistence.csproj" />
-    <ProjectReference Include="..\..\..\..\Core\Core.Persistence\Core.Persistence.csproj" />
-    <ProjectReference Include="..\..\..\..\Financial\Financial.Persistence\Financial.Persistence.csproj" />
     <ProjectReference Include="..\..\..\..\HumanResources\HumanResources.Persistence\HumanResources.Persistence.csproj" />
     <ProjectReference Include="..\..\Domain\Domain.Persistence\Domain.Persistence.csproj" />
   </ItemGroup>

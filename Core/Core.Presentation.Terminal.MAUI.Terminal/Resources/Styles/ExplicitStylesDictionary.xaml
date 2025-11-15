@@ -29,7 +29,7 @@
 
     <Style TargetType="Label" x:Key="ValidationMessageLabelStyle">
         <Setter Property="TextColor" Value="IndianRed" />
-        <Setter Property="HeightRequest" Value="20" />
+        <Setter Property="MinimumHeightRequest" Value="20" />
     </Style>
 
     <Style TargetType="ContentView" x:Key="ModalFrameWrapContentViewStyle">

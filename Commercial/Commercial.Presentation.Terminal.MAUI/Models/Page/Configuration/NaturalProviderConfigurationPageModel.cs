@@ -1,10 +1,18 @@
 ﻿using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class NaturalProviderConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<NaturalProviderDisplayModel>
     {
+        public static string ContactValidableProperty => nameof(Contact);
+        public static string MainPostalContactValidableProperty => nameof(MainPostalContact);
+        public static string PersonalIdentificationNumberValidableProperty => nameof(PersonalIdentificationNumber);
+        public static string BusinessKindValidableProperty => nameof(BusinessKind);
+        public static string DefaultPaymentTermValidableProperty => nameof(DefaultPaymentTerm);
+        public static string BankAccountsValidableProperty => nameof(BankAccounts);
+
         private PersonContactDisplayModel contact;
         private string personalIdentificationNumber;
         private NaturalBusinessKindDisplayModel businessKind;
@@ -17,15 +25,15 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.Models.
             if (model != null)
             {
                 Id = model.Id;
-                Contact = model.Contact;
-                PersonalIdentificationNumber = model.Contact.PersonalIdentificationNumber;
-                BusinessKind = model.BusinessKind;
-                MainPostalContact = model.MainPostalContact;
-                DefaultPaymentTerm = model.DefaultPaymentTerm;
-                BankAccounts = new System.Collections.ObjectModel.ObservableCollection<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel>(model.BankAccounts);
-                Documents = new System.Collections.ObjectModel.ObservableCollection<Core.Interop.API.Common.Models.Display.DocumentDisplayModel>(model.Documents);
-                Priority = model.Priority;
-                AvailablePostalContactItems = new System.Collections.ObjectModel.ObservableCollection<Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel>(Contact.Identity.PostalContacts);
+                contact = model.Contact;
+                personalIdentificationNumber = model.Contact.PersonalIdentificationNumber;
+                businessKind = model.BusinessKind;
+                mainPostalContact = Contact.Identity.PostalContacts.First(item => item.Id == model.MainPostalContact.Id);
+                defaultPaymentTerm = model.DefaultPaymentTerm;
+                BankAccounts = [.. model.BankAccounts];
+                Documents = [.. model.Documents];
+                priority = model.Priority;
+                AvailablePostalContactItems = [.. Contact.Identity.PostalContacts];
             }
         }
 

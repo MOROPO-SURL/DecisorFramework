@@ -141,7 +141,7 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
 
             model.RawMedicalCheckDocument = new Core.Interop.API.Common.Models.Input.DocumentInputModel
             {
-                Id = System.Guid.NewGuid(),
+                Id = model.RawMedicalCheckDocument?.Id ?? default,
                 Name = rawMedicalCheckDocumentFilePickResult.FileName,
                 ContentData = new byte[stream.Length],
                 ContentType = rawMedicalCheckDocumentFilePickResult.ContentType
@@ -156,7 +156,7 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
 
             model.RawPhysicologicalCheckDocument = new Core.Interop.API.Common.Models.Input.DocumentInputModel
             {
-                Id = System.Guid.NewGuid(),
+                Id = model.RawPhysicologicalCheckDocument?.Id ?? default,
                 Name = rawPhysicologicalCheckDocumentFilePickResult.FileName,
                 ContentData = new byte[stream.Length],
                 ContentType = rawPhysicologicalCheckDocumentFilePickResult.ContentType
@@ -171,7 +171,7 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
 
             model.RawDefenseStatusCheckDocument = new Core.Interop.API.Common.Models.Input.DocumentInputModel
             {
-                Id = System.Guid.NewGuid(),
+                Id = model.RawDefenseStatusCheckDocument?.Id ?? default,
                 Name = rawDefenseStatusCheckDocumentFilePickResult.FileName,
                 ContentData = new byte[stream.Length],
                 ContentType = rawDefenseStatusCheckDocumentFilePickResult.ContentType
@@ -186,7 +186,7 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
 
             model.RawResearchResultDocument = new Core.Interop.API.Common.Models.Input.DocumentInputModel
             {
-                Id = System.Guid.NewGuid(),
+                Id = model.RawResearchResultDocument?.Id ?? default,
                 Name = rawResearchResultDocumentFilePickResult.FileName,
                 ContentData = new byte[stream.Length],
                 ContentType = rawResearchResultDocumentFilePickResult.ContentType
@@ -201,7 +201,7 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
 
             model.RawModelDocument = new Core.Interop.API.Common.Models.Input.DocumentInputModel
             {
-                Id = System.Guid.NewGuid(),
+                Id = model.RawModelDocument?.Id ?? default,
                 Name = rawModelDocumentFilePickResult.FileName,
                 ContentData = new byte[stream.Length],
                 ContentType = rawModelDocumentFilePickResult.ContentType

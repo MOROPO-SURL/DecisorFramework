@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract
 {
-    public interface ILeasingDbContext : Governance.Persistence.ORM.EF.Context.Contract.IGovernanceDbContext
+    public interface ILeasingDbContext : Governance.Persistence.ORM.EF.Context.Contract.IGovernanceDbContext, Commercial.Persistence.ORM.EF.Context.Contract.ICommercialDbContext
     {
         public DbSet<Entities.PropertyLeasePropousal> PropertyLeasePropousals { get; set; }
         public DbSet<Entities.PropertySpaceLeasePropousal> PropertySpaceLeasePropousals { get; set; }

@@ -6,6 +6,11 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Servicing.Persistence.ORM.EF</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="Repositories\**" />
+	  <EmbeddedResource Remove="Repositories\**" />
+	  <None Remove="Repositories\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\..\Financial\Financial.Persistence.ORM.EF\Financial.Persistence.ORM.EF.csproj" />
 		<ProjectReference Include="..\Servicing.Persistence\Servicing.Persistence.csproj" />
 	</ItemGroup>
@@ -14,6 +19,5 @@
 	</ItemGroup>
 	<ItemGroup>
 	  <Folder Include="Providers\" />
-	  <Folder Include="Repositories\" />
 	</ItemGroup>
 </Project>

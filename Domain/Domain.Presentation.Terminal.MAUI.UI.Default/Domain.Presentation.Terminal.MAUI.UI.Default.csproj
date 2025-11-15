@@ -32,13 +32,28 @@
 		<ProjectReference Include="..\Domain.Presentation.Terminal.MAUI\Domain.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\Configuration\CentralStateStructureConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\ColaboratorConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Configuration\OrganizationContactConfigurationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Configuration\PersonContactConfigurationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Configuration\UnitMeasurementConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\UnitMeasurementConvertionBridgeConfigurationPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Detail\EmployeeDetailPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\UnitMeasurementDetailPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\List\LegalBusinessKindsListPage.xaml.cs">
@@ -47,10 +62,22 @@
 	  <Compile Update="Pages\Manage\BrandsManagePage.xaml.cs">
 	    <DependentUpon>BrandsManagePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Manage\CentralStateStructuresManagePage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\ColaboratorsManagePage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Manage\OrganizationContactsManagePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Manage\PersonContactsManagePage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\UnitMeasurementsManagePage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\ColaboratorPickPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Pick\EmployeePickPage.xaml.cs">
@@ -61,6 +88,9 @@
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Pick\PersonContactPickPage.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\ColaboratorDefaultCardView.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Card\EmployeeDefaultCardView.xaml.cs">
@@ -79,6 +109,12 @@
 	  <MauiXaml Update="Pages\Configuration\BrandConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\CentralStateStructureConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\ColaboratorConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\OrganizationContactConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -89,6 +125,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\PropertySpaceConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\UnitMeasurementConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\UnitMeasurementConvertionBridgeConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\VehicleConfigurationPage.xaml">
@@ -124,6 +166,9 @@
 	  <MauiXaml Update="Pages\Detail\PropertySpaceDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\UnitMeasurementDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\VehicleDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -145,6 +190,12 @@
 	  <MauiXaml Update="Pages\Manage\BrandsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\CentralStateStructuresManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\ColaboratorsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\OrganizationContactsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -154,7 +205,13 @@
 	  <MauiXaml Update="Pages\Manage\PropertiesManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\UnitMeasurementsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\VehiclesManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\ColaboratorPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\EmployeePickPage.xaml">
@@ -170,6 +227,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\VehiclePickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\ColaboratorDefaultCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\EmployeeDefaultCardView.xaml">

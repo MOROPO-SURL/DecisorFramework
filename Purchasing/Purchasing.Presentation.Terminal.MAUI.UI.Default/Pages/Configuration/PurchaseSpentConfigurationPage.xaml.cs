@@ -3,9 +3,9 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class PurchaseSpentConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel>
+public partial class PurchaseSpentConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel, Interop.API.Common.Models.Display.PurchaseSpentDisplayModel, Models.Page.Configuration.PurchaseSpentConfigurationPageModel>
 {
-	public PurchaseSpentConfigurationPage(System.Action<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel> successAction, Models.Page.Configuration.PurchaseSpentConfigurationPageModel model) : base(successAction, model)
+    public PurchaseSpentConfigurationPage(System.Action<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel> successAction, Models.Page.Configuration.PurchaseSpentConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.PurchaseSpentConfigurationPageModel> validator) : base(successAction, model, validator)
 	{
 		InitializeComponent();
 	}
@@ -16,14 +16,12 @@ public partial class PurchaseSpentConfigurationPage : Core.Presentation.Terminal
     {
         var apiConnectClient = new Interop.API.Connect.Clients.PurchaseSpentsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.PurchaseSpentConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.PurchaseSpentInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -35,18 +33,26 @@ public partial class PurchaseSpentConfigurationPage : Core.Presentation.Terminal
     {
         var apiConnectClient = new Interop.API.Connect.Clients.PurchaseSpentsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.PurchaseSpentConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.PurchaseSpentInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 }

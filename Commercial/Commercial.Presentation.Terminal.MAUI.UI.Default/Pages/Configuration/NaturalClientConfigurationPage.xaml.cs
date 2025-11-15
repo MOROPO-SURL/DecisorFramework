@@ -21,7 +21,7 @@ public partial class NaturalClientConfigurationPage : Core.Presentation.Terminal
     private readonly List<DocumentInputModel> incomingDocuments = [];
     private readonly List<DocumentDisplayModel> outgoingDocuments = [];
 
-    public NaturalClientConfigurationPage(System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel> successAction, Models.Page.Configuration.NaturalClientConfigurationPageModel model) : base(successAction, model, null)
+    public NaturalClientConfigurationPage(System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel> successAction, Models.Page.Configuration.NaturalClientConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.NaturalClientConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -34,20 +34,6 @@ public partial class NaturalClientConfigurationPage : Core.Presentation.Terminal
                 if (model.DefaultPaymentTerm.Id != current.Id) continue;
 
                 PaymentTermPicker.SelectedIndex = i;
-
-                break;
-            }
-        }
-
-        if (model.MainPostalContact != null)
-        {
-            for (int i = 0; i < model.AvailablePostalContactItems.Count; i++)
-            {
-                var current = model.AvailablePostalContactItems[i];
-
-                if (model.MainPostalContact.Id != current.Id) continue;
-
-                PostalContactPicker.SelectedIndex = i;
 
                 break;
             }
@@ -78,10 +64,10 @@ public partial class NaturalClientConfigurationPage : Core.Presentation.Terminal
         {
             Id = System.Guid.NewGuid(),
             ContactId = ConcreteBindingContext.Contact.Id,
-            BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            BusinessKindId = ConcreteBindingContext.BusinessKind.Id,
             PersonalIdentificationNumber = ConcreteBindingContext.PersonalIdentificationNumber,
-            MainPostalContactId = ConcreteBindingContext.AvailablePostalContactItems[PostalContactPicker.SelectedIndex].Id,
-            DefaultPaymentTermId = ConcreteBindingContext.AvailablePaymentTerms[PaymentTermPicker.SelectedIndex].Id,
+            MainPostalContactId = ConcreteBindingContext.MainPostalContact.Id,
+            DefaultPaymentTermId = ConcreteBindingContext.DefaultPaymentTerm.Id,
             Priority = ConcreteBindingContext.Priority,
             IncomingBankAccounts = incomingBankAccounts,
             IncomingDocuments = incomingDocuments
@@ -100,10 +86,10 @@ public partial class NaturalClientConfigurationPage : Core.Presentation.Terminal
         {
             Id = ConcreteBindingContext.Id,
             ContactId = ConcreteBindingContext.Contact.Id,
-            BusinessKindId = ConcreteBindingContext.AvailableBusinessKinds[BusinessKindPicker.SelectedIndex].Id,
+            BusinessKindId = ConcreteBindingContext.BusinessKind.Id,
             PersonalIdentificationNumber = ConcreteBindingContext.PersonalIdentificationNumber,
-            MainPostalContactId = ConcreteBindingContext.AvailablePostalContactItems[PostalContactPicker.SelectedIndex].Id,
-            DefaultPaymentTermId = ConcreteBindingContext.AvailablePaymentTerms[PaymentTermPicker.SelectedIndex].Id,
+            MainPostalContactId = ConcreteBindingContext.MainPostalContact.Id,
+            DefaultPaymentTermId = ConcreteBindingContext.DefaultPaymentTerm.Id,
             Priority = ConcreteBindingContext.Priority,
             IncomingBankAccounts = incomingBankAccounts,
             EditionBankAccounts = editionBankAccounts,
@@ -367,11 +353,35 @@ public partial class NaturalClientConfigurationPage : Core.Presentation.Terminal
     {
         ConcreteBindingContext.Contact = model;
 
+        if (!string.IsNullOrEmpty(model.PersonalIdentificationNumber))
+        {
+            ConcreteBindingContext.PersonalIdentificationNumber = model.PersonalIdentificationNumber;
+        }
+
         ConcreteBindingContext.AvailablePostalContactItems.Clear();
 
         foreach (var item in model.Identity.PostalContacts)
         {
             ConcreteBindingContext.AvailablePostalContactItems.Add(item);
+        }
+
+        if (model.MainPostalContactItem != null)
+        {
+            ConcreteBindingContext.MainPostalContact = ConcreteBindingContext.AvailablePostalContactItems.First(item => item.Id == model.MainPostalContactItem.Id);
+        }
+
+        if (model.BusinessKind != null)
+        {
+            for (int i = 0; i < ConcreteBindingContext.AvailableBusinessKinds.Length; i++)
+            {
+                var current = ConcreteBindingContext.AvailableBusinessKinds[i];
+
+                if (model.BusinessKind.Id != current.Id) continue;
+
+                BusinessKindPicker.SelectedIndex = i;
+
+                break;
+            }
         }
     }
 
@@ -380,7 +390,7 @@ public partial class NaturalClientConfigurationPage : Core.Presentation.Terminal
         incomingBankAccounts.Add(new BankAccountInputModel
         {
             Id = model.Id,
-            IsExternal = false,
+            IsExternal = true,
             BranchId = model.Branch.Id,
             CurrencyId = model.Currency.Id,
             Holder = model.Holder,

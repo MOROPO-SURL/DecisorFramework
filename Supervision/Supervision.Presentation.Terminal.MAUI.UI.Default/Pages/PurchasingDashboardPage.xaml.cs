@@ -60,7 +60,7 @@ public partial class PurchasingDashboardPage : Caney.MVVM.Core.Pages.BindingCont
         {
             var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
-            var purchasePlansAPIConnectClient = new Purchasing.Interop.API.Connect.Clients.PurchasePlansAPIConnectClient(httpClientHelperProvider);
+            var purchasePlansAPIConnectClient = new Purchasing.Interop.API.Connect.Clients.PurchaseOrdersAPIConnectClient(httpClientHelperProvider);
             var purchasesAPIConnectClient = new Purchasing.Interop.API.Connect.Clients.PurchasesAPIConnectClient(httpClientHelperProvider);
             var purchaseZonesAPIConnectClient = new Purchasing.Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(httpClientHelperProvider);
             var legalProvidersAPIConnectClient = new Commercial.Interop.API.Connect.Clients.LegalProvidersAPIConnectClient(httpClientHelperProvider);

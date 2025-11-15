@@ -17,6 +17,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input.Co
 
         public System.Guid? BusinessKindId { get; set; }
 
+        [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
         public string PersonalIdentificationNumber { get; set; }
 
         public System.Guid MainPostalContactId { get; set; }

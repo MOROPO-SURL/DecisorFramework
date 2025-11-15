@@ -16,14 +16,12 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Defau
                 .AddSingleton<IDetailContentPageFactoryFacade<WarehouseDisplayModel>, WarehouseDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<ProductDisplayModel>, ProductDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<FamilyDisplayModel>, FamilyDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<UnitMeasurementDisplayModel>, UnitMeasurementDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<WarehouseDisplayModel, WarehouseConfigurationPageModel>, WarehouseConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<WarehousingAreaDisplayModel, WarehousingAreaConfigurationPageModel>, WarehousingAreaConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ProductDisplayModel, ProductConfigurationPageModel>, ProductConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<FamilyDisplayModel, FamilyConfigurationPageModel>, FamilyConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel>, UnitMeasurementConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<FamilyDisplayModel, FamilyConfigurationPageModel>, FamilyConfigurationPageFactory>();
 
             return builder;
         }

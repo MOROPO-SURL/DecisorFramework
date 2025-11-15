@@ -1,5 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
-using System.Linq;
+﻿using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 {
@@ -11,9 +10,9 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public System.DateTime At { get; set; }
 
-        public ProductDisplayModel Product { get; set; }
+        public Inventory.Interop.API.Common.Models.Display.ProductDisplayModel Product { get; set; }
 
-        public ClassificationDisplayModel Classification { get; set; }
+        public Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel Classification { get; set; }
 
         public string Description { get; set; }
 
@@ -23,9 +22,9 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public decimal MaxPerformanceCoefficient { get; set; }
 
-        public ProductDisplayModel[] InputProducts { get; set; }
+        public Inventory.Interop.API.Common.Models.Display.ProductDisplayModel[] InputProducts { get; set; }
 
-        public ProductDisplayModel[] OutputProducts { get; set; }
+        public Inventory.Interop.API.Common.Models.Display.ProductDisplayModel[] OutputProducts { get; set; }
 
         public ElaborationStepDisplayModel[] Steps { get; set; }
 
@@ -40,7 +39,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             MaxPerformanceCoefficient = entity.MaxPerformanceCoefficient;
             InputProducts = entity.InputProductBridges.Select(bridge =>
             {
-                var model = new ProductDisplayModel();
+                var model = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel();
 
                 model.Import(bridge.Stern);
 
@@ -48,7 +47,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             }).ToArray();
             OutputProducts = entity.OutputProductBridges.Select(bridge =>
             {
-                var model = new ProductDisplayModel();
+                var model = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel();
 
                 model.Import(bridge.Stern);
 
@@ -57,14 +56,14 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
             if (entity.Product != null)
             {
-                Product = new ProductDisplayModel();
+                Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel();
 
                 Product.Import(entity.Product);
             }
 
             if (entity.Classification != null)
             {
-                Classification = new ClassificationDisplayModel();
+                Classification = new Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel();
 
                 Classification.Import(entity.Classification);
             }

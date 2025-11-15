@@ -17,7 +17,7 @@
         public double Capacity { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(UnitMeasurementId))]
-        public UnitMeasurement UnitMeasurement { get; set; }
+        public Domain.Persistence.Entities.UnitMeasurement UnitMeasurement { get; set; }
         public System.Guid UnitMeasurementId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(FamilyId))]

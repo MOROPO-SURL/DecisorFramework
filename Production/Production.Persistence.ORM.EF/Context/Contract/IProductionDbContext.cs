@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Context.Contract
 {
-    public interface IProductionDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext, Essential.Persistence.ORM.EF.Context.Contract.IEssentialDbContext
+    public interface IProductionDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext, HumanResources.Persistence.ORM.EF.Context.Contract.IHumanResourcesDbContext
     {
         public DbSet<Entities.Elaboration> Elaborations { get; set; }
         public DbSet<Entities.ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }

@@ -6,7 +6,7 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Production.Persistence</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Essential\Essential.Persistence\Essential.Persistence.csproj" />
+		<ProjectReference Include="..\..\HumanResources\HumanResources.Persistence\HumanResources.Persistence.csproj" />
 		<ProjectReference Include="..\..\Inventory\Inventory.Persistence\Inventory.Persistence.csproj" />
 	</ItemGroup>
 </Project>

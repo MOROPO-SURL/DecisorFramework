@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Logging;
-using MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Repositories;
 using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Production.Persistence.Entities;
