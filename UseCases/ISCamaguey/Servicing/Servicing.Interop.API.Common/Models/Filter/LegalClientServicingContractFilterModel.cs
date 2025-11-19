@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Filter
 {
-    public class LegalClientServicingContractFilterModel : Framework.Guama.Core.Persistence.Presentation.Models.Filter.Contract.IEntityFilterModel<Persistence.Entities.LegalClientServicingContract, int>
+    public class LegalClientServicingContractFilterModel : Framework.Guama.Core.Persistence.Presentation.Models.Filter.Contract.IEntityFilterModel<Persistence.Entities.LegalClientServicingContract, System.Guid>
     {
         public System.Guid ClientId { get; set; }
 

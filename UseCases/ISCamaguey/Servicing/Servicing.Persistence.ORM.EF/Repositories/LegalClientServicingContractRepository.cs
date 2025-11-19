@@ -1,16 +1,15 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities;
 using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Servicing.Persistence.ORM.EF.Repositories
 {
-    public class LegalClientServicingContractRepository : Framework.Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Entities.LegalClientServicingContract, int>
+    public class LegalClientServicingContractRepository : Framework.Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Entities.LegalClientServicingContract, System.Guid>
     {
         public LegalClientServicingContractRepository(DbContext dbContext) : base(dbContext)
         {
         }
 
-        protected override IQueryable<LegalClientServicingContract> GetQueryableDbSet()
+        protected override IQueryable<Entities.LegalClientServicingContract> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
                 .Include(entity => entity.PaymentTerm)

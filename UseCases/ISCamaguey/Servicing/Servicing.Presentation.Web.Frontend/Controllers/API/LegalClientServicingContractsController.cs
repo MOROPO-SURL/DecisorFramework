@@ -9,9 +9,9 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Web.Frontend.Controll
 {
     [Route("api/servicing/[controller]")]
     [ApiController]
-    public class LegalClientServicingContractsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<LegalClientServicingContract, int, LegalClientServicingContractInputModel, LegalClientServicingContractDisplayModel, LegalClientServicingContractFilterModel>
+    public class LegalClientServicingContractsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<LegalClientServicingContract, System.Guid, LegalClientServicingContractInputModel, LegalClientServicingContractDisplayModel, LegalClientServicingContractFilterModel>
     {
-        public LegalClientServicingContractsController(IEntityRepository<LegalClientServicingContract, int> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientServicingContractsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientServicingContractsController> logger) : base(repository, localizer, logger)
+        public LegalClientServicingContractsController(IEntityRepository<LegalClientServicingContract, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientServicingContractsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientServicingContractsController> logger) : base(repository, localizer, logger)
         {
         }
 
@@ -22,7 +22,7 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Web.Frontend.Controll
 
         protected override System.Func<LegalClientServicingContract, object> GetOrderSelector()
         {
-            return entity => entity.Year * 1000 + entity.Id;
+            return entity => entity.Year * 1000 + entity.Index;
         }
 
         protected override bool IsOrderDescending()

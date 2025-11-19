@@ -2,9 +2,11 @@
 
 namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input
 {
-    public class LegalClientServicingContractInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.LegalClientServicingContract, int>
+    public class LegalClientServicingContractInputModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.LegalClientServicingContract, System.Guid>
     {
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
+
+        public int Index { get; set; }
 
         public int Year { get; set; }
 
@@ -43,6 +45,7 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input
 
         public void Mergue(Persistence.Entities.LegalClientServicingContract entity)
         {
+            entity.Index = Index;
             entity.Year = Year;
             entity.Objective = Objective;
             entity.DurationUnitCount = DurationUnitCount;
