@@ -23,8 +23,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extens
             services.AddScoped<IEntityRepository<VacantPostulationOcupation, System.Guid>, VacantPostulationOcupationRepository>();
             services.AddScoped<IEntityRepository<OcupationCandidate, System.Guid>, OcupationCandidateRepository>();
             services.AddScoped<IEntityRepository<AdmitionPropousal, System.Guid>, AdmitionPropousalRepository>();
-            services.AddScoped<IEntityRepository<AdmitionEmploymentContract, int>, AdmitionEmploymentContractRepository>();
-            services.AddScoped<IEntityRepository<NamingEmploymentContract, int>, NamingEmploymentContractRepository>();
+            services.AddScoped<IEntityRepository<AdmitionEmploymentContract, System.Guid>, AdmitionEmploymentContractRepository>();
+            services.AddScoped<IEntityRepository<NamingEmploymentContract, System.Guid>, NamingEmploymentContractRepository>();
             services.AddScoped<IEntityRepository<EmployeeDailyChecking, long>, EmployeeDailyCheckingRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.HumanResourcesDbSchemaConfigurationProvider>();

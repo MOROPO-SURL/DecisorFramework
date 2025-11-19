@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter
 {
-    public class AdmitionEmploymentContractFilterModel : Guama.Core.Persistence.Presentation.Models.Filter.Contract.IEntityFilterModel<Persistence.Entities.AdmitionEmploymentContract, int>
+    public class AdmitionEmploymentContractFilterModel : Guama.Core.Persistence.Presentation.Models.Filter.Contract.IEntityFilterModel<Persistence.Entities.AdmitionEmploymentContract, System.Guid>
     {
         public System.Guid EmployeeId { get; set; }
 

@@ -2843,21 +2843,28 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     clientid = table.Column<Guid>(type: "uuid", nullable: false),
+                    index = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     objective = table.Column<string>(type: "text", nullable: false),
                     starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     durationunitcount = table.Column<int>(type: "integer", nullable: true),
                     durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true),
                     proformaid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_naturalclientsalecontracts", x => new { x.id, x.year });
+                    table.PrimaryKey("pk_naturalclientsalecontracts", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_naturalclientsalecontracts_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_naturalclientsalecontracts_naturalclients_clientid",
                         column: x => x.clientid,
@@ -3003,20 +3010,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     providerid = table.Column<Guid>(type: "uuid", nullable: false),
+                    index = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     objective = table.Column<string>(type: "text", nullable: false),
                     starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     durationunitcount = table.Column<int>(type: "integer", nullable: true),
-                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true)
+                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_naturalproviderpurchasingcontracts", x => new { x.id, x.year });
+                    table.PrimaryKey("pk_naturalproviderpurchasingcontracts", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_naturalproviderpurchasingcontracts_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_naturalproviderpurchasingcontracts_naturalproviders_provide~",
                         column: x => x.providerid,
@@ -3125,34 +3139,42 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "purchaserequestproductbridges",
+                name: "purchaserequestexpectedproductadquisitions",
                 schema: "decisorframework_purchasing",
                 columns: table => new
                 {
-                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
-                    sternid = table.Column<Guid>(type: "uuid", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    requestid = table.Column<Guid>(type: "uuid", nullable: false),
+                    productid = table.Column<Guid>(type: "uuid", nullable: false),
+                    classificationid = table.Column<Guid>(type: "uuid", nullable: true),
                     amount = table.Column<decimal>(type: "numeric", nullable: false),
                     unitmeasurementid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_purchaserequestproductbridges", x => new { x.prowid, x.sternid });
+                    table.PrimaryKey("pk_purchaserequestexpectedproductadquisitions", x => x.id);
                     table.ForeignKey(
-                        name: "fk_purchaserequestproductbridges_products_sternid",
-                        column: x => x.sternid,
+                        name: "fk_purchaserequestexpectedproductadquisitions_classifications_~",
+                        column: x => x.classificationid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "classifications",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_purchaserequestexpectedproductadquisitions_products_product~",
+                        column: x => x.productid,
                         principalSchema: "decisorframework_inventory",
                         principalTable: "products",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_purchaserequestproductbridges_purchaserequests_prowid",
-                        column: x => x.prowid,
+                        name: "fk_purchaserequestexpectedproductadquisitions_purchaserequests~",
+                        column: x => x.requestid,
                         principalSchema: "decisorframework_purchasing",
                         principalTable: "purchaserequests",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_purchaserequestproductbridges_unitmeasurements_unitmeasurem~",
+                        name: "fk_purchaserequestexpectedproductadquisitions_unitmeasurements~",
                         column: x => x.unitmeasurementid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "unitmeasurements",
@@ -3267,13 +3289,14 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "naturalproviderbudgetproductbridges",
+                name: "naturalproviderbudgetproducts",
                 schema: "decisorframework_purchasing",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     budgetid = table.Column<Guid>(type: "uuid", nullable: false),
                     productid = table.Column<Guid>(type: "uuid", nullable: false),
-                    classificationid = table.Column<Guid>(type: "uuid", nullable: false),
+                    classificationid = table.Column<Guid>(type: "uuid", nullable: true),
                     unitprice = table.Column<decimal>(type: "numeric", nullable: false),
                     currentyid = table.Column<Guid>(type: "uuid", nullable: false),
                     amount = table.Column<decimal>(type: "numeric", nullable: false),
@@ -3281,37 +3304,36 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_naturalproviderbudgetproductbridges", x => new { x.budgetid, x.productid, x.classificationid });
+                    table.PrimaryKey("pk_naturalproviderbudgetproducts", x => x.id);
                     table.ForeignKey(
-                        name: "fk_naturalproviderbudgetproductbridges_classifications_classif~",
+                        name: "fk_naturalproviderbudgetproducts_classifications_classificatio~",
                         column: x => x.classificationid,
                         principalSchema: "decisorframework_inventory",
                         principalTable: "classifications",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_naturalproviderbudgetproductbridges_currencies_currentyid",
+                        name: "fk_naturalproviderbudgetproducts_currencies_currentyid",
                         column: x => x.currentyid,
                         principalSchema: "decisorframework_finantial",
                         principalTable: "currencies",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_naturalproviderbudgetproductbridges_naturalproviderbudgets_~",
+                        name: "fk_naturalproviderbudgetproducts_naturalproviderbudgets_budget~",
                         column: x => x.budgetid,
                         principalSchema: "decisorframework_purchasing",
                         principalTable: "naturalproviderbudgets",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_naturalproviderbudgetproductbridges_products_productid",
+                        name: "fk_naturalproviderbudgetproducts_products_productid",
                         column: x => x.productid,
                         principalSchema: "decisorframework_inventory",
                         principalTable: "products",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_naturalproviderbudgetproductbridges_unitmeasurements_unitme~",
+                        name: "fk_naturalproviderbudgetproducts_unitmeasurements_unitmeasurem~",
                         column: x => x.unitmeasurementid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "unitmeasurements",
@@ -3459,21 +3481,28 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     clientid = table.Column<Guid>(type: "uuid", nullable: false),
+                    index = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     objective = table.Column<string>(type: "text", nullable: false),
                     starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     durationunitcount = table.Column<int>(type: "integer", nullable: true),
                     durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true),
                     proformaid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_legalclientsalecontracts", x => new { x.id, x.year });
+                    table.PrimaryKey("pk_legalclientsalecontracts", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_legalclientsalecontracts_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_legalclientsalecontracts_legalclients_clientid",
                         column: x => x.clientid,
@@ -3619,20 +3648,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     providerid = table.Column<Guid>(type: "uuid", nullable: false),
+                    index = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     objective = table.Column<string>(type: "text", nullable: false),
                     starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     durationunitcount = table.Column<int>(type: "integer", nullable: true),
-                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true)
+                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_legalproviderpurchasingcontracts", x => new { x.id, x.year });
+                    table.PrimaryKey("pk_legalproviderpurchasingcontracts", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_legalproviderpurchasingcontracts_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_legalproviderpurchasingcontracts_legalproviders_providerid",
                         column: x => x.providerid,
@@ -3882,10 +3918,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     sellerid = table.Column<Guid>(type: "uuid", nullable: false),
                     discriminator = table.Column<string>(type: "text", nullable: false),
-                    contractnumber = table.Column<int>(type: "integer", nullable: true),
-                    contractyear = table.Column<int>(type: "integer", nullable: true),
+                    legalclientsalecontractid = table.Column<Guid>(type: "uuid", nullable: true),
                     budgetnumber = table.Column<int>(type: "integer", nullable: true),
                     budgetyear = table.Column<int>(type: "integer", nullable: true),
+                    naturalclientsalecontractid = table.Column<Guid>(type: "uuid", nullable: true),
                     identityid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
@@ -3899,17 +3935,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_abstractsale_legalclientsalecontracts_contractnumber_contra~",
-                        columns: x => new { x.contractnumber, x.contractyear },
+                        name: "fk_abstractsale_legalclientsalecontracts_legalclientsalecontra~",
+                        column: x => x.legalclientsalecontractid,
                         principalSchema: "decisorframework_commercial",
                         principalTable: "legalclientsalecontracts",
-                        principalColumns: new[] { "id", "year" });
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_abstractsale_naturalclientsalecontracts_contractnumber_cont~",
-                        columns: x => new { x.contractnumber, x.contractyear },
+                        name: "fk_abstractsale_naturalclientsalecontracts_naturalclientsaleco~",
+                        column: x => x.naturalclientsalecontractid,
                         principalSchema: "decisorframework_commercial",
                         principalTable: "naturalclientsalecontracts",
-                        principalColumns: new[] { "id", "year" });
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_abstractsale_personidentities_identityid",
                         column: x => x.identityid,
@@ -3919,13 +3957,14 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "legalproviderbudgetproductbridge",
+                name: "legalproviderbudgetproducts",
                 schema: "decisorframework_purchasing",
                 columns: table => new
                 {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     budgetid = table.Column<Guid>(type: "uuid", nullable: false),
                     productid = table.Column<Guid>(type: "uuid", nullable: false),
-                    classificationid = table.Column<Guid>(type: "uuid", nullable: false),
+                    classificationid = table.Column<Guid>(type: "uuid", nullable: true),
                     unitprice = table.Column<decimal>(type: "numeric", nullable: false),
                     currentyid = table.Column<Guid>(type: "uuid", nullable: false),
                     amount = table.Column<decimal>(type: "numeric", nullable: false),
@@ -3933,37 +3972,36 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_legalproviderbudgetproductbridge", x => new { x.budgetid, x.productid, x.classificationid });
+                    table.PrimaryKey("pk_legalproviderbudgetproducts", x => x.id);
                     table.ForeignKey(
-                        name: "fk_legalproviderbudgetproductbridge_classifications_classifica~",
+                        name: "fk_legalproviderbudgetproducts_classifications_classificationid",
                         column: x => x.classificationid,
                         principalSchema: "decisorframework_inventory",
                         principalTable: "classifications",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
+                        principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_legalproviderbudgetproductbridge_currencies_currentyid",
+                        name: "fk_legalproviderbudgetproducts_currencies_currentyid",
                         column: x => x.currentyid,
                         principalSchema: "decisorframework_finantial",
                         principalTable: "currencies",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_legalproviderbudgetproductbridge_legalproviderbudgets_budge~",
+                        name: "fk_legalproviderbudgetproducts_legalproviderbudgets_budgetid",
                         column: x => x.budgetid,
                         principalSchema: "decisorframework_purchasing",
                         principalTable: "legalproviderbudgets",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_legalproviderbudgetproductbridge_products_productid",
+                        name: "fk_legalproviderbudgetproducts_products_productid",
                         column: x => x.productid,
                         principalSchema: "decisorframework_inventory",
                         principalTable: "products",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_legalproviderbudgetproductbridge_unitmeasurements_unitmeasu~",
+                        name: "fk_legalproviderbudgetproducts_unitmeasurements_unitmeasuremen~",
                         column: x => x.unitmeasurementid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "unitmeasurements",
@@ -3972,7 +4010,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "legalproviderbudgetservicebridge",
+                name: "legalproviderbudgetservicebridges",
                 schema: "decisorframework_purchasing",
                 columns: table => new
                 {
@@ -3985,23 +4023,23 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_legalproviderbudgetservicebridge", x => new { x.prowid, x.sternid });
+                    table.PrimaryKey("pk_legalproviderbudgetservicebridges", x => new { x.prowid, x.sternid });
                     table.ForeignKey(
-                        name: "fk_legalproviderbudgetservicebridge_currencies_currentyid",
+                        name: "fk_legalproviderbudgetservicebridges_currencies_currentyid",
                         column: x => x.currentyid,
                         principalSchema: "decisorframework_finantial",
                         principalTable: "currencies",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_legalproviderbudgetservicebridge_legalproviderbudgets_prowid",
+                        name: "fk_legalproviderbudgetservicebridges_legalproviderbudgets_prow~",
                         column: x => x.prowid,
                         principalSchema: "decisorframework_purchasing",
                         principalTable: "legalproviderbudgets",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_legalproviderbudgetservicebridge_requestableservices_sternid",
+                        name: "fk_legalproviderbudgetservicebridges_requestableservices_stern~",
                         column: x => x.sternid,
                         principalSchema: "decisorframework_commercial",
                         principalTable: "requestableservices",
@@ -4163,6 +4201,50 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "purchaseorderexpectedproductresults",
+                schema: "decisorframework_purchasing",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    orderid = table.Column<Guid>(type: "uuid", nullable: false),
+                    productid = table.Column<Guid>(type: "uuid", nullable: false),
+                    classificationid = table.Column<Guid>(type: "uuid", nullable: true),
+                    amount = table.Column<decimal>(type: "numeric", nullable: false),
+                    unitmeasurementid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_purchaseorderexpectedproductresults", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_purchaseorderexpectedproductresults_classifications_classif~",
+                        column: x => x.classificationid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "classifications",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_purchaseorderexpectedproductresults_products_productid",
+                        column: x => x.productid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "products",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchaseorderexpectedproductresults_purchaseorders_orderid",
+                        column: x => x.orderid,
+                        principalSchema: "decisorframework_purchasing",
+                        principalTable: "purchaseorders",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_purchaseorderexpectedproductresults_unitmeasurements_unitme~",
+                        column: x => x.unitmeasurementid,
+                        principalSchema: "decisorframework_domain",
+                        principalTable: "unitmeasurements",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "purchaseorderlegalproviderbudgetbridges",
                 schema: "decisorframework_purchasing",
                 columns: table => new
@@ -4217,70 +4299,42 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "purchaseorderproductresultbridges",
+                name: "purchaseorderplannedproductspents",
                 schema: "decisorframework_purchasing",
                 columns: table => new
                 {
-                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
-                    sternid = table.Column<Guid>(type: "uuid", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    orderid = table.Column<Guid>(type: "uuid", nullable: false),
+                    productid = table.Column<Guid>(type: "uuid", nullable: false),
+                    classificationid = table.Column<Guid>(type: "uuid", nullable: true),
                     amount = table.Column<decimal>(type: "numeric", nullable: false),
                     unitmeasurementid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_purchaseorderproductresultbridges", x => new { x.prowid, x.sternid });
+                    table.PrimaryKey("pk_purchaseorderplannedproductspents", x => x.id);
                     table.ForeignKey(
-                        name: "fk_purchaseorderproductresultbridges_products_sternid",
-                        column: x => x.sternid,
+                        name: "fk_purchaseorderplannedproductspents_classifications_classific~",
+                        column: x => x.classificationid,
+                        principalSchema: "decisorframework_inventory",
+                        principalTable: "classifications",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_purchaseorderplannedproductspents_products_productid",
+                        column: x => x.productid,
                         principalSchema: "decisorframework_inventory",
                         principalTable: "products",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_purchaseorderproductresultbridges_purchaseorders_prowid",
-                        column: x => x.prowid,
+                        name: "fk_purchaseorderplannedproductspents_purchaseorders_orderid",
+                        column: x => x.orderid,
                         principalSchema: "decisorframework_purchasing",
                         principalTable: "purchaseorders",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_purchaseorderproductresultbridges_unitmeasurements_unitmeas~",
-                        column: x => x.unitmeasurementid,
-                        principalSchema: "decisorframework_domain",
-                        principalTable: "unitmeasurements",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "purchaseorderproductspentbridges",
-                schema: "decisorframework_purchasing",
-                columns: table => new
-                {
-                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
-                    sternid = table.Column<Guid>(type: "uuid", nullable: false),
-                    amount = table.Column<decimal>(type: "numeric", nullable: false),
-                    unitmeasurementid = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_purchaseorderproductspentbridges", x => new { x.prowid, x.sternid });
-                    table.ForeignKey(
-                        name: "fk_purchaseorderproductspentbridges_products_sternid",
-                        column: x => x.sternid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "products",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchaseorderproductspentbridges_purchaseorders_prowid",
-                        column: x => x.prowid,
-                        principalSchema: "decisorframework_purchasing",
-                        principalTable: "purchaseorders",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_purchaseorderproductspentbridges_unitmeasurements_unitmeasu~",
+                        name: "fk_purchaseorderplannedproductspents_unitmeasurements_unitmeas~",
                         column: x => x.unitmeasurementid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "unitmeasurements",
@@ -4974,8 +5028,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     staffid = table.Column<Guid>(type: "uuid", nullable: false),
                     vacantid = table.Column<Guid>(type: "uuid", nullable: false),
                     employeeid = table.Column<Guid>(type: "uuid", nullable: false),
@@ -4985,14 +5038,15 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     interviewat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
                     responsibleid = table.Column<Guid>(type: "uuid", nullable: true),
                     description = table.Column<string>(type: "text", nullable: true),
+                    index = table.Column<int>(type: "integer", nullable: false),
                     year = table.Column<int>(type: "integer", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     objective = table.Column<string>(type: "text", nullable: false),
                     starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     durationunitcount = table.Column<int>(type: "integer", nullable: true),
-                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true)
+                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -5002,6 +5056,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         column: x => x.admitionpropousalid,
                         principalSchema: "decisorframework_humanresources",
                         principalTable: "admitionpropousals",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_employmentcontracts_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
                         principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_employmentcontracts_employees_employeeid",
@@ -5023,8 +5083,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     feed = table.Column<double>(type: "double precision", nullable: false),
                     paymenttermid = table.Column<Guid>(type: "uuid", nullable: false),
                     bankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
@@ -5037,14 +5096,15 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     propertyleasenaturalclientid = table.Column<Guid>(type: "uuid", nullable: true),
                     vehicleleasenaturalpostulationid = table.Column<Guid>(type: "uuid", nullable: true),
                     vehicleleasenaturalclientid = table.Column<Guid>(type: "uuid", nullable: true),
+                    index = table.Column<int>(type: "integer", nullable: false),
                     year = table.Column<int>(type: "integer", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     objective = table.Column<string>(type: "text", nullable: false),
                     starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     durationunitcount = table.Column<int>(type: "integer", nullable: true),
-                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true)
+                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -5056,6 +5116,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         principalTable: "bankaccounts",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_leasecontracts_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_leasecontracts_legalclients_propertyleaselegalclientid",
                         column: x => x.propertyleaselegalclientid,
@@ -5095,7 +5161,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    contractid = table.Column<Guid>(type: "uuid", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
                     agreementid = table.Column<Guid>(type: "uuid", nullable: false),
                     costcenterid = table.Column<Guid>(type: "uuid", nullable: false)
@@ -5132,7 +5198,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    contractid = table.Column<Guid>(type: "uuid", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
                     agreementid = table.Column<Guid>(type: "uuid", nullable: false),
                     costcenterid = table.Column<Guid>(type: "uuid", nullable: false),
@@ -5170,7 +5236,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    contractid = table.Column<Guid>(type: "uuid", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
                     agreementid = table.Column<Guid>(type: "uuid", nullable: false),
                     costcenterid = table.Column<Guid>(type: "uuid", nullable: false)
@@ -5207,7 +5273,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    contractid = table.Column<Guid>(type: "uuid", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
                     agreementid = table.Column<Guid>(type: "uuid", nullable: false),
                     costcenterid = table.Column<Guid>(type: "uuid", nullable: false),
@@ -5708,7 +5774,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
-                    prowid = table.Column<int>(type: "integer", nullable: false),
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
                     sternid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -5728,7 +5794,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
-                    prowid = table.Column<int>(type: "integer", nullable: false),
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
                     sternid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -5816,7 +5882,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     staffid = table.Column<Guid>(type: "uuid", nullable: false),
                     vacantid = table.Column<Guid>(type: "uuid", nullable: false),
-                    contractid = table.Column<int>(type: "integer", nullable: false)
+                    contractid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -6962,16 +7028,22 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "ix_abstractsale_contractnumber_contractyear",
-                schema: "decisorframework_sales",
-                table: "abstractsale",
-                columns: new[] { "contractnumber", "contractyear" });
-
-            migrationBuilder.CreateIndex(
                 name: "ix_abstractsale_identityid",
                 schema: "decisorframework_sales",
                 table: "abstractsale",
                 column: "identityid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_abstractsale_legalclientsalecontractid",
+                schema: "decisorframework_sales",
+                table: "abstractsale",
+                column: "legalclientsalecontractid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_abstractsale_naturalclientsalecontractid",
+                schema: "decisorframework_sales",
+                table: "abstractsale",
+                column: "naturalclientsalecontractid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_abstractsale_sellerid",
@@ -7281,16 +7353,22 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "admitionpropousalid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_employmentcontracts_documentid",
+                schema: "decisorframework_humanresources",
+                table: "employmentcontracts",
+                column: "documentid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_employmentcontracts_employeeid",
                 schema: "decisorframework_humanresources",
                 table: "employmentcontracts",
                 column: "employeeid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_employmentcontracts_id_year",
+                name: "ix_employmentcontracts_index_year",
                 schema: "decisorframework_humanresources",
                 table: "employmentcontracts",
-                columns: new[] { "id", "year" },
+                columns: new[] { "index", "year" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
@@ -7334,6 +7412,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_leasing",
                 table: "leasecontracts",
                 column: "bankaccountid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_documentid",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "documentid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_leasecontracts_paymenttermid",
@@ -7493,6 +7577,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "clientid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_legalclientsalecontracts_documentid",
+                schema: "decisorframework_commercial",
+                table: "legalclientsalecontracts",
+                column: "documentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalclientsalecontracts_index_year",
+                schema: "decisorframework_commercial",
+                table: "legalclientsalecontracts",
+                columns: new[] { "index", "year" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "ix_legalclientsalecontracts_proformaid",
                 schema: "decisorframework_commercial",
                 table: "legalclientsalecontracts",
@@ -7535,27 +7632,34 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_legalproviderbudgetproductbridge_classificationid",
+                name: "ix_legalproviderbudgetproducts_budgetid_productid_classificati~",
                 schema: "decisorframework_purchasing",
-                table: "legalproviderbudgetproductbridge",
+                table: "legalproviderbudgetproducts",
+                columns: new[] { "budgetid", "productid", "classificationid" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalproviderbudgetproducts_classificationid",
+                schema: "decisorframework_purchasing",
+                table: "legalproviderbudgetproducts",
                 column: "classificationid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_legalproviderbudgetproductbridge_currentyid",
+                name: "ix_legalproviderbudgetproducts_currentyid",
                 schema: "decisorframework_purchasing",
-                table: "legalproviderbudgetproductbridge",
+                table: "legalproviderbudgetproducts",
                 column: "currentyid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_legalproviderbudgetproductbridge_productid",
+                name: "ix_legalproviderbudgetproducts_productid",
                 schema: "decisorframework_purchasing",
-                table: "legalproviderbudgetproductbridge",
+                table: "legalproviderbudgetproducts",
                 column: "productid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_legalproviderbudgetproductbridge_unitmeasurementid",
+                name: "ix_legalproviderbudgetproducts_unitmeasurementid",
                 schema: "decisorframework_purchasing",
-                table: "legalproviderbudgetproductbridge",
+                table: "legalproviderbudgetproducts",
                 column: "unitmeasurementid");
 
             migrationBuilder.CreateIndex(
@@ -7584,15 +7688,15 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "providerid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_legalproviderbudgetservicebridge_currentyid",
+                name: "ix_legalproviderbudgetservicebridges_currentyid",
                 schema: "decisorframework_purchasing",
-                table: "legalproviderbudgetservicebridge",
+                table: "legalproviderbudgetservicebridges",
                 column: "currentyid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_legalproviderbudgetservicebridge_sternid",
+                name: "ix_legalproviderbudgetservicebridges_sternid",
                 schema: "decisorframework_purchasing",
-                table: "legalproviderbudgetservicebridge",
+                table: "legalproviderbudgetservicebridges",
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
@@ -7606,6 +7710,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_purchasing",
                 table: "legalproviderpurchasezonebridges",
                 column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalproviderpurchasingcontracts_documentid",
+                schema: "decisorframework_commercial",
+                table: "legalproviderpurchasingcontracts",
+                column: "documentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalproviderpurchasingcontracts_index_year",
+                schema: "decisorframework_commercial",
+                table: "legalproviderpurchasingcontracts",
+                columns: new[] { "index", "year" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_legalproviderpurchasingcontracts_providerid",
@@ -7919,6 +8036,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "clientid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_naturalclientsalecontracts_documentid",
+                schema: "decisorframework_commercial",
+                table: "naturalclientsalecontracts",
+                column: "documentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalclientsalecontracts_index_year",
+                schema: "decisorframework_commercial",
+                table: "naturalclientsalecontracts",
+                columns: new[] { "index", "year" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "ix_naturalclientsalecontracts_proformaid",
                 schema: "decisorframework_commercial",
                 table: "naturalclientsalecontracts",
@@ -7961,27 +8091,34 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_naturalproviderbudgetproductbridges_classificationid",
+                name: "ix_naturalproviderbudgetproducts_budgetid_productid_classifica~",
                 schema: "decisorframework_purchasing",
-                table: "naturalproviderbudgetproductbridges",
+                table: "naturalproviderbudgetproducts",
+                columns: new[] { "budgetid", "productid", "classificationid" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalproviderbudgetproducts_classificationid",
+                schema: "decisorframework_purchasing",
+                table: "naturalproviderbudgetproducts",
                 column: "classificationid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_naturalproviderbudgetproductbridges_currentyid",
+                name: "ix_naturalproviderbudgetproducts_currentyid",
                 schema: "decisorframework_purchasing",
-                table: "naturalproviderbudgetproductbridges",
+                table: "naturalproviderbudgetproducts",
                 column: "currentyid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_naturalproviderbudgetproductbridges_productid",
+                name: "ix_naturalproviderbudgetproducts_productid",
                 schema: "decisorframework_purchasing",
-                table: "naturalproviderbudgetproductbridges",
+                table: "naturalproviderbudgetproducts",
                 column: "productid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_naturalproviderbudgetproductbridges_unitmeasurementid",
+                name: "ix_naturalproviderbudgetproducts_unitmeasurementid",
                 schema: "decisorframework_purchasing",
-                table: "naturalproviderbudgetproductbridges",
+                table: "naturalproviderbudgetproducts",
                 column: "unitmeasurementid");
 
             migrationBuilder.CreateIndex(
@@ -8032,6 +8169,19 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_purchasing",
                 table: "naturalproviderpurchasezonebridges",
                 column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalproviderpurchasingcontracts_documentid",
+                schema: "decisorframework_commercial",
+                table: "naturalproviderpurchasingcontracts",
+                column: "documentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalproviderpurchasingcontracts_index_year",
+                schema: "decisorframework_commercial",
+                table: "naturalproviderpurchasingcontracts",
+                columns: new[] { "index", "year" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_naturalproviderpurchasingcontracts_providerid",
@@ -8656,6 +8806,31 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_purchaseorderexpectedproductresults_classificationid",
+                schema: "decisorframework_purchasing",
+                table: "purchaseorderexpectedproductresults",
+                column: "classificationid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_purchaseorderexpectedproductresults_orderid_productid_class~",
+                schema: "decisorframework_purchasing",
+                table: "purchaseorderexpectedproductresults",
+                columns: new[] { "orderid", "productid", "classificationid" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_purchaseorderexpectedproductresults_productid",
+                schema: "decisorframework_purchasing",
+                table: "purchaseorderexpectedproductresults",
+                column: "productid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_purchaseorderexpectedproductresults_unitmeasurementid",
+                schema: "decisorframework_purchasing",
+                table: "purchaseorderexpectedproductresults",
+                column: "unitmeasurementid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_purchaseorderlegalproviderbudgetbridges_sternid",
                 schema: "decisorframework_purchasing",
                 table: "purchaseorderlegalproviderbudgetbridges",
@@ -8668,27 +8843,28 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_purchaseorderproductresultbridges_sternid",
+                name: "ix_purchaseorderplannedproductspents_classificationid",
                 schema: "decisorframework_purchasing",
-                table: "purchaseorderproductresultbridges",
-                column: "sternid");
+                table: "purchaseorderplannedproductspents",
+                column: "classificationid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_purchaseorderproductresultbridges_unitmeasurementid",
+                name: "ix_purchaseorderplannedproductspents_orderid_productid_classif~",
                 schema: "decisorframework_purchasing",
-                table: "purchaseorderproductresultbridges",
-                column: "unitmeasurementid");
+                table: "purchaseorderplannedproductspents",
+                columns: new[] { "orderid", "productid", "classificationid" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "ix_purchaseorderproductspentbridges_sternid",
+                name: "ix_purchaseorderplannedproductspents_productid",
                 schema: "decisorframework_purchasing",
-                table: "purchaseorderproductspentbridges",
-                column: "sternid");
+                table: "purchaseorderplannedproductspents",
+                column: "productid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_purchaseorderproductspentbridges_unitmeasurementid",
+                name: "ix_purchaseorderplannedproductspents_unitmeasurementid",
                 schema: "decisorframework_purchasing",
-                table: "purchaseorderproductspentbridges",
+                table: "purchaseorderplannedproductspents",
                 column: "unitmeasurementid");
 
             migrationBuilder.CreateIndex(
@@ -8794,15 +8970,28 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "productid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_purchaserequestproductbridges_sternid",
+                name: "ix_purchaserequestexpectedproductadquisitions_classificationid",
                 schema: "decisorframework_purchasing",
-                table: "purchaserequestproductbridges",
-                column: "sternid");
+                table: "purchaserequestexpectedproductadquisitions",
+                column: "classificationid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_purchaserequestproductbridges_unitmeasurementid",
+                name: "ix_purchaserequestexpectedproductadquisitions_productid",
                 schema: "decisorframework_purchasing",
-                table: "purchaserequestproductbridges",
+                table: "purchaserequestexpectedproductadquisitions",
+                column: "productid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_purchaserequestexpectedproductadquisitions_requestid_produc~",
+                schema: "decisorframework_purchasing",
+                table: "purchaserequestexpectedproductadquisitions",
+                columns: new[] { "requestid", "productid", "classificationid" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_purchaserequestexpectedproductadquisitions_unitmeasurementid",
+                schema: "decisorframework_purchasing",
+                table: "purchaserequestexpectedproductadquisitions",
                 column: "unitmeasurementid");
 
             migrationBuilder.CreateIndex(
@@ -9735,12 +9924,22 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 table: "staffs");
 
             migrationBuilder.DropForeignKey(
+                name: "fk_documents_thumbnails_thumbnailid",
+                schema: "guamaframework_media",
+                table: "documents");
+
+            migrationBuilder.DropForeignKey(
                 name: "fk_vacants_workpositions_workpositionid",
                 schema: "decisorframework_humanresources",
                 table: "vacants");
 
             migrationBuilder.DropForeignKey(
                 name: "fk_employmentcontracts_admitionpropousals_admitionpropousalid",
+                schema: "decisorframework_humanresources",
+                table: "employmentcontracts");
+
+            migrationBuilder.DropForeignKey(
+                name: "fk_employmentcontracts_documents_documentid",
                 schema: "decisorframework_humanresources",
                 table: "employmentcontracts");
 
@@ -9835,11 +10034,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial");
 
             migrationBuilder.DropTable(
-                name: "legalproviderbudgetproductbridge",
+                name: "legalproviderbudgetproducts",
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
-                name: "legalproviderbudgetservicebridge",
+                name: "legalproviderbudgetservicebridges",
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
@@ -9943,7 +10142,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_commercial");
 
             migrationBuilder.DropTable(
-                name: "naturalproviderbudgetproductbridges",
+                name: "naturalproviderbudgetproducts",
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
@@ -10075,6 +10274,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
+                name: "purchaseorderexpectedproductresults",
+                schema: "decisorframework_purchasing");
+
+            migrationBuilder.DropTable(
                 name: "purchaseorderlegalproviderbudgetbridges",
                 schema: "decisorframework_purchasing");
 
@@ -10083,11 +10286,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
-                name: "purchaseorderproductresultbridges",
-                schema: "decisorframework_purchasing");
-
-            migrationBuilder.DropTable(
-                name: "purchaseorderproductspentbridges",
+                name: "purchaseorderplannedproductspents",
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
@@ -10107,7 +10306,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
-                name: "purchaserequestproductbridges",
+                name: "purchaserequestexpectedproductadquisitions",
                 schema: "decisorframework_purchasing");
 
             migrationBuilder.DropTable(
@@ -10549,10 +10748,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
-                name: "documents",
-                schema: "guamaframework_media");
-
-            migrationBuilder.DropTable(
                 name: "personcontacts",
                 schema: "decisorframework_domain");
 
@@ -10566,10 +10761,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             migrationBuilder.DropTable(
                 name: "images",
-                schema: "guamaframework_media");
-
-            migrationBuilder.DropTable(
-                name: "thumbnails",
                 schema: "guamaframework_media");
 
             migrationBuilder.DropTable(
@@ -10621,6 +10812,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_domain");
 
             migrationBuilder.DropTable(
+                name: "thumbnails",
+                schema: "guamaframework_media");
+
+            migrationBuilder.DropTable(
                 name: "workpositions",
                 schema: "decisorframework_humanresources");
 
@@ -10635,6 +10830,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             migrationBuilder.DropTable(
                 name: "admitionpropousals",
                 schema: "decisorframework_humanresources");
+
+            migrationBuilder.DropTable(
+                name: "documents",
+                schema: "guamaframework_media");
 
             migrationBuilder.DropTable(
                 name: "resolutions");

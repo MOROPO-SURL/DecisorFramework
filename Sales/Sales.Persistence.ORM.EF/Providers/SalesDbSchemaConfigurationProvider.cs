@@ -11,8 +11,8 @@ namespace MOROPO.Framework.Decisor.Sales.Persistence.ORM.EF.Providers
                 return
                 [
                     new BaseEntityTypeConfigurator<Entities.Contract.AbstractSale>(),
-                    new Configurators.LegalClientWholesaleSaleEntityTypeConfigurator(),
-                    new Configurators.NaturalClientWholesaleSaleEntityTypeConfigurator(),
+                    new BaseEntityTypeConfigurator<Entities.LegalClientWholesaleSale>(),
+                    new BaseEntityTypeConfigurator<Entities.NaturalClientWholesaleSale>(),
                     new BaseEntityTypeConfigurator<Entities.RetailSale>(),
                     new Configurators.LegalClientBudgetEntityTypeConfigurator(),
                     new Configurators.LegalClientBudgetProductBridgeEntityTypeConfigurator(),
