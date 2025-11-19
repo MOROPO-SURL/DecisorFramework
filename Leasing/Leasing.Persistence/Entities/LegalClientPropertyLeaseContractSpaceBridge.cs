@@ -1,8 +1,8 @@
 ﻿namespace MOROPO.Framework.Decisor.Leasing.Persistence.Entities
 {
-    public class LegalClientPropertyLeaseContractSpaceBridge : Guama.Core.Persistence.Entities.Contract.IBridge<LegalClientPropertyLeaseContract, int, Domain.Persistence.Entities.PropertySpace, System.Guid>
+    public class LegalClientPropertyLeaseContractSpaceBridge : Guama.Core.Persistence.Entities.Contract.IBridge<LegalClientPropertyLeaseContract, System.Guid, Domain.Persistence.Entities.PropertySpace, System.Guid>
     {
-        public int ProwId { get; set; }
+        public System.Guid ProwId { get; set; }
         public LegalClientPropertyLeaseContract Prow { get; set; }
 
         public System.Guid SternId { get; set; }

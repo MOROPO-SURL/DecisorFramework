@@ -6,7 +6,7 @@
         {
             base.ApplayRules(entityTypeBuilder);
 
-            entityTypeBuilder.HasKey(entity => new { entity.Id, entity.Year });
+            entityTypeBuilder.HasIndex(entity => new { entity.Index, entity.Year }).IsUnique();
         }
     }
 }
