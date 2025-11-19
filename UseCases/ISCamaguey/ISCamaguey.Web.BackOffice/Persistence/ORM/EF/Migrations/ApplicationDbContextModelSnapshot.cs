@@ -7458,10 +7458,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("durationunitmeasurekind");
 
-                    b.Property<double>("Feed")
-                        .HasColumnType("double precision")
-                        .HasColumnName("feed");
-
                     b.Property<string>("Objective")
                         .IsRequired()
                         .HasColumnType("text")
