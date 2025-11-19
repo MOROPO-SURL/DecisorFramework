@@ -72,12 +72,12 @@ public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Page
         var namingEmploymentContractsAPIConnectClient = new Interop.API.Connect.Clients.NamingEmploymentContractsAPIConnectClient(httpClientHelperProvider);
         var admitionEmploymentContractsAPIConnectClient = new Interop.API.Connect.Clients.AdmitionEmploymentContractsAPIConnectClient(httpClientHelperProvider);
 
-        var list = new System.Collections.Generic.List<Guama.Core.Persistence.Entities.Contract.IPriorizableEntity<int>>();
+        var list = new System.Collections.Generic.List<Core.Persistence.Entities.Contract.IYearIndexable>();
 
         list.AddRange(await namingEmploymentContractsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.NamingEmploymentContractFilterModel { EmployeeId = model.Domain.Id }));
         list.AddRange(await admitionEmploymentContractsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.AdmitionEmploymentContractFilterModel { EmployeeId = model.Domain.Id }));
 
-        model.EmploymentContracts = [.. list.OrderBy(_model => _model.Priority)];
+        model.EmploymentContracts = [.. list.OrderBy(_model => _model.Year * 1000 + _model.Index)];
 
         await model.FillDailyCheckingsAsync();
 

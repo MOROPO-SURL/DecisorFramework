@@ -1,12 +1,12 @@
 ﻿namespace MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Display.Contract
 {
-    public abstract class AbstractContractDisplayModel<TEntity> : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<TEntity, int>, Guama.Core.Persistence.Entities.Contract.IPriorizableEntity<int> where TEntity : Persistence.Entities.Contract.AbstractContract
+    public abstract class AbstractContractDisplayModel<TEntity> : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<TEntity, System.Guid>, Core.Persistence.Entities.Contract.IYearIndexable where TEntity : Persistence.Entities.Contract.AbstractContract
     {
-        public int Id { get; set; }
+        public System.Guid Id { get; set; }
+
+        public int Index { get; set; }
 
         public int Year { get; set; }
-
-        public int Priority { get; set; }
 
         public System.DateTime At { get; set; }
 
@@ -21,8 +21,8 @@
         public virtual void Import(TEntity entity)
         {
             Id = entity.Id;
+            Index = entity.Index;
             Year = entity.Year;
-            Priority = entity.Priority;
             At = entity.At;
             Objective = entity.Objective;
             StarAt = entity.StarAt;

@@ -16,10 +16,10 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
         private readonly IEntityRepository<LegalClient, System.Guid> clientRepository;
         private readonly IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> postulationRepository;
         private readonly IEntityRepository<VehicleLeaseOffer, System.Guid> offerRepository;
-        private readonly IEntityRepository<LegalClientVehicleLeaseContract, int> contractRepository;
+        private readonly IEntityRepository<LegalClientVehicleLeaseContract, System.Guid> contractRepository;
         private readonly IEntityRepository<Vehicle, System.Guid> vehicleRepository;
 
-        public LegalClientVehicleLeasingsController(IEntityRepository<Vehicle, System.Guid> vehicleRepository, IEntityRepository<LegalClientVehicleLeaseContract, int> contractRepository, IEntityRepository<VehicleLeaseOffer, System.Guid> offerRepository, IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> postulationRepository, IEntityRepository<LegalClient, System.Guid> clientRepository, IEntityRepository<LegalClientVehicleLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientVehicleLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientVehicleLeasingsController> logger) : base(repository, localizer, logger)
+        public LegalClientVehicleLeasingsController(IEntityRepository<Vehicle, System.Guid> vehicleRepository, IEntityRepository<LegalClientVehicleLeaseContract, System.Guid> contractRepository, IEntityRepository<VehicleLeaseOffer, System.Guid> offerRepository, IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> postulationRepository, IEntityRepository<LegalClient, System.Guid> clientRepository, IEntityRepository<LegalClientVehicleLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientVehicleLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientVehicleLeasingsController> logger) : base(repository, localizer, logger)
         {
             this.clientRepository = clientRepository;
             this.postulationRepository = postulationRepository;
@@ -91,13 +91,13 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
             entity.Contract = contractRepository.Add(new LegalClientVehicleLeaseContract
             {
-                Id = model.Index,
+                Id = System.Guid.NewGuid(),
+                Index = model.Index,
                 Year = model.StartAt.Year,
                 StarAt = model.StartAt,
                 Objective = model.Objective,
                 DurationUnitCount = model.DurationUnitCount,
                 DurationUnitMeasureKind = model.DurationUnitMeasureKind,
-                Priority = model.Priority,
                 Feed = model.Feed,
                 PaymentTermId = model.PaymentTermId,
                 BankAccountId = postulation.BankAccountId,

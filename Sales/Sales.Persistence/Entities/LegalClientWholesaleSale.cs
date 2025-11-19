@@ -2,9 +2,9 @@
 {
 	public class LegalClientWholesaleSale : Contract.AbstractWholesaleSale
 	{
+		[System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(LegalClientSaleContractId))]
 		public Commercial.Persistence.Entities.LegalClientSaleContract Contract { get; set; }
-		public int? ContractNumber { get; set; }
-		public int? ContractYear { get; set; }
+		public System.Guid LegalClientSaleContractId { get; set; }
 	}
 }
 
