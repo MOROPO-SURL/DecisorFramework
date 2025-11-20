@@ -13,9 +13,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.EnsureSchema(
-                name: "decisorframework_commercial");
-
-            migrationBuilder.EnsureSchema(
                 name: "decisorframework_humanresources");
 
             migrationBuilder.EnsureSchema(
@@ -44,6 +41,9 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
 
             migrationBuilder.EnsureSchema(
                 name: "decisorframework_leasing");
+
+            migrationBuilder.EnsureSchema(
+                name: "decisorframework_commercial");
 
             migrationBuilder.EnsureSchema(
                 name: "guamaframework_core_security_common");
@@ -365,7 +365,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 });
 
             migrationBuilder.CreateTable(
-                name: "salarystandards",
+                name: "salarystandard",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -378,11 +378,11 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_salarystandards", x => x.id);
+                    table.PrimaryKey("pk_salarystandard", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "schoolings",
+                name: "schooling",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -396,7 +396,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_schoolings", x => x.id);
+                    table.PrimaryKey("pk_schooling", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -494,7 +494,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
 
             migrationBuilder.CreateTable(
                 name: "unitmeasurements",
-                schema: "decisorframework_inventory",
+                schema: "decisorframework_domain",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -580,7 +580,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 });
 
             migrationBuilder.CreateTable(
-                name: "workforces",
+                name: "workforce",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -593,11 +593,11 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_workforces", x => x.id);
+                    table.PrimaryKey("pk_workforce", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
-                name: "workpositionkinds",
+                name: "workpositionkind",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -612,7 +612,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_workpositionkinds", x => x.id);
+                    table.PrimaryKey("pk_workpositionkind", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -770,7 +770,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
 
             migrationBuilder.CreateTable(
                 name: "unitmeasurementconversionbridges",
-                schema: "decisorframework_inventory",
+                schema: "decisorframework_domain",
                 columns: table => new
                 {
                     prowid = table.Column<Guid>(type: "uuid", nullable: false),
@@ -783,14 +783,14 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                     table.ForeignKey(
                         name: "fk_unitmeasurementconversionbridges_unitmeasurements_prowid",
                         column: x => x.prowid,
-                        principalSchema: "decisorframework_inventory",
+                        principalSchema: "decisorframework_domain",
                         principalTable: "unitmeasurements",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_unitmeasurementconversionbridges_unitmeasurements_sternid",
                         column: x => x.sternid,
-                        principalSchema: "decisorframework_inventory",
+                        principalSchema: "decisorframework_domain",
                         principalTable: "unitmeasurements",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -823,7 +823,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                     table.ForeignKey(
                         name: "fk_warehousingareas_unitmeasurements_unitmeasurementid",
                         column: x => x.unitmeasurementid,
-                        principalSchema: "decisorframework_inventory",
+                        principalSchema: "decisorframework_domain",
                         principalTable: "unitmeasurements",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -837,7 +837,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 });
 
             migrationBuilder.CreateTable(
-                name: "workpositions",
+                name: "workposition",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -853,19 +853,19 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_workpositions", x => x.id);
+                    table.PrimaryKey("pk_workposition", x => x.id);
                     table.ForeignKey(
-                        name: "fk_workpositions_schoolings_schoolingid",
+                        name: "fk_workposition_schooling_schoolingid",
                         column: x => x.schoolingid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "schoolings",
+                        principalTable: "schooling",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_workpositions_workpositionkinds_kindid",
+                        name: "fk_workposition_workpositionkind_kindid",
                         column: x => x.kindid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "workpositionkinds",
+                        principalTable: "workpositionkind",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1072,7 +1072,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                     table.ForeignKey(
                         name: "fk_products_unitmeasurements_defaultunitmeasurementid",
                         column: x => x.defaultunitmeasurementid,
-                        principalSchema: "decisorframework_inventory",
+                        principalSchema: "decisorframework_domain",
                         principalTable: "unitmeasurements",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -1129,7 +1129,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 });
 
             migrationBuilder.CreateTable(
-                name: "workpositionresponsabilities",
+                name: "workpositionresponsability",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -1140,12 +1140,12 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_workpositionresponsabilities", x => x.id);
+                    table.PrimaryKey("pk_workpositionresponsability", x => x.id);
                     table.ForeignKey(
-                        name: "fk_workpositionresponsabilities_workpositions_workpositionid",
+                        name: "fk_workpositionresponsability_workposition_workpositionid",
                         column: x => x.workpositionid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "workpositions",
+                        principalTable: "workposition",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1215,7 +1215,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
 
             migrationBuilder.CreateTable(
                 name: "centralstatestructures",
-                schema: "decisorframework_legal",
+                schema: "decisorframework_domain",
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
@@ -1339,6 +1339,30 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                         column: x => x.sternid,
                         principalSchema: "guamaframework_identity",
                         principalTable: "websitecontactitems",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "colaborators",
+                schema: "decisorframework_domain",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    identityid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_colaborators", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_colaborators_personidentities_identityid",
+                        column: x => x.identityid,
+                        principalSchema: "guamaframework_identity",
+                        principalTable: "personidentities",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -1672,7 +1696,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                     table.ForeignKey(
                         name: "fk_regulations_centralstatestructures_structureid",
                         column: x => x.structureid,
-                        principalSchema: "decisorframework_legal",
+                        principalSchema: "decisorframework_domain",
                         principalTable: "centralstatestructures",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
@@ -2231,7 +2255,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                     table.ForeignKey(
                         name: "fk_organizationcontacts_centralstatestructures_centralstatestr~",
                         column: x => x.centralstatestructureid,
-                        principalSchema: "decisorframework_legal",
+                        principalSchema: "decisorframework_domain",
                         principalTable: "centralstatestructures",
                         principalColumn: "id");
                     table.ForeignKey(
@@ -2310,7 +2334,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 });
 
             migrationBuilder.CreateTable(
-                name: "employeedailycheckings",
+                name: "employeedailychecking",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -2330,9 +2354,9 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_employeedailycheckings", x => x.id);
+                    table.PrimaryKey("pk_employeedailychecking", x => x.id);
                     table.ForeignKey(
-                        name: "fk_employeedailycheckings_employees_employeeid",
+                        name: "fk_employeedailychecking_employees_employeeid",
                         column: x => x.employeeid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "employees",
@@ -2455,21 +2479,28 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_commercial",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     clientid = table.Column<Guid>(type: "uuid", nullable: false),
+                    index = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     objective = table.Column<string>(type: "text", nullable: false),
                     starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     durationunitcount = table.Column<int>(type: "integer", nullable: true),
                     durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true),
                     proformaid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_naturalclientsalecontracts", x => new { x.id, x.year });
+                    table.PrimaryKey("pk_naturalclientsalecontracts", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_naturalclientsalecontracts_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_naturalclientsalecontracts_naturalclients_clientid",
                         column: x => x.clientid,
@@ -2545,20 +2576,27 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_commercial",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     providerid = table.Column<Guid>(type: "uuid", nullable: false),
+                    index = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     objective = table.Column<string>(type: "text", nullable: false),
                     starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     durationunitcount = table.Column<int>(type: "integer", nullable: true),
-                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true)
+                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_naturalproviderpurchasingcontracts", x => new { x.id, x.year });
+                    table.PrimaryKey("pk_naturalproviderpurchasingcontracts", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_naturalproviderpurchasingcontracts_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_naturalproviderpurchasingcontracts_naturalproviders_provide~",
                         column: x => x.providerid,
@@ -2566,48 +2604,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                         principalTable: "naturalproviders",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "abstractbudget",
-                schema: "decisorframework_commercial",
-                columns: table => new
-                {
-                    number = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
-                    enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    sharedat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    confirmedat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    description = table.Column<string>(type: "text", nullable: true),
-                    commercialid = table.Column<Guid>(type: "uuid", nullable: false),
-                    discriminator = table.Column<string>(type: "text", nullable: false),
-                    contactid = table.Column<Guid>(type: "uuid", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_abstractbudget", x => new { x.number, x.year });
-                    table.ForeignKey(
-                        name: "fk_abstractbudget_employees_commercialid",
-                        column: x => x.commercialid,
-                        principalSchema: "decisorframework_domain",
-                        principalTable: "employees",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_abstractbudget_organizationcontacts_contactid",
-                        column: x => x.contactid,
-                        principalSchema: "decisorframework_domain",
-                        principalTable: "organizationcontacts",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "fk_abstractbudget_personcontacts_contactid",
-                        column: x => x.contactid,
-                        principalSchema: "decisorframework_domain",
-                        principalTable: "personcontacts",
-                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -2702,74 +2698,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 });
 
             migrationBuilder.CreateTable(
-                name: "budgetproductbridges",
-                schema: "decisorframework_commercial",
-                columns: table => new
-                {
-                    budgetnumber = table.Column<int>(type: "integer", nullable: false),
-                    budgetyear = table.Column<int>(type: "integer", nullable: false),
-                    productid = table.Column<Guid>(type: "uuid", nullable: false),
-                    unitmeasurementid = table.Column<Guid>(type: "uuid", nullable: true),
-                    unitprice = table.Column<decimal>(type: "numeric", nullable: false),
-                    amount = table.Column<decimal>(type: "numeric", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_budgetproductbridges", x => new { x.budgetnumber, x.budgetyear, x.productid });
-                    table.ForeignKey(
-                        name: "fk_budgetproductbridges_abstractbudget_budgetnumber_budgetyear",
-                        columns: x => new { x.budgetnumber, x.budgetyear },
-                        principalSchema: "decisorframework_commercial",
-                        principalTable: "abstractbudget",
-                        principalColumns: new[] { "number", "year" },
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_budgetproductbridges_products_productid",
-                        column: x => x.productid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "products",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_budgetproductbridges_unitmeasurements_unitmeasurementid",
-                        column: x => x.unitmeasurementid,
-                        principalSchema: "decisorframework_inventory",
-                        principalTable: "unitmeasurements",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "budgetservicebridges",
-                schema: "decisorframework_commercial",
-                columns: table => new
-                {
-                    budgetnumber = table.Column<int>(type: "integer", nullable: false),
-                    budgetyear = table.Column<int>(type: "integer", nullable: false),
-                    serviceid = table.Column<Guid>(type: "uuid", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: false),
-                    unitprice = table.Column<decimal>(type: "numeric", nullable: false),
-                    count = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_budgetservicebridges", x => new { x.budgetnumber, x.budgetyear, x.serviceid });
-                    table.ForeignKey(
-                        name: "fk_budgetservicebridges_abstractbudget_budgetnumber_budgetyear",
-                        columns: x => new { x.budgetnumber, x.budgetyear },
-                        principalSchema: "decisorframework_commercial",
-                        principalTable: "abstractbudget",
-                        principalColumns: new[] { "number", "year" },
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_budgetservicebridges_provisionableservices_serviceid",
-                        column: x => x.serviceid,
-                        principalSchema: "decisorframework_commercial",
-                        principalTable: "provisionableservices",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "legalclientbankaccountbridges",
                 schema: "decisorframework_commercial",
                 columns: table => new
@@ -2828,21 +2756,28 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_commercial",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     clientid = table.Column<Guid>(type: "uuid", nullable: false),
+                    index = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     objective = table.Column<string>(type: "text", nullable: false),
                     starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     durationunitcount = table.Column<int>(type: "integer", nullable: true),
                     durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true),
                     proformaid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_legalclientsalecontracts", x => new { x.id, x.year });
+                    table.PrimaryKey("pk_legalclientsalecontracts", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_legalclientsalecontracts_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_legalclientsalecontracts_legalclients_clientid",
                         column: x => x.clientid,
@@ -2918,20 +2853,27 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_commercial",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false),
-                    year = table.Column<int>(type: "integer", nullable: false),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     providerid = table.Column<Guid>(type: "uuid", nullable: false),
+                    index = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     objective = table.Column<string>(type: "text", nullable: false),
                     starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     durationunitcount = table.Column<int>(type: "integer", nullable: true),
-                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true)
+                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_legalproviderpurchasingcontracts", x => new { x.id, x.year });
+                    table.PrimaryKey("pk_legalproviderpurchasingcontracts", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_legalproviderpurchasingcontracts_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_legalproviderpurchasingcontracts_legalproviders_providerid",
                         column: x => x.providerid,
@@ -2942,7 +2884,56 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 });
 
             migrationBuilder.CreateTable(
-                name: "admitionpropousals",
+                name: "abstractemploymentcontract",
+                schema: "decisorframework_humanresources",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    staffid = table.Column<Guid>(type: "uuid", nullable: false),
+                    vacantid = table.Column<Guid>(type: "uuid", nullable: false),
+                    employeeid = table.Column<Guid>(type: "uuid", nullable: false),
+                    discriminator = table.Column<string>(type: "text", nullable: false),
+                    admitionpropousalid = table.Column<Guid>(type: "uuid", nullable: true),
+                    resolutionid = table.Column<Guid>(type: "uuid", nullable: true),
+                    interviewat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
+                    responsibleid = table.Column<Guid>(type: "uuid", nullable: true),
+                    description = table.Column<string>(type: "text", nullable: true),
+                    index = table.Column<int>(type: "integer", nullable: false),
+                    year = table.Column<int>(type: "integer", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    objective = table.Column<string>(type: "text", nullable: false),
+                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    durationunitcount = table.Column<int>(type: "integer", nullable: true),
+                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_abstractemploymentcontract", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_abstractemploymentcontract_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_abstractemploymentcontract_employees_employeeid",
+                        column: x => x.employeeid,
+                        principalSchema: "decisorframework_domain",
+                        principalTable: "employees",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_abstractemploymentcontract_employees_responsibleid",
+                        column: x => x.responsibleid,
+                        principalSchema: "decisorframework_domain",
+                        principalTable: "employees",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "admitionpropousal",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -2955,7 +2946,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_admitionpropousals", x => x.id);
+                    table.PrimaryKey("pk_admitionpropousal", x => x.id);
                 });
 
             migrationBuilder.CreateTable(
@@ -3339,61 +3330,11 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 });
 
             migrationBuilder.CreateTable(
-                name: "employmentcontracts",
-                schema: "decisorframework_humanresources",
-                columns: table => new
-                {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    staffid = table.Column<Guid>(type: "uuid", nullable: false),
-                    vacantid = table.Column<Guid>(type: "uuid", nullable: false),
-                    employeeid = table.Column<Guid>(type: "uuid", nullable: false),
-                    discriminator = table.Column<string>(type: "text", nullable: false),
-                    admitionpropousalid = table.Column<Guid>(type: "uuid", nullable: true),
-                    resolutionid = table.Column<Guid>(type: "uuid", nullable: true),
-                    interviewat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    responsibleid = table.Column<Guid>(type: "uuid", nullable: true),
-                    description = table.Column<string>(type: "text", nullable: true),
-                    year = table.Column<int>(type: "integer", nullable: false),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    objective = table.Column<string>(type: "text", nullable: false),
-                    starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    durationunitcount = table.Column<int>(type: "integer", nullable: true),
-                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_employmentcontracts", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_employmentcontracts_admitionpropousals_admitionpropousalid",
-                        column: x => x.admitionpropousalid,
-                        principalSchema: "decisorframework_humanresources",
-                        principalTable: "admitionpropousals",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "fk_employmentcontracts_employees_employeeid",
-                        column: x => x.employeeid,
-                        principalSchema: "decisorframework_domain",
-                        principalTable: "employees",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_employmentcontracts_employees_responsibleid",
-                        column: x => x.responsibleid,
-                        principalSchema: "decisorframework_domain",
-                        principalTable: "employees",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
                 name: "leasecontracts",
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
-                    id = table.Column<int>(type: "integer", nullable: false)
-                        .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
                     feed = table.Column<double>(type: "double precision", nullable: false),
                     paymenttermid = table.Column<Guid>(type: "uuid", nullable: false),
                     bankaccountid = table.Column<Guid>(type: "uuid", nullable: false),
@@ -3406,14 +3347,15 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                     propertyleasenaturalclientid = table.Column<Guid>(type: "uuid", nullable: true),
                     vehicleleasenaturalpostulationid = table.Column<Guid>(type: "uuid", nullable: true),
                     vehicleleasenaturalclientid = table.Column<Guid>(type: "uuid", nullable: true),
+                    index = table.Column<int>(type: "integer", nullable: false),
                     year = table.Column<int>(type: "integer", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
                     at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     objective = table.Column<string>(type: "text", nullable: false),
                     starat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
                     durationunitcount = table.Column<int>(type: "integer", nullable: true),
-                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true)
+                    durationunitmeasurekind = table.Column<int>(type: "integer", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -3425,6 +3367,12 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                         principalTable: "bankaccounts",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_leasecontracts_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
                     table.ForeignKey(
                         name: "fk_leasecontracts_legalclients_propertyleaselegalclientid",
                         column: x => x.propertyleaselegalclientid,
@@ -3464,7 +3412,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    contractid = table.Column<Guid>(type: "uuid", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
                     agreementid = table.Column<Guid>(type: "uuid", nullable: false),
                     costcenterid = table.Column<Guid>(type: "uuid", nullable: false)
@@ -3501,7 +3449,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    contractid = table.Column<Guid>(type: "uuid", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
                     agreementid = table.Column<Guid>(type: "uuid", nullable: false),
                     costcenterid = table.Column<Guid>(type: "uuid", nullable: false),
@@ -3539,7 +3487,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    contractid = table.Column<Guid>(type: "uuid", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
                     agreementid = table.Column<Guid>(type: "uuid", nullable: false),
                     costcenterid = table.Column<Guid>(type: "uuid", nullable: false)
@@ -3576,7 +3524,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 columns: table => new
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
-                    contractid = table.Column<int>(type: "integer", nullable: false),
+                    contractid = table.Column<Guid>(type: "uuid", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
                     agreementid = table.Column<Guid>(type: "uuid", nullable: false),
                     costcenterid = table.Column<Guid>(type: "uuid", nullable: false),
@@ -4077,7 +4025,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
-                    prowid = table.Column<int>(type: "integer", nullable: false),
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
                     sternid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -4097,7 +4045,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_leasing",
                 columns: table => new
                 {
-                    prowid = table.Column<int>(type: "integer", nullable: false),
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
                     sternid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -4113,7 +4061,30 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 });
 
             migrationBuilder.CreateTable(
-                name: "ocupationcandidates",
+                name: "ocupation",
+                schema: "decisorframework_humanresources",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    staffid = table.Column<Guid>(type: "uuid", nullable: false),
+                    vacantid = table.Column<Guid>(type: "uuid", nullable: false),
+                    contractid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_ocupation", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_ocupation_abstractemploymentcontract_contractid",
+                        column: x => x.contractid,
+                        principalSchema: "decisorframework_humanresources",
+                        principalTable: "abstractemploymentcontract",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ocupationcandidate",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -4136,67 +4107,44 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_ocupationcandidates", x => x.id);
+                    table.PrimaryKey("pk_ocupationcandidate", x => x.id);
                     table.ForeignKey(
-                        name: "fk_ocupationcandidates_documents_physicologicalcheckdocumentid",
+                        name: "fk_ocupationcandidate_documents_physicologicalcheckdocumentid",
                         column: x => x.physicologicalcheckdocumentid,
                         principalSchema: "guamaframework_media",
                         principalTable: "documents",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_ocupationcandidates_documents_rawdefensestatuscheckdocument~",
+                        name: "fk_ocupationcandidate_documents_rawdefensestatuscheckdocumentid",
                         column: x => x.rawdefensestatuscheckdocumentid,
                         principalSchema: "guamaframework_media",
                         principalTable: "documents",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_ocupationcandidates_documents_rawmedicalcheckdocumentid",
+                        name: "fk_ocupationcandidate_documents_rawmedicalcheckdocumentid",
                         column: x => x.rawmedicalcheckdocumentid,
                         principalSchema: "guamaframework_media",
                         principalTable: "documents",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_ocupationcandidates_documents_rawmodeldocumentid",
+                        name: "fk_ocupationcandidate_documents_rawmodeldocumentid",
                         column: x => x.rawmodeldocumentid,
                         principalSchema: "guamaframework_media",
                         principalTable: "documents",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_ocupationcandidates_documents_rawresearchresultdocumentid",
+                        name: "fk_ocupationcandidate_documents_rawresearchresultdocumentid",
                         column: x => x.rawresearchresultdocumentid,
                         principalSchema: "guamaframework_media",
                         principalTable: "documents",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_ocupationcandidates_employees_responsibleid",
+                        name: "fk_ocupationcandidate_employees_responsibleid",
                         column: x => x.responsibleid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "employees",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ocupations",
-                schema: "decisorframework_humanresources",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    staffid = table.Column<Guid>(type: "uuid", nullable: false),
-                    vacantid = table.Column<Guid>(type: "uuid", nullable: false),
-                    contractid = table.Column<int>(type: "integer", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_ocupations", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_ocupations_employmentcontracts_contractid",
-                        column: x => x.contractid,
-                        principalSchema: "decisorframework_humanresources",
-                        principalTable: "employmentcontracts",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -4459,7 +4407,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 });
 
             migrationBuilder.CreateTable(
-                name: "staffs",
+                name: "staff",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -4470,19 +4418,19 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_staffs", x => x.id);
+                    table.PrimaryKey("pk_staff", x => x.id);
                     table.ForeignKey(
-                        name: "fk_staffs_structures_structureid",
+                        name: "fk_staff_structures_structureid",
                         column: x => x.structureid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "structures",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_staffs_workforces_mainworkforceid",
+                        name: "fk_staff_workforce_mainworkforceid",
                         column: x => x.mainworkforceid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "workforces",
+                        principalTable: "workforce",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -4684,7 +4632,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 });
 
             migrationBuilder.CreateTable(
-                name: "staffworkforcebridges",
+                name: "staffworkforcebridge",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -4695,19 +4643,19 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_staffworkforcebridges", x => new { x.prowid, x.sternid });
+                    table.PrimaryKey("pk_staffworkforcebridge", x => new { x.prowid, x.sternid });
                     table.ForeignKey(
-                        name: "fk_staffworkforcebridges_staffs_prowid",
+                        name: "fk_staffworkforcebridge_staff_prowid",
                         column: x => x.prowid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "staffs",
+                        principalTable: "staff",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_staffworkforcebridges_workforces_sternid",
+                        name: "fk_staffworkforcebridge_workforce_sternid",
                         column: x => x.sternid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "workforces",
+                        principalTable: "workforce",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -5104,8 +5052,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                     staffid = table.Column<Guid>(type: "uuid", nullable: true),
                     contactid = table.Column<Guid>(type: "uuid", nullable: true),
                     candidateid = table.Column<Guid>(type: "uuid", nullable: true),
-                    concretedat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true),
-                    ocupationid = table.Column<Guid>(type: "uuid", nullable: true)
+                    concretedat = table.Column<DateTime>(type: "timestamp without time zone", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -5118,18 +5065,11 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_resolutions_ocupationcandidates_candidateid",
+                        name: "fk_resolutions_ocupationcandidate_candidateid",
                         column: x => x.candidateid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "ocupationcandidates",
+                        principalTable: "ocupationcandidate",
                         principalColumn: "id");
-                    table.ForeignKey(
-                        name: "fk_resolutions_ocupations_ocupationid",
-                        column: x => x.ocupationid,
-                        principalSchema: "decisorframework_humanresources",
-                        principalTable: "ocupations",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "fk_resolutions_personcontacts_contactid",
                         column: x => x.contactid,
@@ -5137,60 +5077,48 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                         principalTable: "personcontacts",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_resolutions_staffs_staffid",
+                        name: "fk_resolutions_staff_staffid",
                         column: x => x.staffid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "staffs",
+                        principalTable: "staff",
                         principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
-                name: "vacantpostulationdocumentbridges",
+                name: "vacant",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
-                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
-                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    ocupationmode = table.Column<int>(type: "integer", nullable: false),
+                    workpositionid = table.Column<Guid>(type: "uuid", nullable: false),
+                    workforceorganizationalunityid = table.Column<Guid>(type: "uuid", nullable: false),
+                    salarystandardid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_vacantpostulationdocumentbridges", x => new { x.prowid, x.sternid });
+                    table.PrimaryKey("pk_vacant", x => x.id);
                     table.ForeignKey(
-                        name: "fk_vacantpostulationdocumentbridges_documents_sternid",
-                        column: x => x.sternid,
-                        principalSchema: "guamaframework_media",
-                        principalTable: "documents",
+                        name: "fk_vacant_salarystandard_salarystandardid",
+                        column: x => x.salarystandardid,
+                        principalSchema: "decisorframework_humanresources",
+                        principalTable: "salarystandard",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_vacant_workposition_workpositionid",
+                        column: x => x.workpositionid,
+                        principalSchema: "decisorframework_humanresources",
+                        principalTable: "workposition",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "vacantpostulationocupations",
-                schema: "decisorframework_humanresources",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    postulationid = table.Column<Guid>(type: "uuid", nullable: false),
-                    organizationname = table.Column<string>(type: "text", nullable: false),
-                    organizationaddress = table.Column<string>(type: "text", nullable: true),
-                    representativename = table.Column<string>(type: "text", nullable: true),
-                    centralstatestructureid = table.Column<Guid>(type: "uuid", nullable: true),
-                    startat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    endat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_vacantpostulationocupations", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_vacantpostulationocupations_centralstatestructures_centrals~",
-                        column: x => x.centralstatestructureid,
-                        principalSchema: "decisorframework_legal",
-                        principalTable: "centralstatestructures",
-                        principalColumn: "id");
-                });
-
-            migrationBuilder.CreateTable(
-                name: "vacantpostulations",
+                name: "vacantpostulation",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -5212,84 +5140,58 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_vacantpostulations", x => x.id);
+                    table.PrimaryKey("pk_vacantpostulation", x => x.id);
                     table.ForeignKey(
-                        name: "fk_vacantpostulations_documents_rawmodeldocumentid",
+                        name: "fk_vacantpostulation_documents_rawmodeldocumentid",
                         column: x => x.rawmodeldocumentid,
                         principalSchema: "guamaframework_media",
                         principalTable: "documents",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_vacantpostulations_personcontacts_contactid",
+                        name: "fk_vacantpostulation_personcontacts_contactid",
                         column: x => x.contactid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "personcontacts",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_vacantpostulations_postalcontactitems_alternativepostalcont~",
+                        name: "fk_vacantpostulation_postalcontactitems_alternativepostalconta~",
                         column: x => x.alternativepostalcontactitemid,
                         principalSchema: "guamaframework_identity",
                         principalTable: "postalcontactitems",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_vacantpostulations_postalcontactitems_officialpostalcontact~",
+                        name: "fk_vacantpostulation_postalcontactitems_officialpostalcontacti~",
                         column: x => x.officialpostalcontactitemid,
                         principalSchema: "guamaframework_identity",
                         principalTable: "postalcontactitems",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_vacantpostulations_schoolings_schoolingid",
+                        name: "fk_vacantpostulation_schooling_schoolingid",
                         column: x => x.schoolingid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "schoolings",
+                        principalTable: "schooling",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_vacantpostulations_staffs_staffid",
+                        name: "fk_vacantpostulation_staff_staffid",
                         column: x => x.staffid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "staffs",
+                        principalTable: "staff",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_vacantpostulation_vacant_vacantid",
+                        column: x => x.vacantid,
+                        principalSchema: "decisorframework_humanresources",
+                        principalTable: "vacant",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
-                name: "vacants",
-                schema: "decisorframework_humanresources",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    ocupationmode = table.Column<int>(type: "integer", nullable: false),
-                    workpositionid = table.Column<Guid>(type: "uuid", nullable: false),
-                    workforceorganizationalunityid = table.Column<Guid>(type: "uuid", nullable: false),
-                    salarystandardid = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_vacants", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_vacants_salarystandards_salarystandardid",
-                        column: x => x.salarystandardid,
-                        principalSchema: "decisorframework_humanresources",
-                        principalTable: "salarystandards",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_vacants_workpositions_workpositionid",
-                        column: x => x.workpositionid,
-                        principalSchema: "decisorframework_humanresources",
-                        principalTable: "workpositions",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "workforceorganizationalunities",
+                name: "workforceorganizationalunity",
                 schema: "decisorframework_humanresources",
                 columns: table => new
                 {
@@ -5301,57 +5203,153 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_workforceorganizationalunities", x => x.id);
+                    table.PrimaryKey("pk_workforceorganizationalunity", x => x.id);
                     table.ForeignKey(
-                        name: "fk_workforceorganizationalunities_organizationalunities_organi~",
+                        name: "fk_workforceorganizationalunity_organizationalunities_organiza~",
                         column: x => x.organizationalunityid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "organizationalunities",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_workforceorganizationalunities_vacants_chiefvacantid",
+                        name: "fk_workforceorganizationalunity_vacant_chiefvacantid",
                         column: x => x.chiefvacantid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "vacants",
+                        principalTable: "vacant",
                         principalColumn: "id");
                     table.ForeignKey(
-                        name: "fk_workforceorganizationalunities_workforceorganizationaluniti~",
-                        column: x => x.parentid,
-                        principalSchema: "decisorframework_humanresources",
-                        principalTable: "workforceorganizationalunities",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "fk_workforceorganizationalunities_workforces_workforceid",
+                        name: "fk_workforceorganizationalunity_workforce_workforceid",
                         column: x => x.workforceid,
                         principalSchema: "decisorframework_humanresources",
-                        principalTable: "workforces",
+                        principalTable: "workforce",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_workforceorganizationalunity_workforceorganizationalunity_p~",
+                        column: x => x.parentid,
+                        principalSchema: "decisorframework_humanresources",
+                        principalTable: "workforceorganizationalunity",
+                        principalColumn: "id");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "vacantpostulationdocumentbridge",
+                schema: "decisorframework_humanresources",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_vacantpostulationdocumentbridge", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_vacantpostulationdocumentbridge_documents_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_vacantpostulationdocumentbridge_vacantpostulation_prowid",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_humanresources",
+                        principalTable: "vacantpostulation",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "vacantpostulationocupation",
+                schema: "decisorframework_humanresources",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    postulationid = table.Column<Guid>(type: "uuid", nullable: false),
+                    organizationname = table.Column<string>(type: "text", nullable: false),
+                    organizationaddress = table.Column<string>(type: "text", nullable: true),
+                    representativename = table.Column<string>(type: "text", nullable: true),
+                    centralstatestructureid = table.Column<Guid>(type: "uuid", nullable: true),
+                    startat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    endat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_vacantpostulationocupation", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_vacantpostulationocupation_centralstatestructures_centralst~",
+                        column: x => x.centralstatestructureid,
+                        principalSchema: "decisorframework_domain",
+                        principalTable: "centralstatestructures",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_vacantpostulationocupation_vacantpostulation_postulationid",
+                        column: x => x.postulationid,
+                        principalSchema: "decisorframework_humanresources",
+                        principalTable: "vacantpostulation",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateIndex(
-                name: "ix_abstractbudget_commercialid",
-                schema: "decisorframework_commercial",
-                table: "abstractbudget",
-                column: "commercialid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_abstractbudget_contactid",
-                schema: "decisorframework_commercial",
-                table: "abstractbudget",
-                column: "contactid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_admitionpropousals_agreementid",
+                name: "ix_abstractemploymentcontract_admitionpropousalid",
                 schema: "decisorframework_humanresources",
-                table: "admitionpropousals",
+                table: "abstractemploymentcontract",
+                column: "admitionpropousalid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_abstractemploymentcontract_documentid",
+                schema: "decisorframework_humanresources",
+                table: "abstractemploymentcontract",
+                column: "documentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_abstractemploymentcontract_employeeid",
+                schema: "decisorframework_humanresources",
+                table: "abstractemploymentcontract",
+                column: "employeeid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_abstractemploymentcontract_index_year",
+                schema: "decisorframework_humanresources",
+                table: "abstractemploymentcontract",
+                columns: new[] { "index", "year" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "ix_abstractemploymentcontract_resolutionid",
+                schema: "decisorframework_humanresources",
+                table: "abstractemploymentcontract",
+                column: "resolutionid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_abstractemploymentcontract_responsibleid",
+                schema: "decisorframework_humanresources",
+                table: "abstractemploymentcontract",
+                column: "responsibleid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_abstractemploymentcontract_staffid",
+                schema: "decisorframework_humanresources",
+                table: "abstractemploymentcontract",
+                column: "staffid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_abstractemploymentcontract_vacantid",
+                schema: "decisorframework_humanresources",
+                table: "abstractemploymentcontract",
+                column: "vacantid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_admitionpropousal_agreementid",
+                schema: "decisorframework_humanresources",
+                table: "admitionpropousal",
                 column: "agreementid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_admitionpropousals_ocupationcandidateid",
+                name: "ix_admitionpropousal_ocupationcandidateid",
                 schema: "decisorframework_humanresources",
-                table: "admitionpropousals",
+                table: "admitionpropousal",
                 column: "ocupationcandidateid");
 
             migrationBuilder.CreateIndex(
@@ -5440,26 +5438,8 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 column: "warehousingareaid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_budgetproductbridges_productid",
-                schema: "decisorframework_commercial",
-                table: "budgetproductbridges",
-                column: "productid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_budgetproductbridges_unitmeasurementid",
-                schema: "decisorframework_commercial",
-                table: "budgetproductbridges",
-                column: "unitmeasurementid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_budgetservicebridges_serviceid",
-                schema: "decisorframework_commercial",
-                table: "budgetservicebridges",
-                column: "serviceid");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_centralstatestructures_identityid",
-                schema: "decisorframework_legal",
+                schema: "decisorframework_domain",
                 table: "centralstatestructures",
                 column: "identityid",
                 unique: true);
@@ -5475,6 +5455,13 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_legal",
                 table: "clausetagbridges",
                 column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_colaborators_identityid",
+                schema: "decisorframework_domain",
+                table: "colaborators",
+                column: "identityid",
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_collects_legalclientpropertyleasingid",
@@ -5581,9 +5568,9 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 column: "thumbnailid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_employeedailycheckings_employeeid_day_month_year",
+                name: "ix_employeedailychecking_employeeid_day_month_year",
                 schema: "decisorframework_humanresources",
-                table: "employeedailycheckings",
+                table: "employeedailychecking",
                 columns: new[] { "employeeid", "day", "month", "year" },
                 unique: true);
 
@@ -5593,49 +5580,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 table: "employees",
                 column: "contactid",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "ix_employmentcontracts_admitionpropousalid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts",
-                column: "admitionpropousalid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_employmentcontracts_employeeid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts",
-                column: "employeeid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_employmentcontracts_id_year",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts",
-                columns: new[] { "id", "year" },
-                unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "ix_employmentcontracts_resolutionid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts",
-                column: "resolutionid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_employmentcontracts_responsibleid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts",
-                column: "responsibleid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_employmentcontracts_staffid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts",
-                column: "staffid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_employmentcontracts_vacantid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts",
-                column: "vacantid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_families_parentid",
@@ -5654,6 +5598,19 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_leasing",
                 table: "leasecontracts",
                 column: "bankaccountid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_documentid",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                column: "documentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_leasecontracts_index_year",
+                schema: "decisorframework_leasing",
+                table: "leasecontracts",
+                columns: new[] { "index", "year" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_leasecontracts_paymenttermid",
@@ -5771,6 +5728,19 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 column: "clientid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_legalclientsalecontracts_documentid",
+                schema: "decisorframework_commercial",
+                table: "legalclientsalecontracts",
+                column: "documentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalclientsalecontracts_index_year",
+                schema: "decisorframework_commercial",
+                table: "legalclientsalecontracts",
+                columns: new[] { "index", "year" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "ix_legalclientsalecontracts_proformaid",
                 schema: "decisorframework_commercial",
                 table: "legalclientsalecontracts",
@@ -5817,6 +5787,19 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_commercial",
                 table: "legalproviderdocumentbridges",
                 column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalproviderpurchasingcontracts_documentid",
+                schema: "decisorframework_commercial",
+                table: "legalproviderpurchasingcontracts",
+                column: "documentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_legalproviderpurchasingcontracts_index_year",
+                schema: "decisorframework_commercial",
+                table: "legalproviderpurchasingcontracts",
+                columns: new[] { "index", "year" },
+                unique: true);
 
             migrationBuilder.CreateIndex(
                 name: "ix_legalproviderpurchasingcontracts_providerid",
@@ -6088,6 +6071,19 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 column: "clientid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_naturalclientsalecontracts_documentid",
+                schema: "decisorframework_commercial",
+                table: "naturalclientsalecontracts",
+                column: "documentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalclientsalecontracts_index_year",
+                schema: "decisorframework_commercial",
+                table: "naturalclientsalecontracts",
+                columns: new[] { "index", "year" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "ix_naturalclientsalecontracts_proformaid",
                 schema: "decisorframework_commercial",
                 table: "naturalclientsalecontracts",
@@ -6136,6 +6132,19 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_naturalproviderpurchasingcontracts_documentid",
+                schema: "decisorframework_commercial",
+                table: "naturalproviderpurchasingcontracts",
+                column: "documentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_naturalproviderpurchasingcontracts_index_year",
+                schema: "decisorframework_commercial",
+                table: "naturalproviderpurchasingcontracts",
+                columns: new[] { "index", "year" },
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "ix_naturalproviderpurchasingcontracts_providerid",
                 schema: "decisorframework_commercial",
                 table: "naturalproviderpurchasingcontracts",
@@ -6155,66 +6164,66 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 column: "defaultpaymenttermid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_ocupationcandidates_physicologicalcheckdocumentid",
+                name: "ix_ocupation_contractid",
                 schema: "decisorframework_humanresources",
-                table: "ocupationcandidates",
-                column: "physicologicalcheckdocumentid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_ocupationcandidates_postulationid",
-                schema: "decisorframework_humanresources",
-                table: "ocupationcandidates",
-                column: "postulationid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_ocupationcandidates_rawdefensestatuscheckdocumentid",
-                schema: "decisorframework_humanresources",
-                table: "ocupationcandidates",
-                column: "rawdefensestatuscheckdocumentid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_ocupationcandidates_rawmedicalcheckdocumentid",
-                schema: "decisorframework_humanresources",
-                table: "ocupationcandidates",
-                column: "rawmedicalcheckdocumentid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_ocupationcandidates_rawmodeldocumentid",
-                schema: "decisorframework_humanresources",
-                table: "ocupationcandidates",
-                column: "rawmodeldocumentid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_ocupationcandidates_rawresearchresultdocumentid",
-                schema: "decisorframework_humanresources",
-                table: "ocupationcandidates",
-                column: "rawresearchresultdocumentid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_ocupationcandidates_responsibleid",
-                schema: "decisorframework_humanresources",
-                table: "ocupationcandidates",
-                column: "responsibleid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_ocupations_contractid",
-                schema: "decisorframework_humanresources",
-                table: "ocupations",
+                table: "ocupation",
                 column: "contractid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "ix_ocupations_staffid_vacantid",
+                name: "ix_ocupation_staffid_vacantid",
                 schema: "decisorframework_humanresources",
-                table: "ocupations",
+                table: "ocupation",
                 columns: new[] { "staffid", "vacantid" },
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "ix_ocupations_vacantid",
+                name: "ix_ocupation_vacantid",
                 schema: "decisorframework_humanresources",
-                table: "ocupations",
+                table: "ocupation",
                 column: "vacantid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_ocupationcandidate_physicologicalcheckdocumentid",
+                schema: "decisorframework_humanresources",
+                table: "ocupationcandidate",
+                column: "physicologicalcheckdocumentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_ocupationcandidate_postulationid",
+                schema: "decisorframework_humanresources",
+                table: "ocupationcandidate",
+                column: "postulationid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_ocupationcandidate_rawdefensestatuscheckdocumentid",
+                schema: "decisorframework_humanresources",
+                table: "ocupationcandidate",
+                column: "rawdefensestatuscheckdocumentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_ocupationcandidate_rawmedicalcheckdocumentid",
+                schema: "decisorframework_humanresources",
+                table: "ocupationcandidate",
+                column: "rawmedicalcheckdocumentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_ocupationcandidate_rawmodeldocumentid",
+                schema: "decisorframework_humanresources",
+                table: "ocupationcandidate",
+                column: "rawmodeldocumentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_ocupationcandidate_rawresearchresultdocumentid",
+                schema: "decisorframework_humanresources",
+                table: "ocupationcandidate",
+                column: "rawresearchresultdocumentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_ocupationcandidate_responsibleid",
+                schema: "decisorframework_humanresources",
+                table: "ocupationcandidate",
+                column: "responsibleid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_organizationalunities_parentid",
@@ -6703,11 +6712,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "ix_resolutions_ocupationid",
-                table: "resolutions",
-                column: "ocupationid");
-
-            migrationBuilder.CreateIndex(
                 name: "ix_resolutions_staffid",
                 table: "resolutions",
                 column: "staffid");
@@ -6754,22 +6758,22 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 column: "serviceid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_staffs_mainworkforceid",
+                name: "ix_staff_mainworkforceid",
                 schema: "decisorframework_humanresources",
-                table: "staffs",
+                table: "staff",
                 column: "mainworkforceid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_staffs_structureid",
+                name: "ix_staff_structureid",
                 schema: "decisorframework_humanresources",
-                table: "staffs",
+                table: "staff",
                 column: "structureid",
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "ix_staffworkforcebridges_sternid",
+                name: "ix_staffworkforcebridge_sternid",
                 schema: "decisorframework_humanresources",
-                table: "staffworkforcebridges",
+                table: "staffworkforcebridge",
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
@@ -6834,7 +6838,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
 
             migrationBuilder.CreateIndex(
                 name: "ix_unitmeasurementconversionbridges_sternid",
-                schema: "decisorframework_inventory",
+                schema: "decisorframework_domain",
                 table: "unitmeasurementconversionbridges",
                 column: "sternid");
 
@@ -6852,82 +6856,82 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "ix_vacantpostulationdocumentbridges_sternid",
+                name: "ix_vacant_salarystandardid",
                 schema: "decisorframework_humanresources",
-                table: "vacantpostulationdocumentbridges",
-                column: "sternid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vacantpostulationocupations_centralstatestructureid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulationocupations",
-                column: "centralstatestructureid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vacantpostulationocupations_postulationid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulationocupations",
-                column: "postulationid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vacantpostulations_alternativepostalcontactitemid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulations",
-                column: "alternativepostalcontactitemid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vacantpostulations_contactid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulations",
-                column: "contactid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vacantpostulations_officialpostalcontactitemid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulations",
-                column: "officialpostalcontactitemid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vacantpostulations_rawmodeldocumentid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulations",
-                column: "rawmodeldocumentid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vacantpostulations_schoolingid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulations",
-                column: "schoolingid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vacantpostulations_staffid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulations",
-                column: "staffid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vacantpostulations_vacantid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulations",
-                column: "vacantid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_vacants_salarystandardid",
-                schema: "decisorframework_humanresources",
-                table: "vacants",
+                table: "vacant",
                 column: "salarystandardid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_vacants_workforceorganizationalunityid",
+                name: "ix_vacant_workforceorganizationalunityid",
                 schema: "decisorframework_humanresources",
-                table: "vacants",
+                table: "vacant",
                 column: "workforceorganizationalunityid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_vacants_workpositionid",
+                name: "ix_vacant_workpositionid",
                 schema: "decisorframework_humanresources",
-                table: "vacants",
+                table: "vacant",
                 column: "workpositionid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vacantpostulation_alternativepostalcontactitemid",
+                schema: "decisorframework_humanresources",
+                table: "vacantpostulation",
+                column: "alternativepostalcontactitemid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vacantpostulation_contactid",
+                schema: "decisorframework_humanresources",
+                table: "vacantpostulation",
+                column: "contactid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vacantpostulation_officialpostalcontactitemid",
+                schema: "decisorframework_humanresources",
+                table: "vacantpostulation",
+                column: "officialpostalcontactitemid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vacantpostulation_rawmodeldocumentid",
+                schema: "decisorframework_humanresources",
+                table: "vacantpostulation",
+                column: "rawmodeldocumentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vacantpostulation_schoolingid",
+                schema: "decisorframework_humanresources",
+                table: "vacantpostulation",
+                column: "schoolingid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vacantpostulation_staffid",
+                schema: "decisorframework_humanresources",
+                table: "vacantpostulation",
+                column: "staffid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vacantpostulation_vacantid",
+                schema: "decisorframework_humanresources",
+                table: "vacantpostulation",
+                column: "vacantid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vacantpostulationdocumentbridge_sternid",
+                schema: "decisorframework_humanresources",
+                table: "vacantpostulationdocumentbridge",
+                column: "sternid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vacantpostulationocupation_centralstatestructureid",
+                schema: "decisorframework_humanresources",
+                table: "vacantpostulationocupation",
+                column: "centralstatestructureid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_vacantpostulationocupation_postulationid",
+                schema: "decisorframework_humanresources",
+                table: "vacantpostulationocupation",
+                column: "postulationid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_vehicleimagebridges_sternid",
@@ -7108,51 +7112,88 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 column: "warehouseid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_workforceorganizationalunities_chiefvacantid",
+                name: "ix_workforceorganizationalunity_chiefvacantid",
                 schema: "decisorframework_humanresources",
-                table: "workforceorganizationalunities",
+                table: "workforceorganizationalunity",
                 column: "chiefvacantid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_workforceorganizationalunities_organizationalunityid",
+                name: "ix_workforceorganizationalunity_organizationalunityid",
                 schema: "decisorframework_humanresources",
-                table: "workforceorganizationalunities",
+                table: "workforceorganizationalunity",
                 column: "organizationalunityid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_workforceorganizationalunities_parentid",
+                name: "ix_workforceorganizationalunity_parentid",
                 schema: "decisorframework_humanresources",
-                table: "workforceorganizationalunities",
+                table: "workforceorganizationalunity",
                 column: "parentid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_workforceorganizationalunities_workforceid",
+                name: "ix_workforceorganizationalunity_workforceid",
                 schema: "decisorframework_humanresources",
-                table: "workforceorganizationalunities",
+                table: "workforceorganizationalunity",
                 column: "workforceid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_workpositionresponsabilities_workpositionid",
+                name: "ix_workposition_kindid",
                 schema: "decisorframework_humanresources",
-                table: "workpositionresponsabilities",
-                column: "workpositionid");
-
-            migrationBuilder.CreateIndex(
-                name: "ix_workpositions_kindid",
-                schema: "decisorframework_humanresources",
-                table: "workpositions",
+                table: "workposition",
                 column: "kindid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_workpositions_schoolingid",
+                name: "ix_workposition_schoolingid",
                 schema: "decisorframework_humanresources",
-                table: "workpositions",
+                table: "workposition",
                 column: "schoolingid");
 
-            migrationBuilder.AddForeignKey(
-                name: "fk_admitionpropousals_agreements_agreementid",
+            migrationBuilder.CreateIndex(
+                name: "ix_workpositionresponsability_workpositionid",
                 schema: "decisorframework_humanresources",
-                table: "admitionpropousals",
+                table: "workpositionresponsability",
+                column: "workpositionid");
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_abstractemploymentcontract_admitionpropousal_admitionpropou~",
+                schema: "decisorframework_humanresources",
+                table: "abstractemploymentcontract",
+                column: "admitionpropousalid",
+                principalSchema: "decisorframework_humanresources",
+                principalTable: "admitionpropousal",
+                principalColumn: "id");
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_abstractemploymentcontract_resolutions_resolutionid",
+                schema: "decisorframework_humanresources",
+                table: "abstractemploymentcontract",
+                column: "resolutionid",
+                principalTable: "resolutions",
+                principalColumn: "id");
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_abstractemploymentcontract_staff_staffid",
+                schema: "decisorframework_humanresources",
+                table: "abstractemploymentcontract",
+                column: "staffid",
+                principalSchema: "decisorframework_humanresources",
+                principalTable: "staff",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_abstractemploymentcontract_vacant_vacantid",
+                schema: "decisorframework_humanresources",
+                table: "abstractemploymentcontract",
+                column: "vacantid",
+                principalSchema: "decisorframework_humanresources",
+                principalTable: "vacant",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_admitionpropousal_agreements_agreementid",
+                schema: "decisorframework_humanresources",
+                table: "admitionpropousal",
                 column: "agreementid",
                 principalSchema: "decisorframework_governance",
                 principalTable: "agreements",
@@ -7160,12 +7201,12 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "fk_admitionpropousals_ocupationcandidates_ocupationcandidateid",
+                name: "fk_admitionpropousal_ocupationcandidate_ocupationcandidateid",
                 schema: "decisorframework_humanresources",
-                table: "admitionpropousals",
+                table: "admitionpropousal",
                 column: "ocupationcandidateid",
                 principalSchema: "decisorframework_humanresources",
-                principalTable: "ocupationcandidates",
+                principalTable: "ocupationcandidate",
                 principalColumn: "id",
                 onDelete: ReferentialAction.Cascade);
 
@@ -7270,34 +7311,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "fk_employmentcontracts_resolutions_resolutionid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts",
-                column: "resolutionid",
-                principalTable: "resolutions",
-                principalColumn: "id");
-
-            migrationBuilder.AddForeignKey(
-                name: "fk_employmentcontracts_staffs_staffid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts",
-                column: "staffid",
-                principalSchema: "decisorframework_humanresources",
-                principalTable: "staffs",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "fk_employmentcontracts_vacants_vacantid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts",
-                column: "vacantid",
-                principalSchema: "decisorframework_humanresources",
-                principalTable: "vacants",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
                 name: "fk_leasecontracts_propleasorgpostulations_propertyleaselegalpo~",
                 schema: "decisorframework_leasing",
                 table: "leasecontracts",
@@ -7354,32 +7367,32 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "fk_ocupationcandidates_vacantpostulations_postulationid",
+                name: "fk_ocupation_staff_staffid",
                 schema: "decisorframework_humanresources",
-                table: "ocupationcandidates",
-                column: "postulationid",
-                principalSchema: "decisorframework_humanresources",
-                principalTable: "vacantpostulations",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "fk_ocupations_staffs_staffid",
-                schema: "decisorframework_humanresources",
-                table: "ocupations",
+                table: "ocupation",
                 column: "staffid",
                 principalSchema: "decisorframework_humanresources",
-                principalTable: "staffs",
+                principalTable: "staff",
                 principalColumn: "id",
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "fk_ocupations_vacants_vacantid",
+                name: "fk_ocupation_vacant_vacantid",
                 schema: "decisorframework_humanresources",
-                table: "ocupations",
+                table: "ocupation",
                 column: "vacantid",
                 principalSchema: "decisorframework_humanresources",
-                principalTable: "vacants",
+                principalTable: "vacant",
+                principalColumn: "id",
+                onDelete: ReferentialAction.Cascade);
+
+            migrationBuilder.AddForeignKey(
+                name: "fk_ocupationcandidate_vacantpostulation_postulationid",
+                schema: "decisorframework_humanresources",
+                table: "ocupationcandidate",
+                column: "postulationid",
+                principalSchema: "decisorframework_humanresources",
+                principalTable: "vacantpostulation",
                 principalColumn: "id",
                 onDelete: ReferentialAction.Cascade);
 
@@ -7394,50 +7407,20 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 onDelete: ReferentialAction.Cascade);
 
             migrationBuilder.AddForeignKey(
-                name: "fk_resolutions_vacants_vacantid",
+                name: "fk_resolutions_vacant_vacantid",
                 table: "resolutions",
                 column: "vacantid",
                 principalSchema: "decisorframework_humanresources",
-                principalTable: "vacants",
+                principalTable: "vacant",
                 principalColumn: "id");
 
             migrationBuilder.AddForeignKey(
-                name: "fk_vacantpostulationdocumentbridges_vacantpostulations_prowid",
+                name: "fk_vacant_workforceorganizationalunity_workforceorganizational~",
                 schema: "decisorframework_humanresources",
-                table: "vacantpostulationdocumentbridges",
-                column: "prowid",
-                principalSchema: "decisorframework_humanresources",
-                principalTable: "vacantpostulations",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "fk_vacantpostulationocupations_vacantpostulations_postulationid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulationocupations",
-                column: "postulationid",
-                principalSchema: "decisorframework_humanresources",
-                principalTable: "vacantpostulations",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "fk_vacantpostulations_vacants_vacantid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulations",
-                column: "vacantid",
-                principalSchema: "decisorframework_humanresources",
-                principalTable: "vacants",
-                principalColumn: "id",
-                onDelete: ReferentialAction.Cascade);
-
-            migrationBuilder.AddForeignKey(
-                name: "fk_vacants_workforceorganizationalunities_workforceorganizatio~",
-                schema: "decisorframework_humanresources",
-                table: "vacants",
+                table: "vacant",
                 column: "workforceorganizationalunityid",
                 principalSchema: "decisorframework_humanresources",
-                principalTable: "workforceorganizationalunities",
+                principalTable: "workforceorganizationalunity",
                 principalColumn: "id",
                 onDelete: ReferentialAction.Cascade);
         }
@@ -7446,61 +7429,9 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "fk_employmentcontracts_employees_employeeid",
+                name: "fk_workforceorganizationalunity_vacant_chiefvacantid",
                 schema: "decisorframework_humanresources",
-                table: "employmentcontracts");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_employmentcontracts_employees_responsibleid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_ocupationcandidates_employees_responsibleid",
-                schema: "decisorframework_humanresources",
-                table: "ocupationcandidates");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_agreements_personcontacts_responsibleid",
-                schema: "decisorframework_governance",
-                table: "agreements");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_decisionmakinggroups_personcontacts_leaderid",
-                schema: "decisorframework_governance",
-                table: "decisionmakinggroups");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_meetings_personcontacts_authorid",
-                schema: "decisorframework_governance",
-                table: "meetings");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_resolutions_personcontacts_contactid",
-                table: "resolutions");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_vacantpostulations_personcontacts_contactid",
-                schema: "decisorframework_humanresources",
-                table: "vacantpostulations");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_admitionpropousals_agreements_agreementid",
-                schema: "decisorframework_humanresources",
-                table: "admitionpropousals");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_resolutions_agreements_agreementid",
-                table: "resolutions");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_admitionpropousals_ocupationcandidates_ocupationcandidateid",
-                schema: "decisorframework_humanresources",
-                table: "admitionpropousals");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_resolutions_ocupationcandidates_candidateid",
-                table: "resolutions");
+                table: "workforceorganizationalunity");
 
             migrationBuilder.DropForeignKey(
                 name: "fk_organizationidentities_images_imageid",
@@ -7527,41 +7458,17 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_domain",
                 table: "properties");
 
-            migrationBuilder.DropForeignKey(
-                name: "fk_staffs_structures_structureid",
-                schema: "decisorframework_humanresources",
-                table: "staffs");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_employmentcontracts_admitionpropousals_admitionpropousalid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_employmentcontracts_resolutions_resolutionid",
-                schema: "decisorframework_humanresources",
-                table: "employmentcontracts");
-
-            migrationBuilder.DropForeignKey(
-                name: "fk_workforceorganizationalunities_vacants_chiefvacantid",
-                schema: "decisorframework_humanresources",
-                table: "workforceorganizationalunities");
-
             migrationBuilder.DropTable(
                 name: "bankdebitcards",
                 schema: "decisorframework_finantial");
 
             migrationBuilder.DropTable(
-                name: "budgetproductbridges",
-                schema: "decisorframework_commercial");
-
-            migrationBuilder.DropTable(
-                name: "budgetservicebridges",
-                schema: "decisorframework_commercial");
-
-            migrationBuilder.DropTable(
                 name: "clausetagbridges",
                 schema: "decisorframework_legal");
+
+            migrationBuilder.DropTable(
+                name: "colaborators",
+                schema: "decisorframework_domain");
 
             migrationBuilder.DropTable(
                 name: "collects",
@@ -7584,7 +7491,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_legal");
 
             migrationBuilder.DropTable(
-                name: "employeedailycheckings",
+                name: "employeedailychecking",
                 schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
@@ -7704,6 +7611,10 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_commercial");
 
             migrationBuilder.DropTable(
+                name: "ocupation",
+                schema: "decisorframework_humanresources");
+
+            migrationBuilder.DropTable(
                 name: "organizationemailcontactitembridges",
                 schema: "guamaframework_identity");
 
@@ -7792,6 +7703,10 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
+                name: "provisionableservices",
+                schema: "decisorframework_commercial");
+
+            migrationBuilder.DropTable(
                 name: "receptionbatchbridges",
                 schema: "decisorframework_inventory");
 
@@ -7808,7 +7723,7 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_commercial");
 
             migrationBuilder.DropTable(
-                name: "staffworkforcebridges",
+                name: "staffworkforcebridge",
                 schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
@@ -7828,18 +7743,18 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
 
             migrationBuilder.DropTable(
                 name: "unitmeasurementconversionbridges",
-                schema: "decisorframework_inventory");
+                schema: "decisorframework_domain");
 
             migrationBuilder.DropTable(
                 name: "userrolebridges",
                 schema: "guamaframework_security_personal");
 
             migrationBuilder.DropTable(
-                name: "vacantpostulationdocumentbridges",
+                name: "vacantpostulationdocumentbridge",
                 schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
-                name: "vacantpostulationocupations",
+                name: "vacantpostulationocupation",
                 schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
@@ -7863,16 +7778,8 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "guamaframework_media");
 
             migrationBuilder.DropTable(
-                name: "workpositionresponsabilities",
+                name: "workpositionresponsability",
                 schema: "decisorframework_humanresources");
-
-            migrationBuilder.DropTable(
-                name: "abstractbudget",
-                schema: "decisorframework_commercial");
-
-            migrationBuilder.DropTable(
-                name: "provisionableservices",
-                schema: "decisorframework_commercial");
 
             migrationBuilder.DropTable(
                 name: "departures",
@@ -7909,6 +7816,10 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
             migrationBuilder.DropTable(
                 name: "naturalproviders",
                 schema: "decisorframework_commercial");
+
+            migrationBuilder.DropTable(
+                name: "abstractemploymentcontract",
+                schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
                 name: "emailcontactitems",
@@ -7991,6 +7902,13 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
+                name: "admitionpropousal",
+                schema: "decisorframework_humanresources");
+
+            migrationBuilder.DropTable(
+                name: "resolutions");
+
+            migrationBuilder.DropTable(
                 name: "propertyspaces",
                 schema: "decisorframework_domain");
 
@@ -8024,6 +7942,10 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
             migrationBuilder.DropTable(
                 name: "leasecontracts",
                 schema: "decisorframework_leasing");
+
+            migrationBuilder.DropTable(
+                name: "ocupationcandidate",
+                schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
                 name: "products",
@@ -8062,12 +7984,16 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
+                name: "vacantpostulation",
+                schema: "decisorframework_humanresources");
+
+            migrationBuilder.DropTable(
                 name: "families",
                 schema: "decisorframework_inventory");
 
             migrationBuilder.DropTable(
                 name: "unitmeasurements",
-                schema: "decisorframework_inventory");
+                schema: "decisorframework_domain");
 
             migrationBuilder.DropTable(
                 name: "paymentterms",
@@ -8090,12 +8016,20 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
+                name: "documents",
+                schema: "guamaframework_media");
+
+            migrationBuilder.DropTable(
+                name: "staff",
+                schema: "decisorframework_humanresources");
+
+            migrationBuilder.DropTable(
                 name: "propertyleasepropousals",
                 schema: "decisorframework_leasing");
 
             migrationBuilder.DropTable(
                 name: "centralstatestructures",
-                schema: "decisorframework_legal");
+                schema: "decisorframework_domain");
 
             migrationBuilder.DropTable(
                 name: "legalbusinesskinds",
@@ -8118,8 +8052,20 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_finantial");
 
             migrationBuilder.DropTable(
+                name: "agreements",
+                schema: "decisorframework_governance");
+
+            migrationBuilder.DropTable(
+                name: "employees",
+                schema: "decisorframework_domain");
+
+            migrationBuilder.DropTable(
                 name: "vehicles",
                 schema: "decisorframework_domain");
+
+            migrationBuilder.DropTable(
+                name: "meetings",
+                schema: "decisorframework_governance");
 
             migrationBuilder.DropTable(
                 name: "brands",
@@ -8134,8 +8080,8 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "decisorframework_domain");
 
             migrationBuilder.DropTable(
-                name: "employees",
-                schema: "decisorframework_domain");
+                name: "decisionmakinggroups",
+                schema: "decisorframework_governance");
 
             migrationBuilder.DropTable(
                 name: "personcontacts",
@@ -8154,28 +8100,36 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
                 schema: "guamaframework_identity");
 
             migrationBuilder.DropTable(
-                name: "agreements",
-                schema: "decisorframework_governance");
-
-            migrationBuilder.DropTable(
-                name: "meetings",
-                schema: "decisorframework_governance");
-
-            migrationBuilder.DropTable(
-                name: "decisionmakinggroups",
-                schema: "decisorframework_governance");
-
-            migrationBuilder.DropTable(
-                name: "ocupationcandidates",
+                name: "vacant",
                 schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
-                name: "vacantpostulations",
+                name: "salarystandard",
                 schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
-                name: "documents",
-                schema: "guamaframework_media");
+                name: "workforceorganizationalunity",
+                schema: "decisorframework_humanresources");
+
+            migrationBuilder.DropTable(
+                name: "workposition",
+                schema: "decisorframework_humanresources");
+
+            migrationBuilder.DropTable(
+                name: "organizationalunities",
+                schema: "decisorframework_domain");
+
+            migrationBuilder.DropTable(
+                name: "workforce",
+                schema: "decisorframework_humanresources");
+
+            migrationBuilder.DropTable(
+                name: "schooling",
+                schema: "decisorframework_humanresources");
+
+            migrationBuilder.DropTable(
+                name: "workpositionkind",
+                schema: "decisorframework_humanresources");
 
             migrationBuilder.DropTable(
                 name: "images",
@@ -8232,57 +8186,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migration
             migrationBuilder.DropTable(
                 name: "propertykinds",
                 schema: "decisorframework_domain");
-
-            migrationBuilder.DropTable(
-                name: "admitionpropousals",
-                schema: "decisorframework_humanresources");
-
-            migrationBuilder.DropTable(
-                name: "resolutions");
-
-            migrationBuilder.DropTable(
-                name: "ocupations",
-                schema: "decisorframework_humanresources");
-
-            migrationBuilder.DropTable(
-                name: "employmentcontracts",
-                schema: "decisorframework_humanresources");
-
-            migrationBuilder.DropTable(
-                name: "staffs",
-                schema: "decisorframework_humanresources");
-
-            migrationBuilder.DropTable(
-                name: "vacants",
-                schema: "decisorframework_humanresources");
-
-            migrationBuilder.DropTable(
-                name: "salarystandards",
-                schema: "decisorframework_humanresources");
-
-            migrationBuilder.DropTable(
-                name: "workforceorganizationalunities",
-                schema: "decisorframework_humanresources");
-
-            migrationBuilder.DropTable(
-                name: "workpositions",
-                schema: "decisorframework_humanresources");
-
-            migrationBuilder.DropTable(
-                name: "organizationalunities",
-                schema: "decisorframework_domain");
-
-            migrationBuilder.DropTable(
-                name: "workforces",
-                schema: "decisorframework_humanresources");
-
-            migrationBuilder.DropTable(
-                name: "schoolings",
-                schema: "decisorframework_humanresources");
-
-            migrationBuilder.DropTable(
-                name: "workpositionkinds",
-                schema: "decisorframework_humanresources");
         }
     }
 }

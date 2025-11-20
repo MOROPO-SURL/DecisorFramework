@@ -135,7 +135,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
                 Year = now.Year,
                 StarAt = now,
                 Objective = $"Contratación generada a partir de la resolución de nombramiento \"{namingResolution.Id}/{namingResolution.Year}\"",
-                Priority = 1,
                 StaffId = model.StaffId,
                 VacantId = model.VacantId,
                 ResolutionId = namingResolution.Id

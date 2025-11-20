@@ -13,7 +13,7 @@
         {
             base.OnStart();
 
-            Windows[0].Title = "EPT Camagüey - Decisor™";
+            Windows[0].Title = "EPT Camagüey Decisor™";
         }
     }
 }

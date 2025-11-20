@@ -34,7 +34,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<Role> Roles { get; set; }
         public DbSet<RolePermissionBridge> RolePermissionBridges { get; set; }
-
         public DbSet<Region> Regions { get; set; }
         public DbSet<Country> Countries { get; set; }
         public DbSet<State> States { get; set; }
@@ -44,12 +43,10 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<StateLocation> StateLocations { get; set; }
         public DbSet<MunicipalityLocation> MunicipalityLocations { get; set; }
         public DbSet<LocalityLocation> LocalityLocations { get; set; }
-
         public DbSet<Thumbnail> Thumbnails { get; set; }
         public DbSet<Image> Images { get; set; }
         public DbSet<Video> Videos { get; set; }
         public DbSet<Document> Documents { get; set; }
-
         public DbSet<User> Users { get; set; }
         public DbSet<UserRoleBridge> UserRoleBridges { get; set; }
         public DbSet<PersonIdentity> PersonIdentities { get; set; }
@@ -79,10 +76,6 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ServiceValueProposition> ServiceValuePropositions { get; set; }
         public DbSet<ServiceValuePropositionRate> ServiceValuePropositionRates { get; set; }
         public DbSet<ServiceValuePropositionImageBridge> ServiceValuePropositionImageBridges { get; set; }
-        public DbSet<OrganizationContactBudget> OrganizationContactBudgets { get; set; }
-        public DbSet<PersonContactBudget> PersonContactBudgets { get; set; }
-        public DbSet<BudgetProductBridge> BudgetProductBridges { get; set; }
-        public DbSet<BudgetServiceBridge> BudgetServiceBridges { get; set; }
         public DbSet<LegalProvider> LegalProviders { get; set; }
         public DbSet<LegalProviderBankAccountBridge> LegalProviderBankAccountBridges { get; set; }
         public DbSet<LegalProviderDocumentBridge> LegalProviderDocumentBridges { get; set; }
@@ -110,17 +103,29 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<AbstractDeparture> Departures { get; set; }
         public DbSet<DepartureBatchBridge> DepartureBatchBridges { get; set; }
         public DbSet<ReceptionBatchBridge> ReceptionBatchBridges { get; set; }
-        public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
-        public DbSet<UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<BankAgency> BankAgencies { get; set; }
         public DbSet<BankBranch> BankBranches { get; set; }
         public DbSet<BankAccount> BankAccounts { get; set; }
         public DbSet<BankDebitCard> BankDebitCards { get; set; }
         public DbSet<CostCenter> CostCenters { get; set; }
+        public DbSet<Tag> ClauseTags { get; set; }
+        public DbSet<Clause> Clauses { get; set; }
+        public DbSet<ClauseTagBridge> ClauseTagBridges { get; set; }
+        public DbSet<Section> Sections { get; set; }
+        public DbSet<Proforma> Proformas { get; set; }
+        public DbSet<ProformaClauseBridge> ProformaSectionClauseBridges { get; set; }
+        public DbSet<ProclamationKind> ProclamationKinds { get; set; }
+        public DbSet<Proclamation> Proclamations { get; set; }
+        public DbSet<RegulationKind> RegulationKinds { get; set; }
+        public DbSet<Regulation> Regulations { get; set; }
+        public DbSet<Disposition> Dispositions { get; set; }
+        public DbSet<DispositionTagBridge> DispositionTagBridges { get; set; }
         public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
         public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
+        public DbSet<CentralStateStructure> CentralStateStructures { get; set; }
         public DbSet<OrganizationContact> OrganizationContacts { get; set; }
+        public DbSet<Colaborator> Colaborators { get; set; }
         public DbSet<PersonContact> PersonContacts { get; set; }
         public DbSet<PropertyKind> PropertyKinds { get; set; }
         public DbSet<Property> Properties { get; set; }
@@ -136,41 +141,8 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
         public DbSet<Structure> Structures { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        public DbSet<Schooling> Schoolings { get; set; }
-        public DbSet<SalaryStandard> SalaryStandards { get; set; }
-        public DbSet<WorkPositionKind> WorkPositionKinds { get; set; }
-        public DbSet<WorkPosition> WorkPositions { get; set; }
-        public DbSet<WorkPositionResponsability> WorkPositionResponsabilities { get; set; }
-        public DbSet<Workforce> Workforces { get; set; }
-        public DbSet<WorkforceOrganizationalUnity> WorkforceOrganizationalUnities { get; set; }
-        public DbSet<Vacant> Vacants { get; set; }
-        public DbSet<VacantPostulation> VacantPostulations { get; set; }
-        public DbSet<VacantPostulationOcupation> VacantPostulationOcupations { get; set; }
-        public DbSet<VacantPostulationDocumentBridge> VacantPostulationDocumentBridges { get; set; }
-        public DbSet<OcupationCandidate> OcupationCandidates { get; set; }
-        public DbSet<AdmitionPropousal> AdmitionPropousals { get; set; }
-        public DbSet<AbstractEmploymentContract> EmploymentContracts { get; set; }
-        public DbSet<NamingEmploymentContract> NamingEmploymentContracts { get; set; }
-        public DbSet<AdmitionEmploymentContract> AdmitionEmploymentContracts { get; set; }
-        public DbSet<NamingResolution> NamingResolutions { get; set; }
-        public DbSet<RemotionResolution> RemotionResolutions { get; set; }
-        public DbSet<Staff> Staffs { get; set; }
-        public DbSet<StaffWorkforceBridge> StaffWorkforceBridges { get; set; }
-        public DbSet<Ocupation> Ocupations { get; set; }
-        public DbSet<EmployeeDailyChecking> EmployeeDailyCheckings { get; set; }
-        public DbSet<Tag> ClauseTags { get; set; }
-        public DbSet<Clause> Clauses { get; set; }
-        public DbSet<ClauseTagBridge> ClauseTagBridges { get; set; }
-        public DbSet<Section> Sections { get; set; }
-        public DbSet<Proforma> Proformas { get; set; }
-        public DbSet<ProformaClauseBridge> ProformaSectionClauseBridges { get; set; }
-        public DbSet<ProclamationKind> ProclamationKinds { get; set; }
-        public DbSet<Proclamation> Proclamations { get; set; }
-        public DbSet<CentralStateStructure> CentralStateStructures { get; set; }
-        public DbSet<RegulationKind> RegulationKinds { get; set; }
-        public DbSet<Regulation> Regulations { get; set; }
-        public DbSet<Disposition> Dispositions { get; set; }
-        public DbSet<DispositionTagBridge> DispositionTagBridges { get; set; }
+        public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
+        public DbSet<UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
         public DbSet<PropertyLeasePropousal> PropertyLeasePropousals { get; set; }
         public DbSet<PropertySpaceLeasePropousal> PropertySpaceLeasePropousals { get; set; }
         public DbSet<VehicleLeasePropousal> VehicleLeasePropousals { get; set; }
