@@ -7,6 +7,8 @@ public partial class WebContactItemConfigurationPage : UI.Pages.Base.Configurati
         InitializeComponent();
     }
 
+    protected override bool IsNotificationRequired => false;
+
     protected override string EntityTypeName => "Sitio de Internet";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.WebContactItemDisplayModel> PerformCreationAsync()

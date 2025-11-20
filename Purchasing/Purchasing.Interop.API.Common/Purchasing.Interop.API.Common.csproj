@@ -7,7 +7,7 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Commercial\Commercial.Interop.API.Common\Commercial.Interop.API.Common.csproj" />
-		<ProjectReference Include="..\..\Essential\Essential.Interop.API.Common\Essential.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\..\Governance\Governance.Interop.API.Common\Governance.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Purchasing.Persistence\Purchasing.Persistence.csproj" />
 	</ItemGroup>
 </Project>

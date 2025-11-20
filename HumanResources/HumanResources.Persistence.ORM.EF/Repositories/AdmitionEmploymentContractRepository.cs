@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositories
 {
-    public class AdmitionEmploymentContractRepository : Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Entities.AdmitionEmploymentContract, int>
+    public class AdmitionEmploymentContractRepository : Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Entities.AdmitionEmploymentContract, System.Guid>
     {
         public AdmitionEmploymentContractRepository(DbContext dbContext) : base(dbContext)
         {

@@ -18,7 +18,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
     private readonly List<ClassificationInputModel> incomingClassificationItems = [];
     private readonly List<ClassificationDisplayModel> outgoingClassificationItems = [];
 
-    public ProductConfigurationPage(System.Action<ProductDisplayModel> successAction, Models.Page.Configuration.ProductConfigurationPageModel model) : base(successAction, model, null)
+    public ProductConfigurationPage(System.Action<ProductDisplayModel> successAction, Models.Page.Configuration.ProductConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.ProductConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -36,15 +36,15 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
             }
         }
 
-        if (model.Category != null)
+        if (model.Family != null)
         {
-            for (int i = 0; i < model.AvailableCategories.Length; i++)
+            for (int i = 0; i < model.AvailableFamilies.Length; i++)
             {
-                var current = model.AvailableCategories[i];
+                var current = model.AvailableFamilies[i];
 
-                if (model.Category.Id != current.Id) continue;
+                if (model.Family.Id != current.Id) continue;
 
-                CategoryPicker.SelectedIndex = i;
+                FamilyPicker.SelectedIndex = i;
 
                 break;
             }
@@ -70,9 +70,9 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
-            DefaultMetricUnityId = ConcreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
-            CategoryId = CategoryPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
-            WarehousingDecreases = ConcreteBindingContext.WarehousingDecreases.ToList(),
+            DefaultMetricUnityId = ConcreteBindingContext.DefaultUnitMeasurement.Id,
+            CategoryId = ConcreteBindingContext.Family?.Id,
+            WarehousingDecreases = [.. ConcreteBindingContext.WarehousingDecreases],
             IncomingClassificationItems = incomingClassificationItems
         };
 
@@ -99,9 +99,9 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
-            DefaultMetricUnityId = ConcreteBindingContext.AvailableUnitMeasurements[DefaultUnitMeasurementPicker.SelectedIndex].Id,
-            CategoryId = CategoryPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableCategories[CategoryPicker.SelectedIndex].Id,
-            WarehousingDecreases = ConcreteBindingContext.WarehousingDecreases.ToList(),
+            DefaultMetricUnityId = ConcreteBindingContext.DefaultUnitMeasurement.Id,
+            CategoryId = ConcreteBindingContext.Family?.Id,
+            WarehousingDecreases = [.. ConcreteBindingContext.WarehousingDecreases],
             EditionClassificationItems = editionClassificationItems,
             IncomingClassificationItems = incomingClassificationItems,
             OutgoingClassificationItems = outgoingClassificationItems
@@ -142,7 +142,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
 
     private void AddClassificationButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationCreateSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel(ConcreteBindingContext, null)));
+        this.NavigationPushPageAsync(new ClassificationConfigurationPage(ClassificationCreateSuccess_Callback, new Models.Page.Configuration.ClassificationConfigurationPageModel(ConcreteBindingContext, null), new Validators.ClassificationConfigurationValidator()));
     }
 
     private void AddWarehosingDecreaseButton_Clicked(object sender, System.EventArgs e)
@@ -160,7 +160,7 @@ public partial class ProductConfigurationPage : Core.Presentation.Terminal.MAUI.
             Name = target.Name,
             Description = target.Description,
             Priority = target.Priority
-        })));
+        }), new Validators.ClassificationConfigurationValidator()));
     }
 
     private void EditWarehousingDecreaseButton_Clicked(object sender, System.EventArgs e)

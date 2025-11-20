@@ -2,6 +2,8 @@
 {
 	public class ClassificationConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Input.ClassificationInputModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+
         private string name;
         private string description;
         private int priority = 1;

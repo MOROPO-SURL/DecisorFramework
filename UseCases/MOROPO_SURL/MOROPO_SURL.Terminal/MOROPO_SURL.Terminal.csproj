@@ -9,7 +9,7 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<Nullable>disable</Nullable>
 		<!-- Display name -->
-		<ApplicationTitle>Decisor MOROPO S.U.R.L.</ApplicationTitle>
+		<ApplicationTitle>MOROPO S.U.R.L. Decisor™</ApplicationTitle>
 		<!-- App Identifier -->
 		<ApplicationId>com.moropo.tool.decisor.terminal</ApplicationId>
 		<!-- Versions -->

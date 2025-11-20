@@ -11,13 +11,9 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(PlanId))]
-        public PurchasePlan Plan { get; set; }
-        public System.Guid? PlanId { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ZoneId))]
-        public PurchaseZone Zone { get; set; }
-        public System.Guid? ZoneId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(OrderId))]
+        public PurchaseOrder Order { get; set; }
+        public System.Guid OrderId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(PurchaserId))]
         public Domain.Persistence.Entities.Employee Purchaser { get; set; }

@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Repositories
 {
-    public class LegalClientVehicleLeaseContractRepository : Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Entities.LegalClientVehicleLeaseContract, int>
+    public class LegalClientVehicleLeaseContractRepository : Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Entities.LegalClientVehicleLeaseContract, System.Guid>
     {
         public LegalClientVehicleLeaseContractRepository(DbContext dbContext) : base(dbContext)
         {

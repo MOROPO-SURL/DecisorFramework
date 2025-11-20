@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -44,7 +43,12 @@ public partial class SectionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+
+                        LoadItems(true);
+                    });
                 });
 
                 break;

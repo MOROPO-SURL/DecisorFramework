@@ -10,16 +10,16 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Defau
 
             var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
-            var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
+            var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(httpClientHelperProvider);
             var familiesAPIConnectClient = new Interop.API.Connect.Clients.FamiliesAPIConnectClient(httpClientHelperProvider);
 
             // TODO complete fallow behavior
             //var warehousingDecreasesAPIConnectClient = new Web.API.Connect.Clients.WarehousingDecreasesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
             _model.AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetAsync();
-            _model.AvailableCategories = await familiesAPIConnectClient.GetAsync();
+            _model.AvailableFamilies = await familiesAPIConnectClient.GetAsync();
 
-            return new Pages.Configuration.ProductConfigurationPage(configurationSuccessAction, _model);
+            return new Pages.Configuration.ProductConfigurationPage(configurationSuccessAction, _model, new Validators.ProductConfigurationValidator());
         }
     }
 }

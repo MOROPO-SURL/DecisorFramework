@@ -79,7 +79,7 @@ public partial class WorkforcesManagePage : Caney.MVVM.Core.Pages.ContentPage
                     {
                         concreteBindingContext.PresentedItem = null;
 
-                        DisplayAlert("Aviso", "Elemento eliminado con éxito.", "Aceptar");
+                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
 
                         LoadItems();
                     }

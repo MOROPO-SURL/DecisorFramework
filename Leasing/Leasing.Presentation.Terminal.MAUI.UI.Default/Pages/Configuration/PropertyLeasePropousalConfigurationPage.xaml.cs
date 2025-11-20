@@ -152,11 +152,15 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
     private void AuthorPickComplete_Callback(Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
     {
         ConcreteBindingContext.Author = model;
+
+        hasChangesFlag = true;
     }
 
     private void AgreementPickComplete_Callback(Governance.Interop.API.Common.Models.Display.AgreementDisplayModel model)
     {
         ConcreteBindingContext.Agreement = model;
+
+        hasChangesFlag = true;
     }
 
     private void PropertySpacePickComplete_Callback(Domain.Interop.API.Common.Models.Display.PropertySpaceDisplayModel model)

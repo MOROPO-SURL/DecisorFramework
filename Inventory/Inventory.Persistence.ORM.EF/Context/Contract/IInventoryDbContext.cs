@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Context.Contract
 {
-	public interface IInventoryDbContext : Financial.Persistence.ORM.EF.Context.Contract.IFinancialDbContext
+    public interface IInventoryDbContext : Financial.Persistence.ORM.EF.Context.Contract.IFinancialDbContext
     {
 		public DbSet<Entities.CustomAttribute> CustomAttributes { get; set; }
 		public DbSet<Entities.Product> Products { get; set; }
@@ -17,8 +17,6 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Context.Contract
 		public DbSet<Entities.Contract.AbstractDeparture> Departures { get; set; }
 		public DbSet<Entities.DepartureBatchBridge> DepartureBatchBridges { get; set; }
         public DbSet<Entities.ReceptionBatchBridge> ReceptionBatchBridges { get; set; }
-        public DbSet<Entities.UnitMeasurement> UnitMeasurements { get; set; }
-        public DbSet<Entities.UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
     }
 }
 

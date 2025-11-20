@@ -1,12 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
 public partial class NaturalClientPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.NaturalClientDisplayModel, Models.Page.Pick.NaturalClientPickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 160;
 
     private System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel> pickCompleteAction;
 
@@ -35,6 +34,8 @@ public partial class NaturalClientPickPage : Core.Presentation.Terminal.MAUI.UI.
         IsEnabled = true;
     }
 
+    protected override double ItemViewRequestWidth { get => 420; }
+
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override void DisposeUnmanagementResources()
@@ -48,17 +49,59 @@ public partial class NaturalClientPickPage : Core.Presentation.Terminal.MAUI.UI.
     {
         var apiConnectClient = new Interop.API.Connect.Clients.NaturalClientsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.NaturalClientFilterModel { Parameter = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
+
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
+        ConcreteBindingContext.SearchParameter = null;
+
         OnReload(sender, eventArgs);
     }
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushPageAsync(new Configuration.NaturalClientConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.NaturalClientConfigurationPageModel(null)));
+        //var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        //if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.LegalClientCreatorPermission)))
+        //{
+        //    DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+        //    return;
+        //}
+
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.NaturalClientDisplayModel, Models.Page.Configuration.NaturalClientConfigurationPageModel>>();
+
+                var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(page);
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+
+                    ConcreteBindingContext.IsBusy = false;
+                });
+            }
+        });
     }
 
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
@@ -81,6 +124,11 @@ public partial class NaturalClientPickPage : Core.Presentation.Terminal.MAUI.UI.
         pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.NaturalClientDisplayModel);
 
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
     }
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.NaturalClientDisplayModel model)

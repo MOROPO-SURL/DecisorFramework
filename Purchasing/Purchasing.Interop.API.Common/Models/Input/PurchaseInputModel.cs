@@ -8,9 +8,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
     {
         public System.Guid Id { get; set; }
 
-        public System.Guid? PlanId { get; set; }
-
-        public System.Guid? ZoneId { get; set; }
+        public System.Guid OrderId { get; set; }
 
         public System.Guid PurchaserId { get; set; }
 
@@ -46,22 +44,16 @@ namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Input
         {
             entity.Description = Description;
 
-            if (entity.ZoneId != ZoneId)
-            {
-                entity.Zone = null;
-                entity.ZoneId = ZoneId;
-            }
-
             if (entity.PurchaserId != PurchaserId)
             {
                 entity.Purchaser = null;
                 entity.PurchaserId = PurchaserId;
             }
 
-            if (entity.PlanId != PlanId)
+            if (entity.OrderId != OrderId)
             {
-                entity.Plan = null;
-                entity.PlanId = PlanId;
+                entity.Order = null;
+                entity.OrderId = OrderId;
             }
 
             // TODO Implement auto-approved behavior

@@ -2,6 +2,8 @@
 {
 	public class FamilyConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.FamilyDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+
         private string name;
         private string description;
         private int priority = 1;

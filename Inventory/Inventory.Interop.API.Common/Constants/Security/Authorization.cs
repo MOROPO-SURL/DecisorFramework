@@ -11,15 +11,6 @@
         public const string CustomAttributeRemoverPermission = "customattribute-remover-permission";
         #endregion
 
-        #region UnitMeasurement
-        public const string UnitMeasurementManagementPermissionGroup = "unit-measurement-management-permission-group";
-
-        public const string UnitMeasurementViewerPermission = "unit-measurement-viewer-permission";
-        public const string UnitMeasurementCreatorPermission = "unit-measurement-creator-permission";
-        public const string UnitMeasurementEditorPermission = "unit-measurement-editor-permission";
-        public const string UnitMeasurementRemoverPermission = "unit-measurement-remover-permission";
-        #endregion
-
         #region Product
         public const string ProductManagementPermissionGroup = "product-management-permission-group";
 
@@ -38,7 +29,7 @@
         public const string FamilyRemoverPermission = "family-remover-permission";
         #endregion
 
-        #region UnitMeasurement
+        #region Warehouse
         public const string WarehouseManagementPermissionGroup = "warehouse-management-permission-group";
 
         public const string WarehouseViewerPermission = "warehouse-viewer-permission";

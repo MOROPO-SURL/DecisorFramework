@@ -38,20 +38,6 @@ public partial class LegalClientConfigurationPage : Core.Presentation.Terminal.M
                 break;
             }
         }
-
-        if (model.MainPostalContact != null)
-        {
-            for (int i = 0; i < model.AvailablePostalContactItems.Count; i++)
-            {
-                var current = model.AvailablePostalContactItems[i];
-
-                if (model.MainPostalContact.Id != current.Id) continue;
-
-                PostalContactPicker.SelectedIndex = i;
-
-                break;
-            }
-        }
     }
 
     protected override string EntityTypeName => "Cliente Jurídico";
@@ -66,8 +52,8 @@ public partial class LegalClientConfigurationPage : Core.Presentation.Terminal.M
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
-            MainPostalContactId = ConcreteBindingContext.AvailablePostalContactItems[PostalContactPicker.SelectedIndex].Id,
-            DefaultPaymentTermId = ConcreteBindingContext.AvailablePaymentTerms[PaymentTermPicker.SelectedIndex].Id,
+            MainPostalContactId = ConcreteBindingContext.MainPostalContact.Id,
+            DefaultPaymentTermId = ConcreteBindingContext.DefaultPaymentTerm.Id,
             Priority = ConcreteBindingContext.Priority,
             IncomingBankAccounts = incomingBankAccounts,
             IncomingDocuments = incomingDocuments
@@ -88,8 +74,8 @@ public partial class LegalClientConfigurationPage : Core.Presentation.Terminal.M
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
-            MainPostalContactId = ConcreteBindingContext.AvailablePostalContactItems[PostalContactPicker.SelectedIndex].Id,
-            DefaultPaymentTermId = ConcreteBindingContext.AvailablePaymentTerms[PaymentTermPicker.SelectedIndex].Id,
+            MainPostalContactId = ConcreteBindingContext.MainPostalContact.Id,
+            DefaultPaymentTermId = ConcreteBindingContext.DefaultPaymentTerm.Id,
             Priority = ConcreteBindingContext.Priority,
             IncomingBankAccounts = incomingBankAccounts,
             EditionBankAccounts = editionBankAccounts,
@@ -353,11 +339,21 @@ public partial class LegalClientConfigurationPage : Core.Presentation.Terminal.M
     {
         ConcreteBindingContext.Contact = model;
 
+        if (!string.IsNullOrEmpty(model.TaxIdentificationNumber))
+        {
+            ConcreteBindingContext.TaxIdentificationNumber = model.TaxIdentificationNumber;
+        }
+
         ConcreteBindingContext.AvailablePostalContactItems.Clear();
 
         foreach (var item in model.Identity.PostalContacts)
         {
             ConcreteBindingContext.AvailablePostalContactItems.Add(item);
+        }
+
+        if (model.MainPostalContactItem != null)
+        {
+            ConcreteBindingContext.MainPostalContact = ConcreteBindingContext.AvailablePostalContactItems.First(item => item.Id == model.MainPostalContactItem.Id);
         }
     }
 
@@ -366,7 +362,7 @@ public partial class LegalClientConfigurationPage : Core.Presentation.Terminal.M
         incomingBankAccounts.Add(new BankAccountInputModel
         {
             Id = model.Id,
-            IsExternal = false,
+            IsExternal = true,
             BranchId = model.Branch.Id,
             CurrencyId = model.Currency.Id,
             Holder = model.Holder,

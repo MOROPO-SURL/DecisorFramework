@@ -37,6 +37,8 @@ public partial class WarehousingAreaConfigurationPage : Core.Presentation.Termin
 
     protected override string EntityTypeName => "Área de Almacenamiento";
 
+    protected override bool IsNotificationRequired => false;
+
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.WarehousingAreaDisplayModel> PerformCreationAsync()
     {
         return System.Threading.Tasks.Task.FromResult(new Interop.API.Common.Models.Display.WarehousingAreaDisplayModel

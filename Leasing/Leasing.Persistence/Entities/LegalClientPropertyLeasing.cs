@@ -4,7 +4,7 @@
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ContractId))]
         public LegalClientPropertyLeaseContract Contract { get; set; }
-        public int ContractId { get; set; }
+        public System.Guid ContractId { get; set; }
 
         public System.Collections.Generic.List<LegalClientPropertyLeasingPersonContactBridge> ContactBridges { get; set; } = new System.Collections.Generic.List<LegalClientPropertyLeasingPersonContactBridge>();
     }

@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class PersonContactPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.PersonContactDisplayModel, Models.Page.Pick.PersonContactPickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 160;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
 
     private System.Action<Interop.API.Common.Models.Display.PersonContactDisplayModel> pickCompleteAction;
 
@@ -54,19 +54,24 @@ public partial class PersonContactPickPage : Core.Presentation.Terminal.MAUI.UI.
     {
         var apiConnectClient = new Interop.API.Connect.Clients.PersonContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.PersonContactFilterModel { Parameter = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
+
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
+        ConcreteBindingContext.SearchParameter = null;
+
         OnReload(sender, eventArgs);
     }
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = BindingContext as Models.Page.Pick.PersonContactPickPageModel;
-
-        concreteBindingContext.IsBusy = true;
+        ConcreteBindingContext.IsBusy = true;
 
         System.Threading.Tasks.Task.Run(async () =>
         {
@@ -78,7 +83,7 @@ public partial class PersonContactPickPage : Core.Presentation.Terminal.MAUI.UI.
 
                 Dispatcher.Dispatch(() =>
                 {
-                    concreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.IsBusy = false;
 
                     this.NavigationPushPageAsync(page);
                 });
@@ -89,7 +94,7 @@ public partial class PersonContactPickPage : Core.Presentation.Terminal.MAUI.UI.
                 {
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
 
-                    concreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.IsBusy = false;
                 });
             }
         });
@@ -122,5 +127,10 @@ public partial class PersonContactPickPage : Core.Presentation.Terminal.MAUI.UI.
         Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
 
         pickedFlag = true;
+    }
+
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
     }
 }

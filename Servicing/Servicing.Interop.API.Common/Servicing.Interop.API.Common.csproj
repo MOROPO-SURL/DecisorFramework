@@ -6,15 +6,12 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Servicing.Interop.API.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+	  <Compile Remove="Models\**" />
+	  <EmbeddedResource Remove="Models\**" />
+	  <None Remove="Models\**" />
+	</ItemGroup>
+	<ItemGroup>
 		<ProjectReference Include="..\..\Financial\Financial.Interop.API.Common\Financial.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Servicing.Persistence\Servicing.Persistence.csproj" />
-	</ItemGroup>
-	<ItemGroup>
-	  <None Remove="Models\Input\" />
-	  <None Remove="Models\Filter\" />
-	</ItemGroup>
-	<ItemGroup>
-	  <Folder Include="Models\Display\" />
-	  <Folder Include="Models\Input\" />
 	</ItemGroup>
 </Project>

@@ -29,7 +29,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
         public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Domain { get; set; }
 
-        public Guama.Core.Persistence.Entities.Contract.IPriorizableEntity<int>[] EmploymentContracts { get; set; }
+        public Core.Persistence.Entities.Contract.IYearIndexable[] EmploymentContracts { get; set; }
 
         public int DailyCheckingMonth { get => dailyCheckingMonth; set => SetProperty(ref dailyCheckingMonth, value); }
 

@@ -1,0 +1,213 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.PurchaseOrderDetailPage"
+    x:TypeArguments="interop_common_display_models:PurchaseOrderDisplayModel"
+    x:DataType="interop_common_display_models:PurchaseOrderDisplayModel"
+    Title="Detalles de Orden de Compra"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="600"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <StackLayout Margin="20" Spacing="20">
+                        <StackLayout>
+                            <Label 
+                                Margin="0,0,0,20"
+                                Text="Detalles"
+                                FontAttributes="Bold"
+                                FontSize="Medium" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
+                                Text="Fecha esperada" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding PlannedFor, StringFormat='{0:D}'}" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Responsable" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Responsible.Contact.Identity}" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Productos Esperados" />
+                            <VerticalStackLayout
+                                BindableLayout.ItemsSource="{Binding ExpectedProductResults}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:PurchaseOrderExpectedProductResultDisplayModel">
+                                        <StackLayout Orientation="Horizontal" Spacing="8">
+                                            <Label
+                                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                                VerticalOptions="Center"
+                                                FontAttributes="Bold"
+                                                Text="-" />
+                                            <Label 
+                                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Product.Name}" />
+                                                        <Span Text="{Binding Classification.Name, StringFormat=' ({0})'}" />
+                                                        <Span Text=" [ " />
+                                                        <Span Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding UnitMeasurement.Symbol}" />
+                                                        <Span Text=" ]" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Ofertas de Proveedores Jurídicos" />
+                            <VerticalStackLayout
+                                BindableLayout.ItemsSource="{Binding LegalProviderBudgets}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:LegalProviderBudgetDisplayModel">
+                                        <StackLayout Orientation="Horizontal" Spacing="8">
+                                            <Label
+                                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                                VerticalOptions="Center"
+                                                FontAttributes="Bold"
+                                                Text="-" />
+                                            <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                <Label 
+                                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                                    FontAttributes="Bold"
+                                                    Text="{Binding Provider.Contact.Identity.Name}" />
+                                                <Label 
+                                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                                    Text="{Binding Provider.Contact.BusinessKind.Name}" />
+                                            </VerticalStackLayout>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                                <BindableLayout.EmptyView>
+                                    <Label Text="---" />
+                                </BindableLayout.EmptyView>
+                            </VerticalStackLayout>
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Ofertas de Proveedores Naturales" />
+                            <VerticalStackLayout
+                                BindableLayout.ItemsSource="{Binding NaturalProviderBudgets}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:NaturalProviderBudgetDisplayModel">
+                                        <StackLayout Orientation="Horizontal" Spacing="8">
+                                            <Label
+                                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                                VerticalOptions="Center"
+                                                FontAttributes="Bold"
+                                                Text="-" />
+                                            <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                <Label 
+                                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                                    FontAttributes="Bold"
+                                                    Text="{Binding Provider.Contact.Identity}" />
+                                                <Label 
+                                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                                    Text="{Binding Provider.Contact.BusinessKind.Name}" />
+                                            </VerticalStackLayout>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                                <BindableLayout.EmptyView>
+                                    <Label Text="---" />
+                                </BindableLayout.EmptyView>
+                            </VerticalStackLayout>
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Insumos Asignados" />
+                            <VerticalStackLayout
+                                BindableLayout.ItemsSource="{Binding PlannedProductSpents}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:PurchaseOrderPlannedProductSpentDisplayModel">
+                                        <StackLayout Orientation="Horizontal" Spacing="8">
+                                            <Label
+                                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                                VerticalOptions="Center"
+                                                FontAttributes="Bold"
+                                                Text="-" />
+                                            <Label 
+                                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Product.Name}" />
+                                                        <Span Text="{Binding Classification.Name, StringFormat=' ({0})'}" />
+                                                        <Span Text=" [ " />
+                                                        <Span Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding UnitMeasurement.Symbol}" />
+                                                        <Span Text=" ]" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                                <BindableLayout.EmptyView>
+                                    <Label Text="---" />
+                                </BindableLayout.EmptyView>
+                            </VerticalStackLayout>
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Anticipo estimado" />
+                            <Label Style="{StaticResource ValuePropertyLabelStyle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding AdvanceRequired, StringFormat='{0:F2}', TargetNullValue='---', FallbackValue='---'}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding AdvanceRequiredCurrency.Symbol}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Descripción" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Description, TargetNullValue='---', FallbackValue='---'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Prioridad" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Priority}" />
+                        </StackLayout>
+                        <StackLayout
+                            x:Name="OptionButtonsStackLayout"
+                            Orientation="Horizontal"
+                            Spacing="20">
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Exportar" />
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Modificar"
+                                Clicked="EditButton_Clicked" />
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Eliminar"
+                                Clicked="DeleteButton_Clicked" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

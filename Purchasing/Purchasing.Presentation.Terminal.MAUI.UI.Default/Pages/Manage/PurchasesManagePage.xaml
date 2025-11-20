@@ -107,7 +107,7 @@
                                         Text="Planificado" />
                                     <Label
                                         Style="{StaticResource ValueFieldLabelStyle}"
-                                        Text="{Binding PresentedItem.Plan.At}" />
+                                        Text="{Binding PresentedItem.Order.At}" />
                                     <Label 
                                         Style="{StaticResource CaptionFieldLabelStyle}"
                                         Text="Descripción" />

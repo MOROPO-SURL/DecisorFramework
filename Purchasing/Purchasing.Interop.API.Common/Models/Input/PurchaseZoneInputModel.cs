@@ -1,6 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
-using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
+﻿using MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
 using System.Collections.Generic;
 

@@ -6,12 +6,12 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Sales.Interop.API.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Commercial\Commercial.Interop.API.Common\Commercial.Interop.API.Common.csproj" />
-		<ProjectReference Include="..\Sales.Persistence\Sales.Persistence.csproj" />
-		<ProjectReference Include="..\..\Servicing\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj" />
+	  <Compile Remove="Models\**" />
+	  <EmbeddedResource Remove="Models\**" />
+	  <None Remove="Models\**" />
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Models\Display\" />
-	  <Folder Include="Models\Input\" />
+		<ProjectReference Include="..\..\Commercial\Commercial.Interop.API.Common\Commercial.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Sales.Persistence\Sales.Persistence.csproj" />
 	</ItemGroup>
 </Project>

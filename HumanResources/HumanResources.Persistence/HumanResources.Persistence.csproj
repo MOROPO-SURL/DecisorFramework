@@ -6,5 +6,6 @@
 	</PropertyGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Governance\Governance.Persistence\Governance.Persistence.csproj" />
+		<ProjectReference Include="..\..\Legal\Legal.Persistence\Legal.Persistence.csproj" />
 	</ItemGroup>
 </Project>

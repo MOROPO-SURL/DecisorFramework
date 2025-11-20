@@ -27,7 +27,7 @@
         </ToolbarItem>
         <ToolbarItem 
         Text="Cancelar"
-        Clicked="ApplyToolbarItem_Clicked">
+        Clicked="CancelToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>

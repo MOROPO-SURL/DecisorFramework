@@ -40,6 +40,8 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected virtual string EntityTypeName { get; } = "Elemento";
 
+        protected virtual bool IsNotificationRequired => true;
+
         public TConfigurationPageModel ConcreteBindingContext => (TConfigurationPageModel)BindingContext;
 
         protected virtual System.Threading.Tasks.Task<TOutModel> PerformCreationAsync() => throw new System.NotImplementedException();
@@ -84,7 +86,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 {
                     if (task.Exception == null && !task.IsCanceled)
                     {
-                        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.");
+                        if (IsNotificationRequired) CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
 
                         successCallbackAction.Invoke(task.Result);
 

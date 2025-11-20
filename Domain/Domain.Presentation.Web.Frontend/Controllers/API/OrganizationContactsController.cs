@@ -1,4 +1,5 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
@@ -12,7 +13,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
 {
     [Microsoft.AspNetCore.Mvc.Route("api/fwrk/domain/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class OrganizationContactsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<OrganizationContact, System.Guid, OrganizationContactInputModel, OrganizationContactDisplayModel>
+    public class OrganizationContactsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<OrganizationContact, System.Guid, OrganizationContactInputModel, OrganizationContactDisplayModel, OrganizationContactFilterModel>
     {
         private readonly IEntityRepository<EmailContactItem, System.Guid> emailContactRepository;
         private readonly IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository;
@@ -402,20 +403,5 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
             }
             catch { }
         }
-
-        // TODO Transpolate to backend !!!
-        //protected override void PostDelete(OrganizationContact entity)
-        //{
-        //    base.PostDelete(entity);
-
-        //    if (entity.Identity.ImageId != null)
-        //    {
-        //        var oldImage = imageRepository.Get(entity.Identity.ImageId.Value);
-
-        //        imageRepository.Delete(oldImage, User.Identity.Name);
-
-        //        imageFileManager.DeleteImageFile(oldImage);
-        //    }
-        //}
     }
 }

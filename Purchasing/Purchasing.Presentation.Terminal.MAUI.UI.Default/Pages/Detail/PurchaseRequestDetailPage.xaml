@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.PurchaseRequestDetailPage"
+    x:TypeArguments="interop_common_display_models:PurchaseRequestDisplayModel"
+    x:DataType="interop_common_display_models:PurchaseRequestDisplayModel"
+    Title="Detalles de Solicitud de Compra"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="560"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <StackLayout Margin="20" Spacing="20">
+                        <StackLayout>
+                            <Label 
+                                Margin="0,0,0,20"
+                                Text="Detalles"
+                                FontAttributes="Bold"
+                                FontSize="Medium" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
+                                Text="Fecha" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding At, StringFormat='{0:D}'}" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Productos" />
+                            <VerticalStackLayout
+                                BindableLayout.ItemsSource="{Binding ExpectedProductAdquisitions}">
+                                <BindableLayout.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:PurchaseRequestExpectedProductAdquisitionDisplayModel">
+                                        <StackLayout Orientation="Horizontal" Spacing="8">
+                                            <Label
+                                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                                VerticalOptions="Center"
+                                                FontAttributes="Bold"
+                                                Text="-" />
+                                            <Label 
+                                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Product.Name}" />
+                                                        <Span Text="{Binding Classification.Name, StringFormat=' ({0})'}" />
+                                                        <Span Text=" [ " />
+                                                        <Span Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding UnitMeasurement.Symbol}" />
+                                                        <Span Text=" ]" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </BindableLayout.ItemTemplate>
+                            </VerticalStackLayout>
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Solicitante" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Author.Contact.Identity}" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Descripción" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Argument}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Prioridad" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Priority}" />
+                        </StackLayout>
+                        <StackLayout
+                            x:Name="OptionButtonsStackLayout"
+                            Orientation="Horizontal"
+                            Spacing="20">
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Modificar"
+                                Clicked="EditButton_Clicked" />
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Eliminar"
+                                Clicked="DeleteButton_Clicked" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

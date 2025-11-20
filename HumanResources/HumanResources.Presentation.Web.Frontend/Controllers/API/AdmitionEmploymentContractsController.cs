@@ -6,9 +6,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 {
     [Microsoft.AspNetCore.Mvc.Route("api/fwrk/hhrr/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class AdmitionEmploymentContractsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultFilteredController<AdmitionEmploymentContract, int, AdmitionEmploymentContractDisplayModel, AdmitionEmploymentContractFilterModel>
+    public class AdmitionEmploymentContractsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultFilteredController<AdmitionEmploymentContract, System.Guid, AdmitionEmploymentContractDisplayModel, AdmitionEmploymentContractFilterModel>
     {
-        public AdmitionEmploymentContractsController(Guama.Core.Persistence.Repositories.IEntityRepository<AdmitionEmploymentContract, int> repository, Microsoft.Extensions.Localization.IStringLocalizer<AdmitionEmploymentContractsController> localizer, Microsoft.Extensions.Logging.ILogger<AdmitionEmploymentContractsController> logger) : base(repository, localizer, logger)
+        public AdmitionEmploymentContractsController(Guama.Core.Persistence.Repositories.IEntityRepository<AdmitionEmploymentContract, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<AdmitionEmploymentContractsController> localizer, Microsoft.Extensions.Logging.ILogger<AdmitionEmploymentContractsController> logger) : base(repository, localizer, logger)
         {
         }
 

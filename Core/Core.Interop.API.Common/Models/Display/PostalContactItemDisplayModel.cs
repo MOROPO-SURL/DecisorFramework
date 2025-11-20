@@ -8,7 +8,7 @@
 
         public string Address { get; set; }
 
-        public int ZipCode { get; set; }
+        public int? ZipCode { get; set; }
 
         public decimal Longitude { get; set; }
 
@@ -21,9 +21,13 @@
             Id = entity.Id;
             Label = entity.Label;
             Address = entity.Address;
-            ZipCode = entity.ZipCode;
             Longitude = entity.Longitude;
             Latitude = entity.Latitude;
+
+            if (entity.ZipCode > 0)
+            {
+                ZipCode = entity.ZipCode;
+            }
 
             Municipality = new MunicipalityDisplayModel { Id = (entity.Location as Guama.Location.Persistence.Entities.MunicipalityLocation).MunicipalityId.Value };
         }

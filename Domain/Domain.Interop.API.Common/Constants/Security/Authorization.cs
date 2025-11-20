@@ -47,6 +47,24 @@
         public const string OrganizationalUnityRemoverPermission = "organizational-unity-remover-domain-permission";
         #endregion
 
+        #region Colaborator
+        public const string ColaboratorManagementPermissionGroup = "colaborator-management-permission-group";
+
+        public const string ColaboratorViewerPermission = "colaborator-viewer-permission";
+        public const string ColaboratorCreatorPermission = "colaborator-creator-permission";
+        public const string ColaboratorEditorPermission = "colaborator-editor-permission";
+        public const string ColaboratorRemoverPermission = "colaborator-remover-permission";
+        #endregion
+
+        #region UnitMeasurement
+        public const string UnitMeasurementManagementPermissionGroup = "unit-measurement-management-permission-group";
+
+        public const string UnitMeasurementViewerPermission = "unit-measurement-viewer-permission";
+        public const string UnitMeasurementCreatorPermission = "unit-measurement-creator-permission";
+        public const string UnitMeasurementEditorPermission = "unit-measurement-editor-permission";
+        public const string UnitMeasurementRemoverPermission = "unit-measurement-remover-permission";
+        #endregion
+
         #region OrganizationContact
         public const string OrganizationContactManagementPermissionGroup = "organization-contact-management-domain-permission-group";
 

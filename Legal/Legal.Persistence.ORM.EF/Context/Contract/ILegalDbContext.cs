@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Legal.Persistence.ORM.EF.Context.Contract
 {
-    public interface ILegalDbContext
+    public interface ILegalDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDomainDbContext
     {
         public Microsoft.EntityFrameworkCore.DbSet<Entities.Tag> ClauseTags { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.Clause> Clauses { get; set; }
@@ -10,7 +10,6 @@
         public Microsoft.EntityFrameworkCore.DbSet<Entities.ProformaClauseBridge> ProformaSectionClauseBridges { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.ProclamationKind> ProclamationKinds { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.Proclamation> Proclamations { get; set; }
-        public Microsoft.EntityFrameworkCore.DbSet<Entities.CentralStateStructure> CentralStateStructures { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.RegulationKind> RegulationKinds { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.Regulation> Regulations { get; set; }
         public Microsoft.EntityFrameworkCore.DbSet<Entities.Disposition> Dispositions { get; set; }

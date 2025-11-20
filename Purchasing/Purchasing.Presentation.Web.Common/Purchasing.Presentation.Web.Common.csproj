@@ -6,10 +6,12 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Purchasing.Presentation.Web.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Persistence.ORM.EF" Version="6.0.1" />
 		<PackageReference Include="GuamaFramework.Media.Presentation.Web.Common" Version="6.0.1" />
 		<PackageReference Include="SkiaSharp" Version="2.88.8" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\Purchasing.Interop.API.Common\Purchasing.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\Purchasing.Persistence.ORM.EF\Purchasing.Persistence.ORM.EF.csproj" />
 	</ItemGroup>
 </Project>

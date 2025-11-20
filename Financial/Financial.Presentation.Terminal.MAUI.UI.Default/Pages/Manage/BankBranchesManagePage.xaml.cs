@@ -41,7 +41,12 @@ public partial class BankBranchesManagePage : Core.Presentation.Terminal.MAUI.UI
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+
+                        LoadItems(true);
+                    });
                 });
 
                 break;

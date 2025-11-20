@@ -11,8 +11,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.ORM.EF.Repositories
         protected override System.Linq.IQueryable<Entities.Purchase> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
-                .Include(entity => entity.Zone)
-                .Include(entity => entity.Plan).ThenInclude(entity => entity.Zone)
+                .Include(entity => entity.Order).ThenInclude(entity => entity.Zone)
                 .Include(entity => entity.Purchaser).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.LegalProviderProductBridges).ThenInclude(bridge => bridge.Product).ThenInclude(entity => entity.FeatureImage)
                 .Include(entity => entity.LegalProviderProductBridges).ThenInclude(bridge => bridge.Provider).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
