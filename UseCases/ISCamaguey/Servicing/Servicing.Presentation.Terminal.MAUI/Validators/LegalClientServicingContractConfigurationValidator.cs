@@ -7,7 +7,7 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.Validat
     {
         public LegalClientServicingContractConfigurationValidator()
         {
-            RuleFor(model => model.Id).GreaterThanOrEqualTo(1);
+            RuleFor(model => model.Index).GreaterThanOrEqualTo(1);
 
             RuleFor(model => model.Year).GreaterThanOrEqualTo(System.DateTime.Now.Year - 5);
 

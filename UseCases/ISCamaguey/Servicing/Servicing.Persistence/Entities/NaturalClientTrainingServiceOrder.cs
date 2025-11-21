@@ -4,6 +4,6 @@
     {
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(TrainingNaturalClientContractId))]
         public NaturalClientServicingContract Contract { get; set; }
-        public int TrainingNaturalClientContractId { get; set; }
+        public System.Guid TrainingNaturalClientContractId { get; set; }
     }
 }

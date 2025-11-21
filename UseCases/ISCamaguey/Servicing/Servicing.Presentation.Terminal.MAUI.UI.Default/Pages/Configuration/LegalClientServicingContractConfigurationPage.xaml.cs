@@ -17,7 +17,8 @@ public partial class LegalClientServicingContractConfigurationPage : Framework.D
 
         var model = new Interop.API.Common.Models.Input.LegalClientServicingContractInputModel
         {
-            Id = ConcreteBindingContext.Id,
+            Id = System.Guid.NewGuid(),
+            Index = ConcreteBindingContext.Index,
             Year = ConcreteBindingContext.Year,
             Objective = ConcreteBindingContext.Objective,
             DurationUnitCount = ConcreteBindingContext.DurationUnitCount,
@@ -42,6 +43,7 @@ public partial class LegalClientServicingContractConfigurationPage : Framework.D
         var model = new Interop.API.Common.Models.Input.LegalClientServicingContractInputModel
         {
             Id = ConcreteBindingContext.Id,
+            Index = ConcreteBindingContext.Index,
             Year = ConcreteBindingContext.Year,
             Objective = ConcreteBindingContext.Objective,
             DurationUnitCount = ConcreteBindingContext.DurationUnitCount,
