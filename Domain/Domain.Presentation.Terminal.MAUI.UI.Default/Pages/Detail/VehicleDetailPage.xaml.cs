@@ -13,6 +13,8 @@ public partial class VehicleDetailPage : Core.Presentation.Terminal.MAUI.UI.Page
         InitializeComponent();
 
         this.delegationAction = delegationAction;
+
+        OptionsStackLayout.IsVisible = delegationAction != null;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)

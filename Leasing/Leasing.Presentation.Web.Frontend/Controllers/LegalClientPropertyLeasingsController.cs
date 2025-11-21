@@ -141,6 +141,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                     Id = clientId,
                     Enabled = true,
                     Priority = postulation.Contact.Priority,
+                    ContactId = postulation.ContactId,
                     DefaultPaymentTermId = model.PaymentTermId,
                     BankAccountBridges = [new LegalClientBankAccountBridge { ProwId = clientId, SternId = postulation.BankAccountId }],
                     DocumentBridges = postulation.DocumentBridges.Select(bridge => new LegalClientDocumentBridge
