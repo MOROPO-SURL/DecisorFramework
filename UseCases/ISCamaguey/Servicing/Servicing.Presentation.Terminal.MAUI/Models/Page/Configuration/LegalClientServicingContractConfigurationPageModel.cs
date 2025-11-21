@@ -2,7 +2,7 @@
 {
     public class LegalClientServicingContractConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.LegalClientServicingContractDisplayModel>
     {
-        public static string IdValidableProperty => nameof(Id);
+        public static string IdValidableProperty => nameof(Index);
         public static string YearValidableProperty => nameof(Year);
         public static string ObjectiveValidableProperty => nameof(Objective);
         public static string DurationUnitCountValidableProperty => nameof(DurationUnitCount);
@@ -14,7 +14,7 @@
         public static string SampleAnalysisServicesValidableProperty => nameof(SampleAnalysisServices);
         public static string GroundIntegralStudyServicesValidableProperty => nameof(GroundIntegralStudyServices);
 
-        private int id;
+        private int index;
         private int year;
         private string objective;
         private System.DateTime startAt = System.DateTime.Now;
@@ -33,7 +33,8 @@
                 return;
             }
 
-            id = model.Id;
+            Id = model.Id;
+            index = model.Index;
             year = model.Year;
             objective = model.Objective;
             startAt = model.StarAt;
@@ -47,7 +48,9 @@
             GroundIntegralStudyServices = [.. model.GroundIntegralStudyServices];
         }
 
-        public int Id { get => id; set => SetProperty(ref id, value); }
+        public System.Guid Id { get; set; }
+
+        public int Index { get => index; set => SetProperty(ref index, value); }
 
         public int Year { get => year; set => SetProperty(ref year, value); }
 
