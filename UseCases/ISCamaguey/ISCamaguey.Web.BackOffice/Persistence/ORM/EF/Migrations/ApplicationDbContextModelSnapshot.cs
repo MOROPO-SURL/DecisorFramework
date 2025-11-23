@@ -4419,7 +4419,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasKey("Id")
                         .HasName("pk_traces");
 
-                    b.ToTable("traces");
+                    b.ToTable("traces", (string)null);
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Guama.Core.Security.Common.Persistence.Entities.Permission", b =>
@@ -8171,7 +8171,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("WarehouseId")
                         .HasDatabaseName("ix_receptions_warehouseid");
 
-                    b.ToTable("receptions");
+                    b.ToTable("receptions", (string)null);
 
                     b.HasDiscriminator().HasValue("TransferReception");
                 });
@@ -8221,7 +8221,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("VacantId")
                         .HasDatabaseName("ix_resolutions_vacantid");
 
-                    b.ToTable("resolutions");
+                    b.ToTable("resolutions", (string)null);
 
                     b.HasDiscriminator().HasValue("NamingResolution");
                 });
@@ -8250,7 +8250,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("OcupationId")
                         .HasDatabaseName("ix_resolutions_ocupationid");
 
-                    b.ToTable("resolutions");
+                    b.ToTable("resolutions", (string)null);
 
                     b.HasDiscriminator().HasValue("RemotionResolution");
                 });

@@ -16,6 +16,8 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Display
 
         public Framework.Decisor.Commercial.Interop.API.Common.Models.Display.LegalClientDisplayModel Client { get; set; }
 
+        public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get; set; }
+
         public override void Import(Persistence.Entities.LegalClientServicingContract entity)
         {
             base.Import(entity);
@@ -39,6 +41,13 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Display
                 Client = new Framework.Decisor.Commercial.Interop.API.Common.Models.Display.LegalClientDisplayModel();
 
                 Client.Import(entity.Client);
+            }
+
+            if (entity.Document != null)
+            {
+                Document = new Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+
+                Document.Import(entity.Document);
             }
 
             TrainingServices = entity.TrainingServiceBridges.Select(bridge =>

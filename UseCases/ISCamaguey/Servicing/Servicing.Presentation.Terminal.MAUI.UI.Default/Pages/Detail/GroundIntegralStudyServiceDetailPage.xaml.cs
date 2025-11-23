@@ -12,6 +12,8 @@ public partial class GroundIntegralStudyServiceDetailPage : Framework.Decisor.Co
         InitializeComponent();
 
         this.delegationAction = delegationAction;
+
+        OptionsStackLayout.IsVisible = delegationAction != null;
     }
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)

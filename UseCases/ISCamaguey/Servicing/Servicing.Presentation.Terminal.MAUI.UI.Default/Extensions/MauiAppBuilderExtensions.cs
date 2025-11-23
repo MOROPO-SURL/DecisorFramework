@@ -16,11 +16,13 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Defa
                 .AddSingleton<IDetailContentPageFactoryFacade<TrainingServiceDisplayModel>, TrainingServiceDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<SampleAnalysisServiceDisplayModel>, SampleAnalysisServiceDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<GroundIntegralStudyServiceDisplayModel>, GroundIntegralStudyServiceDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<LegalClientServicingContractDisplayModel>, LegalClientServicingContractDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<TrainingServiceDisplayModel, TrainingServiceConfigurationPageModel>, TrainingServiceConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<SampleAnalysisServiceDisplayModel, SampleAnalysisServiceConfigurationPageModel>, SampleAnalysisServiceConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<GroundIntegralStudyServiceDisplayModel, GroundIntegralStudyServiceConfigurationPageModel>, GroundIntegralStudyServiceConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<GroundIntegralStudyServiceDisplayModel, GroundIntegralStudyServiceConfigurationPageModel>, GroundIntegralStudyServiceConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<LegalClientServicingContractDisplayModel, LegalClientServicingContractConfigurationPageModel>, LegalClientServicingContractConfigurationPageFactory>();
 
             return builder;
         }

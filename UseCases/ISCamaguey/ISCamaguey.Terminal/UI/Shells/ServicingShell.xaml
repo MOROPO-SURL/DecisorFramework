@@ -6,6 +6,7 @@
     xmlns:fwrk_commercial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
     xmlns:domain_list_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:servicing_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:servicing_list_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.ServicingShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -104,6 +105,20 @@
         <ShellContent
             Title="Naturales"
             ContentTemplate="{DataTemplate fwrk_commercial_manage_pages:NaturalClientsManagePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Contratos">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF01B1;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate servicing_list_pages:LegalClientWidthContractingStatussesListPage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
     <ShellContent

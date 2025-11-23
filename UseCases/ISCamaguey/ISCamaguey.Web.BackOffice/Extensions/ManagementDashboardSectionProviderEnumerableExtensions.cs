@@ -446,7 +446,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Title = "Tipos de Muestra",
                 Controller = "samplekinds",
                 Action = "Index",
-                Area = "lab",
+                Area = "domain",
                 // TODO Set spected permission
                 //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });

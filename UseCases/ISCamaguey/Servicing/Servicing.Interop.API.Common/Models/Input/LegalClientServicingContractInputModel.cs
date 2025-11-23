@@ -6,9 +6,9 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input
     {
         public System.Guid Id { get; set; }
 
-        public int Index { get; set; }
+        public System.DateTime StartAt { get; set; }
 
-        public int Year { get; set; }
+        public int Index { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Objective { get; set; }
@@ -23,6 +23,8 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input
 
         public System.Guid BankAccountId { get; set; }
 
+        public Framework.Decisor.Core.Interop.API.Common.Models.Input.DocumentInputModel Document { get; set; }
+
         public System.Collections.Generic.List<Display.TrainingServiceDisplayModel> TrainingServices { get; set; } = new System.Collections.Generic.List<Display.TrainingServiceDisplayModel>();
 
         public System.Collections.Generic.List<Display.GroundIntegralStudyServiceDisplayModel> GroundIntegralStudyServices { get; set; } = new System.Collections.Generic.List<Display.GroundIntegralStudyServiceDisplayModel>();
@@ -31,7 +33,7 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input
 
         public Persistence.Entities.LegalClientServicingContract Export()
         {
-            var entity = new Persistence.Entities.LegalClientServicingContract();
+            var entity = new Persistence.Entities.LegalClientServicingContract { Id = Id };
 
             Mergue(entity);
 
@@ -45,8 +47,9 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input
 
         public void Mergue(Persistence.Entities.LegalClientServicingContract entity)
         {
+            entity.StarAt = StartAt;
             entity.Index = Index;
-            entity.Year = Year;
+            entity.Year = StartAt.Year;
             entity.Objective = Objective;
             entity.DurationUnitCount = DurationUnitCount;
             entity.DurationUnitMeasureKind = DurationUnitMeasureKind;

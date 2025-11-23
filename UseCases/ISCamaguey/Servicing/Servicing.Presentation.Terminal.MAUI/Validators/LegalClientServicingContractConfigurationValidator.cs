@@ -9,8 +9,6 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.Validat
         {
             RuleFor(model => model.Index).GreaterThanOrEqualTo(1);
 
-            RuleFor(model => model.Year).GreaterThanOrEqualTo(System.DateTime.Now.Year - 5);
-
             RuleFor(model => model.DurationUnitCount).GreaterThanOrEqualTo(1);
 
             RuleFor(model => model.DurationUnitMeasureKind).NotNull();
@@ -21,7 +19,7 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.Validat
 
             RuleFor(model => model.Client).NotNull();
 
-            RuleFor(model => model.BanckAccount).NotNull();
+            RuleFor(model => model.BankAccount).NotNull();
 
             RuleFor(model => model.TrainingServices).Must((model, value) =>
             {

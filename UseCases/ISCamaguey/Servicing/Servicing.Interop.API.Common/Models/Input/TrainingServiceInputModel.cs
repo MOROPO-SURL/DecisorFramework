@@ -20,9 +20,7 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Input
 
         public override void Mergue(Persistence.Entities.TrainingService entity)
         {
-            base.Mergue(entity);
-
-            
+            base.Mergue(entity);            
 
             entity.EmployeeBridges.Clear();
 

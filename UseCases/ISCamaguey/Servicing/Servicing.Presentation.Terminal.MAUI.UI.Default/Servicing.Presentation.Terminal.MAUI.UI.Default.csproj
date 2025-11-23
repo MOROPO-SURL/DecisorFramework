@@ -30,9 +30,15 @@
 		<PackageReference Include="UraniumUI.Material" Version="2.12.1" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\..\..\Commercial\Commercial.Presentation.Terminal.MAUI.UI.Default\Commercial.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\..\..\HumanResources\HumanResources.Presentation.Terminal.MAUI.UI.Default\HumanResources.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Servicing.Interop.API.Connect\Servicing.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\Servicing.Presentation.Terminal.MAUI\Servicing.Presentation.Terminal.MAUI.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Pages\List\LegalClientWidthContractingStatussesListPage.xaml.cs">
+	    <DependentUpon>LegalClientWidthContractingStatussesListPage.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="Pages\Configuration\GroundIntegralStudyServiceConfigurationPage.xaml">
@@ -62,6 +68,9 @@
 	  <MauiXaml Update="Pages\Detail\GroundIntegralStudyServiceStepDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\LegalClientServicingContractDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\SampleAnalysisServiceDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -74,13 +83,40 @@
 	  <MauiXaml Update="Pages\Detail\TrainingServiceStepDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\List\LegalClientWidthContractingStatussesListPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\GroundIntegralStudyServicesManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\LegalClientServicingContractsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\SampleAnalysisServicesManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\TrainingServicesManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\GroundIntegralStudyServicePickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\SampleAnalysisServicePickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\TrainingServicePickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\GroundIntegralStudyServiceDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\LegalClientServicingContractDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\SampleAnalysisServiceDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\TrainingServiceDefaultCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
