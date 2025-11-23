@@ -18,6 +18,51 @@
 
         public Persistence.Enumerations.DurationUnitMeasureKind? DurationUnitMeasureKind { get; set; }
 
+        [Newtonsoft.Json.JsonIgnore]
+        public bool IsEnded 
+        { 
+            get
+            {
+                var now = System.DateTime.Now;
+
+                if (DurationUnitCount != null && DurationUnitCount.Value > 0)
+                {
+                    var limitDateTime = StarAt;
+
+                    switch (DurationUnitMeasureKind.Value)
+                    {
+                        case Framework.Decisor.Legal.Persistence.Enumerations.DurationUnitMeasureKind.Years:
+                            limitDateTime = limitDateTime.AddYears(DurationUnitCount.Value);
+
+                            break;
+
+                        case Framework.Decisor.Legal.Persistence.Enumerations.DurationUnitMeasureKind.Months:
+                            limitDateTime = limitDateTime.AddMonths(DurationUnitCount.Value);
+
+                            break;
+
+                        case Framework.Decisor.Legal.Persistence.Enumerations.DurationUnitMeasureKind.Days:
+                            limitDateTime = limitDateTime.AddDays(DurationUnitCount.Value);
+
+                            break;
+
+                        case Framework.Decisor.Legal.Persistence.Enumerations.DurationUnitMeasureKind.Hours:
+                        default:
+                            limitDateTime = limitDateTime.AddHours(DurationUnitCount.Value);
+
+                            break;
+                    }
+
+                    if (limitDateTime < now)
+                    {
+                        return true;
+                    }
+                }
+
+                return false;
+            }
+        }
+
         public virtual void Import(TEntity entity)
         {
             Id = entity.Id;

@@ -221,14 +221,15 @@
                                     Text="Servicios de Capacitación" />
                                 <BoxView Color="DimGray" HeightRequest="2" />
                                 <VerticalStackLayout
-                                    Margin="0,2,0,0"
+                                    Margin="0,8,0,0"
+                                    Spacing="12"
                                     BindableLayout.ItemsSource="{Binding TrainingServices}">
                                     <BindableLayout.EmptyView>
                                         <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                     </BindableLayout.EmptyView>
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate x:DataType="interop_common_display_models:TrainingServiceDisplayModel">
-                                            <Grid Margin="0,2" ColumnSpacing="8">
+                                            <Grid ColumnSpacing="8">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition />
@@ -265,14 +266,15 @@
                                     Text="Servicios de Análisis de Muestras" />
                                 <BoxView Color="DimGray" HeightRequest="2" />
                                 <VerticalStackLayout
-                                    Margin="0,2,0,0"
+                                    Margin="0,8,0,0"
+                                    Spacing="12"
                                     BindableLayout.ItemsSource="{Binding SampleAnalysisServices}">
                                     <BindableLayout.EmptyView>
                                         <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                     </BindableLayout.EmptyView>
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate x:DataType="interop_common_display_models:SampleAnalysisServiceDisplayModel">
-                                            <Grid Margin="0,2" ColumnSpacing="8">
+                                            <Grid ColumnSpacing="8">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition />
@@ -309,14 +311,15 @@
                                     Text="Servicios de Estudio Integral de Suelos" />
                                 <BoxView Color="DimGray" HeightRequest="2" />
                                 <VerticalStackLayout
-                                    Margin="0,2,0,0"
+                                    Margin="0,8,0,0"
+                                    Spacing="12"
                                     BindableLayout.ItemsSource="{Binding GroundIntegralStudyServices}">
                                     <BindableLayout.EmptyView>
                                         <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                     </BindableLayout.EmptyView>
                                     <BindableLayout.ItemTemplate>
                                         <DataTemplate x:DataType="interop_common_display_models:GroundIntegralStudyServiceDisplayModel">
-                                            <Grid Margin="0,2" ColumnSpacing="8">
+                                            <Grid ColumnSpacing="8">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="Auto" />
                                                     <ColumnDefinition />
