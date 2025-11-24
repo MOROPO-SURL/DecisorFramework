@@ -15,6 +15,7 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Web.Common.Extensions
             services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.LegalClientServicingContract, System.Guid>, Persistence.ORM.EF.Repositories.LegalClientServicingContractRepository>();
             services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.NaturalClientServicingContract, System.Guid>, Persistence.ORM.EF.Repositories.NaturalClientServicingContractRepository>();
             services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.LegalClientSampleAnalysisServiceOrder, long>, Persistence.ORM.EF.Repositories.LegalClientSampleAnalysisServiceOrderRepository>();
+            services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.NaturalClientSampleAnalysisServiceOrder, long>, Persistence.ORM.EF.Repositories.NaturalClientSampleAnalysisServiceOrderRepository>();
 
             services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.ServicingDbSchemaConfigurationProvider>();
         }

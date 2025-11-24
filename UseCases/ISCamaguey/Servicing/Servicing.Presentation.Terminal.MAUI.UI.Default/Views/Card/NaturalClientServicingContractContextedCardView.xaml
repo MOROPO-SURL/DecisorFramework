@@ -43,26 +43,6 @@
                     LineBreakMode="TailTruncation"
                     MaxLines="3"
                     Text="{Binding StarAt, StringFormat='{0:dd/MM/yyyy}'}" />
-                <Label 
-                    Margin="0,8,0,0"
-                    TextColor="DimGray"
-                    Text="Duración"
-                    FontSize="Caption"
-                    FontAttributes="Bold" />
-                <HorizontalStackLayout>
-                    <Label Text="{Binding DurationUnitCount, TargetNullValue='---', FallbackValue='---'}" />
-                    <Label Text="{Binding DurationUnitMeasureKind}" Margin="6,0,0,0" />
-                </HorizontalStackLayout>
-                <Label 
-                    Margin="0,8,0,0"
-                    Text="Objeto"
-                    TextColor="DimGray"
-                    FontSize="Caption"
-                    FontAttributes="Bold" />
-                <Label
-                    LineBreakMode="TailTruncation"
-                    MaxLines="3"
-                    Text="{Binding Objective}" />
             </VerticalStackLayout>
             <Grid
                 IsVisible="{Binding IsEnded}"

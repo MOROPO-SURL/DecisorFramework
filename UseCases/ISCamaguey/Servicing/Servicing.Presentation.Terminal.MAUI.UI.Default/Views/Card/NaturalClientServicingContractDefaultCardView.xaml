@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_pick_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Pick"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Views.Card.NaturalClientServicingContractDefaultCardView"
+    x:DataType="interop_common_display_models:NaturalClientServicingContractDisplayModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <fwrk_core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
+            <caneyframework_presentation_converters:DoubleToFactorConverter x:Key="DoubleToFactorConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame 
+        Padding="0"
+        IsClippedToBounds="True">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <VerticalStackLayout
+                Margin="20"
+                Grid.ColumnSpan="2">
+                <Label FontSize="Large">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Index}" />
+                            <Span Text=" / " />
+                            <Span Text="{Binding Year}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Inicio"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label
+                    LineBreakMode="TailTruncation"
+                    MaxLines="3"
+                    Text="{Binding StarAt, StringFormat='{0:dd/MM/yyyy}'}" />
+                <Label 
+                    Margin="0,8,0,0"
+                    TextColor="DimGray"
+                    Text="Cliente"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Grid Margin="0,4,0,0">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Border 
+                        Grid.Column="0"
+                        VerticalOptions="Center"
+                        StrokeThickness="4"
+                        StrokeLineJoin="Bevel">
+                        <Border.StrokeShape>
+                            <RoundRectangle CornerRadius="32" />
+                        </Border.StrokeShape>
+                        <Image
+                            WidthRequest="64" HeightRequest="64"
+                            Source="{Binding Client.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                    </Border>
+                    <StackLayout 
+                        Grid.Column="1"
+                        VerticalOptions="Center"
+                        Padding="10,0">
+                        <Label
+                            ToolTipProperties.Text="{Binding Client.Contact.Identity.Name}"
+                            Text="{Binding Client.Contact.Identity.Name}"
+                            FontSize="Medium"
+                            LineBreakMode="TailTruncation" />
+                        <Label
+                            IsVisible="{Binding Client.Contact.Identity.LastName, Converter={StaticResource IsNotNullConverter}}"
+                            ToolTipProperties.Text="{Binding Client.Contact.Identity.LastName}"
+                            Text="{Binding Client.Contact.Identity.LastName}"
+                            LineBreakMode="TailTruncation" />
+                        <Label
+                            ToolTipProperties.Text="{Binding Client.Contact.BusinessKind.Name}"
+                            Text="{Binding Client.Contact.BusinessKind.Name}"
+                            LineBreakMode="TailTruncation" />
+                    </StackLayout>
+                </Grid>
+            </VerticalStackLayout>
+            <Grid
+                IsVisible="{Binding IsEnded}"
+                Grid.Column="1"
+                WidthRequest="{Binding Source={Static local_pick_pages:NaturalClientServicingContractPickPage.ITEM_VIEW_REQUEST_HEIGHT}, Converter={StaticResource DoubleToFactorConverter}, ConverterParameter=2}"
+                VerticalOptions="Center"
+                Padding="0,2"
+                BackgroundColor="#A7FFFFFF"
+                Rotation="45"
+                TranslationX="{Binding Source={Static local_pick_pages:NaturalClientServicingContractPickPage.ITEM_VIEW_REQUEST_HEIGHT}, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=2}">
+                <Label                    
+                    Padding="8"
+                    BackgroundColor="{StaticResource Primary}"
+                    HorizontalTextAlignment="Center"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    Text="Concluido" />
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentView>

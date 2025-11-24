@@ -5,7 +5,7 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class LegalClientServicingContractPickPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.LegalClientServicingContractDisplayModel, Models.Page.Pick.LegalClientServicingContractPickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 228;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 232;
 
     private System.Action<Interop.API.Common.Models.Display.LegalClientServicingContractDisplayModel> pickCompleteAction;
 

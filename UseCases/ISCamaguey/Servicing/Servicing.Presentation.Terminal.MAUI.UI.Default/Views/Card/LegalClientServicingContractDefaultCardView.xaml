@@ -52,7 +52,7 @@
                     Text="Cliente"
                     FontSize="Caption"
                     FontAttributes="Bold" />
-                <Grid>
+                <Grid Margin="0,4,0,0">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition />

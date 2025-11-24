@@ -76,7 +76,7 @@
             ContentTemplate="{DataTemplate servicing_manage_pages:LegalClientSampleAnalysisServiceOrdersManagePage}" />
         <ShellContent
             Title="Naturales"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_manage_pages:NaturalClientSampleAnalysisServiceOrdersManagePage}" />
     </FlyoutItem>
     <FlyoutItem Title="Estudios Int. de Suelo">
         <FlyoutItem.Icon>
