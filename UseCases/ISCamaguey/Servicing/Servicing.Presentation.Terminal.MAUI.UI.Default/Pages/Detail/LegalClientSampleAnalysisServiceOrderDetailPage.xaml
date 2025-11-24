@@ -4,17 +4,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.LegalClientSampleAnalysisServiceOrderDetailPage"
     x:TypeArguments="interop_common_display_models:LegalClientSampleAnalysisServiceOrderDisplayModel"
     x:DataType="interop_common_display_models:LegalClientSampleAnalysisServiceOrderDisplayModel"
     Title="Detalles de Órden de Servicio para Cliente Jurídico"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <fwrk_core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <Grid>
             <Grid
                 Padding="10"
-                MaximumWidthRequest="400"
+                MaximumWidthRequest="600"
                 VerticalOptions="Center">
                 <Frame Style="{StaticResource PopupFrameStyle}">
                     <StackLayout Margin="20">
@@ -24,8 +30,55 @@
                             FontAttributes="Bold"
                             FontSize="Medium" />
                         <Label
-                            FontSize="Large"
-                            Text="{Binding Id}" />
+                            FontSize="Header"
+                            Text="{Binding Id, StringFormat='# {0}'}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Fecha" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding At, StringFormat='{0:dd/MM/yyyy HH:mm}'}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Cliente" />
+                        <Grid Margin="0,4,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Border 
+                                Grid.Column="0"
+                                VerticalOptions="Center"
+                                StrokeThickness="4"
+                                StrokeLineJoin="Bevel">
+                                <Border.StrokeShape>
+                                    <RoundRectangle CornerRadius="4" />
+                                </Border.StrokeShape>
+                                <Image
+                                    WidthRequest="64" HeightRequest="64"
+                                    Source="{Binding Contract.Client.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                            </Border>
+                            <StackLayout 
+                                Grid.Column="1"
+                                VerticalOptions="Center"
+                                Padding="10,0">
+                                <Label
+                                    ToolTipProperties.Text="{Binding Contract.Client.Contact.Identity.Name}"
+                                    Text="{Binding Contract.Client.Contact.Identity.Name}"
+                                    FontSize="Medium"
+                                    LineBreakMode="TailTruncation" />
+                                <Label
+                                    ToolTipProperties.Text="{Binding Contract.Client.Contact.BusinessKind.Name}"
+                                    Text="{Binding Contract.Client.Contact.BusinessKind.Name}"
+                                    LineBreakMode="TailTruncation" />
+                            </StackLayout>
+                        </Grid>
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Técnica solicitada" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding RequestedTechnique.Name, TargetNullValue='---', FallbackValue='---'}" />
                         <Label 
                             Style="{StaticResource CaptionPropertyLabelStyle}"
                             Text="Descripción" />
@@ -34,6 +87,7 @@
                             Text="{Binding Description}" />
                         <StackLayout
                             x:Name="OptionButtonsLayout"
+                            Margin="0,20,0,0"
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 
