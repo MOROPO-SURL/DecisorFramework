@@ -18,9 +18,30 @@
 
         public Persistence.Enumerations.DurationUnitMeasureKind? DurationUnitMeasureKind { get; set; }
 
+        public Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get; set; }
+
+        public virtual void Import(TEntity entity)
+        {
+            Id = entity.Id;
+            Index = entity.Index;
+            Year = entity.Year;
+            At = entity.At;
+            Objective = entity.Objective;
+            StarAt = entity.StarAt;
+            DurationUnitCount = entity.DurationUnitCount;
+            DurationUnitMeasureKind = entity.DurationUnitMeasureKind;
+
+            if (entity.Document != null)
+            {
+                Document = new Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+
+                Document.Import(entity.Document);
+            }
+        }
+
         [Newtonsoft.Json.JsonIgnore]
-        public bool IsEnded 
-        { 
+        public bool IsEnded
+        {
             get
             {
                 var now = System.DateTime.Now;
@@ -61,18 +82,6 @@
 
                 return false;
             }
-        }
-
-        public virtual void Import(TEntity entity)
-        {
-            Id = entity.Id;
-            Index = entity.Index;
-            Year = entity.Year;
-            At = entity.At;
-            Objective = entity.Objective;
-            StarAt = entity.StarAt;
-            DurationUnitCount = entity.DurationUnitCount;
-            DurationUnitMeasureKind = entity.DurationUnitMeasureKind;
         }
     }
 }

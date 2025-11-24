@@ -118,7 +118,7 @@
             ContentTemplate="{DataTemplate servicing_list_pages:LegalClientWidthContractingStatussesListPage}" />
         <ShellContent
             Title="Naturales"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_list_pages:NaturalClientWidthContractingStatussesListPage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
     <ShellContent
