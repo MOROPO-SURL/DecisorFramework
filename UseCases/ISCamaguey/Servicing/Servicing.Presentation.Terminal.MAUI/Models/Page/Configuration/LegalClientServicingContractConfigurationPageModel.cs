@@ -2,7 +2,7 @@
 
 public class LegalClientServicingContractConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.LegalClientServicingContractDisplayModel>
 {
-    public static string IdValidableProperty => nameof(Index);
+    public static string IndexValidableProperty => nameof(Index);
     public static string ObjectiveValidableProperty => nameof(Objective);
     public static string DurationUnitCountValidableProperty => nameof(DurationUnitCount);
     public static string DurationUnitMeasureKindValidableProperty => nameof(DurationUnitMeasureKind);

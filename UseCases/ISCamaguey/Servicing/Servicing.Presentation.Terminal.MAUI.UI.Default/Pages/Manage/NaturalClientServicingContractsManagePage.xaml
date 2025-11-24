@@ -108,11 +108,11 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <local_card_views:NaturalClientServicingContractDefaultCardView HeightRequest="{Static local:NaturalClientServicingContractsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
-                                    <local_card_views:NaturalClientServicingContractDefaultCardView.GestureRecognizers>
+                                <local_card_views:NaturalClientServicingContractContextedCardView HeightRequest="{Static local:NaturalClientServicingContractsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                    <local_card_views:NaturalClientServicingContractContextedCardView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </local_card_views:NaturalClientServicingContractDefaultCardView.GestureRecognizers>
-                                </local_card_views:NaturalClientServicingContractDefaultCardView>
+                                    </local_card_views:NaturalClientServicingContractContextedCardView.GestureRecognizers>
+                                </local_card_views:NaturalClientServicingContractContextedCardView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

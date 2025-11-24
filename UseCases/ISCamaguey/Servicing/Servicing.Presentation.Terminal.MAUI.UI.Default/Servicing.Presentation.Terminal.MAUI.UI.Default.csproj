@@ -36,8 +36,17 @@
 		<ProjectReference Include="..\Servicing.Presentation.Terminal.MAUI\Servicing.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\Detail\LegalClientSampleAnalysisServiceOrderDetailPage.xaml.cs">
+	    <DependentUpon>LegalClientSampleAnalysisServiceOrderDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\List\LegalClientWidthContractingStatussesListPage.xaml.cs">
 	    <DependentUpon>LegalClientWidthContractingStatussesListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\LegalClientServicingContractContextedCardView.xaml.cs">
+	    <DependentUpon>LegalClientServicingContractContextedCardView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\NaturalClientServicingContractContextedCardView.xaml.cs">
+	    <DependentUpon>NaturalClientServicingContractContextedCardView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
@@ -45,6 +54,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\GroundIntegralStudyServiceStepConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\LegalClientSampleAnalysisServiceOrderConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\LegalClientServicingContractConfigurationPage.xaml">
@@ -69,6 +81,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\GroundIntegralStudyServiceStepDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\LegalClientSampleAnalysisServiceOrderDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\LegalClientServicingContractDetailPage.xaml">
@@ -98,6 +113,9 @@
 	  <MauiXaml Update="Pages\Manage\GroundIntegralStudyServicesManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\LegalClientSampleAnalysisServiceOrdersManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\LegalClientServicingContractsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -113,6 +131,9 @@
 	  <MauiXaml Update="Pages\Pick\GroundIntegralStudyServicePickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\LegalClientServicingContractPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\SampleAnalysisServicePickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -122,10 +143,16 @@
 	  <MauiXaml Update="Views\Card\GroundIntegralStudyServiceDefaultCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\LegalClientSampleAnalysisServiceOrderDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\LegalClientServicingContractContextedCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\LegalClientServicingContractDefaultCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Views\Card\NaturalClientServicingContractDefaultCardView.xaml">
+	  <MauiXaml Update="Views\Card\NaturalClientServicingContractContextedCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\SampleAnalysisServiceDefaultCardView.xaml">

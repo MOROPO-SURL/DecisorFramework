@@ -49,17 +49,49 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Operaciones" IsEnabled="False" />
-    <ShellContent
-        Title="Órdenes de Servicio (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
+    <MenuFlyoutItem Text="Órdenes" IsEnabled="False" />
+    <FlyoutItem Title="Capacitación">
+        <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFF75;"
+                Glyph="&#xF88F;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Procesamiento de Muestras">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF025C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate servicing_manage_pages:LegalClientSampleAnalysisServiceOrdersManagePage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Estudios Int. de Suelo">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFE49;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
     <MenuFlyoutItem Text="Servicios" IsEnabled="False" />
     <ShellContent
         Title="Capacitación"
