@@ -33,7 +33,7 @@
 
             if (entity.Document != null)
             {
-                Document = new Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+                Document = new Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
 
                 Document.Import(entity.Document);
             }
@@ -52,22 +52,22 @@
 
                     switch (DurationUnitMeasureKind.Value)
                     {
-                        case Framework.Decisor.Legal.Persistence.Enumerations.DurationUnitMeasureKind.Years:
+                        case Persistence.Enumerations.DurationUnitMeasureKind.Years:
                             limitDateTime = limitDateTime.AddYears(DurationUnitCount.Value);
 
                             break;
 
-                        case Framework.Decisor.Legal.Persistence.Enumerations.DurationUnitMeasureKind.Months:
+                        case Persistence.Enumerations.DurationUnitMeasureKind.Months:
                             limitDateTime = limitDateTime.AddMonths(DurationUnitCount.Value);
 
                             break;
 
-                        case Framework.Decisor.Legal.Persistence.Enumerations.DurationUnitMeasureKind.Days:
+                        case Persistence.Enumerations.DurationUnitMeasureKind.Days:
                             limitDateTime = limitDateTime.AddDays(DurationUnitCount.Value);
 
                             break;
 
-                        case Framework.Decisor.Legal.Persistence.Enumerations.DurationUnitMeasureKind.Hours:
+                        case Persistence.Enumerations.DurationUnitMeasureKind.Hours:
                         default:
                             limitDateTime = limitDateTime.AddHours(DurationUnitCount.Value);
 
