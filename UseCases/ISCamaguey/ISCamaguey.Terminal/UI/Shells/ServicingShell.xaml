@@ -6,6 +6,7 @@
     xmlns:fwrk_commercial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
     xmlns:domain_list_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.ISCamaguey.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:servicing_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:servicing_list_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.ServicingShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -48,17 +49,49 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Operaciones" IsEnabled="False" />
-    <ShellContent
-        Title="Órdenes de Servicio (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
+    <MenuFlyoutItem Text="Órdenes" IsEnabled="False" />
+    <FlyoutItem Title="Capacitación">
+        <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFF75;"
+                Glyph="&#xF88F;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Procesamiento de Muestras">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF025C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate servicing_manage_pages:LegalClientSampleAnalysisServiceOrdersManagePage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate servicing_manage_pages:NaturalClientSampleAnalysisServiceOrdersManagePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Estudios Int. de Suelo">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFE49;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
     <MenuFlyoutItem Text="Servicios" IsEnabled="False" />
     <ShellContent
         Title="Capacitación"
@@ -104,6 +137,20 @@
         <ShellContent
             Title="Naturales"
             ContentTemplate="{DataTemplate fwrk_commercial_manage_pages:NaturalClientsManagePage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Contratos">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF01B1;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate servicing_list_pages:LegalClientWidthContractingStatussesListPage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate servicing_list_pages:NaturalClientWidthContractingStatussesListPage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
     <ShellContent

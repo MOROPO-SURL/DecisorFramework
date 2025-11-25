@@ -183,6 +183,7 @@
                                 </uraniumui_material_controls:TabItem>
                             </uraniumui_material_controls:TabView>
                             <StackLayout
+                                x:Name="OptionsStackLayout"
                                 Orientation="Horizontal"
                                 Spacing="20">
                                 <Button 

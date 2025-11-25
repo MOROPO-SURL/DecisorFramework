@@ -8412,11 +8412,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("groundintegralstudylegalclientcontractid");
 
-                    b.Property<Guid>("GroundIntegralStudyResponsibleId")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("uuid")
-                        .HasColumnName("groundintegralstudyresponsibleid");
-
                     b.Property<Guid>("GroundIntegralStudyServiceId")
                         .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("uuid")
@@ -8424,9 +8419,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("GroundIntegralStudyLegalClientContractId")
                         .HasDatabaseName("ix_serviceorders_groundintegralstudylegalclientcontractid");
-
-                    b.HasIndex("GroundIntegralStudyResponsibleId")
-                        .HasDatabaseName("ix_serviceorders_groundintegralstudyresponsibleid");
 
                     b.HasIndex("GroundIntegralStudyServiceId")
                         .HasDatabaseName("ix_serviceorders_groundintegralstudyserviceid");
@@ -8444,11 +8436,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("traininglegalclientcontractid");
 
-                    b.Property<Guid>("TrainingResponsibleId")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("uuid")
-                        .HasColumnName("trainingresponsibleid");
-
                     b.Property<Guid>("TrainingServiceId")
                         .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("uuid")
@@ -8456,9 +8443,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("TrainingLegalClientContractId")
                         .HasDatabaseName("ix_serviceorders_traininglegalclientcontractid");
-
-                    b.HasIndex("TrainingResponsibleId")
-                        .HasDatabaseName("ix_serviceorders_trainingresponsibleid");
 
                     b.HasIndex("TrainingServiceId")
                         .HasDatabaseName("ix_serviceorders_trainingserviceid");
@@ -8476,11 +8460,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("groundintegralstudynaturalclientcontractid");
 
-                    b.Property<Guid>("GroundIntegralStudyResponsibleId")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("uuid")
-                        .HasColumnName("groundintegralstudyresponsibleid");
-
                     b.Property<Guid>("GroundIntegralStudyServiceId")
                         .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("uuid")
@@ -8488,9 +8467,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("GroundIntegralStudyNaturalClientContractId")
                         .HasDatabaseName("ix_serviceorders_groundintegralstudynaturalclientcontractid");
-
-                    b.HasIndex("GroundIntegralStudyResponsibleId")
-                        .HasDatabaseName("ix_serviceorders_groundintegralstudyresponsibleid");
 
                     b.HasIndex("GroundIntegralStudyServiceId")
                         .HasDatabaseName("ix_serviceorders_groundintegralstudyserviceid");
@@ -8508,11 +8484,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("trainingnaturalclientcontractid");
 
-                    b.Property<Guid>("TrainingResponsibleId")
-                        .ValueGeneratedOnUpdateSometimes()
-                        .HasColumnType("uuid")
-                        .HasColumnName("trainingresponsibleid");
-
                     b.Property<Guid>("TrainingServiceId")
                         .ValueGeneratedOnUpdateSometimes()
                         .HasColumnType("uuid")
@@ -8520,9 +8491,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("TrainingNaturalClientContractId")
                         .HasDatabaseName("ix_serviceorders_trainingnaturalclientcontractid");
-
-                    b.HasIndex("TrainingResponsibleId")
-                        .HasDatabaseName("ix_serviceorders_trainingresponsibleid");
 
                     b.HasIndex("TrainingServiceId")
                         .HasDatabaseName("ix_serviceorders_trainingserviceid");
@@ -12384,13 +12352,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_serviceorders_servicingcontracts_groundintegralstudylegalcl~");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
-                        .WithMany()
-                        .HasForeignKey("GroundIntegralStudyResponsibleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_serviceorders_employees_groundintegralstudyresponsibleid");
-
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyService", "Service")
                         .WithMany()
                         .HasForeignKey("GroundIntegralStudyServiceId")
@@ -12399,8 +12360,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_serviceorders_groundintegralstudyservices_groundintegralstu~");
 
                     b.Navigation("Contract");
-
-                    b.Navigation("Responsible");
 
                     b.Navigation("Service");
                 });
@@ -12414,13 +12373,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_serviceorders_servicingcontracts_traininglegalclientcontrac~");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
-                        .WithMany()
-                        .HasForeignKey("TrainingResponsibleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_serviceorders_employees_trainingresponsibleid");
-
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", "Service")
                         .WithMany()
                         .HasForeignKey("TrainingServiceId")
@@ -12429,8 +12381,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_serviceorders_trainingservices_trainingserviceid");
 
                     b.Navigation("Contract");
-
-                    b.Navigation("Responsible");
 
                     b.Navigation("Service");
                 });
@@ -12444,13 +12394,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_serviceorders_servicingcontracts_groundintegralstudynatural~");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
-                        .WithMany()
-                        .HasForeignKey("GroundIntegralStudyResponsibleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_serviceorders_employees_groundintegralstudyresponsibleid");
-
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.GroundIntegralStudyService", "Service")
                         .WithMany()
                         .HasForeignKey("GroundIntegralStudyServiceId")
@@ -12459,8 +12402,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_serviceorders_groundintegralstudyservices_groundintegralstu~");
 
                     b.Navigation("Contract");
-
-                    b.Navigation("Responsible");
 
                     b.Navigation("Service");
                 });
@@ -12474,13 +12415,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_serviceorders_servicingcontracts_trainingnaturalclientcontr~");
 
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Responsible")
-                        .WithMany()
-                        .HasForeignKey("TrainingResponsibleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_serviceorders_employees_trainingresponsibleid");
-
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.TrainingService", "Service")
                         .WithMany()
                         .HasForeignKey("TrainingServiceId")
@@ -12489,8 +12423,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_serviceorders_trainingservices_trainingserviceid");
 
                     b.Navigation("Contract");
-
-                    b.Navigation("Responsible");
 
                     b.Navigation("Service");
                 });

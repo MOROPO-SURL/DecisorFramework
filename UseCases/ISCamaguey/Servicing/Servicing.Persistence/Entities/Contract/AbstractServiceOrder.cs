@@ -5,7 +5,7 @@
         [System.ComponentModel.DataAnnotations.Key]
         public long Id { get; set; }
 
-        public System.DateTime At {  get; set; }
+        public System.DateTime At {  get; set; } = System.DateTime.Now;
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
