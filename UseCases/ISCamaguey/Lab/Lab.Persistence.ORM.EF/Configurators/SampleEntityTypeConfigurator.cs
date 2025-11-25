@@ -10,6 +10,8 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.ORM.EF.Configurators
 
             entityTypeBuilder.ToTable("samples", "decisoriscamaguey_lab");
             entityTypeBuilder.HasDiscriminator();
+
+            entityTypeBuilder.HasIndex(entity => entity.LabelId).IsUnique();
         }
     }
 }

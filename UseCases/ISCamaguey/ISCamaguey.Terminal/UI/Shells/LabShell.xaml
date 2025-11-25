@@ -80,6 +80,16 @@
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
+        Title="Etiquetas de Recepción"
+        ContentTemplate="{DataTemplate lab_manage_pages:SampleReceptionLabelsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF024F;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
         Title="Grupos de Trabajo"
         ContentTemplate="{DataTemplate lab_manage_pages:WorkingGroupsManagePage}">
         <ShellContent.Icon>

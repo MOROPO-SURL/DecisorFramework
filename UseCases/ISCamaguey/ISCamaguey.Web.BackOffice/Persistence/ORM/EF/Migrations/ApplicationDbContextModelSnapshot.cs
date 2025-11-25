@@ -7009,13 +7009,13 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
+                    b.Property<decimal>("Amount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("amount");
+
                     b.Property<bool>("Archived")
                         .HasColumnType("boolean")
                         .HasColumnName("archived");
-
-                    b.Property<Guid>("DefaultSampleKindId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("defaultsamplekindid");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
@@ -7026,9 +7026,63 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
+                    b.Property<Guid>("FeatureImageId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("featureimageid");
+
+                    b.Property<Guid?>("LabelId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("labelid");
+
                     b.Property<string>("Observation")
                         .HasColumnType("text")
                         .HasColumnName("observation");
+
+                    b.Property<int>("Priority")
+                        .HasColumnType("integer")
+                        .HasColumnName("priority");
+
+                    b.Property<Guid>("SampleKindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("samplekindid");
+
+                    b.Property<Guid>("UnitMeasurementId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("unitmeasurementid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_samples");
+
+                    b.HasIndex("FeatureImageId")
+                        .HasDatabaseName("ix_samples_featureimageid");
+
+                    b.HasIndex("LabelId")
+                        .IsUnique()
+                        .HasDatabaseName("ix_samples_labelid");
+
+                    b.HasIndex("SampleKindId")
+                        .HasDatabaseName("ix_samples_samplekindid");
+
+                    b.HasIndex("UnitMeasurementId")
+                        .HasDatabaseName("ix_samples_unitmeasurementid");
+
+                    b.ToTable("samples", "decisoriscamaguey_lab");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractSample");
+
+                    b.UseTphMappingStrategy();
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.SampleReceptionLabel", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Enabled")
+                        .HasColumnType("boolean")
+                        .HasColumnName("enabled");
 
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
@@ -7040,16 +7094,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("reference");
 
                     b.HasKey("Id")
-                        .HasName("pk_samples");
+                        .HasName("pk_samplereceptionlabels");
 
-                    b.HasIndex("DefaultSampleKindId")
-                        .HasDatabaseName("ix_samples_defaultsamplekindid");
-
-                    b.ToTable("samples", "decisoriscamaguey_lab");
-
-                    b.HasDiscriminator<string>("Discriminator").HasValue("AbstractSample");
-
-                    b.UseTphMappingStrategy();
+                    b.ToTable("samplereceptionlabels", "decisoriscamaguey_lab");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlan", b =>
@@ -11551,14 +11598,39 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", b =>
                 {
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.SampleKind", "DefaultSampleKind")
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Image", "FeatureImage")
                         .WithMany()
-                        .HasForeignKey("DefaultSampleKindId")
+                        .HasForeignKey("FeatureImageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_samples_samplekinds_defaultsamplekindid");
+                        .HasConstraintName("fk_samples_images_featureimageid");
 
-                    b.Navigation("DefaultSampleKind");
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.SampleReceptionLabel", "Label")
+                        .WithOne("Sample")
+                        .HasForeignKey("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", "LabelId")
+                        .HasConstraintName("fk_samples_samplereceptionlabels_labelid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.SampleKind", "SampleKind")
+                        .WithMany()
+                        .HasForeignKey("SampleKindId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_samples_samplekinds_samplekindid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
+                        .WithMany()
+                        .HasForeignKey("UnitMeasurementId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_samples_unitmeasurements_unitmeasurementid");
+
+                    b.Navigation("FeatureImage");
+
+                    b.Navigation("Label");
+
+                    b.Navigation("SampleKind");
+
+                    b.Navigation("UnitMeasurement");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroup", b =>
@@ -12725,6 +12797,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.TrainingResult", b =>
                 {
                     b.Navigation("ResearcherBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.SampleReceptionLabel", b =>
+                {
+                    b.Navigation("Sample");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroup", b =>

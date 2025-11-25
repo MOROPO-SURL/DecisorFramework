@@ -14,9 +14,11 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Ex
             builder.Services
                 // DetailPage factory resgistration !!!
                 .AddSingleton<IDetailContentPageFactoryFacade<WorkingGroupDisplayModel>, WorkingGroupDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<SampleReceptionLabelDisplayModel>, SampleReceptionLabelDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
-                .AddSingleton<IConfigurationContentPageFactoryFacade<WorkingGroupDisplayModel, WorkingGroupConfigurationPageModel>, WorkingGroupConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<WorkingGroupDisplayModel, WorkingGroupConfigurationPageModel>, WorkingGroupConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<SampleReceptionLabelDisplayModel, SampleReceptionLabelConfigurationPageModel>, SampleReceptionLabelConfigurationPageFactory>();
 
             return builder;
         }
