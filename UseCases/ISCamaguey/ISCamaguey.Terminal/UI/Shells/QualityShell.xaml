@@ -58,8 +58,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Certificaciones (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Certificaciones"
+        ContentTemplate="{DataTemplate quality_manage_pages:CertificationManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

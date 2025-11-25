@@ -1,6 +1,7 @@
 ﻿
 using MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities;
 using System;
+using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Display
 {
@@ -18,6 +19,10 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Display
 
         public int Priority { get; set; }
 
+        public CubanStandardDisplayModel[] CubanStandards { get; set; }
+
+        public IsoStandardDisplayModel[] IsoStandards { get; set; }
+
         public void Import(Certification entity)
         {
             Id = entity.Id;
@@ -26,6 +31,22 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Display
             Created = entity.Created;
             Enable = entity.Enabled;
             Priority = entity.Priority;
+            CubanStandards = entity.CubanStandardBridges.Select(bridge =>
+            {
+                var model = new CubanStandardDisplayModel();
+
+                model.Import(bridge.Stern);
+
+                return model;
+            }).ToArray();
+            IsoStandards = entity.IsoStandardBridges.Select(bridge =>
+            {
+                var model = new Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel();
+
+                model.Import(bridge.Stern);
+
+                return model;
+            }).ToArray(); 
         }
     }
 }
