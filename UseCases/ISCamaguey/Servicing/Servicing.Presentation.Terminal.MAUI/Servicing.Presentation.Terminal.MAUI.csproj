@@ -30,6 +30,7 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\Core\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj" />
+		<ProjectReference Include="..\..\Domain\Domain.Presentation.Terminal.MAUI.UI.Default\Domain.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj" />
 	</ItemGroup>
 </Project>

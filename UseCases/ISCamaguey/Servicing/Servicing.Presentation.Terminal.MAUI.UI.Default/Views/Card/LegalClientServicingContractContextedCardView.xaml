@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Views.Card.LegalClientServicingContractContextedCardView"
+    x:DataType="interop_common_display_models:LegalClientServicingContractDisplayModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
+            <caneyframework_presentation_converters:DoubleToFactorConverter x:Key="DoubleToFactorConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame 
+        Padding="0"
+        IsClippedToBounds="True">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            <VerticalStackLayout
+                Margin="20"
+                Grid.ColumnSpan="2">
+                <Label FontSize="Large">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding Index}" />
+                            <Span Text=" / " />
+                            <Span Text="{Binding Year}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Inicio"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label
+                    LineBreakMode="TailTruncation"
+                    MaxLines="3"
+                    Text="{Binding StarAt, StringFormat='{0:dd/MM/yyyy}'}" />
+            </VerticalStackLayout>
+            <Grid
+                IsVisible="{Binding IsEnded}"
+                Grid.Column="1"
+                WidthRequest="{Binding Source={Static local_manage_pages:LegalClientServicingContractsManagePage.ITEM_VIEW_REQUEST_HEIGHT}, Converter={StaticResource DoubleToFactorConverter}, ConverterParameter=2}"
+                VerticalOptions="Center"
+                Padding="0,2"
+                BackgroundColor="#A7FFFFFF"
+                Rotation="45"
+                TranslationX="{Binding Source={Static local_manage_pages:LegalClientServicingContractsManagePage.ITEM_VIEW_REQUEST_HEIGHT}, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=2}">
+                <Label                    
+                    Padding="8"
+                    BackgroundColor="{StaticResource Primary}"
+                    HorizontalTextAlignment="Center"
+                    FontAttributes="Bold"
+                    TextColor="White"
+                    Text="Concluido" />
+            </Grid>
+        </Grid>
+    </Frame>
+</ContentView>

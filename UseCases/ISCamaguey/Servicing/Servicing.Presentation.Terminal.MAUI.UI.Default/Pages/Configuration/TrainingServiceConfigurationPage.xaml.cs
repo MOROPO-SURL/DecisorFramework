@@ -32,7 +32,7 @@ public partial class TrainingServiceConfigurationPage : Framework.Decisor.Core.P
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
             ResponsibleId = ConcreteBindingContext.Responsible.Id,
-            Members = ConcreteBindingContext.Members.ToList(),
+            Members = [.. ConcreteBindingContext.Members],
             IncomingSteps = incomingSteps,
             IncomingDocuments = incomingDocuments
         };
@@ -53,7 +53,7 @@ public partial class TrainingServiceConfigurationPage : Framework.Decisor.Core.P
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
             ResponsibleId = ConcreteBindingContext.Responsible.Id,
-            Members = ConcreteBindingContext.Members.ToList(),
+            Members = [.. ConcreteBindingContext.Members],
             IncomingSteps = incomingSteps,
             EditionSteps = editionSteps,
             OutgoingSteps = outgoingSteps,
