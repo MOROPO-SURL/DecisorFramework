@@ -17,7 +17,7 @@
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SampleId))]
         public Contract.AbstractSample Sample { get; set ; }
-        public int SampleId { get; set ; }
+        public long SampleId { get; set ; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(TechniqueId))]
         public Domain.Persistence.Entities.Technique Technique { get; set ; }

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
+    x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Views.Card.ServiceOrderSampleDefaultCardView"
+    x:DataType="interop_common_display_models:ServiceOrderSampleDisplayModel">
+    <Frame>
+        <VerticalStackLayout Spacing="0">
+            <Label 
+                ToolTipProperties.Text="{Binding Label.Reference}"
+                LineBreakMode="TailTruncation"
+                FontSize="Large"
+                Text="{Binding Label.Reference}" />
+            <Label 
+                Margin="0,8,0,0"
+                LineBreakMode="TailTruncation"
+                FontSize="Medium">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding SampleKind.Name}" />
+                        <Span Text="{Binding Amount, StringFormat=', {0:F2}'}" />
+                        <Span Text="{Binding UnitMeasurement.Symbol, StringFormat=' {0}'}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label 
+                Margin="0,12,0,0"
+                LineBreakMode="TailTruncation"
+                FontAttributes="Bold"
+                Text="{Binding Order.Id, StringFormat='Órden #{0}'}" />
+            <Label 
+                LineBreakMode="TailTruncation"
+                Text="{Binding Order.Service.Name}" />
+        </VerticalStackLayout>
+    </Frame>
+</ContentView>

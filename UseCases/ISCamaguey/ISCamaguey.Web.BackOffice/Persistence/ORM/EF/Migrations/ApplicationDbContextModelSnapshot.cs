@@ -6932,8 +6932,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
-                    b.Property<int>("SampleId")
-                        .HasColumnType("integer")
+                    b.Property<long>("SampleId")
+                        .HasColumnType("bigint")
                         .HasColumnName("sampleid");
 
                     b.Property<Guid>("TechniqueId")
@@ -7002,12 +7002,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<long>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("integer")
+                        .HasColumnType("bigint")
                         .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<long>("Id"));
 
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric")
@@ -7016,6 +7016,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<bool>("Archived")
                         .HasColumnType("boolean")
                         .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
 
                     b.Property<string>("Discriminator")
                         .IsRequired()
@@ -7026,7 +7030,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
-                    b.Property<Guid>("FeatureImageId")
+                    b.Property<Guid?>("FeatureImageId")
                         .HasColumnType("uuid")
                         .HasColumnName("featureimageid");
 
@@ -8439,6 +8443,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<Guid>("SampleAnalysisServiceId")
                         .HasColumnType("uuid")
                         .HasColumnName("sampleanalysisserviceid");
+
+                    b.Property<DateTime?>("SampleReceptionAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("samplereceptionat");
 
                     b.HasIndex("RequestedTechniqueId")
                         .HasDatabaseName("ix_serviceorders_requestedtechniqueid");
@@ -11601,8 +11609,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Image", "FeatureImage")
                         .WithMany()
                         .HasForeignKey("FeatureImageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_samples_images_featureimageid");
 
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.SampleReceptionLabel", "Label")
@@ -12386,14 +12392,14 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ServiceOrderSample", b =>
                 {
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder", "ServiceOrder")
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder", "Order")
                         .WithMany()
                         .HasForeignKey("ServiceOrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_samples_serviceorders_serviceorderid");
 
-                    b.Navigation("ServiceOrder");
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder", b =>

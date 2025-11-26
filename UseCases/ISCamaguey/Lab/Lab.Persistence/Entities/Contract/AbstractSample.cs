@@ -2,16 +2,18 @@
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract
 {
-    public abstract class AbstractSample : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<int>
+    public abstract class AbstractSample : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<long>
     {
         [System.ComponentModel.DataAnnotations.Key]
-        public int Id { get; set; }
+        public long Id { get; set; }
 
         public bool Archived { get; set; }
 
         public bool Enabled { get; set; }
 
         public int Priority { get; set; }
+
+        public System.DateTime At { get; set; } = System.DateTime.Now;
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(LabelId))]
         public SampleReceptionLabel Label { get; set; }
@@ -21,7 +23,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(FeatureImageId))]
         public Framework.Guama.Media.Persistence.Entities.Image FeatureImage { get; set; }
-        public System.Guid FeatureImageId { get; set; }
+        public System.Guid? FeatureImageId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SampleKindId))]
         public SampleKind SampleKind { get; set; }
