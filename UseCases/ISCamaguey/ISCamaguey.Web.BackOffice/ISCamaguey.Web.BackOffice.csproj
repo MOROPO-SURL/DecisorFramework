@@ -63,6 +63,7 @@
 		<ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Frontend\Legal.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Backend\Commercial.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\Commercial\Commercial.Presentation.Web.Frontend\Commercial.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\..\..\Production\Production.Presentation.Web.Frontend\Production.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Domain\Domain.Presentation.Web.Backend\Domain.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\Domain\Domain.Presentation.Web.Frontend\Domain.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\IDi\IDi.Presentation.Web.Backend\IDi.Presentation.Web.Backend.csproj" />

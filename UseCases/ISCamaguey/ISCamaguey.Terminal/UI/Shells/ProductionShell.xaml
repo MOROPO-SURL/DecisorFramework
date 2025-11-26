@@ -78,8 +78,8 @@
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
-        Title="Líneas de Producción (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Líneas de Producción"
+        ContentTemplate="{DataTemplate frwk_production_manage_pages:ElaborationsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
