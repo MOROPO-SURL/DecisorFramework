@@ -23,7 +23,7 @@ public partial class ElaborationStepWorkPositionBridgeConfigurationPage : Core.P
         }
     }
 
-    protected override string EntityTypeName => "Rol en Elaboración";
+    protected override string EntityTypeName => "Rol en Línea de Producción";
 
     protected override System.Threading.Tasks.Task<ElaborationStepWorkPositionBridgeModel> PerformCreationAsync()
     {
