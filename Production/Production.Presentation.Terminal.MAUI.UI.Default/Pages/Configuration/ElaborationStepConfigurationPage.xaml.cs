@@ -12,7 +12,7 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
         InitializeComponent();
     }
 
-    protected override string EntityTypeName => "Etapa de Elaboración";
+    protected override string EntityTypeName => "Etapa de Línea de Producción";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.ElaborationStepDisplayModel> PerformCreationAsync()
     {
@@ -26,7 +26,7 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
             Priority = concreteBindingContext.Priority,
             MinDecrease = concreteBindingContext.MinDecrease,
             MaxDecrease = concreteBindingContext.MaxDecrease,
-            WorkPositions = concreteBindingContext.WorkPositions.ToArray()
+            WorkPositions = [.. concreteBindingContext.WorkPositions]
         });
     }
 
@@ -42,7 +42,7 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
             Priority = concreteBindingContext.Priority,
             MinDecrease = concreteBindingContext.MinDecrease,
             MaxDecrease = concreteBindingContext.MaxDecrease,
-            WorkPositions = concreteBindingContext.WorkPositions.ToArray()
+            WorkPositions = [.. concreteBindingContext.WorkPositions]
         });
     }
 
