@@ -16,6 +16,8 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Web.Common.Extensions
             services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.NaturalClientServicingContract, System.Guid>, Persistence.ORM.EF.Repositories.NaturalClientServicingContractRepository>();
             services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.LegalClientSampleAnalysisServiceOrder, long>, Persistence.ORM.EF.Repositories.LegalClientSampleAnalysisServiceOrderRepository>();
             services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.NaturalClientSampleAnalysisServiceOrder, long>, Persistence.ORM.EF.Repositories.NaturalClientSampleAnalysisServiceOrderRepository>();
+            services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.LegalClientTrainingServiceOrder, long>, Persistence.ORM.EF.Repositories.LegalClientTrainingServiceOrderRepository>();
+            services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.NaturalClientTrainingServiceOrder, long>, Persistence.ORM.EF.Repositories.NaturalClientTrainingServiceOrderRepository>();
 
             services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.ServicingDbSchemaConfigurationProvider>();
         }
