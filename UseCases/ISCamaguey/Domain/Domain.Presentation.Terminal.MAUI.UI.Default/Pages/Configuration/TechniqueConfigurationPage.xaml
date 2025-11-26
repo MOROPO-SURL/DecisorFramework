@@ -57,7 +57,7 @@
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="120" />
                 </VerticalStackLayout>
                 <VerticalStackLayout 
