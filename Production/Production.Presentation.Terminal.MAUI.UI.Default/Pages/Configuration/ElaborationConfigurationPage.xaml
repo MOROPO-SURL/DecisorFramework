@@ -345,20 +345,32 @@
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="interop_common_display_models:ElaborationStepDisplayModel">
-                                        <Frame Padding="8">
-                                            <StackLayout Spacing="8" Orientation="Horizontal">
-                                                <Label 
-                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                                    Text="{Binding Name}"
-                                                    FontAttributes="Bold"
-                                                    LineBreakMode="TailTruncation" />
+                                        <Frame 
+                                            Padding="8"
+                                            Margin="0,12,0,0">
+                                            <StackLayout
+                                                Spacing="8"
+                                                Orientation="Horizontal">
+                                                <VerticalStackLayout 
+                                                    Margin="4,0,0,0"
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                    <Label                                                    
+                                                        FontSize="Medium"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Name}" />
+                                                    <Label                                                    
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Description}" />
+                                                </VerticalStackLayout>
                                                 <Button
-                                                    VerticalOptions="Start"
-                                                    FontFamily="MaterialDesignIcons" Text="&#xF90B;"
+                                                    VerticalOptions="Center"
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Text="&#xF90B;"
                                                     Clicked="EditStepButton_Clicked" />
                                                 <Button
-                                                    VerticalOptions="Start"
-                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
+                                                    VerticalOptions="Center"
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Text="&#xFA79;"
                                                     Clicked="RemoveStepButton_Clicked" />
                                             </StackLayout>
                                         </Frame>

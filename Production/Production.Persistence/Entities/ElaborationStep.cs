@@ -16,6 +16,7 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.Entities
         public Elaboration Elaboration { get; set; }
         public System.Guid ElaborationId { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
 
         public decimal MinDecrease { get; set; }
