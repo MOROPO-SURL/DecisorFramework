@@ -261,7 +261,18 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
 
     private void StepCreateSuccess_Callback(ElaborationStepDisplayModel model)
     {
-        ConcreteBindingContext.Steps.Add(model);
+        var _models = ConcreteBindingContext.Steps.ToList();
+
+        _models.Add(model);
+
+        _models = [.. _models.OrderBy(_model => _model.Priority)];
+
+        ConcreteBindingContext.Steps.Clear();
+
+        foreach (var _model in _models)
+        {
+            ConcreteBindingContext.Steps.Add(_model);
+        }
 
         hasChangesFlag = true;
     }
@@ -290,11 +301,28 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
 
     private void StepEditSuccess_Callback(ElaborationStepDisplayModel model)
     {
-        var reference = ConcreteBindingContext.Steps.First(item => item.Id == model.Id);
+        var _models = new System.Collections.Generic.List<ElaborationStepDisplayModel>();
 
-        var index = ConcreteBindingContext.Steps.IndexOf(reference);
+        foreach (var _model in ConcreteBindingContext.Steps)
+        {
+            if (_model.Id == model.Id)
+            {
+                _models.Add(model);
 
-        ConcreteBindingContext.Steps[index] = model;
+                continue;
+            }
+
+            _models.Add(_model);
+        }
+
+        _models = [.. _models.OrderBy(_model => _model.Priority)];
+
+        ConcreteBindingContext.Steps.Clear();
+
+        foreach (var _model in _models)
+        {
+            ConcreteBindingContext.Steps.Add(_model);
+        }
 
         hasChangesFlag = true;
     }

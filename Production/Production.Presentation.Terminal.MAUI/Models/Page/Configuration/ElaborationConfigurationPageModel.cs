@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -32,7 +33,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
                 maxPerformanceCoefficient = model.MaxPerformanceCoefficient;
                 InputProductBridges = [.. model.InputProductBridges];
                 OutputProductBridges = [.. model.OutputProductBridges];
-                Steps = [.. model.Steps];
+                Steps = [.. model.Steps.OrderBy(_model => _model.Priority)];
             }
         }
 

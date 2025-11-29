@@ -48,24 +48,16 @@
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
     <MenuFlyoutItem Text="- Productos -" IsEnabled="False" />
-    <FlyoutItem
-        Title="Ordenes">
-        <FlyoutItem.Icon>
+    <ShellContent
+        Title="Órdenes"
+        ContentTemplate="{DataTemplate decisorframework_production_manage_pages:ProductionOrdersToApproveManagePage}">
+        <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF14E;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </FlyoutItem.Icon>
-        <ShellContent
-            Title="Realizadas"
-            ContentTemplate="{DataTemplate decisorframework_production_list_pages:ProductionOrdersHandledListPage}" />
-        <ShellContent
-            Title="Por Realizar"
-            ContentTemplate="{DataTemplate decisorframework_production_list_pages:ProductionOrdersToCompleteListPage}" />
-        <ShellContent
-            Title="Por Aprobar"
-            ContentTemplate="{DataTemplate decisorframework_production_manage_pages:ProductionOrdersToApproveManagePage}" />
-    </FlyoutItem>
+        </ShellContent.Icon>
+    </ShellContent>
     <ShellContent
         Title="Producciones"
         ContentTemplate="{DataTemplate decisorframework_production_manage_pages:ProductionsManagePage}">
