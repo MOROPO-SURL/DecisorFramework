@@ -33,7 +33,7 @@ public partial class ElaborationStepWorkPositionBridgeConfigurationPage : Core.P
         {
             WorkPosition = concreteBindingContext.AvailableWorkPositions[WorkPositionPicker.SelectedIndex],
             Participation = concreteBindingContext.Participation,
-            Linked = concreteBindingContext.Linked,
+            Relative = concreteBindingContext.Linked,
             Description = concreteBindingContext.Description
         });
     }
@@ -46,7 +46,7 @@ public partial class ElaborationStepWorkPositionBridgeConfigurationPage : Core.P
         {
             WorkPosition = concreteBindingContext.AvailableWorkPositions[WorkPositionPicker.SelectedIndex],
             Participation = concreteBindingContext.Participation,
-            Linked = concreteBindingContext.Linked,
+            Relative = concreteBindingContext.Linked,
             Description = concreteBindingContext.Description
         });
     }

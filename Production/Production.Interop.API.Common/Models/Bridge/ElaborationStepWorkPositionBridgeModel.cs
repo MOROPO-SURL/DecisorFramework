@@ -4,9 +4,9 @@
     {
         public HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel WorkPosition { get; set; }
 
-        public decimal Participation { get; set; }
+        public decimal? Participation { get; set; }
 
-        public bool Linked { get; set; }
+        public bool Relative { get; set; }
 
         public string Description { get; set; }
     }

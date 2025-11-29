@@ -1,33 +1,42 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<core_ui_configuration_pages:BaseConfigurationContentPage 
+<core_ui_base_pages:ConfigurationBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI"
-    xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
+    xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:inventory_card_views="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default"
     xmlns:inventory_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ElaborationConfigurationPage"
-    x:TypeArguments="interop_common_display_models:ElaborationDisplayModel"
+    x:TypeArguments="interop_common_display_models:ElaborationDisplayModel,interop_common_display_models:ElaborationDisplayModel,presentation_configuration_page_models:ElaborationConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:ElaborationConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Aplicar"
-            Clicked="ApplyClickableControl_Clicked">
+            Clicked="ApplyToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Cancelar"
-            Clicked="CancelClickableControl_Clicked">
+            Clicked="CancelToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -35,47 +44,86 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <Grid 
-                Padding="20"
-                ColumnSpacing="16" RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="0" Grid.RowSpan="3">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Producto" />
-                    <ContentView IsVisible="{Binding Product, Converter={StaticResource IsNotNullConverter}}">
-                        <inventory_card_views:ProductDefaultCardView BindingContext="{Binding Path=Product}" />
-                    </ContentView>
-                    <Button 
-                        HorizontalOptions="Start"
-                        Text="Selecionar ..." 
-                        Clicked="ProductChangeButton_Clicked" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0" VerticalOptions="Start">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición" />
-                    <Editor Text="{Binding Description}" HeightRequest="320" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="1" VerticalOptions="Start">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="% Mínimo de Rendimiento" />
-                    <Entry Text="{Binding MinPerformanceCoefficient, StringFormat='{0:F2}'}" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="1" VerticalOptions="Start">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="% Máximo de Rendimiento" />
-                    <Entry Text="{Binding MaxPerformanceCoefficient, StringFormat='{0:F2}'}" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="3">
+            <VerticalStackLayout Spacing="4" Padding="8">
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start"
+                    AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Producto" />
+                        <ContentView IsVisible="{Binding Product, Converter={StaticResource IsNotNullConverter}}">
+                            <inventory_card_views:ProductDefaultCardView BindingContext="{Binding Product}" />
+                        </ContentView>
+                        <Button 
+                            HorizontalOptions="Start"
+                            Text="Selecionar ..."  
+                            Clicked="ProductPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.ProductValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.ProductValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                        <Label 
+                            IsVisible="{Binding AvailableClassifications, Converter={StaticResource IsListNotNullOrEmptyConverter}}"
+                            Style="{StaticResource CaptionFieldLabelStyle}" 
+                            Margin="0,8,0,0"
+                            Text="Clasificación" />
+                        <Picker 
+                            x:Name="ClassificationPicker"
+                            IsVisible="{Binding AvailableClassifications, Converter={StaticResource IsListNotNullOrEmptyConverter}}"
+                            ItemsSource="{Binding AvailableClassifications}" 
+                            ItemDisplayBinding="{Binding Path=Name}"
+                            SelectedItem="{Binding Classification}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.ClassificationValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.ClassificationValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=9, ExtraLargeContainerColumn=8, LargeContainerColumn=6, MediumContainerColumn=12, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción" />
+                        <Editor Text="{Binding Description}" HeightRequest="480" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.DescriptionValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.DescriptionValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start"
+                    AlignContent="Start">
+                    <VerticalStackLayout
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="% Mín. de Rendimiento" />
+                        <Entry Text="{Binding MinPerformanceCoefficient, StringFormat='{0:F2}'}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.MinPerformanceCoefficientValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.MinPerformanceCoefficientValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="% Máx. de Rendimiento" />
+                        <Entry Text="{Binding MaxPerformanceCoefficient, StringFormat='{0:F2}'}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.MaxPerformanceCoefficientCoefficientValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.MaxPerformanceCoefficientCoefficientValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Insumos" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
@@ -98,7 +146,7 @@
                                 Color="{StaticResource Gray050}" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
-                                ItemsSource="{Binding InputProducts}">
+                                ItemsSource="{Binding InputProductBridges}">
                                 <CollectionView.ItemsLayout>
                                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                                 </CollectionView.ItemsLayout>
@@ -106,18 +154,60 @@
                                     <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="inventory_interop_common_display_models:ProductDisplayModel">
+                                    <DataTemplate x:DataType="interop_common_bridge_models:CommonElaborationProductBridgeModel">
                                         <Frame Padding="8">
-                                            <StackLayout Spacing="8" Orientation="Horizontal">
-                                                <Label 
-                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                                    Text="{Binding Name}"
-                                                    FontAttributes="Bold"
-                                                    LineBreakMode="TailTruncation" />
-                                                <Button
-                                                    VerticalOptions="Start"
-                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
-                                                    Clicked="InputProductRemoveButton_Clicked" />
+                                            <StackLayout 
+                                                Orientation="Horizontal"
+                                                Spacing="8">
+                                                <Grid
+                                                    HorizontalOptions="FillAndExpand"
+                                                    ColumnSpacing="8" RowSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Frame 
+                                                        Grid.Column="0" Grid.RowSpan="2"
+                                                        Padding="0">
+                                                        <Image
+                                                            WidthRequest="96" HeightRequest="96"
+                                                            Source="{Binding Product.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                                    </Frame>
+                                                    <Label 
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        Text="{Binding Product.Name}"
+                                                        FontSize="Large"
+                                                        LineBreakMode="TailTruncation" />
+                                                    <Label 
+                                                        Grid.Column="1" Grid.Row="1"
+                                                        VerticalOptions="Start"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Medium"
+                                                        LineBreakMode="TailTruncation">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                                                <Span Text="{Binding UnitMeasurement.Symbol, StringFormat=' {0}'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Grid>                                                
+                                                <VerticalStackLayout 
+                                                    Spacing="8">
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Text="&#xF90B;"
+                                                        Clicked="EditInputProductButton_Clicked" />
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        VerticalOptions="Start"
+                                                        Text="&#xFA79;"
+                                                        Clicked="InputProductRemoveButton_Clicked" />
+                                                </VerticalStackLayout>
                                             </StackLayout>
                                         </Frame>
                                     </DataTemplate>
@@ -126,7 +216,9 @@
                         </Grid>
                     </Frame>
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="4">
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sub-Productos" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
@@ -149,7 +241,7 @@
                                 Color="{StaticResource Gray050}" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
-                                ItemsSource="{Binding OutputProducts}">
+                                ItemsSource="{Binding OutputProductBridges}">
                                 <CollectionView.ItemsLayout>
                                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                                 </CollectionView.ItemsLayout>
@@ -157,18 +249,60 @@
                                     <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="inventory_interop_common_display_models:ProductDisplayModel">
+                                    <DataTemplate x:DataType="interop_common_bridge_models:CommonElaborationProductBridgeModel">
                                         <Frame Padding="8">
-                                            <StackLayout Spacing="8" Orientation="Horizontal">
-                                                <Label 
-                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                                    Text="{Binding Name}"
-                                                    FontAttributes="Bold"
-                                                    LineBreakMode="TailTruncation" />
-                                                <Button
-                                                    VerticalOptions="Start"
-                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
-                                                    Clicked="OutputProductRemoveButton_Clicked" />
+                                            <StackLayout 
+                                                Orientation="Horizontal"
+                                                Spacing="8">
+                                                <Grid
+                                                    HorizontalOptions="FillAndExpand"
+                                                    ColumnSpacing="8" RowSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Frame 
+                                                        Grid.Column="0" Grid.RowSpan="2"
+                                                        Padding="0">
+                                                        <Image
+                                                            WidthRequest="96" HeightRequest="96"
+                                                            Source="{Binding Product.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                                    </Frame>
+                                                    <Label 
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        Text="{Binding Product.Name}"
+                                                        FontSize="Large"
+                                                        LineBreakMode="TailTruncation" />
+                                                    <Label 
+                                                        Grid.Column="1" Grid.Row="1"
+                                                        VerticalOptions="Start"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Medium"
+                                                        LineBreakMode="TailTruncation">
+                                                        <Label.FormattedText>
+                                                            <FormattedString>
+                                                                <Span Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                                                <Span Text="{Binding UnitMeasurement.Symbol, StringFormat=' {0}'}" />
+                                                            </FormattedString>
+                                                        </Label.FormattedText>
+                                                    </Label>
+                                                </Grid>                                                
+                                                <VerticalStackLayout 
+                                                    Spacing="8">
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Text="&#xF90B;"
+                                                        Clicked="EditOutputProductButton_Clicked"/>
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        VerticalOptions="Start"
+                                                        Text="&#xFA79;"
+                                                        Clicked="OutputProductRemoveButton_Clicked" />
+                                                </VerticalStackLayout>
                                             </StackLayout>
                                         </Frame>
                                     </DataTemplate>
@@ -176,7 +310,10 @@
                             </CollectionView>
                         </Grid>
                     </Frame>
-                </VerticalStackLayout><VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="5">
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Etapas" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
@@ -232,16 +369,22 @@
                     </Frame>
                 </VerticalStackLayout>
                 <BoxView 
-                    Grid.ColumnSpan="3" Grid.Row="6" 
-                    Margin="0,8,0,0"
+                    Margin="8,16,8,8"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="7">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                </VerticalStackLayout>
-            </Grid>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1,ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+            </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>
-</core_ui_configuration_pages:BaseConfigurationContentPage>
+</core_ui_base_pages:ConfigurationBaseContentPage>

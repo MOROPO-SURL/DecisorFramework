@@ -116,7 +116,7 @@
                                                                 <Span Text="Remuneración: " FontAttributes="Bold" TextColor="DimGray" />
                                                                 <Span Text="{Binding Participation}" />
                                                                 <Span Text=" " />
-                                                                <Span Text="{Binding Linked, Converter={StaticResource LinkedToObjectConverter}}" />
+                                                                <Span Text="{Binding Relative, Converter={StaticResource LinkedToObjectConverter}}" />
                                                             </FormattedString>
                                                         </Label.FormattedText>
                                                     </Label>

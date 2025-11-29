@@ -76,14 +76,14 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
 
         concreteBindingContext.ProductBridges.Clear();
 
-        foreach (var item in model.Elaboration.OutputProducts)
-        {
-            concreteBindingContext.ProductBridges.Add(new Models.View.ProductionProductBridgeViewModel
-            {
-                Product = item,
-                UnitMeasurement = item.DefaultUnitMeasurement
-            });
-        }
+        //foreach (var item in model.Elaboration.OutputProductBridges)
+        //{
+        //    concreteBindingContext.ProductBridges.Add(new Models.View.ProductionProductBridgeViewModel
+        //    {
+        //        Product = item,
+        //        UnitMeasurement = item.DefaultUnitMeasurement
+        //    });
+        //}
     }
 
     private void AddEmployeeBridgeButton_Clicked(object sender, System.EventArgs e)

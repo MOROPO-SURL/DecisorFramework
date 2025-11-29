@@ -6,11 +6,25 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<ElaborationDisplayModel>
+public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ElaborationDisplayModel, ElaborationDisplayModel, Models.Page.Configuration.ElaborationConfigurationPageModel>
 {
-    public ElaborationConfigurationPage(System.Action<ElaborationDisplayModel> successAction, Models.Page.Configuration.ElaborationConfigurationPageModel model) : base(successAction, model)
+    public ElaborationConfigurationPage(System.Action<ElaborationDisplayModel> successAction, Models.Page.Configuration.ElaborationConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.ElaborationConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
+
+        if (model.Classification != null)
+        {
+            for (int i = 0; i < model.AvailableClassifications.Length; i++)
+            {
+                var current = model.AvailableClassifications[i];
+
+                if (model.Classification.Id != current.Id) continue;
+
+                ClassificationPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Línea de Producción";
@@ -19,19 +33,17 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ElaborationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.ElaborationConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.ElaborationInputModel
         {
             Id = System.Guid.NewGuid(),
-            ProductId = concreteBindingContext.Product.Id,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority,
-            MinPerformanceCoefficient = concreteBindingContext.MinPerformanceCoefficient,
-            MaxPerformanceCoefficient = concreteBindingContext.MaxPerformanceCoefficient,
-            InputProducts = concreteBindingContext.InputProducts.ToList(),
-            OutputProducts = concreteBindingContext.OutputProducts.ToList(),
-            Steps = concreteBindingContext.Steps.ToList()
+            ProductId = ConcreteBindingContext.Product.Id,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority,
+            MinPerformanceCoefficient = ConcreteBindingContext.MinPerformanceCoefficient,
+            MaxPerformanceCoefficient = ConcreteBindingContext.MaxPerformanceCoefficient,
+            InputProductBridges = [.. ConcreteBindingContext.InputProductBridges],
+            OutputProductBridges = [.. ConcreteBindingContext.OutputProductBridges],
+            Steps = [.. ConcreteBindingContext.Steps]
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -43,19 +55,17 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ElaborationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.ElaborationConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.ElaborationInputModel
         {
-            Id = concreteBindingContext.Id,
-            ProductId = concreteBindingContext.Product.Id,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority,
-            MinPerformanceCoefficient = concreteBindingContext.MinPerformanceCoefficient,
-            MaxPerformanceCoefficient = concreteBindingContext.MaxPerformanceCoefficient,
-            InputProducts = concreteBindingContext.InputProducts.ToList(),
-            OutputProducts = concreteBindingContext.OutputProducts.ToList(),
-            Steps = concreteBindingContext.Steps.ToList()
+            Id = ConcreteBindingContext.Id,
+            ProductId = ConcreteBindingContext.Product.Id,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority,
+            MinPerformanceCoefficient = ConcreteBindingContext.MinPerformanceCoefficient,
+            MaxPerformanceCoefficient = ConcreteBindingContext.MaxPerformanceCoefficient,
+            InputProductBridges = [.. ConcreteBindingContext.InputProductBridges],
+            OutputProductBridges = [.. ConcreteBindingContext.OutputProductBridges],
+            Steps = [.. ConcreteBindingContext.Steps]
         };
 
         await apiConnectClient.EditAsync(model);
@@ -63,24 +73,115 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
         return await apiConnectClient.GetAsync(model.Id);
     }
 
-    private void ProductChangeButton_Clicked(object sender, System.EventArgs e)
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
+    }
+
+    private void ProductPickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.ProductPickPage(ProductPickComplete_Callback)));
     }
 
     private void AddInputProductButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.ProductPickPage(InputProductPickComplete_Callback)));
+        this.NavigationPushPageAsync(new CommonElaborationProductBridgeConfigurationPage(InputElaborationProductBridgeCreateSuccess_Callback, new Models.Page.Configuration.CommonElaborationProductBridgeConfigurationPageModel(null)));
     }
 
     private void AddOutputProductButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.ProductPickPage(OutputProductPickComplete_Callback)));
+        this.NavigationPushPageAsync(new CommonElaborationProductBridgeConfigurationPage(OutputElaborationProductBridgeCreateSuccess_Callback, new Models.Page.Configuration.CommonElaborationProductBridgeConfigurationPageModel(null)));
     }
 
     private void AddStepButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushPageAsync(new ElaborationStepConfigurationPage(StepCreateSuccess_Callback, new Models.Page.Configuration.ElaborationStepConfigurationPageModel(null)));
+    }
+
+    private void EditInputProductButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.CommonElaborationProductBridgeModel;
+
+        if (target.Classification == null)
+        {
+            this.NavigationPushPageAsync(new CommonElaborationProductBridgeConfigurationPage(InputElaborationProductBridgeEditSuccess_Callback, new Models.Page.Configuration.CommonElaborationProductBridgeConfigurationPageModel(target)));
+        }
+        else
+        {
+            ConcreteBindingContext.IsBusy = true;
+
+            var classificationsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.ClassificationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+            classificationsAPIConnectClient.FilterAsync(new Inventory.Interop.API.Common.Models.Filter.ClassificationFilterModel { ProductId = target.Product.Id }).ContinueWith(task =>
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    if (task.Exception == null && !task.IsCanceled)
+                    {
+                        var model = new Models.Page.Configuration.CommonElaborationProductBridgeConfigurationPageModel(target)
+                        {
+                            AvailableClassifications = [.. task.Result]
+                        };
+
+                        this.NavigationPushPageAsync(new CommonElaborationProductBridgeConfigurationPage(InputElaborationProductBridgeEditSuccess_Callback, model));
+                    }
+                    else
+                    {
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                    }
+
+                    ConcreteBindingContext.IsBusy = false;
+                });
+            });
+        }
+    }
+
+    private void EditOutputProductButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.CommonElaborationProductBridgeModel;
+
+        if (target.Classification == null)
+        {
+            this.NavigationPushPageAsync(new CommonElaborationProductBridgeConfigurationPage(OutputElaborationProductBridgeEditSuccess_Callback, new Models.Page.Configuration.CommonElaborationProductBridgeConfigurationPageModel(target)));
+        }
+        else
+        {
+            ConcreteBindingContext.IsBusy = true;
+
+            var classificationsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.ClassificationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+            classificationsAPIConnectClient.FilterAsync(new Inventory.Interop.API.Common.Models.Filter.ClassificationFilterModel { ProductId = target.Product.Id }).ContinueWith(task =>
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    if (task.Exception == null && !task.IsCanceled)
+                    {
+                        var model = new Models.Page.Configuration.CommonElaborationProductBridgeConfigurationPageModel(target)
+                        {
+                            AvailableClassifications = [.. task.Result]
+                        };
+
+                        this.NavigationPushPageAsync(new CommonElaborationProductBridgeConfigurationPage(OutputElaborationProductBridgeEditSuccess_Callback, model));
+                    }
+                    else
+                    {
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                    }
+
+                    ConcreteBindingContext.IsBusy = false;
+                });
+            });
+        }
     }
 
     private void EditStepButton_Clicked(object sender, System.EventArgs e)
@@ -94,7 +195,7 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
         {
             if (!task.Result) return;
 
-            Dispatcher.Dispatch(() => ((Models.Page.Configuration.ElaborationConfigurationPageModel)BindingContext).InputProducts.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Inventory.Interop.API.Common.Models.Display.ProductDisplayModel));
+            Dispatcher.Dispatch(() => ConcreteBindingContext.InputProductBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.CommonElaborationProductBridgeModel));
         });
     }
 
@@ -104,7 +205,7 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
         {
             if (!task.Result) return;
 
-            Dispatcher.Dispatch(() => ((Models.Page.Configuration.ElaborationConfigurationPageModel)BindingContext).OutputProducts.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Inventory.Interop.API.Common.Models.Display.ProductDisplayModel));
+            Dispatcher.Dispatch(() => ConcreteBindingContext.OutputProductBridges.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.CommonElaborationProductBridgeModel));
         });
     }
 
@@ -114,47 +215,86 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
         {
             if (!task.Result) return;
 
-            Dispatcher.Dispatch(() => ((Models.Page.Configuration.ElaborationConfigurationPageModel)BindingContext).Steps.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ElaborationStepDisplayModel));
+            Dispatcher.Dispatch(() => ConcreteBindingContext.Steps.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ElaborationStepDisplayModel));
         });
     }
 
     private void ProductPickComplete_Callback(Inventory.Interop.API.Common.Models.Display.ProductDisplayModel model)
     {
-        ((Models.Page.Configuration.ElaborationConfigurationPageModel)BindingContext).Product = model;
+        ConcreteBindingContext.Product = model;
+
+        ConcreteBindingContext.IsBusy = true;
+
+        var classificationsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.ClassificationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+
+        classificationsAPIConnectClient.FilterAsync(new Inventory.Interop.API.Common.Models.Filter.ClassificationFilterModel { ProductId = ConcreteBindingContext.Product.Id }).ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                if (task.Exception != null || task.IsCanceled)
+                {
+                    HandleException(task.Exception);
+                }
+                else
+                {
+                    ConcreteBindingContext.AvailableClassifications = task.Result;
+                }
+
+                ConcreteBindingContext.IsBusy = false;
+            });
+        });
+    }
+
+    private void InputElaborationProductBridgeCreateSuccess_Callback(Interop.API.Common.Models.Bridge.CommonElaborationProductBridgeModel model)
+    {
+        ConcreteBindingContext.InputProductBridges.Add(model);
 
         hasChangesFlag = true;
     }
 
-    private void InputProductPickComplete_Callback(Inventory.Interop.API.Common.Models.Display.ProductDisplayModel model)
+    private void OutputElaborationProductBridgeCreateSuccess_Callback(Interop.API.Common.Models.Bridge.CommonElaborationProductBridgeModel model)
     {
-        ((Models.Page.Configuration.ElaborationConfigurationPageModel)BindingContext).InputProducts.Add(model);
-
-        hasChangesFlag = true;
-    }
-
-    private void OutputProductPickComplete_Callback(Inventory.Interop.API.Common.Models.Display.ProductDisplayModel model)
-    {
-        ((Models.Page.Configuration.ElaborationConfigurationPageModel)BindingContext).OutputProducts.Add(model);
+        ConcreteBindingContext.OutputProductBridges.Add(model);
 
         hasChangesFlag = true;
     }
 
     private void StepCreateSuccess_Callback(ElaborationStepDisplayModel model)
     {
-        ((Models.Page.Configuration.ElaborationConfigurationPageModel)BindingContext).Steps.Add(model);
+        ConcreteBindingContext.Steps.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void InputElaborationProductBridgeEditSuccess_Callback(Interop.API.Common.Models.Bridge.CommonElaborationProductBridgeModel model)
+    {
+        var reference = ConcreteBindingContext.InputProductBridges.First(item => item.Key == model.Key);
+
+        var index = ConcreteBindingContext.InputProductBridges.IndexOf(reference);
+
+        ConcreteBindingContext.InputProductBridges[index] = model;
+
+        hasChangesFlag = true;
+    }
+
+    private void OutputElaborationProductBridgeEditSuccess_Callback(Interop.API.Common.Models.Bridge.CommonElaborationProductBridgeModel model)
+    {
+        var reference = ConcreteBindingContext.OutputProductBridges.First(item => item.Key == model.Key);
+
+        var index = ConcreteBindingContext.OutputProductBridges.IndexOf(reference);
+
+        ConcreteBindingContext.OutputProductBridges[index] = model;
 
         hasChangesFlag = true;
     }
 
     private void StepEditSuccess_Callback(ElaborationStepDisplayModel model)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ElaborationConfigurationPageModel)BindingContext;
+        var reference = ConcreteBindingContext.Steps.First(item => item.Id == model.Id);
 
-        var reference = concreteBindingContext.Steps.First(item => item.Id == model.Id);
+        var index = ConcreteBindingContext.Steps.IndexOf(reference);
 
-        var index = concreteBindingContext.Steps.IndexOf(reference);
-
-        concreteBindingContext.Steps[index] = model;
+        ConcreteBindingContext.Steps[index] = model;
 
         hasChangesFlag = true;
     }
