@@ -1,0 +1,67 @@
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.ElaborationDetailPage"
+    x:TypeArguments="interop_common_display_models:ElaborationDisplayModel"
+    x:DataType="interop_common_display_models:ElaborationDisplayModel"
+    Title="Detalles de Línea de Producción"
+    BackgroundColor="Transparent"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="400"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <StackLayout Margin="20" Spacing="20">
+                        <StackLayout>
+                            <Label 
+                                Margin="0,0,0,20"
+                                Text="Detalles"
+                                FontAttributes="Bold"
+                                FontSize="Medium" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
+                                Text="Producto" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Product.Name}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Prioridad" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Priority}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Descripción" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Description, TargetNullValue='---'}" />
+                        </StackLayout>
+                        <StackLayout
+                            x:Name="OptionButtonsLayout"
+                            Orientation="Horizontal"
+                            Spacing="20">
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Modificar"
+                                Clicked="EditButton_Clicked" />
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Eliminar"
+                                Clicked="DeleteButton_Clicked" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

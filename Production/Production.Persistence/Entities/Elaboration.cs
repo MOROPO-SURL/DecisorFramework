@@ -23,8 +23,7 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.Entities
         public Inventory.Persistence.Entities.Classification Classification { get; set; }
         public System.Guid? ClassificcationId { get; set; }
 
-        public decimal ReferenceAmount { get; set; }
-
+        [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
 
         public decimal MinPerformanceCoefficient { get; set; }
@@ -38,5 +37,7 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.Entities
         public List<ElaborationInputProductClassificationBridge> InputProductClassificationBridges { get; set; } = new List<ElaborationInputProductClassificationBridge>();
 
         public List<ElaborationOutputProductBridge> OutputProductBridges { get; set; } = new List<ElaborationOutputProductBridge>();
+
+        public List<ElaborationOutputProductClassificationBridge> OutputProductClassificationBridges { get; set; } = new List<ElaborationOutputProductClassificationBridge>();
     }
 }

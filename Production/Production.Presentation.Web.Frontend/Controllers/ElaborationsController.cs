@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Production.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
@@ -9,7 +10,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
 {
     [Microsoft.AspNetCore.Mvc.Route("api/fwrk/production/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class ElaborationsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<Elaboration, System.Guid, ElaborationInputModel, ElaborationDisplayModel>
+    public class ElaborationsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<Elaboration, System.Guid, ElaborationInputModel, ElaborationDisplayModel, ElaborationFilterModel>
     {
         private readonly IEntityRepository<ElaborationStep, System.Guid> stepRepository;
 
@@ -20,7 +21,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
 
         protected override System.Linq.Expressions.Expression<System.Func<Elaboration, bool>> GetGlobalSelector()
         {
-            return entity => !entity.Archived && entity.Enabled;
+            return entity => !entity.Archived;
         }
 
         protected override System.Func<Elaboration, object> GetOrderSelector()
@@ -38,6 +39,11 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
             var steps = stepRepository.FindBy(_entity => _entity.ElaborationId == entity.Id).ToArray();
 
             var model = base.EntityToDisplayModel(entity);
+
+            if (entity.Product.FeatureImage != null)
+            {
+                model.Product.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Product.FeatureImage.ContentType);
+            }
 
             model.Steps = steps.Select(_entity =>
             {
@@ -95,7 +101,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
                             ProwId = _model.Id,
                             SternId = __model.WorkPosition.Id,
                             Participation = __model.Participation,
-                            Linked = __model.Linked,
+                            Relative = __model.Relative,
                             Description = __model.Description
                         }).ToList()
                     }, User.Identity.Name, false);
@@ -132,7 +138,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Web.Frontend.Controll
                             ProwId = _model.Id,
                             SternId = __model.WorkPosition.Id,
                             Participation = __model.Participation,
-                            Linked = __model.Linked,
+                            Relative = __model.Relative,
                             Description = __model.Description
                         }).ToList()
                     }, User.Identity.Name, false);

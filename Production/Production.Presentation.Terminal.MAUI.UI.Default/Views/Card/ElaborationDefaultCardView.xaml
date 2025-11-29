@@ -26,8 +26,9 @@
                 IsClippedToBounds="True"
                 Padding="10">
                 <Label
+                    ToolTipProperties.Text="{Binding Product.Name}"
                     LineBreakMode="TailTruncation"
-                    FontAttributes="Bold"
+                    FontSize="Medium"
                     Text="{Binding Product.Name}" />
                 <Label 
                     Margin="0,6,0,0"
