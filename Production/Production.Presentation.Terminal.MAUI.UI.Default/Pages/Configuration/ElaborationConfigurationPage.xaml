@@ -86,8 +86,17 @@
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=9, ExtraLargeContainerColumn=8, LargeContainerColumn=6, MediumContainerColumn=12, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descripción" />
-                        <Editor Text="{Binding Description}" HeightRequest="480" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                        <Entry Text="{Binding Name}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.NameValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.NameValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                        <Label 
+                            Style="{StaticResource CaptionFieldLabelStyle}" 
+                            Margin="0,8,0,0"
+                            Text="Descripción" />
+                        <Editor Text="{Binding Description}" HeightRequest="420" />
                         <Label
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.DescriptionValidableProperty}}"
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.DescriptionValidableProperty}}"

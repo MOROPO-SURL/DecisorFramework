@@ -27,7 +27,7 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
         }
     }
 
-    protected override string EntityTypeName => "Línea de Producción";
+    protected override string EntityTypeName => "Técnica de Producción";
 
     protected override async System.Threading.Tasks.Task<ElaborationDisplayModel> PerformCreationAsync()
     {
@@ -36,6 +36,7 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
         var model = new Interop.API.Common.Models.Input.ElaborationInputModel
         {
             Id = System.Guid.NewGuid(),
+            Name = ConcreteBindingContext.Name,
             ProductId = ConcreteBindingContext.Product.Id,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
@@ -58,6 +59,7 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
         var model = new Interop.API.Common.Models.Input.ElaborationInputModel
         {
             Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
             ProductId = ConcreteBindingContext.Product.Id,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,

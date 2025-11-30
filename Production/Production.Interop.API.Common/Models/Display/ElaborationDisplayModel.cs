@@ -8,6 +8,8 @@
 
         public System.DateTime At { get; set; }
 
+        public string Name { get; set; }
+
         public Inventory.Interop.API.Common.Models.Display.ProductDisplayModel Product { get; set; }
 
         public Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel Classification { get; set; }
@@ -29,6 +31,7 @@
             Id = entity.Id;
             Priority = entity.Priority;
             At = entity.At;
+            Name = entity.Name;
             Description = entity.Description;
             MinPerformanceCoefficient = entity.MinPerformanceCoefficient;
             MaxPerformanceCoefficient = entity.MaxPerformanceCoefficient;

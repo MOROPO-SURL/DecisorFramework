@@ -8,10 +8,14 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public int Priority { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Name { get; set; }
+
         public System.Guid ProductId { get; set; }
 
         public System.Guid? ClassificationId { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
 
         public System.Guid? ReferenceCurrencyId { get; set; }
@@ -47,6 +51,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
         public void Mergue(Persistence.Entities.Elaboration entity)
         {
             entity.Priority = Priority;
+            entity.Name = Name;
             entity.Description = Description;
             entity.MinPerformanceCoefficient = MinPerformanceCoefficient;
             entity.MaxPerformanceCoefficient = MaxPerformanceCoefficient;

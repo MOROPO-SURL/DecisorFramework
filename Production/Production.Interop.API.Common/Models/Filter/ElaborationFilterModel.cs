@@ -6,7 +6,7 @@
 
         public System.Linq.Expressions.Expression<System.Func<Persistence.Entities.Elaboration, bool>> GetSelector()
         {
-            return entity => entity.Product.Name.ToLower().Contains(Param.ToLower());
+            return entity => entity.Name.ToLower().Contains(Param.ToLower()) || entity.Product.Name.ToLower().Contains(Param.ToLower());
         }
     }
 }

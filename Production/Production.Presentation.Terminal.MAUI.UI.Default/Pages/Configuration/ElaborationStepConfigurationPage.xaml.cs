@@ -12,7 +12,7 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
         InitializeComponent();
     }
 
-    protected override string EntityTypeName => "Etapa de Línea de Producción";
+    protected override string EntityTypeName => "Etapa de Técnica de Producción";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.ElaborationStepDisplayModel> PerformCreationAsync()
     {

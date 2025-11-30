@@ -5,6 +5,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 {
     public class ElaborationConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ElaborationDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
         public static string ProductValidableProperty => nameof(Product);
         public static string ClassificationValidableProperty => nameof(Classification);
         public static string DescriptionValidableProperty => nameof(Description);
@@ -12,6 +13,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
         public static string MinPerformanceCoefficientValidableProperty => nameof(MinPerformanceCoefficient);
         public static string MaxPerformanceCoefficientCoefficientValidableProperty => nameof(MaxPerformanceCoefficient);
 
+        private string name;
         private Inventory.Interop.API.Common.Models.Display.ProductDisplayModel product;
         private Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel classification;
         private string description;
@@ -25,6 +27,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
             if (model != null)
             {
                 Id = model.Id;
+                name = model.Name;
                 product = model.Product;
                 classification = model.Classification;
                 description = model.Description;
@@ -38,6 +41,8 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
         }
 
         public System.Guid Id { get; set; }
+
+        public string Name { get => name; set => SetProperty(ref name, value); }
 
         public Inventory.Interop.API.Common.Models.Display.ProductDisplayModel Product { get => product; set => SetProperty(ref product, value); }
 

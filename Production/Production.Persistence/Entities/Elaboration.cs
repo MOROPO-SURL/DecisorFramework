@@ -13,6 +13,9 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.Entities
 
         public int Priority { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Name { get; set; }
+
         public System.DateTime At { get; set; } = System.DateTime.Now;
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProductId))]
