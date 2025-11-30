@@ -65,7 +65,7 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
 
     private void OrderPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ProductionOrderToCompletePickPage(OrderPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ProductionOrderPickPage(OrderPickComplete_Callback)));
     }
 
     private void OrderPickComplete_Callback(ProductionOrderDisplayModel model)

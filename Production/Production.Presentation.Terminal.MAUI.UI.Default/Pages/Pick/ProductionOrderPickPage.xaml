@@ -8,10 +8,10 @@
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.ProductionOrderToCompletePickPage"
+    x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.ProductionOrderPickPage"
     x:TypeArguments="interop_common_display_models:ProductionOrderDisplayModel,presentation_pick_page_models:ProductionOrderPickPageModel"
     x:DataType="presentation_pick_page_models:ProductionOrderPickPageModel"
-    Title="Seleccionar Orden de Producción">
+    Title="Seleccionar Órden de Producción">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
@@ -29,7 +29,11 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Orientation="Vertical">
-                <SearchBar Margin="20,20,20,0" />
+                <SearchBar 
+                    Margin="20,20,20,0"
+                    Text="{Binding SearchParameter}"
+                    Placeholder="-- buscar por nombre de técnica o producto --"
+                    SearchButtonPressed="SearchBar_SearchButtonPressed" />
                 <Grid 
                     VerticalOptions="FillAndExpand"
                     SizeChanged="ItemsCollectionViewLayout_SizeChanged">
@@ -42,11 +46,11 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <local_card_views:ProductionOrderToCompleteDefaultCardView HeightRequest="{Static local:ProductionOrderToCompletePickPage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                <local_card_views:ProductionOrderDefaultCardView HeightRequest="{Static local:ProductionOrderPickPage.ITEM_VIEW_REQUEST_HEIGHT}">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </ContentView.GestureRecognizers>
-                                </local_card_views:ProductionOrderToCompleteDefaultCardView>
+                                </local_card_views:ProductionOrderDefaultCardView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

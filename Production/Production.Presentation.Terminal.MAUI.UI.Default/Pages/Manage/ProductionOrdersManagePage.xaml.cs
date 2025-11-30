@@ -1,36 +1,29 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProductionOrderDisplayModel, Models.Page.Manage.ProductionOrdersManagePageModel, Models.Page.Configuration.ProductionOrderConfigurationPageModel>
+public partial class ProductionOrdersManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProductionOrderDisplayModel, Models.Page.Manage.ProductionOrdersManagePageModel, Models.Page.Configuration.ProductionOrderConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 180;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 228;
 
-    public ProductionOrdersToApproveManagePage()
+    public ProductionOrdersManagePage()
     {
         InitializeComponent();
     }
 
-    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
-    {
-        return ItemsCollectionView;
-    }
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => false;
 
-    protected override double ItemViewRequestWidth { get => 384; }
+    protected override double ItemViewRequestWidth { get => 400; }
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => ITEM_VIEW_REQUEST_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ProductionOrderDisplayModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProductionOrdersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.ProductionOrderFilterModel { Kind = Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.ToApprove }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.ProductionOrderFilterModel { HasProduction = false, Param = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.ProductionOrderDisplayModel target, int discriminator)
@@ -66,6 +59,8 @@ public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Ter
 
     private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
+        ConcreteBindingContext.SearchParameter = null;
+
         OnReload(sender, eventArgs);
     }
 
@@ -82,5 +77,10 @@ public partial class ProductionOrdersToApproveManagePage : Core.Presentation.Ter
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
+    }
+
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
     }
 }

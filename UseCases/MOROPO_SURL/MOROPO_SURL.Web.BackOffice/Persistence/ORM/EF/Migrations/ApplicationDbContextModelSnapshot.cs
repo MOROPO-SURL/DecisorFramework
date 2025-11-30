@@ -6171,13 +6171,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("id");
 
+                    b.Property<Guid>("AgreementId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("agreementid");
+
                     b.Property<decimal>("Amount")
                         .HasColumnType("numeric")
                         .HasColumnName("amount");
-
-                    b.Property<DateTime?>("ApprovedAt")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("approvedat");
 
                     b.Property<bool>("Archived")
                         .HasColumnType("boolean")
@@ -6186,14 +6186,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<DateTime>("At")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
-
-                    b.Property<Guid>("AuthorId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("authorid");
-
-                    b.Property<Guid>("DecisorId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("decisorid");
 
                     b.Property<string>("Description")
                         .HasColumnType("text")
@@ -6218,11 +6210,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasKey("Id")
                         .HasName("pk_productionorders");
 
-                    b.HasIndex("AuthorId")
-                        .HasDatabaseName("ix_productionorders_authorid");
-
-                    b.HasIndex("DecisorId")
-                        .HasDatabaseName("ix_productionorders_decisorid");
+                    b.HasIndex("AgreementId")
+                        .HasDatabaseName("ix_productionorders_agreementid");
 
                     b.HasIndex("ElaborationId")
                         .HasDatabaseName("ix_productionorders_elaborationid");
@@ -12306,19 +12295,12 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                    b.HasOne("MOROPO.Framework.Decisor.Governance.Persistence.Entities.Agreement", "Agreement")
                         .WithMany()
-                        .HasForeignKey("AuthorId")
+                        .HasForeignKey("AgreementId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_productionorders_employees_authorid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Decisor")
-                        .WithMany()
-                        .HasForeignKey("DecisorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_productionorders_employees_decisorid");
+                        .HasConstraintName("fk_productionorders_agreements_agreementid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.Elaboration", "Elaboration")
                         .WithMany()
@@ -12334,9 +12316,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_productionorders_employees_responsibleid");
 
-                    b.Navigation("Author");
-
-                    b.Navigation("Decisor");
+                    b.Navigation("Agreement");
 
                     b.Navigation("Elaboration");
 
