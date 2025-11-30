@@ -92,6 +92,9 @@
 		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
 		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
 	</ItemGroup>
+	<ItemGroup>
+	  <None Remove="Resources\Images\governance.jpg" />
+	</ItemGroup>
 
 	<ItemGroup>
 		<PackageReference Include="FreakyControls" Version="0.5.1" />
@@ -133,6 +136,9 @@
 	  <MauiXaml Update="UI\Pages\QualityDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Shells\GovernanceShell.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Shells\IDiShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -156,6 +162,9 @@
 	  </Compile>
 	  <Compile Update="UI\Pages\Manage\OcupationsSimplifiedManagePage.xaml.cs">
 	    <DependentUpon>OcupationsSimplifiedManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Shells\GovernanceShell.xaml.cs">
+	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 

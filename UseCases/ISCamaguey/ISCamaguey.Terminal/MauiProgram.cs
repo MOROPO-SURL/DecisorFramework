@@ -7,6 +7,7 @@ using Microsoft.Maui.Hosting;
 using MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Extensions;
+using MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.Framework.Decisor.Legal.Presentation.Terminal.MAUI.UI.Default.Extensions;
@@ -47,6 +48,7 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal
                 .UseDecisorFrameworkInventory()
                 .UseDecisorFrameworkProduction()
                 .UseDecisorFrameworkCommercial()
+                .UseDecisorFrameworkGovernance()
                 .UseDecisorUseCaseDomain()
                 .UseDecisorUseCaseQuality()
                 .UseDecisorUseCaseLab()

@@ -48,16 +48,21 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
-    <ShellContent
-        Title="Órdenes"
-        ContentTemplate="{DataTemplate frwk_production_manage_pages:ProductionOrdersToApproveManagePage}">
-        <ShellContent.Icon>
+    <FlyoutItem
+        Title="Órdenes">
+        <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF14E;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Pendientes"
+            ContentTemplate="{DataTemplate frwk_production_manage_pages:ProductionOrdersManagePage}" />
+        <ShellContent
+            Title="Completadas"
+            ContentTemplate="{DataTemplate frwk_production_list_pages:ProductionOrdersListPage}" />
+    </FlyoutItem>
     <ShellContent
         Title="Producciones (%)"
         ContentTemplate="{DataTemplate ContentPage}">
