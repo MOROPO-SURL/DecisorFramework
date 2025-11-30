@@ -14,13 +14,9 @@
 
         public System.DateTime RequestedFor { get; set; }
 
-        public System.DateTime? ApprovedAt { get; set; }
-
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get; set; }
+        public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get; set; }
 
         public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get; set; }
-
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Decisor { get; set; }
 
         public ElaborationDisplayModel Elaboration { get; set; }
 
@@ -34,13 +30,12 @@
             Amount = entity.Amount;
             Description = entity.Description;
             RequestedFor = entity.RequestedFor;
-            ApprovedAt = entity.ApprovedAt;
 
-            if (entity.Author != null)
+            if (entity.Agreement != null)
             {
-                Author = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                Agreement = new Governance.Interop.API.Common.Models.Display.AgreementDisplayModel();
 
-                Author.Import(entity.Author);
+                Agreement.Import(entity.Agreement);
             }
 
             if (entity.Responsible != null)
@@ -48,13 +43,6 @@
                 Responsible = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
 
                 Responsible.Import(entity.Responsible);
-            }
-
-            if (entity.Decisor != null)
-            {
-                Decisor = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
-
-                Decisor.Import(entity.Decisor);
             }
 
             if (entity.Elaboration != null)
