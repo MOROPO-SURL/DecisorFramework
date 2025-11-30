@@ -48,24 +48,16 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
-    <FlyoutItem
-        Title="Ordenes (%)">
-        <FlyoutItem.Icon>
+    <ShellContent
+        Title="Órdenes"
+        ContentTemplate="{DataTemplate frwk_production_manage_pages:ProductionOrdersToApproveManagePage}">
+        <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF14E;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </FlyoutItem.Icon>
-        <ShellContent
-            Title="Realizadas"
-            ContentTemplate="{DataTemplate ContentPage}" />
-        <ShellContent
-            Title="Por Realizar"
-            ContentTemplate="{DataTemplate ContentPage}" />
-        <ShellContent
-            Title="Por Aprobar"
-            ContentTemplate="{DataTemplate ContentPage}" />
-    </FlyoutItem>
+        </ShellContent.Icon>
+    </ShellContent>
     <ShellContent
         Title="Producciones (%)"
         ContentTemplate="{DataTemplate ContentPage}">
@@ -78,7 +70,7 @@
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
-        Title="Líneas de Producción"
+        Title="Técnicas de Producción"
         ContentTemplate="{DataTemplate frwk_production_manage_pages:ElaborationsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
