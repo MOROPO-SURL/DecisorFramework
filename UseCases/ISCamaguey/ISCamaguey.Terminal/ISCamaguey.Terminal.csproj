@@ -168,4 +168,8 @@
 	  </Compile>
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="UI\Pages\Configuration\" />
+	</ItemGroup>
+
 </Project>
