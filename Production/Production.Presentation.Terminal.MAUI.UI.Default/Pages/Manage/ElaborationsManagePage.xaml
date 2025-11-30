@@ -14,7 +14,7 @@
     x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.ElaborationsManagePage"
     x:TypeArguments="interop_common_display_models:ElaborationDisplayModel,presentation_manage_page_models:ElaborationsManagePageModel,presentation_configuration_page_models:ElaborationConfigurationPageModel"
     x:DataType="presentation_manage_page_models:ElaborationsManagePageModel"
-    Title="Gestión de Líneas de Producción">
+    Title="Gestión de Técnicas de Producción">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />

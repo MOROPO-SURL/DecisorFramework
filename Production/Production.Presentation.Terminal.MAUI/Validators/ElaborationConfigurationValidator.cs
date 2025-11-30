@@ -6,6 +6,8 @@ public class ElaborationConfigurationValidator : AbstractValidator<Models.Page.C
 {
     public ElaborationConfigurationValidator()
     {
+        RuleFor(model => model.Name).NotNull().NotEmpty();
+
         RuleFor(model => model.Product).NotNull();
 
         RuleFor(model => model.Classification).Must((model, value) =>
