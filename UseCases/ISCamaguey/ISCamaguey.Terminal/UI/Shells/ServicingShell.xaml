@@ -59,10 +59,10 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Jurídicos"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_manage_pages:LegalClientTrainingServiceOrdersManagePage}" />
         <ShellContent
             Title="Naturales"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_manage_pages:NaturalClientTrainingServiceOrdersManagePage}" />
     </FlyoutItem>
     <FlyoutItem Title="Procesamiento de Muestras">
         <FlyoutItem.Icon>
@@ -87,10 +87,10 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Jurídicos"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_manage_pages:LegalClientGroundIntegralStudyServiceOrdersManagePage}" />
         <ShellContent
             Title="Naturales"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_manage_pages:NaturalClientGroundIntegralStudyServiceOrdersManagePage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Servicios" IsEnabled="False" />
     <ShellContent
