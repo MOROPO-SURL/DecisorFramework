@@ -1,8 +1,8 @@
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Models.View.WorkforceConfigurationVacantViewModel>
+public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Models.View.WorkforceConfigurationVacantViewModel, Models.View.WorkforceConfigurationVacantViewModel, Models.Page.Configuration.VacantConfigurationPageModel>
 {
-    public VacantConfigurationPage(System.Action<Models.View.WorkforceConfigurationVacantViewModel> successAction, Models.Page.Configuration.VacantConfigurationPageModel model) : base(successAction, model)
+    public VacantConfigurationPage(System.Action<Models.View.WorkforceConfigurationVacantViewModel> successAction, Models.Page.Configuration.VacantConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.VacantConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -15,7 +15,6 @@ public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.U
                 if (model.WorkPosition.Id != current.Id) continue;
 
                 WorkPositionPicker.SelectedIndex = i;
-                WorkPositionPicker.SelectedItem = current;
 
                 break;
             }
@@ -30,43 +29,50 @@ public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.U
                 if (model.SalaryStandard.Id != current.Id) continue;
 
                 SalaryStandardPicker.SelectedIndex = i;
-                SalaryStandardPicker.SelectedItem = current;
 
                 break;
             }
         }
     }
 
+    protected override bool IsNotificationRequired => false;
+
     protected override string EntityTypeName => "Vacante";
 
     protected override System.Threading.Tasks.Task<Models.View.WorkforceConfigurationVacantViewModel> PerformCreationAsync()
     {
-        var concreteBindingContext = (Models.Page.Configuration.VacantConfigurationPageModel)BindingContext;
-
         return System.Threading.Tasks.Task.FromResult(new Models.View.WorkforceConfigurationVacantViewModel
         {
             Id = System.Guid.NewGuid(),
-            OrganizationUnity = concreteBindingContext.OrganizationUnity,
-            Priority = concreteBindingContext.Priority,
-            OcupationMode = concreteBindingContext.OcupationMode,
-            WorkPosition = concreteBindingContext.AvailableWorkPositions[WorkPositionPicker.SelectedIndex],
-            SalaryStandard = concreteBindingContext.AvailableSalaryStandards[SalaryStandardPicker.SelectedIndex]
+            OrganizationUnity = ConcreteBindingContext.OrganizationUnity,
+            Priority = ConcreteBindingContext.Priority,
+            OcupationMode = ConcreteBindingContext.OcupationMode,
+            WorkPosition = ConcreteBindingContext.WorkPosition,
+            SalaryStandard = ConcreteBindingContext.SalaryStandard
         });
     }
 
     protected override System.Threading.Tasks.Task<Models.View.WorkforceConfigurationVacantViewModel> PerformEditionAsync()
     {
-        var concreteBindingContext = (Models.Page.Configuration.VacantConfigurationPageModel)BindingContext;
-
         return System.Threading.Tasks.Task.FromResult(new Models.View.WorkforceConfigurationVacantViewModel
         {
-            Id = concreteBindingContext.Id,
-            OrganizationUnity = concreteBindingContext.OrganizationUnity,
-            Priority = concreteBindingContext.Priority,
-            OcupationMode = concreteBindingContext.OcupationMode,
-            WorkPosition = concreteBindingContext.AvailableWorkPositions[WorkPositionPicker.SelectedIndex],
-            SalaryStandard = concreteBindingContext.AvailableSalaryStandards[SalaryStandardPicker.SelectedIndex]
+            Id = ConcreteBindingContext.Id,
+            OrganizationUnity = ConcreteBindingContext.OrganizationUnity,
+            Priority = ConcreteBindingContext.Priority,
+            OcupationMode = ConcreteBindingContext.OcupationMode,
+            WorkPosition = ConcreteBindingContext.WorkPosition,
+            SalaryStandard = ConcreteBindingContext.SalaryStandard
         });
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
