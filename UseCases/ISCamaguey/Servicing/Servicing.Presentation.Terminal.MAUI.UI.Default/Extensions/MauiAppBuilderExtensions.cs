@@ -20,6 +20,10 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Defa
                 .AddSingleton<IDetailContentPageFactoryFacade<NaturalClientServicingContractDisplayModel>, NaturalClientServicingContractDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<LegalClientSampleAnalysisServiceOrderDisplayModel>, LegalClientSampleAnalysisServiceOrderDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<NaturalClientSampleAnalysisServiceOrderDisplayModel>, NaturalClientSampleAnalysisServiceOrderDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<LegalClientTrainingServiceOrderDisplayModel>, LegalClientTrainingServiceOrderDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<NaturalClientTrainingServiceOrderDisplayModel>, NaturalClientTrainingServiceOrderDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<LegalClientGroundIntegralStudyServiceOrderDisplayModel>, LegalClientGroundIntegralStudyServiceOrderDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<NaturalClientGroundIntegralStudyServiceOrderDisplayModel>, NaturalClientGroundIntegralStudyServiceOrderDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<TrainingServiceDisplayModel, TrainingServiceConfigurationPageModel>, TrainingServiceConfigurationPageFactory>()
@@ -28,7 +32,11 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Defa
                 .AddSingleton<IConfigurationContentPageFactoryFacade<LegalClientServicingContractDisplayModel, LegalClientServicingContractConfigurationPageModel>, LegalClientServicingContractConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<NaturalClientServicingContractDisplayModel, NaturalClientServicingContractConfigurationPageModel>, NaturalClientServicingContractConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<LegalClientSampleAnalysisServiceOrderDisplayModel, LegalClientSampleAnalysisServiceOrderConfigurationPageModel>, LegalClientSampleAnalysisServiceOrderConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<NaturalClientSampleAnalysisServiceOrderDisplayModel, NaturalClientSampleAnalysisServiceOrderConfigurationPageModel>, NaturalClientSampleAnalysisServiceOrderConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<NaturalClientSampleAnalysisServiceOrderDisplayModel, NaturalClientSampleAnalysisServiceOrderConfigurationPageModel>, NaturalClientSampleAnalysisServiceOrderConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<LegalClientTrainingServiceOrderDisplayModel, LegalClientTrainingServiceOrderConfigurationPageModel>, LegalClientTrainingServiceOrderConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<NaturalClientTrainingServiceOrderDisplayModel, NaturalClientTrainingServiceOrderConfigurationPageModel>, NaturalClientTrainingServiceOrderConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<LegalClientGroundIntegralStudyServiceOrderDisplayModel, LegalClientGroundIntegralStudyServiceOrderConfigurationPageModel>, LegalClientGroundIntegralStudyServiceOrderConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<NaturalClientGroundIntegralStudyServiceOrderDisplayModel, NaturalClientGroundIntegralStudyServiceOrderConfigurationPageModel>, NaturalClientGroundIntegralStudyServiceOrderConfigurationPageFactory>();
 
             return builder;
         }
