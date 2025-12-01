@@ -9,5 +9,7 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(RequestedTechniqueId))]
         public Domain.Persistence.Entities.Technique RequestedTechnique { get; set; }
         public System.Guid? RequestedTechniqueId { get; set;}
+
+        public System.DateTime? SampleReceptionAt { get; set; }
     }
 }

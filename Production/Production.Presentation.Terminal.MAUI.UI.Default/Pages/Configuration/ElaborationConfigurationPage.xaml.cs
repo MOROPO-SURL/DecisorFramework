@@ -13,7 +13,7 @@ public partial class ElaborationConfigurationPage : Core.Presentation.Terminal.M
         InitializeComponent();
     }
 
-    protected override string EntityTypeName => "Elaboración";
+    protected override string EntityTypeName => "Línea de Producción";
 
     protected override async System.Threading.Tasks.Task<ElaborationDisplayModel> PerformCreationAsync()
     {

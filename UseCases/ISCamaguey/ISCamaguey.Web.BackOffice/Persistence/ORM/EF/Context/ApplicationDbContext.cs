@@ -19,6 +19,7 @@ using MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities;
 using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 using MOROPO.ISCamaguey.Decisor.Reporting.Persistence.Entities;
 using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
+using MOROPO.Framework.Decisor.Production.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
 {
@@ -30,6 +31,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         Framework.Guama.Security.Personal.Persistence.ORM.EF.Contract.IPersistenceDbContext,
         Framework.Decisor.HumanResources.Persistence.ORM.EF.Context.Contract.IHumanResourcesDbContext,
         Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract.ICommercialDbContext,
+        Framework.Decisor.Production.Persistence.ORM.EF.Context.Contract.IProductionDbContext,
         Reporting.Persistence.ORM.EF.Context.Contract.IReportingDbContext
     {
         public ApplicationDbContext(System.Collections.Generic.IEnumerable<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
@@ -279,6 +281,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Analysis> Analysises { get; set; }
         public DbSet<AnalysisOrder> AnalysisOrders { get; set; }
         public DbSet<Assessment> Assessments { get; set; }
+        public DbSet<SampleReceptionLabel> SampleReceptionLabels { get; set; }
         public DbSet<ResearchSample> ResearchSamples { get; set; }
         public DbSet<SampleKind> SampleKinds { get; set; }
         public DbSet<ServiceOrderSample> ServiceOrderSamples { get; set; }
@@ -286,6 +289,20 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<WorkingGroupEmployeeBridge> WorkingGroupEmployeeBridges { get; set; }
         public DbSet<WorkingGroupTechniqueBridge> WorkingGroupTechniqueBridges { get; set; }
         public DbSet<WorkPlan> WorkPlans { get; set; }
+
+        public DbSet<Elaboration> Elaborations { get; set; }
+        public DbSet<ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
+        public DbSet<ElaborationInputProductClassificationBridge> ElaborationInputProductClassificationBridges { get; set; }
+        public DbSet<ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
+        public DbSet<ElaborationStep> ElaborationSteps { get; set; }
+        public DbSet<ElaborationStepWorkPositionBridge> ElaborationStepWorkPositionBridges { get; set; }
+        public DbSet<Production> Productions { get; set; }
+        public DbSet<ProductionColaboratorBridge> ProductionColaboratorBridges { get; set; }
+        public DbSet<ProductionEmployeeBridge> ProductionEmployeeBridges { get; set; }
+        public DbSet<ProductionOrder> ProductionOrders { get; set; }
+        public DbSet<ProductionOrderDeparture> ProductionOrderDepartures { get; set; }
+        public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
+        public DbSet<ProductionReception> ProductionReceptions { get; set; }
     }
 }
 
