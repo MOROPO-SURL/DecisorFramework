@@ -111,14 +111,14 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
                 }, User.Identity.Name, false);
             }
 
-            var index = namingResolutionRepository.Count() + 1;
+            var namingResolutionIndex = namingResolutionRepository.Count() + 1;
 
             var namingResolution = namingResolutionRepository.Add(new NamingResolution
             {
                 Id = System.Guid.NewGuid(),
                 AgreementId = agreement.Id,
                 ContactId = model.ContactId,
-                Index = index,
+                Index = namingResolutionIndex,
                 At = now,
                 Year = now.Year,
                 ConcretedAt = now,
@@ -132,6 +132,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
             entity.StaffId = model.StaffId;
             entity.Contract = new NamingEmploymentContract
             {
+                Index = namingResolutionIndex,
                 Year = now.Year,
                 StarAt = now,
                 Objective = $"Contratación generada a partir de la resolución de nombramiento \"{namingResolution.Id}/{namingResolution.Year}\"",
