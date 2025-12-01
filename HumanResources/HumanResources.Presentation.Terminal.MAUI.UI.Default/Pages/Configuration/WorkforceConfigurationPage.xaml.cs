@@ -128,20 +128,17 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         {
             try
             {
-                var workPositionsAPIConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-                var salaryStandardsAPIConnectClient = new Interop.API.Connect.Clients.SalaryStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Models.View.WorkforceConfigurationVacantViewModel, Models.Page.Configuration.VacantConfigurationPageModel>>();
 
-                var model = new Models.Page.Configuration.VacantConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalUnityViewModel)
-                {
-                    AvailableWorkPositions = await workPositionsAPIConnectClient.GetAsync(),
-                    AvailableSalaryStandards = await salaryStandardsAPIConnectClient.GetAsync()
-                };
+                var page = await factory.BuildAsync(VacantDefineSuccess_Callback, null);
+
+                page.ConcreteBindingContext.OrganizationUnity = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalUnityViewModel;
 
                 Dispatcher.Dispatch(() =>
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new VacantConfigurationPage(VacantDefineSuccess_Callback, model));
+                    this.NavigationPushPageAsync(page);
                 });
             }
             catch (System.Exception exception)
@@ -162,20 +159,17 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         {
             try
             {
-                var workPositionsAPIConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-                var salaryStandardsAPIConnectClient = new Interop.API.Connect.Clients.SalaryStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Models.View.WorkforceConfigurationVacantViewModel, Models.Page.Configuration.VacantConfigurationPageModel>>();
 
-                var model = new Models.Page.Configuration.VacantConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalUnityViewModel)
-                {
-                    AvailableWorkPositions = await workPositionsAPIConnectClient.GetAsync(),
-                    AvailableSalaryStandards = await salaryStandardsAPIConnectClient.GetAsync()
-                };
+                var page = await factory.BuildAsync(VacantCreateSuccess_Callback, null);
+
+                page.ConcreteBindingContext.OrganizationUnity = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalUnityViewModel;
 
                 Dispatcher.Dispatch(() =>
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new VacantConfigurationPage(VacantCreateSuccess_Callback, model));
+                    this.NavigationPushPageAsync(page);
                 });
             }
             catch (System.Exception exception)
@@ -196,20 +190,15 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         {
             try
             {
-                var workPositionsAPIConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-                var salaryStandardsAPIConnectClient = new Interop.API.Connect.Clients.SalaryStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Models.View.WorkforceConfigurationVacantViewModel, Models.Page.Configuration.VacantConfigurationPageModel>>();
 
-                var model = new Models.Page.Configuration.VacantConfigurationPageModel((((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalUnityViewModel).ChiefVacant)
-                {
-                    AvailableWorkPositions = await workPositionsAPIConnectClient.GetAsync(),
-                    AvailableSalaryStandards = await salaryStandardsAPIConnectClient.GetAsync()
-                };
+                var page = await factory.BuildAsync(ChiefVacantEditSuccess_Callback, (((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalUnityViewModel).ChiefVacant);
 
                 Dispatcher.Dispatch(() =>
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new VacantConfigurationPage(ChiefVacantEditSuccess_Callback, model));
+                    this.NavigationPushPageAsync(page);
                 });
             }
             catch (System.Exception exception)
@@ -230,20 +219,15 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         {
             try
             {
-                var workPositionsAPIConnectClient = new Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-                var salaryStandardsAPIConnectClient = new Interop.API.Connect.Clients.SalaryStandardsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Models.View.WorkforceConfigurationVacantViewModel, Models.Page.Configuration.VacantConfigurationPageModel>>();
 
-                var model = new Models.Page.Configuration.VacantConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationVacantViewModel)
-                {
-                    AvailableWorkPositions = await workPositionsAPIConnectClient.GetAsync(),
-                    AvailableSalaryStandards = await salaryStandardsAPIConnectClient.GetAsync()
-                };
+                var page = await factory.BuildAsync(VacantEditSuccess_Callback, ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationVacantViewModel);
 
                 Dispatcher.Dispatch(() =>
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new VacantConfigurationPage(VacantEditSuccess_Callback, model));
+                    this.NavigationPushPageAsync(page);
                 });
             }
             catch (System.Exception exception)
