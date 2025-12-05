@@ -9,8 +9,6 @@ public partial class GroundIntegralStudyServiceStepConfigurationPage : Framework
 
     protected override string EntityTypeName => "Etapa de Servicio de Estudio Integral de Suelo";
 
-    protected override bool IsNotificationRequired => false;
-
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Input.GroundIntegralStudyServiceStepInputModel> PerformCreationAsync()
     {
         var model = new Interop.API.Common.Models.Input.GroundIntegralStudyServiceStepInputModel

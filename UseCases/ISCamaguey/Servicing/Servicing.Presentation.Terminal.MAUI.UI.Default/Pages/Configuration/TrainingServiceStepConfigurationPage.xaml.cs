@@ -9,8 +9,6 @@ public partial class TrainingServiceStepConfigurationPage : Framework.Decisor.Co
 
     protected override string EntityTypeName => "Etapa de Servicio de Capacitación";
 
-    protected override bool IsNotificationRequired => false;
-
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Input.TrainingServiceStepInputModel> PerformCreationAsync()
     {
         var model = new Interop.API.Common.Models.Input.TrainingServiceStepInputModel

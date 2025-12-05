@@ -23,8 +23,6 @@ public partial class SimplifiedVacantConfigurationPage : Framework.Decisor.Core.
         ConcreteBindingContext.OcupationMode = Framework.Decisor.HumanResources.Persistence.Enumerations.VacantOcupationMode.Naming;
     }
 
-    protected override bool IsNotificationRequired => false;
-
     protected override string EntityTypeName => "Vacante";
 
     protected override System.Threading.Tasks.Task<Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.WorkforceConfigurationVacantViewModel> PerformCreationAsync()
