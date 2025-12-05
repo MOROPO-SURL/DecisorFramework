@@ -60,7 +60,7 @@ public partial class ProductionsManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             try
             {
-                var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.ProductionConfigurationPageModel(concreteBindingContext.PresentedItem)
                 {

@@ -2,19 +2,20 @@
 {
     public class PurchaseSpentConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.PurchaseSpentDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+
         private string name;
         private string description;
         private int priority = 1;
 
         public PurchaseSpentConfigurationPageModel(Interop.API.Common.Models.Display.PurchaseSpentDisplayModel model) : base(model)
         {
-            if (model != null)
-            {
-                Id = model.Id;
-                Name = model.Name;
-                Description = model.Description;
-                Priority = model.Priority;
-            }
+            if (model == null) return;
+
+            Id = model.Id;
+            name = model.Name;
+            description = model.Description;
+            priority = model.Priority;
         }
 
         public System.Guid Id { get; set; }

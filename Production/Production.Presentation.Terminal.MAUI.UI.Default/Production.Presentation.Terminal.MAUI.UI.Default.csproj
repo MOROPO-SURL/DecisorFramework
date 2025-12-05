@@ -29,8 +29,34 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\HumanResources\HumanResources.Presentation.Terminal.MAUI.UI.Default\HumanResources.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\..\Governance\Governance.Presentation.Terminal.MAUI.UI.Default\Governance.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\..\HumanResources\HumanResources.Interop.API.Connect\HumanResources.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\..\Inventory\Inventory.Presentation.Terminal.MAUI.UI.Default\Inventory.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Production.Presentation.Terminal.MAUI\Production.Presentation.Terminal.MAUI.csproj" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Pages\Configuration\CommonElaborationProductBridgeConfigurationPage.xaml.cs">
+	    <DependentUpon>CommonElaborationProductBridgeConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\List\ProductionOrdersListPage.xaml.cs">
+	    <DependentUpon>ProductionOrdersListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\ProductionOrdersManagePage.xaml.cs">
+	    <DependentUpon>ProductionOrdersManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\ProductionOrderPickPage.xaml.cs">
+	    <DependentUpon>ProductionOrderPickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\ProductionOrderDefaultCardView.xaml.cs">
+	    <DependentUpon>ProductionOrderDefaultCardView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\CommonElaborationProductBridgeConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\ElaborationDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	</ItemGroup>
 </Project>

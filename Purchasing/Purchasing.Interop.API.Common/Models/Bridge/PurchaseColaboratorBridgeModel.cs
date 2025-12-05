@@ -2,6 +2,6 @@
 {
     public class PurchaseColaboratorBridgeModel : Contract.AbstractPurchasePersonBridgeModel
     {
-        public Essential.Interop.API.Common.Models.Display.ColaboratorDisplayModel Colaborator { get; set; }
+        public Domain.Interop.API.Common.Models.Display.ColaboratorDisplayModel Colaborator { get; set; }
     }
 }

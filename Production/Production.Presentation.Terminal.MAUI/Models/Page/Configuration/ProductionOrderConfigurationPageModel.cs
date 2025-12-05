@@ -1,16 +1,18 @@
-﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
-
-namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration
+﻿namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class ProductionOrderConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ProductionOrderDisplayModel>
     {
+        public static string ElaborationValidableProperty => nameof(Elaboration);
+        public static string AgreementValidableProperty => nameof(Agreement);
+        public static string ResponsibleValidableProperty => nameof(Responsible);
+        public static string AmountValidableProperty => nameof(Amount);
+
         private System.DateTime requestedFor;
         private string description;
         private int priority = 1;
         private Interop.API.Common.Models.Display.ElaborationDisplayModel elaboration;
-        private EmployeeDisplayModel author;
-        private EmployeeDisplayModel responsible;
-        private EmployeeDisplayModel decisor;
+        private Governance.Interop.API.Common.Models.Display.AgreementDisplayModel agreement;
+        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel responsible;
         private decimal amount;
 
         public ProductionOrderConfigurationPageModel(Interop.API.Common.Models.Display.ProductionOrderDisplayModel model) : base(model)
@@ -18,14 +20,13 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
             if (model != null)
             {
                 Id = model.Id;
-                RequestedFor = model.RequestedFor;
-                Description = model.Description;
-                Priority = model.Priority;
-                Elaboration = model.Elaboration;
-                Author = model.Author;
-                Responsible = model.Responsible;
-                Decisor = model.Decisor;
-                Amount = model.Amount;
+                requestedFor = model.RequestedFor;
+                description = model.Description;
+                priority = model.Priority;
+                elaboration = model.Elaboration;
+                agreement = model.Agreement;
+                responsible = model.Responsible;
+                amount = model.Amount;
             }
             else
             {
@@ -45,18 +46,10 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public Interop.API.Common.Models.Display.ElaborationDisplayModel Elaboration { get => elaboration; set => SetProperty(ref elaboration, value); }
 
-        public EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
+        public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get => agreement; set => SetProperty(ref agreement, value); }
 
-        public EmployeeDisplayModel Responsible { get => responsible; set => SetProperty(ref responsible, value); }
-
-        public EmployeeDisplayModel Decisor { get => decisor; set => SetProperty(ref decisor, value); }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get => responsible; set => SetProperty(ref responsible, value); }
 
         public decimal Amount { get => amount; set => SetProperty(ref amount, value); }
-
-        public EmployeeDisplayModel[] AvailableAuthors { get; set; } = [];
-
-        public EmployeeDisplayModel[] AvailableResponsibles { get; set; } = [];
-
-        public EmployeeDisplayModel[] AvailableDecisors { get; set; } = [];
     }
 }

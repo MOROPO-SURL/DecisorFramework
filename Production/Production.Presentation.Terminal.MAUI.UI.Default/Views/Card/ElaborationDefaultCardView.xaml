@@ -14,21 +14,26 @@
             <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <Frame 
-        Padding="0"
-        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
-        <StackLayout>
+    <Frame Padding="0">
+        <StackLayout 
+            Orientation="Vertical"
+            Spacing="0">
             <Image
+                VerticalOptions="FillAndExpand"
                 Aspect="AspectFill"
-                HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=1.777777777777778}"
                 Source="{Binding Product.FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
             <StackLayout
-                IsClippedToBounds="True"
-                Padding="10">
+                Padding="16">
                 <Label
+                    ToolTipProperties.Text="{Binding Product.Name}"
+                    LineBreakMode="TailTruncation"
+                    FontSize="Medium"
+                    Text="{Binding Product.Name}" />
+                <Label
+                    ToolTipProperties.Text="{Binding Name}"
                     LineBreakMode="TailTruncation"
                     FontAttributes="Bold"
-                    Text="{Binding Product.Name}" />
+                    Text="{Binding Name}" />
                 <Label 
                     Margin="0,6,0,0"
                     Text="Descripción"

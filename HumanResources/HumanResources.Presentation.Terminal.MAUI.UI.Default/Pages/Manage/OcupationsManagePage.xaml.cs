@@ -208,6 +208,8 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
                                         else
                                         {
                                             pickContactVacantBindingContext.Ocupation = _task.Result;
+
+                                            CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
                                         }
 
                                         pickContactVacantBindingContext = null;
@@ -252,6 +254,8 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
                         else
                         {
                             model.Ocupation = null;
+
+                            CommunityToolkit.Maui.Alerts.Toast.Make("Persona asignada a la ocupación retirada con éxito.").Show();
                         }
 
                         ConcreteBindingContext.IsBusy = false;

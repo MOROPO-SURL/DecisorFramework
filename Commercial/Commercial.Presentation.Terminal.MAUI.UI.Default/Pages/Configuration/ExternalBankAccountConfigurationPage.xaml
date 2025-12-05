@@ -31,7 +31,7 @@
         </ToolbarItem>
     </ContentPage.ToolbarItems>
     <ScrollView Orientation="Vertical">
-        <VerticalStackLayout Spacing="0" Padding="8">
+        <VerticalStackLayout Spacing="4" Padding="8">
             <FlexLayout 
                 Wrap="Wrap"
                 AlignItems="Start" AlignContent="Start">
@@ -79,7 +79,7 @@
                 Wrap="Wrap"
                 AlignItems="Start" AlignContent="Start">
                 <VerticalStackLayout 
-                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                     Margin="4"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />

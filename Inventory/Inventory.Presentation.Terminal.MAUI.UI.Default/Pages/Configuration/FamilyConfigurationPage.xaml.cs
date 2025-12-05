@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Defau
 
 public partial class FamilyConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.FamilyDisplayModel, Interop.API.Common.Models.Display.FamilyDisplayModel, Models.Page.Configuration.FamilyConfigurationPageModel>
 {
-    public FamilyConfigurationPage(System.Action<Interop.API.Common.Models.Display.FamilyDisplayModel> successAction, Models.Page.Configuration.FamilyConfigurationPageModel model) : base(successAction, model, null)
+    public FamilyConfigurationPage(System.Action<Interop.API.Common.Models.Display.FamilyDisplayModel> successAction, Models.Page.Configuration.FamilyConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.FamilyConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 

@@ -2,6 +2,8 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
     xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Purchasing.Interop.API.Common"
@@ -9,6 +11,13 @@
     x:Class="MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.PurchaseZoneConfigurationPage"
     x:TypeArguments="interop_common_display_models:PurchaseZoneDisplayModel,interop_common_display_models:PurchaseZoneDisplayModel,presentation_configuration_page_models:PurchaseZoneConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:PurchaseZoneConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Aplicar"
@@ -27,30 +36,26 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <Grid 
-                Padding="20"
-                ColumnSpacing="16" RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="0">
+            <VerticalStackLayout Spacing="4" Padding="8">
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                     <Entry Text="{Binding Name}" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PurchaseZoneConfigurationPageModel.NameValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PurchaseZoneConfigurationPageModel.NameValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="1">
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
-                    <Editor Text="{Binding Description}" HeightRequest="200" />
+                    <Editor Text="{Binding Description}" HeightRequest="120" />
                 </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.ColumnSpan="4" Grid.Row="2">
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Gastos" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
@@ -85,20 +90,28 @@
                                         <Frame Padding="8">
                                             <StackLayout Spacing="8" Orientation="Horizontal">
                                                 <Label 
+                                                    Margin="8"
                                                     HorizontalOptions="FillAndExpand" VerticalOptions="Center"
                                                     Text="{Binding Spent.Name}"
-                                                    FontAttributes="Bold"
+                                                    FontSize="Medium"
                                                     LineBreakMode="TailTruncation" />
+                                                <Label 
+                                                    HorizontalOptions="Start" VerticalOptions="Center"
+                                                    FontAttributes="Bold"
+                                                    Text="{Binding Amount, StringFormat='{0:F2}'}" />
                                                 <Label
                                                     HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                                    Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                                    FontAttributes="Bold"
+                                                    Text="{Binding Currency.Symbol}" />
                                                 <Button
                                                     VerticalOptions="Start"
-                                                    FontFamily="MaterialDesignIcons" Text="&#xF90B;"
+                                                    Style="{StaticResource FontIconImageButtonStyle}" 
+                                                    Text="&#xF90B;"
                                                     Clicked="EditSpentBridgeButton_Clicked" />
                                                 <Button
                                                     VerticalOptions="Start"
-                                                    FontFamily="MaterialDesignIcons" Text="&#xf1c0;"
+                                                    Style="{StaticResource FontIconImageButtonStyle}" 
+                                                    Text="&#xFA78;"
                                                     Clicked="SpentBridgeRemoveButton_Clicked" />
                                             </StackLayout>
                                         </Frame>
@@ -109,15 +122,21 @@
                     </Frame>
                 </VerticalStackLayout>
                 <BoxView 
-                    Grid.ColumnSpan="3" Grid.Row="3" 
-                    Margin="0,8,0,0"
+                    Margin="8,16,8,8"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="4">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                </VerticalStackLayout>
-            </Grid>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1,ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+            </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>

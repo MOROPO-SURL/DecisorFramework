@@ -20,7 +20,9 @@ public partial class DocumentConfigurationPage : UI.Pages.Base.ConfigurationBase
         {
             Id = ConcreteBindingContext.Id,
             Name = ConcreteBindingContext.Name,
-            Description = ConcreteBindingContext.Description
+            Description = ConcreteBindingContext.Description,
+            Extension = ConcreteBindingContext.Extension,
+            Length = ConcreteBindingContext.Length
         });
     }
 

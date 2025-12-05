@@ -29,8 +29,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Essential\Essential.Presentation.Terminal.MAUI.Terminal\Essential.Presentation.Terminal.MAUI.csproj" />
-		<ProjectReference Include="..\..\Inventory\Inventory.Presentation.Terminal.MAUI\Inventory.Presentation.Terminal.MAUI.csproj" />
+		<ProjectReference Include="..\..\Core\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj" />
 		<ProjectReference Include="..\Production.Interop.API.Connect\Production.Interop.API.Connect.csproj" />
 	</ItemGroup>
 </Project>

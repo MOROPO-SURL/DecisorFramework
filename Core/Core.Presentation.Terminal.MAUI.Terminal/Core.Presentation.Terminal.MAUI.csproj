@@ -31,4 +31,14 @@
 	<ItemGroup>
 		<ProjectReference Include="..\Core.Interop.API.Connect\Core.Interop.API.Connect.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Compile Update="Resources\Styles\ExplicitStylesDictionary.xaml.cs">
+	    <DependentUpon>ExplicitStylesDictionary.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Resources\Styles\ExplicitStylesDictionary.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	</ItemGroup>
 </Project>

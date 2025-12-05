@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.Controls;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using System.Linq;
 
@@ -23,7 +24,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected int CurrentItemsPageLimit { get; private set; }
 
-        protected virtual Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() { throw new System.NotImplementedException(); }
+        protected virtual CollectionView GetItemsCollectionView() { throw new System.NotImplementedException(); }
 
         protected virtual double ItemViewRequestWidth { get => 320; }
 
@@ -207,6 +208,62 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
             {
                 CurrentItemsPageLimit = 10;
             }
+        }
+
+        protected virtual void PresentToastNotification(string message, System.TimeSpan? time = null, System.TimeSpan? delay = null)
+        {
+#if WINDOWS
+            if (string.IsNullOrEmpty(message) || string.IsNullOrWhiteSpace(message) || Content is not Grid) return;
+
+            var toastFrame = new Frame
+            {
+                Style = (Style)Application.Current.Resources["SuccessToastFrameStyle"],
+                Opacity = 0,
+                Margin = new Microsoft.Maui.Thickness(48),
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.End,
+                Content = new Label
+                {
+                    Style = (Style)Application.Current.Resources["SuccessToastLabelStyle"],
+                    Text = message 
+                }
+            };
+
+            var toastContainerGrid = Content as Grid;
+
+            if (toastContainerGrid.ColumnDefinitions.Count > 1) Grid.SetColumnSpan(toastFrame, toastContainerGrid.ColumnDefinitions.Count);
+
+            if (toastContainerGrid.RowDefinitions.Count > 1) Grid.SetRowSpan(toastFrame, toastContainerGrid.RowDefinitions.Count);
+
+            toastContainerGrid.Add(toastFrame);
+
+            System.Threading.Tasks.Task.Delay(delay ?? System.TimeSpan.FromSeconds(1)).ContinueWith(_ =>
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    toastFrame.FadeTo(1).ContinueWith(async _ =>
+                    {
+                        await System.Threading.Tasks.Task.Delay(time ?? System.TimeSpan.FromSeconds(3));
+
+                        Dispatcher.Dispatch(() =>
+                        {
+                            toastFrame.FadeTo(0).ContinueWith(_ =>
+                            {
+                                Dispatcher.Dispatch(() =>
+                                {
+                                    toastContainerGrid.Remove(toastFrame);
+
+                                    toastFrame = null;
+                                    toastContainerGrid = null;
+                                });
+                            });
+                        });
+                    });
+                });
+            });
+#else
+            CommunityToolkit.Maui.Alerts.Snackbar.Make(message).Show();
+#endif
         }
     }
 }

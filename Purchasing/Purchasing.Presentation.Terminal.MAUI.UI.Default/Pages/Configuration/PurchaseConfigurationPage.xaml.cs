@@ -10,36 +10,6 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
     public PurchaseConfigurationPage(System.Action<Interop.API.Common.Models.Display.PurchaseDisplayModel> successAction, Models.Page.Configuration.PurchaseConfigurationPageModel model) : base(successAction, model)
     {
         InitializeComponent();
-
-        if (model.Zone != null)
-        {
-            for (int i = 0; i < model.AvailableZones.Length; i++)
-            {
-                var current = model.AvailableZones[i];
-
-                if (model.Zone.Id != current.Id) continue;
-
-                ZonePicker.SelectedIndex = i;
-                ZonePicker.SelectedItem = current;
-
-                break;
-            }
-        }
-
-        if (model.Purchaser != null)
-        {
-            for (int i = 0; i < model.AvailablePurchasers.Length; i++)
-            {
-                var current = model.AvailablePurchasers[i];
-
-                if (model.Purchaser.Id != current.Id) continue;
-
-                PurchaserPicker.SelectedIndex = i;
-                PurchaserPicker.SelectedItem = current;
-
-                break;
-            }
-        }
     }
 
     protected override string EntityTypeName => "Compra";
@@ -53,12 +23,11 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
         var model = new Interop.API.Common.Models.Input.PurchaseInputModel
         {
             Id = System.Guid.NewGuid(),
-            PlanId = concreteBindingContext.Plan?.Id ?? null,
-            ZoneId = ZonePicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableZones[PurchaserPicker.SelectedIndex].Id,
+            OrderId = concreteBindingContext.Order.Id,
             Description = concreteBindingContext.Description,
-            PurchaserId = concreteBindingContext.AvailablePurchasers[PurchaserPicker.SelectedIndex].Id,
-            LegalProviderProductBridges = concreteBindingContext.LegalProviderProductBridges.ToList(),
-            NaturalProviderProductBridges = concreteBindingContext.NaturalProviderProductBridges.ToList(),
+            PurchaserId = concreteBindingContext.Purchaser.Id,
+            LegalProviderProductBridges = [.. concreteBindingContext.LegalProviderProductBridges],
+            NaturalProviderProductBridges = [.. concreteBindingContext.NaturalProviderProductBridges],
             RegularSpentBridges = concreteBindingContext.RegularSpentBridges.Where(item => item.Count > 0).Select(item => new Interop.API.Common.Models.Bridge.PurchasePurchaseSpentBridgeModel
             {
                 Spent = item.Spent,
@@ -92,46 +61,16 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
         hasChangesFlag = true;
     }
 
-    private void ZonePicker_SelectedIndexChanged(object sender, System.EventArgs e)
+    private void OrderPickButton_Clicked(object sender, System.EventArgs e)
     {
-        if (ZonePicker.SelectedItem != null)
-        {
-            var concreteBindingContext = (Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext;
-
-            concreteBindingContext.RegularSpentBridges.Clear();
-
-            var purchasaZone = ZonePicker.SelectedItem as Interop.API.Common.Models.Display.PurchaseZoneDisplayModel;
-
-            foreach (var item in purchasaZone.SpentBridges)
-            {
-                concreteBindingContext.RegularSpentBridges.Add(new Models.View.PurchasePurchaseSpentBridgeViewModel
-                {
-                    Spent = item.Spent,
-                    Amount = item.Amount,
-                    Count = 1
-                });
-            }
-        }
-
-        hasChangesFlag = true;
-    }
-
-    private void PlanPickButton_Clicked(object sender, System.EventArgs e)
-    {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PurchasePlanToCompletePickPage(PlanPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PurchaseOrderPickPage(OrderPickComplete_Callback)));
     }
 
     private void RegularSpentsResetButton_Clicked(object sender, System.EventArgs e)
     {
         var concreteBindingContext = (Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext;
 
-        concreteBindingContext.RegularSpentBridges.Clear();
-
-        var zone = concreteBindingContext.Plan?.Zone ?? (ZonePicker.SelectedItem as Interop.API.Common.Models.Display.PurchaseZoneDisplayModel);
-
-        if (zone == null) return;
-
-        foreach (var item in concreteBindingContext.Plan.Zone.SpentBridges)
+        foreach (var item in concreteBindingContext.Order.Zone.SpentBridges)
         {
             concreteBindingContext.RegularSpentBridges.Add(new Models.View.PurchasePurchaseSpentBridgeViewModel
             {
@@ -176,7 +115,7 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
         {
             try
             {
-                var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
                 
                 var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseProductLegalProviderBridgeModel;
 
@@ -213,7 +152,7 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
         {
             try
             {
-                var unitMeasurementsAPIConnectClient = new Inventory.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var unitMeasurementsAPIConnectClient = new Domain.Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
                 
                 var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Bridge.PurchaseProductNaturalProviderBridgeModel;
 
@@ -276,26 +215,11 @@ public partial class PurchaseConfigurationPage : Core.Presentation.Terminal.MAUI
         });
     }
 
-    private void PlanPickComplete_Callback(Interop.API.Common.Models.Display.PurchasePlanDisplayModel model)
+    private void OrderPickComplete_Callback(Interop.API.Common.Models.Display.PurchaseOrderDisplayModel model)
     {
         var concreteBindingContext = (Models.Page.Configuration.PurchaseConfigurationPageModel)BindingContext;
 
-        concreteBindingContext.Plan = model;
-
-        ZonePicker.SelectedIndex = -1;
-        ZonePicker.IsEnabled = false;
-
-        concreteBindingContext.RegularSpentBridges.Clear();
-
-        foreach (var item in model.Zone.SpentBridges)
-        {
-            concreteBindingContext.RegularSpentBridges.Add(new Models.View.PurchasePurchaseSpentBridgeViewModel
-            {
-                Spent = item.Spent,
-                Amount = item.Amount,
-                Count = 1
-            });
-        }
+        concreteBindingContext.Order = model;
     }
 
     private void PurchaseLegalProviderProductBridgeCreateSuccess_Callback(Interop.API.Common.Models.Bridge.PurchaseProductLegalProviderBridgeModel model)

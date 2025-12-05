@@ -37,16 +37,10 @@ public partial class PurchasesManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             try
             {
-                var httpClientProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
-
-                var zonesAPIConnectClient = new Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(httpClientProvider);
-                var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(httpClientProvider);
-                var employeesAPIConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientProvider);
+                var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.PurchaseConfigurationPageModel(null)
                 {
-                    AvailablePurchasers = await employeesAPIConnectClient.GetAsync(),
-                    AvailableZones = await zonesAPIConnectClient.GetAsync(),
                     AvailableCostCenters = await costCentersAPIConnectClient.GetAsync()
                 };
 
@@ -96,16 +90,10 @@ public partial class PurchasesManagePage : Caney.MVVM.Core.Pages.ContentPage
         {
             try
             {
-                var httpClientProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
-
-                var zonesAPIConnectClient = new Interop.API.Connect.Clients.PurchaseZonesAPIConnectClient(httpClientProvider);
-                var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(httpClientProvider);
-                var employeesAPIConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(httpClientProvider);
+                var costCentersAPIConnectClient = new Financial.Interop.API.Connect.Clients.CostCentersAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.PurchaseConfigurationPageModel(concreteBindingContext.PresentedItem)
                 {
-                    AvailablePurchasers = await employeesAPIConnectClient.GetAsync(),
-                    AvailableZones = await zonesAPIConnectClient.GetAsync(),
                     AvailableCostCenters = await costCentersAPIConnectClient.GetAsync()
                 };
 

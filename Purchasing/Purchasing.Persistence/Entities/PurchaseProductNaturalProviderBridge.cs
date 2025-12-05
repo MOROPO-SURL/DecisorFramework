@@ -1,6 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
-
-namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
+﻿namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
 {
     public class PurchaseProductNaturalProviderBridge
     {
@@ -19,7 +17,7 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
         public decimal Amount { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(UnitMeasurementId))]
-        public UnitMeasurement UnitMeasurement { get; set; }
+        public Domain.Persistence.Entities.UnitMeasurement UnitMeasurement { get; set; }
         public System.Guid UnitMeasurementId { get; set; }
 
         public decimal Cost { get; set; }

@@ -2,6 +2,9 @@
 {
     public class VacantConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<View.WorkforceConfigurationVacantViewModel>
     {
+        public static string WorkPositionValidableProperty => nameof(WorkPosition);
+        public static string SalaryStandardValidableProperty => nameof(SalaryStandard);
+
         private int priority = 1;
         private Persistence.Enumerations.VacantOcupationMode ocupationMode;
         private Interop.API.Common.Models.Display.WorkPositionDisplayModel workPosition;
@@ -14,15 +17,10 @@
                 Id = model.Id;
                 OrganizationUnity = model.OrganizationUnity;
                 priority = model.Priority;
-                ocupationMode = model.OcupationMode;                
+                ocupationMode = model.OcupationMode;
                 workPosition = model.WorkPosition;
                 salaryStandard = model.SalaryStandard;
             }
-        }
-
-        public VacantConfigurationPageModel(View.WorkforceConfigurationOrganizationalUnityViewModel organizationUnity) : base(null)
-        {
-            OrganizationUnity = organizationUnity;
         }
 
         public System.Guid Id { get; set; }

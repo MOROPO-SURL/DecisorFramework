@@ -1,7 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
-using System.Linq;
-
-namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
+﻿namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 {
     public class ElaborationDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Elaboration, System.Guid>
     {
@@ -11,21 +8,21 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public System.DateTime At { get; set; }
 
-        public ProductDisplayModel Product { get; set; }
+        public string Name { get; set; }
 
-        public ClassificationDisplayModel Classification { get; set; }
+        public Inventory.Interop.API.Common.Models.Display.ProductDisplayModel Product { get; set; }
+
+        public Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel Classification { get; set; }
 
         public string Description { get; set; }
-
-        public decimal ReferenceAmount { get; set; }
 
         public decimal MinPerformanceCoefficient { get; set; }
 
         public decimal MaxPerformanceCoefficient { get; set; }
 
-        public ProductDisplayModel[] InputProducts { get; set; }
+        public Bridge.CommonElaborationProductBridgeModel[] InputProductBridges { get; set; }
 
-        public ProductDisplayModel[] OutputProducts { get; set; }
+        public Bridge.CommonElaborationProductBridgeModel[] OutputProductBridges { get; set; }
 
         public ElaborationStepDisplayModel[] Steps { get; set; }
 
@@ -34,40 +31,95 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             Id = entity.Id;
             Priority = entity.Priority;
             At = entity.At;
+            Name = entity.Name;
             Description = entity.Description;
-            ReferenceAmount = entity.ReferenceAmount;
             MinPerformanceCoefficient = entity.MinPerformanceCoefficient;
             MaxPerformanceCoefficient = entity.MaxPerformanceCoefficient;
-            InputProducts = entity.InputProductBridges.Select(bridge =>
-            {
-                var model = new ProductDisplayModel();
-
-                model.Import(bridge.Stern);
-
-                return model;
-            }).ToArray();
-            OutputProducts = entity.OutputProductBridges.Select(bridge =>
-            {
-                var model = new ProductDisplayModel();
-
-                model.Import(bridge.Stern);
-
-                return model;
-            }).ToArray();
 
             if (entity.Product != null)
             {
-                Product = new ProductDisplayModel();
+                Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel();
 
                 Product.Import(entity.Product);
             }
 
             if (entity.Classification != null)
             {
-                Classification = new ClassificationDisplayModel();
+                Classification = new Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel();
 
                 Classification.Import(entity.Classification);
             }
+
+            var inputProductBridges = new System.Collections.Generic.List<Bridge.CommonElaborationProductBridgeModel>();
+
+            foreach (var bridge in entity.InputProductBridges)
+            {
+                var model = new Bridge.CommonElaborationProductBridgeModel
+                {
+                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
+                    Amount = bridge.Amount,
+                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel()
+                };
+
+                model.Product.Import(bridge.Stern);
+                model.UnitMeasurement.Import(bridge.UnitMeasurement);
+
+                inputProductBridges.Add(model);
+            }
+
+            foreach (var bridge in entity.InputProductClassificationBridges)
+            {
+                var model = new Bridge.CommonElaborationProductBridgeModel
+                {
+                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
+                    Classification = new Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel(),
+                    Amount = bridge.Amount,
+                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel()
+                };
+
+                model.Product.Import(bridge.Stern.Product);
+                model.Classification.Import(bridge.Stern);
+                model.UnitMeasurement.Import(bridge.UnitMeasurement);
+
+                inputProductBridges.Add(model);
+            }
+
+            var outputProductBridges = new System.Collections.Generic.List<Bridge.CommonElaborationProductBridgeModel>();
+
+            foreach (var bridge in entity.OutputProductBridges)
+            {
+                var model = new Bridge.CommonElaborationProductBridgeModel
+                {
+                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
+                    Amount = bridge.Amount,
+                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel()
+                };
+
+                model.Product.Import(bridge.Stern);
+                model.UnitMeasurement.Import(bridge.UnitMeasurement);
+
+                outputProductBridges.Add(model);
+            }
+
+            foreach (var bridge in entity.OutputProductClassificationBridges)
+            {
+                var model = new Bridge.CommonElaborationProductBridgeModel
+                {
+                    Product = new Inventory.Interop.API.Common.Models.Display.ProductDisplayModel(),
+                    Classification = new Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel(),
+                    Amount = bridge.Amount,
+                    UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel()
+                };
+
+                model.Product.Import(bridge.Stern.Product);
+                model.Classification.Import(bridge.Stern);
+                model.UnitMeasurement.Import(bridge.UnitMeasurement);
+
+                outputProductBridges.Add(model);
+            }
+
+            InputProductBridges = inputProductBridges.ToArray();
+            OutputProductBridges = outputProductBridges.ToArray();
         }
     }
 }

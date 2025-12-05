@@ -16,7 +16,7 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
 
     protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
 
-    protected override double ItemViewRequestWidth { get => 240; }
+    protected override double ItemViewRequestWidth { get => 328; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
@@ -26,6 +26,11 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ProductDisplayModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProductsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.ProductFilterModel { Name = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
@@ -41,7 +46,12 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+
+                        LoadItems(true);
+                    });
                 });
 
                 break;
@@ -58,6 +68,8 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
 
     private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
+        ConcreteBindingContext.SearchParameter = null;
+
         OnReload(sender, eventArgs);
     }
 
@@ -74,5 +86,10 @@ public partial class ProductsManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
+    }
+
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
     }
 }

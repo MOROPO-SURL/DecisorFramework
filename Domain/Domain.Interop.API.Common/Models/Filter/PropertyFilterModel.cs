@@ -10,7 +10,7 @@
 
             if (Name != null)
             {
-                result = entity => entity.Name.Contains(Name);
+                result = entity => entity.Name.ToLower().Contains(Name.ToLower());
             }
 
             if (result == null) return entity => true;

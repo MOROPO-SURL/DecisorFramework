@@ -22,6 +22,12 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public ImageInputModel Image { get; set; }
 
+        public string TaxIdentificationNumber { get; set; }
+
+        public string StateIdentificationCode { get; set; }
+
+        public System.Guid? CentralStateStructureId { get; set; }
+
         public System.Guid RepresentativeId { get; set; }
 
         public System.Guid BusinessKindId { get; set; }
@@ -63,6 +69,14 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             entity.Identity.BornDate = BornDate;
             entity.Identity.About = About;
             entity.Priority = Priority;
+            entity.TaxIdentificationNumber = TaxIdentificationNumber;
+            entity.StateIdentificationCode = StateIdentificationCode;
+
+            if (entity.CentralStateStructureId != CentralStateStructureId)
+            {
+                entity.CentralStateStructure = null;
+                entity.CentralStateStructureId = CentralStateStructureId;
+            }
 
             if (entity.RepresentativeId != RepresentativeId)
             {

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.UnitMeasurementConvertionBridgeConfigurationPage"
+    x:TypeArguments="interop_common_bridge_models:UnitMeasurementConvertionBridgeModel,interop_common_bridge_models:UnitMeasurementConvertionBridgeModel,presentation_configuration_page_models:UnitMeasurementConvertionBridgeConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:UnitMeasurementConvertionBridgeConfigurationPageModel">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <Grid 
+            Padding="20"
+            ColumnSpacing="16" RowSpacing="16">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Label 
+                Grid.Column="0" Grid.Row="0"
+                VerticalTextAlignment="Center"
+                FontSize="Medium"
+                LineBreakMode="TailTruncation">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="Unidad de " />
+                        <Span Text="{Binding Source.Name}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label
+                Grid.Column="1" Grid.Row="1"
+                HorizontalTextAlignment="Center" VerticalTextAlignment="Center"
+                Margin="8,0"
+                FontSize="Medium"
+                FontAttributes="Bold"
+                Text="=" />
+            <Entry 
+                Grid.Column="2" Grid.Row="0"
+                VerticalTextAlignment="Center"
+                Text="{Binding Convertion, StringFormat='{0:F}'}" />
+            <Picker 
+                x:Name="DestinationUnitMeasurementPicker"
+                Grid.Column="3" Grid.Row="0"
+                VerticalTextAlignment="Center"
+                ItemsSource="{Binding AvailableUnitMeasurements}" 
+                ItemDisplayBinding="{Binding Name}"
+                SelectedIndexChanged="Picker_SelectedIndexChanged" />
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:ConfigurationBaseContentPage>

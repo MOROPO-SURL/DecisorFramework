@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"    
     xmlns:decisorframework_inventory_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_purchasing_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_supervision_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.InventoryShell">
@@ -111,7 +112,7 @@
     </ShellContent>
     <ShellContent
         Title="Unidades de Medida"
-        ContentTemplate="{DataTemplate decisorframework_inventory_manage_pages:UnitMeasurementsManagePage}">
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:UnitMeasurementsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

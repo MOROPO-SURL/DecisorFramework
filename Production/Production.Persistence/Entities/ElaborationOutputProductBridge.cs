@@ -10,6 +10,10 @@
 
         public decimal Amount { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(UnitMeasurementId))]
+        public Domain.Persistence.Entities.UnitMeasurement UnitMeasurement { get; set; }
+        public System.Guid UnitMeasurementId { get; set; }
+
         public decimal MinPerformanceCoefficient { get; set; }
 
         public decimal MaxPerformanceCoefficient { get; set; }

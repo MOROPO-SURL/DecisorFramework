@@ -19,13 +19,13 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<PropertyLeaseOrganizationPostulation, System.Guid>, PropertyLeaseOrganizationPostulationRepository>();
             services.AddScoped<IEntityRepository<PropertyLeasePersonPostulation, System.Guid>, PropertyLeasePersonPostulationRepository>();
             services.AddScoped<IEntityRepository<SupervisionGroup, System.Guid>, SupervisionGroupRepository>();
-            services.AddScoped<IEntityRepository<LegalClientVehicleLeaseContract, int>, LegalClientVehicleLeaseContractRepository>();
+            services.AddScoped<IEntityRepository<LegalClientVehicleLeaseContract, System.Guid>, LegalClientVehicleLeaseContractRepository>();
             services.AddScoped<IEntityRepository<LegalClientVehicleLeasing, System.Guid>, LegalClientVehicleLeasingRepository>();
-            services.AddScoped<IEntityRepository<NaturalClientVehicleLeaseContract, int>, NaturalClientVehicleLeaseContractRepository>();
+            services.AddScoped<IEntityRepository<NaturalClientVehicleLeaseContract, System.Guid>, NaturalClientVehicleLeaseContractRepository>();
             services.AddScoped<IEntityRepository<NaturalClientVehicleLeasing, System.Guid>, NaturalClientVehicleLeasingRepository>();
-            services.AddScoped<IEntityRepository<LegalClientPropertyLeaseContract, int>, LegalClientPropertyLeaseContractRepository>();
+            services.AddScoped<IEntityRepository<LegalClientPropertyLeaseContract, System.Guid>, LegalClientPropertyLeaseContractRepository>();
             services.AddScoped<IEntityRepository<LegalClientPropertyLeasing, System.Guid>, LegalClientPropertyLeasingRepository>();
-            services.AddScoped<IEntityRepository<NaturalClientPropertyLeaseContract, int>, NaturalClientPropertyLeaseContractRepository>();
+            services.AddScoped<IEntityRepository<NaturalClientPropertyLeaseContract, System.Guid>, NaturalClientPropertyLeaseContractRepository>();
             services.AddScoped<IEntityRepository<NaturalClientPropertyLeasing, System.Guid>, NaturalClientPropertyLeasingRepository>();
             services.AddScoped<IEntityRepository<LegalClientPropertyLeasingCollect, System.Guid>, LegalClientPropertyLeasingCollectRepository>();
             services.AddScoped<IEntityRepository<LegalClientVehicleLeasingCollect, System.Guid>, LegalClientVehicleLeasingCollectRepository>();

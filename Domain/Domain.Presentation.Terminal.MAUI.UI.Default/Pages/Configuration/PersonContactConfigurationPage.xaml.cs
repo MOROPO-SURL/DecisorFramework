@@ -477,7 +477,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
             Id = model.Id,
             Label = model.Label,
             Address = model.Address,
-            ZipCode = model.ZipCode,
+            ZipCode = model.ZipCode ?? 0,
             MunicipalityId = model.Municipality.Id,
             Latitude = model.Latitude,
             Longitude = model.Longitude
@@ -540,7 +540,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
 
             item.Label = model.Label;
             item.Address = model.Address;
-            item.ZipCode = model.ZipCode;
+            item.ZipCode = model.ZipCode ?? 0;
             item.MunicipalityId = model.Municipality.Id;
             item.Latitude = model.Latitude;
             item.Longitude = model.Longitude;
@@ -558,7 +558,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
 
                 item.Label = model.Label;
                 item.Address = model.Address;
-                item.ZipCode = model.ZipCode;
+                item.ZipCode = model.ZipCode ?? 0;
                 item.MunicipalityId = model.Municipality.Id;
                 item.Latitude = model.Latitude;
                 item.Longitude = model.Longitude;
@@ -576,7 +576,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
                 Id = model.Id,
                 Label = model.Label,
                 Address = model.Address,
-                ZipCode = model.ZipCode,
+                ZipCode = model.ZipCode ?? 0,
                 MunicipalityId = model.Municipality.Id,
                 Latitude = model.Latitude,
                 Longitude = model.Longitude

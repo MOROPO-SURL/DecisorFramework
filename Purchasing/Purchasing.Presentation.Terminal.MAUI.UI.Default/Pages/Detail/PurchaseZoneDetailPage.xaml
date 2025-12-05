@@ -24,24 +24,26 @@
                                 FontSize="Medium" />
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
                                 Text="Nombre" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Name}" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Descripción" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Description, TargetNullValue='---', FallbackValue='---'}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Prioridad" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Priority}" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Descripción" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Description, TargetNullValue='---'}" />
                         </StackLayout>
                         <StackLayout
+                            x:Name="OptionButtonsStackLayout"
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 
@@ -56,12 +58,7 @@
                     </StackLayout>
                 </Frame>
                 <Button
-                    HorizontalOptions="End" VerticalOptions="Start"
-                    Text="&#xf5ad;"
-                    FontSize="Medium"
-                    FontFamily="MaterialDesignIcons"
-                    BorderWidth="0"
-                    WidthRequest="48" HeightRequest="48"
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
                     Clicked="DismissControl_Invoked" />
             </Grid>
         </Grid>

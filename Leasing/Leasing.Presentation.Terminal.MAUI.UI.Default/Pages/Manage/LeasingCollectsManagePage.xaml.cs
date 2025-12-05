@@ -220,7 +220,12 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
 
                 legalClientPropertyLeasingCollectAPIConnectClient.ArchiveAsync(legalClientPropertyLeasingCollectModel.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+
+                        LoadItems(true);
+                    });
                 });
 
                 return;
@@ -231,7 +236,12 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
 
                 naturalClientPropertyLeasingCollectAPIConnectClient.ArchiveAsync(naturalClientPropertyLeasingCollectModel.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+
+                        LoadItems(true);
+                    });
                 });
 
                 return;
@@ -242,7 +252,12 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
 
                 legalClientVehicleLeasingCollectAPIConnectClient.ArchiveAsync(legalClientVehicleLeasingCollectModel.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+
+                        LoadItems(true);
+                    });
                 });
 
                 return;
@@ -253,7 +268,12 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
 
                 naturalClientVehicleLeasingCollectAPIConnectClient.ArchiveAsync(naturalClientVehicleLeasingCollectModel.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+
+                        LoadItems(true);
+                    });
                 });
 
                 return;
@@ -265,21 +285,29 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
 
     protected void LegalClientVehicleLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.LegalClientVehicleLeasingCollectDisplayModel model)
     {
+        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
+
         LoadItems(true);
     }
 
     protected void LegalClientPropertyLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.LegalClientPropertyLeasingCollectDisplayModel model)
     {
+        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
+
         LoadItems(true);
     }
 
     protected void NaturalClientVehicleLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.NaturalClientVehicleLeasingCollectDisplayModel model)
     {
+        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
+
         LoadItems(true);
     }
 
     protected void NaturalClientPropertyLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.NaturalClientPropertyLeasingCollectDisplayModel model)
     {
+        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
+
         LoadItems(true);
     }
 

@@ -266,7 +266,7 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
         {
             try
             {
-                var apiConnectClient = new Legal.Interop.API.Connect.Clients.CentralStateStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var apiConnectClient = new Domain.Interop.API.Connect.Clients.CentralStateStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.VacantPostulationOcupationConfigurationPageModel(null)
                 {
@@ -298,7 +298,7 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
         {
             try
             {
-                var apiConnectClient = new Legal.Interop.API.Connect.Clients.CentralStateStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var apiConnectClient = new Domain.Interop.API.Connect.Clients.CentralStateStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 var model = new Models.Page.Configuration.VacantPostulationOcupationConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.VacantPostulationOcupationDisplayModel)
                 {

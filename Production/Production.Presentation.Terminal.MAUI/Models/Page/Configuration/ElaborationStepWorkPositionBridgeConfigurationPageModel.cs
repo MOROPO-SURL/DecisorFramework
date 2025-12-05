@@ -2,7 +2,7 @@
 {
     public class ElaborationStepWorkPositionBridgeConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Bridge.ElaborationStepWorkPositionBridgeModel>
     {
-        private decimal participation;
+        private decimal? participation;
         private bool linked;
         private string description;
 
@@ -12,14 +12,14 @@
             {
                 WorkPosition = model.WorkPosition;
                 Participation = model.Participation;
-                Linked = model.Linked;
+                Linked = model.Relative;
                 Description = model.Description;
             }
         }
 
         public HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel WorkPosition { get; set; }
 
-        public decimal Participation { get => participation; set => SetProperty(ref participation, value); }
+        public decimal? Participation { get => participation; set => SetProperty(ref participation, value); }
 
         public bool Linked { get => linked; set => SetProperty(ref linked, value); }
 

@@ -1,0 +1,151 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ResourceDictionary 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Resources.Styles.ExplicitStylesDictionary">
+
+    <!-- ========== SUCCESS (ÉXITO) - VERDE VIVO/PASTEL ========== -->
+    <!-- TEMA LIGHT: Verde pastel vibrante como fondo principal -->
+    <Color x:Key="LightSuccessBackground">#FF4CAF50</Color>
+    <!-- Verde vibrante -->
+    <Color x:Key="LightSuccessBorder">#FF45A049</Color>
+    <!-- Verde un poco más oscuro -->
+    <Color x:Key="LightSuccessText">#FFFFFFFF</Color>
+    <!-- Texto blanco (contraste máximo) -->
+
+    <!-- TEMA DARK: Verde más oscuro pero manteniendo la identidad verde -->
+    <Color x:Key="DarkSuccessBackground">#FF2E7D32</Color>
+    <!-- Verde oscuro vibrante -->
+    <Color x:Key="DarkSuccessBorder">#FF1B5E20</Color>
+    <!-- Verde más oscuro -->
+    <Color x:Key="DarkSuccessText">#FFE8F5E9</Color>
+    <!-- Verde muy claro para texto -->
+
+    <!-- ========== ERROR (ERROR) - ROJO VIVO/PASTEL ========== -->
+    <!-- TEMA LIGHT: Rojo pastel vibrante -->
+    <Color x:Key="LightErrorBackground">#FFF44336</Color>
+    <!-- Rojo vibrante -->
+    <Color x:Key="LightErrorBorder">#FFE53935</Color>
+    <!-- Rojo un poco más oscuro -->
+    <Color x:Key="LightErrorText">#FFFFFFFF</Color>
+    <!-- Texto blanco -->
+
+    <!-- TEMA DARK: Rojo oscuro vibrante -->
+    <Color x:Key="DarkErrorBackground">#FFC62828</Color>
+    <!-- Rojo oscuro vibrante -->
+    <Color x:Key="DarkErrorBorder">#FFB71C1C</Color>
+    <!-- Rojo más oscuro -->
+    <Color x:Key="DarkErrorText">#FFFFEBEE</Color>
+    <!-- Rojo muy claro para texto -->
+
+    <!-- ========== WARNING (ADVERTENCIA) - NARANJA/AMARILLO VIVO ========== -->
+    <!-- TEMA LIGHT: Naranja vibrante -->
+    <Color x:Key="LightWarningBackground">#FFFF9800</Color>
+    <!-- Naranja vibrante -->
+    <Color x:Key="LightWarningBorder">#FFF57C00</Color>
+    <!-- Naranja un poco más oscuro -->
+    <Color x:Key="LightWarningText">#FFFFFFFF</Color>
+    <!-- Texto blanco -->
+
+    <!-- TEMA DARK: Naranja oscuro vibrante -->
+    <Color x:Key="DarkWarningBackground">#FFEF6C00</Color>
+    <!-- Naranja oscuro vibrante -->
+    <Color x:Key="DarkWarningBorder">#FFE65100</Color>
+    <!-- Naranja más oscuro -->
+    <Color x:Key="DarkWarningText">#FFFFF3E0</Color>
+    <!-- Naranja muy claro para texto -->
+
+    <!-- ========== INFO (INFORMACIÓN) - AZUL VIVO/PASTEL ========== -->
+    <!-- TEMA LIGHT: Azul vibrante -->
+    <Color x:Key="LightInfoBackground">#FF2196F3</Color>
+    <!-- Azul vibrante -->
+    <Color x:Key="LightInfoBorder">#FF1E88E5</Color>
+    <!-- Azul un poco más oscuro -->
+    <Color x:Key="LightInfoText">#FFFFFFFF</Color>
+    <!-- Texto blanco -->
+
+    <!-- TEMA DARK: Azul oscuro vibrante -->
+    <Color x:Key="DarkInfoBackground">#FF1565C0</Color>
+    <!-- Azul oscuro vibrante -->
+    <Color x:Key="DarkInfoBorder">#FF0D47A1</Color>
+    <!-- Azul más oscuro -->
+    <Color x:Key="DarkInfoText">#FFE3F2FD</Color>
+    <!-- Azul muy claro para texto -->
+
+    <!-- ========== GENERAL (GENERAL) - PÚRPURA/MORADO VIVO ========== -->
+    <!-- TEMA LIGHT: Púrpura vibrante -->
+    <Color x:Key="LightGeneralBackground">#FF9C27B0</Color>
+    <!-- Púrpura vibrante -->
+    <Color x:Key="LightGeneralBorder">#FF8E24AA</Color>
+    <!-- Púrpura un poco más oscuro -->
+    <Color x:Key="LightGeneralText">#FFFFFFFF</Color>
+    <!-- Texto blanco -->
+
+    <!-- TEMA DARK: Púrpura oscuro vibrante -->
+    <Color x:Key="DarkGeneralBackground">#FF6A1B9A</Color>
+    <!-- Púrpura oscuro vibrante -->
+    <Color x:Key="DarkGeneralBorder">#FF4A148C</Color>
+    <!-- Púrpura más oscuro -->
+    <Color x:Key="DarkGeneralText">#FFF3E5F5</Color>
+    <!-- Púrpura muy claro para texto -->
+
+    <Style TargetType="Frame" x:Key="SuccessToastFrameStyle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightSuccessBackground}, Dark={StaticResource DarkSuccessBackground}}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="SuccessToastLabelStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightSuccessText}, Dark={StaticResource DarkSuccessText}}" />
+    </Style>
+    
+    <Style TargetType="Frame" x:Key="PopupFrameStyle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}" />
+        <Setter Property="VerticalOptions" Value="Center" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Margin" Value="20" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="CaptionPropertyLabelStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
+        <Setter Property="FontAttributes" Value="Bold" />
+        <Setter Property="FontSize" Value="Caption" />
+        <Setter Property="Margin" Value="0,16,0,0" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="ValuePropertyLabelStyle">
+        <Setter Property="FontSize" Value="Default" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="ValidationMessageLabelStyle">
+        <Setter Property="TextColor" Value="IndianRed" />
+        <Setter Property="MinimumHeightRequest" Value="20" />
+    </Style>
+
+    <Style TargetType="ContentView" x:Key="ModalFrameWrapContentViewStyle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#A9000000, Dark=#A9333333}" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="FontIconImageButtonStyle">
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="21" />
+        <Setter Property="FontFamily" Value="MaterialDesignIcons" />
+    </Style>
+
+    <Style TargetType="Button" x:Key="DetailPageCloseButtonStyle">
+        <Setter Property="HorizontalOptions" Value="End" />
+        <Setter Property="VerticalOptions" Value="Start" />
+        <Setter Property="WidthRequest" Value="48" />
+        <Setter Property="HeightRequest" Value="48" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="FontSize" Value="Medium" />
+        <Setter Property="FontFamily" Value="MaterialDesignIcons" />
+        <Setter Property="Text" Value="&#xf5ad;" />
+        <Setter Property="BorderWidth" Value="0" />
+    </Style>
+
+</ResourceDictionary>

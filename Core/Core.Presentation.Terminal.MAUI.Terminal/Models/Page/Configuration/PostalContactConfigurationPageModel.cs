@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.C
     {
         private string label;
         private string address;
-        private int zipCode;
+        private int? zipCode;
         private decimal longitude;
         private decimal latitude;
 
@@ -15,12 +15,13 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.C
             if (model != null)
             {
                 Id = model.Id;
-                Label = model.Label;
-                Address = model.Address;
-                ZipCode = model.ZipCode;
-                Latitude = model.Latitude;
-                Longitude = model.Longitude;
+                label = model.Label;
+                address = model.Address;
+                latitude = model.Latitude;
+                longitude = model.Longitude;
                 Municipality = model.Municipality;
+
+                if (model.ZipCode > 0) zipCode = model.ZipCode;
             }
         }
 
@@ -30,7 +31,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.C
 
         public string Address { get => address; set => SetProperty(ref address, value); }
 
-        public int ZipCode { get => zipCode; set => SetProperty(ref zipCode, value); }
+        public int? ZipCode { get => zipCode; set => SetProperty(ref zipCode, value); }
 
         public decimal Longitude { get => longitude; set => SetProperty(ref longitude, value); }
 

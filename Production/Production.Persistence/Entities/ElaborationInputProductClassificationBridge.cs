@@ -9,5 +9,9 @@
         public Inventory.Persistence.Entities.Classification Stern { get; set; }
 
         public decimal Amount { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(UnitMeasurementId))]
+        public Domain.Persistence.Entities.UnitMeasurement UnitMeasurement { get; set; }
+        public System.Guid UnitMeasurementId { get; set; }
     }
 }

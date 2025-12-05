@@ -1,11 +1,13 @@
-﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration
+﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+
+namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
     public class VacantPostulationOcupationConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.VacantPostulationOcupationDisplayModel>
     {
         private string organizationName;
         private string organizationAddress;
         private string representativeName;
-        private Legal.Interop.API.Common.Models.Display.CentralStateStructureDisplayModel centralStateStructure;
+        private CentralStateStructureDisplayModel centralStateStructure;
         private System.DateTime startAt;
         private System.DateTime endAt;
 
@@ -36,12 +38,12 @@
 
         public string RepresentativeName { get => representativeName; set => SetProperty(ref representativeName, value); }
 
-        public Legal.Interop.API.Common.Models.Display.CentralStateStructureDisplayModel CentralStateStructure { get => centralStateStructure; set => SetProperty(ref centralStateStructure, value); }
+        public CentralStateStructureDisplayModel CentralStateStructure { get => centralStateStructure; set => SetProperty(ref centralStateStructure, value); }
 
         public System.DateTime StartAt { get => startAt; set => SetProperty(ref startAt, value); }
 
         public System.DateTime EndAt { get => endAt; set => SetProperty(ref endAt, value); }
 
-        public Legal.Interop.API.Common.Models.Display.CentralStateStructureDisplayModel[] AvailableCentralStateStructures { get; set; }
+        public CentralStateStructureDisplayModel[] AvailableCentralStateStructures { get; set; }
     }
 }

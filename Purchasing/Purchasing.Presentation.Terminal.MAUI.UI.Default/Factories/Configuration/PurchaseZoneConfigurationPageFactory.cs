@@ -4,7 +4,7 @@
     {
         public async System.Threading.Tasks.Task<Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, Models.Page.Configuration.PurchaseZoneConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.PurchaseZoneDisplayModel model)
         {
-            return new Pages.Configuration.PurchaseZoneConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.PurchaseZoneConfigurationPageModel(model));
+            return new Pages.Configuration.PurchaseZoneConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.PurchaseZoneConfigurationPageModel(model), new Validators.PurchaseZoneConfigurationValidator());
         }
     }
 }

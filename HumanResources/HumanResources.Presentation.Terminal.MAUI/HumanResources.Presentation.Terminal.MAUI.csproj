@@ -27,8 +27,7 @@
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\Domain\Domain.Presentation.Terminal.MAUI.UI.Default\Domain.Presentation.Terminal.MAUI.UI.Default.csproj" />
-		<ProjectReference Include="..\..\Legal\Legal.Presentation.Terminal.MAUI\Legal.Presentation.Terminal.MAUI.csproj" />
+		<ProjectReference Include="..\..\Core\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj" />
 		<ProjectReference Include="..\HumanResources.Interop.API.Connect\HumanResources.Interop.API.Connect.csproj" />
 	</ItemGroup>
 </Project>

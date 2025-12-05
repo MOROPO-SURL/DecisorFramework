@@ -21,7 +21,7 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
     private readonly List<DocumentInputModel> incomingDocuments = [];
     private readonly List<DocumentDisplayModel> outgoingDocuments = [];
 
-    public LegalProviderConfigurationPage(System.Action<Interop.API.Common.Models.Display.LegalProviderDisplayModel> successAction, Models.Page.Configuration.LegalProviderConfigurationPageModel model) : base(successAction, model, null)
+    public LegalProviderConfigurationPage(System.Action<Interop.API.Common.Models.Display.LegalProviderDisplayModel> successAction, Models.Page.Configuration.LegalProviderConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.LegalProviderConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -34,20 +34,6 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
                 if (model.DefaultPaymentTerm.Id != current.Id) continue;
 
                 PaymentTermPicker.SelectedIndex = i;
-
-                break;
-            }
-        }
-
-        if (model.MainPostalContact != null)
-        {
-            for (int i = 0; i < model.AvailablePostalContactItems.Count; i++)
-            {
-                var current = model.AvailablePostalContactItems[i];
-
-                if (model.MainPostalContact.Id != current.Id) continue;
-
-                PostalContactPicker.SelectedIndex = i;
 
                 break;
             }
@@ -66,8 +52,8 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
-            MainPostalContactId = ConcreteBindingContext.AvailablePostalContactItems[PostalContactPicker.SelectedIndex].Id,
-            DefaultPaymentTermId = ConcreteBindingContext.AvailablePaymentTerms[PaymentTermPicker.SelectedIndex].Id,
+            MainPostalContactId = ConcreteBindingContext.MainPostalContact.Id,
+            DefaultPaymentTermId = ConcreteBindingContext.DefaultPaymentTerm.Id,
             Priority = ConcreteBindingContext.Priority,
             IncomingBankAccounts = incomingBankAccounts,
             IncomingDocuments = incomingDocuments
@@ -88,8 +74,8 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
             ContactId = ConcreteBindingContext.Contact.Id,
             TaxIdentificationNumber = ConcreteBindingContext.TaxIdentificationNumber,
             StateIdentificationCode = ConcreteBindingContext.StateIdentificationCode,
-            MainPostalContactId = ConcreteBindingContext.AvailablePostalContactItems[PostalContactPicker.SelectedIndex].Id,
-            DefaultPaymentTermId = ConcreteBindingContext.AvailablePaymentTerms[PaymentTermPicker.SelectedIndex].Id,
+            MainPostalContactId = ConcreteBindingContext.MainPostalContact.Id,
+            DefaultPaymentTermId = ConcreteBindingContext.DefaultPaymentTerm.Id,
             Priority = ConcreteBindingContext.Priority,
             IncomingBankAccounts = incomingBankAccounts,
             EditionBankAccounts = editionBankAccounts,
@@ -353,11 +339,21 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
     {
         ConcreteBindingContext.Contact = model;
 
+        if (!string.IsNullOrEmpty(model.TaxIdentificationNumber))
+        {
+            ConcreteBindingContext.TaxIdentificationNumber = model.TaxIdentificationNumber;
+        }
+
         ConcreteBindingContext.AvailablePostalContactItems.Clear();
 
         foreach (var item in model.Identity.PostalContacts)
         {
             ConcreteBindingContext.AvailablePostalContactItems.Add(item);
+        }
+
+        if (model.MainPostalContactItem != null)
+        {
+            ConcreteBindingContext.MainPostalContact = ConcreteBindingContext.AvailablePostalContactItems.First(item => item.Id == model.MainPostalContactItem.Id);
         }
     }
 
@@ -366,7 +362,7 @@ public partial class LegalProviderConfigurationPage : Core.Presentation.Terminal
         incomingBankAccounts.Add(new BankAccountInputModel
         {
             Id = model.Id,
-            IsExternal = false,
+            IsExternal = true,
             BranchId = model.Branch.Id,
             CurrencyId = model.Currency.Id,
             Holder = model.Holder,

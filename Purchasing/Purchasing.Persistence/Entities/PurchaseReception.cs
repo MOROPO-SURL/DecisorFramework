@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
+﻿namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
 {
     public class PurchaseReception : Inventory.Persistence.Entities.Contract.AbstractReception
     {
@@ -8,6 +6,6 @@ namespace MOROPO.Framework.Decisor.Purchasing.Persistence.Entities
         public Purchase Purchase { get; set; }
         public System.Guid? PurchaseId { get; set; }
 
-        public List<PurchaseReceptionProductWeightBridge> ProductWeightBridges { get; set; } = new List<PurchaseReceptionProductWeightBridge>();
+        public System.Collections.Generic.List<PurchaseReceptionProductWeightBridge> ProductWeightBridges { get; set; } = new System.Collections.Generic.List<PurchaseReceptionProductWeightBridge>();
     }
 }
