@@ -9,8 +9,6 @@ public partial class ClassificationConfigurationPage : Core.Presentation.Termina
 
     protected override string EntityTypeName => "Clasificación";
 
-    protected override bool IsNotificationRequired => false;
-
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Input.ClassificationInputModel> PerformCreationAsync()
     {
         return System.Threading.Tasks.Task.FromResult(new Interop.API.Common.Models.Input.ClassificationInputModel

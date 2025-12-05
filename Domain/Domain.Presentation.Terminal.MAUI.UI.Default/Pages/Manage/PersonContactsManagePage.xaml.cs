@@ -56,7 +56,7 @@ public partial class PersonContactsManagePage : Core.Presentation.Terminal.MAUI.
                 {
                     Dispatcher.Dispatch(() =>
                     {
-                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+                        PresentToastNotification("Elemento eliminado con éxito.");
 
                         LoadItems(true);
                     });

@@ -38,8 +38,6 @@ public partial class PostalContactConfigurationPage : UI.Pages.Base.Configuratio
         IsEnabled = true;
     }
 
-    protected override bool IsNotificationRequired => false;
-
     protected override string EntityTypeName => "Dirección Postal";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.PostalContactItemDisplayModel> PerformCreationAsync()

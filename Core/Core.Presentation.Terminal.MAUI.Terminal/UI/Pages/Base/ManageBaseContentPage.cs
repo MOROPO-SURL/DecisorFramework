@@ -139,6 +139,8 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected void ConfigurationSuccess_Callback(TModel model)
         {
+            PresentToastNotification("Cambios aplicados con éxito.");
+
             LoadItems(true);
         }
 

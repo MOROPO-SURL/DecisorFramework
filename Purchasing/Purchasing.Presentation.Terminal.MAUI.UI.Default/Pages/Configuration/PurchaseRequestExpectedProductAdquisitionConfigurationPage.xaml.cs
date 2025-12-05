@@ -38,8 +38,6 @@ public partial class PurchaseRequestExpectedProductAdquisitionConfigurationPage 
         }
     }
 
-    protected override bool IsNotificationRequired => false;
-
     protected override string EntityTypeName => "Producto Solicitado";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.PurchaseRequestExpectedProductAdquisitionDisplayModel> PerformCreationAsync()

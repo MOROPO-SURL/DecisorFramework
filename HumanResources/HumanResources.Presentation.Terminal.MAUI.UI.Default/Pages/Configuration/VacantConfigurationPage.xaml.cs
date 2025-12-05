@@ -35,8 +35,6 @@ public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.U
         }
     }
 
-    protected override bool IsNotificationRequired => false;
-
     protected override string EntityTypeName => "Vacante";
 
     protected override System.Threading.Tasks.Task<Models.View.WorkforceConfigurationVacantViewModel> PerformCreationAsync()

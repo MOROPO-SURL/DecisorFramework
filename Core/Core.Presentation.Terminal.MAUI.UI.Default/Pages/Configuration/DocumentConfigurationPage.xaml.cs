@@ -7,8 +7,6 @@ public partial class DocumentConfigurationPage : UI.Pages.Base.ConfigurationBase
         InitializeComponent();
     }
 
-    protected override bool IsNotificationRequired => false;
-
     protected override string EntityTypeName => "Documento";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.DocumentDisplayModel> PerformCreationAsync()
