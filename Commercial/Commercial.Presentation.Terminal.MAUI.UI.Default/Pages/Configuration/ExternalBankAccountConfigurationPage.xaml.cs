@@ -37,8 +37,6 @@ public partial class ExternalBankAccountConfigurationPage : Core.Presentation.Te
         }
     }
 
-    protected override bool IsNotificationRequired => false;
-
     protected override string EntityTypeName => "Cuenta Bancaria";
 
     protected override System.Threading.Tasks.Task<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel> PerformCreationAsync()

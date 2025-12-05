@@ -38,8 +38,6 @@ public partial class PurchaseOrderPlannedProductSpentConfigurationPage : Core.Pr
         }
     }
 
-    protected override bool IsNotificationRequired => false;
-
     protected override string EntityTypeName => "Insumo Asignado";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.PurchaseOrderPlannedProductSpentDisplayModel> PerformCreationAsync()

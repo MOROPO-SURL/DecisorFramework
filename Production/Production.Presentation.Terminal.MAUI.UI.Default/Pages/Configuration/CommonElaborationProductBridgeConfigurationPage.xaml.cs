@@ -38,8 +38,6 @@ public partial class CommonElaborationProductBridgeConfigurationPage : Core.Pres
         }
     }
 
-    protected override bool IsNotificationRequired => false;
-
     protected override string EntityTypeName => "Insumo";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Bridge.CommonElaborationProductBridgeModel> PerformCreationAsync()

@@ -38,8 +38,6 @@ public partial class PurchaseOrderExpectedProductResultConfigurationPage : Core.
         }
     }
 
-    protected override bool IsNotificationRequired => false;
-
     protected override string EntityTypeName => "Producto Requerido";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.PurchaseOrderExpectedProductResultDisplayModel> PerformCreationAsync()
