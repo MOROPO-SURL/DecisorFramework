@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -43,7 +44,7 @@ public partial class BankBranchesManagePage : Core.Presentation.Terminal.MAUI.UI
                 {
                     Dispatcher.Dispatch(() =>
                     {
-                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
 
                         LoadItems(true);
                     });

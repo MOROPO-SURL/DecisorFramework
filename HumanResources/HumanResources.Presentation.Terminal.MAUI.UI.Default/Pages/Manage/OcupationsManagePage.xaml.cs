@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
@@ -209,7 +210,7 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
                                         {
                                             pickContactVacantBindingContext.Ocupation = _task.Result;
 
-                                            CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
+                                            this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
                                         }
 
                                         pickContactVacantBindingContext = null;
@@ -255,7 +256,7 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
                         {
                             model.Ocupation = null;
 
-                            CommunityToolkit.Maui.Alerts.Toast.Make("Persona asignada a la ocupación retirada con éxito.").Show();
+                            this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Persona asignada a la ocupación retirada con éxito.");
                         }
 
                         ConcreteBindingContext.IsBusy = false;

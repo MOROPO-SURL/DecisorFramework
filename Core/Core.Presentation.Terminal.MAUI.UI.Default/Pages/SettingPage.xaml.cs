@@ -17,8 +17,6 @@ public partial class SettingPage : Microsoft.Maui.Controls.ContentPage
 
     private void ApplySuccess_Callback()
 	{
-        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
-
         settingChangeCallbackAction?.Invoke();
 
         this.NavigationPopModalPageAsync();

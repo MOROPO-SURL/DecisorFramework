@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
@@ -222,7 +223,7 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
                 {
                     Dispatcher.Dispatch(() =>
                     {
-                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
 
                         LoadItems(true);
                     });
@@ -238,7 +239,7 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
                 {
                     Dispatcher.Dispatch(() =>
                     {
-                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
 
                         LoadItems(true);
                     });
@@ -254,7 +255,7 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
                 {
                     Dispatcher.Dispatch(() =>
                     {
-                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
 
                         LoadItems(true);
                     });
@@ -270,7 +271,7 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
                 {
                     Dispatcher.Dispatch(() =>
                     {
-                        CommunityToolkit.Maui.Alerts.Toast.Make("Elemento eliminado con éxito.").Show();
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
 
                         LoadItems(true);
                     });
@@ -285,28 +286,28 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
 
     protected void LegalClientVehicleLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.LegalClientVehicleLeasingCollectDisplayModel model)
     {
-        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
+        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
 
         LoadItems(true);
     }
 
     protected void LegalClientPropertyLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.LegalClientPropertyLeasingCollectDisplayModel model)
     {
-        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
+        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
 
         LoadItems(true);
     }
 
     protected void NaturalClientVehicleLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.NaturalClientVehicleLeasingCollectDisplayModel model)
     {
-        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
+        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
 
         LoadItems(true);
     }
 
     protected void NaturalClientPropertyLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.NaturalClientPropertyLeasingCollectDisplayModel model)
     {
-        CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.").Show();
+        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
 
         LoadItems(true);
     }
