@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 
@@ -83,11 +84,11 @@ public partial class TrainingServiceDetailPage : Framework.Decisor.Core.Presenta
 
                     if (fileSaverResult.IsSuccessful)
                     {
-                        await CommunityToolkit.Maui.Alerts.Toast.Make("Archivo descargado con éxito.").Show();
+                        this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Archivo descargado con éxito.");
                     }
-                    else
+                    else// if (fileSaverResult.FilePath != null)
                     {
-                        await CommunityToolkit.Maui.Alerts.Toast.Make("No fue posible salvar el archivo.").Show();
+                        this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Error, "No fue posible salvar el archivo.");
                     }
                 }
 
