@@ -86,7 +86,7 @@ public partial class TrainingServiceDetailPage : Framework.Decisor.Core.Presenta
                     {
                         this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Archivo descargado con éxito.");
                     }
-                    else// if (fileSaverResult.FilePath != null)
+                    else if (fileSaverResult.FilePath != null)
                     {
                         this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Error, "No fue posible salvar el archivo.");
                     }
