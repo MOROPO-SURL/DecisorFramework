@@ -72,23 +72,6 @@
     <Color x:Key="DarkInfoText">#FFE3F2FD</Color>
     <!-- Azul muy claro para texto -->
 
-    <!-- ========== GENERAL (GENERAL) - PÚRPURA/MORADO VIVO ========== -->
-    <!-- TEMA LIGHT: Púrpura vibrante -->
-    <Color x:Key="LightGeneralBackground">#FF9C27B0</Color>
-    <!-- Púrpura vibrante -->
-    <Color x:Key="LightGeneralBorder">#FF8E24AA</Color>
-    <!-- Púrpura un poco más oscuro -->
-    <Color x:Key="LightGeneralText">#FFFFFFFF</Color>
-    <!-- Texto blanco -->
-
-    <!-- TEMA DARK: Púrpura oscuro vibrante -->
-    <Color x:Key="DarkGeneralBackground">#FF6A1B9A</Color>
-    <!-- Púrpura oscuro vibrante -->
-    <Color x:Key="DarkGeneralBorder">#FF4A148C</Color>
-    <!-- Púrpura más oscuro -->
-    <Color x:Key="DarkGeneralText">#FFF3E5F5</Color>
-    <!-- Púrpura muy claro para texto -->
-
     <Style TargetType="Frame" x:Key="SuccessToastFrameStyle">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightSuccessBackground}, Dark={StaticResource DarkSuccessBackground}}" />
         <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}" />
@@ -97,7 +80,43 @@
     <Style TargetType="Label" x:Key="SuccessToastLabelStyle">
         <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightSuccessText}, Dark={StaticResource DarkSuccessText}}" />
     </Style>
-    
+
+    <Style TargetType="Frame" x:Key="ErrorToastFrameStyle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightErrorBackground}, Dark={StaticResource DarkErrorBackground}}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource LightErrorBorder}, Dark={StaticResource DarkErrorBorder}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="ErrorToastLabelStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightErrorText}, Dark={StaticResource DarkErrorText}}" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="WarningToastFrameStyle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightWarningBackground}, Dark={StaticResource DarkWarningBackground}}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource LightWarningBorder}, Dark={StaticResource DarkWarningBorder}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="WarningToastLabelStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightWarningText}, Dark={StaticResource DarkWarningText}}" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="InfoToastFrameStyle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightInfoBackground}, Dark={StaticResource DarkInfoBackground}}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light={StaticResource LightInfoBorder}, Dark={StaticResource DarkInfoBorder}}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="InfoToastLabelStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light={StaticResource LightInfoText}, Dark={StaticResource DarkInfoText}}" />
+    </Style>
+
+    <Style TargetType="Frame" x:Key="DefaultToastFrameStyle">
+        <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}" />
+        <Setter Property="BorderColor" Value="{AppThemeBinding Light=LightGray, Dark=DarkGray}" />
+    </Style>
+
+    <Style TargetType="Label" x:Key="DefaultToastLabelStyle">
+        <Setter Property="TextColor" Value="{AppThemeBinding Light=Black, Dark=White}" />
+    </Style>
+
     <Style TargetType="Frame" x:Key="PopupFrameStyle">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=White, Dark=Black}" />
         <Setter Property="VerticalOptions" Value="Center" />
