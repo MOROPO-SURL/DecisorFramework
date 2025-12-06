@@ -36,6 +36,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Providers.Facade.IRuntimeContextProviderFacade, Providers.SingleRuntimeContextProvider>()
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade, Helpers.MainExceptionHandlingHelper>()
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSessionManager>()
+                   .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISettingManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSettingManager>()
                    .AddSingleton<IDetailContentPageFactoryFacade<GuidelineDisplayModel>, GuidelineDetailPageFactory>()
                    .AddSingleton<IDetailContentPageFactoryFacade<UnitMeasurementDisplayModel>, UnitMeasurementDetailPageFactory>()
                    .AddSingleton<IDetailContentPageFactoryFacade<PersonDisplayModel>, PersonDetailPageFactory>()

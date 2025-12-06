@@ -2,6 +2,7 @@
 <Application 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fwrk_core_presentation_dictionary_resources="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Resources.Styles;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.App">
     <Application.Resources>
         <ResourceDictionary>
@@ -9,6 +10,8 @@
                 <ResourceDictionary Source="Resources/Styles/Values.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
                 <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+
+                <fwrk_core_presentation_dictionary_resources:ExplicitStylesDictionary />
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="LogoImageViewStyle" TargetType="Image">
