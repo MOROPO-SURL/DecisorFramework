@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -56,7 +57,7 @@ public partial class PersonContactsManagePage : Core.Presentation.Terminal.MAUI.
                 {
                     Dispatcher.Dispatch(() =>
                     {
-                        PresentToastNotification("Elemento eliminado con éxito.");
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
 
                         LoadItems(true);
                     });
