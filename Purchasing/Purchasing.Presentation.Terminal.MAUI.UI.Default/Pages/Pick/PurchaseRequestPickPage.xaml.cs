@@ -9,29 +9,11 @@ public partial class PurchaseRequestPickPage : Core.Presentation.Terminal.MAUI.U
 
     private System.Action<Interop.API.Common.Models.Display.PurchaseRequestDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public PurchaseRequestPickPage(System.Action<Interop.API.Common.Models.Display.PurchaseRequestDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
@@ -117,8 +99,13 @@ public partial class PurchaseRequestPickPage : Core.Presentation.Terminal.MAUI.U
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.PurchaseRequestDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }

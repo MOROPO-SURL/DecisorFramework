@@ -11,30 +11,12 @@ public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages
 
     private System.Action<Interop.API.Common.Models.Display.PropertyDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public PropertyPickPage(System.Action<Interop.API.Common.Models.Display.PropertyDisplayModel> pickCompleteAction, Interop.API.Common.Models.Filter.PropertyFilterModel filter = null)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
         this.filter = filter;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
@@ -124,8 +106,13 @@ public partial class PropertyPickPage : Core.Presentation.Terminal.MAUI.UI.Pages
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.PropertyDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }

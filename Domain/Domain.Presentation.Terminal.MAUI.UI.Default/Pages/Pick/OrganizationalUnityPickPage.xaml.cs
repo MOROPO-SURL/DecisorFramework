@@ -9,29 +9,11 @@ public partial class OrganizationalUnityPickPage : Core.Presentation.Terminal.MA
 
     private System.Action<Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public OrganizationalUnityPickPage(System.Action<Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
@@ -111,8 +93,13 @@ public partial class OrganizationalUnityPickPage : Core.Presentation.Terminal.MA
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }

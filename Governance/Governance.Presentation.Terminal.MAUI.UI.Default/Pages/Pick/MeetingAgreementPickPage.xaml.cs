@@ -7,29 +7,11 @@ public partial class MeetingAgreementPickPage : Core.Presentation.Terminal.MAUI.
 {
     private System.Action<Interop.API.Common.Models.Display.AgreementDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public MeetingAgreementPickPage(System.Action<Interop.API.Common.Models.Display.AgreementDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
