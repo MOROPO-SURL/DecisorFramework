@@ -6,6 +6,8 @@
 
         public System.Guid ParticipatingOrganizationId { get; set; }
 
+        public decimal Salary { get; set; }
+
         public override Persistence.Entities.ExternalResearcher Export()
         {
             var entity = new Persistence.Entities.ExternalResearcher { Id = Id, Enabled = true };
@@ -18,6 +20,8 @@
         public override void Mergue(Persistence.Entities.ExternalResearcher entity)
         {
             base.Mergue(entity);
+
+            entity.Salary = Salary;
 
             if (entity.ContactId != ContactId)
             {

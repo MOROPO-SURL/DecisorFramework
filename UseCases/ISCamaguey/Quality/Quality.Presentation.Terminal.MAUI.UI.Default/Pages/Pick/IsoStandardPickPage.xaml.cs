@@ -9,29 +9,11 @@ public partial class IsoStandardPickPage : Framework.Decisor.Core.Presentation.T
 
     private System.Action<Interop.API.Common.Models.Display.IsoStandardDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public IsoStandardPickPage(System.Action<Interop.API.Common.Models.Display.IsoStandardDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
@@ -129,8 +111,13 @@ public partial class IsoStandardPickPage : Framework.Decisor.Core.Presentation.T
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.IsoStandardDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }

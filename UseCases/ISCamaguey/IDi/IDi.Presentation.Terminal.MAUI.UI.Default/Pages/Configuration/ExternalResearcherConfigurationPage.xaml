@@ -23,6 +23,29 @@
             <fwrk_core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+
+            <Array Type="{x:Type x:Int32}" x:Key="TimeAvailabilityValues">
+                <x:Int32>1</x:Int32>
+                <x:Int32>2</x:Int32>
+                <x:Int32>3</x:Int32>
+                <x:Int32>4</x:Int32>
+                <x:Int32>5</x:Int32>
+                <x:Int32>6</x:Int32>
+                <x:Int32>7</x:Int32>
+                <x:Int32>8</x:Int32>
+                <x:Int32>9</x:Int32>
+                <x:Int32>10</x:Int32>
+                <x:Int32>11</x:Int32>
+                <x:Int32>12</x:Int32>
+                <x:Int32>13</x:Int32>
+                <x:Int32>14</x:Int32>
+                <x:Int32>15</x:Int32>
+                <x:Int32>16</x:Int32>
+                <x:Int32>17</x:Int32>
+                <x:Int32>18</x:Int32>
+                <x:Int32>19</x:Int32>
+                <x:Int32>20</x:Int32>
+            </Array>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -48,7 +71,7 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Contacto" />
@@ -88,35 +111,58 @@
                             Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=5, ExtraLargeContainerColumn=12, LargeContainerColumn=12, MediumContainerColumn=12, SmallContainerColumn=12}}">
-                        <FlexLayout 
-                            Wrap="Wrap"
-                            AlignItems="Start" AlignContent="Start">
-                            <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=12, ExtraLargeContainerColumn=6, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4"
-                                Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Categoría Cirtífica (opcional)" />
-                                <Picker 
-                                    x:Name="CategoryPicker" 
-                                    ItemsSource="{Binding AvailableResearcherCategories}"
-                                    ItemDisplayBinding="{Binding Name}"
-                                    SelectedItem="{Binding Category}"
-                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                            </VerticalStackLayout>
-                            <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=12, ExtraLargeContainerColumn=6, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4"
-                                Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Categoría Docente (opcional)" />
-                                <Picker 
-                                    x:Name="TeachingCategoryPicker" 
-                                    ItemsSource="{Binding AvailableTeachingCategories}"
-                                    ItemDisplayBinding="{Binding Name}"
-                                    SelectedItem="{Binding TeachingCategory}"
-                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                            </VerticalStackLayout>
-                        </FlexLayout>
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2,ExtraLargeContainerColumn=3, LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fondo de tiempo" />
+                        <StackLayout Orientation="Horizontal" Spacing="6">
+                            <Picker 
+                                HorizontalOptions="FillAndExpand"
+                                SelectedItem="{Binding TimeAvailability}" 
+                                ItemsSource="{StaticResource TimeAvailabilityValues}" />
+                            <Label 
+                                VerticalOptions="Center"
+                                Text="Horas" />
+                        </StackLayout>
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ExternalResearcherConfigurationPageModel.TimeAvailabilityValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ExternalResearcherConfigurationPageModel.TimeAvailabilityValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=4, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Salario base" />
+                        <Entry Text="{Binding Salary, StringFormat='{0:F2}'}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ExternalResearcherConfigurationPageModel.SalaryValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ExternalResearcherConfigurationPageModel.SalaryValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Categoría Cirtífica (opcional)" />
+                        <Picker 
+                            x:Name="CategoryPicker" 
+                            ItemsSource="{Binding AvailableResearcherCategories}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding Category}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Categoría Docente (opcional)" />
+                        <Picker 
+                            x:Name="TeachingCategoryPicker" 
+                            ItemsSource="{Binding AvailableTeachingCategories}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding TeachingCategory}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <FlexLayout

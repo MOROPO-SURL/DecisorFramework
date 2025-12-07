@@ -4,11 +4,15 @@
     {
         public static string ContactValidableProperty => nameof(Contact);
         public static string ParticipatingOrganizationValidableProperty => nameof(ParticipatingOrganization);
+        public static string TimeAvailabilityValidableProperty => nameof(TimeAvailability);
+        public static string SalaryValidableProperty => nameof(Salary);
 
         private Framework.Decisor.Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel contact;
         private Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel participatingOrganization;
         private Interop.API.Common.Models.Display.ResearcherCategoryDisplayModel category;
         private Interop.API.Common.Models.Display.TeachingCategoryDisplayModel teachingCategory;
+        private int timeAvailability = 8;
+        private decimal salary;
         private int priority = 1;
 
         public ExternalResearcherConfigurationPageModel(Interop.API.Common.Models.Display.ExternalResearcherDisplayModel model) : base(model)
@@ -20,6 +24,8 @@
             participatingOrganization = model.ParticipatingOrganization;
             category = model.Category;
             teachingCategory = model.TeachingCategory;
+            timeAvailability = model.TimeAvailability;
+            salary = model.Salary;
             priority = model.Priority;
             SpecializationResearchAreas = [.. model.SpecializationResearchAreas];
             MasteryResearchAreas = [.. model.MasteryResearchAreas];
@@ -35,6 +41,10 @@
         public Interop.API.Common.Models.Display.ResearcherCategoryDisplayModel Category { get => category; set => SetProperty(ref category, value); }
 
         public Interop.API.Common.Models.Display.TeachingCategoryDisplayModel TeachingCategory { get => teachingCategory; set => SetProperty(ref teachingCategory, value); }
+
+        public int TimeAvailability { get => timeAvailability; set => SetProperty(ref timeAvailability, value); }
+
+        public decimal Salary { get => salary; set => SetProperty(ref salary, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 

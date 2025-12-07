@@ -6136,6 +6136,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("teachingcategoryid");
 
+                    b.Property<int>("TimeAvailability")
+                        .HasColumnType("integer")
+                        .HasColumnName("timeavailability");
+
                     b.HasKey("Id")
                         .HasName("pk_researchers");
 
@@ -6828,6 +6832,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<Guid>("SternId")
                         .HasColumnType("uuid")
                         .HasColumnName("sternid");
+
+                    b.Property<int>("TimeAvailability")
+                        .HasColumnType("integer")
+                        .HasColumnName("timeavailability");
 
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_projectresearcherbridges");
@@ -8880,6 +8888,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<Guid>("ParticipatingOrganizationId")
                         .HasColumnType("uuid")
                         .HasColumnName("participatingorganizationid");
+
+                    b.Property<decimal>("Salary")
+                        .HasColumnType("numeric")
+                        .HasColumnName("salary");
 
                     b.HasIndex("ContactId")
                         .HasDatabaseName("ix_researchers_contactid");

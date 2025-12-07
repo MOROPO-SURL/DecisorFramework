@@ -9,6 +9,10 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Validators
             RuleFor(model => model.Contact).NotNull();
 
             RuleFor(model => model.ParticipatingOrganization).NotNull();
+
+            RuleFor(model => model.TimeAvailability).GreaterThan(0);
+
+            RuleFor(model => model.Salary).GreaterThan(0);
         }
     }
 }

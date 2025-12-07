@@ -7,5 +7,7 @@
         
         public System.Guid SternId { get ; set ; }
         public Contract.AbstractResearcher Stern { get ; set ; }
+
+        public int TimeAvailability { get; set; }
     }
 }

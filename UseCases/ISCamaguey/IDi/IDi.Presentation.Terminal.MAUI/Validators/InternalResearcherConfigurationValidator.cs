@@ -7,6 +7,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Validators
         public InternalResearcherConfigurationValidator()
         {
             RuleFor(model => model.Employee).NotNull();
+
+            RuleFor(model => model.TimeAvailability).GreaterThan(0);
         }
     }
 }

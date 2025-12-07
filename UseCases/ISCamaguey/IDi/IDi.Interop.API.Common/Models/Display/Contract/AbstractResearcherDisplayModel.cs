@@ -14,6 +14,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display.Contra
 
         public TeachingCategoryDisplayModel TeachingCategory { get; set; }
 
+        public int TimeAvailability { get; set; }
+
         public ResearchAreaDisplayModel[] SpecializationResearchAreas { get; set; }
 
         public ResearchAreaDisplayModel[] MasteryResearchAreas { get; set; }
@@ -25,6 +27,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display.Contra
             Id = entity.Id;
             Enabled = entity.Enabled;
             Priority = entity.Priority;
+            TimeAvailability = entity.TimeAvailability;
             SpecializationResearchAreas = entity.ResearchAreaSpecializationBridges.Select(bridge =>
             {
                 var model = new ResearchAreaDisplayModel();

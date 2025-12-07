@@ -6,9 +6,13 @@
 
         public ParticipatingOrganizationDisplayModel ParticipatingOrganization { get; set; }
 
+        public decimal Salary { get; set; }
+
         public override void Import(Persistence.Entities.ExternalResearcher entity)
         {
             base.Import(entity);
+
+            Salary = entity.Salary;
 
             if (entity.Contact != null)
             {

@@ -12,6 +12,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input.Contract
 
         public System.Guid? TeachingCategoryId { get; set; }
 
+        public int TimeAvailability { get; set; }
+
         public Display.ResearchAreaDisplayModel[] SpecializationResearchAreas { get; set; }
 
         public Display.ResearchAreaDisplayModel[] MasteryResearchAreas { get; set; }
@@ -28,6 +30,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input.Contract
         public virtual void Mergue(TEntity entity)
         {
             entity.Priority = Priority;
+            entity.TimeAvailability = TimeAvailability;
 
             if (entity.CategoryId != CategoryId)
             {

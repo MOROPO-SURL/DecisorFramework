@@ -53,6 +53,8 @@ public partial class ExternalResearcherConfigurationPage : Framework.Decisor.Cor
             CategoryId = ConcreteBindingContext.Category?.Id,
             TeachingCategoryId = ConcreteBindingContext.TeachingCategory?.Id,
             SpecializationResearchAreas = [.. ConcreteBindingContext.SpecializationResearchAreas],
+            TimeAvailability = ConcreteBindingContext.TimeAvailability,
+            Salary = ConcreteBindingContext.Salary,
             MasteryResearchAreas = [.. ConcreteBindingContext.MasteryResearchAreas],
             DoctorateResearchAreas = [.. ConcreteBindingContext.DoctorateResearchAreas]
         };
@@ -74,6 +76,8 @@ public partial class ExternalResearcherConfigurationPage : Framework.Decisor.Cor
             Priority = ConcreteBindingContext.Priority,
             CategoryId = ConcreteBindingContext.Category?.Id,
             TeachingCategoryId = ConcreteBindingContext.TeachingCategory?.Id,
+            TimeAvailability = ConcreteBindingContext.TimeAvailability,
+            Salary = ConcreteBindingContext.Salary,
             SpecializationResearchAreas = [.. ConcreteBindingContext.SpecializationResearchAreas],
             MasteryResearchAreas = [.. ConcreteBindingContext.MasteryResearchAreas],
             DoctorateResearchAreas = [.. ConcreteBindingContext.DoctorateResearchAreas]

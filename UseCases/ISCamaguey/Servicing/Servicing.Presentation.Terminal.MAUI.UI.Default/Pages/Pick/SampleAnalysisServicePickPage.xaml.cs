@@ -9,8 +9,6 @@ public partial class SampleAnalysisServicePickPage : Framework.Decisor.Core.Pres
 
     private System.Action<Interop.API.Common.Models.Display.SampleAnalysisServiceDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public SampleAnalysisServicePickPage(System.Action<Interop.API.Common.Models.Display.SampleAnalysisServiceDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
@@ -18,20 +16,6 @@ public partial class SampleAnalysisServicePickPage : Framework.Decisor.Core.Pres
         this.pickCompleteAction = pickCompleteAction;
 
         IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
@@ -129,8 +113,13 @@ public partial class SampleAnalysisServicePickPage : Framework.Decisor.Core.Pres
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.SampleAnalysisServiceDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }
