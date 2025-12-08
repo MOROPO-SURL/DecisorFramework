@@ -7,7 +7,21 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions
         public static void PresentToastNotification(this ContentPage target, Enumerations.NotificationKind kind, string message, System.TimeSpan? delay = null, System.TimeSpan? time = null)
         {
 //#if WINDOWS
-            if (string.IsNullOrEmpty(message) || string.IsNullOrWhiteSpace(message) || target.Content is not Grid) return;
+            if (string.IsNullOrEmpty(message) || string.IsNullOrWhiteSpace(message)) return;
+
+            if (target.Content is not Grid toastContainerGrid)
+            {
+                if (target.Content is ScrollView targetScrollViewContent && targetScrollViewContent.Content is not Grid)
+                {
+                    throw new System.InvalidOperationException();
+                }
+                else
+                {
+                    toastContainerGrid = (target.Content as ScrollView).Content as Grid;
+                }
+            }
+
+            if (toastContainerGrid == null) throw new System.InvalidOperationException();
 
             var toastFrame = new Frame
             {
@@ -22,8 +36,6 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions
                     Text = message 
                 }
             };
-
-            var toastContainerGrid = target.Content as Grid;
 
             if (toastContainerGrid.ColumnDefinitions.Count > 1) Grid.SetColumnSpan(toastFrame, toastContainerGrid.ColumnDefinitions.Count);
 

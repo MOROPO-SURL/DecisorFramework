@@ -9,29 +9,11 @@ public partial class EmployeePickPage : Core.Presentation.Terminal.MAUI.UI.Pages
 
     private System.Action<Interop.API.Common.Models.Display.EmployeeDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public EmployeePickPage(System.Action<Interop.API.Common.Models.Display.EmployeeDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
