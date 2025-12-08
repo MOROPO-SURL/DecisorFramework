@@ -9,29 +9,11 @@ public partial class LegalProviderBudgetPickPage : Core.Presentation.Terminal.MA
 
     private System.Action<Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public LegalProviderBudgetPickPage(System.Action<Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
@@ -129,8 +111,13 @@ public partial class LegalProviderBudgetPickPage : Core.Presentation.Terminal.MA
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.LegalProviderBudgetDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }

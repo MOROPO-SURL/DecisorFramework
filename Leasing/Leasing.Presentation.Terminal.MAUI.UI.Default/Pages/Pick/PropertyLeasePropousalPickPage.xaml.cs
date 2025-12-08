@@ -9,29 +9,11 @@ public partial class PropertyLeasePropousalPickPage : Core.Presentation.Terminal
 
     private System.Action<Interop.API.Common.Models.Display.PropertyLeasePropousalDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public PropertyLeasePropousalPickPage(System.Action<Interop.API.Common.Models.Display.PropertyLeasePropousalDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override double ItemViewRequestWidth { get => 400; }
@@ -96,8 +78,13 @@ public partial class PropertyLeasePropousalPickPage : Core.Presentation.Terminal
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.PropertyLeasePropousalDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }

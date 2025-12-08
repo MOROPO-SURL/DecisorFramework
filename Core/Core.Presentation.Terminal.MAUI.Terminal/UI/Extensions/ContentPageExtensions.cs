@@ -9,15 +9,16 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions
 //#if WINDOWS
             if (string.IsNullOrEmpty(message) || string.IsNullOrWhiteSpace(message)) return;
 
-            var toastContainerGrid = target.Content as Grid;
-
-            if (target.Content is ScrollView targetScrollViewContent && targetScrollViewContent.Content is not Grid)
+            if (target.Content is not Grid toastContainerGrid)
             {
-                throw new System.InvalidOperationException();
-            }
-            else
-            {
-                toastContainerGrid = (target.Content as ScrollView).Content as Grid;
+                if (target.Content is ScrollView targetScrollViewContent && targetScrollViewContent.Content is not Grid)
+                {
+                    throw new System.InvalidOperationException();
+                }
+                else
+                {
+                    toastContainerGrid = (target.Content as ScrollView).Content as Grid;
+                }
             }
 
             if (toastContainerGrid == null) throw new System.InvalidOperationException();
