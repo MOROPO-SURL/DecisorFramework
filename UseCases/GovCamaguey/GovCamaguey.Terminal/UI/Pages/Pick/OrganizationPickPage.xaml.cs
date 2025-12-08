@@ -9,8 +9,6 @@ public partial class OrganizationPickPage : Framework.Caney.MVVM.Core.Pages.Cont
 {
     private System.Action<OrganizationDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public OrganizationPickPage(System.Action<OrganizationDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
@@ -26,12 +24,7 @@ public partial class OrganizationPickPage : Framework.Caney.MVVM.Core.Pages.Cont
     {
         base.OnAppearing();
 
-        if (IsEnabled)
-        {
-            if (pickedFlag) (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
+        if (IsEnabled) return;
 
         LoadItems();
 
@@ -71,9 +64,14 @@ public partial class OrganizationPickPage : Framework.Caney.MVVM.Core.Pages.Cont
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.OrganizationDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 
     private void LoadItems()

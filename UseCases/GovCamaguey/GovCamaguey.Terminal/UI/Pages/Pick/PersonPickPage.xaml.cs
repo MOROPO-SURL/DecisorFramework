@@ -8,8 +8,6 @@ public partial class PersonPickPage : Framework.Caney.MVVM.Core.Pages.ContentPag
 {
     private System.Action<Interop.API.Common.Models.Display.PersonDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public PersonPickPage(System.Action<Interop.API.Common.Models.Display.PersonDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
@@ -25,12 +23,7 @@ public partial class PersonPickPage : Framework.Caney.MVVM.Core.Pages.ContentPag
     {
         base.OnAppearing();
 
-        if (IsEnabled)
-        {
-            if (pickedFlag) (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
+        if (IsEnabled) return;
 
         LoadItems();
 
@@ -70,9 +63,14 @@ public partial class PersonPickPage : Framework.Caney.MVVM.Core.Pages.ContentPag
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.PersonDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 
     private void LoadItems()

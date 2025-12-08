@@ -10,29 +10,11 @@ public partial class GuidelinePickPage : Framework.Decisor.Core.Presentation.Ter
 
     private System.Action<Interop.API.Common.Models.Display.GuidelineDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public GuidelinePickPage(System.Action<Interop.API.Common.Models.Display.GuidelineDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
@@ -120,8 +102,13 @@ public partial class GuidelinePickPage : Framework.Decisor.Core.Presentation.Ter
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.GuidelineDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }
