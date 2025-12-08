@@ -117,25 +117,55 @@
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ServiceOrderSampleConfigurationPageModel.OrderValidableProperty}}"
                             Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
-                    <VerticalStackLayout 
+                    <Grid 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=5, MediumContainerColumn=4, SmallContainerColumn=8}}"
-                        Margin="4"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Etiqueta" />
-                        <ContentView                        
-                            IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
-                            HeightRequest="{Static local_pick_pages:SampleReceptionLabelPickPage.ITEM_VIEW_REQUEST_HEIGHT}">
-                            <local_card_views:SampleReceptionLabelDefaultCardView BindingContext="{Binding Label}" />
-                        </ContentView>
-                        <Button
-                            HorizontalOptions="Start"
-                            Text="Seleccionar ..."
-                            Clicked="LabelPickButton_Clicked" />
+                        Margin="4"                        
+                        ColumnSpacing="6" RowSpacing="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.ColumnSpan="3" Grid.Row="0"
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Consecutivo" />
+                        <Entry
+                            Grid.Column="0" Grid.Row="1"
+                            BackgroundColor="Transparent"
+                            IsReadOnly="True"
+                            Text="{Binding Index}" />
+                        <Stepper
+                            Grid.Column="0" Grid.Row="1"
+                            Margin="0,0,6,0"
+                            HorizontalOptions="End" VerticalOptions="Center"
+                            Minimum="1"
+                            Value="{Binding Index}" />
                         <Label
-                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ServiceOrderSampleConfigurationPageModel.LabelValidableProperty}}"
-                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ServiceOrderSampleConfigurationPageModel.LabelValidableProperty}}"
+                            Grid.Column="0" Grid.Row="2"
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ServiceOrderSampleConfigurationPageModel.IndexValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ServiceOrderSampleConfigurationPageModel.IndexValidableProperty}}"
                             Style="{StaticResource ValidationMessageLabelStyle}" />
-                    </VerticalStackLayout>
+                        <Label
+                            Grid.Column="1" Grid.Row="1"
+                            VerticalOptions="Center"
+                            FontSize="Medium"
+                            Text="/" />
+                        <Picker
+                            Grid.Column="2" Grid.Row="1"
+                            ItemsSource="{Binding AvailableYears}"
+                            SelectedItem="{Binding Year}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            Grid.Column="2" Grid.Row="2"
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ServiceOrderSampleConfigurationPageModel.YearValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ServiceOrderSampleConfigurationPageModel.YearValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </Grid>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=3, SmallContainerColumn=6}}"
                         Margin="4" 
@@ -186,21 +216,6 @@
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Observaciones (Opcional)" />
                     <Editor Text="{Binding Observation}" HeightRequest="180" />
                 </VerticalStackLayout>
-                <BoxView 
-                    Margin="8,16,8,8"
-                    HeightRequest="1" 
-                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <FlexLayout
-                    Wrap="Wrap"
-                    AlignItems="Start" AlignContent="Start">
-                    <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
-                        Margin="4"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                        <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                    </VerticalStackLayout>
-                </FlexLayout>
             </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>

@@ -7,7 +7,6 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.Analysis> Analysises { get; set; }
         public DbSet<Entities.AnalysisOrder> AnalysisOrders { get; set; }
         public DbSet<Entities.Assessment> Assessments { get; set; }
-        public DbSet<Entities.SampleReceptionLabel> SampleReceptionLabels { get; set; }
         // TODO Uncomment required line!!
         //public DbSet<Entities.ProductionSample> ProductionSamples { get; set; }
         public DbSet<Entities.ResearchSample> ResearchSamples { get; set; }

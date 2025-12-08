@@ -1,16 +1,16 @@
 ﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display.Contract
 {
-    public abstract class AbstractSampleDisplayModel<TEntity> : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<TEntity, long> where TEntity : Persistence.Entities.Contract.AbstractSample
+    public abstract class AbstractSampleDisplayModel<TEntity> : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractSample
     {
-        public long Id { get; set; }
+        public System.Guid Id { get; set; }
 
         public bool Enabled { get; set; }
 
-        public int Priority { get; set; }
+        public int Index { get; set; }
+
+        public int Year { get; set; }
 
         public System.DateTime At { get; set; }
-
-        public SampleReceptionLabelDisplayModel Label { get; set; }
 
         public string Observation { get; set; }
 
@@ -26,17 +26,11 @@
         {
             Id = entity.Id;
             Enabled = entity.Enabled;
-            Priority = entity.Priority;
+            Index = entity.Index;
+            Year = entity.Year;
             At = entity.At;
             Observation = entity.Observation;
             Amount = entity.Amount;
-
-            if (entity.Label != null)
-            {
-                Label = new SampleReceptionLabelDisplayModel();
-
-                Label.Import(entity.Label);
-            }
 
             if (entity.FeatureImage != null)
             {

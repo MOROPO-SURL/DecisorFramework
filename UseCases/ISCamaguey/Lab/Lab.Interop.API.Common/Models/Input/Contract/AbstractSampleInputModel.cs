@@ -1,12 +1,12 @@
 ﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input.Contract
 {
-    public abstract class AbstractSampleInputModel<TEntity> : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<TEntity, long> where TEntity : Persistence.Entities.Contract.AbstractSample
+    public abstract class AbstractSampleInputModel<TEntity> : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractSample
     {
-        public long Id { get; set; }
+        public System.Guid Id { get; set; }
 
-        public int Priority { get; set; }
+        public int Index { get; set; }
 
-        public System.Guid? LabelId { get; set; }
+        public int Year { get; set; }
 
         public string Observation { get; set; }
 
@@ -27,15 +27,10 @@
 
         public virtual void Mergue(TEntity entity)
         {
-            entity.Priority = Priority;
+            entity.Index = Index;
+            entity.Year = Year;
             entity.Observation = Observation;
             entity.Amount = Amount;
-
-            if (entity.LabelId != LabelId)
-            {
-                entity.Label = null;
-                entity.LabelId = LabelId;
-            }
 
             if (entity.SampleKindId != SampleKindId)
             {

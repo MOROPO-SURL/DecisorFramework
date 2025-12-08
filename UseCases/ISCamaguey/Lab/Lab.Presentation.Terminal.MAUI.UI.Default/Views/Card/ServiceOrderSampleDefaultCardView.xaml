@@ -8,10 +8,15 @@
     <Frame>
         <VerticalStackLayout Spacing="0">
             <Label 
-                ToolTipProperties.Text="{Binding Label.Reference}"
                 LineBreakMode="TailTruncation"
-                FontSize="Large"
-                Text="{Binding Label.Reference}" />
+                FontSize="Large">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Index}" />
+                        <Span Text="{Binding Year, StringFormat=' / {0}'}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
             <Label 
                 Margin="0,8,0,0"
                 LineBreakMode="TailTruncation"

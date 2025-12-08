@@ -6,7 +6,9 @@ public class ServiceOrderSampleConfigurationValidator : AbstractValidator<Models
 {
     public ServiceOrderSampleConfigurationValidator()
     {
-        RuleFor(model => model.Label).NotNull();
+        RuleFor(model => model.Index).NotEmpty().GreaterThanOrEqualTo(1);
+
+        RuleFor(model => model.Year).NotNull();
 
         RuleFor(model => model.SampleKind).NotNull();
 
@@ -14,6 +16,6 @@ public class ServiceOrderSampleConfigurationValidator : AbstractValidator<Models
 
         RuleFor(model => model.UnitMeasurement).NotNull();
 
-        RuleFor(model => model.Amount).GreaterThan(0);
+        RuleFor(model => model.Amount).NotEmpty().GreaterThan(0);
     }
 }

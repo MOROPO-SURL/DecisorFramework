@@ -2,22 +2,20 @@
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract
 {
-    public abstract class AbstractSample : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<long>
+    public abstract class AbstractSample : Framework.Guama.Core.Persistence.Entities.Contract.IEnableableEntity<System.Guid>, Framework.Guama.Core.Persistence.Entities.Contract.IArchivableEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
-        public long Id { get; set; }
+        public System.Guid Id { get; set; }
 
         public bool Archived { get; set; }
 
         public bool Enabled { get; set; }
 
-        public int Priority { get; set; }
+        public int Index { get; set; }
+
+        public int Year { get; set; }
 
         public System.DateTime At { get; set; } = System.DateTime.Now;
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(LabelId))]
-        public SampleReceptionLabel Label { get; set; }
-        public System.Guid? LabelId { get; set; }
 
         public string Observation {  get; set; }
 

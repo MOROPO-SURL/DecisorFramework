@@ -57,13 +57,14 @@ public partial class ServiceOrderSampleConfigurationPage : Framework.Decisor.Cor
 
         var model = new Interop.API.Common.Models.Input.ServiceOrderSampleInputModel
         {
+            Id = System.Guid.NewGuid(),
             ServiceOrderId = ConcreteBindingContext.Order.Id,
-            LabelId = ConcreteBindingContext.Label.Id,
+            Index = ConcreteBindingContext.Index,
+            Year = ConcreteBindingContext.Year,
             Amount = ConcreteBindingContext.Amount,
             UnitMeasurementId = ConcreteBindingContext.UnitMeasurement.Id,
             SampleKindId = ConcreteBindingContext.SampleKind.Id,
-            Observation = ConcreteBindingContext.Observation,
-            Priority = ConcreteBindingContext.Priority
+            Observation = ConcreteBindingContext.Observation
         };
 
         if (featureImagePickedModel != null)
@@ -76,7 +77,7 @@ public partial class ServiceOrderSampleConfigurationPage : Framework.Decisor.Cor
 
         await apiConnectClient.CreateAsync(model);
 
-        return null;
+        return await apiConnectClient.GetAsync(model.Id);
     }
 
     protected override async System.Threading.Tasks.Task<ServiceOrderSampleDisplayModel> PerformEditionAsync()
@@ -87,12 +88,12 @@ public partial class ServiceOrderSampleConfigurationPage : Framework.Decisor.Cor
         {
             Id = ConcreteBindingContext.Id,
             ServiceOrderId = ConcreteBindingContext.Order.Id,
-            LabelId = ConcreteBindingContext.Label.Id,
+            Index = ConcreteBindingContext.Index,
+            Year = ConcreteBindingContext.Year,
             Amount = ConcreteBindingContext.Amount,
             UnitMeasurementId = ConcreteBindingContext.UnitMeasurement.Id,
             SampleKindId = ConcreteBindingContext.SampleKind.Id,
-            Observation = ConcreteBindingContext.Observation,
-            Priority = ConcreteBindingContext.Priority
+            Observation = ConcreteBindingContext.Observation
         };
 
         if (featureImagePickedModel != null)
@@ -105,7 +106,7 @@ public partial class ServiceOrderSampleConfigurationPage : Framework.Decisor.Cor
 
         await apiConnectClient.EditAsync(model);
 
-        return null;
+        return await apiConnectClient.GetAsync(model.Id);
     }
 
     private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
@@ -135,7 +136,7 @@ public partial class ServiceOrderSampleConfigurationPage : Framework.Decisor.Cor
 
     private void LabelPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.SampleReceptionLabelPickPage(LabelSuccessPick_Callback)));
+        // TODO Remove this delegate!!!
     }
 
     private void FeatureImagePickSuccess_Callback(ImageInputModel model)
@@ -150,13 +151,6 @@ public partial class ServiceOrderSampleConfigurationPage : Framework.Decisor.Cor
     private void OrderSuccessPick_Callback(CommonSampleAnalysisServiceOrderDisplayModel model)
     {
         ConcreteBindingContext.Order = model;
-
-        hasChangesFlag = true;
-    }
-
-    private void LabelSuccessPick_Callback(SampleReceptionLabelDisplayModel model)
-    {
-        ConcreteBindingContext.Label = model;
 
         hasChangesFlag = true;
     }

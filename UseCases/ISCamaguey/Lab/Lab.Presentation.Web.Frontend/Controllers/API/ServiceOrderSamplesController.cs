@@ -10,13 +10,13 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.AP
 
 [Route("api/lab/[controller]")]
 [ApiController]
-public class ServiceOrderSamplesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<ServiceOrderSample, long, ServiceOrderSampleInputModel, ServiceOrderSampleDisplayModel>
+public class ServiceOrderSamplesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<ServiceOrderSample, System.Guid, ServiceOrderSampleInputModel, ServiceOrderSampleDisplayModel>
 {
     private readonly IEntityRepository<Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder, long> orderRepository;
     private readonly IEntityRepository<Image, System.Guid> imageRepository;
     private readonly IImageFileManagerFacade imageFileManager;
 
-    public ServiceOrderSamplesController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder, long> orderRepository, IEntityRepository<ServiceOrderSample, long> repository, Microsoft.Extensions.Localization.IStringLocalizer<ServiceOrderSamplesController> localizer, Microsoft.Extensions.Logging.ILogger<ServiceOrderSamplesController> logger) : base(repository, localizer, logger)
+    public ServiceOrderSamplesController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder, long> orderRepository, IEntityRepository<ServiceOrderSample, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ServiceOrderSamplesController> localizer, Microsoft.Extensions.Logging.ILogger<ServiceOrderSamplesController> logger) : base(repository, localizer, logger)
     {
         this.orderRepository = orderRepository;
         this.imageRepository = imageRepository;
@@ -33,7 +33,7 @@ public class ServiceOrderSamplesController : Framework.Guama.Core.Presentation.W
         return entity => entity.At;
     }
 
-    public override ActionResult Delete(long key)
+    public override ActionResult Delete(System.Guid key)
     {
         return NotFound();
     }

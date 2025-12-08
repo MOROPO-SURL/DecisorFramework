@@ -6,7 +6,7 @@
 
         public override Persistence.Entities.ServiceOrderSample Export()
         {
-            var entity = new Persistence.Entities.ServiceOrderSample { Enabled = true };
+            var entity = new Persistence.Entities.ServiceOrderSample { Id = Id, Enabled = true };
 
             Mergue(entity);
 

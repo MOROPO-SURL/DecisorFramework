@@ -42,11 +42,17 @@
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Margin="0"
-                                Text="Etiqueta" />
+                                Text="Consecutivo" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                FontSize="Large"
-                                Text="{Binding Label.Reference}" />
+                                FontSize="Large">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Index}" />
+                                        <Span Text="{Binding Year, StringFormat=' / {0}'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Contenido" />
@@ -102,12 +108,6 @@
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Observation, TargetNullValue='---', FallbackValue='---'}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Prioridad" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Priority}" />
                         </StackLayout>
                         <StackLayout
                             Orientation="Horizontal"
