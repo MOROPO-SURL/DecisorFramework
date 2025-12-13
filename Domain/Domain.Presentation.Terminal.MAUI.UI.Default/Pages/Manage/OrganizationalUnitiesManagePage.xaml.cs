@@ -31,33 +31,35 @@ public partial class OrganizationalUnitiesManagePage : Caney.MVVM.Core.Pages.Con
     {
         var concreteBindingContext = (Models.Page.Manage.OrganizationalUnitiesManagePageModel)BindingContext;
 
+        if (concreteBindingContext.IsBusy) return;
+
+        var apiConnectClient = new Interop.API.Connect.Clients.ParentalOrganizationalUnitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
         concreteBindingContext.IsBusy = true;
 
-        System.Threading.Tasks.Task.Run(async () =>
+        apiConnectClient.GetAsync().ContinueWith(task =>
         {
-            try
+            Dispatcher.Dispatch(() =>
             {
-                var apiConnectClient = new Interop.API.Connect.Clients.ParentalOrganizationalUnitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                concreteBindingContext.IsBusy = false;
 
-                var model = new Models.Page.Configuration.OrganizationalUnityConfigurationPageModel(null)
+                if (task.Exception != null || task.IsCanceled)
                 {
-                    AvailableParents = await apiConnectClient.GetAsync()
-                };
-
-                Dispatcher.Dispatch(() =>
+                    Dispatcher.Dispatch(() =>
+                    {
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                    });
+                }
+                else
                 {
-                    concreteBindingContext.IsBusy = false;
+                    var model = new Models.Page.Configuration.OrganizationalUnityConfigurationPageModel(null)
+                    {
+                        AvailableParents = task.Result
+                    };
 
                     this.NavigationPushPageAsync(new Configuration.OrganizationalUnityConfigurationPage(ConfigurationSuccess_Callback, model));
-                });
-            }
-            catch (System.Exception exception)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                });
-            }
+                }
+            });
         });
     }
 
