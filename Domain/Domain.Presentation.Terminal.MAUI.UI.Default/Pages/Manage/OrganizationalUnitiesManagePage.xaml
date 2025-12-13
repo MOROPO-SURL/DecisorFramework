@@ -7,24 +7,8 @@
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
-    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.OrganizationalUnitiesManagePage"
     Title="Gestión de Unidades Organizativas">
-    <ContentPage.Resources>
-        <ResourceDictionary>
-            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
-
-            <Style TargetType="Label" x:Key="CaptionFieldLabelStyle">
-                <Setter Property="TextColor" Value="{AppThemeBinding Light=DimGray, Dark=Gray}" />
-                <Setter Property="FontAttributes" Value="Bold" />
-                <Setter Property="FontSize" Value="Caption" />
-                <Setter Property="Margin" Value="0,16,0,0" />
-            </Style>
-            <Style TargetType="Label" x:Key="ValueFieldLabelStyle">
-                <Setter Property="FontSize" Value="Default" />
-            </Style>
-        </ResourceDictionary>
-    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Agregar"
@@ -44,7 +28,6 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Orientation="Vertical">
-                <SearchBar Margin="20,20,20,0" />
                 <ScrollView 
                     Orientation="Vertical"
                     VerticalOptions="FillAndExpand">
@@ -73,72 +56,6 @@
                     </VerticalStackLayout>
                 </ScrollView>
             </StackLayout>
-            <ContentView 
-                IsVisible="{Binding PresentedItem, Converter={StaticResource IsNotNullConverter}}"
-                Style="{StaticResource ModalFrameWrapContentViewStyle}">
-                <ScrollView Orientation="Vertical">
-                    <Grid>
-                        <Frame
-                            VerticalOptions="Center" HorizontalOptions="Center"
-                            Padding="0" Margin="20"
-                            WidthRequest="400">
-                            <Grid>
-                                <StackLayout Margin="20" Spacing="20">
-                                    <StackLayout>
-                                        <Label 
-                                            Margin="0,0,0,20"
-                                            Text="Detalles"
-                                            FontAttributes="Bold"
-                                            FontSize="Medium" />
-                                        <Label
-                                            Style="{StaticResource CaptionFieldLabelStyle}"
-                                            Margin="0"
-                                            Text="Nombre" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Name}" />
-                                        <Label 
-                                            Style="{StaticResource CaptionFieldLabelStyle}"
-                                            Text="Prioridad" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Priority}" />
-                                        <Label 
-                                            Style="{StaticResource CaptionFieldLabelStyle}"
-                                            Text="Referencia" />
-                                        <Label
-                                            Style="{StaticResource ValueFieldLabelStyle}"
-                                            Text="{Binding PresentedItem.Reference, TargetNullValue='---'}" />
-                                    </StackLayout>
-                                    <StackLayout
-                                        Orientation="Horizontal"
-                                        Spacing="20">
-                                        <Button 
-                                            HorizontalOptions="FillAndExpand"
-                                            Text="Modificar"
-                                            Clicked="PresentedItemEditButton_Clicked" />
-                                        <Button 
-                                            HorizontalOptions="FillAndExpand"
-                                            Text="Eliminar"
-                                            Clicked="PresentedItemRemoveButton_Clicked" />
-                                    </StackLayout>
-                                </StackLayout>
-                                <Button
-                                    HorizontalOptions="End" VerticalOptions="Start"
-                                    Padding="10"
-                                    BackgroundColor="Transparent"
-                                    Text="&#xf5ad;"
-                                    TextColor="{AppThemeBinding Light=Black, Dark=White}"
-                                    FontSize="Medium"
-                                    FontFamily="MaterialDesignIcons"
-                                    BorderWidth="0"
-                                    WidthRequest="48" HeightRequest="48"
-                                    Clicked="PresentedItemDismissButton_Clicked" />
-                            </Grid>
-                        </Frame>
-                    </Grid>
-                </ScrollView>
-            </ContentView>
             <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>

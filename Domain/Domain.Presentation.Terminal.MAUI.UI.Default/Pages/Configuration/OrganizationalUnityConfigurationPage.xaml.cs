@@ -3,9 +3,9 @@ using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class OrganizationalUnityConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel>
+public partial class OrganizationalUnityConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel, Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel, Models.Page.Configuration.OrganizationalUnityConfigurationPageModel>
 {
-    public OrganizationalUnityConfigurationPage(System.Action<Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel> successAction, Models.Page.Configuration.OrganizationalUnityConfigurationPageModel model) : base(successAction, model)
+    public OrganizationalUnityConfigurationPage(System.Action<Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel> successAction, Models.Page.Configuration.OrganizationalUnityConfigurationPageModel model) : base(successAction, model, new Validators.OrganizationalUnityConfigurationValidator())
     {
         InitializeComponent();
 
@@ -31,14 +31,13 @@ public partial class OrganizationalUnityConfigurationPage : Core.Presentation.Te
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ParentalOrganizationalUnitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.OrganizationalUnityConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.OrganizationalUnityInputModel
         {
-            Name = concreteBindingContext.Name,
-            ParentId = ParentPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
-            Reference = concreteBindingContext.Reference,
-            Priority = concreteBindingContext.Priority
+            Id = System.Guid.NewGuid(),
+            Name = ConcreteBindingContext.Name,
+            ParentId = ParentPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
+            Reference = ConcreteBindingContext.Reference,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -50,20 +49,28 @@ public partial class OrganizationalUnityConfigurationPage : Core.Presentation.Te
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ParentalOrganizationalUnitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.OrganizationalUnityConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.OrganizationalUnityInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            ParentId = ParentPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
-            Reference = concreteBindingContext.Reference,
-            Priority = concreteBindingContext.Priority
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            ParentId = ParentPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
+            Reference = ConcreteBindingContext.Reference,
+            Priority = ConcreteBindingContext.Priority
         };
 
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
