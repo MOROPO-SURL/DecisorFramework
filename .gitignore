@@ -407,3 +407,4 @@ FodyWeavers.xsd
 /UseCases/EPTCamaguey/EPTCamaguey.Web.BackOffice/dpkeys
 /UseCases/ISCamaguey/ISCamaguey.Web.BackOffice/wwwroot/media
 /UseCases/ISCamaguey/ISCamaguey.Web.BackOffice/.config/dotnet-tools.json
+/UseCases/CITMACamaguey/CITMACamaguey.Web.BackOffice/dpkeys
