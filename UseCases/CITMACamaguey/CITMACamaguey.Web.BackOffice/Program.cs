@@ -5,12 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using MOROPO.Framework.Decisor.Commercial.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Core.Presentation.Web.Frontend.Options;
 using MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Decisor.Financial.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Legal.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Governance.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Core.Security.Common.Presentation.Web.Frontend.Extensions;
@@ -51,13 +48,10 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice
             builder.Services.PerformMediaWebCommonRelativePathFileManagementServiceRegistration();
             builder.Services.PerformLocationWebCommonServiceRegistration();
 
-            builder.Services.AddDecisorLegalPresentationWebCommon();
             builder.Services.AddDecisorDomainPresentationWebCommon();
-            builder.Services.AddDecisorHumanResourcesPresentationWebCommon();
-            builder.Services.AddDecisorFinancialPresentationWebCommon();
-            builder.Services.AddDecisorInventoryPresentationWebCommon();
-            builder.Services.AddDecisorCommercialPresentationWebCommon();
+            builder.Services.AddDecisorLegalPresentationWebCommon();
             builder.Services.AddDecisorGovernancePresentationWebCommon();
+            builder.Services.AddDecisorHumanResourcesPresentationWebCommon();
 
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Framework.Guama.Core.Persistence.ORM.EF.Entities.Trace, long>, Framework.Guama.Core.Persistence.ORM.EF.Repositories.TraceRepository>();
 
