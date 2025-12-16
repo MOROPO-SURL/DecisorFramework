@@ -8,7 +8,7 @@ using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Servicing.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/commercial/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/commercial/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class RequestableServicesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<RequestableService, System.Guid, RequestableServiceInputModel, RequestableServiceDisplayModel, RequestableServiceFilterModel>
     {

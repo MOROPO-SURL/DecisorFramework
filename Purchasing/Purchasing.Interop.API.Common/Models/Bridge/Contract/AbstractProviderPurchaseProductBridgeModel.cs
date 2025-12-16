@@ -1,12 +1,10 @@
-﻿using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
-
-namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge.Contract
+﻿namespace MOROPO.Framework.Decisor.Purchasing.Interop.API.Common.Models.Bridge.Contract
 {
     public abstract class AbstractProviderPurchaseProductBridgeModel
     {
         public Inventory.Interop.API.Common.Models.Display.ProductDisplayModel Product { get; set; }
 
-        public UnitMeasurementDisplayModel UnitMeasurement { get; set; }
+        public Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get; set; }
 
         public decimal Amount { get; set; }
 

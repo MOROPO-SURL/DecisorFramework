@@ -1,12 +1,13 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/domain/organizationalunities/tree")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/domain/organizationalunities/tree")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class TreeOrganizationalUnitiesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultController<OrganizationalUnity, System.Guid, OrganizationalUnityTreeDisplayModel>
+    public class TreeOrganizationalUnitiesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultFilteredController<OrganizationalUnity, System.Guid, OrganizationalUnityTreeDisplayModel, OrganizationalUnityFilterModel>
     {
         public TreeOrganizationalUnitiesController(Guama.Core.Persistence.Repositories.IEntityRepository<OrganizationalUnity, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<TreeOrganizationalUnitiesController> localizer, Microsoft.Extensions.Logging.ILogger<TreeOrganizationalUnitiesController> logger)
             : base(repository, localizer, logger)

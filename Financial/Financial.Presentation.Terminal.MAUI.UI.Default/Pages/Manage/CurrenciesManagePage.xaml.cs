@@ -1,10 +1,11 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
 public partial class CurrenciesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.CurrencyDisplayModel, Models.Page.Manage.CurrenciesManagePageModel, Models.Page.Configuration.CurrencyConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 120;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 116;
 
     public CurrenciesManagePage()
     {
@@ -39,7 +40,12 @@ public partial class CurrenciesManagePage : Core.Presentation.Terminal.MAUI.UI.P
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
+
+                        LoadItems(true);
+                    });
                 });
 
                 break;

@@ -8,7 +8,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Legal.Presentation.Web.Frontend.Controllers.API
 {
-    [Route("api/legal/[controller]")]
+    [Route("api/fwrk/legal/[controller]")]
     [ApiController]
     public class SectionsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Section, int, SectionInputModel, SectionDisplayModel>
     {

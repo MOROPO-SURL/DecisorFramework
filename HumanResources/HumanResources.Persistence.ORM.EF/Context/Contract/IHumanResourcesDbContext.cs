@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Context.Contract
 {
-    public interface IHumanResourcesDbContext : Legal.Persistence.ORM.EF.Context.Contract.ILegalDbContext
+    public interface IHumanResourcesDbContext : Governance.Persistence.ORM.EF.Context.Contract.IGovernanceDbContext, Legal.Persistence.ORM.EF.Context.Contract.ILegalDbContext
     {
         public DbSet<Entities.Schooling> Schoolings { get; set; }
         public DbSet<Entities.SalaryStandard> SalaryStandards { get; set; }

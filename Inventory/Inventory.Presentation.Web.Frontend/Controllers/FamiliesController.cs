@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Extensions;
@@ -8,9 +9,9 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers
 {
-    [Route("api/inventory/[controller]")]
+    [Route("api/fwrk/inventory/[controller]")]
     [ApiController]
-    public class FamiliesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Family, int, FamilyInputModel, FamilyDisplayModel>
+    public class FamiliesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<Family, int, FamilyInputModel, FamilyDisplayModel, FamilyFilterModel>
     {
         public FamiliesController(Guama.Core.Persistence.Repositories.IEntityRepository<Family, int> repository, Microsoft.Extensions.Localization.IStringLocalizer<FamiliesController> localizer, Microsoft.Extensions.Logging.ILogger<FamiliesController> logger)
             : base(repository, localizer, logger)

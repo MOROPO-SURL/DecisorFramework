@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/hhrr/namingresolutions";
+        protected override string TargetController => "api/fwrk/hhrr/namingresolutions";
     }
 }

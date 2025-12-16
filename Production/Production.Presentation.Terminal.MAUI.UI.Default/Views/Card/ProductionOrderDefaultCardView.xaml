@@ -1,0 +1,51 @@
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
+    x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Views.Card.ProductionOrderDefaultCardView"
+    x:DataType="interop_common_display_models:ProductionOrderDisplayModel">
+    <Frame>
+        <VerticalStackLayout>
+            <Label 
+                ToolTipProperties.Text="{Binding Elaboration.Product.Name}"
+                LineBreakMode="TailTruncation"
+                FontAttributes="Bold"
+                FontSize="Medium"
+                Text="{Binding Elaboration.Product.Name}" />
+            <Label 
+                ToolTipProperties.Text="{Binding Elaboration.Name}"
+                LineBreakMode="TailTruncation"
+                FontAttributes="Bold"
+                Text="{Binding Elaboration.Name}" />
+            <Label FontSize="Large">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                        <Span Text="{Binding Elaboration.Product.DefaultUnitMeasurement.Symbol, StringFormat=' {0}'}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
+            <Label 
+                Margin="0,8,0,0"
+                Text="Responsable"
+                TextColor="DimGray"
+                FontSize="Caption"
+                FontAttributes="Bold" />
+            <Label
+                ToolTipProperties.Text="{Binding Responsible}"
+                LineBreakMode="TailTruncation"
+                Text="{Binding Responsible}" />
+            <Label 
+                Margin="0,8,0,0"
+                Text="Fecha prevista"
+                TextColor="DimGray"
+                FontSize="Caption"
+                FontAttributes="Bold" />
+            <Label
+                VerticalOptions="FillAndExpand"
+                LineBreakMode="TailTruncation"
+                MaxLines="2"
+                Text="{Binding RequestedFor, StringFormat='{0:D}'}" />
+        </VerticalStackLayout>
+    </Frame>
+</ContentView>

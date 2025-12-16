@@ -9,18 +9,18 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 {
-    [Route("api/leasing/[controller]")]
+    [Route("api/fwrk/leasing/[controller]")]
     [ApiController]
     public class NaturalClientPropertyLeasingsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<NaturalClientPropertyLeasing, System.Guid, NaturalClientPropertyLeasingInputModel, NaturalClientPropertyLeasingDisplayModel>
     {
         private readonly IEntityRepository<NaturalClient, System.Guid> clientRepository;
         private readonly IEntityRepository<PropertyLeasePersonPostulation, System.Guid> postulationRepository;
         private readonly IEntityRepository<PropertyLeaseOffer, System.Guid> offerRepository;
-        private readonly IEntityRepository<NaturalClientPropertyLeaseContract, int> contractRepository;
+        private readonly IEntityRepository<NaturalClientPropertyLeaseContract, System.Guid> contractRepository;
         private readonly IEntityRepository<PropertySpace, System.Guid> propertySpaceRepository;
         private readonly IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository;
 
-        public NaturalClientPropertyLeasingsController(IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository, IEntityRepository<PropertySpace, System.Guid> propertySpaceRepository, IEntityRepository<NaturalClientPropertyLeaseContract, int> contractRepository, IEntityRepository<PropertyLeaseOffer, System.Guid> offerRepository, IEntityRepository<PropertyLeasePersonPostulation, System.Guid> postulationRepository, IEntityRepository<NaturalClient, System.Guid> clientRepository, IEntityRepository<NaturalClientPropertyLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<NaturalClientPropertyLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<NaturalClientPropertyLeasingsController> logger) : base(repository, localizer, logger)
+        public NaturalClientPropertyLeasingsController(IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository, IEntityRepository<PropertySpace, System.Guid> propertySpaceRepository, IEntityRepository<NaturalClientPropertyLeaseContract, System.Guid> contractRepository, IEntityRepository<PropertyLeaseOffer, System.Guid> offerRepository, IEntityRepository<PropertyLeasePersonPostulation, System.Guid> postulationRepository, IEntityRepository<NaturalClient, System.Guid> clientRepository, IEntityRepository<NaturalClientPropertyLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<NaturalClientPropertyLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<NaturalClientPropertyLeasingsController> logger) : base(repository, localizer, logger)
         {
             this.clientRepository = clientRepository;
             this.postulationRepository = postulationRepository;
@@ -108,13 +108,13 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
             entity.Contract = contractRepository.Add(new NaturalClientPropertyLeaseContract
             {
-                Id = model.Index,
+                Id = System.Guid.NewGuid(),
+                Index = model.Index,
                 Year = model.StartAt.Year,
                 StarAt = model.StartAt,
                 Objective = model.Objective,
                 DurationUnitCount = model.DurationUnitCount,
                 DurationUnitMeasureKind = model.DurationUnitMeasureKind,
-                Priority = model.Priority,
                 Feed = model.Feed,
                 PaymentTermId = model.PaymentTermId,
                 BankAccountId = postulation.BankAccountId,

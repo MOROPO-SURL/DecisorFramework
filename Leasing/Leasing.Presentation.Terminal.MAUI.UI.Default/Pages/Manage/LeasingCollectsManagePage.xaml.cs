@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
@@ -220,7 +221,12 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
 
                 legalClientPropertyLeasingCollectAPIConnectClient.ArchiveAsync(legalClientPropertyLeasingCollectModel.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
+
+                        LoadItems(true);
+                    });
                 });
 
                 return;
@@ -231,7 +237,12 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
 
                 naturalClientPropertyLeasingCollectAPIConnectClient.ArchiveAsync(naturalClientPropertyLeasingCollectModel.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
+
+                        LoadItems(true);
+                    });
                 });
 
                 return;
@@ -242,7 +253,12 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
 
                 legalClientVehicleLeasingCollectAPIConnectClient.ArchiveAsync(legalClientVehicleLeasingCollectModel.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
+
+                        LoadItems(true);
+                    });
                 });
 
                 return;
@@ -253,7 +269,12 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
 
                 naturalClientVehicleLeasingCollectAPIConnectClient.ArchiveAsync(naturalClientVehicleLeasingCollectModel.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
+
+                        LoadItems(true);
+                    });
                 });
 
                 return;
@@ -265,21 +286,29 @@ public partial class LeasingCollectsManagePage : Core.Presentation.Terminal.MAUI
 
     protected void LegalClientVehicleLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.LegalClientVehicleLeasingCollectDisplayModel model)
     {
+        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
+
         LoadItems(true);
     }
 
     protected void LegalClientPropertyLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.LegalClientPropertyLeasingCollectDisplayModel model)
     {
+        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
+
         LoadItems(true);
     }
 
     protected void NaturalClientVehicleLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.NaturalClientVehicleLeasingCollectDisplayModel model)
     {
+        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
+
         LoadItems(true);
     }
 
     protected void NaturalClientPropertyLeasingCollectConfigurationSuccess_Callback(Interop.API.Common.Models.Display.NaturalClientPropertyLeasingCollectDisplayModel model)
     {
+        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
+
         LoadItems(true);
     }
 

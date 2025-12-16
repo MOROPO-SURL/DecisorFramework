@@ -16,11 +16,16 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.Entities
         public Elaboration Elaboration { get; set; }
         public System.Guid ElaborationId { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
 
         public decimal MinDecrease { get; set; }
 
         public decimal MaxDecrease { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ParentId))]
+        public ElaborationStep Parent { get; set; }
+        public System.Guid? ParentId { get; set; }
 
         public List<ElaborationStepWorkPositionBridge> WorkPositionBridges { get; set; } = new List<ElaborationStepWorkPositionBridge>();
     }

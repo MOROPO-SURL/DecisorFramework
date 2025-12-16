@@ -1,14 +1,11 @@
-﻿using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input;
-
-namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Connect.Clients
+﻿namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Connect.Clients
 {
-    public class LegalProvidersAPIConnectClient : Guama.Core.Presentation.API.Connect.Clients.Contract.AbstractArchivableEnableableEntityManagementAPIConnectClient<Persistence.Entities.LegalProvider, System.Guid, LegalProviderInputModel, LegalProviderDisplayModel>
+    public class LegalProvidersAPIConnectClient : Guama.Core.Presentation.API.Connect.Clients.Contract.AbstractArchivableEnableableEntityManagementFilteredAPIConnectClient<Persistence.Entities.LegalProvider, System.Guid, Common.Models.Input.LegalProviderInputModel, Common.Models.Display.LegalProviderDisplayModel, Common.Models.Filter.LegalProviderFilterModel>
     {
         public LegalProvidersAPIConnectClient(Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade httpClientHelperProvider) : base(httpClientHelperProvider)
         {
         }
 
-        protected override string TargetController => "api/commercial/legalproviders";
+        protected override string TargetController => "api/fwrk/commercial/legalproviders";
     }
 }

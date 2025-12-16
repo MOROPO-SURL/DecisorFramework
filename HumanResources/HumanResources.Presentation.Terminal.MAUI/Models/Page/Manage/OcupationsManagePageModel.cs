@@ -6,6 +6,6 @@
 
         public System.Collections.ObjectModel.ObservableCollection<View.StaffWorkforceViewModel> AvailableStaffWorkforces { get; set; } = [];
 
-        public System.Collections.ObjectModel.ObservableCollection<View.OcupationsRawManageOrganizationalUnityViewModel> OrganizationalUnities { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<View.OcupationsManageOrganizationalUnityViewModel> OrganizationalUnities { get; set; } = [];
     }
 }

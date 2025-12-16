@@ -54,7 +54,7 @@
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Orden" />
                     <ContentView                        
                         IsVisible="{Binding Order, Converter={StaticResource IsNotNullConverter}}">
-                        <local_card_views:ProductionOrderToCompleteDefaultCardView
+                        <local_card_views:ProductionOrderDefaultCardView
                             BindingContext="{Binding Order}"
                             HeightRequest="180"
                             Margin="0,0,0,10" />

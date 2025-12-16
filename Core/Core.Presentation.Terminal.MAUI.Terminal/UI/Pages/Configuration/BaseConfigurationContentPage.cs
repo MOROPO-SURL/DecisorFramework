@@ -78,8 +78,6 @@ public class BaseConfigurationContentPage<TModel> : Caney.MVVM.Core.Pages.Conten
             {
                 if (task.Exception == null && !task.IsCanceled)
                 {
-                    CommunityToolkit.Maui.Alerts.Toast.Make("Cambios aplicados con éxito.");
-
                     successCallbackAction.Invoke(task.Result);
 
                     this.NavigationPopPageAsync();

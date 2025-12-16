@@ -6,7 +6,7 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\..\HumanResources\HumanResources.Persistence.ORM.EF\HumanResources.Persistence.ORM.EF.csproj" />
+		<ProjectReference Include="..\..\Core\Core.Persistence.ORM.EF\Core.Persistence.ORM.EF.csproj" />
 		<ProjectReference Include="..\Domain.Persistence\Domain.Persistence.csproj" />
 	</ItemGroup>
 </Project>

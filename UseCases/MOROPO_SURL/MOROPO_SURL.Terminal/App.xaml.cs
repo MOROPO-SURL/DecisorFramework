@@ -13,7 +13,7 @@
         {
             base.OnStart();
 
-            Windows[0].Title = "Decisor MOROPO S.U.R.L.";
+            Windows[0].Title = "MOROPO S.U.R.L. Decisor™";
         }
     }
 }

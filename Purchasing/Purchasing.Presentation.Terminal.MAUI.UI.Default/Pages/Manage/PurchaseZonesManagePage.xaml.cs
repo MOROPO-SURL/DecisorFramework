@@ -1,10 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
 public partial class PurchaseZonesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.PurchaseZoneDisplayModel, Models.Page.Manage.PurchaseZonesManagePageModel, Models.Page.Configuration.PurchaseZoneConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 136;
 
     public PurchaseZonesManagePage()
     {
@@ -39,7 +40,12 @@ public partial class PurchaseZonesManagePage : Core.Presentation.Terminal.MAUI.U
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
+
+                        LoadItems(true);
+                    });
                 });
 
                 break;

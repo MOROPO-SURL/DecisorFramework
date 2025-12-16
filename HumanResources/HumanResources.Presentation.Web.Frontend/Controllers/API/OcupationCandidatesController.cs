@@ -9,7 +9,7 @@ using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/hhrr/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/hhrr/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class OcupationCandidatesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<OcupationCandidate, System.Guid, OcupationCandidateInputModel, OcupationCandidateDisplayModel, OcupationCandidateFilterModel>
     {
@@ -249,7 +249,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         {
             base.PostEdit(entity, model);
 
-            if (model.RawMedicalCheckDocument != null)
+            if (model.RawMedicalCheckDocument != null && model.RawMedicalCheckDocument.Id != default)
             {
                 var oldRawDocument = documentRepository.Get(model.RawMedicalCheckDocument.Id);
 
@@ -258,7 +258,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                 documentFileManager.DeleteDocumentFile(oldRawDocument);
             }
 
-            if (model.RawPhysicologicalCheckDocument != null)
+            if (model.RawPhysicologicalCheckDocument != null && model.RawPhysicologicalCheckDocument.Id != default)
             {
                 var oldRawDocument = documentRepository.Get(model.RawPhysicologicalCheckDocument.Id);
 
@@ -267,7 +267,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                 documentFileManager.DeleteDocumentFile(oldRawDocument);
             }
 
-            if (model.RawDefenseStatusCheckDocument != null)
+            if (model.RawDefenseStatusCheckDocument != null && model.RawDefenseStatusCheckDocument.Id != default)
             {
                 var oldRawDocument = documentRepository.Get(model.RawDefenseStatusCheckDocument.Id);
 
@@ -276,7 +276,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                 documentFileManager.DeleteDocumentFile(oldRawDocument);
             }
 
-            if (model.RawResearchResultDocument != null)
+            if (model.RawResearchResultDocument != null && model.RawResearchResultDocument.Id != default)
             {
                 var oldRawDocument = documentRepository.Get(model.RawResearchResultDocument.Id);
 
@@ -285,7 +285,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                 documentFileManager.DeleteDocumentFile(oldRawDocument);
             }
 
-            if (model.RawModelDocument != null)
+            if (model.RawModelDocument != null && model.RawModelDocument.Id != default)
             {
                 var oldRawDocument = documentRepository.Get(model.RawModelDocument.Id);
 

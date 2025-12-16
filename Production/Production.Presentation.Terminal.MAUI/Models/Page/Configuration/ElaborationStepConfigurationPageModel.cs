@@ -2,6 +2,12 @@
 {
     public class ElaborationStepConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ElaborationStepDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+        public static string DescriptionValidableProperty => nameof(Description);
+        public static string MinDecreaseValidableProperty => nameof(MinDecrease);
+        public static string MaxDecreaseValidableProperty => nameof(MaxDecrease);
+        public static string WorkPositionsValidableProperty => nameof(WorkPositions);
+
         private string name;
         private string description;
         private int priority = 1;
@@ -19,7 +25,7 @@
                 MinDecrease = model.MinDecrease;
                 MaxDecrease = model.MaxDecrease;
 
-                foreach (var item in model.WorkPositions) WorkPositions.Add(item);
+                WorkPositions = [.. model.WorkPositions];
             }
         }
 

@@ -16,7 +16,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Defa
             _model.AvailablePaymentTerms = await paymentTermsAPIConnectClient.GetEnabledAsync();
             _model.AvailableBusinessKinds = await businessKindsAPIConnectClient.GetEnabledAsync();
 
-            return new Pages.Configuration.NaturalClientConfigurationPage(configurationSuccessAction, _model);
+            return new Pages.Configuration.NaturalClientConfigurationPage(configurationSuccessAction, _model, new Validators.NaturalClientConfigurationValidator());
         }
     }
 }

@@ -1,53 +1,300 @@
+<?xml version="1.0" encoding="utf-8" ?>
 <core_ui_base_pages:DetailBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:core_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Core.Interop.API.Common"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.PersonContactDetailPage"
     x:TypeArguments="interop_common_display_models:PersonContactDisplayModel"
     x:DataType="interop_common_display_models:PersonContactDisplayModel"
     Title="Detalles de Contacto (Persona)"
+    BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <Grid>
-            <Frame
-                Style="{StaticResource PopupFrameStyle}"
-                WidthRequest="400">
-                <Grid>
-                    <StackLayout Margin="20" Spacing="20">
-                        <StackLayout>
-                            <Label 
-                                Margin="0,0,0,20"
-                                Text="Detalles"
-                                FontAttributes="Bold"
-                                FontSize="Medium" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Margin="0"
-                                Text="Nombre" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Identity.Name}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Apellidos" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Identity.LastName, TargetNullValue='---'}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Prioridad" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Priority}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Acerca de" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Identity.About, TargetNullValue='---'}" />
-                        </StackLayout>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="680"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <VerticalStackLayout Margin="12" Padding="8">
+                        <VerticalStackLayout>
+                            <FlexLayout 
+                                Wrap="Wrap"
+                                AlignItems="Start" AlignContent="Start">
+                                <Frame
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"                        
+                                    Margin="4"
+                                    Padding="0">
+                                    <Image
+                                        Aspect="AspectFill"
+                                        HeightRequest="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Width}"
+                                        Source="{Binding Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                </Frame>
+                                <VerticalStackLayout
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=10, ExtraLargeContainerColumn=10, LargeContainerColumn=9, MediumContainerColumn=8, SmallContainerColumn=6}}"                        
+                                    Margin="4">
+                                    <Label
+                                        FontSize="Medium"
+                                        Text="{Binding Identity.Name}" />
+                                    <Label 
+                                        IsVisible="{Binding Identity.LastName, Converter={StaticResource IsNotNullConverter}}"
+                                        Text="{Binding Identity.LastName}" />
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                                        Text="Alias" />
+                                    <Label
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        Text="{Binding Identity.Alias, TargetNullValue='---'}" />
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                                        Text="Identificvador personal" />
+                                    <Label
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        Text="{Binding PersonalIdentificationNumber, TargetNullValue='---'}" />
+                                </VerticalStackLayout>
+                            </FlexLayout>
+                            <FlexLayout>
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                        Text="Sexo" />
+                                    <Label 
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        Text="{Binding Identity.Sex}" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                        Text="Estado Civil" />
+                                    <Label 
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        Text="{Binding Identity.CivilStatus}" />
+                                </VerticalStackLayout>
+                            </FlexLayout>
+                            <FlexLayout
+                                Wrap="Wrap"
+                                AlignItems="Start"
+                                AlignContent="Start">
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                        Text="Teléfonos" />
+                                    <BoxView Color="DimGray" HeightRequest="2" />
+                                    <VerticalStackLayout
+                                        Margin="0,2,0,0"
+                                        BindableLayout.ItemsSource="{Binding Identity.PhoneContacts}">
+                                        <BindableLayout.EmptyView>
+                                            <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                        </BindableLayout.EmptyView>
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="core_interop_common_display_models:PhoneContactItemDisplayModel">
+                                                <Grid Margin="0,2" ColumnSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Label
+                                                        Grid.Column="0" Grid.RowSpan="2"
+                                                        VerticalOptions="Center"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Medium"
+                                                        Text="-" />
+                                                    <Label
+                                                        IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        Text="{Binding Label}" />
+                                                    <Label
+                                                        Grid.Column="1" Grid.Row="1"
+                                                        Text="{Binding PhoneNumber}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                        Text="Emails" />
+                                    <BoxView Color="DimGray" HeightRequest="2" />
+                                    <VerticalStackLayout
+                                        Margin="0,2,0,0"
+                                        BindableLayout.ItemsSource="{Binding Identity.EmailContacts}">
+                                        <BindableLayout.EmptyView>
+                                            <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                        </BindableLayout.EmptyView>
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="core_interop_common_display_models:EmailContactItemDisplayModel">
+                                                <Grid Margin="0,2" ColumnSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Label
+                                                        Grid.Column="0" Grid.RowSpan="2"
+                                                        VerticalOptions="Center"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Medium"
+                                                        Text="-" />
+                                                    <Label
+                                                        IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        Text="{Binding Label}" />
+                                                    <Label
+                                                        Grid.Column="1" Grid.Row="1"
+                                                        Text="{Binding EmailAddress}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                            </FlexLayout>                            
+                            <VerticalStackLayout Margin="8,0">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Sitios de Internet" />
+                                <BoxView Margin="0,6" Color="DimGray" HeightRequest="2" />
+                                <VerticalStackLayout
+                                    Margin="0,2,0,0"
+                                    BindableLayout.ItemsSource="{Binding Identity.WebContacts}">
+                                    <BindableLayout.EmptyView>
+                                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </BindableLayout.EmptyView>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="core_interop_common_display_models:WebContactItemDisplayModel">
+                                            <Grid Margin="0,2" ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Label
+                                                    Grid.Column="0" Grid.RowSpan="2"
+                                                    VerticalOptions="Center"
+                                                    FontAttributes="Bold"
+                                                    FontSize="Medium"
+                                                    Text="-" />
+                                                <Label
+                                                    IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    FontAttributes="Bold"
+                                                    FontSize="Caption"
+                                                    Text="{Binding Label}" />
+                                                <Label
+                                                    Grid.Column="1" Grid.Row="1"
+                                                    Text="{Binding Url}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Direcciones postales" />
+                                <BoxView Margin="0,6" Color="DimGray" HeightRequest="2" />
+                                <VerticalStackLayout
+                                    Margin="0,2,0,0"
+                                    BindableLayout.ItemsSource="{Binding Identity.PostalContacts}">
+                                    <BindableLayout.EmptyView>
+                                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </BindableLayout.EmptyView>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="core_interop_common_display_models:PostalContactItemDisplayModel">
+                                            <Grid Margin="0,2" ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Label
+                                                    Grid.Column="0" Grid.RowSpan="2"
+                                                    VerticalOptions="Center"
+                                                    FontAttributes="Bold"
+                                                    FontSize="Medium"
+                                                    Text="-" />
+                                                <Label
+                                                    IsVisible="{Binding Label, Converter={StaticResource IsNotNullConverter}}"
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    FontAttributes="Bold"
+                                                    FontSize="Caption"
+                                                    Text="{Binding Label}" />
+                                                <Label Grid.Column="1" Grid.Row="1">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding Address}" />
+                                                            <Span Text="{Binding Municipality.Name, StringFormat=', {0}'}" />
+                                                            <Span Text="{Binding Municipality.State.Name, StringFormat=', {0}'}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                            </Grid>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Usuario" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding User.Id, TargetNullValue='---', FallbackValue='---'}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Acerca de" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Identity.About, TargetNullValue='---'}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Prioridad" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Priority}" />
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
                         <StackLayout
+                            x:Name="OptionsStackLayout"
+                            Margin="8,16,8,8"
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 
@@ -59,20 +306,12 @@
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />
                         </StackLayout>
-                    </StackLayout>
-                    <Button
-                        HorizontalOptions="End" VerticalOptions="Start"
-                        Padding="10"
-                        BackgroundColor="Transparent"
-                        Text="&#xf5ad;"
-                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-                        FontSize="Medium"
-                        FontFamily="MaterialDesignIcons"
-                        BorderWidth="0"
-                        WidthRequest="48" HeightRequest="48"
-                        Clicked="DismissControl_Invoked" />
-                </Grid>
-            </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
         </Grid>
     </ScrollView>
 </core_ui_base_pages:DetailBaseContentPage>

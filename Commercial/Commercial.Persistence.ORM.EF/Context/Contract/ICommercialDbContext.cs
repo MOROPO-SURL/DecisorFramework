@@ -3,7 +3,7 @@ using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract
 {
-    public interface ICommercialDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext
+    public interface ICommercialDbContext : Inventory.Persistence.ORM.EF.Context.Contract.IInventoryDbContext, Legal.Persistence.ORM.EF.Context.Contract.ILegalDbContext
     {
         public DbSet<PaymentTerm> PaymentTerms { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }
@@ -14,10 +14,6 @@ namespace MOROPO.Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contrac
         public DbSet<ServiceValueProposition> ServiceValuePropositions { get; set; }
         public DbSet<ServiceValuePropositionRate> ServiceValuePropositionRates { get; set; }
         public DbSet<ServiceValuePropositionImageBridge> ServiceValuePropositionImageBridges { get; set; }
-        public DbSet<OrganizationContactBudget> OrganizationContactBudgets { get; set; }
-        public DbSet<PersonContactBudget> PersonContactBudgets { get; set; }
-        public DbSet<BudgetProductBridge> BudgetProductBridges { get; set; }
-        public DbSet<BudgetServiceBridge> BudgetServiceBridges { get; set; }
         public DbSet<LegalProvider> LegalProviders { get; set; }
         public DbSet<LegalProviderBankAccountBridge> LegalProviderBankAccountBridges { get; set; }
         public DbSet<LegalProviderDocumentBridge> LegalProviderDocumentBridges { get; set; }

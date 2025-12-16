@@ -15,7 +15,7 @@
     x:DataType="presentation_configuration_page_models:OrganizationContactConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="RootFlexLayoutItemResponsiveWithConverter" SingleSpacing="4" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="RootFlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrappedFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="PostalContactDetailFlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
@@ -42,7 +42,7 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <VerticalStackLayout Spacing="0" Margin="8">
+            <VerticalStackLayout Spacing="4" Margin="8">
                 <FlexLayout 
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
@@ -96,7 +96,7 @@
                                 <Picker 
                                     x:Name="BusinessKindPicker"
                                     ItemsSource="{Binding AvailableBusinessKinds, Mode=OneTime}" 
-                                    ItemDisplayBinding="{Binding Name}"
+                                    ItemDisplayBinding="{Binding Path=Name}"
                                     SelectedItem="{Binding BusinessKind}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
                                 <Label
@@ -125,6 +125,40 @@
                                     Style="{StaticResource ValidationMessageLabelStyle}" />
                             </VerticalStackLayout>
                         </FlexLayout>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="NIT (opcional)" />
+                        <Entry Text="{Binding TaxIdentificationNumber}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:OrganizationContactConfigurationPageModel.TaxIdentificationNumberValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:OrganizationContactConfigurationPageModel.TaxIdentificationNumberValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código REUP (opcional)" />
+                        <Entry Text="{Binding StateIdentificationCode}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Organismo (opcional)" />
+                        <Picker 
+                            x:Name="CentralStateStructurePicker"
+                            ItemsSource="{Binding AvailableCentralStateStructures, Mode=OneTime}"
+                            ItemDisplayBinding="{Binding Path=Identity.Name}"
+                            SelectedItem="{Binding CentralStateStructure}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <FlexLayout
@@ -186,12 +220,12 @@
                                                     </VerticalStackLayout>
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xF90B;"
                                                         Clicked="PhoneContactItemEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xFA78;"
                                                         Clicked="PhoneContactItemRemotionButton_Clicked" />
                                                 </StackLayout>
@@ -258,12 +292,12 @@
                                                     </VerticalStackLayout>
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xF90B;"
                                                         Clicked="EmailContactItemEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xFA78;"
                                                         Clicked="EmailContactItemRemotionButton_Clicked" />
                                                 </StackLayout>
@@ -349,18 +383,18 @@
                                                                 Margin="4"
                                                                 Spacing="6">
                                                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código Postal" />
-                                                                <Label Text="{Binding ZipCode}" />
+                                                                <Label Text="{Binding ZipCode, TargetNullValue='---'}" />
                                                             </VerticalStackLayout>
                                                         </FlexLayout>
                                                     </VerticalStackLayout>
                                                     <VerticalStackLayout Spacing="8">
                                                         <Button
-                                                            FontFamily="MaterialDesignIcons" 
+                                                            Style="{StaticResource FontIconImageButtonStyle}" 
                                                             Text="&#xF90B;"
                                                             Clicked="PostalContactItemEditionButton_Clicked" />
                                                         <Button
                                                             VerticalOptions="Start"
-                                                            FontFamily="MaterialDesignIcons" 
+                                                            Style="{StaticResource FontIconImageButtonStyle}" 
                                                             Text="&#xFA78;"
                                                             Clicked="PostalContactItemRemotionButton_Clicked" />
                                                     </VerticalStackLayout>
@@ -427,12 +461,12 @@
                                                     </VerticalStackLayout>
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xF90B;"
                                                         Clicked="WebContactItemEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xFA78;"
                                                         Clicked="WebContactItemRemotionButton_Clicked" />
                                                 </StackLayout>
@@ -458,7 +492,7 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource RootFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1,ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />

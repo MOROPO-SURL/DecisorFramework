@@ -10,10 +10,11 @@
     Background="{StaticResource OverlayBackgroundBrush}">
     <ScrollView Orientation="Vertical">
         <Grid>
-            <Frame
-                Style="{StaticResource PopupFrameStyle}"
-                WidthRequest="400">
-                <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="400"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
                     <StackLayout Margin="20" Spacing="20">
                         <StackLayout>
                             <Label 
@@ -23,24 +24,26 @@
                                 FontSize="Medium" />
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
                                 Text="Nombre" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Name}" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Descripción" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Description, TargetNullValue='---', FallbackValue='---'}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Prioridad" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Priority}" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Descripción" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Description, TargetNullValue='---'}" />
                         </StackLayout>
                         <StackLayout
+                            x:Name="OptionButtonsStackLayout"
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 
@@ -53,19 +56,11 @@
                                 Clicked="DeleteButton_Clicked" />
                         </StackLayout>
                     </StackLayout>
-                    <Button
-                        HorizontalOptions="End" VerticalOptions="Start"
-                        Padding="10"
-                        BackgroundColor="Transparent"
-                        Text="&#xf5ad;"
-                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-                        FontSize="Medium"
-                        FontFamily="MaterialDesignIcons"
-                        BorderWidth="0"
-                        WidthRequest="48" HeightRequest="48"
-                        Clicked="DismissControl_Invoked" />
-                </Grid>
-            </Frame>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
         </Grid>
     </ScrollView>
 </core_ui_base_pages:DetailBaseContentPage>

@@ -1,5 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
-using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract;
+﻿using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Configurators
 {
@@ -9,7 +8,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Configurato
         {
             base.ApplayRules(entityTypeBuilder);
 
-            entityTypeBuilder.HasIndex(entity => new { entity.Id, entity.Year }).IsUnique();
+            entityTypeBuilder.HasIndex(entity => new { entity.Index, entity.Year }).IsUnique();
         }
     }
 }

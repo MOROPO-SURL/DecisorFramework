@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Providers
 {
-	public class InventoryDbSchemaConfigurationProvider : Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade
+    public class InventoryDbSchemaConfigurationProvider : Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade
     {
         public System.Collections.Generic.ICollection<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator> EntityTypeConfigurators
         {
@@ -22,9 +22,7 @@ namespace MOROPO.Framework.Decisor.Inventory.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.Contract.AbstractDeparture>(),
                     new Configurators.DepartureBatchBridgeEntityTypeConfigurator(),
                     new Configurators.ReceptionEntityTypeConfigurator(),
-                    new Configurators.ReceptionBatchBridgeEntityTypeConfigurator(),
-                    new BaseEntityTypeConfigurator<Entities.UnitMeasurement>(),
-                    new Configurators.UnitMeasurementConversionBridgeEntityTypeConfigurator()
+                    new Configurators.ReceptionBatchBridgeEntityTypeConfigurator()
                 };
             }
         }

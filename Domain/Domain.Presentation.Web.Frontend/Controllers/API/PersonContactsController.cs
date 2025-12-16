@@ -1,4 +1,5 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
@@ -10,9 +11,9 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/domain/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/domain/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class PersonContactsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<PersonContact, System.Guid, PersonContactInputModel, PersonContactDisplayModel>
+    public class PersonContactsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<PersonContact, System.Guid, PersonContactInputModel, PersonContactDisplayModel, PersonContactFilterModel>
     {
         private readonly IEntityRepository<EmailContactItem, System.Guid> emailContactRepository;
         private readonly IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository;

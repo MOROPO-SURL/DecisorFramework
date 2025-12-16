@@ -21,19 +21,13 @@
 
         public System.DateTime RequestedFor { get; set; }
 
-        public System.DateTime? ApprovedAt { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AuthorId))]
-        public Domain.Persistence.Entities.Employee Author { get; set; }
-        public System.Guid AuthorId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AgreementId))]
+        public Governance.Persistence.Entities.Agreement Agreement { get; set; }
+        public System.Guid AgreementId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResponsibleId))]
         public Domain.Persistence.Entities.Employee Responsible { get; set; }
         public System.Guid ResponsibleId { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DecisorId))]
-        public Domain.Persistence.Entities.Employee Decisor { get; set; }
-        public System.Guid DecisorId { get; set; }
 
         public Production Production { get; set; }
     }

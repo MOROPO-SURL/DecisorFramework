@@ -2,7 +2,7 @@
 
 public partial class ClassificationConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Input.ClassificationInputModel, Interop.API.Common.Models.Input.ClassificationInputModel, Models.Page.Configuration.ClassificationConfigurationPageModel>
 {
-    public ClassificationConfigurationPage(System.Action<Interop.API.Common.Models.Input.ClassificationInputModel> successAction, Models.Page.Configuration.ClassificationConfigurationPageModel model) : base(successAction, model, null)
+    public ClassificationConfigurationPage(System.Action<Interop.API.Common.Models.Input.ClassificationInputModel> successAction, Models.Page.Configuration.ClassificationConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.ClassificationConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }

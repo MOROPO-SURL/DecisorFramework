@@ -12,7 +12,7 @@
 
         public double Capacity { get; set; }
 
-        public UnitMeasurementDisplayModel UnitMeasurement { get; set; }
+        public Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel UnitMeasurement { get; set; }
 
         public FamilyDisplayModel Family { get; set; }
 
@@ -35,7 +35,7 @@
 
             if (entity.UnitMeasurement != null)
             {
-                UnitMeasurement = new UnitMeasurementDisplayModel();
+                UnitMeasurement = new Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel();
 
                 UnitMeasurement.Import(entity.UnitMeasurement);
             }

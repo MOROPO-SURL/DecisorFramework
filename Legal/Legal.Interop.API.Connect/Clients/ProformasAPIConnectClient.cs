@@ -6,6 +6,6 @@
         {
         }
 
-        protected override string TargetController => "api/legal/proformas";
+        protected override string TargetController => "api/fwrk/legal/proformas";
     }
 }

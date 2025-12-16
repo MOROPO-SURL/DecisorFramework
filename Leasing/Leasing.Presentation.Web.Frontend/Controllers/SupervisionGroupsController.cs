@@ -7,7 +7,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 {
-    [Route("api/leasing/[controller]")]
+    [Route("api/fwrk/leasing/[controller]")]
     [ApiController]
     public class SupervisionGroupsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<SupervisionGroup, System.Guid, SupervisionGroupInputModel, SupervisionGroupDisplayModel>
     {

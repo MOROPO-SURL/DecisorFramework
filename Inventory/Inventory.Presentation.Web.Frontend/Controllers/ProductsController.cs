@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Extensions;
@@ -9,9 +10,9 @@ using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Inventory.Presentation.Web.Frontend.Controllers
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/inventory/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/inventory/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
-    public class ProductsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Product, System.Guid, ProductInputModel, ProductDisplayModel>
+    public class ProductsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<Product, System.Guid, ProductInputModel, ProductDisplayModel, ProductFilterModel>
     {
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
         private readonly IEntityRepository<Family, int> familyRepository;

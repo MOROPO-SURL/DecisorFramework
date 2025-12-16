@@ -7,7 +7,7 @@ using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/domain/structures/parental")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/domain/structures/parental")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class ParentalStructuresController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Structure, System.Guid, StructureInputModel, StructureParentalDisplayModel>
     {

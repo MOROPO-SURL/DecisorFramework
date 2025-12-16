@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages;
 
@@ -93,5 +94,17 @@ public partial class DefaultUserAuthenticationPage : Caney.MVVM.Core.Pages.Bindi
     private void OnPasswordEnterPressed(object sender, System.EventArgs e)
     {
         SignInButton_Clicked(sender, e);
+    }
+
+    private void SettingButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new SettingPage(SettingChange_Callback));
+    }
+
+    private void SettingChange_Callback()
+    {
+        (Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>() as Providers.Facade.IReseableHttpClientHelperProviderFacade).Reset();
+
+        this.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.");
     }
 }

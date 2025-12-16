@@ -4,17 +4,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     x:Class="MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.ProductDetailPage"
     x:TypeArguments="interop_common_display_models:ProductDisplayModel"
     x:DataType="interop_common_display_models:ProductDisplayModel"
     Title="Detalles de Producto"
+    BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <Grid>
-            <Frame
-                Style="{StaticResource PopupFrameStyle}"
-                WidthRequest="400">
-                <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="400"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
                     <StackLayout Margin="20" Spacing="20">
                         <StackLayout>
                             <Label 
@@ -22,9 +30,13 @@
                                 Text="Detalles"
                                 FontAttributes="Bold"
                                 FontSize="Medium" />
+                            <Frame
+                                Padding="0"
+                                IsClippedToBounds="True">
+                                <Image Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                            </Frame>
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Margin="0"
                                 Text="Nombre" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
@@ -55,19 +67,11 @@
                                 Clicked="DeleteButton_Clicked" />
                         </StackLayout>
                     </StackLayout>
-                    <Button
-                        HorizontalOptions="End" VerticalOptions="Start"
-                        Padding="10"
-                        BackgroundColor="Transparent"
-                        Text="&#xf5ad;"
-                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-                        FontSize="Medium"
-                        FontFamily="MaterialDesignIcons"
-                        BorderWidth="0"
-                        WidthRequest="48" HeightRequest="48"
-                        Clicked="DismissControl_Invoked" />
-                </Grid>
-            </Frame>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
         </Grid>
     </ScrollView>
 </core_ui_base_pages:DetailBaseContentPage>

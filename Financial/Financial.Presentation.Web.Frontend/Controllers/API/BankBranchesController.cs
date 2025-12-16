@@ -7,7 +7,7 @@ using MOROPO.Framework.Guama.Location.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/financial/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/financial/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class BankBranchesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<BankBranch, System.Guid, BankBranchInputModel, BankBranchDisplayModel>
     {

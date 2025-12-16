@@ -10,29 +10,11 @@ public partial class LegalClientPickPage : Core.Presentation.Terminal.MAUI.UI.Pa
 
     private System.Action<Interop.API.Common.Models.Display.LegalClientDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public LegalClientPickPage(System.Action<Interop.API.Common.Models.Display.LegalClientDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
@@ -48,11 +30,18 @@ public partial class LegalClientPickPage : Core.Presentation.Terminal.MAUI.UI.Pa
     {
         var apiConnectClient = new Interop.API.Connect.Clients.LegalClientsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.LegalClientFilterModel { Name = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
+
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
+        ConcreteBindingContext.SearchParameter = null;
+
         OnReload(sender, eventArgs);
     }
 
@@ -67,9 +56,7 @@ public partial class LegalClientPickPage : Core.Presentation.Terminal.MAUI.UI.Pa
             return;
         }
 
-        var concreteBindingContext = BindingContext as Models.Page.Pick.LegalClientPickPageModel;
-
-        concreteBindingContext.IsBusy = true;
+        ConcreteBindingContext.IsBusy = true;
 
         System.Threading.Tasks.Task.Run(async () =>
         {
@@ -81,7 +68,7 @@ public partial class LegalClientPickPage : Core.Presentation.Terminal.MAUI.UI.Pa
 
                 Dispatcher.Dispatch(() =>
                 {
-                    concreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.IsBusy = false;
 
                     this.NavigationPushPageAsync(page);
                 });
@@ -92,7 +79,7 @@ public partial class LegalClientPickPage : Core.Presentation.Terminal.MAUI.UI.Pa
                 {
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
 
-                    concreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.IsBusy = false;
                 });
             }
         });
@@ -120,10 +107,20 @@ public partial class LegalClientPickPage : Core.Presentation.Terminal.MAUI.UI.Pa
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }
 
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
+    }
+
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.LegalClientDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }

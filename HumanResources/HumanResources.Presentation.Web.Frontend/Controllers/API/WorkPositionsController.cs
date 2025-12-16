@@ -5,7 +5,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/hhrr/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/hhrr/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class WorkPositionsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<WorkPosition, System.Guid, WorkPositionInputModel, WorkPositionDisplayModel>
     {

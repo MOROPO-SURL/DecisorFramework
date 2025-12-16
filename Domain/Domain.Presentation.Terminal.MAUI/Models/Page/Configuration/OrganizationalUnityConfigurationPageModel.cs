@@ -2,6 +2,8 @@
 {
     public class OrganizationalUnityConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+
         private string name;
         private string reference;
         private int priority = 1;

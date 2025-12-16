@@ -16,6 +16,7 @@
     x:TypeArguments="presentation_detail_page_models:EmployeeDetailPageModel"
     x:DataType="presentation_detail_page_models:EmployeeDetailPageModel"
     Title="Detalles de Empleado"
+    BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -244,10 +245,11 @@
     </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <Grid>
-            <Frame
-                Style="{StaticResource PopupFrameStyle}"
-                WidthRequest="640">
-                <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="640"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
                     <StackLayout 
                         Margin="20" Padding="8"
                         Spacing="16">
@@ -542,22 +544,13 @@
                                     </DataTemplate>
                                 </uraniumui_material_controls:TabItem.ContentTemplate>
                             </uraniumui_material_controls:TabItem>
-                        </uraniumui_material_controls:TabView>        
+                        </uraniumui_material_controls:TabView>
                     </StackLayout>
-                    <Button
-                        HorizontalOptions="End" VerticalOptions="Start"
-                        Padding="10"
-                        BackgroundColor="Transparent"
-                        Text="&#xf5ad;"
-                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-                        FontSize="Medium"
-                        FontFamily="MaterialDesignIcons"
-                        BorderWidth="0"
-                        WidthRequest="48" HeightRequest="48"
-                        Clicked="DismissControl_Invoked" />
-                    <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
-                </Grid>
-            </Frame>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
         </Grid>
     </ScrollView>
 </core_ui_base_pages:DetailBaseContentPage>

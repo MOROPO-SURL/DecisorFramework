@@ -12,10 +12,11 @@ using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Decisor.Legal.Persistence.Entities;
 using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Production.Persistence.Entities;
-using MOROPO.Framework.Decisor.Essential.Persistence.Entities;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities.Contract;
 using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
 using MOROPO.Framework.Decisor.Governance.Persistence.Entities;
+using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
+using MOROPO.Framework.Decisor.Sales.Persistence.Entities;
 
 namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
 {
@@ -34,7 +35,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         }
 
         public DbSet<Permission> Permissions { get; set; }
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<Framework.Guama.Core.Security.Common.Persistence.Entities.Role> Roles { get; set; }
         public DbSet<RolePermissionBridge> RolePermissionBridges { get; set; }
 
         public DbSet<Region> Regions { get; set; }
@@ -89,10 +90,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ServiceValueProposition> ServiceValuePropositions { get; set; }
         public DbSet<ServiceValuePropositionRate> ServiceValuePropositionRates { get; set; }
         public DbSet<ServiceValuePropositionImageBridge> ServiceValuePropositionImageBridges { get; set; }
-        public DbSet<OrganizationContactBudget> OrganizationContactBudgets { get; set; }
-        public DbSet<PersonContactBudget> PersonContactBudgets { get; set; }
-        public DbSet<BudgetProductBridge> BudgetProductBridges { get; set; }
-        public DbSet<BudgetServiceBridge> BudgetServiceBridges { get; set; }
         public DbSet<LegalProvider> LegalProviders { get; set; }
         public DbSet<LegalProviderBankAccountBridge> LegalProviderBankAccountBridges { get; set; }
         public DbSet<LegalProviderDocumentBridge> LegalProviderDocumentBridges { get; set; }
@@ -145,7 +142,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
         public DbSet<Structure> Structures { get; set; }
         public DbSet<Employee> Employees { get; set; }
-        
+        public DbSet<Colaborator> Colaborators { get; set; }
+
         public DbSet<Schooling> Schoolings { get; set; }
         public DbSet<SalaryStandard> SalaryStandards { get; set; }
         public DbSet<WorkPositionKind> WorkPositionKinds { get; set; }
@@ -186,6 +184,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
         public DbSet<ElaborationInputProductClassificationBridge> ElaborationInputProductClassificationBridges { get; set; }
         public DbSet<ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
+        public DbSet<ElaborationOutputProductClassificationBridge> ElaborationOutputProductClassificationBridges { get; set; }
         public DbSet<ElaborationStep> ElaborationSteps { get; set; }
         public DbSet<ElaborationStepWorkPositionBridge> ElaborationStepWorkPositionBridges { get; set; }
         public DbSet<Production> Productions { get; set; }
@@ -244,29 +243,36 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<NaturalClientPropertyLeasingCollect> NatClientPropLeasCollects { get; set; }
         public DbSet<NaturalClientVehicleLeasingCollect> NatClientVehLeasCollects { get; set; }
 
-        public DbSet<Colaborator> Colaborators { get; set; }
+        public DbSet<LegalProviderBudget> LegalProviderBudgets { get; set; }
+        public DbSet<LegalProviderBudgetProduct> LegalProviderBudgetProducts { get; set; }
+        public DbSet<LegalProviderBudgetServiceBridge> LegalProviderBudgetServiceBridges { get; set; }
+        public DbSet<NaturalProviderBudget> NaturalProviderBudgets { get; set; }
+        public DbSet<NaturalProviderBudgetProduct> NaturalProviderBudgetProducts { get; set; }
+        public DbSet<NaturalProviderBudgetServiceBridge> NaturalProviderBudgetServiceBridges { get; set; }
         public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Role> PurchasingRoles { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseSpent> PurchaseSpents { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZone> PurchaseZones { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZoneSpentBridge> PurchaseZoneSpentBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZoneLegalProviderBridge> LegalProviderPurchaseZoneBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseZoneNaturalProviderBridge> NaturalProviderPurchaseZoneBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.Purchase> Purchases { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseEmployeeBridge> PurchaseEmployeeBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseColaboratorBridge> PurchaseColaboratorBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseProductLegalProviderBridge> PurchaseProductLegalProviderBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseProductNaturalProviderBridge> PurchaseProductNaturalProviderBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchasePurchaseSpentBridge> PurchasePurchaseSpentBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlan> PurchasePlans { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanLegalProviderBridge> PurchasePlanLegalProviderBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanNaturalProviderBridge> PurchasePlanNaturalProviderBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanOutputProductBridge> PurchasePlanOutputProductBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanInputProductBridge> PurchasePlanInputProductBridges { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseCashAdvance> PurchaseCashAdvances { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchasePlanDeparture> PurchasePlanDepartures { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReception> PurchaseReceptions { get; set; }
-        public DbSet<Framework.Decisor.Purchasing.Persistence.Entities.PurchaseReceptionProductWeightBridge> PurchaseReceptionProductWeightBridges { get; set; }
-        
+        public DbSet<PurchaseSpent> PurchaseSpents { get; set; }
+        public DbSet<PurchaseZone> PurchaseZones { get; set; }
+        public DbSet<PurchaseZoneSpentBridge> PurchaseZoneSpentBridges { get; set; }
+        public DbSet<PurchaseZoneLegalProviderBridge> LegalProviderPurchaseZoneBridges { get; set; }
+        public DbSet<PurchaseZoneNaturalProviderBridge> NaturalProviderPurchaseZoneBridges { get; set; }
+        public DbSet<Purchase> Purchases { get; set; }
+        public DbSet<PurchaseEmployeeBridge> PurchaseEmployeeBridges { get; set; }
+        public DbSet<PurchaseColaboratorBridge> PurchaseColaboratorBridges { get; set; }
+        public DbSet<PurchaseProductLegalProviderBridge> PurchaseProductLegalProviderBridges { get; set; }
+        public DbSet<PurchaseProductNaturalProviderBridge> PurchaseProductNaturalProviderBridges { get; set; }
+        public DbSet<PurchasePurchaseSpentBridge> PurchasePurchaseSpentBridges { get; set; }
+        public DbSet<PurchaseRequest> PurchaseRequests { get; set; }
+        public DbSet<PurchaseRequestExpectedProductAdquisition> PurchaseRequestExpectedProductAdquisitions { get; set; }
+        public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
+        public DbSet<PurchaseOrderExpectedProductResult> PurchaseOrderExpectedProductResults { get; set; }
+        public DbSet<PurchaseOrderPlannedProductSpent> PurchaseOrderPlannedProductSpents { get; set; }
+        public DbSet<PurchaseOrderLegalProviderBudgetBridge> PurchaseOrderLegalProviderBudgetBridges { get; set; }
+        public DbSet<PurchaseOrderNaturalProviderBudgetBridge> PurchaseOrderNaturalProviderBudgetBridges { get; set; }
+        public DbSet<PurchaseCashAdvance> PurchaseCashAdvances { get; set; }
+        public DbSet<PurchaseOrderDeparture> PurchaseOrderDepartures { get; set; }
+        public DbSet<PurchaseReception> PurchaseReceptions { get; set; }
+        public DbSet<PurchaseReceptionProductWeightBridge> PurchaseReceptionProductWeightBridges { get; set; }
+
         public DbSet<DecisionMakingGroup> DecisionMakingGroups { get; set; }
         public DbSet<DecisionMakingGroupEmployeeBridge> DecisionMakingGroupEmployeeBridges { get; set; }
         public DbSet<DecisionMakingGroupContactBridge> DecisionMakingGroupContactBridges { get; set; }

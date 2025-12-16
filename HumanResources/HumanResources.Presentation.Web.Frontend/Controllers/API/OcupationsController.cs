@@ -7,7 +7,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Controllers.API
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/hhrr/[controller]")]
+    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/hhrr/[controller]")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class OcupationsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementFilteredController<Ocupation, System.Guid, OcupationInputModel, OcupationDisplayModel, OcupationFilterModel>
     {
@@ -62,7 +62,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                     Objective = $"Contratación generada a partir de la resolución de nombramiento \"{namingResolution.Id}/{namingResolution.At.Year}\"",
                     DurationUnitCount = model.DurationUnitCount,
                     DurationUnitMeasureKind = model.DurationUnitMeasureKind,
-                    Priority = namingResolution.Contact?.Priority ?? candidate.Postulation.Contact.Priority,
                     StaffId = namingResolution.StaffId ?? candidate.Postulation.StaffId,
                     VacantId = namingResolution.VacantId ?? candidate.Postulation.VacantId,
                     ResolutionId = namingResolution.Id
@@ -110,7 +109,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                     Objective = $"Contratación generada a partir de la propuesta de admisión tomada en la reunión No.{admisionPropousal.Agreement.Meeting.Index} con fecha {admisionPropousal.Agreement.Meeting.At:D}",
                     DurationUnitCount = model.DurationUnitCount,
                     DurationUnitMeasureKind = model.DurationUnitMeasureKind,
-                    Priority = admisionPropousal.OcupationCandidate.Postulation.Contact.Priority,
                     StaffId = admisionPropousal.OcupationCandidate.Postulation.StaffId,
                     VacantId = admisionPropousal.OcupationCandidate.Postulation.VacantId,
                     AdmitionPropousalId = admisionPropousal.Id

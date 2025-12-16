@@ -9,18 +9,18 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 {
-    [Route("api/leasing/[controller]")]
+    [Route("api/fwrk/leasing/[controller]")]
     [ApiController]
     public class LegalClientPropertyLeasingsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<LegalClientPropertyLeasing, System.Guid, LegalClientPropertyLeasingInputModel, LegalClientPropertyLeasingDisplayModel>
     {
         private readonly IEntityRepository<LegalClient, System.Guid> clientRepository;
         private readonly IEntityRepository<PropertyLeaseOrganizationPostulation, System.Guid> postulationRepository;
         private readonly IEntityRepository<PropertyLeaseOffer, System.Guid> offerRepository;
-        private readonly IEntityRepository<LegalClientPropertyLeaseContract, int> contractRepository;
+        private readonly IEntityRepository<LegalClientPropertyLeaseContract, System.Guid> contractRepository;
         private readonly IEntityRepository<PropertySpace, System.Guid> propertySpaceRepository;
         private readonly IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository;
 
-        public LegalClientPropertyLeasingsController(IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository, IEntityRepository<PropertySpace, System.Guid> propertySpaceRepository, IEntityRepository<LegalClientPropertyLeaseContract, int> contractRepository, IEntityRepository<PropertyLeaseOffer, System.Guid> offerRepository, IEntityRepository<PropertyLeaseOrganizationPostulation, System.Guid> postulationRepository, IEntityRepository<LegalClient, System.Guid> clientRepository, IEntityRepository<LegalClientPropertyLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientPropertyLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientPropertyLeasingsController> logger) : base(repository, localizer, logger)
+        public LegalClientPropertyLeasingsController(IEntityRepository<PropertySpaceLeasePropousal, System.Guid> spaceLeasePropousalRepository, IEntityRepository<PropertySpace, System.Guid> propertySpaceRepository, IEntityRepository<LegalClientPropertyLeaseContract, System.Guid> contractRepository, IEntityRepository<PropertyLeaseOffer, System.Guid> offerRepository, IEntityRepository<PropertyLeaseOrganizationPostulation, System.Guid> postulationRepository, IEntityRepository<LegalClient, System.Guid> clientRepository, IEntityRepository<LegalClientPropertyLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientPropertyLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientPropertyLeasingsController> logger) : base(repository, localizer, logger)
         {
             this.clientRepository = clientRepository;
             this.postulationRepository = postulationRepository;
@@ -108,13 +108,13 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
 
             entity.Contract = contractRepository.Add(new LegalClientPropertyLeaseContract
             {
-                Id = model.Index,
+                Id = System.Guid.NewGuid(),
+                Index = model.Index,
                 Year = model.StartAt.Year,
                 StarAt = model.StartAt,
                 Objective = model.Objective,
                 DurationUnitCount = model.DurationUnitCount,
                 DurationUnitMeasureKind = model.DurationUnitMeasureKind,
-                Priority = model.Priority,
                 Feed = model.Feed,
                 PaymentTermId = model.PaymentTermId,
                 BankAccountId = postulation.BankAccountId,
@@ -141,6 +141,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                     Id = clientId,
                     Enabled = true,
                     Priority = postulation.Contact.Priority,
+                    ContactId = postulation.ContactId,
                     DefaultPaymentTermId = model.PaymentTermId,
                     BankAccountBridges = [new LegalClientBankAccountBridge { ProwId = clientId, SternId = postulation.BankAccountId }],
                     DocumentBridges = postulation.DocumentBridges.Select(bridge => new LegalClientDocumentBridge

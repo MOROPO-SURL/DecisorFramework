@@ -1,10 +1,11 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
 public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.VehicleDisplayModel, Models.Page.Manage.VehiclesManagePageModel, Models.Page.Configuration.VehicleConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 284;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 320;
 
     public VehiclesManagePage()
     {
@@ -49,7 +50,12 @@ public partial class VehiclesManagePage : Core.Presentation.Terminal.MAUI.UI.Pag
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {
-                    Dispatcher.Dispatch(() => LoadItems(true));
+                    Dispatcher.Dispatch(() =>
+                    {
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
+
+                        LoadItems(true);
+                    });
                 });
 
                 break;

@@ -3,62 +3,185 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.PropertyDetailPage"
     x:TypeArguments="interop_common_display_models:PropertyDisplayModel"
     x:DataType="interop_common_display_models:PropertyDisplayModel"
     Title="Detalles de Inmueble"
+    BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <caneyframework_presentation_converters:DoubleToFractionConverter x:Key="DoubleToFractionConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <Grid>
-            <Frame
-                Style="{StaticResource PopupFrameStyle}"
-                WidthRequest="400">
-                <Grid>
-                    <StackLayout Margin="20" Spacing="20">
-                        <StackLayout>
-                            <Label 
-                                Margin="0,0,0,20"
-                                Text="Detalles"
-                                FontAttributes="Bold"
-                                FontSize="Medium" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Nombre" />
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="720"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <VerticalStackLayout Margin="12" Padding="8">
+                        <VerticalStackLayout>
+                            <Frame
+                                Margin="8"
+                                HeightRequest="{Binding Source={RelativeSource AncestorType={Type Grid}}, Path=Width, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=1.8}"
+                                Padding="0">
+                                <Image
+                                    Aspect="AspectFill"
+                                    Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                            </Frame>
                             <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Name}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Tipo" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Kind.Name}" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Entidad Administrativa" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Structure.Identity.Name}" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="No. Activo Fijo" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Margin="8,4"
+                                LineBreakMode="TailTruncation"
+                                FontSize="Large"
                                 Text="{Binding Reference}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Prioridad" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Priority}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Descripción" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Description, TargetNullValue='---'}" />
-                        </StackLayout>
+                            <VerticalStackLayout 
+                                Margin="8,4"
+                                Spacing="6">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Nombre" />
+                                <Label 
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Name}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout 
+                                Margin="8,4"
+                                Spacing="6">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Tipo" />
+                                <Label 
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Kind.Name}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout 
+                                Margin="8,4"
+                                Spacing="6">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Entidad Administrativa" />
+                                <Label 
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Structure.Identity.Name}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout Margin="8,4">
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Dirección postal" />
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding PostalContact.Address}" />
+                                            <Span Text="{Binding PostalContact.Municipality.Name, StringFormat=', {0}'}" />
+                                            <Span Text="{Binding PostalContact.Municipality.State.Name, StringFormat=', {0}'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Espacios" />
+                                <BoxView Margin="0,6" Color="DimGray" HeightRequest="2" />
+                                <VerticalStackLayout
+                                    Margin="0,4,0,8"
+                                    Spacing="8"
+                                    BindableLayout.ItemsSource="{Binding Spaces}">
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_display_models:PropertySpaceDisplayModel">
+                                            <Frame
+                                                Padding="0"
+                                                HeightRequest="172">
+                                                <Grid 
+                                                    VerticalOptions="FillAndExpand"
+                                                    IsClippedToBounds="True"
+                                                    ColumnSpacing="0">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="2*" />
+                                                        <ColumnDefinition Width="3*" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Image
+                                                        Grid.Column="0"
+                                                        Aspect="AspectFill"
+                                                        Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                                    <Grid
+                                                        IsVisible="{Binding Assignment, Converter={StaticResource IsNotNullConverter}}"
+                                                        Grid.Row="0"
+                                                        VerticalOptions="Center"
+                                                        Padding="0,2"
+                                                        BackgroundColor="#A7FFFFFF"
+                                                        Rotation="-45"
+                                                        TranslationY="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Height, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=-12}"
+                                                        TranslationX="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Height, Converter={StaticResource DoubleToFractionConverter}, ConverterParameter=-3}">
+                                                        <Label                    
+                                                            Padding="8"
+                                                            BackgroundColor="{StaticResource Primary}"
+                                                            HorizontalTextAlignment="Center"
+                                                            FontAttributes="Bold"
+                                                            TextColor="White"
+                                                            Text="{Binding Assignment}" />
+                                                    </Grid>
+                                                    <StackLayout 
+                                                        Grid.Column="1"
+                                                        Padding="8">
+                                                        <Label 
+                                                            FontAttributes="Bold"
+                                                            FontSize="Medium"
+                                                            LineBreakMode="TailTruncation"
+                                                            MaxLines="2"
+                                                            Text="{Binding Name}" />
+                                                        <Label 
+                                                            Margin="0,8,0,0"
+                                                            Text="Espacio útil"
+                                                            TextColor="DimGray"
+                                                            FontSize="Caption"
+                                                            FontAttributes="Bold" />
+                                                        <Label
+                                                            LineBreakMode="TailTruncation"
+                                                            Text="{Binding Area, StringFormat='{0:F2} m²'}" />
+                                                        <Label 
+                                                            Margin="0,8,0,0"
+                                                            Text="Descripción"
+                                                            TextColor="DimGray"
+                                                            FontSize="Caption"
+                                                            FontAttributes="Bold" />
+                                                        <Label
+                                                            VerticalOptions="FillAndExpand"
+                                                            LineBreakMode="TailTruncation"
+                                                            MaxLines="3"
+                                                            Text="{Binding Description, TargetNullValue='---'}" />
+                                                    </StackLayout>
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Descripción" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Description, TargetNullValue='---'}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Prioridad" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Priority}" />
+                            </VerticalStackLayout>
+                        </VerticalStackLayout>
                         <StackLayout
+                            x:Name="OptionsStackLayout"
+                            Margin="8,16,8,8"
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 
@@ -70,20 +193,12 @@
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />
                         </StackLayout>
-                    </StackLayout>
-                    <Button
-                        HorizontalOptions="End" VerticalOptions="Start"
-                        Padding="10"
-                        BackgroundColor="Transparent"
-                        Text="&#xf5ad;"
-                        TextColor="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
-                        FontSize="Medium"
-                        FontFamily="MaterialDesignIcons"
-                        BorderWidth="0"
-                        WidthRequest="48" HeightRequest="48"
-                        Clicked="DismissControl_Invoked" />
-                </Grid>
-            </Frame>
+                    </VerticalStackLayout>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
         </Grid>
     </ScrollView>
 </core_ui_base_pages:DetailBaseContentPage>

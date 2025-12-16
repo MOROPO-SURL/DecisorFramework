@@ -5,38 +5,20 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class OrganizationContactPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.OrganizationContactDisplayModel, Models.Page.Pick.OrganizationContactPickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 144;
 
     private System.Action<Interop.API.Common.Models.Display.OrganizationContactDisplayModel> pickCompleteAction;
-
-    private bool pickedFlag = false;
 
     public OrganizationContactPickPage(System.Action<Interop.API.Common.Models.Display.OrganizationContactDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth => 384;
+    protected override double ItemViewRequestWidth => 420;
 
     protected override void DisposeUnmanagementResources()
     {
@@ -53,6 +35,11 @@ public partial class OrganizationContactPickPage : Core.Presentation.Terminal.MA
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.OrganizationContactDisplayModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.OrganizationContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.OrganizationContactFilterModel { Name = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
 
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
@@ -102,6 +89,8 @@ public partial class OrganizationContactPickPage : Core.Presentation.Terminal.MA
 
     private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
     {
+        ConcreteBindingContext.SearchParameter = null;
+
         OnLoadMore(sender, eventArgs);
     }
 
@@ -119,8 +108,18 @@ public partial class OrganizationContactPickPage : Core.Presentation.Terminal.MA
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.OrganizationContactDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
+    }
+
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
     }
 }

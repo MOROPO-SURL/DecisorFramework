@@ -1,6 +1,4 @@
-﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
-
-namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
+﻿namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 {
     public class ProductionOrderDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.ProductionOrder, System.Guid>
     {
@@ -16,13 +14,9 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public System.DateTime RequestedFor { get; set; }
 
-        public System.DateTime? ApprovedAt { get; set; }
+        public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get; set; }
 
-        public EmployeeDisplayModel Author { get; set; }
-
-        public EmployeeDisplayModel Responsible { get; set; }
-
-        public EmployeeDisplayModel Decisor { get; set; }
+        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get; set; }
 
         public ElaborationDisplayModel Elaboration { get; set; }
 
@@ -36,27 +30,19 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
             Amount = entity.Amount;
             Description = entity.Description;
             RequestedFor = entity.RequestedFor;
-            ApprovedAt = entity.ApprovedAt;
 
-            if (entity.Author != null)
+            if (entity.Agreement != null)
             {
-                Author = new EmployeeDisplayModel();
+                Agreement = new Governance.Interop.API.Common.Models.Display.AgreementDisplayModel();
 
-                Author.Import(entity.Author);
+                Agreement.Import(entity.Agreement);
             }
 
             if (entity.Responsible != null)
             {
-                Responsible = new EmployeeDisplayModel();
+                Responsible = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
 
                 Responsible.Import(entity.Responsible);
-            }
-
-            if (entity.Decisor != null)
-            {
-                Decisor = new EmployeeDisplayModel();
-
-                Decisor.Import(entity.Decisor);
             }
 
             if (entity.Elaboration != null)
