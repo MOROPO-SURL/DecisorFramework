@@ -95,24 +95,37 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Gestión" />
-    <FlyoutItem Title="Plantilla">
-        <FlyoutItem.Icon>
+    <MenuFlyoutItem Text="Plantilla" />
+    <ShellContent
+        Title="Estructuras"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}">
+        <ShellContent.Icon>
             <FontImageSource
-             FontFamily="MaterialDesignIcons"
-             Glyph="&#xF002C;"
-             Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </FlyoutItem.Icon>
-        <ShellContent
-            Title="Personal"
-            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsManagePage}" />
-        <ShellContent
-             Title="Estructuras"
-             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}" />
-        <ShellContent
-            Title="Asignaciones"
-            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}" />
-    </FlyoutItem>
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF645;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Asignaciones"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFCF8;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Personal"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF002C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <ShellContent
         Title="Expedientes laborales"
         ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:EmployeesListPage}">
@@ -123,6 +136,7 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <MenuFlyoutItem Text="Gestión" />
     <ShellContent
         Title="Plazas laborales"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkPositionsManagePage}">
