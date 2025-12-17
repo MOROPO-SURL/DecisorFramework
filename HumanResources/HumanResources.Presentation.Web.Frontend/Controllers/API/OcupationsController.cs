@@ -15,13 +15,15 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         private readonly IEntityRepository<AdmitionPropousal, System.Guid> admisionPropousalRepository;
         private readonly IEntityRepository<Employee, System.Guid> employeeRepository;
         private readonly IEntityRepository<OcupationCandidate, System.Guid> ocupationCandidateRepository;
+        private readonly IEntityRepository<Persistence.Entities.Contract.AbstractEmploymentContract, System.Guid> employmentContractRepository;
 
-        public OcupationsController(IEntityRepository<OcupationCandidate, System.Guid> ocupationCandidateRepository, IEntityRepository<Employee, System.Guid> employeeRepository, IEntityRepository<AdmitionPropousal, System.Guid> admisionPropousalRepository, IEntityRepository<NamingResolution, System.Guid> namingResolutionRepository, IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
+        public OcupationsController(IEntityRepository<Persistence.Entities.Contract.AbstractEmploymentContract, System.Guid> employmentContractRepository, IEntityRepository<OcupationCandidate, System.Guid> ocupationCandidateRepository, IEntityRepository<Employee, System.Guid> employeeRepository, IEntityRepository<AdmitionPropousal, System.Guid> admisionPropousalRepository, IEntityRepository<NamingResolution, System.Guid> namingResolutionRepository, IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
         {
             this.namingResolutionRepository = namingResolutionRepository;
             this.admisionPropousalRepository = admisionPropousalRepository;
             this.employeeRepository = employeeRepository;
             this.ocupationCandidateRepository = ocupationCandidateRepository;
+            this.employmentContractRepository = employmentContractRepository;
         }
 
         protected override OcupationDisplayModel EntityToDisplayModel(Ocupation entity)
@@ -45,6 +47,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         {
             base.PreCreate(entity, model);
 
+            var nextIndex = employmentContractRepository.Count() + 1;
+
             if (model.NamingResolutionId != null)
             {
                 var namingResolution = namingResolutionRepository.Get(model.NamingResolutionId.Value);
@@ -57,9 +61,10 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                 entity.VacantId = namingResolution.VacantId ?? candidate.Postulation.VacantId;
                 entity.Contract = new NamingEmploymentContract
                 {
+                    Index = nextIndex,
                     Year = model.StarAt.Year,
                     StarAt = model.StarAt,
-                    Objective = $"Contratación generada a partir de la resolución de nombramiento \"{namingResolution.Id}/{namingResolution.At.Year}\"",
+                    Objective = $"Contratación generada a partir de la resolución de nombramiento \"{namingResolution.Index}/{namingResolution.Year}\"",
                     DurationUnitCount = model.DurationUnitCount,
                     DurationUnitMeasureKind = model.DurationUnitMeasureKind,
                     StaffId = namingResolution.StaffId ?? candidate.Postulation.StaffId,
@@ -104,6 +109,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                 entity.VacantId = admisionPropousal.OcupationCandidate.Postulation.VacantId;
                 entity.Contract = new AdmitionEmploymentContract
                 {
+                    Index = nextIndex,
                     Year = model.StarAt.Year,
                     StarAt = model.StarAt,
                     Objective = $"Contratación generada a partir de la propuesta de admisión tomada en la reunión No.{admisionPropousal.Agreement.Meeting.Index} con fecha {admisionPropousal.Agreement.Meeting.At:D}",

@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class DecisionMakingGroupsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel, Models.Page.Manage.DecisionMakingGroupsManagePageModel, Models.Page.Configuration.DecisionMakingGroupConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 156;
 
     public DecisionMakingGroupsManagePage()
     {
@@ -19,7 +19,7 @@ public partial class DecisionMakingGroupsManagePage : Core.Presentation.Terminal
 
     protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
 
-    protected override double ItemViewRequestWidth { get => 320; }
+    protected override double ItemViewRequestWidth { get => 400; }
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
