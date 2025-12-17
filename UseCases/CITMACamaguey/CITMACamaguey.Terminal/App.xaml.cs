@@ -13,7 +13,7 @@
         {
             base.OnStart();
 
-            Windows[0].Title = "Decisor CITMA Camagüey";
+            Windows[0].Title = "CITMA Camagüey Decisor™";
         }
     }
 }
