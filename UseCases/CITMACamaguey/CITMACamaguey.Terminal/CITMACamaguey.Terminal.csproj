@@ -63,6 +63,7 @@
 		<None Remove="Resources\Images\domain.jpg" />
 		<None Remove="Resources\Images\governance.jpg" />
 		<None Remove="Resources\Images\legal.jpg" />
+		<None Remove="Resources\Images\logo_citma.jpg" />
 		<None Remove="Resources\Images\rr_hh.jpg" />
 	</ItemGroup>
 

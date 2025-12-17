@@ -46,21 +46,21 @@
             HeightRequest="168"
             ColumnSpacing="0">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid
                 x:Name="LogoWrapLayout"
-                Grid.Column="1"
-                MinimumWidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}">
+                Grid.Column="0"
+                BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}">
                 <Image
-                    Margin="32,16"
                     HorizontalOptions="Center" VerticalOptions="Center"
-                    Style="{StaticResource LogoImageViewStyle}" />
+                    Margin="4"
+                    Source="logo_citma.jpg" />
             </Grid>
             <Grid
-                Grid.Column="0"
+                Grid.Column="1"
                 Padding="20"
                 ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
@@ -78,9 +78,6 @@
                     WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
                     StrokeThickness="4"
                     StrokeLineJoin="Bevel">
-                    <Border.StrokeShape>
-                        <RoundRectangle CornerRadius="0,30,30,00" />
-                    </Border.StrokeShape>
                     <Image
                         WidthRequest="120" HeightRequest="120"
                         Source="default_person_picture.jpg" />
