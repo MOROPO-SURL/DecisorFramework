@@ -35,7 +35,6 @@
         </Grid>
     </Shell.FlyoutHeader>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
-    <MenuFlyoutItem Text="Estructural" IsEnabled="False" />
     <ShellContent
         Title="Entidades Administrativas"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:StructuresManagePage}">
@@ -56,25 +55,13 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Activos" IsEnabled="False" />
     <ShellContent
-        Title="Vehículos"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:VehiclesManagePage}">
+        Title="Organismos"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:CentralStateStructuresManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF0E7;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <MenuFlyoutItem Text="Complementarios" IsEnabled="False" />
-    <ShellContent
-        Title="Marcas"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:BrandsManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF4CF;"
+                Glyph="&#xFA35;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
