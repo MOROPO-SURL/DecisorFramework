@@ -85,7 +85,7 @@
                                             Style="{StaticResource ValuePropertyLabelStyle}">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="{Binding Id}" />
+                                                    <Span Text="{Binding Index}" />
                                                     <Span Text=" / " />
                                                     <Span Text="{Binding Year}" />
                                                 </FormattedString>

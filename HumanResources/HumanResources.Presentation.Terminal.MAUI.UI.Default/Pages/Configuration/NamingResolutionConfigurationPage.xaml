@@ -83,11 +83,11 @@
                         <Frame
                             IsVisible="{Binding Vacant, Converter={StaticResource IsNotNullConverter}}"
                             Padding="0">
-                            <VerticalStackLayout Margin="8" Spacing="8">
+                            <VerticalStackLayout Margin="16" Spacing="8">
                                 <Label
                                     ToolTipProperties.Text="{Binding Vacant.WorkPosition.Name}"
                                     Text="{Binding Vacant.WorkPosition.Name}"
-                                    FontAttributes="Bold"
+                                    FontSize="Medium"
                                     LineBreakMode="TailTruncation" />
                                 <Label
                                     ToolTipProperties.Text="{Binding Staff.Structure.Identity.Name}"
