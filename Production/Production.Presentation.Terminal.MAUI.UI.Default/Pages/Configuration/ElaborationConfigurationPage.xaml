@@ -8,6 +8,7 @@
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Core.Interop.API.Common"
     xmlns:inventory_card_views="clr-namespace:MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Inventory.Presentation.Terminal.MAUI.UI.Default"
     xmlns:inventory_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Inventory.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Inventory.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
@@ -21,6 +22,7 @@
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            <core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
             <communitytoolkit_converters:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
@@ -381,6 +383,110 @@
                                                     Style="{StaticResource FontIconImageButtonStyle}"
                                                     Text="&#xFA79;"
                                                     Clicked="RemoveStepButton_Clicked" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Documentos" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="DocumentAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding Documents}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Padding="8" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="fwrk_core_interop_common_display_models:DocumentDisplayModel">
+                                        <Frame 
+                                            Padding="0"
+                                            Margin="0,12,0,0">
+                                            <StackLayout Orientation="Horizontal">
+                                                <Grid
+                                                    WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                                                    BackgroundColor="DimGray">
+                                                    <Label
+                                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                                        Text="{Binding Converter={StaticResource DocumentDisplayModelToMaterialDesignFontIconTextConverter}}"
+                                                        TextColor="White"
+                                                        FontSize="80"
+                                                        FontFamily="MaterialDesignIcons" />
+                                                </Grid>
+                                                <Grid 
+                                                    HorizontalOptions="FillAndExpand"
+                                                    Padding="16"
+                                                    ColumnSpacing="8" RowSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <VerticalStackLayout
+                                                        Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
+                                                        Spacing="2">
+                                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                                                        <Label Text="{Binding Name}" LineBreakMode="TailTruncation" />
+                                                    </VerticalStackLayout>
+                                                    <VerticalStackLayout
+                                                        Grid.Column="0" Grid.Row="1"
+                                                        Spacing="2">
+                                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
+                                                        <Label Text="{Binding Extension}" />
+                                                    </VerticalStackLayout>
+                                                    <VerticalStackLayout
+                                                        Grid.Column="1" Grid.Row="1"
+                                                        Spacing="2">
+                                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tamaño" />
+                                                        <Label Text="{Binding Length, StringFormat='{0} bytes'}" />
+                                                    </VerticalStackLayout>
+                                                </Grid>
+                                                <VerticalStackLayout 
+                                                    Padding="8"
+                                                    Spacing="8">
+                                                    <Button
+                                                        Padding="0"
+                                                        FontSize="21"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xF90B;"
+                                                        Clicked="DocumentEditionButton_Clicked" />
+                                                    <Button
+                                                        VerticalOptions="Start"
+                                                        Padding="0"
+                                                        FontSize="21"
+                                                        FontFamily="MaterialDesignIcons" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="DocumentRemotionButton_Clicked" />
+                                                </VerticalStackLayout>
                                             </StackLayout>
                                         </Frame>
                                     </DataTemplate>
