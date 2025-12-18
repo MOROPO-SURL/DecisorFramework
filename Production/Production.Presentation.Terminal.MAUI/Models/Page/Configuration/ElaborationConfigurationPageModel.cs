@@ -37,6 +37,7 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
                 InputProductBridges = [.. model.InputProductBridges];
                 OutputProductBridges = [.. model.OutputProductBridges];
                 Steps = [.. model.Steps.OrderBy(_model => _model.Priority)];
+                Documents = [.. model.Documents];
             }
         }
 
@@ -61,6 +62,8 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
         public ObservableCollection<Interop.API.Common.Models.Bridge.CommonElaborationProductBridgeModel> OutputProductBridges { get; set; } = [];
 
         public ObservableCollection<Interop.API.Common.Models.Display.ElaborationStepDisplayModel> Steps { get; set; } = [];
+
+        public ObservableCollection<Core.Interop.API.Common.Models.Display.DocumentDisplayModel> Documents { get; set; } = [];
 
         public Inventory.Interop.API.Common.Models.Display.ClassificationDisplayModel[] AvailableClassifications { get => availableClassifications; set => SetProperty(ref availableClassifications, value); }
     }

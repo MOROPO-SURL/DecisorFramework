@@ -24,6 +24,8 @@
 
         public Bridge.CommonElaborationProductBridgeModel[] OutputProductBridges { get; set; }
 
+        public Core.Interop.API.Common.Models.Display.DocumentDisplayModel[] Documents { get; set; }
+
         public ElaborationStepDisplayModel[] Steps { get; set; }
 
         public virtual void Import(Persistence.Entities.Elaboration entity)

@@ -42,5 +42,7 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.Entities
         public List<ElaborationOutputProductBridge> OutputProductBridges { get; set; } = new List<ElaborationOutputProductBridge>();
 
         public List<ElaborationOutputProductClassificationBridge> OutputProductClassificationBridges { get; set; } = new List<ElaborationOutputProductClassificationBridge>();
+
+        public List<ElaborationDocumentBridge> DocumentBridges { get; set; } = new List<ElaborationDocumentBridge>();
     }
 }
