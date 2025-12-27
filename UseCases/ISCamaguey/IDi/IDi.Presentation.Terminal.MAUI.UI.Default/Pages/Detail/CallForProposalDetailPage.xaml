@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<fwrk_core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common"
+    xmlns:fwrk_core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_constants="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Core.Interop.API.Common"
+    x:Class="MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.CallForProposalDetailPage"
+    x:TypeArguments="interop_common_display_models:CallForProposalDisplayModel"
+    x:DataType="interop_common_display_models:CallForProposalDisplayModel"
+    Title="Detalles de Financista"
+    BackgroundColor="Transparent"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <fwrk_core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="{Static fwrk_core_constants:CommonDetailPageConstants.MediumShortDetailPageFrameWrapperWidth}"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <Grid>
+                        <StackLayout Margin="20" Spacing="20">
+                            <StackLayout>
+                                <Label 
+                                    Margin="0,0,0,20"
+                                    Text="Detalles"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium" />
+                                <Label
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Margin="0"
+                                    Text="Título" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Title}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Financista" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Financier.Contact.Identity.Name}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Inicia" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding StartAt, StringFormat='{0:D}'}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Termina" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding EndAt, StringFormat='{0:D}'}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Descripción" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Description}" />
+                                <VerticalStackLayout 
+                                    Spacing="6">
+                                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Áreas de Investigación" />
+                                    <BoxView Color="DimGray" HeightRequest="2" />
+                                    <VerticalStackLayout
+                                        Spacing="8"
+                                        BindableLayout.ItemsSource="{Binding ResearchAreas}">
+                                        <BindableLayout.EmptyView>
+                                            <Label
+                                                FontAttributes="Italic"
+                                                TextColor="DimGray"
+                                                Text="Sin elementos que mostrar" />
+                                        </BindableLayout.EmptyView>
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="interop_common_display_models:ResearchAreaDisplayModel">
+                                                <Grid ColumnSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition Width="4" />
+                                                        <ColumnDefinition />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <BoxView
+                                                        Grid.Column="0" Grid.RowSpan="2"
+                                                        Color="DimGray" />
+                                                    <Label         
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        FontAttributes="Bold"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Name}" />
+                                                    <Label                                                    
+                                                        Grid.Column="1" Grid.Row="1"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding Description, FallbackValue='---', TargetNullValue='---'}" />
+                                                </Grid>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    Spacing="6">
+                                    <Label Style="{StaticResource CaptionPropertyLabelStyle}" Text="Documentos" />
+                                    <BoxView Color="DimGray" HeightRequest="2" />
+                                    <VerticalStackLayout
+                                        Spacing="8"
+                                        Padding="0,2,0,0"
+                                        BindableLayout.ItemsSource="{Binding Documents}">
+                                        <BindableLayout.EmptyView>
+                                            <Label
+                                                FontAttributes="Italic"
+                                                TextColor="DimGray"
+                                                Text="Sin elementos que mostrar" />
+                                        </BindableLayout.EmptyView>
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="fwrk_core_interop_common_display_models:DocumentDisplayModel">
+                                                <Frame Padding="0">
+                                                    <StackLayout Orientation="Horizontal">
+                                                        <Grid
+                                                            WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                                                            BackgroundColor="DimGray">
+                                                            <Label
+                                                                HorizontalOptions="Center" VerticalOptions="Center"
+                                                                Text="{Binding Converter={StaticResource DocumentDisplayModelToMaterialDesignFontIconTextConverter}}"
+                                                                TextColor="White"
+                                                                FontSize="80"
+                                                                FontFamily="MaterialDesignIcons" />
+                                                        </Grid>
+                                                        <Grid 
+                                                            HorizontalOptions="FillAndExpand"
+                                                            Padding="16"
+                                                            ColumnSpacing="8" RowSpacing="8">
+                                                            <Grid.ColumnDefinitions>
+                                                                <ColumnDefinition />
+                                                                <ColumnDefinition />
+                                                            </Grid.ColumnDefinitions>
+                                                            <Grid.RowDefinitions>
+                                                                <RowDefinition Height="Auto" />
+                                                                <RowDefinition Height="Auto" />
+                                                            </Grid.RowDefinitions>
+                                                            <VerticalStackLayout
+                                                                Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
+                                                                Spacing="2">
+                                                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                                                                <Label Text="{Binding Name}" LineBreakMode="TailTruncation" />
+                                                            </VerticalStackLayout>
+                                                            <VerticalStackLayout
+                                                                Grid.Column="0" Grid.Row="1"
+                                                                Spacing="2">
+                                                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
+                                                                <Label Text="{Binding Extension}" />
+                                                            </VerticalStackLayout>
+                                                            <VerticalStackLayout
+                                                                Grid.Column="1" Grid.Row="1"
+                                                                Spacing="2">
+                                                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tamaño" />
+                                                                <Label Text="{Binding Length, StringFormat='{0} bytes'}" />
+                                                            </VerticalStackLayout>
+                                                        </Grid>
+                                                        <Button
+                                                            VerticalOptions="Start"
+                                                            Margin="8" Padding="0"
+                                                            FontSize="21"
+                                                            FontFamily="MaterialDesignIcons" 
+                                                            Text="&#xF1DA;"
+                                                            Clicked="DocumentDownloadButton_Clicked" />
+                                                    </StackLayout>
+                                                </Frame>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Creado" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding At}" />
+                            </StackLayout>
+                            <StackLayout
+                                x:Name="OptionButtonsStackLayout"
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <Button 
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Modificar"
+                                    Clicked="EditButton_Clicked" />
+                                <Button 
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Eliminar"
+                                    Clicked="DeleteButton_Clicked" />
+                            </StackLayout>
+                        </StackLayout>
+                        <Grid 
+                            x:Name="BusyIndicatorGrid" 
+                            IsVisible="False"
+                            BackgroundColor="{AppThemeBinding Light=#A7FFFFFF, Dark=#A7000000}">
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <ActivityIndicator 
+                                    WidthRequest="64.0" HeightRequest="64.0"
+                                    IsRunning="{Binding Source={RelativeSource AncestorType={Type Grid}}, Path=IsVisible}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Grid>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</fwrk_core_ui_base_pages:DetailBaseContentPage>

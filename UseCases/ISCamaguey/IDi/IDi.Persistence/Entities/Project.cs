@@ -12,9 +12,11 @@
         public int Priority { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(255)]
         public string Name { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(50)]
         public string Code { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CategoryId))]
@@ -22,18 +24,23 @@
         public System.Guid CategoryId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(2550)]
         public string Summary { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(5100)]
         public string Problem { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(5100)]
         public string Context { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(2550)]
         public string Beneficiary { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(255)]
         public string MainObjetive { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProgramId))]
@@ -55,6 +62,10 @@
         public System.DateTime StartAt { get; set; }
 
         public System.DateTime EndAt { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DocumentId))]
+        public Framework.Guama.Media.Persistence.Entities.Document Document { get; set; }
+        public System.Guid DocumentId { get; set; }
 
         public System.Collections.Generic.ICollection<ProjectSpecificObjective> SpecificObjectives { get; set; }
 

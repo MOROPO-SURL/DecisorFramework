@@ -42,8 +42,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.ThesisResultResearcherBridge> ThesisResultResearcherBridges { get; set; }
         public DbSet<Entities.TrainingResult> TrainingResults { get; set; }
         public DbSet<Entities.TrainingResultResearcherBridge> TrainingResultResearcherBridges { get; set; }
-        public DbSet<Entities.CallForPropousal> CallForPropousals { get; set; }
-        public DbSet<Entities.CallForPropousalResearchAreaBridge> CallForPropousalResearchAreaBridges { get; set; }
-        public DbSet<Entities.CallForPropousalDocumentBridge> CallForPropousalDocumentBridges { get; set; }
+        public DbSet<Entities.CallForProposal> CallForProposals { get; set; }
+        public DbSet<Entities.CallForProposalResearchAreaBridge> CallForProposalResearchAreaBridges { get; set; }
+        public DbSet<Entities.CallForProposalDocumentBridge> CallForProposalDocumentBridges { get; set; }
     }
 }

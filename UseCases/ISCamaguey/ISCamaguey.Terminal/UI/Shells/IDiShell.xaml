@@ -58,8 +58,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Propuestas a Proyecto (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Propuestas a Proyecto"
+        ContentTemplate="{DataTemplate idi_manage_pages:ProjectProposalsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -123,7 +123,7 @@
     </ShellContent>
     <ShellContent
         Title="Convocatorias"
-        ContentTemplate="{DataTemplate idi_manage_pages:CallForPropousalsManagePage}">
+        ContentTemplate="{DataTemplate idi_manage_pages:CallForProposalsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

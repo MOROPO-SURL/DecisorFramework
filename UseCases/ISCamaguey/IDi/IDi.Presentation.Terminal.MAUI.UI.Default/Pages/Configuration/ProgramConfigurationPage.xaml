@@ -161,15 +161,12 @@
                                                 <Label 
                                                     Margin="8,0,0,0"
                                                     VerticalOptions="Center"
-                                                    FontSize="Medium"
                                                     Text="No." />
                                                 <Label 
                                                     VerticalOptions="Center"
-                                                    FontSize="Medium"
                                                     Text="{Binding Index}" />
                                                 <Label
                                                     HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                                    FontSize="Medium"
                                                     LineBreakMode="TailTruncation"
                                                     Text="{Binding Title}" />
                                                 <Button

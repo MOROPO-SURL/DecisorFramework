@@ -4,8 +4,6 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class FinanciersManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.FinancierDisplayModel, Models.Page.Manage.FinanciersManagePageModel, Models.Page.Configuration.FinancierConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 144;
-
     public FinanciersManagePage()
     {
         InitializeComponent();
@@ -16,11 +14,11 @@ public partial class FinanciersManagePage : Framework.Decisor.Core.Presentation.
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 420; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.FINANCIER_DEFAULT_CARD_VIEW_WIDTH;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
-        return ITEM_VIEW_REQUEST_HEIGHT;
+        return Constants.CardViewHeightConstants.FINANCIER_DEFAULT_CARD_VIEW_HEIGHT;
     }
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.FinancierDisplayModel>> FetchItemsAsync()

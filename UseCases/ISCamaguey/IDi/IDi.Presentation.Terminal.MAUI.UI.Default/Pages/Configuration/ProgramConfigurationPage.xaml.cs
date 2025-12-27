@@ -25,7 +25,9 @@ public partial class ProgramConfigurationPage : Framework.Decisor.Core.Presentat
         var model = new Interop.API.Common.Models.Input.ProgramInputModel
         {
             Id = System.Guid.NewGuid(),
+            Priority = ConcreteBindingContext.Priority,
             Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
             Alias = ConcreteBindingContext.Alias,
             Code = ConcreteBindingContext.Code,
             ManagerId = ConcreteBindingContext.Manager.Id,
@@ -45,7 +47,9 @@ public partial class ProgramConfigurationPage : Framework.Decisor.Core.Presentat
         var model = new Interop.API.Common.Models.Input.ProgramInputModel
         {
             Id = ConcreteBindingContext.Id,
+            Priority = ConcreteBindingContext.Priority,
             Name = ConcreteBindingContext.Name,
+            Description= ConcreteBindingContext.Description,
             Alias = ConcreteBindingContext.Alias,
             Code = ConcreteBindingContext.Code,
             ManagerId = ConcreteBindingContext.Manager.Id,

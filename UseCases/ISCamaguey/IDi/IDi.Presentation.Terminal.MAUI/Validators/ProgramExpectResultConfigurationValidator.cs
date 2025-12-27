@@ -8,7 +8,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Validators
         {
             RuleFor(model => model.Title).NotNull().NotEmpty();
 
-            RuleFor(model => model.Index).GreaterThan(1);
+            RuleFor(model => model.Index).GreaterThanOrEqualTo(1);
 
             RuleFor(model => model.Description).NotNull().NotEmpty();
         }

@@ -272,9 +272,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ThesisResultResearcherBridge> ThesisResultResearcherBridges { get; set; }
         public DbSet<TrainingResult> TrainingResults { get; set; }
         public DbSet<TrainingResultResearcherBridge> TrainingResultResearcherBridges { get; set; }
-        public DbSet<CallForPropousal> CallForPropousals { get; set; }
-        public DbSet<CallForPropousalResearchAreaBridge> CallForPropousalResearchAreaBridges { get; set; }
-        public DbSet<CallForPropousalDocumentBridge> CallForPropousalDocumentBridges { get; set; }
+        public DbSet<CallForProposal> CallForProposals { get; set; }
+        public DbSet<CallForProposalResearchAreaBridge> CallForProposalResearchAreaBridges { get; set; }
+        public DbSet<CallForProposalDocumentBridge> CallForProposalDocumentBridges { get; set; }
 
         public DbSet<SampleAnalysisReport> SampleAnalysisReports { get; set; }
         public DbSet<SampleAnalysisServiceReport> SampleAnalysisServiceReports { get; set; }
@@ -294,6 +294,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ElaborationInputProductClassificationBridge> ElaborationInputProductClassificationBridges { get; set; }
         public DbSet<ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
         public DbSet<ElaborationOutputProductClassificationBridge> ElaborationOutputProductClassificationBridges { get; set; }
+        public DbSet<ElaborationDocumentBridge> ElaborationDocumentBridges { get; set; }
         public DbSet<ElaborationStep> ElaborationSteps { get; set; }
         public DbSet<ElaborationStepWorkPositionBridge> ElaborationStepWorkPositionBridges { get; set; }
         public DbSet<Production> Productions { get; set; }

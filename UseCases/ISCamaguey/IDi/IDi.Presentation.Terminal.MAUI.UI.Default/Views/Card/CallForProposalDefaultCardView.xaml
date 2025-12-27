@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Views.Card.CallForProposalDefaultCardView"
+    x:DataType="interop_common_display_models:CallForProposalDisplayModel">
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <fwrk_core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame Padding="0">
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Image
+                Grid.Column="0" Grid.RowSpan="3"
+                Aspect="AspectFill"
+                WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                Source="{Binding Financier.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+            <VerticalStackLayout 
+                Grid.Column="1"
+                Padding="10">
+                <Label 
+                    FontSize="Medium"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Title}" />                
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Financista"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label 
+                    FontAttributes="Bold"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Financier.Contact.Identity.Name}" />
+                <Label 
+                    Margin="0,8,0,0"
+                    Text="Plazo"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label LineBreakMode="TailTruncation">
+                    <Label.FormattedText>
+                        <FormattedString>
+                            <Span Text="{Binding StartAt, StringFormat='{0:dd/MM/yyyy}'}" />
+                            <Span Text=" - " />
+                            <Span Text="{Binding EndAt, StringFormat='{0:dd/MM/yyyy}'}" />
+                        </FormattedString>
+                    </Label.FormattedText>
+                </Label>
+            </VerticalStackLayout>
+        </Grid>
+    </Frame>
+</ContentView>

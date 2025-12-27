@@ -8,8 +8,10 @@
         public bool Archived { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(255)]
         public string Name { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(2550)]
         public string Description { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProjectId))]

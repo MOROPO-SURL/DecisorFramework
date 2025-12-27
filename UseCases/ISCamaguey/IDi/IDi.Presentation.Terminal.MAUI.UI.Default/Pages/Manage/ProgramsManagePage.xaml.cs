@@ -4,8 +4,6 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class ProgramsManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProgramDisplayModel, Models.Page.Manage.ProgramsManagePageModel, Models.Page.Configuration.ProgramConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 146;
-
     public ProgramsManagePage()
     {
         InitializeComponent();
@@ -16,11 +14,11 @@ public partial class ProgramsManagePage : Framework.Decisor.Core.Presentation.Te
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 400; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.PROGRAM_DEFAULT_CARD_VIEW_WIDTH;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
-        return ITEM_VIEW_REQUEST_HEIGHT;
+        return Constants.CardViewHeightConstants.PROGRAM_DEFAULT_CARD_VIEW_HEIGHT;
     }
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ProgramDisplayModel>> FetchItemsAsync()

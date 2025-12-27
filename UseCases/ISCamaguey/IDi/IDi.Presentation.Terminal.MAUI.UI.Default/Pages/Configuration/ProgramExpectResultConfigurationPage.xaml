@@ -45,17 +45,35 @@
                 <FlexLayout 
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
-                    <VerticalStackLayout 
+                    <Grid 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, LargeContainerColumn=2, MediumContainerColumn=3, SmallContainerColumn=4}}"
-                        Margin="4"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No." />
-                        <Entry Text="{Binding Index}" />
+                        Margin="4"                        
+                        ColumnSpacing="6" RowSpacing="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.Row="0"
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="No." />
+                        <Entry
+                            Grid.Row="1"
+                            BackgroundColor="Transparent"
+                            IsReadOnly="True"
+                            Text="{Binding Index}" />
+                        <Stepper
+                            Grid.Row="1"
+                            Margin="0,0,6,0"
+                            HorizontalOptions="End" VerticalOptions="Center"
+                            Minimum="1"
+                            Value="{Binding Index}" />
                         <Label
+                            Grid.Row="2"
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProgramExpectResultConfigurationPageModel.IndexValidableProperty}}"
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProgramExpectResultConfigurationPageModel.IndexValidableProperty}}"
                             Style="{StaticResource ValidationMessageLabelStyle}" />
-                    </VerticalStackLayout>
+                    </Grid>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=11, LargeContainerColumn=10, MediumContainerColumn=12}}"
                         Margin="4"

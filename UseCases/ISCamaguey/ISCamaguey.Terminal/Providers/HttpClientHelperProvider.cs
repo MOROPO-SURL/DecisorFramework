@@ -16,7 +16,7 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal.Providers
 #if DEBUG
             var baseUrl = Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.Android ? "https://192.168.64.21:7208" : "https://localhost:7208";
 #else
-            var baseUrl = "https://iscmg.decisor.moropo.cu";
+            var baseUrl = "http://192.168.0.12";
 #endif
             var settingManager = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISettingManagerFacade>();
 

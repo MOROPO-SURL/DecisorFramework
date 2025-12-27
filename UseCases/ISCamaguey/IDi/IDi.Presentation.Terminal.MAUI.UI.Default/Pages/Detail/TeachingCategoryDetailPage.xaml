@@ -33,22 +33,16 @@
                                 Text="{Binding Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Creado" />
+                                Text="Descripción" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding At}" />
+                                Text="{Binding Description, TargetNullValue='---'}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Prioridad" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Priority}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Descripción" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Description, TargetNullValue='---'}" />
                         </StackLayout>
                         <StackLayout
                             Orientation="Horizontal"
