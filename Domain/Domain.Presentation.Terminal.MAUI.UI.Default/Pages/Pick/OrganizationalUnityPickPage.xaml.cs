@@ -36,37 +36,19 @@ public partial class OrganizationalUnityPickPage : Core.Presentation.Terminal.MA
     {
         var apiConnectClient = new Interop.API.Connect.Clients.TreeOrganizationalUnitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.OrganizationalUnityFilterModel { Name = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
+
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
+        ConcreteBindingContext.SearchParameter = null;
+
         OnReload(sender, eventArgs);
-    }
-
-    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
-    {
-        //var concreteBindingContext = BindingContext as Models.Page.Pick.OrganizationalUnityPickPageModel;
-
-        //var apiConnectClient = new Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-        //concreteBindingContext.IsBusy = true;
-
-        //apiConnectClient.GetEnabledAsync().ContinueWith(task =>
-        //{
-        //    var model = new Models.Page.Configuration.OrganizationContactConfigurationPageModel
-        //    {
-        //        AvailableBusinessKinds = task.Result
-        //    };
-
-        //    Dispatcher.Dispatch(() =>
-        //    {
-        //        concreteBindingContext.IsBusy = false;
-
-        //        this.NavigationPushPageAsync(new Configuration.OrganizationContactConfigurationPage(ConfigurationSuccess_Callback, model));
-        //    });
-
-        //});
     }
 
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
@@ -91,15 +73,8 @@ public partial class OrganizationalUnityPickPage : Core.Presentation.Terminal.MA
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }
 
-    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel model)
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
     {
-        Dispatcher.Dispatch(() =>
-        {
-            pickCompleteAction.Invoke(model);
-
-            pickCompleteAction = null;
-
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-        });
+        OnReload(sender, eventArgs);
     }
 }

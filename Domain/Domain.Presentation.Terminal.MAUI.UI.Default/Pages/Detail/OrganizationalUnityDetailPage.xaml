@@ -4,9 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
-    x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.OrganizationalUnityTreeDetailPage"
-    x:TypeArguments="interop_common_display_models:OrganizationalUnityTreeDisplayModel"
-    x:DataType="interop_common_display_models:OrganizationalUnityTreeDisplayModel"
+    x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.OrganizationalUnityDetailPage"
+    x:TypeArguments="interop_common_display_models:OrganizationalUnityParentalDisplayModel"
+    x:DataType="interop_common_display_models:OrganizationalUnityParentalDisplayModel"
     Title="Detalles de Unidad Organizativa"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
@@ -33,10 +33,35 @@
                                 Text="{Binding Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Superior" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Parent.TreeName, TargetNullValue='---', FallbackValue='---'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Referencia" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Reference, TargetNullValue='---'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Prioridad" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Priority}" />
+                        </StackLayout>
+                        <StackLayout
+                            x:Name="OptionsButtonLayout"
+                            Orientation="Horizontal"
+                            Spacing="20">
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Modificar"
+                                Clicked="EditButton_Clicked" />
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Eliminar"
+                                Clicked="DeleteButton_Clicked" />
                         </StackLayout>
                     </StackLayout>
                 </Frame>
