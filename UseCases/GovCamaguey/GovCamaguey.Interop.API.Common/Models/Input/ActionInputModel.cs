@@ -10,17 +10,19 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
         public int Index { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(1024)]
         public string Name { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(5120)]
         public string Description { get; set; }
 
         public OrganizationDisplayModel[] ResponsabilityOrganizations { get; set; }
 
         public OrganizationDisplayModel[] ParticipationOrganizations { get; set; }
 
-        public List<IndicatorInputModel> EditionIndicators { get; set; } = new List<IndicatorInputModel>();
-        public List<IndicatorInputModel> IncomingIndicators { get; set; } = new List<IndicatorInputModel>();
-        public List<IndicatorDisplayModel> OutgoingIndicators { get; set; } = new List<IndicatorDisplayModel>();
+        public List<ActionIndicatorInputModel> EditionIndicators { get; set; } = new List<ActionIndicatorInputModel>();
+        public List<ActionIndicatorInputModel> IncomingIndicators { get; set; } = new List<ActionIndicatorInputModel>();
+        public List<ActionIndicatorDisplayModel> OutgoingIndicators { get; set; } = new List<ActionIndicatorDisplayModel>();
 
         public List<ActionMonthlyClosureInputModel> EditionMonthlyClosures { get; set; } = new List<ActionMonthlyClosureInputModel>();
         public List<ActionMonthlyClosureInputModel> IncomingMonthlyClosures { get; set; } = new List<ActionMonthlyClosureInputModel>();

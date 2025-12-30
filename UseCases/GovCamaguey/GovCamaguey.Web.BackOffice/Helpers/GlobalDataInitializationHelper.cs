@@ -105,6 +105,25 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Helpers
             }
             #endregion
 
+            #region GlobalIndicator
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.GlobalIndicatorViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.GlobalIndicatorViewerPermission.ToPermissionEntity(Authorization.GlobalIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.GlobalIndicatorCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.GlobalIndicatorCreatorPermission.ToPermissionEntity(Authorization.GlobalIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.GlobalIndicatorEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.GlobalIndicatorEditorPermission.ToPermissionEntity(Authorization.GlobalIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.GlobalIndicatorRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.GlobalIndicatorRemoverPermission.ToPermissionEntity(Authorization.GlobalIndicatorManagementPermissionGroup));
+            }
+            #endregion
+
             if (dbContext is Framework.Guama.Core.Persistence.ORM.EF.Context.Contract.ITraceableDbContext)
             {
                 (dbContext as Framework.Guama.Core.Persistence.ORM.EF.Context.Contract.ITraceableDbContext).SaveChanges("system");

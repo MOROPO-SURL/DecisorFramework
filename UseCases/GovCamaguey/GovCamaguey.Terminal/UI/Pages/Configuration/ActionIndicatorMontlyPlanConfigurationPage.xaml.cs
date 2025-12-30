@@ -1,0 +1,50 @@
+using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration;
+
+public partial class ActionIndicatorMontlyPlanConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ActionIndicatorMontlyPlanInputModel, ActionIndicatorMontlyPlanInputModel, Models.Page.Configuration.ActionIndicatorMontlyPlanConfigurationPageModel>
+{
+    public ActionIndicatorMontlyPlanConfigurationPage(System.Action<ActionIndicatorMontlyPlanInputModel> successIndicator, Models.Page.Configuration.ActionIndicatorMontlyPlanConfigurationPageModel model) : base(successIndicator, model, new Validators.ActionIndicatorMontlyPlanConfigurationValidator())
+    {
+        InitializeComponent();
+    }
+
+    protected override string EntityTypeName => "Plan Mensual de Indicador";
+
+    protected override System.Threading.Tasks.Task<ActionIndicatorMontlyPlanInputModel> PerformCreationAsync()
+    {
+        return System.Threading.Tasks.Task.FromResult(new ActionIndicatorMontlyPlanInputModel
+        {
+            Id = System.Guid.NewGuid(),
+            Month = ConcreteBindingContext.YearMonth.Value,
+            Year = ConcreteBindingContext.YearMonth.Key,
+            Amount = ConcreteBindingContext.Amount
+        });
+    }
+
+    protected override System.Threading.Tasks.Task<ActionIndicatorMontlyPlanInputModel> PerformEditionAsync()
+    {
+        return System.Threading.Tasks.Task.FromResult(new ActionIndicatorMontlyPlanInputModel
+        {
+            Id = ConcreteBindingContext.Id,
+            Month = ConcreteBindingContext.YearMonth.Value,
+            Year = ConcreteBindingContext.YearMonth.Key,
+            Amount = ConcreteBindingContext.Amount
+        });
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
+    }
+}

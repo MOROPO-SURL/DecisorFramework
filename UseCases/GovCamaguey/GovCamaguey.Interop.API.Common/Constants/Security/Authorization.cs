@@ -65,13 +65,22 @@
         public const string ActionRemoverPermission = "action-remover-permission";
         #endregion
 
-        #region Indicator
-        public const string IndicatorManagementPermissionGroup = "indicator-management-permission-group";
+        #region ActionIndicator
+        public const string ActionIndicatorManagementPermissionGroup = "action-indicator-management-permission-group";
 
-        public const string IndicatorViewerPermission = "indicator-viewer-permission";
-        public const string IndicatorCreatorPermission = "indicator-creator-permission";
-        public const string IndicatorEditorPermission = "indicator-editor-permission";
-        public const string IndicatorRemoverPermission = "indicator-remover-permission";
+        public const string ActionIndicatorViewerPermission = "action-indicator-viewer-permission";
+        public const string ActionIndicatorCreatorPermission = "action-indicator-creator-permission";
+        public const string ActionIndicatorEditorPermission = "action-indicator-editor-permission";
+        public const string ActionIndicatorRemoverPermission = "action-indicator-remover-permission";
+        #endregion
+
+        #region GlobalIndicator
+        public const string GlobalIndicatorManagementPermissionGroup = "global-indicator-management-permission-group";
+
+        public const string GlobalIndicatorViewerPermission = "global-indicator-viewer-permission";
+        public const string GlobalIndicatorCreatorPermission = "global-indicator-creator-permission";
+        public const string GlobalIndicatorEditorPermission = "global-indicator-editor-permission";
+        public const string GlobalIndicatorRemoverPermission = "global-indicator-remover-permission";
         #endregion
 
         #region Result

@@ -132,7 +132,7 @@
                 </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <local_card_views:IndicatorDeepCardView Padding="8,4" />
+                        <local_card_views:ActionIndicatorDeepCardView Padding="8,4" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

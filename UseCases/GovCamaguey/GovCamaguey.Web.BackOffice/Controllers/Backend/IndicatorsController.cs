@@ -10,13 +10,13 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
     [Microsoft.AspNetCore.Authorization.Authorize]
     [RequirePermissions(Framework.Guama.Core.Security.Presentation.Constants.Permissions.ShellManager)]
     [Area("governance")]
-    public class IndicatorsController : Framework.Guama.Core.Presentation.Web.Backend.Controllers.Contract.AbstractArchivableEnableableEntityManagementController<Indicator, System.Guid, IndicatorInputModel, IndicatorDisplayViewModel>
+    public class IndicatorsController : Framework.Guama.Core.Presentation.Web.Backend.Controllers.Contract.AbstractArchivableEnableableEntityManagementController<ActionIndicator, System.Guid, ActionIndicatorInputModel, IndicatorDisplayViewModel>
     {
-        public IndicatorsController(Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Indicator, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<IndicatorsController> localizer, ILogger<IndicatorsController> logger) : base(repository, localizer, logger)
+        public IndicatorsController(Framework.Guama.Core.Persistence.Repositories.IEntityRepository<ActionIndicator, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<IndicatorsController> localizer, ILogger<IndicatorsController> logger) : base(repository, localizer, logger)
         {
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.IndicatorViewerPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ActionIndicatorViewerPermission)]
         public override IActionResult Index(int sheet = 1, int limit = 25)
         {
             return base.Index(sheet, limit);
@@ -27,7 +27,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
             return NotFound();
         }
 
-        public override IActionResult Create(IndicatorInputModel model)
+        public override IActionResult Create(ActionIndicatorInputModel model)
         {
             return NotFound();
         }
@@ -37,30 +37,30 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
             return NotFound();
         }
 
-        public override IActionResult Edit(IndicatorInputModel model)
+        public override IActionResult Edit(ActionIndicatorInputModel model)
         {
             return NotFound();
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.IndicatorEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ActionIndicatorEditorPermission)]
         public override IActionResult Enable(System.Guid key)
         {
             return base.Enable(key);
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.IndicatorEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ActionIndicatorEditorPermission)]
         public override IActionResult Disable(System.Guid key)
         {
             return base.Disable(key);
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.IndicatorEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ActionIndicatorEditorPermission)]
         public override IActionResult Archive(System.Guid key)
         {
             return base.Archive(key);
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.IndicatorEditorPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ActionIndicatorEditorPermission)]
         public override IActionResult Unarchive(System.Guid key)
         {
             return base.Unarchive(key);
@@ -71,7 +71,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
             return NotFound();
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.IndicatorRemoverPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ActionIndicatorRemoverPermission)]
         public override IActionResult Delete(IndicatorDisplayViewModel model)
         {
             return base.Delete(model);

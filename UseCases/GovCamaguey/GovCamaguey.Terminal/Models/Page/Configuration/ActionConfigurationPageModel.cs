@@ -9,6 +9,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
         public static string NameValidableProperty => nameof(Name);
         public static string IndexValidableProperty => nameof(Index);
         public static string ResponsabilityOrganizationsValidableProperty => nameof(ResponsabilityOrganizations);
+        public static string DescriptionValidableProperty => nameof(Description);
 
         private string name;
         private string description;
@@ -16,7 +17,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 
         public ActionConfigurationPageModel() : this(null) { }
 
-        public ActionConfigurationPageModel(Interop.API.Common.Models.Input.ActionInputModel model, IndicatorDisplayModel[] indicators = null, ActionMonthlyClosureDisplayModel[] monthlyClosures = null) : base(model)
+        public ActionConfigurationPageModel(Interop.API.Common.Models.Input.ActionInputModel model, ActionIndicatorDisplayModel[] indicators = null, ActionMonthlyClosureDisplayModel[] monthlyClosures = null) : base(model)
         {
             if (model != null)
             {
@@ -29,7 +30,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 
                 if (indicators != null)
                 {
-                    Indicators = new ObservableCollection<IndicatorDisplayModel>(indicators.OrderBy(_model => _model.Priority));
+                    Indicators = new ObservableCollection<ActionIndicatorDisplayModel>(indicators.OrderBy(_model => _model.Priority));
                 }
                 
                 if (monthlyClosures != null)
@@ -51,7 +52,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 
         public ObservableCollection<OrganizationDisplayModel> ParticipationOrganizations { get; set; } = [];
 
-        public ObservableCollection<IndicatorDisplayModel> Indicators { get; set; } = [];
+        public ObservableCollection<ActionIndicatorDisplayModel> Indicators { get; set; } = [];
 
         public ObservableCollection<ActionMonthlyClosureDisplayModel> MonthlyClosures { get; set; } = [];
     }

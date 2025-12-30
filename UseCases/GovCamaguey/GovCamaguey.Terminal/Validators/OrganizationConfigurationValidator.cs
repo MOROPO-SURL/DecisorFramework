@@ -7,7 +7,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Validators
         public OrganizationConfigurationValidator()
         {
             RuleFor(model => model.Name)
-                .NotNull();
+                .NotEmpty()
+                .WithName("Nombre");
         }
     }
 }

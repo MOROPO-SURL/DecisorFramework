@@ -4,6 +4,7 @@
     {
         public static string NameValidableProperty => nameof(Name);
         public static string IndexValidableProperty => nameof(Index);
+        public static string DescriptionValidableProperty => nameof(Description);
 
         private string name;
         private string description;

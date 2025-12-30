@@ -1,10 +1,9 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Factories.Configuration
+﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Factories.Configuration;
+
+public class OrganizationConfigurationPageFactory : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.OrganizationDisplayModel, Models.Page.Configuration.OrganizationConfigurationPageModel>
 {
-    public class OrganizationConfigurationPageFactory : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.OrganizationDisplayModel, Models.Page.Configuration.OrganizationConfigurationPageModel>
+    public async System.Threading.Tasks.Task<Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.OrganizationDisplayModel, Interop.API.Common.Models.Display.OrganizationDisplayModel, Models.Page.Configuration.OrganizationConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.OrganizationDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.OrganizationDisplayModel model)
     {
-        public async System.Threading.Tasks.Task<Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.OrganizationDisplayModel, Interop.API.Common.Models.Display.OrganizationDisplayModel, Models.Page.Configuration.OrganizationConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.OrganizationDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.OrganizationDisplayModel model)
-        {
-            return new UI.Pages.Configuration.OrganizationConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.OrganizationConfigurationPageModel(model));
-        }
+        return new UI.Pages.Configuration.OrganizationConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.OrganizationConfigurationPageModel(model));
     }
 }

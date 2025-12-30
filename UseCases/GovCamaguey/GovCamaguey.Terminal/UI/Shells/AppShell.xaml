@@ -66,6 +66,16 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
+        Title="Indicadores Globales"
+        ContentTemplate="{DataTemplate local_manage_pages:GlobalIndicatorsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF4C5;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
         Title="Lineamientos"
         ContentTemplate="{DataTemplate local_manage_pages:GuidelinesManagePage}">
         <ShellContent.Icon>

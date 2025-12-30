@@ -18,7 +18,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 
         public OrganizationDisplayModel[] ParticipationOrganizations { get; set; }
 
-        public IndicatorDisplayModel[] Indicators { get; set; }
+        public ActionIndicatorDisplayModel[] Indicators { get; set; }
 
         public ActionMonthlyClosureDisplayModel[] MonthlyClosures { get; set; }
 
@@ -50,7 +50,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 
             Indicators = entity.Indicators.OrderBy(_entity => _entity.Priority).Select(_entity =>
             {
-                var model = new IndicatorDisplayModel();
+                var model = new ActionIndicatorDisplayModel();
 
                 model.Import(_entity);
 

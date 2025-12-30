@@ -70,8 +70,14 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
         public DbSet<ActionMonthlyClosure> ActionMonthlyClosures { get; set; }
         public DbSet<ActionOrganizationResponsabilityBridge> ActionOrganizationResponsabilityBridges { get; set; }
         public DbSet<ActionOrganizationParticipationBridge> ActionOrganizationParticipationBridges { get; set; }
-        public DbSet<Indicator> Indicators { get; set; }
-        public DbSet<IndicatorMontlyPlan> IndicatorMontlyPlans { get; set; }
-        public DbSet<Result> Results { get; set; }
+        public DbSet<ActionIndicator> ActionIndicators { get; set; }
+        public DbSet<ActionIndicatorMontlyPlan> ActionIndicatorMontlyPlans { get; set; }
+        public DbSet<ProyectionIndicator> ProyectionIndicators { get; set; }
+        public DbSet<ProyectionIndicatorMontlyPlan> ProyectionIndicatorMontlyPlans { get; set; }
+        public DbSet<ObjectiveIndicator> ObjectiveIndicators { get; set; }
+        public DbSet<ObjectiveIndicatorMontlyPlan> ObjectiveIndicatorMontlyPlans { get; set; }
+        public DbSet<GlobalIndicator> GlobalIndicators { get; set; }
+        public DbSet<GlobalIndicatorMontlyPlan> GlobalIndicatorMontlyPlans { get; set; }
+        public DbSet<ActionIndicatorResult> ActionIndicatorResults { get; set; }
     }
 }

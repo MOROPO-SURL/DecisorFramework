@@ -7,10 +7,14 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Validators
         public UnitMeasurementConfigurationValidator()
         {
             RuleFor(model => model.Name)
-                .NotNull();
+                .NotEmpty()
+                .MaximumLength(255)
+                .WithName("Nombre");
 
             RuleFor(model => model.Symbol)
-                .NotNull();
+                .NotNull()
+                .MaximumLength(10)
+                .WithName("Símbolo");
         }
     }
 }

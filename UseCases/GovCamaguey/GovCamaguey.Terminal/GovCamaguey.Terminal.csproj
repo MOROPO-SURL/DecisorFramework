@@ -86,7 +86,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="UI\Pages\Configuration\ActionIndicatorConfigurationPage.xaml.cs">
+	    <DependentUpon>ActionIndicatorConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\Configuration\ActionIndicatorMontlyPlanConfigurationPage.xaml.cs">
+	    <DependentUpon>ActionIndicatorMontlyPlanConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Views\Card\ActionIndicatorDeepCardView.xaml.cs">
+	    <DependentUpon>ActionIndicatorDeepCardView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="UI\Pages\Configuration\GlobalIndicatorConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Configuration\GlobalIndicatorMontlyPlanConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Detail\GlobalIndicatorDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\GovernanceDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Manage\GlobalIndicatorsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

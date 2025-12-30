@@ -14,8 +14,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
         public int Index { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(1024)]
         public string Name { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(5120)]
         public string Description { get; set; }
     }
 }

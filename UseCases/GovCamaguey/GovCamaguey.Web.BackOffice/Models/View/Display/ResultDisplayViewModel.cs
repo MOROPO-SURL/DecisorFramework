@@ -4,7 +4,7 @@
     {
         public IndicatorDisplayViewModel Indicator { get; set; }
 
-        public override void Import(Prototype.Persistence.Entities.Result entity)
+        public override void Import(Prototype.Persistence.Entities.ActionIndicatorResult entity)
         {
             base.Import(entity);
 

@@ -22,7 +22,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.View
 
         public OrganizationDisplayModel[] ParticipationOrganizations { get; set; }
 
-        public IndicatorDisplayModel[] Indicators { get; set; }
+        public ActionIndicatorDisplayModel[] Indicators { get; set; }
 
         public ActionMonthlyClosureDisplayModel[] MonthlyClosures { get; set; }
 

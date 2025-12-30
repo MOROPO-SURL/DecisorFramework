@@ -66,6 +66,10 @@
                 <VerticalStackLayout Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="180" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:GuidelineConfigurationPageModel.DescriptionValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:GuidelineConfigurationPageModel.DescriptionValidableProperty}}"
+                        TextColor="IndianRed" />
                 </VerticalStackLayout>
             </StackLayout>
         </ScrollView>

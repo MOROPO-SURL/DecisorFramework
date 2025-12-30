@@ -7,10 +7,12 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Validators
         public PersonConfigurationValidator()
         {
             RuleFor(model => model.Name)
-                .NotNull();
+                .NotEmpty()
+                .WithName("Nombre");
 
             RuleFor(model => model.Sex)
-                .NotNull();
+                .NotNull()
+                .WithName("Sexo");
         }
     }
 }

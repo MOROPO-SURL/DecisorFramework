@@ -10,8 +10,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
         public int Index { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(1024)]
         public string Name { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(5120)]
         public string Description { get; set; }
 
         public GuidelineDisplayModel[] Guidelines { get; set; }

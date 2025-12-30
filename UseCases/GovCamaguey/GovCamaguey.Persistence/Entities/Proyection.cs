@@ -15,8 +15,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
         public int Index { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(1024)]
         public string Name { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(5120)]
         public string Description { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ObjectiveId))]
@@ -32,5 +34,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
         public ICollection<ProyectionGuidelineBridge> GuidelineBridges { get; set; } = new List<ProyectionGuidelineBridge>();
 
         public ICollection<Action> Actions { get; set; } = new List<Action>();
+
+        public ICollection<ProyectionIndicator> Indicators { get; set; } = new List<ProyectionIndicator>();
     }
 }

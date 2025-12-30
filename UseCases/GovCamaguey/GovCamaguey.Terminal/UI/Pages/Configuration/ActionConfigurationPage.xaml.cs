@@ -9,9 +9,9 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration;
 
 public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ActionInputModel, ActionInputModel, Models.Page.Configuration.ActionConfigurationPageModel>
 {
-    private readonly List<IndicatorInputModel> editionIndicators = [];
-    private readonly List<IndicatorInputModel> incomingIndicators = [];
-    private readonly List<IndicatorDisplayModel> outgoingIndicators = [];
+    private readonly List<ActionIndicatorInputModel> editionIndicators = [];
+    private readonly List<ActionIndicatorInputModel> incomingIndicators = [];
+    private readonly List<ActionIndicatorDisplayModel> outgoingIndicators = [];
 
     private readonly List<ActionMonthlyClosureInputModel> editionMonthlyClosures = [];
     private readonly List<ActionMonthlyClosureInputModel> incomingMonthlyClosures = [];
@@ -22,7 +22,7 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
         InitializeComponent();
     }
 
-    public ActionConfigurationPage(System.Action<ActionInputModel> successAction, Models.Page.Configuration.ActionConfigurationPageModel model, List<IndicatorInputModel> editionIndicators, List<IndicatorInputModel> incomingIndicators, List<IndicatorDisplayModel> outgoingIndicators, List<ActionMonthlyClosureInputModel> editionMonthlyClosures, List<ActionMonthlyClosureInputModel> incomingMonthlyClosures, List<ActionMonthlyClosureDisplayModel> outgoingMonthlyClosures) : this(successAction, model)
+    public ActionConfigurationPage(System.Action<ActionInputModel> successAction, Models.Page.Configuration.ActionConfigurationPageModel model, List<ActionIndicatorInputModel> editionIndicators, List<ActionIndicatorInputModel> incomingIndicators, List<ActionIndicatorDisplayModel> outgoingIndicators, List<ActionMonthlyClosureInputModel> editionMonthlyClosures, List<ActionMonthlyClosureInputModel> incomingMonthlyClosures, List<ActionMonthlyClosureDisplayModel> outgoingMonthlyClosures) : this(successAction, model)
     {
         this.editionIndicators = editionIndicators;
         this.incomingIndicators = incomingIndicators;
@@ -83,7 +83,7 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
     {
         var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
 
-        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.IndicatorCreatorPermission)))
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ActionIndicatorCreatorPermission)))
         {
             DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
 
@@ -98,7 +98,7 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
             {
                 var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-                var model = new Models.Page.Configuration.IndicatorConfigurationPageModel(null)
+                var model = new Models.Page.Configuration.ActionIndicatorConfigurationPageModel(null)
                 {
                     AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetEnabledAsync()
                 };
@@ -107,7 +107,7 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new IndicatorConfigurationPage(IndicatorCreateSuccess_Callback, model));
+                    this.NavigationPushPageAsync(new ActionIndicatorConfigurationPage(IndicatorCreateSuccess_Callback, model));
                 });
             }
             catch (System.Exception exception)
@@ -124,24 +124,24 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
     {
         var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
 
-        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.IndicatorEditorPermission)))
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ActionIndicatorEditorPermission)))
         {
             DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
 
             return;
         }
 
-        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as IndicatorDisplayModel;
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ActionIndicatorDisplayModel;
         
         ConcreteBindingContext.IsBusy = true;
 
-        System.Threading.Tasks.Task.Run(async () =>
+        System.Threading.Tasks.Task.Run((System.Func<System.Threading.Tasks.Task>)(async () =>
         {
             try
             {
                 var model = incomingIndicators.FirstOrDefault(_model => _model.Id == target.Id) ?? editionIndicators.FirstOrDefault(_model => _model.Id == target.Id);
 
-                model ??= new IndicatorInputModel
+                model ??= new ActionIndicatorInputModel
                 {
                     Id = target.Id,
                     Name = target.Name,
@@ -153,17 +153,17 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
 
                 var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-                var configurationModel = new Models.Page.Configuration.IndicatorConfigurationPageModel(model, target.MontlyPlans)
+                var configurationModel = new Models.Page.Configuration.ActionIndicatorConfigurationPageModel(model, target.MontlyPlans)
                 {
                     AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetEnabledAsync()
                 };
 
-                Dispatcher.Dispatch(() =>
+                Dispatcher.Dispatch((System.Action)(() =>
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new IndicatorConfigurationPage(IndicatorEditSuccess_Callback, configurationModel, model.EditionMontlyPlans, model.IncomingMontlyPlans, model.OutgoingMontlyPlans));
-                });
+                    this.NavigationPushPageAsync((Microsoft.Maui.Controls.Page)new ActionIndicatorConfigurationPage(IndicatorEditSuccess_Callback, configurationModel, model.EditionMontlyPlans, model.IncomingMontlyPlans, model.OutgoingMontlyPlans));
+                }));
             }
             catch (System.Exception exception)
             {
@@ -172,14 +172,14 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
                 });
             }
-        });
+        }));
     }
 
     private void IndicatorRemotionButton_Clicked(object sender, System.EventArgs e)
     {
         var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
 
-        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.IndicatorRemoverPermission)))
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ActionIndicatorRemoverPermission)))
         {
             DisplayAlert("Aviso", "Su usuario no cuenta con permisos para retirar elementos registrados de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
 
@@ -192,7 +192,7 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
 
             Dispatcher.Dispatch(() =>
             {
-                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as IndicatorDisplayModel;
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ActionIndicatorDisplayModel;
 
                 var handled = false;
 
@@ -330,11 +330,11 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
         });
     }
 
-    private void IndicatorCreateSuccess_Callback(IndicatorInputModel model)
+    private void IndicatorCreateSuccess_Callback(ActionIndicatorInputModel model)
     {
         incomingIndicators.Add(model);
 
-        ConcreteBindingContext.Indicators.Add(new IndicatorDisplayModel
+        ConcreteBindingContext.Indicators.Add(new ActionIndicatorDisplayModel
         {
             Id = model.Id,
             Priority = model.Priority,
@@ -347,7 +347,7 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
         hasChangesFlag = true;
     }
 
-    private void IndicatorEditSuccess_Callback(IndicatorInputModel model)
+    private void IndicatorEditSuccess_Callback(ActionIndicatorInputModel model)
     {
         var handled = false;
 
@@ -397,7 +397,7 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
 
             if (item.Id != model.Id) continue;
 
-            ConcreteBindingContext.Indicators[index] = new IndicatorDisplayModel
+            ConcreteBindingContext.Indicators[index] = new ActionIndicatorDisplayModel
             {
                 Id = model.Id,
                 Priority = model.Priority,

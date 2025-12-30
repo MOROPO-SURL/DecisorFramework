@@ -77,7 +77,7 @@ public partial class GovernanceStatusPage : Microsoft.Maui.Controls.ContentPage
         var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
         var objectivesAPIConnectClient = new Interop.API.Connect.Clients.ObjectivesAPIConnectClient(httpClientHelperProvider);
-        var resultsAPIConnectClient = new Interop.API.Connect.Clients.ResultsAPIConnectClient(httpClientHelperProvider);
+        var resultsAPIConnectClient = new Interop.API.Connect.Clients.ActionIndicatorResultsAPIConnectClient(httpClientHelperProvider);
 
         objectivesAPIConnectClient.GetAsync(objectiveId).ContinueWith(task =>
         {
@@ -92,7 +92,7 @@ public partial class GovernanceStatusPage : Microsoft.Maui.Controls.ContentPage
                 }
                 else
                 {
-                    var indicators = new List<IndicatorDisplayModel>();
+                    var indicators = new List<ActionIndicatorDisplayModel>();
 
                     var model = task.Result;
 

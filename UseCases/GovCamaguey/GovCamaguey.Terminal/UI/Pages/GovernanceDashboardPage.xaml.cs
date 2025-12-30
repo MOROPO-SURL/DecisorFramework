@@ -66,7 +66,7 @@ public partial class GovernanceDashboardPage : Microsoft.Maui.Controls.ContentPa
         var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
         var objectivesAPIConnectClient = new Interop.API.Connect.Clients.ObjectivesAPIConnectClient(httpClientHelperProvider);
-        var resultsAPIConnectClient = new Interop.API.Connect.Clients.ResultsAPIConnectClient(httpClientHelperProvider);
+        var resultsAPIConnectClient = new Interop.API.Connect.Clients.ActionIndicatorResultsAPIConnectClient(httpClientHelperProvider);
 
         objectivesAPIConnectClient.GetAsync().ContinueWith(async task =>
         {

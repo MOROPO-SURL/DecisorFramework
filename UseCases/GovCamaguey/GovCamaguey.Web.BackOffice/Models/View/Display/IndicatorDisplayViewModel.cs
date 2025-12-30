@@ -1,12 +1,12 @@
 ﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Models.View.Display
 {
-    public class IndicatorDisplayViewModel : Interop.API.Common.Models.Display.IndicatorDisplayModel
+    public class IndicatorDisplayViewModel : Interop.API.Common.Models.Display.ActionIndicatorDisplayModel
     {
         public bool Archived { get; set; }
 
         public ActionDisplayViewModel Action { get; set; }
 
-        public override void Import(Prototype.Persistence.Entities.Indicator entity)
+        public override void Import(Prototype.Persistence.Entities.ActionIndicator entity)
         {
             base.Import(entity);
 

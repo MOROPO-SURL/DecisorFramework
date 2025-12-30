@@ -47,17 +47,34 @@
                     Margin="8"
                     Spacing="6"
                     Orientation="Horizontal">
-                    <VerticalStackLayout 
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Número" />
-                        <Entry 
-                            WidthRequest="96"
+                   <Grid
+                        WidthRequest="108"
+                        ColumnSpacing="6" RowSpacing="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.Row="0"
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Número" />
+                        <Entry
+                            Grid.Row="1"
+                            BackgroundColor="Transparent"
+                            IsReadOnly="True"
                             Text="{Binding Index}" />
+                        <Stepper
+                            Grid.Row="1"
+                            Margin="0,0,6,0"
+                            HorizontalOptions="End" VerticalOptions="Center"
+                            Minimum="1"
+                            Value="{Binding Index}" />
                         <Label
+                            Grid.Row="2"
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:ProyectionConfigurationPageModel.IndexValidableProperty}}"
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:ProyectionConfigurationPageModel.IndexValidableProperty}}"
                             TextColor="IndianRed" />
-                    </VerticalStackLayout>
+                    </Grid>
                     <VerticalStackLayout 
                         HorizontalOptions="FillAndExpand"
                         Spacing="6">
@@ -74,6 +91,10 @@
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="120" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:ProyectionConfigurationPageModel.DescriptionValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:ProyectionConfigurationPageModel.DescriptionValidableProperty}}"
+                        TextColor="IndianRed" />
                 </VerticalStackLayout>
                 <FlexLayout
                     Wrap="Wrap"

@@ -35,6 +35,7 @@
 		<PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="6.35.0" />
 	</ItemGroup>
 	<ItemGroup>
+	  <ProjectReference Include="..\..\..\Core\Core.Persistence.ORM.EF\Core.Persistence.ORM.EF.csproj" />
 	  <ProjectReference Include="..\..\..\Core\Core.Presentation.Web.Backend\Core.Presentation.Web.Backend.csproj" />
 	  <ProjectReference Include="..\..\..\Core\Core.Presentation.Web.Frontend\Core.Presentation.Web.Frontend.csproj" />
 	  <ProjectReference Include="..\GovCamaguey.Interop.API.Common\GovCamaguey.Interop.API.Common.csproj" />

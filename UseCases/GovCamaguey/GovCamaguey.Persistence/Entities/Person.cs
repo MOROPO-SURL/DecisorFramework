@@ -14,6 +14,7 @@
         public Framework.Guama.Identity.Persistence.Entities.PersonIdentity Identity { get; set; }
         public System.Guid IdentityId { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(255)]
         public string Role { get; set; }
     }
 }

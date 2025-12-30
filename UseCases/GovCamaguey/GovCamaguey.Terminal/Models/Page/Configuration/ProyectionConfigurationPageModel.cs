@@ -9,6 +9,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
         public static string NameValidableProperty => nameof(Name);
         public static string IndexValidableProperty => nameof(Index);
         public static string ResponsabilityOrganizationsValidableProperty => nameof(ResponsabilityOrganizations);
+        public static string DescriptionValidableProperty => nameof(Description);
 
         private string name;
         private string description;

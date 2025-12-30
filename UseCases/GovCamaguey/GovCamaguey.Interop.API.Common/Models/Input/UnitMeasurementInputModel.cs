@@ -5,9 +5,11 @@
         public System.Guid Id { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(255)]
         public string Name { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(10)]
         public string Symbol { get; set; }
 
         public int Priority { get; set; }

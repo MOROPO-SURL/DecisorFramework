@@ -10,9 +10,9 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
     [Microsoft.AspNetCore.Authorization.Authorize]
     [RequirePermissions(Framework.Guama.Core.Security.Presentation.Constants.Permissions.ShellManager)]
     [Area("governance")]
-    public class ResultsController : Framework.Guama.Core.Presentation.Web.Backend.Controllers.Contract.AbstractEntityManagementController<Result, long, ResultInputModel, ResultDisplayViewModel>
+    public class ResultsController : Framework.Guama.Core.Presentation.Web.Backend.Controllers.Contract.AbstractEntityManagementController<ActionIndicatorResult, long, ResultInputModel, ResultDisplayViewModel>
     {
-        public ResultsController(Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Result, long> repository, Microsoft.Extensions.Localization.IStringLocalizer<ResultsController> localizer, ILogger<ResultsController> logger) : base(repository, localizer, logger)
+        public ResultsController(Framework.Guama.Core.Persistence.Repositories.IEntityRepository<ActionIndicatorResult, long> repository, Microsoft.Extensions.Localization.IStringLocalizer<ResultsController> localizer, ILogger<ResultsController> logger) : base(repository, localizer, logger)
         {
         }
 

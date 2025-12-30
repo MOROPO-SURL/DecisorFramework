@@ -8,8 +8,6 @@ using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
 using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Factories.Configuration;
 using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Factories.Detail;
 using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration;
-using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration;
-using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Detail;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal
@@ -42,11 +40,13 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal
                    .AddSingleton<IDetailContentPageFactoryFacade<PersonDisplayModel>, PersonDetailPageFactory>()
                    .AddSingleton<IDetailContentPageFactoryFacade<OrganizationDisplayModel>, OrganizationDetailPageFactory>()
                    .AddSingleton<IDetailContentPageFactoryFacade<ObjectiveDisplayModel>, ObjectiveDetailPageFactory>()
+                   .AddSingleton<IDetailContentPageFactoryFacade<GlobalIndicatorDisplayModel>, GlobalIndicatorDetailPageFactory>()
                    .AddSingleton<IConfigurationContentPageFactoryFacade<GuidelineDisplayModel, GuidelineConfigurationPageModel>, GuidelineConfigurationPageFactory>()
                    .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel>, UnitMeasurementConfigurationPageFactory>()
                    .AddSingleton<IConfigurationContentPageFactoryFacade<PersonDisplayModel, PersonConfigurationPageModel>, PersonConfigurationPageFactory>()
                    .AddSingleton<IConfigurationContentPageFactoryFacade<OrganizationDisplayModel, OrganizationConfigurationPageModel>, OrganizationConfigurationPageFactory>()
-                   .AddSingleton<IConfigurationContentPageFactoryFacade<ObjectiveDisplayModel, ObjectiveConfigurationPageModel>, ObjectiveConfigurationPageFactory>();
+                   .AddSingleton<IConfigurationContentPageFactoryFacade<ObjectiveDisplayModel, ObjectiveConfigurationPageModel>, ObjectiveConfigurationPageFactory>()
+                   .AddSingleton<IConfigurationContentPageFactoryFacade<GlobalIndicatorDisplayModel, GlobalIndicatorConfigurationPageModel>, GlobalIndicatorConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

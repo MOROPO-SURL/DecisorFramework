@@ -1,9 +1,15 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF.Repositories
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF.Repositories;
+
+public class GuidelineRepository : Framework.Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Prototype.Persistence.Entities.Guideline, System.Guid>
 {
-    public class GuidelineRepository : Framework.Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Prototype.Persistence.Entities.Guideline, System.Guid>
+    public GuidelineRepository(DbContext dbContext) : base(dbContext)
     {
-        public GuidelineRepository(Microsoft.EntityFrameworkCore.DbContext dbContext) : base(dbContext)
-        {
-        }
+    }
+
+    protected override System.Linq.IQueryable<Prototype.Persistence.Entities.Guideline> GetQueryableDbSet()
+    {
+        return base.GetQueryableDbSet().AsNoTracking();
     }
 }

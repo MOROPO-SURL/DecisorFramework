@@ -7,368 +7,367 @@ using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 using System.Linq;
 
-namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend;
+
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+[Route("api/governance/[controller]")]
+[ApiController]
+public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Objective, System.Guid, ObjectiveInputModel, ObjectiveDisplayModel>
 {
-    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
-    [Route("api/governance/[controller]")]
-    [ApiController]
-    public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Objective, System.Guid, ObjectiveInputModel, ObjectiveDisplayModel>
+    private readonly IEntityRepository<Proyection, System.Guid> proyectionRepository;
+    private readonly IEntityRepository<Action, System.Guid> actionRepository;
+    private readonly IEntityRepository<ActionIndicator, System.Guid> indicatorRepository;
+    private readonly IEntityRepository<ActionIndicatorMontlyPlan, System.Guid> indicatorMontlyPlanRepository;
+    private readonly IEntityRepository<ActionMonthlyClosure, System.Guid> actionMonthlyClosureRepository;
+
+    public ObjectivesController(IEntityRepository<ActionMonthlyClosure, System.Guid> actionMonthlyClosureRepository, IEntityRepository<ActionIndicatorMontlyPlan, System.Guid> indicatorMontlyPlanRepository, IEntityRepository<ActionIndicator, System.Guid> indicatorRepository, IEntityRepository<Action, System.Guid> actionRepository, IEntityRepository<Proyection, System.Guid> proyectionRepository, IEntityRepository<Objective, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, Microsoft.Extensions.Logging.ILogger<ObjectivesController> logger)
+        : base(repository, localizer, logger)
     {
-        private readonly IEntityRepository<Proyection, System.Guid> proyectionRepository;
-        private readonly IEntityRepository<Action, System.Guid> actionRepository;
-        private readonly IEntityRepository<Indicator, System.Guid> indicatorRepository;
-        private readonly IEntityRepository<IndicatorMontlyPlan, System.Guid> indicatorMontlyPlanRepository;
-        private readonly IEntityRepository<ActionMonthlyClosure, System.Guid> actionMonthlyClosureRepository;
+        this.proyectionRepository = proyectionRepository;
+        this.actionRepository = actionRepository;
+        this.indicatorRepository = indicatorRepository;
+        this.indicatorMontlyPlanRepository = indicatorMontlyPlanRepository;
+        this.actionMonthlyClosureRepository = actionMonthlyClosureRepository;
+    }
 
-        public ObjectivesController(IEntityRepository<ActionMonthlyClosure, System.Guid> actionMonthlyClosureRepository, IEntityRepository<IndicatorMontlyPlan, System.Guid> indicatorMontlyPlanRepository, IEntityRepository<Indicator, System.Guid> indicatorRepository, IEntityRepository<Action, System.Guid> actionRepository, IEntityRepository<Proyection, System.Guid> proyectionRepository, IEntityRepository<Objective, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, Microsoft.Extensions.Logging.ILogger<ObjectivesController> logger)
-            : base(repository, localizer, logger)
+    protected override System.Linq.Expressions.Expression<System.Func<Objective, bool>> GetGlobalSelector()
+    {
+        return entity => !entity.Archived;
+    }
+
+    protected override System.Func<Objective, object> GetOrderSelector()
+    {
+        return entity => entity.Index;
+    }
+
+    protected override ObjectiveDisplayModel EntityToDisplayModel(Objective entity)
+    {
+        var model = base.EntityToDisplayModel(entity);
+
+        if (model.Responsible.Identity.Image != null)
         {
-            this.proyectionRepository = proyectionRepository;
-            this.actionRepository = actionRepository;
-            this.indicatorRepository = indicatorRepository;
-            this.indicatorMontlyPlanRepository = indicatorMontlyPlanRepository;
-            this.actionMonthlyClosureRepository = actionMonthlyClosureRepository;
+            model.Responsible.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Responsible.Identity.Image.ContentType);
         }
 
-        protected override System.Linq.Expressions.Expression<System.Func<Objective, bool>> GetGlobalSelector()
+        foreach (var proyection in entity.Proyections)
         {
-            return entity => !entity.Archived;
-        }
+            var item = model.Proyections.First(_model => _model.Id == proyection.Id);
 
-        protected override System.Func<Objective, object> GetOrderSelector()
-        {
-            return entity => entity.Index;
-        }
-
-        protected override ObjectiveDisplayModel EntityToDisplayModel(Objective entity)
-        {
-            var model = base.EntityToDisplayModel(entity);
-
-            if (model.Responsible.Identity.Image != null)
+            foreach (var bridge in proyection.OrganizationResponsabilityBridges)
             {
-                model.Responsible.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Responsible.Identity.Image.ContentType);
+                if (bridge.Stern.Identity.Image == null) continue;
+
+                var target = item.ResponsabilityOrganizations.First(_model => _model.Id == bridge.SternId);
+
+                target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
             }
 
-            foreach (var proyection in entity.Proyections)
+            foreach (var bridge in proyection.OrganizationParticipationBridges)
             {
-                var item = model.Proyections.First(_model => _model.Id == proyection.Id);
+                if (bridge.Stern.Identity.Image == null) continue;
 
-                foreach (var bridge in proyection.OrganizationResponsabilityBridges)
+                var target = item.ParticipationOrganizations.First(_model => _model.Id == bridge.SternId);
+
+                target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
+            }
+
+            foreach (var action in proyection.Actions)
+            {
+                var _item = item.Actions.First(_model => _model.Id == action.Id);
+
+                foreach (var bridge in action.OrganizationResponsabilityBridges)
                 {
                     if (bridge.Stern.Identity.Image == null) continue;
 
-                    var target = item.ResponsabilityOrganizations.First(_model => _model.Id == bridge.SternId);
+                    var target = _item.ResponsabilityOrganizations.First(_model => _model.Id == bridge.SternId);
 
                     target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
                 }
 
-                foreach (var bridge in proyection.OrganizationParticipationBridges)
+                foreach (var bridge in action.OrganizationParticipationBridges)
                 {
                     if (bridge.Stern.Identity.Image == null) continue;
 
-                    var target = item.ParticipationOrganizations.First(_model => _model.Id == bridge.SternId);
+                    var target = _item.ParticipationOrganizations.First(_model => _model.Id == bridge.SternId);
 
                     target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
                 }
-
-                foreach (var action in proyection.Actions)
-                {
-                    var _item = item.Actions.First(_model => _model.Id == action.Id);
-
-                    foreach (var bridge in action.OrganizationResponsabilityBridges)
-                    {
-                        if (bridge.Stern.Identity.Image == null) continue;
-
-                        var target = _item.ResponsabilityOrganizations.First(_model => _model.Id == bridge.SternId);
-
-                        target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
-                    }
-
-                    foreach (var bridge in action.OrganizationParticipationBridges)
-                    {
-                        if (bridge.Stern.Identity.Image == null) continue;
-
-                        var target = _item.ParticipationOrganizations.First(_model => _model.Id == bridge.SternId);
-
-                        target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
-                    }
-                }
-            }
-
-            return model;
-        }
-
-        public override ActionResult Delete(System.Guid key)
-        {
-            return NotFound();
-        }
-
-        public override ActionResult Enable(System.Guid key)
-        {
-            return NotFound(key);
-        }
-
-        public override ActionResult Disable(System.Guid key)
-        {
-            return NotFound();
-        }
-
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission)]
-        public override ActionResult<ObjectiveDisplayModel[]> Get()
-        {
-            return base.Get();
-        }
-
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission)]
-        public override ActionResult<ObjectiveDisplayModel> Get(System.Guid key)
-        {
-            return base.Get(key);
-        }
-
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission)]
-        public override ActionResult<PaginationModel<ObjectiveDisplayModel>> GetPaginate(int sheet = 1, int limit = 25)
-        {
-            return base.GetPaginate(sheet, limit);
-        }
-
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveCreatorPermission)]
-        public override ActionResult Create([FromBody] ObjectiveInputModel model)
-        {
-            return base.Create(model);
-        }
-
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveEditorPermission)]
-        public override ActionResult Edit([FromBody] ObjectiveInputModel model)
-        {
-            return base.Edit(model);
-        }
-
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveRemoverPermission)]
-        public override ActionResult Archive(System.Guid key)
-        {
-            return base.Archive(key);
-        }
-
-        protected override void PreCreate(Objective entity, ObjectiveInputModel model)
-        {
-            base.PreCreate(entity, model);
-
-            foreach (var _model in model.IncomingProyections)
-            {
-                var _entity = _model.Export();
-
-                _entity.ObjectiveId = entity.Id;
-
-                proyectionRepository.Add(_entity, User.Identity.Name, false);
-
-                ExtendCreate(_entity, _model);
             }
         }
 
-        protected override void PreEdit(Objective entity, ObjectiveInputModel model)
+        return model;
+    }
+
+    public override ActionResult Delete(System.Guid key)
+    {
+        return NotFound();
+    }
+
+    public override ActionResult Enable(System.Guid key)
+    {
+        return NotFound(key);
+    }
+
+    public override ActionResult Disable(System.Guid key)
+    {
+        return NotFound();
+    }
+
+    [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission)]
+    public override ActionResult<ObjectiveDisplayModel[]> Get()
+    {
+        return base.Get();
+    }
+
+    [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission)]
+    public override ActionResult<ObjectiveDisplayModel> Get(System.Guid key)
+    {
+        return base.Get(key);
+    }
+
+    [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission)]
+    public override ActionResult<PaginationModel<ObjectiveDisplayModel>> GetPaginate(int sheet = 1, int limit = 25)
+    {
+        return base.GetPaginate(sheet, limit);
+    }
+
+    [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveCreatorPermission)]
+    public override ActionResult Create([FromBody] ObjectiveInputModel model)
+    {
+        return base.Create(model);
+    }
+
+    [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveEditorPermission)]
+    public override ActionResult Edit([FromBody] ObjectiveInputModel model)
+    {
+        return base.Edit(model);
+    }
+
+    [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveRemoverPermission)]
+    public override ActionResult Archive(System.Guid key)
+    {
+        return base.Archive(key);
+    }
+
+    protected override void PreCreate(Objective entity, ObjectiveInputModel model)
+    {
+        base.PreCreate(entity, model);
+
+        foreach (var _model in model.IncomingProyections)
         {
-            base.PreEdit(entity, model);
+            var _entity = _model.Export();
 
-            foreach (var _model in model.OutgoingProyections)
-            {
-                var _entity = entity.Proyections.First(bridge => bridge.Id == _model.Id);
+            _entity.ObjectiveId = entity.Id;
 
-                _entity.Archived = true;
+            proyectionRepository.Add(_entity, User.Identity.Name, false);
 
-                proyectionRepository.Update(_entity, User.Identity.Name, false);
-            }
+            ExtendCreate(_entity, _model);
+        }
+    }
 
-            foreach (var _model in model.EditionProyections)
-            {
-                var _entity = entity.Proyections.First(bridge => bridge.Id == _model.Id);
+    protected override void PreEdit(Objective entity, ObjectiveInputModel model)
+    {
+        base.PreEdit(entity, model);
 
-                _model.Mergue(_entity);
+        foreach (var _model in model.OutgoingProyections)
+        {
+            var _entity = entity.Proyections.First(bridge => bridge.Id == _model.Id);
 
-                proyectionRepository.Update(_entity, User.Identity.Name, false);
+            _entity.Archived = true;
 
-                ExtendEdit(_entity, _model);
-            }
-
-            foreach (var _model in model.IncomingProyections)
-            {
-                var _entity = _model.Export();
-
-                _entity.ObjectiveId = entity.Id;
-
-                proyectionRepository.Add(_entity, User.Identity.Name, false);
-
-                ExtendCreate(_entity, _model);
-            }
+            proyectionRepository.Update(_entity, User.Identity.Name, false);
         }
 
-        protected void ExtendCreate(Proyection entity, ProyectionInputModel model)
+        foreach (var _model in model.EditionProyections)
         {
-            foreach (var _model in model.IncomingActions)
-            {
-                var _entity = _model.Export();
+            var _entity = entity.Proyections.First(bridge => bridge.Id == _model.Id);
 
-                _entity.ProyectionId = entity.Id;
+            _model.Mergue(_entity);
 
-                actionRepository.Add(_entity, User.Identity.Name, false);
+            proyectionRepository.Update(_entity, User.Identity.Name, false);
 
-                ExtendCreate(_entity, _model);
-            }
+            ExtendEdit(_entity, _model);
         }
 
-        protected void ExtendEdit(Proyection entity, ProyectionInputModel model)
+        foreach (var _model in model.IncomingProyections)
         {
-            foreach (var _model in model.OutgoingActions)
-            {
-                var _entity = entity.Actions.First(bridge => bridge.Id == _model.Id);
+            var _entity = _model.Export();
 
-                _entity.Archived = true;
+            _entity.ObjectiveId = entity.Id;
 
-                actionRepository.Update(_entity, User.Identity.Name, false);
-            }
+            proyectionRepository.Add(_entity, User.Identity.Name, false);
 
-            foreach (var _model in model.EditionActions)
-            {
-                var _entity = entity.Actions.First(bridge => bridge.Id == _model.Id);
+            ExtendCreate(_entity, _model);
+        }
+    }
 
-                _model.Mergue(_entity);
+    protected void ExtendCreate(Proyection entity, ProyectionInputModel model)
+    {
+        foreach (var _model in model.IncomingActions)
+        {
+            var _entity = _model.Export();
 
-                actionRepository.Update(_entity, User.Identity.Name, false);
+            _entity.ProyectionId = entity.Id;
 
-                ExtendEdit(_entity, _model);
-            }
+            actionRepository.Add(_entity, User.Identity.Name, false);
 
-            foreach (var _model in model.IncomingActions)
-            {
-                var _entity = _model.Export();
+            ExtendCreate(_entity, _model);
+        }
+    }
 
-                _entity.ProyectionId = entity.Id;
+    protected void ExtendEdit(Proyection entity, ProyectionInputModel model)
+    {
+        foreach (var _model in model.OutgoingActions)
+        {
+            var _entity = entity.Actions.First(bridge => bridge.Id == _model.Id);
 
-                actionRepository.Add(_entity, User.Identity.Name, false);
+            _entity.Archived = true;
 
-                ExtendCreate(_entity, _model);
-            }
+            actionRepository.Update(_entity, User.Identity.Name, false);
         }
 
-        protected void ExtendCreate(Action entity, ActionInputModel model)
+        foreach (var _model in model.EditionActions)
         {
-            foreach (var _model in model.IncomingIndicators)
-            {
-                var _entity = _model.Export();
+            var _entity = entity.Actions.First(bridge => bridge.Id == _model.Id);
 
-                _entity.ActionId = entity.Id;
+            _model.Mergue(_entity);
 
-                indicatorRepository.Add(_entity, User.Identity.Name, false);
+            actionRepository.Update(_entity, User.Identity.Name, false);
 
-                ExtendCreate(_entity, _model);
-            }
-
-            foreach (var _model in model.IncomingMonthlyClosures)
-            {
-                var _entity = _model.Export();
-
-                _entity.ActionId = entity.Id;
-
-                actionMonthlyClosureRepository.Add(_entity, User.Identity.Name, false);
-            }
+            ExtendEdit(_entity, _model);
         }
 
-        protected void ExtendEdit(Action entity, ActionInputModel model)
+        foreach (var _model in model.IncomingActions)
         {
-            foreach (var _model in model.OutgoingIndicators)
-            {
-                var _entity = entity.Indicators.First(bridge => bridge.Id == _model.Id);
+            var _entity = _model.Export();
 
-                _entity.Archived = true;
+            _entity.ProyectionId = entity.Id;
 
-                indicatorRepository.Update(_entity, User.Identity.Name, false);
-            }
+            actionRepository.Add(_entity, User.Identity.Name, false);
 
-            foreach (var _model in model.EditionIndicators)
-            {
-                var _entity = entity.Indicators.First(bridge => bridge.Id == _model.Id);
+            ExtendCreate(_entity, _model);
+        }
+    }
 
-                _model.Mergue(_entity);
+    protected void ExtendCreate(Action entity, ActionInputModel model)
+    {
+        foreach (var _model in model.IncomingIndicators)
+        {
+            var _entity = _model.Export();
 
-                indicatorRepository.Update(_entity, User.Identity.Name, false);
+            _entity.ActionId = entity.Id;
 
-                ExtendEdit(_entity, _model);
-            }
+            indicatorRepository.Add(_entity, User.Identity.Name, false);
 
-            foreach (var _model in model.IncomingIndicators)
-            {
-                var _entity = _model.Export();
-
-                _entity.ActionId = entity.Id;
-
-                indicatorRepository.Add(_entity, User.Identity.Name, false);
-
-                ExtendCreate(_entity, _model);
-            }
-
-            foreach (var _model in model.OutgoingMonthlyClosures)
-            {
-                var _entity = entity.MonthlyClosures.First(bridge => bridge.Id == _model.Id);
-
-                actionMonthlyClosureRepository.Delete(_entity, User.Identity.Name, false);
-            }
-
-            foreach (var _model in model.EditionMonthlyClosures)
-            {
-                var _entity = entity.MonthlyClosures.First(bridge => bridge.Id == _model.Id);
-
-                _model.Mergue(_entity);
-
-                actionMonthlyClosureRepository.Update(_entity, User.Identity.Name, false);
-            }
-
-            foreach (var _model in model.IncomingMonthlyClosures)
-            {
-                var _entity = _model.Export();
-
-                _entity.ActionId = entity.Id;
-
-                actionMonthlyClosureRepository.Add(_entity, User.Identity.Name, false);
-            }
+            ExtendCreate(_entity, _model);
         }
 
-        protected void ExtendCreate(Indicator entity, IndicatorInputModel model)
+        foreach (var _model in model.IncomingMonthlyClosures)
         {
-            foreach (var _model in model.IncomingMontlyPlans)
-            {
-                var _entity = _model.Export();
+            var _entity = _model.Export();
 
-                _entity.IndicatorId = entity.Id;
+            _entity.ActionId = entity.Id;
 
-                indicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
-            }
+            actionMonthlyClosureRepository.Add(_entity, User.Identity.Name, false);
+        }
+    }
+
+    protected void ExtendEdit(Action entity, ActionInputModel model)
+    {
+        foreach (var _model in model.OutgoingIndicators)
+        {
+            var _entity = entity.Indicators.First(bridge => bridge.Id == _model.Id);
+
+            _entity.Archived = true;
+
+            indicatorRepository.Update(_entity, User.Identity.Name, false);
         }
 
-        protected void ExtendEdit(Indicator entity, IndicatorInputModel model)
+        foreach (var _model in model.EditionIndicators)
         {
-            foreach (var _model in model.OutgoingMontlyPlans)
-            {
-                var _entity = entity.MontlyPlans.First(bridge => bridge.Id == _model.Id);
+            var _entity = entity.Indicators.First(bridge => bridge.Id == _model.Id);
 
-                indicatorMontlyPlanRepository.Delete(_entity, User.Identity.Name, false);
-            }
+            _model.Mergue(_entity);
 
-            foreach (var _model in model.EditionMontlyPlans)
-            {
-                var _entity = entity.MontlyPlans.First(bridge => bridge.Id == _model.Id);
+            indicatorRepository.Update(_entity, User.Identity.Name, false);
 
-                _model.Mergue(_entity);
+            ExtendEdit(_entity, _model);
+        }
 
-                indicatorMontlyPlanRepository.Update(_entity, User.Identity.Name, false);
-            }
+        foreach (var _model in model.IncomingIndicators)
+        {
+            var _entity = _model.Export();
 
-            foreach (var _model in model.IncomingMontlyPlans)
-            {
-                var _entity = _model.Export();
+            _entity.ActionId = entity.Id;
 
-                _entity.IndicatorId = entity.Id;
+            indicatorRepository.Add(_entity, User.Identity.Name, false);
 
-                indicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
-            }
+            ExtendCreate(_entity, _model);
+        }
+
+        foreach (var _model in model.OutgoingMonthlyClosures)
+        {
+            var _entity = entity.MonthlyClosures.First(bridge => bridge.Id == _model.Id);
+
+            actionMonthlyClosureRepository.Delete(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.EditionMonthlyClosures)
+        {
+            var _entity = entity.MonthlyClosures.First(bridge => bridge.Id == _model.Id);
+
+            _model.Mergue(_entity);
+
+            actionMonthlyClosureRepository.Update(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.IncomingMonthlyClosures)
+        {
+            var _entity = _model.Export();
+
+            _entity.ActionId = entity.Id;
+
+            actionMonthlyClosureRepository.Add(_entity, User.Identity.Name, false);
+        }
+    }
+
+    protected void ExtendCreate(ActionIndicator entity, ActionIndicatorInputModel model)
+    {
+        foreach (var _model in model.IncomingMontlyPlans)
+        {
+            var _entity = _model.Export();
+
+            _entity.IndicatorId = entity.Id;
+
+            indicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
+        }
+    }
+
+    protected void ExtendEdit(ActionIndicator entity, ActionIndicatorInputModel model)
+    {
+        foreach (var _model in model.OutgoingMontlyPlans)
+        {
+            var _entity = entity.MontlyPlans.First(bridge => bridge.Id == _model.Id);
+
+            indicatorMontlyPlanRepository.Delete(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.EditionMontlyPlans)
+        {
+            var _entity = entity.MontlyPlans.First(bridge => bridge.Id == _model.Id);
+
+            _model.Mergue(_entity);
+
+            indicatorMontlyPlanRepository.Update(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.IncomingMontlyPlans)
+        {
+            var _entity = _model.Export();
+
+            _entity.IndicatorId = entity.Id;
+
+            indicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
         }
     }
 }
