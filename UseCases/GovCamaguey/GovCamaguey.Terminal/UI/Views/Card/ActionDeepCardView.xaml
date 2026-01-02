@@ -34,68 +34,134 @@
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
-            <FlexLayout
-                Wrap="Wrap"
-                AlignItems="Start" AlignContent="Start">
-                <VerticalStackLayout 
-                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
-                    Margin="4"
-                    Spacing="6">
-                    <Label 
-                        Style="{StaticResource CaptionFieldLabelStyle}"
-                        Margin="0,16,0,4" 
-                        Text="Responsables" />
-                    <BoxView Color="DimGray" HeightRequest="1" />
-                    <StackLayout BindableLayout.ItemsSource="{Binding ResponsabilityOrganizations}">
-                        <BindableLayout.EmptyView>
-                            <Label
-                                Padding="0,4"
-                                FontAttributes="Italic"
-                                TextColor="DimGray"
-                                Text="Sin elementos que mostrar" />
-                        </BindableLayout.EmptyView>
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
-                                <Frame Margin="0,4" Padding="10">
+            <ContentView>
+                <ContentView.Content>
+                    <OnIdiom x:TypeArguments="View">
+                        <OnIdiom.Default>
+                            <Grid ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <VerticalStackLayout 
+                                    Grid.Column="0"
+                                    Margin="4"
+                                    Spacing="6">
                                     <Label 
-                                        FontSize="Medium"
-                                        LineBreakMode="TailTruncation"
-                                        Text="{Binding Identity.Name}" />
-                                </Frame>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </StackLayout>
-                </VerticalStackLayout>
-                <VerticalStackLayout 
-                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
-                    Margin="4"
-                    Spacing="6">
-                    <Label 
-                        Style="{StaticResource CaptionFieldLabelStyle}"
-                        Margin="0,16,0,4" 
-                        Text="Participantes" />
-                    <BoxView Color="DimGray" HeightRequest="1" />
-                    <StackLayout BindableLayout.ItemsSource="{Binding ParticipationOrganizations}">
-                        <BindableLayout.EmptyView>
-                            <Label
-                                Padding="0,4"
-                                FontAttributes="Italic"
-                                TextColor="DimGray"
-                                Text="Sin elementos que mostrar" />
-                        </BindableLayout.EmptyView>
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
-                                <Frame Margin="0,4" Padding="10">
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Margin="0,16,0,4" 
+                                        Text="Responsables" />
+                                    <BoxView Color="DimGray" HeightRequest="1" /> 
+                                    <StackLayout BindableLayout.ItemsSource="{Binding ResponsabilityOrganizations}">
+                                        <BindableLayout.EmptyView>
+                                            <Label
+                                                Padding="0,4"
+                                                FontAttributes="Italic"
+                                                TextColor="DimGray"
+                                                Text="Sin elementos que mostrar" />
+                                        </BindableLayout.EmptyView>
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
+                                                <Frame Margin="0,4" Padding="10">
+                                                    <Label 
+                                                        FontSize="Medium"
+                                                        Text="{Binding Identity.Name}" />
+                                                </Frame>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    Grid.Column="1"
+                                    Margin="4"
+                                    Spacing="6">
                                     <Label 
-                                        FontSize="Medium"
-                                        LineBreakMode="TailTruncation"
-                                        Text="{Binding Identity.Name}" />
-                                </Frame>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                    </StackLayout>
-                </VerticalStackLayout>
-            </FlexLayout>
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Margin="0,16,0,4" 
+                                        Text="Participantes" />
+                                    <BoxView Color="DimGray" HeightRequest="1" />
+                                    <StackLayout BindableLayout.ItemsSource="{Binding ParticipationOrganizations}">
+                                        <BindableLayout.EmptyView>
+                                            <Label
+                                                Padding="0,4"
+                                                FontAttributes="Italic"
+                                                TextColor="DimGray"
+                                                Text="Sin elementos que mostrar" />
+                                        </BindableLayout.EmptyView>
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
+                                                <Frame Margin="0,4" Padding="10">
+                                                    <Label 
+                                                        FontSize="Medium"
+                                                        Text="{Binding Identity.Name}" />
+                                                </Frame>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>                    
+                                </VerticalStackLayout>
+                            </Grid>
+                        </OnIdiom.Default>
+                        <OnIdiom.Phone>
+                            <VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Margin="0,16,0,4" 
+                                        Text="Responsables" />
+                                    <BoxView Color="DimGray" HeightRequest="1" /> 
+                                    <StackLayout BindableLayout.ItemsSource="{Binding ResponsabilityOrganizations}">
+                                        <BindableLayout.EmptyView>
+                                            <Label
+                                                Padding="0,4"
+                                                FontAttributes="Italic"
+                                                TextColor="DimGray"
+                                                Text="Sin elementos que mostrar" />
+                                        </BindableLayout.EmptyView>
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
+                                                <Frame Margin="0,4" Padding="10">
+                                                    <Label 
+                                                        FontSize="Medium"
+                                                        Text="{Binding Identity.Name}" />
+                                                </Frame>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Margin="0,16,0,4" 
+                                        Text="Participantes" />
+                                    <BoxView Color="DimGray" HeightRequest="1" />
+                                    <StackLayout BindableLayout.ItemsSource="{Binding ParticipationOrganizations}">
+                                        <BindableLayout.EmptyView>
+                                            <Label
+                                                Padding="0,4"
+                                                FontAttributes="Italic"
+                                                TextColor="DimGray"
+                                                Text="Sin elementos que mostrar" />
+                                        </BindableLayout.EmptyView>
+                                        <BindableLayout.ItemTemplate>
+                                            <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
+                                                <Frame Margin="0,4" Padding="10">
+                                                    <Label 
+                                                        FontSize="Medium"
+                                                        Text="{Binding Identity.Name}" />
+                                                </Frame>
+                                            </DataTemplate>
+                                        </BindableLayout.ItemTemplate>
+                                    </StackLayout>                    
+                                </VerticalStackLayout>
+                            </VerticalStackLayout>
+                        </OnIdiom.Phone>
+                    </OnIdiom>
+                </ContentView.Content>
+            </ContentView>
             <Label 
                 Style="{StaticResource CaptionFieldLabelStyle}" 
                 Margin="8,16,8,0" 

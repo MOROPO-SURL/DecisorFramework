@@ -66,7 +66,8 @@
                                 <local_card_views:PersonDefaultCardView BindingContext="{Binding Objective.Responsible}" />
                             </ContentView>
                         </VerticalStackLayout>
-                    </FlexLayout><Label 
+                    </FlexLayout>
+                    <Label 
                         Style="{StaticResource CaptionFieldLabelStyle}" 
                         Margin="8,8,8,0" 
                         Text="Objetivos específicos" />
