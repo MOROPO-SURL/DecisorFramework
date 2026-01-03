@@ -1,52 +1,17 @@
-﻿using System.Collections.ObjectModel;
-using System.Linq;
+﻿using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration;
 
-public class ActionIndicatorConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Input.ActionIndicatorInputModel>
+public class ActionIndicatorConfigurationPageModel : Contract.AbstractIndicatorConfigurationPageModel<Persistence.Entities.ActionIndicator, Interop.API.Common.Models.Input.ActionIndicatorInputModel, Persistence.Entities.ActionIndicatorMontlyPlan, Interop.API.Common.Models.Display.ActionIndicatorMontlyPlanDisplayModel>
 {
     public static string NameValidableProperty => nameof(Name);
     public static string AmountValidableProperty => nameof(Amount);
     public static string DescriptionValidableProperty => nameof(Description);
-
-    private string name;
-    private string description;
-    private int priority = 1;
-    private double amount;
+    public static string UnitMeasurementValidableProperty => nameof(UnitMeasurement);
 
     public ActionIndicatorConfigurationPageModel() : this(null) { }
 
-    public ActionIndicatorConfigurationPageModel(Interop.API.Common.Models.Input.ActionIndicatorInputModel model, Interop.API.Common.Models.Display.ActionIndicatorMontlyPlanDisplayModel[] montlyPlans = null) : base(model)
+    public ActionIndicatorConfigurationPageModel(Interop.API.Common.Models.Input.ActionIndicatorInputModel model, Interop.API.Common.Models.Display.ActionIndicatorMontlyPlanDisplayModel[] montlyPlans = null) : base(model, montlyPlans)
     {
-        if (model != null)
-        {
-            Id = model.Id;
-            Priority = model.Priority;
-            Name = model.Name;
-            Description = model.Description;
-            Amount = model.Amount;
-            UnitMeasurementId = model.UnitMeasurementId;
-
-            if (montlyPlans != null)
-            {
-                MontlyPlans = new ObservableCollection<Interop.API.Common.Models.Display.ActionIndicatorMontlyPlanDisplayModel>(montlyPlans.OrderBy(_model => _model.Year * 100 + _model.Month));
-            }
-        }
     }
-
-    public System.Guid Id { get; set; }
-
-    public int Priority { get => priority; set => SetProperty(ref priority, value); }
-
-    public string Name { get => name; set => SetProperty(ref name, value); }
-
-    public string Description { get => description; set => SetProperty(ref description, value); }
-
-    public double Amount { get => amount; set => SetProperty(ref amount, value); }
-
-    public System.Guid? UnitMeasurementId { get; set; }
-
-    public ObservableCollection<Interop.API.Common.Models.Display.ActionIndicatorMontlyPlanDisplayModel> MontlyPlans { get; set; } = [];
-
-    public Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; }
 }

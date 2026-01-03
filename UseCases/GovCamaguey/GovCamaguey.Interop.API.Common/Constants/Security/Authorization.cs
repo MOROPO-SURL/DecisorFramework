@@ -74,6 +74,24 @@
         public const string ActionIndicatorRemoverPermission = "action-indicator-remover-permission";
         #endregion
 
+        #region ProyectionIndicator
+        public const string ProyectionIndicatorManagementPermissionGroup = "proyection-indicator-management-permission-group";
+
+        public const string ProyectionIndicatorViewerPermission = "proyection-indicator-viewer-permission";
+        public const string ProyectionIndicatorCreatorPermission = "proyection-indicator-creator-permission";
+        public const string ProyectionIndicatorEditorPermission = "proyection-indicator-editor-permission";
+        public const string ProyectionIndicatorRemoverPermission = "proyection-indicator-remover-permission";
+        #endregion
+
+        #region ObjectiveIndicator
+        public const string ObjectiveIndicatorManagementPermissionGroup = "objective-indicator-management-permission-group";
+
+        public const string ObjectiveIndicatorViewerPermission = "objective-indicator-viewer-permission";
+        public const string ObjectiveIndicatorCreatorPermission = "objective-indicator-creator-permission";
+        public const string ObjectiveIndicatorEditorPermission = "objective-indicator-editor-permission";
+        public const string ObjectiveIndicatorRemoverPermission = "objective-indicator-remover-permission";
+        #endregion
+
         #region GlobalIndicator
         public const string GlobalIndicatorManagementPermissionGroup = "global-indicator-management-permission-group";
 

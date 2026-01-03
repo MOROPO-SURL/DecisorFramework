@@ -38,14 +38,13 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Orientation="Vertical">
-                <SearchBar Margin="20,20,20,0" />
                 <Grid 
-                VerticalOptions="FillAndExpand"
-                SizeChanged="ItemsCollectionViewLayout_SizeChanged">
+                    VerticalOptions="FillAndExpand"
+                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
                     <CollectionView
-                    x:Name="ItemsCollectionView"
-                    Margin="10"
-                    ItemsSource="{Binding Items}">
+                        x:Name="ItemsCollectionView"
+                        Margin="10"
+                        ItemsSource="{Binding Items}">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
                         </CollectionView.ItemsLayout>
@@ -60,20 +59,20 @@
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>
                             <Label
-                            IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
-                            HorizontalTextAlignment="Center"
-                            Margin="5"
-                            Text="Sin elementos que mostrar"
-                            TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
-                            FontAttributes="Italic" />
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                                HorizontalTextAlignment="Center"
+                                Margin="5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                FontAttributes="Italic" />
                         </CollectionView.EmptyView>
                         <CollectionView.Footer>
                             <StackLayout IsVisible="{Binding HasMoreItems}">
                                 <Button
-                                HorizontalOptions="Center"
-                                Margin="5"
-                                Text="Mostrar más"
-                                Clicked="LoadMoreBurron_Clicked" />
+                                    HorizontalOptions="Center"
+                                    Margin="5"
+                                    Text="Mostrar más"
+                                    Clicked="LoadMoreBurron_Clicked" />
                             </StackLayout>
                         </CollectionView.Footer>
                     </CollectionView>

@@ -1,4 +1,6 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration;
+﻿using System.Collections.ObjectModel;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration;
 
 public class ObjectiveConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ObjectiveDisplayModel>
 {
@@ -23,8 +25,8 @@ public class ObjectiveConfigurationPageModel : Framework.Decisor.Core.Presentati
             Name = model.Name;
             Description = model.Description;
             Responsible = model.Responsible;
-
-            Proyections = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ProyectionDisplayModel>(model.Proyections);
+            Indicators = [.. model.Indicators];
+            Proyections = [.. model.Proyections];
         }
     }
 
@@ -37,6 +39,8 @@ public class ObjectiveConfigurationPageModel : Framework.Decisor.Core.Presentati
     public string Description { get => description; set => SetProperty(ref description, value); }
 
     public Interop.API.Common.Models.Display.PersonDisplayModel Responsible { get => responsible; set => SetProperty(ref responsible, value); }
+
+    public ObservableCollection<Interop.API.Common.Models.Display.ObjectiveIndicatorDisplayModel> Indicators { get; set; } = [];
 
     public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ProyectionDisplayModel> Proyections { get; set; } = [];
 }

@@ -14,6 +14,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 
         public PersonDisplayModel Responsible { get; set; }
 
+        public ObjectiveIndicatorDisplayModel[] Indicators { get; set; }
+
         public ProyectionDisplayModel[] Proyections { get; set; }
 
         public virtual void Import(Persistence.Entities.Objective entity)
@@ -29,6 +31,15 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 
                 Responsible.Import(entity.Responsible);
             }
+
+            Indicators = entity.Indicators.OrderBy(_entity => _entity.Priority).Select(_entity =>
+            {
+                var model = new ObjectiveIndicatorDisplayModel();
+
+                model.Import(_entity);
+
+                return model;
+            }).ToArray();
 
             Proyections = entity.Proyections.OrderBy(_entity => _entity.Index).Select(_entity =>
             {

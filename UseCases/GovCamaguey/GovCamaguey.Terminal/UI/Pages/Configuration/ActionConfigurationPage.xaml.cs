@@ -22,7 +22,16 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
         InitializeComponent();
     }
 
-    public ActionConfigurationPage(System.Action<ActionInputModel> successAction, Models.Page.Configuration.ActionConfigurationPageModel model, List<ActionIndicatorInputModel> editionIndicators, List<ActionIndicatorInputModel> incomingIndicators, List<ActionIndicatorDisplayModel> outgoingIndicators, List<ActionMonthlyClosureInputModel> editionMonthlyClosures, List<ActionMonthlyClosureInputModel> incomingMonthlyClosures, List<ActionMonthlyClosureDisplayModel> outgoingMonthlyClosures) : this(successAction, model)
+    public ActionConfigurationPage(
+        System.Action<ActionInputModel> successAction, 
+        Models.Page.Configuration.ActionConfigurationPageModel model, 
+        List<ActionIndicatorInputModel> editionIndicators, 
+        List<ActionIndicatorInputModel> incomingIndicators, 
+        List<ActionIndicatorDisplayModel> outgoingIndicators, 
+        List<ActionMonthlyClosureInputModel> editionMonthlyClosures, 
+        List<ActionMonthlyClosureInputModel> incomingMonthlyClosures, 
+        List<ActionMonthlyClosureDisplayModel> outgoingMonthlyClosures) 
+        : this(successAction, model)
     {
         this.editionIndicators = editionIndicators;
         this.incomingIndicators = incomingIndicators;
@@ -162,7 +171,7 @@ public partial class ActionConfigurationPage : Framework.Decisor.Core.Presentati
                 {
                     ConcreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync((Microsoft.Maui.Controls.Page)new ActionIndicatorConfigurationPage(IndicatorEditSuccess_Callback, configurationModel, model.EditionMontlyPlans, model.IncomingMontlyPlans, model.OutgoingMontlyPlans));
+                    this.NavigationPushPageAsync(new ActionIndicatorConfigurationPage(IndicatorEditSuccess_Callback, configurationModel, model.EditionMontlyPlans, model.IncomingMontlyPlans, model.OutgoingMontlyPlans));
                 }));
             }
             catch (System.Exception exception)

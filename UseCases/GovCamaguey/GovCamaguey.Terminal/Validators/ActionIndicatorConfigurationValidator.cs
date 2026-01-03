@@ -19,5 +19,9 @@ public class ActionIndicatorConfigurationValidator : AbstractValidator<Models.Pa
         RuleFor(entity => entity.Description)
             .MaximumLength(1024)
             .WithName("Descripción");
+
+        RuleFor(entity => entity.UnitMeasurement)
+            .NotNull()
+            .WithName("Unidad de medida");
     }
 }

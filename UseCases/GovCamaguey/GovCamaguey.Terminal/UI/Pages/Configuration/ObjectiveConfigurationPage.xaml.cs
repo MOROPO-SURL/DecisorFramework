@@ -9,6 +9,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration;
 
 public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<ObjectiveDisplayModel, ObjectiveDisplayModel, Models.Page.Configuration.ObjectiveConfigurationPageModel>
 {
+    private readonly List<ObjectiveIndicatorInputModel> editionIndicators = [];
+    private readonly List<ObjectiveIndicatorInputModel> incomingIndicators = [];
+    private readonly List<ObjectiveIndicatorDisplayModel> outgoingIndicators = [];
+
     private readonly List<ProyectionInputModel> editionProyections = [];
     private readonly List<ProyectionInputModel> incomingProyections = [];
     private readonly List<ProyectionDisplayModel> outgoingProyections = [];
@@ -31,6 +35,7 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
             Name = ConcreteBindingContext.Name,
             ResponsibleId = ConcreteBindingContext.Responsible.Id,
             Description = ConcreteBindingContext.Description,
+            IncomingIndicators = incomingIndicators,
             IncomingProyections = incomingProyections
         };
 
@@ -50,6 +55,9 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
             Name = ConcreteBindingContext.Name,
             ResponsibleId = ConcreteBindingContext.Responsible.Id,
             Description = ConcreteBindingContext.Description,
+            IncomingIndicators = incomingIndicators,
+            EditionIndicators = editionIndicators,
+            OutgoingIndicators = outgoingIndicators,
             IncomingProyections = incomingProyections,
             EditionProyections = editionProyections,
             OutgoingProyections = outgoingProyections
@@ -73,6 +81,158 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
     private void ResponsiblePickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PersonPickPage(ResponsiblePickComplete_Callback)));
+    }
+
+    private void IndicatorAgregationButton_Clicked(object sender, System.EventArgs e)
+    {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ObjectiveIndicatorCreatorPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                var model = new Models.Page.Configuration.ObjectiveIndicatorConfigurationPageModel(null)
+                {
+                    AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetEnabledAsync()
+                };
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(new ObjectiveIndicatorConfigurationPage(IndicatorCreateSuccess_Callback, model));
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        });
+    }
+
+    private void IndicatorEditionButton_Clicked(object sender, System.EventArgs e)
+    {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ObjectiveIndicatorEditorPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ObjectiveIndicatorDisplayModel;
+
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var model = incomingIndicators.FirstOrDefault(_model => _model.Id == target.Id) ?? editionIndicators.FirstOrDefault(_model => _model.Id == target.Id);
+
+                model ??= new ObjectiveIndicatorInputModel
+                {
+                    Id = target.Id,
+                    Name = target.Name,
+                    Amount = target.Amount,
+                    Priority = target.Priority,
+                    Description = target.Description,
+                    UnitMeasurementId = target.UnitMeasurement.Id
+                };
+
+                var unitMeasurementsAPIConnectClient = new Interop.API.Connect.Clients.UnitMeasurementsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                var configurationModel = new Models.Page.Configuration.ObjectiveIndicatorConfigurationPageModel(model, target.MontlyPlans)
+                {
+                    AvailableUnitMeasurements = await unitMeasurementsAPIConnectClient.GetEnabledAsync()
+                };
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(new ObjectiveIndicatorConfigurationPage(IndicatorEditSuccess_Callback, configurationModel, model.EditionMontlyPlans, model.IncomingMontlyPlans, model.OutgoingMontlyPlans));
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        });
+    }
+
+    private void IndicatorRemotionButton_Clicked(object sender, System.EventArgs e)
+    {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ObjectiveIndicatorRemoverPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para retirar elementos registrados de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este indicador?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ObjectiveIndicatorDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingIndicators)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingIndicators.Remove(incomingIndicators.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionIndicators)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionIndicators.Remove(editionIndicators.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingIndicators.Add(target);
+                }
+
+                ConcreteBindingContext.Indicators.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
     }
 
     private void ProyectionAgregationButton_Clicked(object sender, System.EventArgs e)
@@ -115,7 +275,7 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
             ParticipationOrganizations = target.ParticipationOrganizations
         };
         
-        this.NavigationPushPageAsync(new ProyectionConfigurationPage(ProyectionEditSuccess_Callback, new Models.Page.Configuration.ProyectionConfigurationPageModel(model, target.Actions), model.EditionActions, model.IncomingActions, model.OutgoingActions));
+        this.NavigationPushPageAsync(new ProyectionConfigurationPage(ProyectionEditSuccess_Callback, new Models.Page.Configuration.ProyectionConfigurationPageModel(model, target.Indicators, target.Actions), model.EditionIndicators, model.IncomingIndicators, model.OutgoingIndicators, model.EditionActions, model.IncomingActions, model.OutgoingActions));
     }
 
     private void ProyectionRemotionButton_Clicked(object sender, System.EventArgs e)
@@ -268,5 +428,88 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
     private void ResponsiblePickComplete_Callback(PersonDisplayModel model)
     {
         ConcreteBindingContext.Responsible = model;
+    }
+
+    private void IndicatorCreateSuccess_Callback(ObjectiveIndicatorInputModel model)
+    {
+        incomingIndicators.Add(model);
+
+        ConcreteBindingContext.Indicators.Add(new ObjectiveIndicatorDisplayModel
+        {
+            Id = model.Id,
+            Priority = model.Priority,
+            Name = model.Name,
+            Description = model.Description,
+            Amount = model.Amount,
+            UnitMeasurement = new UnitMeasurementDisplayModel { Id = model.UnitMeasurementId }
+        });
+
+        hasChangesFlag = true;
+    }
+
+    private void IndicatorEditSuccess_Callback(ObjectiveIndicatorInputModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingIndicators)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.Priority = model.Priority;
+            item.Name = model.Name;
+            item.Description = model.Description;
+            item.Amount = model.Amount;
+            item.UnitMeasurementId = model.UnitMeasurementId;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionIndicators)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.Priority = model.Priority;
+                item.Name = model.Name;
+                item.Description = model.Description;
+                item.Amount = model.Amount;
+                item.UnitMeasurementId = model.UnitMeasurementId;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionIndicators.Add(model);
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.Indicators)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.Indicators[index] = new ObjectiveIndicatorDisplayModel
+            {
+                Id = model.Id,
+                Priority = model.Priority,
+                Name = model.Name,
+                Description = model.Description,
+                Amount = model.Amount,
+                UnitMeasurement = new UnitMeasurementDisplayModel { Id = model.UnitMeasurementId }
+            };
+
+            break;
+        }
+
+        hasChangesFlag = true;
     }
 }

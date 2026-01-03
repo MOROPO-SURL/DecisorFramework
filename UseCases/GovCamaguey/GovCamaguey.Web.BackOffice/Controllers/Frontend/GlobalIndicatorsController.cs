@@ -3,6 +3,7 @@ using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Core.Presentation.Models;
 using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
+using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Filter;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 using System.Linq;
@@ -12,7 +13,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
 [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/governance/[controller]")]
 [ApiController]
-public class GlobalIndicatorsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<GlobalIndicator, System.Guid, GlobalIndicatorInputModel, GlobalIndicatorDisplayModel>
+public class GlobalIndicatorsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<GlobalIndicator, System.Guid, GlobalIndicatorInputModel, GlobalIndicatorDisplayModel, GlobalIndicatorFilterModel>
 {
     private readonly IEntityRepository<GlobalIndicatorMontlyPlan, System.Guid> indicatorMontlyPlanRepository;
 

@@ -22,6 +22,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
 
         public OrganizationDisplayModel[] ParticipationOrganizations { get; set; }
 
+        public List<ProyectionIndicatorInputModel> EditionIndicators { get; set; } = new List<ProyectionIndicatorInputModel>();
+        public List<ProyectionIndicatorInputModel> IncomingIndicators { get; set; } = new List<ProyectionIndicatorInputModel>();
+        public List<ProyectionIndicatorDisplayModel> OutgoingIndicators { get; set; } = new List<ProyectionIndicatorDisplayModel>();
+
         public List<ActionInputModel> EditionActions { get; set; } = new List<ActionInputModel>();
         public List<ActionInputModel> IncomingActions { get; set; } = new List<ActionInputModel>();
         public List<ActionDisplayModel> OutgoingActions { get; set; } = new List<ActionDisplayModel>();

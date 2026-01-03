@@ -7,8 +7,8 @@ public class ActionIndicatorMontlyPlanConfigurationValidator : AbstractValidator
     public ActionIndicatorMontlyPlanConfigurationValidator()
     {
         RuleFor(model => model.YearMonth)
-            .NotNull()
-            .WithName("Mes / Año");
+            .Must(model => model.Key != 0)
+            .WithName("Mes/Año");
 
         RuleFor(model => model.Amount)
             .NotNull()

@@ -104,6 +104,18 @@
 	  <MauiXaml Update="UI\Pages\Configuration\GlobalIndicatorMontlyPlanConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveIndicatorConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Configuration\ObjectiveIndicatorMontlyPlanConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Configuration\ProyectionIndicatorConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\Configuration\ProyectionIndicatorMontlyPlanConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Detail\GlobalIndicatorDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>

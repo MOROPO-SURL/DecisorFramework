@@ -20,6 +20,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 
         public OrganizationDisplayModel[] ParticipationOrganizations { get; set; }
 
+        public ProyectionIndicatorDisplayModel[] Indicators { get; set; }
+
         public ActionDisplayModel[] Actions { get; set; }
 
         public virtual void Import(Persistence.Entities.Proyection entity)
@@ -53,6 +55,15 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
                 var model = new OrganizationDisplayModel();
 
                 model.Import(bridge.Stern);
+
+                return model;
+            }).ToArray();
+
+            Indicators = entity.Indicators.OrderBy(_entity => _entity.Priority).Select(_entity =>
+            {
+                var model = new ProyectionIndicatorDisplayModel();
+
+                model.Import(_entity);
 
                 return model;
             }).ToArray();

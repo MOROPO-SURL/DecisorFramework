@@ -15,19 +15,39 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
 public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Objective, System.Guid, ObjectiveInputModel, ObjectiveDisplayModel>
 {
     private readonly IEntityRepository<Proyection, System.Guid> proyectionRepository;
+    private readonly IEntityRepository<ProyectionIndicator, System.Guid> proyectionIndicatorRepository;
+    private readonly IEntityRepository<ProyectionIndicatorMontlyPlan, System.Guid> proyectionIndicatorMontlyPlanRepository;
     private readonly IEntityRepository<Action, System.Guid> actionRepository;
-    private readonly IEntityRepository<ActionIndicator, System.Guid> indicatorRepository;
-    private readonly IEntityRepository<ActionIndicatorMontlyPlan, System.Guid> indicatorMontlyPlanRepository;
     private readonly IEntityRepository<ActionMonthlyClosure, System.Guid> actionMonthlyClosureRepository;
+    private readonly IEntityRepository<ActionIndicator, System.Guid> actionIndicatorRepository;
+    private readonly IEntityRepository<ActionIndicatorMontlyPlan, System.Guid> actionIndicatorMontlyPlanRepository;
+    private readonly IEntityRepository<ObjectiveIndicator, System.Guid> objectiveIndicatorRepository;
+    private readonly IEntityRepository<ObjectiveIndicatorMontlyPlan, System.Guid> objectiveIndicatorMontlyPlanRepository;
 
-    public ObjectivesController(IEntityRepository<ActionMonthlyClosure, System.Guid> actionMonthlyClosureRepository, IEntityRepository<ActionIndicatorMontlyPlan, System.Guid> indicatorMontlyPlanRepository, IEntityRepository<ActionIndicator, System.Guid> indicatorRepository, IEntityRepository<Action, System.Guid> actionRepository, IEntityRepository<Proyection, System.Guid> proyectionRepository, IEntityRepository<Objective, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, Microsoft.Extensions.Logging.ILogger<ObjectivesController> logger)
+    public ObjectivesController(
+        IEntityRepository<ObjectiveIndicatorMontlyPlan, System.Guid> objectiveIndicatorMontlyPlanRepository, 
+        IEntityRepository<ObjectiveIndicator, System.Guid> objectiveIndicatorRepository, 
+        IEntityRepository<ActionIndicatorMontlyPlan, System.Guid> actionIndicatorMontlyPlanRepository, 
+        IEntityRepository<ActionIndicator, System.Guid> actionIndicatorRepository, 
+        IEntityRepository<ActionMonthlyClosure, System.Guid> actionMonthlyClosureRepository, 
+        IEntityRepository<Action, System.Guid> actionRepository,
+        IEntityRepository<ProyectionIndicatorMontlyPlan, System.Guid> proyectionIndicatorMontlyPlanRepository,
+        IEntityRepository<ProyectionIndicator, System.Guid> proyectionIndicatorRepository,
+        IEntityRepository<Proyection, System.Guid> proyectionRepository, 
+        IEntityRepository<Objective, System.Guid> repository, 
+        Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, 
+        Microsoft.Extensions.Logging.ILogger<ObjectivesController> logger)
         : base(repository, localizer, logger)
     {
         this.proyectionRepository = proyectionRepository;
+        this.proyectionIndicatorRepository = proyectionIndicatorRepository;
+        this.proyectionIndicatorMontlyPlanRepository = proyectionIndicatorMontlyPlanRepository;
         this.actionRepository = actionRepository;
-        this.indicatorRepository = indicatorRepository;
-        this.indicatorMontlyPlanRepository = indicatorMontlyPlanRepository;
         this.actionMonthlyClosureRepository = actionMonthlyClosureRepository;
+        this.actionIndicatorRepository = actionIndicatorRepository;
+        this.actionIndicatorMontlyPlanRepository = actionIndicatorMontlyPlanRepository;
+        this.objectiveIndicatorRepository = objectiveIndicatorRepository;
+        this.objectiveIndicatorMontlyPlanRepository = objectiveIndicatorMontlyPlanRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<Objective, bool>> GetGlobalSelector()
@@ -153,6 +173,17 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
     {
         base.PreCreate(entity, model);
 
+        foreach (var _model in model.IncomingIndicators)
+        {
+            var _entity = _model.Export();
+
+            _entity.ObjectiveId = entity.Id;
+
+            objectiveIndicatorRepository.Add(_entity, User.Identity.Name, false);
+
+            ExtendCreate(_entity, _model);
+        }
+
         foreach (var _model in model.IncomingProyections)
         {
             var _entity = _model.Export();
@@ -168,6 +199,37 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
     protected override void PreEdit(Objective entity, ObjectiveInputModel model)
     {
         base.PreEdit(entity, model);
+
+        foreach (var _model in model.OutgoingIndicators)
+        {
+            var _entity = entity.Indicators.First(bridge => bridge.Id == _model.Id);
+
+            _entity.Archived = true;
+
+            objectiveIndicatorRepository.Update(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.EditionIndicators)
+        {
+            var _entity = entity.Indicators.First(bridge => bridge.Id == _model.Id);
+
+            _model.Mergue(_entity);
+
+            objectiveIndicatorRepository.Update(_entity, User.Identity.Name, false);
+
+            ExtendEdit(_entity, _model);
+        }
+
+        foreach (var _model in model.IncomingIndicators)
+        {
+            var _entity = _model.Export();
+
+            _entity.ObjectiveId = entity.Id;
+
+            objectiveIndicatorRepository.Add(_entity, User.Identity.Name, false);
+
+            ExtendCreate(_entity, _model);
+        }
 
         foreach (var _model in model.OutgoingProyections)
         {
@@ -203,6 +265,17 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
     protected void ExtendCreate(Proyection entity, ProyectionInputModel model)
     {
+        foreach (var _model in model.IncomingIndicators)
+        {
+            var _entity = _model.Export();
+
+            _entity.ProyectionId = entity.Id;
+
+            proyectionIndicatorRepository.Add(_entity, User.Identity.Name, false);
+
+            ExtendCreate(_entity, _model);
+        }
+
         foreach (var _model in model.IncomingActions)
         {
             var _entity = _model.Export();
@@ -217,6 +290,37 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
     protected void ExtendEdit(Proyection entity, ProyectionInputModel model)
     {
+        foreach (var _model in model.OutgoingIndicators)
+        {
+            var _entity = entity.Indicators.First(bridge => bridge.Id == _model.Id);
+
+            _entity.Archived = true;
+
+            proyectionIndicatorRepository.Update(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.EditionIndicators)
+        {
+            var _entity = entity.Indicators.First(bridge => bridge.Id == _model.Id);
+
+            _model.Mergue(_entity);
+
+            proyectionIndicatorRepository.Update(_entity, User.Identity.Name, false);
+
+            ExtendEdit(_entity, _model);
+        }
+
+        foreach (var _model in model.IncomingIndicators)
+        {
+            var _entity = _model.Export();
+
+            _entity.ProyectionId = entity.Id;
+
+            proyectionIndicatorRepository.Add(_entity, User.Identity.Name, false);
+
+            ExtendCreate(_entity, _model);
+        }
+
         foreach (var _model in model.OutgoingActions)
         {
             var _entity = entity.Actions.First(bridge => bridge.Id == _model.Id);
@@ -257,7 +361,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
             _entity.ActionId = entity.Id;
 
-            indicatorRepository.Add(_entity, User.Identity.Name, false);
+            actionIndicatorRepository.Add(_entity, User.Identity.Name, false);
 
             ExtendCreate(_entity, _model);
         }
@@ -280,7 +384,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
             _entity.Archived = true;
 
-            indicatorRepository.Update(_entity, User.Identity.Name, false);
+            actionIndicatorRepository.Update(_entity, User.Identity.Name, false);
         }
 
         foreach (var _model in model.EditionIndicators)
@@ -289,7 +393,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
             _model.Mergue(_entity);
 
-            indicatorRepository.Update(_entity, User.Identity.Name, false);
+            actionIndicatorRepository.Update(_entity, User.Identity.Name, false);
 
             ExtendEdit(_entity, _model);
         }
@@ -300,7 +404,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
             _entity.ActionId = entity.Id;
 
-            indicatorRepository.Add(_entity, User.Identity.Name, false);
+            actionIndicatorRepository.Add(_entity, User.Identity.Name, false);
 
             ExtendCreate(_entity, _model);
         }
@@ -331,6 +435,86 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
         }
     }
 
+    protected void ExtendCreate(ObjectiveIndicator entity, ObjectiveIndicatorInputModel model)
+    {
+        foreach (var _model in model.IncomingMontlyPlans)
+        {
+            var _entity = _model.Export();
+
+            _entity.IndicatorId = entity.Id;
+
+            objectiveIndicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
+        }
+    }
+
+    protected void ExtendEdit(ObjectiveIndicator entity, ObjectiveIndicatorInputModel model)
+    {
+        foreach (var _model in model.OutgoingMontlyPlans)
+        {
+            var _entity = entity.MontlyPlans.First(bridge => bridge.Id == _model.Id);
+
+            objectiveIndicatorMontlyPlanRepository.Delete(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.EditionMontlyPlans)
+        {
+            var _entity = entity.MontlyPlans.First(bridge => bridge.Id == _model.Id);
+
+            _model.Mergue(_entity);
+
+            objectiveIndicatorMontlyPlanRepository.Update(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.IncomingMontlyPlans)
+        {
+            var _entity = _model.Export();
+
+            _entity.IndicatorId = entity.Id;
+
+            objectiveIndicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
+        }
+    }
+
+    protected void ExtendCreate(ProyectionIndicator entity, ProyectionIndicatorInputModel model)
+    {
+        foreach (var _model in model.IncomingMontlyPlans)
+        {
+            var _entity = _model.Export();
+
+            _entity.IndicatorId = entity.Id;
+
+            proyectionIndicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
+        }
+    }
+
+    protected void ExtendEdit(ProyectionIndicator entity, ProyectionIndicatorInputModel model)
+    {
+        foreach (var _model in model.OutgoingMontlyPlans)
+        {
+            var _entity = entity.MontlyPlans.First(bridge => bridge.Id == _model.Id);
+
+            proyectionIndicatorMontlyPlanRepository.Delete(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.EditionMontlyPlans)
+        {
+            var _entity = entity.MontlyPlans.First(bridge => bridge.Id == _model.Id);
+
+            _model.Mergue(_entity);
+
+            proyectionIndicatorMontlyPlanRepository.Update(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.IncomingMontlyPlans)
+        {
+            var _entity = _model.Export();
+
+            _entity.IndicatorId = entity.Id;
+
+            proyectionIndicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
+        }
+    }
+
     protected void ExtendCreate(ActionIndicator entity, ActionIndicatorInputModel model)
     {
         foreach (var _model in model.IncomingMontlyPlans)
@@ -339,7 +523,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
             _entity.IndicatorId = entity.Id;
 
-            indicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
+            actionIndicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
         }
     }
 
@@ -349,7 +533,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
         {
             var _entity = entity.MontlyPlans.First(bridge => bridge.Id == _model.Id);
 
-            indicatorMontlyPlanRepository.Delete(_entity, User.Identity.Name, false);
+            actionIndicatorMontlyPlanRepository.Delete(_entity, User.Identity.Name, false);
         }
 
         foreach (var _model in model.EditionMontlyPlans)
@@ -358,7 +542,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
             _model.Mergue(_entity);
 
-            indicatorMontlyPlanRepository.Update(_entity, User.Identity.Name, false);
+            actionIndicatorMontlyPlanRepository.Update(_entity, User.Identity.Name, false);
         }
 
         foreach (var _model in model.IncomingMontlyPlans)
@@ -367,7 +551,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
             _entity.IndicatorId = entity.Id;
 
-            indicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
+            actionIndicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
         }
     }
 }

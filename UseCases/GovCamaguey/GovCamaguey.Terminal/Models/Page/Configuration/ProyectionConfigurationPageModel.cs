@@ -17,7 +17,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
 
         public ProyectionConfigurationPageModel() : this(null) { }
 
-        public ProyectionConfigurationPageModel(Interop.API.Common.Models.Input.ProyectionInputModel model, ActionDisplayModel[] actions = null) : base(model)
+        public ProyectionConfigurationPageModel(Interop.API.Common.Models.Input.ProyectionInputModel model, ProyectionIndicatorDisplayModel[] indicators = null, ActionDisplayModel[] actions = null) : base(model)
         {
             if (model != null)
             {
@@ -28,6 +28,11 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
                 Guidelines = new ObservableCollection<GuidelineDisplayModel>(model.Guidelines);
                 ResponsabilityOrganizations = new ObservableCollection<OrganizationDisplayModel>(model.ResponsabilityOrganizations);
                 ParticipationOrganizations = new ObservableCollection<OrganizationDisplayModel>(model.ParticipationOrganizations);
+
+                if (indicators != null)
+                {
+                    Indicators = new ObservableCollection<ProyectionIndicatorDisplayModel>(indicators.OrderBy(_model => _model.Priority));
+                }
 
                 if (actions != null)
                 {
@@ -49,6 +54,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuratio
         public ObservableCollection<OrganizationDisplayModel> ResponsabilityOrganizations { get; set; } = [];
 
         public ObservableCollection<OrganizationDisplayModel> ParticipationOrganizations { get; set; } = [];
+
+        public ObservableCollection<ProyectionIndicatorDisplayModel> Indicators { get; set; } = [];
 
         public ObservableCollection<ActionDisplayModel> Actions { get; set; } = [];
     }

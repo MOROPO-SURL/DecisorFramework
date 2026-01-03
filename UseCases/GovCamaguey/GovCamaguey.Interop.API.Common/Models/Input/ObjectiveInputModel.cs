@@ -18,6 +18,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input
 
         public System.Guid ResponsibleId { get; set; }
 
+        public List<ObjectiveIndicatorInputModel> EditionIndicators { get; set; } = new List<ObjectiveIndicatorInputModel>();
+        public List<ObjectiveIndicatorInputModel> IncomingIndicators { get; set; } = new List<ObjectiveIndicatorInputModel>();
+        public List<ObjectiveIndicatorDisplayModel> OutgoingIndicators { get; set; } = new List<ObjectiveIndicatorDisplayModel>();
+
         public List<ProyectionInputModel> EditionProyections { get; set; } = new List<ProyectionInputModel>();
         public List<ProyectionInputModel> IncomingProyections { get; set; } = new List<ProyectionInputModel>();
         public List<ProyectionDisplayModel> OutgoingProyections { get; set; } = new List<ProyectionDisplayModel>();

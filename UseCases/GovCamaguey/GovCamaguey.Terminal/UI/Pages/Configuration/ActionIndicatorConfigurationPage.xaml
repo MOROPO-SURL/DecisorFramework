@@ -80,9 +80,14 @@
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad de medida" />
                         <Picker 
                             x:Name="UnitMeasurementPicker"
-                            ItemsSource="{Binding AvailableUnitMeasurements}" 
-                            ItemDisplayBinding="{Binding Name}"
+                            ItemsSource="{Binding AvailableUnitMeasurements}"
+                            ItemDisplayBinding="{Binding Name}" 
+                            SelectedItem="{Binding UnitMeasurement}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:ActionIndicatorConfigurationPageModel.UnitMeasurementValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:ActionIndicatorConfigurationPageModel.UnitMeasurementValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <VerticalStackLayout 
@@ -125,9 +130,8 @@
                                             <StackLayout Orientation="Horizontal" Spacing="8">
                                                 <Label
                                                     Margin="8"
-                                                    HorizontalOptions="FillAndExpand"
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
                                                     LineBreakMode="TailTruncation"
-                                                    FontSize="Medium"
                                                     Text="{Binding .}" />
                                                 <Button
                                                     VerticalOptions="Center"
@@ -159,7 +163,7 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />

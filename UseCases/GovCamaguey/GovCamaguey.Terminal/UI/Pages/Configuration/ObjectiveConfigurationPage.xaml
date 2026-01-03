@@ -113,11 +113,76 @@
                     Margin="8" 
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
-                    <Editor Text="{Binding Description}" HeightRequest="120" />
+                    <Editor Text="{Binding Description}" HeightRequest="320" />
                     <Label
                         IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:ObjectiveConfigurationPageModel.DescriptionValidableProperty}}"
                         Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:ObjectiveConfigurationPageModel.DescriptionValidableProperty}}"
                         TextColor="IndianRed" />
+                </VerticalStackLayout>
+                <VerticalStackLayout
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Indicadores" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="IndicatorAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding Indicators}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:ObjectiveIndicatorDisplayModel">
+                                        <Frame 
+                                            Padding="8"
+                                            Margin="0,12,0,0">
+                                            <StackLayout Orientation="Horizontal" Spacing="8">
+                                                <Label
+                                                    Margin="8"
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    LineBreakMode="TailTruncation"
+                                                    Text="{Binding Name}" />
+                                                <Button
+                                                    VerticalOptions="Center"
+                                                    Padding="0"
+                                                    FontSize="21"
+                                                    FontFamily="MaterialDesignIcons" 
+                                                    Text="&#xF90B;"
+                                                    Clicked="IndicatorEditionButton_Clicked" />
+                                                <Button
+                                                    VerticalOptions="Center"
+                                                    Padding="0"
+                                                    FontSize="21"
+                                                    FontFamily="MaterialDesignIcons" 
+                                                    Text="&#xFA78;"
+                                                    Clicked="IndicatorRemotionButton_Clicked" />
+                                            </StackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
                 </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8"
@@ -159,9 +224,8 @@
                                             <StackLayout Orientation="Horizontal" Spacing="8">
                                                 <Label
                                                     Margin="8"
-                                                    HorizontalOptions="FillAndExpand"
-                                                    LineBreakMode="TailTruncation"
-                                                    FontSize="Medium">
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                    LineBreakMode="TailTruncation">
                                                     <Label.FormattedText>
                                                         <FormattedString>
                                                             <Span
