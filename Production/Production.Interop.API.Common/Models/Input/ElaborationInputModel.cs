@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 {
@@ -24,15 +27,15 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public decimal MaxPerformanceCoefficient { get; set; }
 
-        //public List<ElaborationStepDisplayModel> EditionSteps { get; set; } = new List<ElaborationStepDisplayModel>();
-        //public List<ElaborationStepDisplayModel> IncomingSteps { get; set; } = new List<ElaborationStepDisplayModel>();
-        //public List<ElaborationStepDisplayModel> OutgoingSteps { get; set; } = new List<ElaborationStepDisplayModel>();
-
         public System.Collections.Generic.List<Display.ElaborationStepDisplayModel> Steps { get; set; } = new System.Collections.Generic.List<Display.ElaborationStepDisplayModel>();
 
         public System.Collections.Generic.List<Bridge.CommonElaborationProductBridgeModel> InputProductBridges { get; set; } = new System.Collections.Generic.List<Bridge.CommonElaborationProductBridgeModel>();
 
         public System.Collections.Generic.List<Bridge.CommonElaborationProductBridgeModel> OutputProductBridges { get; set; } = new System.Collections.Generic.List<Bridge.CommonElaborationProductBridgeModel>();
+
+        public List<DocumentInputModel> EditionDocuments { get; set; } = new List<DocumentInputModel>();
+        public List<DocumentInputModel> IncomingDocuments { get; set; } = new List<DocumentInputModel>();
+        public List<DocumentDisplayModel> OutgoingDocuments { get; set; } = new List<DocumentDisplayModel>();
 
         public Persistence.Entities.Elaboration Export()
         {

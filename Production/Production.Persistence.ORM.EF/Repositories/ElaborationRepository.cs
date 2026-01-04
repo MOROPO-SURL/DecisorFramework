@@ -21,7 +21,8 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Repositories
                 .Include(entity => entity.OutputProductBridges).ThenInclude(bridge => bridge.Stern)
                 .Include(entity => entity.OutputProductBridges).ThenInclude(bridge => bridge.UnitMeasurement)
                 .Include(entity => entity.OutputProductClassificationBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Product)
-                .Include(entity => entity.OutputProductClassificationBridges).ThenInclude(bridge => bridge.UnitMeasurement);
+                .Include(entity => entity.OutputProductClassificationBridges).ThenInclude(bridge => bridge.UnitMeasurement)
+                .Include(entity => entity.DocumentBridges).ThenInclude(entity => entity.Stern);
         }
     }
 }
