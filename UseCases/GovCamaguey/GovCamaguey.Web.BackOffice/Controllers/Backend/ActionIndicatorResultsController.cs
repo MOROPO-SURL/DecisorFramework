@@ -10,13 +10,13 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
     [Microsoft.AspNetCore.Authorization.Authorize]
     [RequirePermissions(Framework.Guama.Core.Security.Presentation.Constants.Permissions.ShellManager)]
     [Area("governance")]
-    public class ResultsController : Framework.Guama.Core.Presentation.Web.Backend.Controllers.Contract.AbstractEntityManagementController<ActionIndicatorResult, long, ResultInputModel, ResultDisplayViewModel>
+    public class ActionIndicatorResultsController : Framework.Guama.Core.Presentation.Web.Backend.Controllers.Contract.AbstractEntityManagementController<ActionIndicatorResult, long, ActionIndicatorResultInputModel, ActionIndicatorResultDisplayViewModel>
     {
-        public ResultsController(Framework.Guama.Core.Persistence.Repositories.IEntityRepository<ActionIndicatorResult, long> repository, Microsoft.Extensions.Localization.IStringLocalizer<ResultsController> localizer, ILogger<ResultsController> logger) : base(repository, localizer, logger)
+        public ActionIndicatorResultsController(Framework.Guama.Core.Persistence.Repositories.IEntityRepository<ActionIndicatorResult, long> repository, Microsoft.Extensions.Localization.IStringLocalizer<ActionIndicatorResultsController> localizer, ILogger<ActionIndicatorResultsController> logger) : base(repository, localizer, logger)
         {
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ResultViewerPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ActionIndicatorResultViewerPermission)]
         public override IActionResult Index(int sheet = 1, int limit = 25)
         {
             return base.Index(sheet, limit);
@@ -27,7 +27,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
             return NotFound();
         }
 
-        public override IActionResult Create(ResultInputModel model)
+        public override IActionResult Create(ActionIndicatorResultInputModel model)
         {
             return NotFound();
         }
@@ -37,7 +37,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
             return NotFound();
         }
 
-        public override IActionResult Edit(ResultInputModel model)
+        public override IActionResult Edit(ActionIndicatorResultInputModel model)
         {
             return NotFound();
         }
@@ -47,8 +47,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
             return NotFound();
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ResultRemoverPermission)]
-        public override IActionResult Delete(ResultDisplayViewModel model)
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ActionIndicatorResultRemoverPermission)]
+        public override IActionResult Delete(ActionIndicatorResultDisplayViewModel model)
         {
             return base.Delete(model);
         }

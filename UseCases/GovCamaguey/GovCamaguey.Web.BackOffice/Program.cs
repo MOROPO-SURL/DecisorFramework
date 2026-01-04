@@ -57,10 +57,13 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.ActionIndicatorResult, long>, Persistence.ORM.EF.Repositories.ActionIndicatorResultRepository>();
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.ProyectionIndicator, System.Guid>, Persistence.ORM.EF.Repositories.ProyectionIndicatorRepository>();
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.ProyectionIndicatorMontlyPlan, System.Guid>, Persistence.ORM.EF.Repositories.ProyectionIndicatorMontlyPlanRepository>();
+            builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.ProyectionIndicatorResult, long>, Persistence.ORM.EF.Repositories.ProyectionIndicatorResultRepository>();
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.ObjectiveIndicator, System.Guid>, Persistence.ORM.EF.Repositories.ObjectiveIndicatorRepository>();
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.ObjectiveIndicatorMontlyPlan, System.Guid>, Persistence.ORM.EF.Repositories.ObjectiveIndicatorMontlyPlanRepository>();
+            builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.ObjectiveIndicatorResult, long>, Persistence.ORM.EF.Repositories.ObjectiveIndicatorResultRepository>();
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.GlobalIndicator, System.Guid>, Persistence.ORM.EF.Repositories.GlobalIndicatorRepository>();
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.GlobalIndicatorMontlyPlan, System.Guid>, Persistence.ORM.EF.Repositories.GlobalIndicatorMontlyPlanRepository>();
+            builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Prototype.Persistence.Entities.GlobalIndicatorResult, long>, Persistence.ORM.EF.Repositories.GlobalIndicatorResultRepository>();
 
             builder.Services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.ApplicationDbSchemaConfigurationProvider>();
 

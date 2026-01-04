@@ -70,6 +70,28 @@
                     <Label 
                         Style="{StaticResource CaptionFieldLabelStyle}" 
                         Margin="8,8,8,0" 
+                        Text="Indicadores" />
+                    <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
+                    <CollectionView ItemsSource="{Binding Objective.Indicators}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                        </CollectionView.ItemsLayout>
+                        <!--<CollectionView.EmptyView>
+                            <Label
+                                Padding="8,4,8,16"
+                                FontAttributes="Italic"
+                                TextColor="DimGray"
+                                Text="Sin elementos que mostrar" />
+                        </CollectionView.EmptyView>-->
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate>
+                                <local_card_views:ObjectiveIndicatorDeepCardView Padding="8,4" />
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                    </CollectionView>
+                    <Label 
+                        Style="{StaticResource CaptionFieldLabelStyle}" 
+                        Margin="8,8,8,0" 
                         Text="Objetivos específicos" />
                     <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
                     <CollectionView ItemsSource="{Binding Objective.Proyections}">

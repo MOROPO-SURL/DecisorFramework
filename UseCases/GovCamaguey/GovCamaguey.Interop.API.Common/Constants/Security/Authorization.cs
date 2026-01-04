@@ -101,13 +101,40 @@
         public const string GlobalIndicatorRemoverPermission = "global-indicator-remover-permission";
         #endregion
 
-        #region Result
-        public const string ResultManagementPermissionGroup = "result-management-permission-group";
+        #region ActionIndicatorResult
+        public const string ActionIndicatorResultManagementPermissionGroup = "action-indicator-result-management-permission-group";
 
-        public const string ResultViewerPermission = "result-viewer-permission";
-        public const string ResultCreatorPermission = "result-creator-permission";
-        public const string ResultEditorPermission = "result-editor-permission";
-        public const string ResultRemoverPermission = "result-remover-permission";
+        public const string ActionIndicatorResultViewerPermission = "action-indicator-result-viewer-permission";
+        public const string ActionIndicatorResultCreatorPermission = "action-indicator-result-creator-permission";
+        public const string ActionIndicatorResultEditorPermission = "action-indicator-result-editor-permission";
+        public const string ActionIndicatorResultRemoverPermission = "action-indicator-result-remover-permission";
+        #endregion
+
+        #region ProyectionIndicatorResult
+        public const string ProyectionIndicatorResultManagementPermissionGroup = "proyection-indicator-result-management-permission-group";
+
+        public const string ProyectionIndicatorResultViewerPermission = "proyection-indicator-result-viewer-permission";
+        public const string ProyectionIndicatorResultCreatorPermission = "proyection-indicator-result-creator-permission";
+        public const string ProyectionIndicatorResultEditorPermission = "proyection-indicator-result-editor-permission";
+        public const string ProyectionIndicatorResultRemoverPermission = "proyection-indicator-result-remover-permission";
+        #endregion
+
+        #region ObjectiveIndicatorResult
+        public const string ObjectiveIndicatorResultManagementPermissionGroup = "objective-indicator-result-management-permission-group";
+
+        public const string ObjectiveIndicatorResultViewerPermission = "objective-indicator-result-viewer-permission";
+        public const string ObjectiveIndicatorResultCreatorPermission = "objective-indicator-result-creator-permission";
+        public const string ObjectiveIndicatorResultEditorPermission = "objective-indicator-result-editor-permission";
+        public const string ObjectiveIndicatorResultRemoverPermission = "objective-indicator-result-remover-permission";
+        #endregion
+
+        #region GlobalIndicatorResult
+        public const string GlobalIndicatorResultManagementPermissionGroup = "global-indicator-result-management-permission-group";
+
+        public const string GlobalIndicatorResultViewerPermission = "global-indicator-result-viewer-permission";
+        public const string GlobalIndicatorResultCreatorPermission = "global-indicator-result-creator-permission";
+        public const string GlobalIndicatorResultEditorPermission = "global-indicator-result-editor-permission";
+        public const string GlobalIndicatorResultRemoverPermission = "global-indicator-result-remover-permission";
         #endregion
     }
 }

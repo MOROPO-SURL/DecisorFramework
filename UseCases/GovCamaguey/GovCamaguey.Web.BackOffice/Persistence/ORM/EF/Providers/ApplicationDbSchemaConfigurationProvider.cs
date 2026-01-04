@@ -26,10 +26,13 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     new BaseEntityTypeConfigurator<Prototype.Persistence.Entities.ActionIndicatorResult>(),
                     new BaseEntityTypeConfigurator<Prototype.Persistence.Entities.ProyectionIndicator>(),
                     new BaseEntityTypeConfigurator<Prototype.Persistence.Entities.ProyectionIndicatorMontlyPlan>(),
+                    new BaseEntityTypeConfigurator<Prototype.Persistence.Entities.ProyectionIndicatorResult>(),
                     new BaseEntityTypeConfigurator<Prototype.Persistence.Entities.ObjectiveIndicator>(),
                     new BaseEntityTypeConfigurator<Prototype.Persistence.Entities.ObjectiveIndicatorMontlyPlan>(),
+                    new BaseEntityTypeConfigurator<Prototype.Persistence.Entities.ObjectiveIndicatorResult>(),
                     new BaseEntityTypeConfigurator<Prototype.Persistence.Entities.GlobalIndicator>(),
-                    new BaseEntityTypeConfigurator<Prototype.Persistence.Entities.GlobalIndicatorMontlyPlan>()
+                    new BaseEntityTypeConfigurator<Prototype.Persistence.Entities.GlobalIndicatorMontlyPlan>(),
+                    new BaseEntityTypeConfigurator<Prototype.Persistence.Entities.GlobalIndicatorResult>()
                 ];
             }
         }

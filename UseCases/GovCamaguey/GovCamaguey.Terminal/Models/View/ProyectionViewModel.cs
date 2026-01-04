@@ -23,6 +23,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.View
 
         public OrganizationDisplayModel[] ParticipationOrganizations { get; set; }
 
+        public ProyectionIndicatorDisplayModel[] Indicators { get; set; }
+
         public ActionViewModel[] Actions { get; set; }
 
         public ProyectionViewModel(ProyectionDisplayModel model, int objectiveIndex)
@@ -35,6 +37,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.View
             Guidelines = model.Guidelines;
             ResponsabilityOrganizations = model.ResponsabilityOrganizations;
             ParticipationOrganizations = model.ParticipationOrganizations;
+            Indicators = model.Indicators;
 
             ObjectiveIndex = objectiveIndex;
 

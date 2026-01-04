@@ -79,5 +79,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
         public DbSet<GlobalIndicator> GlobalIndicators { get; set; }
         public DbSet<GlobalIndicatorMontlyPlan> GlobalIndicatorMontlyPlans { get; set; }
         public DbSet<ActionIndicatorResult> ActionIndicatorResults { get; set; }
+        public DbSet<ProyectionIndicatorResult> ProyectionIndicatorResults { get; set; }
+        public DbSet<ObjectiveIndicatorResult> ObjectiveIndicatorResults { get; set; }
+        public DbSet<GlobalIndicatorResult> GlobalIndicatorResults { get; set; }
     }
 }

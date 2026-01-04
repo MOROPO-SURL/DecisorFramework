@@ -14,6 +14,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.View
 
         public Interop.API.Common.Models.Display.PersonDisplayModel Responsible { get; set; }
 
+        public Interop.API.Common.Models.Display.ObjectiveIndicatorDisplayModel[] Indicators { get; set; }
+
         public ProyectionViewModel[] Proyections { get; set; }
 
         public ObjectiveViewModel(Interop.API.Common.Models.Display.ObjectiveDisplayModel model)
@@ -23,6 +25,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.View
             Name = model.Name;
             Description = model.Description;
             Responsible = model.Responsible;
+            Indicators = model.Indicators;
 
             Proyections = model.Proyections.Select(_model => new ProyectionViewModel(_model, model.Index)).ToArray();
         }

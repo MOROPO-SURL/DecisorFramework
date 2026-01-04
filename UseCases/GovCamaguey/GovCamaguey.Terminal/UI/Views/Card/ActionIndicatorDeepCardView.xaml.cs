@@ -14,7 +14,7 @@ public partial class ActionIndicatorDeepCardView : Microsoft.Maui.Controls.Conte
     {
         var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
 
-        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ResultCreatorPermission)))
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ActionIndicatorResultCreatorPermission)))
         {
             Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
 
@@ -49,7 +49,7 @@ public partial class ActionIndicatorDeepCardView : Microsoft.Maui.Controls.Conte
 
                 var apiConnectClient = new Interop.API.Connect.Clients.ActionIndicatorResultsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-                apiConnectClient.CreateAsync(new Interop.API.Common.Models.Input.ResultInputModel { Amount = result, IndicatorId = concreteBindingContext.Id }).ContinueWith(_task =>
+                apiConnectClient.CreateAsync(new Interop.API.Common.Models.Input.ActionIndicatorResultInputModel { Amount = result, IndicatorId = concreteBindingContext.Id }).ContinueWith(_task =>
                 {
                     Microsoft.Maui.Controls.Shell.Current.CurrentPage.Dispatcher.Dispatch(() =>
                     {

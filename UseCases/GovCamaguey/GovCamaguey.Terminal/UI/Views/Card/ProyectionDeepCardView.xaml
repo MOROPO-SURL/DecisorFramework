@@ -59,13 +59,13 @@
                         </Frame>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-                <CollectionView.EmptyView>
+                <!--<CollectionView.EmptyView>
                     <Label
                         Padding="8,0"
                         FontAttributes="Italic"
                         TextColor="DimGray"
                         Text="Sin elementos que mostrar" />
-                </CollectionView.EmptyView>
+                </CollectionView.EmptyView>-->
             </CollectionView>
             <ContentView>
                 <ContentView.Content>
@@ -86,13 +86,13 @@
                                         Text="Responsables" />
                                     <BoxView Color="DimGray" HeightRequest="1" /> 
                                     <StackLayout BindableLayout.ItemsSource="{Binding ResponsabilityOrganizations}">
-                                        <BindableLayout.EmptyView>
+                                        <!--<BindableLayout.EmptyView>
                                             <Label
                                                 Padding="0,4"
                                                 FontAttributes="Italic"
                                                 TextColor="DimGray"
                                                 Text="Sin elementos que mostrar" />
-                                        </BindableLayout.EmptyView>
+                                        </BindableLayout.EmptyView>-->
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
                                                 <Frame Margin="0,4" Padding="10">
@@ -114,13 +114,13 @@
                                         Text="Participantes" />
                                     <BoxView Color="DimGray" HeightRequest="1" />
                                     <StackLayout BindableLayout.ItemsSource="{Binding ParticipationOrganizations}">
-                                        <BindableLayout.EmptyView>
+                                        <!--<BindableLayout.EmptyView>
                                             <Label
                                                 Padding="0,4"
                                                 FontAttributes="Italic"
                                                 TextColor="DimGray"
                                                 Text="Sin elementos que mostrar" />
-                                        </BindableLayout.EmptyView>
+                                        </BindableLayout.EmptyView>-->
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
                                                 <Frame Margin="0,4" Padding="10">
@@ -145,13 +145,13 @@
                                         Text="Responsables" />
                                     <BoxView Color="DimGray" HeightRequest="1" /> 
                                     <StackLayout BindableLayout.ItemsSource="{Binding ResponsabilityOrganizations}">
-                                        <BindableLayout.EmptyView>
+                                        <!--<BindableLayout.EmptyView>
                                             <Label
                                                 Padding="0,4"
                                                 FontAttributes="Italic"
                                                 TextColor="DimGray"
                                                 Text="Sin elementos que mostrar" />
-                                        </BindableLayout.EmptyView>
+                                        </BindableLayout.EmptyView>-->
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
                                                 <Frame Margin="0,4" Padding="10">
@@ -172,13 +172,13 @@
                                         Text="Participantes" />
                                     <BoxView Color="DimGray" HeightRequest="1" />
                                     <StackLayout BindableLayout.ItemsSource="{Binding ParticipationOrganizations}">
-                                        <BindableLayout.EmptyView>
+                                        <!--<BindableLayout.EmptyView>
                                             <Label
                                                 Padding="0,4"
                                                 FontAttributes="Italic"
                                                 TextColor="DimGray"
                                                 Text="Sin elementos que mostrar" />
-                                        </BindableLayout.EmptyView>
+                                        </BindableLayout.EmptyView>-->
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
                                                 <Frame Margin="0,4" Padding="10">
@@ -198,6 +198,28 @@
             <Label 
                 Style="{StaticResource CaptionFieldLabelStyle}" 
                 Margin="8,16,8,0" 
+                Text="Indicadores" />
+            <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
+            <CollectionView ItemsSource="{Binding Indicators}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <!--<CollectionView.EmptyView>
+                    <Label
+                        Padding="8,4,8,8"
+                        FontAttributes="Italic"
+                        TextColor="DimGray"
+                        Text="Sin elementos que mostrar" />
+                </CollectionView.EmptyView>-->
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <local_card_views:ProyectionIndicatorDeepCardView Padding="8,4" />
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+            <Label 
+                Style="{StaticResource CaptionFieldLabelStyle}" 
+                Margin="8,16,8,0" 
                 Text="Acciones" />
             <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
             <CollectionView ItemsSource="{Binding Actions}">
@@ -209,13 +231,13 @@
                         <local_card_views:ActionDeepCardView Padding="8,4" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
-                <CollectionView.EmptyView>
+                <!--<CollectionView.EmptyView>
                     <Label
                         Padding="8,0"
                         FontAttributes="Italic"
                         TextColor="DimGray"
                         Text="Sin elementos que mostrar" />
-                </CollectionView.EmptyView>
+                </CollectionView.EmptyView>-->
             </CollectionView>
         </VerticalStackLayout>
     </Frame>

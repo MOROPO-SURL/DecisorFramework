@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Models.View.Display
 {
-    public class ResultDisplayViewModel : Interop.API.Common.Models.Display.ResultDisplayModel
+    public class ActionIndicatorResultDisplayViewModel : Interop.API.Common.Models.Display.ActionIndicatorResultDisplayModel
     {
         public IndicatorDisplayViewModel Indicator { get; set; }
 
