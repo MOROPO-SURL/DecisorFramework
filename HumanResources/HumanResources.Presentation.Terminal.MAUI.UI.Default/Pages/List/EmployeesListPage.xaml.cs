@@ -26,7 +26,6 @@ public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Page
         return ITEM_VIEW_REQUEST_HEIGHT;
     }
 
-
     protected override async System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Models.Page.Detail.EmployeeDetailPageModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
@@ -63,7 +62,6 @@ public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Page
     {
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
-
 
     protected override async System.Threading.Tasks.Task<Models.Page.Detail.EmployeeDetailPageModel> FillItemDataAsync(Models.Page.Detail.EmployeeDetailPageModel model)
     {
