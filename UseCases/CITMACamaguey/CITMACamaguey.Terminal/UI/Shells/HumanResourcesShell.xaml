@@ -48,7 +48,7 @@
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
     <ShellContent
-        Title="Elaboración de pre-nóminas"
+        Title="Elaboración de pre-nóminas (%)"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -76,7 +76,7 @@
             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:AdmitionPropousalsManagePage}" />
     </FlyoutItem>
     <ShellContent
-        Title="Solicitudes de baja"
+        Title="Solicitudes de baja (%)"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -86,7 +86,7 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Tramitaciones de jubilación"
+        Title="Tramitaciones de jubilación (%)"
         ContentTemplate="{DataTemplate ContentPage}">
         <ShellContent.Icon>
             <FontImageSource

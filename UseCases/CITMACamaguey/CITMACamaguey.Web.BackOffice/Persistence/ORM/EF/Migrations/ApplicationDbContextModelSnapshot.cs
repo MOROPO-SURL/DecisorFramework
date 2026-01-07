@@ -392,6 +392,10 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
+                    b.Property<int>("SkinKind")
+                        .HasColumnType("integer")
+                        .HasColumnName("skinkind");
+
                     b.Property<string>("UserId")
                         .HasColumnType("text")
                         .HasColumnName("userid");
@@ -1688,6 +1692,10 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                     b.Property<Guid>("StructureId")
                         .HasColumnType("uuid")
                         .HasColumnName("structureid");
+
+                    b.Property<int>("WorkingDayCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("workingdaycount");
 
                     b.HasKey("Id")
                         .HasName("pk_staffs");
