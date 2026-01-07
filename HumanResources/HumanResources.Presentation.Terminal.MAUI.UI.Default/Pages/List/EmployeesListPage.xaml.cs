@@ -30,7 +30,16 @@ public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Page
     {
         var apiConnectClient = new Domain.Interop.API.Connect.Clients.EmployeesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var result = await apiConnectClient.GetPaginateAsync();
+        Guama.Core.Presentation.Models.PaginationModel<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel> result = null;
+
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            result = await apiConnectClient.FilterPaginateAsync(new Domain.Interop.API.Common.Models.Filter.EmployeeFilterModel { Parameter = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
+        else
+        {
+            result = await apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
 
         return new Guama.Core.Presentation.Models.PaginationModel<Models.Page.Detail.EmployeeDetailPageModel>
         {
@@ -41,26 +50,6 @@ public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Page
             Page = result.Page,
             List = result.List.Select(item => new Models.Page.Detail.EmployeeDetailPageModel { Domain = item }).ToList()
         };
-    }
-
-    private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
-    {
-        OnReload(sender, eventArgs);
-    }
-
-    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
-    {
-        OnLoadMore(sender, eventArgs);
-    }
-
-    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
-    {
-        OnItemsCollectionViewLayoutResize(sender, eventArgs);
-    }
-
-    private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
-    {
-        base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 
     protected override async System.Threading.Tasks.Task<Models.Page.Detail.EmployeeDetailPageModel> FillItemDataAsync(Models.Page.Detail.EmployeeDetailPageModel model)
@@ -80,5 +69,32 @@ public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Page
         await model.FillDailyCheckingsAsync();
 
         return model;
+    }
+
+    private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        ConcreteBindingContext.SearchParameter = null;
+
+        OnReload(sender, eventArgs);
+    }
+
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
+    }
+
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
+    {
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
+    }
+
+    private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
+    }
+
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
     }
 }

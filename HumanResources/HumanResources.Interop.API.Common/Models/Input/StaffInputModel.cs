@@ -10,6 +10,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
 
         public System.Guid MainWorkforceId { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Range(1, 28)]
+        public int WorkingDayCount { get; set; } = 24;
+
         public Bridge.AlternativeWorkforceBridgeModel[] AlternativeWorkforces { get; set; }
 
         public Persistence.Entities.Staff Export()
@@ -28,6 +31,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
 
         public void Mergue(Persistence.Entities.Staff entity)
         {
+            entity.WorkingDayCount = WorkingDayCount;
+
             entity.AlternativeWorkforceBridges = AlternativeWorkforces.Select(model => new Persistence.Entities.StaffWorkforceBridge
             {
                 ProwId = entity.Id,

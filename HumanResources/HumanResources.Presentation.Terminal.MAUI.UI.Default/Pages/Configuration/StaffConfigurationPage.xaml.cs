@@ -1,13 +1,10 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
-using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<StaffDisplayModel>
+public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.StaffDisplayModel, Interop.API.Common.Models.Display.StaffDisplayModel, Models.Page.Configuration.StaffConfigurationPageModel>
 {
-    public StaffConfigurationPage(System.Action<StaffDisplayModel> successAction, Models.Page.Configuration.StaffConfigurationPageModel model) : base(successAction, model)
+    public StaffConfigurationPage(System.Action<Interop.API.Common.Models.Display.StaffDisplayModel> successAction, Models.Page.Configuration.StaffConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.StaffConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -44,18 +41,17 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
 
     protected override string EntityTypeName => "Asignación de Plantilla";
 
-    protected override async System.Threading.Tasks.Task<StaffDisplayModel> PerformCreationAsync()
+    protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.StaffDisplayModel> PerformCreationAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.StaffsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.StaffConfigurationPageModel)BindingContext;
-
-        var model = new StaffInputModel
+        var model = new Interop.API.Common.Models.Input.StaffInputModel
         {
             Id = System.Guid.NewGuid(),
-            StructureId = concreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
-            MainWorkforceId = concreteBindingContext.AvailableWorkforces[MainWorkforcePicker.SelectedIndex].Id,
-            AlternativeWorkforces = concreteBindingContext.AlternativeWorkforceBridges.ToArray()
+            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
+            MainWorkforceId = ConcreteBindingContext.AvailableWorkforces[MainWorkforcePicker.SelectedIndex].Id,
+            WorkingDayCount = ConcreteBindingContext.WorkingDayCount,
+            AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges]
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -63,23 +59,32 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
         return await apiConnectClient.GetAsync(model.Id);
     }
 
-    protected override async System.Threading.Tasks.Task<StaffDisplayModel> PerformEditionAsync()
+    protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.StaffDisplayModel> PerformEditionAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.StaffsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.StaffConfigurationPageModel)BindingContext;
-
-        var model = new StaffInputModel
+        var model = new Interop.API.Common.Models.Input.StaffInputModel
         {
-            Id = concreteBindingContext.Id,
-            StructureId = concreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
-            MainWorkforceId = concreteBindingContext.AvailableWorkforces[MainWorkforcePicker.SelectedIndex].Id,
-            AlternativeWorkforces = concreteBindingContext.AlternativeWorkforceBridges.ToArray()
+            Id = ConcreteBindingContext.Id,
+            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
+            MainWorkforceId = ConcreteBindingContext.AvailableWorkforces[MainWorkforcePicker.SelectedIndex].Id,
+            WorkingDayCount = ConcreteBindingContext.WorkingDayCount,
+            AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges]
         };
 
         await apiConnectClient.EditAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)

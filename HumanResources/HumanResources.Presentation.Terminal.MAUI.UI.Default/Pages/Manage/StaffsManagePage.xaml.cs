@@ -1,188 +1,85 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using Microsoft.Maui.Dispatching;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class StaffsManagePage : Caney.MVVM.Core.Pages.ContentPage
+public partial class StaffsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.StaffDisplayModel, Models.Page.Manage.StaffsManagePageModel, Models.Page.Configuration.StaffConfigurationPageModel>
 {
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 120;
+
     public StaffsManagePage()
     {
         InitializeComponent();
-
-        IsEnabled = false;
-
-        BindingContext = new Models.Page.Manage.StaffsManagePageModel();
     }
 
-    protected override void OnAppearing()
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
     {
-        base.OnAppearing();
-
-        if (IsEnabled) return;
-
-        LoadItems();
-
-        IsEnabled = true;
+        return ItemsCollectionView;
     }
 
-    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    protected override double ItemViewRequestWidth => 720;
+
+    protected override double MeasureCollectionViewCellHeight(double width)
     {
-        var concreteBindingContext = (Models.Page.Manage.StaffsManagePageModel)BindingContext;
+        return ITEM_VIEW_REQUEST_HEIGHT;
+    }
 
-        concreteBindingContext.IsBusy = true;
+    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.StaffDisplayModel>> FetchItemsAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.StaffsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        System.Threading.Tasks.Task.Run(async () =>
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
+    }
+
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.StaffDisplayModel target, int discriminator)
+    {
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
         {
-            try
-            {
-                var structuresAPIConnectClient = new Domain.Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-                var workforcesAPIConnectClient = new Interop.API.Connect.Clients.WorkforcesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.StaffsAPIConnectClient(httpClientHelperProvider);
 
-                var model = new Models.Page.Configuration.StaffConfigurationPageModel(null)
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {
-                    AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync(),
-                    AvailableWorkforces = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.WorkforceDisplayModel>(await workforcesAPIConnectClient.GetAsync())
-                };
+                    Dispatcher.Dispatch(() =>
+                    {
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
 
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    this.NavigationPushPageAsync(new Configuration.StaffConfigurationPage(ConfigurationSuccess_Callback, model));
+                        LoadItems(true);
+                    });
                 });
-            }
-            catch (System.Exception exception)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                });
-            }
-        });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
-    private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (((Models.Page.Manage.StaffsManagePageModel)BindingContext).IsBusy) return;
+        AddItem(sender, eventArgs);
+    }
 
-        LoadItems();
+    private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
+    }
+
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
+    }
+
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
+    {
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
     }
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        ((Models.Page.Manage.StaffsManagePageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.StaffDisplayModel;
-    }
-
-    private void PresentedItemDismissButton_Clicked(object sender, System.EventArgs e)
-    {
-        ((Models.Page.Manage.StaffsManagePageModel)BindingContext).PresentedItem = null;
-    }
-
-    private void PresentedItemEditButton_Clicked(object sender, System.EventArgs e)
-    {
-        var concreteBindingContext = (Models.Page.Manage.StaffsManagePageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        System.Threading.Tasks.Task.Run(async () =>
-        {
-            try
-            {
-                var structuresAPIConnectClient = new Domain.Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-                var workforcesAPIConnectClient = new Interop.API.Connect.Clients.WorkforcesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-                var model = new Models.Page.Configuration.StaffConfigurationPageModel(concreteBindingContext.PresentedItem)
-                {
-                    AvailableStructures = await structuresAPIConnectClient.GetAsync(),
-                    AvailableWorkforces = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.WorkforceDisplayModel>(await workforcesAPIConnectClient.GetAsync())
-                };
-
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    this.NavigationPushPageAsync(new Configuration.StaffConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                    PresentedItemDismissButton_Clicked(sender, e);
-                });
-            }
-            catch (System.Exception exception)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                });
-            }
-        });
-    }
-
-    private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)
-    {
-        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
-        {
-            if (!task.Result) return;
-
-            var concreteBindingContext = (Models.Page.Manage.StaffsManagePageModel)BindingContext;
-
-            var apiConnectClient = new Interop.API.Connect.Clients.StaffsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-            apiConnectClient.ArchiveAsync(concreteBindingContext.PresentedItem.Id).ContinueWith(_task =>
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    if (_task.Exception != null || _task.IsCanceled)
-                    {
-                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                    }
-                    else
-                    {
-                        concreteBindingContext.PresentedItem = null;
-
-                        DisplayAlert("Aviso", "Elemento eliminado con éxito.", "Aceptar");
-
-                        LoadItems();
-                    }
-                });
-            });
-        });
-    }
-
-    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.StaffDisplayModel model)
-    {
-        LoadItems();
-    }
-
-    private void LoadItems()
-    {
-        var concreteBindingContext = (Models.Page.Manage.StaffsManagePageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        concreteBindingContext.Items.Clear();
-
-        var apiConnectClient = new Interop.API.Connect.Clients.StaffsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        apiConnectClient.GetAsync().ContinueWith(task =>
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                concreteBindingContext.IsBusy = false;
-
-                if (task.Exception != null || task.IsCanceled)
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                }
-                else
-                {
-                    foreach (var model in task.Result)
-                    {
-                        concreteBindingContext.Items.Add(model);
-                    }
-                }
-            });
-        });
+        base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 }

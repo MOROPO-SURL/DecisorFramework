@@ -248,7 +248,7 @@
         <Grid>
             <Grid
                 Padding="10"
-                MaximumWidthRequest="{Static core_constants:CommonDetailPageConstants.MediumRegularDetailPageFrameWrapperWidth}"
+                MaximumWidthRequest="{Static core_constants:CommonDetailPageConstants.LargeRegularDetailPageFrameWrapperWidth}"
                 VerticalOptions="Center">
                 <Frame Style="{StaticResource PopupFrameStyle}">
                     <StackLayout 
@@ -258,7 +258,7 @@
                             Wrap="Wrap"
                             AlignItems="Start" AlignContent="Start">
                             <Frame
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=3, SmallContainerColumn=4}}"                        
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=1, LargeContainerColumn=2, MediumContainerColumn=3, SmallContainerColumn=4}}"                        
                                 Margin="4"
                                 Padding="0">
                                 <Image
@@ -267,7 +267,7 @@
                                     Source="{Binding Domain.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
                             </Frame>
                             <VerticalStackLayout
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=10, ExtraLargeContainerColumn=10, LargeContainerColumn=9, MediumContainerColumn=9, SmallContainerColumn=8}}"                        
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=11, LargeContainerColumn=10, MediumContainerColumn=9, SmallContainerColumn=8}}"                        
                                 Margin="4">
                                 <VerticalStackLayout>
                                     <Label
@@ -312,7 +312,7 @@
                                         </DataTemplate>
                                     </uraniumui_material_controls:TabItem.ContentTemplate>
                                 </uraniumui_material_controls:TabItem>
-                                <uraniumui_material_controls:TabItem Title="Reg. de Asistencia">
+                                <uraniumui_material_controls:TabItem Title="Asistencia">
                                     <uraniumui_material_controls:TabItem.ContentTemplate>
                                         <DataTemplate>
                                             <VerticalStackLayout Margin="8" Spacing="0">
@@ -524,10 +524,51 @@
                                         </DataTemplate>
                                     </uraniumui_material_controls:TabItem.ContentTemplate>
                                 </uraniumui_material_controls:TabItem>
-                                <uraniumui_material_controls:TabItem Title="Certificados Médicos">
+                                <uraniumui_material_controls:TabItem Title="Ausencias">
                                     <uraniumui_material_controls:TabItem.ContentTemplate>
                                         <DataTemplate>
-                                            <Label Margin="8" Text="..." />
+                                            <Label 
+                                                Margin="24"
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                TextColor="DimGray"
+                                                Text="En construcción ..." />
+                                        </DataTemplate>
+                                    </uraniumui_material_controls:TabItem.ContentTemplate>
+                                </uraniumui_material_controls:TabItem>
+                                <uraniumui_material_controls:TabItem Title="Sanciones">
+                                    <uraniumui_material_controls:TabItem.ContentTemplate>
+                                        <DataTemplate>
+                                            <Label 
+                                                Margin="24"
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                TextColor="DimGray"
+                                                Text="En construcción ..." />
+                                        </DataTemplate>
+                                    </uraniumui_material_controls:TabItem.ContentTemplate>
+                                </uraniumui_material_controls:TabItem>
+                                <uraniumui_material_controls:TabItem Title="Certificados">
+                                    <uraniumui_material_controls:TabItem.ContentTemplate>
+                                        <DataTemplate>
+                                            <Label 
+                                                Margin="24"
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                TextColor="DimGray"
+                                                Text="En construcción ..." />
+                                        </DataTemplate>
+                                    </uraniumui_material_controls:TabItem.ContentTemplate>
+                                </uraniumui_material_controls:TabItem>
+                                <uraniumui_material_controls:TabItem Title="Evaluaciones">
+                                    <uraniumui_material_controls:TabItem.ContentTemplate>
+                                        <DataTemplate>
+                                            <Label 
+                                                Margin="24"
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Italic"
+                                                TextColor="DimGray"
+                                                Text="En construcción ..." />
                                         </DataTemplate>
                                     </uraniumui_material_controls:TabItem.ContentTemplate>
                                 </uraniumui_material_controls:TabItem>
