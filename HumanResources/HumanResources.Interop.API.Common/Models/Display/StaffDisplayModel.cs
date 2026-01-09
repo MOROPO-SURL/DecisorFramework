@@ -10,11 +10,14 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Disp
 
         public WorkforceDisplayModel MainWorkforce { get; set; }
 
+        public int WorkingDayCount { get; set; }
+
         public Bridge.AlternativeWorkforceBridgeModel[] AlternativeWorkforces { get; set; }
 
         public void Import(Persistence.Entities.Staff entity)
         {
             Id = entity.Id;
+            WorkingDayCount = entity.WorkingDayCount;
             AlternativeWorkforces = entity.AlternativeWorkforceBridges?.Select(bridge =>
             {
                 var model = new Bridge.AlternativeWorkforceBridgeModel

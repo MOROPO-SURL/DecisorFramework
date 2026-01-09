@@ -16,5 +16,8 @@
         public System.Guid MainWorkforceId { get; set; }
 
         public System.Collections.Generic.List<StaffWorkforceBridge> AlternativeWorkforceBridges { get; set; } = new System.Collections.Generic.List<StaffWorkforceBridge>();
+
+        [System.ComponentModel.DataAnnotations.Range(1, 28)]
+        public int WorkingDayCount { get; set; } = 24;
     }
 }
