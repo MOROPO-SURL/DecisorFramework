@@ -7,6 +7,7 @@
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.VacantConfigurationPage"
     x:TypeArguments="presentation_configuration_view_models:WorkforceConfigurationVacantViewModel,presentation_configuration_view_models:WorkforceConfigurationVacantViewModel,presentation_configuration_page_models:VacantConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:VacantConfigurationPageModel">
@@ -33,68 +34,71 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <ScrollView Orientation="Vertical">
-        <VerticalStackLayout Spacing="0" Padding="8">
-            <VerticalStackLayout 
-                Margin="8"
-                Spacing="6">
-                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Plaza Laboral" />
-                <Picker 
-                    x:Name="WorkPositionPicker"
-                    ItemsSource="{Binding AvailableWorkPositions}"
-                    ItemDisplayBinding="{Binding Name}"
-                    SelectedItem="{Binding WorkPosition}"
-                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                <Label
-                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VacantConfigurationPageModel.WorkPositionValidableProperty}}"
-                    Style="{StaticResource ValidationMessageLabelStyle}"
-                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VacantConfigurationPageModel.WorkPositionValidableProperty}}" />
-            </VerticalStackLayout>
-            <FlexLayout 
-                Wrap="Wrap"
-                AlignItems="Start" AlignContent="Start">
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="0" Padding="8">
                 <VerticalStackLayout 
-                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                    Margin="4"
+                    Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Escala Salarial" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Plaza Laboral" />
                     <Picker 
-                        x:Name="SalaryStandardPicker"
-                        ItemsSource="{Binding AvailableSalaryStandards}" 
+                        x:Name="WorkPositionPicker"
+                        ItemsSource="{Binding AvailableWorkPositions}"
                         ItemDisplayBinding="{Binding Name}"
-                        SelectedItem="{Binding SalaryStandard}"
+                        SelectedItem="{Binding WorkPosition}"
                         SelectedIndexChanged="Picker_SelectedIndexChanged" />
                     <Label
-                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VacantConfigurationPageModel.SalaryStandardValidableProperty}}"
-                    Style="{StaticResource ValidationMessageLabelStyle}"
-                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VacantConfigurationPageModel.SalaryStandardValidableProperty}}" />
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VacantConfigurationPageModel.WorkPositionValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VacantConfigurationPageModel.WorkPositionValidableProperty}}" />
                 </VerticalStackLayout>
-                <VerticalStackLayout 
-                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                    Margin="4"
-                    Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Modo de ocupación" />
-                    <Picker 
-                        ItemsSource="{Binding AvailableVacantOcupationModes}" 
-                        SelectedItem="{Binding OcupationMode}"
-                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                </VerticalStackLayout>
-            </FlexLayout>
-            <BoxView 
-                Margin="8,16,8,8"
-                HeightRequest="1" 
-                Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-            <FlexLayout
-                Wrap="Wrap"
-                AlignItems="Start" AlignContent="Start">
-                <VerticalStackLayout 
-                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
-                    Margin="4"
-                    Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                </VerticalStackLayout>
-            </FlexLayout>
-        </VerticalStackLayout>
-    </ScrollView>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Escala Salarial" />
+                        <Picker 
+                            x:Name="SalaryStandardPicker"
+                            ItemsSource="{Binding AvailableSalaryStandards}" 
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding SalaryStandard}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VacantConfigurationPageModel.SalaryStandardValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VacantConfigurationPageModel.SalaryStandardValidableProperty}}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Modo de ocupación" />
+                        <Picker 
+                            ItemsSource="{Binding AvailableVacantOcupationModes}" 
+                            SelectedItem="{Binding OcupationMode}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <BoxView 
+                    Margin="8,16,8,8"
+                    HeightRequest="1" 
+                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
 </core_ui_base_pages:ConfigurationBaseContentPage>
