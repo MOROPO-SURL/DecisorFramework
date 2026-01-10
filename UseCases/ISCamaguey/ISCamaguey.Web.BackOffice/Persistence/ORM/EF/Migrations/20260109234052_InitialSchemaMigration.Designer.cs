@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251208041552_InitialSchemaMigration")]
+    [Migration("20260109234052_InitialSchemaMigration")]
     partial class InitialSchemaMigration
     {
         /// <inheritdoc />
@@ -1318,6 +1318,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
+
+                    b.Property<int>("SkinKind")
+                        .HasColumnType("integer")
+                        .HasColumnName("skinkind");
 
                     b.Property<string>("UserId")
                         .HasColumnType("text")
@@ -2947,6 +2951,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("structureid");
 
+                    b.Property<int>("WorkingDayCount")
+                        .HasColumnType("integer")
+                        .HasColumnName("workingdaycount");
+
                     b.HasKey("Id")
                         .HasName("pk_staffs");
 
@@ -4437,6 +4445,25 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_elaborations_productid");
 
                     b.ToTable("elaborations", "decisorframework_production");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationDocumentBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_elaborationdocumentbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_elaborationdocumentbridges_sternid");
+
+                    b.ToTable("elaborationdocumentbridges", "decisorframework_production");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationInputProductBridge", b =>
@@ -6024,7 +6051,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("awardresults", "decisoriscamaguey_idi");
                 });
 
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForPropousal", b =>
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForProposal", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -6061,15 +6088,15 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("title");
 
                     b.HasKey("Id")
-                        .HasName("pk_callforpropousals");
+                        .HasName("pk_callforproposals");
 
                     b.HasIndex("FinancierId")
-                        .HasDatabaseName("ix_callforpropousals_financierid");
+                        .HasDatabaseName("ix_callforproposals_financierid");
 
-                    b.ToTable("callforpropousals", "decisoriscamaguey_idi");
+                    b.ToTable("callforproposals", "decisoriscamaguey_idi");
                 });
 
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForPropousalDocumentBridge", b =>
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForProposalDocumentBridge", b =>
                 {
                     b.Property<Guid>("ProwId")
                         .HasColumnType("uuid")
@@ -6080,15 +6107,15 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("sternid");
 
                     b.HasKey("ProwId", "SternId")
-                        .HasName("pk_callforpropousaldocumentbridges");
+                        .HasName("pk_callforproposaldocumentbridges");
 
                     b.HasIndex("SternId")
-                        .HasDatabaseName("ix_callforpropousaldocumentbridges_sternid");
+                        .HasDatabaseName("ix_callforproposaldocumentbridges_sternid");
 
-                    b.ToTable("callforpropousaldocumentbridges", "decisoriscamaguey_idi");
+                    b.ToTable("callforproposaldocumentbridges", "decisoriscamaguey_idi");
                 });
 
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForPropousalResearchAreaBridge", b =>
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForProposalResearchAreaBridge", b =>
                 {
                     b.Property<Guid>("ProwId")
                         .HasColumnType("uuid")
@@ -6099,12 +6126,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("sternid");
 
                     b.HasKey("ProwId", "SternId")
-                        .HasName("pk_callforpropousalresearchareabridges");
+                        .HasName("pk_callforproposalresearchareabridges");
 
                     b.HasIndex("SternId")
-                        .HasDatabaseName("ix_callforpropousalresearchareabridges_sternid");
+                        .HasDatabaseName("ix_callforproposalresearchareabridges_sternid");
 
-                    b.ToTable("callforpropousalresearchareabridges", "decisoriscamaguey_idi");
+                    b.ToTable("callforproposalresearchareabridges", "decisoriscamaguey_idi");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract.AbstractResearcher", b =>
@@ -6531,7 +6558,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.Property<string>("Beneficiary")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(2550)
+                        .HasColumnType("character varying(2550)")
                         .HasColumnName("beneficiary");
 
                     b.Property<Guid>("CategoryId")
@@ -6544,13 +6572,19 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.Property<string>("Code")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(50)
+                        .HasColumnType("character varying(50)")
                         .HasColumnName("code");
 
                     b.Property<string>("Context")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(5100)
+                        .HasColumnType("character varying(5100)")
                         .HasColumnName("context");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
 
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
@@ -6562,12 +6596,14 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.Property<string>("MainObjetive")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("mainobjetive");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("name");
 
                     b.Property<Guid?>("PredecessorId")
@@ -6580,7 +6616,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.Property<string>("Problem")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(5100)
+                        .HasColumnType("character varying(5100)")
                         .HasColumnName("problem");
 
                     b.Property<Guid?>("ProgramId")
@@ -6597,7 +6634,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.Property<string>("Summary")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(2550)
+                        .HasColumnType("character varying(2550)")
                         .HasColumnName("summary");
 
                     b.HasKey("Id")
@@ -6608,6 +6646,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("ChiefId")
                         .HasDatabaseName("ix_projects_chiefid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_projects_documentid");
 
                     b.HasIndex("PredecessorId")
                         .HasDatabaseName("ix_projects_predecessorid");
@@ -6755,11 +6796,17 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<Guid?>("CallForPropousalId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("callforpropousalid");
+
                     b.Property<string>("Description")
-                        .HasColumnType("text")
+                        .IsRequired()
+                        .HasMaxLength(5100)
+                        .HasColumnType("character varying(5100)")
                         .HasColumnName("description");
 
-                    b.Property<Guid>("DocumentId")
+                    b.Property<Guid?>("DocumentId")
                         .HasColumnType("uuid")
                         .HasColumnName("documentid");
 
@@ -6767,20 +6814,31 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("text")
-                        .HasColumnName("name");
-
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
                         .HasColumnName("priority");
 
+                    b.Property<Guid?>("ProgramId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("programid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("title");
+
                     b.HasKey("Id")
                         .HasName("pk_projectproposals");
 
+                    b.HasIndex("CallForPropousalId")
+                        .HasDatabaseName("ix_projectproposals_callforpropousalid");
+
                     b.HasIndex("DocumentId")
                         .HasDatabaseName("ix_projectproposals_documentid");
+
+                    b.HasIndex("ProgramId")
+                        .HasDatabaseName("ix_projectproposals_programid");
 
                     b.ToTable("projectproposals", "decisoriscamaguey_idi");
                 });
@@ -6861,12 +6919,14 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnName("archived");
 
                     b.Property<string>("Description")
-                        .HasColumnType("text")
+                        .HasMaxLength(2550)
+                        .HasColumnType("character varying(2550)")
                         .HasColumnName("description");
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("text")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
                         .HasColumnName("name");
 
                     b.Property<Guid>("ProjectId")
@@ -11017,6 +11077,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Product");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationDocumentBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.Elaboration", "Prow")
+                        .WithMany("DocumentBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_elaborationdocumentbridges_elaborations_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_elaborationdocumentbridges_documents_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.ElaborationInputProductBridge", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.Elaboration", "Prow")
@@ -11790,54 +11871,54 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Kind");
                 });
 
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForPropousal", b =>
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForProposal", b =>
                 {
                     b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Financier", "Financier")
                         .WithMany()
                         .HasForeignKey("FinancierId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_callforpropousals_financiers_financierid");
+                        .HasConstraintName("fk_callforproposals_financiers_financierid");
 
                     b.Navigation("Financier");
                 });
 
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForPropousalDocumentBridge", b =>
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForProposalDocumentBridge", b =>
                 {
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForPropousal", "Prow")
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForProposal", "Prow")
                         .WithMany("DocumentBridges")
                         .HasForeignKey("ProwId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_callforpropousaldocumentbridges_callforpropousals_prowid");
+                        .HasConstraintName("fk_callforproposaldocumentbridges_callforproposals_prowid");
 
                     b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Stern")
                         .WithMany()
                         .HasForeignKey("SternId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_callforpropousaldocumentbridges_documents_sternid");
+                        .HasConstraintName("fk_callforproposaldocumentbridges_documents_sternid");
 
                     b.Navigation("Prow");
 
                     b.Navigation("Stern");
                 });
 
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForPropousalResearchAreaBridge", b =>
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForProposalResearchAreaBridge", b =>
                 {
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForPropousal", "Prow")
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForProposal", "Prow")
                         .WithMany("ResearchAreaBridges")
                         .HasForeignKey("ProwId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_callforpropousalresearchareabridges_callforpropousals_prowid");
+                        .HasConstraintName("fk_callforproposalresearchareabridges_callforproposals_prowid");
 
                     b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ResearchArea", "Stern")
                         .WithMany()
                         .HasForeignKey("SternId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_callforpropousalresearchareabridges_researchareas_sternid");
+                        .HasConstraintName("fk_callforproposalresearchareabridges_researchareas_sternid");
 
                     b.Navigation("Prow");
 
@@ -12056,6 +12137,13 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_projects_researchers_chiefid");
 
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_projects_documents_documentid");
+
                     b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Predecessor")
                         .WithMany()
                         .HasForeignKey("PredecessorId")
@@ -12074,6 +12162,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Category");
 
                     b.Navigation("Chief");
+
+                    b.Navigation("Document");
 
                     b.Navigation("Predecessor");
 
@@ -12152,14 +12242,26 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectProposal", b =>
                 {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForProposal", "CallForPropousal")
+                        .WithMany()
+                        .HasForeignKey("CallForPropousalId")
+                        .HasConstraintName("fk_projectproposals_callforproposals_callforpropousalid");
+
                     b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
                         .WithMany()
                         .HasForeignKey("DocumentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_projectproposals_documents_documentid");
 
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Program", "Program")
+                        .WithMany()
+                        .HasForeignKey("ProgramId")
+                        .HasConstraintName("fk_projectproposals_programs_programid");
+
+                    b.Navigation("CallForPropousal");
+
                     b.Navigation("Document");
+
+                    b.Navigation("Program");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectReport", b =>
@@ -13553,6 +13655,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.Elaboration", b =>
                 {
+                    b.Navigation("DocumentBridges");
+
                     b.Navigation("InputProductBridges");
 
                     b.Navigation("InputProductClassificationBridges");
@@ -13635,7 +13739,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("IsoStandardBridge");
                 });
 
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForPropousal", b =>
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForProposal", b =>
                 {
                     b.Navigation("DocumentBridges");
 

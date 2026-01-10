@@ -1437,32 +1437,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "projectproposals",
-                schema: "decisoriscamaguey_idi",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: true),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    documentid = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_projectproposals", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_projectproposals_documents_documentid",
-                        column: x => x.documentid,
-                        principalSchema: "guamaframework_media",
-                        principalTable: "documents",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "projectreports",
                 schema: "decisoriscamaguey_idi",
                 columns: table => new
@@ -2491,6 +2465,33 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "elaborationdocumentbridges",
+                schema: "decisorframework_production",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_elaborationdocumentbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_elaborationdocumentbridges_documents_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_elaborationdocumentbridges_elaborations_prowid",
+                        column: x => x.prowid,
+                        principalSchema: "decisorframework_production",
+                        principalTable: "elaborations",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "elaborationinputproductbridges",
                 schema: "decisorframework_production",
                 columns: table => new
@@ -2820,6 +2821,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     personalidentificationnumber = table.Column<string>(type: "text", nullable: true),
                     userid = table.Column<string>(type: "text", nullable: true),
                     businesskindid = table.Column<Guid>(type: "uuid", nullable: true),
+                    skinkind = table.Column<int>(type: "integer", nullable: false),
                     enabled = table.Column<bool>(type: "boolean", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
                     priority = table.Column<int>(type: "integer", nullable: false),
@@ -3934,7 +3936,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "callforpropousals",
+                name: "callforproposals",
                 schema: "decisoriscamaguey_idi",
                 columns: table => new
                 {
@@ -3949,9 +3951,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_callforpropousals", x => x.id);
+                    table.PrimaryKey("pk_callforproposals", x => x.id);
                     table.ForeignKey(
-                        name: "fk_callforpropousals_financiers_financierid",
+                        name: "fk_callforproposals_financiers_financierid",
                         column: x => x.financierid,
                         principalSchema: "decisoriscamaguey_idi",
                         principalTable: "financiers",
@@ -4462,7 +4464,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "callforpropousaldocumentbridges",
+                name: "callforproposaldocumentbridges",
                 schema: "decisoriscamaguey_idi",
                 columns: table => new
                 {
@@ -4471,16 +4473,16 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_callforpropousaldocumentbridges", x => new { x.prowid, x.sternid });
+                    table.PrimaryKey("pk_callforproposaldocumentbridges", x => new { x.prowid, x.sternid });
                     table.ForeignKey(
-                        name: "fk_callforpropousaldocumentbridges_callforpropousals_prowid",
+                        name: "fk_callforproposaldocumentbridges_callforproposals_prowid",
                         column: x => x.prowid,
                         principalSchema: "decisoriscamaguey_idi",
-                        principalTable: "callforpropousals",
+                        principalTable: "callforproposals",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_callforpropousaldocumentbridges_documents_sternid",
+                        name: "fk_callforproposaldocumentbridges_documents_sternid",
                         column: x => x.sternid,
                         principalSchema: "guamaframework_media",
                         principalTable: "documents",
@@ -4489,7 +4491,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "callforpropousalresearchareabridges",
+                name: "callforproposalresearchareabridges",
                 schema: "decisoriscamaguey_idi",
                 columns: table => new
                 {
@@ -4498,21 +4500,60 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("pk_callforpropousalresearchareabridges", x => new { x.prowid, x.sternid });
+                    table.PrimaryKey("pk_callforproposalresearchareabridges", x => new { x.prowid, x.sternid });
                     table.ForeignKey(
-                        name: "fk_callforpropousalresearchareabridges_callforpropousals_prowid",
+                        name: "fk_callforproposalresearchareabridges_callforproposals_prowid",
                         column: x => x.prowid,
                         principalSchema: "decisoriscamaguey_idi",
-                        principalTable: "callforpropousals",
+                        principalTable: "callforproposals",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "fk_callforpropousalresearchareabridges_researchareas_sternid",
+                        name: "fk_callforproposalresearchareabridges_researchareas_sternid",
                         column: x => x.sternid,
                         principalSchema: "decisoriscamaguey_idi",
                         principalTable: "researchareas",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "projectproposals",
+                schema: "decisoriscamaguey_idi",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    title = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    at = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    description = table.Column<string>(type: "character varying(5100)", maxLength: 5100, nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    programid = table.Column<Guid>(type: "uuid", nullable: true),
+                    callforpropousalid = table.Column<Guid>(type: "uuid", nullable: true),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_projectproposals", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_projectproposals_callforproposals_callforpropousalid",
+                        column: x => x.callforpropousalid,
+                        principalSchema: "decisoriscamaguey_idi",
+                        principalTable: "callforproposals",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_projectproposals_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_projectproposals_programs_programid",
+                        column: x => x.programid,
+                        principalSchema: "decisoriscamaguey_idi",
+                        principalTable: "programs",
+                        principalColumn: "id");
                 });
 
             migrationBuilder.CreateTable(
@@ -4696,67 +4737,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "projects",
-                schema: "decisoriscamaguey_idi",
-                columns: table => new
-                {
-                    id = table.Column<Guid>(type: "uuid", nullable: false),
-                    archived = table.Column<bool>(type: "boolean", nullable: false),
-                    enabled = table.Column<bool>(type: "boolean", nullable: false),
-                    priority = table.Column<int>(type: "integer", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    code = table.Column<string>(type: "text", nullable: false),
-                    categoryid = table.Column<Guid>(type: "uuid", nullable: false),
-                    summary = table.Column<string>(type: "text", nullable: false),
-                    problem = table.Column<string>(type: "text", nullable: false),
-                    context = table.Column<string>(type: "text", nullable: false),
-                    beneficiary = table.Column<string>(type: "text", nullable: false),
-                    mainobjetive = table.Column<string>(type: "text", nullable: false),
-                    programid = table.Column<Guid>(type: "uuid", nullable: true),
-                    proposalid = table.Column<Guid>(type: "uuid", nullable: true),
-                    predecessorid = table.Column<Guid>(type: "uuid", nullable: true),
-                    chiefid = table.Column<Guid>(type: "uuid", nullable: false),
-                    startat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    endat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_projects", x => x.id);
-                    table.ForeignKey(
-                        name: "fk_projects_programs_programid",
-                        column: x => x.programid,
-                        principalSchema: "decisoriscamaguey_idi",
-                        principalTable: "programs",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "fk_projects_projectcategories_categoryid",
-                        column: x => x.categoryid,
-                        principalSchema: "decisoriscamaguey_idi",
-                        principalTable: "projectcategories",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_projects_projectproposals_proposalid",
-                        column: x => x.proposalid,
-                        principalSchema: "decisoriscamaguey_idi",
-                        principalTable: "projectproposals",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "fk_projects_projects_predecessorid",
-                        column: x => x.predecessorid,
-                        principalSchema: "decisoriscamaguey_idi",
-                        principalTable: "projects",
-                        principalColumn: "id");
-                    table.ForeignKey(
-                        name: "fk_projects_researchers_chiefid",
-                        column: x => x.chiefid,
-                        principalSchema: "decisoriscamaguey_idi",
-                        principalTable: "researchers",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "publicationresults",
                 schema: "decisoriscamaguey_idi",
                 columns: table => new
@@ -4926,6 +4906,75 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "projects",
+                schema: "decisoriscamaguey_idi",
+                columns: table => new
+                {
+                    id = table.Column<Guid>(type: "uuid", nullable: false),
+                    archived = table.Column<bool>(type: "boolean", nullable: false),
+                    enabled = table.Column<bool>(type: "boolean", nullable: false),
+                    priority = table.Column<int>(type: "integer", nullable: false),
+                    name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    code = table.Column<string>(type: "character varying(50)", maxLength: 50, nullable: false),
+                    categoryid = table.Column<Guid>(type: "uuid", nullable: false),
+                    summary = table.Column<string>(type: "character varying(2550)", maxLength: 2550, nullable: false),
+                    problem = table.Column<string>(type: "character varying(5100)", maxLength: 5100, nullable: false),
+                    context = table.Column<string>(type: "character varying(5100)", maxLength: 5100, nullable: false),
+                    beneficiary = table.Column<string>(type: "character varying(2550)", maxLength: 2550, nullable: false),
+                    mainobjetive = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    programid = table.Column<Guid>(type: "uuid", nullable: true),
+                    proposalid = table.Column<Guid>(type: "uuid", nullable: true),
+                    predecessorid = table.Column<Guid>(type: "uuid", nullable: true),
+                    chiefid = table.Column<Guid>(type: "uuid", nullable: false),
+                    startat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    endat = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
+                    documentid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_projects", x => x.id);
+                    table.ForeignKey(
+                        name: "fk_projects_documents_documentid",
+                        column: x => x.documentid,
+                        principalSchema: "guamaframework_media",
+                        principalTable: "documents",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_projects_programs_programid",
+                        column: x => x.programid,
+                        principalSchema: "decisoriscamaguey_idi",
+                        principalTable: "programs",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_projects_projectcategories_categoryid",
+                        column: x => x.categoryid,
+                        principalSchema: "decisoriscamaguey_idi",
+                        principalTable: "projectcategories",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_projects_projectproposals_proposalid",
+                        column: x => x.proposalid,
+                        principalSchema: "decisoriscamaguey_idi",
+                        principalTable: "projectproposals",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_projects_projects_predecessorid",
+                        column: x => x.predecessorid,
+                        principalSchema: "decisoriscamaguey_idi",
+                        principalTable: "projects",
+                        principalColumn: "id");
+                    table.ForeignKey(
+                        name: "fk_projects_researchers_chiefid",
+                        column: x => x.chiefid,
+                        principalSchema: "decisoriscamaguey_idi",
+                        principalTable: "researchers",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "collects",
                 schema: "decisorframework_finantial",
                 columns: table => new
@@ -4947,6 +4996,33 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         column: x => x.orderid,
                         principalSchema: "decisoriscamaguey_servicing",
                         principalTable: "serviceorders",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "publicationresultresearcherbridges",
+                schema: "decisoriscamaguey_idi",
+                columns: table => new
+                {
+                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
+                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("pk_publicationresultresearcherbridges", x => new { x.prowid, x.sternid });
+                    table.ForeignKey(
+                        name: "fk_publicationresultresearcherbridges_publicationresults_prowid",
+                        column: x => x.prowid,
+                        principalSchema: "decisoriscamaguey_idi",
+                        principalTable: "publicationresults",
+                        principalColumn: "id",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "fk_publicationresultresearcherbridges_researchers_sternid",
+                        column: x => x.sternid,
+                        principalSchema: "decisoriscamaguey_idi",
+                        principalTable: "researchers",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -5103,8 +5179,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 {
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
-                    name = table.Column<string>(type: "text", nullable: false),
-                    description = table.Column<string>(type: "text", nullable: true),
+                    name = table.Column<string>(type: "character varying(255)", maxLength: 255, nullable: false),
+                    description = table.Column<string>(type: "character varying(2550)", maxLength: 2550, nullable: true),
                     projectid = table.Column<Guid>(type: "uuid", nullable: false)
                 },
                 constraints: table =>
@@ -5182,33 +5258,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         column: x => x.unitmeasurementid,
                         principalSchema: "decisorframework_domain",
                         principalTable: "unitmeasurements",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "publicationresultresearcherbridges",
-                schema: "decisoriscamaguey_idi",
-                columns: table => new
-                {
-                    prowid = table.Column<Guid>(type: "uuid", nullable: false),
-                    sternid = table.Column<Guid>(type: "uuid", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("pk_publicationresultresearcherbridges", x => new { x.prowid, x.sternid });
-                    table.ForeignKey(
-                        name: "fk_publicationresultresearcherbridges_publicationresults_prowid",
-                        column: x => x.prowid,
-                        principalSchema: "decisoriscamaguey_idi",
-                        principalTable: "publicationresults",
-                        principalColumn: "id",
-                        onDelete: ReferentialAction.Cascade);
-                    table.ForeignKey(
-                        name: "fk_publicationresultresearcherbridges_researchers_sternid",
-                        column: x => x.sternid,
-                        principalSchema: "decisoriscamaguey_idi",
-                        principalTable: "researchers",
                         principalColumn: "id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -6339,7 +6388,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     id = table.Column<Guid>(type: "uuid", nullable: false),
                     archived = table.Column<bool>(type: "boolean", nullable: false),
                     structureid = table.Column<Guid>(type: "uuid", nullable: false),
-                    mainworkforceid = table.Column<Guid>(type: "uuid", nullable: false)
+                    mainworkforceid = table.Column<Guid>(type: "uuid", nullable: false),
+                    workingdaycount = table.Column<int>(type: "integer", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -6904,21 +6954,21 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "warehousingareaid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_callforpropousaldocumentbridges_sternid",
+                name: "ix_callforproposaldocumentbridges_sternid",
                 schema: "decisoriscamaguey_idi",
-                table: "callforpropousaldocumentbridges",
+                table: "callforproposaldocumentbridges",
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_callforpropousalresearchareabridges_sternid",
+                name: "ix_callforproposalresearchareabridges_sternid",
                 schema: "decisoriscamaguey_idi",
-                table: "callforpropousalresearchareabridges",
+                table: "callforproposalresearchareabridges",
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
-                name: "ix_callforpropousals_financierid",
+                name: "ix_callforproposals_financierid",
                 schema: "decisoriscamaguey_idi",
-                table: "callforpropousals",
+                table: "callforproposals",
                 column: "financierid");
 
             migrationBuilder.CreateIndex(
@@ -7057,6 +7107,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "guamaframework_media",
                 table: "documents",
                 column: "thumbnailid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_elaborationdocumentbridges_sternid",
+                schema: "decisorframework_production",
+                table: "elaborationdocumentbridges",
+                column: "sternid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_elaborationinputproductbridges_sternid",
@@ -8029,10 +8085,22 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 column: "sternid");
 
             migrationBuilder.CreateIndex(
+                name: "ix_projectproposals_callforpropousalid",
+                schema: "decisoriscamaguey_idi",
+                table: "projectproposals",
+                column: "callforpropousalid");
+
+            migrationBuilder.CreateIndex(
                 name: "ix_projectproposals_documentid",
                 schema: "decisoriscamaguey_idi",
                 table: "projectproposals",
                 column: "documentid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_projectproposals_programid",
+                schema: "decisoriscamaguey_idi",
+                table: "projectproposals",
+                column: "programid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_projectreports_documentid",
@@ -8057,6 +8125,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisoriscamaguey_idi",
                 table: "projects",
                 column: "chiefid");
+
+            migrationBuilder.CreateIndex(
+                name: "ix_projects_documentid",
+                schema: "decisoriscamaguey_idi",
+                table: "projects",
+                column: "documentid");
 
             migrationBuilder.CreateIndex(
                 name: "ix_projects_predecessorid",
@@ -9268,11 +9342,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_finantial");
 
             migrationBuilder.DropTable(
-                name: "callforpropousaldocumentbridges",
+                name: "callforproposaldocumentbridges",
                 schema: "decisoriscamaguey_idi");
 
             migrationBuilder.DropTable(
-                name: "callforpropousalresearchareabridges",
+                name: "callforproposalresearchareabridges",
                 schema: "decisoriscamaguey_idi");
 
             migrationBuilder.DropTable(
@@ -9310,6 +9384,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             migrationBuilder.DropTable(
                 name: "dispositiontagbridges",
                 schema: "decisorframework_legal");
+
+            migrationBuilder.DropTable(
+                name: "elaborationdocumentbridges",
+                schema: "decisorframework_production");
 
             migrationBuilder.DropTable(
                 name: "elaborationinputproductbridges",
@@ -9691,10 +9769,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisoriscamaguey_idi");
 
             migrationBuilder.DropTable(
-                name: "callforpropousals",
-                schema: "decisoriscamaguey_idi");
-
-            migrationBuilder.DropTable(
                 name: "certifications",
                 schema: "decisoriscamaguey_quality");
 
@@ -9835,10 +9909,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisoriscamaguey_lab");
 
             migrationBuilder.DropTable(
-                name: "financiers",
-                schema: "decisoriscamaguey_idi");
-
-            migrationBuilder.DropTable(
                 name: "regulations",
                 schema: "decisorframework_legal");
 
@@ -9930,10 +10000,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_inventory");
 
             migrationBuilder.DropTable(
-                name: "programs",
-                schema: "decisoriscamaguey_idi");
-
-            migrationBuilder.DropTable(
                 name: "projectcategories",
                 schema: "decisoriscamaguey_idi");
 
@@ -9968,6 +10034,14 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
             migrationBuilder.DropTable(
                 name: "products",
                 schema: "decisorframework_inventory");
+
+            migrationBuilder.DropTable(
+                name: "callforproposals",
+                schema: "decisoriscamaguey_idi");
+
+            migrationBuilder.DropTable(
+                name: "programs",
+                schema: "decisoriscamaguey_idi");
 
             migrationBuilder.DropTable(
                 name: "participatingorganizations",
@@ -10006,6 +10080,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_domain");
 
             migrationBuilder.DropTable(
+                name: "financiers",
+                schema: "decisoriscamaguey_idi");
+
+            migrationBuilder.DropTable(
                 name: "bankbranches",
                 schema: "decisorframework_finantial");
 
@@ -10014,12 +10092,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 schema: "decisorframework_finantial");
 
             migrationBuilder.DropTable(
-                name: "organizationcontacts",
-                schema: "decisorframework_domain");
-
-            migrationBuilder.DropTable(
                 name: "paymentterms",
                 schema: "decisorframework_commercial");
+
+            migrationBuilder.DropTable(
+                name: "organizationcontacts",
+                schema: "decisorframework_domain");
 
             migrationBuilder.DropTable(
                 name: "bankagencies",
