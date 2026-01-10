@@ -29,7 +29,7 @@
 		<PackageReference Include="CommunityToolkit.Maui" Version="9.1.1" />
 	</ItemGroup>
 	<ItemGroup>
-		<ProjectReference Include="..\Core.Interop.API.Connect\Core.Interop.API.Connect.csproj" />
+	  <ProjectReference Include="..\Core.Interop.API.Connect\Core.Interop.API.Connect.csproj" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Compile Update="Resources\Styles\ExplicitStylesDictionary.xaml.cs">

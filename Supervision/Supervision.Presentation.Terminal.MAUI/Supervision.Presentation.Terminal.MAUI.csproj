@@ -32,6 +32,8 @@
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\..\Core\Core.Presentation.Terminal.MAUI.Terminal\Core.Presentation.Terminal.MAUI.csproj" />
+		<ProjectReference Include="..\..\HumanResources\HumanResources.Interop.API.Common\HumanResources.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\..\HumanResources\HumanResources.Persistence\HumanResources.Persistence.csproj" />
 		<ProjectReference Include="..\Supervision.Interop.API.Connect\Supervision.Interop.API.Connect.csproj" />
 	</ItemGroup>
 </Project>
