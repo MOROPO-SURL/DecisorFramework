@@ -184,6 +184,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
         public DbSet<ElaborationInputProductClassificationBridge> ElaborationInputProductClassificationBridges { get; set; }
         public DbSet<ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
+        public DbSet<ElaborationOutputProductClassificationBridge> ElaborationOutputProductClassificationBridges { get; set; }
+        public DbSet<ElaborationDocumentBridge> ElaborationDocumentBridges { get; set; }
         public DbSet<ElaborationStep> ElaborationSteps { get; set; }
         public DbSet<ElaborationStepWorkPositionBridge> ElaborationStepWorkPositionBridges { get; set; }
         public DbSet<Production> Productions { get; set; }

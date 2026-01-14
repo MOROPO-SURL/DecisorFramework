@@ -9,29 +9,11 @@ public partial class VacantPostulationPickPage : Core.Presentation.Terminal.MAUI
 
     private System.Action<Interop.API.Common.Models.Display.VacantPostulationDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public VacantPostulationPickPage(System.Action<Interop.API.Common.Models.Display.VacantPostulationDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;

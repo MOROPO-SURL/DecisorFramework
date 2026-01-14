@@ -9,29 +9,11 @@ public partial class NaturalClientPickPage : Core.Presentation.Terminal.MAUI.UI.
 
     private System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel> pickCompleteAction;
 
-    private bool pickedFlag = false;
-
     public NaturalClientPickPage(System.Action<Interop.API.Common.Models.Display.NaturalClientDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override double ItemViewRequestWidth { get => 420; }
@@ -133,8 +115,13 @@ public partial class NaturalClientPickPage : Core.Presentation.Terminal.MAUI.UI.
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.NaturalClientDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }

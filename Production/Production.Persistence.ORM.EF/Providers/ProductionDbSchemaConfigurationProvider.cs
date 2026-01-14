@@ -14,6 +14,8 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Providers
                     new Configurators.ElaborationInputProductBridgeEntityTypeConfigurator(),
                     new Configurators.ElaborationInputProductClassificationBridgeEntityTypeConfigurator(),
                     new Configurators.ElaborationOutputProductBridgeEntityTypeConfigurator(),
+                    new Configurators.ElaborationOutputProductClassificationBridgeEntityTypeConfigurator(),
+                    new Configurators.ElaborationDocumentBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.ElaborationStep>(),
                     new Configurators.ElaborationStepWorkPositionBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.Production>(),

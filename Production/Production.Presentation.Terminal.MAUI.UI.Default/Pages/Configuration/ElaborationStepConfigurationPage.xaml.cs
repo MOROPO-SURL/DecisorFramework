@@ -5,52 +5,56 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class ElaborationStepConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.ElaborationStepDisplayModel>
+public partial class ElaborationStepConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.ElaborationStepDisplayModel, Interop.API.Common.Models.Display.ElaborationStepDisplayModel, Models.Page.Configuration.ElaborationStepConfigurationPageModel>
 {
-    public ElaborationStepConfigurationPage(System.Action<Interop.API.Common.Models.Display.ElaborationStepDisplayModel> successAction, Models.Page.Configuration.ElaborationStepConfigurationPageModel model) : base(successAction, model)
+    public ElaborationStepConfigurationPage(System.Action<Interop.API.Common.Models.Display.ElaborationStepDisplayModel> successAction, Models.Page.Configuration.ElaborationStepConfigurationPageModel model) : base(successAction, model, new Validators.ElaborationStepConfigurationValidator())
     {
         InitializeComponent();
     }
 
-    protected override string EntityTypeName => "Etapa de Elaboración";
+    protected override string EntityTypeName => "Etapa de Técnica de Producción";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.ElaborationStepDisplayModel> PerformCreationAsync()
     {
-        var concreteBindingContext = (Models.Page.Configuration.ElaborationStepConfigurationPageModel)BindingContext;
-
         return System.Threading.Tasks.Task.FromResult(new Interop.API.Common.Models.Display.ElaborationStepDisplayModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority,
-            MinDecrease = concreteBindingContext.MinDecrease,
-            MaxDecrease = concreteBindingContext.MaxDecrease,
-            WorkPositions = concreteBindingContext.WorkPositions.ToArray()
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority,
+            MinDecrease = ConcreteBindingContext.MinDecrease,
+            MaxDecrease = ConcreteBindingContext.MaxDecrease,
+            WorkPositions = [.. ConcreteBindingContext.WorkPositions]
         });
     }
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.ElaborationStepDisplayModel> PerformEditionAsync()
     {
-        var concreteBindingContext = (Models.Page.Configuration.ElaborationStepConfigurationPageModel)BindingContext;
-
         return System.Threading.Tasks.Task.FromResult(new Interop.API.Common.Models.Display.ElaborationStepDisplayModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            Description = concreteBindingContext.Description,
-            Priority = concreteBindingContext.Priority,
-            MinDecrease = concreteBindingContext.MinDecrease,
-            MaxDecrease = concreteBindingContext.MaxDecrease,
-            WorkPositions = concreteBindingContext.WorkPositions.ToArray()
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            Description = ConcreteBindingContext.Description,
+            Priority = ConcreteBindingContext.Priority,
+            MinDecrease = ConcreteBindingContext.MinDecrease,
+            MaxDecrease = ConcreteBindingContext.MaxDecrease,
+            WorkPositions = [.. ConcreteBindingContext.WorkPositions]
         });
+    }
+
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
     }
 
     private void AddRoleButton_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ElaborationStepConfigurationPageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
+        ConcreteBindingContext.IsBusy = true;
 
         System.Threading.Tasks.Task.Run(async () =>
         {
@@ -65,7 +69,7 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
 
                 Dispatcher.Dispatch(() =>
                 {
-                    concreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.IsBusy = false;
 
                     this.NavigationPushPageAsync(new ElaborationStepWorkPositionBridgeConfigurationPage(RoleCreationSuccess_Callback, model));
                 });
@@ -82,9 +86,7 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
 
     private void EditRoleButton_Clicked(object sender, System.EventArgs e)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ElaborationStepConfigurationPageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
+        ConcreteBindingContext.IsBusy = true;
 
         System.Threading.Tasks.Task.Run(async () =>
         {
@@ -99,7 +101,7 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
 
                 Dispatcher.Dispatch(() =>
                 {
-                    concreteBindingContext.IsBusy = false;
+                    ConcreteBindingContext.IsBusy = false;
 
                     this.NavigationPushPageAsync(new ElaborationStepWorkPositionBridgeConfigurationPage(RoleEditionSuccess_Callback, model));
                 });
@@ -135,13 +137,11 @@ public partial class ElaborationStepConfigurationPage : Core.Presentation.Termin
 
     private void RoleEditionSuccess_Callback(Interop.API.Common.Models.Bridge.ElaborationStepWorkPositionBridgeModel model)
     {
-        var concreteBindingContext = (Models.Page.Configuration.ElaborationStepConfigurationPageModel)BindingContext;
+        var reference = ConcreteBindingContext.WorkPositions.First(item => item.WorkPosition.Id == model.WorkPosition.Id);
 
-        var reference = concreteBindingContext.WorkPositions.First(item => item.WorkPosition.Id == model.WorkPosition.Id);
+        var index = ConcreteBindingContext.WorkPositions.IndexOf(reference);
 
-        var index = concreteBindingContext.WorkPositions.IndexOf(reference);
-
-        concreteBindingContext.WorkPositions[index] = model;
+        ConcreteBindingContext.WorkPositions[index] = model;
 
         hasChangesFlag = true;
     }

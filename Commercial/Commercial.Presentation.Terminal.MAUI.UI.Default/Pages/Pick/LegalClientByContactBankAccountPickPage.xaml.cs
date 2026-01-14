@@ -11,30 +11,12 @@ public partial class LegalClientByContactBankAccountPickPage : Core.Presentation
     private System.Action<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel> pickCompleteAction;
     private readonly Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel organization;
 
-    private bool pickedFlag = false;
-
     public LegalClientByContactBankAccountPickPage(System.Action<Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel> pickCompleteAction, Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel organization)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
         this.organization = organization;
-
-        IsEnabled = false;
-    }
-
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
-
-        if (IsEnabled && pickedFlag)
-        {
-            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
-
-            return;
-        }
-
-        IsEnabled = true;
     }
 
     protected override double ItemViewRequestWidth { get => 360; }
@@ -161,8 +143,13 @@ public partial class LegalClientByContactBankAccountPickPage : Core.Presentation
 
     private void ConfigurationSuccess_Callback(Financial.Interop.API.Common.Models.Display.BankAccountDisplayModel model)
     {
-        Dispatcher.Dispatch(() => pickCompleteAction.Invoke(model));
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
 
-        pickedFlag = true;
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }

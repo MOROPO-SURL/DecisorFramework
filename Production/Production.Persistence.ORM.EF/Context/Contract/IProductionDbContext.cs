@@ -8,6 +8,8 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Context.Contrac
         public DbSet<Entities.ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
         public DbSet<Entities.ElaborationInputProductClassificationBridge> ElaborationInputProductClassificationBridges { get; set; }
         public DbSet<Entities.ElaborationOutputProductBridge> ElaborationOutputProductBridges { get; set; }
+        public DbSet<Entities.ElaborationOutputProductClassificationBridge> ElaborationOutputProductClassificationBridges { get; set; }
+        public DbSet<Entities.ElaborationDocumentBridge> ElaborationDocumentBridges { get; set; }
         public DbSet<Entities.ElaborationStep> ElaborationSteps { get; set; }
         public DbSet<Entities.ElaborationStepWorkPositionBridge> ElaborationStepWorkPositionBridges { get; set; }
         public DbSet<Entities.Production> Productions { get; set; }

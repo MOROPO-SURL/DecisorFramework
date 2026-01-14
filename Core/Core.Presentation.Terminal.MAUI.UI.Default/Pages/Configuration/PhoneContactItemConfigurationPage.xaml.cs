@@ -7,8 +7,6 @@ public partial class PhoneContactItemConfigurationPage : UI.Pages.Base.Configura
         InitializeComponent();
     }
 
-    protected override bool IsNotificationRequired => false;
-
     protected override string EntityTypeName => "Teléfono";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.PhoneContactItemDisplayModel> PerformCreationAsync()

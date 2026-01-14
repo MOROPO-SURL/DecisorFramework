@@ -47,7 +47,6 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Orientation="Vertical">
-                <SearchBar Margin="20,20,20,0" />
                 <ScrollView 
                     Orientation="Vertical"
                     VerticalOptions="FillAndExpand">

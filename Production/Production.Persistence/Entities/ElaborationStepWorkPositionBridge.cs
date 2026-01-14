@@ -8,9 +8,9 @@
         public System.Guid SternId { get; set; }
         public HumanResources.Persistence.Entities.WorkPosition Stern { get; set; }
 
-        public decimal Participation { get; set; }
+        public decimal? Participation { get; set; }
 
-        public bool Linked { get; set; }
+        public bool Relative { get; set; }
 
         public string Description { get; set; }
     }

@@ -52,8 +52,6 @@ public partial class LegalProviderBudgetProductConfigurationPage : Core.Presenta
         }
     }
 
-    protected override bool IsNotificationRequired => false;
-
     protected override string EntityTypeName => "Oferta de Producto";
 
     protected override System.Threading.Tasks.Task<Interop.API.Common.Models.Display.LegalProviderBudgetProductDisplayModel> PerformCreationAsync()

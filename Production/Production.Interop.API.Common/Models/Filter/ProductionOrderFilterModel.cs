@@ -2,25 +2,15 @@
 {
     public class ProductionOrderFilterModel : Guama.Core.Persistence.Presentation.Models.Filter.Contract.IEntityFilterModel<Persistence.Entities.ProductionOrder, System.Guid>
     {
-        public Core.Interop.API.Common.Enumerations.CommonPlanFilterKind Kind { get; set; }
+        public string Param { get; set; }
+
+        public bool HasProduction { get; set; }
 
         public System.Linq.Expressions.Expression<System.Func<Persistence.Entities.ProductionOrder, bool>> GetSelector()
         {
-            switch (Kind)
-            {
-                case Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.Handled:
+            if (string.IsNullOrEmpty(Param)) return entity => entity.Production != null == HasProduction;
 
-                    return entity => entity.Production != null;
-
-                case Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.ToApprove:
-
-                    return entity => entity.ApprovedAt == null;
-
-                case Core.Interop.API.Common.Enumerations.CommonPlanFilterKind.ToComplete:
-                default:
-
-                    return entity => entity.ApprovedAt != null && entity.Production == null;
-            }
+            return entity => entity.Production != null == HasProduction && (entity.Elaboration.Name.ToLower().Contains(Param.ToLower()) || entity.Elaboration.Product.Name.ToLower().Contains(Param.ToLower()));
         }
     }
 }

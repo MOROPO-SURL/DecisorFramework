@@ -13,6 +13,8 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 
         public NaturalBusinessKindDisplayModel BusinessKind { get; set; }
 
+        public Persistence.Enumerations.PersonSkinKind SkinKind { get; set; }
+
         public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContactItem { get; set; }
 
         public override void Import(PersonContact entity)
@@ -20,6 +22,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
             base.Import(entity);
 
             PersonalIdentificationNumber = entity.PersonalIdentificationNumber;
+            SkinKind = entity.SkinKind;
 
             if (entity.Identity != null)
             {

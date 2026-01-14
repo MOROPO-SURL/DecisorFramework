@@ -61,6 +61,7 @@
                                             Text="{Binding Structure.Identity.Name}" />
                                         <Label 
                                             LineBreakMode="TailTruncation"
+                                            FontSize="Medium"
                                             Text="{Binding Name}" />
                                         <Label 
                                             Margin="0,8,0,0"

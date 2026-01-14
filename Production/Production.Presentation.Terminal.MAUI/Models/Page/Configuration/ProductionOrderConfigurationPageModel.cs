@@ -2,13 +2,17 @@
 {
     public class ProductionOrderConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ProductionOrderDisplayModel>
     {
+        public static string ElaborationValidableProperty => nameof(Elaboration);
+        public static string AgreementValidableProperty => nameof(Agreement);
+        public static string ResponsibleValidableProperty => nameof(Responsible);
+        public static string AmountValidableProperty => nameof(Amount);
+
         private System.DateTime requestedFor;
         private string description;
         private int priority = 1;
         private Interop.API.Common.Models.Display.ElaborationDisplayModel elaboration;
-        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel author;
+        private Governance.Interop.API.Common.Models.Display.AgreementDisplayModel agreement;
         private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel responsible;
-        private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel decisor;
         private decimal amount;
 
         public ProductionOrderConfigurationPageModel(Interop.API.Common.Models.Display.ProductionOrderDisplayModel model) : base(model)
@@ -16,14 +20,13 @@
             if (model != null)
             {
                 Id = model.Id;
-                RequestedFor = model.RequestedFor;
-                Description = model.Description;
-                Priority = model.Priority;
-                Elaboration = model.Elaboration;
-                Author = model.Author;
-                Responsible = model.Responsible;
-                Decisor = model.Decisor;
-                Amount = model.Amount;
+                requestedFor = model.RequestedFor;
+                description = model.Description;
+                priority = model.Priority;
+                elaboration = model.Elaboration;
+                agreement = model.Agreement;
+                responsible = model.Responsible;
+                amount = model.Amount;
             }
             else
             {
@@ -43,18 +46,10 @@
 
         public Interop.API.Common.Models.Display.ElaborationDisplayModel Elaboration { get => elaboration; set => SetProperty(ref elaboration, value); }
 
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
+        public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get => agreement; set => SetProperty(ref agreement, value); }
 
         public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Responsible { get => responsible; set => SetProperty(ref responsible, value); }
 
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel Decisor { get => decisor; set => SetProperty(ref decisor, value); }
-
         public decimal Amount { get => amount; set => SetProperty(ref amount, value); }
-
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel[] AvailableAuthors { get; set; } = [];
-
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel[] AvailableResponsibles { get; set; } = [];
-
-        public Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel[] AvailableDecisors { get; set; } = [];
     }
 }

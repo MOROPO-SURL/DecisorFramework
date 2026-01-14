@@ -32,7 +32,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
                 {
                     WorkPosition = new HumanResources.Interop.API.Common.Models.Display.WorkPositionDisplayModel(),
                     Participation = bridge.Participation,
-                    Linked = bridge.Linked,
+                    Relative = bridge.Relative,
                     Description = bridge.Description
                 };
 

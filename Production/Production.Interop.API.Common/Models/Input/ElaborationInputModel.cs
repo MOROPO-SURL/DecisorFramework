@@ -1,4 +1,7 @@
-﻿using System.Linq;
+﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 {
@@ -8,27 +11,31 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public int Priority { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
+        public string Name { get; set; }
+
         public System.Guid ProductId { get; set; }
 
         public System.Guid? ClassificationId { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
 
-        public decimal ReferenceAmount { get; set; }
+        public System.Guid? ReferenceCurrencyId { get; set; }
 
         public decimal MinPerformanceCoefficient { get; set; }
 
         public decimal MaxPerformanceCoefficient { get; set; }
 
-        //public List<ElaborationStepDisplayModel> EditionSteps { get; set; } = new List<ElaborationStepDisplayModel>();
-        //public List<ElaborationStepDisplayModel> IncomingSteps { get; set; } = new List<ElaborationStepDisplayModel>();
-        //public List<ElaborationStepDisplayModel> OutgoingSteps { get; set; } = new List<ElaborationStepDisplayModel>();
-
         public System.Collections.Generic.List<Display.ElaborationStepDisplayModel> Steps { get; set; } = new System.Collections.Generic.List<Display.ElaborationStepDisplayModel>();
 
-        public System.Collections.Generic.List<Inventory.Interop.API.Common.Models.Display.ProductDisplayModel> InputProducts { get; set; } = new System.Collections.Generic.List<Inventory.Interop.API.Common.Models.Display.ProductDisplayModel>();
+        public System.Collections.Generic.List<Bridge.CommonElaborationProductBridgeModel> InputProductBridges { get; set; } = new System.Collections.Generic.List<Bridge.CommonElaborationProductBridgeModel>();
 
-        public System.Collections.Generic.List<Inventory.Interop.API.Common.Models.Display.ProductDisplayModel> OutputProducts { get; set; } = new System.Collections.Generic.List<Inventory.Interop.API.Common.Models.Display.ProductDisplayModel>();
+        public System.Collections.Generic.List<Bridge.CommonElaborationProductBridgeModel> OutputProductBridges { get; set; } = new System.Collections.Generic.List<Bridge.CommonElaborationProductBridgeModel>();
+
+        public List<DocumentInputModel> EditionDocuments { get; set; } = new List<DocumentInputModel>();
+        public List<DocumentInputModel> IncomingDocuments { get; set; } = new List<DocumentInputModel>();
+        public List<DocumentDisplayModel> OutgoingDocuments { get; set; } = new List<DocumentDisplayModel>();
 
         public Persistence.Entities.Elaboration Export()
         {
@@ -47,19 +54,37 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
         public void Mergue(Persistence.Entities.Elaboration entity)
         {
             entity.Priority = Priority;
+            entity.Name = Name;
             entity.Description = Description;
-            entity.ReferenceAmount = ReferenceAmount;
             entity.MinPerformanceCoefficient = MinPerformanceCoefficient;
             entity.MaxPerformanceCoefficient = MaxPerformanceCoefficient;
-            entity.InputProductBridges = InputProducts.Select(model => new Persistence.Entities.ElaborationInputProductBridge
+            entity.InputProductBridges = InputProductBridges.Where(model => model.Classification == null).Select(model => new Persistence.Entities.ElaborationInputProductBridge
             {
                 ProwId = entity.Id,
-                SternId = model.Id
+                SternId = model.Product.Id,
+                Amount = model.Amount,
+                UnitMeasurementId = model.UnitMeasurement.Id
             }).ToList();
-            entity.OutputProductBridges = OutputProducts.Select(model => new Persistence.Entities.ElaborationOutputProductBridge
+            entity.InputProductClassificationBridges = InputProductBridges.Where(model => model.Classification != null).Select(model => new Persistence.Entities.ElaborationInputProductClassificationBridge
             {
                 ProwId = entity.Id,
-                SternId = model.Id
+                SternId = model.Classification.Id,
+                Amount = model.Amount,
+                UnitMeasurementId = model.UnitMeasurement.Id,
+            }).ToList();
+            entity.OutputProductBridges = OutputProductBridges.Where(model => model.Classification == null).Select(model => new Persistence.Entities.ElaborationOutputProductBridge
+            {
+                ProwId = entity.Id,
+                SternId = model.Product.Id,
+                Amount = model.Amount,
+                UnitMeasurementId = model.UnitMeasurement.Id
+            }).ToList();
+            entity.OutputProductClassificationBridges = OutputProductBridges.Where(model => model.Classification != null).Select(model => new Persistence.Entities.ElaborationOutputProductClassificationBridge
+            {
+                ProwId = entity.Id,
+                SternId = model.Classification.Id,
+                Amount = model.Amount,
+                UnitMeasurementId = model.UnitMeasurement.Id
             }).ToList();
 
             if (entity.ProductId != ProductId)

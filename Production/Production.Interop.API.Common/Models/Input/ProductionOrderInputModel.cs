@@ -12,11 +12,9 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public System.DateTime RequestedFor { get; set; }
 
-        public System.Guid AuthorId { get; set; }
+        public System.Guid AgreementId { get; set; }
 
         public System.Guid ResponsibleId { get; set; }
-
-        public System.Guid DecisorId { get; set; }
 
         public System.Guid ElaborationId { get; set; }
 
@@ -49,22 +47,16 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
                 entity.ElaborationId = ElaborationId;
             }
 
-            if (entity.AuthorId != AuthorId)
+            if (entity.AgreementId != AgreementId)
             {
-                entity.Author = null;
-                entity.AuthorId = AuthorId;
+                entity.Agreement = null;
+                entity.AgreementId = AgreementId;
             }
 
             if (entity.ResponsibleId != ResponsibleId)
             {
                 entity.Responsible = null;
                 entity.ResponsibleId = ResponsibleId;
-            }
-
-            if (entity.DecisorId != DecisorId)
-            {
-                entity.Decisor = null;
-                entity.DecisorId = DecisorId;
             }
         }
     }

@@ -5,6 +5,7 @@
     xmlns:decisorframework_humanresources_manage_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_humanresources_list_pages="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_supervision_pages="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.HumanResourcesShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -38,7 +39,7 @@
     <MenuFlyoutItem Text="Inicio" />
     <ShellContent
         Title="Panel de control"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate decisorframework_supervision_pages:HumanResourcesDashboardPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -95,24 +96,37 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Gestión" />
-    <FlyoutItem Title="Plantilla">
-        <FlyoutItem.Icon>
+    <MenuFlyoutItem Text="Plantilla" />
+    <ShellContent
+        Title="Estructuras"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}">
+        <ShellContent.Icon>
             <FontImageSource
-             FontFamily="MaterialDesignIcons"
-             Glyph="&#xF002C;"
-             Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </FlyoutItem.Icon>
-        <ShellContent
-            Title="Personal"
-            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsManagePage}" />
-        <ShellContent
-             Title="Estructuras"
-             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}" />
-        <ShellContent
-            Title="Asignaciones"
-            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}" />
-    </FlyoutItem>
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF645;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Asignaciones"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFCF8;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Personal"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF002C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <ShellContent
         Title="Expedientes laborales"
         ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:EmployeesListPage}">
@@ -123,6 +137,7 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <MenuFlyoutItem Text="Gestión" />
     <ShellContent
         Title="Plazas laborales"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkPositionsManagePage}">

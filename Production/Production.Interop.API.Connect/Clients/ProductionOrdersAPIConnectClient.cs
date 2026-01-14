@@ -6,11 +6,6 @@
         {
         }
 
-        public virtual async System.Threading.Tasks.Task ApproveAsync(System.Guid key)
-        {
-            await httpClientHelperProvider.HttpClientHelper.PutAsync($"{TargetController}/approve/{key}");
-        }
-
         protected override string TargetController => "api/fwrk/production/productionorders";
     }
 }

@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Maui.Dispatching;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
@@ -38,8 +37,6 @@ public partial class PurchaseOrderExpectedProductResultConfigurationPage : Core.
             }
         }
     }
-
-    protected override bool IsNotificationRequired => false;
 
     protected override string EntityTypeName => "Producto Requerido";
 

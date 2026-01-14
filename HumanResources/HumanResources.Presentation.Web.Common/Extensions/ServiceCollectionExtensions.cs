@@ -23,6 +23,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extens
             services.AddScoped<IEntityRepository<VacantPostulationOcupation, System.Guid>, VacantPostulationOcupationRepository>();
             services.AddScoped<IEntityRepository<OcupationCandidate, System.Guid>, OcupationCandidateRepository>();
             services.AddScoped<IEntityRepository<AdmitionPropousal, System.Guid>, AdmitionPropousalRepository>();
+            services.AddScoped<IEntityRepository<Persistence.Entities.Contract.AbstractEmploymentContract, System.Guid>, EmploymentContractRepository>();
             services.AddScoped<IEntityRepository<AdmitionEmploymentContract, System.Guid>, AdmitionEmploymentContractRepository>();
             services.AddScoped<IEntityRepository<NamingEmploymentContract, System.Guid>, NamingEmploymentContractRepository>();
             services.AddScoped<IEntityRepository<EmployeeDailyChecking, long>, EmployeeDailyCheckingRepository>();

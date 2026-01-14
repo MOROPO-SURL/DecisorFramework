@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.Framework.Decisor.Purchasing.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 
@@ -73,11 +74,11 @@ public partial class LegalProviderBudgetDetailPage : Core.Presentation.Terminal.
 
                     if (fileSaverResult.IsSuccessful)
                     {
-                        await CommunityToolkit.Maui.Alerts.Toast.Make("Archivo descargado con éxito.").Show();
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Archivo descargado con éxito.");
                     }
-                    else
+                    else if (fileSaverResult.FilePath != null)
                     {
-                        await CommunityToolkit.Maui.Alerts.Toast.Make("No fue posible salvar el archivo.").Show();
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Error, "No fue posible salvar el archivo.");
                     }
                 }
 

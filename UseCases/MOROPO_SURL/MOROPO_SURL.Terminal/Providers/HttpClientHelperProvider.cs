@@ -23,7 +23,21 @@ namespace MOROPO.Tool.Decisor.Terminal.Providers
                     Credentials = !settingManager.UseProxyAuthentication ? null : new System.Net.NetworkCredential(settingManager.ProxyUsername, settingManager.ProxyPassword)
                 },
                 ServerCertificateCustomValidationCallback = (message, certificate, chain, errors) => true
-            }, Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.Android ? "https://10.0.2.2:7208" : "https://localhost:7208");
+            }, Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.Android ? "https://10.0.2.2:7208" : "https://localhost:7208", GetAuthorizeHeader);
+        }
+
+        private System.Collections.Generic.KeyValuePair<string, string> GetAuthorizeHeader()
+        {
+            var session = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession;
+
+            if (session == null)
+            {
+                return new System.Collections.Generic.KeyValuePair<string, string>();
+            }
+            else
+            {
+                return new System.Collections.Generic.KeyValuePair<string, string>(session.Type, session.Token);
+            }
         }
     }
 }
