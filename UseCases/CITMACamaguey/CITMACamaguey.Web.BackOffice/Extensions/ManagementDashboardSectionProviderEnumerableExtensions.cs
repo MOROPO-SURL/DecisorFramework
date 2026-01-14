@@ -9,7 +9,6 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Extensions
         {
             var securitySection = new List<ManagementDashboardSectionViewModel>();
             var locationSection = new List<ManagementDashboardSectionViewModel>();
-            var legalSection = new List<ManagementDashboardSectionViewModel>();
             var domainSection = new List<ManagementDashboardSectionViewModel>();
             var humanResourcesSection = new List<ManagementDashboardSectionViewModel>();
 
@@ -79,33 +78,6 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Extensions
             });
             domainSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Tipos de Inmueble",
-                Controller = "propertykinds",
-                Action = "Index",
-                Area = "domain",
-                // TODO Set spected permission
-                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
-            });
-            domainSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Tipos de Vehículo",
-                Controller = "vehiclekinds",
-                Action = "Index",
-                Area = "domain",
-                // TODO Set spected permission
-                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
-            });
-            domainSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Tipos de Motorización",
-                Controller = "vehicleenginekinds",
-                Action = "Index",
-                Area = "domain",
-                // TODO Set spected permission
-                //Role = Framework.Decisor.Domain.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
-            });
-            domainSection.Add(new ManagementDashboardSectionViewModel
-            {
                 Title = "Tipos de Pers. Jurídica",
                 Controller = "legalbusinesskinds",
                 Action = "Index",
@@ -139,21 +111,12 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Extensions
                 Area = "HHRR",
                 Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.WorkPositionKindViewerPermission
             });
-            humanResourcesSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Empleados",
-                Controller = "employees",
-                Action = "Index",
-                Area = "HHRR",
-                Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.EmployeeViewerPermission
-            });
             #endregion
 
             return new Dictionary<string, ICollection<ManagementDashboardSectionViewModel>>
             {
                 { "Seguridad", securitySection },
                 { "Locación", locationSection },
-                { "Jurídico", legalSection },
                 { "Dominio", domainSection },
                 { "Recursos Humanos", humanResourcesSection }
             };

@@ -1,0 +1,7 @@
+﻿namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Services.Contract;
+
+public interface IViewRenderService
+{
+    System.Threading.Tasks.Task<string> RenderViewToStringAsync(string viewName, object model);
+    System.Threading.Tasks.Task<string> RenderPartialViewToStringAsync(string viewName, object model);
+}

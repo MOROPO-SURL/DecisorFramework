@@ -6,8 +6,9 @@ namespace MOROPO.CITMACamaguey.Decisor.Terminal.Providers
     {
 #if DEBUG
         private const string SERVER_URI = "https://localhost:7208";
+
 #else
-        private const string SERVER_URI = "http://decisor.citma.cmg.co.cu";
+        private const string SERVER_URI = "https://citma.decisor.moropo.cu";
 #endif
 
         public Framework.Guama.Core.Presentation.API.Connect.Helpers.HttpClientHelper HttpClientHelper { get; private set; }

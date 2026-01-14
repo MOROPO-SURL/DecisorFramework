@@ -1,0 +1,139 @@
+﻿@model MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Models.View.Report.Standard.SIF.RH_8_SIFStandardReportViewModel
+
+@{ 
+    Layout = "_ReportLayout";
+}
+
+@section styles {
+    <style type="text/css">
+        th.primary-cell {
+            width: 9%;
+            min-width: 96px;
+        }
+
+        th.regular-cell {
+            width: 6%;
+            min-width: 64px;
+        }
+    </style>
+}
+
+<table>
+    <thead>
+        <tr>
+            <th colspan="5" style="text-align: left;">
+                <div>Ministerio de Ciencia, Tecnología y Medio Ambiente</div>
+                <div>Sistema de Información Estadística Complemenntaria</div>
+                <div>Aprobado por Resolución No___ de fecha:_________</div>
+            </th>
+            <th colspan="3">DISTRIBUCIÓN DE LOS TRABAJADORES POR CATEGORÍA OCUPACIONAL Y GRUPO DE LA ESCALA</th>
+            <th colspan="3" style="text-align: left;">
+                <div>Informe terminado en: @Model.EndedAt.ToString("MMMM")</div>
+                <div>Mes: </div>
+                <div>Año: </div>
+            </th>
+            <th colspan="3">
+                <div>Modelo SIF-RH-08</div>
+                <div>Periocidad: Anual</div>
+                <div>UM: UNO</div>
+            </th>
+        </tr>
+        <tr>
+            <th rowspan="2" class="primary-cell">Grupo Escala</th>
+            <th rowspan="2" class="primary-cell">Salario</th>
+            <th colspan="2">Operarios</th>
+            <th colspan="2">Trabajadores de Servicio</th>
+            <th colspan="2">Administrativos</th>
+            <th colspan="2">Técnicos</th>
+            <th colspan="2">Cuadros</th>
+            <th colspan="2">Total de Trabajadores</th>
+        </tr>
+        <tr>
+            <th class="regular-cell">Total</th>
+            <th class="regular-cell">F</th>
+            <th class="regular-cell">Total</th>
+            <th class="regular-cell">F</th>
+            <th class="regular-cell">Total</th>
+            <th class="regular-cell">F</th>
+            <th class="regular-cell">Total</th>
+            <th class="regular-cell">F</th>
+            <th class="regular-cell">Total</th>
+            <th class="regular-cell">F</th>
+            <th class="regular-cell">Total</th>
+            <th class="regular-cell">F</th>
+        </tr>
+        <tr>
+            <th>A</th>
+            <th>B</th>
+            <th>1</th>
+            <th>2</th>
+            <th>3</th>
+            <th>4</th>
+            <th>5</th>
+            <th>6</th>
+            <th>7</th>
+            <th>8</th>
+            <th>9</th>
+            <th>10</th>
+            <th>11</th>
+            <th>12</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SalaryStandardStats)
+        {
+            <tr>
+                <td>@item.SalaryStandard.Name</td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <td></td>
+            </tr>
+        }
+    </tbody>
+    <tfoot>
+        <tr>
+            <th>Total</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+            <th>0</th>
+        </tr>
+        <tr>
+            <th colspan="6" style="text-align: left;">
+                <p style="margin-top: 0;">Certificamos que los datos contenidos en este modelo corresponden a los datos anotados en nuestros registros primarios y de acuerdo a las instrucciones vigentes para la elaboración del mismo.</p>
+                <div>D_<span>@Model.EndedAt.Day</span>_M_<span>@Model.EndedAt.Month</span>_A_<span>@Model.EndedAt.Year</span></div>
+            </th>
+            <th colspan="4" style="text-align: left; vertical-align: top;">
+                <div>Confeccionado por:</div>
+                <div>Nombre y apellido: <span></span></div>
+                <div>Fecha: <span>@Model.EndedAt.ToString("dd-MM-yyyy")</span></div>
+                <div>Firma:</div>
+            </th>
+            <th colspan="4" style="text-align: left; vertical-align: top;">
+                <div>Aprobado por:</div>
+                <div>Nombre y apellido: <span></span></div>
+                <div>Fecha: <span>@Model.EndedAt.ToString("dd-MM-yyyy")</span></div>
+                <div>Firma:</div>
+            </th>
+        </tr>
+    </tfoot>
+</table>

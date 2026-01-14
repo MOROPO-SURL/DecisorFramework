@@ -53,6 +53,11 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice
             builder.Services.AddDecisorGovernancePresentationWebCommon();
             builder.Services.AddDecisorHumanResourcesPresentationWebCommon();
 
+            builder.Services.AddScoped<Services.Contract.IHtmlToPdfService, Services.WkhtmltopdfHtmlToPdfService>();
+            builder.Services.AddScoped<Services.Contract.IViewRenderService, Services.DefaultViewRenderService>();
+
+            builder.Services.AddHttpContextAccessor();
+
             builder.Services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Framework.Guama.Core.Persistence.ORM.EF.Entities.Trace, long>, Framework.Guama.Core.Persistence.ORM.EF.Repositories.TraceRepository>();
 
             builder.Services.AddAuthentication(config =>
