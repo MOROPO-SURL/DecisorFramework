@@ -36,24 +36,38 @@
             </Grid>
         </Grid>
     </Shell.FlyoutHeader>
-    <MenuFlyoutItem Text="Gestión" />
-    <FlyoutItem Title="Plantilla">
-        <FlyoutItem.Icon>
+    <MenuFlyoutItem Text="Plantilla" />
+    <ShellContent
+        Title="Estructuras"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}">
+        <ShellContent.Icon>
             <FontImageSource
-             FontFamily="MaterialDesignIcons"
-             Glyph="&#xF002C;"
-             Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </FlyoutItem.Icon>
-        <ShellContent
-            Title="Personal"
-            ContentTemplate="{DataTemplate local_manage_pages:OcupationsSimplifiedManagePage}" />
-        <ShellContent
-             Title="Estructuras"
-             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}" />
-        <ShellContent
-            Title="Asignaciones"
-            ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}" />
-    </FlyoutItem>
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF645;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Asignaciones"
+        ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFCF8;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Personal"
+        ContentTemplate="{DataTemplate local_manage_pages:OcupationsSimplifiedManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF002C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <MenuFlyoutItem Text="Gestión" />
     <ShellContent
         Title="Contactos"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PersonContactsManagePage}">
