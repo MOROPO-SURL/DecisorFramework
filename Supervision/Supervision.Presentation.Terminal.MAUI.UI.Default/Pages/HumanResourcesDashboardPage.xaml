@@ -1,0 +1,279 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<caneyframework_mvvm_pages:BindingContextedContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_page_models="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.Models.Page;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:live_charts_controls="clr-namespace:LiveChartsCore.SkiaSharpView.Maui;assembly=LiveChartsCore.SkiaSharpView.Maui"
+    xmlns:live_charts_core_skiasharpview_painting="clr-namespace:LiveChartsCore.SkiaSharpView.Painting;assembly=LiveChartsCore.SkiaSharpView"
+    xmlns:live_charts_core_skiasharpview_draw="clr-namespace:LiveChartsCore.SkiaSharpView.SKCharts;assembly=LiveChartsCore.SkiaSharpView"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages.HumanResourcesDashboardPage"
+    x:TypeArguments="presentation_page_models:HumanResourcesDashboardPageModel"
+    x:DataType="presentation_page_models:HumanResourcesDashboardPageModel"
+    Title="Panel de Control para Recursos Humanos">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <fwrk_core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+
+            <communitytoolkit_converters:BoolToObjectConverter x:Key="BoolToMockOpacityObjectConverter">
+                <communitytoolkit_converters:BoolToObjectConverter.TrueObject>
+                    <x:Double>0.15</x:Double>
+                </communitytoolkit_converters:BoolToObjectConverter.TrueObject>
+                <communitytoolkit_converters:BoolToObjectConverter.FalseObject>
+                    <x:Double>1.0</x:Double>
+                </communitytoolkit_converters:BoolToObjectConverter.FalseObject>
+            </communitytoolkit_converters:BoolToObjectConverter>
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+
+            <Style x:Key="CardHeaderSeparatorBoxViewStyle" TargetType="BoxView">
+                <Setter Property="Color" Value="DimGray" />
+                <Setter Property="Margin" Value="0,5,0,10" />
+                <Setter Property="HeightRequest" Value="2" />
+            </Style>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="4" Margin="8">
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start"
+                    AlignContent="Start">
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=9, SmallContainerColumn=12}}"
+                        Margin="4">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Covertura de plantilla" />
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Datos globales" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Grid>
+                                <live_charts_controls:PieChart 
+                                    x:Name="StaffCompletitionGlobalPieChart"
+                                    IsEnabled="{Binding IsStaffCompletitionGlobalPieChartMock, Converter={StaticResource InvertedBoolConverter}}"
+                                    Opacity="{Binding IsStaffCompletitionGlobalPieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="360"
+                                    InitialRotation="-225"
+                                    MaxAngle="270"
+                                    MinValue="0"
+                                    MaxValue="100"
+                                    Series="{Binding StaffCompletitionGlobalPieChart.Series}"/>
+                                <VerticalStackLayout 
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    IsVisible="{Binding IsStaffCompletitionGlobalPieChartMock}">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="Medium"
+                                        Text="Sin datos suficientes" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Italic"
+                                        Text="mostrando datos simulados" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=8, LargeContainerColumn=6, MediumContainerColumn=12, SmallContainerColumn=12}}"
+                        Margin="4">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                Text="Covertura de plantilla" />
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Datos por tipo de plaza" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Grid>
+                                <live_charts_controls:CartesianChart
+                                    x:Name="StaffCompletitionByWorkPositionKindCartesianChart"
+                                    IsEnabled="{Binding IsStaffCompletitionByWorkPositionKindCartesianChartMock, Converter={StaticResource InvertedBoolConverter}}"
+                                    Opacity="{Binding IsStaffCompletitionByWorkPositionKindCartesianChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="360"
+                                    Series="{Binding StaffCompletitionByWorkPositionKindCartesianChart.Series}"
+                                    XAxes="{Binding StaffCompletitionByWorkPositionKindCartesianChart.XAxes}"
+                                    YAxes="{Binding StaffCompletitionByWorkPositionKindCartesianChart.YAxes}" />
+                                <VerticalStackLayout 
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    IsVisible="{Binding IsStaffCompletitionByWorkPositionKindCartesianChartMock}">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="Medium"
+                                        Text="Sin datos suficientes" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Italic"
+                                        Text="mostrando datos simulados" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=12, LargeContainerColumn=12, MediumContainerColumn=12, SmallContainerColumn=12}}"
+                        Margin="4">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                Text="Comportamiento de covertura de plantilla" />
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Últimos 12 meses" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Grid>
+                                <live_charts_controls:CartesianChart
+                                    x:Name="StaffCompletitionPathMontlyCartesianChart"
+                                    IsEnabled="{Binding IsStaffCompletitionPathMontlyCartesianChartMock, Converter={StaticResource InvertedBoolConverter}}"
+                                    Opacity="{Binding IsStaffCompletitionPathMontlyCartesianChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="360"
+                                    Series="{Binding StaffCompletitionPathMontlyCartesianChart.Series}"
+                                    XAxes="{Binding StaffCompletitionPathMontlyCartesianChart.XAxes}"
+                                    YAxes="{Binding StaffCompletitionPathMontlyCartesianChart.YAxes}" />
+                                <VerticalStackLayout 
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    IsVisible="{Binding IsStaffCompletitionPathMontlyCartesianChartMock}">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="Medium"
+                                        Text="Sin datos suficientes" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Italic"
+                                        Text="mostrando datos simulados" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        Margin="4">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Composición de plantilla" />
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Cantidad por edades" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Grid>
+                                <live_charts_controls:PieChart 
+                                    x:Name="StaffCompositionByAgePieChart"
+                                    IsEnabled="{Binding IsStaffCompositionByAgePieChartMock, Converter={StaticResource InvertedBoolConverter}}"
+                                    Opacity="{Binding IsStaffCompositionByAgePieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="360"
+                                    LegendPosition="Right"
+                                    Series="{Binding StaffCompositionByAgePieChart.Series}" />
+                                <VerticalStackLayout 
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    IsVisible="{Binding IsStaffCompositionByAgePieChartMock}">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="Medium"
+                                        Text="Sin datos suficientes" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Italic"
+                                        Text="mostrando datos simulados" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Composición de plantilla" />
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Cantidad por sexo" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Grid>
+                                <live_charts_controls:PieChart 
+                                    x:Name="StaffCompositionBySexPieChart"
+                                    IsEnabled="{Binding IsStaffCompositionBySexPieChartMock, Converter={StaticResource InvertedBoolConverter}}"
+                                    Opacity="{Binding IsStaffCompositionBySexPieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="360"
+                                    LegendPosition="Bottom"
+                                    Series="{Binding StaffCompositionBySexPieChart.Series}" />
+                                <VerticalStackLayout 
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    IsVisible="{Binding IsStaffCompositionBySexPieChartMock}">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="Medium"
+                                        Text="Sin datos suficientes" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Italic"
+                                        Text="mostrando datos simulados" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                    <Frame 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, LargeContainerColumn=6, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4">
+                        <VerticalStackLayout>
+                            <Label
+                                FontSize="Medium"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation"
+                                Text="Composición de plantilla" />
+                            <Label
+                                FontAttributes="Bold"
+                                Text="Candidad por tipo de piel" />
+                            <BoxView Style="{StaticResource CardHeaderSeparatorBoxViewStyle}" />
+                            <Grid>
+                                <live_charts_controls:PieChart 
+                                    x:Name="StaffCompositionBySkinKindPieChart"
+                                    IsEnabled="{Binding IsStaffCompositionBySkinKindPieChartMock, Converter={StaticResource InvertedBoolConverter}}"
+                                    Opacity="{Binding IsStaffCompositionBySkinKindPieChartMock, Converter={StaticResource BoolToMockOpacityObjectConverter}}"
+                                    HeightRequest="360"
+                                    LegendPosition="Bottom"
+                                    Series="{Binding StaffCompositionBySkinKindPieChart.Series}" />
+                                <VerticalStackLayout 
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    IsVisible="{Binding IsStaffCompositionBySkinKindPieChartMock}">
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontSize="Medium"
+                                        Text="Sin datos suficientes" />
+                                    <Label
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Italic"
+                                        Text="mostrando datos simulados" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </VerticalStackLayout>
+                    </Frame>
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}" />
+    </Grid>
+</caneyframework_mvvm_pages:BindingContextedContentPage>
