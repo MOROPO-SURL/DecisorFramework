@@ -78,13 +78,30 @@
             <FlexLayout 
                 Wrap="Wrap"
                 AlignItems="Start" AlignContent="Start">
-                <VerticalStackLayout 
-                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                <Grid
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                     Margin="4"
-                    Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                </VerticalStackLayout>
+                    ColumnSpacing="6" RowSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Row="0"
+                        Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                    <Entry
+                        Grid.Row="1"
+                        BackgroundColor="Transparent"
+                        IsReadOnly="True"
+                        Text="{Binding Priority}" />
+                    <Stepper
+                        Grid.Row="1"
+                        Margin="0,0,6,0"
+                        HorizontalOptions="End" VerticalOptions="Center"
+                        Minimum="1"
+                        Maximum="100"
+                        Value="{Binding Priority}" />
+                </Grid>
             </FlexLayout>
         </VerticalStackLayout>
     </ScrollView>

@@ -130,10 +130,29 @@
                     Margin="0,8,0,0"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="4">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                </VerticalStackLayout>
+                <Grid
+                    Grid.Column="0" Grid.Row="4"
+                    ColumnSpacing="6" RowSpacing="6">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.Row="0"
+                        Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                    <Entry
+                        Grid.Row="1"
+                        BackgroundColor="Transparent"
+                        IsReadOnly="True"
+                        Text="{Binding Priority}" />
+                    <Stepper
+                        Grid.Row="1"
+                        Margin="0,0,6,0"
+                        HorizontalOptions="End" VerticalOptions="Center"
+                        Minimum="1"
+                        Maximum="100"
+                        Value="{Binding Priority}" />
+                </Grid>
             </Grid>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
