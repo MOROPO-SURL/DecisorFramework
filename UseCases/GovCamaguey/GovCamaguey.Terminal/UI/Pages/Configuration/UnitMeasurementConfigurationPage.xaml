@@ -5,6 +5,7 @@
     xmlns:local_configuration_page_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;assembly=MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common"    
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration.UnitMeasurementConfigurationPage"
@@ -12,6 +13,7 @@
     x:DataType="local_configuration_page_models:UnitMeasurementConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
         </ResourceDictionary>
@@ -32,59 +34,68 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>
-    <Grid>        
+    <Grid>
         <ScrollView Orientation="Vertical">
-            <Grid 
-                Padding="20"
-                ColumnSpacing="16" RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <StackLayout 
-                    Grid.ColumnSpan="4" Grid.Row="0"
-                    Spacing="16"
-                    Orientation="Horizontal">
+            <VerticalStackLayout Spacing="4" Padding="8">
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        HorizontalOptions="FillAndExpand"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=11,ExtraLargeContainerColumn=10, LargeContainerColumn=9, MediumContainerColumn=12, SmallContainerColumn=12}}"
+                        Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                         <Entry Text="{Binding Name}" />
                         <Label
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.NameValidableProperty}}"
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.NameValidableProperty}}"
-                            TextColor="IndianRed" />
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1,ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=2, SmallContainerColumn=4}}"
+                        Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Símbolo" />
-                        <Entry 
-                            HorizontalOptions="Start"
-                            WidthRequest="96"
-                            Text="{Binding Symbol}" />
+                        <Entry Text="{Binding Symbol}" />
                         <Label
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.SymbolValidableProperty}}"
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:UnitMeasurementConfigurationPageModel.SymbolValidableProperty}}"
-                            TextColor="IndianRed" />
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
-                </StackLayout>
+                </FlexLayout>
                 <BoxView 
-                    Grid.ColumnSpan="4" Grid.Row="1" 
-                    Margin="0,8,0,0"
+                    Margin="8,16,8,8"
                     HeightRequest="1" 
                     Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="2">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Picker SelectedItem="{Binding Priority}" ItemsSource="{StaticResource PriorityValues}" />
-                </VerticalStackLayout>
-            </Grid>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <Grid
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        ColumnSpacing="6" RowSpacing="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.Row="0"
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Entry
+                            Grid.Row="1"
+                            BackgroundColor="Transparent"
+                            IsReadOnly="True"
+                            Text="{Binding Priority}" />
+                        <Stepper
+                            Grid.Row="1"
+                            Margin="0,0,6,0"
+                            HorizontalOptions="End" VerticalOptions="Center"
+                            Minimum="1"
+                            Maximum="100"
+                            Value="{Binding Priority}" />
+                    </Grid>
+                </FlexLayout>
+            </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>
