@@ -147,6 +147,8 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<PropertySpaceLeasePropousal> PropertySpaceLeasePropousals { get; set; }
         public DbSet<VehicleLeasePropousal> VehicleLeasePropousals { get; set; }
         public DbSet<PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
+        public DbSet<PropertyLeaseOfferSpaceSpecification> PropertyLeaseOfferSpaceSpecifications { get; set; }
+        public DbSet<PropertyLeaseOfferSpaceSpecificationClauseBridge> PropertyLeaseOfferSpaceSpecificationClauseBridges { get; set; }
         public DbSet<VehicleLeaseOffer> VehicleLeaseOffers { get; set; }
         public DbSet<VehicleLeaseOrganizationPostulation> VehLeasOrgPostulations { get; set; }
         public DbSet<VehicleLeaseOrganizationPostulationDocumentBridge> VehLeasOrgPostDocumentBridges { get; set; }
