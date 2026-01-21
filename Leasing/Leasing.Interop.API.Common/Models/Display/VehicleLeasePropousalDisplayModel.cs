@@ -18,6 +18,10 @@
 
         public Domain.Interop.API.Common.Models.Display.VehicleDisplayModel Vehicle { get; set; }
 
+        public decimal BaselineAmount { get; set; }
+
+        public Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel BaselineCurrency { get; set; }
+
         public void Import(Persistence.Entities.VehicleLeasePropousal entity)
         {
             Id = entity.Id;
@@ -25,6 +29,7 @@
             Priority = entity.Priority;
             At = entity.At;
             Description = entity.Description;
+            BaselineAmount = entity.BaselineAmount;
 
             if (entity.Author != null)
             {
@@ -45,6 +50,13 @@
                 Vehicle = new Domain.Interop.API.Common.Models.Display.VehicleDisplayModel();
 
                 Vehicle.Import(entity.Vehicle);
+            }
+
+            if (entity.BaselineCurrency != null)
+            {
+                BaselineCurrency = new Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel();
+
+                BaselineCurrency.Import(entity.BaselineCurrency);
             }
         }
     }

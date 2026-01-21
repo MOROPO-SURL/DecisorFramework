@@ -77,7 +77,7 @@
                         <FlexLayout
                             Wrap="Wrap">
                             <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=12}}"
                                 Margin="4"
                                 Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Entidad Administrativa" />
@@ -102,6 +102,17 @@
                                     IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.ReferenceValidableProperty}}"
                                     Style="{StaticResource ValidationMessageLabelStyle}"
                                     Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.ReferenceValidableProperty}}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                Margin="4"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Licencia Operativa" />
+                                <Entry Text="{Binding OperativeLicenceCode}" />
+                                <Label
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.OperativeLicenceCodeValidableProperty}}"
+                                    Style="{StaticResource ValidationMessageLabelStyle}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.OperativeLicenceCodeValidableProperty}}" />
                             </VerticalStackLayout>
                             <VerticalStackLayout 
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
@@ -157,144 +168,148 @@
                                     Style="{StaticResource ValidationMessageLabelStyle}"
                                     Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.KindValidableProperty}}" />
                             </VerticalStackLayout>
-                            <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4"
-                                Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Chapa" />
-                                <Entry Text="{Binding Plate}" />
-                                <Label
-                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.PlateValidableProperty}}"
-                                    Style="{StaticResource ValidationMessageLabelStyle}"
-                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.PlateValidableProperty}}" />
-                            </VerticalStackLayout>
-                            <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4"
-                                Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. de Circulación" />
-                                <Entry Text="{Binding TrafficCirculationIdentifier}" />
-                                <Label
-                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.TrafficCirculationIdentifierValidableProperty}}"
-                                    Style="{StaticResource ValidationMessageLabelStyle}"
-                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.TrafficCirculationIdentifierValidableProperty}}" />
-                            </VerticalStackLayout>
-                            <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4"
-                                Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo de Motorización" />
-                                <Picker 
-                                    x:Name="EngineKindPicker" 
-                                    ItemsSource="{Binding AvailableEngineKinds}"
-                                    ItemDisplayBinding="{Binding Name}"
-                                    SelectedItem="{Binding EngineKind}"
-                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
-                                <Label
-                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.EngineKindCirculationIdentifierValidableProperty}}"
-                                    Style="{StaticResource ValidationMessageLabelStyle}"
-                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.EngineKindCirculationIdentifierValidableProperty}}" />
-                            </VerticalStackLayout>
-                            <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4"
-                                Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. Motor" />
-                                <Entry Text="{Binding EngineIdentifier}" />
-                                <Label
-                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.EngineIdentifierCirculationIdentifierValidableProperty}}"
-                                    Style="{StaticResource ValidationMessageLabelStyle}"
-                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.EngineIdentifierCirculationIdentifierValidableProperty}}" />
-                            </VerticalStackLayout>
-                            <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4"
-                                Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. de Carrocería" />
-                                <Entry Text="{Binding BodyIdentifier}" />
-                                <Label
-                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.BodyIdentifierCirculationIdentifierValidableProperty}}"
-                                    Style="{StaticResource ValidationMessageLabelStyle}"
-                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.BodyIdentifierCirculationIdentifierValidableProperty}}" />
-                            </VerticalStackLayout>
-                            <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4"
-                                Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Índice de Disponibilidad Técnica" />
-                                <Frame 
-                                    CornerRadius="4"
-                                    Padding="10,5,5,5">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label
-                                            Grid.Column="0" Grid.Row="1"
-                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                            Text="{Binding TechnicalAvailabilityIndex, StringFormat='{0} %'}" />
-                                        <Stepper 
-                                            Grid.Column="1" Grid.Row="1"
-                                            VerticalOptions="Center"
-                                            Minimum="1"
-                                            Maximum="100"
-                                            Value="{Binding TechnicalAvailabilityIndex}" />
-                                    </StackLayout>
-                                </Frame>
-                                <Label
-                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.TechnicalAvailabilityIndexValidableProperty}}"
-                                    Style="{StaticResource ValidationMessageLabelStyle}"
-                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.TechnicalAvailabilityIndexValidableProperty}}" />
-                            </VerticalStackLayout>
-                            <VerticalStackLayout 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4"
-                                Spacing="6">
-                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. de Asientos" />
-                                <Frame 
-                                    CornerRadius="4"
-                                    Padding="10,5,5,5">
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label
-                                            Grid.Column="0" Grid.Row="1"
-                                            HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                            Text="{Binding SeatCount}" />
-                                        <Stepper 
-                                            Grid.Column="1" Grid.Row="1"
-                                            VerticalOptions="Center"
-                                            Value="{Binding SeatCount}" />
-                                    </StackLayout>
-                                </Frame>
-                                <Label
-                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.SeatCountCirculationIdentifierValidableProperty}}"
-                                    Style="{StaticResource ValidationMessageLabelStyle}"
-                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.SeatCountCirculationIdentifierValidableProperty}}" />
-                            </VerticalStackLayout>
-                            <Grid 
-                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
-                                Margin="4"
-                                ColumnSpacing="6" RowSpacing="6">
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition />
-                                    <ColumnDefinition Width="Auto" />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Label 
-                                    Grid.ColumnSpan="2" Grid.Row="0"
-                                    Style="{StaticResource CaptionFieldLabelStyle}" 
-                                    Text="Capacidad de Carga" />
-                                <Entry 
-                                    Grid.Column="0" Grid.Row="1"
-                                    Text="{Binding LoadCapacity, StringFormat='{0:F2}'}" />
-                                <Label
-                                    Grid.Column="1" Grid.Row="1"
-                                    VerticalOptions="Center"
-                                    Text="Ton"
-                                    FontSize="Medium" />
-                            </Grid>
                         </FlexLayout>
                     </StackLayout>
+                </FlexLayout>
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Chapa" />
+                        <Entry Text="{Binding Plate}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.PlateValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.PlateValidableProperty}}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. de Circulación" />
+                        <Entry Text="{Binding TrafficCirculationIdentifier}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.TrafficCirculationIdentifierValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.TrafficCirculationIdentifierValidableProperty}}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo de Motorización" />
+                        <Picker 
+                            x:Name="EngineKindPicker" 
+                            ItemsSource="{Binding AvailableEngineKinds}"
+                            ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding EngineKind}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.EngineKindCirculationIdentifierValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.EngineKindCirculationIdentifierValidableProperty}}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. Motor" />
+                        <Entry Text="{Binding EngineIdentifier}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.EngineIdentifierCirculationIdentifierValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.EngineIdentifierCirculationIdentifierValidableProperty}}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. de Carrocería" />
+                        <Entry Text="{Binding BodyIdentifier}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.BodyIdentifierCirculationIdentifierValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.BodyIdentifierCirculationIdentifierValidableProperty}}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Índice de Disponibilidad Técnica" />
+                        <Frame 
+                            CornerRadius="4"
+                            Padding="10,5,5,5">
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    Grid.Column="0" Grid.Row="1"
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                    Text="{Binding TechnicalAvailabilityIndex, StringFormat='{0} %'}" />
+                                <Stepper 
+                                    Grid.Column="1" Grid.Row="1"
+                                    VerticalOptions="Center"
+                                    Minimum="1"
+                                    Maximum="100"
+                                    Value="{Binding TechnicalAvailabilityIndex}" />
+                            </StackLayout>
+                        </Frame>
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.TechnicalAvailabilityIndexValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.TechnicalAvailabilityIndexValidableProperty}}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="No. de Asientos" />
+                        <Frame 
+                            CornerRadius="4"
+                            Padding="10,5,5,5">
+                            <StackLayout Orientation="Horizontal">
+                                <Label
+                                    Grid.Column="0" Grid.Row="1"
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                    Text="{Binding SeatCount}" />
+                                <Stepper 
+                                    Grid.Column="1" Grid.Row="1"
+                                    VerticalOptions="Center"
+                                    Value="{Binding SeatCount}" />
+                            </StackLayout>
+                        </Frame>
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.SeatCountCirculationIdentifierValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:VehicleConfigurationPageModel.SeatCountCirculationIdentifierValidableProperty}}" />
+                    </VerticalStackLayout>
+                    <Grid 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=12}}"
+                        Margin="4"
+                        ColumnSpacing="6" RowSpacing="6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.ColumnSpan="2" Grid.Row="0"
+                            Style="{StaticResource CaptionFieldLabelStyle}" 
+                            Text="Capacidad de Carga" />
+                        <Entry 
+                            Grid.Column="0" Grid.Row="1"
+                            Text="{Binding LoadCapacity, StringFormat='{0:F2}'}" />
+                        <Label
+                            Grid.Column="1" Grid.Row="1"
+                            VerticalOptions="Center"
+                            Text="Ton"
+                            FontSize="Medium" />
+                    </Grid>                    
                 </FlexLayout>
                 <VerticalStackLayout 
                     Margin="8"

@@ -14,6 +14,10 @@
 
         public System.Guid VehicleId { get; set; }
 
+        public decimal BaselineAmount { get; set; }
+
+        public System.Guid BaselineCurrencyId { get; set; }
+
         public Persistence.Entities.VehicleLeasePropousal Export()
         {
             var entity = new Persistence.Entities.VehicleLeasePropousal { Id = Id };
@@ -32,6 +36,7 @@
         {
             entity.Priority = Priority;
             entity.Description = Description;
+            entity.BaselineAmount = BaselineAmount;
 
             if (entity.AuthorId != AuthorId)
             {
@@ -49,6 +54,12 @@
             {
                 entity.Vehicle = null;
                 entity.VehicleId = VehicleId;
+            }
+
+            if (entity.BaselineCurrencyId != BaselineCurrencyId)
+            {
+                entity.BaselineCurrency = null;
+                entity.BaselineCurrencyId = BaselineCurrencyId;
             }
         }
     }

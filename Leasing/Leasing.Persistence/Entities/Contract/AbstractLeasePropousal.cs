@@ -22,5 +22,11 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AgreementId))]
         public Governance.Persistence.Entities.Agreement Agreement { get; set; }
         public System.Guid AgreementId { get; set; }
+
+        public decimal BaselineAmount { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(BaselineCurrencyId))]
+        public Financial.Persistence.Entities.Currency BaselineCurrency { get; set; }
+        public System.Guid BaselineCurrencyId { get; set; }
     }
 }

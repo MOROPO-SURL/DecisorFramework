@@ -18,6 +18,8 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 
         public string Reference { get; set; }
 
+        public string OperativeLicenceCode { get; set; }
+
         public VehicleKindDisplayModel Kind { get; set; }
 
         public BrandDisplayModel Brand { get; set; }
@@ -53,6 +55,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
             Priority = entity.Priority;
             Assignment = entity.Assignment;
             Reference = entity.Reference;
+            OperativeLicenceCode = entity.OperativeLicenceCode;
             Model = entity.Model;
             Year = entity.Year;
             Plate = entity.Plate;
