@@ -8,6 +8,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.PropertySpaceLeasePropousal> PropertySpaceLeasePropousals { get; set; }
         public DbSet<Entities.VehicleLeasePropousal> VehicleLeasePropousals { get; set; }
         public DbSet<Entities.PropertyLeaseOffer> PropertyLeaseOffers { get; set; }
+        public DbSet<Entities.PropertyLeaseOfferSpaceSpecification> PropertyLeaseOfferSpaceSpecifications { get; set; }
+        public DbSet<Entities.PropertyLeaseOfferSpaceSpecificationClauseBridge> PropertyLeaseOfferSpaceSpecificationClauseBridges { get; set; }
         public DbSet<Entities.VehicleLeaseOffer> VehicleLeaseOffers { get; set; }
         public DbSet<Entities.VehicleLeaseOrganizationPostulation> VehLeasOrgPostulations { get; set; }
         public DbSet<Entities.VehicleLeaseOrganizationPostulationDocumentBridge> VehLeasOrgPostDocumentBridges { get; set; }

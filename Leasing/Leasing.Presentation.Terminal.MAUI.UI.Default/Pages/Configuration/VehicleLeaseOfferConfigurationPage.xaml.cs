@@ -10,6 +10,20 @@ public partial class VehicleLeaseOfferConfigurationPage : Core.Presentation.Term
     public VehicleLeaseOfferConfigurationPage(System.Action<VehicleLeaseOfferDisplayModel> successAction, Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.VehicleLeaseOfferConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
+
+        if (model.BaselineCurrency != null)
+        {
+            for (int i = 0; i < model.AvailableCurrencies.Length; i++)
+            {
+                var current = model.AvailableCurrencies[i];
+
+                if (model.BaselineCurrency.Id != current.Id) continue;
+
+                BaselineCurrencyPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Oferta de Arrendamiento de Vehículo";
@@ -26,7 +40,9 @@ public partial class VehicleLeaseOfferConfigurationPage : Core.Presentation.Term
             Description = ConcreteBindingContext.Description,
             OpenAt = ConcreteBindingContext.OpenAt,
             ClosedAt = ConcreteBindingContext.HasClosetAtDate ? ConcreteBindingContext.ClosedAt : null,
-            Priority = ConcreteBindingContext.Priority
+            Priority = ConcreteBindingContext.Priority,
+            BaselineAmount = ConcreteBindingContext.BaselineAmount,
+            BaselineCurrencyId = ConcreteBindingContext.BaselineCurrency.Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -48,7 +64,9 @@ public partial class VehicleLeaseOfferConfigurationPage : Core.Presentation.Term
             Description = ConcreteBindingContext.Description,
             OpenAt = ConcreteBindingContext.OpenAt,
             ClosedAt = ConcreteBindingContext.HasClosetAtDate ? ConcreteBindingContext.ClosedAt : null,
-            Priority = ConcreteBindingContext.Priority
+            Priority = ConcreteBindingContext.Priority,
+            BaselineAmount = ConcreteBindingContext.BaselineAmount,
+            BaselineCurrencyId = ConcreteBindingContext.BaselineCurrency.Id
         };
 
         await apiConnectClient.EditAsync(model);
@@ -65,6 +83,12 @@ public partial class VehicleLeaseOfferConfigurationPage : Core.Presentation.Term
     {
         OnCancel(sender, eventArgs);
     }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
+    }
+
     private void PropousalPickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VehicleLeasePropousalPickPage(PropousalPickComplete_Callback)));

@@ -1,16 +1,19 @@
 ﻿using FluentValidation;
 
-namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Validators
+namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Validators;
+
+public class PropertyLeaseOfferConfigurationValidator : AbstractValidator<Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel>
 {
-    public class PropertyLeaseOfferConfigurationValidator : AbstractValidator<Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel>
+    public PropertyLeaseOfferConfigurationValidator()
     {
-        public PropertyLeaseOfferConfigurationValidator()
-        {
-            RuleFor(model => model.Propousal).NotNull();
+        RuleFor(model => model.Propousal).NotNull();
 
-            RuleFor(model => model.Agreement).NotNull();
+        RuleFor(model => model.Agreement).NotNull();
 
-            RuleFor(model => model.Description).NotNull().NotEmpty();
-        }
+        RuleFor(model => model.Description).NotEmpty();
+
+        RuleFor(model => model.BaselineAmount).NotEmpty().GreaterThan(0);
+
+        RuleFor(model => model.BaselineCurrency).NotNull();
     }
 }

@@ -105,6 +105,7 @@ public partial class VehicleConfigurationPage : Core.Presentation.Terminal.MAUI.
             LoadCapacity = ConcreteBindingContext.LoadCapacity,
             StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
             Reference = ConcreteBindingContext.Reference,
+            OperativeLicenceCode = ConcreteBindingContext.OperativeLicenceCode,
             TechnicalAvailabilityIndex = ConcreteBindingContext.TechnicalAvailabilityIndex,
             Description = ConcreteBindingContext.Description,
             IncomingImageItems = incomingImages
@@ -144,6 +145,7 @@ public partial class VehicleConfigurationPage : Core.Presentation.Terminal.MAUI.
             LoadCapacity = ConcreteBindingContext.LoadCapacity,
             StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
             Reference = ConcreteBindingContext.Reference,
+            OperativeLicenceCode = ConcreteBindingContext.OperativeLicenceCode,
             TechnicalAvailabilityIndex = ConcreteBindingContext.TechnicalAvailabilityIndex,
             Description = ConcreteBindingContext.Description,
             IncomingImageItems = incomingImages,

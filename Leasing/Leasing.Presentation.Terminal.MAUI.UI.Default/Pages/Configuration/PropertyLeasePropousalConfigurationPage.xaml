@@ -164,8 +164,8 @@
                                                     Padding="8"
                                                     Spacing="8">
                                                     <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
                                                         VerticalOptions="Start"
-                                                        FontFamily="MaterialDesignIcons" 
                                                         Text="&#xFA78;"
                                                         Clicked="SpacePropousalRemotionButton_Clicked" />
                                                 </VerticalStackLayout>
@@ -185,27 +185,7 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=12}}"
-                        Margin="4"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Gestor" />
-                        <ContentView                        
-                            IsVisible="{Binding Author, Converter={StaticResource IsNotNullConverter}}"
-                            HeightRequest="140">
-                            <domain_presentation_card_views:EmployeeDefaultCardView
-                                BindingContext="{Binding Author}" />
-                        </ContentView>
-                        <Button
-                            HorizontalOptions="Start"
-                            Text="Seleccionar ..."
-                            Clicked="AuthorPickButton_Clicked" />
-                        <Label
-                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel.AuthorValidableProperty}}"
-                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel.AuthorValidableProperty}}"
-                            Style="{StaticResource ValidationMessageLabelStyle}" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=9, LargeContainerColumn=8, MediumContainerColumn=12}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=8, LargeContainerColumn=10, MediumContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acuerdo C/D primario" />
@@ -269,6 +249,53 @@
                         <Label
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel.AgreementValidableProperty}}"
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel.AgreementValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=6, LargeContainerColumn=8, MediumContainerColumn=10, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Gestor" />
+                        <ContentView                        
+                            IsVisible="{Binding Author, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="140">
+                            <domain_presentation_card_views:EmployeeDefaultCardView
+                                BindingContext="{Binding Author}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="AuthorPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel.AuthorValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel.AuthorValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Monto de partida (por m²)" />
+                        <Entry Text="{Binding BaselineAmount, StringFormat='{0:F2}'}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel.BaselineAmountValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel.BaselineAmountValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Moneda" />
+                        <Picker 
+                            x:Name="BaselineCurrencyPicker"
+                            ItemsSource="{Binding AvailableCurrencies}"
+                            ItemDisplayBinding="{Binding Path=Name}"
+                            SelectedItem="{Binding BaselineCurrency}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel.BaselineCurrencyValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PropertyLeasePropousalConfigurationPageModel.BaselineCurrencyValidableProperty}}"
                             Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                 </FlexLayout>
