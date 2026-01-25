@@ -3,8 +3,6 @@ using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Governance.Persistence.Entities;
-using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
-using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Contract;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities;
 using MOROPO.Framework.Decisor.Inventory.Persistence.Entities.Contract;
 using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
@@ -143,6 +141,9 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Employee> Employees { get; set; }
         public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
         public DbSet<UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
+
+        public DbSet<DriveLicence> DriveLicences { get; set; }
+        public DbSet<DriveLicenceVehicleKindBridge> DriveLicenceVehicleKindBridges { get; set; }
         public DbSet<PropertyLeasePropousal> PropertyLeasePropousals { get; set; }
         public DbSet<PropertySpaceLeasePropousal> PropertySpaceLeasePropousals { get; set; }
         public DbSet<VehicleLeasePropousal> VehicleLeasePropousals { get; set; }
@@ -168,9 +169,9 @@ namespace MOROPO.EPTCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<LegalClientVehicleLeaseContract> LegalClientVehicleLeaseContracts { get; set; }
         public DbSet<NaturalClientVehicleLeaseContract> NaturalClientVehicleLeaseContracts { get; set; }
         public DbSet<LegalClientVehicleLeasing> LegalClientVehicleLeasings { get; set; }
-        public DbSet<LegalClientVehicleLeasingPersonContactBridge> LegClientVehLeasPersonContactBridges { get; set; }
+        public DbSet<LegalClientVehicleLeasingDriveLicenceBridge> LegClientVehLeasDrivLicBridges { get; set; }
         public DbSet<NaturalClientVehicleLeasing> NaturalClientVehicleLeasings { get; set; }
-        public DbSet<NaturalClientVehicleLeasingPersonContactBridge> NatClientVehLeasPersonContactBridges { get; set; }
+        public DbSet<NaturalClientVehicleLeasingDriveLicenceBridge> NatClientVehLeasDrivLicBridges { get; set; }
         public DbSet<LegalClientPropertyLeasing> LegalClientPropertyLeasings { get; set; }
         public DbSet<LegalClientPropertyLeasingPersonContactBridge> LegClientPropLeasPersonContactBridges { get; set; }
         public DbSet<NaturalClientPropertyLeasing> NaturalClientPropertyLeasings { get; set; }
