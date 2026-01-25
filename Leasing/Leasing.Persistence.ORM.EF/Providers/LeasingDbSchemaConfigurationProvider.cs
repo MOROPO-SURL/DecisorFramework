@@ -10,6 +10,8 @@ public class LeasingDbSchemaConfigurationProvider : Guama.Core.Persistence.ORM.E
         {
             return new System.Collections.Generic.List<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
             {
+                new BaseEntityTypeConfigurator<Entities.DriveLicence>(),
+                new Configurators.DriveLicenceVehicleKindBridgeEntityTypeConfigurator(),
                 new BaseEntityTypeConfigurator<Entities.VehicleLeasePropousal>(),
                 new BaseEntityTypeConfigurator<Entities.PropertyLeasePropousal>(),
                 new Configurators.PropertySpaceLeasePropousalEntityTypeConfigurator(),
@@ -38,8 +40,8 @@ public class LeasingDbSchemaConfigurationProvider : Guama.Core.Persistence.ORM.E
                 new BaseEntityTypeConfigurator<Entities.NaturalClientVehicleLeaseContract>(),
                 new BaseEntityTypeConfigurator<Entities.LegalClientVehicleLeasing>(),
                 new BaseEntityTypeConfigurator<Entities.NaturalClientVehicleLeasing>(),
-                new Configurators.LegalClientVehicleLeasingPersonContactBridgeEntityTypeConfigurator(),
-                new Configurators.NaturalClientVehicleLeasingPersonContactBridgeEntityTypeConfigurator(),
+                new Configurators.LegalClientVehicleLeasingDriveLicenceBridgeEntityTypeConfigurator(),
+                new Configurators.NaturalClientVehicleLeasingDriveLicenceBridgeEntityTypeConfigurator(),
                 new BaseEntityTypeConfigurator<Entities.LegalClientPropertyLeasing>(),
                 new BaseEntityTypeConfigurator<Entities.NaturalClientPropertyLeasing>(),
                 new Configurators.LegalClientPropertyLeasingPersonContactBridgeEntityTypeConfigurator(),

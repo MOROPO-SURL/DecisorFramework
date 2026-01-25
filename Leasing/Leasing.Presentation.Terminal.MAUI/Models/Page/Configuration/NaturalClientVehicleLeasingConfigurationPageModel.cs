@@ -12,6 +12,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         public static string DurationUnitMeasureKindValidableProperty => nameof(DurationUnitMeasureKind);
         public static string FeedValidableProperty => nameof(Feed);
         public static string PaymentTermValidableProperty => nameof(PaymentTerm);
+        public static string DriveLicencesValidableProperty => nameof(DriveLicences);
 
         private int priority = 1;
         private int index = 1;
@@ -56,7 +57,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
 
         public Commercial.Interop.API.Common.Models.Display.PaymentTermDisplayModel PaymentTerm { get => paymentTerm; set => SetProperty(ref paymentTerm, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel> Contacts { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<DriveLicenceDisplayModel> DriveLicences { get; set; } = [];
 
         public Legal.Persistence.Enumerations.DurationUnitMeasureKind[] AvailableDurationUnitMeasureKinds { get; } = [Legal.Persistence.Enumerations.DurationUnitMeasureKind.Years, Legal.Persistence.Enumerations.DurationUnitMeasureKind.Months, Legal.Persistence.Enumerations.DurationUnitMeasureKind.Days, Legal.Persistence.Enumerations.DurationUnitMeasureKind.Hours];
 

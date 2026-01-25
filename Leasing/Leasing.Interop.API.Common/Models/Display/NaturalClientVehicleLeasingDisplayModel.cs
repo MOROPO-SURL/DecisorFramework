@@ -6,7 +6,7 @@
 
         public string OperativeLicenceCode { get; set; }
 
-        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel[] Drivers { get; set; }
+        public DriveLicenceDisplayModel[] DriverLicences { get; set; }
 
         public override void Import(Persistence.Entities.NaturalClientVehicleLeasing entity)
         {

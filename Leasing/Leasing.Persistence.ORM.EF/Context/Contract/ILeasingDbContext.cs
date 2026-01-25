@@ -4,6 +4,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract
 {
     public interface ILeasingDbContext : Governance.Persistence.ORM.EF.Context.Contract.IGovernanceDbContext, Commercial.Persistence.ORM.EF.Context.Contract.ICommercialDbContext
     {
+        public DbSet<Entities.DriveLicence> DriveLicences { get; set; }
+        public DbSet<Entities.DriveLicenceVehicleKindBridge> DriveLicenceVehicleKindBridges { get; set; }
         public DbSet<Entities.PropertyLeasePropousal> PropertyLeasePropousals { get; set; }
         public DbSet<Entities.PropertySpaceLeasePropousal> PropertySpaceLeasePropousals { get; set; }
         public DbSet<Entities.VehicleLeasePropousal> VehicleLeasePropousals { get; set; }
@@ -29,9 +31,9 @@ namespace MOROPO.Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.LegalClientVehicleLeaseContract> LegalClientVehicleLeaseContracts { get; set; }
         public DbSet<Entities.NaturalClientVehicleLeaseContract> NaturalClientVehicleLeaseContracts { get; set; }
         public DbSet<Entities.LegalClientVehicleLeasing> LegalClientVehicleLeasings { get; set; }
-        public DbSet<Entities.LegalClientVehicleLeasingPersonContactBridge> LegClientVehLeasPersonContactBridges { get; set; }
+        public DbSet<Entities.LegalClientVehicleLeasingDriveLicenceBridge> LegClientVehLeasDrivLicBridges { get; set; }
         public DbSet<Entities.NaturalClientVehicleLeasing> NaturalClientVehicleLeasings { get; set; }
-        public DbSet<Entities.NaturalClientVehicleLeasingPersonContactBridge> NatClientVehLeasPersonContactBridges { get; set; }
+        public DbSet<Entities.NaturalClientVehicleLeasingDriveLicenceBridge> NatClientVehLeasDrivLicBridges { get; set; }
         public DbSet<Entities.LegalClientPropertyLeasing> LegalClientPropertyLeasings { get; set; }
         public DbSet<Entities.LegalClientPropertyLeasingPersonContactBridge> LegClientPropLeasPersonContactBridges { get; set; }
         public DbSet<Entities.NaturalClientPropertyLeasing> NaturalClientPropertyLeasings { get; set; }
