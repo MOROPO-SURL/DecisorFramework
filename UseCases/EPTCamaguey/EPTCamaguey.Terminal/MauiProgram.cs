@@ -41,11 +41,12 @@ namespace MOROPO.EPTCamaguey.Decisor.Terminal
            .UseDecisorFrameworkGovernance()
            .UseDecisorFrameworkLeasing()
            .Services
-               .AddSingleton<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade, Providers.HttpClientHelperProvider>()
-               .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Providers.Facade.IRuntimeContextProviderFacade, Providers.SingleRuntimeContextProvider>()
-               .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade, Helpers.MainExceptionHandlingHelper>()
-               .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSessionManager>()
-               .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISettingManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSettingManager>();
+                .AddSingleton<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade, Providers.HttpClientHelperProvider>()
+                .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Providers.Facade.IRuntimeContextProviderFacade, Providers.SingleRuntimeContextProvider>()
+                .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade, Helpers.MainExceptionHandlingHelper>()
+                .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSessionManager>()
+                .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISettingManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSettingManager>()
+                .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.WorkforceConfigurationVacantViewModel, Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration.VacantConfigurationPageModel>, UI.Factories.Configuration.SimplifiedVacantConfigurationPageFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

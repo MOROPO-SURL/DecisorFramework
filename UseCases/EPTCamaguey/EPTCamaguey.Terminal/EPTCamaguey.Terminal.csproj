@@ -101,6 +101,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="UI\Pages\Configuration\SimplifiedVacantConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Shells\GovernanceShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
