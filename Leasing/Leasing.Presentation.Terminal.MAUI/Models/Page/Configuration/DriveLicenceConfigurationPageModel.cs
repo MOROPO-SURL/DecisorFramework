@@ -6,12 +6,13 @@ public class DriveLicenceConfigurationPageModel : Core.Presentation.Terminal.MAU
     public static string CodeValidableProperty => nameof(Code);
     public static string ReferenceValidableProperty => nameof(Reference);
     public static string ExpireAtYearValidableProperty => nameof(ExpireAtYear);
+    public static string VehicleKindBridgesValidableProperty => nameof(VehicleKindBridges);
 
     private Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel contact;
     private string code;
     private string reference;
-    private int releasedAtMonth;
     private int releasedAtYear;
+    private int expireAtMonth;
     private int expireAtYear;
 
     public DriveLicenceConfigurationPageModel(Interop.API.Common.Models.Display.DriveLicenceDisplayModel model) : base(model)
@@ -39,7 +40,7 @@ public class DriveLicenceConfigurationPageModel : Core.Presentation.Terminal.MAU
 
         if (model == null)
         {
-            releasedAtMonth = now.Month;
+            expireAtMonth = now.Month;
             releasedAtYear = now.Year - driveLicenceLongevity / 2;
             expireAtYear = now.Year + driveLicenceLongevity - driveLicenceLongevity / 2;
 
@@ -50,9 +51,10 @@ public class DriveLicenceConfigurationPageModel : Core.Presentation.Terminal.MAU
         contact = model.Contact;
         code = model.Code;
         reference = model.Reference;
-        releasedAtMonth = model.ReleasedAt.Month;
         releasedAtYear = model.ReleasedAt.Year;
+        expireAtMonth = model.ExpireAt.Month;
         expireAtYear = model.ExpireAt.Year;
+        VehicleKindBridges = [.. model.VehicleKindBridges];
     }
 
     public System.Guid Id { get; set; }
@@ -63,11 +65,13 @@ public class DriveLicenceConfigurationPageModel : Core.Presentation.Terminal.MAU
 
     public string Reference { get => reference; set => SetProperty(ref reference, value); }
 
-    public int ReleasedAtMonth { get => releasedAtMonth; set => SetProperty(ref releasedAtMonth, value); }
-
     public int ReleasedAtYear { get => releasedAtYear; set => SetProperty(ref releasedAtYear, value); }
 
+    public int ExpireAtMonth { get => expireAtMonth; set => SetProperty(ref expireAtMonth, value); }
+
     public int ExpireAtYear { get => expireAtYear; set => SetProperty(ref expireAtYear, value); }
+
+    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.Display.DriveLicenceVehicleKindBridgeDisplayModel> VehicleKindBridges { get; set; } = [];
 
     public int[] AvailableMonths { get; private set; } = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
 

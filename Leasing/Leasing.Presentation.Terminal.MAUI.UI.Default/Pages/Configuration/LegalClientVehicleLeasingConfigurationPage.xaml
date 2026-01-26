@@ -2,6 +2,7 @@
 <core_ui_base_pages:ConfigurationBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_converters="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Converters"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
     xmlns:domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
@@ -19,6 +20,8 @@
     x:DataType="presentation_configuration_page_models:LegalClientVehicleLeasingConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local_converters:DriveLicenceVehicleKindBridgesToStringConverter x:Key="DriveLicenceVehicleKindBridgesToStringConverter" />
+
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
@@ -226,6 +229,7 @@
                             </Grid.RowDefinitions>
                             <Button
                                 Grid.Column="1" Grid.Row="0"
+                                Margin="8"
                                 HorizontalOptions="End"
                                 Text="Agregar"
                                 Clicked="DriveLicenceCreationButton_Clicked" />
@@ -237,7 +241,7 @@
                                 Margin="4"
                                 ItemsSource="{Binding DriveLicences}">
                                 <CollectionView.EmptyView>
-                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    <Label Padding="4" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemsLayout>
                                     <GridItemsLayout Orientation="Vertical" Span="1" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
@@ -284,12 +288,18 @@
                                                         FontAttributes="Bold"
                                                         TextColor="DimGray"
                                                         Text="NUMERO" />
-                                                    <Label
-                                                        Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="1"
-                                                        FontSize="Medium"
-                                                        LineBreakMode="TailTruncation"
-                                                        TextTransform="Uppercase"
-                                                        Text="{Binding Code}" />
+                                                    <VerticalStackLayout Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="1">
+                                                        <Label
+                                                            FontSize="Medium"
+                                                            LineBreakMode="TailTruncation"
+                                                            TextTransform="Uppercase"
+                                                            Text="{Binding VehicleKindBridges, Converter={StaticResource DriveLicenceVehicleKindBridgesToStringConverter}}" />
+                                                        <Label
+                                                            FontSize="Medium"
+                                                            LineBreakMode="TailTruncation"
+                                                            TextTransform="Uppercase"
+                                                            Text="{Binding Code}" />
+                                                    </VerticalStackLayout>
                                                     <Label
                                                         Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="2"
                                                         FontAttributes="Bold"

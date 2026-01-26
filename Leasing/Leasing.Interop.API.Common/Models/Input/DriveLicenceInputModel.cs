@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
+﻿using System.Linq;
+
+namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 {
     public class DriveLicenceInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.DriveLicence, System.Guid>
     {
@@ -17,6 +19,11 @@
         public System.DateTime ReleasedAt { get; set; }
 
         public System.DateTime ExpireAt { get; set; }
+
+        [System.ComponentModel.DataAnnotations.MaxLength(100)]
+        public string Limitation { get; set; }
+
+        public Bridge.Input.DriveLicenceVehicleKindBridgeInputModel[] VehicleKindBridges { get; set; }
 
         public Persistence.Entities.DriveLicence Export()
         {
@@ -38,12 +45,24 @@
             entity.Reference = Reference;
             entity.ReleasedAt = ReleasedAt;
             entity.ExpireAt = ExpireAt;
+            entity.Limitation = Limitation;
 
             if (entity.ContactId != ContactId)
             {
                 entity.Contact = null;
                 entity.ContactId = ContactId;
             }
+
+            entity.VehicleKindBridges.Clear();
+
+            entity.VehicleKindBridges = VehicleKindBridges.Select(item => new Persistence.Entities.DriveLicenceVehicleKindBridge
+            {
+                ProwId = entity.Id,
+                SternId = item.SternId,
+                Category = item.Category,
+                Specification = item.Specification,
+                AchievedAt = item.AchievedAt
+            }).ToList();
         }
     }
 }

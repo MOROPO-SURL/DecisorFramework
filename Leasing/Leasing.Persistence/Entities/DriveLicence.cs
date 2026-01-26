@@ -21,6 +21,9 @@
 
         public System.DateTime ExpireAt { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(100)]
+        public string Limitation { get; set; }
+
         public System.Collections.Generic.List<DriveLicenceVehicleKindBridge> VehicleKindBridges { get; set; } = new System.Collections.Generic.List<DriveLicenceVehicleKindBridge>();
     }
 }

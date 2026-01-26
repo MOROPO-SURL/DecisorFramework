@@ -6,15 +6,15 @@
 
         public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel Contact { get; set; }
 
-        // Number
-        public string Code { get; set; }
+        public string Code { get; set; } // Number
 
-        // Document id (reverso ej: C577490)
-        public string Reference { get; set; }
+        public string Reference { get; set; } // Document id (reverso ej: C577490)
 
         public System.DateTime ReleasedAt { get; set; }
 
         public System.DateTime ExpireAt { get; set; }
+
+        public string Limitation { get; set; }
 
         public Bridge.Display.DriveLicenceVehicleKindBridgeDisplayModel[] VehicleKindBridges { get; set; }
 
@@ -25,6 +25,7 @@
             Reference = entity.Reference;
             ReleasedAt = entity.ReleasedAt;
             ExpireAt = entity.ExpireAt;
+            Limitation = entity.Limitation;
 
             if (entity.Contact != null)
             {
@@ -32,6 +33,11 @@
 
                 Contact.Import(entity.Contact);
             }
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
         }
 
         public override bool Equals(object obj)

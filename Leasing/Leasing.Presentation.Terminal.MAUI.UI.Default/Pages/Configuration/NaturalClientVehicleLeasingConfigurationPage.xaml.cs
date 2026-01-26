@@ -140,6 +140,13 @@ public partial class NaturalClientVehicleLeasingConfigurationPage : Core.Present
 
     private void DriveLicenceCreationComplete_Callback(DriveLicenceDisplayModel model)
     {
+        if (ConcreteBindingContext.DriveLicences.Any(item => item.Contact.Id == model.Contact.Id))
+        {
+            DisplayAlert("Aviso", "Ya se ha definido este conductor.", "Aceptar");
+
+            return;
+        }
+
         ConcreteBindingContext.DriveLicences.Add(model);
     }
 

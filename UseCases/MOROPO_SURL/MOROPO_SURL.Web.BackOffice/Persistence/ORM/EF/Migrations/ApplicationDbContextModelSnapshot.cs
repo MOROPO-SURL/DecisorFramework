@@ -4008,6 +4008,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("expireat");
 
+                    b.Property<string>("Limitation")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("limitation");
+
                     b.Property<string>("Reference")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -4044,6 +4049,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<int>("Category")
                         .HasColumnType("integer")
                         .HasColumnName("category");
+
+                    b.Property<string>("Specification")
+                        .HasMaxLength(100)
+                        .HasColumnType("character varying(100)")
+                        .HasColumnName("specification");
 
                     b.HasKey("ProwId", "SternId")
                         .HasName("pk_drivelicencevehiclekindbridges");

@@ -10,6 +10,9 @@
 
         public Enumerations.DriveLicenceCategory Category { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(100)]
+        public string Specification { get; set; }
+
         public System.DateTime AchievedAt { get; set; }
     }
 }

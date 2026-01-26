@@ -22,5 +22,9 @@ public class DriveLicenceConfigurationValidator : AbstractValidator<Models.Page.
         RuleFor(model => model.ExpireAtYear)
             .GreaterThan(model =>  model.ReleasedAtYear)
             .WithName("Año de vencimiento");
+
+        RuleFor(model => model.VehicleKindBridges)
+            .NotEmpty()
+            .WithName("Categorías");
     }
 }
