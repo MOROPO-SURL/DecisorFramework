@@ -16,6 +16,10 @@
 
         public System.Guid PropousalId { get; set; }
 
+        public decimal BaselineAmount { get; set; }
+
+        public System.Guid BaselineCurrencyId { get; set; }
+
         public Persistence.Entities.VehicleLeaseOffer Export()
         {
             var entity = new Persistence.Entities.VehicleLeaseOffer { Id = Id, Enabled = true };
@@ -36,11 +40,18 @@
             entity.OpenAt = OpenAt;
             entity.ClosedAt = ClosedAt;
             entity.Description = Description;
+            entity.BaselineAmount = BaselineAmount;
 
             if (entity.AgreementId != AgreementId)
             {
                 entity.Agreement = null;
                 entity.AgreementId = AgreementId;
+            }
+
+            if (entity.BaselineCurrencyId != BaselineCurrencyId)
+            {
+                entity.BaselineCurrency = null;
+                entity.BaselineCurrencyId = BaselineCurrencyId;
             }
         }
     }

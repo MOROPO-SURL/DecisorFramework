@@ -12,7 +12,11 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Validators
 
             RuleFor(model => model.Author).NotNull();
 
-            RuleFor(model => model.Description).NotNull().NotEmpty();
+            RuleFor(model => model.Description).NotEmpty();
+
+            RuleFor(model => model.BaselineAmount).NotEmpty().GreaterThan(0);
+
+            RuleFor(model => model.BaselineCurrency).NotNull();
         }
     }
 }

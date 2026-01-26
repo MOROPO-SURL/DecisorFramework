@@ -22,6 +22,9 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         [System.ComponentModel.DataAnnotations.Required]
         public string Reference { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
+        public string OperativeLicenceCode { get; set; }
+
         public System.Guid KindId { get; set; }
 
         public int Year { get; set; }
@@ -71,6 +74,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             entity.Priority = Priority;
             entity.Model = Model;
             entity.Reference = Reference;
+            entity.OperativeLicenceCode = OperativeLicenceCode;
             entity.Model = Model;
             entity.Year = Year;
             entity.Plate = Plate;

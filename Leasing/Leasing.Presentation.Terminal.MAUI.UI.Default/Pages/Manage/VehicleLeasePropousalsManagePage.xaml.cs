@@ -17,6 +17,8 @@ public partial class VehicleLeasePropousalsManagePage : Core.Presentation.Termin
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth { get => 400; }
 
     protected override double MeasureCollectionViewCellHeight(double width)

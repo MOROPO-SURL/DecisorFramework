@@ -10,6 +10,20 @@ public partial class PropertyLeaseOfferConfigurationPage : Core.Presentation.Ter
     public PropertyLeaseOfferConfigurationPage(System.Action<PropertyLeaseOfferDisplayModel> successAction, Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
+
+        if (model.BaselineCurrency != null)
+        {
+            for (int i = 0; i < model.AvailableCurrencies.Length; i++)
+            {
+                var current = model.AvailableCurrencies[i];
+
+                if (model.BaselineCurrency.Id != current.Id) continue;
+
+                BaselineCurrencyPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Oferta de Arrendamiento de Inmueble";
@@ -26,7 +40,9 @@ public partial class PropertyLeaseOfferConfigurationPage : Core.Presentation.Ter
             Description = ConcreteBindingContext.Description,
             OpenAt = ConcreteBindingContext.OpenAt,
             ClosedAt = ConcreteBindingContext.HasClosetAtDate ? ConcreteBindingContext.ClosedAt : null,
-            Priority = ConcreteBindingContext.Priority
+            Priority = ConcreteBindingContext.Priority,
+            BaselineAmount = ConcreteBindingContext.BaselineAmount,
+            BaselineCurrencyId = ConcreteBindingContext.BaselineCurrency.Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -46,7 +62,9 @@ public partial class PropertyLeaseOfferConfigurationPage : Core.Presentation.Ter
             Description = ConcreteBindingContext.Description,
             OpenAt = ConcreteBindingContext.OpenAt,
             ClosedAt = ConcreteBindingContext.HasClosetAtDate ? ConcreteBindingContext.ClosedAt : null,
-            Priority = ConcreteBindingContext.Priority
+            Priority = ConcreteBindingContext.Priority,
+            BaselineAmount = ConcreteBindingContext.BaselineAmount,
+            BaselineCurrencyId = ConcreteBindingContext.BaselineCurrency.Id
         };
 
         await apiConnectClient.EditAsync(model);
@@ -62,6 +80,11 @@ public partial class PropertyLeaseOfferConfigurationPage : Core.Presentation.Ter
     private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         OnCancel(sender, eventArgs);
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
     }
 
     private void PropousalPickButton_Clicked(object sender, System.EventArgs e)

@@ -16,6 +16,10 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 
         public System.Guid PropertyId { get; set; }
 
+        public decimal BaselineAmount { get; set; }
+
+        public System.Guid BaselineCurrencyId { get; set; }
+
         public List<PropertySpaceLeasePropousalInputModel> IncomingSpaces { get; set; } = new List<PropertySpaceLeasePropousalInputModel>();
         public List<Display.PropertySpaceLeasePropousalDisplayModel> OutgoingSpaces { get; set; } = new List<Display.PropertySpaceLeasePropousalDisplayModel>();
 
@@ -37,6 +41,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
         {
             entity.Priority = Priority;
             entity.Description = Description;
+            entity.BaselineAmount = BaselineAmount;
 
             if (entity.AuthorId != AuthorId)
             {
@@ -54,6 +59,12 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
             {
                 entity.Property = null;
                 entity.PropertyId = PropertyId;
+            }
+
+            if (entity.BaselineCurrencyId != BaselineCurrencyId)
+            {
+                entity.BaselineCurrency = null;
+                entity.BaselineCurrencyId = BaselineCurrencyId;
             }
         }
     }

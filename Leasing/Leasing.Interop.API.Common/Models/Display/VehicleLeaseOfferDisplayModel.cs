@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
+﻿namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
 {
     public class VehicleLeaseOfferDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.VehicleLeaseOffer, System.Guid>
     {
@@ -22,6 +20,10 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
 
         public VehicleLeasePropousalDisplayModel Propousal { get; set; }
 
+        public decimal BaselineAmount { get; set; }
+
+        public Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel BaselineCurrency { get; set; }
+
         public VehicleLeaseOrganizationPostulationDisplayModel[] OrganizationPostulations { get; set; }
 
         public VehicleLeasePersonPostulationDisplayModel[] PersonPostulations { get; set; }
@@ -35,6 +37,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
             OpenAt = entity.OpenAt;
             ClosedAt = entity.ClosedAt;
             Description = entity.Description;
+            BaselineAmount = entity.BaselineAmount;
 
             if (entity.Agreement != null)
             {
@@ -48,6 +51,13 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
                 Propousal = new VehicleLeasePropousalDisplayModel();
 
                 Propousal.Import(entity.Propousal);
+            }
+
+            if (entity.BaselineCurrency != null)
+            {
+                BaselineCurrency = new Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel();
+
+                BaselineCurrency.Import(entity.BaselineCurrency);
             }
         }
     }

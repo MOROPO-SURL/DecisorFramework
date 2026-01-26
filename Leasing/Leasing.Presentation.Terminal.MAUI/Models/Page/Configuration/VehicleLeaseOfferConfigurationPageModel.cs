@@ -7,6 +7,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         public static string PropousalValidableProperty => nameof(Propousal);
         public static string AgreementValidableProperty => nameof(Agreement);
         public static string DescriptionValidableProperty => nameof(Description);
+        public static string BaselineAmountValidableProperty => nameof(BaselineAmount);
+        public static string BaselineCurrencyValidableProperty => nameof(BaselineCurrency);
 
         private int priority = 1;
         private System.DateTime openAt = System.DateTime.Now;
@@ -15,6 +17,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         private string description;
         private VehicleLeasePropousalDisplayModel propousal;
         private Governance.Interop.API.Common.Models.Display.AgreementDisplayModel agreement;
+        private decimal baselineAmount;
+        private Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel baselineCurrency;
 
         public VehicleLeaseOfferConfigurationPageModel(VehicleLeaseOfferDisplayModel model) : base(model)
         {
@@ -28,6 +32,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
             Description = model.Description;
             Propousal = model.Propousal;
             Agreement = model.Agreement;
+            baselineAmount = model.BaselineAmount;
+            baselineCurrency = model.BaselineCurrency;
         }
 
         public System.Guid Id { get; set; }
@@ -45,5 +51,11 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         public VehicleLeasePropousalDisplayModel Propousal { get => propousal; set => SetProperty(ref propousal, value); }
 
         public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get => agreement; set => SetProperty(ref agreement, value); }
+
+        public decimal BaselineAmount { get => baselineAmount; set => SetProperty(ref baselineAmount, value); }
+
+        public Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel BaselineCurrency { get => baselineCurrency; set => SetProperty(ref baselineCurrency, value); }
+
+        public Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel[] AvailableCurrencies { get; set; }
     }
 }

@@ -10,24 +10,30 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
         public static string SpacePropousalsValidableProperty => nameof(SpacePropousals);
         public static string AuthorValidableProperty => nameof(Author);
         public static string AgreementValidableProperty => nameof(Agreement);
+        public static string BaselineAmountValidableProperty => nameof(BaselineAmount);
+        public static string BaselineCurrencyValidableProperty => nameof(BaselineCurrency);
 
         private int priority = 1;
         private string description;
         private Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel author;
         private Governance.Interop.API.Common.Models.Display.AgreementDisplayModel agreement;
         private Domain.Interop.API.Common.Models.Display.PropertyDisplayModel property;
+        private decimal baselineAmount;
+        private Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel baselineCurrency;
 
         public PropertyLeasePropousalConfigurationPageModel(PropertyLeasePropousalDisplayModel model) : base(model)
         {
             if (model == null) return;
 
             Id = model.Id;
-            Priority = model.Priority;
-            Description = model.Description;
-            Author = model.Author;
-            Agreement = model.Agreement;
-            Property = model.Property;
-            SpacePropousals = model.SpacePropousals.ToObservableCollection();
+            priority = model.Priority;
+            description = model.Description;
+            author = model.Author;
+            agreement = model.Agreement;
+            property = model.Property;
+            baselineAmount = model.BaselineAmount;
+            baselineCurrency = model.BaselineCurrency;
+            SpacePropousals = [.. model.SpacePropousals];
         }
 
         public System.Guid Id { get; set; }
@@ -42,6 +48,12 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Pag
 
         public Domain.Interop.API.Common.Models.Display.PropertyDisplayModel Property { get => property; set => SetProperty(ref property, value); }
 
+        public decimal BaselineAmount { get => baselineAmount; set => SetProperty(ref baselineAmount, value); }
+
+        public Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel BaselineCurrency { get => baselineCurrency; set => SetProperty(ref baselineCurrency, value); }
+
         public System.Collections.ObjectModel.ObservableCollection<PropertySpaceLeasePropousalDisplayModel> SpacePropousals { get; set; } = [];
+
+        public Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel[] AvailableCurrencies { get; set; }
     }
 }

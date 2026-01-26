@@ -10,6 +10,20 @@ public partial class VehicleLeasePropousalConfigurationPage : Core.Presentation.
     public VehicleLeasePropousalConfigurationPage(System.Action<VehicleLeasePropousalDisplayModel> successAction, Models.Page.Configuration.VehicleLeasePropousalConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.VehicleLeasePropousalConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
+
+        if (model.BaselineCurrency != null)
+        {
+            for (int i = 0; i < model.AvailableCurrencies.Length; i++)
+            {
+                var current = model.AvailableCurrencies[i];
+
+                if (model.BaselineCurrency.Id != current.Id) continue;
+
+                BaselineCurrencyPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Propuesta de Arrendamiento de Vehículo";
@@ -25,7 +39,9 @@ public partial class VehicleLeasePropousalConfigurationPage : Core.Presentation.
             AgreementId = ConcreteBindingContext.Agreement.Id,
             Description = ConcreteBindingContext.Description,
             VehicleId = ConcreteBindingContext.Vehicle.Id,
-            Priority = ConcreteBindingContext.Priority
+            Priority = ConcreteBindingContext.Priority,
+            BaselineAmount = ConcreteBindingContext.BaselineAmount,
+            BaselineCurrencyId = ConcreteBindingContext.BaselineCurrency.Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -44,7 +60,9 @@ public partial class VehicleLeasePropousalConfigurationPage : Core.Presentation.
             AgreementId = ConcreteBindingContext.Agreement.Id,
             Description = ConcreteBindingContext.Description,
             VehicleId = ConcreteBindingContext.Vehicle.Id,
-            Priority = ConcreteBindingContext.Priority
+            Priority = ConcreteBindingContext.Priority,
+            BaselineAmount = ConcreteBindingContext.BaselineAmount,
+            BaselineCurrencyId = ConcreteBindingContext.BaselineCurrency.Id
         };
 
         await apiConnectClient.EditAsync(model);
@@ -60,6 +78,11 @@ public partial class VehicleLeasePropousalConfigurationPage : Core.Presentation.
     private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         OnCancel(sender, eventArgs);
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
     }
 
     private void VehiclePickButton_Clicked(object sender, System.EventArgs e)

@@ -3,6 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
@@ -62,7 +63,15 @@ public partial class NaturalClientVehicleLeasingConfigurationPage : Core.Present
             AgreementId = ConcreteBindingContext.Agreement.Id,
             CostCenterId = ConcreteBindingContext.AvailableConstCenters[CostCenterPicker.SelectedIndex].Id,
             Priority = ConcreteBindingContext.Priority,
-            Contacts = [.. ConcreteBindingContext.Contacts]
+            IncomingDriveLicences = [.. ConcreteBindingContext.DriveLicences.Select(item => new Interop.API.Common.Models.Input.DriveLicenceInputModel
+            {
+                Id = item.Id,
+                ContactId = item.Contact.Id,
+                Code = item.Code,
+                Reference = item.Reference,
+                ReleasedAt = item.ReleasedAt,
+                ExpireAt = item.ExpireAt
+            })]
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -95,19 +104,19 @@ public partial class NaturalClientVehicleLeasingConfigurationPage : Core.Present
         hasChangesFlag = true;
     }
 
-    private void DriverAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    private void DriveLicenceCreationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(DriverPickComplete_Callback)));
+        this.NavigationPushPageAsync(new DriveLicenceConfigurationPage(DriveLicenceCreationComplete_Callback, new Models.Page.Configuration.DriveLicenceConfigurationPageModel(null)));
     }
 
-    private void DriverDetailButton_Clicked(object sender, System.EventArgs eventArgs)
+    private void DriveLicenceEditionButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel;
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as DriveLicenceDisplayModel;
 
-        this.NavigationPushModalPageAsync(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.PersonContactDetailPage(target, null));
+        this.NavigationPushPageAsync(new DriveLicenceConfigurationPage(DriveLicenceEditionComplete_Callback, new Models.Page.Configuration.DriveLicenceConfigurationPageModel(target)));
     }
 
-    private void DriverRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    private void DriveLicenceRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         DisplayAlert("Confirmación", "Está seguro que desea retirar este conductor?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
@@ -115,9 +124,9 @@ public partial class NaturalClientVehicleLeasingConfigurationPage : Core.Present
 
             Dispatcher.Dispatch(() =>
             {
-                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel;
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as DriveLicenceDisplayModel;
 
-                ConcreteBindingContext.Contacts.Remove(target);
+                ConcreteBindingContext.DriveLicences.Remove(target);
 
                 hasChangesFlag = true;
             });
@@ -129,8 +138,20 @@ public partial class NaturalClientVehicleLeasingConfigurationPage : Core.Present
         ConcreteBindingContext.Agreement = model;
     }
 
-    private void DriverPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
+    private void DriveLicenceCreationComplete_Callback(DriveLicenceDisplayModel model)
     {
-        ConcreteBindingContext.Contacts.Add(model);
+        if (ConcreteBindingContext.DriveLicences.Any(item => item.Contact.Id == model.Contact.Id))
+        {
+            DisplayAlert("Aviso", "Ya se ha definido este conductor.", "Aceptar");
+
+            return;
+        }
+
+        ConcreteBindingContext.DriveLicences.Add(model);
+    }
+
+    private void DriveLicenceEditionComplete_Callback(DriveLicenceDisplayModel model)
+    {
+        ConcreteBindingContext.DriveLicences[ConcreteBindingContext.DriveLicences.IndexOf(model)] = model;
     }
 }

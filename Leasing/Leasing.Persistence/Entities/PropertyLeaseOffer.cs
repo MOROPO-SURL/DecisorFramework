@@ -6,6 +6,8 @@
         public PropertyLeasePropousal Propousal { get; set; }
         public System.Guid PropousalId { get; set; }
 
+        public System.Collections.Generic.ICollection<PropertyLeaseOfferSpaceSpecification> SpaceSpecifications { get; set; }
+
         public System.Collections.Generic.ICollection<PropertyLeaseOrganizationPostulation> OrganizationPostulations { get; set; }
 
         public System.Collections.Generic.ICollection<PropertyLeasePersonPostulation> PersonPostulations { get; set; }

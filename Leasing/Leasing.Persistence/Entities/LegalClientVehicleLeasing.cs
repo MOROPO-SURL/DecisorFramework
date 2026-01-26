@@ -6,6 +6,6 @@
         public LegalClientVehicleLeaseContract Contract { get; set; }
         public System.Guid ContractId { get; set; }
 
-        public System.Collections.Generic.List<LegalClientVehicleLeasingPersonContactBridge> ContactBridges { get; set; } = new System.Collections.Generic.List<LegalClientVehicleLeasingPersonContactBridge>();
+        public System.Collections.Generic.List<LegalClientVehicleLeasingDriveLicenceBridge> DriveLicenceBridges { get; set; } = new System.Collections.Generic.List<LegalClientVehicleLeasingDriveLicenceBridge>();
     }
 }
