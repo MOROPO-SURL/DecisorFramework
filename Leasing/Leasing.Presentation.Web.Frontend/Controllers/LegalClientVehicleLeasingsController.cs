@@ -18,14 +18,16 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
         private readonly IEntityRepository<VehicleLeaseOffer, System.Guid> offerRepository;
         private readonly IEntityRepository<LegalClientVehicleLeaseContract, System.Guid> contractRepository;
         private readonly IEntityRepository<Vehicle, System.Guid> vehicleRepository;
+        private readonly IEntityRepository<DriveLicence, System.Guid> driveLicenceRepository;
 
-        public LegalClientVehicleLeasingsController(IEntityRepository<Vehicle, System.Guid> vehicleRepository, IEntityRepository<LegalClientVehicleLeaseContract, System.Guid> contractRepository, IEntityRepository<VehicleLeaseOffer, System.Guid> offerRepository, IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> postulationRepository, IEntityRepository<LegalClient, System.Guid> clientRepository, IEntityRepository<LegalClientVehicleLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientVehicleLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientVehicleLeasingsController> logger) : base(repository, localizer, logger)
+        public LegalClientVehicleLeasingsController(IEntityRepository<DriveLicence, System.Guid> driveLicenceRepository, IEntityRepository<Vehicle, System.Guid> vehicleRepository, IEntityRepository<LegalClientVehicleLeaseContract, System.Guid> contractRepository, IEntityRepository<VehicleLeaseOffer, System.Guid> offerRepository, IEntityRepository<VehicleLeaseOrganizationPostulation, System.Guid> postulationRepository, IEntityRepository<LegalClient, System.Guid> clientRepository, IEntityRepository<LegalClientVehicleLeasing, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientVehicleLeasingsController> localizer, Microsoft.Extensions.Logging.ILogger<LegalClientVehicleLeasingsController> logger) : base(repository, localizer, logger)
         {
             this.clientRepository = clientRepository;
             this.postulationRepository = postulationRepository;
             this.offerRepository = offerRepository;
             this.contractRepository = contractRepository;
             this.vehicleRepository = vehicleRepository;
+            this.driveLicenceRepository = driveLicenceRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<LegalClientVehicleLeasing, bool>> GetGlobalSelector()
@@ -62,21 +64,17 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
                 model.Contract.Vehicle.FeatureImage.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Contract.Postulation.Offer.Propousal.Vehicle.FeatureImage.ContentType);
             }
 
-            var members = new System.Collections.Generic.List<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel>();
-
-            foreach (var bridge in entity.ContactBridges)
+            model.DriverLicences = entity.DriveLicenceBridges.Select(bridge =>
             {
-                var _model = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
+                var _model = new DriveLicenceDisplayModel();
 
                 _model.Import(bridge.Stern);
 
-                if (bridge.Stern.Identity.Image != null)
-                    _model.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
+                if (bridge.Stern.Contact.Identity.Image != null)
+                    _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Contact.Identity.Image.ContentType);
 
-                members.Add(_model);
-            }
-
-            model.Drivers = [.. members];
+                return _model;
+            }).ToArray();
 
             return model;
         }
@@ -84,6 +82,17 @@ namespace MOROPO.Framework.Decisor.Leasing.Presentation.Web.Frontend.Controllers
         protected override void PreCreate(LegalClientVehicleLeasing entity, LegalClientVehicleLeasingInputModel model)
         {
             base.PreCreate(entity, model);
+
+            foreach (var _model in model.IncomingDriveLicences)
+            {
+                var _entity = driveLicenceRepository.Add(_model.Export(), User.Identity.Name, false);
+
+                entity.DriveLicenceBridges.Add(new LegalClientVehicleLeasingDriveLicenceBridge
+                {
+                    ProwId = entity.Id,
+                    SternId = _entity.Id
+                });
+            }
 
             var postulation = postulationRepository.Get(model.PostulationId);
 

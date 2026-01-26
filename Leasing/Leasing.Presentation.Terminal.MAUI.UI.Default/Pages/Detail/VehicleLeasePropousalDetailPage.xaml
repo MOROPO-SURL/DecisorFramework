@@ -39,16 +39,28 @@
                                 Text="{Binding At}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Prioridad" />
+                                Text="Monto de partida" />
                             <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Priority}" />
+                                Style="{StaticResource ValuePropertyLabelStyle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding BaselineAmount, StringFormat='{0:F2}'}" />
+                                        <Span Text="{Binding BaselineCurrency.Name, StringFormat=', {0}'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Argumento" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Description, TargetNullValue='---'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Prioridad" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Priority}" />
                         </StackLayout>
                         <StackLayout
                             Orientation="Horizontal"

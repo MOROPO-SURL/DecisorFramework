@@ -15,6 +15,20 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
     public PropertyLeasePropousalConfigurationPage(System.Action<PropertyLeasePropousalDisplayModel> successAction, Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.PropertyLeasePropousalConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
+
+        if (model.BaselineCurrency != null)
+        {
+            for (int i = 0; i < model.AvailableCurrencies.Length; i++)
+            {
+                var current = model.AvailableCurrencies[i];
+
+                if (model.BaselineCurrency.Id != current.Id) continue;
+
+                BaselineCurrencyPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Propuesta de Arrendamiento de Inmueble";
@@ -31,6 +45,8 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
             Description = ConcreteBindingContext.Description,
             PropertyId = ConcreteBindingContext.Property.Id,
             Priority = ConcreteBindingContext.Priority,
+            BaselineAmount = ConcreteBindingContext.BaselineAmount,
+            BaselineCurrencyId = ConcreteBindingContext.BaselineCurrency.Id,
             IncomingSpaces = incomingSpaces
         };
 
@@ -51,6 +67,8 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
             Description = ConcreteBindingContext.Description,
             PropertyId = ConcreteBindingContext.Property.Id,
             Priority = ConcreteBindingContext.Priority,
+            BaselineAmount = ConcreteBindingContext.BaselineAmount,
+            BaselineCurrencyId = ConcreteBindingContext.BaselineCurrency.Id,
             IncomingSpaces = incomingSpaces,
             OutgoingSpaces = outgoingSpaces
         };
@@ -68,6 +86,11 @@ public partial class PropertyLeasePropousalConfigurationPage : Core.Presentation
     private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         OnCancel(sender, eventArgs);
+    }
+
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
     }
 
     private void PropertyPickButton_Clicked(object sender, System.EventArgs e)

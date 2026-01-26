@@ -17,7 +17,9 @@ public partial class PropertyLeaseOffersManagePage : Core.Presentation.Terminal.
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 400; }
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
+    protected override double ItemViewRequestWidth => 400;
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
