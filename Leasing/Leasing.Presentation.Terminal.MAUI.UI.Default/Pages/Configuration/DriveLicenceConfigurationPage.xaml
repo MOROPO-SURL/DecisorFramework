@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
+    xmlns:domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
+    xmlns:interop_common_bridge_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Bridge.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.DriveLicenceConfigurationPage"
+    x:TypeArguments="interop_common_display_models:DriveLicenceDisplayModel,interop_common_display_models:DriveLicenceDisplayModel,presentation_configuration_page_models:DriveLicenceConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:DriveLicenceConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:IntToMonthNameStringConverter x:Key="IntToMonthNameStringConverter" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrapFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="0" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="0" Padding="8">
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3,ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Contacto" />
+                        <ContentView                        
+                            IsVisible="{Binding Contact, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="140">
+                            <domain_presentation_card_views:PersonContactDefaultCardView
+                                BindingContext="{Binding Contact}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="ContactPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:DriveLicenceConfigurationPageModel.ContactValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:DriveLicenceConfigurationPageModel.ContactValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <Grid WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrapFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=9,ExtraLargeContainerColumn=8, LargeContainerColumn=6, SmallContainerColumn=12}}">
+                        <FlexLayout 
+                            Wrap="Wrap"
+                            AlignItems="Start" AlignContent="Start">
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Número" />
+                                <Entry Text="{Binding Code}" Placeholder="Ej. 86121233322" />
+                                <Label
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:DriveLicenceConfigurationPageModel.CodeValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:DriveLicenceConfigurationPageModel.CodeValidableProperty}}"
+                                    Style="{StaticResource ValidationMessageLabelStyle}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Serie" />
+                                <Entry Text="{Binding Reference}" Placeholder="Ej. C577491" />
+                                <Label
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:DriveLicenceConfigurationPageModel.ReferenceValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:DriveLicenceConfigurationPageModel.ReferenceValidableProperty}}"
+                                    Style="{StaticResource ValidationMessageLabelStyle}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=2, SmallContainerColumn=5}}"
+                                Margin="4"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Expedida" />
+                                <Picker
+                                    Grid.Column="0" Grid.Row="1"
+                                    ItemsSource="{Binding AvailableReleasationYears}"
+                                    SelectedItem="{Binding ReleasedAtYear}"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                            </VerticalStackLayout>
+                            <Grid 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, SmallContainerColumn=7}}"
+                                Margin="4"
+                                ColumnSpacing="6" RowSpacing="6">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="2*" />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Label 
+                                    Grid.ColumnSpan="2" Grid.Row="0"
+                                    Style="{StaticResource CaptionFieldLabelStyle}" 
+                                    Text="Vencimiento" />
+                                <Picker
+                                    Grid.Column="0" Grid.Row="1"
+                                    ItemsSource="{Binding AvailableMonths}"
+                                    ItemDisplayBinding="{Binding Converter={StaticResource IntToMonthNameStringConverter}}"
+                                    SelectedItem="{Binding ExpireAtMonth}"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                                <Picker
+                                    Grid.Column="1" Grid.Row="1"
+                                    ItemsSource="{Binding AvailableExirationYears}"
+                                    SelectedItem="{Binding ExpireAtYear}"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                                <Label
+                                    Grid.Column="1" Grid.Row="2"
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:DriveLicenceConfigurationPageModel.ExpireAtYearValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:DriveLicenceConfigurationPageModel.ExpireAtYearValidableProperty}}"
+                                    Style="{StaticResource ValidationMessageLabelStyle}" />
+                            </Grid>
+                        </FlexLayout>
+                    </Grid>
+                </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Categorías" />
+                    <Frame Padding="4">
+                        <Grid RowSpacing="4">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                Margin="8"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="VehicleKindBridgeCreationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                Margin="4"
+                                ItemsSource="{Binding VehicleKindBridges}">
+                                <CollectionView.EmptyView>
+                                    <Label Padding="4" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="480" ItemSpacing="8" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_bridge_display_models:DriveLicenceVehicleKindBridgeDisplayModel">
+                                        <Frame Padding="8">
+                                            <VerticalStackLayout Spacing="0">
+                                                <Grid ColumnSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="5*" />
+                                                        <ColumnDefinition Width="2*" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Label
+                                                        Grid.Column="0" Grid.RowSpan="2"
+                                                        HorizontalTextAlignment="Center" VerticalOptions="Center"
+                                                        FontSize="Medium"
+                                                        LineBreakMode="TailTruncation"
+                                                        TextTransform="Uppercase"
+                                                        Text="{Binding Category}" />
+                                                    <Label
+                                                        Grid.Column="1" Grid.Row="0"
+                                                        LineBreakMode="TailTruncation"
+                                                        FontAttributes="Bold"
+                                                        TextTransform="Uppercase"
+                                                        Text="{Binding Stern.Name}" />
+                                                    <Label
+                                                        Grid.Column="1" Grid.Row="1"
+                                                        LineBreakMode="TailTruncation"
+                                                        TextTransform="Uppercase"
+                                                        Text="{Binding Specification}" />
+                                                    <Label
+                                                        Grid.Column="2" Grid.RowSpan="2"
+                                                        HorizontalTextAlignment="Center" VerticalOptions="Center"
+                                                        LineBreakMode="TailTruncation"
+                                                        Text="{Binding AchievedAt, StringFormat='{0:MMM yyy}'}"
+                                                        TextTransform="Uppercase" />
+                                                    <Button
+                                                        Grid.Column="3" Grid.RowSpan="2"
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Text="&#xF90B;"
+                                                        Clicked="VehicleKindBridgeEditionButton_Clicked" />
+                                                    <Button
+                                                        Grid.Column="4" Grid.RowSpan="2"
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Text="&#xFA78;"
+                                                        Clicked="VehicleKindBridgeRemotionButton_Clicked" />
+                                                </Grid>
+                                            </VerticalStackLayout>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:DriveLicenceConfigurationPageModel.VehicleKindBridgesValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:DriveLicenceConfigurationPageModel.VehicleKindBridgesValidableProperty}}"
+                        TextColor="IndianRed" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</core_ui_base_pages:ConfigurationBaseContentPage>

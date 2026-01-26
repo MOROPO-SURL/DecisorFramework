@@ -8,9 +8,7 @@ public class PropertyLeaseOfferConfigurationPageFactory : Core.Presentation.Term
     {
         var _model = new Models.Page.Configuration.PropertyLeaseOfferConfigurationPageModel(model);
 
-        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
-
-        var apiConnectClient = new Financial.Interop.API.Connect.Clients.CurrenciesAPIConnectClient(httpClientHelperProvider);
+        var apiConnectClient = new Financial.Interop.API.Connect.Clients.CurrenciesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         _model.AvailableCurrencies = await apiConnectClient.GetAsync();
 

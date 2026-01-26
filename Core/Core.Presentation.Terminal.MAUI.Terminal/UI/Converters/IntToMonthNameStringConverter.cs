@@ -1,4 +1,4 @@
-﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Converters
+﻿namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters
 {
     public class IntToMonthNameStringConverter : Microsoft.Maui.Controls.IValueConverter
     {

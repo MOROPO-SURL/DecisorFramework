@@ -1,4 +1,4 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 {
@@ -6,6 +6,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
     {
         [System.ComponentModel.DataAnnotations.Required]
         public string OperativeLicenceCode { get; set; }
+
+        public List<DriveLicenceInputModel> IncomingDriveLicences { get; set; } = new List<DriveLicenceInputModel>();
 
         public override Persistence.Entities.LegalClientVehicleLeasing Export()
         {
@@ -21,14 +23,6 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
             base.Mergue(entity);
 
             entity.OperativeLicenceCode = OperativeLicenceCode;
-
-            entity.ContactBridges.Clear();
-
-            entity.ContactBridges = Contacts.Select(model => new Persistence.Entities.LegalClientVehicleLeasingPersonContactBridge
-            {
-                ProwId = entity.Id,
-                SternId = model.Id
-            }).ToList();
         }
     }
 }
