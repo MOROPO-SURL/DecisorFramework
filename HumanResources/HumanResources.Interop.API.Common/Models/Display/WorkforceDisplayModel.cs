@@ -13,6 +13,8 @@
 
         public System.DateTime At { get; set; }
 
+        public VacantDisplayModel ChiefVacant { get; set; }
+
         public WorkforceOrganizationalUnityDisplayModel[] OrganizationalUnities { get; set; }
 
         public void Import(Persistence.Entities.Workforce entity)
@@ -22,6 +24,13 @@
             Enabled = entity.Enabled;
             Priority = entity.Priority;
             At = entity.At;
+
+            if (entity.ChiefVacant != null)
+            {
+                ChiefVacant = new VacantDisplayModel();
+
+                ChiefVacant.Import(entity.ChiefVacant);
+            }
         }
     }
 }

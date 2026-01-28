@@ -16,6 +16,10 @@
 
         public System.DateTime At { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ChiefVacantId))]
+        public Vacant ChiefVacant { get; set; }
+        public System.Guid ChiefVacantId { get; set; }
+
         public System.Collections.Generic.ICollection<WorkforceOrganizationalUnity> OrganizationalUnities { get; set; }
     }
 }

@@ -43,6 +43,19 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
         pickCompleteAction = null;
     }
 
+    private void RootChiefVacantTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
+    {
+        var model = new Models.View.StaffVacantViewModel
+        {
+            Staff = ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex],
+            Vacant = ConcreteBindingContext.RootChiefVacant
+        };
+
+        pickCompleteAction.Invoke(model);
+
+        (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         var model = new Models.View.StaffVacantViewModel
@@ -63,6 +76,7 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
         ConcreteBindingContext.IsBusy = true;
 
         ConcreteBindingContext.AvailableStaffs.Clear();
+        ConcreteBindingContext.RootChiefVacant = null;
         ConcreteBindingContext.Items.Clear();
 
         var apiConnectClient = new Interop.API.Connect.Clients.StaffsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
@@ -122,6 +136,11 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
             var ocupations = new System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel>(await ocupationsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.OcupationFilterModel { StaffId = staff.Id, WorkforceId = staff.MainWorkforce.Id }));
 
             var _models = targetWorkforce.OrganizationalUnities.ToVacantPickOrganizationalUnityViewModelChildren(ocupations, vacantOcupationModes);
+
+            if (vacantOcupationModes.Any(item => item == targetWorkforce.ChiefVacant.OcupationMode))
+            {
+                ConcreteBindingContext.RootChiefVacant = targetWorkforce.ChiefVacant;
+            }
 
             foreach (var _model in _models)
             {

@@ -6,9 +6,15 @@
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.VacantPickPage"
     x:DataType="presentation_manage_page_models:OcupationsManagePageModel"
     Title="Seleccionar Vacante">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Actualizar"
@@ -38,6 +44,32 @@
                         ItemDisplayBinding="{Binding Path=Structure.Identity.Name}"
                         SelectedIndexChanged="StaffPicker_SelectedIndexChanged" />
                 </VerticalStackLayout>
+                <Label 
+                    Style="{StaticResource CaptionFieldLabelStyle}"
+                    Margin="8,16,8,0"
+                    Text="Máxima autoridad" />
+                <Frame 
+                    HorizontalOptions="Start"
+                    Margin="8" Padding="0"
+                    IsVisible="{Binding RootChiefVacant, Converter={StaticResource IsNotNullConverter}}">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="RootChiefVacantTapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <VerticalStackLayout Spacing="0">
+                        <Image 
+                            WidthRequest="240" HeightRequest="240"
+                            BackgroundColor="DimGray"
+                            Source="default_person_picture.jpg" />
+                        <VerticalStackLayout Margin="8,8,8,12" Spacing="8">
+                            <Label
+                                HorizontalOptions="Center"
+                                ToolTipProperties.Text="{Binding RootChiefVacant.WorkPosition.Name}"
+                                Text="{Binding RootChiefVacant.WorkPosition.Name}"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
                 <VerticalStackLayout>
                     <Label 
                         Style="{StaticResource CaptionFieldLabelStyle}" 

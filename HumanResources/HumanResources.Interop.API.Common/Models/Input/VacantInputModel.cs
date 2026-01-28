@@ -12,7 +12,7 @@
 
         public System.Guid SalaryStandardId { get; set; }
 
-        public System.Guid WorkforceOrganizationalUnityId { get; set; }
+        public System.Guid? WorkforceOrganizationalUnityId { get; set; }
 
         public Persistence.Entities.Vacant Export()
         {
