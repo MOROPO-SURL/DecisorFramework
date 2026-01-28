@@ -71,13 +71,14 @@
                         Padding="8,4" />
                 </VerticalStackLayout>
                 <Label 
+                    IsVisible="{Binding RootChiefVacant, Converter={StaticResource IsNotNullConverter}}"
                     Style="{StaticResource CaptionFieldLabelStyle}"
                     Margin="8,16,8,0"
                     Text="Máxima autoridad" />
                 <Frame 
+                    IsVisible="{Binding RootChiefVacant, Converter={StaticResource IsNotNullConverter}}"
                     HorizontalOptions="Start"
-                    Margin="8" Padding="0"
-                    IsVisible="{Binding RootChiefVacant, Converter={StaticResource IsNotNullConverter}}">
+                    Margin="8" Padding="0">
                     <VerticalStackLayout Spacing="0">
                         <Grid WidthRequest="240" HeightRequest="240">
                             <Image 
