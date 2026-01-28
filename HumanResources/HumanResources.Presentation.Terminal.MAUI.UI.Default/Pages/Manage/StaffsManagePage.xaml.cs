@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class StaffsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.StaffDisplayModel, Models.Page.Manage.StaffsManagePageModel, Models.Page.Configuration.StaffConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 120;
+    public static double ITEM_VIEW_REQUEST_HEIGHT = 112;
 
     public StaffsManagePage()
     {

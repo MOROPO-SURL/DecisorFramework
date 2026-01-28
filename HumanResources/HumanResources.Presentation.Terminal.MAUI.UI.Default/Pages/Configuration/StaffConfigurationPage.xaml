@@ -67,6 +67,7 @@
                             x:Name="MainWorkforcePicker"
                             ItemsSource="{Binding AvailableWorkforces}"
                             ItemDisplayBinding="{Binding Name}"
+                            SelectedItem="{Binding MainWorkforce}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
                         <Label
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.MainWorkforceStandardValidableProperty}}"

@@ -30,6 +30,14 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
             Name = ConcreteBindingContext.Name,
             At = ConcreteBindingContext.At,
             Priority = ConcreteBindingContext.Priority,
+            ChiefVacant = new VacantInputModel
+            {
+                Id = ConcreteBindingContext.ChiefVacant.Id,
+                Priority = ConcreteBindingContext.ChiefVacant.Priority,
+                OcupationMode = ConcreteBindingContext.ChiefVacant.OcupationMode,
+                SalaryStandardId = ConcreteBindingContext.ChiefVacant.SalaryStandard.Id,
+                WorkPositionId = ConcreteBindingContext.ChiefVacant.WorkPosition.Id
+            },
             IncomingOrganizationalUnities = incomingOrganizationalUnities
         };
 
@@ -48,6 +56,14 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
             Name = ConcreteBindingContext.Name,
             At = ConcreteBindingContext.At,
             Priority = ConcreteBindingContext.Priority,
+            ChiefVacant = new VacantInputModel
+            {
+                Id = ConcreteBindingContext.ChiefVacant.Id,
+                Priority = ConcreteBindingContext.ChiefVacant.Priority,
+                OcupationMode = ConcreteBindingContext.ChiefVacant.OcupationMode,
+                SalaryStandardId = ConcreteBindingContext.ChiefVacant.SalaryStandard.Id,
+                WorkPositionId = ConcreteBindingContext.ChiefVacant.WorkPosition.Id
+            },
             IncomingOrganizationalUnities = incomingOrganizationalUnities,
             EditionOrganizationalUnities = editionOrganizationalUnities,
             OutgoingOrganizationalUnities = outgoingOrganizationalUnities
@@ -130,7 +146,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
             {
                 var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Models.View.WorkforceConfigurationVacantViewModel, Models.Page.Configuration.VacantConfigurationPageModel>>();
 
-                var page = await factory.BuildAsync(VacantDefineSuccess_Callback, null);
+                var page = await factory.BuildAsync(ChiefVacantDefineSuccess_Callback, null);
 
                 page.ConcreteBindingContext.OrganizationUnity = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalUnityViewModel;
 
@@ -164,6 +180,42 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
                 var page = await factory.BuildAsync(VacantCreateSuccess_Callback, null);
 
                 page.ConcreteBindingContext.OrganizationUnity = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalUnityViewModel;
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(page);
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+                });
+            }
+        });
+    }
+
+    private void RootChiefVacantEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Models.View.WorkforceConfigurationVacantViewModel, Models.Page.Configuration.VacantConfigurationPageModel>>();
+
+                var page = await factory.BuildAsync(ChiefVacantEditSuccess_Callback, new Models.View.WorkforceConfigurationVacantViewModel
+                {
+                    Id = ConcreteBindingContext.ChiefVacant.Id,
+                    OcupationMode = ConcreteBindingContext.ChiefVacant.OcupationMode,
+                    SalaryStandard = ConcreteBindingContext.ChiefVacant.SalaryStandard,
+                    WorkPosition = ConcreteBindingContext.ChiefVacant.WorkPosition,
+                    Priority = ConcreteBindingContext.ChiefVacant.Priority
+                });
 
                 Dispatcher.Dispatch(() =>
                 {
@@ -348,29 +400,26 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         });
     }
 
-    private void VacantDefineSuccess_Callback(Models.View.WorkforceConfigurationVacantViewModel model)
+    private void ChiefVacantDefineSuccess_Callback(Models.View.WorkforceConfigurationVacantViewModel model)
     {
-        var target = FindTargetWorkforceOrganizationalUnity(model, incomingOrganizationalUnities, editionOrganizationalUnities);
-
-        if (target != null)
+        if (model.OrganizationUnity == null)
         {
-            target.ChiefVacant = new VacantInputModel
+            ConcreteBindingContext.ChiefVacant = new VacantDisplayModel
             {
                 Id = model.Id,
                 OcupationMode = model.OcupationMode,
                 Priority = model.Priority,
-                SalaryStandardId = model.SalaryStandard.Id,
-                WorkPositionId = model.WorkPosition.Id,
-                WorkforceOrganizationalUnityId = model.OrganizationUnity.Id
+                SalaryStandard = model.SalaryStandard,
+                WorkPosition = model.WorkPosition
             };
         }
         else
         {
-            editionOrganizationalUnities.Add(new WorkforceOrganizationalUnityInputModel
+            var target = FindTargetWorkforceOrganizationalUnity(model, incomingOrganizationalUnities, editionOrganizationalUnities);
+
+            if (target != null)
             {
-                Id = model.OrganizationUnity.Id,
-                OrganizationalUnityId = model.OrganizationUnity.Domain.Id,
-                ChiefVacant = new VacantInputModel
+                target.ChiefVacant = new VacantInputModel
                 {
                     Id = model.Id,
                     OcupationMode = model.OcupationMode,
@@ -378,11 +427,28 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
                     SalaryStandardId = model.SalaryStandard.Id,
                     WorkPositionId = model.WorkPosition.Id,
                     WorkforceOrganizationalUnityId = model.OrganizationUnity.Id
-                }
-            });
-        }
+                };
+            }
+            else
+            {
+                editionOrganizationalUnities.Add(new WorkforceOrganizationalUnityInputModel
+                {
+                    Id = model.OrganizationUnity.Id,
+                    OrganizationalUnityId = model.OrganizationUnity.Domain.Id,
+                    ChiefVacant = new VacantInputModel
+                    {
+                        Id = model.Id,
+                        OcupationMode = model.OcupationMode,
+                        Priority = model.Priority,
+                        SalaryStandardId = model.SalaryStandard.Id,
+                        WorkPositionId = model.WorkPosition.Id,
+                        WorkforceOrganizationalUnityId = model.OrganizationUnity.Id
+                    }
+                });
+            }
 
-        model.OrganizationUnity.ChiefVacant = model;
+            model.OrganizationUnity.ChiefVacant = model;
+        }
 
         hasChangesFlag = true;
     }
@@ -428,19 +494,29 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
     private void ChiefVacantEditSuccess_Callback(Models.View.WorkforceConfigurationVacantViewModel model)
     {
-        var target = FindTargetWorkforceOrganizationalUnity(model, incomingOrganizationalUnities, editionOrganizationalUnities);
+        if (model.OrganizationUnity == null)
+        {
+            ConcreteBindingContext.ChiefVacant.Priority = model.Priority;
+            ConcreteBindingContext.ChiefVacant.OcupationMode = model.OcupationMode;
+            ConcreteBindingContext.ChiefVacant.WorkPosition = model.WorkPosition;
+            ConcreteBindingContext.ChiefVacant.SalaryStandard = model.SalaryStandard;
+        }
+        else
+        {
+            var target = FindTargetWorkforceOrganizationalUnity(model, incomingOrganizationalUnities, editionOrganizationalUnities);
 
-        target.ChiefVacant.Priority = model.Priority;
-        target.ChiefVacant.OcupationMode = model.OcupationMode;
-        target.ChiefVacant.WorkforceOrganizationalUnityId = model.OrganizationUnity.Id;
-        target.ChiefVacant.WorkPositionId = model.WorkPosition.Id;
-        target.ChiefVacant.SalaryStandardId = model.SalaryStandard.Id;
+            target.ChiefVacant.Priority = model.Priority;
+            target.ChiefVacant.OcupationMode = model.OcupationMode;
+            target.ChiefVacant.WorkforceOrganizationalUnityId = model.OrganizationUnity.Id;
+            target.ChiefVacant.WorkPositionId = model.WorkPosition.Id;
+            target.ChiefVacant.SalaryStandardId = model.SalaryStandard.Id;
 
-        model.OrganizationUnity.ChiefVacant.Priority = model.Priority;
-        model.OrganizationUnity.ChiefVacant.OcupationMode = model.OcupationMode;
-        model.OrganizationUnity.ChiefVacant.OrganizationUnity = model.OrganizationUnity;
-        model.OrganizationUnity.ChiefVacant.WorkPosition = model.WorkPosition;
-        model.OrganizationUnity.ChiefVacant.SalaryStandard = model.SalaryStandard;
+            model.OrganizationUnity.ChiefVacant.Priority = model.Priority;
+            model.OrganizationUnity.ChiefVacant.OcupationMode = model.OcupationMode;
+            model.OrganizationUnity.ChiefVacant.OrganizationUnity = model.OrganizationUnity;
+            model.OrganizationUnity.ChiefVacant.WorkPosition = model.WorkPosition;
+            model.OrganizationUnity.ChiefVacant.SalaryStandard = model.SalaryStandard;
+        }
 
         hasChangesFlag = true;
     }

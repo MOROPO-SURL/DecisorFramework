@@ -32,9 +32,9 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
     {
         InitializeComponent();
 
-        for (int i = 0; i < model.AvailableSexs.Length; i++)
+        for (int i = 0; i < Models.Page.Configuration.PersonContactConfigurationPageModel.AVAILABLE_SEXS.Length; i++)
         {
-            var current = model.AvailableSexs[i];
+            var current = Models.Page.Configuration.PersonContactConfigurationPageModel.AVAILABLE_SEXS[i];
 
             if (model.Sex != current) continue;
 
@@ -43,13 +43,24 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
             break;
         }
 
-        for (int i = 0; i < model.AvailableCivilStatuses.Length; i++)
+        for (int i = 0; i < Models.Page.Configuration.PersonContactConfigurationPageModel.AVAILABLE_CIVIL_STATUSES.Length; i++)
         {
-            var current = model.AvailableCivilStatuses[i];
+            var current = Models.Page.Configuration.PersonContactConfigurationPageModel.AVAILABLE_CIVIL_STATUSES[i];
 
             if (model.CivilStatus != current) continue;
 
             CivilStatusPicker.SelectedIndex = i;
+
+            break;
+        }
+
+        for (int i = 0; i < Models.Page.Configuration.PersonContactConfigurationPageModel.AVAILABLE_SKIN_KINDS.Length; i++)
+        {
+            var current = Models.Page.Configuration.PersonContactConfigurationPageModel.AVAILABLE_SKIN_KINDS[i];
+
+            if (model.SkinKind != current) continue;
+
+            SkinKindPicker.SelectedIndex = i;
 
             break;
         }
@@ -89,8 +100,9 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
             LastName = ConcreteBindingContext.LastName,
             Alias = ConcreteBindingContext.Alias,
             About = ConcreteBindingContext.About,
-            Sex = ConcreteBindingContext.AvailableSexs[SexPicker.SelectedIndex],
-            CivilStatus = ConcreteBindingContext.AvailableCivilStatuses[CivilStatusPicker.SelectedIndex],
+            SkinKind = ConcreteBindingContext.SkinKind,
+            Sex = ConcreteBindingContext.Sex,
+            CivilStatus = ConcreteBindingContext.CivilStatus,
             UserId = UsersPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableUsers[UsersPicker.SelectedIndex].Id,
             Priority = ConcreteBindingContext.Priority,
             PersonalIdentificationNumber = ConcreteBindingContext.PersonalIdentificationNumber,
@@ -124,8 +136,9 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
             LastName = ConcreteBindingContext.LastName,
             Alias = ConcreteBindingContext.Alias,
             About = ConcreteBindingContext.About,
-            Sex = ConcreteBindingContext.AvailableSexs[SexPicker.SelectedIndex],
-            CivilStatus = ConcreteBindingContext.AvailableCivilStatuses[CivilStatusPicker.SelectedIndex],
+            SkinKind = ConcreteBindingContext.SkinKind,
+            Sex = ConcreteBindingContext.Sex,
+            CivilStatus = ConcreteBindingContext.CivilStatus,
             UserId = UsersPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableUsers[UsersPicker.SelectedIndex].Id,
             Priority = ConcreteBindingContext.Priority,
             PersonalIdentificationNumber = ConcreteBindingContext.PersonalIdentificationNumber,

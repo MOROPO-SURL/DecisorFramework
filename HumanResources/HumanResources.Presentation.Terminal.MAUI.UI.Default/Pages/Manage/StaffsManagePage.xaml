@@ -51,7 +51,9 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:StaffDisplayModel">
-                                <Frame HeightRequest="{Static local:StaffsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                <Frame 
+                                    Padding="16"
+                                    HeightRequest="{Static local:StaffsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </Frame.GestureRecognizers>
