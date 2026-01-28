@@ -832,6 +832,11 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                         .HasColumnType("text")
                         .HasColumnName("model");
 
+                    b.Property<string>("OperativeLicenceCode")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("operativelicencecode");
+
                     b.Property<string>("Plate")
                         .IsRequired()
                         .HasColumnType("text")
@@ -1769,7 +1774,7 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                         .HasColumnType("uuid")
                         .HasColumnName("workpositionid");
 
-                    b.Property<Guid>("WorkforceOrganizationalUnityId")
+                    b.Property<Guid?>("WorkforceOrganizationalUnityId")
                         .HasColumnType("uuid")
                         .HasColumnName("workforceorganizationalunityid");
 
@@ -2086,6 +2091,10 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<Guid>("ChiefVacantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("chiefvacantid");
+
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
@@ -2101,6 +2110,9 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
 
                     b.HasKey("Id")
                         .HasName("pk_workforces");
+
+                    b.HasIndex("ChiefVacantId")
+                        .HasDatabaseName("ix_workforces_chiefvacantid");
 
                     b.ToTable("workforces", "decisorframework_humanresources");
                 });
@@ -4543,8 +4555,6 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", "WorkforceOrganizationalUnity")
                         .WithMany()
                         .HasForeignKey("WorkforceOrganizationalUnityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_vacants_workforceorganizationalunities_workforceorganizatio~");
 
                     b.Navigation("SalaryStandard");
@@ -4687,6 +4697,18 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                         .HasConstraintName("fk_workpositionresponsabilities_workpositions_workpositionid");
 
                     b.Navigation("WorkPosition");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", "ChiefVacant")
+                        .WithMany()
+                        .HasForeignKey("ChiefVacantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workforces_vacants_chiefvacantid");
+
+                    b.Navigation("ChiefVacant");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", b =>
