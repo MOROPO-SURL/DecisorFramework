@@ -7,12 +7,17 @@
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.OcupationsManagePage"
     x:DataType="presentation_manage_page_models:OcupationsManagePageModel"
     Title="Definición de Personal en Plantilla">
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -26,7 +31,7 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <VerticalStackLayout Spacing="0" Padding="8">            
+            <StackLayout Orientation="Vertical" Spacing="0" Padding="8">            
                 <FlexLayout 
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
@@ -54,30 +59,95 @@
                     </VerticalStackLayout>
                 </FlexLayout>
                 <VerticalStackLayout>
-                    <Label 
-                        Style="{StaticResource CaptionFieldLabelStyle}" 
+                    <BoxView
+                        Color="DimGray" 
+                        Margin="8,16,8,8" 
+                        HeightRequest="1" />
+                    <Label
+                        IsVisible="{Binding RootChiefVacant, Converter={StaticResource IsNullConverter}}"
+                        Text="Seleccione estructura de plantilla de una entidad administrativa ..." 
+                        FontAttributes="Italic" 
+                        TextColor="DimGray" 
+                        Padding="8,4" />
+                </VerticalStackLayout>
+                <Label 
+                    Style="{StaticResource CaptionFieldLabelStyle}"
+                    Margin="8,16,8,0"
+                    Text="Máxima autoridad" />
+                <Frame 
+                    HorizontalOptions="Start"
+                    Margin="8" Padding="0"
+                    IsVisible="{Binding RootChiefVacant, Converter={StaticResource IsNotNullConverter}}">
+                    <VerticalStackLayout Spacing="0">
+                        <Grid WidthRequest="240" HeightRequest="240">
+                            <Image 
+                                BackgroundColor="DimGray"
+                                Source="{Binding RootChiefVacant.Ocupation.Employee.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                            <Grid
+                                IsVisible="{Binding RootChiefVacant.Ocupation, Converter={StaticResource IsNotNullConverter}}"
+                                VerticalOptions="End"
+                                BackgroundColor="{AppThemeBinding Light=#BBDDDDDD, Dark=#A9333333}">
+                                <VerticalStackLayout Margin="8">
+                                    <Label
+                                        ToolTipProperties.Text="{Binding RootChiefVacant.Ocupation.Employee.Contact.Identity.Name}"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding RootChiefVacant.Ocupation.Employee.Contact.Identity.Name}"
+                                        FontAttributes="Bold" />
+                                    <Label
+                                        ToolTipProperties.Text="{Binding RootChiefVacant.Ocupation.Employee.Contact.Identity.LastName}"
+                                        LineBreakMode="TailTruncation"
+                                        Text="{Binding RootChiefVacant.Ocupation.Employee.Contact.Identity.LastName, TargetNullValue='---'}" />
+                                </VerticalStackLayout>
+                            </Grid>
+                        </Grid>
+                        <VerticalStackLayout Margin="8,8,8,12" Spacing="8">
+                            <Label
+                                HorizontalOptions="Center"
+                                ToolTipProperties.Text="{Binding RootChiefVacant.WorkPosition.Name}"
+                                Text="{Binding RootChiefVacant.WorkPosition.Name}"
+                                FontAttributes="Bold"
+                                LineBreakMode="TailTruncation" />
+                            <StackLayout Orientation="Horizontal" Spacing="8">
+                                <Button
+                                    IsVisible="{Binding RootChiefVacant.Ocupation, Converter={StaticResource IsNullConverter}}"
+                                    FontFamily="MaterialDesignIcons" 
+                                    Text="&#xF014;"
+                                    Padding="0"
+                                    FontSize="21"
+                                    Clicked="RootOcupationCreationButton_Clicked" />
+                                <Button
+                                    IsEnabled="{Binding RootChiefVacant.Ocupation, Converter={StaticResource IsNotNullConverter}}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Detalles"
+                                    Clicked="RootEmployeeDetailButton_Clicked" />
+                            </StackLayout>
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                </Frame>
+                <VerticalStackLayout IsVisible="{Binding RootChiefVacant, Converter={StaticResource IsNotNullConverter}}">
+                    <Label
+                        Style="{StaticResource CaptionFieldLabelStyle}"
                         Margin="8,8,8,0" 
                         Text="Unidades Organizativas" />
-                    <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
+                    <BoxView
+                        Color="DimGray" 
+                        Margin="8,4,8,8" HeightRequest="1" />
                     <CollectionView ItemsSource="{Binding OrganizationalUnities}">
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
-                        <CollectionView.EmptyView>
-                            <Label Text="Seleccione estructura de plantilla de una entidad administrativa ..." FontAttributes="Italic" TextColor="DimGray" Padding="8,4" />
-                        </CollectionView.EmptyView>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
                                 <local_card_views:OcupationsManageOrganizationalUnityAndVacantsCardView 
                                     Padding="8,4"
-                                    OcupationCreationButtonClick="OcupationCreationButton_Clicked"
+                                    OcupationCreationButtonClick="LeafOcupationCreationButton_Clicked"
                                     RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"
-                                    EmployeeDetailButtonClick="EmployeeDetailButton_Clicked" />
+                                    EmployeeDetailButtonClick="LeafEmployeeDetailButton_Clicked" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
                 </VerticalStackLayout>
-            </VerticalStackLayout>
+            </StackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>

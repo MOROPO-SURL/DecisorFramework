@@ -6,6 +6,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
     {
         private string name;
         private System.DateTime at;
+        private Interop.API.Common.Models.Display.VacantDisplayModel chiefVacant;
         private int priority = 1;
 
         public WorkforceConfigurationPageModel(Interop.API.Common.Models.Display.WorkforceDisplayModel model) : base(model)
@@ -13,9 +14,10 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
             if (model != null)
             {
                 Id = model.Id;
-                Name = model.Name;
-                At = model.At;
-                Priority = model.Priority;
+                name = model.Name;
+                at = model.At;
+                chiefVacant = model.ChiefVacant;
+                priority = model.Priority;
 
                 var result = model.OrganizationalUnities.ToOrganizationalUnityViewModelChildren();
 
@@ -31,6 +33,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
         public string Name { get => name; set => SetProperty(ref name, value); }
 
         public System.DateTime At { get => at; set => SetProperty(ref at, value); }
+
+        public Interop.API.Common.Models.Display.VacantDisplayModel ChiefVacant { get => chiefVacant; set => SetProperty(ref chiefVacant, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 

@@ -3029,7 +3029,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("workpositionid");
 
-                    b.Property<Guid>("WorkforceOrganizationalUnityId")
+                    b.Property<Guid?>("WorkforceOrganizationalUnityId")
                         .HasColumnType("uuid")
                         .HasColumnName("workforceorganizationalunityid");
 
@@ -3346,6 +3346,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<Guid>("ChiefVacantId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("chiefvacantid");
+
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
@@ -3361,6 +3365,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_workforces");
+
+                    b.HasIndex("ChiefVacantId")
+                        .HasDatabaseName("ix_workforces_chiefvacantid");
 
                     b.ToTable("workforces", "decisorframework_humanresources");
                 });
@@ -10686,8 +10693,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", "WorkforceOrganizationalUnity")
                         .WithMany()
                         .HasForeignKey("WorkforceOrganizationalUnityId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
                         .HasConstraintName("fk_vacants_workforceorganizationalunities_workforceorganizatio~");
 
                     b.Navigation("SalaryStandard");
@@ -10830,6 +10835,18 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_workpositionresponsabilities_workpositions_workpositionid");
 
                     b.Navigation("WorkPosition");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Workforce", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.Vacant", "ChiefVacant")
+                        .WithMany()
+                        .HasForeignKey("ChiefVacantId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workforces_vacants_chiefvacantid");
+
+                    b.Navigation("ChiefVacant");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.HumanResources.Persistence.Entities.WorkforceOrganizationalUnity", b =>
