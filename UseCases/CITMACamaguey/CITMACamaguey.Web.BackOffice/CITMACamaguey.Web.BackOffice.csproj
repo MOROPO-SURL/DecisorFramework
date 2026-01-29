@@ -21,6 +21,9 @@
 		<None Remove="wwwroot\media\**" />
 	</ItemGroup>
 	<ItemGroup>
+	  <_WebToolingArtifacts Remove="Properties\PublishProfiles\VPSFolderProfile.pubxml" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.1.1" />
 		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.1" />
 		<PackageReference Include="GuamaFramework.Location.Presentation.Web.Backend" Version="6.0.1" />
