@@ -20,6 +20,8 @@
     x:DataType="presentation_configuration_page_models:NaturalClientVehicleLeasingConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local_converters:DriveLicenceVehicleKindBridgesToStringConverter x:Key="DriveLicenceVehicleKindBridgesToStringConverter" />
+
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
@@ -551,7 +553,7 @@
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Valor del Arrendamiento" />
-                        <Entry Text="{Binding Feed, StringFormat='{0:D}'}" />
+                        <Entry Text="{Binding Feed, StringFormat='{0:F2}'}" />
                         <Label
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientVehicleLeasingConfigurationPageModel.FeedValidableProperty}}"
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:NaturalClientVehicleLeasingConfigurationPageModel.FeedValidableProperty}}"
