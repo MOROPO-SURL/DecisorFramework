@@ -65,6 +65,7 @@
                                     x:Name="KindPicker"
                                     ItemsSource="{Binding AvailableKinds}"
                                     ItemDisplayBinding="{Binding Name}"
+                                    SelectedItem="{Binding Kind}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
                                 <Label
                                     IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StructureConfigurationPageModel.KindValidableProperty}}"

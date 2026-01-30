@@ -6,6 +6,6 @@ public class OrganizationalUnityConfigurationValidator : AbstractValidator<Model
 {
     public OrganizationalUnityConfigurationValidator()
     {
-        RuleFor(entity => entity.Name).NotEmpty();
+        RuleFor(entity => entity.Name).NotEmpty().WithName("Nombre");
     }
 }

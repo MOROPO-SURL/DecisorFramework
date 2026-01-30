@@ -61,7 +61,7 @@ public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAU
             Id = System.Guid.NewGuid(),
             Name = ConcreteBindingContext.Name,
             About = ConcreteBindingContext.About,
-            KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
+            KindId = ConcreteBindingContext.Kind.Id,
             ParentId = ConcreteBindingContext.Parent?.Id,
             OrganizationalUnities = [.. ConcreteBindingContext.OrganizationalUnities],
             Priority = ConcreteBindingContext.Priority
@@ -89,7 +89,7 @@ public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAU
             Id = ConcreteBindingContext.Id,
             Name = ConcreteBindingContext.Name,
             About = ConcreteBindingContext.About,
-            KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
+            KindId = ConcreteBindingContext.Kind.Id,
             ParentId = ConcreteBindingContext.Parent?.Id,
             OrganizationalUnities = [.. ConcreteBindingContext.OrganizationalUnities],
             Priority = ConcreteBindingContext.Priority
