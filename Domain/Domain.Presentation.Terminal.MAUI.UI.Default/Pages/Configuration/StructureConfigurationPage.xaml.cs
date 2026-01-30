@@ -1,15 +1,14 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Configuration.BaseConfigurationContentPage<Interop.API.Common.Models.Display.StructureParentalDisplayModel>
+public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.StructureParentalDisplayModel, Interop.API.Common.Models.Display.StructureParentalDisplayModel, Models.Page.Configuration.StructureConfigurationPageModel>
 {
     private ImageInputModel imagePickedModel;
 
-    public StructureConfigurationPage(System.Action<Interop.API.Common.Models.Display.StructureParentalDisplayModel> successAction, Models.Page.Configuration.StructureConfigurationPageModel model) : base(successAction, model)
+    public StructureConfigurationPage(System.Action<Interop.API.Common.Models.Display.StructureParentalDisplayModel> successAction, Models.Page.Configuration.StructureConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.StructureConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -57,17 +56,15 @@ public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAU
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.StructureConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.StructureInputModel
         {
             Id = System.Guid.NewGuid(),
-            Name = concreteBindingContext.Name,
-            About = concreteBindingContext.About,
-            KindId = concreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
-            ParentId = ParentPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
-            OrganizationalUnities = concreteBindingContext.OrganizationalUnities.ToList(),
-            Priority = concreteBindingContext.Priority
+            Name = ConcreteBindingContext.Name,
+            About = ConcreteBindingContext.About,
+            KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
+            ParentId = ConcreteBindingContext.Parent?.Id,
+            OrganizationalUnities = [.. ConcreteBindingContext.OrganizationalUnities],
+            Priority = ConcreteBindingContext.Priority
         };
 
         if (imagePickedModel != null)
@@ -87,17 +84,15 @@ public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAU
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var concreteBindingContext = (Models.Page.Configuration.StructureConfigurationPageModel)BindingContext;
-
         var model = new Interop.API.Common.Models.Input.StructureInputModel
         {
-            Id = concreteBindingContext.Id,
-            Name = concreteBindingContext.Name,
-            About = concreteBindingContext.About,
-            KindId = concreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
-            ParentId = ParentPicker.SelectedIndex == -1 ? null : concreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
-            OrganizationalUnities = concreteBindingContext.OrganizationalUnities.ToList(),
-            Priority = concreteBindingContext.Priority
+            Id = ConcreteBindingContext.Id,
+            Name = ConcreteBindingContext.Name,
+            About = ConcreteBindingContext.About,
+            KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
+            ParentId = ConcreteBindingContext.Parent?.Id,
+            OrganizationalUnities = [.. ConcreteBindingContext.OrganizationalUnities],
+            Priority = ConcreteBindingContext.Priority
         };
 
         if (imagePickedModel != null)
@@ -113,6 +108,16 @@ public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAU
         return await apiConnectClient.GetAsync(model.Id);
     }
 
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnApply(sender, eventArgs);
+    }
+
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnCancel(sender, eventArgs);
+    }
+
     private void AddOrganizationalUnityButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OrganizationalUnityPickPage(OrganizationalUnityPickComplete_Callback)));
@@ -124,13 +129,20 @@ public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAU
         {
             if (!task.Result) return;
 
-            Dispatcher.Dispatch(() => ((Models.Page.Configuration.StructureConfigurationPageModel)BindingContext).OrganizationalUnities.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel));
+            Dispatcher.Dispatch(() => ConcreteBindingContext.OrganizationalUnities.Remove(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel));
         });
     }
 
     private void ImageLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, ImagePickSuccess_Callback);
+    }
+
+    private void ClearParentButton_Clicked(object sender, System.EventArgs e)
+    {
+        ConcreteBindingContext.Parent = null;
+
+        hasChangesFlag = true;
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
@@ -140,7 +152,7 @@ public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAU
 
     private void OrganizationalUnityPickComplete_Callback(Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel model)
     {
-        ((Models.Page.Configuration.StructureConfigurationPageModel)BindingContext).OrganizationalUnities.Add(model);
+        ConcreteBindingContext.OrganizationalUnities.Add(model);
 
         hasChangesFlag = true;
     }
@@ -149,7 +161,7 @@ public partial class StructureConfigurationPage : Core.Presentation.Terminal.MAU
     {
         imagePickedModel = model;
 
-        ((Models.Page.Configuration.StructureConfigurationPageModel)BindingContext).ImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedModel.ContentData));
+        ConcreteBindingContext.ImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedModel.ContentData));
 
         hasChangesFlag = true;
     }

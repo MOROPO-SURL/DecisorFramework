@@ -62,7 +62,7 @@ public partial class StructuresManagePage : Caney.MVVM.Core.Pages.ContentPage
                 {
                     concreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new Configuration.StructureConfigurationPage(ConfigurationSuccess_Callback, model));
+                    this.NavigationPushPageAsync(new Configuration.StructureConfigurationPage(ConfigurationSuccess_Callback, model, new Validators.StructureConfigurationValidator()));
                 });
             }
             catch (System.Exception exception)
@@ -137,7 +137,7 @@ public partial class StructuresManagePage : Caney.MVVM.Core.Pages.ContentPage
 
                 var parents = new System.Collections.Generic.List<Interop.API.Common.Models.Display.StructureParentalDisplayModel>(await structureAPIConnectClient.GetAsync());
 
-                parents.RemoveAll(model => model.Id == target.Id);
+                parents.RemoveAll(model => IsSelectable(target, model));
 
                 var model = new Models.Page.Configuration.StructureConfigurationPageModel(await structureAPIConnectClient.GetAsync(target.Id))
                 {
@@ -149,7 +149,7 @@ public partial class StructuresManagePage : Caney.MVVM.Core.Pages.ContentPage
                 {
                     concreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new Configuration.StructureConfigurationPage(ConfigurationSuccess_Callback, model));
+                    this.NavigationPushPageAsync(new Configuration.StructureConfigurationPage(ConfigurationSuccess_Callback, model, new Validators.StructureConfigurationValidator()));
                 });
             });
         }
@@ -219,5 +219,14 @@ public partial class StructuresManagePage : Caney.MVVM.Core.Pages.ContentPage
                 }
             });
         });
+    }
+
+    private bool IsSelectable(Interop.API.Common.Models.Display.StructureParentalDisplayModel target, Interop.API.Common.Models.Display.StructureParentalDisplayModel model)
+    {
+        if (model.Id == target.Id) return true;
+
+        if (model.Parent == null) return false;
+
+        return IsSelectable(target, model.Parent);
     }
 }

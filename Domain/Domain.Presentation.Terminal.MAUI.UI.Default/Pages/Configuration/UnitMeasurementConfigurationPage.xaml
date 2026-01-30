@@ -37,7 +37,7 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <VerticalStackLayout Spacing="4" Padding="8">
+            <VerticalStackLayout Spacing="0" Padding="8">
                 <FlexLayout 
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
