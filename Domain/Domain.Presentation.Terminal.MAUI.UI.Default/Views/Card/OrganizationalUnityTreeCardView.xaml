@@ -4,27 +4,35 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
-    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card.OrganizationalUnityTreeCardView"
     x:DataType="interop_common_display_models:OrganizationalUnityTreeDisplayModel">
-    <Frame>
-        <VerticalStackLayout>
+    <ContentView.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
+        </ResourceDictionary>
+    </ContentView.Resources>
+    <Frame Padding="16">
+        <VerticalStackLayout Spacing="16">
             <Label
                 FontSize="Medium"
                 Text="{Binding Name}" />
-            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Children}">
-                <BindableLayout.ItemTemplate>
+            <CollectionView 
+                IsVisible="{Binding Children, Converter={StaticResource IsListNotNullOrEmptyConverter}}"
+                ItemsSource="{Binding Children}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <local_card_views:OrganizationalUnityTreeCardView 
-                            ItemTapGestureRecognizerTapped="TapGestureRecognizer_Tapped"
-                            Margin="0,8,0,0">
+                        <local_card_views:OrganizationalUnityTreeCardView ItemTapGestureRecognizerTapped="TapGestureRecognizer_Tapped">
                             <ContentView.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                             </ContentView.GestureRecognizers>
                         </local_card_views:OrganizationalUnityTreeCardView>
                     </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </VerticalStackLayout>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </VerticalStackLayout>
     </Frame>
 </ContentView>
