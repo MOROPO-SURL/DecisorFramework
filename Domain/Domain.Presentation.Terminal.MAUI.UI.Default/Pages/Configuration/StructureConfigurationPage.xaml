@@ -129,8 +129,8 @@
                         Grid.Column="1" Grid.Row="1"
                         VerticalOptions="Center"
                         ToolTipProperties.Text="Eliminar selección"
-                        Style="{StaticResource FontIconImageButtonStyle}"
-                        Text="&#xF6C8;"
+                        Style="{StaticResource DefaultStyledIconButtonStyle}"
+                        Text="&#xF156;"
                         Clicked="ClearParentButton_Clicked" />
                 </Grid>
                 <VerticalStackLayout 
@@ -145,17 +145,18 @@
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
-                                <RowDefinition Height="2" />
+                                <RowDefinition Height="1" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Button
+                                Style="{StaticResource DefaultStyledButtonStyle}"
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
                                 Text="Agregar"
                                 Clicked="AddOrganizationalUnityButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Color="DimGray" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemsSource="{Binding OrganizationalUnities}">
@@ -175,8 +176,8 @@
                                                     Text="{Binding Name}"
                                                     LineBreakMode="TailTruncation" />
                                                 <Button
-                                                    Style="{StaticResource FontIconImageButtonStyle}"
-                                                    VerticalOptions="Start"
+                                                    Style="{StaticResource DangerStyledIconButtonStyle}"
+                                                    VerticalOptions="Center"
                                                     Text="&#xFA78;"
                                                     Clicked="OrganizationalUnityRemoveButton_Clicked" />
                                             </StackLayout>

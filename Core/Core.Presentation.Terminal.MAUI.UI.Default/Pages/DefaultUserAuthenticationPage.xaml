@@ -57,7 +57,7 @@
                 </Grid>
             </ScrollView>
             <Button
-                Style="{StaticResource FontIconImageButtonStyle}"
+                Style="{StaticResource DefaultStyledIconButtonStyle}"
                 HorizontalOptions="End" VerticalOptions="Start"
                 Margin="16"
                 Text="&#xF66A;"
