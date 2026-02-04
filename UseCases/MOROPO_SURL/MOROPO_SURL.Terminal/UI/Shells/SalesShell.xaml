@@ -43,7 +43,7 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" IsEnabled="False" />
-    <MenuFlyoutItem Text="Minoristas" IsEnabled="False" />
+    <MenuFlyoutItem Text="» Minoristas «" IsEnabled="False" />
     <ShellContent
         Title="Inicios de Turno"
         ContentTemplate="{DataTemplate decisorframework_sales_manage_pages:ShiftOpeningsManagePage}">
@@ -64,7 +64,7 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutSeparator Text="Mayoristas" />
+    <MenuFlyoutSeparator Text="» Mayoristas «" />
     <FlyoutItem
         Title="Ofertas">
         <FlyoutItem.Icon>

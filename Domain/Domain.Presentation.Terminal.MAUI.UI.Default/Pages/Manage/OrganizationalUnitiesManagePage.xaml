@@ -5,9 +5,9 @@
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
-    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.OrganizationalUnitiesManagePage"
+    x:DataType="presentation_manage_page_models:OrganizationalUnitiesManagePageModel"
     Title="Gestión de Unidades Organizativas">
     <ContentPage.ToolbarItems>
         <ToolbarItem 
@@ -27,35 +27,34 @@
     </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <Grid>
-            <StackLayout Orientation="Vertical">
-                <ScrollView 
-                    Orientation="Vertical"
-                    VerticalOptions="FillAndExpand">
-                    <VerticalStackLayout
-                        Margin="10"
-                        BindableLayout.ItemsSource="{Binding Items}">
-                        <BindableLayout.ItemTemplate>
-                            <DataTemplate>
-                                <local_card_views:OrganizationalUnityTreeCardView
-                                    Margin="10"
-                                    ItemTapGestureRecognizerTapped="ItemTapGestureRecognizer_Tapped">
-                                    <ContentView.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </ContentView.GestureRecognizers>
-                                </local_card_views:OrganizationalUnityTreeCardView>
-                            </DataTemplate>
-                        </BindableLayout.ItemTemplate>
-                        <BindableLayout.EmptyView>
-                            <Label
-                                HorizontalTextAlignment="Center"
-                                Margin="5"
-                                Text="Sin elementos que mostrar"
-                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
-                                FontAttributes="Italic" />
-                        </BindableLayout.EmptyView>
-                    </VerticalStackLayout>
-                </ScrollView>
-            </StackLayout>
+            <ScrollView 
+                Orientation="Vertical"
+                VerticalOptions="FillAndExpand">
+                <CollectionView
+                    Margin="16,8,16,16"
+                    ItemsSource="{Binding Items}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <local_card_views:OrganizationalUnityTreeCardView ItemTapGestureRecognizerTapped="ItemTapGestureRecognizer_Tapped">
+                                <ContentView.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                </ContentView.GestureRecognizers>
+                            </local_card_views:OrganizationalUnityTreeCardView>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                    <CollectionView.EmptyView>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            Margin="5"
+                            Text="Sin elementos que mostrar"
+                            TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                            FontAttributes="Italic" />
+                    </CollectionView.EmptyView>
+                </CollectionView>
+            </ScrollView>
             <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
         </Grid>
     </ContentPage.Content>

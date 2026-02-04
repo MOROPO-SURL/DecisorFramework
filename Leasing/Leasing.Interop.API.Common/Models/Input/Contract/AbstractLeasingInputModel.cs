@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input.Contract
+﻿using MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;
+
+namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input.Contract
 {
     public abstract class AbstractLeasingInputModel<TEntity> : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractLeasing
     {
@@ -26,8 +28,6 @@
         public double Feed { get; set; }
 
         public System.Guid PaymentTermId { get; set; }
-
-        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel[] Contacts { get; set; }
 
         public abstract TEntity Export();
 

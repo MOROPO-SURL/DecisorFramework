@@ -18,6 +18,10 @@
 
         public Domain.Interop.API.Common.Models.Display.PropertyDisplayModel Property { get; set; }
 
+        public decimal BaselineAmount { get; set; }
+
+        public Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel BaselineCurrency { get; set; }
+
         public PropertySpaceLeasePropousalDisplayModel[] SpacePropousals { get; set; }
 
         public void Import(Persistence.Entities.PropertyLeasePropousal entity)
@@ -27,6 +31,7 @@
             Priority = entity.Priority;
             At = entity.At;
             Description = entity.Description;
+            BaselineAmount = entity.BaselineAmount;
 
             if (entity.Author != null)
             {
@@ -47,6 +52,13 @@
                 Property = new Domain.Interop.API.Common.Models.Display.PropertyDisplayModel();
 
                 Property.Import(entity.Property);
+            }
+
+            if (entity.BaselineCurrency != null)
+            {
+                BaselineCurrency = new Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel();
+
+                BaselineCurrency.Import(entity.BaselineCurrency);
             }
         }
     }

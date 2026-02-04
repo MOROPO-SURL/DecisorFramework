@@ -24,6 +24,9 @@
         [System.ComponentModel.DataAnnotations.Required]
         public string Reference { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
+        public string OperativeLicenceCode { get; set; }
+
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(KindId))]
         public VehicleKind Kind { get; set; }
         public System.Guid KindId { get; set; }

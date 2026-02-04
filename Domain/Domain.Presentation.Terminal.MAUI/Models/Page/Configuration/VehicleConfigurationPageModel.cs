@@ -19,6 +19,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public static string SeatCountCirculationIdentifierValidableProperty => nameof(SeatCount);
         public static string StructureValidableProperty => nameof(Structure);
         public static string ReferenceValidableProperty => nameof(Reference);
+        public static string OperativeLicenceCodeValidableProperty => nameof(OperativeLicenceCode);
         public static string TechnicalAvailabilityIndexValidableProperty => nameof(TechnicalAvailabilityIndex);
 
         private int priority = 1;
@@ -36,6 +37,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private double loadCapacity;
         private StructureParentalDisplayModel structure;
         private string reference;
+        private string operativeLicenceCode;
         private double technicalAvailabilityIndex = 100;
         private string description;
 
@@ -44,22 +46,23 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
             if (model != null)
             {
                 Id = model.Id;
-                Priority = model.Priority;
-                Brand = model.Brand;
-                Model = model.Model;
-                Year = model.Year;
-                Kind = model.Kind;
-                TrafficCirculationIdentifier = model.TrafficCirculationIdentifier;
-                Plate = model.Plate;
-                EngineKind = model.EngineKind;
-                EngineIdentifier = model.EngineIdentifier;
-                BodyIdentifier = model.BodyIdentifier;
-                SeatCount = model.SeatCount;
-                LoadCapacity = model.LoadCapacity;
-                Structure = model.Structure;
-                Reference = model.Reference;
-                TechnicalAvailabilityIndex = model.TechnicalAvailabilityIndex;
-                Description = model.Description;
+                priority = model.Priority;
+                brand = model.Brand;
+                this.model = model.Model;
+                year = model.Year;
+                kind = model.Kind;
+                trafficCirculationIdentifier = model.TrafficCirculationIdentifier;
+                plate = model.Plate;
+                engineKind = model.EngineKind;
+                engineIdentifier = model.EngineIdentifier;
+                bodyIdentifier = model.BodyIdentifier;
+                seatCount = model.SeatCount;
+                loadCapacity = model.LoadCapacity;
+                structure = model.Structure;
+                reference = model.Reference;
+                operativeLicenceCode = model.OperativeLicenceCode;
+                technicalAvailabilityIndex = model.TechnicalAvailabilityIndex;
+                description = model.Description;
 
                 if (model.FeatureImage != null)
                 {
@@ -105,6 +108,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public StructureParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
 
         public string Reference { get => reference; set => SetProperty(ref reference, value); }
+
+        public string OperativeLicenceCode { get => operativeLicenceCode; set => SetProperty(ref operativeLicenceCode, value); }
 
         public double TechnicalAvailabilityIndex { get => technicalAvailabilityIndex; set => SetProperty(ref technicalAvailabilityIndex, value); }
 

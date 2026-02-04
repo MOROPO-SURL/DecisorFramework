@@ -4,6 +4,8 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Input
 {
     public class LegalClientPropertyLeasingInputModel : Contract.AbstractLeasingInputModel<Persistence.Entities.LegalClientPropertyLeasing>
     {
+        public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel[] Contacts { get; set; }
+
         public override Persistence.Entities.LegalClientPropertyLeasing Export()
         {
             var entity = new Persistence.Entities.LegalClientPropertyLeasing { Id = Id };

@@ -35,7 +35,7 @@ public partial class OrganizationalUnityConfigurationPage : Core.Presentation.Te
         {
             Id = System.Guid.NewGuid(),
             Name = ConcreteBindingContext.Name,
-            ParentId = ParentPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
+            ParentId = ConcreteBindingContext.Parent?.Id,
             Reference = ConcreteBindingContext.Reference,
             Priority = ConcreteBindingContext.Priority
         };
@@ -53,7 +53,7 @@ public partial class OrganizationalUnityConfigurationPage : Core.Presentation.Te
         {
             Id = ConcreteBindingContext.Id,
             Name = ConcreteBindingContext.Name,
-            ParentId = ParentPicker.SelectedIndex == -1 ? null : ConcreteBindingContext.AvailableParents[ParentPicker.SelectedIndex].Id,
+            ParentId = ConcreteBindingContext.Parent?.Id,
             Reference = ConcreteBindingContext.Reference,
             Priority = ConcreteBindingContext.Priority
         };
@@ -71,6 +71,13 @@ public partial class OrganizationalUnityConfigurationPage : Core.Presentation.Te
     private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         OnCancel(sender, eventArgs);
+    }
+
+    private void ClearParentButton_Clicked(object sender, System.EventArgs e)
+    {
+        ConcreteBindingContext.Parent = null;
+
+        hasChangesFlag = true;
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)

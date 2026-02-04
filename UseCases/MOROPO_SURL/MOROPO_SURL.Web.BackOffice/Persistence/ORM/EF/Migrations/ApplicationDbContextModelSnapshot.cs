@@ -4935,6 +4935,44 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("propertyleaseofferspacespecifications", "decisorframework_leasing");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOfferSpaceSpecification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<decimal>("BaselineAmount")
+                        .HasColumnType("numeric")
+                        .HasColumnName("baselineamount");
+
+                    b.Property<Guid>("BaselineCurrencyId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("baselinecurrencyid");
+
+                    b.Property<Guid>("OfferId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("offerid");
+
+                    b.Property<Guid>("SpaceId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("spaceid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_propertyleaseofferspacespecifications");
+
+                    b.HasIndex("BaselineCurrencyId")
+                        .HasDatabaseName("ix_propertyleaseofferspacespecifications_baselinecurrencyid");
+
+                    b.HasIndex("OfferId")
+                        .HasDatabaseName("ix_propertyleaseofferspacespecifications_offerid");
+
+                    b.HasIndex("SpaceId")
+                        .HasDatabaseName("ix_propertyleaseofferspacespecifications_spaceid");
+
+                    b.ToTable("propertyleaseofferspacespecifications", "decisorframework_leasing");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Leasing.Persistence.Entities.PropertyLeaseOfferSpaceSpecificationClauseBridge", b =>
                 {
                     b.Property<Guid>("ProwId")

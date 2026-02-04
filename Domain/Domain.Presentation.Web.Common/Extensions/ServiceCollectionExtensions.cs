@@ -10,6 +10,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions
         public static void AddDecisorDomainPresentationWebCommon(this IServiceCollection services)
         {
 
+            services.AddScoped<IEntityRepository<ChangeNotification, System.Guid>, ChangeNotificationRepository>();
             services.AddScoped<IEntityRepository<CentralStateStructure, System.Guid>, CentralStateSctructureRepository>();
             services.AddScoped<IEntityRepository<Colaborator, System.Guid>, ColaboratorRepository>();
             services.AddScoped<IEntityRepository<PersonContact, System.Guid>, PersonContactRepository>();

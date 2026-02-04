@@ -2,9 +2,11 @@
 <core_ui_base_pages:ConfigurationBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_converters="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.UI.Default.Converters"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Leasing.Presentation.Terminal.MAUI"
     xmlns:domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Leasing.Interop.API.Common"    
@@ -18,14 +20,32 @@
     x:DataType="presentation_configuration_page_models:LegalClientVehicleLeasingConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local_converters:DriveLicenceVehicleKindBridgesToStringConverter x:Key="DriveLicenceVehicleKindBridgesToStringConverter" />
+
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
-
-            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="180" AbsoluteHorizontalSeparation="12" />
+            <core_ui_converters:StringToSubstringConverter x:Key="StringToSubstringConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            
+            <Array Type="{x:Type x:Int32}" x:Key="CIBornYearSubstringParameter">
+                <x:Int32>4</x:Int32>
+                <x:Int32>2</x:Int32>
+            </Array>
+            <Array Type="{x:Type x:Int32}" x:Key="CIBornMonthSubstringParameter">
+                <x:Int32>2</x:Int32>
+                <x:Int32>2</x:Int32>
+            </Array>
+            <Array Type="{x:Type x:Int32}" x:Key="CIBornDaySubstringParameter">
+                <x:Int32>0</x:Int32>
+                <x:Int32>2</x:Int32>
+            </Array>
+            <Array Type="{x:Type x:Int32}" x:Key="CITailSubstringParameter">
+                <x:Int32>6</x:Int32>
+                <x:Int32>5</x:Int32>
+            </Array>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -196,8 +216,8 @@
                     Margin="8"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Conductores" />
-                    <Frame Padding="8">
-                        <Grid RowSpacing="8">
+                    <Frame Padding="4">
+                        <Grid RowSpacing="4">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
@@ -209,70 +229,216 @@
                             </Grid.RowDefinitions>
                             <Button
                                 Grid.Column="1" Grid.Row="0"
+                                Margin="8"
                                 HorizontalOptions="End"
                                 Text="Agregar"
-                                Clicked="DriverAgregationButton_Clicked" />
+                                Clicked="DriveLicenceCreationButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
                                 Color="{StaticResource Gray050}" />
-                            <FlexLayout
+                            <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 Margin="4"
-                                Wrap="Wrap"
-                                AlignItems="Start" AlignContent="Start"
-                                BindableLayout.ItemsSource="{Binding Contacts}">
-                                <BindableLayout.EmptyView>
-                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
-                                </BindableLayout.EmptyView>
-                                <BindableLayout.ItemTemplate>
-                                    <DataTemplate x:DataType="domain_interop_common_display_models:PersonContactDisplayModel">
-                                        <Frame 
-                                            Padding="0" Margin="4"
-                                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource ViewChildParentWidthToRelativeWidthConverter}}">
+                                ItemsSource="{Binding DriveLicences}">
+                                <CollectionView.EmptyView>
+                                    <Label Padding="4" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="1" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="480" ItemSpacing="8" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:DriveLicenceDisplayModel">
+                                        <Frame Padding="8">
                                             <VerticalStackLayout Spacing="0">
-                                                <Grid>
-                                                    <Image 
-                                                        BackgroundColor="DimGray"
-                                                        HeightRequest="{Binding Source={RelativeSource AncestorType={Type Frame}}, Path=Width}"
-                                                        Aspect="AspectFill"
-                                                        Source="{Binding Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
-                                                    <Grid
-                                                        VerticalOptions="End"
-                                                        BackgroundColor="{AppThemeBinding Light=#BBDDDDDD, Dark=#A9333333}">
-                                                        <VerticalStackLayout Margin="8">
-                                                            <Label
-                                                                ToolTipProperties.Text="{Binding Identity.Name}"
-                                                                LineBreakMode="TailTruncation"
-                                                                Text="{Binding Identity.Name}"
-                                                                FontAttributes="Bold" />
-                                                            <Label
-                                                                ToolTipProperties.Text="{Binding Identity.LastName}"
-                                                                LineBreakMode="TailTruncation"
-                                                                Text="{Binding Identity.LastName, TargetNullValue='---'}" />
-                                                        </VerticalStackLayout>
-                                                    </Grid>
-                                                </Grid>
-                                                <Grid Margin="4" ColumnSpacing="4">
+                                                <Grid ColumnSpacing="8">
                                                     <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition />
-                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="4*" />
+                                                        <ColumnDefinition Width="4*" />
+                                                        <ColumnDefinition Width="4*" />
+                                                        <ColumnDefinition Width="7*" />
+                                                        <ColumnDefinition Width="5*" />
+                                                        <ColumnDefinition Width="3*" />
+                                                        <ColumnDefinition Width="3*" />
+                                                        <ColumnDefinition Width="Auto" />
                                                     </Grid.ColumnDefinitions>
-                                                    <Button
-                                                        Grid.Column="0"
-                                                        Text="Detalles"
-                                                        Clicked="DriverDetailButton_Clicked" />
-                                                    <Button
-                                                        Grid.Column="1"
-                                                        Text="Eliminar"
-                                                        Clicked="DriverRemotionButton_Clicked" />
+                                                    <Grid.RowDefinitions>
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition />
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition />
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="18" />
+                                                        <RowDefinition Height="Auto" />
+                                                        <RowDefinition Height="Auto" />
+                                                    </Grid.RowDefinitions>
+                                                    <Image 
+                                                        Grid.Column="0" Grid.ColumnSpan="3" Grid.RowSpan="4"
+                                                        Margin="0,0,0,8"
+                                                        VerticalOptions="Start"
+                                                        BackgroundColor="DimGray"
+                                                        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
+                                                        Aspect="AspectFill"
+                                                        Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                                    <Label
+                                                        Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="0"
+                                                        FontAttributes="Bold"
+                                                        TextColor="DimGray"
+                                                        Text="NUMERO" />
+                                                    <VerticalStackLayout Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="1">
+                                                        <Label
+                                                            FontSize="Medium"
+                                                            LineBreakMode="TailTruncation"
+                                                            TextTransform="Uppercase"
+                                                            Text="{Binding VehicleKindBridges, Converter={StaticResource DriveLicenceVehicleKindBridgesToStringConverter}}" />
+                                                        <Label
+                                                            FontSize="Medium"
+                                                            LineBreakMode="TailTruncation"
+                                                            TextTransform="Uppercase"
+                                                            Text="{Binding Code}" />
+                                                    </VerticalStackLayout>
+                                                    <Label
+                                                        Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="2"
+                                                        FontAttributes="Bold"
+                                                        TextColor="DimGray"
+                                                        Text="NOMBRE Y APELLIDOS" />
+                                                    <VerticalStackLayout
+                                                        Grid.Column="3" Grid.ColumnSpan="4" Grid.Row="3">
+                                                        <Label
+                                                            FontSize="Medium"
+                                                            LineBreakMode="TailTruncation"
+                                                            TextTransform="Uppercase"
+                                                            Text="{Binding Contact.Identity.Name}" />
+                                                        <Label
+                                                            FontSize="Medium"
+                                                            LineBreakMode="TailTruncation"
+                                                            TextTransform="Uppercase"
+                                                            Text="{Binding Contact.Identity.LastName}" />
+                                                    </VerticalStackLayout>
+                                                    <Label
+                                                        Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="4"
+                                                        FontAttributes="Bold"
+                                                        TextColor="DimGray"
+                                                        Text="LIMITANTES" />
+                                                    <Label
+                                                        Grid.Column="0" Grid.ColumnSpan="7" Grid.Row="5"
+                                                        Margin="0,0,0,8"
+                                                        LineBreakMode="TailTruncation"
+                                                        TextTransform="Uppercase"
+                                                        Text="Ninguna" />
+                                                    <Label
+                                                        Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="6"
+                                                        HorizontalOptions="Center"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        LineBreakMode="TailTruncation"
+                                                        TextColor="DimGray"
+                                                        Text="FECHA DE NACIMIENTO" />
+                                                    <Label
+                                                        Grid.Column="0" Grid.Row="7"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Contact.PersonalIdentificationNumber, Converter={StaticResource StringToSubstringConverter}, ConverterParameter={StaticResource CIBornYearSubstringParameter}}" />
+                                                    <Label
+                                                        Grid.Column="0" Grid.Row="8"
+                                                        HorizontalOptions="Center"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        TextColor="DimGray"
+                                                        Text="AÑO" />
+                                                    <Label
+                                                        Grid.Column="1" Grid.Row="7"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Contact.PersonalIdentificationNumber, Converter={StaticResource StringToSubstringConverter}, ConverterParameter={StaticResource CIBornMonthSubstringParameter}}" />
+                                                    <Label
+                                                        Grid.Column="1" Grid.Row="8"
+                                                        HorizontalOptions="Center"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        TextColor="DimGray"
+                                                        Text="MES" />
+                                                    <Label
+                                                        Grid.Column="2" Grid.Row="7"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Contact.PersonalIdentificationNumber, Converter={StaticResource StringToSubstringConverter}, ConverterParameter={StaticResource CIBornDaySubstringParameter}}" />
+                                                    <Label
+                                                        Grid.Column="2" Grid.Row="8"
+                                                        HorizontalOptions="Center"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        TextColor="DimGray"
+                                                        Text="DIA" />
+                                                    <Label
+                                                        Grid.Column="3" Grid.Row="7"
+                                                        HorizontalOptions="Center"
+                                                        Text="{Binding Contact.PersonalIdentificationNumber, Converter={StaticResource StringToSubstringConverter}, ConverterParameter={StaticResource CITailSubstringParameter}}" />
+                                                    <Label
+                                                        Grid.Column="4" Grid.Row="6"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        LineBreakMode="TailTruncation"
+                                                        TextColor="DimGray"
+                                                        Text="EXPEDIDA" />
+                                                    <Label
+                                                        Grid.Column="4" Grid.Row="7"
+                                                        Text="{Binding ReleasedAt.Year}" />
+                                                    <Label
+                                                        Grid.Column="4" Grid.Row="8"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        TextColor="DimGray"
+                                                        Text="AÑO" />
+                                                    <Label
+                                                        Grid.Column="5" Grid.ColumnSpan="2" Grid.Row="6"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        LineBreakMode="TailTruncation"
+                                                        TextColor="DimGray"
+                                                        Text="VENCIMIENTO" />
+                                                    <Label
+                                                        Grid.Column="5" Grid.Row="7"
+                                                        Text="{Binding ExpireAt.Month}" />
+                                                    <Label
+                                                        Grid.Column="5" Grid.Row="8"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        TextColor="DimGray"
+                                                        Text="MES" />
+                                                    <Label
+                                                        Grid.Column="6" Grid.Row="7"
+                                                        Text="{Binding ExpireAt.Year}" />
+                                                    <Label
+                                                        Grid.Column="6" Grid.Row="8"
+                                                        FontAttributes="Bold"
+                                                        FontSize="Caption"
+                                                        TextColor="DimGray"
+                                                        Text="AÑO" />
+                                                    <VerticalStackLayout 
+                                                        Grid.Column="7" Grid.RowSpan="4"
+                                                        Spacing="8">
+                                                        <Button
+                                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                                            Text="&#xF90B;"
+                                                            Clicked="DriveLicenceEditionButton_Clicked" />
+                                                        <Button
+                                                            Style="{StaticResource FontIconImageButtonStyle}"
+                                                            Text="&#xFA78;"
+                                                            Clicked="DriveLicenceRemotionButton_Clicked" />
+                                                    </VerticalStackLayout>
                                                 </Grid>
                                             </VerticalStackLayout>
                                         </Frame>
                                     </DataTemplate>
-                                </BindableLayout.ItemTemplate>
-                            </FlexLayout>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
                         </Grid>
                     </Frame>
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientVehicleLeasingConfigurationPageModel.DriveLicencesValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientVehicleLeasingConfigurationPageModel.DriveLicencesValidableProperty}}"
+                        TextColor="IndianRed" />
                 </VerticalStackLayout>
                 <Grid
                     Margin="8,16,8,8"
@@ -387,7 +553,7 @@
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Valor del Arrendamiento" />
-                        <Entry Text="{Binding Feed, StringFormat='{0:D}'}" />
+                        <Entry Text="{Binding Feed, StringFormat='{0:F2}'}" />
                         <Label
                             IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientVehicleLeasingConfigurationPageModel.FeedValidableProperty}}"
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:LegalClientVehicleLeasingConfigurationPageModel.FeedValidableProperty}}"

@@ -22,6 +22,10 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
 
         public PropertyLeasePropousalDisplayModel Propousal { get; set; }
 
+        public decimal BaselineAmount { get; set; }
+
+        public Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel BaselineCurrency { get; set; }
+
         public PropertyLeaseOrganizationPostulationDisplayModel[] OrganizationPostulations { get; set; }
 
         public PropertyLeasePersonPostulationDisplayModel[] PersonPostulations { get; set; }
@@ -35,6 +39,7 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
             OpenAt = entity.OpenAt;
             ClosedAt = entity.ClosedAt;
             Description = entity.Description;
+            BaselineAmount = entity.BaselineAmount;
 
             if (entity.Agreement != null)
             {
@@ -48,6 +53,13 @@ namespace MOROPO.Framework.Decisor.Leasing.Interop.API.Common.Models.Display
                 Propousal = new PropertyLeasePropousalDisplayModel();
 
                 Propousal.Import(entity.Propousal);
+            }
+
+            if (entity.BaselineCurrency != null)
+            {
+                BaselineCurrency = new Financial.Interop.API.Common.Models.Display.CurrencyDisplayModel();
+
+                BaselineCurrency.Import(entity.BaselineCurrency);
             }
         }
     }

@@ -8,6 +8,12 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 {
     public class PersonContactConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PersonContactDisplayModel>
     {
+        public static Sex[] AVAILABLE_SEXS { get; private set; } = [Sex.Unknown, Sex.Male, Sex.Famale];
+
+        public static CivilStatus[] AVAILABLE_CIVIL_STATUSES = [CivilStatus.Single, CivilStatus.Married, CivilStatus.Divorced, CivilStatus.Widower, CivilStatus.Unknow];
+
+        public static Persistence.Enumerations.PersonSkinKind[] AVAILABLE_SKIN_KINDS = [ Persistence.Enumerations.PersonSkinKind.White, Persistence.Enumerations.PersonSkinKind.Black, Persistence.Enumerations.PersonSkinKind.Crossbred ];
+
         public static string NameValidableProperty => nameof(Name);
 
         private string name;
@@ -19,6 +25,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private UserDisplayModel user;
         private int priority = 1;
         private string personalIdentificationNumber;
+        private Persistence.Enumerations.PersonSkinKind skinKind;
         private Microsoft.Maui.Controls.ImageSource imageSource;
 
         public PersonContactConfigurationPageModel(PersonContactDisplayModel model) : base(model)
@@ -34,6 +41,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
                 CivilStatus = model.Identity.CivilStatus;
                 User = model.User;
                 Priority = model.Priority;
+                SkinKind = model.SkinKind;
                 PersonalIdentificationNumber = model.PersonalIdentificationNumber;
 
                 foreach (var item in model.Identity.EmailContacts) EmailContactItems.Add(item);
@@ -74,6 +82,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public string PersonalIdentificationNumber { get => personalIdentificationNumber; set => SetProperty(ref personalIdentificationNumber, value); }
 
+        public Persistence.Enumerations.PersonSkinKind SkinKind { get => skinKind; set => SetProperty(ref skinKind, value); }
+
         public Microsoft.Maui.Controls.ImageSource ImageSource { get => imageSource; set => SetProperty(ref imageSource, value); }
 
         public ObservableCollection<EmailContactItemDisplayModel> EmailContactItems { get; set; } = [];
@@ -85,9 +95,5 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public ObservableCollection<PostalContactItemDisplayModel> PostalContactItems { get; set; } = [];
 
         public UserDisplayModel[] AvailableUsers { get; set; }
-
-        public Sex[] AvailableSexs { get; private set; } = [Sex.Unknown, Sex.Male, Sex.Famale];
-
-        public CivilStatus[] AvailableCivilStatuses { get; private set; } = [CivilStatus.Single, CivilStatus.Married, CivilStatus.Divorced, CivilStatus.Widower, CivilStatus.Unknow];
     }
 }

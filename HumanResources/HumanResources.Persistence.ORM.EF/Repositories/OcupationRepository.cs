@@ -11,7 +11,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
 
         protected override IQueryable<Entities.Ocupation> GetQueryableDbSet()
         {
-            return base.GetQueryableDbSet().Include(entity => entity.Contract).ThenInclude(entity => entity.Employee).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image);
+            return base.GetQueryableDbSet()
+                .Include(entity => entity.Staff).ThenInclude(entity => entity.MainWorkforce)
+                .Include(entity => entity.Contract).ThenInclude(entity => entity.Employee).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image);
         }
     }
 }
