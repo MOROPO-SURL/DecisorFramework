@@ -16,7 +16,8 @@ using MOROPO.Framework.Decisor.Domain.Persistence.Entities.Contract;
 using MOROPO.Framework.Decisor.Leasing.Persistence.Entities;
 using MOROPO.Framework.Decisor.Governance.Persistence.Entities;
 using MOROPO.Framework.Decisor.Purchasing.Persistence.Entities;
-using MOROPO.Framework.Decisor.Sales.Persistence.Entities;
+using System.Collections.Generic;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
 {
@@ -30,8 +31,13 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         Framework.Decisor.Purchasing.Persistence.ORM.EF.Context.Contract.IPurchasingDbContext,
         Framework.Decisor.Leasing.Persistence.ORM.EF.Context.Contract.ILeasingDbContext
     {
-        public ApplicationDbContext(System.Collections.Generic.IEnumerable<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
+        public ApplicationDbContext(IEnumerable<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
         {
+        }
+
+        public override void OnEntryChangesDetected(List<EntityEntry> relevantEntryChanges)
+        {
+            base.OnEntryChangesDetected(relevantEntryChanges);
         }
 
         public DbSet<Permission> Permissions { get; set; }
@@ -75,6 +81,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<OrganizationSocialContactItemBridge> OrganizationSocialContactItemBridges { get; set; }
         public DbSet<OrganizationWebSiteContactItemBridge> OrganizationWebSiteContactItemBridges { get; set; }
 
+        public DbSet<ChangeNotification> ChangeNotifications { get; set; }
+        public DbSet<ChangeNotificationUserBridge> ChangeNotificationUserBridges { get; set; }
         public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
         public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
         public DbSet<AbstractContact> Contacts { get; set; }

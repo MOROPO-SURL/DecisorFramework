@@ -49,6 +49,7 @@
                             IsPassword="true"
                             Completed="OnPasswordEnterPressed"/>
                         <Button
+                            Style="{StaticResource PrimaryKindButtonStyle}"
                             IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
                             HorizontalOptions="Center"
                             Text="Iniciar"
@@ -57,7 +58,7 @@
                 </Grid>
             </ScrollView>
             <Button
-                Style="{StaticResource DefaultStyledIconButtonStyle}"
+                Style="{StaticResource FontIconImageButtonStyle}"
                 HorizontalOptions="End" VerticalOptions="Start"
                 Margin="16"
                 Text="&#xF66A;"

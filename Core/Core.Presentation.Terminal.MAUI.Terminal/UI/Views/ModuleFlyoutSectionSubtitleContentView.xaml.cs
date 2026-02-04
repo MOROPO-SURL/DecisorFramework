@@ -1,4 +1,4 @@
-namespace MOROPO.Tool.Decisor.Terminal.UI.Views;
+namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Views;
 
 public partial class ModuleFlyoutSectionSubtitleContentView : Microsoft.Maui.Controls.ContentView
 {

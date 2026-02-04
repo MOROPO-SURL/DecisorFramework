@@ -1013,6 +1013,67 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("centralstatestructures", "decisorframework_domain");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.ChangeNotification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<string>("Cached")
+                        .IsRequired()
+                        .HasMaxLength(10240)
+                        .HasColumnType("character varying(10240)")
+                        .HasColumnName("cached");
+
+                    b.Property<int>("ChangeKind")
+                        .HasColumnType("integer")
+                        .HasColumnName("changekind");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("description");
+
+                    b.Property<string>("EntityName")
+                        .IsRequired()
+                        .HasMaxLength(255)
+                        .HasColumnType("character varying(255)")
+                        .HasColumnName("entityname");
+
+                    b.HasKey("Id")
+                        .HasName("pk_changenotifications");
+
+                    b.ToTable("changenotifications", "decisorframework_domain");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.ChangeNotificationUserBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<string>("SternId")
+                        .HasColumnType("text")
+                        .HasColumnName("sternid");
+
+                    b.Property<DateTime?>("ReadedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("readedat");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_changenotificationuserbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_changenotificationuserbridges_sternid");
+
+                    b.ToTable("changenotificationuserbridges", "decisorframework_domain");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Colaborator", b =>
                 {
                     b.Property<Guid>("Id")
@@ -9867,6 +9928,27 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Identity");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.ChangeNotificationUserBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.ChangeNotification", "Prow")
+                        .WithMany("UserBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_changenotificationuserbridges_changenotifications_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Security.Personal.Persistence.Entities.User", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_changenotificationuserbridges_users_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Colaborator", b =>
                 {
                     b.HasOne("MOROPO.Framework.Guama.Identity.Persistence.Entities.PersonIdentity", "Identity")
@@ -14429,6 +14511,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("ImageBridges");
 
                     b.Navigation("Rates");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.ChangeNotification", b =>
+                {
+                    b.Navigation("UserBridges");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Property", b =>

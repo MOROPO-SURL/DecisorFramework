@@ -75,7 +75,7 @@
                         VerticalOptions="Center"
                         ToolTipProperties.Text="Eliminar selección"
                         Style="{StaticResource FontIconImageButtonStyle}"
-                        Text="&#xF6C8;"
+                        Text="&#xF02C4;"
                         Clicked="ClearParentButton_Clicked" />
                 </Grid>
                 <VerticalStackLayout 

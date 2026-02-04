@@ -129,8 +129,8 @@
                         Grid.Column="1" Grid.Row="1"
                         VerticalOptions="Center"
                         ToolTipProperties.Text="Eliminar selección"
-                        Style="{StaticResource DefaultStyledIconButtonStyle}"
-                        Text="&#xF156;"
+                        Style="{StaticResource FontIconImageButtonStyle}"
+                        Text="&#xF02C4;"
                         Clicked="ClearParentButton_Clicked" />
                 </Grid>
                 <VerticalStackLayout 
@@ -176,7 +176,7 @@
                                                     Text="{Binding Name}"
                                                     LineBreakMode="TailTruncation" />
                                                 <Button
-                                                    Style="{StaticResource DangerStyledIconButtonStyle}"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                     VerticalOptions="Center"
                                                     Text="&#xFA78;"
                                                     Clicked="OrganizationalUnityRemoveButton_Clicked" />

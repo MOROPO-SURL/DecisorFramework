@@ -43,16 +43,19 @@
     <StackLayout>
         <Grid 
             BackgroundColor="{AppThemeBinding Light={StaticResource OffWhite}, Dark={StaticResource OffBlack}}"
-            HeightRequest="168"
             ColumnSpacing="0">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="168" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
             <Grid
                 x:Name="LogoWrapLayout"
-                Grid.Column="1"
+                Grid.Column="1" Grid.Row="0"
                 MinimumWidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}">
                 <Image
                     Margin="32,16"
@@ -60,7 +63,8 @@
                     Style="{StaticResource LogoImageViewStyle}" />
             </Grid>
             <Grid
-                Grid.Column="0"
+                Grid.Column="0" Grid.Row="0"
+                VerticalOptions="Center"
                 Padding="20"
                 ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
@@ -69,12 +73,14 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
+                    <RowDefinition />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
                     <RowDefinition Height="Auto" />
+                    <RowDefinition />
                 </Grid.RowDefinitions>
                 <Border
-                    Grid.Column="0" Grid.RowSpan="3"
+                    Grid.Column="0" Grid.RowSpan="5"
                     WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
                     StrokeThickness="4"
                     StrokeLineJoin="Bevel">
@@ -86,13 +92,13 @@
                         Source="default_person_picture.jpg" />
                 </Border>
                 <Label
-                    Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
+                    Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
                     LineBreakMode="TailTruncation" 
                     Text="{Binding User.Id}"
                     FontSize="Medium"
                     FontAttributes="Bold" />
                 <Label
-                    Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
+                    Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"
                     LineBreakMode="TailTruncation"
                     TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}"
                     FontSize="Default">
@@ -105,23 +111,19 @@
                     </Label.FormattedText>
                 </Label>
                 <Button
-                    Grid.Column="1" Grid.Row="2"
-                    Margin="0, 10"
-                    Padding="0"
-                    FontSize="21"
-                    FontFamily="MaterialDesignIcons"
+                    Grid.Column="1" Grid.Row="3"
+                    Style="{StaticResource FontIconImageButtonStyle}"
+                    Margin="0,10"
                     Text="&#xF6BB;" />
                 <Button
-                    Grid.Column="2" Grid.Row="2"
+                    Grid.Column="2" Grid.Row="3"
+                    Style="{StaticResource FontIconImageButtonStyle}"
                     HorizontalOptions="Start"
-                    Margin="0, 10"
-                    Padding="0"
-                    FontSize="21"
-                    FontFamily="MaterialDesignIcons"
+                    Margin="0,10"
                     Text="&#xF5FD;" />
             </Grid>
             <Grid
-                Grid.Column="2"
+                Grid.Column="2" Grid.Row="0"
                 Padding="20"
                 ColumnSpacing="10">
                 <Grid.ColumnDefinitions>
@@ -168,6 +170,9 @@
                         FontSize="Medium" />
                 </VerticalStackLayout>
             </Grid>
+            <BoxView 
+                Grid.ColumnSpan="3" Grid.Row="1"
+                Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}" />
         </Grid>
         <ScrollView VerticalOptions="FillAndExpand">
             <FlexLayout
