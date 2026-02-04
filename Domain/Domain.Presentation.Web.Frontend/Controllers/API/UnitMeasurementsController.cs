@@ -8,6 +8,7 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/fwrk/domain/[controller]")]
     [ApiController]
     public class UnitMeasurementsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<UnitMeasurement, System.Guid, UnitMeasurementInputModel, UnitMeasurementDisplayModel, UnitMeasurementFilterModel>

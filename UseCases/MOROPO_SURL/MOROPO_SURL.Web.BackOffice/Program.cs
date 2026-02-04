@@ -79,6 +79,36 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
                 config.LoginPath = new PathString("/security/account/login");
                 config.ExpireTimeSpan = System.TimeSpan.FromMinutes(5);
                 config.SlidingExpiration = true;
+            }).AddJwtBearer(config =>
+            {
+                config.RequireHttpsMetadata = false;
+                config.SaveToken = true;
+                config.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidIssuer = builder.Configuration["JWT:Issuer"],
+                    ValidAudience = builder.Configuration["JWT:Issuer"],
+                    ValidateLifetime = false,
+                    RequireExpirationTime = false,
+                    IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])),
+                    ClockSkew = System.TimeSpan.Zero
+                };
+                config.Events = new Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents
+                {
+                    OnMessageReceived = context =>
+                    {
+                        var accessToken = context.Request.Query["access_token"];
+                        // If the request is for our hub...
+                        var path = context.HttpContext.Request.Path;
+
+                        if (!string.IsNullOrEmpty(accessToken) && path.StartsWithSegments("/hubs/dashboard"))
+                        {
+                            // Read the token out of the query string
+                            context.Token = accessToken;
+                        }
+
+                        return System.Threading.Tasks.Task.CompletedTask;
+                    }
+                };
             });
 
             #region Security concreter dependencies configuration
