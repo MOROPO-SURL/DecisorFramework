@@ -1,6 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
@@ -30,14 +30,27 @@ public partial class StructuresManagePage : Caney.MVVM.Core.Pages.ContentPage
     {
         var concreteBindingContext = (Models.Page.Manage.StructuresManagePageModel)BindingContext;
 
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.StructureCreatorPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar elementos. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            concreteBindingContext.IsBusy = false;
+
+            return;
+        }
+
         concreteBindingContext.IsBusy = true;
 
         System.Threading.Tasks.Task.Run(async () =>
         {
             try
             {
-                var structureAPIConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-                var kindAPIConnectClient = new Interop.API.Connect.Clients.StructureKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+                var structureAPIConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(httpClientHelperProvider);
+                var kindAPIConnectClient = new Interop.API.Connect.Clients.StructureKindsAPIConnectClient(httpClientHelperProvider);
 
                 var model = new Models.Page.Configuration.StructureConfigurationPageModel(null)
                 {
@@ -49,9 +62,7 @@ public partial class StructuresManagePage : Caney.MVVM.Core.Pages.ContentPage
                 {
                     concreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new Configuration.StructureConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                    PresentedItemDismissButton_Clicked(sender, e);
+                    this.NavigationPushPageAsync(new Configuration.StructureConfigurationPage(ConfigurationSuccess_Callback, model, new Validators.StructureConfigurationValidator()));
                 });
             }
             catch (System.Exception exception)
@@ -73,34 +84,64 @@ public partial class StructuresManagePage : Caney.MVVM.Core.Pages.ContentPage
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        ((Models.Page.Manage.StructuresManagePageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.StructureTreeDisplayModel;
-    }
+        var concreteBindingContext = (Models.Page.Manage.StructuresManagePageModel)BindingContext;
 
-    private void PresentedItemDismissButton_Clicked(object sender, System.EventArgs e)
-    {
-        ((Models.Page.Manage.StructuresManagePageModel)BindingContext).PresentedItem = null;
-    }
+        if (concreteBindingContext.IsBusy) return;
 
-    private void PresentedItemEditButton_Clicked(object sender, System.EventArgs e)
+        concreteBindingContext.IsBusy = true;
+
+        var structureAPIConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        structureAPIConnectClient.GetAsync(((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.StructureTreeDisplayModel).Id).ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                concreteBindingContext.IsBusy = false;
+
+                if (task.Exception != null || task.IsCanceled)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    this.NavigationPushModalPageAsync(new Detail.StructureDetailPage(task.Result, DetailActionDelegationRequest_Callback));
+                }
+            });
+        });
+    }
+    private void DetailActionDelegationRequest_Callback(Interop.API.Common.Models.Display.StructureParentalDisplayModel target, int? discriminator)
     {
         var concreteBindingContext = (Models.Page.Manage.StructuresManagePageModel)BindingContext;
 
         concreteBindingContext.IsBusy = true;
 
-        System.Threading.Tasks.Task.Run(async () =>
+        if (discriminator == null)
         {
-            try
+            var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+            if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.StructureEditorPermission)))
             {
-                var structureAPIConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-                var kindAPIConnectClient = new Interop.API.Connect.Clients.StructureKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+                DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                concreteBindingContext.IsBusy = false;
+
+                return;
+            }
+
+            System.Threading.Tasks.Task.Run(async () =>
+            {
+                var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+                var structureAPIConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(httpClientHelperProvider);
+                var kindAPIConnectClient = new Interop.API.Connect.Clients.StructureKindsAPIConnectClient(httpClientHelperProvider);
 
                 var parents = new System.Collections.Generic.List<Interop.API.Common.Models.Display.StructureParentalDisplayModel>(await structureAPIConnectClient.GetAsync());
 
-                parents.RemoveAll(model => model.Id == concreteBindingContext.PresentedItem.Id);
+                parents.RemoveAll(model => IsSelectable(target, model));
 
-                var model = new Models.Page.Configuration.StructureConfigurationPageModel(await structureAPIConnectClient.GetAsync(concreteBindingContext.PresentedItem.Id))
+                var model = new Models.Page.Configuration.StructureConfigurationPageModel(await structureAPIConnectClient.GetAsync(target.Id))
                 {
-                    AvailableParents = parents.ToArray(),
+                    AvailableParents = [.. parents],
                     AvailableKinds = await kindAPIConnectClient.GetAsync()
                 };
 
@@ -108,52 +149,40 @@ public partial class StructuresManagePage : Caney.MVVM.Core.Pages.ContentPage
                 {
                     concreteBindingContext.IsBusy = false;
 
-                    this.NavigationPushPageAsync(new Configuration.StructureConfigurationPage(ConfigurationSuccess_Callback, model));
-
-                    PresentedItemDismissButton_Clicked(sender, e);
-                });
-            }
-            catch (System.Exception exception)
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                });
-            }
-        });
-    }
-
-    private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)
-    {
-        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
-        {
-            if (!task.Result) return;
-
-            var concreteBindingContext = (Models.Page.Manage.StructuresManagePageModel)BindingContext;
-
-            var apiConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-            apiConnectClient.ArchiveAsync(concreteBindingContext.PresentedItem.Id).ContinueWith(_task =>
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    if (_task.Exception != null || _task.IsCanceled)
-                    {
-                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                    }
-                    else
-                    {
-                        concreteBindingContext.PresentedItem = null;
-
-                        DisplayAlert("Aviso", "Elemento eliminado con éxito.", "Aceptar");
-
-                        LoadItems();
-                    }
+                    this.NavigationPushPageAsync(new Configuration.StructureConfigurationPage(ConfigurationSuccess_Callback, model, new Validators.StructureConfigurationValidator()));
                 });
             });
-        });
+        }
+        else if (discriminator == 0)
+        {
+            DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+            {
+                if (!task.Result) return;
+
+                var concreteBindingContext = (Models.Page.Manage.StructuresManagePageModel)BindingContext;
+
+                var apiConnectClient = new Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(_task =>
+                {
+                    Dispatcher.Dispatch(() =>
+                    {
+                        concreteBindingContext.IsBusy = false;
+
+                        if (_task.Exception != null || _task.IsCanceled)
+                        {
+                            Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                        }
+                        else
+                        {
+                            DisplayAlert("Aviso", "Elemento eliminado con éxito.", "Aceptar");
+
+                            LoadItems();
+                        }
+                    });
+                });
+            });
+        }
     }
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.StructureParentalDisplayModel model)
@@ -169,7 +198,7 @@ public partial class StructuresManagePage : Caney.MVVM.Core.Pages.ContentPage
 
         concreteBindingContext.Items.Clear();
 
-        var apiConnectClient = new Interop.API.Connect.Clients.TreeStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.TreeStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         apiConnectClient.GetAsync().ContinueWith(task =>
         {
@@ -190,5 +219,14 @@ public partial class StructuresManagePage : Caney.MVVM.Core.Pages.ContentPage
                 }
             });
         });
+    }
+
+    private bool IsSelectable(Interop.API.Common.Models.Display.StructureParentalDisplayModel target, Interop.API.Common.Models.Display.StructureParentalDisplayModel model)
+    {
+        if (model.Id == target.Id) return true;
+
+        if (model.Parent == null) return false;
+
+        return IsSelectable(target, model.Parent);
     }
 }

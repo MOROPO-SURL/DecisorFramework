@@ -10,25 +10,27 @@
     x:DataType="interop_common_display_models:StructureTreeDisplayModel">
     <ContentView.Resources>
         <ResourceDictionary>
-            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ItemViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="280" AbsoluteHorizontalSeparation="20" />
-            
             <communitytoolkit_converters:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
-    <Frame>
+    <Frame Padding="16">
         <VerticalStackLayout>
             <Label
                 FontSize="Medium"
                 Text="{Binding Identity.Name}" />
             <Label Text="{Binding Kind.Name}" />
             <Label 
-                IsVisible="{Binding Children, Converter={StaticResource IsListNotNullOrEmptyConverter}}"
+                IsVisible="{Binding OrganizationalUnities, Converter={StaticResource IsListNotNullOrEmptyConverter}}"
                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                Margin="0,16,0,4"
                 Text="Unidades Organizativas" />
-            <VerticalStackLayout BindableLayout.ItemsSource="{Binding OrganizationalUnities}">
-                <BindableLayout.ItemTemplate>
+            <CollectionView ItemsSource="{Binding OrganizationalUnities}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
                     <DataTemplate x:DataType="interop_common_display_models:OrganizationalUnityTreeDisplayModel">
-                        <Frame Margin="0,8,0,0">
+                        <Frame>
                             <StackLayout>
                                 <Label 
                                     Text="{Binding Name}"
@@ -36,25 +38,27 @@
                             </StackLayout>
                         </Frame>
                     </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </VerticalStackLayout>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             <Label 
                 IsVisible="{Binding Children, Converter={StaticResource IsListNotNullOrEmptyConverter}}"
                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                Margin="0,16,0,4"
                 Text="Dependencias" />
-            <VerticalStackLayout BindableLayout.ItemsSource="{Binding Children}">
-                <BindableLayout.ItemTemplate>
+            <CollectionView ItemsSource="{Binding Children}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <local_card_views:StructureTreeCardView 
-                            ItemTapGestureRecognizerTapped="TapGestureRecognizer_Tapped"
-                            Margin="0,8,0,0">
+                        <local_card_views:StructureTreeCardView ItemTapGestureRecognizerTapped="TapGestureRecognizer_Tapped">
                             <ContentView.GestureRecognizers>
                                 <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                             </ContentView.GestureRecognizers>
                         </local_card_views:StructureTreeCardView>
                     </DataTemplate>
-                </BindableLayout.ItemTemplate>
-            </VerticalStackLayout>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
         </VerticalStackLayout>
     </Frame>
 </ContentView>

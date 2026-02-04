@@ -90,6 +90,7 @@
                                 Text="Aplicar"
                                 Command="{Binding ApplyChangesCommand}" />
                             <Button 
+                                Style="{StaticResource DefaultStyledButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Cancelar"
                                 Clicked="DismissControl_Invoked" />

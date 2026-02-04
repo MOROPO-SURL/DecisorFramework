@@ -43,8 +43,8 @@
                             LineBreakMode="TailTruncation" />
                     </VerticalStackLayout>
                     <Button
+                        Style="{StaticResource FontIconImageButtonStyle}" 
                         VerticalOptions="Start"
-                        FontFamily="MaterialDesignIcons" 
                         Text="&#xF90B;"
                         Clicked="ChiefVacantEditionButton_Clicked" />
                 </StackLayout>
@@ -109,12 +109,12 @@
                                         </VerticalStackLayout>
                                         <VerticalStackLayout Spacing="8">
                                             <Button
-                                                FontFamily="MaterialDesignIcons" 
+                                                Style="{StaticResource FontIconImageButtonStyle}" 
                                                 Text="&#xF90B;"
                                                 Clicked="VacantEditionButton_Clicked" />
                                             <Button
                                                 VerticalOptions="Start"
-                                                FontFamily="MaterialDesignIcons" 
+                                                Style="{StaticResource FontIconImageButtonStyle}" 
                                                 Text="&#xFA78;"
                                                 Clicked="VacantRemoveButton_Clicked" />
                                         </VerticalStackLayout>

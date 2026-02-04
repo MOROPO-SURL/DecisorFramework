@@ -46,7 +46,7 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
-    <MenuFlyoutItem Text="Estructural" IsEnabled="False" />
+    <MenuFlyoutItem Text="» Estructural «" IsEnabled="False" />
     <ShellContent
         Title="Entidades Administrativas"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:StructuresManagePage}">
@@ -67,7 +67,7 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Activos" IsEnabled="False" />
+    <MenuFlyoutItem Text="» Activos «" IsEnabled="False" />
     <ShellContent
         Title="Inmuebles"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PropertiesManagePage}">
@@ -88,7 +88,7 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Complementarios" IsEnabled="False" />
+    <MenuFlyoutItem Text="» Complementarios «" IsEnabled="False" />
     <ShellContent
         Title="Organismos"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:CentralStateStructuresManagePage}">

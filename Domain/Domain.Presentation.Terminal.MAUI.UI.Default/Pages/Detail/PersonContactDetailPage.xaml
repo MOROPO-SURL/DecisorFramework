@@ -68,7 +68,18 @@
                             </FlexLayout>
                             <FlexLayout>
                                 <VerticalStackLayout 
-                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=12}}"
+                                    Margin="4"
+                                    Spacing="6">
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                        Text="Color de piel" />
+                                    <Label 
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        Text="{Binding SkinKind}" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
                                     Margin="4"
                                     Spacing="6">
                                     <Label 
@@ -79,7 +90,7 @@
                                         Text="{Binding Identity.Sex}" />
                                 </VerticalStackLayout>
                                 <VerticalStackLayout 
-                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
                                     Margin="4"
                                     Spacing="6">
                                     <Label 

@@ -2,6 +2,7 @@
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
+using MOROPO.Framework.Guama.Core.Persistence.Entities.Contract;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using System.Linq;
 
@@ -49,6 +50,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         {
             base.PreCreate(entity, model);
 
+            entity.ChiefVacant = vacantRepository.Add(model.ChiefVacant.Export(), User.Identity.Name, false);
+            entity.ChiefVacantId = entity.ChiefVacant.Id;
+
             foreach (var _model in model.IncomingOrganizationalUnities)
             {
                 var _entity = _model.Export();
@@ -76,6 +80,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         protected override void PreEdit(Workforce entity, WorkforceInputModel model)
         {
             base.PreEdit(entity, model);
+
+            model.ChiefVacant.Mergue(entity.ChiefVacant);
 
             foreach (var _model in model.OutgoingOrganizationalUnities)
             {

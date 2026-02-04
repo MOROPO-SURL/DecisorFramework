@@ -10,6 +10,8 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Configurators
 
             entityTypeBuilder.HasOne(entity => entity.Identity).WithOne().HasForeignKey<PersonContact>(entity => entity.IdentityId).OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Cascade);
             entityTypeBuilder.HasOne(entity => entity.User).WithOne().HasForeignKey<PersonContact>(entity => entity.UserId).OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.SetNull);
+
+            entityTypeBuilder.HasIndex(entity => entity.UserId).IsUnique();
         }
     }
 }
