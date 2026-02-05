@@ -33,11 +33,10 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.Structure>(),
                     new Configurators.EmployeeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.UnitMeasurement>(),
-                    new Configurators.UnitMeasurementConversionBridgeEntityTypeConfigurator()
-                ];
+                    new Configurators.UnitMeasurementConversionBridgeEntityTypeConfigurator(),
                     new Configurators.UnitMeasurementConversionBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.KnowledgeArea>()
-                };
+                ];
             }
         }
 
