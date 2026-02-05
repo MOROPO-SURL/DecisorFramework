@@ -20,6 +20,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<ExternalResearcher, System.Guid>, ExternalResearcherRepository>();
             services.AddScoped<IEntityRepository<CallForProposal, System.Guid>, CallForProposalRepository>();
             services.AddScoped<IEntityRepository<ProjectProposal, System.Guid>, ProjectProposalRepository>();
+            services.AddScoped<IEntityRepository<ProjectCategory, System.Guid>, ProjectCategoryRepository>();
 
             services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.IDiDbSchemaConfigurationProvider>();
         }

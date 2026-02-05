@@ -1756,6 +1756,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("model");
 
+                    b.Property<string>("OperativeLicenceCode")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("operativelicencecode");
+
                     b.Property<string>("Plate")
                         .IsRequired()
                         .HasColumnType("text")

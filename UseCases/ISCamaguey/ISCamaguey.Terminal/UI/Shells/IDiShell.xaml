@@ -152,4 +152,14 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <ShellContent
+    Title="Categorías de Proyectos"
+    ContentTemplate="{DataTemplate idi_list_pages:ProjectCategoriesListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+            FontFamily="MaterialDesignIcons"
+            Glyph="&#xF2C0;"
+            Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
 </Shell>

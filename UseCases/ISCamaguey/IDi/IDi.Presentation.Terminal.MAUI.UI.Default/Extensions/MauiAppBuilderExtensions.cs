@@ -23,6 +23,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Ex
                 .AddSingleton<IDetailContentPageFactoryFacade<InternalResearcherDisplayModel>, InternalResearcherDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<CallForProposalDisplayModel>, CallForProposalDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<ProjectProposalDisplayModel>, ProjectProposalDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<ProjectCategoryDisplayModel>, ProjectCategoryDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ResearchAreaDisplayModel, ResearchAreaConfigurationPageModel>, ResearchAreaConfigurationPageFactory>()

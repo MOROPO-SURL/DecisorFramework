@@ -40,6 +40,9 @@
 	  <Compile Update="Pages\Detail\CallForProposalDetailPage.xaml.cs">
 	    <DependentUpon>CallForProposalDetailPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Detail\ProjectCategoryDetailPage.xaml.cs">
+	    <DependentUpon>ProjectCategoryDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Detail\ResearcherCategoryDetailPage.xaml.cs">
 	    <DependentUpon>ResearcherCategoryDetailPage.xaml</DependentUpon>
 	  </Compile>
@@ -96,6 +99,9 @@
 	  <MauiXaml Update="Pages\Detail\InternalResearcherDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\ProjectCategoryDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ParticipatingOrganizationDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -115,6 +121,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\TeachingCategoryDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\List\ProjectCategoriesListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\List\ResearcherCategoriesListPage.xaml">
