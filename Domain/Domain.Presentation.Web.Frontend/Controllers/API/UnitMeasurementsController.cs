@@ -8,16 +8,19 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/fwrk/domain/[controller]")]
     [ApiController]
     public class UnitMeasurementsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<UnitMeasurement, System.Guid, UnitMeasurementInputModel, UnitMeasurementDisplayModel, UnitMeasurementFilterModel>
     {
         private readonly IBridgeRepository<UnitMeasurementConversionBridge, UnitMeasurement, System.Guid, UnitMeasurement, System.Guid> unitMeasurementConversionBridgeRepository;
+        private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-        public UnitMeasurementsController(IBridgeRepository<UnitMeasurementConversionBridge, UnitMeasurement, System.Guid, UnitMeasurement, System.Guid> unitMeasurementConversionBridgeRepository, IEntityRepository<UnitMeasurement, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<UnitMeasurementsController> localizer, Microsoft.Extensions.Logging.ILogger<UnitMeasurementsController> logger)
+        public UnitMeasurementsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IBridgeRepository<UnitMeasurementConversionBridge, UnitMeasurement, System.Guid, UnitMeasurement, System.Guid> unitMeasurementConversionBridgeRepository, IEntityRepository<UnitMeasurement, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<UnitMeasurementsController> localizer, Microsoft.Extensions.Logging.ILogger<UnitMeasurementsController> logger)
             : base(repository, localizer, logger)
         {
             this.unitMeasurementConversionBridgeRepository = unitMeasurementConversionBridgeRepository;
+            this.changeNotificationRepository = changeNotificationRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<UnitMeasurement, bool>> GetGlobalSelector()
@@ -45,6 +48,30 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers
 
                 unitMeasurementConversionBridgeRepository.Add(new UnitMeasurementConversionBridge { ProwId = _model.Destination.Id, SternId = entity.Id, Convertion = 1 / _model.Convertion }, User.Identity.Name, false);
             }
+        }
+
+        protected override void PostCreate(UnitMeasurement entity, UnitMeasurementInputModel model)
+        {
+            base.PostCreate(entity, model);
+
+            if (model.NotificationUserIds == null || model.NotificationUserIds.Length <= 0) return;
+
+            var _model = new UnitMeasurementDisplayModel();
+
+            _model.Import(entity);
+
+            var notificationId = System.Guid.NewGuid();
+
+            changeNotificationRepository.Add(new ChangeNotification
+            {
+                Id = notificationId,
+                Kind = Persistence.Enumerations.NotificationKind.Requested,
+                AuthorId = User.Identity.Name,
+                ChangeKind = Persistence.Enumerations.ChangeKind.Creation,
+                EntityName = typeof(UnitMeasurement).AssemblyQualifiedName,
+                Cached = Newtonsoft.Json.JsonConvert.SerializeObject(_model),
+                UserBridges = model.NotificationUserIds.Select(item => new ChangeNotificationUserBridge { ProwId = notificationId, SternId = item }).ToList()
+            }, User.Identity.Name);
         }
 
         protected override void PreEdit(UnitMeasurement entity, UnitMeasurementInputModel model)
@@ -75,6 +102,30 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers
 
                 unitMeasurementConversionBridgeRepository.Add(new UnitMeasurementConversionBridge { ProwId = _model.Destination.Id, SternId = entity.Id, Convertion = 1 / _model.Convertion }, User.Identity.Name, false);
             }
+        }
+
+        protected override void PostEdit(UnitMeasurement entity, UnitMeasurementInputModel model)
+        {
+            base.PostEdit(entity, model);
+
+            if (model.NotificationUserIds == null || model.NotificationUserIds.Length <= 0) return;
+
+            var _model = new UnitMeasurementDisplayModel();
+
+            _model.Import(entity);
+
+            var notificationId = System.Guid.NewGuid();
+
+            changeNotificationRepository.Add(new ChangeNotification
+            {
+                Id = notificationId,
+                Kind = Persistence.Enumerations.NotificationKind.Requested,
+                AuthorId = User.Identity.Name,
+                ChangeKind = Persistence.Enumerations.ChangeKind.Edition,
+                EntityName = typeof(UnitMeasurement).AssemblyQualifiedName,
+                Cached = Newtonsoft.Json.JsonConvert.SerializeObject(_model),
+                UserBridges = model.NotificationUserIds.Select(item => new ChangeNotificationUserBridge { ProwId = notificationId, SternId = item }).ToList()
+            }, User.Identity.Name);
         }
 
         [HttpGet("releateds/{key}")]

@@ -5,6 +5,8 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Context.Contract
 {
     public interface IDomainDbContext
     {
+        public DbSet<ChangeNotification> ChangeNotifications { get; set; }
+        public DbSet<ChangeNotificationUserBridge> ChangeNotificationUserBridges { get; set; }
         public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
         public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
         public DbSet<CentralStateStructure> CentralStateStructures { get; set; }

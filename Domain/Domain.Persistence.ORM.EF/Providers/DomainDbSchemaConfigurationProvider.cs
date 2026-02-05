@@ -8,8 +8,10 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Providers
         {
             get
             {
-                return new System.Collections.Generic.List<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
-                {
+                return
+                [
+                    new BaseEntityTypeConfigurator<Entities.ChangeNotification>(),
+                    new Configurators.ChangeNotificationUserBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.LegalBusinessKind>(),
                     new BaseEntityTypeConfigurator<Entities.NaturalBusinessKind>(),
                     new Configurators.CentralStateStructureEntityTypeConfigurator(),
@@ -31,6 +33,8 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.Structure>(),
                     new Configurators.EmployeeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.UnitMeasurement>(),
+                    new Configurators.UnitMeasurementConversionBridgeEntityTypeConfigurator()
+                ];
                     new Configurators.UnitMeasurementConversionBridgeEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.KnowledgeArea>()
                 };
