@@ -65,8 +65,10 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers
             changeNotificationRepository.Add(new ChangeNotification
             {
                 Id = notificationId,
+                Kind = Persistence.Enumerations.NotificationKind.Requested,
+                AuthorId = User.Identity.Name,
                 ChangeKind = Persistence.Enumerations.ChangeKind.Creation,
-                EntityName = typeof(UnitMeasurement).Name,
+                EntityName = typeof(UnitMeasurement).AssemblyQualifiedName,
                 Cached = Newtonsoft.Json.JsonConvert.SerializeObject(_model),
                 UserBridges = model.NotificationUserIds.Select(item => new ChangeNotificationUserBridge { ProwId = notificationId, SternId = item }).ToList()
             }, User.Identity.Name);
@@ -117,8 +119,10 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers
             changeNotificationRepository.Add(new ChangeNotification
             {
                 Id = notificationId,
+                Kind = Persistence.Enumerations.NotificationKind.Requested,
+                AuthorId = User.Identity.Name,
                 ChangeKind = Persistence.Enumerations.ChangeKind.Edition,
-                EntityName = typeof(UnitMeasurement).Name,
+                EntityName = typeof(UnitMeasurement).AssemblyQualifiedName,
                 Cached = Newtonsoft.Json.JsonConvert.SerializeObject(_model),
                 UserBridges = model.NotificationUserIds.Select(item => new ChangeNotificationUserBridge { ProwId = notificationId, SternId = item }).ToList()
             }, User.Identity.Name);
