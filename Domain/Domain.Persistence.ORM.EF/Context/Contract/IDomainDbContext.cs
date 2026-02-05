@@ -27,5 +27,6 @@ namespace MOROPO.Framework.Decisor.Domain.Persistence.ORM.EF.Context.Contract
         public DbSet<Employee> Employees { get; set; }
         public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
         public DbSet<UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
+        public DbSet<KnowledgeArea> KnowledgeAreas { get; set; }
     }
 }

@@ -24,6 +24,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
                 .AddSingleton<IDetailContentPageFactoryFacade<VehicleDisplayModel>, VehicleDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<EmployeeDisplayModel>, EmployeeDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<UnitMeasurementDisplayModel>, UnitMeasurementDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<KnowledgeAreaDisplayModel>, KnowledgeAreaDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel>, PersonContactConfigurationPageFactory>()
@@ -32,7 +33,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
                 .AddSingleton<IConfigurationContentPageFactoryFacade<PropertyDisplayModel, PropertyConfigurationPageModel>, PropertyConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<BrandDisplayModel, BrandConfigurationPageModel>, BrandConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<VehicleDisplayModel, VehicleConfigurationPageModel>, VehicleConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel>, UnitMeasurementConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel>, UnitMeasurementConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<KnowledgeAreaDisplayModel, KnowledgeAreaConfigurationPageModel>, KnowledgeAreaConfigurationPageFactory>() ;
 
             return builder;
         }

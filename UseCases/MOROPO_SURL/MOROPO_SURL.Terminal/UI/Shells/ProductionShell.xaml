@@ -56,12 +56,12 @@
                 Glyph="&#xF14E;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
-        <ShellContent
+        <!--<ShellContent
             Title="Pendientes"
-            ContentTemplate="{DataTemplate decisorframework_production_manage_pages:ProductionOrdersManagePage}" />
-        <ShellContent
+            ContentTemplate="{DataTemplate decisorframework_production_manage_pages:ProductionOrdersManagePage}" />-->
+        <!--<ShellContent
             Title="Completadas"
-            ContentTemplate="{DataTemplate decisorframework_production_list_pages:ProductionOrdersListPage}" />
+            ContentTemplate="{DataTemplate decisorframework_production_list_pages:ProductionOrdersListPage}" />-->
     </FlyoutItem>
     <ShellContent
         Title="Producciones"

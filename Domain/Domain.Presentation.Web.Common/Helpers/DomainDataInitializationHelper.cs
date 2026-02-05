@@ -314,6 +314,26 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Helpers
             }
             #endregion
 
+
+            #region KnowledgeArea
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.KnowledgeAreaViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.KnowledgeAreaViewerPermission.ToPermissionEntity(Authorization.KnowledgeAreaManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.KnowledgeAreaCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.KnowledgeAreaCreatorPermission.ToPermissionEntity(Authorization.KnowledgeAreaManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.KnowledgeAreaEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.KnowledgeAreaEditorPermission.ToPermissionEntity(Authorization.KnowledgeAreaManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.KnowledgeAreaRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.KnowledgeAreaRemoverPermission.ToPermissionEntity(Authorization.KnowledgeAreaManagementPermissionGroup));
+            }
+            #endregion
+
             if (dbContext is Guama.Core.Persistence.ORM.EF.Context.Contract.ITraceableDbContext)
             {
                 (dbContext as Guama.Core.Persistence.ORM.EF.Context.Contract.ITraceableDbContext).SaveChanges("system");

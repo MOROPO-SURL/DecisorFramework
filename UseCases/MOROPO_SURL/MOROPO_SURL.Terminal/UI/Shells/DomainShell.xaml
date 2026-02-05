@@ -109,6 +109,16 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <!--<ShellContent
+        Title="Áreas de Conocimiento"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:KnowledgeAreaManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFA2C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>-->
     <ShellContent
         Title="Unidades de Medida"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:UnitMeasurementsManagePage}">

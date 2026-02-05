@@ -145,5 +145,14 @@
         public const string VehicleKindEditorPermission = "vehicle-kind-editor-domain-permission";
         public const string VehicleKindRemoverPermission = "vehicle-kind-remover-domain-permission";
         #endregion
+
+        #region KnowledgeArea
+        public const string KnowledgeAreaManagementPermissionGroup = "knowledge-area-management-domain-permission-group";
+
+        public const string KnowledgeAreaViewerPermission = "knowledge-area-viewer-domain-permission";
+        public const string KnowledgeAreaCreatorPermission = "knowledge-area-creator-domain-permission";
+        public const string KnowledgeAreaEditorPermission = "knowledge-area-editor-domain-permission";
+        public const string KnowledgeAreaRemoverPermission = "knowledge-area-remover-domain-permission";
+        #endregion
     }
 }
