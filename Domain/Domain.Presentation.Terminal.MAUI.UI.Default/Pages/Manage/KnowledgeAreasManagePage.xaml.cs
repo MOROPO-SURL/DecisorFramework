@@ -3,11 +3,11 @@ using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class KnowledgeAreaManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel, Models.Page.Manage.KnowledgeAreasManagePageModel, Models.Page.Configuration.KnowledgeAreaConfigurationPageModel>
+public partial class KnowledgeAreasManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel, Models.Page.Manage.KnowledgeAreasManagePageModel, Models.Page.Configuration.KnowledgeAreaConfigurationPageModel>
 {
     public static double ITEM_VIEW_REQUEST_HEIGHT = 128;
 
-    public KnowledgeAreaManagePage()
+    public KnowledgeAreasManagePage()
     {
         InitializeComponent();
     }
