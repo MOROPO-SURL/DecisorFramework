@@ -161,6 +161,8 @@ public partial class OrganizationalUnitiesManagePage : Caney.MVVM.Core.Pages.Con
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel model)
     {
+        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.", delay: System.TimeSpan.FromMilliseconds(500));
+
         LoadItems();
     }
 

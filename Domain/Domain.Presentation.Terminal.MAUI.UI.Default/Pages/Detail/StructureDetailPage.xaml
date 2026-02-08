@@ -49,7 +49,6 @@
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 
-                                Style="{StaticResource DefaultStyledButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />

@@ -12,7 +12,7 @@
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.KnowledgeAreasManagePage"
     x:TypeArguments="interop_common_display_models:KnowledgeAreaDisplayModel,presentation_manage_page_models:KnowledgeAreasManagePageModel,presentation_configuration_page_models:KnowledgeAreaConfigurationPageModel"
     x:DataType="presentation_manage_page_models:KnowledgeAreasManagePageModel"
-    Title="Gestión de Area del Conocimiento">
+    Title="Gestión de Áreas del Conocimiento">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />

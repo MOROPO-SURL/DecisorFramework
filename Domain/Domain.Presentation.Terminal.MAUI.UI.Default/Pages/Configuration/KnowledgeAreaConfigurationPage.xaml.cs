@@ -10,7 +10,7 @@ public partial class KnowledgeAreaConfigurationPage : Core.Presentation.Terminal
         InitializeComponent();
     }
 
-    protected override string EntityTypeName => "Area del Conocimiento";
+    protected override string EntityTypeName => "Área del Conocimiento";
 
     protected override async System.Threading.Tasks.Task<KnowledgeAreaDisplayModel> PerformCreationAsync()
     {

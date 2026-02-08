@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ListBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
+    xmlns:presentation_view_template_selectors="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Template.Selector"
+    xmlns:presentation_list_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List.ChangeNotificationsListPage"
+    x:TypeArguments="presentation_view_models:ChangeNotificationViewModel,presentation_list_page_models:ChangeNotificationsListPageModel"
+    x:DataType="presentation_list_page_models:ChangeNotificationsListPageModel"
+    Title="Avisos">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <presentation_view_template_selectors:ChangeNotificationViewSelector x:Key="ChangeNotificationViewSelector">
+                <presentation_view_template_selectors:ChangeNotificationViewSelector.NotReadedNotificationTemplate>
+                    <DataTemplate x:DataType="presentation_view_models:ChangeNotificationViewModel">
+                        <Frame Padding="0">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <BoxView
+                                    Grid.Column="0"
+                                    WidthRequest="4"
+                                    Color="{StaticResource Primary}" />
+                                <Label
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
+                                    Margin="8"
+                                    FontSize="56"
+                                    FontFamily="MaterialDesignIcons"
+                                    Text="{Binding FeatureIconGlyph, Mode=OneTime}" />
+                                <VerticalStackLayout
+                                    Grid.Column="2"
+                                    VerticalOptions="Center"
+                                    Margin="0,12"
+                                    Spacing="4">
+                                    <Label
+                                        LineBreakMode="TailTruncation"
+                                        FontAttributes="Bold"
+                                        Text="{Binding Title, Mode=OneTime}" />
+                                    <Label
+                                        LineBreakMode="TailTruncation"
+                                        FontAttributes="Bold"
+                                        Text="{Binding Model.At, Mode=OneTime, StringFormat='{0:D}'}" />
+                                </VerticalStackLayout>                                        
+                                <Label
+                                    Grid.Column="3"
+                                    VerticalOptions="Center" 
+                                    FontSize="32"
+                                    FontFamily="MaterialDesignIcons"
+                                    TextColor="DimGray"
+                                    Text="&#xFD35;"
+                                    ToolTipProperties.Text="{Binding Model.ReadedAt, Mode=OneTime, StringFormat='Visto en {0:D}', TargetNullValue='Notificación no leída'}" />
+                                <Button
+                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                    Grid.Column="4"
+                                    Margin="16"
+                                    VerticalOptions="Center" 
+                                    Text="&#xF1D9;"
+                                    Clicked="NotificationOptionsButton_Clicked"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </presentation_view_template_selectors:ChangeNotificationViewSelector.NotReadedNotificationTemplate>
+                <presentation_view_template_selectors:ChangeNotificationViewSelector.ReadedNotificationTemplate>
+                    <DataTemplate x:DataType="presentation_view_models:ChangeNotificationViewModel">
+                        <Frame Padding="0">
+                            <Frame.GestureRecognizers>
+                                <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                            </Frame.GestureRecognizers>
+                            <Grid ColumnSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition />
+                                    <ColumnDefinition Width="Auto" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <BoxView
+                                    Grid.Column="0"
+                                    WidthRequest="4"
+                                    Color="DimGray" />
+                                <Label
+                                    Grid.Column="1"
+                                    VerticalOptions="Center"
+                                    Margin="8"
+                                    FontSize="56"
+                                    FontFamily="MaterialDesignIcons"
+                                    TextColor="DimGray"
+                                    Text="{Binding FeatureIconGlyph, Mode=OneTime}" />
+                                <VerticalStackLayout
+                                    Grid.Column="2"
+                                    VerticalOptions="Center"
+                                    Margin="0,12"
+                                    Spacing="4">
+                                    <Label
+                                        LineBreakMode="TailTruncation"
+                                        TextColor="DimGray"
+                                        Text="{Binding Title, Mode=OneTime}" />
+                                    <Label
+                                        LineBreakMode="TailTruncation"
+                                        TextColor="DimGray"
+                                        Text="{Binding Model.At, Mode=OneTime, StringFormat='{0:D}'}" />
+                                </VerticalStackLayout>                                        
+                                <Label
+                                    Grid.Column="3"
+                                    VerticalOptions="Center" 
+                                    FontSize="32"
+                                    FontFamily="MaterialDesignIcons"
+                                    TextColor="DimGray"
+                                    Text="&#xF09C;"
+                                    ToolTipProperties.Text="{Binding Model.ReadedAt, Mode=OneTime, StringFormat='Visto en {0:D}', TargetNullValue='Notificación no leída'}" />
+                                <Button
+                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                    Grid.Column="4"
+                                    Margin="16"
+                                    VerticalOptions="Center" 
+                                    Text="&#xF1D9;"
+                                    Clicked="NotificationOptionsButton_Clicked"/>
+                            </Grid>
+                        </Frame>
+                    </DataTemplate>
+                </presentation_view_template_selectors:ChangeNotificationViewSelector.ReadedNotificationTemplate>
+            </presentation_view_template_selectors:ChangeNotificationViewSelector>
+            
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Todo leído"
+            Clicked="MarkAllAsReadedToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF12D;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Ir al Inicio"
+            Clicked="BackToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF2DE;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <Grid 
+                    VerticalOptions="FillAndExpand"
+                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
+                    <CollectionView
+                        x:Name="ItemsCollectionView"
+                        Margin="10,6,10,10"
+                        ItemsSource="{Binding Items}"
+                        ItemTemplate="{StaticResource ChangeNotificationViewSelector}">
+                        <CollectionView.ItemsLayout>
+                            <LinearItemsLayout Orientation="Vertical" ItemSpacing="5" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.EmptyView>
+                            <Label
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                                HorizontalTextAlignment="Center"
+                                Margin="5,7,5,5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                FontAttributes="Italic" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.Footer>
+                            <StackLayout IsVisible="{Binding HasMoreItems}">
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="5"
+                                    Text="Mostrar más"
+                                    Clicked="LoadMoreBurron_Clicked" />
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</core_ui_base_pages:ListBaseContentPage>

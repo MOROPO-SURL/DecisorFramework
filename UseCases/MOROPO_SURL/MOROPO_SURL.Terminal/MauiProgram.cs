@@ -55,7 +55,8 @@ namespace MOROPO.Tool.Decisor.Terminal
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade, Helpers.MainExceptionHandlingHelper>()
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IMenuFlyoutSectionSubtitleHelperFacade, Helpers.MenuFlyoutSectionSubtitleHelper>()
                    .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSessionManager>()
-                   .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISettingManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSettingManager>();
+                   .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISettingManagerFacade, Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.DefaultSettingManager>()
+                   .AddSingleton<Framework.Decisor.Domain.Presentation.Terminal.MAUI.Factories.Facade.IChangeNotificationViewModelFactoryFacade, Factories.ChangeNotificationViewModelFactory>();
 
 #if DEBUG
             builder.Logging.AddDebug();

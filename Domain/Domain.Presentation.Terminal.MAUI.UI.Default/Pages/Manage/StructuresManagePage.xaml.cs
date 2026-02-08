@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
@@ -187,6 +188,8 @@ public partial class StructuresManagePage : Caney.MVVM.Core.Pages.ContentPage
 
     private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.StructureParentalDisplayModel model)
     {
+        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.", delay: System.TimeSpan.FromMilliseconds(500)); 
+        
         LoadItems();
     }
 

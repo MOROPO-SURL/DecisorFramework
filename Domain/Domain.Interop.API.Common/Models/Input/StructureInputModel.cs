@@ -4,10 +4,8 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 {
-    public class StructureInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Structure, System.Guid>
+    public class StructureInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Structure, System.Guid>
     {
-        public System.Guid Id { get; set; } = System.Guid.NewGuid();
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -25,7 +23,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public List<OrganizationalUnityTreeDisplayModel> OrganizationalUnities { get; set; } = new List<OrganizationalUnityTreeDisplayModel>();
 
-        public Persistence.Entities.Structure Export()
+        public override Persistence.Entities.Structure Export()
         {
             var entity = new Persistence.Entities.Structure { Id = Id, Enabled = true, Identity = new Guama.Identity.Persistence.Entities.OrganizationIdentity() };
 
@@ -34,12 +32,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.Structure entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.Structure entity)
+        public override void Mergue(Persistence.Entities.Structure entity)
         {
             entity.Identity.Name = Name;
             entity.Identity.About = About;

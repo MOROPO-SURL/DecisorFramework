@@ -5,16 +5,14 @@
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; } = System.Guid.NewGuid();
 
-        public System.DateTime At { get; set; }
-
         public Enumerations.NotificationKind Kind { get; set; }
-
-        public Enumerations.ChangeKind ChangeKind { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AuthorId))]
         public Guama.Security.Personal.Persistence.Entities.User Author { get; set; }
         [System.ComponentModel.DataAnnotations.Required]
         public string AuthorId { get; set; }
+
+        public Enumerations.ChangeKind ChangeKind { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.MaxLength(255)]

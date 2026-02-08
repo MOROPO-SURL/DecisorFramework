@@ -9,8 +9,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions
     {
         public static void AddDecisorDomainPresentationWebCommon(this IServiceCollection services)
         {
-
             services.AddScoped<IEntityRepository<ChangeNotification, System.Guid>, ChangeNotificationRepository>();
+            services.AddScoped<IBridgeRepository<ChangeNotificationUserBridge, ChangeNotification, System.Guid, Guama.Security.Personal.Persistence.Entities.User, string>, ChangeNotificationUserBridgeRepository>();
             services.AddScoped<IEntityRepository<CentralStateStructure, System.Guid>, CentralStateSctructureRepository>();
             services.AddScoped<IEntityRepository<Colaborator, System.Guid>, ColaboratorRepository>();
             services.AddScoped<IEntityRepository<PersonContact, System.Guid>, PersonContactRepository>();

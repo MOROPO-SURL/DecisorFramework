@@ -1,24 +1,28 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.API
 {
+    [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Microsoft.AspNetCore.Mvc.Route("api/fwrk/domain/structures/parental")]
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class ParentalStructuresController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Structure, System.Guid, StructureInputModel, StructureParentalDisplayModel>
     {
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
+        private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
         private readonly IImageFileManagerFacade imageFileManager;
 
-        public ParentalStructuresController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Structure, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ParentalStructuresController> localizer, Microsoft.Extensions.Logging.ILogger<ParentalStructuresController> logger)
+        public ParentalStructuresController(IImageFileManagerFacade imageFileManager, IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Structure, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ParentalStructuresController> localizer, Microsoft.Extensions.Logging.ILogger<ParentalStructuresController> logger)
             : base(repository, localizer, logger)
         {
             this.imageRepository = imageRepository;
             this.imageFileManager = imageFileManager;
+            this.changeNotificationRepository = changeNotificationRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<Structure, bool>> GetGlobalSelector()
@@ -70,6 +74,13 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
             }
         }
 
+        protected override void PostCreate(Structure entity, StructureInputModel model)
+        {
+            base.PostCreate(entity, model);
+
+            this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+        }
+
         protected override void PreEdit(Structure entity, StructureInputModel model)
         {
             base.PreEdit(entity, model);
@@ -98,6 +109,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
         protected override void PostEdit(Structure entity, StructureInputModel model)
         {
             base.PostEdit(entity, model);
+
+            this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
 
             try
             {
