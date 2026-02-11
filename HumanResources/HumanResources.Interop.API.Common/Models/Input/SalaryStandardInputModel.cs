@@ -9,7 +9,7 @@
 
         public int Priority { get; set; }
 
-        public double Fee { get; set; }
+        public float Fee { get; set; }
 
         public Persistence.Entities.SalaryStandard Export()
         {

@@ -14,7 +14,7 @@
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.StaffsManagePage"
     x:TypeArguments="interop_common_display_models:StaffDisplayModel,presentation_manage_page_models:StaffsManagePageModel,presentation_configuration_page_models:StaffConfigurationPageModel"
     x:DataType="presentation_manage_page_models:StaffsManagePageModel"
-    Title="Gestión de Asignaciones de Plantilla">
+    Title="Gestión de Configuraciones de Plantilla">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />

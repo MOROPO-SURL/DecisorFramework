@@ -39,7 +39,7 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
         }
     }
 
-    protected override string EntityTypeName => "Asignación de Plantilla";
+    protected override string EntityTypeName => "Configuración de Plantilla";
 
     protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.StaffDisplayModel> PerformCreationAsync()
     {
@@ -48,9 +48,11 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
         var model = new Interop.API.Common.Models.Input.StaffInputModel
         {
             Id = System.Guid.NewGuid(),
-            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
-            MainWorkforceId = ConcreteBindingContext.AvailableWorkforces[MainWorkforcePicker.SelectedIndex].Id,
-            WorkingDayCount = ConcreteBindingContext.WorkingDayCount,
+            StructureId = ConcreteBindingContext.Structure.Id,
+            MainWorkforceId = ConcreteBindingContext.MainWorkforce.Id,
+            WorkingWeekHourCount = ConcreteBindingContext.WorkingWeekHourCount,
+            DoctorateExtraFeed = ConcreteBindingContext.DoctorateExtraFeed,
+            MasteryExtraFeed = ConcreteBindingContext.MasteryExtraFeed,
             AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges]
         };
 
@@ -66,9 +68,11 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
         var model = new Interop.API.Common.Models.Input.StaffInputModel
         {
             Id = ConcreteBindingContext.Id,
-            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
-            MainWorkforceId = ConcreteBindingContext.AvailableWorkforces[MainWorkforcePicker.SelectedIndex].Id,
-            WorkingDayCount = ConcreteBindingContext.WorkingDayCount,
+            StructureId = ConcreteBindingContext.Structure.Id,
+            MainWorkforceId = ConcreteBindingContext.MainWorkforce.Id,
+            WorkingWeekHourCount = ConcreteBindingContext.WorkingWeekHourCount,
+            DoctorateExtraFeed = ConcreteBindingContext.DoctorateExtraFeed,
+            MasteryExtraFeed = ConcreteBindingContext.MasteryExtraFeed,
             AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges]
         };
 

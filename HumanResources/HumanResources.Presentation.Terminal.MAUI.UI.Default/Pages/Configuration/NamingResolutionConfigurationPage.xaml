@@ -56,7 +56,7 @@
                             </Grid.RowDefinitions>
                             <Label 
                                 Grid.Row="0"
-                                Style="{StaticResource CaptionFieldLabelStyle}" Text="No. Consecutivo" />
+                                Style="{StaticResource CaptionFieldLabelStyle}" Text="No. Resolución" />
                             <Entry
                                 Grid.Row="1"
                                 BackgroundColor="Transparent"
@@ -104,7 +104,7 @@
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=5, ExtraLargeContainerColumn=7, LargeContainerColumn=5, MediumContainerColumn=12, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acuerdo" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acuerdo (opcional)" />
                         <Frame 
                             IsVisible="{Binding Agreement, Converter={StaticResource IsNotNullConverter}}"
                             Padding="16">

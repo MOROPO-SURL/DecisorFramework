@@ -3,12 +3,14 @@
     public class StaffConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.StaffDisplayModel>
     {
         public static string StructureValidableProperty => nameof(Structure);
-        public static string MainWorkforceStandardValidableProperty => nameof(MainWorkforce);
-        public static string WorkingDayCountStandardValidableProperty => nameof(WorkingDayCount);
+        public static string MainWorkforceValidableProperty => nameof(MainWorkforce);
+        public static string WorkingWeekHourCountValidableProperty => nameof(WorkingWeekHourCount);
 
         private Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel structure;
         private Interop.API.Common.Models.Display.WorkforceDisplayModel mainWorkforce;
-        private int workingDayCount = 24;
+        private int workingWeekHourCount = 44;
+        private float doctorateExtraFeed;
+        private float masteryExtraFeed;
 
         public StaffConfigurationPageModel(Interop.API.Common.Models.Display.StaffDisplayModel model) : base(model)
         {
@@ -17,7 +19,9 @@
                 Id = model.Id;
                 structure = model.Structure;
                 mainWorkforce = model.MainWorkforce;
-                workingDayCount = model.WorkingDayCount;
+                workingWeekHourCount = model.WorkingWeekHourCount;
+                masteryExtraFeed = model.MasteryExtraFeed;
+                doctorateExtraFeed = model.DoctorateExtraFeed;
                 AlternativeWorkforceBridges = new System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.AlternativeWorkforceBridgeModel>(model.AlternativeWorkforces);
             }
         }
@@ -28,7 +32,11 @@
 
         public Interop.API.Common.Models.Display.WorkforceDisplayModel MainWorkforce { get => mainWorkforce; set => SetProperty(ref mainWorkforce, value); }
 
-        public int WorkingDayCount { get => workingDayCount; set => SetProperty(ref workingDayCount, value); }
+        public int WorkingWeekHourCount { get => workingWeekHourCount; set => SetProperty(ref workingWeekHourCount, value); }
+
+        public float DoctorateExtraFeed { get => doctorateExtraFeed; set => SetProperty(ref doctorateExtraFeed, value); }
+
+        public float MasteryExtraFeed { get => masteryExtraFeed; set => SetProperty(ref masteryExtraFeed, value); }
 
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.AlternativeWorkforceBridgeModel> AlternativeWorkforceBridges { get; set; } = [];
 

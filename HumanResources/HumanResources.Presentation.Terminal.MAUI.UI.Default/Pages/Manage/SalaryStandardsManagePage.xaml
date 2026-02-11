@@ -62,7 +62,7 @@
                                             Text="{Binding Name}" />
                                         <Label 
                                             Margin="0,8,0,0"
-                                            Text="Tariza"
+                                            Text="Tarifa horaria"
                                             TextColor="DimGray"
                                             FontSize="Caption"
                                             FontAttributes="Bold" />
@@ -70,7 +70,7 @@
                                             VerticalOptions="FillAndExpand"
                                             LineBreakMode="TailTruncation"
                                             MaxLines="2"
-                                            Text="{Binding Fee, StringFormat='{0:F2}'}" />
+                                            Text="{Binding Fee}" />
                                     </VerticalStackLayout>
                                 </Frame>
                             </DataTemplate>

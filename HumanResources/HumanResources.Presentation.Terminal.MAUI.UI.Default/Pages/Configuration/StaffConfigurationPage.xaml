@@ -70,9 +70,9 @@
                             SelectedItem="{Binding MainWorkforce}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
                         <Label
-                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.MainWorkforceStandardValidableProperty}}"
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.MainWorkforceValidableProperty}}"
                             Style="{StaticResource ValidationMessageLabelStyle}"
-                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.MainWorkforceStandardValidableProperty}}" />
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.MainWorkforceValidableProperty}}" />
                     </VerticalStackLayout>
                     <Grid
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
@@ -85,24 +85,38 @@
                         </Grid.RowDefinitions>
                         <Label 
                             Grid.Row="0"
-                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Días laborables" />
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Horas laborables por semana" />
                         <Entry
                             Grid.Row="1"
                             BackgroundColor="Transparent"
                             IsReadOnly="True"
-                            Text="{Binding WorkingDayCount}" />
+                            Text="{Binding WorkingWeekHourCount}" />
                         <Stepper
                             Grid.Row="1"
                             Margin="0,0,6,0"
                             HorizontalOptions="End" VerticalOptions="Center"
-                            Minimum="1" Maximum="28"
-                            Value="{Binding WorkingDayCount}" />
+                            Minimum="1" Maximum="44"
+                            Value="{Binding WorkingWeekHourCount}" />
                         <Label
                             Grid.Column="2"
-                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.WorkingDayCountStandardValidableProperty}}"
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.WorkingWeekHourCountValidableProperty}}"
                             Style="{StaticResource ValidationMessageLabelStyle}"
-                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.WorkingDayCountStandardValidableProperty}}" />
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.WorkingWeekHourCountValidableProperty}}" />
                     </Grid>
+                    <VerticalStackLayout
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tarifa por hora extra maestrías" />
+                        <Entry Text="{Binding MasteryExtraFeed}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tarifa por hora extra maestrías" />
+                        <Entry Text="{Binding DoctorateExtraFeed}" />
+                    </VerticalStackLayout>
                 </FlexLayout>
             </VerticalStackLayout>
         </ScrollView>

@@ -10,14 +10,20 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Disp
 
         public WorkforceDisplayModel MainWorkforce { get; set; }
 
-        public int WorkingDayCount { get; set; }
+        public int WorkingWeekHourCount { get; set; }
+
+        public float DoctorateExtraFeed { get; set; }
+
+        public float MasteryExtraFeed { get; set; }
 
         public Bridge.AlternativeWorkforceBridgeModel[] AlternativeWorkforces { get; set; }
 
         public void Import(Persistence.Entities.Staff entity)
         {
             Id = entity.Id;
-            WorkingDayCount = entity.WorkingDayCount;
+            WorkingWeekHourCount = entity.WorkingWeekHourCount;
+            DoctorateExtraFeed = entity.DoctorateExtraFeed;
+            MasteryExtraFeed = entity.MasteryExtraFeed;
             AlternativeWorkforces = entity.AlternativeWorkforceBridges?.Select(bridge =>
             {
                 var model = new Bridge.AlternativeWorkforceBridgeModel
