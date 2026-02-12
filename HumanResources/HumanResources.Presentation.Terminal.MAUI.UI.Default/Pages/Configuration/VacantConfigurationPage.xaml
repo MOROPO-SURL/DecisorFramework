@@ -16,6 +16,7 @@
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -77,7 +78,8 @@
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Modo de ocupación" />
                         <Picker 
-                            ItemsSource="{Binding AvailableVacantOcupationModes}" 
+                            ItemsSource="{Static presentation_configuration_page_models:VacantConfigurationPageModel.AVAILABLE_VACANT_OCUPATION_MODES}" 
+                            ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizedStringConverter}}"
                             SelectedItem="{Binding OcupationMode}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
                     </VerticalStackLayout>

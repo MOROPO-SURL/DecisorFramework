@@ -17,6 +17,7 @@
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrapFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="0" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="PostalContactDetailFlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
             
@@ -110,6 +111,7 @@
                                 <Picker 
                                     x:Name="SkinKindPicker" 
                                     ItemsSource="{Static presentation_configuration_page_models:PersonContactConfigurationPageModel.AVAILABLE_SKIN_KINDS}"
+                                    ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizedStringConverter}}"
                                     SelectedItem="{Binding SkinKind}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
                             </VerticalStackLayout>
@@ -121,6 +123,7 @@
                                 <Picker 
                                     x:Name="SexPicker" 
                                     ItemsSource="{Static presentation_configuration_page_models:PersonContactConfigurationPageModel.AVAILABLE_SEXS}"
+                                    ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizedStringConverter}}"
                                     SelectedItem="{Binding Sex}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
                             </VerticalStackLayout>
@@ -132,6 +135,7 @@
                                 <Picker 
                                     x:Name="CivilStatusPicker" 
                                     ItemsSource="{Static presentation_configuration_page_models:PersonContactConfigurationPageModel.AVAILABLE_CIVIL_STATUSES}"
+                                    ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizedStringConverter}}"
                                     SelectedItem="{Binding CivilStatus}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
                             </VerticalStackLayout>

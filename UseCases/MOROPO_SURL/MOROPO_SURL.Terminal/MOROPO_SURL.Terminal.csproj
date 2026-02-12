@@ -89,6 +89,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="LocalizationResources.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>LocalizationResources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="LocalizationResources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>LocalizationResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup>
 	  <MauiXaml Update="UI\Shells\GovernanceShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
