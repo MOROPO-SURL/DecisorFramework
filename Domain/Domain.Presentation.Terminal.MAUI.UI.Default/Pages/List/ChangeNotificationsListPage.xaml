@@ -135,12 +135,11 @@
             </presentation_view_template_selectors:ChangeNotificationViewSelector>
             
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
-            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
-            Text="Todo leído"
+            Text="Todas leídas"
             Clicked="MarkAllAsReadedToolbarItems_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF12D;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />

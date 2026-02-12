@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using System.Linq;
@@ -84,6 +85,23 @@ public class ChangeNotificationsController : Guama.Core.Presentation.Web.Common.
     }
 
     [HttpPut]
+    [Route("notreaded/{id}")]
+    public ActionResult MarkAsNotReaded(System.Guid id)
+    {
+        var bridge = repository.FindOneBy(_bridge => _bridge.ProwId == id && _bridge.SternId == User.Identity.Name);
+
+        bridge.ReadedAt = null;
+
+        var entry = dbContext.Entry(bridge);
+
+        entry.State = EntityState.Modified;
+
+        (dbContext as Guama.Core.Persistence.ORM.EF.Context.Contract.ITraceableDbContext).SaveChanges(User.Identity.Name, true);
+
+        return Ok();
+    }
+
+    [HttpPut]
     [Route("readed/{id}")]
     public ActionResult MarkAsReaded(System.Guid id)
     {
@@ -116,7 +134,31 @@ public class ChangeNotificationsController : Guama.Core.Presentation.Web.Common.
         }
 
         (dbContext as Guama.Core.Persistence.ORM.EF.Context.Contract.ITraceableDbContext).SaveChanges(User.Identity.Name, true);
-
         return Ok();
+    }
+
+    [HttpDelete("{key}")]
+    public virtual ActionResult Delete(System.Guid key)
+    {
+        try
+        {
+            var bridge = repository.Get(key, User.Identity.Name);
+
+            repository.Delete(bridge, User.Identity.Name);
+
+            return Ok();
+        }
+        catch (DbUpdateException e)
+        {
+            logger.LogError(e, e.Message);
+
+            return Conflict();
+        }
+        catch (System.Exception e)
+        {
+            logger.LogError(e, e.Message);
+
+            return NoContent();
+        }
     }
 }

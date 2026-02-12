@@ -25,6 +25,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
                 .AddSingleton<IDetailContentPageFactoryFacade<EmployeeDisplayModel>, EmployeeDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<UnitMeasurementDisplayModel>, UnitMeasurementDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<KnowledgeAreaDisplayModel>, KnowledgeAreaDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<Models.View.ChangeNotificationViewModel>, ChangeNotificationDetailFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel>, PersonContactConfigurationPageFactory>()

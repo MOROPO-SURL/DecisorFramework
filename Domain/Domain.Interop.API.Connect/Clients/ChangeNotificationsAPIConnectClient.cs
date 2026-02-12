@@ -21,6 +21,11 @@
             return httpClientHelperProvider.HttpClientHelper.GetAsync<Guama.Core.Presentation.Models.PaginationModel<Common.Models.Display.ChangeNotificationDisplayModel>>($"{TARGET_CONTROLLER}/page/{page}/limit/{limit}");
         }
 
+        public System.Threading.Tasks.Task MarkAsNotReadedAsync(System.Guid id)
+        {
+            return httpClientHelperProvider.HttpClientHelper.PutAsync($"{TARGET_CONTROLLER}/notreaded/{id}");
+        }
+
         public System.Threading.Tasks.Task MarkAsReadedAsync(System.Guid id)
         {
             return httpClientHelperProvider.HttpClientHelper.PutAsync($"{TARGET_CONTROLLER}/readed/{id}");
@@ -29,6 +34,11 @@
         public System.Threading.Tasks.Task MarkAllAsReadedAsync()
         {
             return httpClientHelperProvider.HttpClientHelper.PutAsync($"{TARGET_CONTROLLER}/readed/all");
+        }
+
+        public System.Threading.Tasks.Task DeleteAsync(System.Guid key)
+        {
+            return httpClientHelperProvider.HttpClientHelper.DeleteAsync($"{TARGET_CONTROLLER}/{key}");
         }
     }
 }
