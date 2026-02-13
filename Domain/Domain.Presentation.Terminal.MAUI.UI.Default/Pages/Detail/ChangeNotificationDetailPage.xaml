@@ -27,7 +27,7 @@
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Margin="0"
-                                FontAttributes="Bold"
+                                FontSize="Medium"
                                 Text="{Binding Title}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"

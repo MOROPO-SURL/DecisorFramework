@@ -226,6 +226,11 @@ public partial class ChangeNotificationsListPage : Core.Presentation.Terminal.MA
 
                     break;
 
+                case OPTIONS_DETAILS:
+                    Dispatcher.Dispatch(() => ItemTapGestureRecognizer_Tapped(sender, new Microsoft.Maui.Controls.TappedEventArgs(null)));
+
+                    break;
+
                 case OPTIONS_CANCEL:
                 default:
                     break;
