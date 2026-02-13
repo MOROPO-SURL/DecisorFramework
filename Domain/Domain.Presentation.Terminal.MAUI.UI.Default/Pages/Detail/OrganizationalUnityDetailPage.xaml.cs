@@ -19,6 +19,15 @@ public partial class OrganizationalUnityDetailPage : Core.Presentation.Terminal.
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
     {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.OrganizationalUnityEditorPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
         var model = BindingContext as Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel;
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>

@@ -30,7 +30,7 @@
 	<PropertyGroup>
 		<TargetFrameworks Condition="$([MSBuild]::IsOSPlatform('windows'))">$(TargetFrameworks);net8.0-windows10.0.19041.0</TargetFrameworks>
 		<DefaultLanguage>en-US</DefaultLanguage>
-		<PackageCertificateThumbprint>8496D1173129CED1DE72A913E2C2FB8D7679FEB4</PackageCertificateThumbprint>
+		<PackageCertificateThumbprint>ABF288475B98FFB6E0AC11E6BAF085A3E9FBC705</PackageCertificateThumbprint>
 		<AppxPackageSigningEnabled>True</AppxPackageSigningEnabled>
 		<GenerateAppInstallerFile>True</GenerateAppInstallerFile>
 		<AppxPackageSigningTimestampDigestAlgorithm>SHA256</AppxPackageSigningTimestampDigestAlgorithm>

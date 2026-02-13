@@ -47,7 +47,7 @@
                 <Label 
                     Style="{StaticResource CaptionFieldLabelStyle}"
                     Margin="8,16,8,0"
-                    Text="Máxima autoridad" />
+                    Text="Puesto superior absoluto" />
                 <Frame 
                     HorizontalOptions="Start"
                     Margin="8" Padding="0"

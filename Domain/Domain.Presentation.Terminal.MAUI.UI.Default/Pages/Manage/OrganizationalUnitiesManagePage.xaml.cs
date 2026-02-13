@@ -97,23 +97,12 @@ public partial class OrganizationalUnitiesManagePage : Caney.MVVM.Core.Pages.Con
 
         concreteBindingContext.IsBusy = true;
 
+        var apiConnectClient = new Interop.API.Connect.Clients.ParentalOrganizationalUnitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
         if (discriminator == null)
         {
-            var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
-
-            if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.UnitMeasurementEditorPermission)))
-            {
-                DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
-
-                concreteBindingContext.IsBusy = false;
-
-                return;
-            }
-
             System.Threading.Tasks.Task.Run(async () =>
             {
-                var apiConnectClient = new Interop.API.Connect.Clients.ParentalOrganizationalUnitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
                 var model = new Models.Page.Configuration.OrganizationalUnityConfigurationPageModel(target)
                 {
                     AvailableParents = await apiConnectClient.GetAsync()
@@ -129,31 +118,22 @@ public partial class OrganizationalUnitiesManagePage : Caney.MVVM.Core.Pages.Con
         }
         else if (discriminator == 0)
         {
-            DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
+            apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
             {
-                if (!task.Result) return;
-
-                var concreteBindingContext = (Models.Page.Manage.OrganizationalUnitiesManagePageModel)BindingContext;
-
-                var apiConnectClient = new Interop.API.Connect.Clients.ParentalOrganizationalUnitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(_task =>
+                Dispatcher.Dispatch(() =>
                 {
-                    Dispatcher.Dispatch(() =>
+                    concreteBindingContext.IsBusy = false;
+
+                    if (task.Exception != null || task.IsCanceled)
                     {
-                        concreteBindingContext.IsBusy = false;
+                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                    }
+                    else
+                    {
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
 
-                        if (_task.Exception != null || _task.IsCanceled)
-                        {
-                            Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                        }
-                        else
-                        {
-                            this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
-
-                            LoadItems();
-                        }
-                    });
+                        LoadItems();
+                    }
                 });
             });
         }

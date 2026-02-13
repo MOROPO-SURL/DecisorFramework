@@ -153,10 +153,10 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
-            Text="Ir al Inicio"
+            Text="Cerrar"
             Clicked="BackToolbarItems_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF2DE;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF5AD;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>

@@ -5,6 +5,7 @@
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.OcupationsManageOrganizationalUnityAndVacantsCardView"
     x:DataType="presentation_view_models:OcupationsManageOrganizationalUnityViewModel">
@@ -30,8 +31,11 @@
                 x:Name="VacantsCollectionView"
                 ItemsSource="{Binding Vacants}">
                 <CollectionView.ItemsLayout>
-                    <GridItemsLayout Span="4" HorizontalItemSpacing="4" VerticalItemSpacing="4" Orientation="Vertical" />
+                    <GridItemsLayout Orientation="Vertical" Span="1" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
                 </CollectionView.ItemsLayout>
+                <CollectionView.Behaviors>
+                    <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="240" ItemSpacing="8" />
+                </CollectionView.Behaviors>
                 <CollectionView.EmptyView>
                     <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                 </CollectionView.EmptyView>

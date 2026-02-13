@@ -48,42 +48,48 @@
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                     <Entry Text="{Binding Name}" />
                 </VerticalStackLayout>
-                <VerticalStackLayout
-                    Margin="8"
-                    Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Vacante superior" />
-                    <Frame 
-                        IsVisible="{Binding ChiefVacant, Converter={StaticResource IsNotNullConverter}}"
-                        Padding="8">
-                        <StackLayout Orientation="Horizontal">
-                            <VerticalStackLayout 
-                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                Padding="8">
-                                <Label
-                                    Text="{Binding ChiefVacant.WorkPosition.Name}"
-                                    LineBreakMode="TailTruncation"
-                                    FontSize="Medium" />
-                                <Label
-                                    Style="{StaticResource CaptionFieldLabelStyle}"
-                                    Margin="0,8,0,0"
-                                    Text="Referencia" />
-                                <Label
-                                    Text="{Binding ChiefVacant.WorkPosition.Reference, TargetNullValue='---'}"
-                                    LineBreakMode="TailTruncation" />
-                            </VerticalStackLayout>
-                            <Button
-                                Style="{StaticResource FontIconImageButtonStyle}"
-                                VerticalOptions="Start"
-                                Text="&#xF90B;"
-                                Clicked="RootChiefVacantEditionButton_Clicked" />
-                        </StackLayout>
-                    </Frame>
-                    <Button
-                        IsVisible="{Binding ChiefVacant, Converter={StaticResource IsNullConverter}}"
-                        HorizontalOptions="Start"                
-                        Text="Definir"
-                        Clicked="DefineChiefVacantButton_Clicked" />
-                </VerticalStackLayout>                
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Puesto superior absoluto" />
+                        <Frame 
+                            IsVisible="{Binding ChiefVacant, Converter={StaticResource IsNotNullConverter}}"
+                            Padding="8">
+                            <StackLayout Orientation="Horizontal">
+                                <VerticalStackLayout 
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                    Padding="8">
+                                    <Label
+                                        ToolTipProperties.Text="{Binding ChiefVacant.WorkPosition.Name}"
+                                        Text="{Binding ChiefVacant.WorkPosition.Name}"
+                                        LineBreakMode="TailTruncation"
+                                        FontSize="Medium" />
+                                    <Label
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Margin="0,8,0,0"
+                                        Text="Referencia" />
+                                    <Label
+                                        Text="{Binding ChiefVacant.WorkPosition.Reference, TargetNullValue='---'}"
+                                        LineBreakMode="TailTruncation" />
+                                </VerticalStackLayout>
+                                <Button
+                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                    VerticalOptions="Start"
+                                    Text="&#xF3CC;"
+                                    Clicked="RootChiefVacantEditionButton_Clicked" />
+                            </StackLayout>
+                        </Frame>
+                        <Button
+                            IsVisible="{Binding ChiefVacant, Converter={StaticResource IsNullConverter}}"
+                            HorizontalOptions="Start"                
+                            Text="Definir"
+                            Clicked="DefineChiefVacantButton_Clicked" />
+                    </VerticalStackLayout>
+                </FlexLayout>                
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
@@ -106,7 +112,7 @@
                                 Clicked="AddOrganizationalUnityButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Color="DimGray" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemsSource="{Binding OrganizationalUnities}">
@@ -118,13 +124,21 @@
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate>
-                                        <local_card_views:WorkforceConfigurationOrganizationalUnityAndVacantsCardView
-                                            Margin="10"
-                                            DefineChiefVacantButtonClick="DefineChiefVacantButton_Clicked"
-                                            ChiefVacantEditionButtonClick="ChiefVacantEditionButton_Clicked"
-                                            AddVacantButtonClick="AddVacantButton_Clicked"
-                                            VacantEditionButtonClick="VacantEditionButton_Clicked"
-                                            VacantRemoveButtonClick="VacantRemoveButton_Clicked" />
+                                        <Grid>
+                                            <local_card_views:WorkforceConfigurationOrganizationalUnityAndVacantsCardView
+                                                Margin="10"
+                                                DefineChiefVacantButtonClick="DefineChiefVacantButton_Clicked"
+                                                ChiefVacantEditionButtonClick="ChiefVacantEditionButton_Clicked"
+                                                AddVacantButtonClick="AddVacantButton_Clicked"
+                                                VacantEditionButtonClick="VacantEditionButton_Clicked"
+                                                VacantRemoveButtonClick="VacantRemoveButton_Clicked" />
+                                            <Button
+                                                Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                HorizontalOptions="End" VerticalOptions="Start"
+                                                Margin="0"
+                                                Text="&#xFA78;"
+                                                Clicked="OrganizationalUnityRemoveButton_Clicked" />
+                                        </Grid>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>
                             </CollectionView>
@@ -134,12 +148,12 @@
                 <BoxView 
                     Margin="8,16,8,8"
                     HeightRequest="1" 
-                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                    Color="DimGray" />
                 <FlexLayout
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <Grid
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         ColumnSpacing="6" RowSpacing="6">
                         <Grid.RowDefinitions>
