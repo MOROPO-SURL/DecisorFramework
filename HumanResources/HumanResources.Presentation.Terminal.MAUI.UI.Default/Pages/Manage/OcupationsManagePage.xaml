@@ -73,8 +73,8 @@
                 <Label 
                     IsVisible="{Binding RootChiefVacant, Converter={StaticResource IsNotNullConverter}}"
                     Style="{StaticResource CaptionFieldLabelStyle}"
-                    Margin="8,16,8,0"
-                    Text="Máxima autoridad" />
+                    Margin="8,8,8,0"
+                    Text="M&#x00E1;xima autoridad" />
                 <Frame 
                     IsVisible="{Binding RootChiefVacant, Converter={StaticResource IsNotNullConverter}}"
                     HorizontalOptions="Start"

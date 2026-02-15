@@ -18,7 +18,8 @@
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
-            
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
+
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
             <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
@@ -55,7 +56,7 @@
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Puesto superior absoluto" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="M&#x00E1;xima autoridad" />
                         <Frame 
                             IsVisible="{Binding ChiefVacant, Converter={StaticResource IsNotNullConverter}}"
                             Padding="8">
@@ -75,18 +76,32 @@
                                     <Label
                                         Text="{Binding ChiefVacant.WorkPosition.Reference, TargetNullValue='---'}"
                                         LineBreakMode="TailTruncation" />
+                                    <Label
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Margin="0,8,0,0"
+                                        Text="Escala salarial" />
+                                    <Label
+                                        Text="{Binding ChiefVacant.SalaryStandard.Name}"
+                                        LineBreakMode="TailTruncation" />
+                                    <Label
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Margin="0,8,0,0"
+                                        Text="Modo de ocupaci&#x00F3;n" />
+                                    <Label
+                                        Text="{Binding ChiefVacant.OcupationMode, Converter={StaticResource StringToLocalizedStringConverter}}"
+                                        LineBreakMode="TailTruncation" />
                                 </VerticalStackLayout>
                                 <Button
                                     Style="{StaticResource FontIconImageButtonStyle}"
                                     VerticalOptions="Start"
-                                    Text="&#xF3CC;"
+                                    Text="&#xF90B;"
                                     Clicked="RootChiefVacantEditionButton_Clicked" />
                             </StackLayout>
                         </Frame>
                         <Button
-                            IsVisible="{Binding ChiefVacant, Converter={StaticResource IsNullConverter}}"
-                            HorizontalOptions="Start"                
-                            Text="Definir"
+                            HorizontalOptions="Start"
+                            Margin="0,0,0,8"
+                            Text="Seleccionar ..."
                             Clicked="DefineChiefVacantButton_Clicked" />
                     </VerticalStackLayout>
                 </FlexLayout>                

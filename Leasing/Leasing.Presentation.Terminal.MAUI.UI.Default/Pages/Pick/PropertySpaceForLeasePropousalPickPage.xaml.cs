@@ -40,10 +40,10 @@ public partial class PropertySpaceForLeasePropousalPickPage : Core.Presentation.
         {
             HasNext = false,
             HasPrevious = false,
-            Limit = availables.Count(),
+            Limit = availables.Length,
             MaxPageCount = 1,
             Page = 1,
-            List = availables.ToList()
+            List = [.. availables]
         });
     }
 

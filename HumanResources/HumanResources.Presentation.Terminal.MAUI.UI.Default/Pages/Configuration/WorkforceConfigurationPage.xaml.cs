@@ -404,7 +404,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
     {
         if (model.OrganizationUnity == null)
         {
-            ConcreteBindingContext.ChiefVacant = new VacantDisplayModel
+            ConcreteBindingContext.ChiefVacant = new Models.View.WorkforceConfigurationVacantViewModel
             {
                 Id = model.Id,
                 OcupationMode = model.OcupationMode,

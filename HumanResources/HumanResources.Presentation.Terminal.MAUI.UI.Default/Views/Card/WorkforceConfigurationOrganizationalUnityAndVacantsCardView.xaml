@@ -13,7 +13,8 @@
     <ContentView.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
-            
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
+
             <communitytoolkit_converters:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
             <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
@@ -52,6 +53,20 @@
                                     Text="Referencia" />
                                 <Label
                                     Text="{Binding ChiefVacant.WorkPosition.Reference, TargetNullValue='---'}"
+                                    LineBreakMode="TailTruncation" />
+                                <Label
+                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                    Margin="0,8,0,0"
+                                    Text="Escala salarial" />
+                                <Label
+                                    Text="{Binding ChiefVacant.SalaryStandard.Name}"
+                                    LineBreakMode="TailTruncation" />
+                                <Label
+                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                    Margin="0,8,0,0"
+                                    Text="Modo de ocupaci&#x00F3;n" />
+                                <Label
+                                    Text="{Binding ChiefVacant.OcupationMode, Converter={StaticResource StringToLocalizedStringConverter}}"
                                     LineBreakMode="TailTruncation" />
                             </VerticalStackLayout>
                             <Button
@@ -123,6 +138,20 @@
                                                 Text="Referencia" />
                                             <Label
                                                 Text="{Binding WorkPosition.Reference, TargetNullValue='---'}"
+                                                LineBreakMode="TailTruncation" />
+                                            <Label
+                                                Style="{StaticResource CaptionFieldLabelStyle}"
+                                                Margin="0,8,0,0"
+                                                Text="Escala salarial" />
+                                            <Label
+                                                Text="{Binding SalaryStandard.Name}"
+                                                LineBreakMode="TailTruncation" />
+                                            <Label
+                                                Style="{StaticResource CaptionFieldLabelStyle}"
+                                                Margin="0,8,0,0"
+                                                Text="Modo de ocupaci&#x00F3;n" />
+                                            <Label
+                                                Text="{Binding OcupationMode, Converter={StaticResource StringToLocalizedStringConverter}}"
                                                 LineBreakMode="TailTruncation" />
                                         </VerticalStackLayout>
                                         <VerticalStackLayout Spacing="8">
