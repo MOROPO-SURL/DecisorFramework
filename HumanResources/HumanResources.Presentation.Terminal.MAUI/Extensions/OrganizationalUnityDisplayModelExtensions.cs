@@ -62,7 +62,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                     Name = target.OrganizationalUnity.Name,
                     Enabled = target.OrganizationalUnity.Enabled,
                     Priority = target.OrganizationalUnity.Priority,
-                    Reference = target.OrganizationalUnity.Reference
+                    //Reference = target.OrganizationalUnity.Reference
                 };
 
                 if (target.Vacants != null)
@@ -140,7 +140,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                     Name = target.OrganizationalUnity.Name,
                     Enabled = target.OrganizationalUnity.Enabled,
                     Priority = target.OrganizationalUnity.Priority,
-                    Reference = target.OrganizationalUnity.Reference
+                    //Reference = target.OrganizationalUnity.Reference
                 };
 
                 var _result = new System.Collections.Generic.List<Interop.API.Common.Models.Display.VacantDisplayModel>();

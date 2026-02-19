@@ -6,7 +6,7 @@
         public static string MainWorkforceValidableProperty => nameof(MainWorkforce);
         public static string WorkingWeekHourCountValidableProperty => nameof(WorkingWeekHourCount);
 
-        private Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel structure;
+        private Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel structure;
         private Interop.API.Common.Models.Display.WorkforceDisplayModel mainWorkforce;
         private int workingWeekHourCount = 44;
         private float doctorateExtraFeed;
@@ -28,7 +28,7 @@
 
         public System.Guid Id { get; set; }
 
-        public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
+        public Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
 
         public Interop.API.Common.Models.Display.WorkforceDisplayModel MainWorkforce { get => mainWorkforce; set => SetProperty(ref mainWorkforce, value); }
 
@@ -40,7 +40,7 @@
 
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Bridge.AlternativeWorkforceBridgeModel> AlternativeWorkforceBridges { get; set; } = [];
 
-        public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel[] AvailableStructures { get; set; }
+        public Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel[] AvailableStructures { get; set; }
 
         public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.WorkforceDisplayModel> AvailableWorkforces { get; set; } = [];
     }

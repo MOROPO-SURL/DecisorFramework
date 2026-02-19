@@ -6,7 +6,7 @@
 
         public System.Guid Id { get; set; }
 
-        public Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel Domain { get; set; }
+        public Domain.Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel Domain { get; set; }
 
         public WorkforceConfigurationVacantViewModel ChiefVacant { get => chiefVacant; set => SetProperty(ref chiefVacant, value); }
 

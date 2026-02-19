@@ -4,7 +4,7 @@
     {
         public System.Guid Id { get; set; }
 
-        public Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel OrganizationalUnity { get; set; }
+        public Domain.Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel OrganizationalUnity { get; set; }
 
         public VacantDisplayModel ChiefVacant { get; set; }
 
@@ -18,7 +18,7 @@
 
             if (entity.OrganizationalUnity != null)
             {
-                OrganizationalUnity = new Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel();
+                OrganizationalUnity = new Domain.Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel();
 
                 OrganizationalUnity.Import(entity.OrganizationalUnity);
             }

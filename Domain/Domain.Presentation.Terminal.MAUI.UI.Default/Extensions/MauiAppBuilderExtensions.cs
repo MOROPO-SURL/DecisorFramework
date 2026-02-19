@@ -13,6 +13,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
         {
             builder.Services
                 // DetailPage factory resgistration !!!
+                .AddSingleton<IDetailContentPageFactoryFacade<Models.View.ChangeNotificationViewModel>, ChangeNotificationDetailFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<PersonContactDisplayModel>, PersonContactDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<OrganizationContactDisplayModel>, OrganizationContactDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<NaturalBusinessKindDisplayModel>, NaturalBusinessKindDetailPageFactory>()
@@ -25,7 +26,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
                 .AddSingleton<IDetailContentPageFactoryFacade<EmployeeDisplayModel>, EmployeeDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<UnitMeasurementDisplayModel>, UnitMeasurementDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<KnowledgeAreaDisplayModel>, KnowledgeAreaDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<Models.View.ChangeNotificationViewModel>, ChangeNotificationDetailFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<OrganizationalUnitDisplayModel>, OrganizationalUnityDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<OrganizationalStructureDisplayModel>, OrganizationalStructureDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<PersonContactDisplayModel, PersonContactConfigurationPageModel>, PersonContactConfigurationPageFactory>()
@@ -35,7 +37,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
                 .AddSingleton<IConfigurationContentPageFactoryFacade<BrandDisplayModel, BrandConfigurationPageModel>, BrandConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<VehicleDisplayModel, VehicleConfigurationPageModel>, VehicleConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<UnitMeasurementDisplayModel, UnitMeasurementConfigurationPageModel>, UnitMeasurementConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<KnowledgeAreaDisplayModel, KnowledgeAreaConfigurationPageModel>, KnowledgeAreaConfigurationPageFactory>() ;
+                .AddSingleton<IConfigurationContentPageFactoryFacade<KnowledgeAreaDisplayModel, KnowledgeAreaConfigurationPageModel>, KnowledgeAreaConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<OrganizationalUnitDisplayModel, OrganizationalUnitConfigurationPageModel>, OrganizationalUnitConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<OrganizationalStructureDisplayModel, OrganizationalStructureConfigurationPageModel>, OrganizationalStructureConfigurationPageFactory>();
 
             return builder;
         }

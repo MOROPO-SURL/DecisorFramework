@@ -19,9 +19,11 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<NaturalBusinessKind, System.Guid>, NaturalBusinessKindRepository>();
             services.AddScoped<IEntityRepository<PropertyKind, System.Guid>, PropertyKindRepository>();
             services.AddScoped<IEntityRepository<VehicleEngineKind, System.Guid>, VehicleEngineKindRepository>();
-            services.AddScoped<IEntityRepository<StructureKind, System.Guid>, StructureKindRepository>();
-            services.AddScoped<IEntityRepository<OrganizationalUnity, System.Guid>, OrganizationalUnityRepository>();
-            services.AddScoped<IEntityRepository<Structure, System.Guid>, StructureRepository>();
+            services.AddScoped<IEntityRepository<AdministrativeEntityKind, System.Guid>, AdministrativeEntityKindRepository>();
+            services.AddScoped<IEntityRepository<OrganizationalUnit, System.Guid>, OrganizationalUnitRepository>();
+            services.AddScoped<IEntityRepository<AdministrativeEntity, System.Guid>, AdministrativeEntityRepository>();
+            services.AddScoped<IEntityRepository<OrganizationalStructure, System.Guid>, OrganizationalStructureRepository>();
+            services.AddScoped<IEntityRepository<OrganizationalStructuringUnit, System.Guid>, OrganizationalStructuringUnitRepository>();
             services.AddScoped<IEntityRepository<Property, System.Guid>, PropertyRepository>();
             services.AddScoped<IEntityRepository<PropertySpace, System.Guid>, PropertySpaceRepository>();
             services.AddScoped<IEntityRepository<Brand, System.Guid>, BrandRepository>();

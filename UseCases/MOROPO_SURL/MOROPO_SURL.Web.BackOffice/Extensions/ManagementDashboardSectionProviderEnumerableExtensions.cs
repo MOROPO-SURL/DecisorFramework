@@ -75,8 +75,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
             #region Domain
             domainSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Tipos de Estructura",
-                Controller = "structurekinds",
+                Title = "Tipos de Entidad Administrativa",
+                Controller = "administrativeentitykinds",
                 Action = "Index",
                 Area = "domain",
                 // TODO Set spected permission

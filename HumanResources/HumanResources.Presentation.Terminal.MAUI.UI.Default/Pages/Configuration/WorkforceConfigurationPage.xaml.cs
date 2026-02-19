@@ -86,7 +86,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
     private void AddOrganizationalUnityButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationalUnityPickPage(OrganizationalUnityPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationalUnitPickPage(OrganizationalUnityPickComplete_Callback)));
     }
 
     private void OrganizationalUnityRemoveButton_Clicked(object sender, System.EventArgs e)
@@ -359,9 +359,9 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         });
     }
 
-    private void OrganizationalUnityPickComplete_Callback(Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel model)
+    private void OrganizationalUnityPickComplete_Callback(Domain.Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel model)
     {
-        var apiConnectClient = new Domain.Interop.API.Connect.Clients.TreeOrganizationalUnitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Domain.Interop.API.Connect.Clients.OrganizationalUnitsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         var concreteBindingContext = (Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext;
 
@@ -382,14 +382,14 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
                     var model = new WorkforceOrganizationalUnityInputModel
                     {
                         Id = System.Guid.NewGuid(),
-                        OrganizationalUnityId = task.Result.Id                        
+                        //OrganizationalUnityId = task.Result.Id                        
                     };
 
                     ((Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext).OrganizationalUnities.Add(new Models.View.WorkforceConfigurationOrganizationalUnityViewModel
                     {
                         Id = model.Id,
-                        Domain = task.Result,
-                        Children = GetOrganizationalUnityChildren(task.Result, model)
+                        //Domain = task.Result,
+                        //Children = GetOrganizationalUnityChildren(task.Result, model)
                     });
 
                     incomingOrganizationalUnities.Add(model);
@@ -603,33 +603,33 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         hasChangesFlag = true;
     }
 
-    private static Models.View.WorkforceConfigurationOrganizationalUnityViewModel[] GetOrganizationalUnityChildren(Domain.Interop.API.Common.Models.Display.OrganizationalUnityTreeDisplayModel target, WorkforceOrganizationalUnityInputModel model)
+    private static Models.View.WorkforceConfigurationOrganizationalUnityViewModel[] GetOrganizationalUnityChildren(Domain.Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel target, WorkforceOrganizationalUnityInputModel model)
     {
         var result = new List<Models.View.WorkforceConfigurationOrganizationalUnityViewModel>();
 
-        foreach (var item in target.Children)
-        {
-            var _model = new WorkforceOrganizationalUnityInputModel
-            {
-                Id = System.Guid.NewGuid(),
-                OrganizationalUnityId = item.Id
-            };
+        //foreach (var item in target.Children)
+        //{
+        //    var _model = new WorkforceOrganizationalUnityInputModel
+        //    {
+        //        Id = System.Guid.NewGuid(),
+        //        OrganizationalUnityId = item.Id
+        //    };
 
-            var _target = new Models.View.WorkforceConfigurationOrganizationalUnityViewModel
-            {
-                Id = _model.Id,
-                Domain = item
-            };
+        //    var _target = new Models.View.WorkforceConfigurationOrganizationalUnityViewModel
+        //    {
+        //        Id = _model.Id,
+        //        Domain = item
+        //    };
 
-            if (item.Children != null)
-            {
-                _target.Children = GetOrganizationalUnityChildren(item, _model);
-            }
+        //    if (item.Children != null)
+        //    {
+        //        _target.Children = GetOrganizationalUnityChildren(item, _model);
+        //    }
 
-            result.Add(_target);
+        //    result.Add(_target);
 
-            model.Children.Add(_model);
-        }
+        //    model.Children.Add(_model);
+        //}
 
         return [.. result];
     }

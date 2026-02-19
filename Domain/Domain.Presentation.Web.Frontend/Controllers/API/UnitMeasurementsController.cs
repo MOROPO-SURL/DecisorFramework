@@ -26,7 +26,7 @@ public class UnitMeasurementsController : Guama.Core.Presentation.Web.API.Contro
 
     protected override System.Linq.Expressions.Expression<System.Func<UnitMeasurement, bool>> GetGlobalSelector()
     {
-        return entity => !entity.Archived && entity.Enabled;
+        return entity => !entity.Archived;
     }
 
     protected override System.Func<UnitMeasurement, object> GetOrderSelector()

@@ -146,10 +146,11 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleImageBridge> VehicleImageBridges { get; set; }
-        public DbSet<StructureKind> StructureKinds { get; set; }
-        public DbSet<OrganizationalUnity> OrganizationalUnities { get; set; }
-        public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
-        public DbSet<Structure> Structures { get; set; }
+        public DbSet<AdministrativeEntityKind> AdministrativeEntityKinds { get; set; }
+        public DbSet<OrganizationalUnit> OrganizationalUnits { get; set; }
+        public DbSet<OrganizationalStructure> OrganizationalStructures { get; set; }
+        public DbSet<OrganizationalStructuringUnit> OrganizationalStructuringUnits { get; set; }
+        public DbSet<AdministrativeEntity> AdministrativeEntities { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
 

@@ -12,23 +12,17 @@ public partial class BrandsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages
         InitializeComponent();
     }
 
-    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
-    {
-        return ItemsCollectionView;
-    }
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override double ItemViewRequestWidth { get => 320; }
+
+    protected override double MeasureCollectionViewCellHeight(double width) => ITEM_VIEW_REQUEST_HEIGHT;
 
     protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.BrandViewerPermission;
 
     protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.BrandCreatorPermission;
 
     protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.BrandEditorPermission;
-
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.BrandDisplayModel>> FetchItemsAsync()
     {

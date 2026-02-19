@@ -23,6 +23,9 @@
 		<CreatePackage>false</CreatePackage>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Pages\Detail\OrganizationalStructureDetailPage.xaml.cs~RFa69b833b.TMP" />
+	</ItemGroup>
+	<ItemGroup>
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
 	</ItemGroup>
@@ -37,11 +40,20 @@
 	  <Compile Update="Pages\Configuration\ColaboratorConfigurationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Configuration\OrganizationalStructuringUnitConfigurationPage.xaml.cs">
+	    <DependentUpon>OrganizationalStructuringUnitConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\OrganizationalUnitConfigurationPage.xaml.cs">
+	    <DependentUpon>OrganizationalUnitConfigurationPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Configuration\OrganizationContactConfigurationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Configuration\PersonContactConfigurationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\AdministrativeEntityConfigurationPage.xaml.cs">
+	    <DependentUpon>AdministrativeEntityConfigurationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Configuration\UnitMeasurementConfigurationPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
@@ -51,6 +63,9 @@
 	  </Compile>
 	  <Compile Update="Pages\Detail\EmployeeDetailPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\AdministrativeEntityDetailPage.xaml.cs">
+	    <DependentUpon>AdministrativeEntityDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Detail\UnitMeasurementDetailPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
@@ -70,11 +85,17 @@
 	  <Compile Update="Pages\Manage\KnowledgeAreasManagePage.xaml.cs">
 	    <DependentUpon>KnowledgeAreasManagePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Manage\OrganizationalUnitsManagePage.xaml.cs">
+	    <DependentUpon>OrganizationalUnitsManagePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Manage\OrganizationContactsManagePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Manage\PersonContactsManagePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\AdministrativeEntitiesManagePage.xaml.cs">
+	    <DependentUpon>AdministrativeEntitiesManagePage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Manage\UnitMeasurementsManagePage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
@@ -85,6 +106,9 @@
 	  <Compile Update="Pages\Pick\EmployeePickPage.xaml.cs">
 	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\OrganizationalUnitPickPage.xaml.cs">
+	    <DependentUpon>OrganizationalUnitPickPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Pick\OrganizationContactPickPage.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
@@ -98,6 +122,12 @@
 	  <Compile Update="Views\Card\EmployeeDefaultCardView.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
+	  <Compile Update="Views\Card\OrganizationalStructuringUnitTreeCardView.xaml.cs">
+	    <DependentUpon>OrganizationalStructuringUnitTreeCardView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\OrganizationalUnitCardView.xaml.cs">
+	    <DependentUpon>OrganizationalUnitCardView.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Card\OrganizationContactDefaultCardView.xaml.cs">
 	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
@@ -105,6 +135,9 @@
 	  <Compile Update="Views\Card\PersonContactDefaultCardView.xaml.cs">
 	    <SubType>Code</SubType>
 	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\AdministrativeEntityTreeCardView.xaml.cs">
+	    <DependentUpon>AdministrativeEntityTreeCardView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
@@ -118,6 +151,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\KnowledgeAreaConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\OrganizationalStructureConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\OrganizationalStructuringUnitConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\OrganizationContactConfigurationPage.xaml">
@@ -159,6 +198,9 @@
 	  <MauiXaml Update="Pages\Detail\NaturalBusinessKindDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\OrganizationalStructureDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\OrganizationalUnityDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -174,7 +216,7 @@
 	  <MauiXaml Update="Pages\Detail\PropertySpaceDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="Pages\Detail\StructureDetailPage.xaml">
+	  <MauiXaml Update="Pages\Detail\AdministrativeEntityDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\UnitMeasurementDetailPage.xaml">
@@ -211,6 +253,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\KnowledgeAreasManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\OrganizationalStructuresManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\OrganizationContactsManagePage.xaml">
@@ -250,6 +295,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\EmployeeDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\OrganizationalStructureDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\OrganizationalStructuringUnitTreeCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\OrganizationContactDefaultCardView.xaml">

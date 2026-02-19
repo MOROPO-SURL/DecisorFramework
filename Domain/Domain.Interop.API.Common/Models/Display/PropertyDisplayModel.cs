@@ -14,7 +14,7 @@
 
         public Core.Interop.API.Common.Models.Display.ImageDisplayModel FeatureImage { get; set; }
 
-        public StructureParentalDisplayModel Structure { get; set; }
+        public AdministrativeEntityParentalDisplayModel Structure { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Reference { get; set; }
@@ -54,11 +54,11 @@
                 FeatureImage.Import(entity.FeatureImage);
             }
 
-            if (entity.Structure != null)
+            if (entity.AdministrativeEntity != null)
             {
-                Structure = new StructureParentalDisplayModel();
+                Structure = new AdministrativeEntityParentalDisplayModel();
 
-                Structure.Import(entity.Structure);
+                Structure.Import(entity.AdministrativeEntity);
             }
         }
     }

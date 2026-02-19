@@ -19,10 +19,26 @@ public class ChangeNotificationViewModelFactory : Framework.Decisor.Domain.Prese
             return result;
         }
 
-        if (typeof(Framework.Decisor.Domain.Persistence.Entities.Structure) == entityType)
+        if (typeof(Framework.Decisor.Domain.Persistence.Entities.AdministrativeEntity) == entityType)
         {
             result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Entidad Administrativa";
-            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["StructureMaterialDesignGlyphIconId"];
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["AdministrativeEntityMaterialDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Domain.Persistence.Entities.OrganizationalUnit) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Unidad Organizativa";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["OrganizationalUnitDesignGlyphIconId"];
+
+            return result;
+        }
+
+        if (typeof(Framework.Decisor.Domain.Persistence.Entities.OrganizationalStructure) == entityType)
+        {
+            result.Title = $"{(model.ChangeKind == Framework.Decisor.Domain.Persistence.Enumerations.ChangeKind.Creation ? "Creada" : "Modificada")} Estructura Organizacional";
+            result.FeatureIconGlyph = (string)Microsoft.Maui.Controls.Application.Current.Resources["OrganizationalStructureMaterialDesignGlyphIconId"];
 
             return result;
         }
