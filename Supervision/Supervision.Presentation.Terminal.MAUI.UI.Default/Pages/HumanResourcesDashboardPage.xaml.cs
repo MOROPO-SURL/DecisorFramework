@@ -255,7 +255,7 @@ public partial class HumanResourcesDashboardPage : Caney.MVVM.Core.Pages.Binding
         });
     }
 
-    private int CountVacants(HumanResources.Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel model)
+    private int CountVacants(HumanResources.Interop.API.Common.Models.Display.WorkforceOrganizationalUnitDisplayModel model)
     {
         var result = 1 + model.Vacants.Length;
 

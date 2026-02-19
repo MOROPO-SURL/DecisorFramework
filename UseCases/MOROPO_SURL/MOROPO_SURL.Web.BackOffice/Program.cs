@@ -156,6 +156,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
                         var defaultUserId = "admin";
                         var k3y = new System.Guid(0x7c9294dd, 0x1e74, 0x45b2, 0xa8, 0x45, 0xaf, 0x6A, 0xe5, 0x2a, 0xf6, 0x19);
 
+#if DEBUG
+                        Log.Logger.Debug($"********'{k3y}'***********");
+#endif
+
                         var protectedPassword = (dbContext as Persistence.ORM.EF.Context.ApplicationDbContext).CreateSecureUser(k3y, defaultUserId, "system");
 
                         Log.Logger.Information(string.Format(">>>>>> Protected Password : '{0}' => '{1}'", defaultUserId, protectedPassword));

@@ -14,17 +14,15 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
 
         public System.DateTime At { get; set; }
 
-        public VacantInputModel ChiefVacant { get; set; }
-
-        public List<System.Guid> RootOrganizationalUnityIds { get; set; } = new List<System.Guid>();
+        public System.Guid OrganizationalStructureId { get; set; }
         
-        public List<KeyValuePair<System.Guid, VacantInputModel>> OrganizationalUnityVacants { get; set; } = new List<KeyValuePair<System.Guid, VacantInputModel>>();
+        public List<KeyValuePair<System.Guid, VacantInputModel>> OrganizationalUnitVacants { get; set; } = new List<KeyValuePair<System.Guid, VacantInputModel>>();
 
-        public List<WorkforceOrganizationalUnityInputModel> EditionOrganizationalUnities { get; set; } = new List<WorkforceOrganizationalUnityInputModel>();
+        public List<WorkforceOrganizationalUnitInputModel> EditionOrganizationalUnits { get; set; } = new List<WorkforceOrganizationalUnitInputModel>();
 
-        public List<WorkforceOrganizationalUnityInputModel> IncomingOrganizationalUnities { get; set; } = new List<WorkforceOrganizationalUnityInputModel>();
+        public List<WorkforceOrganizationalUnitInputModel> IncomingOrganizationalUnits { get; set; } = new List<WorkforceOrganizationalUnitInputModel>();
 
-        public List<WorkforceOrganizationalUnityDisplayModel> OutgoingOrganizationalUnities { get; set; } = new List<WorkforceOrganizationalUnityDisplayModel>();
+        public List<WorkforceOrganizationalUnitDisplayModel> OutgoingOrganizationalUnits { get; set; } = new List<WorkforceOrganizationalUnitDisplayModel>();
 
         public Persistence.Entities.Workforce Export()
         {
@@ -45,6 +43,12 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
             entity.At = System.DateTime.Now;
             entity.Name = Name;
             entity.Priority = Priority;
+
+            if (entity.OrganizationalStructureId != OrganizationalStructureId)
+            {
+                entity.OrganizationalStructure = null;
+                entity.OrganizationalStructureId = OrganizationalStructureId;
+            }
         }
     }
 }

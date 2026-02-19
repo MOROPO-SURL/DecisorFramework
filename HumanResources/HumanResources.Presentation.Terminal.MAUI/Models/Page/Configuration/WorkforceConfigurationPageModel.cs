@@ -24,16 +24,16 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
                 {
                     OrganizationalUnities.Add(_item);
 
-                    if (_item.ChiefVacant?.Id == model.ChiefVacant.Id) chiefVacant = _item.ChiefVacant;
+                    if (_item.ChiefVacant?.Id == model.OrganizationalStructure.Id) chiefVacant = _item.ChiefVacant;
                 }
 
                 chiefVacant ??= new View.WorkforceConfigurationVacantViewModel
                 {
-                    Id = model.ChiefVacant.Id,
-                    OcupationMode = model.ChiefVacant.OcupationMode,
-                    SalaryStandard = model.ChiefVacant.SalaryStandard,
-                    WorkPosition = model.ChiefVacant.WorkPosition,
-                    Priority = model.ChiefVacant.Priority
+                    Id = model.OrganizationalStructure.Id,
+                    OcupationMode = model.OrganizationalStructure.OcupationMode,
+                    SalaryStandard = model.OrganizationalStructure.SalaryStandard,
+                    WorkPosition = model.OrganizationalStructure.WorkPosition,
+                    Priority = model.OrganizationalStructure.Priority
                 };
             }
         }

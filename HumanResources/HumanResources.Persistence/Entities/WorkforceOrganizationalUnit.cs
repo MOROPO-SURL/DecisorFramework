@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Persistence.Entities
 {
-    public class WorkforceOrganizationalUnity : Guama.Core.Persistence.Entities.Contract.IEntity<System.Guid>
+    public class WorkforceOrganizationalUnit : Guama.Core.Persistence.Entities.Contract.IEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; }
@@ -9,15 +9,12 @@
         public Workforce Workforce { get; set; }
         public System.Guid WorkforceId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(OrganizationalUnityId))]
-        public Domain.Persistence.Entities.OrganizationalUnit OrganizationalUnity { get; set; }
-        public System.Guid OrganizationalUnityId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(OrganizationalStructuringUnitId))]
+        public Domain.Persistence.Entities.OrganizationalStructuringUnit OrganizationalStructuringUnit { get; set; }
+        public System.Guid OrganizationalStructuringUnitId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ChiefVacantId))]
         public Vacant ChiefVacant { get; set; }
         public System.Guid? ChiefVacantId { get; set; }
-
-        public WorkforceOrganizationalUnity Parent { get; set; }
-        public System.Guid? ParentId { get; set; }
     }
 }

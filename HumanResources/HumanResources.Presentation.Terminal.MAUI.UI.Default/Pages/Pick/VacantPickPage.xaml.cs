@@ -137,9 +137,9 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
 
             var _models = targetWorkforce.OrganizationalUnities.ToVacantPickOrganizationalUnityViewModelChildren(ocupations, vacantOcupationModes);
 
-            if (vacantOcupationModes.Any(item => item == targetWorkforce.ChiefVacant.OcupationMode))
+            if (vacantOcupationModes.Any(item => item == targetWorkforce.OrganizationalStructure.OcupationMode))
             {
-                ConcreteBindingContext.RootChiefVacant = targetWorkforce.ChiefVacant;
+                ConcreteBindingContext.RootChiefVacant = targetWorkforce.OrganizationalStructure;
             }
 
             foreach (var _model in _models)

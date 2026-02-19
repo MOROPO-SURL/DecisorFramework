@@ -127,12 +127,12 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
             {
                 ConcreteBindingContext.RootChiefVacant = new Models.View.OcupationsManageVacantViewModel
                 {
-                    Id = targetWorkforce.ChiefVacant.Id,
-                    VacantId = targetWorkforce.ChiefVacant.Id,
-                    VacantOcupationMode = targetWorkforce.ChiefVacant.OcupationMode,
-                    WorkPosition = targetWorkforce.ChiefVacant.WorkPosition,
-                    SalaryStandard = targetWorkforce.ChiefVacant.SalaryStandard,
-                    Ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == targetWorkforce.ChiefVacant.Id)
+                    Id = targetWorkforce.OrganizationalStructure.Id,
+                    VacantId = targetWorkforce.OrganizationalStructure.Id,
+                    VacantOcupationMode = targetWorkforce.OrganizationalStructure.OcupationMode,
+                    WorkPosition = targetWorkforce.OrganizationalStructure.WorkPosition,
+                    SalaryStandard = targetWorkforce.OrganizationalStructure.SalaryStandard,
+                    Ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == targetWorkforce.OrganizationalStructure.Id)
                 };
 
                 foreach (var _model in _models)

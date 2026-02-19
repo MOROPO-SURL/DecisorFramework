@@ -10,7 +10,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Context.Con
         public DbSet<Entities.WorkPosition> WorkPositions { get; set; }
         public DbSet<Entities.WorkPositionResponsability> WorkPositionResponsabilities { get; set; }
         public DbSet<Entities.Workforce> Workforces { get; set; }
-        public DbSet<Entities.WorkforceOrganizationalUnity> WorkforceOrganizationalUnities { get; set; }
+        public DbSet<Entities.WorkforceOrganizationalUnit> WorkforceOrganizationalUnits { get; set; }
         public DbSet<Entities.Vacant> Vacants { get; set; }
         public DbSet<Entities.VacantPostulation> VacantPostulations { get; set; }
         public DbSet<Entities.VacantPostulationOcupation> VacantPostulationOcupations { get; set; }

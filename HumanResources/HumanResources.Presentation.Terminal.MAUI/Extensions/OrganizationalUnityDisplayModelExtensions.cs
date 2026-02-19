@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
 {
     public static class OrganizationalUnityDisplayModelExtensions
     {
-        public static Models.View.WorkforceConfigurationOrganizationalUnityViewModel[] ToOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel[] targets)
+        public static Models.View.WorkforceConfigurationOrganizationalUnityViewModel[] ToOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnitDisplayModel[] targets)
         {
             var result = new System.Collections.Generic.List<Models.View.WorkforceConfigurationOrganizationalUnityViewModel>();
 
@@ -13,7 +13,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                 var model = new Models.View.WorkforceConfigurationOrganizationalUnityViewModel
                 {
                     Id = item.Id,
-                    Domain = item.OrganizationalUnity
+                    Domain = item.OrganizationalStructuringUnit
                 };
 
                 model.ChiefVacant = item.ChiefVacant == null ? null : new Models.View.WorkforceConfigurationVacantViewModel
@@ -50,7 +50,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
             return result.OrderBy(model => model.Domain.Priority).ToArray();
         }
 
-        public static Models.View.OcupationsManageOrganizationalUnityViewModel[] ToOcupationsManageOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
+        public static Models.View.OcupationsManageOrganizationalUnityViewModel[] ToOcupationsManageOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnitDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
         {
             var result = new System.Collections.Generic.List<Models.View.OcupationsManageOrganizationalUnityViewModel>();
 
@@ -59,9 +59,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                 var model = new Models.View.OcupationsManageOrganizationalUnityViewModel
                 {
                     Id = target.Id,
-                    Name = target.OrganizationalUnity.Name,
-                    Enabled = target.OrganizationalUnity.Enabled,
-                    Priority = target.OrganizationalUnity.Priority,
+                    Name = target.OrganizationalStructuringUnit.Name,
+                    Enabled = target.OrganizationalStructuringUnit.Enabled,
+                    Priority = target.OrganizationalStructuringUnit.Priority,
                     //Reference = target.OrganizationalUnity.Reference
                 };
 
@@ -128,7 +128,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
             return result.OrderBy(model => model.Priority).ToArray();
         }
 
-        public static Models.View.VacantPickOrganizationalUnityViewModel[] ToVacantPickOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations, Persistence.Enumerations.VacantOcupationMode[] vacantOcupationModes)
+        public static Models.View.VacantPickOrganizationalUnityViewModel[] ToVacantPickOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnitDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations, Persistence.Enumerations.VacantOcupationMode[] vacantOcupationModes)
         {
             var result = new System.Collections.Generic.List<Models.View.VacantPickOrganizationalUnityViewModel>();
 
@@ -137,9 +137,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
                 var model = new Models.View.VacantPickOrganizationalUnityViewModel
                 {
                     Id = target.Id,
-                    Name = target.OrganizationalUnity.Name,
-                    Enabled = target.OrganizationalUnity.Enabled,
-                    Priority = target.OrganizationalUnity.Priority,
+                    Name = target.OrganizationalStructuringUnit.Name,
+                    Enabled = target.OrganizationalStructuringUnit.Enabled,
+                    Priority = target.OrganizationalStructuringUnit.Priority,
                     //Reference = target.OrganizationalUnity.Reference
                 };
 
