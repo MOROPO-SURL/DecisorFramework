@@ -573,6 +573,7 @@
 
     <Style TargetType="Button" x:Key="DangerKindButtonStyle">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light={StaticResource LightDangerBackground}, Dark={StaticResource DarkDangerBackground}}" />
+        <Setter Property="TextColor" Value="White" />
         <Setter Property="VisualStateManager.VisualStateGroups">
             <VisualStateGroupList>
                 <VisualStateGroup x:Name="CommonStates">

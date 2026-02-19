@@ -31,6 +31,12 @@
                                 Text="{Binding Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Rederencia" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Reference, TargetNullValue='---'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Prioridad" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
@@ -50,6 +56,7 @@
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />
                             <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />

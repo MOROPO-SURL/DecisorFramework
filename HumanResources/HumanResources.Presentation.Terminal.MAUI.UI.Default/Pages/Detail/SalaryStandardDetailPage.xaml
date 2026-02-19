@@ -32,10 +32,10 @@
                                 Text="{Binding Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Tarifa" />
+                                Text="Tarifa horaria" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Fee, StringFormat='{0:F2}'}" />
+                                Text="{Binding Fee}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Prioridad" />
@@ -51,6 +51,7 @@
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />
                             <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />

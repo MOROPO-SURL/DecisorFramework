@@ -41,13 +41,13 @@
                     <Picker 
                         x:Name="StaffPicker" 
                         ItemsSource="{Binding AvailableStaffs}"
-                        ItemDisplayBinding="{Binding Path=Structure.Identity.Name}"
+                        ItemDisplayBinding="{Binding Structure.Identity.Name}"
                         SelectedIndexChanged="StaffPicker_SelectedIndexChanged" />
                 </VerticalStackLayout>
                 <Label 
                     Style="{StaticResource CaptionFieldLabelStyle}"
-                    Margin="8,16,8,0"
-                    Text="Máxima autoridad" />
+                    Margin="8,8,8,0"
+                    Text="M&#x00E1;xima autoridad" />
                 <Frame 
                     HorizontalOptions="Start"
                     Margin="8" Padding="0"

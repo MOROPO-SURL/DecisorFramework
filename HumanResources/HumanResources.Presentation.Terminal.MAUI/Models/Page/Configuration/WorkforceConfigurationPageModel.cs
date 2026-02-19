@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
     {
         private string name;
         private System.DateTime at;
-        private Interop.API.Common.Models.Display.VacantDisplayModel chiefVacant;
+        private View.WorkforceConfigurationVacantViewModel chiefVacant;
         private int priority = 1;
 
         public WorkforceConfigurationPageModel(Interop.API.Common.Models.Display.WorkforceDisplayModel model) : base(model)
@@ -16,7 +16,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
                 Id = model.Id;
                 name = model.Name;
                 at = model.At;
-                chiefVacant = model.ChiefVacant;
                 priority = model.Priority;
 
                 var result = model.OrganizationalUnities.ToOrganizationalUnityViewModelChildren();
@@ -24,7 +23,18 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
                 foreach (var _item in result)
                 {
                     OrganizationalUnities.Add(_item);
+
+                    if (_item.ChiefVacant?.Id == model.ChiefVacant.Id) chiefVacant = _item.ChiefVacant;
                 }
+
+                chiefVacant ??= new View.WorkforceConfigurationVacantViewModel
+                {
+                    Id = model.ChiefVacant.Id,
+                    OcupationMode = model.ChiefVacant.OcupationMode,
+                    SalaryStandard = model.ChiefVacant.SalaryStandard,
+                    WorkPosition = model.ChiefVacant.WorkPosition,
+                    Priority = model.ChiefVacant.Priority
+                };
             }
         }
 
@@ -34,7 +44,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
         public System.DateTime At { get => at; set => SetProperty(ref at, value); }
 
-        public Interop.API.Common.Models.Display.VacantDisplayModel ChiefVacant { get => chiefVacant; set => SetProperty(ref chiefVacant, value); }
+        public View.WorkforceConfigurationVacantViewModel ChiefVacant { get => chiefVacant; set => SetProperty(ref chiefVacant, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 

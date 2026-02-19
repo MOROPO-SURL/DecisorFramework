@@ -2,7 +2,6 @@
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
-using MOROPO.Framework.Guama.Core.Persistence.Entities.Contract;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using System.Linq;
 

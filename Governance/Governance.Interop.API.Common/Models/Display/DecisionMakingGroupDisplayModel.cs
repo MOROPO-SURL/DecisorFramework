@@ -6,7 +6,7 @@
 
         public bool Enabled { get; set; }
 
-        public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel Structure { get; set; }
+        public Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel Structure { get; set; }
 
         public string Name { get; set; }
 
@@ -32,7 +32,7 @@
 
             if (entity.Structure != null)
             {
-                Structure = new Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel();
+                Structure = new Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel();
 
                 Structure.Import(entity.Structure);
             }

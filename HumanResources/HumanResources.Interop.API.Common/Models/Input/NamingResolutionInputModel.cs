@@ -6,7 +6,7 @@
 
         public System.Guid? CandidateId { get; set; }
 
-        public System.Guid AgreementId { get; set; }
+        public System.Guid? AgreementId { get; set; }
 
         public System.Guid? VacantId { get; set; }
 

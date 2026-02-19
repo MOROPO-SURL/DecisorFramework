@@ -10,7 +10,7 @@
 
         public int Priority { get; set; }
 
-        public double Fee { get; set; }
+        public float Fee { get; set; }
 
         public void Import(Persistence.Entities.SalaryStandard entity)
         {

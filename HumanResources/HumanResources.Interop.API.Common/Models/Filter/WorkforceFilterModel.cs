@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filt
 {
     public class WorkforceFilterModel : Guama.Core.Persistence.Presentation.Models.Filter.Contract.IEntityFilterModel<Persistence.Entities.Workforce, System.Guid>
     {
-        public Domain.Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel[] OrganizationalUnities { get; set; }
+        public Domain.Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel[] OrganizationalUnities { get; set; }
 
         public System.Linq.Expressions.Expression<System.Func<Persistence.Entities.Workforce, bool>> GetSelector()
         {

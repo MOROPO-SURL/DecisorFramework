@@ -10,7 +10,7 @@
         public System.Guid WorkforceId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(OrganizationalUnityId))]
-        public Domain.Persistence.Entities.OrganizationalUnity OrganizationalUnity { get; set; }
+        public Domain.Persistence.Entities.OrganizationalUnit OrganizationalUnity { get; set; }
         public System.Guid OrganizationalUnityId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ChiefVacantId))]

@@ -49,21 +49,31 @@
     <MenuFlyoutItem Text="» Estructural «" IsEnabled="False" />
     <ShellContent
         Title="Entidades Administrativas"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:StructuresManagePage}">
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:AdministrativeEntitiesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF006B;"
+                Glyph="{StaticResource AdministrativeEntityMaterialDesignGlyphIconId}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Estructuras Organizacionales"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationalStructuresManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="{StaticResource OrganizationalStructureMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
         Title="Unidades Organizativas"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationalUnitiesManagePage}">
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationalUnitsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF645;"
+                Glyph="{StaticResource OrganizationalUnitDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -110,12 +120,22 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
+        Title="Áreas de Conocimiento"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:KnowledgeAreasManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9D0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
         Title="Unidades de Medida"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:UnitMeasurementsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF472;"
+                Glyph="{StaticResource UnitMeasurementMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

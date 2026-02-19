@@ -2,6 +2,8 @@
 {
     public class VacantConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<View.WorkforceConfigurationVacantViewModel>
     {
+        public static readonly Persistence.Enumerations.VacantOcupationMode[] AVAILABLE_VACANT_OCUPATION_MODES = [Persistence.Enumerations.VacantOcupationMode.Admision, Persistence.Enumerations.VacantOcupationMode.Naming, Persistence.Enumerations.VacantOcupationMode.Hybrid];
+
         public static string WorkPositionValidableProperty => nameof(WorkPosition);
         public static string SalaryStandardValidableProperty => nameof(SalaryStandard);
 
@@ -38,7 +40,5 @@
         public Interop.API.Common.Models.Display.WorkPositionDisplayModel[] AvailableWorkPositions { get; set; }
 
         public Interop.API.Common.Models.Display.SalaryStandardDisplayModel[] AvailableSalaryStandards { get; set; }
-
-        public Persistence.Enumerations.VacantOcupationMode[] AvailableVacantOcupationModes => [Persistence.Enumerations.VacantOcupationMode.Admision, Persistence.Enumerations.VacantOcupationMode.Naming, Persistence.Enumerations.VacantOcupationMode.Hybrid];
     }
 }

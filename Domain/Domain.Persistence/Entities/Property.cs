@@ -26,9 +26,9 @@
         public Guama.Media.Persistence.Entities.Image FeatureImage { get; set; }
         public System.Guid? FeatureImageId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(StructureId))]
-        public Structure Structure { get; set; }
-        public System.Guid StructureId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AdministrativeEntityId))]
+        public AdministrativeEntity AdministrativeEntity { get; set; }
+        public System.Guid AdministrativeEntityId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
         public string Reference { get; set; }

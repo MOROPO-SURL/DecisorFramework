@@ -8,7 +8,7 @@
         public bool Archived { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(StructureId))]
-        public Domain.Persistence.Entities.Structure Structure { get; set; }
+        public Domain.Persistence.Entities.AdministrativeEntity Structure { get; set; }
         public System.Guid StructureId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(MainWorkforceId))]
@@ -17,7 +17,11 @@
 
         public System.Collections.Generic.List<StaffWorkforceBridge> AlternativeWorkforceBridges { get; set; } = new System.Collections.Generic.List<StaffWorkforceBridge>();
 
-        [System.ComponentModel.DataAnnotations.Range(1, 28)]
-        public int WorkingDayCount { get; set; } = 24;
+        [System.ComponentModel.DataAnnotations.Range(1, 44)]
+        public int WorkingWeekHourCount { get; set; } = 44;
+
+        public float DoctorateExtraFeed { get; set; }
+
+        public float MasteryExtraFeed { get; set; }     
     }
 }
