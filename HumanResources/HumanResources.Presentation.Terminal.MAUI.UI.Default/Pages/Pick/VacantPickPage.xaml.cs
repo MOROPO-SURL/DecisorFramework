@@ -2,7 +2,6 @@ using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
@@ -135,12 +134,12 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
 
             var ocupations = new System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel>(await ocupationsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.OcupationFilterModel { StaffId = staff.Id, WorkforceId = staff.MainWorkforce.Id }));
 
-            var _models = targetWorkforce.OrganizationalUnities.ToVacantPickOrganizationalUnityViewModelChildren(ocupations, vacantOcupationModes);
+            var _models = targetWorkforce.OrganizationalUnits.ToVacantPickOrganizationalUnityViewModelChildren(ocupations, vacantOcupationModes);
 
-            if (vacantOcupationModes.Any(item => item == targetWorkforce.OrganizationalStructure.OcupationMode))
-            {
-                ConcreteBindingContext.RootChiefVacant = targetWorkforce.OrganizationalStructure;
-            }
+            //if (vacantOcupationModes.Any(item => item == targetWorkforce.OrganizationalStructure.OcupationMode))
+            //{
+            //    ConcreteBindingContext.RootChiefVacant = targetWorkforce.OrganizationalStructure;
+            //}
 
             foreach (var _model in _models)
             {

@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;
+﻿using System.Linq;
+
+namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;
 
 public class OrganizationalStructureConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.OrganizationalStructureDisplayModel>
 {
@@ -32,14 +34,23 @@ public class OrganizationalStructureConfigurationPageModel : Core.Presentation.T
         var result = new OrganizationalStructuringUnitConfigurationPageModel(null)
         {
             Id = model.Id,
+            Kind = model.Kind,
             Reference = model.Reference,
             OrganizationalUnit = model.OrganizationalUnit,
             Parent = parent
         };
 
-        foreach (var _model in model.Children)
+        var dependencyChildren = model.Children.Where(_model => _model.Kind == Persistence.Enumerations.OrganizationalStructuringUnitKind.Dependency).ToArray();
+        var compositionChildren = model.Children.Where(_model => _model.Kind == Persistence.Enumerations.OrganizationalStructuringUnitKind.Composition).ToArray();
+
+        foreach (var _model in dependencyChildren)
         {
-            result.Children.Add(GetConfiguration(_model, result));
+            result.DependencyChildren.Add(GetConfiguration(_model, result));
+        }
+
+        foreach (var _model in compositionChildren)
+        {
+            result.CompositionChildren.Add(GetConfiguration(_model, result));
         }
 
         return result;

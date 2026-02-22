@@ -9,7 +9,7 @@
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.WorkforceConfigurationOrganizationalUnityAndVacantsCardView"
-    x:DataType="presentation_view_models:WorkforceConfigurationOrganizationalUnityViewModel">
+    x:DataType="presentation_view_models:WorkforceConfigurationOrganizationalStructuringUnitViewModel">
     <ContentView.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
@@ -24,7 +24,7 @@
         <VerticalStackLayout>
             <Label
                 FontSize="Medium"
-                Text="{Binding Domain.Name}" />
+                Text="{Binding Context.OrganizationalUnit.Name}" />
             <FlexLayout
                 Wrap="Wrap"
                 AlignItems="Start" AlignContent="Start">

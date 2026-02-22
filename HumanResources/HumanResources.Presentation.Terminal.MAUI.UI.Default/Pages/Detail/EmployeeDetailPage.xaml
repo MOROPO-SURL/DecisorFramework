@@ -39,9 +39,9 @@
                                     Text="{Binding Vacant.WorkPosition.Name}"
                                     FontSize="Medium" />
                                 <Label
-                                    ToolTipProperties.Text="{Binding WorkforceOrganizationalUnity.OrganizationalUnity.Name}"
+                                    ToolTipProperties.Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}"
                                     LineBreakMode="TailTruncation"
-                                    Text="{Binding WorkforceOrganizationalUnity.OrganizationalUnity.Name}" />
+                                    Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}" />
                                 <Label
                                     ToolTipProperties.Text="{Binding Staff.Structure.Identity}"
                                     LineBreakMode="TailTruncation"
@@ -144,9 +144,9 @@
                                     Text="{Binding Vacant.WorkPosition.Name}"
                                     FontSize="Medium" />
                                 <Label
-                                    ToolTipProperties.Text="{Binding WorkforceOrganizationalUnity.OrganizationalUnity.Name}"
+                                    ToolTipProperties.Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}"
                                     LineBreakMode="TailTruncation"
-                                    Text="{Binding WorkforceOrganizationalUnity.OrganizationalUnity.Name}" />
+                                    Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}" />
                                 <Label
                                     ToolTipProperties.Text="{Binding Staff.Structure.Identity}"
                                     LineBreakMode="TailTruncation"

@@ -17,7 +17,7 @@
             if (model != null)
             {
                 Id = model.Id;
-                OrganizationUnity = model.OrganizationUnity;
+                OrganizationUnity = model.Context;
                 priority = model.Priority;
                 ocupationMode = model.OcupationMode;
                 workPosition = model.WorkPosition;
@@ -27,7 +27,7 @@
 
         public System.Guid Id { get; set; }
 
-        public View.WorkforceConfigurationOrganizationalUnityViewModel OrganizationUnity { get; set; }
+        public View.WorkforceConfigurationOrganizationalStructuringUnitViewModel OrganizationUnity { get; set; }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 

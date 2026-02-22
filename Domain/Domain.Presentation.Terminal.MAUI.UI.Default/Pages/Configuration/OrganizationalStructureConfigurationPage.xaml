@@ -63,14 +63,15 @@
                         Text="&#x00C1;rbol de Unidades Organizativa" />
                     <local_card_views:OrganizationalStructuringUnitTreeCardView 
                         BindingContext="{Binding OrganizationalStructuringUnitConfiguration}"
-                        AddChildButtonClick="OrganizationalUnityAddChildButton_Clicked"
-                        EditChildButtonClick="OrganizationalUnityEditButton_Clicked"
-                        RemoveChildButtonClick="OrganizationalUnityRemotionButton_Clicked" />
+                        AddDependencyChildButtonClick="DependencyOrganizationalUnitAddChildButton_Clicked"
+                        AddCompositionChildButtonClick="CompositionOrganizationalUnitAddChildButton_Clicked"
+                        EditChildButtonClick="OrganizationalUnitEditButton_Clicked"
+                        RemoveChildButtonClick="OrganizationalUnitRemotionButton_Clicked" />
                     <Button
                         IsVisible="{Binding OrganizationalStructuringUnitConfiguration, Converter={StaticResource IsNullConverter}}"
                         HorizontalOptions="Start"                
                         Text="Definir"
-                        Clicked="RootOrganizationlUnityDefineButton_Clicked" />
+                        Clicked="RootOrganizationlUnitDefineButton_Clicked" />
                     <Label
                         IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:OrganizationalStructureConfigurationPageModel.OrganizationalStructuringUnitConfigurationValidableProperty}}"
                         Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:OrganizationalStructureConfigurationPageModel.OrganizationalStructuringUnitConfigurationValidableProperty}}"

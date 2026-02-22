@@ -48,63 +48,7 @@
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                     <Entry Text="{Binding Name}" />
-                </VerticalStackLayout>
-                <FlexLayout
-                    Wrap="Wrap"
-                    AlignItems="Start" AlignContent="Start">
-                    <VerticalStackLayout
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
-                        Margin="4"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="M&#x00E1;xima autoridad" />
-                        <Frame 
-                            IsVisible="{Binding ChiefVacant, Converter={StaticResource IsNotNullConverter}}"
-                            Padding="8">
-                            <StackLayout Orientation="Horizontal">
-                                <VerticalStackLayout 
-                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                    Padding="8">
-                                    <Label
-                                        ToolTipProperties.Text="{Binding ChiefVacant.WorkPosition.Name}"
-                                        Text="{Binding ChiefVacant.WorkPosition.Name}"
-                                        LineBreakMode="TailTruncation"
-                                        FontSize="Medium" />
-                                    <Label
-                                        Style="{StaticResource CaptionFieldLabelStyle}"
-                                        Margin="0,8,0,0"
-                                        Text="Referencia" />
-                                    <Label
-                                        Text="{Binding ChiefVacant.WorkPosition.Reference, TargetNullValue='---'}"
-                                        LineBreakMode="TailTruncation" />
-                                    <Label
-                                        Style="{StaticResource CaptionFieldLabelStyle}"
-                                        Margin="0,8,0,0"
-                                        Text="Escala salarial" />
-                                    <Label
-                                        Text="{Binding ChiefVacant.SalaryStandard.Name}"
-                                        LineBreakMode="TailTruncation" />
-                                    <Label
-                                        Style="{StaticResource CaptionFieldLabelStyle}"
-                                        Margin="0,8,0,0"
-                                        Text="Modo de ocupaci&#x00F3;n" />
-                                    <Label
-                                        Text="{Binding ChiefVacant.OcupationMode, Converter={StaticResource StringToLocalizedStringConverter}}"
-                                        LineBreakMode="TailTruncation" />
-                                </VerticalStackLayout>
-                                <Button
-                                    Style="{StaticResource FontIconImageButtonStyle}"
-                                    VerticalOptions="Start"
-                                    Text="&#xF90B;"
-                                    Clicked="RootChiefVacantEditionButton_Clicked" />
-                            </StackLayout>
-                        </Frame>
-                        <Button
-                            HorizontalOptions="Start"
-                            Margin="0,0,0,8"
-                            Text="Seleccionar ..."
-                            Clicked="DefineChiefVacantButton_Clicked" />
-                    </VerticalStackLayout>
-                </FlexLayout>                
+                </VerticalStackLayout>                
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">

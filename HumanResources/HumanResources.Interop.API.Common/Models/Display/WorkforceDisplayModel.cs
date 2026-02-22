@@ -15,6 +15,8 @@
 
         public Domain.Interop.API.Common.Models.Display.OrganizationalStructureDisplayModel OrganizationalStructure { get; set; }
 
+        public WorkforceOrganizationalUnitDisplayModel[] OrganizationalUnits { get; set; }
+
         public void Import(Persistence.Entities.Workforce entity)
         {
             Id = entity.Id;

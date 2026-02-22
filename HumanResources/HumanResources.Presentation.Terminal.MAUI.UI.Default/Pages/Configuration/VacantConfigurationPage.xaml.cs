@@ -42,7 +42,7 @@ public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.U
         return System.Threading.Tasks.Task.FromResult(new Models.View.WorkforceConfigurationVacantViewModel
         {
             Id = System.Guid.NewGuid(),
-            OrganizationUnity = ConcreteBindingContext.OrganizationUnity,
+            Context = ConcreteBindingContext.OrganizationUnity,
             Priority = ConcreteBindingContext.Priority,
             OcupationMode = ConcreteBindingContext.OcupationMode,
             WorkPosition = ConcreteBindingContext.WorkPosition,
@@ -55,7 +55,7 @@ public partial class VacantConfigurationPage : Core.Presentation.Terminal.MAUI.U
         return System.Threading.Tasks.Task.FromResult(new Models.View.WorkforceConfigurationVacantViewModel
         {
             Id = ConcreteBindingContext.Id,
-            OrganizationUnity = ConcreteBindingContext.OrganizationUnity,
+            Context = ConcreteBindingContext.OrganizationUnity,
             Priority = ConcreteBindingContext.Priority,
             OcupationMode = ConcreteBindingContext.OcupationMode,
             WorkPosition = ConcreteBindingContext.WorkPosition,

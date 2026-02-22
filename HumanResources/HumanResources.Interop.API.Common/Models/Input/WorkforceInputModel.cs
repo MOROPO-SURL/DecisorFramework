@@ -15,8 +15,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
         public System.DateTime At { get; set; }
 
         public System.Guid OrganizationalStructureId { get; set; }
-        
-        public List<KeyValuePair<System.Guid, VacantInputModel>> OrganizationalUnitVacants { get; set; } = new List<KeyValuePair<System.Guid, VacantInputModel>>();
 
         public List<WorkforceOrganizationalUnitInputModel> EditionOrganizationalUnits { get; set; } = new List<WorkforceOrganizationalUnitInputModel>();
 

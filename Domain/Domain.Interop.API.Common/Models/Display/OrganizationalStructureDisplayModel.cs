@@ -18,13 +18,6 @@
             Enabled = entity.Enabled;
             Priority = entity.Priority;
             Name = entity.Name;
-
-            if (entity.RootStructuringUnit != null)
-            {
-                RootStructuringUnit = new OrganizationalStructuringUnitDisplayModel();
-
-                RootStructuringUnit.Import(entity.RootStructuringUnit);
-            }
         }
     }
 }

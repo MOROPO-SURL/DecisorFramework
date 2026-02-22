@@ -121,7 +121,7 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
 
             var ocupations = new System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel>(await ocupationsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.OcupationFilterModel { StaffId = staffId, WorkforceId = targetWorkforceId }));
 
-            var _models = targetWorkforce.OrganizationalUnities.ToOcupationsManageOrganizationalUnityViewModelChildren(ocupations);
+            var _models = targetWorkforce.OrganizationalUnits.ToOcupationsManageOrganizationalUnitViewModelChildren(ocupations);
 
             Dispatcher.Dispatch(() =>
             {
@@ -129,9 +129,9 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
                 {
                     Id = targetWorkforce.OrganizationalStructure.Id,
                     VacantId = targetWorkforce.OrganizationalStructure.Id,
-                    VacantOcupationMode = targetWorkforce.OrganizationalStructure.OcupationMode,
-                    WorkPosition = targetWorkforce.OrganizationalStructure.WorkPosition,
-                    SalaryStandard = targetWorkforce.OrganizationalStructure.SalaryStandard,
+                    //VacantOcupationMode = targetWorkforce.OrganizationalStructure.OcupationMode,
+                    //WorkPosition = targetWorkforce.OrganizationalStructure.WorkPosition,
+                    //SalaryStandard = targetWorkforce.OrganizationalStructure.SalaryStandard,
                     Ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == targetWorkforce.OrganizationalStructure.Id)
                 };
 

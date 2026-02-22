@@ -10,7 +10,9 @@
         <VerticalStackLayout>
             <Label
                 FontSize="Medium"
-                Text="{Binding Name}" />
+                LineBreakMode="TailTruncation"
+                Text="{Binding Name}"
+                ToolTipProperties.Text="{Binding Name}" />
             <Label 
                 Margin="0,8,0,0"
                 Text="Descripción"

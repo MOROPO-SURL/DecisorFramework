@@ -9,7 +9,9 @@
         <VerticalStackLayout>
             <Label
                 FontSize="Medium"
-                Text="{Binding Name}" />
+                LineBreakMode="TailTruncation"
+                Text="{Binding Name}"
+                ToolTipProperties.Text="{Binding Name}" />
             <Label 
                 Margin="0,6,0,0"
                 Text="Unidad Organizativa Superior"

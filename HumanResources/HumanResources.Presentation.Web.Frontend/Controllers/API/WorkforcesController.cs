@@ -1,9 +1,10 @@
-﻿using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
+﻿using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Controllers.API
 {
@@ -13,12 +14,14 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
     {
         private readonly IEntityRepository<Vacant, System.Guid> vacantRepository;
         private readonly IEntityRepository<WorkforceOrganizationalUnit, System.Guid> organizationalUnitRepository;
+        private readonly IEntityRepository<OrganizationalStructuringUnit, System.Guid> organizationalStructuringUnityRepository;
 
-        public WorkforcesController(IEntityRepository<WorkforceOrganizationalUnit, System.Guid> organizationalUnitRepository, IEntityRepository<Vacant, System.Guid> vacantRepository, IEntityRepository<Workforce, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<WorkforcesController> localizer, Microsoft.Extensions.Logging.ILogger<WorkforcesController> logger)
+        public WorkforcesController(IEntityRepository<OrganizationalStructuringUnit, System.Guid> organizationalStructuringUnityRepository, IEntityRepository<WorkforceOrganizationalUnit, System.Guid> organizationalUnitRepository, IEntityRepository<Vacant, System.Guid> vacantRepository, IEntityRepository<Workforce, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<WorkforcesController> localizer, Microsoft.Extensions.Logging.ILogger<WorkforcesController> logger)
             : base(repository, localizer, logger)
         {
             this.vacantRepository = vacantRepository;
             this.organizationalUnitRepository = organizationalUnitRepository;
+            this.organizationalStructuringUnityRepository = organizationalStructuringUnityRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<Workforce, bool>> GetGlobalSelector()
@@ -40,7 +43,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         {
             var result = base.EntityToDisplayModel(entity);
 
-            //result.OrganizationalUnities = GetOrganizationalUnityChildren(entity.OrganizationalUnits.Where(_entity => _entity.ParentId == null).OrderBy(_entity => _entity.OrganizationalStructuringUnit.Priority).ToArray());
+            result.OrganizationalStructure.RootStructuringUnit = entity.OrganizationalStructure.RootStructuringUnit.GetInteropChildren(organizationalStructuringUnityRepository);
 
             return result;
         }
@@ -48,9 +51,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         protected override void PreCreate(Workforce entity, WorkforceInputModel model)
         {
             base.PreCreate(entity, model);
-
-            //entity.ChiefVacant = vacantRepository.Add(model.ChiefVacant.Export(), User.Identity.Name, false);
-            //entity.ChiefVacantId = entity.ChiefVacant.Id;
 
             foreach (var _model in model.IncomingOrganizationalUnits)
             {
@@ -79,8 +79,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         protected override void PreEdit(Workforce entity, WorkforceInputModel model)
         {
             base.PreEdit(entity, model);
-
-            //model.ChiefVacant.Mergue(entity.ChiefVacant);
 
             foreach (var _model in model.OutgoingOrganizationalUnits)
             {

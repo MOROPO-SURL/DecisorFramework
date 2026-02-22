@@ -10,7 +10,7 @@
 
         public VacantDisplayModel[] Vacants { get; set; }
 
-        public WorkforceOrganizationalUnitDisplayModel[] Children { get; set; }
+        //public WorkforceOrganizationalUnitDisplayModel[] Children { get; set; }
 
         public void Import(Persistence.Entities.WorkforceOrganizationalUnit entity)
         {
