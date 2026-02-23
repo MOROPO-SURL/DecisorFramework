@@ -16,7 +16,7 @@
 
         public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel AlternativePostalContactItem { get; set; }
 
-        public SchoolingDisplayModel Schooling { get; set; }
+        public Domain.Persistence.Enumerations.EducationLevel EducationLevel { get; set; }
 
         public string SchoolingComplement { get; set; }
 
@@ -38,6 +38,7 @@
         {
             Id = entity.Id;
             At = entity.At;
+            EducationLevel = entity.EducationLevel;
             SchoolingComplement = entity.SchoolingComplement;
             MaleParentName = entity.MaleParentName;
             FemaleParentName = entity.FemaleParentName;
@@ -77,13 +78,6 @@
                 AlternativePostalContactItem = new Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel();
 
                 AlternativePostalContactItem.Import(entity.AlternativePostalContactItem);
-            }
-
-            if (entity.Schooling != null)
-            {
-                Schooling = new SchoolingDisplayModel();
-
-                Schooling.Import(entity.Schooling);
             }
 
             if (entity.RawModelDocument != null)

@@ -9,7 +9,7 @@
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.WorkforceConfigurationOrganizationalUnityAndVacantsCardView"
-    x:DataType="presentation_view_models:WorkforceConfigurationOrganizationalStructuringUnitViewModel">
+    x:DataType="presentation_view_models:WorkforceConfigurationOrganizationalStructuringUnitTreeViewModel">
     <ContentView.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
@@ -172,7 +172,7 @@
                     </CollectionView>
                 </Grid>
             </Frame>
-            <Label 
+            <!--<Label 
                 IsVisible="{Binding Children, Converter={StaticResource IsListNotNullOrEmptyConverter}}"
                 Style="{StaticResource CaptionFieldLabelStyle}"
                 Margin="0,16,0,0"
@@ -190,7 +190,7 @@
                         </local_card_views:WorkforceConfigurationOrganizationalUnityAndVacantsCardView>
                     </DataTemplate>
                 </BindableLayout.ItemTemplate>
-            </VerticalStackLayout>
+            </VerticalStackLayout>-->
         </VerticalStackLayout>
     </Frame>
 </ContentView>

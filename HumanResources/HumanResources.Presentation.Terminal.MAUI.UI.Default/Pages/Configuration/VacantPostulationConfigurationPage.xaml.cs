@@ -22,20 +22,6 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
     {
         InitializeComponent();
 
-        if (model.Schooling != null)
-        {
-            for (int i = 0; i < model.AvailableSchoolings.Length; i++)
-            {
-                var current = model.AvailableSchoolings[i];
-
-                if (model.Schooling.Id != current.Id) continue;
-
-                SchoolingPicker.SelectedIndex = i;
-
-                break;
-            }
-        }
-
         if (model.OfficialPostalContactItem != null) 
         {
             for (int i = 0; i < model.Contact.Identity.PostalContacts.Length; i++)
@@ -80,7 +66,7 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
             ContactId = ConcreteBindingContext.Contact.Id,
             OfficialPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[MainPostalContactItemPicker.SelectedIndex].Id,
             AlternativePostalContactItemId = AltPostalContactItemPicker.SelectedIndex >= 0 ? ConcreteBindingContext.Contact.Identity.PostalContacts[AltPostalContactItemPicker.SelectedIndex].Id : null,
-            SchoolingId = ConcreteBindingContext.AvailableSchoolings[SchoolingPicker.SelectedIndex].Id,
+            EducationLevel = ConcreteBindingContext.EducationLevel,
             SchoolingComplement = ConcreteBindingContext.SchoolingComplement,
             MaleParentName = ConcreteBindingContext.MaleParentName,
             FemaleParentName = ConcreteBindingContext.FemaleParentName,
@@ -109,7 +95,7 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
             ContactId = ConcreteBindingContext.Contact.Id,
             OfficialPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[MainPostalContactItemPicker.SelectedIndex].Id,
             AlternativePostalContactItemId = AltPostalContactItemPicker.SelectedIndex >= 0 ? ConcreteBindingContext.Contact.Identity.PostalContacts[AltPostalContactItemPicker.SelectedIndex].Id : null,
-            SchoolingId = ConcreteBindingContext.AvailableSchoolings[SchoolingPicker.SelectedIndex].Id,
+            EducationLevel = ConcreteBindingContext.EducationLevel,
             SchoolingComplement = ConcreteBindingContext.SchoolingComplement,
             MaleParentName = ConcreteBindingContext.MaleParentName,
             FemaleParentName = ConcreteBindingContext.FemaleParentName,

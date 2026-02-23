@@ -9,7 +9,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extens
     {
         public static void AddDecisorHumanResourcesPresentationWebCommon(this IServiceCollection services)
         {
-            services.AddScoped<IEntityRepository<Schooling, System.Guid>, SchoolingRepository>();
             services.AddScoped<IEntityRepository<WorkPositionKind, System.Guid>, WorkPositionKindRepository>();
             services.AddScoped<IEntityRepository<WorkPosition, System.Guid>, WorkPositionRepository>();
             services.AddScoped<IEntityRepository<NamingResolution, System.Guid>, NamingResolutionRepository>();

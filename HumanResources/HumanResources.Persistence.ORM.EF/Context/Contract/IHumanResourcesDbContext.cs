@@ -4,7 +4,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Context.Con
 {
     public interface IHumanResourcesDbContext : Governance.Persistence.ORM.EF.Context.Contract.IGovernanceDbContext, Legal.Persistence.ORM.EF.Context.Contract.ILegalDbContext
     {
-        public DbSet<Entities.Schooling> Schoolings { get; set; }
         public DbSet<Entities.SalaryStandard> SalaryStandards { get; set; }
         public DbSet<Entities.WorkPositionKind> WorkPositionKinds { get; set; }
         public DbSet<Entities.WorkPosition> WorkPositions { get; set; }

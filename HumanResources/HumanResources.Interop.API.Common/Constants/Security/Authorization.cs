@@ -11,15 +11,6 @@
         public const string EmployeeRemoverPermission = "employee-remover-permission";
         #endregion
 
-        #region Schooling
-        public const string SchoolingManagementPermissionGroup = "schooling-management-permission-group";
-
-        public const string SchoolingViewerPermission = "schooling-viewer-permission";
-        public const string SchoolingCreatorPermission = "schooling-creator-permission";
-        public const string SchoolingEditorPermission = "schooling-editor-permission";
-        public const string SchoolingRemoverPermission = "schooling-remover-permission";
-        #endregion
-
         #region WorkPositionKind
         public const string WorkPositionKindManagementPermissionGroup = "workpositionkind-management-permission-group";
 

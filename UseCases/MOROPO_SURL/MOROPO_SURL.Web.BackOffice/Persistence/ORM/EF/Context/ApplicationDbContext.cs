@@ -154,7 +154,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
 
-        public DbSet<Schooling> Schoolings { get; set; }
         public DbSet<SalaryStandard> SalaryStandards { get; set; }
         public DbSet<WorkPositionKind> WorkPositionKinds { get; set; }
         public DbSet<WorkPosition> WorkPositions { get; set; }

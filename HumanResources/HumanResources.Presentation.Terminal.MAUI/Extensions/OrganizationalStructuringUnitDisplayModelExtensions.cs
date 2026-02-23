@@ -5,9 +5,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Ext
 
 public static class OrganizationalStructuringUnitDisplayModelExtensions
 {
-    public static Models.View.WorkforceConfigurationOrganizationalStructuringUnitViewModel ToConfigurationViewModel(this Domain.Interop.API.Common.Models.Display.OrganizationalStructuringUnitDisplayModel target, WorkforceOrganizationalUnitDisplayModel[] workforceOrganizationalUnits)
+    public static Models.View.WorkforceConfigurationOrganizationalStructuringUnitTreeViewModel ToConfigurationViewModel(this Domain.Interop.API.Common.Models.Display.OrganizationalStructuringUnitDisplayModel target, WorkforceOrganizationalUnitDisplayModel[] workforceOrganizationalUnits)
     {
-        var model = new Models.View.WorkforceConfigurationOrganizationalStructuringUnitViewModel
+        var model = new Models.View.WorkforceConfigurationOrganizationalStructuringUnitTreeViewModel
         {
             Id = target.Id,
             //Context = target.
@@ -38,10 +38,10 @@ public static class OrganizationalStructuringUnitDisplayModelExtensions
             }));
         }
 
-        foreach (var child in target.Children)
-        {
-            model.Children.Add(child.ToConfigurationViewModel(workforceOrganizationalUnits));
-        }
+        //foreach (var child in target.Children)
+        //{
+        //    model.Children.Add(child.ToConfigurationViewModel(workforceOrganizationalUnits));
+        //}
 
         return model;
     }

@@ -29,9 +29,7 @@
         public Guama.Identity.Persistence.Entities.PostalContactItem AlternativePostalContactItem { get; set; }
         public System.Guid? AlternativePostalContactItemId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SchoolingId))]
-        public Schooling Schooling { get; set; }
-        public System.Guid SchoolingId { get; set; }
+        public Domain.Persistence.Enumerations.EducationLevel EducationLevel { get; set; }
 
         public string SchoolingComplement { get; set; }
 

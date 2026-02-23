@@ -13,7 +13,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
     private readonly List<WorkforceOrganizationalUnitInputModel> incomingOrganizationalUnits = [];
     private readonly List<WorkforceOrganizationalUnitDisplayModel> outgoingOrganizationalUnits = [];
 
-    public WorkforceConfigurationPage(System.Action<WorkforceDisplayModel> successAction, Models.Page.Configuration.WorkforceConfigurationPageModel model) : base(successAction, model, null)
+    public WorkforceConfigurationPage(System.Action<WorkforceDisplayModel> successAction, Models.Page.Configuration.WorkforceConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.WorkforceConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }
@@ -70,6 +70,11 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         OnCancel(sender, eventArgs);
     }
 
+    private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
+    }
+
     private void AddOrganizationalUnityButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationalUnitPickPage(OrganizationalUnityPickComplete_Callback)));
@@ -81,7 +86,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         {
             if (!task.Result) return;
 
-            var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalStructuringUnitViewModel;
+            var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalStructuringUnitTreeViewModel;
 
             var handled = false;
 
@@ -118,7 +123,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
             hasChangesFlag = true;
 
-            Dispatcher.Dispatch(() => ((Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext).OrganizationalUnities.Remove(target));
+            //Dispatcher.Dispatch(() => ((Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext).OrganizationalUnities.Remove(target));
         });
     }
 
@@ -134,7 +139,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
                 var page = await factory.BuildAsync(ChiefVacantDefineSuccess_Callback, null);
 
-                page.ConcreteBindingContext.OrganizationUnity = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalStructuringUnitViewModel;
+                page.ConcreteBindingContext.OrganizationUnity = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalStructuringUnitTreeViewModel;
 
                 Dispatcher.Dispatch(() =>
                 {
@@ -165,7 +170,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
                 var page = await factory.BuildAsync(VacantCreateSuccess_Callback, null);
 
-                page.ConcreteBindingContext.OrganizationUnity = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalStructuringUnitViewModel;
+                page.ConcreteBindingContext.OrganizationUnity = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalStructuringUnitTreeViewModel;
 
                 Dispatcher.Dispatch(() =>
                 {
@@ -194,7 +199,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
             {
                 var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Models.View.WorkforceConfigurationVacantViewModel, Models.Page.Configuration.VacantConfigurationPageModel>>();
 
-                var page = await factory.BuildAsync(ChiefVacantEditSuccess_Callback, (((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalStructuringUnitViewModel).ChiefVacant);
+                var page = await factory.BuildAsync(ChiefVacantEditSuccess_Callback, (((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationOrganizationalStructuringUnitTreeViewModel).ChiefVacant);
 
                 Dispatcher.Dispatch(() =>
                 {
@@ -335,12 +340,12 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
                         //OrganizationalUnityId = task.Result.Id                        
                     };
 
-                    ((Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext).OrganizationalUnities.Add(new Models.View.WorkforceConfigurationOrganizationalStructuringUnitViewModel
-                    {
-                        Id = model.Id,
+                    //((Models.Page.Configuration.WorkforceConfigurationPageModel)BindingContext).OrganizationalUnities.Add(new Models.View.WorkforceConfigurationOrganizationalStructuringUnitTreeViewModel
+                    //{
+                    //    Id = model.Id,
                         //Domain = task.Result,
                         //Children = GetOrganizationalUnityChildren(task.Result, model)
-                    });
+                    //});
 
                     incomingOrganizationalUnits.Add(model);
 

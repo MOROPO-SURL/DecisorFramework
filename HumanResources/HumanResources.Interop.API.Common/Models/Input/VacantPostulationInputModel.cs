@@ -20,7 +20,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
 
         public System.Guid? AlternativePostalContactItemId { get; set; }
 
-        public System.Guid SchoolingId { get; set; }
+        public Domain.Persistence.Enumerations.EducationLevel EducationLevel { get; set; }
 
         public string SchoolingComplement { get; set; }
 
@@ -37,7 +37,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
 
         public string PersonalIdentificationNumber { get; set; }
 
-        public Core.Interop.API.Common.Models.Input.DocumentInputModel RawModelDocument { get; set; }
+        public DocumentInputModel RawModelDocument { get; set; }
 
         public List<DocumentInputModel> EditionDocuments { get; set; } = new List<DocumentInputModel>();
         public List<DocumentInputModel> IncomingDocuments { get; set; } = new List<DocumentInputModel>();
@@ -64,6 +64,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
         public void Mergue(Persistence.Entities.VacantPostulation entity)
         {
             entity.At = At;
+            entity.EducationLevel = EducationLevel;
             entity.SchoolingComplement = SchoolingComplement;
             entity.MaleParentName = MaleParentName;
             entity.FemaleParentName = FemaleParentName;
@@ -98,12 +99,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
             {
                 entity.AlternativePostalContactItem = null;
                 entity.AlternativePostalContactItemId= AlternativePostalContactItemId;
-            }
-
-            if (entity.SchoolingId != SchoolingId)
-            {
-                entity.Schooling = null;
-                entity.SchoolingId = SchoolingId;
             }
         }
     }

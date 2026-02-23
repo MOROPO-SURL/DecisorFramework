@@ -1,127 +1,76 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class WorkforcesManagePage : Caney.MVVM.Core.Pages.ContentPage
+public partial class WorkforcesManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.WorkforceDisplayModel, Models.Page.Manage.WorkforcesManagePageModel, Models.Page.Configuration.WorkforceConfigurationPageModel>
 {
     public WorkforcesManagePage()
     {
         InitializeComponent();
-
-        IsEnabled = false;
-
-        BindingContext = new Models.Page.Manage.WorkforcesManagePageModel();
     }
 
-    protected override void OnAppearing()
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
+
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.WORKFORCE_DEFAULT_CARD_VIEW_WIDTH;
+
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.WORKFORCE_DEFAULT_CARD_VIEW_HEIGHT;
+
+    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.WorkforceDisplayModel>> FetchItemsAsync()
     {
-        base.OnAppearing();
+        var apiConnectClient = new Interop.API.Connect.Clients.WorkforcesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        if (IsEnabled) return;
-
-        LoadItems();
-
-        IsEnabled = true;
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.WorkforceDisplayModel target, int discriminator)
     {
-        this.NavigationPushPageAsync(new Configuration.WorkforceConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.WorkforceConfigurationPageModel(null)));
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        switch (discriminator)
+        {
+            case 0:
+                var apiConnectClient = new Interop.API.Connect.Clients.WorkforcesAPIConnectClient(httpClientHelperProvider);
+
+                apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
+                {
+                    Dispatcher.Dispatch(() =>
+                    {
+                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
+
+                        LoadItems(true);
+                    });
+                });
+
+                break;
+
+            default:
+                throw new System.InvalidOperationException();
+        }
     }
 
-    private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (((Models.Page.Manage.WorkforcesManagePageModel)BindingContext).IsBusy) return;
+        AddItem(sender, eventArgs);
+    }
 
-        LoadItems();
+    private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
+    }
+
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
+    }
+
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
+    {
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
     }
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        ((Models.Page.Manage.WorkforcesManagePageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.WorkforceDisplayModel;
-    }
-
-    private void PresentedItemDismissButton_Clicked(object sender, System.EventArgs e)
-    {
-        ((Models.Page.Manage.WorkforcesManagePageModel)BindingContext).PresentedItem = null;
-    }
-
-    private void PresentedItemEditButton_Clicked(object sender, System.EventArgs e)
-    {
-        this.NavigationPushPageAsync(new Configuration.WorkforceConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.WorkforceConfigurationPageModel(((Models.Page.Manage.WorkforcesManagePageModel)BindingContext).PresentedItem)));
-
-        PresentedItemDismissButton_Clicked(sender, e);
-    }
-
-    private void PresentedItemRemoveButton_Clicked(object sender, System.EventArgs e)
-    {
-        DisplayAlert("Confirmación", "Está seguro que desea eliminar este elemento?", "Eliminar", "Cancelar").ContinueWith(task =>
-        {
-            if (!task.Result) return;
-
-            var concreteBindingContext = (Models.Page.Manage.WorkforcesManagePageModel)BindingContext;
-
-            var apiConnectClient = new Interop.API.Connect.Clients.WorkforcesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-            apiConnectClient.ArchiveAsync(concreteBindingContext.PresentedItem.Id).ContinueWith(_task =>
-            {
-                Dispatcher.Dispatch(() =>
-                {
-                    concreteBindingContext.IsBusy = false;
-
-                    if (_task.Exception != null || _task.IsCanceled)
-                    {
-                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                    }
-                    else
-                    {
-                        concreteBindingContext.PresentedItem = null;
-
-                        this.PresentToastNotification(Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Elemento eliminado con éxito.");
-
-                        LoadItems();
-                    }
-                });
-            });
-        });
-    }
-
-    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.WorkforceDisplayModel model)
-    {
-        LoadItems();
-    }
-
-    private void LoadItems()
-    {
-        var concreteBindingContext = (Models.Page.Manage.WorkforcesManagePageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        concreteBindingContext.Items.Clear();
-
-        var apiConnectClient = new Interop.API.Connect.Clients.WorkforcesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        apiConnectClient.GetAsync().ContinueWith(task =>
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                concreteBindingContext.IsBusy = false;
-
-                if (task.Exception != null || task.IsCanceled)
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                }
-                else
-                {
-                    foreach (var model in task.Result)
-                    {
-                        concreteBindingContext.Items.Add(model);
-                    }
-                }
-            });
-        });
+        base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 }

@@ -9,7 +9,7 @@
 
         public System.Guid Id { get; set; }
 
-        public WorkforceConfigurationOrganizationalStructuringUnitViewModel Context { get; set; }
+        public WorkforceConfigurationOrganizationalStructuringUnitTreeViewModel Context { get; set; }
 
         public int Priority { get => priority; set => priority = value; }
 

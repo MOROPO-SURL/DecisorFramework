@@ -6,9 +6,8 @@
         {
             get
             {
-                return new System.Collections.Generic.List<Guama.Core.Persistence.ORM.EF.Configurators.Contract.IEntityTypeConfigurator>
-                {
-                    new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.Schooling>(),
+                return
+                [
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.WorkPositionKind>(),
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.WorkPosition>(),
                     new Core.Persistence.ORM.EF.Configurators.Base.BaseEntityTypeConfigurator<Entities.WorkPositionResponsability>(),
@@ -28,7 +27,7 @@
                     new Configurators.StaffWorkforceBridgeEntityTypeConfigurator(),
                     new Configurators.OcupationEntityTypeConfigurator(),
                     new Configurators.EmployeeDailyCheckingEntityTypeConfigurator()
-                };
+                ];
             }
         }
 

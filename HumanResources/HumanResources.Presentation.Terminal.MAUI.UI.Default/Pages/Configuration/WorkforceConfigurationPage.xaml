@@ -48,8 +48,27 @@
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
                     <Entry Text="{Binding Name}" />
-                </VerticalStackLayout>                
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:WorkforceConfigurationPageModel.NameValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:WorkforceConfigurationPageModel.NameValidableProperty}}" />
+                </VerticalStackLayout>
                 <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Estructura Organizacional" />
+                    <Picker 
+                        x:Name="OrganizationalStructurePicker"
+                        ItemsSource="{Binding AvailableOrganizationalStructures}"
+                        ItemDisplayBinding="{Binding Path=Name}"
+                        SelectedItem="{Binding OrganizationalStructure}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:WorkforceConfigurationPageModel.OrganizationalStructureValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:WorkforceConfigurationPageModel.OrganizationalStructureValidableProperty}}" />
+                </VerticalStackLayout>
+                <!--<VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidades Organizativas" />
@@ -103,7 +122,7 @@
                             </CollectionView>
                         </Grid>
                     </Frame>
-                </VerticalStackLayout>
+                </VerticalStackLayout>-->
                 <BoxView 
                     Margin="8,16,8,8"
                     HeightRequest="1" 
