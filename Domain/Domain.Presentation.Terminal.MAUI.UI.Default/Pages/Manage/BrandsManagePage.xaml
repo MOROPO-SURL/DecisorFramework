@@ -42,7 +42,7 @@
                     Margin="20,20,20,0"
                     Text="{Binding SearchParameter}"
                     Placeholder="-- buscar marca por nombre --"
-                    SearchButtonPressed="SearchBar_SearchButtonPressed"  />/>
+                    SearchButtonPressed="SearchBar_SearchButtonPressed" />
                 <Grid 
                     VerticalOptions="FillAndExpand"
                     SizeChanged="ItemsCollectionViewLayout_SizeChanged">
