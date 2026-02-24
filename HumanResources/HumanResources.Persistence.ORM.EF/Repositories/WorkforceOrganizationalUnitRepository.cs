@@ -14,7 +14,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
         {
             return base.GetQueryableDbSet()
                 .Include(entity => entity.OrganizationalStructuringUnit)
-                .Include(entity => entity.ChiefVacant);
+                .Include(entity => entity.ChiefVacant).ThenInclude(entity => entity.WorkPosition)
+                .Include(entity => entity.ChiefVacant).ThenInclude(entity => entity.SalaryStandard);
         }
     }
 }

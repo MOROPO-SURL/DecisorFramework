@@ -5,6 +5,7 @@ using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Controllers.API
 {
@@ -45,6 +46,38 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
             result.OrganizationalStructure.RootStructuringUnit = entity.OrganizationalStructure.RootStructuringUnit.GetInteropChildren(organizationalStructuringUnityRepository);
 
+            result.OrganizationalUnits = organizationalUnitRepository.FindBy(_entity => _entity.WorkforceId == entity.Id).ToArray().Select(_entity =>
+            {
+                var _model = new WorkforceOrganizationalUnitDisplayModel();
+
+                _model.Import(_entity);
+
+                if (_entity.ChiefVacantId != null)
+                {
+                    _model.Vacants = vacantRepository.FindBy(__entity => __entity.WorkforceOrganizationalUnitId == _entity.Id && __entity.Id != _entity.ChiefVacant.Id).OrderBy(__entity => __entity.Priority).ToArray().Select(__entity =>
+                    {
+                        var __model = new VacantDisplayModel();
+
+                        __model.Import(__entity);
+
+                        return __model;
+                    }).ToArray();
+                }
+                else
+                {
+                    _model.Vacants = vacantRepository.FindBy(__entity => __entity.WorkforceOrganizationalUnitId == _entity.Id).OrderBy(__entity => __entity.Priority).ToArray().Select(__entity =>
+                    {
+                        var __model = new VacantDisplayModel();
+
+                        __model.Import(__entity);
+
+                        return __model;
+                    }).ToArray();
+                }
+
+                return _model;
+            }).ToArray();
+
             return result;
         }
 
@@ -59,8 +92,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                 _entity.WorkforceId = entity.Id;
 
                 organizationalUnitRepository.Add(_entity, User.Identity.Name, false);
-
-                PreCreate(_entity, _model);
             }
         }
 
@@ -93,7 +124,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
                 organizationalUnitRepository.Add(_entity, User.Identity.Name, false);
 
-                PreCreate(_entity, _model);
+                //PreCreate(_entity, _model);
             }
         }
 
@@ -112,21 +143,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
             }
 
             Repository.Update(entity, User.Identity.Name);
-        }
-
-        private void PreCreate(WorkforceOrganizationalUnit entity, WorkforceOrganizationalUnitInputModel model)
-        {
-            //foreach (var _model in model.Children)
-            //{
-            //    var _entity = _model.Export();
-
-            //    _entity.ParentId = entity.Id;
-            //    _entity.WorkforceId = entity.WorkforceId;
-
-            //    organizationalUnityRepository.Add(_entity, User.Identity.Name, false);
-
-            //    PreCreate(_entity, _model);
-            //}
         }
 
         private void PostCreate(WorkforceOrganizationalUnit entity, WorkforceOrganizationalUnitInputModel model)
@@ -148,11 +164,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
                 vacantRepository.Add(_entity, User.Identity.Name, false);
             }
-
-            //foreach (var _model in model.Children)
-            //{
-            //    PostCreate(organizationalUnityRepository.Get(_model.Id), _model);
-            //}
         }
 
         private void PostEdit(WorkforceOrganizationalUnit entity, WorkforceOrganizationalUnitInputModel model)
@@ -203,48 +214,5 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
             //    PostEdit(organizationalUnityRepository.Get(_model.Id), _model);
             //}
         }
-
-        //private WorkforceOrganizationalUnitDisplayModel[] GetOrganizationalUnityChildren(WorkforceOrganizationalUnit[] organizationalUnities)
-        //{
-        //    var result = new System.Collections.Generic.List<WorkforceOrganizationalUnitDisplayModel>();
-
-        //    foreach (var entity in organizationalUnities)
-        //    {
-        //        var model = new WorkforceOrganizationalUnitDisplayModel();
-
-        //        model.Import(entity);
-
-        //        if (entity.ChiefVacant != null)
-        //        {
-        //            model.Vacants = vacantRepository.FindBy(_entity => _entity.WorkforceOrganizationalUnitId == entity.Id && _entity.Id != entity.ChiefVacant.Id).OrderBy(_entity => _entity.Priority).ToArray().Select(_entity =>
-        //            {
-        //                var _model = new VacantDisplayModel();
-
-        //                _model.Import(_entity);
-
-        //                return _model;
-        //            }).ToArray();
-        //        }
-        //        else
-        //        {
-        //            model.Vacants = vacantRepository.FindBy(_entity => _entity.WorkforceOrganizationalUnitId == entity.Id).OrderBy(_entity => _entity.Priority).ToArray().Select(_entity =>
-        //            {
-        //                var _model = new VacantDisplayModel();
-
-        //                _model.Import(_entity);
-
-        //                return _model;
-        //            }).ToArray();
-        //        }
-
-        //        var children = organizationalUnitRepository.FindBy(_entity => _entity.ParentId == entity.Id).OrderBy(_entity => _entity.OrganizationalStructuringUnit.Priority).ToArray();
-
-        //        model.Children = GetOrganizationalUnityChildren(children);
-
-        //        result.Add(model);
-        //    }
-
-        //    return [.. result.OrderBy(model => model.OrganizationalStructuringUnit.OrganizationalUnit.Priority)];
-        //}
     }
 }

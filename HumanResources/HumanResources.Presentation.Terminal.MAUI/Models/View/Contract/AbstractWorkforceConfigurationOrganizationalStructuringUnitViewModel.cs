@@ -1,6 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;
+﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View.Contract;
 
-public class WorkforceConfigurationOrganizationalStructuringUnitLeafViewModel : Caney.MVVM.Core.Models.BaseBindableModel
+public abstract class AbstractWorkforceConfigurationOrganizationalStructuringUnitViewModel : Caney.MVVM.Core.Models.BaseBindableModel
 {
     private WorkforceConfigurationVacantViewModel chiefVacant;
 
@@ -8,7 +8,7 @@ public class WorkforceConfigurationOrganizationalStructuringUnitLeafViewModel : 
 
     public Domain.Interop.API.Common.Models.Display.OrganizationalStructuringUnitDisplayModel Context { get; set; }
 
-    public WorkforceConfigurationOrganizationalStructuringUnitTreeViewModel Parent { get; set; }
+    public TreeWorkforceConfigurationOrganizationalStructuringUnitViewModel Parent { get; set; }
 
     public WorkforceConfigurationVacantViewModel ChiefVacant { get => chiefVacant; set => SetProperty(ref chiefVacant, value); }
 

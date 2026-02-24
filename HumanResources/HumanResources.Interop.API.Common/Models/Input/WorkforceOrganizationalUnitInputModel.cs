@@ -7,7 +7,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
     {
         public System.Guid Id { get; set; }
 
-        public System.Guid OrganizationalStructuringUnityId { get; set; }
+        public System.Guid OrganizationalStructuringUnitId { get; set; }
 
         public VacantInputModel ChiefVacant { get; set; }
 
@@ -19,7 +19,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
 
         public Persistence.Entities.WorkforceOrganizationalUnit Export()
         {
-            var entity = new Persistence.Entities.WorkforceOrganizationalUnit { Id = Id, OrganizationalStructuringUnitId = OrganizationalStructuringUnityId };
+            var entity = new Persistence.Entities.WorkforceOrganizationalUnit { Id = Id, OrganizationalStructuringUnitId = OrganizationalStructuringUnitId };
 
             Mergue(entity);
 

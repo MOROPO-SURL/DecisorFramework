@@ -12,8 +12,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
         {
             return base.GetQueryableDbSet()
                 .AsNoTracking()
-                .Include(entity => entity.OrganizationalStructure).ThenInclude(entity => entity.RootStructuringUnit)
-                .Include(entity => entity.OrganizationalUnits).ThenInclude(entity => entity.OrganizationalStructuringUnit)
+                .Include(entity => entity.OrganizationalStructure).ThenInclude(entity => entity.RootStructuringUnit).ThenInclude(entity => entity.OrganizationalUnit)
+                .Include(entity => entity.OrganizationalUnits).ThenInclude(entity => entity.OrganizationalStructuringUnit).ThenInclude(entity => entity.OrganizationalUnit)
                 .Include(entity => entity.OrganizationalUnits).ThenInclude(entity => entity.ChiefVacant).ThenInclude(entity => entity.WorkPosition)
                 .Include(entity => entity.OrganizationalUnits).ThenInclude(entity => entity.ChiefVacant).ThenInclude(entity => entity.SalaryStandard)
                 .AsSplitQuery();

@@ -4,12 +4,21 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
+    xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.WorkforceConfigurationOrganizationalStructuringUnitTreeCardView"
-    x:DataType="presentation_view_models:WorkforceConfigurationOrganizationalStructuringUnitTreeViewModel">
+    x:DataType="presentation_view_models:TreeWorkforceConfigurationOrganizationalStructuringUnitViewModel">
     <ContentView.Resources>
         <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
+
+            <communitytoolkit_converters:IsListNotNullOrEmptyConverter x:Key="IsListNotNullOrEmptyConverter" />
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentView.Resources>
     <Grid ColumnSpacing="0" RowSpacing="8">
@@ -25,11 +34,12 @@
         <Label
             IsVisible="{Binding Parent, Converter={StaticResource IsNotNullConverter}}"
             Grid.Column="0"
-            VerticalOptions="Center"
+            VerticalOptions="Start"
             FontSize="Large"
             FontFamily="MaterialDesignIcons"
             Text="&#xF60D;" />
         <BoxView
+            IsVisible="{Binding Parent, Converter={StaticResource IsNotNullConverter}}"
             Grid.Column="1" Grid.RowSpan="2"
             WidthRequest="2"
             Color="DimGray" />
@@ -50,10 +60,157 @@
                     FontSize="Caption"
                     FontAttributes="Bold" />
                 <Label Text="{Binding Context.Reference, TargetNullValue='---'}" />
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
+                        Spacing="0">
+                        <Label 
+                            Style="{StaticResource CaptionFieldLabelStyle}"
+                            Margin="0,8"
+                            Text="Puesto superior" />
+                        <Frame 
+                            IsVisible="{Binding ChiefVacant, Converter={StaticResource IsNotNullConverter}}"
+                            Padding="8">
+                            <StackLayout Orientation="Horizontal">
+                                <VerticalStackLayout 
+                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                    Padding="8">
+                                    <Label
+                                        ToolTipProperties.Text="{Binding ChiefVacant.WorkPosition.Name}"
+                                        Text="{Binding ChiefVacant.WorkPosition.Name}"
+                                        LineBreakMode="TailTruncation"
+                                        FontSize="Medium" />
+                                    <Label
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Margin="0,8,0,0"
+                                        Text="Referencia" />
+                                    <Label
+                                        Text="{Binding ChiefVacant.WorkPosition.Reference, TargetNullValue='---'}"
+                                        LineBreakMode="TailTruncation" />
+                                    <Label
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Margin="0,8,0,0"
+                                        Text="Escala salarial" />
+                                    <Label
+                                        Text="{Binding ChiefVacant.SalaryStandard.Name}"
+                                        LineBreakMode="TailTruncation" />
+                                    <Label
+                                        Style="{StaticResource CaptionFieldLabelStyle}"
+                                        Margin="0,8,0,0"
+                                        Text="Modo de ocupaci&#x00F3;n" />
+                                    <Label
+                                        Text="{Binding ChiefVacant.OcupationMode, Converter={StaticResource StringToLocalizedStringConverter}}"
+                                        LineBreakMode="TailTruncation" />
+                                </VerticalStackLayout>
+                                <Button
+                                    Style="{StaticResource FontIconImageButtonStyle}" 
+                                    VerticalOptions="Start"
+                                    Text="&#xF90B;"
+                                    Clicked="ChiefVacantEditionButton_Clicked" />
+                            </StackLayout>
+                        </Frame>
+                        <Button
+                            IsVisible="{Binding ChiefVacant, Converter={StaticResource IsNullConverter}}"
+                            HorizontalOptions="Start"                
+                            Text="Definir"
+                            Clicked="DefineChiefVacantButton_Clicked" />                    
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <Label 
+                    Style="{StaticResource CaptionFieldLabelStyle}"
+                    Margin="0,16,0,8"
+                    Text="Puestos subalternos" />
+                <Frame Padding="8">
+                    <Grid RowSpacing="8">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="2" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Button
+                            Grid.Column="1" Grid.Row="0"
+                            HorizontalOptions="End"
+                            Text="Agregar"
+                            Clicked="AddVacantButton_Clicked" />
+                        <BoxView
+                            Grid.ColumnSpan="2" Grid.Row="1"
+                            Color="DimGray" />
+                        <CollectionView
+                            Grid.ColumnSpan="2" Grid.Row="2"
+                            ItemsSource="{Binding Vacants}">
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" Span="1" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.Behaviors>
+                                <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="320" ItemSpacing="8" />
+                            </CollectionView.Behaviors>
+                            <CollectionView.EmptyView>
+                                <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="interop_common_display_models:VacantDisplayModel">
+                                    <Frame 
+                                        Padding="8"
+                                        Margin="0,12,0,0">
+                                        <StackLayout Orientation="Horizontal">
+                                            <VerticalStackLayout 
+                                                HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                Padding="8">
+                                                <Label
+                                                    ToolTipProperties.Text="{Binding WorkPosition.Name}"
+                                                    Text="{Binding WorkPosition.Name}"
+                                                    LineBreakMode="TailTruncation"
+                                                    FontSize="Medium" />
+                                                <Label
+                                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                                    Margin="0,8,0,0"
+                                                    Text="Referencia" />
+                                                <Label
+                                                    Text="{Binding WorkPosition.Reference, TargetNullValue='---'}"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Label
+                                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                                    Margin="0,8,0,0"
+                                                    Text="Escala salarial" />
+                                                <Label
+                                                    Text="{Binding SalaryStandard.Name}"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Label
+                                                    Style="{StaticResource CaptionFieldLabelStyle}"
+                                                    Margin="0,8,0,0"
+                                                    Text="Modo de ocupaci&#x00F3;n" />
+                                                <Label
+                                                    Text="{Binding OcupationMode, Converter={StaticResource StringToLocalizedStringConverter}}"
+                                                    LineBreakMode="TailTruncation" />
+                                            </VerticalStackLayout>
+                                            <VerticalStackLayout Spacing="8">
+                                                <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}" 
+                                                    Text="&#xF90B;"
+                                                    Clicked="VacantEditionButton_Clicked" />
+                                                <Button
+                                                    VerticalOptions="Start"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                    Text="&#xFA78;"
+                                                    Clicked="VacantRemoveButton_Clicked" />
+                                            </VerticalStackLayout>
+                                        </StackLayout>
+                                    </Frame>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </Grid>
+                </Frame>
                 <Label 
                     Style="{StaticResource CaptionFieldLabelStyle}"
                     VerticalOptions="End"
-                    Margin="0,4"
+                    Margin="0,16,0,4"
                     TextColor="DimGray"
                     FontSize="Caption"
                     FontAttributes="Bold"
@@ -89,7 +246,6 @@
             Spacing="8">
             <Label 
                 Style="{StaticResource CaptionFieldLabelStyle}"
-                Margin="0,0,0,4"
                 VerticalOptions="End"
                 Text="Dependencias" />
             <BoxView
