@@ -17,7 +17,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.PostalContactItemBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Location)
                 .Include(entity => entity.OfficialPostalContactItem).ThenInclude(entity => entity.Location)
                 .Include(entity => entity.AlternativePostalContactItem).ThenInclude(entity => entity.Location)
-                .Include(entity => entity.EducationLevel)
                 .Include(entity => entity.DocumentBridges).ThenInclude(bridge => bridge.Stern);
         }
     }

@@ -212,7 +212,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
             var model = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.WorkforceConfigurationVacantViewModel;
 
-            var target = FindTargetWorkforceOrganizationalUnit(model);
+            var target = ConcreteBindingContext.FindConfiguratingTargetWorkforceOrganizationalUnit(model);
 
             Dispatcher.Dispatch(() =>
             {
@@ -273,7 +273,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
     private void ChiefVacantDefineSuccess_Callback(Models.View.WorkforceConfigurationVacantViewModel model)
     {
-        var target = FindTargetWorkforceOrganizationalUnit(model);
+        var target = ConcreteBindingContext.FindConfiguratingTargetWorkforceOrganizationalUnit(model);
 
         if (target != null)
         {
@@ -312,7 +312,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
     private void VacantCreateSuccess_Callback(Models.View.WorkforceConfigurationVacantViewModel model)
     {
-        var target = FindTargetWorkforceOrganizationalUnit(model);
+        var target = ConcreteBindingContext.FindConfiguratingTargetWorkforceOrganizationalUnit(model);
 
         if (target != null)
         {
@@ -328,20 +328,42 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         }
         else
         {
-            ConcreteBindingContext.IncomingOrganizationalUnits.Add(new WorkforceOrganizationalUnitInputModel
+            target = ConcreteBindingContext.FindPersistedTargetWorkforceOrganizationalUnit(model);
+
+            if (target != null)
             {
-                Id = model.Context.Id,
-                OrganizationalStructuringUnitId = model.Context.Context.Id,
-                IncomingVacants = [new VacantInputModel
+                ConcreteBindingContext.EditionOrganizationalUnits.Add(new WorkforceOrganizationalUnitInputModel
                 {
-                    Id = model.Id,
-                    OcupationMode = model.OcupationMode,
-                    Priority = model.Priority,
-                    SalaryStandardId = model.SalaryStandard.Id,
-                    WorkPositionId = model.WorkPosition.Id,
-                    WorkforceOrganizationalUnitId = model.Context.Id
-                }]
-            });
+                    Id = model.Context.Id,
+                    OrganizationalStructuringUnitId = model.Context.Context.Id,
+                    IncomingVacants = [new VacantInputModel
+                    {
+                        Id = model.Id,
+                        OcupationMode = model.OcupationMode,
+                        Priority = model.Priority,
+                        SalaryStandardId = model.SalaryStandard.Id,
+                        WorkPositionId = model.WorkPosition.Id,
+                        WorkforceOrganizationalUnitId = model.Context.Id
+                    }]
+                });
+            }
+            else
+            {
+                ConcreteBindingContext.IncomingOrganizationalUnits.Add(new WorkforceOrganizationalUnitInputModel
+                {
+                    Id = model.Context.Id,
+                    OrganizationalStructuringUnitId = model.Context.Context.Id,
+                    IncomingVacants = [new VacantInputModel
+                    {
+                        Id = model.Id,
+                        OcupationMode = model.OcupationMode,
+                        Priority = model.Priority,
+                        SalaryStandardId = model.SalaryStandard.Id,
+                        WorkPositionId = model.WorkPosition.Id,
+                        WorkforceOrganizationalUnitId = model.Context.Id
+                    }]
+                });
+            }
         }
 
         model.Context.Vacants.Add(model);
@@ -351,7 +373,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
     private void ChiefVacantEditSuccess_Callback(Models.View.WorkforceConfigurationVacantViewModel model)
     {
-        var target = FindTargetWorkforceOrganizationalUnit(model);
+        var target = ConcreteBindingContext.FindConfiguratingTargetWorkforceOrganizationalUnit(model);
 
         if (target != null)
         {
@@ -390,7 +412,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
     private void VacantEditSuccess_Callback(Models.View.WorkforceConfigurationVacantViewModel model)
     {
-        var target = FindTargetWorkforceOrganizationalUnit(model);
+        var target = ConcreteBindingContext.FindConfiguratingTargetWorkforceOrganizationalUnit(model);
 
         if (target != null)
         {
@@ -468,57 +490,5 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         }
 
         hasChangesFlag = true;
-    }
-
-    //private static Models.View.WorkforceConfigurationOrganizationalStructuringUnitViewModel[] GetOrganizationalUnityChildren(Domain.Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel target, WorkforceOrganizationalUnitInputModel model)
-    //{
-    //    var result = new List<Models.View.WorkforceConfigurationOrganizationalStructuringUnitViewModel>();
-
-        //foreach (var item in target.Children)
-        //{
-        //    var _model = new WorkforceOrganizationalUnityInputModel
-        //    {
-        //        Id = System.Guid.NewGuid(),
-        //        OrganizationalUnityId = item.Id
-        //    };
-
-        //    var _target = new Models.View.WorkforceConfigurationOrganizationalUnityViewModel
-        //    {
-        //        Id = _model.Id,
-        //        Domain = item
-        //    };
-
-        //    if (item.Children != null)
-        //    {
-        //        _target.Children = GetOrganizationalUnityChildren(item, _model);
-        //    }
-
-        //    result.Add(_target);
-
-        //    model.Children.Add(_model);
-        //}
-
-    //    return [.. result];
-    //}
-
-    private WorkforceOrganizationalUnitInputModel FindTargetWorkforceOrganizationalUnit(Models.View.WorkforceConfigurationVacantViewModel model)
-    {
-        if (ConcreteBindingContext.IncomingOrganizationalUnits.Count <= 0 && ConcreteBindingContext.EditionOrganizationalUnits.Count <= 0) return null;
-
-        foreach (var item in ConcreteBindingContext.IncomingOrganizationalUnits)
-        {
-            if (item.OrganizationalStructuringUnitId != model.Context.Id) continue;
-
-            return item;
-        }
-
-        foreach (var item in ConcreteBindingContext.EditionOrganizationalUnits)
-        {
-            if (item.OrganizationalStructuringUnitId != model.Context.Id) continue;
-
-            return item;
-        }
-
-        return null;
     }
 }
