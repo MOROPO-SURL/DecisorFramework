@@ -180,7 +180,7 @@ public partial class UnitMeasurementConfigurationPage : Core.Presentation.Termin
 
     private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        DisplayAlert("Confirmación", "Está seguro que desea retirar esta usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
