@@ -96,7 +96,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
                 var page = await factory.BuildAsync(ChiefVacantDefineSuccess_Callback, null);
 
-                page.ConcreteBindingContext.OrganizationUnity = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.TreeWorkforceConfigurationOrganizationalStructuringUnitViewModel;
+                page.ConcreteBindingContext.Context = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.TreeWorkforceConfigurationOrganizationalStructuringUnitViewModel;
 
                 Dispatcher.Dispatch(() =>
                 {
@@ -127,7 +127,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
                 var page = await factory.BuildAsync(VacantCreateSuccess_Callback, null);
 
-                page.ConcreteBindingContext.OrganizationUnity = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.TreeWorkforceConfigurationOrganizationalStructuringUnitViewModel;
+                page.ConcreteBindingContext.Context = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.TreeWorkforceConfigurationOrganizationalStructuringUnitViewModel;
 
                 Dispatcher.Dispatch(() =>
                 {
@@ -428,6 +428,8 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
                 item.WorkPositionId = model.WorkPosition.Id;
 
                 handled = true;
+
+                break;
             }
 
             if (!handled)
@@ -442,6 +444,30 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
                     item.WorkPositionId = model.WorkPosition.Id;
 
                     handled = true;
+
+                    break;
+                }
+            }
+
+            if (!handled)
+            {
+                foreach (var item in model.Context.Vacants)
+                {
+                    if (item.Id != model.Id) continue;
+
+                    target.EditionVacants.Add(new VacantInputModel
+                    {
+                        Id = model.Id,
+                        OcupationMode = model.OcupationMode,
+                        Priority = model.Priority,
+                        SalaryStandardId = model.SalaryStandard.Id,
+                        WorkPositionId = model.WorkPosition.Id,
+                        WorkforceOrganizationalUnitId = model.Context.Id
+                    });
+
+                    handled = true;
+
+                    break;
                 }
             }
 

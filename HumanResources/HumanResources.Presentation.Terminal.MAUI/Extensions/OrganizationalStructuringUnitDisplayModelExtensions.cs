@@ -59,110 +59,117 @@ public static class OrganizationalStructuringUnitDisplayModelExtensions
             Parent = parent
         };
 
-        //var workforceOrganizationalUnit = workforceOrganizationalUnits?.FirstOrDefault(_model => _model.OrganizationalStructuringUnit.Id == target.Id);
+        return model;
+    }
 
-        //model.ChiefVacant = workforceOrganizationalUnit.ChiefVacant == null ? null : new Models.View.WorkforceConfigurationVacantViewModel
-        //{
-        //    Id = workforceOrganizationalUnit.ChiefVacant.Id,
-        //    Priority = workforceOrganizationalUnit.ChiefVacant.Priority,
-        //    OcupationMode = workforceOrganizationalUnit.ChiefVacant.OcupationMode,
-        //    WorkPosition = workforceOrganizationalUnit.ChiefVacant.WorkPosition,
-        //    SalaryStandard = workforceOrganizationalUnit.ChiefVacant.SalaryStandard,
-        //    Context = model
-        //};
+    public static Models.View.TreeOcupationManageOrganizationalStructuringUnitViewModel ToConfigurationTreeViewModel(this Domain.Interop.API.Common.Models.Display.OrganizationalStructuringUnitDisplayModel target, System.Collections.Generic.List<WorkforceOrganizationalUnitDisplayModel> workforceOrganizationalUnits, System.Collections.Generic.List<OcupationDisplayModel> ocupations, Models.View.TreeOcupationManageOrganizationalStructuringUnitViewModel parent)
+    {
+        var model = new Models.View.TreeOcupationManageOrganizationalStructuringUnitViewModel
+        {
+            Id = target.Id,
+            Context = target,
+            Parent = parent
+        };
 
-        //if (workforceOrganizationalUnit.Vacants != null)
-        //{
-        //    model.Vacants = new System.Collections.ObjectModel.ObservableCollection<Models.View.WorkforceConfigurationVacantViewModel>(workforceOrganizationalUnit.Vacants.Select(_model => new Models.View.WorkforceConfigurationVacantViewModel
-        //    {
-        //        Id = _model.Id,
-        //        Priority = _model.Priority,
-        //        OcupationMode = _model.OcupationMode,
-        //        WorkPosition = _model.WorkPosition,
-        //        SalaryStandard = _model.SalaryStandard,
-        //        Context = model
-        //    }));
-        //}
+        var workforceOrganizationalUnit = workforceOrganizationalUnits.FirstOrDefault(_model => _model.OrganizationalStructuringUnit.Id == target.Id);
+
+        if (workforceOrganizationalUnit != null)
+        {
+            var vacants = workforceOrganizationalUnit.Vacants.Select(_model =>
+            {
+                var ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == _model.Id);
+
+                var result = new Models.View.OcupationsManageVacantViewModel
+                {
+                    Id = _model.Id,
+                    VacantId = _model.Id,
+                    VacantOcupationMode = _model.OcupationMode,
+                    WorkPosition = _model.WorkPosition,
+                    SalaryStandard = _model.SalaryStandard,
+                    Ocupation = ocupation
+                };
+
+                if (ocupation != null) ocupations.Remove(ocupation);
+
+                return result;
+            }).ToList();
+            
+            if (workforceOrganizationalUnit.ChiefVacant != null)
+            {
+                vacants.Insert(0, new Models.View.OcupationsManageVacantViewModel
+                {
+                    Id = workforceOrganizationalUnit.ChiefVacant.Id,
+                    VacantId = workforceOrganizationalUnit.ChiefVacant.Id,
+                    VacantOcupationMode = workforceOrganizationalUnit.ChiefVacant.OcupationMode,
+                    WorkPosition = workforceOrganizationalUnit.ChiefVacant.WorkPosition,
+                    SalaryStandard = workforceOrganizationalUnit.ChiefVacant.SalaryStandard,
+                    Ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == workforceOrganizationalUnit.ChiefVacant.Id)
+                });
+            }
+
+            model.Vacants = [.. vacants];
+        }
+
+        foreach (var child in target.Children)
+        {
+            if (child.Kind == Domain.Persistence.Enumerations.OrganizationalStructuringUnitKind.Dependency)
+                model.DependencyChildren.Add(child.ToConfigurationTreeViewModel(workforceOrganizationalUnits, ocupations, model));
+            else
+                model.CompositionChildren.Add(child.ToConfigurationLeafViewModel(workforceOrganizationalUnits, ocupations, model));
+        }
 
         return model;
     }
 
-    public static Models.View.OcupationsManageOrganizationalUnityViewModel[] ToOcupationsManageOrganizationalUnitViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnitDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations)
+    private static Models.View.LeafOcupationManageOrganizationalStructuringUnitViewModel ToConfigurationLeafViewModel(this Domain.Interop.API.Common.Models.Display.OrganizationalStructuringUnitDisplayModel target, System.Collections.Generic.List<WorkforceOrganizationalUnitDisplayModel> workforceOrganizationalUnits, System.Collections.Generic.List<OcupationDisplayModel> ocupations, Models.View.TreeOcupationManageOrganizationalStructuringUnitViewModel parent)
     {
-        var result = new System.Collections.Generic.List<Models.View.OcupationsManageOrganizationalUnityViewModel>();
-
-        foreach (var target in targets)
+        var model = new Models.View.LeafOcupationManageOrganizationalStructuringUnitViewModel
         {
-            var model = new Models.View.OcupationsManageOrganizationalUnityViewModel
-            {
-                Id = target.Id,
-                //Name = target.OrganizationalStructuringUnit.Name,
-                //Enabled = target.OrganizationalStructuringUnit.Enabled,
-                //Priority = target.OrganizationalStructuringUnit.Priority,
-                //Reference = target.OrganizationalUnity.Reference
-            };
+            Id = target.Id,
+            Context = target,
+            Parent = parent
+        };
 
-            if (target.Vacants != null)
+        var workforceOrganizationalUnit = workforceOrganizationalUnits.FirstOrDefault(_model => _model.OrganizationalStructuringUnit.Id == target.Id);
+
+        if (workforceOrganizationalUnit != null)
+        {
+            var vacants = workforceOrganizationalUnit.Vacants.Select(_model =>
             {
-                var vacants = target.Vacants.Select(_model =>
+                var ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == _model.Id);
+
+                var result = new Models.View.OcupationsManageVacantViewModel
                 {
-                    var ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == _model.Id);
+                    Id = _model.Id,
+                    VacantId = _model.Id,
+                    VacantOcupationMode = _model.OcupationMode,
+                    WorkPosition = _model.WorkPosition,
+                    SalaryStandard = _model.SalaryStandard,
+                    Ocupation = ocupation
+                };
 
-                    var result = new Models.View.OcupationsManageVacantViewModel
-                    {
-                        Id = _model.Id,
-                        VacantId = _model.Id,
-                        VacantOcupationMode = _model.OcupationMode,
-                        WorkPosition = _model.WorkPosition,
-                        SalaryStandard = _model.SalaryStandard,
-                        Ocupation = ocupation
-                    };
+                if (ocupation != null) ocupations.Remove(ocupation);
 
-                    if (ocupation != null) ocupations.Remove(ocupation);
+                return result;
+            }).ToList();
 
-                    return result;
-                }).ToList();
-
-                if (target.ChiefVacant != null)
-                {
-                    vacants.Insert(0, new Models.View.OcupationsManageVacantViewModel
-                    {
-                        Id = target.ChiefVacant.Id,
-                        VacantId = target.ChiefVacant.Id,
-                        VacantOcupationMode = target.ChiefVacant.OcupationMode,
-                        WorkPosition = target.ChiefVacant.WorkPosition,
-                        SalaryStandard = target.ChiefVacant.SalaryStandard,
-                        Ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == target.ChiefVacant.Id)
-                    });
-                }
-
-                model.Vacants = vacants.ToArray();
-            }
-            else if (target.ChiefVacant != null)
+            if (workforceOrganizationalUnit.ChiefVacant != null)
             {
-                model.Vacants = 
-                [
-                    new Models.View.OcupationsManageVacantViewModel
-                    {
-                        Id = target.ChiefVacant.Id,
-                        VacantId = target.ChiefVacant.Id,
-                        VacantOcupationMode = target.ChiefVacant.OcupationMode,
-                        WorkPosition = target.ChiefVacant.WorkPosition,
-                        SalaryStandard = target.ChiefVacant.SalaryStandard,
-                        Ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == target.ChiefVacant.Id)
-                    }
-                ];
+                vacants.Insert(0, new Models.View.OcupationsManageVacantViewModel
+                {
+                    Id = workforceOrganizationalUnit.ChiefVacant.Id,
+                    VacantId = workforceOrganizationalUnit.ChiefVacant.Id,
+                    VacantOcupationMode = workforceOrganizationalUnit.ChiefVacant.OcupationMode,
+                    WorkPosition = workforceOrganizationalUnit.ChiefVacant.WorkPosition,
+                    SalaryStandard = workforceOrganizationalUnit.ChiefVacant.SalaryStandard,
+                    Ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == workforceOrganizationalUnit.ChiefVacant.Id)
+                });
             }
 
-            //if (target.Children != null)
-            //{
-            //    model.Children = target.Children.ToOcupationsManageOrganizationalUnityViewModelChildren(ocupations);
-            //}
-
-            result.Add(model);
+            model.Vacants = [.. vacants];
         }
 
-        return result.OrderBy(model => model.Priority).ToArray();
+        return model;
     }
 
     public static Models.View.VacantPickOrganizationalUnityViewModel[] ToVacantPickOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnitDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations, Persistence.Enumerations.VacantOcupationMode[] vacantOcupationModes)

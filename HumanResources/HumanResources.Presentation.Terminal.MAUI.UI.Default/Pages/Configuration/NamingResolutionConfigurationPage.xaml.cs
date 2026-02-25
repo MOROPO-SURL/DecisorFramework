@@ -78,7 +78,7 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
 
     private void VacantPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPickPage(ConcreteBindingContext.IsForOcupationCandidate ? [Persistence.Enumerations.VacantOcupationMode.Hybrid] : [Persistence.Enumerations.VacantOcupationMode.Naming], VacantPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPickPage(ConcreteBindingContext.IsForOcupationCandidate ? [Persistence.Enumerations.VacantOcupationMode.Designation] : [Persistence.Enumerations.VacantOcupationMode.Naming], VacantPickComplete_Callback)));
     }
 
     private void CandidatePickButton_Clicked(object sender, System.EventArgs e)

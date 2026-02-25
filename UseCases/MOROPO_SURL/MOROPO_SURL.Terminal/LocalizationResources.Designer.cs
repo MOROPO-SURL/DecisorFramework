@@ -97,6 +97,15 @@ namespace MOROPO.Tool.Decisor.Terminal {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Designación.
+        /// </summary>
+        internal static string Designation {
+            get {
+                return ResourceManager.GetString("Designation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Divorciado(a).
         /// </summary>
         internal static string Divorced {
@@ -120,15 +129,6 @@ namespace MOROPO.Tool.Decisor.Terminal {
         internal static string HighSchool {
             get {
                 return ResourceManager.GetString("HighSchool", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Busca una cadena traducida similar a Designación.
-        /// </summary>
-        internal static string Hybrid {
-            get {
-                return ResourceManager.GetString("Hybrid", resourceCulture);
             }
         }
         

@@ -38,7 +38,7 @@ public partial class OcupationCandidatePickPage : Core.Presentation.Terminal.MAU
     {
         var apiConnectClient = new Interop.API.Connect.Clients.OcupationCandidatesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.OcupationCandidateFilterModel { VacantOcupationMode = isForNamingResolution ? Persistence.Enumerations.VacantOcupationMode.Hybrid : Persistence.Enumerations.VacantOcupationMode.Admision }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.OcupationCandidateFilterModel { VacantOcupationMode = isForNamingResolution ? Persistence.Enumerations.VacantOcupationMode.Designation : Persistence.Enumerations.VacantOcupationMode.Admision }, CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)

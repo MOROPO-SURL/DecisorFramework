@@ -44,32 +44,6 @@
                         ItemDisplayBinding="{Binding Structure.Identity.Name}"
                         SelectedIndexChanged="StaffPicker_SelectedIndexChanged" />
                 </VerticalStackLayout>
-                <Label 
-                    Style="{StaticResource CaptionFieldLabelStyle}"
-                    Margin="8,8,8,0"
-                    Text="M&#x00E1;xima autoridad" />
-                <Frame 
-                    HorizontalOptions="Start"
-                    Margin="8" Padding="0"
-                    IsVisible="{Binding RootChiefVacant, Converter={StaticResource IsNotNullConverter}}">
-                    <Frame.GestureRecognizers>
-                        <TapGestureRecognizer Tapped="RootChiefVacantTapGestureRecognizer_Tapped" />
-                    </Frame.GestureRecognizers>
-                    <VerticalStackLayout Spacing="0">
-                        <Image 
-                            WidthRequest="240" HeightRequest="240"
-                            BackgroundColor="DimGray"
-                            Source="default_person_picture.jpg" />
-                        <VerticalStackLayout Margin="8,8,8,12" Spacing="8">
-                            <Label
-                                HorizontalOptions="Center"
-                                ToolTipProperties.Text="{Binding RootChiefVacant.WorkPosition.Name}"
-                                Text="{Binding RootChiefVacant.WorkPosition.Name}"
-                                FontAttributes="Bold"
-                                LineBreakMode="TailTruncation" />
-                        </VerticalStackLayout>
-                    </VerticalStackLayout>
-                </Frame>
                 <VerticalStackLayout>
                     <Label 
                         Style="{StaticResource CaptionFieldLabelStyle}" 

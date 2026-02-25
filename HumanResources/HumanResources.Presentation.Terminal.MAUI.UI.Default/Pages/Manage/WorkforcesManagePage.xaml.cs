@@ -10,6 +10,8 @@ public partial class WorkforcesManagePage : Core.Presentation.Terminal.MAUI.UI.P
         InitializeComponent();
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.WORKFORCE_DEFAULT_CARD_VIEW_WIDTH;

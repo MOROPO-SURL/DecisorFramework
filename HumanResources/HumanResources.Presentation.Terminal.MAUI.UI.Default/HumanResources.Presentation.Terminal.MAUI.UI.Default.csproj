@@ -39,9 +39,6 @@
 	  <Compile Update="Pages\Manage\OcupationsManagePage.xaml.cs">
 	    <DependentUpon>OcupationsManagePage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="Views\Card\OcupationsManageOrganizationalUnityAndVacantsCardView.xaml.cs">
-	    <DependentUpon>OcupationsManageOrganizationalUnityAndVacantsCardView.xaml</DependentUpon>
-	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="Pages\Configuration\AdmitionPropousalConfigurationPage.xaml">
@@ -111,6 +108,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\OcupationCandidateDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\OcupationManageOrganizationalStructuringUnitLeafCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\OcupationManageOrganizationalStructuringUnitTreeCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\VacantPickOrganizationalUnityCardView.xaml">
