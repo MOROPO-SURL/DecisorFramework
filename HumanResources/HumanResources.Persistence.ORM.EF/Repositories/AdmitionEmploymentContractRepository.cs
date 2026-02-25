@@ -13,7 +13,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
             return base.GetQueryableDbSet()
                 .Include(entity => entity.Vacant).ThenInclude(entity => entity.WorkforceOrganizationalUnit).ThenInclude(entity => entity.OrganizationalStructuringUnit)
                 .Include(entity => entity.Vacant).ThenInclude(entity => entity.WorkPosition).ThenInclude(entity => entity.Kind)
-                .Include(entity => entity.Staff).ThenInclude(entity => entity.Structure).ThenInclude(entity => entity.Identity)
+                .Include(entity => entity.Staff).ThenInclude(entity => entity.AdministrativeEntity).ThenInclude(entity => entity.Identity)
                 .Include(entity => entity.AdmitionPropousal);
         }
     }

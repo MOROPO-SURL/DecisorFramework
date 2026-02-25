@@ -11,7 +11,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
         protected override System.Linq.IQueryable<Entities.VacantPostulation> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
-                .Include(entity => entity.Staff).ThenInclude(entity => entity.Structure).ThenInclude(entity => entity.Identity)
+                .Include(entity => entity.Staff).ThenInclude(entity => entity.AdministrativeEntity).ThenInclude(entity => entity.Identity)
                 .Include(entity => entity.Vacant).ThenInclude(entity => entity.WorkPosition)
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.PostalContactItemBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Location)

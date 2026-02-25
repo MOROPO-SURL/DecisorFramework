@@ -43,10 +43,10 @@
                                     LineBreakMode="TailTruncation"
                                     Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}" />
                                 <Label
-                                    ToolTipProperties.Text="{Binding Staff.Structure.Identity}"
+                                    ToolTipProperties.Text="{Binding Staff.AdministrativeEntity.Identity}"
                                     LineBreakMode="TailTruncation"
                                     FontAttributes="Bold"
-                                    Text="{Binding Staff.Structure.Identity}" />
+                                    Text="{Binding Staff.AdministrativeEntity.Identity}" />
                                 <Grid 
                                     Margin="0,8,0,0"
                                     ColumnSpacing="8">
@@ -148,10 +148,10 @@
                                     LineBreakMode="TailTruncation"
                                     Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}" />
                                 <Label
-                                    ToolTipProperties.Text="{Binding Staff.Structure.Identity}"
+                                    ToolTipProperties.Text="{Binding Staff.AdministrativeEntity.Identity}"
                                     LineBreakMode="TailTruncation"
                                     FontAttributes="Bold"
-                                    Text="{Binding Staff.Structure.Identity}" />
+                                    Text="{Binding Staff.AdministrativeEntity.Identity}" />
                                 <Grid 
                                     Margin="0,8,0,0"
                                     ColumnSpacing="8">

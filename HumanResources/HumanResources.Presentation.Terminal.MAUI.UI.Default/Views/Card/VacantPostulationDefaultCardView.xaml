@@ -48,7 +48,7 @@
                 <Label
                     VerticalOptions="FillAndExpand"
                     LineBreakMode="TailTruncation"
-                    Text="{Binding Staff.Structure.Identity.Name}" />
+                    Text="{Binding Staff.AdministrativeEntity.Identity.Name}" />
             </StackLayout>
         </Grid>
     </Frame>

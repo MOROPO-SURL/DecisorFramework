@@ -10,11 +10,11 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
         protected override IQueryable<Entities.NamingResolution> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
-                .Include(entity => entity.Staff).ThenInclude(entity => entity.Structure).ThenInclude(entity => entity.Identity)
+                .Include(entity => entity.Staff).ThenInclude(entity => entity.AdministrativeEntity).ThenInclude(entity => entity.Identity)
                 .Include(entity => entity.Vacant).ThenInclude(entity => entity.WorkPosition)
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.Candidate).ThenInclude(entity => entity.Postulation).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
-                .Include(entity => entity.Candidate).ThenInclude(entity => entity.Postulation).ThenInclude(entity => entity.Staff).ThenInclude(entity => entity.Structure).ThenInclude(entity => entity.Identity)
+                .Include(entity => entity.Candidate).ThenInclude(entity => entity.Postulation).ThenInclude(entity => entity.Staff).ThenInclude(entity => entity.AdministrativeEntity).ThenInclude(entity => entity.Identity)
                 .Include(entity => entity.Candidate).ThenInclude(entity => entity.Postulation).ThenInclude(entity => entity.Vacant).ThenInclude(entity => entity.WorkPosition)
                 .Include(entity => entity.Candidate).ThenInclude(entity => entity.Responsible).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity)
                 .Include(entity => entity.Vacant).ThenInclude(entity => entity.WorkPosition)

@@ -6,7 +6,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Disp
     {
         public System.Guid Id { get; set; } = System.Guid.NewGuid();
 
-        public Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel Structure { get; set; }
+        public Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel AdministrativeEntity { get; set; }
 
         public WorkforceDisplayModel MainWorkforce { get; set; }
 
@@ -38,11 +38,11 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Disp
                 return model;
             }).ToArray();
 
-            if (entity.Structure != null)
+            if (entity.AdministrativeEntity != null)
             {
-                Structure = new Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel();
+                AdministrativeEntity = new Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel();
 
-                Structure.Import(entity.Structure);
+                AdministrativeEntity.Import(entity.AdministrativeEntity);
             }
 
             if (entity.MainWorkforce != null)

@@ -65,8 +65,8 @@
                                     FontAttributes="Bold"
                                     LineBreakMode="TailTruncation" />                                
                                 <Label
-                                    ToolTipProperties.Text="{Binding Staff.Structure.Identity.Name}"
-                                    Text="{Binding Staff.Structure.Identity.Name}"
+                                    ToolTipProperties.Text="{Binding Staff.AdministrativeEntity.Identity.Name}"
+                                    Text="{Binding Staff.AdministrativeEntity.Identity.Name}"
                                     LineBreakMode="TailTruncation" />
                             </VerticalStackLayout>
                         </Frame>
