@@ -3,12 +3,12 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
-    xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
+    xmlns:presentation_pick_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Pick;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.VacantPickPage"
-    x:DataType="presentation_manage_page_models:OcupationsManagePageModel"
+    x:DataType="presentation_pick_page_models:VacantPickPageModel"
     Title="Seleccionar Vacante">
     <ContentPage.Resources>
         <ResourceDictionary>
@@ -41,30 +41,22 @@
                     <Picker 
                         x:Name="StaffPicker" 
                         ItemsSource="{Binding AvailableStaffs}"
-                        ItemDisplayBinding="{Binding Structure.Identity.Name}"
+                        ItemDisplayBinding="{Binding AdministrativeEntity.Identity.Name}"
                         SelectedIndexChanged="StaffPicker_SelectedIndexChanged" />
                 </VerticalStackLayout>
                 <VerticalStackLayout>
                     <Label 
                         Style="{StaticResource CaptionFieldLabelStyle}" 
                         Margin="8,8,8,0" 
-                        Text="Unidades Organizativas" />
+                        Text="Estructura organizacional" />
                     <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
-                    <CollectionView ItemsSource="{Binding Items}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.EmptyView>
-                            <Label Text="Seleccione una entidad administrativa ..." FontAttributes="Italic" TextColor="DimGray" Padding="8,4" />
-                        </CollectionView.EmptyView>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <local_card_views:VacantPickOrganizationalUnityCardView 
-                                    Padding="8,4"
-                                    ItemTapped="ItemTapGestureRecognizer_Tapped" />
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                    <ContentView 
+                        IsVisible="{Binding RootTreeVacantPickOrganizationalStructuringUnitViewModel, Converter={StaticResource IsNotNullConverter}}"
+                        Margin="0,4,0,0">
+                        <local_card_views:VacantPickOrganizationalStructuringUnitTreeCardView
+                            BindingContext="{Binding RootTreeVacantPickOrganizationalStructuringUnitViewModel}"
+                            ItemTapped="ItemTapGestureRecognizer_Tapped" />
+                    </ContentView>
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>

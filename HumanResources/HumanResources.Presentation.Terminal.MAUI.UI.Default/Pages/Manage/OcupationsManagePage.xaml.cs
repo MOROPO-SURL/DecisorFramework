@@ -50,7 +50,6 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
         ConcreteBindingContext.AvailableStaffs.Clear();
         ConcreteBindingContext.AvailableStaffWorkforces.Clear();
         ConcreteBindingContext.RootTreeOcupationManageOrganizationalStructuringUnit = null;
-        ConcreteBindingContext.Items.Clear();
 
         var apiConnectClient = new Interop.API.Connect.Clients.StaffsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
@@ -107,8 +106,6 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
         var staffId = ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex].Id;
         var targetWorkforceId = ConcreteBindingContext.AvailableStaffWorkforces[StaffWorkforcePicker.SelectedIndex].Workforce.Id;
 
-        ConcreteBindingContext.Items.Clear();
-
         System.Threading.Tasks.Task.Run(async () => 
         {
             var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
@@ -120,7 +117,7 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
 
             var ocupations = new System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel>(await ocupationsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.OcupationFilterModel { StaffId = staffId, WorkforceId = targetWorkforceId }));
 
-            return targetWorkforce.OrganizationalStructure.RootStructuringUnit.ToConfigurationTreeViewModel(targetWorkforce.OrganizationalUnits.ToList(), ocupations, null);
+            return targetWorkforce.OrganizationalStructure.RootStructuringUnit.ToConfigurationTreeViewModel([.. targetWorkforce.OrganizationalUnits], ocupations, null);
         }).ContinueWith(task => 
         {
             Dispatcher.Dispatch(() =>
@@ -190,7 +187,7 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
                                     {
                                         Id = ocupationId,
                                         StarAt = System.DateTime.Now,
-                                        NamingResolutionId = availables[0].Id
+                                        ResolutionId = availables[0].Id
                                     });
 
                                     return await ocupationAPIConnectClient.GetAsync(ocupationId);

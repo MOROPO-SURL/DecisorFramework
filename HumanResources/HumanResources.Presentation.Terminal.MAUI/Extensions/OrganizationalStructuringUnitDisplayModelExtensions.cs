@@ -59,6 +59,29 @@ public static class OrganizationalStructuringUnitDisplayModelExtensions
             Parent = parent
         };
 
+        var workforceOrganizationalUnit = workforceOrganizationalUnits?.FirstOrDefault(_model => _model.OrganizationalStructuringUnit.Id == target.Id);
+
+        model.ChiefVacant = workforceOrganizationalUnit?.ChiefVacant == null ? null : new Models.View.WorkforceConfigurationVacantViewModel
+        {
+            Id = workforceOrganizationalUnit.ChiefVacant.Id,
+            Priority = workforceOrganizationalUnit.ChiefVacant.Priority,
+            OcupationMode = workforceOrganizationalUnit.ChiefVacant.OcupationMode,
+            WorkPosition = workforceOrganizationalUnit.ChiefVacant.WorkPosition,
+            SalaryStandard = workforceOrganizationalUnit.ChiefVacant.SalaryStandard
+        };
+
+        if (workforceOrganizationalUnit?.Vacants != null)
+        {
+            model.Vacants = new System.Collections.ObjectModel.ObservableCollection<Models.View.WorkforceConfigurationVacantViewModel>(workforceOrganizationalUnit.Vacants.Select(_model => new Models.View.WorkforceConfigurationVacantViewModel
+            {
+                Id = _model.Id,
+                Priority = _model.Priority,
+                OcupationMode = _model.OcupationMode,
+                WorkPosition = _model.WorkPosition,
+                SalaryStandard = _model.SalaryStandard
+            }));
+        }
+
         return model;
     }
 
@@ -172,29 +195,24 @@ public static class OrganizationalStructuringUnitDisplayModelExtensions
         return model;
     }
 
-    public static Models.View.VacantPickOrganizationalUnityViewModel[] ToVacantPickOrganizationalUnityViewModelChildren(this Interop.API.Common.Models.Display.WorkforceOrganizationalUnitDisplayModel[] targets, System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel> ocupations, Persistence.Enumerations.VacantOcupationMode[] vacantOcupationModes)
+    public static Models.View.TreeVacantPickOrganizationalStructuringUnitViewModel ToConfigurationTreeViewModel(this Domain.Interop.API.Common.Models.Display.OrganizationalStructuringUnitDisplayModel target, System.Collections.Generic.List<WorkforceOrganizationalUnitDisplayModel> workforceOrganizationalUnits, System.Collections.Generic.List<OcupationDisplayModel> ocupations, Persistence.Enumerations.VacantOcupationMode[] vacantOcupationModes, Models.View.TreeVacantPickOrganizationalStructuringUnitViewModel parent)
     {
-        var result = new System.Collections.Generic.List<Models.View.VacantPickOrganizationalUnityViewModel>();
-
-        foreach (var target in targets)
+        var model = new Models.View.TreeVacantPickOrganizationalStructuringUnitViewModel
         {
-            var model = new Models.View.VacantPickOrganizationalUnityViewModel
-            {
-                Id = target.Id,
-                //Name = target.OrganizationalStructuringUnit.Name,
-                //Enabled = target.OrganizationalStructuringUnit.Enabled,
-                //Priority = target.OrganizationalStructuringUnit.Priority,
-                //Reference = target.OrganizationalUnity.Reference
-            };
+            Context = target,
+            Parent = parent
+        };
 
-            var _result = new System.Collections.Generic.List<Interop.API.Common.Models.Display.VacantDisplayModel>();
+        var workforceOrganizationalUnit = workforceOrganizationalUnits.FirstOrDefault(_model => _model.OrganizationalStructuringUnit.Id == target.Id);
 
-            if (target.ChiefVacant != null && vacantOcupationModes.Any(item => item == target.ChiefVacant.OcupationMode) && !ocupations.Any(_item => _item.VacantId == target.ChiefVacant.Id))
+        if (workforceOrganizationalUnit != null)
+        {
+            if (workforceOrganizationalUnit.ChiefVacant != null && vacantOcupationModes.Any(item => item == workforceOrganizationalUnit.ChiefVacant.OcupationMode) && !ocupations.Any(_item => _item.VacantId == workforceOrganizationalUnit.ChiefVacant.Id))
             {
-                _result.Add(target.ChiefVacant);
+                model.Vacants.Add(workforceOrganizationalUnit.ChiefVacant);
             }
 
-            var vacants = target.Vacants.Where(model => vacantOcupationModes.Any(item => item == model.OcupationMode)).ToArray();
+            var vacants = workforceOrganizationalUnit.Vacants.Where(model => vacantOcupationModes.Any(item => item == model.OcupationMode)).ToArray();
 
             foreach (var vacant in vacants)
             {
@@ -206,20 +224,56 @@ public static class OrganizationalStructuringUnitDisplayModelExtensions
                 }
                 else
                 {
-                    _result.Add(vacant);
+                    model.Vacants.Add(vacant);
                 }
             }
-
-            model.Vacants = _result.ToArray();
-
-            //if (target.Children != null)
-            //{
-            //    model.Children = target.Children.ToVacantPickOrganizationalUnityViewModelChildren(ocupations, vacantOcupationModes);
-            //}
-
-            result.Add(model);
         }
 
-        return result.OrderBy(model => model.Priority).ToArray();
+        foreach (var child in target.Children)
+        {
+            if (child.Kind == Domain.Persistence.Enumerations.OrganizationalStructuringUnitKind.Dependency)
+                model.DependencyChildren.Add(child.ToConfigurationTreeViewModel(workforceOrganizationalUnits, ocupations, vacantOcupationModes, model));
+            else
+                model.CompositionChildren.Add(child.ToConfigurationLeafViewModel(workforceOrganizationalUnits, ocupations, vacantOcupationModes, model));
+        }
+
+        return model;
+    }
+
+    private static Models.View.LeafVacantPickOrganizationalStructuringUnitViewModel ToConfigurationLeafViewModel(this Domain.Interop.API.Common.Models.Display.OrganizationalStructuringUnitDisplayModel target, System.Collections.Generic.List<WorkforceOrganizationalUnitDisplayModel> workforceOrganizationalUnits, System.Collections.Generic.List<OcupationDisplayModel> ocupations, Persistence.Enumerations.VacantOcupationMode[] vacantOcupationModes, Models.View.TreeVacantPickOrganizationalStructuringUnitViewModel parent)
+    {
+        var model = new Models.View.LeafVacantPickOrganizationalStructuringUnitViewModel
+        {
+            Context = target,
+            Parent = parent
+        };
+
+        var workforceOrganizationalUnit = workforceOrganizationalUnits.FirstOrDefault(_model => _model.OrganizationalStructuringUnit.Id == target.Id);
+
+        if (workforceOrganizationalUnit != null)
+        {
+            if (workforceOrganizationalUnit.ChiefVacant != null && vacantOcupationModes.Any(item => item == workforceOrganizationalUnit.ChiefVacant.OcupationMode) && !ocupations.Any(_item => _item.VacantId == workforceOrganizationalUnit.ChiefVacant.Id))
+            {
+                model.Vacants.Add(workforceOrganizationalUnit.ChiefVacant);
+            }
+
+            var vacants = workforceOrganizationalUnit.Vacants.Where(model => vacantOcupationModes.Any(item => item == model.OcupationMode)).ToArray();
+
+            foreach (var vacant in vacants)
+            {
+                var ocupation = ocupations.FirstOrDefault(_item => _item.VacantId == vacant.Id);
+
+                if (ocupation != null)
+                {
+                    ocupations.Remove(ocupation);
+                }
+                else
+                {
+                    model.Vacants.Add(vacant);
+                }
+            }
+        }
+
+        return model;
     }
 }

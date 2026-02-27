@@ -20,6 +20,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
                 .AddSingleton<IDetailContentPageFactoryFacade<OcupationCandidateDisplayModel>, OcupationCandidateDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<AdmitionPropousalDisplayModel>, AdmitionPropousalDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<NamingResolutionDisplayModel>, NamingResolutionDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<DesignationResolutionDisplayModel>, DesignationResolutionDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<StaffDisplayModel>, StaffDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<Models.Page.Detail.EmployeeDetailPageModel>, EmployeeDetailPageFactory>()
 
@@ -32,6 +33,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
                 .AddSingleton<IConfigurationContentPageFactoryFacade<OcupationCandidateDisplayModel, OcupationCandidateConfigurationPageModel>, OcupationCandidateConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<AdmitionPropousalDisplayModel, AdmitionPropousalConfigurationPageModel>, AdmitionPropousalConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<NamingResolutionDisplayModel, NamingResolutionConfigurationPageModel>, NamingResolutionConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<DesignationResolutionDisplayModel, DesignationResolutionConfigurationPageModel>, DesignationResolutionConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<StaffDisplayModel, StaffConfigurationPageModel>, StaffConfigurationPageFactory>();
 
             return builder;

@@ -1,5 +1,5 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;
 
-public class LeafOcupationManageOrganizationalStructuringUnitViewModel : Contract.AbstractOcupationManageOrganizationalStructuringUnitViewModel
+public sealed class LeafOcupationManageOrganizationalStructuringUnitViewModel : Contract.AbstractOcupationManageOrganizationalStructuringUnitViewModel
 {
 }

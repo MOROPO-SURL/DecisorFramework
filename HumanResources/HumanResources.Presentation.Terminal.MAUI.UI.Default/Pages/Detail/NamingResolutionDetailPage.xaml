@@ -8,7 +8,7 @@
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.NamingResolutionDetailPage"
     x:TypeArguments="interop_common_display_models:NamingResolutionDisplayModel"
     x:DataType="interop_common_display_models:NamingResolutionDisplayModel"
-    Title="Detalles de Plaza Laboral"
+    Title="Detalles de Resolución de Nombramiento"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
     <ContentPage.Resources>
@@ -33,22 +33,13 @@
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Margin="0"
-                                Text="Vacante" />
+                                Text="Puesto" />
                             <Label
-                                IsVisible="{Binding Vacant, Converter={StaticResource IsNotNullConverter}}"
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Vacant.WorkPosition.Name}" />
-                            <Label
-                                IsVisible="{Binding Candidate, Converter={StaticResource IsNotNullConverter}}"
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Candidate.Postulation.Vacant.WorkPosition.Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Contacto" />
-                            <Label
-                                IsVisible="{Binding Contact, Converter={StaticResource IsNotNullConverter}}"
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Contact.Identity}" />
+                                Text="Nombrado(a)" />
                             <Label
                                 IsVisible="{Binding Candidate, Converter={StaticResource IsNotNullConverter}}"
                                 Style="{StaticResource ValuePropertyLabelStyle}"
