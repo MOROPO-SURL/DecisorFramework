@@ -47,29 +47,44 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"                        
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"                        
                         Margin="4"
                         Spacing="6">
                         <Grid
                             ColumnSpacing="6" RowSpacing="6">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition Height="Auto" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Label 
-                                Grid.Row="0"
+                                Grid.Row="0" Grid.ColumnSpan="2"
                                 Style="{StaticResource CaptionFieldLabelStyle}" Text="No. Resolución" />
                             <Entry
-                                Grid.Row="1"
+                                Grid.Row="1" Grid.Column="0"
                                 BackgroundColor="Transparent"
                                 IsReadOnly="True"
                                 Text="{Binding Index}" />
                             <Stepper
-                                Grid.Row="1"
+                                Grid.Row="1" Grid.Column="0"
                                 Margin="0,0,6,0"
+                                Maximum="1000"
                                 HorizontalOptions="End" VerticalOptions="Center"
                                 Value="{Binding Index}" />
+                            <Button
+                                Style="{StaticResource FontIconImageButtonStyle}"
+                                Grid.Column="1" Grid.Row="1"
+                                VerticalOptions="Center"
+                                Text="&#xF90B;"
+                                Clicked="IndexSetButton_Clicked" />
                         </Grid>
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:NamingResolutionConfigurationPageModel.IndexValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:NamingResolutionConfigurationPageModel.IndexValidableProperty}}" />
                         <Label 
                             Style="{StaticResource CaptionFieldLabelStyle}" 
                             Margin="0,8,0,0"
@@ -77,7 +92,7 @@
                         <DatePicker Date="{Binding At}" Format="dddd dd, MMMM, yyyy" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=8}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Candidato" />
@@ -96,7 +111,7 @@
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:NamingResolutionConfigurationPageModel.CandidateValidableProperty}}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=5, ExtraLargeContainerColumn=7, LargeContainerColumn=5, MediumContainerColumn=12, SmallContainerColumn=12}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, ExtraLargeContainerColumn=7, LargeContainerColumn=5, MediumContainerColumn=12, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acuerdo (opcional)" />

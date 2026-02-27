@@ -2,6 +2,7 @@
 
 public class DesignationResolutionConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.DesignationResolutionDisplayModel>
 {
+    public static string IndexValidableProperty => nameof(Index);
     public static string ContactValidableProperty => nameof(Contact);
     public static string VacantValidableProperty => nameof(Vacant);
     public static string SummaryValidableProperty => nameof(Summary);

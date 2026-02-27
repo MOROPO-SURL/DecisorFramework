@@ -64,6 +64,26 @@ public partial class DesignationResolutionConfigurationPage : Core.Presentation.
         OnCancel(sender, eventArgs);
     }
 
+    private void IndexSetButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayPromptAsync("Número de resolución", "Especifique el valor deseado para el número de resolución. Se espera un número entero.", "Aplicar", "Cancelar", keyboard: Microsoft.Maui.Keyboard.Numeric).ContinueWith(task =>
+        {
+            if (string.IsNullOrEmpty(task.Result) || task.IsCanceled) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                try
+                {
+                    ConcreteBindingContext.Index = int.Parse(task.Result);
+                }
+                catch
+                {
+                    DisplayAlert("Aviso", "El valor especificado no es válido. Se espera un número entero.", "Aceptar");
+                }
+            });
+        });
+    }
+
     private void ContactPickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback)));

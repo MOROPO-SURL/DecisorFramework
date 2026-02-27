@@ -54,11 +54,19 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
                 if (_entity.ChiefVacantId != null)
                 {
+                    _model.ChiefVacant.WorkforceOrganizationalUnit = new WorkforceOrganizationalUnitDisplayModel();
+
+                    _model.ChiefVacant.WorkforceOrganizationalUnit.Import(_entity);
+
                     _model.Vacants = vacantRepository.FindBy(__entity => __entity.WorkforceOrganizationalUnitId == _entity.Id && __entity.Id != _entity.ChiefVacant.Id).OrderBy(__entity => __entity.Priority).ToArray().Select(__entity =>
                     {
                         var __model = new VacantDisplayModel();
 
                         __model.Import(__entity);
+
+                        __model.WorkforceOrganizationalUnit = new WorkforceOrganizationalUnitDisplayModel();
+
+                        __model.WorkforceOrganizationalUnit.Import(_entity);
 
                         return __model;
                     }).ToArray();
@@ -70,6 +78,10 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                         var __model = new VacantDisplayModel();
 
                         __model.Import(__entity);
+
+                        __model.WorkforceOrganizationalUnit = new WorkforceOrganizationalUnitDisplayModel();
+
+                        __model.WorkforceOrganizationalUnit.Import(_entity);
 
                         return __model;
                     }).ToArray();

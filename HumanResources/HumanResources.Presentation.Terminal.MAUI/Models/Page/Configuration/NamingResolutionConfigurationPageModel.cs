@@ -2,6 +2,7 @@
 
 public class NamingResolutionConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.NamingResolutionDisplayModel>
 {
+    public static string IndexValidableProperty => nameof(Index);
     public static string CandidateValidableProperty => nameof(Candidate);
     public static string SummaryValidableProperty => nameof(Summary);
 

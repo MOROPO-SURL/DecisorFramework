@@ -6,6 +6,10 @@ public class DesignationResolutionConfigurationValidator : AbstractValidator<Mod
 {
     public DesignationResolutionConfigurationValidator()
     {
+        RuleFor(model => model.Index)
+            .GreaterThan(0)
+            .WithName("Número de resolución");
+
         RuleFor(model => model.Contact)
             .NotNull()
             .WithName("Designado(a)");

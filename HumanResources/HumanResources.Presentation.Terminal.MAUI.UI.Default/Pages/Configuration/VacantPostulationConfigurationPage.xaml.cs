@@ -140,6 +140,30 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback)));
     }
 
+    private void ContactEditButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel, Domain.Presentation.Terminal.MAUI.Models.Page.Configuration.PersonContactConfigurationPageModel>>();
+
+        ConcreteBindingContext.IsBusy = true;
+
+        factory.BuildAsync(ContactPickComplete_Callback, ConcreteBindingContext.Contact).ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                if (task.Exception != null || task.IsCanceled)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    this.NavigationPushPageAsync(task.Result);
+                }
+
+                ConcreteBindingContext.IsBusy = false;
+            });
+        });
+    }
+
     private void DocumentAgregationButton_Clicked(object sender, System.EventArgs e)
     {
         Microsoft.Maui.Storage.FilePicker.Default.PickAsync(new Microsoft.Maui.Storage.PickOptions

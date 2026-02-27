@@ -6,9 +6,13 @@ public class NamingResolutionConfigurationValidator : AbstractValidator<Models.P
 {
     public NamingResolutionConfigurationValidator()
     {
+        RuleFor(model => model.Index)
+            .GreaterThan(0)
+            .WithName("Número de resolución");
+
         RuleFor(model => model.Candidate)
             .NotNull()
-            .WithName("Nombrado(a)");
+            .WithName("Candidato");
 
         RuleFor(model => model.Summary)
             .NotEmpty()

@@ -4,6 +4,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 {
     public class VacantPostulationConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.VacantPostulationDisplayModel>
     {
+        private Interop.API.Common.Models.Display.StaffDisplayModel staff;
         private Interop.API.Common.Models.Display.VacantDisplayModel vacant;
         private Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel contact;
         private Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel officialPostalContactItem;
@@ -42,7 +43,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
         public System.Guid Id { get; set; }
 
-        public Interop.API.Common.Models.Display.StaffDisplayModel Staff { get; set; }
+        public Interop.API.Common.Models.Display.StaffDisplayModel Staff { get => staff; set => SetProperty(ref staff, value); }
 
         public Interop.API.Common.Models.Display.VacantDisplayModel Vacant { get => vacant; set => SetProperty(ref vacant, value); }
 
