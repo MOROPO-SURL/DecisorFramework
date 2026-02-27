@@ -5,26 +5,18 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Models.Page.Detail.EmployeeDetailPageModel, Models.Page.List.EmployeesListPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 140;
-
     public EmployeesListPage()
     {
         InitializeComponent();
     }
 
-    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
-    {
-        return ItemsCollectionView;
-    }
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override bool DetailRequiredAsyncWorkPresentation => true;
 
-    protected override double ItemViewRequestWidth { get => 384; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.EMPLOYEE_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.EMPLOYEE_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override async System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Models.Page.Detail.EmployeeDetailPageModel>> FetchItemsAsync()
     {
@@ -56,11 +48,13 @@ public partial class EmployeesListPage : Core.Presentation.Terminal.MAUI.UI.Page
     {
         var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
+        var designationEmploymentContractsAPIConnectClient = new Interop.API.Connect.Clients.DesignationEmploymentContractsAPIConnectClient(httpClientHelperProvider);
         var namingEmploymentContractsAPIConnectClient = new Interop.API.Connect.Clients.NamingEmploymentContractsAPIConnectClient(httpClientHelperProvider);
         var admitionEmploymentContractsAPIConnectClient = new Interop.API.Connect.Clients.AdmitionEmploymentContractsAPIConnectClient(httpClientHelperProvider);
 
         var list = new System.Collections.Generic.List<Core.Persistence.Entities.Contract.IYearIndexable>();
 
+        list.AddRange(await designationEmploymentContractsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.DesignationEmploymentContractFilterModel { EmployeeId = model.Domain.Id }));
         list.AddRange(await namingEmploymentContractsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.NamingEmploymentContractFilterModel { EmployeeId = model.Domain.Id }));
         list.AddRange(await admitionEmploymentContractsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.AdmitionEmploymentContractFilterModel { EmployeeId = model.Domain.Id }));
 

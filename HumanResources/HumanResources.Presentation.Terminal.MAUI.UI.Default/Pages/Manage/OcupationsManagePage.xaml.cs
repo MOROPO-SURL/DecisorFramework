@@ -164,11 +164,11 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
                         {
                             ConcreteBindingContext.IsBusy = false;
 
-                            DisplayAlert("Aviso", "No existen resoluciones de nombramiento relacionadas con la vacante seleccionada.", "Aceptar");
+                            DisplayAlert("Aviso", "No existen resoluciones de designación vigentes relacionadas con la vacante seleccionada.", "Aceptar");
                         }
                         else
                         {
-                            DisplayAlert("Confirmación", "Está seguro que desea aplicar la resolución de nombramiento vinculada a esta ocupación en la plantilla?", "Confirmar", "Cancelar").ContinueWith(_task =>
+                            DisplayAlert("Confirmación", "Está seguro que desea aplicar la resolución de designación vigente vinculada a esta ocupación en la plantilla?", "Confirmar", "Cancelar").ContinueWith(_task =>
                             {
                                 if (!_task.Result)
                                 {
@@ -245,11 +245,11 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
                         {
                             ConcreteBindingContext.IsBusy = false;
 
-                            DisplayAlert("Aviso", "No existen resoluciones de nombramiento relacionadas con la vacante seleccionada.", "Aceptar");
+                            DisplayAlert("Aviso", "No existen resoluciones de nombramiento vigentes relacionadas con la vacante seleccionada.", "Aceptar");
                         }
                         else
                         {
-                            DisplayAlert("Confirmación", "Está seguro que desea aplicar la resolución de nombramiento vinculada a esta ocupación en la plantilla?", "Confirmar", "Cancelar").ContinueWith(_task =>
+                            DisplayAlert("Confirmación", "Está seguro que desea aplicar la resolución de nombramiento vigente vinculada a esta ocupación en la plantilla?", "Confirmar", "Cancelar").ContinueWith(_task =>
                             {
                                 if (!_task.Result)
                                 {
