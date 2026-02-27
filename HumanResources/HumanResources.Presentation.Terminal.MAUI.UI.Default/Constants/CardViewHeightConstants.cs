@@ -11,6 +11,6 @@ public static class CardViewHeightConstants
     public static double NAMING_RESOLUTION_DEFAULT_CARD_VIEW_HEIGHT = 268;
     public static double NAMING_RESOLUTION_DEFAULT_CARD_VIEW_WIDTH = 400;
 
-    public static double DESIGNATION_RESOLUTION_DEFAULT_CARD_VIEW_HEIGHT = 268;
+    public static double DESIGNATION_RESOLUTION_DEFAULT_CARD_VIEW_HEIGHT = 284;
     public static double DESIGNATION_RESOLUTION_DEFAULT_CARD_VIEW_WIDTH = 400;
 }

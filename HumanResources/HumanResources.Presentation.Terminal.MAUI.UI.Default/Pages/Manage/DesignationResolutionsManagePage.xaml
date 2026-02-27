@@ -99,17 +99,19 @@
                                                 <Label
                                                     ToolTipProperties.Text="{Binding Contact.Identity.Name}"
                                                     Text="{Binding Contact.Identity.Name}"
+                                                    FontAttributes="Bold"
                                                     FontSize="Medium"
                                                     LineBreakMode="TailTruncation" />
                                                 <Label
                                                     ToolTipProperties.Text="{Binding Contact.Identity.LastName}"
+                                                    FontAttributes="Bold"
                                                     Text="{Binding Contact.Identity.LastName}"
                                                     LineBreakMode="TailTruncation" />
                                                 <Label
                                                     Margin="0,8,0,0"
                                                     ToolTipProperties.Text="{Binding Vacant.WorkPosition.Name}"
                                                     Text="{Binding Vacant.WorkPosition.Name}"
-                                                    FontAttributes="Bold"
+                                                    FontSize="Medium"
                                                     LineBreakMode="TailTruncation" />
                                                 <Label
                                                     ToolTipProperties.Text="{Binding Staff.AdministrativeEntity.Identity.Name}"

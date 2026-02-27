@@ -77,10 +77,29 @@
                         <DatePicker Date="{Binding At}" Format="dddd dd, MMMM, yyyy" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=8}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=5, LargeContainerColumn=5, MediumContainerColumn=8, SmallContainerColumn=11}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Vacante" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombrado" />
+                        <ContentView IsVisible="{Binding Contact, Converter={StaticResource IsNotNullConverter}}">
+                            <domain_card_views:PersonContactDefaultCardView 
+                                BindingContext="{Binding Contact}"
+                                HeightRequest="140" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="ContactPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:DesignationResolutionConfigurationPageModel.ContactValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:DesignationResolutionConfigurationPageModel.ContactValidableProperty}}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=5, LargeContainerColumn=4, MediumContainerColumn=8, SmallContainerColumn=10}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Puesto" />
                         <Frame
                             IsVisible="{Binding Vacant, Converter={StaticResource IsNotNullConverter}}"
                             Padding="0">
@@ -105,89 +124,69 @@
                             Style="{StaticResource ValidationMessageLabelStyle}"
                             Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:DesignationResolutionConfigurationPageModel.VacantValidableProperty}}" />
                     </VerticalStackLayout>
-                    <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=5, ExtraLargeContainerColumn=7, LargeContainerColumn=5, MediumContainerColumn=12, SmallContainerColumn=12}}"
-                        Margin="4"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acuerdo (opcional)" />
-                        <Frame 
-                            IsVisible="{Binding Agreement, Converter={StaticResource IsNotNullConverter}}"
-                            Padding="16">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition Width="Auto" />
-                                    <ColumnDefinition />
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                    <RowDefinition Height="Auto" />
-                                </Grid.RowDefinitions>
-                                <Label
-                                    Grid.Column="0" Grid.Row="0"
-                                    Text="No." />
-                                <Label
-                                    Grid.Column="1" Grid.RowSpan="2"
-                                    Margin="0,0,4,0"
-                                    FontSize="Large"
-                                    Text="{Binding Agreement.Index}" />
-                                <Label
-                                    Grid.Column="2" Grid.ColumnSpan="4"
-                                    FontAttributes="Bold"
-                                    Text="{Binding Agreement.Title}" />
-                                <Label
-                                    Grid.Column="2" Grid.Row="1"
-                                    Style="{StaticResource CaptionFieldLabelStyle}"
-                                    Margin="0"
-                                    Text="Grupo Decisor:" />
-                                <Label
-                                    Grid.Column="3" Grid.Row="1"
-                                    Margin="4,0,8,0"
-                                    Text="{Binding Agreement.Meeting.DecisionMakingGroup.CanonicalName}" />
-                                <Label
-                                    Grid.Column="4" Grid.Row="1"
-                                    Style="{StaticResource CaptionFieldLabelStyle}"
-                                    Margin="0"
-                                    Text="Reunión:" />
-                                <Label
-                                    Grid.Column="5" Grid.Row="1"
-                                    Margin="4,0"
-                                    LineBreakMode="TailTruncation"
-                                    Text="{Binding Agreement.Meeting.At}" />
-                                <Label
-                                    Grid.ColumnSpan="6" Grid.Row="2"
-                                    Text="{Binding Agreement.Description, TargetNullValue='---'}" />
-                            </Grid>
-                        </Frame>
-                        <Button
-                            HorizontalOptions="Start"
-                            Text="Seleccionar ..."
-                            Clicked="AgreementPickButton_Clicked" />
-                    </VerticalStackLayout>
-                    <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, ExtraLargeContainerColumn=4, LargeContainerColumn=5, MediumContainerColumn=6, SmallContainerColumn=10}}"
-                        Margin="4"
-                        Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombrado" />
-                        <ContentView IsVisible="{Binding Contact, Converter={StaticResource IsNotNullConverter}}">
-                            <domain_card_views:PersonContactDefaultCardView 
-                                BindingContext="{Binding Contact}"
-                                HeightRequest="140" />
-                        </ContentView>
-                        <Button
-                            HorizontalOptions="Start"
-                            Text="Seleccionar ..."
-                            Clicked="ContactPickButton_Clicked" />
-                        <Label
-                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:DesignationResolutionConfigurationPageModel.ContactValidableProperty}}"
-                            Style="{StaticResource ValidationMessageLabelStyle}"
-                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:DesignationResolutionConfigurationPageModel.ContactValidableProperty}}" />
-                    </VerticalStackLayout>
                 </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Acuerdo (opcional)" />
+                    <Frame 
+                        IsVisible="{Binding Agreement, Converter={StaticResource IsNotNullConverter}}"
+                        Padding="16">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Label
+                                Grid.Column="0" Grid.Row="0"
+                                Text="No." />
+                            <Label
+                                Grid.Column="1" Grid.RowSpan="2"
+                                Margin="0,0,4,0"
+                                FontSize="Large"
+                                Text="{Binding Agreement.Index}" />
+                            <Label
+                                Grid.Column="2" Grid.ColumnSpan="4"
+                                FontAttributes="Bold"
+                                Text="{Binding Agreement.Title}" />
+                            <Label
+                                Grid.Column="2" Grid.Row="1"
+                                Style="{StaticResource CaptionFieldLabelStyle}"
+                                Margin="0"
+                                Text="Grupo Decisor:" />
+                            <Label
+                                Grid.Column="3" Grid.Row="1"
+                                Margin="4,0,8,0"
+                                Text="{Binding Agreement.Meeting.DecisionMakingGroup.CanonicalName}" />
+                            <Label
+                                Grid.Column="4" Grid.Row="1"
+                                Style="{StaticResource CaptionFieldLabelStyle}"
+                                Margin="0"
+                                Text="Reunión:" />
+                            <Label
+                                Grid.Column="5" Grid.Row="1"
+                                Margin="4,0"
+                                LineBreakMode="TailTruncation"
+                                Text="{Binding Agreement.Meeting.At}" />
+                            <Label
+                                Grid.ColumnSpan="6" Grid.Row="2"
+                                Text="{Binding Agreement.Description, TargetNullValue='---'}" />
+                        </Grid>
+                    </Frame>
+                    <Button
+                        HorizontalOptions="Start"
+                        Text="Seleccionar ..."
+                        Clicked="AgreementPickButton_Clicked" />
+                </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
