@@ -2,8 +2,8 @@
 {
     public class DesignationEmploymentContract : Contract.AbstractEmploymentContract
     {
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResolutionId))]
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DesignationResolutionId))]
         public DesignationResolution Resolution { get; set; }
-        public System.Guid? ResolutionId { get; set; }
+        public System.Guid DesignationResolutionId { get; set; }
     }
 }

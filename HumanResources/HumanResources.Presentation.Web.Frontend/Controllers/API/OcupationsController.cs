@@ -1,8 +1,11 @@
-﻿using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Logging;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
+using MOROPO.Framework.Decisor.Legal.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Controllers.API
@@ -40,6 +43,36 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
             return model;
         }
 
+        [HttpPost]
+        public override ActionResult Create([FromBody] OcupationInputModel inputModel)
+        {
+            ValidateCreate(inputModel);
+
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var entity = inputModel.Export();
+
+                    PreCreate(entity, inputModel);
+
+                    Repository.Add(entity, User.Identity.Name);
+
+                    PostCreate(entity, inputModel);
+
+                    return Ok();
+                }
+                catch (System.Exception e)
+                {
+                    logger.LogError(e.InnerException, e.Message);
+
+                    return Conflict();
+                }
+            }
+
+            return BadRequest(ModelState);
+        }
+
         public override Microsoft.AspNetCore.Mvc.ActionResult Edit([Microsoft.AspNetCore.Mvc.FromBody] OcupationInputModel model)
         {
             return NotFound();
@@ -51,7 +84,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
             var nextIndex = employmentContractRepository.Count() + 1;
 
-            switch (entity.Vacant.OcupationMode)
+            switch (model.OcupationMode)
             {                
                 case Persistence.Enumerations.VacantOcupationMode.Designation:
                     var designationResolution = designationResolutionRepository.Get(model.ResolutionId.Value);
@@ -60,7 +93,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
                     entity.StaffId = designationResolution.StaffId;
                     entity.VacantId = designationResolution.VacantId;
-                    entity.Contract = new NamingEmploymentContract
+                    entity.Contract = new DesignationEmploymentContract
                     {
                         Index = nextIndex,
                         Year = model.StarAt.Year,
@@ -70,7 +103,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                         DurationUnitMeasureKind = model.DurationUnitMeasureKind,
                         StaffId = entity.StaffId,
                         VacantId = entity.VacantId,
-                        ResolutionId = designationResolution.Id
+                        DesignationResolutionId = designationResolution.Id
                     };
 
                     if (employee != null)
@@ -119,7 +152,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                         DurationUnitMeasureKind = model.DurationUnitMeasureKind,
                         StaffId = entity.StaffId,
                         VacantId = entity.VacantId,
-                        ResolutionId = namingResolution.Id
+                        NamingResolutionId = namingResolution.Id
                     };
 
                     if (_employee != null)
@@ -197,8 +230,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
                     break;
             }
-
-            throw new System.InvalidOperationException();
         }
     }
 }
