@@ -3,10 +3,8 @@ using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 {
-    public class KnowledgeAreaInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<KnowledgeArea, System.Guid>
+    public class KnowledgeAreaInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.KnowledgeArea, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -14,7 +12,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public int Priority { get; set; }
 
-        public KnowledgeArea Export()
+        public override KnowledgeArea Export()
         {
             var entity = new KnowledgeArea { Id = Id, Enabled = true };
 
@@ -23,12 +21,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(KnowledgeArea entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(KnowledgeArea entity)
+        public override void Mergue(KnowledgeArea entity)
         {
             entity.Name = Name;
             entity.Description = Description;

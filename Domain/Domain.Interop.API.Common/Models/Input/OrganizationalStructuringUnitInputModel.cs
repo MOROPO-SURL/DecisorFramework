@@ -4,6 +4,8 @@
     {
         public System.Guid Id { get; set; }
 
+        public Persistence.Enumerations.OrganizationalStructuringUnitKind Kind { get; set; }
+
         public System.Guid OrganizationalUnitId { get; set; }
 
         [System.ComponentModel.DataAnnotations.MaxLength(120)]
@@ -24,6 +26,7 @@
 
         public void Mergue(Persistence.Entities.OrganizationalStructuringUnit entity)
         {
+            entity.Kind = Kind;
             entity.Reference = Reference;
 
             if (entity.OrganizationalUnitId != OrganizationalUnitId)

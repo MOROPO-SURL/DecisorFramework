@@ -62,7 +62,7 @@
                                             FontAttributes="Bold"
                                             FontSize="Medium"
                                             LineBreakMode="TailTruncation"
-                                            Text="{Binding Structure.Identity.Name}" />
+                                            Text="{Binding AdministrativeEntity.Identity.Name}" />
                                         <Label 
                                             Margin="0,8,0,0"
                                             Text="Principal Estructura de Plantilla"

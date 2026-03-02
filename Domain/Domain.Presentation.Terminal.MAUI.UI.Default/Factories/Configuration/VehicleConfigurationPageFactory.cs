@@ -15,7 +15,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
             var engineKindsAPIConnectClient = new Interop.API.Connect.Clients.VehicleEngineKindsAPIConnectClient(httpClientHelperProvider);
             var structuresAPIConnectClient = new Interop.API.Connect.Clients.ParentalAdministrativeEntitiesAPIConnectClient(httpClientHelperProvider);
 
-            _model.AvailableBrands = await brandsAPIConnectClient.GetEnabledAsync();
+            _model.AvailableBrands = await brandsAPIConnectClient.GetAsync();
             _model.AvailableKinds = await kindsAPIConnectClient.GetEnabledAsync();
             _model.AvailableEngineKinds = await engineKindsAPIConnectClient.GetEnabledAsync();
             _model.AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync();

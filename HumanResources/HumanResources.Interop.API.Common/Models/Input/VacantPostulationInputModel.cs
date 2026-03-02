@@ -20,24 +20,34 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
 
         public System.Guid? AlternativePostalContactItemId { get; set; }
 
-        public System.Guid SchoolingId { get; set; }
+        public Domain.Persistence.Enumerations.EducationLevel EducationLevel { get; set; }
 
-        public string SchoolingComplement { get; set; }
+        [System.ComponentModel.DataAnnotations.MaxLength(256)]
+        public string UltimateEducationInstitution { get; set; }
+
+        [System.ComponentModel.DataAnnotations.MaxLength(512)]
+        public string TitulationTitle { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(200)]
         public string MaleParentName { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(200)]
         public string FemaleParentName { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(256)]
         public string Alignment { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(1024)]
         public string ResponsabilityCommitment { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
         public string PersonalIdentificationNumber { get; set; }
 
-        public Core.Interop.API.Common.Models.Input.DocumentInputModel RawModelDocument { get; set; }
+        public DocumentInputModel RawModelDocument { get; set; }
 
         public List<DocumentInputModel> EditionDocuments { get; set; } = new List<DocumentInputModel>();
         public List<DocumentInputModel> IncomingDocuments { get; set; } = new List<DocumentInputModel>();
@@ -64,7 +74,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
         public void Mergue(Persistence.Entities.VacantPostulation entity)
         {
             entity.At = At;
-            entity.SchoolingComplement = SchoolingComplement;
+            entity.EducationLevel = EducationLevel;
+            entity.UltimateEducationInstitution = UltimateEducationInstitution;
+            entity.TitulationTitle = TitulationTitle;
             entity.MaleParentName = MaleParentName;
             entity.FemaleParentName = FemaleParentName;
             entity.Alignment = Alignment;
@@ -98,12 +110,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
             {
                 entity.AlternativePostalContactItem = null;
                 entity.AlternativePostalContactItemId= AlternativePostalContactItemId;
-            }
-
-            if (entity.SchoolingId != SchoolingId)
-            {
-                entity.Schooling = null;
-                entity.SchoolingId = SchoolingId;
             }
         }
     }

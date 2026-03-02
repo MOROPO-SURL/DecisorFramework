@@ -11,8 +11,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
         protected override System.Linq.IQueryable<Entities.WorkPosition> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
-                .Include(entity => entity.Kind)
-                .Include(entity => entity.Schooling);
+                .AsNoTracking()
+                .Include(entity => entity.Kind);
         }
     }
 }

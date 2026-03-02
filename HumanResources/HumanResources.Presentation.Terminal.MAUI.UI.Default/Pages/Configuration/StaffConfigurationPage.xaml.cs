@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
@@ -8,16 +9,15 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
     {
         InitializeComponent();
 
-        if (model.Structure != null)
+        if (model.AdministrativeEntity != null)
         {
-            for (int i = 0; i < model.AvailableStructures.Length; i++)
+            for (int i = 0; i < model.AvailableAdministrativeEntities.Length; i++)
             {
-                var current = model.AvailableStructures[i];
+                var current = model.AvailableAdministrativeEntities[i];
 
-                if (model.Structure.Id != current.Id) continue;
+                if (model.AdministrativeEntity.Id != current.Id) continue;
 
                 StructurePicker.SelectedIndex = i;
-                StructurePicker.SelectedItem = current;
 
                 break;
             }
@@ -32,7 +32,6 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
                 if (model.MainWorkforce.Id != current.Id) continue;
 
                 MainWorkforcePicker.SelectedIndex = i;
-                MainWorkforcePicker.SelectedItem = current;
 
                 break;
             }
@@ -48,7 +47,7 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
         var model = new Interop.API.Common.Models.Input.StaffInputModel
         {
             Id = System.Guid.NewGuid(),
-            StructureId = ConcreteBindingContext.Structure.Id,
+            StructureId = ConcreteBindingContext.AdministrativeEntity.Id,
             MainWorkforceId = ConcreteBindingContext.MainWorkforce.Id,
             WorkingWeekHourCount = ConcreteBindingContext.WorkingWeekHourCount,
             DoctorateExtraFeed = ConcreteBindingContext.DoctorateExtraFeed,
@@ -68,7 +67,7 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
         var model = new Interop.API.Common.Models.Input.StaffInputModel
         {
             Id = ConcreteBindingContext.Id,
-            StructureId = ConcreteBindingContext.Structure.Id,
+            StructureId = ConcreteBindingContext.AdministrativeEntity.Id,
             MainWorkforceId = ConcreteBindingContext.MainWorkforce.Id,
             WorkingWeekHourCount = ConcreteBindingContext.WorkingWeekHourCount,
             DoctorateExtraFeed = ConcreteBindingContext.DoctorateExtraFeed,
@@ -89,6 +88,39 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
     private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         OnCancel(sender, eventArgs);
+    }
+
+    private void AdministrativeEntityPicker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
+
+        if (ConcreteBindingContext == null || ConcreteBindingContext.MainWorkforce != null) return;
+
+        ConcreteBindingContext.IsBusy = true;
+
+        var workforcesAPIConnectClient = new Interop.API.Connect.Clients.WorkforcesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        workforcesAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.WorkforceFilterModel { OrganizationalStructure = ConcreteBindingContext.AdministrativeEntity.OrganizationalStructure }).ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                if (task.Exception != null || task.IsCanceled)
+                {
+                    HandleException(task.Exception);
+                }
+                else
+                {
+                    ConcreteBindingContext.AvailableWorkforces.Clear();
+
+                    foreach (var item in task.Result)
+                    {
+                        ConcreteBindingContext.AvailableWorkforces.Add(item);
+                    }
+                }
+
+                ConcreteBindingContext.IsBusy = false;
+            });
+        });
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)

@@ -7,7 +7,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class AdmitionPropousalConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<AdmitionPropousalDisplayModel, AdmitionPropousalDisplayModel, Models.Page.Configuration.AdmitionPropousalConfigurationPageModel>
 {
-    public AdmitionPropousalConfigurationPage(System.Action<AdmitionPropousalDisplayModel> successAction, Models.Page.Configuration.AdmitionPropousalConfigurationPageModel model) : base(successAction, model, null)
+    public AdmitionPropousalConfigurationPage(System.Action<AdmitionPropousalDisplayModel> successAction, Models.Page.Configuration.AdmitionPropousalConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.AdmitionPropousalConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }
@@ -62,7 +62,7 @@ public partial class AdmitionPropousalConfigurationPage : Core.Presentation.Term
 
     private void CandidatePickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OcupationCandidatePickPage(false, CondidatePickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OcupationCandidatePickPage(CondidatePickComplete_Callback)));
     }
 
     private void AgreementPickButton_Clicked(object sender, System.EventArgs e)

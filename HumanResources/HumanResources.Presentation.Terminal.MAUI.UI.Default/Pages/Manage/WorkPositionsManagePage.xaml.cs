@@ -5,24 +5,16 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class WorkPositionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.WorkPositionDisplayModel, Models.Page.Manage.WorkPositionsManagePageModel, Models.Page.Configuration.WorkPositionConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
-
     public WorkPositionsManagePage()
     {
         InitializeComponent();       
     }
 
-    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
-    {
-        return ItemsCollectionView;
-    }
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth { get => 384; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.WORK_POSITION_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.WORK_POSITION_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.WorkPositionDisplayModel>> FetchItemsAsync()
     {

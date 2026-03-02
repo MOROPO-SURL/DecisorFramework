@@ -6,7 +6,7 @@ public class StaffConfigurationValidator : AbstractValidator<Models.Page.Configu
 {
     public StaffConfigurationValidator()
     {
-        RuleFor(model => model.Structure)
+        RuleFor(model => model.AdministrativeEntity)
             .NotNull()
             .WithName("Entidad Administrativa");
 

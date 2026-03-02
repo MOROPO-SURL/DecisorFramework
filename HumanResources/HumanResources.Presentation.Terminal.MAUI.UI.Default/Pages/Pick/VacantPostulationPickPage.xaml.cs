@@ -5,8 +5,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class VacantPostulationPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.VacantPostulationDisplayModel, Models.Page.Pick.VacantPostulationPickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 148;
-
     private System.Action<Interop.API.Common.Models.Display.VacantPostulationDisplayModel> pickCompleteAction;
 
     public VacantPostulationPickPage(System.Action<Interop.API.Common.Models.Display.VacantPostulationDisplayModel> pickCompleteAction)
@@ -18,7 +16,7 @@ public partial class VacantPostulationPickPage : Core.Presentation.Terminal.MAUI
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth => 392;
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.VACANT_POSTULATION_DEFAULT_CARD_VIEW_WIDTH;
 
     protected override void DisposeUnmanagementResources()
     {
@@ -27,10 +25,7 @@ public partial class VacantPostulationPickPage : Core.Presentation.Terminal.MAUI
         pickCompleteAction = null;
     }
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.VACANT_POSTULATION_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.VacantPostulationDisplayModel>> FetchItemsAsync()
     {

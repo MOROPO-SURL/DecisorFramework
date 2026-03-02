@@ -5,6 +5,8 @@
         [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; } = System.Guid.NewGuid();
 
+        public Enumerations.OrganizationalStructuringUnitKind Kind { get; set; }
+
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(OrganizationalUnitId))]
         public OrganizationalUnit OrganizationalUnit { get; set; }
         public System.Guid OrganizationalUnitId { get; set; }

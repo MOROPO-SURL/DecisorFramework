@@ -14,7 +14,7 @@
 
         public WorkPositionKindDisplayModel Kind { get; set; }
 
-        public SchoolingDisplayModel Schooling { get; set; }
+        public Domain.Persistence.Enumerations.EducationLevel EducationLevel { get; set; }
 
         public string Description { get; set; }
 
@@ -25,6 +25,7 @@
             Priority = entity.Priority;
             Name = entity.Name;
             Reference = entity.Reference;
+            EducationLevel = entity.EducationLevel;
             Description = entity.Description;
 
             if (entity.Kind != null)
@@ -32,13 +33,6 @@
                 Kind = new WorkPositionKindDisplayModel();
 
                 Kind.Import(entity.Kind);
-            }
-
-            if (entity.Schooling != null)
-            {
-                Schooling = new SchoolingDisplayModel();
-
-                Schooling.Import(entity.Schooling);
             }
         }
     }

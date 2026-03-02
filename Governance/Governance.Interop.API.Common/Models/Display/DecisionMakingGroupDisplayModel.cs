@@ -6,7 +6,7 @@
 
         public bool Enabled { get; set; }
 
-        public Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel Structure { get; set; }
+        public Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel AdministrativeEntity { get; set; }
 
         public string Name { get; set; }
 
@@ -20,7 +20,7 @@
 
         public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel[] Collaborators { get; set; }
 
-        public string CanonicalName => $"{Structure.Identity.Name}, {Name}";
+        public string CanonicalName => $"{AdministrativeEntity?.Identity.Name}, {Name}";
 
         public void Import(Persistence.Entities.DecisionMakingGroup entity)
         {
@@ -30,11 +30,11 @@
             Description = entity.Description;
             Priority = entity.Priority;
 
-            if (entity.Structure != null)
+            if (entity.AdministrativeEntity != null)
             {
-                Structure = new Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel();
+                AdministrativeEntity = new Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel();
 
-                Structure.Import(entity.Structure);
+                AdministrativeEntity.Import(entity.AdministrativeEntity);
             }
 
             if (entity.Leader != null)

@@ -29,21 +29,27 @@
         public Guama.Identity.Persistence.Entities.PostalContactItem AlternativePostalContactItem { get; set; }
         public System.Guid? AlternativePostalContactItemId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SchoolingId))]
-        public Schooling Schooling { get; set; }
-        public System.Guid SchoolingId { get; set; }
+        public Domain.Persistence.Enumerations.EducationLevel EducationLevel { get; set; }
 
-        public string SchoolingComplement { get; set; }
+        [System.ComponentModel.DataAnnotations.MaxLength(256)]
+        public string UltimateEducationInstitution { get; set; }
+
+        [System.ComponentModel.DataAnnotations.MaxLength(512)]
+        public string TitulationTitle { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(200)]
         public string MaleParentName { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(200)]
         public string FemaleParentName { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(256)]
         public string Alignment { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(1024)]
         public string ResponsabilityCommitment { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(RawModelDocumentId))]

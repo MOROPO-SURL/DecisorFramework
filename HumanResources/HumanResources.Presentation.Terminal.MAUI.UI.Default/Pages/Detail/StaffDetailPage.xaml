@@ -29,7 +29,7 @@
                                 Text="Entidad Administrativa" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Structure.Identity.Name}" />
+                                Text="{Binding AdministrativeEntity.Identity.Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Principal Estructura de Plantilla" />

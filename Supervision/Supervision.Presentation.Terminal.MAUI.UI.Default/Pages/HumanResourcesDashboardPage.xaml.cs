@@ -65,10 +65,10 @@ public partial class HumanResourcesDashboardPage : Caney.MVVM.Core.Pages.Binding
                 var workforce = await workforcesAPIConnectClient.GetAsync(BindingContextPageModel.Staff.MainWorkforce.Id);
                 var ocupations = await ocupationsAPIConnectClient.FilterAsync(new HumanResources.Interop.API.Common.Models.Filter.OcupationFilterModel { StaffId = BindingContextPageModel.Staff.Id, WorkforceId = BindingContextPageModel.Staff.MainWorkforce.Id });
 
-                foreach (var organizationalUnity in workforce.OrganizationalUnities)
-                {
-                    vacantCount += CountVacants(organizationalUnity);
-                }
+                //foreach (var organizationalUnity in workforce.OrganizationalUnities)
+                //{
+                //    vacantCount += CountVacants(organizationalUnity);
+                //}
 
                 ocupationCount = ocupations.Length;
             }
@@ -255,14 +255,14 @@ public partial class HumanResourcesDashboardPage : Caney.MVVM.Core.Pages.Binding
         });
     }
 
-    private int CountVacants(HumanResources.Interop.API.Common.Models.Display.WorkforceOrganizationalUnityDisplayModel model)
+    private int CountVacants(HumanResources.Interop.API.Common.Models.Display.WorkforceOrganizationalUnitDisplayModel model)
     {
         var result = 1 + model.Vacants.Length;
 
-        foreach (var child in model.Children)
-        {
-            result += CountVacants(child);
-        }
+        //foreach (var child in model.Children)
+        //{
+        //    result += CountVacants(child);
+        //}
 
         return result;
     }

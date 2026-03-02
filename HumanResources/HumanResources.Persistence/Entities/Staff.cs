@@ -7,9 +7,9 @@
 
         public bool Archived { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(StructureId))]
-        public Domain.Persistence.Entities.AdministrativeEntity Structure { get; set; }
-        public System.Guid StructureId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AdministrativeEntityId))]
+        public Domain.Persistence.Entities.AdministrativeEntity AdministrativeEntity { get; set; }
+        public System.Guid AdministrativeEntityId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(MainWorkforceId))]
         public Workforce MainWorkforce { get; set; }

@@ -120,11 +120,17 @@
   <data name="Admision" xml:space="preserve">
     <value>Admisión</value>
   </data>
+  <data name="Bachelor" xml:space="preserve">
+    <value>Universitario</value>
+  </data>
   <data name="Black" xml:space="preserve">
     <value>Negra</value>
   </data>
   <data name="Crossbred" xml:space="preserve">
     <value>Mestiza</value>
+  </data>
+  <data name="Designation" xml:space="preserve">
+    <value>Designación</value>
   </data>
   <data name="Divorced" xml:space="preserve">
     <value>Divorciado(a)</value>
@@ -132,8 +138,8 @@
   <data name="Famale" xml:space="preserve">
     <value>Femenino</value>
   </data>
-  <data name="Hybrid" xml:space="preserve">
-    <value>Designación</value>
+  <data name="HighSchool" xml:space="preserve">
+    <value>Bachillerato</value>
   </data>
   <data name="Male" xml:space="preserve">
     <value>Masculino</value>
@@ -144,8 +150,20 @@
   <data name="Naming" xml:space="preserve">
     <value>Nombramiento</value>
   </data>
+  <data name="None" xml:space="preserve">
+    <value>Ninguno</value>
+  </data>
+  <data name="Primary" xml:space="preserve">
+    <value>Primaria</value>
+  </data>
+  <data name="Secondary" xml:space="preserve">
+    <value>Secoundaria</value>
+  </data>
   <data name="Single" xml:space="preserve">
     <value>Soltero(a)</value>
+  </data>
+  <data name="Technical" xml:space="preserve">
+    <value>Técnico Vocacional</value>
   </data>
   <data name="Unknow" xml:space="preserve">
     <value>Desconocido</value>

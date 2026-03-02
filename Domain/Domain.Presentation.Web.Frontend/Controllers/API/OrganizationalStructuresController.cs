@@ -3,6 +3,7 @@ using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using System.Linq;
@@ -42,7 +43,7 @@ public class OrganizationalStructuresController : Guama.Core.Presentation.Web.AP
     {
         var result = base.EntityToDisplayModel(entity);
 
-        result.RootStructuringUnit = GetChildren(entity.RootStructuringUnit);
+        result.RootStructuringUnit = entity.RootStructuringUnit.GetInteropChildren(organizationalStructuringUnityRepository);
 
         return result;
     }
@@ -102,25 +103,5 @@ public class OrganizationalStructuresController : Guama.Core.Presentation.Web.AP
         base.PostEdit(entity, model);
 
         this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
-    }
-
-    private OrganizationalStructuringUnitDisplayModel GetChildren(OrganizationalStructuringUnit entity)
-    {
-        var result = new OrganizationalStructuringUnitDisplayModel();
-
-        result.Import(entity);
-
-        var children = organizationalStructuringUnityRepository.FindBy(_entity => _entity.ParentId == entity.Id).OrderBy(_entity => _entity.OrganizationalUnit.Priority).ToArray();
-
-        var resultChildren = new System.Collections.Generic.List<OrganizationalStructuringUnitDisplayModel>();
-
-        foreach (var child in children)
-        {
-            resultChildren.Add(GetChildren(child));
-        }
-
-        result.Children = resultChildren.ToArray();
-
-        return result;
     }
 }

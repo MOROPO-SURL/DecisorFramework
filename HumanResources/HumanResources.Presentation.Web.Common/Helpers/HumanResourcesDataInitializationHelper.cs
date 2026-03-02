@@ -29,25 +29,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Helper
             }
             #endregion
 
-            #region Schooling
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.SchoolingViewerPermission)))
-            {
-                permissionDbSet.Add(Authorization.SchoolingViewerPermission.ToPermissionEntity(Authorization.SchoolingManagementPermissionGroup));
-            }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.SchoolingCreatorPermission)))
-            {
-                permissionDbSet.Add(Authorization.SchoolingCreatorPermission.ToPermissionEntity(Authorization.SchoolingManagementPermissionGroup));
-            }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.SchoolingEditorPermission)))
-            {
-                permissionDbSet.Add(Authorization.SchoolingEditorPermission.ToPermissionEntity(Authorization.SchoolingManagementPermissionGroup));
-            }
-            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.SchoolingRemoverPermission)))
-            {
-                permissionDbSet.Add(Authorization.SchoolingRemoverPermission.ToPermissionEntity(Authorization.SchoolingManagementPermissionGroup));
-            }
-            #endregion
-
             #region VacantKind
             if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.WorkPositionKindViewerPermission)))
             {

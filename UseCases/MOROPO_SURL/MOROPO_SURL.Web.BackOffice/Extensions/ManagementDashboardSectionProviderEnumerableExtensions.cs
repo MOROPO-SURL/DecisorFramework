@@ -75,7 +75,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
             #region Domain
             domainSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Tipos de Entidad Administrativa",
+                Title = "Tipos de Ent. Admin.",
                 Controller = "administrativeentitykinds",
                 Action = "Index",
                 Area = "domain",
@@ -128,14 +128,6 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Extensions
             #endregion
 
             #region HH.RR.
-            humanResourcesSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Niveles de Escolaridad",
-                Controller = "schoolings",
-                Action = "Index",
-                Area = "HHRR",
-                Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.SchoolingViewerPermission
-            });
             humanResourcesSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Tipos de Plaza",

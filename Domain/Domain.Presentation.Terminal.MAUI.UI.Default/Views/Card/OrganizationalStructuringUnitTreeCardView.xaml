@@ -16,54 +16,116 @@
     <Grid ColumnSpacing="0" RowSpacing="8">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
             <ColumnDefinition />
             <ColumnDefinition Width="Auto" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
-            <RowDefinition />
-            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
         <Label
             IsVisible="{Binding Parent, Converter={StaticResource IsNotNullConverter}}"
-            Grid.Column="0" Grid.RowSpan="3"
+            Grid.Column="0"
             VerticalOptions="Center"
-            Margin="0,0,0,0"
             FontSize="Large"
             FontFamily="MaterialDesignIcons"
             Text="&#xF60D;" />
+        <BoxView
+            Grid.Column="1" Grid.RowSpan="2"
+            WidthRequest="2"
+            Color="DimGray" />
         <Frame 
-            Grid.Column="1" Grid.RowSpan="3"
+            Grid.Column="2"
+            Margin="8,0,0,0"
             Padding="16">
-            <VerticalStackLayout Spacing="0">
+            <Grid ColumnSpacing="8" RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
                 <Label
+                    Grid.ColumnSpan="2" Grid.Row="0"
+                    LineBreakMode="TailTruncation"
                     FontSize="Medium"
-                    Text="{Binding OrganizationalUnit.Name}" />
+                    Text="{Binding OrganizationalUnit.Name}"
+                    ToolTipProperties.Text="{Binding OrganizationalUnit.Name}" />
                 <Label 
-                    Margin="0,4,0,0"
+                    Grid.ColumnSpan="2" Grid.Row="1"
+                    Margin="0,16,0,0"
                     Text="Referencia"
                     TextColor="DimGray"
                     FontSize="Caption"
                     FontAttributes="Bold" />
-                <Label Text="{Binding Reference, TargetNullValue='---'}" />               
-            </VerticalStackLayout>
+                <Label 
+                    Grid.ColumnSpan="2" Grid.Row="2"
+                    Text="{Binding Reference, TargetNullValue='---'}" />
+                <Label 
+                    Style="{StaticResource CaptionFieldLabelStyle}"
+                    Grid.Column="0" Grid.Row="3"
+                    VerticalOptions="End"
+                    Margin="0,4"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold"
+                    Text="Agregados" />
+                <BoxView
+                    Grid.Column="0" Grid.Row="4"
+                    HeightRequest="2"
+                    Color="DimGray" />
+                <Button
+                    Grid.Column="1" Grid.Row="3" Grid.RowSpan="2"
+                    HorizontalOptions="Center"
+                    Text="Agregar"
+                    Clicked="AddCompositionChildButton_Clicked" />
+                <CollectionView 
+                    Grid.ColumnSpan="2" Grid.Row="5"
+                    Margin="0,4,0,0"
+                    ItemsSource="{Binding CompositionChildren}">
+                    <CollectionView.ItemsLayout>
+                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.EmptyView>
+                        <Label Padding="4,0,4,4" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate>
+                            <local:OrganizationalStructuringUnitSingleCardView
+                                EditChildButtonClick="EditChildButton_Clicked"
+                                RemoveChildButtonClick="RemoveChildButton_Clicked" />
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </Grid>
         </Frame>
-        <Button
-            Style="{StaticResource FontIconImageButtonStyle}" 
-            Grid.Column="2" Grid.Row="0"
-            Margin="8,0,0,0"
-            Text="&#xF90B;"
-            Clicked="EditChildButton_Clicked" />
-        <Button
-            Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
-            IsVisible="{Binding Parent, Converter={StaticResource IsNotNullConverter}}"
-            Grid.Column="2" Grid.Row="1"
-            Margin="8,0,0,0"
-            Text="&#xFA78;"
-            Clicked="RemoveChildButton_Clicked" />
+        <VerticalStackLayout 
+            Grid.Column="3" Grid.Row="0"
+            VerticalOptions="Start"
+            Spacing="8">
+            <Button
+                Style="{StaticResource FontIconImageButtonStyle}" 
+                Grid.Column="3" Grid.Row="0"
+                Margin="8,0,0,0"
+                Text="&#xF90B;"
+                Clicked="EditChildButton_Clicked" />
+            <Button
+                Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                IsVisible="{Binding Parent, Converter={StaticResource IsNotNullConverter}}"
+                Grid.Column="3" Grid.Row="1"
+                Margin="8,0,0,0"
+                Text="&#xFA78;"
+                Clicked="RemoveChildButton_Clicked" />
+        </VerticalStackLayout>
         <Grid
-            Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="3"
+            Grid.Column="2" Grid.ColumnSpan="2" Grid.Row="1"
             Margin="8,0,0,0"
             ColumnSpacing="8">
             <Grid.ColumnDefinitions>
@@ -78,7 +140,7 @@
             <Label 
                 Style="{StaticResource CaptionFieldLabelStyle}"
                 Grid.Column="0" Grid.Row="0"
-                Margin="0,0,0,8"
+                Margin="0,0,0,4"
                 VerticalOptions="End"
                 Text="Dependencias" />
             <BoxView
@@ -88,10 +150,10 @@
                 Grid.Column="1" Grid.RowSpan="2"
                 HorizontalOptions="Center"
                 Text="Agregar"
-                Clicked="AddChildButton_Clicked" />
+                Clicked="AddDependencyChildButton_Clicked" />
             <CollectionView 
                 Grid.ColumnSpan="2" Grid.Row="2"
-                ItemsSource="{Binding Children}">
+                ItemsSource="{Binding DependencyChildren}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
                 </CollectionView.ItemsLayout>
@@ -101,7 +163,8 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <local:OrganizationalStructuringUnitTreeCardView
-                            AddChildButtonClick="AddChildButton_Clicked"
+                            AddDependencyChildButtonClick="AddDependencyChildButton_Clicked"
+                            AddCompositionChildButtonClick="AddCompositionChildButton_Clicked"
                             EditChildButtonClick="EditChildButton_Clicked"
                             RemoveChildButtonClick="RemoveChildButton_Clicked" />
                     </DataTemplate>

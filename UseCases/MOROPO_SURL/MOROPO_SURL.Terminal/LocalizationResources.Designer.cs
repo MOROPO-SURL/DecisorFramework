@@ -70,6 +70,15 @@ namespace MOROPO.Tool.Decisor.Terminal {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Universitario.
+        /// </summary>
+        internal static string Bachelor {
+            get {
+                return ResourceManager.GetString("Bachelor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Negra.
         /// </summary>
         internal static string Black {
@@ -84,6 +93,15 @@ namespace MOROPO.Tool.Decisor.Terminal {
         internal static string Crossbred {
             get {
                 return ResourceManager.GetString("Crossbred", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Designación.
+        /// </summary>
+        internal static string Designation {
+            get {
+                return ResourceManager.GetString("Designation", resourceCulture);
             }
         }
         
@@ -106,11 +124,11 @@ namespace MOROPO.Tool.Decisor.Terminal {
         }
         
         /// <summary>
-        ///   Busca una cadena traducida similar a Designación.
+        ///   Busca una cadena traducida similar a Bachillerato.
         /// </summary>
-        internal static string Hybrid {
+        internal static string HighSchool {
             get {
-                return ResourceManager.GetString("Hybrid", resourceCulture);
+                return ResourceManager.GetString("HighSchool", resourceCulture);
             }
         }
         
@@ -142,11 +160,47 @@ namespace MOROPO.Tool.Decisor.Terminal {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Ninguno.
+        /// </summary>
+        internal static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Primaria.
+        /// </summary>
+        internal static string Primary {
+            get {
+                return ResourceManager.GetString("Primary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Secoundaria.
+        /// </summary>
+        internal static string Secondary {
+            get {
+                return ResourceManager.GetString("Secondary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Soltero(a).
         /// </summary>
         internal static string Single {
             get {
                 return ResourceManager.GetString("Single", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Técnico Vocacional.
+        /// </summary>
+        internal static string Technical {
+            get {
+                return ResourceManager.GetString("Technical", resourceCulture);
             }
         }
         

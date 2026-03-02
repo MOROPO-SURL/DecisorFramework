@@ -25,6 +25,7 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
             RootStructuringUnit = new Interop.API.Common.Models.Input.OrganizationalStructuringUnitInputModel
             {
                 Id = ConcreteBindingContext.OrganizationalStructuringUnitConfiguration.Id,
+                Kind = Persistence.Enumerations.OrganizationalStructuringUnitKind.Dependency,
                 OrganizationalUnitId = ConcreteBindingContext.OrganizationalStructuringUnitConfiguration.OrganizationalUnit.Id,
                 Reference = ConcreteBindingContext.OrganizationalStructuringUnitConfiguration.Reference
             },
@@ -50,6 +51,7 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
             RootStructuringUnit = new Interop.API.Common.Models.Input.OrganizationalStructuringUnitInputModel
             {
                 Id = ConcreteBindingContext.OrganizationalStructuringUnitConfiguration.Id,
+                Kind = Persistence.Enumerations.OrganizationalStructuringUnitKind.Dependency,
                 OrganizationalUnitId = ConcreteBindingContext.OrganizationalStructuringUnitConfiguration.OrganizationalUnit.Id,
                 Reference = ConcreteBindingContext.OrganizationalStructuringUnitConfiguration.Reference
             },
@@ -73,7 +75,7 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
         OnCancel(sender, eventArgs);
     }
 
-    private void RootOrganizationlUnityDefineButton_Clicked(object sender, System.EventArgs e)
+    private void RootOrganizationlUnitDefineButton_Clicked(object sender, System.EventArgs e)
     {
         ConcreteBindingContext.IsBusy = true;
 
@@ -93,6 +95,7 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
                 {
                     this.NavigationPushPageAsync(new OrganizationalStructuringUnitConfigurationPage(RootOrganizationlUnitDefine_Callback, new Models.Page.Configuration.OrganizationalStructuringUnitConfigurationPageModel(null)
                     {
+                        Kind = Persistence.Enumerations.OrganizationalStructuringUnitKind.Dependency,
                         AvailableOrganizationalUnits = [.. task.Result]
                     }));
                 }
@@ -100,7 +103,7 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
         });
     }
 
-    private void OrganizationalUnityEditButton_Clicked(object sender, System.EventArgs eventArgs)
+    private void OrganizationalUnitEditButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         ConcreteBindingContext.IsBusy = true;
 
@@ -127,7 +130,7 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
         });
     }
 
-    private void OrganizationalUnityAddChildButton_Clicked(object sender, System.EventArgs eventArgs)
+    private void DependencyOrganizationalUnitAddChildButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         ConcreteBindingContext.IsBusy = true;
 
@@ -147,6 +150,7 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
                 {
                     this.NavigationPushPageAsync(new OrganizationalStructuringUnitConfigurationPage(OrganizationalUnitAddChild_Callback, new Models.Page.Configuration.OrganizationalStructuringUnitConfigurationPageModel(null)
                     {
+                        Kind = Persistence.Enumerations.OrganizationalStructuringUnitKind.Dependency,
                         AvailableOrganizationalUnits = [.. task.Result],
                         Parent = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Models.Page.Configuration.OrganizationalStructuringUnitConfigurationPageModel
                     }));
@@ -155,7 +159,36 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
         });
     }
 
-    private void OrganizationalUnityRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    private void CompositionOrganizationalUnitAddChildButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        ConcreteBindingContext.IsBusy = true;
+
+        var apiConnectClient = new Interop.API.Connect.Clients.OrganizationalUnitsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        apiConnectClient.GetAsync().ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                ConcreteBindingContext.IsBusy = false;
+
+                if (task.Exception != null || task.IsCanceled)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    this.NavigationPushPageAsync(new OrganizationalStructuringUnitConfigurationPage(OrganizationalUnitAddChild_Callback, new Models.Page.Configuration.OrganizationalStructuringUnitConfigurationPageModel(null)
+                    {
+                        Kind = Persistence.Enumerations.OrganizationalStructuringUnitKind.Composition,
+                        AvailableOrganizationalUnits = [.. task.Result],
+                        Parent = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Models.Page.Configuration.OrganizationalStructuringUnitConfigurationPageModel
+                    }));
+                }
+            });
+        });
+    }
+
+    private void OrganizationalUnitRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         DisplayAlert("Confirmación", "Está seguro que desea retirar este elemento?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
@@ -195,7 +228,14 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
                     target.Parent.OutgoingInteropChildren.Add(new Models.Page.Configuration.OrganizationalStructuringUnitConfigurationPageModel(target));
                 }
 
-                target.Parent.Children.Remove(target);
+                if (target.Kind == Persistence.Enumerations.OrganizationalStructuringUnitKind.Dependency)
+                {
+                    target.Parent.DependencyChildren.Remove(target);
+                }
+                else
+                {
+                    target.Parent.CompositionChildren.Remove(target);
+                }
 
                 hasChangesFlag = true;
             });
@@ -276,7 +316,7 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
             model.Parent.EditionInteropChildren.Add(new Models.Page.Configuration.OrganizationalStructuringUnitConfigurationPageModel(model));
         }
 
-        var target = model.Parent.Children.First(_model => _model.Id == model.Id);
+        var target = model.Kind == Persistence.Enumerations.OrganizationalStructuringUnitKind.Dependency ? model.Parent.DependencyChildren.First(_model => _model.Id == model.Id) : model.Parent.CompositionChildren.First(_model => _model.Id == model.Id);
 
         target.OrganizationalUnit = model.OrganizationalUnit;
         target.Reference = model.Reference;
@@ -288,9 +328,16 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
     {
         var target = new Models.Page.Configuration.OrganizationalStructuringUnitConfigurationPageModel(model);
 
-        model.Parent.Children.Add(target);
-
         model.Parent.IncomingInteropChildren.Add(target);
+
+        if (model.Kind == Persistence.Enumerations.OrganizationalStructuringUnitKind.Dependency)
+        {
+            model.Parent.DependencyChildren.Add(target);
+        }
+        else
+        {
+            model.Parent.CompositionChildren.Add(target);
+        }
 
         hasChangesFlag = true;
     }
@@ -302,6 +349,7 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
             context.IncomingStructuringUnits.Add(new Interop.API.Common.Models.Input.OrganizationalStructuringUnitInputModel
             {
                 Id = _model.Id,
+                Kind = _model.Kind,
                 OrganizationalUnitId = _model.OrganizationalUnit.Id,
                 Reference = _model.Reference,
                 ParentId = model.Id
@@ -313,6 +361,7 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
             context.EditionStructuringUnits.Add(new Interop.API.Common.Models.Input.OrganizationalStructuringUnitInputModel
             {
                 Id = _model.Id,
+                Kind = _model.Kind,
                 OrganizationalUnitId = _model.OrganizationalUnit.Id,
                 Reference = _model.Reference,
                 ParentId = model.Id
@@ -324,7 +373,12 @@ public partial class OrganizationalStructureConfigurationPage : Core.Presentatio
             context.OutgoingStructuringUnits.Add(new Interop.API.Common.Models.Display.OrganizationalStructuringUnitDisplayModel { Id = _model.Id });
         }
 
-        foreach (var _model in model.Children)
+        foreach (var _model in model.DependencyChildren)
+        {
+            DeepBind(context, _model);
+        }
+
+        foreach (var _model in model.CompositionChildren)
         {
             DeepBind(context, _model);
         }

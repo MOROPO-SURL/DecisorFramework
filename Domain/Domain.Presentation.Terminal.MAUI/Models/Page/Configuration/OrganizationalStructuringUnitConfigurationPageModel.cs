@@ -12,8 +12,9 @@ public class OrganizationalStructuringUnitConfigurationPageModel : Core.Presenta
         if (model == null) return;
 
         Id = model.Id;
+        Kind = model.Kind;
         reference = model.Reference;
-        OrganizationalUnit = model.OrganizationalUnit;
+        organizationalUnit = model.OrganizationalUnit;
         Parent = model.Parent;
         IncomingInteropChildren = model.IncomingInteropChildren;
         EditionInteropChildren = model.EditionInteropChildren;
@@ -21,6 +22,8 @@ public class OrganizationalStructuringUnitConfigurationPageModel : Core.Presenta
     }
 
     public System.Guid Id { get; set; } = System.Guid.NewGuid();
+
+    public Persistence.Enumerations.OrganizationalStructuringUnitKind Kind { get; set; }
 
     public OrganizationalStructuringUnitConfigurationPageModel Parent { get; set; }
 
@@ -30,7 +33,9 @@ public class OrganizationalStructuringUnitConfigurationPageModel : Core.Presenta
 
     public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel> AvailableOrganizationalUnits { get; set; } = [];
 
-    public System.Collections.ObjectModel.ObservableCollection<OrganizationalStructuringUnitConfigurationPageModel> Children { get; set; } = [];
+    public System.Collections.ObjectModel.ObservableCollection<OrganizationalStructuringUnitConfigurationPageModel> DependencyChildren { get; set; } = [];
+
+    public System.Collections.ObjectModel.ObservableCollection<OrganizationalStructuringUnitConfigurationPageModel> CompositionChildren { get; set; } = [];
 
     public List<OrganizationalStructuringUnitConfigurationPageModel> EditionInteropChildren { get; private set; } = [];
     public List<OrganizationalStructuringUnitConfigurationPageModel> IncomingInteropChildren { get; private set; } = [];

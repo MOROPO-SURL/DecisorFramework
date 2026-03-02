@@ -179,14 +179,4 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <ShellContent
-        Title="Niveles de preparación"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:SchoolingsListPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF474;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
 </Shell>
