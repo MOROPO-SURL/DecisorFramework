@@ -5,8 +5,6 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class AdmitionPropousalPickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel, Models.Page.Pick.AdmitionPropousalPickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 236;
-
     private System.Action<Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel> pickCompleteAction;
     
     private readonly Interop.API.Common.Models.Display.WorkPositionDisplayModel workPosition;
@@ -23,7 +21,7 @@ public partial class AdmitionPropousalPickPage : Core.Presentation.Terminal.MAUI
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth => 520;
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.ADMITION_PROPOUSAL_DEFAULT_CARD_VIEW_WIDTH;
 
     protected override void DisposeUnmanagementResources()
     {
@@ -32,10 +30,7 @@ public partial class AdmitionPropousalPickPage : Core.Presentation.Terminal.MAUI
         pickCompleteAction = null;
     }
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.ADMITION_PROPOUSAL_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel>> FetchItemsAsync()
     {

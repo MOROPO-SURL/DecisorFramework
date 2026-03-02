@@ -87,7 +87,7 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
 
     private void CandidatePickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OcupationCandidatePickPage(true, CondidatePickComplete_Callback)));
+        //this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OcupationCandidatePickPage(true, CondidatePickComplete_Callback)));
     }
 
     private void CondidatePickComplete_Callback(Interop.API.Common.Models.Display.OcupationCandidateDisplayModel model)

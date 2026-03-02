@@ -22,19 +22,29 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
 
         public Domain.Persistence.Enumerations.EducationLevel EducationLevel { get; set; }
 
-        public string SchoolingComplement { get; set; }
+        [System.ComponentModel.DataAnnotations.MaxLength(256)]
+        public string UltimateEducationInstitution { get; set; }
+
+        [System.ComponentModel.DataAnnotations.MaxLength(512)]
+        public string TitulationTitle { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(200)]
         public string MaleParentName { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(200)]
         public string FemaleParentName { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(256)]
         public string Alignment { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(1024)]
         public string ResponsabilityCommitment { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.RegularExpression("^[0-9]{11}$")]
         public string PersonalIdentificationNumber { get; set; }
 
         public DocumentInputModel RawModelDocument { get; set; }
@@ -65,7 +75,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
         {
             entity.At = At;
             entity.EducationLevel = EducationLevel;
-            entity.SchoolingComplement = SchoolingComplement;
+            entity.UltimateEducationInstitution = UltimateEducationInstitution;
+            entity.TitulationTitle = TitulationTitle;
             entity.MaleParentName = MaleParentName;
             entity.FemaleParentName = FemaleParentName;
             entity.Alignment = Alignment;

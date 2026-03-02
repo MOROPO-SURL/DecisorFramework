@@ -4,6 +4,6 @@ public class AdmitionPropousalConfigurationPageFactory : Core.Presentation.Termi
 {
     public async System.Threading.Tasks.Task<Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel, Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel, Models.Page.Configuration.AdmitionPropousalConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel model)
     {
-        return new Pages.Configuration.AdmitionPropousalConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.AdmitionPropousalConfigurationPageModel(model));
+        return new Pages.Configuration.AdmitionPropousalConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.AdmitionPropousalConfigurationPageModel(model), new Validators.AdmitionPropousalConfigurationValidator());
     }
 }

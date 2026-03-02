@@ -3,6 +3,7 @@ using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
+using MOROPO.Framework.Guama.Core.Persistence.Entities.Contract;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Location.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
@@ -48,6 +49,10 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
         protected override VacantPostulationDisplayModel EntityToDisplayModel(VacantPostulation entity)
         {
             var model = base.EntityToDisplayModel(entity);
+
+            model.Vacant.WorkforceOrganizationalUnit = new WorkforceOrganizationalUnitDisplayModel();
+
+            model.Vacant.WorkforceOrganizationalUnit.Import(entity.Vacant.WorkforceOrganizationalUnit);
 
             foreach (var _model in model.Contact.Identity.PostalContacts)
             {

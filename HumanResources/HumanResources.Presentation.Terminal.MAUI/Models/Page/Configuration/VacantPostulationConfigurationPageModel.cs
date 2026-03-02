@@ -4,13 +4,25 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 {
     public class VacantPostulationConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.VacantPostulationDisplayModel>
     {
+        public static string VacantValidableProperty => nameof(Vacant);
+        public static string ContactValidableProperty => nameof(Contact);
+        public static string OfficialPostalContactItemValidableProperty => nameof(OfficialPostalContactItem);
+        public static string UltimateEducationInstitutionValidableProperty => nameof(UltimateEducationInstitution);
+        public static string TitulationTitleValidableProperty => nameof(TitulationTitle);
+        public static string MaleParentNameValidableProperty => nameof(MaleParentName);
+        public static string FemaleParentNameValidableProperty => nameof(FemaleParentName);
+        public static string AlignmentValidableProperty => nameof(Alignment);
+        public static string ResponsabilityCommitmentValidableProperty => nameof(ResponsabilityCommitment);
+        public static string PersonalIdentificationNumberValidableProperty => nameof(PersonalIdentificationNumber);
+
         private Interop.API.Common.Models.Display.StaffDisplayModel staff;
         private Interop.API.Common.Models.Display.VacantDisplayModel vacant;
         private Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel contact;
         private Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel officialPostalContactItem;
         private Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel alternativePostalContactItem;
         private Domain.Persistence.Enumerations.EducationLevel educationLevel;
-        private string schoolingComplement;
+        private string ultimateEducationInstitution;
+        private string titulationTitle;
         private string maleParentName;
         private string femaleParentName;
         private string alignment;
@@ -31,7 +43,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
                 officialPostalContactItem = model.OfficialPostalContactItem;
                 alternativePostalContactItem = model.AlternativePostalContactItem;
                 EducationLevel = model.EducationLevel;
-                schoolingComplement = model.SchoolingComplement;
+                ultimateEducationInstitution = model.UltimateEducationInstitution;
+                titulationTitle = model.TitulationTitle;
                 maleParentName = model.MaleParentName;
                 femaleParentName = model.FemaleParentName;
                 alignment = model.Alignment;
@@ -55,7 +68,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
         public Domain.Persistence.Enumerations.EducationLevel EducationLevel { get => educationLevel; set => SetProperty(ref educationLevel, value); }
 
-        public string SchoolingComplement { get => schoolingComplement; set => SetProperty(ref schoolingComplement, value); }
+        public string UltimateEducationInstitution { get => ultimateEducationInstitution; set => SetProperty(ref ultimateEducationInstitution, value); }
+
+        public string TitulationTitle { get => titulationTitle; set => SetProperty(ref titulationTitle, value); }
 
         public string MaleParentName { get => maleParentName; set => SetProperty(ref maleParentName, value); }
 

@@ -4,7 +4,7 @@
     {
         public async System.Threading.Tasks.Task<Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.VacantPostulationDisplayModel, Interop.API.Common.Models.Display.VacantPostulationDisplayModel, Models.Page.Configuration.VacantPostulationConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.VacantPostulationDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.VacantPostulationDisplayModel model)
         {
-            return new Pages.Configuration.VacantPostulationConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.VacantPostulationConfigurationPageModel(model));
+            return new Pages.Configuration.VacantPostulationConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.VacantPostulationConfigurationPageModel(model), new Validators.VacantPostulationConfigurationValidator());
         }
     }
 }

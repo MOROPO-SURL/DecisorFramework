@@ -38,13 +38,17 @@
                     Text="{Binding Postulation.Contact.Identity.LastName}" />
                 <Label 
                     Margin="0,8,0,0"
-                    Text="Vacante"
+                    Text="Puesto"
                     TextColor="DimGray"
                     FontAttributes="Bold" />
                 <Label
                     VerticalOptions="FillAndExpand"
                     LineBreakMode="TailTruncation"
                     Text="{Binding Postulation.Vacant.WorkPosition.Name}" />
+                <Label
+                    VerticalOptions="FillAndExpand"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Postulation.Vacant.WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}" />
                 <Label
                     VerticalOptions="FillAndExpand"
                     LineBreakMode="TailTruncation"

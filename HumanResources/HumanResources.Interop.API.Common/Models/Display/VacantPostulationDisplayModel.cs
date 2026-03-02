@@ -18,9 +18,11 @@
 
         public Domain.Persistence.Enumerations.EducationLevel EducationLevel { get; set; }
 
-        public string SchoolingComplement { get; set; }
+        public string UltimateEducationInstitution { get; set; }
 
         public string MaleParentName { get; set; }
+
+        public string TitulationTitle { get; set; }
 
         public string FemaleParentName { get; set; }
 
@@ -39,7 +41,8 @@
             Id = entity.Id;
             At = entity.At;
             EducationLevel = entity.EducationLevel;
-            SchoolingComplement = entity.SchoolingComplement;
+            UltimateEducationInstitution = entity.UltimateEducationInstitution;
+            TitulationTitle = entity.TitulationTitle;
             MaleParentName = entity.MaleParentName;
             FemaleParentName = entity.FemaleParentName;
             Alignment = entity.Alignment;

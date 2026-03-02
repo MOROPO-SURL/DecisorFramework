@@ -18,7 +18,7 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
     private readonly List<VacantPostulationOcupationInputModel> incomingOcupations = [];
     private readonly List<VacantPostulationOcupationDisplayModel> outgoingOcupations = [];
 
-    public VacantPostulationConfigurationPage(System.Action<VacantPostulationDisplayModel> successAction, Models.Page.Configuration.VacantPostulationConfigurationPageModel model) : base(successAction, model, null)
+    public VacantPostulationConfigurationPage(System.Action<VacantPostulationDisplayModel> successAction, Models.Page.Configuration.VacantPostulationConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.VacantPostulationConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -64,15 +64,16 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
             StaffId = ConcreteBindingContext.Staff.Id,
             VacantId = ConcreteBindingContext.Vacant.Id,
             ContactId = ConcreteBindingContext.Contact.Id,
-            OfficialPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[MainPostalContactItemPicker.SelectedIndex].Id,
-            AlternativePostalContactItemId = AltPostalContactItemPicker.SelectedIndex >= 0 ? ConcreteBindingContext.Contact.Identity.PostalContacts[AltPostalContactItemPicker.SelectedIndex].Id : null,
+            OfficialPostalContactItemId = ConcreteBindingContext.OfficialPostalContactItem.Id,
+            AlternativePostalContactItemId = ConcreteBindingContext.AlternativePostalContactItem?.Id,
             EducationLevel = ConcreteBindingContext.EducationLevel,
-            SchoolingComplement = ConcreteBindingContext.SchoolingComplement,
+            UltimateEducationInstitution = ConcreteBindingContext.UltimateEducationInstitution,
+            TitulationTitle = ConcreteBindingContext.TitulationTitle,
             MaleParentName = ConcreteBindingContext.MaleParentName,
             FemaleParentName = ConcreteBindingContext.FemaleParentName,
             Alignment = ConcreteBindingContext.Alignment,
             ResponsabilityCommitment = ConcreteBindingContext.ResponsabilityCommitment,
-            PersonalIdentificationNumber = !string.IsNullOrEmpty(ConcreteBindingContext.PersonalIdentificationNumber) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.ResponsabilityCommitment) && ConcreteBindingContext.PersonalIdentificationNumber != ConcreteBindingContext.Contact.PersonalIdentificationNumber ? ConcreteBindingContext.PersonalIdentificationNumber : null,
+            PersonalIdentificationNumber = ConcreteBindingContext.PersonalIdentificationNumber,
             IncomingDocuments = incomingDocuments,
             IncomingOcupations = incomingOcupations
         };
@@ -93,15 +94,16 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
             StaffId = ConcreteBindingContext.Staff.Id,
             VacantId = ConcreteBindingContext.Vacant.Id,
             ContactId = ConcreteBindingContext.Contact.Id,
-            OfficialPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[MainPostalContactItemPicker.SelectedIndex].Id,
-            AlternativePostalContactItemId = AltPostalContactItemPicker.SelectedIndex >= 0 ? ConcreteBindingContext.Contact.Identity.PostalContacts[AltPostalContactItemPicker.SelectedIndex].Id : null,
+            OfficialPostalContactItemId = ConcreteBindingContext.OfficialPostalContactItem.Id,
+            AlternativePostalContactItemId = ConcreteBindingContext.AlternativePostalContactItem?.Id,
             EducationLevel = ConcreteBindingContext.EducationLevel,
-            SchoolingComplement = ConcreteBindingContext.SchoolingComplement,
+            UltimateEducationInstitution = ConcreteBindingContext.UltimateEducationInstitution,
+            TitulationTitle = ConcreteBindingContext.TitulationTitle,
             MaleParentName = ConcreteBindingContext.MaleParentName,
             FemaleParentName = ConcreteBindingContext.FemaleParentName,
             Alignment = ConcreteBindingContext.Alignment,
             ResponsabilityCommitment = ConcreteBindingContext.ResponsabilityCommitment,
-            PersonalIdentificationNumber = !string.IsNullOrEmpty(ConcreteBindingContext.PersonalIdentificationNumber) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.ResponsabilityCommitment) && ConcreteBindingContext.PersonalIdentificationNumber != ConcreteBindingContext.Contact.PersonalIdentificationNumber ? ConcreteBindingContext.PersonalIdentificationNumber : null,
+            PersonalIdentificationNumber = ConcreteBindingContext.PersonalIdentificationNumber,
             IncomingDocuments = incomingDocuments,
             EditionDocuments = editionDocuments,
             OutgoingDocuments = outgoingDocuments,
