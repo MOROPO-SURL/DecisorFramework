@@ -72,8 +72,7 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice
             builder.Services.AddAuthentication(config =>
             {
                 config.DefaultScheme = Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme;
-            })
-            .AddCookie(config =>
+            }).AddCookie(config =>
             {
                 config.AccessDeniedPath = new PathString("/error/403");
                 config.LoginPath = new PathString("/security/account/login");

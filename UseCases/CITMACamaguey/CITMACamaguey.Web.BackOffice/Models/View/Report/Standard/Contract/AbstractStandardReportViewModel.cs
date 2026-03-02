@@ -4,5 +4,5 @@ public abstract class AbstractStandardReportViewModel
 {
     public System.DateTime EndedAt { get; set; } = System.DateTime.Now;
 
-    public Framework.Decisor.Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel Structure { get; set; }
+    public Framework.Decisor.Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel AdministrativeEntity { get; set; }
 }

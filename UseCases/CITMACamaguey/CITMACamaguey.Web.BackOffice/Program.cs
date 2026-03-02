@@ -63,14 +63,26 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice
             builder.Services.AddAuthentication(config =>
             {
                 config.DefaultScheme = Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme;
-            })
-            .AddCookie(config =>
+            }).AddCookie(config =>
             {
                 config.AccessDeniedPath = new PathString("/error/403");
                 config.LoginPath = new PathString("/security/account/login");
                 config.ExpireTimeSpan = System.TimeSpan.FromMinutes(5);
                 config.SlidingExpiration = true;
-            });
+            }).AddJwtBearer(config =>
+            {
+                config.RequireHttpsMetadata = false;
+                config.SaveToken = true;
+                config.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
+                {
+                    ValidIssuer = builder.Configuration["JWT:Issuer"],
+                    ValidAudience = builder.Configuration["JWT:Issuer"],
+                    ValidateLifetime = false,
+                    RequireExpirationTime = false,
+                    IssuerSigningKey = new Microsoft.IdentityModel.Tokens.SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"])),
+                    ClockSkew = System.TimeSpan.Zero
+                };
+            }); ;
 
             #region Security concreter dependencies configuration
             builder.Services.AddSingleton<Framework.Guama.Core.Presentation.Web.Security.Helpers.Facade.ILicenseValidationHelperFacade, Helpers.WillcardLicenseValidationHelper>();

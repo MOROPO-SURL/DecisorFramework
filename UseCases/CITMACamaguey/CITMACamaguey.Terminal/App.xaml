@@ -15,7 +15,7 @@
 
                 <uraniumui_material:StyleResource ColorsOverride="{Reference appColors}" BasedOn="{Reference appStyles}" />
 
-                <fwrk_core_presentation_dictionary_resources:ExplicitStylesDictionary />
+                <fwrk_core_presentation_dictionary_resources:SharedStylesDictionary />
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="LogoImageViewStyle" TargetType="Image">

@@ -60,13 +60,12 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<OrganizationPostalContactItemBridge> OrganizationPostalContactItemBridges { get; set; }
         public DbSet<OrganizationSocialContactItemBridge> OrganizationSocialContactItemBridges { get; set; }
         public DbSet<OrganizationWebSiteContactItemBridge> OrganizationWebSiteContactItemBridges { get; set; }
-        public DbSet<Schooling> Schoolings { get; set; }
         public DbSet<SalaryStandard> SalaryStandards { get; set; }
         public DbSet<WorkPositionKind> WorkPositionKinds { get; set; }
         public DbSet<WorkPosition> WorkPositions { get; set; }
         public DbSet<WorkPositionResponsability> WorkPositionResponsabilities { get; set; }
         public DbSet<Workforce> Workforces { get; set; }
-        public DbSet<WorkforceOrganizationalUnity> WorkforceOrganizationalUnities { get; set; }
+        public DbSet<WorkforceOrganizationalUnit> WorkforceOrganizationalUnits { get; set; }
         public DbSet<Vacant> Vacants { get; set; }
         public DbSet<VacantPostulation> VacantPostulations { get; set; }
         public DbSet<VacantPostulationOcupation> VacantPostulationOcupations { get; set; }
@@ -74,8 +73,10 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<OcupationCandidate> OcupationCandidates { get; set; }
         public DbSet<AdmitionPropousal> AdmitionPropousals { get; set; }
         public DbSet<AbstractEmploymentContract> EmploymentContracts { get; set; }
+        public DbSet<DesignationEmploymentContract> DesignationEmploymentContracts { get; set; }
         public DbSet<NamingEmploymentContract> NamingEmploymentContracts { get; set; }
         public DbSet<AdmitionEmploymentContract> AdmitionEmploymentContracts { get; set; }
+        public DbSet<DesignationResolution> DesignationResolutions { get; set; }
         public DbSet<NamingResolution> NamingResolutions { get; set; }
         public DbSet<RemotionResolution> RemotionResolutions { get; set; }
         public DbSet<Staff> Staffs { get; set; }
@@ -103,6 +104,8 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Regulation> Regulations { get; set; }
         public DbSet<Disposition> Dispositions { get; set; }
         public DbSet<DispositionTagBridge> DispositionTagBridges { get; set; }
+        public DbSet<ChangeNotification> ChangeNotifications { get; set; }
+        public DbSet<ChangeNotificationUserBridge> ChangeNotificationUserBridges { get; set; }
         public DbSet<LegalBusinessKind> LegalBusinessKinds { get; set; }
         public DbSet<NaturalBusinessKind> NaturalBusinessKinds { get; set; }
         public DbSet<CentralStateStructure> CentralStateStructures { get; set; }
@@ -118,13 +121,15 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleImageBridge> VehicleImageBridges { get; set; }
-        public DbSet<StructureKind> StructureKinds { get; set; }
-        public DbSet<OrganizationalUnity> OrganizationalUnities { get; set; }
-        public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
-        public DbSet<Structure> Structures { get; set; }
+        public DbSet<AdministrativeEntityKind> AdministrativeEntityKinds { get; set; }
+        public DbSet<OrganizationalUnit> OrganizationalUnits { get; set; }
+        public DbSet<OrganizationalStructure> OrganizationalStructures { get; set; }
+        public DbSet<OrganizationalStructuringUnit> OrganizationalStructuringUnits { get; set; }
+        public DbSet<AdministrativeEntity> AdministrativeEntities { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
         public DbSet<UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
+        public DbSet<KnowledgeArea> KnowledgeAreas { get; set; }
     }
 }
 

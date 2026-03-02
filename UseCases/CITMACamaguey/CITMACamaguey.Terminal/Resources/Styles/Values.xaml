@@ -18,5 +18,10 @@
         <x:Int32>11</x:Int32>
         <x:Int32>12</x:Int32>
     </Array>
-    
+
+    <x:String x:Key="AdministrativeEntityMaterialDesignGlyphIconId">&#xF990;</x:String>
+    <x:String x:Key="OrganizationalStructureMaterialDesignGlyphIconId">&#xF645;</x:String>
+    <x:String x:Key="OrganizationalUnitDesignGlyphIconId">&#xF006B;</x:String>
+    <x:String x:Key="UnitMeasurementMaterialDesignGlyphIconId">&#xF472;</x:String>
+
 </ResourceDictionary>

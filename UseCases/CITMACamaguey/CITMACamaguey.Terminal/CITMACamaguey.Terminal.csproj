@@ -86,9 +86,21 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="LocalizationResources.Designer.cs">
+	    <DependentUpon>LocalizationResources.resx</DependentUpon>
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	  </Compile>
 	  <Compile Update="UI\Pages\Report\Standard\SIF\RH_8_SIF_StandardReportPage.xaml.cs">
 	    <DependentUpon>RH_8_SIF_StandardReportPage.xaml</DependentUpon>
 	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="LocalizationResources.resx">
+	    <LastGenOutput>LocalizationResources.Designer.cs</LastGenOutput>
+	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 	<ItemGroup>
