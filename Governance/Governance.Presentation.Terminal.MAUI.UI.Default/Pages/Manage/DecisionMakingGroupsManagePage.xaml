@@ -58,7 +58,7 @@
                                     <StackLayout>
                                         <Label 
                                             LineBreakMode="TailTruncation"
-                                            Text="{Binding Structure.Identity.Name}" />
+                                            Text="{Binding AdministrativeEntity.Identity.Name}" />
                                         <Label 
                                             LineBreakMode="TailTruncation"
                                             FontSize="Medium"

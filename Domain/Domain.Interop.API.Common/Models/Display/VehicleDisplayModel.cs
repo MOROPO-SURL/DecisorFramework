@@ -14,7 +14,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 
         public Core.Interop.API.Common.Models.Display.ImageDisplayModel FeatureImage { get; set; }
 
-        public StructureParentalDisplayModel Structure { get; set; }
+        public AdministrativeEntityParentalDisplayModel Structure { get; set; }
 
         public string Reference { get; set; }
 
@@ -95,11 +95,11 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
                 EngineKind.Import(entity.EngineKind);
             }
 
-            if (entity.Structure != null)
+            if (entity.AdministrativeEntity != null)
             {
-                Structure = new StructureParentalDisplayModel();
+                Structure = new AdministrativeEntityParentalDisplayModel();
 
-                Structure.Import(entity.Structure);
+                Structure.Import(entity.AdministrativeEntity);
             }
         }
     }

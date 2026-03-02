@@ -10,6 +10,7 @@
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.StaffConfigurationPage"
     x:TypeArguments="interop_common_display_models:StaffDisplayModel,interop_common_display_models:StaffDisplayModel,presentation_configuration_page_models:StaffConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:StaffConfigurationPageModel">
@@ -18,6 +19,8 @@
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -49,14 +52,14 @@
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Entidad Administrativa" />
                         <Picker 
                             x:Name="StructurePicker"
-                            ItemsSource="{Binding AvailableStructures}"
+                            ItemsSource="{Binding AvailableAdministrativeEntities}"
                             ItemDisplayBinding="{Binding Path=Identity.Name}"
-                            SelectedItem="{Binding Structure}"
-                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                            SelectedItem="{Binding AdministrativeEntity}"
+                            SelectedIndexChanged="AdministrativeEntityPicker_SelectedIndexChanged" />
                         <Label
-                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.StructureValidableProperty}}"
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.AdministrativeEntityValidableProperty}}"
                             Style="{StaticResource ValidationMessageLabelStyle}"
-                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.StructureValidableProperty}}" />
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.AdministrativeEntityValidableProperty}}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=6}}"
@@ -65,14 +68,15 @@
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Principal Estructura de Plantilla" />
                         <Picker 
                             x:Name="MainWorkforcePicker"
+                            IsEnabled="{Binding AdministrativeEntity, Converter={StaticResource IsNotNullConverter}}"
                             ItemsSource="{Binding AvailableWorkforces}"
-                            ItemDisplayBinding="{Binding Name}"
+                            ItemDisplayBinding="{Binding Path=Name}"
                             SelectedItem="{Binding MainWorkforce}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
                         <Label
-                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.MainWorkforceStandardValidableProperty}}"
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.MainWorkforceValidableProperty}}"
                             Style="{StaticResource ValidationMessageLabelStyle}"
-                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.MainWorkforceStandardValidableProperty}}" />
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.MainWorkforceValidableProperty}}" />
                     </VerticalStackLayout>
                     <Grid
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
@@ -85,24 +89,38 @@
                         </Grid.RowDefinitions>
                         <Label 
                             Grid.Row="0"
-                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Días laborables" />
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Horas laborables por semana" />
                         <Entry
                             Grid.Row="1"
                             BackgroundColor="Transparent"
                             IsReadOnly="True"
-                            Text="{Binding WorkingDayCount}" />
+                            Text="{Binding WorkingWeekHourCount}" />
                         <Stepper
                             Grid.Row="1"
                             Margin="0,0,6,0"
                             HorizontalOptions="End" VerticalOptions="Center"
-                            Minimum="1" Maximum="28"
-                            Value="{Binding WorkingDayCount}" />
+                            Minimum="1" Maximum="44"
+                            Value="{Binding WorkingWeekHourCount}" />
                         <Label
                             Grid.Column="2"
-                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.WorkingDayCountStandardValidableProperty}}"
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.WorkingWeekHourCountValidableProperty}}"
                             Style="{StaticResource ValidationMessageLabelStyle}"
-                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.WorkingDayCountStandardValidableProperty}}" />
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:StaffConfigurationPageModel.WorkingWeekHourCountValidableProperty}}" />
                     </Grid>
+                    <VerticalStackLayout
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tarifa por hora extra maestrías" />
+                        <Entry Text="{Binding MasteryExtraFeed}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tarifa por hora extra maestrías" />
+                        <Entry Text="{Binding DoctorateExtraFeed}" />
+                    </VerticalStackLayout>
                 </FlexLayout>
             </VerticalStackLayout>
         </ScrollView>

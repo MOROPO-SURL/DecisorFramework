@@ -407,4 +407,6 @@ FodyWeavers.xsd
 /UseCases/EPTCamaguey/EPTCamaguey.Web.BackOffice/dpkeys
 /UseCases/ISCamaguey/ISCamaguey.Web.BackOffice/wwwroot/media
 /UseCases/ISCamaguey/ISCamaguey.Web.BackOffice/.config/dotnet-tools.json
+/UseCases/MOROPO_SURL/MOROPO_SURL.Web.BackOffice/.config/dotnet-tools.json
+/UseCases/MOROPO_SURL/MOROPO_SURL.Web.BackOffice/Persistence/ORM/EF/Migrations
 /UseCases/CITMACamaguey/CITMACamaguey.Web.BackOffice/dpkeys

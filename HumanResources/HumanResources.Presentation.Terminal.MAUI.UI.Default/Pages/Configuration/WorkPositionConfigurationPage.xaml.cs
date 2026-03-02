@@ -23,21 +23,6 @@ public partial class WorkPositionConfigurationPage : Core.Presentation.Terminal.
                 break;
             }
         }
-
-        if (model.Schooling != null)
-        {
-            for (int i = 0; i < model.AvailableSchoolings.Length; i++)
-            {
-                var current = model.AvailableSchoolings[i];
-
-                if (model.Schooling.Id != current.Id) continue;
-
-                SchoolingPicker.SelectedIndex = i;
-                SchoolingPicker.SelectedItem = current;
-
-                break;
-            }
-        }
     }
 
     protected override string EntityTypeName => "Plaza Laboral";
@@ -52,7 +37,7 @@ public partial class WorkPositionConfigurationPage : Core.Presentation.Terminal.
             Name = ConcreteBindingContext.Name,
             Priority = ConcreteBindingContext.Priority,
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
-            SchoolingId = ConcreteBindingContext.AvailableSchoolings[SchoolingPicker.SelectedIndex].Id,
+            EducationLevel = ConcreteBindingContext.EducationLevel,
             Reference = ConcreteBindingContext.Reference,
             Description = ConcreteBindingContext.Description
         };
@@ -72,7 +57,7 @@ public partial class WorkPositionConfigurationPage : Core.Presentation.Terminal.
             Name = ConcreteBindingContext.Name,
             Priority = ConcreteBindingContext.Priority,
             KindId = ConcreteBindingContext.AvailableKinds[KindPicker.SelectedIndex].Id,
-            SchoolingId = ConcreteBindingContext.AvailableSchoolings[SchoolingPicker.SelectedIndex].Id,
+            EducationLevel = ConcreteBindingContext.EducationLevel,
             Reference = ConcreteBindingContext.Reference,
             Description = ConcreteBindingContext.Description
         };

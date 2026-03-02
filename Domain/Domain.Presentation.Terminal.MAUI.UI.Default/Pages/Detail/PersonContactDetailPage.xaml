@@ -18,6 +18,7 @@
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
@@ -76,7 +77,7 @@
                                         Text="Color de piel" />
                                     <Label 
                                         Style="{StaticResource ValuePropertyLabelStyle}"
-                                        Text="{Binding SkinKind}" />
+                                        Text="{Binding SkinKind, Converter={StaticResource StringToLocalizedStringConverter}}" />
                                 </VerticalStackLayout>
                                 <VerticalStackLayout 
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
@@ -87,7 +88,7 @@
                                         Text="Sexo" />
                                     <Label 
                                         Style="{StaticResource ValuePropertyLabelStyle}"
-                                        Text="{Binding Identity.Sex}" />
+                                        Text="{Binding Identity.Sex, Converter={StaticResource StringToLocalizedStringConverter}}" />
                                 </VerticalStackLayout>
                                 <VerticalStackLayout 
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
@@ -98,7 +99,7 @@
                                         Text="Estado Civil" />
                                     <Label 
                                         Style="{StaticResource ValuePropertyLabelStyle}"
-                                        Text="{Binding Identity.CivilStatus}" />
+                                        Text="{Binding Identity.CivilStatus, Converter={StaticResource StringToLocalizedStringConverter}}" />
                                 </VerticalStackLayout>
                             </FlexLayout>
                             <FlexLayout
@@ -313,6 +314,7 @@
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />
                             <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />

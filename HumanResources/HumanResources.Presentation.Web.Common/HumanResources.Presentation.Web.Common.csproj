@@ -11,6 +11,7 @@
 		<PackageReference Include="SkiaSharp" Version="2.88.8" />
 	</ItemGroup>
 	<ItemGroup>
+		<ProjectReference Include="..\..\Domain\Domain.Presentation.Web.Common\Domain.Presentation.Web.Common.csproj" />
 		<ProjectReference Include="..\HumanResources.Interop.API.Common\HumanResources.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\HumanResources.Persistence.ORM.EF\HumanResources.Persistence.ORM.EF.csproj" />
 	</ItemGroup>

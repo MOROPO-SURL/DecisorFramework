@@ -1,10 +1,9 @@
-﻿namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Factories.Detail
+﻿namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Factories.Detail;
+
+public class BrandDetailPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.BrandDisplayModel>
 {
-    public class BrandDetailPageFactory : Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.BrandDisplayModel>
+    public Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.BrandDisplayModel> Build(Interop.API.Common.Models.Display.BrandDisplayModel model, System.Action<Interop.API.Common.Models.Display.BrandDisplayModel, int?> delegationAction = null)
     {
-        public Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.BrandDisplayModel> Build(Interop.API.Common.Models.Display.BrandDisplayModel model, System.Action<Interop.API.Common.Models.Display.BrandDisplayModel, int?> delegationAction = null)
-        {
-            return new Pages.Detail.BrandDetailPage(model, delegationAction);
-        }
+        return new Pages.Detail.BrandDetailPage(model, delegationAction);
     }
 }

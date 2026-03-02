@@ -13,7 +13,7 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
     private Microsoft.Maui.Storage.FileResult rawResearchResultDocumentFilePickResult;
     private Microsoft.Maui.Storage.FileResult rawModelDocumentFilePickResult;
 
-    public OcupationCandidateConfigurationPage(System.Action<OcupationCandidateDisplayModel> successAction, Models.Page.Configuration.OcupationCandidateConfigurationPageModel model) : base(successAction, model, null)    {
+    public OcupationCandidateConfigurationPage(System.Action<OcupationCandidateDisplayModel> successAction, Models.Page.Configuration.OcupationCandidateConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.OcupationCandidateConfigurationPageModel> validator) : base(successAction, model, validator)    {
         InitializeComponent();
     }
 

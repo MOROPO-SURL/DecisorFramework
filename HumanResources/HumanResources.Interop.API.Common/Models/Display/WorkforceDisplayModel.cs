@@ -13,9 +13,9 @@
 
         public System.DateTime At { get; set; }
 
-        public VacantDisplayModel ChiefVacant { get; set; }
+        public Domain.Interop.API.Common.Models.Display.OrganizationalStructureDisplayModel OrganizationalStructure { get; set; }
 
-        public WorkforceOrganizationalUnityDisplayModel[] OrganizationalUnities { get; set; }
+        public WorkforceOrganizationalUnitDisplayModel[] OrganizationalUnits { get; set; }
 
         public void Import(Persistence.Entities.Workforce entity)
         {
@@ -25,11 +25,11 @@
             Priority = entity.Priority;
             At = entity.At;
 
-            if (entity.ChiefVacant != null)
+            if (entity.OrganizationalStructure != null)
             {
-                ChiefVacant = new VacantDisplayModel();
+                OrganizationalStructure = new Domain.Interop.API.Common.Models.Display.OrganizationalStructureDisplayModel();
 
-                ChiefVacant.Import(entity.ChiefVacant);
+                OrganizationalStructure.Import(entity.OrganizationalStructure);
             }
         }
     }

@@ -11,11 +11,9 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
             var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
 
             var kindsAPIConnectClient = new Interop.API.Connect.Clients.WorkPositionKindsAPIConnectClient(httpClientHelperProvider);
-            var shoolingsAPIConnectClien = new Interop.API.Connect.Clients.SchoolingsAPIConnectClient(httpClientHelperProvider);
-
+            
             _model.AvailableKinds = await kindsAPIConnectClient.GetAsync();
-            _model.AvailableSchoolings = await shoolingsAPIConnectClien.GetAsync();
-
+            
             return new Pages.Configuration.WorkPositionConfigurationPage(configurationSuccessAction, _model);
         }
     }

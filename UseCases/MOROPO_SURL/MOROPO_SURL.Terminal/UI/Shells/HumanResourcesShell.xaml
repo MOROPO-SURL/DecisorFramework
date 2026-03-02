@@ -108,12 +108,12 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Asignaciones"
+        Title="Configuraciones"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFCF8;"
+                Glyph="&#xF493;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -176,16 +176,6 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF017;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-        Title="Niveles de preparación"
-        ContentTemplate="{DataTemplate decisorframework_humanresources_list_pages:SchoolingsListPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF474;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

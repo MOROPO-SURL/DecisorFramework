@@ -10,9 +10,11 @@
 
         public Legal.Persistence.Enumerations.DurationUnitMeasureKind? DurationUnitMeasureKind { get; set; }
 
+        public Persistence.Enumerations.VacantOcupationMode OcupationMode { get; set; }
+
         public System.Guid? AdmisionPropousalId { get; set; }
 
-        public System.Guid? NamingResolutionId { get; set; }
+        public System.Guid? ResolutionId { get; set; }
 
         public Persistence.Entities.Ocupation Export()
         {

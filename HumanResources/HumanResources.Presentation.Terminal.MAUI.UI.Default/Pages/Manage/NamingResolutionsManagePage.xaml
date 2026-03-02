@@ -2,8 +2,7 @@
 <core_ui_base_pages:ManageBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
-    xmlns:local_datatemplate_selectors="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Template.Selector"
+    xmlns:local_constants="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Constants"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
@@ -15,145 +14,12 @@
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.NamingResolutionsManagePage"
     x:TypeArguments="interop_common_display_models:NamingResolutionDisplayModel,presentation_manage_page_models:NamingResolutionsManagePageModel,presentation_configuration_page_models:NamingResolutionConfigurationPageModel"
     x:DataType="presentation_manage_page_models:NamingResolutionsManagePageModel"
-    Title="Gestión de Candidatos a Admisión">
+    Title="Gestión de Resoluciones de Nombramiento">
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
 
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
-
-            <local_datatemplate_selectors:NamingResolutionTemplateSelector x:Key="NamingResolutionTemplateSelector">
-                <local_datatemplate_selectors:NamingResolutionTemplateSelector.DirectNamingResolutionDataTemplate>
-                    <DataTemplate x:DataType="interop_common_display_models:NamingResolutionDisplayModel">
-                        <Frame HeightRequest="{Static local:NamingResolutionsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                            </Frame.GestureRecognizers>
-                            <VerticalStackLayout Spacing="4">
-                                <Label FontSize="Large">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding Index}" />
-                                            <Span Text=" / " />
-                                            <Span Text="{Binding Year}" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Border 
-                                        Grid.Column="0"
-                                        VerticalOptions="Center"
-                                        StrokeThickness="4"
-                                        StrokeLineJoin="Bevel">
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="48" />
-                                        </Border.StrokeShape>
-                                        <Image
-                                            WidthRequest="96" HeightRequest="96"
-                                            Source="{Binding Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
-                                    </Border>
-                                    <StackLayout 
-                                        Grid.Column="1"
-                                        Padding="10">
-                                        <Label
-                                            ToolTipProperties.Text="{Binding Contact.Identity.Name}"
-                                            Text="{Binding Contact.Identity.Name}"
-                                            FontSize="Medium"
-                                            LineBreakMode="TailTruncation" />
-                                        <Label
-                                            ToolTipProperties.Text="{Binding Contact.Identity.LastName}"
-                                            Text="{Binding Contact.Identity.LastName}"
-                                            LineBreakMode="TailTruncation" />
-                                        <Label
-                                            Margin="0,8,0,0"
-                                            ToolTipProperties.Text="{Binding Vacant.WorkPosition.Name}"
-                                            Text="{Binding Vacant.WorkPosition.Name}"
-                                            FontAttributes="Bold"
-                                            LineBreakMode="TailTruncation" />
-                                        <Label
-                                            ToolTipProperties.Text="{Binding Staff.Structure.Identity.Name}"
-                                            Text="{Binding Staff.Structure.Identity.Name}"
-                                            LineBreakMode="TailTruncation" />
-                                    </StackLayout>
-                                </Grid>
-                                <Label
-                                    Text="{Binding Summary}"
-                                    LineBreakMode="TailTruncation"
-                                    MaxLines="3" />
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </local_datatemplate_selectors:NamingResolutionTemplateSelector.DirectNamingResolutionDataTemplate>
-                <local_datatemplate_selectors:NamingResolutionTemplateSelector.CandidateNamingResolutionDataTemplate>
-                    <DataTemplate x:DataType="interop_common_display_models:NamingResolutionDisplayModel">
-                        <Frame HeightRequest="{Static local:NamingResolutionsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
-                            <Frame.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                            </Frame.GestureRecognizers>
-                            <VerticalStackLayout Spacing="4">
-                                <Label FontSize="Large">
-                                    <Label.FormattedText>
-                                        <FormattedString>
-                                            <Span Text="{Binding Index}" />
-                                            <Span Text=" / " />
-                                            <Span Text="{Binding Year}" />
-                                        </FormattedString>
-                                    </Label.FormattedText>
-                                </Label>
-                                <Grid>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition />
-                                    </Grid.ColumnDefinitions>
-                                    <Border 
-                                        Grid.Column="0"
-                                        VerticalOptions="Center"
-                                        StrokeThickness="4"
-                                        StrokeLineJoin="Bevel">
-                                        <Border.StrokeShape>
-                                            <RoundRectangle CornerRadius="48" />
-                                        </Border.StrokeShape>
-                                        <Image
-                                            WidthRequest="96" HeightRequest="96"
-                                            Source="{Binding Candidate.Postulation.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
-                                    </Border>
-                                    <StackLayout 
-                                        Grid.Column="1"
-                                        Padding="10">
-                                        <Label
-                                            ToolTipProperties.Text="{Binding Candidate.Postulation.Contact.Identity.Name}"
-                                            Text="{Binding Candidate.Postulation.Contact.Identity.Name}"
-                                            FontSize="Medium"
-                                            LineBreakMode="TailTruncation" />
-                                        <Label
-                                            ToolTipProperties.Text="{Binding Candidate.Postulation.Contact.Identity.LastName}"
-                                            Text="{Binding Candidate.Postulation.Contact.Identity.LastName}"
-                                            LineBreakMode="TailTruncation" />
-                                        <Label
-                                            Margin="0,8,0,0"
-                                            ToolTipProperties.Text="{Binding Vacant.WorkPosition.Name}"
-                                            Text="{Binding Candidate.Postulation.Vacant.WorkPosition.Name}"
-                                            FontAttributes="Bold"
-                                            LineBreakMode="TailTruncation" />
-                                        <Label
-                                            ToolTipProperties.Text="{Binding Staff.Structure.Identity.Name}"
-                                            Text="{Binding Candidate.Postulation.Staff.Structure.Identity.Name}"
-                                            LineBreakMode="TailTruncation" />
-                                    </StackLayout>
-                                </Grid>
-                                <Label
-                                    Text="{Binding Summary}"
-                                    LineBreakMode="TailTruncation"
-                                    MaxLines="3" />
-                            </VerticalStackLayout>
-                        </Frame>
-                    </DataTemplate>
-                </local_datatemplate_selectors:NamingResolutionTemplateSelector.CandidateNamingResolutionDataTemplate>
-            </local_datatemplate_selectors:NamingResolutionTemplateSelector>
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -181,8 +47,7 @@
                     <CollectionView
                         x:Name="ItemsCollectionView"
                         Margin="10"
-                        ItemsSource="{Binding Items}"
-                        ItemTemplate="{StaticResource NamingResolutionTemplateSelector}">
+                        ItemsSource="{Binding Items}">
                         <CollectionView.ItemsLayout>
                             <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
                         </CollectionView.ItemsLayout>
@@ -195,6 +60,71 @@
                                 TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
                                 FontAttributes="Italic" />
                         </CollectionView.EmptyView>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_common_display_models:NamingResolutionDisplayModel">
+                                <Frame HeightRequest="{Static local_constants:CardViewHeightConstants.NAMING_RESOLUTION_DEFAULT_CARD_VIEW_HEIGHT}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                    </Frame.GestureRecognizers>
+                                    <VerticalStackLayout Spacing="4">
+                                        <Label FontSize="Large">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Index}" />
+                                                    <Span Text=" / " />
+                                                    <Span Text="{Binding Year}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Border 
+                                                Grid.Column="0"
+                                                VerticalOptions="Center"
+                                                StrokeThickness="4"
+                                                StrokeLineJoin="Bevel">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="48" />
+                                                </Border.StrokeShape>
+                                                <Image
+                                                    WidthRequest="96" HeightRequest="96"
+                                                    Source="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                            </Border>
+                                            <StackLayout 
+                                                Grid.Column="1"
+                                                Padding="10">
+                                                <Label
+                                                    ToolTipProperties.Text="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity.Name}"
+                                                    Text="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity.Name}"
+                                                    FontSize="Medium"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Label
+                                                    ToolTipProperties.Text="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity.LastName}"
+                                                    Text="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity.LastName}"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Label
+                                                    Margin="0,8,0,0"
+                                                    ToolTipProperties.Text="{Binding AdmitionPropousal.Candidate.Postulation.Vacant.WorkPosition.Name}"
+                                                    Text="{Binding AdmitionPropousal.Candidate.Postulation.Vacant.WorkPosition.Name}"
+                                                    FontAttributes="Bold"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Label
+                                                    ToolTipProperties.Text="{Binding AdmitionPropousal.Candidate.Postulation.Staff.AdministrativeEntity.Identity.Name}"
+                                                    Text="{Binding AdmitionPropousal.Candidate.Postulation.Staff.AdministrativeEntity.Identity.Name}"
+                                                    LineBreakMode="TailTruncation" />
+                                            </StackLayout>
+                                        </Grid>
+                                        <Label
+                                            Text="{Binding Summary}"
+                                            LineBreakMode="TailTruncation"
+                                            MaxLines="3" />
+                                    </VerticalStackLayout>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
                         <CollectionView.Footer>
                             <StackLayout IsVisible="{Binding HasMoreItems}">
                                 <Button

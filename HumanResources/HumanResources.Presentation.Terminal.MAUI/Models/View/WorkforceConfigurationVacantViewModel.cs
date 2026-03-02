@@ -9,11 +9,11 @@
 
         public System.Guid Id { get; set; }
 
-        public WorkforceConfigurationOrganizationalUnityViewModel OrganizationUnity { get; set; }
+        public TreeWorkforceConfigurationOrganizationalStructuringUnitViewModel Context { get; set; }
 
-        public int Priority { get => priority; set => priority = value; }
+        public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public Persistence.Enumerations.VacantOcupationMode OcupationMode { get => vacantOcupationMode; set => vacantOcupationMode = value; }
+        public Persistence.Enumerations.VacantOcupationMode OcupationMode { get => vacantOcupationMode; set => SetProperty(ref vacantOcupationMode, value); }
 
         public Interop.API.Common.Models.Display.WorkPositionDisplayModel WorkPosition { get => workPosition; set => SetProperty(ref workPosition, value); }
 

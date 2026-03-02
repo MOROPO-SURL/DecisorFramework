@@ -87,8 +87,6 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         private void DetailActionDelegationRequest_Callback(TModel target, int? discriminator)
         {
-            var concreteBindingContext = (TManagePageModel)BindingContext;
-
             ConcreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation;
 
             if (discriminator == null)

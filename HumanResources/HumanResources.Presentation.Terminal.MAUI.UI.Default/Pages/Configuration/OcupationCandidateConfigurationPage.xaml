@@ -2,6 +2,7 @@
 <core_ui_base_pages:ConfigurationBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Constants"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:local_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
@@ -19,6 +20,8 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
             <core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
@@ -53,13 +56,17 @@
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Postulación" />
                         <ContentView
                             IsVisible="{Binding Postulation, Converter={StaticResource IsNotNullConverter}}"
-                            HeightRequest="148">
+                            HeightRequest="{Static local_constants:CardViewHeightConstants.VACANT_POSTULATION_DEFAULT_CARD_VIEW_HEIGHT}">
                             <local_presentation_card_views:VacantPostulationDefaultCardView BindingContext="{Binding Postulation}" />
                         </ContentView>
                         <Button
                             HorizontalOptions="Start"
                             Text="Seleccionar ..."
                             Clicked="PostulationPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:OcupationCandidateConfigurationPageModel.PostulationValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:OcupationCandidateConfigurationPageModel.PostulationValidableProperty}}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=8}}"
@@ -75,6 +82,10 @@
                             HorizontalOptions="Start"
                             Text="Seleccionar ..."
                             Clicked="ResponsiblePickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:OcupationCandidateConfigurationPageModel.ResponsibleValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:OcupationCandidateConfigurationPageModel.ResponsibleValidableProperty}}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=4}}"
