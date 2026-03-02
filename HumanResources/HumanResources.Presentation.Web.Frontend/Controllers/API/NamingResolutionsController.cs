@@ -10,11 +10,11 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 [Microsoft.AspNetCore.Mvc.ApiController]
 public class NamingResolutionsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<NamingResolution, System.Guid, NamingResolutionInputModel, NamingResolutionDisplayModel, NamingResolutionFilterModel>
 {
-    private readonly IEntityRepository<OcupationCandidate, System.Guid> ocupationCandidateRepository;
+    private readonly IEntityRepository<AdmitionPropousal, System.Guid> admitionPropousalRepository;
 
-    public NamingResolutionsController(IEntityRepository<OcupationCandidate, System.Guid> ocupationCandidateRepository, IEntityRepository<NamingResolution, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<NamingResolutionsController> localizer, Microsoft.Extensions.Logging.ILogger<NamingResolutionsController> logger) : base(repository, localizer, logger)
+    public NamingResolutionsController(IEntityRepository<AdmitionPropousal, System.Guid> admitionPropousalRepository, IEntityRepository<NamingResolution, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<NamingResolutionsController> localizer, Microsoft.Extensions.Logging.ILogger<NamingResolutionsController> logger) : base(repository, localizer, logger)
     {
-        this.ocupationCandidateRepository = ocupationCandidateRepository;
+        this.admitionPropousalRepository = admitionPropousalRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<NamingResolution, bool>> GetGlobalSelector()
@@ -41,9 +41,9 @@ public class NamingResolutionsController : Guama.Core.Presentation.Web.API.Contr
     {
         var model = base.EntityToDisplayModel(entity);
 
-        if (model.Candidate != null && model.Candidate.Postulation.Contact.Identity.Image != null)
+        if (model.AdmitionPropousal != null && model.AdmitionPropousal.Candidate.Postulation.Contact.Identity.Image != null)
         {
-            model.Candidate.Postulation.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Candidate.Postulation.Contact.Identity.Image.ContentType);
+            model.AdmitionPropousal.Candidate.Postulation.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.AdmitionPropousal.OcupationCandidate.Postulation.Contact.Identity.Image.ContentType);
         }
 
         return model;
@@ -53,33 +53,36 @@ public class NamingResolutionsController : Guama.Core.Presentation.Web.API.Contr
     {
         base.PreCreate(entity, model);
 
-        var candidate = ocupationCandidateRepository.Get(model.CandidateId);
+        var _entity = admitionPropousalRepository.Get(model.AdmitionPropousalId);
 
-        candidate.Archived = true;
+        _entity.Archived = true;
 
-        ocupationCandidateRepository.Update(candidate, User.Identity.Name, false);
+        admitionPropousalRepository.Update(_entity, User.Identity.Name, false);
     }
 
     protected override void PreEdit(NamingResolution entity, NamingResolutionInputModel model)
     {
         base.PreEdit(entity, model);
 
-        if (entity.CandidateId != model.CandidateId)
+        // TODO Improbe validation by find resolution id in NamingEmploymentContract !!!
+        if (entity.ConcretedAt != null) throw new Guama.Core.Presentation.Web.Common.Exceptions.NoContinuableActionException("Resolution concreted");
+
+        if (entity.AdmitionPropousalId != model.AdmitionPropousalId)
         {
-            var oldCandidate = ocupationCandidateRepository.Get(model.CandidateId);
+            var outEntity = admitionPropousalRepository.Get(model.AdmitionPropousalId);
 
-            oldCandidate.Archived = false;
+            outEntity.Archived = false;
 
-            ocupationCandidateRepository.Update(oldCandidate, User.Identity.Name, false);
+            admitionPropousalRepository.Update(outEntity, User.Identity.Name, false);
 
-            entity.Candidate = null;
-            entity.CandidateId = model.CandidateId;
+            entity.AdmitionPropousal = null;
+            entity.AdmitionPropousalId = model.AdmitionPropousalId;
 
-            var newCandidate = ocupationCandidateRepository.Get(model.CandidateId);
+            var inEntity = admitionPropousalRepository.Get(model.AdmitionPropousalId);
 
-            newCandidate.Archived = true;
+            inEntity.Archived = true;
 
-            ocupationCandidateRepository.Update(newCandidate, User.Identity.Name, false);
+            admitionPropousalRepository.Update(inEntity, User.Identity.Name, false);
         }
     }
 }

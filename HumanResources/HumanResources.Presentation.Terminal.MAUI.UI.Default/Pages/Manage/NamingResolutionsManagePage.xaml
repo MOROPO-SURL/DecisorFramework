@@ -91,29 +91,29 @@
                                                 </Border.StrokeShape>
                                                 <Image
                                                     WidthRequest="96" HeightRequest="96"
-                                                    Source="{Binding Candidate.Postulation.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
+                                                    Source="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
                                             </Border>
                                             <StackLayout 
                                                 Grid.Column="1"
                                                 Padding="10">
                                                 <Label
-                                                    ToolTipProperties.Text="{Binding Candidate.Postulation.Contact.Identity.Name}"
-                                                    Text="{Binding Candidate.Postulation.Contact.Identity.Name}"
+                                                    ToolTipProperties.Text="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity.Name}"
+                                                    Text="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity.Name}"
                                                     FontSize="Medium"
                                                     LineBreakMode="TailTruncation" />
                                                 <Label
-                                                    ToolTipProperties.Text="{Binding Candidate.Postulation.Contact.Identity.LastName}"
-                                                    Text="{Binding Candidate.Postulation.Contact.Identity.LastName}"
+                                                    ToolTipProperties.Text="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity.LastName}"
+                                                    Text="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity.LastName}"
                                                     LineBreakMode="TailTruncation" />
                                                 <Label
                                                     Margin="0,8,0,0"
-                                                    ToolTipProperties.Text="{Binding Candidate.Postulation.Vacant.WorkPosition.Name}"
-                                                    Text="{Binding Candidate.Postulation.Vacant.WorkPosition.Name}"
+                                                    ToolTipProperties.Text="{Binding AdmitionPropousal.Candidate.Postulation.Vacant.WorkPosition.Name}"
+                                                    Text="{Binding AdmitionPropousal.Candidate.Postulation.Vacant.WorkPosition.Name}"
                                                     FontAttributes="Bold"
                                                     LineBreakMode="TailTruncation" />
                                                 <Label
-                                                    ToolTipProperties.Text="{Binding Candidate.Postulation.Staff.AdministrativeEntity.Identity.Name}"
-                                                    Text="{Binding Candidate.Postulation.Staff.AdministrativeEntity.Identity.Name}"
+                                                    ToolTipProperties.Text="{Binding AdmitionPropousal.Candidate.Postulation.Staff.AdministrativeEntity.Identity.Name}"
+                                                    Text="{Binding AdmitionPropousal.Candidate.Postulation.Staff.AdministrativeEntity.Identity.Name}"
                                                     LineBreakMode="TailTruncation" />
                                             </StackLayout>
                                         </Grid>

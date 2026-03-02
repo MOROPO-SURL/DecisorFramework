@@ -23,7 +23,7 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
             At = ConcreteBindingContext.At,
             Summary = ConcreteBindingContext.Summary,
             AgreementId = ConcreteBindingContext.Agreement?.Id,
-            CandidateId = ConcreteBindingContext.Candidate.Id
+            AdmitionPropousalId = ConcreteBindingContext.AdmitionPropousal.Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -42,7 +42,7 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
             At = ConcreteBindingContext.At,
             Summary = ConcreteBindingContext.Summary,
             AgreementId = ConcreteBindingContext.Agreement?.Id,
-            CandidateId = ConcreteBindingContext.Candidate.Id
+            AdmitionPropousalId = ConcreteBindingContext.AdmitionPropousal.Id
         };
 
         await apiConnectClient.EditAsync(model);
@@ -85,14 +85,14 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.MeetingAgreementPickPage(AgreementPickComplete_Callback)));
     }
 
-    private void CandidatePickButton_Clicked(object sender, System.EventArgs e)
+    private void AdmitionPropousalPickButton_Clicked(object sender, System.EventArgs e)
     {
-        //this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OcupationCandidatePickPage(true, CondidatePickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.AdmitionPropousalPickPage(AdmitionPropousalPickComplete_Callback)));
     }
 
-    private void CondidatePickComplete_Callback(Interop.API.Common.Models.Display.OcupationCandidateDisplayModel model)
+    private void AdmitionPropousalPickComplete_Callback(Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel model)
     {
-        ConcreteBindingContext.Candidate = model;
+        ConcreteBindingContext.AdmitionPropousal = model;
     }
 
     private void AgreementPickComplete_Callback(Governance.Interop.API.Common.Models.Display.AgreementDisplayModel model)

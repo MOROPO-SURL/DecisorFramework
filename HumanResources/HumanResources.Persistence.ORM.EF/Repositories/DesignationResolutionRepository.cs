@@ -10,12 +10,11 @@ public class DesignationResolutionRepository : Guama.Core.Persistence.ORM.EF.Rep
     protected override IQueryable<Entities.DesignationResolution> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
-            .AsNoTracking()
-            .Include(entity => entity.Staff).ThenInclude(entity => entity.AdministrativeEntity).ThenInclude(entity => entity.Identity)
+            .Include(entity => entity.Vacant).ThenInclude(entity => entity.WorkPosition)
             .Include(entity => entity.Vacant).ThenInclude(entity => entity.WorkPosition)
             .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
-            .Include(entity => entity.Vacant).ThenInclude(entity => entity.WorkPosition)
             .Include(entity => entity.Agreement).ThenInclude(entity => entity.Meeting).ThenInclude(entity => entity.DecisionMakingGroup)
+            .AsNoTracking()
             .AsSplitQuery();
     }
 }

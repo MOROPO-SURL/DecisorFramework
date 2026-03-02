@@ -2,16 +2,16 @@
 {
     public class NamingResolutionInputModel : Contract.AbstractIncorporationResolutionInputModel<Persistence.Entities.NamingResolution>
     {
-        public System.Guid CandidateId { get; set; }
+        public System.Guid AdmitionPropousalId { get; set; }
 
         public override void Mergue(Persistence.Entities.NamingResolution entity)
         {
             base.Mergue(entity);
 
-            if (entity.CandidateId != CandidateId)
+            if (entity.AdmitionPropousalId != AdmitionPropousalId)
             {
-                entity.Candidate = null;
-                entity.CandidateId = CandidateId;
+                entity.AdmitionPropousal = null;
+                entity.AdmitionPropousalId = AdmitionPropousalId;
             }
         }
     }

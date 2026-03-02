@@ -10,9 +10,9 @@ public class NamingResolutionConfigurationValidator : AbstractValidator<Models.P
             .GreaterThan(0)
             .WithName("Número de resolución");
 
-        RuleFor(model => model.Candidate)
+        RuleFor(model => model.AdmitionPropousal)
             .NotNull()
-            .WithName("Candidato");
+            .WithName("Propuesta de admisión");
 
         RuleFor(model => model.Summary)
             .NotEmpty()

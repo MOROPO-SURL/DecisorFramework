@@ -3,14 +3,14 @@
 public class NamingResolutionConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.NamingResolutionDisplayModel>
 {
     public static string IndexValidableProperty => nameof(Index);
-    public static string CandidateValidableProperty => nameof(Candidate);
+    public static string AdmitionPropousalValidableProperty => nameof(AdmitionPropousal);
     public static string SummaryValidableProperty => nameof(Summary);
 
     private int index;
     private System.DateTime at = System.DateTime.Now;
     private string summary;
     private Governance.Interop.API.Common.Models.Display.AgreementDisplayModel agreement;
-    private Interop.API.Common.Models.Display.OcupationCandidateDisplayModel candidate;
+    private Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel admitionPropousal;
 
     public NamingResolutionConfigurationPageModel(Interop.API.Common.Models.Display.NamingResolutionDisplayModel model) : base(model)
     {
@@ -21,7 +21,7 @@ public class NamingResolutionConfigurationPageModel : Core.Presentation.Terminal
             at = model.At;
             summary = model.Summary;
             agreement = model.Agreement;
-            candidate = model.Candidate;
+            admitionPropousal = model.AdmitionPropousal;
         }
     }
 
@@ -35,5 +35,5 @@ public class NamingResolutionConfigurationPageModel : Core.Presentation.Terminal
 
     public Governance.Interop.API.Common.Models.Display.AgreementDisplayModel Agreement { get => agreement; set => SetProperty(ref agreement, value); }
 
-    public Interop.API.Common.Models.Display.OcupationCandidateDisplayModel Candidate { get => candidate; set => SetProperty(ref candidate, value); }
+    public Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel AdmitionPropousal { get => admitionPropousal; set => SetProperty(ref admitionPropousal, value); }
 }

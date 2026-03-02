@@ -36,14 +36,14 @@
                                 Text="Puesto" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Candidate.Postulation.Vacant.WorkPosition.Name}" />
+                                Text="{Binding AdmitionPropousal.Candidate.Postulation.Vacant.WorkPosition.Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Nombrado(a)" />
                             <Label
-                                IsVisible="{Binding Candidate, Converter={StaticResource IsNotNullConverter}}"
+                                IsVisible="{Binding AdmitionPropousal.Candidate, Converter={StaticResource IsNotNullConverter}}"
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Candidate.Postulation.Contact.Identity}" />
+                                Text="{Binding AdmitionPropousal.Candidate.Postulation.Contact.Identity}" />
                         </StackLayout>
                         <StackLayout
                             Orientation="Horizontal"

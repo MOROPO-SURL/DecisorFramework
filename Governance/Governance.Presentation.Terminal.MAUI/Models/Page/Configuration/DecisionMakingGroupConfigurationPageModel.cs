@@ -18,7 +18,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
                 Name = model.Name;
                 Description = model.Description;
                 Priority = model.Priority;
-                Structure = model.Structure;
+                Structure = model.AdministrativeEntity;
                 Leader = model.Leader;
                 Members = new ObservableCollection<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel>(model.Members);
                 Collaborators = new ObservableCollection<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel>(model.Collaborators);

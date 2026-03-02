@@ -2,7 +2,7 @@
 {
     public class NamingResolutionDisplayModel : Contract.AbstractIncorporationResolutionDisplayModel<Persistence.Entities.NamingResolution>
     {
-        public OcupationCandidateDisplayModel Candidate { get; set; }
+        public AdmitionPropousalDisplayModel AdmitionPropousal { get; set; }
 
         public override void Import(Persistence.Entities.NamingResolution entity)
         {
@@ -10,11 +10,11 @@
 
             ConcretedAt = entity.ConcretedAt;
 
-            if (entity.Candidate != null)
+            if (entity.AdmitionPropousal != null)
             {
-                Candidate = new OcupationCandidateDisplayModel();
+                AdmitionPropousal = new AdmitionPropousalDisplayModel();
 
-                Candidate.Import(entity.Candidate);
+                AdmitionPropousal.Import(entity.AdmitionPropousal);
             }
         }
     }

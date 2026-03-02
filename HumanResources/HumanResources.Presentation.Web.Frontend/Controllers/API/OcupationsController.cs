@@ -136,12 +136,12 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                 case Persistence.Enumerations.VacantOcupationMode.Naming:
                     var namingResolution = namingResolutionRepository.Get(model.ResolutionId.Value);
 
-                    var candidate = ocupationCandidateRepository.Get(namingResolution.CandidateId);
+                    var admisionPropousal = admisionPropousalRepository.Get(namingResolution.AdmitionPropousalId);
 
-                    var _employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == candidate.Postulation.ContactId);
+                    var _employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == admisionPropousal.OcupationCandidate.Postulation.ContactId);
 
-                    entity.StaffId =  candidate.Postulation.StaffId;
-                    entity.VacantId = candidate.Postulation.VacantId;
+                    entity.StaffId =  admisionPropousal.OcupationCandidate.Postulation.StaffId;
+                    entity.VacantId = admisionPropousal.OcupationCandidate.Postulation.VacantId;
                     entity.Contract = new NamingEmploymentContract
                     {
                         Index = nextIndex,
@@ -171,8 +171,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                         entity.Contract.Employee = new Employee
                         {
                             Enabled = true,
-                            Priority = candidate.Postulation.Contact.Priority,
-                            ContactId = namingResolution.Candidate.Postulation.ContactId
+                            Priority = admisionPropousal.OcupationCandidate.Postulation.Contact.Priority,
+                            ContactId = namingResolution.AdmitionPropousal.OcupationCandidate.Postulation.ContactId
                         };
                     }
 
@@ -184,23 +184,23 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
 
                 case Persistence.Enumerations.VacantOcupationMode.Admision:
                 default:
-                    var admisionPropousal = admisionPropousalRepository.Get(model.AdmisionPropousalId.Value);
+                    var _admisionPropousal = admisionPropousalRepository.Get(model.AdmisionPropousalId.Value);
 
-                    var __employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == admisionPropousal.OcupationCandidate.Postulation.ContactId);
+                    var __employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == _admisionPropousal.OcupationCandidate.Postulation.ContactId);
 
-                    entity.StaffId = admisionPropousal.OcupationCandidate.Postulation.StaffId;
-                    entity.VacantId = admisionPropousal.OcupationCandidate.Postulation.VacantId;
+                    entity.StaffId = _admisionPropousal.OcupationCandidate.Postulation.StaffId;
+                    entity.VacantId = _admisionPropousal.OcupationCandidate.Postulation.VacantId;
                     entity.Contract = new AdmitionEmploymentContract
                     {
                         Index = nextIndex,
                         Year = model.StarAt.Year,
                         StarAt = model.StarAt,
-                        Objective = $"Contratación generada a partir de la propuesta de admisión tomada en la reunión No.{admisionPropousal.Agreement.Meeting.Index} con fecha {admisionPropousal.Agreement.Meeting.At:D}",
+                        Objective = $"Contratación generada a partir de la propuesta de admisión tomada en la reunión No.{_admisionPropousal.Agreement.Meeting.Index} con fecha {_admisionPropousal.Agreement.Meeting.At:D}",
                         DurationUnitCount = model.DurationUnitCount,
                         DurationUnitMeasureKind = model.DurationUnitMeasureKind,
-                        StaffId = admisionPropousal.OcupationCandidate.Postulation.StaffId,
-                        VacantId = admisionPropousal.OcupationCandidate.Postulation.VacantId,
-                        AdmitionPropousalId = admisionPropousal.Id
+                        StaffId = _admisionPropousal.OcupationCandidate.Postulation.StaffId,
+                        VacantId = _admisionPropousal.OcupationCandidate.Postulation.VacantId,
+                        AdmitionPropousalId = _admisionPropousal.Id
                     };
 
                     if (__employee != null)
@@ -219,14 +219,14 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Cont
                         entity.Contract.Employee = new Employee
                         {
                             Enabled = true,
-                            Priority = admisionPropousal.OcupationCandidate.Postulation.Contact.Priority,
-                            ContactId = admisionPropousal.OcupationCandidate.Postulation.ContactId
+                            Priority = _admisionPropousal.OcupationCandidate.Postulation.Contact.Priority,
+                            ContactId = _admisionPropousal.OcupationCandidate.Postulation.ContactId
                         };
                     }
 
-                    admisionPropousal.Archived = true;
+                    _admisionPropousal.Archived = true;
 
-                    admisionPropousalRepository.Update(admisionPropousal, User.Identity.Name, false);
+                    admisionPropousalRepository.Update(_admisionPropousal, User.Identity.Name, false);
 
                     break;
             }

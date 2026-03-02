@@ -43,10 +43,10 @@ namespace MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Input
             entity.Description = Description;
             entity.Priority = Priority;
 
-            if (entity.StructureId != StructureId)
+            if (entity.AdministrativeEntityId != StructureId)
             {
-                entity.Structure = null;
-                entity.StructureId = StructureId;
+                entity.AdministrativeEntity = null;
+                entity.AdministrativeEntityId = StructureId;
             }
 
             if (entity.LeaderId != LeaderId)

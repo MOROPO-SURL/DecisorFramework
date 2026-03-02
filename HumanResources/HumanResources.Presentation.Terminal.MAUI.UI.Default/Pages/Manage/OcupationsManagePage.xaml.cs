@@ -302,7 +302,7 @@ public partial class OcupationsManagePage : Caney.MVVM.Core.Pages.ContentPage
             return;
         }
         
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.AdmitionPropousalPickPage(pickContactVacantBindingContext.WorkPosition, ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex], AdmitionPropousalPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.AdmitionPropousalPickPage(AdmitionPropousalPickComplete_Callback, pickContactVacantBindingContext.WorkPosition, ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex])));
     }
 
     private void RemoveOcupationButton_Clicked(object sender, System.EventArgs e)
