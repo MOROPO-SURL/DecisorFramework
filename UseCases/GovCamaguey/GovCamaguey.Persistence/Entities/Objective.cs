@@ -25,6 +25,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
         public Person Responsible { get; set; }
         public System.Guid ResponsibleId { get; set; }
 
+        public List<ObjectiveUserBridge> ObjectiveUserBridges { get; set; } = new List<ObjectiveUserBridge>();
+
         public ICollection<Proyection> Proyections { get; set; }
 
         public ICollection<ObjectiveIndicator> Indicators { get; set; } = new List<ObjectiveIndicator>();

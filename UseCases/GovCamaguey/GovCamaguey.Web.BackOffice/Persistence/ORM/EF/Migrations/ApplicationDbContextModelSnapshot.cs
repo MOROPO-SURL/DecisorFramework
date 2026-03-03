@@ -1230,6 +1230,25 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.ToTable("actionorganizationresponsabilitybridges");
                 });
 
+            modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.ActionUserBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<string>("SternId")
+                        .HasColumnType("text")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_actionuserbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_actionuserbridges_sternid");
+
+                    b.ToTable("actionuserbridges");
+                });
+
             modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.GlobalIndicator", b =>
                 {
                     b.Property<Guid>("Id")
@@ -1533,6 +1552,33 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .HasDatabaseName("ix_objectiveindicatorresults_indicatorid");
 
                     b.ToTable("objectiveindicatorresults");
+                });
+
+            modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.ObjectiveUserBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<string>("SternId")
+                        .HasColumnType("text")
+                        .HasColumnName("sternid");
+
+                    b.Property<bool>("IsActionsIncluded")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isactionsincluded");
+
+                    b.Property<bool>("IsProyectionsIncluded")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isproyectionsincluded");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_objectiveuserbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_objectiveuserbridges_sternid");
+
+                    b.ToTable("objectiveuserbridges");
                 });
 
             modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Organization", b =>
@@ -1848,6 +1894,29 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .HasDatabaseName("ix_proyectionorganizationresponsabilitybridges_sternid");
 
                     b.ToTable("proyectionorganizationresponsabilitybridges");
+                });
+
+            modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.ProyectionUserBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<string>("SternId")
+                        .HasColumnType("text")
+                        .HasColumnName("sternid");
+
+                    b.Property<bool>("IsActionsIncluded")
+                        .HasColumnType("boolean")
+                        .HasColumnName("isactionsincluded");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_proyectionuserbridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_proyectionuserbridges_sternid");
+
+                    b.ToTable("proyectionuserbridges");
                 });
 
             modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.UnitMeasurement", b =>
@@ -2446,6 +2515,27 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.ActionUserBridge", b =>
+                {
+                    b.HasOne("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Action", "Prow")
+                        .WithMany("ActionUserBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_actionuserbridges_actions_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Security.Personal.Persistence.Entities.User", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_actionuserbridges_users_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.GlobalIndicator", b =>
                 {
                     b.HasOne("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
@@ -2525,6 +2615,27 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .HasConstraintName("fk_objectiveindicatorresults_objectiveindicators_indicatorid");
 
                     b.Navigation("Indicator");
+                });
+
+            modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.ObjectiveUserBridge", b =>
+                {
+                    b.HasOne("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Objective", "Prow")
+                        .WithMany("ObjectiveUserBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_objectiveuserbridges_objectives_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Security.Personal.Persistence.Entities.User", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_objectiveuserbridges_users_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
                 });
 
             modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Organization", b =>
@@ -2683,6 +2794,27 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.Navigation("Stern");
                 });
 
+            modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.ProyectionUserBridge", b =>
+                {
+                    b.HasOne("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Proyection", "Prow")
+                        .WithMany("ProyectionUserBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_proyectionuserbridges_proyections_prowid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Security.Personal.Persistence.Entities.User", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_proyectionuserbridges_users_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Guama.Location.Persistence.Entities.LocalityLocation", b =>
                 {
                     b.HasOne("MOROPO.Framework.Guama.Location.Persistence.Entities.Locality", "Locality")
@@ -2763,6 +2895,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
 
             modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Action", b =>
                 {
+                    b.Navigation("ActionUserBridges");
+
                     b.Navigation("Indicators");
 
                     b.Navigation("MonthlyClosures");
@@ -2786,6 +2920,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                 {
                     b.Navigation("Indicators");
 
+                    b.Navigation("ObjectiveUserBridges");
+
                     b.Navigation("Proyections");
                 });
 
@@ -2807,6 +2943,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.Navigation("OrganizationParticipationBridges");
 
                     b.Navigation("OrganizationResponsabilityBridges");
+
+                    b.Navigation("ProyectionUserBridges");
                 });
 
             modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.ProyectionIndicator", b =>

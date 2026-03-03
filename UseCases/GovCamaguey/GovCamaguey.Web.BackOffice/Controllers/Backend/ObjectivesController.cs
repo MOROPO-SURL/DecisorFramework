@@ -1,9 +1,15 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using MOROPO.Framework.Guama.Core.Persistence.Repositories;
+using MOROPO.Framework.Guama.Core.Presentation.Models.View;
 using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
+using MOROPO.Framework.Guama.Security.Personal.Persistence.Entities;
+using MOROPO.Framework.Guama.Security.Personal.Presentation.Web.Backend.Models.View;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
+using MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Models.View;
 using MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Models.View.Display;
+using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backend
 {
@@ -12,8 +18,12 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
     [Area("governance")]
     public class ObjectivesController : Framework.Guama.Core.Presentation.Web.Backend.Controllers.Contract.AbstractArchivableEnableableEntityManagementController<Objective, System.Guid, ObjectiveInputModel, ObjectiveDisplayViewModel>
     {
-        public ObjectivesController(Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Objective, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, ILogger<ObjectivesController> logger) : base(repository, localizer, logger)
+        private readonly IEntityRepository<User, string> userRepository;
+        private readonly IBridgeRepository<ObjectiveUserBridge, Objective, System.Guid, User, string> userBridgeRepository;
+
+        public ObjectivesController(IBridgeRepository<ObjectiveUserBridge, Objective, System.Guid, User, string> userBridgeRepository, IEntityRepository<User, string> userRepository, IEntityRepository<Objective, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, ILogger<ObjectivesController> logger) : base(repository, localizer, logger)
         {
+            this.userBridgeRepository = userBridgeRepository;
         }
 
         [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission)]
@@ -76,5 +86,245 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
         {
             return base.Delete(model);
         }
+
+        #region Account Moderators Management
+
+        [HttpGet]
+        [Route("edit/{key}/moderation")]
+        public IActionResult Moderation(System.Guid key)
+        {
+            try
+            {
+                var entity = Repository.Get(key);
+
+                var model = new ObjectiveModeratorationViewModel
+                {
+                    Objective = new ObjectiveDisplayViewModel(),
+                    Moderators = userBridgeRepository.FindBy(bridge => bridge.ProwId == entity.Id).ToArray().Select(bridge =>
+                    {
+                        var _model = new Models.View.Display.Bridge.ObjectiveUserBridgeDisplayModel
+                        {
+                            User = new Framework.Guama.Security.Personal.Presentation.Web.Backend.Models.View.UserDisplayViewModel(),
+                            IsProyectionsIncluded = bridge.IsProyectionsIncluded,
+                            IsActionsIncluded = bridge.IsActionsIncluded
+                        };
+
+                        _model.User.Import(bridge.Stern);
+
+                        return _model;
+                    }).ToArray()
+                };
+
+                model.Objective.Import(entity);
+
+                return View(model);
+            }
+            catch (System.Exception e)
+            {
+                logger.LogError(e, e.Message);
+            }
+
+            SetDefaultNotification(NotificationType.Danger, GetNotFoundMessage());
+
+            return GetDefaultActionResult();
+        }
+
+        [HttpGet]
+        [Route("edit/{key}/moderation/add")]
+        public IActionResult AddModerator(System.Guid key)
+        {
+            try
+            {
+                var entity = Repository.Get(key);
+
+                var model = new Models.View.Input.Bridge.ObjectiveUserBridgeInputModel
+                {
+                    AvailableUsers = [.. userRepository.GetAll().Select(_entity => new UserDisplayViewModel
+                    {
+                        Id = _entity.Id
+                    })]
+                };
+
+                return View(model);
+            }
+            catch (System.Exception e)
+            {
+                logger.LogError(e, e.Message);
+            }
+
+            SetDefaultNotification(NotificationType.Danger, GetNotFoundMessage());
+
+            return GetDefaultActionResult();
+        }
+
+        [HttpPost]
+        [Route("edit/{key}/moderation/add")]
+        [ValidateAntiForgeryToken]
+        public IActionResult AddModerator(System.Guid key, Models.View.Input.Bridge.ObjectiveUserBridgeInputModel model)
+        {
+            try
+            {
+                var entity = Repository.Get(key);
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        var bridge = new ObjectiveUserBridge
+                        {
+                            ProwId = entity.Id,
+                            SternId = model.UserId,
+                            
+                        };
+
+                        userBridgeRepository.Add(bridge, User.Identity.Name, false);
+
+                        SetDefaultNotification(NotificationType.Success, GetCreationSuccessMessage());
+
+                        return RedirectToAction("moderation", new { key = entity.Id });
+                    }
+                    catch (Framework.Guama.Core.Presentation.Web.Frontend.InvalidModelException e)
+                    {
+                        ModelState.AddModelError(e.ModelKey, e.ErrorMessage);
+                    }
+                }
+
+                SetDefaultNotification(NotificationType.Danger, GetInvalidMessage());
+
+                model.AvailableUsers = [.. userRepository.GetAll().Select(_entity => new UserDisplayViewModel
+                {
+                    Id = _entity.Id
+                })];
+
+                return View(model);
+            }
+            catch (System.Exception e)
+            {
+                logger.LogError(e, e.Message);
+            }
+
+            SetDefaultNotification(NotificationType.Danger, GetNotFoundMessage());
+
+            return GetDefaultActionResult();
+        }
+
+        [HttpGet]
+        [Route("edit/{key}/moderation/edit/{id}")]
+        public IActionResult EditModerator(System.Guid key, string id)
+        {
+            try
+            {
+                var entity = Repository.Get(key);
+
+                var bridge = userBridgeRepository.Get(key, id);
+
+                var model = new Models.View.Display.Bridge.ObjectiveUserBridgeDisplayModel
+                {
+                    User = new UserDisplayViewModel(),
+                    IsProyectionsIncluded = bridge.IsProyectionsIncluded,
+                    IsActionsIncluded = bridge.IsActionsIncluded
+                };
+
+                model.User.Import(bridge.Stern);
+
+                return View(model);
+            }
+            catch (System.Exception e)
+            {
+                logger.LogError(e, e.Message);
+            }
+
+            SetDefaultNotification(NotificationType.Danger, GetNotFoundMessage());
+
+            return GetDefaultActionResult();
+        }
+
+        [HttpPost]
+        [Route("edit/{key}/moderation/edit")]
+        [ValidateAntiForgeryToken]
+        public IActionResult EditModerator(System.Guid key, Models.View.Input.Bridge.ObjectiveUserBridgeInputModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    var entity = Repository.Get(key);
+
+                    try
+                    {
+                        var bridge = userBridgeRepository.Get(key, model.UserId);
+
+                        bridge.IsProyectionsIncluded = model.IsProyectionsIncluded;
+                        bridge.IsActionsIncluded = model.IsActionsIncluded;
+
+                        userBridgeRepository.Update(bridge.Stern, User.Identity.Name);
+
+                        SetDefaultNotification(NotificationType.Success, GetEditionSuccessMessage());
+
+                        return RedirectToAction("moderation", new { key = entity.Id });
+                    }
+                    catch (Framework.Guama.Core.Presentation.Web.Frontend.InvalidModelException e)
+                    {
+                        ModelState.AddModelError(e.ModelKey, e.ErrorMessage);
+                    }
+
+                    SetDefaultNotification(NotificationType.Danger, GetInvalidMessage());
+
+                    model.AvailableUsers = [.. userRepository.GetAll().Select(_entity => new UserDisplayViewModel
+                    {
+                        Id = _entity.Id
+                    })];
+
+                    return View(model);
+                }
+                catch (System.Exception e)
+                {
+                    logger.LogError(e, e.Message);
+                }
+            }
+
+            SetDefaultNotification(NotificationType.Danger, GetNotFoundMessage());
+
+            return GetDefaultActionResult();
+        }
+
+        [HttpPost]
+        [Route("edit/{key}/moderation/delete")]
+        [ValidateAntiForgeryToken]
+        public IActionResult DeleteModerator(System.Guid key, Models.View.Display.Bridge.ObjectiveUserBridgeDisplayModel model)
+        {
+            try
+            {
+                var entity = Repository.Get(key);
+
+                var bridge = userBridgeRepository.Get(key, model.User.Id);
+
+                var image = bridge.Stern.Identity.Image;
+
+                userBridgeRepository.Delete(bridge, User.Identity.Name);
+
+                SetDefaultNotification(NotificationType.Success, GetDeletionSuccessMessage());
+
+                return RedirectToAction("moderation", new { key = entity.Id });
+            }
+            catch (Microsoft.EntityFrameworkCore.DbUpdateException e)
+            {
+                logger.LogError(e, e.Message);
+
+                SetDefaultNotification(NotificationType.Warning, GetOnDeletionDependecyConstrainErrorMessage());
+
+                return RedirectToAction("moderation", new { key });
+            }
+            catch (System.Exception e)
+            {
+                logger.LogError(e, e.Message);
+            }
+
+            SetDefaultNotification(NotificationType.Danger, GetNotFoundMessage());
+
+            return GetSuccessDeleteActionResult();
+        }
+
+        #endregion
     }
 }
