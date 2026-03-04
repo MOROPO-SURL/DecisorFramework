@@ -23,7 +23,13 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
 
         public ObjectivesController(IBridgeRepository<ObjectiveUserBridge, Objective, System.Guid, User, string> userBridgeRepository, IEntityRepository<User, string> userRepository, IEntityRepository<Objective, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, ILogger<ObjectivesController> logger) : base(repository, localizer, logger)
         {
+            this.userRepository = userRepository;
             this.userBridgeRepository = userBridgeRepository;
+        }
+
+        protected override System.Func<Objective, object> GetOrderSelector()
+        {
+            return entity => entity.Index;
         }
 
         [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission)]
@@ -87,11 +93,11 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
             return base.Delete(model);
         }
 
-        #region Account Moderators Management
+        #region Moderators Management
 
         [HttpGet]
-        [Route("edit/{key}/moderation")]
-        public IActionResult Moderation(System.Guid key)
+        [Route("edit/{key}/moderators")]
+        public IActionResult Moderators(System.Guid key)
         {
             try
             {
@@ -104,7 +110,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
                     {
                         var _model = new Models.View.Display.Bridge.ObjectiveUserBridgeDisplayModel
                         {
-                            User = new Framework.Guama.Security.Personal.Presentation.Web.Backend.Models.View.UserDisplayViewModel(),
+                            User = new UserDisplayViewModel(),
                             IsProyectionsIncluded = bridge.IsProyectionsIncluded,
                             IsActionsIncluded = bridge.IsActionsIncluded
                         };
@@ -130,7 +136,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
         }
 
         [HttpGet]
-        [Route("edit/{key}/moderation/add")]
+        [Route("edit/{key}/moderators/add")]
         public IActionResult AddModerator(System.Guid key)
         {
             try
@@ -139,9 +145,12 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
 
                 var model = new Models.View.Input.Bridge.ObjectiveUserBridgeInputModel
                 {
+                    ObjectiveId = entity.Id,
                     AvailableUsers = [.. userRepository.GetAll().Select(_entity => new UserDisplayViewModel
                     {
-                        Id = _entity.Id
+                        Id = _entity.Id,
+                        Name = _entity.Identity.Name,
+                        LastName = _entity.Identity.LastName
                     })]
                 };
 
@@ -158,7 +167,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
         }
 
         [HttpPost]
-        [Route("edit/{key}/moderation/add")]
+        [Route("edit/{key}/moderators/add")]
         [ValidateAntiForgeryToken]
         public IActionResult AddModerator(System.Guid key, Models.View.Input.Bridge.ObjectiveUserBridgeInputModel model)
         {
@@ -174,14 +183,15 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
                         {
                             ProwId = entity.Id,
                             SternId = model.UserId,
-                            
+                            IsProyectionsIncluded = model.IsProyectionsIncluded,
+                            IsActionsIncluded = model.IsActionsIncluded
                         };
 
-                        userBridgeRepository.Add(bridge, User.Identity.Name, false);
+                        userBridgeRepository.Add(bridge, User.Identity.Name);
 
                         SetDefaultNotification(NotificationType.Success, GetCreationSuccessMessage());
 
-                        return RedirectToAction("moderation", new { key = entity.Id });
+                        return RedirectToAction("moderators", new { key = entity.Id });
                     }
                     catch (Framework.Guama.Core.Presentation.Web.Frontend.InvalidModelException e)
                     {
@@ -191,9 +201,12 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
 
                 SetDefaultNotification(NotificationType.Danger, GetInvalidMessage());
 
+                model.ObjectiveId = entity.Id;
                 model.AvailableUsers = [.. userRepository.GetAll().Select(_entity => new UserDisplayViewModel
                 {
-                    Id = _entity.Id
+                    Id = _entity.Id,
+                    Name = _entity.Identity.Name,
+                    LastName = _entity.Identity.LastName
                 })];
 
                 return View(model);
@@ -209,7 +222,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
         }
 
         [HttpGet]
-        [Route("edit/{key}/moderation/edit/{id}")]
+        [Route("edit/{key}/moderators/edit/{id}")]
         public IActionResult EditModerator(System.Guid key, string id)
         {
             try
@@ -218,14 +231,13 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
 
                 var bridge = userBridgeRepository.Get(key, id);
 
-                var model = new Models.View.Display.Bridge.ObjectiveUserBridgeDisplayModel
+                var model = new Models.View.Input.Bridge.ObjectiveUserBridgeInputModel
                 {
-                    User = new UserDisplayViewModel(),
+                    ObjectiveId = entity.Id,
+                    UserId = bridge.SternId,
                     IsProyectionsIncluded = bridge.IsProyectionsIncluded,
                     IsActionsIncluded = bridge.IsActionsIncluded
                 };
-
-                model.User.Import(bridge.Stern);
 
                 return View(model);
             }
@@ -240,7 +252,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
         }
 
         [HttpPost]
-        [Route("edit/{key}/moderation/edit")]
+        [Route("edit/{key}/moderators/edit")]
         [ValidateAntiForgeryToken]
         public IActionResult EditModerator(System.Guid key, Models.View.Input.Bridge.ObjectiveUserBridgeInputModel model)
         {
@@ -257,11 +269,11 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
                         bridge.IsProyectionsIncluded = model.IsProyectionsIncluded;
                         bridge.IsActionsIncluded = model.IsActionsIncluded;
 
-                        userBridgeRepository.Update(bridge.Stern, User.Identity.Name);
+                        userBridgeRepository.Update(bridge, User.Identity.Name);
 
                         SetDefaultNotification(NotificationType.Success, GetEditionSuccessMessage());
 
-                        return RedirectToAction("moderation", new { key = entity.Id });
+                        return RedirectToAction("moderators", new { key = entity.Id });
                     }
                     catch (Framework.Guama.Core.Presentation.Web.Frontend.InvalidModelException e)
                     {
@@ -270,10 +282,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
 
                     SetDefaultNotification(NotificationType.Danger, GetInvalidMessage());
 
-                    model.AvailableUsers = [.. userRepository.GetAll().Select(_entity => new UserDisplayViewModel
-                    {
-                        Id = _entity.Id
-                    })];
+                    model.ObjectiveId = entity.Id;
 
                     return View(model);
                 }
@@ -289,7 +298,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
         }
 
         [HttpPost]
-        [Route("edit/{key}/moderation/delete")]
+        [Route("edit/{key}/moderators/delete")]
         [ValidateAntiForgeryToken]
         public IActionResult DeleteModerator(System.Guid key, Models.View.Display.Bridge.ObjectiveUserBridgeDisplayModel model)
         {
@@ -305,7 +314,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
 
                 SetDefaultNotification(NotificationType.Success, GetDeletionSuccessMessage());
 
-                return RedirectToAction("moderation", new { key = entity.Id });
+                return RedirectToAction("moderators", new { key = entity.Id });
             }
             catch (Microsoft.EntityFrameworkCore.DbUpdateException e)
             {
@@ -313,7 +322,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Backen
 
                 SetDefaultNotification(NotificationType.Warning, GetOnDeletionDependecyConstrainErrorMessage());
 
-                return RedirectToAction("moderation", new { key });
+                return RedirectToAction("moderators", new { key });
             }
             catch (System.Exception e)
             {

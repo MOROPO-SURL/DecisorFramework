@@ -132,7 +132,7 @@
                         <th>Indicador</th>
                         <th>Monto</th>
                         <th>Unidad de Medida</th>
-                        <th class="fit">Opciones</th>
+                        <th class="fit width-short">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -155,8 +155,8 @@
                                 </td>
                                 <td class="fit" style="vertical-align: middle;">
                                     <div class="btn-group btn-group-sm">
-                                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#descrip-@item.Id"><span class="mdi mdi-eye"></span><span class="ml-1">Detalles</span></button>
-                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-@item.Id"><span class="mdi mdi-delete"></span><span class="ml-1">Eliminar</span></button>
+                                        <button type="button" class="btn btn-light" data-toggle="modal" data-target="#descrip-@item.Id"><span class="mdi mdi-eye"></span><span>Detalles</span></button>
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#delete-@item.Id"><span class="mdi mdi-trash-can"></span><span>Eliminar</span></button>
                                     </div>
 
                                     <div class="modal fade " id="descrip-@item.Id" tabindex="-1" role="dialog" aria-labelledby="descrip-@item.Id-label" aria-hidden="true">
@@ -175,7 +175,7 @@
                                                         <dt>Monto</dt>
                                                         <dd>@item.Amount</dd>
                                                         <dt>Unidad de Medida</dt>
-                                                        <dd>@item.Indicator.UnitMeasurement.Name</dd
+                                                        <dd>@item.Indicator.UnitMeasurement.Name</dd>
                                                         <dt>Fecha</dt>
                                                         <dd>@item.At</dd>
                                                     </dl>
@@ -200,7 +200,7 @@
                                                     </div>
                                                     <div class="modal-footer" style="margin-top: 0;">
                                                         <button type="submit" class="btn btn-danger">Eliminar</button>
-                                                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                                                     </div>
                                                 }
                                             </div>

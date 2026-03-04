@@ -151,7 +151,7 @@
                         <th style="width: 1px; word-wrap: unset;">Habilitado?</th>
                         <th style="width: 130px; text-align: center;">Acceso Total?</th>
                         <th>Creado</th>
-                        <th class="fit" style="width: 320px;">Opciones</th>
+                        <th class="fit width-large">Opciones</th>
                     </tr>        
                 </thead>
                 <tbody>
@@ -213,9 +213,9 @@
                                     }
                                 </td>
                                 <td style="vertical-align: middle;" title="Creado">@item.Created</td>
-                                <td class="fit" style="vertical-align: middle; width: 320px;">
+                                <td class="fit" style="vertical-align: middle;">
                                     <div class="btn-group btn-group-sm">
-                                        <button class="btn btn-light" data-toggle="modal" data-target="#descrip-@item.Id"><span class=mdi mdi-eye"></span><span class="ml-1">Detalles</span></button>
+                                        <button class="btn btn-light" data-toggle="modal" data-target="#descrip-@item.Id"><span class="mdi mdi-eye"></span><span class="ml-1">Detalles</span></button>
                                         <a role="button" href="@Url.Action("edit", new { key = item.Id })" class="btn btn-light" title="Editar"><span class="mdi mdi-square-edit-outline"></span><span class="ml-1">Modificar</span></a>
                                         <div class="btn-group btn-group-sm">
                                             <button type="button" class="btn btn-light dropdown-toggle" data-toggle="dropdown" title="Extras"></button>

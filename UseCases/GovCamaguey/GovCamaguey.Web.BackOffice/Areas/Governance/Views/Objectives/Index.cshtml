@@ -130,7 +130,7 @@
                     <tr>
                         <th>Nombre</th>
                         <th class="fit">Habilitado?</th>
-                        <th class="fit">Opciones</th>
+                        <th class="fit width-extra-large">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -187,21 +187,22 @@
 
                                         <div class="btn-group btn-group-sm">
                                             <button type="button" class="btn btn-light" data-toggle="modal" data-target="#descrip-@item.Id"><span class="mdi mdi-eye"></span><span class="ml-1">Detalles</span></button>
+                                            <a class="btn btn-light" asp-action="moderators" asp-route-key="@item.Id"><span class="mdi mdi-account-badge-horizontal"></span><span class="ml-1">Moderadores</span></a>
                                             @if (!item.Archived)
                                             {
-                                                <button type="submit" class="btn btn-warning" style="width: 96px;">
+                                                <button type="submit" class="btn btn-warning btn-set-archived">
                                                     <span class="mdi mdi-archive"></span>
                                                     <span>Archivar</span>
                                                 </button>
                                             }
                                             else
                                             {
-                                                <button type="submit" class="btn btn-primary" style="width: 96px;">
+                                                <button type="submit" class="btn btn-primary btn-set-archived">
                                                     <span class="mdi mdi-archive-outline"></span>
                                                     <span>Recuperar</span>
                                                 </button>
                                             }
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-@item.Id"><span class="mdi mdi-delete"></span><span class="ml-1">Eliminar</span></button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-@item.Id"><span class="mdi mdi-trash-can"></span><span class="ml-1">Eliminar</span></button>
                                         </div>
                                     }
 
@@ -253,7 +254,7 @@
                                                     </div>
                                                     <div class="modal-footer" style="margin-top: 0;">
                                                         <button type="submit" class="btn btn-danger">Eliminar</button>
-                                                        <button type="button" class="btn btn-light" data-dismiss="modal">Cancelar</button>
+                                                        <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">Cancelar</button>
                                                     </div>
                                                 }
                                             </div>
