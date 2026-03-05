@@ -2,9 +2,11 @@
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 {
-    public class ObjectiveDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Objective, System.Guid>
+    public class ObjectiveDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Objective, System.Guid>, Contract.IModerableModel
     {
         public System.Guid Id { get; set; }
+
+        public bool IsModerable { get; set; }
 
         public int Index { get; set; }
 

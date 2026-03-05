@@ -13,7 +13,6 @@ public class ObjectiveRepository : Framework.Guama.Core.Persistence.ORM.EF.Repos
     protected override IQueryable<Objective> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
-            .AsNoTracking()
             .Include(entity => entity.Responsible).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
             .Include(entity => entity.Proyections).ThenInclude(entity => entity.GuidelineBridges).ThenInclude(bridge => bridge.Stern)
             .Include(entity => entity.Proyections).ThenInclude(entity => entity.OrganizationResponsabilityBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
@@ -27,6 +26,7 @@ public class ObjectiveRepository : Framework.Guama.Core.Persistence.ORM.EF.Repos
             .Include(entity => entity.Proyections).ThenInclude(entity => entity.Actions).ThenInclude(entity => entity.MonthlyClosures)
             .Include(entity => entity.Proyections).ThenInclude(entity => entity.Actions).ThenInclude(entity => entity.Indicators).ThenInclude(entity => entity.UnitMeasurement)
             .Include(entity => entity.Proyections).ThenInclude(entity => entity.Actions).ThenInclude(entity => entity.Indicators).ThenInclude(entity => entity.MontlyPlans)
+            .AsNoTracking()
             .AsSplitQuery();
     }
 }

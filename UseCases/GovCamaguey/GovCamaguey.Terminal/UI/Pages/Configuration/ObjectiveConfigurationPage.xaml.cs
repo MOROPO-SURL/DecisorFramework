@@ -262,6 +262,13 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
 
         var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ProyectionDisplayModel;
 
+        if (!target.IsModerable)
+        {
+            DisplayAlert("Aviso", "Su usuario no ha sido asiganado como moderador de este objetivo específico, por lo que no podrá realizar operaciones sobre el mismo. Contacte con los administradores del sistema ante cualquier inquietud al respecto.", "Aceptar");
+
+            return;
+        }
+
         var model = incomingProyections.FirstOrDefault(_model => _model.Id == target.Id) ?? editionProyections.FirstOrDefault(_model => _model.Id == target.Id);
 
         model ??= new ProyectionInputModel
@@ -289,14 +296,21 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
             return;
         }
 
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ProyectionDisplayModel;
+
+        if (!target.IsModerable)
+        {
+            DisplayAlert("Aviso", "Su usuario no ha sido asiganado como moderador de este objetivo específico, por lo que no podrá realizar operaciones sobre el mismo. Contacte con los administradores del sistema ante cualquier inquietud al respecto.", "Aceptar");
+
+            return;
+        }
+
         DisplayAlert("Confirmación", "Está seguro que desea retirar esta proyección?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
             Dispatcher.Dispatch(() =>
             {
-                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ProyectionDisplayModel;
-
                 var handled = false;
 
                 foreach (var item in incomingProyections)

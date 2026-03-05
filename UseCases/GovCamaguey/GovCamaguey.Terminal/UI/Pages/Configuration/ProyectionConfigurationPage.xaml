@@ -121,7 +121,7 @@
                                     Clicked="AddOrganizationResponsabilityButton_Clicked" />
                                 <BoxView
                                     Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="{StaticResource Gray050}" />
+                                    Color="DimGray" />
                                 <CollectionView
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     ItemsSource="{Binding ResponsabilityOrganizations}">
@@ -165,11 +165,10 @@
                                                             Text="{Binding Identity.About, TargetNullValue='---'}" />
                                                     </StackLayout>
                                                     <Button
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         Grid.Column="2"
                                                         HorizontalOptions="End" VerticalOptions="Start"
-                                                        Margin="10" Padding="0"
-                                                        FontFamily="MaterialDesignIcons" 
-                                                        FontSize="21"
+                                                        Margin="10"
                                                         Text="&#xFA78;"
                                                         Clicked="ResponsabilityOrganizationRemoveButton_Clicked" />
                                                 </Grid>
@@ -207,7 +206,7 @@
                                     Clicked="AddOrganizationParticipationButton_Clicked" />
                                 <BoxView
                                     Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="{StaticResource Gray050}" />
+                                    Color="DimGray" />
                                 <CollectionView
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     ItemsSource="{Binding ParticipationOrganizations}">
@@ -251,11 +250,10 @@
                                                             Text="{Binding Identity.About, TargetNullValue='---'}" />
                                                     </StackLayout>
                                                     <Button
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         Grid.Column="2"
                                                         HorizontalOptions="End" VerticalOptions="Start"
-                                                        Margin="10" Padding="0"
-                                                        FontFamily="MaterialDesignIcons" 
-                                                        FontSize="21"
+                                                        Margin="10"
                                                         Text="&#xFA78;"
                                                         Clicked="ParticipationOrganizationRemoveButton_Clicked" />
                                                 </Grid>
@@ -289,7 +287,7 @@
                                 Clicked="AddGuidelineButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Color="DimGray" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemsSource="{Binding Guidelines}">
@@ -320,10 +318,8 @@
                                                     </Label.FormattedText>
                                                 </Label>
                                                 <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                     HorizontalOptions="End" VerticalOptions="Start"
-                                                    Padding="0"
-                                                    FontFamily="MaterialDesignIcons" 
-                                                    FontSize="21"
                                                     Text="&#xFA78;"
                                                     Clicked="GuidelineRemoveButton_Clicked" />
                                             </StackLayout>
@@ -356,7 +352,7 @@
                                 Clicked="IndicatorAgregationButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Color="DimGray" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemsSource="{Binding Indicators}">
@@ -385,10 +381,8 @@
                                                     Text="&#xF90B;"
                                                     Clicked="IndicatorEditionButton_Clicked" />
                                                 <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                     VerticalOptions="Center"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons" 
                                                     Text="&#xFA78;"
                                                     Clicked="IndicatorRemotionButton_Clicked" />
                                             </StackLayout>
@@ -421,7 +415,7 @@
                                 Clicked="ActionAgregationButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Color="DimGray" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemsSource="{Binding Actions}">
@@ -452,17 +446,15 @@
                                                     </Label.FormattedText>
                                                 </Label>
                                                 <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    IsEnabled="{Binding IsModerable}"
                                                     VerticalOptions="Center"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons" 
                                                     Text="&#xF90B;"
                                                     Clicked="ActionEditionButton_Clicked" />
                                                 <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                    IsEnabled="{Binding IsModerable}"
                                                     VerticalOptions="Center"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons" 
                                                     Text="&#xFA78;"
                                                     Clicked="ActionRemotionButton_Clicked" />
                                             </StackLayout>

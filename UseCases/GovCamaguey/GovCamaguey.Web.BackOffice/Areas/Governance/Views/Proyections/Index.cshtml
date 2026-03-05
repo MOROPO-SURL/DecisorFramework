@@ -130,7 +130,7 @@
                     <tr>
                         <th>Nombre</th>
                         <th class="fit">Habilitado?</th>
-                        <th class="fit width-medium">Opciones</th>
+                        <th class="fit width-extra-large">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -186,7 +186,8 @@
                                         <input type="hidden" name="key" value="@Html.Raw(item.Id)" />
 
                                         <div class="btn-group btn-group-sm">
-                                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#descrip-@item.Id"><span class="mdi mdi-eye"></span><span>Detalles</span></button>
+                                            <button type="button" class="btn btn-light" data-toggle="modal" data-target="#descrip-@item.Id"><span class="mdi mdi-eye"></span><span class="ml-1">Detalles</span></button>
+                                            <a class="btn btn-light" asp-action="moderators" asp-route-key="@item.Id"><span class="mdi mdi-account-badge-horizontal"></span><span class="ml-1">Moderadores</span></a>
                                             @if (!item.Archived)
                                             {
                                                 <button type="submit" class="btn btn-warning btn-set-archived">
@@ -201,7 +202,7 @@
                                                     <span>Recuperar</span>
                                                 </button>
                                             }
-                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-@item.Id"><span class="mdi mdi-trash-can"></span><span>Eliminar</span></button>
+                                            <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#delete-@item.Id"><span class="mdi mdi-trash-can-outline"></span><span class="ml-1">Eliminar</span></button>
                                         </div>
                                     }
 

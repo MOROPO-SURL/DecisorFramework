@@ -75,6 +75,13 @@ public partial class ObjectivesManagePage : Framework.Decisor.Core.Presentation.
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
+        if (!((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.ObjectiveDisplayModel).IsModerable)
+        {
+            DisplayAlert("Aviso", "Su usuario no ha sido asiganado como moderador de este objetivo, por lo que no podrá realizar operaciones sobre el mismo. Contacte con los administradores del sistema ante cualquier inquietud al respecto.", "Aceptar");
+
+            return;
+        }
+
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 }

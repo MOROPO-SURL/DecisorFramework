@@ -2,9 +2,11 @@
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
 {
-    public class ActionDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Action, System.Guid>
+    public class ActionDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Action, System.Guid>, Contract.IModerableModel
     {
         public System.Guid Id { get; set; }
+
+        public bool IsModerable { get; set; }
 
         public bool Enabled { get; set; }
 

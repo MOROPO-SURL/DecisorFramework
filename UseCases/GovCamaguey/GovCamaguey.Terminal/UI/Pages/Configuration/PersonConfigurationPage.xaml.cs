@@ -173,7 +173,7 @@ public partial class PersonConfigurationPage : Framework.Decisor.Core.Presentati
                 {
                     if (item.Id != target.Id) continue;
 
-                    incomingPhoneContactItems.Remove(editionPhoneContactItems.First(model => model.Id == target.Id));
+                    incomingPhoneContactItems.Remove(incomingPhoneContactItems.First(model => model.Id == target.Id));
 
                     handled = true;
 
@@ -220,7 +220,7 @@ public partial class PersonConfigurationPage : Framework.Decisor.Core.Presentati
                 {
                     if (item.Id != target.Id) continue;
 
-                    incomingEmailContactItems.Remove(editionEmailContactItems.First(model => model.Id == target.Id));
+                    incomingEmailContactItems.Remove(incomingEmailContactItems.First(model => model.Id == target.Id));
 
                     handled = true;
 

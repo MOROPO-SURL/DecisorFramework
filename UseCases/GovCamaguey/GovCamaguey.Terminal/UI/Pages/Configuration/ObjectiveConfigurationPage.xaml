@@ -141,7 +141,7 @@
                                 Clicked="IndicatorAgregationButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Color="DimGray" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemsSource="{Binding Indicators}">
@@ -163,17 +163,13 @@
                                                     LineBreakMode="TailTruncation"
                                                     Text="{Binding Name}" />
                                                 <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
                                                     VerticalOptions="Center"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons" 
                                                     Text="&#xF90B;"
                                                     Clicked="IndicatorEditionButton_Clicked" />
                                                 <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                     VerticalOptions="Center"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons" 
                                                     Text="&#xFA78;"
                                                     Clicked="IndicatorRemotionButton_Clicked" />
                                             </StackLayout>
@@ -206,7 +202,7 @@
                                 Clicked="ProyectionAgregationButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Color="DimGray" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemsSource="{Binding Proyections}">
@@ -237,17 +233,15 @@
                                                     </Label.FormattedText>
                                                 </Label>
                                                 <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    IsEnabled="{Binding IsModerable}"
                                                     VerticalOptions="Center"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons" 
                                                     Text="&#xF90B;"
                                                     Clicked="ProyectionEditionButton_Clicked" />
                                                 <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                    IsEnabled="{Binding IsModerable}"
                                                     VerticalOptions="Center"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons" 
                                                     Text="&#xFA78;"
                                                     Clicked="ProyectionRemotionButton_Clicked" />
                                             </StackLayout>

@@ -53,8 +53,10 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice
             builder.Services.AddScoped<IEntityRepository<Objective, System.Guid>, ObjectiveRepository>();
             builder.Services.AddScoped<IBridgeRepository<ObjectiveUserBridge, Objective, System.Guid, Framework.Guama.Security.Personal.Persistence.Entities.User, string>, ObjectiveUserBridgeRepository>();
             builder.Services.AddScoped<IEntityRepository<Proyection, System.Guid>, ProyectionRepository>();
+            builder.Services.AddScoped<IBridgeRepository<ProyectionUserBridge, Proyection, System.Guid, Framework.Guama.Security.Personal.Persistence.Entities.User, string>, ProyectionUserBridgeRepository>();
             builder.Services.AddScoped<IEntityRepository<ProyectionMonthlyClosure, System.Guid>, ProyectionMonthlyClosureRepository>();
             builder.Services.AddScoped<IEntityRepository<Action, System.Guid>, ActionRepository>();
+            builder.Services.AddScoped<IBridgeRepository<ActionUserBridge, Action, System.Guid, Framework.Guama.Security.Personal.Persistence.Entities.User, string>, ActionUserBridgeRepository>();
             builder.Services.AddScoped<IEntityRepository<ActionMonthlyClosure, System.Guid>, ActionMonthlyClosureRepository>();
             builder.Services.AddScoped<IEntityRepository<ActionIndicator, System.Guid>, ActionIndicatorRepository>();
             builder.Services.AddScoped<IEntityRepository<ActionIndicatorMontlyPlan, System.Guid>, ActionIndicatorMontlyPlanRepository>();

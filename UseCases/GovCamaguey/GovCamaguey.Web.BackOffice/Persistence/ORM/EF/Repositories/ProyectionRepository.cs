@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF.Repositories;
 
@@ -11,7 +12,8 @@ public class ProyectionRepository : Framework.Guama.Core.Persistence.ORM.EF.Repo
     protected override System.Linq.IQueryable<Prototype.Persistence.Entities.Proyection> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
+            .Include(entity => entity.Objective)
             .AsNoTracking()
-            .Include(entity => entity.Objective);
+            .AsSplitQuery();
     }
 }

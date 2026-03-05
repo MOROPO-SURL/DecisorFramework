@@ -17,6 +17,7 @@
         <ResourceDictionary>
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <communitytoolkit_converters:BoolToObjectConverter x:Key="IsModerableToGlyphConverter" TrueObject="&#xF008;" FalseObject="&#xF0189;" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -56,19 +57,27 @@
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </Frame.GestureRecognizers>
-                                    <Label
-                                        LineBreakMode="TailTruncation"
-                                        FontSize="Medium">
-                                        <Label.FormattedText>
-                                            <FormattedString>
-                                                <Span
-                                                    FontAttributes="Bold"
-                                                    Text="{Binding Index, StringFormat='{0}.'}" />
-                                                <Span Text=" " />
-                                                <Span Text="{Binding Name}" />
-                                            </FormattedString>
-                                        </Label.FormattedText>
-                                    </Label>
+                                    <StackLayout Orientation="Horizontal" Spacing="8">
+                                        <Label
+                                            HorizontalOptions="FillAndExpand"
+                                            LineBreakMode="TailTruncation"
+                                            FontSize="Medium">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span
+                                                        FontAttributes="Bold"
+                                                        Text="{Binding Index, StringFormat='{0}.'}" />
+                                                    <Span Text=" " />
+                                                    <Span Text="{Binding Name}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                        <Label 
+                                            FontFamily="MaterialDesignIcons"
+                                            FontSize="32"
+                                            TextColor="DimGray"
+                                            Text="{Binding IsModerable, Converter={StaticResource IsModerableToGlyphConverter}}" />
+                                    </StackLayout>
                                 </Frame>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>

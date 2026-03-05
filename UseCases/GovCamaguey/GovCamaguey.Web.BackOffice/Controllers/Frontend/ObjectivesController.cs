@@ -2,6 +2,7 @@
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Core.Presentation.Models;
 using MOROPO.Framework.Guama.Core.Presentation.Web.Security.Attributes;
+using MOROPO.Framework.Guama.Security.Personal.Persistence.Entities;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
@@ -23,8 +24,14 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
     private readonly IEntityRepository<ActionIndicatorMontlyPlan, System.Guid> actionIndicatorMontlyPlanRepository;
     private readonly IEntityRepository<ObjectiveIndicator, System.Guid> objectiveIndicatorRepository;
     private readonly IEntityRepository<ObjectiveIndicatorMontlyPlan, System.Guid> objectiveIndicatorMontlyPlanRepository;
+    private readonly IBridgeRepository<ObjectiveUserBridge, Objective, System.Guid, User, string> objectiveUserBridgeRepository;
+    private readonly IBridgeRepository<ProyectionUserBridge, Proyection, System.Guid, User, string> proyectionUserBridgeRepository;
+    private readonly IBridgeRepository<ActionUserBridge, Action, System.Guid, User, string> actionUserBridgeRepository;
 
     public ObjectivesController(
+        IBridgeRepository<ActionUserBridge, Action, System.Guid, User, string> actionUserBridgeRepository,
+        IBridgeRepository<ProyectionUserBridge, Proyection, System.Guid, User, string> proyectionUserBridgeRepository,
+        IBridgeRepository<ObjectiveUserBridge, Objective, System.Guid, User, string> objectiveUserBridgeRepository,
         IEntityRepository<ObjectiveIndicatorMontlyPlan, System.Guid> objectiveIndicatorMontlyPlanRepository, 
         IEntityRepository<ObjectiveIndicator, System.Guid> objectiveIndicatorRepository, 
         IEntityRepository<ActionIndicatorMontlyPlan, System.Guid> actionIndicatorMontlyPlanRepository, 
@@ -48,6 +55,9 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
         this.actionIndicatorMontlyPlanRepository = actionIndicatorMontlyPlanRepository;
         this.objectiveIndicatorRepository = objectiveIndicatorRepository;
         this.objectiveIndicatorMontlyPlanRepository = objectiveIndicatorMontlyPlanRepository;
+        this.objectiveUserBridgeRepository = objectiveUserBridgeRepository;
+        this.proyectionUserBridgeRepository = proyectionUserBridgeRepository;
+        this.actionUserBridgeRepository = actionUserBridgeRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<Objective, bool>> GetGlobalSelector()
@@ -64,6 +74,8 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
     {
         var model = base.EntityToDisplayModel(entity);
 
+        model.IsModerable = IsObjectiveModerable(entity.Id);
+
         if (model.Responsible.Identity.Image != null)
         {
             model.Responsible.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Responsible.Identity.Image.ContentType);
@@ -72,6 +84,8 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
         foreach (var proyection in entity.Proyections)
         {
             var item = model.Proyections.First(_model => _model.Id == proyection.Id);
+
+            item.IsModerable = IsProyectionModerable(entity.Id, proyection.Id);
 
             foreach (var bridge in proyection.OrganizationResponsabilityBridges)
             {
@@ -94,6 +108,8 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
             foreach (var action in proyection.Actions)
             {
                 var _item = item.Actions.First(_model => _model.Id == action.Id);
+
+                _item.IsModerable = IsActionModerable(entity.Id, proyection.Id, action.Id);
 
                 foreach (var bridge in action.OrganizationResponsabilityBridges)
                 {
@@ -160,18 +176,24 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
     [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveEditorPermission)]
     public override ActionResult Edit([FromBody] ObjectiveInputModel model)
     {
+        if (!IsObjectiveModerable(model.Id)) return new ForbidResult();
+
         return base.Edit(model);
     }
 
     [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ObjectiveRemoverPermission)]
     public override ActionResult Archive(System.Guid key)
     {
+        if (objectiveUserBridgeRepository.Count(bridge => bridge.ProwId == key && bridge.SternId == User.Identity.Name) < 0) return new ForbidResult();
+
         return base.Archive(key);
     }
 
     protected override void PreCreate(Objective entity, ObjectiveInputModel model)
     {
         base.PreCreate(entity, model);
+
+        objectiveUserBridgeRepository.Add(new ObjectiveUserBridge { ProwId = entity.Id, SternId = User.Identity.Name, IsProyectionsIncluded = true, IsActionsIncluded = true }, User.Identity.Name, false);
 
         foreach (var _model in model.IncomingIndicators)
         {
@@ -233,6 +255,8 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
         foreach (var _model in model.OutgoingProyections)
         {
+            if (!IsProyectionModerable(entity.Id, _model.Id)) continue;
+
             var _entity = entity.Proyections.First(bridge => bridge.Id == _model.Id);
 
             _entity.Archived = true;
@@ -242,6 +266,8 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
         foreach (var _model in model.EditionProyections)
         {
+            if (!IsProyectionModerable(entity.Id, _model.Id)) continue;
+
             var _entity = entity.Proyections.First(bridge => bridge.Id == _model.Id);
 
             _model.Mergue(_entity);
@@ -258,6 +284,8 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
             _entity.ObjectiveId = entity.Id;
 
             proyectionRepository.Add(_entity, User.Identity.Name, false);
+
+            proyectionUserBridgeRepository.Add(new ProyectionUserBridge { ProwId = entity.Id, SternId = User.Identity.Name, IsActionsIncluded = false }, User.Identity.Name, false);
 
             ExtendCreate(_entity, _model);
         }
@@ -283,6 +311,8 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
             _entity.ProyectionId = entity.Id;
 
             actionRepository.Add(_entity, User.Identity.Name, false);
+
+            actionUserBridgeRepository.Add(new ActionUserBridge { ProwId = entity.Id, SternId = User.Identity.Name }, User.Identity.Name, false);
 
             ExtendCreate(_entity, _model);
         }
@@ -323,6 +353,8 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
         foreach (var _model in model.OutgoingActions)
         {
+            if (!IsActionModerable(entity.ObjectiveId, entity.Id, _model.Id)) continue;
+
             var _entity = entity.Actions.First(bridge => bridge.Id == _model.Id);
 
             _entity.Archived = true;
@@ -332,6 +364,8 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
         foreach (var _model in model.EditionActions)
         {
+            if (!IsActionModerable(entity.ObjectiveId, entity.Id, _model.Id)) continue;
+
             var _entity = entity.Actions.First(bridge => bridge.Id == _model.Id);
 
             _model.Mergue(_entity);
@@ -553,5 +587,30 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
             actionIndicatorMontlyPlanRepository.Add(_entity, User.Identity.Name, false);
         }
+    }
+
+    private bool IsObjectiveModerable(System.Guid objectiveId)
+    {
+        return objectiveUserBridgeRepository.Count(bridge => bridge.ProwId == objectiveId && bridge.SternId == User.Identity.Name) > 0;
+    }
+
+    private bool IsProyectionModerable(System.Guid objectiveId, System.Guid proyectionId)
+    {
+        if (objectiveUserBridgeRepository.Count(bridge => bridge.IsProyectionsIncluded && bridge.ProwId == objectiveId && bridge.SternId == User.Identity.Name) > 0) return true;
+
+        if (proyectionUserBridgeRepository.Count(bridge => bridge.ProwId == proyectionId && bridge.SternId == User.Identity.Name) > 0) return true;
+
+        return false;
+    }
+
+    private bool IsActionModerable(System.Guid objectiveId, System.Guid proyectionId, System.Guid actionId)
+    {
+        if (objectiveUserBridgeRepository.Count(bridge => bridge.IsActionsIncluded && bridge.ProwId == objectiveId && bridge.SternId == User.Identity.Name) > 0) return true;
+
+        if (proyectionUserBridgeRepository.Count(bridge => bridge.IsActionsIncluded && bridge.ProwId == proyectionId && bridge.SternId == User.Identity.Name) > 0) return true;
+
+        if (actionUserBridgeRepository.Count(bridge => bridge.ProwId == actionId && bridge.SternId == User.Identity.Name) > 0) return true;
+
+        return false;
     }
 }

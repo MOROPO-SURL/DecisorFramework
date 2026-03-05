@@ -50,7 +50,7 @@
                     <th style="border-top: none;">Nombre completo</th>
                     <th style="border-top: none;">Incluye obj. espec.</th>
                     <th style="border-top: none;">Incluye acciones</th>
-                    <th style="width: 1px; white-space:nowrap; border-top: none;">Acciones</th>
+                    <th onclick="fit" style="border-top: none; width: 240px;">Acciones</th>
                 </tr>
             </thead>
             <tbody>
@@ -89,8 +89,8 @@
                             </td>
                             <td style="vertical-align: middle;">
                                 <div class="btn-group btn-group">
-                                    <a class="btn btn-light" asp-action="editmoderator" asp-route-key="@Model.Objective.Id" asp-route-id="@item.User.Id"><span class="mdi mdi-square-edit-outline"></span><span>Modificar</span></a>
-                                    <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#delete-@item.User.Id"><span class="mdi mdi-trash-can"></span><span>Eliminar</span></a>
+                                    <a class="btn btn-light" asp-action="editmoderator" asp-route-key="@Model.Objective.Id" asp-route-id="@item.User.Id"><span class="mdi mdi-square-edit-outline"></span><span class="ml-1">Modificar</span></a>
+                                    <a class="btn btn-danger" href="#" data-toggle="modal" data-target="#delete-@item.User.Id"><span class="mdi mdi-trash-can"></span><span class="ml-1">Eliminar</span></a>
                                 </div>
 
                                 <div class="modal fade" id="delete-@item.User.Id" tabindex="-1" role="dialog" aria-labelledby="delete-@item.User.Id-lable" aria-hidden="true">
