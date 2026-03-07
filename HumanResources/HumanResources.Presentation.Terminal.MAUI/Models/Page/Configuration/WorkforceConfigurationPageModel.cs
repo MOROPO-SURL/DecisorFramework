@@ -77,6 +77,8 @@ public class WorkforceConfigurationPageModel : Core.Presentation.Terminal.MAUI.M
 
     public Interop.API.Common.Models.Input.WorkforceOrganizationalUnitInputModel FindPersistedTargetWorkforceOrganizationalUnit(View.WorkforceConfigurationVacantViewModel model)
     {
+        if (organizationalUnits == null) return null;
+
         foreach (var item in organizationalUnits)
         {
             if (item.OrganizationalStructuringUnit.Id != model.Context.Id) continue;

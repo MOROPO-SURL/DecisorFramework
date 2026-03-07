@@ -96,7 +96,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
                 var page = await factory.BuildAsync(ChiefVacantDefineSuccess_Callback, null);
 
-                page.ConcreteBindingContext.Context = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.TreeWorkforceConfigurationOrganizationalStructuringUnitViewModel;
+                page.ConcreteBindingContext.Context = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.Contract.AbstractWorkforceConfigurationOrganizationalStructuringUnitViewModel;
 
                 Dispatcher.Dispatch(() =>
                 {
@@ -127,7 +127,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
 
                 var page = await factory.BuildAsync(VacantCreateSuccess_Callback, null);
 
-                page.ConcreteBindingContext.Context = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.TreeWorkforceConfigurationOrganizationalStructuringUnitViewModel;
+                page.ConcreteBindingContext.Context = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.Contract.AbstractWorkforceConfigurationOrganizationalStructuringUnitViewModel;
 
                 Dispatcher.Dispatch(() =>
                 {
@@ -156,7 +156,7 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
             {
                 var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Models.View.WorkforceConfigurationVacantViewModel, Models.Page.Configuration.VacantConfigurationPageModel>>();
 
-                var page = await factory.BuildAsync(ChiefVacantEditSuccess_Callback, (((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.TreeWorkforceConfigurationOrganizationalStructuringUnitViewModel).ChiefVacant);
+                var page = await factory.BuildAsync(ChiefVacantEditSuccess_Callback, (((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Models.View.Contract.AbstractWorkforceConfigurationOrganizationalStructuringUnitViewModel).ChiefVacant);
 
                 Dispatcher.Dispatch(() =>
                 {
@@ -289,20 +289,42 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
         }
         else
         {
-            ConcreteBindingContext.IncomingOrganizationalUnits.Add(new WorkforceOrganizationalUnitInputModel
+            target = ConcreteBindingContext.FindPersistedTargetWorkforceOrganizationalUnit(model);
+
+            if (target != null)
             {
-                Id = model.Context.Id,
-                OrganizationalStructuringUnitId = model.Context.Context.Id,
-                ChiefVacant = new VacantInputModel
+                ConcreteBindingContext.EditionOrganizationalUnits.Add(new WorkforceOrganizationalUnitInputModel
                 {
-                    Id = model.Id,
-                    OcupationMode = model.OcupationMode,
-                    Priority = model.Priority,
-                    SalaryStandardId = model.SalaryStandard.Id,
-                    WorkPositionId = model.WorkPosition.Id,
-                    WorkforceOrganizationalUnitId = model.Context.Id
-                }
-            });
+                    Id = model.Context.Id,
+                    OrganizationalStructuringUnitId = model.Context.Context.Id,
+                    ChiefVacant = new VacantInputModel
+                    {
+                        Id = model.Id,
+                        OcupationMode = model.OcupationMode,
+                        Priority = model.Priority,
+                        SalaryStandardId = model.SalaryStandard.Id,
+                        WorkPositionId = model.WorkPosition.Id,
+                        WorkforceOrganizationalUnitId = model.Context.Id
+                    }
+                });
+            }
+            else
+            {
+                ConcreteBindingContext.IncomingOrganizationalUnits.Add(new WorkforceOrganizationalUnitInputModel
+                {
+                    Id = model.Context.Id,
+                    OrganizationalStructuringUnitId = model.Context.Context.Id,
+                    ChiefVacant = new VacantInputModel
+                    {
+                        Id = model.Id,
+                        OcupationMode = model.OcupationMode,
+                        Priority = model.Priority,
+                        SalaryStandardId = model.SalaryStandard.Id,
+                        WorkPositionId = model.WorkPosition.Id,
+                        WorkforceOrganizationalUnitId = model.Context.Id
+                    }
+                });
+            }
         }
 
         model.Context.ChiefVacant = model;
