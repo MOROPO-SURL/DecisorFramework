@@ -108,6 +108,8 @@
 
             if (target.Controller == "paymentterms") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-calendar-clock");
 
+            if (target.Controller == "workpositionkinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-worker");
+
             return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
         }
     }

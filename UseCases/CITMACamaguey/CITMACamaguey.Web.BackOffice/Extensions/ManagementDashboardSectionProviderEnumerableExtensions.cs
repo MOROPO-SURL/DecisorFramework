@@ -69,8 +69,8 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Extensions
             #region Domain
             domainSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Tipos de Entidad Administrativa",
-                Controller = "administrativeentities",
+                Title = "Tipos de Ent. Admin.",
+                Controller = "administrativeentitykinds",
                 Action = "Index",
                 Area = "domain",
                 // TODO Set spected permission

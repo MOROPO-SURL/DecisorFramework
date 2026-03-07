@@ -5,7 +5,7 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<AssemblyName>MOROPO.CITMACamaguey.Decisor.Web.BackOffice</AssemblyName>
 		<RootNamespace>MOROPO.CITMACamaguey.Decisor.Web.BackOffice</RootNamespace>
-		<VersionPrefix>0.3.0</VersionPrefix>
+		<VersionPrefix>0.4.0</VersionPrefix>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="dpkeys\**" />
@@ -25,11 +25,11 @@
 	  <_WebToolingArtifacts Remove="Properties\PublishProfiles\VPSFolderProfile.pubxml" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.1.1" />
-		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.1" />
-		<PackageReference Include="GuamaFramework.Location.Presentation.Web.Backend" Version="6.0.1" />
-		<PackageReference Include="GuamaFramework.Media.Presentation.Web.Common" Version="6.0.1" />
-		<PackageReference Include="GuamaFramework.Security.Personal.Presentation.Web.Backend" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Location.Presentation.Web.Backend" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Media.Presentation.Web.Common" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Security.Personal.Presentation.Web.Backend" Version="6.0.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
