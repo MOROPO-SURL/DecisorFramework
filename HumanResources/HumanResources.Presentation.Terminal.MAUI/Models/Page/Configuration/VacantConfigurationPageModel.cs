@@ -27,7 +27,7 @@
 
         public System.Guid Id { get; set; }
 
-        public View.TreeWorkforceConfigurationOrganizationalStructuringUnitViewModel Context { get; set; }
+        public View.Contract.AbstractWorkforceConfigurationOrganizationalStructuringUnitViewModel Context { get; set; }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 

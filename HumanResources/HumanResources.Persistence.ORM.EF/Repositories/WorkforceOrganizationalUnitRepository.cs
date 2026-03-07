@@ -12,11 +12,11 @@ public class WorkforceOrganizationalUnitRepository : Guama.Core.Persistence.ORM.
 
     protected override IQueryable<WorkforceOrganizationalUnit> GetQueryableDbSet()
     {
+        // Is mandatory that no mark with AsNoTracking !!!
         return base.GetQueryableDbSet()
             .Include(entity => entity.OrganizationalStructuringUnit).ThenInclude(entity => entity.OrganizationalUnit)
             .Include(entity => entity.ChiefVacant).ThenInclude(entity => entity.WorkPosition)
             .Include(entity => entity.ChiefVacant).ThenInclude(entity => entity.SalaryStandard)
-            .AsNoTracking()
             .AsSplitQuery();
     }
 }

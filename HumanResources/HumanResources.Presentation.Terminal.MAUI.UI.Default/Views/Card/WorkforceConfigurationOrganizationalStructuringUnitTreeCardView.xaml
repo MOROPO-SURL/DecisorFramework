@@ -4,7 +4,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
-    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
@@ -154,7 +153,7 @@
                                 <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                             </CollectionView.EmptyView>
                             <CollectionView.ItemTemplate>
-                                <DataTemplate x:DataType="interop_common_display_models:VacantDisplayModel">
+                                <DataTemplate x:DataType="presentation_view_models:WorkforceConfigurationVacantViewModel">
                                     <Frame 
                                         Padding="8"
                                         Margin="0,12,0,0">
@@ -164,7 +163,7 @@
                                                 Padding="8">
                                                 <Label
                                                     ToolTipProperties.Text="{Binding WorkPosition.Name}"
-                                                    Text="{Binding WorkPosition.Name}"
+                                                    Text="{Binding WorkPosition.Name, TargetNullValue='Null', FallbackValue='Fallback'}"
                                                     LineBreakMode="TailTruncation"
                                                     FontSize="Medium" />
                                                 <Label

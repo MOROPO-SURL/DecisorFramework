@@ -67,7 +67,8 @@ public static class OrganizationalStructuringUnitDisplayModelExtensions
             Priority = workforceOrganizationalUnit.ChiefVacant.Priority,
             OcupationMode = workforceOrganizationalUnit.ChiefVacant.OcupationMode,
             WorkPosition = workforceOrganizationalUnit.ChiefVacant.WorkPosition,
-            SalaryStandard = workforceOrganizationalUnit.ChiefVacant.SalaryStandard
+            SalaryStandard = workforceOrganizationalUnit.ChiefVacant.SalaryStandard,
+            Context = model
         };
 
         if (workforceOrganizationalUnit?.Vacants != null)
@@ -78,7 +79,8 @@ public static class OrganizationalStructuringUnitDisplayModelExtensions
                 Priority = _model.Priority,
                 OcupationMode = _model.OcupationMode,
                 WorkPosition = _model.WorkPosition,
-                SalaryStandard = _model.SalaryStandard
+                SalaryStandard = _model.SalaryStandard,
+                Context = model
             }));
         }
 
