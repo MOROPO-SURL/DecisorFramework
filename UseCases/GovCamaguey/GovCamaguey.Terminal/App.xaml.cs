@@ -1,19 +1,18 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal
+﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal;
+
+public partial class App : Microsoft.Maui.Controls.Application
 {
-    public partial class App : Microsoft.Maui.Controls.Application
+    public App()
     {
-        public App()
-        {
-            InitializeComponent();
+        InitializeComponent();
 
-            MainPage = new UI.Shells.AppShell();
-        }
+        MainPage = new UI.Shells.AppShell();
+    }
 
-        protected override void OnStart()
-        {
-            base.OnStart();
+    protected override void OnStart()
+    {
+        base.OnStart();
 
-            Windows[0].Title = "Gobierno de Camagüey - Decisor™";
-        }
+        Windows[0].Title = $"Gobierno de Camagüey - Decisor™ v{Microsoft.Maui.ApplicationModel.AppInfo.Current.VersionString}";
     }
 }
