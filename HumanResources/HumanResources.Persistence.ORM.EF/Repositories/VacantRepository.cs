@@ -13,7 +13,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
         protected override IQueryable<Vacant> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
-                .Include(entity => entity.WorkPosition).ThenInclude(entity => entity.Schooling)
+                .AsNoTracking()
                 .Include(entity => entity.WorkPosition).ThenInclude(entity => entity.Kind)
                 .Include(entity => entity.SalaryStandard);
         }

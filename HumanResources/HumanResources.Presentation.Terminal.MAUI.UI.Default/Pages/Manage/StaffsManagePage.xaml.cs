@@ -1,5 +1,4 @@
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Maui.Dispatching;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
@@ -18,12 +17,11 @@ public partial class StaffsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages
         return ItemsCollectionView;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override double ItemViewRequestWidth => 720;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => ITEM_VIEW_REQUEST_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.StaffDisplayModel>> FetchItemsAsync()
     {

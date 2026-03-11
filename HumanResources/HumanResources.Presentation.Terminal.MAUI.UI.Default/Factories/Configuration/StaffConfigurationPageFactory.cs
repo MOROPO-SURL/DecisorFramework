@@ -9,11 +9,12 @@ public class StaffConfigurationPageFactory : Core.Presentation.Terminal.MAUI.UI.
     {
         var _model = new Models.Page.Configuration.StaffConfigurationPageModel(model);
 
-        var structuresAPIConnectClient = new Domain.Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var administrativeEntitiesAPIConnectClient = new Domain.Interop.API.Connect.Clients.ParentalAdministrativeEntitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
         var workforcesAPIConnectClient = new Interop.API.Connect.Clients.WorkforcesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
-        _model.AvailableStructures = await structuresAPIConnectClient.GetEnabledAsync();
-        _model.AvailableWorkforces = [.. await workforcesAPIConnectClient.GetAsync()];
+        _model.AvailableAdministrativeEntities = await administrativeEntitiesAPIConnectClient.GetEnabledAsync();
+
+        if (model != null) _model.AvailableWorkforces = [.. await workforcesAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.WorkforceFilterModel { OrganizationalStructure = model.AdministrativeEntity.OrganizationalStructure })];
 
         return new Pages.Configuration.StaffConfigurationPage(configurationSuccessAction, _model, new Validators.StaffConfigurationValidator());
     }

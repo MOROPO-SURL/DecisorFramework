@@ -92,10 +92,10 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
                 entity.BrandId = BrandId;
             }
 
-            if (entity.StructureId != StructureId)
+            if (entity.AdministrativeEntityId != StructureId)
             {
-                entity.Structure = null;
-                entity.StructureId = StructureId;
+                entity.AdministrativeEntity = null;
+                entity.AdministrativeEntityId = StructureId;
             }
 
             if (entity.KindId != KindId)

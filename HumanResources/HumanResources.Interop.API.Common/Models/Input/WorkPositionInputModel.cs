@@ -13,7 +13,7 @@
 
         public System.Guid KindId { get; set; }
 
-        public System.Guid SchoolingId { get; set; }
+        public Domain.Persistence.Enumerations.EducationLevel EducationLevel { get; set; }
 
         public string Description { get; set; }
 
@@ -35,6 +35,7 @@
         {
             entity.Name = Name;
             entity.Reference = Reference;
+            entity.EducationLevel = EducationLevel;
             entity.Description = Description;
             entity.Priority = Priority;
 
@@ -42,12 +43,6 @@
             {
                 entity.Kind = null;
                 entity.KindId = KindId;
-            }
-
-            if (entity.SchoolingId != SchoolingId)
-            {
-                entity.Schooling = null;
-                entity.SchoolingId = SchoolingId;
             }
         }
     }

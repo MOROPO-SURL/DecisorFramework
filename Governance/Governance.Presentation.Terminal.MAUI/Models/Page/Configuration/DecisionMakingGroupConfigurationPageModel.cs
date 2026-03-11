@@ -7,7 +7,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
         private int priority = 1;
         private string name;
         private string description;
-        private Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel structure;
+        private Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel structure;
         private Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel leader;
 
         public DecisionMakingGroupConfigurationPageModel(Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel model) : base(model)
@@ -18,7 +18,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
                 Name = model.Name;
                 Description = model.Description;
                 Priority = model.Priority;
-                Structure = model.Structure;
+                Structure = model.AdministrativeEntity;
                 Leader = model.Leader;
                 Members = new ObservableCollection<Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel>(model.Members);
                 Collaborators = new ObservableCollection<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel>(model.Collaborators);
@@ -33,7 +33,7 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
 
         public string Description { get => description; set => SetProperty(ref description, value); }
 
-        public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
+        public Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
 
         public Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel Leader { get => leader; set => SetProperty(ref leader, value); }
 
@@ -41,6 +41,6 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
 
         public ObservableCollection<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel> Collaborators { get; set; } = [];
 
-        public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel[] AvailableStructures { get; set; }
+        public Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel[] AvailableStructures { get; set; }
     }
 }

@@ -48,7 +48,7 @@
                 <Label
                     VerticalOptions="FillAndExpand"
                     LineBreakMode="TailTruncation"
-                    Text="{Binding Candidate.Postulation.Staff.Structure.Identity.Name}" />
+                    Text="{Binding Candidate.Postulation.Staff.AdministrativeEntity.Identity.Name}" />
                 <Label 
                     Margin="0,8,0,0"
                     Text="Acuerdo"

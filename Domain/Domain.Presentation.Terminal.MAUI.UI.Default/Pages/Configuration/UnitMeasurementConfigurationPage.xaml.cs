@@ -28,8 +28,8 @@ public partial class UnitMeasurementConfigurationPage : Core.Presentation.Termin
             Name = ConcreteBindingContext.Name,
             Symbol = ConcreteBindingContext.Symbol,
             Priority = ConcreteBindingContext.Priority,
-            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray(),
-            IncomingConvertions = editionConvetions
+            IncomingConvertions = editionConvetions,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -47,10 +47,10 @@ public partial class UnitMeasurementConfigurationPage : Core.Presentation.Termin
             Name = ConcreteBindingContext.Name,
             Symbol = ConcreteBindingContext.Symbol,
             Priority = ConcreteBindingContext.Priority,
-            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray(),
             IncomingConvertions = incomingConvetions,
             OutgoingConvertions = outgoingConvetions,
-            EditionConvertions = editionConvetions
+            EditionConvertions = editionConvetions,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -180,7 +180,7 @@ public partial class UnitMeasurementConfigurationPage : Core.Presentation.Termin
 
     private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        DisplayAlert("Confirmación", "Está seguro que desea retirar esta usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 

@@ -2,12 +2,13 @@
 <core_ui_base_pages:ManageBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:local_constants="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Constants"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.WorkPositionsManagePage"   
@@ -16,6 +17,8 @@
     Title="Gestión de Plazas Laborales">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
+            
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
@@ -51,7 +54,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:WorkPositionDisplayModel">
-                                <Frame HeightRequest="{Static local:WorkPositionsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                <Frame HeightRequest="{Static local_constants:CardViewHeightConstants.WORK_POSITION_DEFAULT_CARD_VIEW_HEIGHT}">
                                     <Frame.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </Frame.GestureRecognizers>
@@ -66,12 +69,16 @@
                                             LineBreakMode="TailTruncation"
                                             Text="{Binding Kind.Name}" />
                                         <Label 
-                                            Margin="0,6,0,0"
-                                            Text="{Binding Description}"
+                                            Margin="0,8,0,0"
+                                            Text="Nivel de escolaridad"
                                             TextColor="DimGray"
                                             FontSize="Caption"
+                                            FontAttributes="Bold" />
+                                        <Label
+                                            VerticalOptions="FillAndExpand"
                                             LineBreakMode="TailTruncation"
-                                            MaxLines="3" />
+                                            MaxLines="2"
+                                            Text="{Binding EducationLevel, Converter={StaticResource StringToLocalizedStringConverter}}" />
                                     </StackLayout>
                                 </Frame>
                             </DataTemplate>

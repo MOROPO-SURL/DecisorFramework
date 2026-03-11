@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class NamingResolutionConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel>
 {
-    public NamingResolutionConfigurationPage(System.Action<Interop.API.Common.Models.Display.NamingResolutionDisplayModel> successAction, Models.Page.Configuration.NamingResolutionConfigurationPageModel model) : base(successAction, model, null)
+    public NamingResolutionConfigurationPage(System.Action<Interop.API.Common.Models.Display.NamingResolutionDisplayModel> successAction, Models.Page.Configuration.NamingResolutionConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.NamingResolutionConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }
@@ -22,11 +22,8 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
             Index = ConcreteBindingContext.Index,
             At = ConcreteBindingContext.At,
             Summary = ConcreteBindingContext.Summary,
-            AgreementId = ConcreteBindingContext.Agreement.Id,
-            ContactId = ConcreteBindingContext.Contact?.Id,
-            VacantId = ConcreteBindingContext.Vacant?.Id,
-            StaffId = ConcreteBindingContext.Staff?.Id,
-            CandidateId = ConcreteBindingContext.Candidate?.Id
+            AgreementId = ConcreteBindingContext.Agreement?.Id,
+            AdmitionPropousalId = ConcreteBindingContext.AdmitionPropousal.Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -44,11 +41,8 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
             Index = ConcreteBindingContext.Index,
             At = ConcreteBindingContext.At,
             Summary = ConcreteBindingContext.Summary,
-            AgreementId = ConcreteBindingContext.Agreement.Id,
-            ContactId = ConcreteBindingContext.Contact?.Id,
-            VacantId = ConcreteBindingContext.Vacant?.Id,
-            StaffId = ConcreteBindingContext.Staff?.Id,
-            CandidateId = ConcreteBindingContext.Candidate?.Id
+            AgreementId = ConcreteBindingContext.Agreement?.Id,
+            AdmitionPropousalId = ConcreteBindingContext.AdmitionPropousal.Id
         };
 
         await apiConnectClient.EditAsync(model);
@@ -66,9 +60,24 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
         OnCancel(sender, eventArgs);
     }
 
-    private void ContactPickButton_Clicked(object sender, System.EventArgs e)
+    private void IndexSetButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback)));
+        DisplayPromptAsync("Número de resolución", "Especifique el valor deseado para el número de resolución. Se espera un número entero.", "Aplicar", "Cancelar", keyboard: Microsoft.Maui.Keyboard.Numeric).ContinueWith(task =>
+        {
+            if (string.IsNullOrEmpty(task.Result) || task.IsCanceled) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                try
+                {
+                    ConcreteBindingContext.Index = int.Parse(task.Result);
+                }
+                catch
+                {
+                    DisplayAlert("Aviso", "El valor especificado no es válido. Se espera un número entero.", "Aceptar");
+                }
+            });
+        });
     }
 
     private void AgreementPickButton_Clicked(object sender, System.EventArgs e)
@@ -76,36 +85,18 @@ public partial class NamingResolutionConfigurationPage : Core.Presentation.Termi
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.MeetingAgreementPickPage(AgreementPickComplete_Callback)));
     }
 
-    private void VacantPickButton_Clicked(object sender, System.EventArgs eventArgs)
+    private void AdmitionPropousalPickButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPickPage(ConcreteBindingContext.IsForOcupationCandidate ? [Persistence.Enumerations.VacantOcupationMode.Hybrid] : [Persistence.Enumerations.VacantOcupationMode.Naming], VacantPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.AdmitionPropousalPickPage(AdmitionPropousalPickComplete_Callback)));
     }
 
-    private void CandidatePickButton_Clicked(object sender, System.EventArgs e)
+    private void AdmitionPropousalPickComplete_Callback(Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel model)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.OcupationCandidatePickPage(true, CondidatePickComplete_Callback)));
-    }
-
-    private void CondidatePickComplete_Callback(Interop.API.Common.Models.Display.OcupationCandidateDisplayModel model)
-    {
-        ConcreteBindingContext.Candidate = model;
-    }
-
-    private void ContactPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)
-    {
-        var concreteBindingContext = (Models.Page.Configuration.NamingResolutionConfigurationPageModel)BindingContext;
-
-        concreteBindingContext.Contact = model;
+        ConcreteBindingContext.AdmitionPropousal = model;
     }
 
     private void AgreementPickComplete_Callback(Governance.Interop.API.Common.Models.Display.AgreementDisplayModel model)
     {
         ConcreteBindingContext.Agreement = model;
-    }
-
-    private void VacantPickComplete_Callback(Models.View.StaffVacantViewModel model)
-    {
-        ConcreteBindingContext.Staff = model.Staff;
-        ConcreteBindingContext.Vacant = model.Vacant;
     }
 }

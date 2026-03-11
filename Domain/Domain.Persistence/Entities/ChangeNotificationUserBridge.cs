@@ -8,6 +8,8 @@
         public string SternId { get; set; }
         public Guama.Security.Personal.Persistence.Entities.User Stern { get; set; }
 
+        public System.DateTime At { get; set; } = System.DateTime.Now;
+
         public System.DateTime? ReadedAt { get; set; }
     }
 }

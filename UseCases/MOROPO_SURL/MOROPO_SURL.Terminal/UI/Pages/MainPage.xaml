@@ -2,18 +2,20 @@
 <caneyframework_mvvm_pages:BindingContextedContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:decisorframework_core_models_page="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:frwk_core_models_page="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
-    xmlns:freaky_controls="clr-namespace:Maui.FreakyControls;assembly=Maui.FreakyControls"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Tool.Decisor.Terminal.UI.Pages.MainPage"
-    x:TypeArguments="decisorframework_core_models_page:MainPageModel"
-    x:DataType="decisorframework_core_models_page:MainPageModel"
+    x:TypeArguments="frwk_core_models_page:MainPageModel"
+    x:DataType="frwk_core_models_page:MainPageModel"
     Title="Inicio">
     <ContentPage.Resources>
         <ResourceDictionary>
             <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="240" AbsoluteHorizontalSeparation="20" />
             <caneyframework_presentation_converters:DoubleToFactorConverter x:Key="DoubleToFactorConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
 
             <Style x:Key="SectionCardFrameStyle" TargetType="Frame">
                 <Setter Property="CornerRadius" Value="4" />
@@ -137,6 +139,9 @@
                     MinimumWidthRequest="124"
                     VerticalOptions="Center"
                     Padding="20" Spacing="4">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="NotificationsLayoutTapGestureRecognizer_Tapped" />
+                    </VerticalStackLayout.GestureRecognizers>
                     <Label
                         HorizontalOptions="Center"
                         Text="&#xF09E;"
@@ -149,6 +154,27 @@
                         TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                         FontSize="Medium" />
                 </VerticalStackLayout>
+                <Frame
+                    IsVisible="{Binding NotificationCount, Converter={StaticResource IsNotNullConverter}}"
+                    Grid.Column="1"
+                    Margin="8"
+                    HorizontalOptions="End" VerticalOptions="Start"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    MinimumWidthRequest="32"
+                    CornerRadius="16"
+                    BorderColor="Transparent"
+                    Padding="4">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="NotificationsLayoutTapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Label 
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            TextColor="{AppThemeBinding Light=White, Dark=Black}"
+                            Text="{Binding NotificationCount}" />
+                    </Grid>
+                </Frame>
                 <BoxView
                     Grid.Column="2"
                     Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />

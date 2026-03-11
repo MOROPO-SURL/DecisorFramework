@@ -1,43 +1,26 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
 public partial class NamingResolutionsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Manage.NamingResolutionsManagePageModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 268;
-
-    private const string DIRECT_NAMING = "Directo";
-    private const string CANDIDATE_NAMING = "Candidatura";
-
     public NamingResolutionsManagePage()
     {
         InitializeComponent();
     }
 
-    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
-    {
-        return ItemsCollectionView;
-    }
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() =>ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth { get => 400; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.NAMING_RESOLUTION_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.NAMING_RESOLUTION_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.NamingResolutionDisplayModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.NamingResolutionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         return apiConnectClient.GetPaginateAsync();
-    }
-
-    protected override void ComplementConfigurationPage(Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel> page, Interop.API.Common.Models.Display.NamingResolutionDisplayModel model)
-    {
-        page.ConcreteBindingContext.IsForOcupationCandidate = model.Candidate != null;
     }
 
     protected override void OnActionDelegationRequest(Interop.API.Common.Models.Display.NamingResolutionDisplayModel target, int discriminator)
@@ -66,56 +49,7 @@ public partial class NamingResolutionsManagePage : Core.Presentation.Terminal.MA
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
-        DisplayActionSheet("Método de nombramiento", "Cancelar", null, DIRECT_NAMING, CANDIDATE_NAMING).ContinueWith(task =>
-        {
-            bool isForOcupationCandidate = false;
-
-            switch (task.Result)
-            {
-                case DIRECT_NAMING:
-                    isForOcupationCandidate = false;
-
-                    break;
-
-                case CANDIDATE_NAMING:
-                    isForOcupationCandidate = true;
-
-                    break;
-
-                default:
-                    return;
-            }
-
-            var concreteBindingContext = (Models.Page.Manage.NamingResolutionsManagePageModel)BindingContext;
-
-            Dispatcher.Dispatch(() => concreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation);
-
-            System.Threading.Tasks.Task.Run(async () =>
-            {
-                try
-                {
-                    var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.NamingResolutionDisplayModel, Models.Page.Configuration.NamingResolutionConfigurationPageModel>>();
-
-                    var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
-
-                    page.ConcreteBindingContext.IsForOcupationCandidate = isForOcupationCandidate;
-
-                    Dispatcher.Dispatch(() =>
-                    {
-                        concreteBindingContext.IsBusy = false;
-
-                        this.NavigationPushPageAsync(page);
-                    });
-                }
-                catch (System.Exception exception)
-                {
-                    Dispatcher.Dispatch(() =>
-                    {
-                        Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
-                    });
-                }
-            });
-        });        
+        AddItem(sender, eventArgs);
     }
 
     private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)

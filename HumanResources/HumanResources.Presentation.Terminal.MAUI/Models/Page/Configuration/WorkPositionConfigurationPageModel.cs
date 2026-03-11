@@ -9,19 +9,19 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
         private string description;
         private int priority = 1;
         private WorkPositionKindDisplayModel kind;
-        private SchoolingDisplayModel schooling;
+        private Domain.Persistence.Enumerations.EducationLevel educationLevel;
 
         public WorkPositionConfigurationPageModel(WorkPositionDisplayModel model) : base(model)
         {
             if (model != null)
             {
                 Id = model.Id;
-                Name = model.Name;
-                Schooling = model.Schooling;
-                Kind = model.Kind;
-                Reference = model.Reference;
-                Description = model.Description;
-                Priority = model.Priority;
+                name = model.Name;
+                educationLevel = model.EducationLevel;
+                kind = model.Kind;
+                reference = model.Reference;
+                description = model.Description;
+                priority = model.Priority;
             }
         }
 
@@ -37,10 +37,8 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Mod
 
         public WorkPositionKindDisplayModel Kind { get => kind; set => SetProperty(ref kind, value); }
 
-        public SchoolingDisplayModel Schooling { get => schooling; set => SetProperty(ref schooling, value); }
+        public Domain.Persistence.Enumerations.EducationLevel EducationLevel { get => educationLevel; set => SetProperty(ref educationLevel, value); }
 
         public WorkPositionKindDisplayModel[] AvailableKinds { get; set; }
-
-        public SchoolingDisplayModel[] AvailableSchoolings { get; set; }
     }
 }

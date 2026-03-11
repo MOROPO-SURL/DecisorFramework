@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
+    xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
+    x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card.VacantPickOrganizationalStructuringUnitLeafCardView"
+    x:DataType="presentation_view_models:LeafVacantPickOrganizationalStructuringUnitViewModel">
+    <Grid ColumnSpacing="0" RowSpacing="8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Label
+            Grid.Column="0"
+            VerticalOptions="Center"
+            FontSize="Large"
+            FontFamily="MaterialDesignIcons"
+            Text="&#xF554;" />
+        <Frame 
+            Grid.Column="1"
+            Margin="8,0,0,0"
+            Padding="16">
+            <VerticalStackLayout>
+                <Label
+                    Grid.ColumnSpan="2" Grid.Row="0"
+                    FontSize="Medium"
+                    Text="{Binding Context.OrganizationalUnit.Name}" />
+                <Label 
+                    Style="{StaticResource CaptionFieldLabelStyle}"
+                    Margin="0,8"
+                    Text="Ocupaciones" />
+                <CollectionView 
+                    x:Name="VacantsCollectionView"
+                    ItemsSource="{Binding Vacants}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="1" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.Behaviors>
+                        <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="240" ItemSpacing="8" />
+                    </CollectionView.Behaviors>
+                    <CollectionView.EmptyView>
+                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="interop_common_display_models:VacantDisplayModel">
+                            <Frame Padding="0">
+                                <Frame.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
+                                </Frame.GestureRecognizers>
+                                <VerticalStackLayout Spacing="0">
+                                    <Image 
+                                        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
+                                        BackgroundColor="DimGray"
+                                        Source="default_person_picture.jpg" />
+                                    <VerticalStackLayout Margin="8,8,8,12" Spacing="8">
+                                        <Label
+                                            HorizontalOptions="Center"
+                                            ToolTipProperties.Text="{Binding WorkPosition.Name}"
+                                            Text="{Binding WorkPosition.Name}"
+                                            FontAttributes="Bold"
+                                            LineBreakMode="TailTruncation" />
+                                    </VerticalStackLayout>
+                                </VerticalStackLayout>
+                            </Frame>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </Frame>
+    </Grid>
+</ContentView>

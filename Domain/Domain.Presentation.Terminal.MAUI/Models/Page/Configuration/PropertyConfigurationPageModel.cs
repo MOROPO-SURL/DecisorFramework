@@ -19,7 +19,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private Microsoft.Maui.Controls.ImageSource fatureImageSource;
         private string name;
         private PropertyKindDisplayModel kind;
-        private StructureParentalDisplayModel structure;
+        private AdministrativeEntityParentalDisplayModel structure;
         private PostalContactItemDisplayModel postalContact;
         private string reference;
         private string description;
@@ -68,7 +68,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public PropertyKindDisplayModel Kind { get => kind; set => SetProperty(ref kind, value); }
 
-        public StructureParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
+        public AdministrativeEntityParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
 
         public PostalContactItemDisplayModel PostalContact { get => postalContact; set => SetProperty(ref postalContact, value); }
 
@@ -84,6 +84,6 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public PropertyKindDisplayModel[] AvailableKinds { get; set; }
 
-        public StructureParentalDisplayModel[] AvailableStructures { get; set; }
+        public AdministrativeEntityParentalDisplayModel[] AvailableStructures { get; set; }
     }
 }

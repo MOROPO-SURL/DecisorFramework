@@ -17,6 +17,7 @@
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrapFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="0" />
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="PostalContactDetailFlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
             
@@ -110,6 +111,7 @@
                                 <Picker 
                                     x:Name="SkinKindPicker" 
                                     ItemsSource="{Static presentation_configuration_page_models:PersonContactConfigurationPageModel.AVAILABLE_SKIN_KINDS}"
+                                    ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizedStringConverter}}"
                                     SelectedItem="{Binding SkinKind}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
                             </VerticalStackLayout>
@@ -121,6 +123,7 @@
                                 <Picker 
                                     x:Name="SexPicker" 
                                     ItemsSource="{Static presentation_configuration_page_models:PersonContactConfigurationPageModel.AVAILABLE_SEXS}"
+                                    ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizedStringConverter}}"
                                     SelectedItem="{Binding Sex}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
                             </VerticalStackLayout>
@@ -132,6 +135,7 @@
                                 <Picker 
                                     x:Name="CivilStatusPicker" 
                                     ItemsSource="{Static presentation_configuration_page_models:PersonContactConfigurationPageModel.AVAILABLE_CIVIL_STATUSES}"
+                                    ItemDisplayBinding="{Binding Converter={StaticResource StringToLocalizedStringConverter}}"
                                     SelectedItem="{Binding CivilStatus}"
                                     SelectedIndexChanged="Picker_SelectedIndexChanged" />
                             </VerticalStackLayout>
@@ -164,7 +168,7 @@
                                     Clicked="PhoneContactItemAgregationButton_Clicked" />
                                 <BoxView
                                     Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="{StaticResource Gray050}" />
+                                    Color="DimGray" />
                                 <CollectionView
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     ItemsSource="{Binding PhoneContactItems}">
@@ -236,7 +240,7 @@
                                     Clicked="EmailContactItemAgregationButton_Clicked" />
                                 <BoxView
                                     Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="{StaticResource Gray050}" />
+                                    Color="DimGray" />
                                 <CollectionView
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     ItemsSource="{Binding EmailContactItems}">
@@ -308,7 +312,7 @@
                                     Clicked="PostalContactItemAgregationButton_Clicked" />
                                 <BoxView
                                     Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="{StaticResource Gray050}" />
+                                    Color="DimGray" />
                                 <CollectionView
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     ItemsSource="{Binding PostalContactItems}">
@@ -406,7 +410,7 @@
                                     Clicked="WebContactItemAgregationButton_Clicked" />
                                 <BoxView
                                     Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="{StaticResource Gray050}" />
+                                    Color="DimGray" />
                                 <CollectionView
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     ItemsSource="{Binding WebContactItems}">
@@ -464,7 +468,7 @@
                 <BoxView 
                     Margin="8,16,8,8"
                     HeightRequest="1" 
-                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                    Color="DimGray" />
                 <FlexLayout 
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">

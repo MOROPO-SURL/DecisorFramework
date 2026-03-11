@@ -5,7 +5,7 @@
     {
         public StaffDisplayModel Staff { get; set; }
 
-        public WorkforceOrganizationalUnityDisplayModel WorkforceOrganizationalUnity { get; set; }
+        public WorkforceOrganizationalUnitDisplayModel WorkforceOrganizationalUnit { get; set; }
 
         public VacantDisplayModel Vacant { get; set; }
 
@@ -26,11 +26,11 @@
 
                 Vacant.Import(entity.Vacant);
 
-                if (entity.Vacant.WorkforceOrganizationalUnity != null)
+                if (entity.Vacant.WorkforceOrganizationalUnit != null)
                 {
-                    WorkforceOrganizationalUnity = new WorkforceOrganizationalUnityDisplayModel();
+                    WorkforceOrganizationalUnit = new WorkforceOrganizationalUnitDisplayModel();
 
-                    WorkforceOrganizationalUnity.Import(entity.Vacant.WorkforceOrganizationalUnity);
+                    WorkforceOrganizationalUnit.Import(entity.Vacant.WorkforceOrganizationalUnit);
                 }
             }
         }

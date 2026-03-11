@@ -3,12 +3,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.WorkPositionDetailPage"
     x:TypeArguments="interop_common_display_models:WorkPositionDisplayModel"
     x:DataType="interop_common_display_models:WorkPositionDisplayModel"
     Title="Detalles de Plaza Laboral"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <Grid>
             <Grid
@@ -25,22 +31,43 @@
                                 FontSize="Medium" />
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
                                 Text="Nombre" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
+                                ToolTipProperties.Text="{Binding Name}"
+                                LineBreakMode="TailTruncation"
                                 Text="{Binding Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Prioridad" />
+                                Text="Rederencia" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Priority}" />
+                                Text="{Binding Reference, TargetNullValue='---'}" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Categor&#x00ED;a ocupacional" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Kind.Name}" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Nivel de escolaridad" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding EducationLevel, Converter={StaticResource StringToLocalizedStringConverter}}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Detalles" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Description, TargetNullValue='---'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Prioridad" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Priority}" />
                         </StackLayout>
                         <StackLayout
                             Orientation="Horizontal"
@@ -50,6 +77,7 @@
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />
                             <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />

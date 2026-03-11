@@ -38,7 +38,7 @@
                     Text="{Binding Contact.Identity.LastName}" />
                 <Label 
                     Margin="0,8,0,0"
-                    Text="Vacante"
+                    Text="Puesto"
                     TextColor="DimGray"
                     FontAttributes="Bold" />
                 <Label
@@ -48,7 +48,11 @@
                 <Label
                     VerticalOptions="FillAndExpand"
                     LineBreakMode="TailTruncation"
-                    Text="{Binding Staff.Structure.Identity.Name}" />
+                    Text="{Binding Vacant.WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}" />
+                <Label
+                    VerticalOptions="FillAndExpand"
+                    LineBreakMode="TailTruncation"
+                    Text="{Binding Staff.AdministrativeEntity.Identity.Name}" />
             </StackLayout>
         </Grid>
     </Frame>

@@ -5,7 +5,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class SalaryStandardConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.SalaryStandardDisplayModel, Interop.API.Common.Models.Display.SalaryStandardDisplayModel, Models.Page.Configuration.SalaryStandardConfigurationPageModel>
 {
-    public SalaryStandardConfigurationPage(System.Action<Interop.API.Common.Models.Display.SalaryStandardDisplayModel> successAction, Models.Page.Configuration.SalaryStandardConfigurationPageModel model) : base(successAction, model, null)
+    public SalaryStandardConfigurationPage(System.Action<Interop.API.Common.Models.Display.SalaryStandardDisplayModel> successAction, Models.Page.Configuration.SalaryStandardConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.SalaryStandardConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }

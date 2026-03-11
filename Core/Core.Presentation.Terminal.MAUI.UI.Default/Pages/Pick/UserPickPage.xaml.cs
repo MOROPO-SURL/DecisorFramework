@@ -5,8 +5,6 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class UserPickPage : UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.UserDisplayModel, Models.Page.Pick.UserPickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 132;
-
     private System.Action<Interop.API.Common.Models.Display.UserDisplayModel> pickCompleteAction;
 
     public UserPickPage(System.Action<Interop.API.Common.Models.Display.UserDisplayModel> pickCompleteAction)
@@ -18,7 +16,7 @@ public partial class UserPickPage : UI.Pages.Base.ListBaseContentPage<Interop.AP
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth => 384;
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.USER_DEFAULT_CARD_VIEW_WIDTH;
 
     protected override void DisposeUnmanagementResources()
     {
@@ -29,7 +27,7 @@ public partial class UserPickPage : UI.Pages.Base.ListBaseContentPage<Interop.AP
 
     protected override double MeasureCollectionViewCellHeight(double width)
     {
-        return ITEM_VIEW_REQUEST_HEIGHT;
+        return Constants.CardViewHeightConstants.USER_DEFAULT_CARD_VIEW_HEIGHT;
     }
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.UserDisplayModel>> FetchItemsAsync()

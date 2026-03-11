@@ -88,6 +88,9 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<AbstractContact> Contacts { get; set; }
         public DbSet<OrganizationContact> OrganizationContacts { get; set; }
         public DbSet<PersonContact> PersonContacts { get; set; }
+        public DbSet<KnowledgeArea> KnowledgeAreas { get; set; }
+        public DbSet<AcademicAchievement> AcademicAchievements { get; set; }
+        public DbSet<AcademicAchievementKnowledgeAreaBridge> AcademicAchievementKnowledgeAreaBridges { get; set; }
 
         public DbSet<PaymentTerm> PaymentTerms { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }
@@ -145,20 +148,20 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleImageBridge> VehicleImageBridges { get; set; }
-        public DbSet<StructureKind> StructureKinds { get; set; }
-        public DbSet<OrganizationalUnity> OrganizationalUnities { get; set; }
-        public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
-        public DbSet<Structure> Structures { get; set; }
+        public DbSet<AdministrativeEntityKind> AdministrativeEntityKinds { get; set; }
+        public DbSet<OrganizationalUnit> OrganizationalUnits { get; set; }
+        public DbSet<OrganizationalStructure> OrganizationalStructures { get; set; }
+        public DbSet<OrganizationalStructuringUnit> OrganizationalStructuringUnits { get; set; }
+        public DbSet<AdministrativeEntity> AdministrativeEntities { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
 
-        public DbSet<Schooling> Schoolings { get; set; }
         public DbSet<SalaryStandard> SalaryStandards { get; set; }
         public DbSet<WorkPositionKind> WorkPositionKinds { get; set; }
         public DbSet<WorkPosition> WorkPositions { get; set; }
         public DbSet<WorkPositionResponsability> WorkPositionResponsabilities { get; set; }
         public DbSet<Workforce> Workforces { get; set; }
-        public DbSet<WorkforceOrganizationalUnity> WorkforceOrganizationalUnities { get; set; }
+        public DbSet<WorkforceOrganizationalUnit> WorkforceOrganizationalUnits { get; set; }
         public DbSet<Vacant> Vacants { get; set; }
         public DbSet<VacantPostulation> VacantPostulations { get; set; }
         public DbSet<VacantPostulationOcupation> VacantPostulationOcupations { get; set; }
@@ -166,8 +169,10 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<OcupationCandidate> OcupationCandidates { get; set; }
         public DbSet<AdmitionPropousal> AdmitionPropousals { get; set; }
         public DbSet<Framework.Decisor.HumanResources.Persistence.Entities.Contract.AbstractEmploymentContract> EmploymentContracts { get; set; }
+        public DbSet<DesignationEmploymentContract> DesignationEmploymentContracts { get; set; }
         public DbSet<NamingEmploymentContract> NamingEmploymentContracts { get; set; }
         public DbSet<AdmitionEmploymentContract> AdmitionEmploymentContracts { get; set; }
+        public DbSet<DesignationResolution> DesignationResolutions { get; set; }
         public DbSet<NamingResolution> NamingResolutions { get; set; }
         public DbSet<RemotionResolution> RemotionResolutions { get; set; }
         public DbSet<Staff> Staffs { get; set; }

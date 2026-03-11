@@ -8,7 +8,7 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Defau
         {
             var _model = new Models.Page.Configuration.CostCenterConfigurationPageModel(model);
 
-            var apiConnectClient = new Domain.Interop.API.Connect.Clients.ParentalStructuresAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+            var apiConnectClient = new Domain.Interop.API.Connect.Clients.ParentalAdministrativeEntitiesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
             _model.AvailableStructures = await apiConnectClient.GetEnabledAsync();
 

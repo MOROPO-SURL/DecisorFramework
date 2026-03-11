@@ -11,7 +11,7 @@
 	  <None Remove="Controllers\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.2" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Servicing.Interop.API.Common\Servicing.Interop.API.Common.csproj" />
