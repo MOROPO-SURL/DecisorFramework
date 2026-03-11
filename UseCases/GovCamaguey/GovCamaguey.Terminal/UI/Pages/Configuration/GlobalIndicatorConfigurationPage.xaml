@@ -8,6 +8,7 @@
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;assembly=MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common"    
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Configuration.GlobalIndicatorConfigurationPage"
     x:TypeArguments="interop_common_display_models:GlobalIndicatorDisplayModel,interop_common_display_models:GlobalIndicatorDisplayModel,local_configuration_page_models:GlobalIndicatorConfigurationPageModel"
     x:DataType="local_configuration_page_models:GlobalIndicatorConfigurationPageModel">
@@ -16,6 +17,8 @@
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -79,9 +82,14 @@
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad de medida" />
                         <Picker 
                             x:Name="UnitMeasurementPicker"
-                            ItemsSource="{Binding AvailableUnitMeasurements}" 
-                            ItemDisplayBinding="{Binding Name}"
+                            ItemsSource="{Binding AvailableUnitMeasurements}"
+                            ItemDisplayBinding="{Binding Name}" 
+                            SelectedItem="{Binding UnitMeasurement}"
                             SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:GlobalIndicatorConfigurationPageModel.UnitMeasurementValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:GlobalIndicatorConfigurationPageModel.UnitMeasurementValidableProperty}}"
+                            TextColor="IndianRed" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <VerticalStackLayout 
@@ -100,6 +108,7 @@
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
                             <Button
+                                IsEnabled="{Binding UnitMeasurement, Converter={StaticResource IsNotNullConverter}}"
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
                                 Text="Agregar"
