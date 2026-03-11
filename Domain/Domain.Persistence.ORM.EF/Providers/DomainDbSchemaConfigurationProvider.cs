@@ -35,7 +35,9 @@ public class DomainDbSchemaConfigurationProvider : Guama.Core.Persistence.ORM.EF
                 new Configurators.EmployeeEntityTypeConfigurator(),
                 new BaseEntityTypeConfigurator<Entities.UnitMeasurement>(),
                 new Configurators.UnitMeasurementConversionBridgeEntityTypeConfigurator(),
-                new BaseEntityTypeConfigurator<Entities.KnowledgeArea>()
+                new BaseEntityTypeConfigurator<Entities.KnowledgeArea>(),
+                new BaseEntityTypeConfigurator<Entities.AcademicAchievement>(),
+                new Configurators.AcademicAchievementKnowledgeAreaBridgeEntityTypeConfigurator()
             ];
         }
     }

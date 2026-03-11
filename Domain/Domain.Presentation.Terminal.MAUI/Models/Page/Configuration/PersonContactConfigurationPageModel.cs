@@ -3,6 +3,7 @@ using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Extensions;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Guama.Identity.Persistence.Enumerations;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration
 {
@@ -43,6 +44,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
                 Priority = model.Priority;
                 SkinKind = model.SkinKind;
                 PersonalIdentificationNumber = model.PersonalIdentificationNumber;
+                DoctorateAcademicAchievements = [.. model.AcademicAchievements.Where(_model => _model.AcademicLevel == Persistence.Enumerations.AcademicLevel.Doctorate)];
+                MasterAcademicAchievements = [.. model.AcademicAchievements.Where(_model => _model.AcademicLevel == Persistence.Enumerations.AcademicLevel.Master)];
+                PostgraduateAcademicAchievements = [.. model.AcademicAchievements.Where(_model => _model.AcademicLevel == Persistence.Enumerations.AcademicLevel.Postgraduate)];
 
                 foreach (var item in model.Identity.EmailContacts) EmailContactItems.Add(item);
 
@@ -93,6 +97,12 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         public ObservableCollection<WebContactItemDisplayModel> WebContactItems { get; set; } = [];
 
         public ObservableCollection<PostalContactItemDisplayModel> PostalContactItems { get; set; } = [];
+
+        public ObservableCollection<AcademicAchievementDisplayModel> DoctorateAcademicAchievements { get; set; } = [];
+
+        public ObservableCollection<AcademicAchievementDisplayModel> MasterAcademicAchievements { get; set; } = [];
+
+        public ObservableCollection<AcademicAchievementDisplayModel> PostgraduateAcademicAchievements { get; set; } = [];
 
         public UserDisplayModel[] AvailableUsers { get; set; }
     }

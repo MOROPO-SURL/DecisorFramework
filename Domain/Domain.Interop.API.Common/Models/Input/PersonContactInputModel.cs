@@ -1,5 +1,6 @@
 ﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
 using System.Collections.Generic;
 
@@ -48,6 +49,10 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         public List<WebContactItemInputModel> EditionWebContactItems { get; set; } = new List<WebContactItemInputModel>();
         public List<WebContactItemInputModel> IncomingWebContactItems { get; set; } = new List<WebContactItemInputModel>();
         public List<WebContactItemDisplayModel> OutgoingWebContactItems { get; set; } = new List<WebContactItemDisplayModel>();
+
+        public List<AcademicAchievementInputModel> EditionAcademicAchievements { get; set; } = new List<AcademicAchievementInputModel>();
+        public List<AcademicAchievementInputModel> IncomingAcademicAchievements { get; set; } = new List<AcademicAchievementInputModel>();
+        public List<AcademicAchievementDisplayModel> OutgoingAcademicAchievements { get; set; } = new List<AcademicAchievementDisplayModel>();
 
         public PersonContact Export()
         {
