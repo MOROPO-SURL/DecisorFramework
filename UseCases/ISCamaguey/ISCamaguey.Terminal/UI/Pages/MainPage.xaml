@@ -5,7 +5,7 @@
     xmlns:decisorframework_core_models_page="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
-    xmlns:freaky_controls="clr-namespace:Maui.FreakyControls;assembly=Maui.FreakyControls"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages.MainPage"
     x:TypeArguments="decisorframework_core_models_page:MainPageModel"
     x:DataType="decisorframework_core_models_page:MainPageModel"
@@ -14,6 +14,8 @@
         <ResourceDictionary>
             <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="240" AbsoluteHorizontalSeparation="20" />
             <caneyframework_presentation_converters:DoubleToFactorConverter x:Key="DoubleToFactorConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
 
             <Style x:Key="SectionCardFrameStyle" TargetType="Frame">
                 <Setter Property="CornerRadius" Value="4" />
@@ -52,18 +54,22 @@
                 <ColumnDefinition />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="168" />
+                <RowDefinition Height="1" />
+            </Grid.RowDefinitions>
             <Image
-                Grid.ColumnSpan="3"
+                Grid.ColumnSpan="3" Grid.Row="0"
                 HorizontalOptions="Start"
                 Source="logo_art_frame.png" />
             <Grid
                 x:Name="LogoWrapLayout"
-                Grid.Column="0"
+                Grid.Column="0" Grid.Row="0"
                 MinimumWidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}">
                 <Image Style="{StaticResource LogoImageViewStyle}" />
             </Grid>
             <Grid
-                Grid.Column="2"
+                Grid.Column="2" Grid.Row="0"
                 Padding="20"
                 ColumnSpacing="10">
                 <Grid.IsVisible>
@@ -93,6 +99,27 @@
                         TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                         FontSize="Medium" />
                 </VerticalStackLayout>
+                <Frame
+                    IsVisible="{Binding NotificationCount, Converter={StaticResource IsNotNullConverter}}"
+                    Grid.Column="0"
+                    Margin="8"
+                    HorizontalOptions="End" VerticalOptions="Start"
+                    BackgroundColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
+                    MinimumWidthRequest="32"
+                    CornerRadius="16"
+                    BorderColor="Transparent"
+                    Padding="4">
+                    <Frame.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="NotificationsLayoutTapGestureRecognizer_Tapped" />
+                    </Frame.GestureRecognizers>
+                    <Grid>
+                        <Label 
+                            FontAttributes="Bold"
+                            HorizontalTextAlignment="Center"
+                            TextColor="{AppThemeBinding Light=White, Dark=Black}"
+                            Text="{Binding NotificationCount}" />
+                    </Grid>
+                </Frame>
                 <BoxView
                     Grid.Column="1"
                     Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
@@ -117,21 +144,24 @@
                     Grid.Column="3"
                     Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray900}}" />
                 <Grid
-                    Grid.Column="4"
-                    Margin="20,0,0,0"
-                    ColumnSpacing="6" RowSpacing="0">
+                    Grid.Column="4" Grid.Row="0"
+                    VerticalOptions="Center"
+                    Padding="8,0,0,0"
+                    ColumnSpacing="10">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition Width="Auto" />
                         <ColumnDefinition />
                     </Grid.ColumnDefinitions>
                     <Grid.RowDefinitions>
+                        <RowDefinition />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
                         <RowDefinition Height="Auto" />
+                        <RowDefinition />
                     </Grid.RowDefinitions>
                     <Border
-                        Grid.Column="0" Grid.RowSpan="3"
+                        Grid.Column="0" Grid.RowSpan="5"
                         WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
                         StrokeThickness="4"
                         StrokeLineJoin="Bevel">
@@ -143,13 +173,13 @@
                             Source="default_person_picture.jpg" />
                     </Border>
                     <Label
-                        Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="0"
+                        Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
                         LineBreakMode="TailTruncation" 
                         Text="{Binding User.Id}"
                         FontSize="Medium"
                         FontAttributes="Bold" />
                     <Label
-                        Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="1"
+                        Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="2"
                         LineBreakMode="TailTruncation"
                         TextColor="{AppThemeBinding Light={StaticResource Gray900}, Dark={StaticResource Gray200}}"
                         FontSize="Default">
@@ -162,19 +192,21 @@
                         </Label.FormattedText>
                     </Label>
                     <Button
+                        Grid.Column="1" Grid.Row="3"
                         Style="{StaticResource FontIconImageButtonStyle}"
-                        Grid.Column="1" Grid.Row="2"
-                        Margin="0, 10"
+                        Margin="0,10"
                         Text="&#xF6BB;" />
                     <Button
+                        Grid.Column="2" Grid.Row="3"
                         Style="{StaticResource FontIconImageButtonStyle}"
-                        Grid.Column="2" Grid.Row="2"
                         HorizontalOptions="Start"
-                        Margin="0, 10"
-                        Text="&#xF5FD;"
-                        Clicked="LogOutButton_Clicked" />
+                        Margin="0,10"
+                        Text="&#xF5FD;" />
                 </Grid>
             </Grid>
+            <BoxView 
+                Grid.ColumnSpan="3" Grid.Row="1"
+                Color="{AppThemeBinding Light={StaticResource Gray200}, Dark={StaticResource Gray800}}" />
         </Grid>
         <ScrollView VerticalOptions="FillAndExpand">
             <FlexLayout

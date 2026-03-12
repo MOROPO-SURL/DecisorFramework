@@ -154,7 +154,10 @@
 	  <MauiXaml Update="UI\Shells\ServicingShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView.xaml">
+	  <MauiXaml Update="UI\Views\Card\OcupationSimplifiedManageOrganizationalStructuringUnitLeafCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\OcupationSimplifiedManageOrganizationalStructuringUnitTreeCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
@@ -168,6 +171,12 @@
 	  </Compile>
 	  <Compile Update="UI\Shells\GovernanceShell.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Views\Card\OcupationSimplifiedManageOrganizationalStructuringUnitLeafCardView.xaml.cs">
+	    <DependentUpon>OcupationSimplifiedManageOrganizationalStructuringUnitLeafCardView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Views\Card\OcupationSimplifiedManageOrganizationalStructuringUnitTreeCardView.xaml.cs">
+	    <DependentUpon>OcupationSimplifiedManageOrganizationalStructuringUnitTreeCardView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 

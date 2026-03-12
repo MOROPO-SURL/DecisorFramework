@@ -2,7 +2,6 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:frwk_domain_list_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:frwk_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.DomainShell">
     <Shell.FlyoutBehavior>
@@ -38,32 +37,31 @@
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Entidades Administrativas"
-        ContentTemplate="{DataTemplate frwk_domain_manage_pages:StructuresManagePage}">
+        ContentTemplate="{DataTemplate frwk_domain_manage_pages:AdministrativeEntitiesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF006B;"
+                Glyph="{StaticResource AdministrativeEntityMaterialDesignGlyphIconId}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Estructuras Organizacionales"
+        ContentTemplate="{DataTemplate frwk_domain_manage_pages:OrganizationalStructuresManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="{StaticResource OrganizationalStructureMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
         Title="Unidades Organizativas"
-        ContentTemplate="{DataTemplate frwk_domain_manage_pages:OrganizationalUnitiesManagePage}">
+        ContentTemplate="{DataTemplate frwk_domain_manage_pages:OrganizationalUnitsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF645;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
-    <ShellContent
-        Title="Tipos de Entidad Administrativa"
-        ContentTemplate="{DataTemplate frwk_domain_list_pages:StructureKindsListPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF006C;"
+                Glyph="{StaticResource OrganizationalUnitDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -73,7 +71,7 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF472;"
+                Glyph="{StaticResource UnitMeasurementMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

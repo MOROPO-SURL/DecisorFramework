@@ -54,28 +54,27 @@
                     </VerticalStackLayout>
                 </FlexLayout>
                 <VerticalStackLayout>
-                    <Label 
-                        Style="{StaticResource CaptionFieldLabelStyle}" 
+                    <Label
+                        Style="{StaticResource CaptionFieldLabelStyle}"
                         Margin="8,8,8,0" 
-                        Text="Unidades Organizativas" />
-                    <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
-                    <CollectionView ItemsSource="{Binding OrganizationalUnities}">
-                        <CollectionView.ItemsLayout>
-                            <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
-                        </CollectionView.ItemsLayout>
-                        <CollectionView.EmptyView>
-                            <Label Text="Seleccione estructura de plantilla de una entidad administrativa ..." FontAttributes="Italic" TextColor="DimGray" Padding="8,4" />
-                        </CollectionView.EmptyView>
-                        <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <local_card_views:OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView 
-                                    Padding="8,4"
-                                    ContactPickButtonClick="ContactPickButton_Clicked"
-                                    RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"
-                                    EmployeeDetailButtonClick="EmployeeDetailButton_Clicked" />
-                            </DataTemplate>
-                        </CollectionView.ItemTemplate>
-                    </CollectionView>
+                        Text="Especificación de ocupaciones" />
+                    <BoxView
+                        Color="DimGray" 
+                        Margin="8,4,8,8" HeightRequest="1" />
+                    <ContentView 
+                        IsVisible="{Binding RootTreeOcupationManageOrganizationalStructuringUnit, Converter={StaticResource IsNotNullConverter}}"
+                        Margin="0,4,0,0">
+                        <local_card_views:OcupationSimplifiedManageOrganizationalStructuringUnitTreeCardView
+                            BindingContext="{Binding RootTreeOcupationManageOrganizationalStructuringUnit}"
+                            ContactPickButtonClick="ContactPickButton_Clicked"
+                            RemoveOcupationButtonClick="RemoveOcupationButton_Clicked"
+                            EmployeeDetailButtonClick="EmployeeDetailButton_Clicked" />
+                    </ContentView>
+                    <Label
+                        IsVisible="{Binding RootTreeOcupationManageOrganizationalStructuringUnit, Converter={StaticResource IsNullConverter}}"
+                        FontAttributes="Italic"
+                        TextColor="DimGray"
+                        Text="Seleccione estructura de plantilla de una entidad administrativa ..." />
                 </VerticalStackLayout>
             </VerticalStackLayout>
         </ScrollView>

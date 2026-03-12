@@ -98,7 +98,7 @@
 
             if (target.Controller == "costcenters") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-finance");
 
-            if (target.Controller == "structurekinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-graph-outline");
+            if (target.Controller == "administrativeentitykinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-office-building");
 
             if (target.Controller == "propertykinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-home-city-outline");
 
