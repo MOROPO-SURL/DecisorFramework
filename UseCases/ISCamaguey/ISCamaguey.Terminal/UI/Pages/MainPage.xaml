@@ -87,6 +87,9 @@
                     MinimumWidthRequest="124"
                     VerticalOptions="Center"
                     Padding="20" Spacing="4">
+                    <VerticalStackLayout.GestureRecognizers>
+                        <TapGestureRecognizer Tapped="NotificationsLayoutTapGestureRecognizer_Tapped" />
+                    </VerticalStackLayout.GestureRecognizers>
                     <Label
                         HorizontalOptions="Center"
                         Text="&#xF09E;"
@@ -201,7 +204,8 @@
                         Style="{StaticResource FontIconImageButtonStyle}"
                         HorizontalOptions="Start"
                         Margin="0,10"
-                        Text="&#xF5FD;" />
+                        Text="&#xF5FD;"
+                        Clicked="LogOutButton_Clicked" />
                 </Grid>
             </Grid>
             <BoxView 
