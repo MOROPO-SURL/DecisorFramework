@@ -77,6 +77,7 @@
                     </ContentView>
                     <Label
                         IsVisible="{Binding RootTreeOcupationManageOrganizationalStructuringUnit, Converter={StaticResource IsNullConverter}}"
+                        Margin="8,0"
                         FontAttributes="Italic"
                         TextColor="DimGray"
                         Text="Seleccione estructura de plantilla de una entidad administrativa ..." />

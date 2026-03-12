@@ -25,7 +25,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 
             PersonalIdentificationNumber = entity.PersonalIdentificationNumber;
             SkinKind = entity.SkinKind;
-            AcademicAchievements = entity.AcademicAchievements.Select(_entity =>
+            AcademicAchievements = entity.AcademicAchievements?.Select(_entity =>
             {
                 var model = new AcademicAchievementDisplayModel();
 
