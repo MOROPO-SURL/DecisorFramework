@@ -39,16 +39,6 @@
     </Shell.FlyoutHeader>
     <MenuFlyoutItem Text="Plantilla" />
     <ShellContent
-        Title="Personal"
-        ContentTemplate="{DataTemplate local_manage_pages:OcupationsSimplifiedManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF002C;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
         Title="Estructuras"
         ContentTemplate="{DataTemplate frwk_humanresources_manage_pages:WorkforcesManagePage}">
         <ShellContent.Icon>
@@ -59,12 +49,22 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Asignaciones"
+        Title="Configuraciones"
         ContentTemplate="{DataTemplate frwk_humanresources_manage_pages:StaffsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFCF8;"
+                Glyph="&#xF493;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Personal"
+        ContentTemplate="{DataTemplate local_manage_pages:OcupationsSimplifiedManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF002C;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
