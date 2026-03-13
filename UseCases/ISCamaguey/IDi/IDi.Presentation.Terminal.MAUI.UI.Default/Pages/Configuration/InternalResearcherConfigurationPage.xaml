@@ -161,7 +161,7 @@
                                     Clicked="DoctorateResearchAreaAgregationButton_Clicked" />
                                 <BoxView
                                     Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="{StaticResource Gray050}" />
+                                    Color="DimGray" />
                                 <VerticalStackLayout
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     Margin="4"
@@ -248,7 +248,7 @@
                                     Clicked="MasteryResearchAreaAgregationButton_Clicked" />
                                 <BoxView
                                     Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="{StaticResource Gray050}" />
+                                    Color="DimGray" />
                                 <VerticalStackLayout
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     Margin="4"
@@ -335,7 +335,7 @@
                                     Clicked="SpecializationResearchAreaAgregationButton_Clicked" />
                                 <BoxView
                                     Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="{StaticResource Gray050}" />
+                                    Color="DimGray" />
                                 <VerticalStackLayout
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     Margin="4"
@@ -408,7 +408,7 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <Grid
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         ColumnSpacing="6" RowSpacing="6">
                         <Grid.RowDefinitions>
