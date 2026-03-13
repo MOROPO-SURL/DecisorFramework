@@ -8,6 +8,14 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public System.Guid MainKnowledgeAreaId { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(512)]
+        public string Title { get; set; }
+
+        public System.DateTime? At { get; set; }
+
+        [System.ComponentModel.DataAnnotations.MaxLength(512)]
+        public string Institution { get; set; }
+
         public Display.KnowledgeAreaDisplayModel[] ExtraKnowledgeAreas { get; set; }
 
         public override Persistence.Entities.AcademicAchievement Export()
@@ -22,6 +30,9 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         public override void Mergue(Persistence.Entities.AcademicAchievement entity)
         {
             entity.AcademicLevel = AcademicLevel;
+            entity.Title = Title;
+            entity.At = At;
+            entity.Institution = Institution;
 
             entity.KnowledgeAreaBridges.Clear();
 

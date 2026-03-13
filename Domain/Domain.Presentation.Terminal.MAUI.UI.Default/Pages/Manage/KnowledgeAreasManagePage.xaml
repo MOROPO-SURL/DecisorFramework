@@ -2,7 +2,8 @@
 <core_ui_base_pages:ManageBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:local_constants="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Constants"
+    xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
@@ -12,7 +13,7 @@
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.KnowledgeAreasManagePage"
     x:TypeArguments="interop_common_display_models:KnowledgeAreaDisplayModel,presentation_manage_page_models:KnowledgeAreasManagePageModel,presentation_configuration_page_models:KnowledgeAreaConfigurationPageModel"
     x:DataType="presentation_manage_page_models:KnowledgeAreasManagePageModel"
-    Title="Gestión de Áreas del Conocimiento">
+    Title="Gestión de Áreas del conocimiento">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
@@ -54,29 +55,12 @@
                             <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="interop_common_display_models:KnowledgeAreaDisplayModel">
-                                <Frame HeightRequest="{Static local:KnowledgeAreasManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
-                                    <Frame.GestureRecognizers>
+                            <DataTemplate>
+                                <local_card_views:KnowledgeAreaDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.KNOWLEDGE_AREA_DEFAULT_CARD_VIEW_HEIGHT}">
+                                    <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </Frame.GestureRecognizers>
-                                    <StackLayout>
-                                        <Label 
-                                            Text="{Binding Name}"
-                                            LineBreakMode="TailTruncation"
-                                            FontSize="Medium" />
-                                        <Label 
-                                            Margin="0,8,0,0"
-                                            Text="Descripción"
-                                            TextColor="DimGray"
-                                            FontSize="Caption"
-                                            FontAttributes="Bold" />
-                                        <Label 
-                                            VerticalOptions="FillAndExpand"
-                                            LineBreakMode="TailTruncation"
-                                            MaxLines="2"
-                                            Text="{Binding Description, TargetNullValue='---'}" />
-                                    </StackLayout>
-                                </Frame>
+                                    </ContentView.GestureRecognizers>
+                                </local_card_views:KnowledgeAreaDefaultCardView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>
