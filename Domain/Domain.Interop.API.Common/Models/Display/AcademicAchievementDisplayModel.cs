@@ -10,12 +10,21 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 
         public KnowledgeAreaDisplayModel MainKnowledgeArea { get; set; }
 
+        public string Title { get; set; }
+
+        public System.DateTime? At { get; set; }
+
+        public string Institution { get; set; }
+
         public KnowledgeAreaDisplayModel[] ExtraKnowledgeAreas { get; set; }
 
         public void Import(Persistence.Entities.AcademicAchievement entity)
         {
             Id = entity.Id;
             AcademicLevel = entity.AcademicLevel;
+            Title = entity.Title;
+            At = entity.At;
+            Institution = entity.Institution;
             ExtraKnowledgeAreas = entity.KnowledgeAreaBridges.Select(bridge =>
             {
                 var model = new KnowledgeAreaDisplayModel();
