@@ -14,7 +14,6 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" SingleSpacing="8" />
-            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
             <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
@@ -77,6 +76,7 @@
                     </ContentView>
                     <Label
                         IsVisible="{Binding RootTreeOcupationManageOrganizationalStructuringUnit, Converter={StaticResource IsNullConverter}}"
+                        Margin="8,0"
                         FontAttributes="Italic"
                         TextColor="DimGray"
                         Text="Seleccione estructura de plantilla de una entidad administrativa ..." />
