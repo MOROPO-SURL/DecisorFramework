@@ -6,7 +6,7 @@ using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend;
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend.API;
 
 [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/governance/[controller]")]
@@ -19,7 +19,7 @@ public class ObjectiveIndicatorResultsController : Framework.Guama.Core.Presenta
     public ObjectiveIndicatorResultsController(IBridgeRepository<ObjectiveUserBridge, Objective, System.Guid, User, string> userBridgeRepository, IEntityRepository<ObjectiveIndicator, System.Guid> objectiveIndicatorRepository, IEntityRepository<ObjectiveIndicatorResult, long> repository, Microsoft.Extensions.Localization.IStringLocalizer<ObjectiveIndicatorResultsController> localizer, Microsoft.Extensions.Logging.ILogger<ObjectiveIndicatorResultsController> logger)
         : base(repository, localizer, logger)
     {
-        this.indicatorRepository = objectiveIndicatorRepository;
+        indicatorRepository = objectiveIndicatorRepository;
         this.userBridgeRepository = userBridgeRepository;
     }
 

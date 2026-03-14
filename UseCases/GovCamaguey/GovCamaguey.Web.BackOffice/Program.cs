@@ -77,6 +77,11 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice
 
             builder.Services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Helpers.Facade.IDataInitializationHelper, Helpers.GlobalDataInitializationHelper>();
 
+            builder.Services.AddScoped<Services.Contract.IHtmlToPdfService, Services.WkhtmltopdfHtmlToPdfService>();
+            builder.Services.AddScoped<Services.Contract.IViewRenderService, Services.DefaultViewRenderService>();
+
+            builder.Services.AddHttpContextAccessor();
+
             builder.Services.AddAuthentication(config =>
             {
                 config.DefaultScheme = Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme;

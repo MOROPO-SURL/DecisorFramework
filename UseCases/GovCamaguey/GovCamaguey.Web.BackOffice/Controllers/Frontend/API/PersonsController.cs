@@ -10,19 +10,19 @@ using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 using System.Linq;
 
-namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend.API
 {
     [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/governance/[controller]")]
     [ApiController]
-    public class OrganizationsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Organization, System.Guid, OrganizationInputModel, OrganizationDisplayModel>
+    public class PersonsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Person, System.Guid, PersonInputModel, PersonDisplayModel>
     {
         private readonly IEntityRepository<EmailContactItem, System.Guid> emailContactRepository;
         private readonly IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository;
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
         private readonly IImageFileManagerFacade imageFileManager;
 
-        public OrganizationsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository, IEntityRepository<EmailContactItem, System.Guid> emailContactRepository, IEntityRepository<Organization, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OrganizationsController> localizer, Microsoft.Extensions.Logging.ILogger<OrganizationsController> logger) : base(repository, localizer, logger)
+        public PersonsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository, IEntityRepository<EmailContactItem, System.Guid> emailContactRepository, IEntityRepository<Person, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PersonsController> localizer, Microsoft.Extensions.Logging.ILogger<PersonsController> logger) : base(repository, localizer, logger)
         {
             this.emailContactRepository = emailContactRepository;
             this.phoneContactRepository = phoneContactRepository;
@@ -30,7 +30,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
             this.imageFileManager = imageFileManager;
         }
 
-        protected override System.Linq.Expressions.Expression<System.Func<Organization, bool>> GetGlobalSelector()
+        protected override System.Linq.Expressions.Expression<System.Func<Person, bool>> GetGlobalSelector()
         {
             return entity => !entity.Archived && entity.Enabled;
         }
@@ -50,12 +50,12 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
             return NotFound();
         }
 
-        protected override System.Func<Organization, object> GetOrderSelector()
+        protected override System.Func<Person, object> GetOrderSelector()
         {
             return entity => entity.Priority;
         }
 
-        protected override OrganizationDisplayModel EntityToDisplayModel(Organization entity)
+        protected override PersonDisplayModel EntityToDisplayModel(Person entity)
         {
             var model = base.EntityToDisplayModel(entity);
 
@@ -67,43 +67,43 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
             return model;
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationViewerPermission)]
-        public override ActionResult<OrganizationDisplayModel[]> Get()
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.PersonViewerPermission)]
+        public override ActionResult<PersonDisplayModel[]> Get()
         {
             return base.Get();
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationViewerPermission)]
-        public override ActionResult<OrganizationDisplayModel> Get(System.Guid key)
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.PersonViewerPermission)]
+        public override ActionResult<PersonDisplayModel> Get(System.Guid key)
         {
             return base.Get(key);
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationViewerPermission)]
-        public override ActionResult<PaginationModel<OrganizationDisplayModel>> GetPaginate(int sheet = 1, int limit = 25)
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.PersonViewerPermission)]
+        public override ActionResult<PaginationModel<PersonDisplayModel>> GetPaginate(int sheet = 1, int limit = 25)
         {
             return base.GetPaginate(sheet, limit);
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationCreatorPermission)]
-        public override ActionResult Create([FromBody] OrganizationInputModel model)
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.PersonCreatorPermission)]
+        public override ActionResult Create([FromBody] PersonInputModel model)
         {
             return base.Create(model);
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationEditorPermission)]
-        public override ActionResult Edit([FromBody] OrganizationInputModel model)
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.PersonEditorPermission)]
+        public override ActionResult Edit([FromBody] PersonInputModel model)
         {
             return base.Edit(model);
         }
 
-        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.OrganizationRemoverPermission)]
+        [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.PersonRemoverPermission)]
         public override ActionResult Archive(System.Guid key)
         {
             return base.Archive(key);
         }
 
-        protected override void PreCreate(Organization entity, OrganizationInputModel model)
+        protected override void PreCreate(Person entity, PersonInputModel model)
         {
             base.PreCreate(entity, model);
 
@@ -121,7 +121,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                     Length = model.Image.ContentData.LongLength,
                     Width = imageSkBitmap.Width,
                     Height = imageSkBitmap.Height,
-                    About = string.Format("Image for Organization: {0}", model.Id)
+                    About = string.Format("Image for Person: {0}", model.Id)
                 }, User.Identity.Name, false);
 
                 imageFileManager.SaveImageFileContent(entity.Identity.Image.Id, model.Image.ContentData, model.Image.ContentType);
@@ -136,7 +136,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                     PhoneNumber = _model.PhoneNumber
                 }, User.Identity.Name, false);
 
-                entity.Identity.PhoneContactItemBridges.Add(new OrganizationPhoneContactItemBridge
+                entity.Identity.PhoneContactItemBridges.Add(new PersonPhoneContactItemBridge
                 {
                     ProwId = entity.Id,
                     SternId = _entity.Id
@@ -152,7 +152,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                     EmailAddress = _model.EmailAddress
                 }, User.Identity.Name, false);
 
-                entity.Identity.EmailContactItemBridges.Add(new OrganizationEmailContactItemBridge
+                entity.Identity.EmailContactItemBridges.Add(new PersonEmailContactItemBridge
                 {
                     ProwId = entity.Id,
                     SternId = _entity.Id
@@ -160,7 +160,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
             }
         }
 
-        protected override void PreEdit(Organization entity, OrganizationInputModel model)
+        protected override void PreEdit(Person entity, PersonInputModel model)
         {
             base.PreEdit(entity, model);
 
@@ -178,7 +178,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                     Length = model.Image.ContentData.LongLength,
                     Width = imageSkBitmap.Width,
                     Height = imageSkBitmap.Height,
-                    About = string.Format("Image for Organization: {0}", model.Id)
+                    About = string.Format("Image for Person: {0}", model.Id)
                 }, User.Identity.Name, false);
 
                 imageFileManager.SaveImageFileContent(entity.Identity.Image.Id, model.Image.ContentData, model.Image.ContentType);
@@ -212,7 +212,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                     PhoneNumber = _model.PhoneNumber
                 }, User.Identity.Name, false);
 
-                entity.Identity.PhoneContactItemBridges.Add(new OrganizationPhoneContactItemBridge
+                entity.Identity.PhoneContactItemBridges.Add(new PersonPhoneContactItemBridge
                 {
                     ProwId = entity.Id,
                     SternId = _entity.Id
@@ -249,7 +249,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                     EmailAddress = _model.EmailAddress
                 }, User.Identity.Name, false);
 
-                entity.Identity.EmailContactItemBridges.Add(new OrganizationEmailContactItemBridge
+                entity.Identity.EmailContactItemBridges.Add(new PersonEmailContactItemBridge
                 {
                     ProwId = entity.Id,
                     SternId = _entity.Id
@@ -259,7 +259,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
             #endregion
         }
 
-        protected override void PostEdit(Organization entity, OrganizationInputModel model)
+        protected override void PostEdit(Person entity, PersonInputModel model)
         {
             base.PostEdit(entity, model);
 
@@ -275,6 +275,20 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
                 }
             }
             catch { }
+        }
+
+        protected override void PostDelete(Person entity)
+        {
+            base.PostDelete(entity);
+
+            if (entity.Identity.ImageId != null)
+            {
+                var oldImage = imageRepository.Get(entity.Identity.ImageId.Value);
+
+                imageRepository.Delete(oldImage, User.Identity.Name);
+
+                imageFileManager.DeleteImageFile(oldImage);
+            }
         }
     }
 }

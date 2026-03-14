@@ -5,12 +5,12 @@ using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 
-namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend.API
 {
     [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/governance/[controller]")]
     [ApiController]
-    public class GuidelinesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Guideline, System.Guid, Interop.API.Common.Models.Input.GuidelineInputModel, Interop.API.Common.Models.Display.GuidelineDisplayModel>
+    public class GuidelinesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Guideline, System.Guid, GuidelineInputModel, GuidelineDisplayModel>
     {
         public GuidelinesController(Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Guideline, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<GuidelinesController> localizer, Microsoft.Extensions.Logging.ILogger<GuidelinesController> logger)
             : base(repository, localizer, logger)

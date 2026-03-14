@@ -6,7 +6,7 @@ using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend;
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend.API;
 
 [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/governance/[controller]")]
@@ -63,7 +63,7 @@ public class ActionIndicatorResultsController : Framework.Guama.Core.Presentatio
     {
         var rawResult = new List<ActionIndicatorResult>();
 
-        foreach (var key in keys) 
+        foreach (var key in keys)
         {
             var last = Repository.GetAll().Where(entity => entity.IndicatorId == key).OrderByDescending(entity => entity.At).FirstOrDefault();
 

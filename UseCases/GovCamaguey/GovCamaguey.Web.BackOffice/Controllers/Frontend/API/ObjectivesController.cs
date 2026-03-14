@@ -8,7 +8,7 @@ using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 using System.Linq;
 
-namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend;
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend.API;
 
 [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/governance/[controller]")]
@@ -32,17 +32,17 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
         IBridgeRepository<ActionUserBridge, Action, System.Guid, User, string> actionUserBridgeRepository,
         IBridgeRepository<ProyectionUserBridge, Proyection, System.Guid, User, string> proyectionUserBridgeRepository,
         IBridgeRepository<ObjectiveUserBridge, Objective, System.Guid, User, string> objectiveUserBridgeRepository,
-        IEntityRepository<ObjectiveIndicatorMontlyPlan, System.Guid> objectiveIndicatorMontlyPlanRepository, 
-        IEntityRepository<ObjectiveIndicator, System.Guid> objectiveIndicatorRepository, 
-        IEntityRepository<ActionIndicatorMontlyPlan, System.Guid> actionIndicatorMontlyPlanRepository, 
-        IEntityRepository<ActionIndicator, System.Guid> actionIndicatorRepository, 
-        IEntityRepository<ActionMonthlyClosure, System.Guid> actionMonthlyClosureRepository, 
+        IEntityRepository<ObjectiveIndicatorMontlyPlan, System.Guid> objectiveIndicatorMontlyPlanRepository,
+        IEntityRepository<ObjectiveIndicator, System.Guid> objectiveIndicatorRepository,
+        IEntityRepository<ActionIndicatorMontlyPlan, System.Guid> actionIndicatorMontlyPlanRepository,
+        IEntityRepository<ActionIndicator, System.Guid> actionIndicatorRepository,
+        IEntityRepository<ActionMonthlyClosure, System.Guid> actionMonthlyClosureRepository,
         IEntityRepository<Action, System.Guid> actionRepository,
         IEntityRepository<ProyectionIndicatorMontlyPlan, System.Guid> proyectionIndicatorMontlyPlanRepository,
         IEntityRepository<ProyectionIndicator, System.Guid> proyectionIndicatorRepository,
-        IEntityRepository<Proyection, System.Guid> proyectionRepository, 
-        IEntityRepository<Objective, System.Guid> repository, 
-        Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer, 
+        IEntityRepository<Proyection, System.Guid> proyectionRepository,
+        IEntityRepository<Objective, System.Guid> repository,
+        Microsoft.Extensions.Localization.IStringLocalizer<ObjectivesController> localizer,
         Microsoft.Extensions.Logging.ILogger<ObjectivesController> logger)
         : base(repository, localizer, logger)
     {

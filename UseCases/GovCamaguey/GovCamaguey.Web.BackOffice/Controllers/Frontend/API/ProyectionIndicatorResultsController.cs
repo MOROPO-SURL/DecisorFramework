@@ -6,7 +6,7 @@ using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend;
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend.API;
 
 [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Route("api/governance/[controller]")]
@@ -45,7 +45,7 @@ public class ProyectionIndicatorResultsController : Framework.Guama.Core.Present
     {
         if (IsIndicatorModerable(model.IndicatorId)) return base.Create(model);
 
-        return new ForbidResult();        
+        return new ForbidResult();
     }
 
     [RequirePermissions(Interop.API.Common.Constants.Security.Authorization.ProyectionIndicatorResultEditorPermission)]
