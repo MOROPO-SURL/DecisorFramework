@@ -5,10 +5,9 @@
     xmlns:local_view_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.View"
     xmlns:local_card_views="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;assembly=MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common"
-    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
-    x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card.ActionDeepCardView"
-    x:DataType="local_view_models:ActionViewModel">
+    x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card.ProyectionDeepSummaryCardView"
+    x:DataType="local_view_models:ProyectionSummaryViewModel">
     <ContentView.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
@@ -25,15 +24,41 @@
                             Text="{Binding ObjectiveIndex, StringFormat='{0}.'}" />
                         <Span
                             FontAttributes="Bold"
-                            Text="{Binding ProyectionIndex, StringFormat='{0}.'}" />
-                        <Span
-                            FontAttributes="Bold"
                             Text="{Binding Index, StringFormat='{0}.'}" />
                         <Span Text=" " />
                         <Span Text="{Binding Name}" />
                     </FormattedString>
                 </Label.FormattedText>
             </Label>
+            <Label 
+                Style="{StaticResource CaptionFieldLabelStyle}" 
+                Margin="8,16,8,0" 
+                Text="Lineamientos" />
+            <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
+            <CollectionView ItemsSource="{Binding Guidelines}">
+                <CollectionView.ItemsLayout>
+                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                </CollectionView.ItemsLayout>
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="interop_common_display_models:GuidelineDisplayModel">
+                        <Frame Margin="0,4" Padding="10">
+                            <Label
+                                FontSize="Medium"
+                                LineBreakMode="TailTruncation">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span
+                                            FontAttributes="Bold"
+                                            Text="{Binding Index, StringFormat='{0}.'}" />
+                                        <Span Text=" " />
+                                        <Span Text="{Binding Name}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                        </Frame>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
             <ContentView>
                 <ContentView.Content>
                     <OnIdiom x:TypeArguments="View">
@@ -45,27 +70,18 @@
                                 </Grid.ColumnDefinitions>
                                 <VerticalStackLayout 
                                     Grid.Column="0"
-                                    Margin="4"
+                                    Margin="8,4"
                                     Spacing="6">
                                     <Label 
                                         Style="{StaticResource CaptionFieldLabelStyle}"
-                                        Margin="0,16,0,4" 
+                                        Margin="0,16,0,0"
                                         Text="Responsables" />
                                     <BoxView Color="DimGray" HeightRequest="1" /> 
                                     <StackLayout BindableLayout.ItemsSource="{Binding ResponsabilityOrganizations}">
-                                        <!--<BindableLayout.EmptyView>
-                                            <Label
-                                                Padding="0,4"
-                                                FontAttributes="Italic"
-                                                TextColor="DimGray"
-                                                Text="Sin elementos que mostrar" />
-                                        </BindableLayout.EmptyView>-->
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
-                                                <Frame Margin="0,4" Padding="10">
-                                                    <Label 
-                                                        FontSize="Medium"
-                                                        Text="{Binding Identity.Name}" />
+                                                <Frame Margin="0,4" Padding="16">
+                                                    <Label Text="{Binding Identity.Name}" />
                                                 </Frame>
                                             </DataTemplate>
                                         </BindableLayout.ItemTemplate>
@@ -73,27 +89,18 @@
                                 </VerticalStackLayout>
                                 <VerticalStackLayout 
                                     Grid.Column="1"
-                                    Margin="4"
+                                    Margin="8,4"
                                     Spacing="6">
                                     <Label 
                                         Style="{StaticResource CaptionFieldLabelStyle}"
-                                        Margin="0,16,0,4" 
+                                        Margin="0,16,0,0"
                                         Text="Participantes" />
                                     <BoxView Color="DimGray" HeightRequest="1" />
                                     <StackLayout BindableLayout.ItemsSource="{Binding ParticipationOrganizations}">
-                                        <!--<BindableLayout.EmptyView>
-                                            <Label
-                                                Padding="0,4"
-                                                FontAttributes="Italic"
-                                                TextColor="DimGray"
-                                                Text="Sin elementos que mostrar" />
-                                        </BindableLayout.EmptyView>-->
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
-                                                <Frame Margin="0,4" Padding="10">
-                                                    <Label 
-                                                        FontSize="Medium"
-                                                        Text="{Binding Identity.Name}" />
+                                                <Frame Margin="0,4" Padding="16">
+                                                    <Label Text="{Binding Identity.Name}" />
                                                 </Frame>
                                             </DataTemplate>
                                         </BindableLayout.ItemTemplate>
@@ -104,54 +111,36 @@
                         <OnIdiom.Phone>
                             <VerticalStackLayout>
                                 <VerticalStackLayout 
-                                    Margin="4"
+                                    Margin="8,4"
                                     Spacing="6">
                                     <Label 
                                         Style="{StaticResource CaptionFieldLabelStyle}"
-                                        Margin="0,16,0,4" 
+                                        Margin="0,16,0,0" 
                                         Text="Responsables" />
                                     <BoxView Color="DimGray" HeightRequest="1" /> 
                                     <StackLayout BindableLayout.ItemsSource="{Binding ResponsabilityOrganizations}">
-                                        <!--<BindableLayout.EmptyView>
-                                            <Label
-                                                Padding="0,4"
-                                                FontAttributes="Italic"
-                                                TextColor="DimGray"
-                                                Text="Sin elementos que mostrar" />
-                                        </BindableLayout.EmptyView>-->
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
-                                                <Frame Margin="0,4" Padding="10">
-                                                    <Label 
-                                                        FontSize="Medium"
-                                                        Text="{Binding Identity.Name}" />
+                                                <Frame Margin="0,4" Padding="16">
+                                                    <Label Text="{Binding Identity.Name}" />
                                                 </Frame>
                                             </DataTemplate>
                                         </BindableLayout.ItemTemplate>
                                     </StackLayout>
                                 </VerticalStackLayout>
                                 <VerticalStackLayout 
-                                    Margin="4"
+                                    Margin="8,4"
                                     Spacing="6">
                                     <Label 
                                         Style="{StaticResource CaptionFieldLabelStyle}"
-                                        Margin="0,16,0,4" 
+                                        Margin="0,16,0,0"
                                         Text="Participantes" />
                                     <BoxView Color="DimGray" HeightRequest="1" />
                                     <StackLayout BindableLayout.ItemsSource="{Binding ParticipationOrganizations}">
-                                        <!--<BindableLayout.EmptyView>
-                                            <Label
-                                                Padding="0,4"
-                                                FontAttributes="Italic"
-                                                TextColor="DimGray"
-                                                Text="Sin elementos que mostrar" />
-                                        </BindableLayout.EmptyView>-->
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="interop_common_display_models:OrganizationDisplayModel">
-                                                <Frame Margin="0,4" Padding="10">
-                                                    <Label 
-                                                        FontSize="Medium"
-                                                        Text="{Binding Identity.Name}" />
+                                                <Frame Margin="0,4" Padding="16">
+                                                    <Label Text="{Binding Identity.Name}" />
                                                 </Frame>
                                             </DataTemplate>
                                         </BindableLayout.ItemTemplate>
@@ -165,30 +154,29 @@
             <Label 
                 Style="{StaticResource CaptionFieldLabelStyle}" 
                 Margin="8,16,8,0" 
-                Text="Controles de Cumplimiento" />
-            <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
-            <CollectionView ItemsSource="{Binding MonthlyClosures}">
+                Text="Indicadores" />
+            <BoxView Color="DimGray" Margin="8,4" HeightRequest="1" />
+            <CollectionView Margin="8,0" ItemsSource="{Binding Indicators}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                 </CollectionView.ItemsLayout>
-                <!--<CollectionView.EmptyView>
-                    <Label
-                        Padding="8,4,8,8"
-                        FontAttributes="Italic"
-                        TextColor="DimGray"
-                        Text="Sin elementos que mostrar" />
-                </CollectionView.EmptyView>-->
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="interop_common_display_models:ActionMonthlyClosureDisplayModel">
-                        <Frame 
-                            Padding="8"
-                            Margin="0,12,0,0">
-                            <StackLayout Orientation="Horizontal" Spacing="8">
-                                <Label
-                                    Margin="8"
-                                    LineBreakMode="TailTruncation"
-                                    FontSize="Medium"
-                                    Text="{Binding At, StringFormat='{0:D}'}" />
+                    <DataTemplate x:DataType="interop_common_display_models:ProyectionIndicatorDisplayModel">
+                        <Frame Padding="16">
+                            <StackLayout Orientation="Horizontal" Spacing="12">
+                                <Label 
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="{Binding Name}" />
+                                <Label>
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span FontAttributes="Bold" Text="Meta: " />
+                                            <Span Text="{Binding Amount}" />
+                                            <Span Text=" " />
+                                            <Span Text="{Binding UnitMeasurement.Symbol}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
                             </StackLayout>
                         </Frame>
                     </DataTemplate>
@@ -197,22 +185,15 @@
             <Label 
                 Style="{StaticResource CaptionFieldLabelStyle}" 
                 Margin="8,16,8,0" 
-                Text="Indicadores" />
+                Text="Acciones" />
             <BoxView Color="DimGray" Margin="8,4,8,8" HeightRequest="1" />
-            <CollectionView ItemsSource="{Binding Indicators}">
+            <CollectionView ItemsSource="{Binding Actions}">
                 <CollectionView.ItemsLayout>
                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
-                </CollectionView.ItemsLayout>                
-                <!--<CollectionView.EmptyView>
-                    <Label
-                        Padding="8,4,8,8"
-                        FontAttributes="Italic"
-                        TextColor="DimGray"
-                        Text="Sin elementos que mostrar" />
-                </CollectionView.EmptyView>-->
+                </CollectionView.ItemsLayout>
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
-                        <local_card_views:ActionIndicatorDeepCardView Padding="8,4" />
+                        <local_card_views:ActionDeepSummaryCardView Padding="8,4" />
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>

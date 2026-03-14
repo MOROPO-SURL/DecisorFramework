@@ -1,22 +1,21 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages;
 
-public partial class GovernanceStatusPage : Microsoft.Maui.Controls.ContentPage
+public partial class ObjectiveIndicatorHandlingPage : Microsoft.Maui.Controls.ContentPage
 {
-	public GovernanceStatusPage()
-	{
-		InitializeComponent();
+    public ObjectiveIndicatorHandlingPage()
+    {
+        InitializeComponent();
 
-        BindingContext = new Models.Page.GovernanceStatusPageModel();
+        BindingContext = new Models.Page.ObjectiveIndicatorHandlingPageModel();
 
         IsEnabled = false;
     }
 
-    private Models.Page.GovernanceStatusPageModel ConcreteBindingContext { get => BindingContext as Models.Page.GovernanceStatusPageModel; }
+    private Models.Page.ObjectiveIndicatorHandlingPageModel ConcreteBindingContext { get => BindingContext as Models.Page.ObjectiveIndicatorHandlingPageModel; }
 
     protected override void OnAppearing()
     {
@@ -92,7 +91,7 @@ public partial class GovernanceStatusPage : Microsoft.Maui.Controls.ContentPage
                 }
                 else
                 {
-                    var indicators = new List<ActionIndicatorDisplayModel>();
+                    var indicators = new System.Collections.Generic.List<ActionIndicatorDisplayModel>();
 
                     var model = task.Result;
 
@@ -107,7 +106,7 @@ public partial class GovernanceStatusPage : Microsoft.Maui.Controls.ContentPage
                         }
                     }
 
-                    resultsAPIConnectClient.GetLastsByIndicators(indicators.ToArray()).ContinueWith(_task =>
+                    resultsAPIConnectClient.GetLastsByIndicators([.. indicators]).ContinueWith(_task =>
                     {
                         Dispatcher.Dispatch(() =>
                         {
@@ -127,7 +126,7 @@ public partial class GovernanceStatusPage : Microsoft.Maui.Controls.ContentPage
                                     item.Balance = target?.Amount ?? 0;
                                 }
 
-                                ConcreteBindingContext.Objective = new Models.View.ObjectiveViewModel(model);
+                                ConcreteBindingContext.Objective = new Models.View.ObjectiveIndicatorHandlingViewModel(model);
                                 ConcreteBindingContext.IsBusy = false;
                             }
                         });

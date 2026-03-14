@@ -355,6 +355,7 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
         ConcreteBindingContext.Proyections.Add(new ProyectionDisplayModel
         {
             Id = model.Id,
+            IsModerable = true,
             Index = model.Index,
             Name = model.Name,
             Description = model.Description,
@@ -425,6 +426,7 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
             ConcreteBindingContext.Proyections[index] = new ProyectionDisplayModel
             {
                 Id = model.Id,
+                IsModerable = item.IsModerable,
                 Index = model.Index,
                 Name = model.Name,
                 Description = model.Description,

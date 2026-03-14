@@ -3,12 +3,12 @@ using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card;
 
-public partial class ActionIndicatorDeepCardView : Microsoft.Maui.Controls.ContentView
+public partial class ActionIndicatorDeepHandlingCardView : Microsoft.Maui.Controls.ContentView
 {
-	public ActionIndicatorDeepCardView()
+	public ActionIndicatorDeepHandlingCardView()
 	{
 		InitializeComponent();
-	}
+    }
 
     private void ResultUpgradeButton_Clicked(object sender, System.EventArgs e)
     {
@@ -23,11 +23,11 @@ public partial class ActionIndicatorDeepCardView : Microsoft.Maui.Controls.Conte
 
         var concreteBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.ActionIndicatorDisplayModel;
 
-		Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayPromptAsync($"Actualizar indicador", $"Especifique el nuevo valor del indicador ¨{concreteBindingContext.Name}¨. El valor no debe ser inferior a {concreteBindingContext.Balance:F2} {concreteBindingContext.UnitMeasurement.Name}.{System.Environment.NewLine}", "Aplicar", "Cancelar", null, keyboard: Microsoft.Maui.Keyboard.Numeric).ContinueWith(task =>
-		{
-			Microsoft.Maui.Controls.Shell.Current.CurrentPage.Dispatcher.Dispatch(() =>
-			{
-                var pageModel = (Microsoft.Maui.Controls.Shell.Current.CurrentPage as Pages.GovernanceStatusPage).BindingContext as Framework.Caney.MVVM.Core.Models.Page.BasePageModel;
+        Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayPromptAsync($"Actualizar indicador", $"Especifique el nuevo valor del indicador ¨{concreteBindingContext.Name}¨. El valor no debe ser inferior a {concreteBindingContext.Balance:F2} {concreteBindingContext.UnitMeasurement.Name}.{System.Environment.NewLine}", "Aplicar", "Cancelar", null, keyboard: Microsoft.Maui.Keyboard.Numeric).ContinueWith(task =>
+        {
+            Microsoft.Maui.Controls.Shell.Current.CurrentPage.Dispatcher.Dispatch(() =>
+            {
+                var pageModel = (Microsoft.Maui.Controls.Shell.Current.CurrentPage as Pages.ObjectiveIndicatorHandlingPage).BindingContext as Framework.Caney.MVVM.Core.Models.Page.BasePageModel;
 
                 if (task.Result == null) return;
 
@@ -70,6 +70,6 @@ public partial class ActionIndicatorDeepCardView : Microsoft.Maui.Controls.Conte
                     });
                 });
             });
-		});
+        });
     }
 }

@@ -8,9 +8,9 @@
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.GovernanceStatusPage"
-    x:DataType="local_page_models:GovernanceStatusPageModel"
-    Title="Estado de Objetivos">
+    x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.ObjectiveIndicatorHandlingPage"
+    x:DataType="local_page_models:ObjectiveIndicatorHandlingPageModel"
+    Title="Actualización de Indicadores por Objetivo">
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
@@ -53,20 +53,6 @@
                     TextColor="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}"
                     Text="Seleccione un objetivo para detallar su estado ..." />
                 <VerticalStackLayout IsVisible="{Binding Objective, Converter={StaticResource IsNotNullConverter}}">
-                    <FlexLayout 
-                        Margin="0,8"
-                        Wrap="Wrap"
-                        AlignItems="Start" AlignContent="Start">
-                        <VerticalStackLayout 
-                            WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, MediumContainerColumn=6, SmallContainerColumn=8}}"
-                            Margin="4"
-                            Spacing="6">
-                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Responsable" />
-                            <ContentView HeightRequest="120">
-                                <local_card_views:PersonDefaultCardView BindingContext="{Binding Objective.Responsible}" />
-                            </ContentView>
-                        </VerticalStackLayout>
-                    </FlexLayout>
                     <Label 
                         Style="{StaticResource CaptionFieldLabelStyle}" 
                         Margin="8,8,8,0" 
@@ -76,16 +62,9 @@
                         <CollectionView.ItemsLayout>
                             <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                         </CollectionView.ItemsLayout>
-                        <!--<CollectionView.EmptyView>
-                            <Label
-                                Padding="8,4,8,16"
-                                FontAttributes="Italic"
-                                TextColor="DimGray"
-                                Text="Sin elementos que mostrar" />
-                        </CollectionView.EmptyView>-->
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <local_card_views:ObjectiveIndicatorDeepCardView Padding="8,4" />
+                                <local_card_views:ObjectiveIndicatorDeepHandlingCardView Padding="8,4" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>
@@ -100,7 +79,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <local_card_views:ProyectionDeepCardView Padding="8,4" />
+                                <local_card_views:ProyectionDeepHandlingCardView Padding="8,4" />
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                     </CollectionView>

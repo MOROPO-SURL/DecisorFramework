@@ -1,0 +1,139 @@
+using Microsoft.Extensions.DependencyInjection;
+using System.Linq;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages;
+
+public partial class GlobalIndicatorHandlingPage : Microsoft.Maui.Controls.ContentPage
+{
+	public GlobalIndicatorHandlingPage()
+	{
+		InitializeComponent();
+
+        BindingContext = new Models.Page.GlobalIndicatorHandlingPageModel();
+
+        IsEnabled = false;
+    }
+
+    private Models.Page.GlobalIndicatorHandlingPageModel ConcreteBindingContext { get => BindingContext as Models.Page.GlobalIndicatorHandlingPageModel; }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (IsEnabled) return;
+
+        IsEnabled = true;
+
+        ReloadToolbarItem_Clicked(this, System.EventArgs.Empty);
+    }
+
+    private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        if (ConcreteBindingContext.IsBusy) return;
+
+        ConcreteBindingContext.IsBusy = true;
+
+        ConcreteBindingContext.Indicators.Clear();
+
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        var indicatorsAPIConnectClient = new Interop.API.Connect.Clients.GlobalIndicatorsAPIConnectClient(httpClientHelperProvider);
+        var resultsAPIConnectClient = new Interop.API.Connect.Clients.GlobalIndicatorResultsAPIConnectClient(httpClientHelperProvider);
+
+        indicatorsAPIConnectClient.GetAsync().ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                if (task.Exception != null || task.IsCanceled)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);                    
+                }
+                else
+                {
+                    resultsAPIConnectClient.GetLasts().ContinueWith(_task =>
+                    {
+                        Dispatcher.Dispatch(() =>
+                        {
+                            if (_task.Exception != null || _task.IsCanceled)
+                            {
+                                Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(_task.Exception, this);
+                            }
+                            else
+                            {
+                                foreach (var item in task.Result)
+                                {
+                                    var target = _task.Result.FirstOrDefault(_model => _model.IndicatorId == item.Id);
+
+                                    item.Balance = target?.Amount ?? 0;
+
+                                    ConcreteBindingContext.Indicators.Add(item);
+                                }
+                            }
+                        });
+                    });
+                }
+
+                ConcreteBindingContext.IsBusy = false;
+            });
+        });
+    }
+
+    private void ResultUpgradeButton_Clicked(object sender, System.EventArgs e)
+    {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.GlobalIndicatorResultCreatorPermission)))
+        {
+            Microsoft.Maui.Controls.Application.Current.MainPage.DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
+        var senderBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.GlobalIndicatorDisplayModel;
+
+        Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayPromptAsync($"Actualizar indicador", $"Especifique el nuevo valor del indicador ¨{senderBindingContext.Name}¨. El valor no debe ser inferior a {senderBindingContext.Balance:F2} {senderBindingContext.UnitMeasurement.Name}.{System.Environment.NewLine}", "Aplicar", "Cancelar", null, keyboard: Microsoft.Maui.Keyboard.Numeric).ContinueWith(task =>
+        {
+            Microsoft.Maui.Controls.Shell.Current.CurrentPage.Dispatcher.Dispatch(() =>
+            {
+                if (task.Result == null) return;
+
+                if (!double.TryParse(task.Result, out double result))
+                {
+                    Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayAlert("Aviso", "Dato no especificado en el formato adecuado.", "Aceptar");
+
+                    return;
+                }
+
+                if (result <= senderBindingContext.Balance)
+                {
+                    Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayAlert("Aviso", $"El valor especificado debe ser mayor al del estado actual ({senderBindingContext.Balance} {senderBindingContext.UnitMeasurement.Symbol}).", "Aceptar");
+
+                    return;
+                }
+
+                ConcreteBindingContext.IsBusy = true;
+
+                var apiConnectClient = new Interop.API.Connect.Clients.GlobalIndicatorResultsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+                apiConnectClient.CreateAsync(new Interop.API.Common.Models.Input.GlobalIndicatorResultInputModel { Amount = result, IndicatorId = senderBindingContext.Id }).ContinueWith(_task =>
+                {
+                    Dispatcher.Dispatch(() =>
+                    {
+                        ConcreteBindingContext.IsBusy = false;
+
+                        if (_task.Exception != null || _task.IsCanceled)
+                        {
+                            Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(_task.Exception, Microsoft.Maui.Controls.Shell.Current.CurrentPage);
+                        }
+                        else
+                        {
+                            DisplayAlert("Aviso", "Cambios aplicados con éxito.", "Aceptar");
+
+                            ReloadToolbarItem_Clicked(sender, System.EventArgs.Empty);
+                        }
+                    });
+                });
+            });
+        });
+    }
+}

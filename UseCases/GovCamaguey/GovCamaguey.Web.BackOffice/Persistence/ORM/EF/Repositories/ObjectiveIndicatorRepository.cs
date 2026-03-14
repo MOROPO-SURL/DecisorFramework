@@ -12,7 +12,6 @@ public class ObjectiveIndicatorRepository : Framework.Guama.Core.Persistence.ORM
     {
         return base.GetQueryableDbSet()
             .AsNoTracking()
-            .Include(entity => entity.UnitMeasurement)
-            .Include(entity => entity.ObjectiveId);
+            .Include(entity => entity.UnitMeasurement);
     }
 }

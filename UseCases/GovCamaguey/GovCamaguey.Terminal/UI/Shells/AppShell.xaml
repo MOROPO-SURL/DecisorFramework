@@ -46,7 +46,7 @@
     </ShellContent>
     <ShellContent
         Title="Resumen de Objetivo"
-        ContentTemplate="{DataTemplate local_pages:GovernanceStatusPage}">
+        ContentTemplate="{DataTemplate local_pages:ObjectiveSummaryPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -54,6 +54,17 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <FlyoutItem
+        Title="Actualización de Indicadores">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF535;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent Title="Globales" ContentTemplate="{DataTemplate local_pages:GlobalIndicatorHandlingPage}" />
+        <ShellContent Title="Objetivos" ContentTemplate="{DataTemplate local_pages:ObjectiveIndicatorHandlingPage}" />
+    </FlyoutItem>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Objetivos"

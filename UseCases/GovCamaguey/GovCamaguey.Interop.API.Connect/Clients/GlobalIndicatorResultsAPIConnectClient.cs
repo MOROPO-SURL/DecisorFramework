@@ -7,5 +7,10 @@
         }
 
         protected override string TargetController => "api/governance/globalindicatorresults";
+
+        public System.Threading.Tasks.Task<Common.Models.Display.GlobalIndicatorResultDisplayModel[]> GetLasts()
+        {
+            return httpClientHelperProvider.HttpClientHelper.GetAsync<Common.Models.Display.GlobalIndicatorResultDisplayModel[]>($"{TargetController}/lasts");
+        }
     }
 }

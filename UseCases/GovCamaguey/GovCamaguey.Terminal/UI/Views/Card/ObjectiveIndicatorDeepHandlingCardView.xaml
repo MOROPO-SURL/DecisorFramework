@@ -3,9 +3,9 @@
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;assembly=MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common"
-    x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card.ProyectionIndicatorDeepCardView"
-    x:DataType="interop_common_display_models:ProyectionIndicatorDisplayModel">
-    <Frame>
+    x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card.ObjectiveIndicatorDeepHandlingCardView"
+    x:DataType="interop_common_display_models:ObjectiveIndicatorDisplayModel">
+    <Frame Padding="16">
         <Grid ColumnSpacing="12">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition />
@@ -15,10 +15,8 @@
             <VerticalStackLayout 
                 Grid.Column="0"
                 VerticalOptions="Center">
-                <Label 
-                    FontSize="Medium"
-                    Text="{Binding Name}" />
-                <Label FontSize="Medium">
+                <Label Text="{Binding Name}" />
+                <Label>
                     <Label.FormattedText>
                         <FormattedString>
                             <Span FontAttributes="Bold" Text="Meta: " />
@@ -34,9 +32,8 @@
                 VerticalOptions="Center">
                 <Label 
                     FontAttributes="Bold"
-                    FontSize="Medium"
                     Text="Estado" />
-                <Label FontSize="Medium">
+                <Label>
                     <Label.FormattedText>
                         <FormattedString>
                             <Span x:Name="BalanceSpan" Text="{Binding Balance, StringFormat='{0:F2}', Mode=OneTime}" />

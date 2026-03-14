@@ -92,8 +92,23 @@
 	  <Compile Update="UI\Pages\Configuration\ActionIndicatorMontlyPlanConfigurationPage.xaml.cs">
 	    <DependentUpon>ActionIndicatorMontlyPlanConfigurationPage.xaml</DependentUpon>
 	  </Compile>
-	  <Compile Update="UI\Views\Card\ActionIndicatorDeepCardView.xaml.cs">
-	    <DependentUpon>ActionIndicatorDeepCardView.xaml</DependentUpon>
+	  <Compile Update="UI\Pages\ObjectiveIndicatorHandlingPage.xaml.cs">
+	    <DependentUpon>ObjectiveIndicatorHandlingPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\ObjectiveSummaryPage.xaml.cs">
+	    <DependentUpon>ObjectiveSummaryPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Views\Card\ActionDeepSummaryCardView.xaml.cs">
+	    <DependentUpon>ActionDeepSummaryCardView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Views\Card\ObjectiveIndicatorDeepHandlingCardView.xaml.cs">
+	    <DependentUpon>ObjectiveIndicatorDeepHandlingCardView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Views\Card\ProyectionDeepSummaryCardView.xaml.cs">
+	    <DependentUpon>ProyectionDeepSummaryCardView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Views\Card\ProyectionIndicatorDeepHandlingCardView.xaml.cs">
+	    <DependentUpon>ProyectionIndicatorDeepHandlingCardView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 
@@ -119,16 +134,31 @@
 	  <MauiXaml Update="UI\Pages\Detail\GlobalIndicatorDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\GlobalIndicatorHandlingPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\GovernanceDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\ObjectiveIndicatorHandlingPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Manage\GlobalIndicatorsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\ObjectiveIndicatorDeepCardView.xaml">
+	  <MauiXaml Update="UI\Views\Card\ActionDeepHandlingCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\ProyectionIndicatorDeepCardView.xaml">
+	  <MauiXaml Update="UI\Views\Card\ActionIndicatorDeepHandlingCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\ObjectiveIndicatorDeepHandlingCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\ProyectionDeepHandlingCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\ProyectionIndicatorDeepHandlingCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

@@ -1345,8 +1345,15 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<Guid>("IndicatorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("indicatorid");
+
                     b.HasKey("Id")
                         .HasName("pk_globalindicatorresults");
+
+                    b.HasIndex("IndicatorId")
+                        .HasDatabaseName("ix_globalindicatorresults_indicatorid");
 
                     b.ToTable("globalindicatorresults");
                 });
@@ -2556,6 +2563,18 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
                         .HasConstraintName("fk_globalindicatormontlyplans_globalindicators_indicatorid");
+
+                    b.Navigation("Indicator");
+                });
+
+            modelBuilder.Entity("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.GlobalIndicatorResult", b =>
+                {
+                    b.HasOne("MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.GlobalIndicator", "Indicator")
+                        .WithMany()
+                        .HasForeignKey("IndicatorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_globalindicatorresults_globalindicators_indicatorid");
 
                     b.Navigation("Indicator");
                 });
