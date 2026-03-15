@@ -957,13 +957,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("academiclevel");
 
+                    b.Property<DateTime?>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
                     b.Property<Guid>("ContactId")
                         .HasColumnType("uuid")
                         .HasColumnName("contactid");
 
+                    b.Property<string>("Institution")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
+                        .HasColumnName("institution");
+
                     b.Property<Guid>("MainKnowledgeAreaId")
                         .HasColumnType("uuid")
                         .HasColumnName("mainknowledgeareaid");
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
+                        .HasColumnName("title");
 
                     b.HasKey("Id")
                         .HasName("pk_academicachievements");
