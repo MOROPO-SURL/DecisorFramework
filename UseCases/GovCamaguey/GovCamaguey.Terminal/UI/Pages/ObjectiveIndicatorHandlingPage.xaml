@@ -27,12 +27,6 @@
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
-        <ToolbarItem 
-            Text="Exportar">
-            <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF21D;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
-            </ToolbarItem.IconImageSource>
-        </ToolbarItem>
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">

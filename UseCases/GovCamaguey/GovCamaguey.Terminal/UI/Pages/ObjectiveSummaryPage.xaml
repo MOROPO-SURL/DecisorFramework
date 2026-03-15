@@ -29,9 +29,18 @@
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
-            Text="Exportar">
+            Text="Exportar Actual"
+            IsEnabled="{Binding Objective, Converter={StaticResource IsNotNullConverter}}"
+            Clicked="DownloadCurrentToolbarItems_Clicked">
             <ToolbarItem.IconImageSource>
-                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF21D;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF214;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Exportar Todos"
+            Clicked="DownloadAllToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF222;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
     </ContentPage.ToolbarItems>

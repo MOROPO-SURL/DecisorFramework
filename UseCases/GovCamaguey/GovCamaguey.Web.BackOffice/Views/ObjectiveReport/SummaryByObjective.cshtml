@@ -39,6 +39,10 @@
             margin-bottom: 12px;
         }
 
+            li.li-indicator > p {
+                margin-top: 8px;
+            }
+
         .text-muted {
             color: dimgray;
             font-style: italic;
@@ -60,7 +64,7 @@
 else
 {
     <ul>
-        @foreach (var _item in item.Indicators)
+        @foreach (var _item in Model.Indicators)
         {
             <li class="li-indicator">
                 <div><span>@_item.Name</span></div>
@@ -84,7 +88,7 @@ else
         @foreach (var _item in Model.Proyections)
         {
             <li>
-                <h3>@item.Index.@_item.Index @_item.Name</h3>
+                <h3>@Model.Index.@_item.Index @_item.Name</h3>
                 @if (!string.IsNullOrEmpty(_item.Description))
                 {
                     <p>@_item.Description</p>
@@ -159,7 +163,7 @@ else
                         @foreach (var __item in _item.Actions)
                         {
                             <li>
-                                <h4>@item.Index.@_item.Index.@__item.Index @__item.Name</h4>
+                                <h4>@Model.Index.@_item.Index.@__item.Index @__item.Name</h4>
                                 @if (!string.IsNullOrEmpty(__item.Description))
                                 {
                                     <p>@__item.Description</p>

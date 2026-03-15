@@ -14,7 +14,7 @@ public class ProyectionSummaryViewModel : AbstractProyectionViewModel
 
         ObjectiveIndex = objectiveIndex;
 
-        Actions = [.. entity.Actions];
+        Actions = [.. entity.Actions.OrderBy(entity => entity.Index)];
     }
 
     public Prototype.Persistence.Entities.Guideline[] Guidelines { get; set; }

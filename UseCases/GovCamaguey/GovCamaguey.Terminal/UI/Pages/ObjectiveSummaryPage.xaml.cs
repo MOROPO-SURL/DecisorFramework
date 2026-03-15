@@ -1,4 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages;
 
@@ -50,6 +51,86 @@ public partial class ObjectiveSummaryPage : Microsoft.Maui.Controls.ContentPage
                     foreach (var model in task.Result)
                     {
                         ConcreteBindingContext.AvaialbleObjetives.Add(model);
+                    }
+                }
+
+                ConcreteBindingContext.IsBusy = false;
+            });
+        });
+    }
+
+    private void DownloadCurrentToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        if (ConcreteBindingContext.IsBusy || ConcreteBindingContext.Objective == null) return;
+
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        ConcreteBindingContext.IsBusy = true;
+
+        var httpClient = new System.Net.Http.HttpClient
+        {
+            Timeout = System.TimeSpan.FromSeconds(30.0)
+        };
+
+        httpClient.GetByteArrayAsync($"{httpClientHelperProvider.HttpClientHelper.ClientBaseAddress}report/objectives/summary/{ConcreteBindingContext.Objective.Id}/print").ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(async () =>
+            {
+                if (task.IsCanceled || task.Exception != null)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    var fileSaverResult = await CommunityToolkit.Maui.Storage.FileSaver.Default.SaveAsync($"Resumen de Objetivo-{ConcreteBindingContext.Objective.Index} {System.DateTime.Now:dd-MM-yyyy}.pdf", new System.IO.MemoryStream(task.Result));
+
+                    if (fileSaverResult.IsSuccessful)
+                    {
+                        this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Archivo descargado con éxito.");
+                    }
+                    else if (fileSaverResult.FilePath != null)
+                    {
+                        this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Error, "No fue posible salvar el archivo.");
+                    }
+                }
+
+                ConcreteBindingContext.IsBusy = false;
+            });
+        });
+    }
+
+    private void DownloadAllToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        if (ConcreteBindingContext.IsBusy) return;
+
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        ConcreteBindingContext.IsBusy = true;
+
+        var httpClient = new System.Net.Http.HttpClient
+        {
+            Timeout = System.TimeSpan.FromSeconds(30.0)
+        };
+
+        httpClient.GetByteArrayAsync($"{httpClientHelperProvider.HttpClientHelper.ClientBaseAddress}report/objectives/summary/print").ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(async () =>
+            {
+                if (task.IsCanceled || task.Exception != null)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    var fileSaverResult = await CommunityToolkit.Maui.Storage.FileSaver.Default.SaveAsync($"Resumen de Objetivos {System.DateTime.Now:dd-MM-yyyy}.pdf", new System.IO.MemoryStream(task.Result));
+
+                    if (fileSaverResult.IsSuccessful)
+                    {
+                        this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Archivo descargado con éxito.");
+                    }
+                    else if (fileSaverResult.FilePath != null)
+                    {
+                        this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Error, "No fue posible salvar el archivo.");
                     }
                 }
 
