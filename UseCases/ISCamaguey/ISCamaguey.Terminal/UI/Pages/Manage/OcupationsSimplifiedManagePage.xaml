@@ -42,7 +42,7 @@
                         <Picker 
                             x:Name="StaffPicker" 
                             ItemsSource="{Binding AvailableStaffs}"
-                            ItemDisplayBinding="{Binding Path=Structure.Identity.Name}"
+                            ItemDisplayBinding="{Binding Path=AdministrativeEntity.Identity.Name}"
                             SelectedIndexChanged="StaffPicker_SelectedIndexChanged" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
