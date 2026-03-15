@@ -7,7 +7,7 @@
     x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.KnowledgeAreaDetailPage"
     x:TypeArguments="interop_common_display_models:KnowledgeAreaDisplayModel"
     x:DataType="interop_common_display_models:KnowledgeAreaDisplayModel"
-    Title="Detalles del Area de Conocimiento"
+    Title="Detalles del Área del conocimiento"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
     <ScrollView Orientation="Vertical">
