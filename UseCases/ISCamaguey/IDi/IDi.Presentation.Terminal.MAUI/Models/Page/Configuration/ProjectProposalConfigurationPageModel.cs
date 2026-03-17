@@ -1,4 +1,6 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Configuration;
+﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
+
+namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Configuration;
 
 public class ProjectProposalConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ProjectProposalDisplayModel>
 {
@@ -10,6 +12,7 @@ public class ProjectProposalConfigurationPageModel : Framework.Decisor.Core.Pres
     private int priority = 1;
     private Interop.API.Common.Models.Display.ProgramDisplayModel program;
     private Interop.API.Common.Models.Display.CallForProposalDisplayModel callForPropousal;
+    private DocumentDisplayModel document;
 
     public ProjectProposalConfigurationPageModel(Interop.API.Common.Models.Display.ProjectProposalDisplayModel model) : base(model)
     {
@@ -21,6 +24,7 @@ public class ProjectProposalConfigurationPageModel : Framework.Decisor.Core.Pres
         priority = model.Priority;
         program = model.Program;
         callForPropousal = model.CallForPropousal;
+        document = model.Document;
     }
 
     public System.Guid Id { get; set; }
@@ -34,4 +38,6 @@ public class ProjectProposalConfigurationPageModel : Framework.Decisor.Core.Pres
     public Interop.API.Common.Models.Display.ProgramDisplayModel Program { get => program; set => SetProperty(ref program, value); }
 
     public Interop.API.Common.Models.Display.CallForProposalDisplayModel CallForPropousal { get => callForPropousal; set => SetProperty(ref callForPropousal, value); }
+
+    public DocumentDisplayModel Document { get => document; set => SetProperty(ref document, value); }
 }

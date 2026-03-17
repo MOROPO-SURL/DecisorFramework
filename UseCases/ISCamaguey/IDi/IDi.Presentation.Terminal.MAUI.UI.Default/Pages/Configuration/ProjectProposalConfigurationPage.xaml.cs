@@ -5,6 +5,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class ProjectProposalConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.ProjectProposalDisplayModel, Interop.API.Common.Models.Display.ProjectProposalDisplayModel, Models.Page.Configuration.ProjectProposalConfigurationPageModel>
 {
+    private Microsoft.Maui.Storage.FileResult documentFilePickResult;
+
     public ProjectProposalConfigurationPage(System.Action<Interop.API.Common.Models.Display.ProjectProposalDisplayModel> successAction, Models.Page.Configuration.ProjectProposalConfigurationPageModel model, Validators.ProjectProposalConfigurationValidator validator) : base(successAction, model, validator)
     {
         InitializeComponent();
@@ -26,6 +28,21 @@ public partial class ProjectProposalConfigurationPage : Framework.Decisor.Core.P
             CallForPropousalId = ConcreteBindingContext.CallForPropousal?.Id
         };
 
+        if (documentFilePickResult != null)
+        {
+            using var stream = await documentFilePickResult.OpenReadAsync();
+
+            model.Document = new Framework.Decisor.Core.Interop.API.Common.Models.Input.DocumentInputModel
+            {
+                Id = System.Guid.NewGuid(),
+                Name = documentFilePickResult.FileName,
+                ContentData = new byte[stream.Length],
+                ContentType = documentFilePickResult.ContentType
+            };
+
+            stream.Read(model.Document.ContentData, 0, (int)stream.Length);
+        }
+
         await apiConnectClient.CreateAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
@@ -44,6 +61,21 @@ public partial class ProjectProposalConfigurationPage : Framework.Decisor.Core.P
             ProgramId = ConcreteBindingContext.Program?.Id,
             CallForPropousalId = ConcreteBindingContext.CallForPropousal?.Id
         };
+
+        if (documentFilePickResult != null)
+        {
+            using var stream = await documentFilePickResult.OpenReadAsync();
+
+            model.Document = new Framework.Decisor.Core.Interop.API.Common.Models.Input.DocumentInputModel
+            {
+                Id = model.Document?.Id ?? System.Guid.NewGuid(),
+                Name = documentFilePickResult.FileName,
+                ContentData = new byte[stream.Length],
+                ContentType = documentFilePickResult.ContentType
+            };
+
+            stream.Read(model.Document.ContentData, 0, (int)stream.Length);
+        }
 
         await apiConnectClient.EditAsync(model);
 
@@ -68,6 +100,41 @@ public partial class ProjectProposalConfigurationPage : Framework.Decisor.Core.P
     private void CallForPropousalPickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.CallForProposalPickPage(CallForPropousalPickComplete_Callback)));
+    }
+
+    private void DocumentPickButton_Clicked(object sender, System.EventArgs e)
+    {
+        Microsoft.Maui.Storage.FilePicker.Default.PickAsync(new Microsoft.Maui.Storage.PickOptions
+        {
+            PickerTitle = "Seleccionar archivo",
+            FileTypes = new Microsoft.Maui.Storage.FilePickerFileType(
+                new System.Collections.Generic.Dictionary<Microsoft.Maui.Devices.DevicePlatform, System.Collections.Generic.IEnumerable<string>>
+                {
+                    { Microsoft.Maui.Devices.DevicePlatform.iOS, [ "public.my.comic.extension" ] }, // UTType values
+                    { Microsoft.Maui.Devices.DevicePlatform.Android, [ "application/comics" ] }, // MIME type
+                    { Microsoft.Maui.Devices.DevicePlatform.WinUI, [ ".doc", ".docx", ".dot", ".pdf" ] }, // file extension
+                    { Microsoft.Maui.Devices.DevicePlatform.macOS, [ "cbr", "cbz" ] }, // UTType values
+                })
+        }).ContinueWith(async task =>
+        {
+            if (task.Result == null) return;
+
+            documentFilePickResult = task.Result;
+
+            using var stream = await documentFilePickResult.OpenReadAsync();
+
+            var lenght = stream.Length;
+
+            Dispatcher.Dispatch(() =>
+            {
+                ConcreteBindingContext.Document = new Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel
+                {
+                    Name = System.IO.Path.GetFileNameWithoutExtension(documentFilePickResult.FileName),
+                    Extension = System.IO.Path.GetExtension(documentFilePickResult.FileName),
+                    Length = lenght
+                };
+            });
+        });
     }
 
     private void ProgramPickComplete_Callback(Interop.API.Common.Models.Display.ProgramDisplayModel model)

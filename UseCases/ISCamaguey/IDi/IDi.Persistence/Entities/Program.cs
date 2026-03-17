@@ -11,11 +11,14 @@
         
         public int Priority { get ; set ; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(320)]
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(60)]
         public string Alias { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(60)]
         [System.ComponentModel.DataAnnotations.Required]
         public string Code { get; set; }
 

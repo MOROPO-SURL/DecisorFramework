@@ -16,8 +16,11 @@
         public string Name { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.MaxLength(50)]
+        [System.ComponentModel.DataAnnotations.MaxLength(60)]
         public string Code { get; set; }
+
+        [System.ComponentModel.DataAnnotations.MaxLength(60)]
+        public string Alias { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CategoryId))]
         public ProjectCategory Category { get; set; }
@@ -40,7 +43,7 @@
         public string Beneficiary { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.MaxLength(255)]
+        [System.ComponentModel.DataAnnotations.MaxLength(360)]
         public string MainObjetive { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProgramId))]
