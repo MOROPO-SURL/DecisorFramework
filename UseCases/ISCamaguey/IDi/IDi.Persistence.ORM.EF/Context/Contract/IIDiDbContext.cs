@@ -17,8 +17,12 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.ParticipatingOrganization> ParticipatingOrganizations { get; set; }
         public DbSet<Entities.ParticipatingOrganizationResearchAreaBridge> ParticipatingOrganizationResearchAreaBridges { get; set; }
         public DbSet<Entities.Program> Programs { get; set; }
+        public DbSet<Entities.ProgramKind> ProgramKinds { get; set; }
         public DbSet<Entities.ProgramExpectResult> ProgramExpectResults { get; set; }
+        public DbSet<Entities.ImpactDimension> ImpactDimensions { get; set; }
         public DbSet<Entities.Project> Projects { get; set; }
+        public DbSet<Entities.ProjectProgramExpectResultBridge> ProjectProgramExpectResultBridges { get; set; }
+        public DbSet<Entities.ProjectImpact> ProjectImpacts { get; set; }
         public DbSet<Entities.ProjectBudgetCurrencyBridge> ProjectBudgetCurrencyBridges { get; set; }
         public DbSet<Entities.ProjectBudgetFunancing> ProjectBudgetFunancings { get; set; }
         public DbSet<Entities.ProjectCategory> ProjectCategories { get; set; }

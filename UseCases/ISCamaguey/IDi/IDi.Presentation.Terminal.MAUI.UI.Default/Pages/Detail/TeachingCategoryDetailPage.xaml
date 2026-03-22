@@ -17,45 +17,31 @@
                 MaximumWidthRequest="400"
                 VerticalOptions="Center">
                 <Frame Style="{StaticResource PopupFrameStyle}">
-                    <StackLayout Margin="20" Spacing="20">
-                        <StackLayout>
-                            <Label 
-                                Margin="0,0,0,20"
-                                Text="Detalles"
-                                FontAttributes="Bold"
-                                FontSize="Medium" />
-                            <Label
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Margin="0"
-                                Text="Nombre" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Name}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Descripción" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Description, TargetNullValue='---'}" />
-                            <Label 
-                                Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Prioridad" />
-                            <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Priority}" />
-                        </StackLayout>
-                        <StackLayout
-                            Orientation="Horizontal"
-                            Spacing="20">
-                            <Button 
-                                HorizontalOptions="FillAndExpand"
-                                Text="Modificar"
-                                Clicked="EditButton_Clicked" />
-                            <Button 
-                                HorizontalOptions="FillAndExpand"
-                                Text="Eliminar"
-                                Clicked="DeleteButton_Clicked" />
-                        </StackLayout>
+                    <StackLayout Margin="20">
+                        <Label 
+                            Margin="0,0,0,20"
+                            Text="Detalles"
+                            FontAttributes="Bold"
+                            FontSize="Medium" />
+                        <Label
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Margin="0"
+                            Text="Nombre" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Name}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Descripción" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Description, TargetNullValue='---'}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Prioridad" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Priority}" />
                     </StackLayout>
                 </Frame>
                 <Button

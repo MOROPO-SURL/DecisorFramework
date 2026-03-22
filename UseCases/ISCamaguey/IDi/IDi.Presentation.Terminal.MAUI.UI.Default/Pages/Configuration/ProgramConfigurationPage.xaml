@@ -60,8 +60,28 @@
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6}}"
                         Margin="4"
                         Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
+                        <Picker 
+                            x:Name="KindPicker"
+                            ItemsSource="{Binding AvailableKinds}"
+                            ItemDisplayBinding="{Binding Path=Name}"
+                            SelectedItem="{Binding Kind}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProgramConfigurationPageModel.KindValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProgramConfigurationPageModel.KindValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Alias (opcional)" />
                         <Entry Text="{Binding Alias}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProgramConfigurationPageModel.AliasValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProgramConfigurationPageModel.AliasValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6}}"
@@ -120,7 +140,7 @@
                     </VerticalStackLayout>
                 </FlexLayout>
                 <VerticalStackLayout Margin="8" Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridades" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Resultados / Prioridades" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
                             <Grid.ColumnDefinitions>
@@ -139,8 +159,8 @@
                                 Text="Agregar"
                                 Clicked="ProgramExpectResultAgregationButton_Clicked" />
                             <BoxView
-                                Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Style="{StaticResource SeparatorBoxView}"
+                                Grid.ColumnSpan="2" Grid.Row="1" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemsSource="{Binding ExpectResults}">
@@ -170,22 +190,16 @@
                                                     LineBreakMode="TailTruncation"
                                                     Text="{Binding Title}" />
                                                 <Button
-                                                    FontFamily="MaterialDesignIcons"
-                                                    Padding="0"
-                                                    FontSize="21"
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
                                                     Text="&#xF2FD;"
                                                     Clicked="ProgramExpectResultDetailButton_Clicked" />
                                                 <Button
-                                                    FontFamily="MaterialDesignIcons" 
-                                                    Padding="0"
-                                                    FontSize="21"
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
                                                     Text="&#xF90B;"
                                                     Clicked="ProgramExpectResultEditionButton_Clicked" />
                                                 <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                     VerticalOptions="Start"
-                                                    FontFamily="MaterialDesignIcons" 
-                                                    Padding="0"
-                                                    FontSize="21"
                                                     Text="&#xFA78;"
                                                     Clicked="ProgramExpectResultRemotionButton_Clicked" />
                                             </StackLayout>
@@ -208,14 +222,14 @@
                     <Editor Text="{Binding Description}" HeightRequest="180" />
                 </VerticalStackLayout>
                 <BoxView 
+                    Style="{StaticResource SeparatorBoxView}"
                     Margin="8,16,8,8"
-                    HeightRequest="1" 
-                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
+                    HeightRequest="1" />
                 <FlexLayout 
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <Grid
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         ColumnSpacing="6" RowSpacing="6">
                         <Grid.RowDefinitions>

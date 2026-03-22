@@ -25,10 +25,7 @@ public partial class ProgramPickPage : Framework.Decisor.Core.Presentation.Termi
         pickCompleteAction = null;
     }
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return Constants.CardViewHeightConstants.PROGRAM_DEFAULT_CARD_VIEW_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.PROGRAM_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ProgramDisplayModel>> FetchItemsAsync()
     {

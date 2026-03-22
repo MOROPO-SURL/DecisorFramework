@@ -1,0 +1,24 @@
+﻿using Microsoft.EntityFrameworkCore;
+using System.Linq;
+
+namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Repositories;
+
+public class ProjectRepository : Framework.Guama.Core.Persistence.ORM.EF.Repositories.Contract.AbstractEntityRepository<Entities.Project, System.Guid>
+{
+    public ProjectRepository(DbContext dbContext) : base(dbContext)
+    {
+    }
+
+    protected override IQueryable<Entities.Project> GetQueryableDbSet()
+    {
+        return base.GetQueryableDbSet()
+            .Include(entity => entity.Category)
+            .Include(entity => entity.Document)
+            .Include(entity => entity.Chief).ThenInclude(entity => entity.Employee).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+            .Include(entity => entity.Program).ThenInclude(entity => entity.Kind)
+            .Include(entity => entity.SpecificObjectives)
+            .Include(entity => entity.ParticipatingOrganizationBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+            .AsNoTracking()
+            .AsSplitQuery();
+    }
+}

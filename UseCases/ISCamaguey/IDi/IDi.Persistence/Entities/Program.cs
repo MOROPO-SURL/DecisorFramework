@@ -11,16 +11,20 @@
         
         public int Priority { get ; set ; }
 
-        [System.ComponentModel.DataAnnotations.MaxLength(320)]
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(320)]
         public string Name { get; set; }
 
         [System.ComponentModel.DataAnnotations.MaxLength(60)]
         public string Alias { get; set; }
 
-        [System.ComponentModel.DataAnnotations.MaxLength(60)]
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(60)]
         public string Code { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(KindId))]
+        public ProgramKind Kind { get; set; }
+        public System.Guid KindId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ChiefId))]
         public Framework.Decisor.Domain.Persistence.Entities.PersonContact Chief { get; set; }

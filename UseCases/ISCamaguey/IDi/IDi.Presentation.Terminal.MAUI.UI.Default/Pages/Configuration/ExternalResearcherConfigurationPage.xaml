@@ -191,8 +191,8 @@
                                     Text="Agregar"
                                     Clicked="DoctorateResearchAreaAgregationButton_Clicked" />
                                 <BoxView
-                                    Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="DimGray" />
+                                    Style="{StaticResource SeparatorBoxView}"
+                                    Grid.ColumnSpan="2" Grid.Row="1" />
                                 <VerticalStackLayout
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     Margin="4"
@@ -278,8 +278,8 @@
                                     Text="Agregar"
                                     Clicked="MasteryResearchAreaAgregationButton_Clicked" />
                                 <BoxView
-                                    Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="DimGray" />
+                                    Style="{StaticResource SeparatorBoxView}"
+                                    Grid.ColumnSpan="2" Grid.Row="1" />
                                 <VerticalStackLayout
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     Margin="4"
@@ -365,8 +365,8 @@
                                     Text="Agregar"
                                     Clicked="SpecializationResearchAreaAgregationButton_Clicked" />
                                 <BoxView
-                                    Grid.ColumnSpan="2" Grid.Row="1"
-                                    Color="DimGray" />
+                                    Style="{StaticResource SeparatorBoxView}"
+                                    Grid.ColumnSpan="2" Grid.Row="1" />
                                 <VerticalStackLayout
                                     Grid.ColumnSpan="2" Grid.Row="2"
                                     Margin="4"
@@ -432,9 +432,9 @@
                     </VerticalStackLayout>
                 </FlexLayout>
                 <BoxView 
+                    Style="{StaticResource SeparatorBoxView}"
                     Margin="8,16,8,8"
-                    HeightRequest="1" 
-                    Color="DimGray" />
+                    HeightRequest="1" />
                 <FlexLayout 
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">

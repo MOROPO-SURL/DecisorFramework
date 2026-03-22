@@ -1,16 +1,22 @@
 ﻿using FluentValidation;
 
-namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Validators
+namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Validators;
+
+public class ProgramExpectResultConfigurationValidator : AbstractValidator<Models.Page.Configuration.ProgramExpectResultConfigurationPageModel>
 {
-    public class ProgramExpectResultConfigurationValidator : AbstractValidator<Models.Page.Configuration.ProgramExpectResultConfigurationPageModel>
+    public ProgramExpectResultConfigurationValidator()
     {
-        public ProgramExpectResultConfigurationValidator()
-        {
-            RuleFor(model => model.Title).NotNull().NotEmpty();
+        RuleFor(model => model.Title)
+            .NotEmpty()
+            .MaximumLength(512)
+            .WithName("Título");
 
-            RuleFor(model => model.Index).GreaterThanOrEqualTo(1);
+        RuleFor(model => model.Index)
+            .GreaterThanOrEqualTo(1)
+            .WithName("Número");
 
-            RuleFor(model => model.Description).NotNull().NotEmpty();
-        }
+        RuleFor(model => model.Description)
+            .MaximumLength(2048)
+            .WithName("Descripción");
     }
 }

@@ -276,6 +276,24 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
             });
             researchSection.Add(new ManagementDashboardSectionViewModel
             {
+                Title = "Tipos de Programa",
+                Controller = "programkinds",
+                Action = "Index",
+                Area = "IDi",
+                // TODO Set spected permission
+                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+            });
+            researchSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Categorías de Projecto",
+                Controller = "projectcategories",
+                Action = "Index",
+                Area = "IDi",
+                // TODO Set spected permission
+                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+            });
+            researchSection.Add(new ManagementDashboardSectionViewModel
+            {
                 Title = "Categorías Científicas",
                 Controller = "researchercategories",
                 Action = "Index",

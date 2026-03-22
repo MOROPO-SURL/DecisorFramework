@@ -1,4 +1,6 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
+﻿using System.Collections.Generic;
+
+namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
 {
     public class Project : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
@@ -12,7 +14,7 @@
         public int Priority { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.MaxLength(255)]
+        [System.ComponentModel.DataAnnotations.MaxLength(500)]
         public string Name { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
@@ -27,23 +29,23 @@
         public System.Guid CategoryId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.MaxLength(2550)]
+        [System.ComponentModel.DataAnnotations.MaxLength(5000)]
         public string Summary { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.MaxLength(5100)]
+        [System.ComponentModel.DataAnnotations.MaxLength(10000)]
         public string Problem { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.MaxLength(5100)]
+        [System.ComponentModel.DataAnnotations.MaxLength(500000)]
         public string Context { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.MaxLength(2550)]
+        [System.ComponentModel.DataAnnotations.MaxLength(5000)]
         public string Beneficiary { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
-        [System.ComponentModel.DataAnnotations.MaxLength(360)]
+        [System.ComponentModel.DataAnnotations.MaxLength(1000)]
         public string MainObjetive { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProgramId))]
@@ -59,7 +61,7 @@
         public System.Guid? PredecessorId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ChiefId))]
-        public Contract.AbstractResearcher Chief { get; set; }
+        public InternalResearcher Chief { get; set; }
         public System.Guid ChiefId { get; set; }
 
         public System.DateTime StartAt { get; set; }
@@ -70,15 +72,19 @@
         public Framework.Guama.Media.Persistence.Entities.Document Document { get; set; }
         public System.Guid DocumentId { get; set; }
 
-        public System.Collections.Generic.ICollection<ProjectSpecificObjective> SpecificObjectives { get; set; }
+        public List<ProjectProgramExpectResultBridge> ProgramExpectResultBridges { get; set; } = new List<ProjectProgramExpectResultBridge>();
 
-        public System.Collections.Generic.ICollection<ProjectBudgetFunancing> BudgetFunancings { get; set; }
+        public List<ProjectBudgetCurrencyBridge> BudgetCurrencyBridges { get; set; } = new List<ProjectBudgetCurrencyBridge>();
 
-        public System.Collections.Generic.List<ProjectBudgetCurrencyBridge> BudgetCurrencyBridges { get; set; } = new System.Collections.Generic.List<ProjectBudgetCurrencyBridge>();
+        public List<ProjectParticipatingOrganizationBridge> ParticipatingOrganizationBridges { get; set; } = new List<ProjectParticipatingOrganizationBridge>();
 
-        public System.Collections.Generic.List<ProjectParticipatingOrganizationBridge> ParticipatingOrganizationBridges { get; set; } = new System.Collections.Generic.List<ProjectParticipatingOrganizationBridge>();
+        public List<ProjectResearcherBridge> ResearcherBridges { get; set; } = new List<ProjectResearcherBridge>();
 
-        public System.Collections.Generic.List<ProjectResearcherBridge> ResearcherBridges { get; set; } = new System.Collections.Generic.List<ProjectResearcherBridge>();
+        public ICollection<ProjectSpecificObjective> SpecificObjectives { get; set; }
+
+        public ICollection<ProjectBudgetFunancing> BudgetFunancings { get; set; }
+
+        public ICollection<ProjectImpact> Impacts { get; set; }
 
     }
 }

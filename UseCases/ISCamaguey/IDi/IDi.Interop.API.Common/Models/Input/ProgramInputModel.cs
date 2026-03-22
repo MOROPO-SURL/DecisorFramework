@@ -7,12 +7,17 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
         public System.Guid Id { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(320)]
         public string Name { get; set; }
 
+        [System.ComponentModel.DataAnnotations.MaxLength(60)]
         public string Alias { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(60)]
         public string Code { get; set; }
+
+        public System.Guid KindId { get; set; }
 
         public System.Guid ChiefId { get; set; }
 
@@ -47,6 +52,12 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
             entity.Code = Code;
             entity.Description = Description;
             entity.Priority = Priority;
+
+            if (entity.KindId != KindId)
+            {
+                entity.Kind = null;
+                entity.KindId = KindId;
+            }
 
             if (entity.ChiefId != ChiefId)
             {

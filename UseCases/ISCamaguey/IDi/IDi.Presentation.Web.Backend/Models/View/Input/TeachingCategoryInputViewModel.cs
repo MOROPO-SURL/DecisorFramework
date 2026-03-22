@@ -2,7 +2,6 @@
 {
     public class TeachingCategoryInputViewModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.TeachingCategory, System.Guid>
     {
-        [System.ComponentModel.DataAnnotations.Key]
         public System.Guid Id { get; set; } = System.Guid.NewGuid();
 
         public int Priority { get; set; }

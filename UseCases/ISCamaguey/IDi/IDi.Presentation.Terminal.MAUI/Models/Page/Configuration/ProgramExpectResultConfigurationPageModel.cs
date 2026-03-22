@@ -6,7 +6,7 @@
         public static string IndexValidableProperty => nameof(Index);
         public static string DescriptionValidableProperty => nameof(Description);
 
-        private int index;
+        private int index = 1;
         private string title;
         private string description;
 

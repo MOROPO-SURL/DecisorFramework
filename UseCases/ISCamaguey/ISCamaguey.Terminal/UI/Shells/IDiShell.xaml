@@ -68,12 +68,12 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Proyectos (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Proyectos"
+        ContentTemplate="{DataTemplate idi_manage_pages:ProjectsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF76F;"
+                Glyph="&#xF00AA;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -83,7 +83,7 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF00AA;"
+                Glyph="&#xF030E;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -132,6 +132,26 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
+    <ShellContent
+        Title="Tipos de Programa"
+        ContentTemplate="{DataTemplate idi_list_pages:ProgramKindsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF030F;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Categorías de Proyecto"
+        ContentTemplate="{DataTemplate idi_list_pages:ProjectCategoriesListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF00AB;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <ShellContent
         Title="Categorías Científicas"
         ContentTemplate="{DataTemplate idi_list_pages:ResearcherCategoriesListPage}">

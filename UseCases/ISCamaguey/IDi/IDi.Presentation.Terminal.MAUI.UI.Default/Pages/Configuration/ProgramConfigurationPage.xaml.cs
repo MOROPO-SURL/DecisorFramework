@@ -14,6 +14,20 @@ public partial class ProgramConfigurationPage : Framework.Decisor.Core.Presentat
     public ProgramConfigurationPage(System.Action<Interop.API.Common.Models.Display.ProgramDisplayModel> successAction, Models.Page.Configuration.ProgramConfigurationPageModel model, Validators.ProgramConfigurationValidator validator) : base(successAction, model, validator)
     {
         InitializeComponent();
+
+        if (model.Kind != null)
+        {
+            for (int i = 0; i < model.AvailableKinds.Length; i++)
+            {
+                var current = model.AvailableKinds[i];
+
+                if (model.Kind.Id != current.Id) continue;
+
+                KindPicker.SelectedIndex = i;
+
+                break;
+            }
+        }
     }
 
     protected override string EntityTypeName => "Programa";
@@ -30,6 +44,7 @@ public partial class ProgramConfigurationPage : Framework.Decisor.Core.Presentat
             Description = ConcreteBindingContext.Description,
             Alias = ConcreteBindingContext.Alias,
             Code = ConcreteBindingContext.Code,
+            KindId = ConcreteBindingContext.Kind.Id,
             ManagerId = ConcreteBindingContext.Manager.Id,
             ChiefId = ConcreteBindingContext.Chief.Id,
             IncomingProgramExpectResults = incomingProgramExpectResults
@@ -52,6 +67,7 @@ public partial class ProgramConfigurationPage : Framework.Decisor.Core.Presentat
             Description= ConcreteBindingContext.Description,
             Alias = ConcreteBindingContext.Alias,
             Code = ConcreteBindingContext.Code,
+            KindId = ConcreteBindingContext.Kind.Id,
             ManagerId = ConcreteBindingContext.Manager.Id,
             ChiefId = ConcreteBindingContext.Chief.Id,
             IncomingProgramExpectResults = incomingProgramExpectResults,

@@ -130,8 +130,8 @@
                                 Text="Agregar"
                                 Clicked="ResearchAreaAgregationButton_Clicked" />
                             <BoxView
-                                Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Style="{StaticResource SeparatorBoxView}"
+                                Grid.ColumnSpan="2" Grid.Row="1" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemSizingStrategy="MeasureAllItems"
@@ -222,8 +222,8 @@
                                 Text="Agregar"
                                 Clicked="DocumentAgregationButton_Clicked" />
                             <BoxView
-                                Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Style="{StaticResource SeparatorBoxView}"
+                                Grid.ColumnSpan="2" Grid.Row="1" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemSizingStrategy="MeasureAllItems"

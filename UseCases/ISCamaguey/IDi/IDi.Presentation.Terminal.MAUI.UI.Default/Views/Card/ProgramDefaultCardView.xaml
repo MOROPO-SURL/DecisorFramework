@@ -10,6 +10,7 @@
             <Label 
                 LineBreakMode="TailTruncation"
                 FontSize="Medium"
+                ToolTipProperties.Text="{Binding Name}"
                 Text="{Binding Name}" />
             <Label Text="{Binding Code}" />
             <Label 
@@ -22,6 +23,7 @@
                 VerticalOptions="FillAndExpand"
                 LineBreakMode="TailTruncation"
                 MaxLines="2"
+                ToolTipProperties.Text="{Binding Description}"
                 Text="{Binding Description, TargetNullValue='---'}" />
         </VerticalStackLayout>
     </Frame>

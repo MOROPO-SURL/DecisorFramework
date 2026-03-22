@@ -22,7 +22,10 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Ex
                 .AddSingleton<IDetailContentPageFactoryFacade<ExternalResearcherDisplayModel>, ExternalResearcherDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<InternalResearcherDisplayModel>, InternalResearcherDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<CallForProposalDisplayModel>, CallForProposalDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<ProjectDisplayModel>, ProjectDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<ProjectProposalDisplayModel>, ProjectProposalDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<ProjectCategoryDisplayModel>, ProjectCategoryDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<ProgramKindDisplayModel>, ProgramKindDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ResearchAreaDisplayModel, ResearchAreaConfigurationPageModel>, ResearchAreaConfigurationPageFactory>()
@@ -32,6 +35,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Ex
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ExternalResearcherDisplayModel, ExternalResearcherConfigurationPageModel>, ExternalResearcherConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<InternalResearcherDisplayModel, InternalResearcherConfigurationPageModel>, InternalResearcherConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<CallForProposalDisplayModel, CallForProposalConfigurationPageModel>, CallForProposalConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<ProjectDisplayModel, ProjectConfigurationPageModel>, ProjectConfigurationPageFactory>()
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ProjectProposalDisplayModel, ProjectProposalConfigurationPageModel>, ProjectProposalConfigurationPageFactory>();
 
             return builder;
