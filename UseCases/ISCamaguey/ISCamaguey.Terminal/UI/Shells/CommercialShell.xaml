@@ -1,6 +1,7 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages"
     xmlns:frwk_domain_list_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:frwk_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:frwk_commercial_list_pages="clr-namespace:MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Commercial.Presentation.Terminal.MAUI.UI.Default"
@@ -15,7 +16,7 @@
                 Aspect="AspectFill"
                 Source="commercial.jpg" />
             <BoxView
-                BackgroundColor="Black"
+                Color="Black"
                 Opacity="0.5" />
             <Grid
                 Padding="16">
@@ -36,12 +37,23 @@
             </Grid>
         </Grid>
     </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
+    <ShellContent
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate local_pages:SimplifiedCommercialDashboardPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <FlyoutItem Title="Clientes">
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFAC0;"
+                Glyph="{StaticResource ClientMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
@@ -55,7 +67,7 @@
         <FlyoutItem.Icon>
             <FontImageSource
              FontFamily="MaterialDesignIcons"
-             Glyph="&#xF5D2;"
+             Glyph="{StaticResource ContactMaterialDesignGlyphIconId}"
              Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
@@ -72,7 +84,7 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF070;"
+                Glyph="{StaticResource LegalBusinessKindMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -82,7 +94,7 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF00F5;"
+                Glyph="{StaticResource NaturalBusinessKindMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -92,7 +104,7 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF0F0;"
+                Glyph="{StaticResource PaymentTermMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

@@ -2,6 +2,7 @@
 <Shell
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages"
     xmlns:frwk_financial_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.FinancialShell">
     <Shell.FlyoutBehavior>
@@ -13,7 +14,7 @@
                 Aspect="AspectFill"
                 Source="cash.jpg" />
             <BoxView
-                BackgroundColor="Black"
+                Color="Black"
                 Opacity="0.5" />
             <Grid
                 Padding="16">
@@ -34,44 +35,48 @@
             </Grid>
         </Grid>
     </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
+    <ShellContent
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate local_pages:SimplfiedFinancialDashboardPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
         Title="Agencias Bancarias"
+        Route="BankAgenciesManagePage"
         ContentTemplate="{DataTemplate frwk_financial_manage_pages:BankAgenciesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF070;"
+                Glyph="{StaticResource BankAgencyMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
         Title="Sucursales Bancarias"
+        Route="BankBranchesManagePage"
         ContentTemplate="{DataTemplate frwk_financial_manage_pages:BankBranchesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFA26;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-        Title="Cuentas Bancarias"
-        ContentTemplate="{DataTemplate frwk_financial_manage_pages:BankAccountsManagePage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF02A8;"
+                Glyph="{StaticResource BankBranchMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
         Title="Monedas"
+        Route="CurrenciesManagePage"
         ContentTemplate="{DataTemplate frwk_financial_manage_pages:CurrenciesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF4CB;"
+                Glyph="{StaticResource CurrencyMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

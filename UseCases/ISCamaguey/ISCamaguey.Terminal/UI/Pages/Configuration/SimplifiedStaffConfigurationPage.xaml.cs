@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages.Configuration;
 
@@ -51,7 +53,8 @@ public partial class SimplifiedStaffConfigurationPage : Framework.Decisor.Core.P
             WorkingWeekHourCount = ConcreteBindingContext.WorkingWeekHourCount,
             DoctorateExtraFeed = ConcreteBindingContext.DoctorateExtraFeed,
             MasteryExtraFeed = ConcreteBindingContext.MasteryExtraFeed,
-            AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges]
+            AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -71,7 +74,8 @@ public partial class SimplifiedStaffConfigurationPage : Framework.Decisor.Core.P
             WorkingWeekHourCount = ConcreteBindingContext.WorkingWeekHourCount,
             DoctorateExtraFeed = ConcreteBindingContext.DoctorateExtraFeed,
             MasteryExtraFeed = ConcreteBindingContext.MasteryExtraFeed,
-            AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges]
+            AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -125,5 +129,32 @@ public partial class SimplifiedStaffConfigurationPage : Framework.Decisor.Core.P
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
     {
         hasChangesFlag = true;
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 }

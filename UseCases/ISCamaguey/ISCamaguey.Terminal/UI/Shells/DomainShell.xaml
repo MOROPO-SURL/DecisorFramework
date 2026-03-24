@@ -2,6 +2,7 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages"
     xmlns:frwk_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.DomainShell">
     <Shell.FlyoutBehavior>
@@ -13,7 +14,7 @@
                 Aspect="AspectFill"
                 Source="domain.jpg" />
             <BoxView
-                BackgroundColor="Black"
+                Color="Black"
                 Opacity="0.5" />
             <Grid
                 Padding="16">
@@ -34,9 +35,21 @@
             </Grid>
         </Grid>
     </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
+    <ShellContent
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate local_pages:SimplifiedDomainDashboardPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Entidades Administrativas"
+        Route="AdministrativeEntitiesManagePage"
         ContentTemplate="{DataTemplate frwk_domain_manage_pages:AdministrativeEntitiesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -47,6 +60,7 @@
     </ShellContent>
     <ShellContent
         Title="Estructuras Organizacionales"
+        Route="OrganizationalStructuresManagePage"
         ContentTemplate="{DataTemplate frwk_domain_manage_pages:OrganizationalStructuresManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -57,6 +71,7 @@
     </ShellContent>
     <ShellContent
         Title="Unidades Organizativas"
+        Route="OrganizationalUnitsManagePage"
         ContentTemplate="{DataTemplate frwk_domain_manage_pages:OrganizationalUnitsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
