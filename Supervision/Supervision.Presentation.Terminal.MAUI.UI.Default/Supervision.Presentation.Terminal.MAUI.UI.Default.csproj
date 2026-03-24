@@ -34,9 +34,12 @@
 		<ProjectReference Include="..\..\Commercial\Commercial.Interop.API.Connect\Commercial.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\..\Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\Domain\Domain.Interop.API.Connect\Domain.Interop.API.Connect.csproj" />
+		<ProjectReference Include="..\..\Financial\Financial.Interop.API.Connect\Financial.Interop.API.Connect.csproj" />
+		<ProjectReference Include="..\..\Financial\Financial.Presentation.Terminal.MAUI.UI.Default\Financial.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\HumanResources\HumanResources.Interop.API.Common\HumanResources.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\..\HumanResources\HumanResources.Interop.API.Connect\HumanResources.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\..\HumanResources\HumanResources.Persistence\HumanResources.Persistence.csproj" />
+		<ProjectReference Include="..\..\HumanResources\HumanResources.Presentation.Terminal.MAUI.UI.Default\HumanResources.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\Inventory\Inventory.Interop.API.Connect\Inventory.Interop.API.Connect.csproj" />
 		<ProjectReference Include="..\..\Leasing\Leasing.Interop.API.Common\Leasing.Interop.API.Common.csproj" />
 		<ProjectReference Include="..\..\Leasing\Leasing.Interop.API.Connect\Leasing.Interop.API.Connect.csproj" />
@@ -45,10 +48,36 @@
 		<ProjectReference Include="..\Supervision.Presentation.Terminal.MAUI\Supervision.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\DomainDashboardPage.xaml.cs">
+	    <DependentUpon>DomainDashboardPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\GovernanceDashboardPage.xaml.cs">
+	    <DependentUpon>GovernanceDashboardPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\FinancialDashboardPage.xaml.cs">
+	    <DependentUpon>FinancialDashboardPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\CommercialDashboardPage.xaml.cs">
+	    <DependentUpon>CommercialDashboardPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
 	  <MauiXaml Update="Pages\HumanResourcesDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\LeasingDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\DomainDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\GovernanceDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\FinancialDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\CommercialDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

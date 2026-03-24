@@ -12,7 +12,7 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
     private readonly List<Interop.API.Common.Models.Input.AgreementInputModel> incomingAgreements = [];
     private readonly List<Interop.API.Common.Models.Display.AgreementDisplayModel> outgoingAgreements = [];
 
-    public MeetingConfigurationPage(System.Action<Interop.API.Common.Models.Display.MeetingDisplayModel> successAction, Models.Page.Configuration.MeetingConfigurationPageModel model) : base(successAction, model, null)
+    public MeetingConfigurationPage(System.Action<Interop.API.Common.Models.Display.MeetingDisplayModel> successAction, Models.Page.Configuration.MeetingConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.MeetingConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
@@ -44,11 +44,12 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
             At = ConcreteBindingContext.AtDate.Date + ConcreteBindingContext.AtTime,
             Summary = ConcreteBindingContext.Summary,
             Rapporteurship = ConcreteBindingContext.Rapporteurship,
-            DecisionMakingGroupId = ConcreteBindingContext.AvailableGroups[GroupPicker.SelectedIndex].Id,
+            DecisionMakingGroupId = ConcreteBindingContext.Group.Id,
             AuthorId = ConcreteBindingContext.Author.Id,
-            InternalInvitations = ConcreteBindingContext.InternalInvitations.ToList(),
-            ExternalInvitations = ConcreteBindingContext.ExternalInvitations.ToList(),
-            IncomingAgreements = incomingAgreements
+            InternalInvitations = [.. ConcreteBindingContext.InternalInvitations],
+            ExternalInvitations = [.. ConcreteBindingContext.ExternalInvitations],
+            IncomingAgreements = incomingAgreements,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -67,13 +68,14 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
             At = ConcreteBindingContext.AtDate.Date + ConcreteBindingContext.AtTime,
             Summary = ConcreteBindingContext.Summary,
             Rapporteurship = ConcreteBindingContext.Rapporteurship,
-            DecisionMakingGroupId = ConcreteBindingContext.AvailableGroups[GroupPicker.SelectedIndex].Id,
+            DecisionMakingGroupId = ConcreteBindingContext.Group.Id,
             AuthorId = ConcreteBindingContext.Author.Id,
-            InternalInvitations = ConcreteBindingContext.InternalInvitations.ToList(),
-            ExternalInvitations = ConcreteBindingContext.ExternalInvitations.ToList(),
+            InternalInvitations = [.. ConcreteBindingContext.InternalInvitations],
+            ExternalInvitations = [.. ConcreteBindingContext.ExternalInvitations],
             IncomingAgreements = incomingAgreements,
             EditionAgreements = editionAgreements,
-            OutgoingAgreements = outgoingAgreements
+            OutgoingAgreements = outgoingAgreements,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -161,12 +163,12 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
 
     private void AgreementAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushPageAsync(new AgreementConfigurationPage(AgreementCreateSuccess_Callback, new Models.Page.Configuration.AgreementConfigurationPageModel(null)));
+        this.NavigationPushPageAsync(new AgreementConfigurationPage(AgreementCreateSuccess_Callback, new Models.Page.Configuration.AgreementConfigurationPageModel(null), new Validators.AgreementConfigurationValidator()));
     }
 
     private void AgreementEditionButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushPageAsync(new AgreementConfigurationPage(AgreementEditSuccess_Callback, new Models.Page.Configuration.AgreementConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.AgreementDisplayModel)));
+        this.NavigationPushPageAsync(new AgreementConfigurationPage(AgreementEditSuccess_Callback, new Models.Page.Configuration.AgreementConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.AgreementDisplayModel), new Validators.AgreementConfigurationValidator()));
     }
 
     private void AgreementRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -221,6 +223,33 @@ public partial class MeetingConfigurationPage : Core.Presentation.Terminal.MAUI.
                 hasChangesFlag = true;
             });
         });
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void AgreementCreateSuccess_Callback(Interop.API.Common.Models.Display.AgreementDisplayModel model)

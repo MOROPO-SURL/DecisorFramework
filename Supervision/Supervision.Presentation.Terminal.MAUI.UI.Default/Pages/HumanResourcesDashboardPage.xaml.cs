@@ -1,8 +1,8 @@
-using LiveChartsCore;
 using LiveChartsCore.SkiaSharpView;
 using LiveChartsCore.SkiaSharpView.Painting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Maui.Controls;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages;
@@ -35,13 +35,94 @@ public partial class HumanResourcesDashboardPage : Caney.MVVM.Core.Pages.Binding
         Refresh();
     }
 
+    private async void GoWorkPositionKindsAdminSiteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Microsoft.Maui.ApplicationModel.Launcher.OpenAsync($"{Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>().HttpClientHelper.ClientBaseAddress}management/hhrr/workpositionkinds");
+    }
+
+    private async void GoWorkPositionsManageSiteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Shell.Current.GoToAsync(new ShellNavigationState($"///{typeof(HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.WorkPositionsManagePage).Name}"));
+    }
+
+    private async void GoSalaryStandardsManageSiteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Shell.Current.GoToAsync(new ShellNavigationState($"///{typeof(HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.SalaryStandardsManagePage).Name}"));
+    }
+
+    private async void GoWorkforcesManageSiteButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Shell.Current.GoToAsync(new ShellNavigationState($"///{typeof(HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.WorkforcesManagePage).Name}"));
+    }
+
+    private async void GoStaffsManageSiteManagePageButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Shell.Current.GoToAsync(new ShellNavigationState($"///{typeof(HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.StaffsManagePage).Name}"));
+    }
+
+    private async void GoOcupationsManageSiteManagePageButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Shell.Current.GoToAsync(new ShellNavigationState($"///{typeof(HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.OcupationsManagePage).Name}"));
+    }
+
     private void Refresh()
     {
         if (BindingContextPageModel.IsBusy) return;
 
         BindingContextPageModel.IsBusy = true;
 
-        StaffChange_Callback();
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+            var workPositionKindsAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.WorkPositionKindsAPIConnectClient(httpClientHelperProvider);
+            var workPositionsAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.WorkPositionsAPIConnectClient(httpClientHelperProvider);
+            var salaryStandardsAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.SalaryStandardsAPIConnectClient(httpClientHelperProvider);
+            var workforcesAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.WorkforcesAPIConnectClient(httpClientHelperProvider);
+            var staffsAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.StaffsAPIConnectClient(httpClientHelperProvider);
+            var ocupationsAPIConnectClient = new HumanResources.Interop.API.Connect.Clients.OcupationsAPIConnectClient(httpClientHelperProvider);
+
+            var workPositionKindCount = await workPositionKindsAPIConnectClient.CountAsync();
+            var workPositionCount = await workPositionsAPIConnectClient.CountAsync();
+            var salaryStandardCount = await salaryStandardsAPIConnectClient.CountAsync();
+            var workforceCount = await workforcesAPIConnectClient.CountAsync();
+            var staffCount = await staffsAPIConnectClient.CountAsync();
+            var ocupationCount = await ocupationsAPIConnectClient.CountAsync();
+
+            Dispatcher.Dispatch(() =>
+            {
+                BindingContextPageModel.HasAnyWorkPositionKind = workPositionKindCount > 0;
+                BindingContextPageModel.HasAnyWorkPosition = workPositionCount > 0;
+                BindingContextPageModel.HasAnySalaryStandard = salaryStandardCount > 0;
+                BindingContextPageModel.HasAnyWorkforce = workforceCount > 0;
+                BindingContextPageModel.HasAnyStaff = staffCount > 0;
+                BindingContextPageModel.HasAnyOcupation = ocupationCount > 0;
+                BindingContextPageModel.IsModuleReady =
+                    BindingContextPageModel.HasAnyWorkPositionKind &&
+                    BindingContextPageModel.HasAnyWorkPosition &&
+                    BindingContextPageModel.HasAnySalaryStandard &&
+                    BindingContextPageModel.HasAnyWorkforce &&
+                    BindingContextPageModel.HasAnyStaff &&
+                    BindingContextPageModel.HasAnyOcupation;
+
+                BindingContextPageModel.IsBusy = false;
+
+                StaffChange_Callback();
+            });
+        }).ContinueWith(task =>
+        {
+            if (!task.IsFaulted && !task.IsCanceled)
+            {
+                return;
+            }
+
+            Dispatcher.Dispatch(() =>
+            {
+                BindingContextPageModel.IsBusy = false;
+
+                this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Error, "No fue posible actualizar la información en este momento.", delay: System.TimeSpan.FromMilliseconds(500));
+            });
+        });
     }
 
     private void StaffChange_Callback()
@@ -104,16 +185,16 @@ public partial class HumanResourcesDashboardPage : Caney.MVVM.Core.Pages.Binding
                     Series = LiveChartsCore.SkiaSharpView.Extensions.GaugeGenerator.BuildSolidGauge(
                         new LiveChartsCore.SkiaSharpView.Extensions.GaugeItem(BindingContextPageModel.IsStaffCompletitionGlobalPieChartMock ? System.Convert.ToDouble(System.Random.Shared.Next(20, 80)) : System.Convert.ToDouble(vacantCount) / System.Convert.ToDouble(ocupationCount) * 100d, series =>
                         {
-                            series.Fill = new LiveChartsCore.SkiaSharpView.Painting.SolidColorPaint(SkiaSharp.SKColors.SkyBlue);
+                            series.Fill = new SolidColorPaint(SkiaSharp.SKColors.SkyBlue);
                             series.DataLabelsSize = 50;
-                            series.DataLabelsPaint = new LiveChartsCore.SkiaSharpView.Painting.SolidColorPaint(SkiaSharp.SKColors.SkyBlue);
+                            series.DataLabelsPaint = new SolidColorPaint(SkiaSharp.SKColors.SkyBlue);
                             series.DataLabelsPosition = LiveChartsCore.Measure.PolarLabelsPosition.ChartCenter;
                             series.InnerRadius = 75;
                         }),
                         new LiveChartsCore.SkiaSharpView.Extensions.GaugeItem(LiveChartsCore.SkiaSharpView.Extensions.GaugeItem.Background, series =>
                         {
                             series.InnerRadius = 75;
-                            series.Fill = new LiveChartsCore.SkiaSharpView.Painting.SolidColorPaint(SkiaSharp.SKColors.DimGray);
+                            series.Fill = new SolidColorPaint(SkiaSharp.SKColors.DimGray);
                         })).ToArray()
                 };
 
@@ -251,19 +332,7 @@ public partial class HumanResourcesDashboardPage : Caney.MVVM.Core.Pages.Binding
         {
             if (!task.IsCanceled && task.Exception == null) return;
 
-            Dispatcher.Dispatch(() => Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this));
+            Dispatcher.Dispatch(() => this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Error, "No fue posible actualizar la información en este momento.", delay: System.TimeSpan.FromMilliseconds(500)));
         });
-    }
-
-    private int CountVacants(HumanResources.Interop.API.Common.Models.Display.WorkforceOrganizationalUnitDisplayModel model)
-    {
-        var result = 1 + model.Vacants.Length;
-
-        //foreach (var child in model.Children)
-        //{
-        //    result += CountVacants(child);
-        //}
-
-        return result;
     }
 }

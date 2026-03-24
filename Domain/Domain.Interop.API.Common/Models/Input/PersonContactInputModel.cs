@@ -6,10 +6,8 @@ using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 {
-    public class PersonContactInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<PersonContact, System.Guid>
+    public class PersonContactInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<PersonContact, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -54,7 +52,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         public List<AcademicAchievementInputModel> IncomingAcademicAchievements { get; set; } = new List<AcademicAchievementInputModel>();
         public List<AcademicAchievementDisplayModel> OutgoingAcademicAchievements { get; set; } = new List<AcademicAchievementDisplayModel>();
 
-        public PersonContact Export()
+        public override PersonContact Export()
         {
             var entity = new PersonContact { Id = Id, Enabled = true, Identity = new Guama.Identity.Persistence.Entities.PersonIdentity() };
 
@@ -63,12 +61,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(PersonContact entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(PersonContact entity)
+        public override void Mergue(PersonContact entity)
         {
             entity.Identity.Name = Name;
             entity.Identity.About = About;

@@ -5,6 +5,9 @@
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_default_constants="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Constants;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:core_ui_default_card_views="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Financial.Interop.API.Common"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
@@ -14,6 +17,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrapFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="0" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
         </ResourceDictionary>
@@ -36,87 +40,152 @@
     </ContentPage.ToolbarItems>
     <Grid>
         <ScrollView Orientation="Vertical">
-            <Grid 
-                Padding="20"
-                ColumnSpacing="16" RowSpacing="16">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-                <Frame
-                    Grid.Column="3" Grid.Row="0" Grid.RowSpan="3"
-                    VerticalOptions="Start"
-                    Padding="0"
-                    HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
-                    <Grid>
-                        <Image Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
-                        <Grid BackgroundColor="#A7000000">
-                            <Grid.GestureRecognizers>
-                                <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />
-                            </Grid.GestureRecognizers>
+            <VerticalStackLayout Spacing="0" Padding="8">
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrapFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=9, LargeContainerColumn=8, MediumContainerColumn=12}}">
+                        <VerticalStackLayout 
+                            Margin="8"
+                            Spacing="6">
+                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                            <Entry Text="{Binding Name}" />
                             <Label
-                                Text="&#xF8CB;"
-                                TextColor="White"
-                                HorizontalOptions="Center" VerticalOptions="Center"
-                                FontFamily="MaterialDesignIcons"
-                                FontSize="96" />
+                                IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:BankAgencyConfigurationPageModel.NameValidableProperty}}"
+                                Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:BankAgencyConfigurationPageModel.NameValidableProperty}}"
+                                Style="{StaticResource ValidationMessageLabelStyle}" />
+                        </VerticalStackLayout>
+                        <FlexLayout 
+                            Wrap="Wrap"
+                            AlignItems="Start" AlignContent="Start">
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}, AncestorLevel=1}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, ExtraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6}}"
+                                Margin="4"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Alias (opcional)" />
+                                <Entry Text="{Binding Alias}" />
+                            </VerticalStackLayout>
+                        </FlexLayout>
+                        <VerticalStackLayout 
+                            Margin="8"
+                            Spacing="6">
+                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
+                            <Editor Text="{Binding About}" HeightRequest="200" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}}"
+                        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
+                        VerticalOptions="Start"
+                        Margin="4"
+                        Padding="0">
+                        <Grid>
+                            <Image Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
+                            <Grid BackgroundColor="#A7000000">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />
+                                </Grid.GestureRecognizers>
+                                <Label
+                                    Text="&#xF8CB;"
+                                    TextColor="White"
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="96" />
+                            </Grid>
                         </Grid>
-                    </Grid>
-                </Frame>
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
-                    <Entry Text="{Binding Name}" />
-                    <Label
-                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:BankAgencyConfigurationPageModel.NameValidableProperty}}"
-                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:BankAgencyConfigurationPageModel.NameValidableProperty}}"
-                        Style="{StaticResource ValidationMessageLabelStyle}" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.Row="1">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Alias (opcional)" />
-                    <Entry Text="{Binding Alias}" />
-                </VerticalStackLayout>
-                <VerticalStackLayout Spacing="6" Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
-                    <Editor Text="{Binding About}" HeightRequest="200" />
-                </VerticalStackLayout>
+                    </Frame>
+                </FlexLayout>
                 <BoxView 
-                    Grid.ColumnSpan="4" Grid.Row="3" 
-                    Margin="0,8,0,0"
-                    HeightRequest="1" 
-                    Color="{AppThemeBinding Light={StaticResource Gray600}, Dark={StaticResource Gray100}}" />
-                <Grid
-                    Grid.Column="0" Grid.Row="4"
-                    ColumnSpacing="6" RowSpacing="6">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto" />
-                        <RowDefinition Height="Auto" />
-                    </Grid.RowDefinitions>
-                    <Label 
-                        Grid.Row="0"
-                        Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
-                    <Entry
-                        Grid.Row="1"
-                        BackgroundColor="Transparent"
-                        IsReadOnly="True"
-                        Text="{Binding Priority}" />
-                    <Stepper
-                        Grid.Row="1"
-                        Margin="0,0,6,0"
-                        HorizontalOptions="End" VerticalOptions="Center"
-                        Minimum="1"
-                        Maximum="100"
-                        Value="{Binding Priority}" />
-                </Grid>
-            </Grid>
+                    Style="{StaticResource SeparatorBoxView}"
+                    Margin="8,16,8,8"
+                    HeightRequest="1" />
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <Grid
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        ColumnSpacing="6" RowSpacing="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.Row="0"
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Entry
+                            Grid.Row="1"
+                            BackgroundColor="Transparent"
+                            IsReadOnly="True"
+                            Text="{Binding Priority}" />
+                        <Stepper
+                            Grid.Row="1"
+                            Margin="0,0,6,0"
+                            HorizontalOptions="End" VerticalOptions="Center"
+                            Minimum="1"
+                            Maximum="100"
+                            Value="{Binding Priority}" />
+                    </Grid>
+                </FlexLayout>
+                <BoxView 
+                    Style="{StaticResource SeparatorBoxView}"
+                    Margin="8,16,8,8"
+                    HeightRequest="1" />
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Usuarios a notificar" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="NotificationUserAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="DimGray" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                Margin="4"
+                                ItemsSource="{Binding NotificationUsers}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="1" HorizontalItemSpacing="8" VerticalItemSpacing="8" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="{Static core_ui_default_constants:CardViewHeightConstants.USER_DEFAULT_CARD_VIEW_WIDTH}" ItemSpacing="8" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <core_ui_default_card_views:UserDefaultCardView HeightRequest="{Static core_ui_default_constants:CardViewHeightConstants.USER_DEFAULT_CARD_VIEW_HEIGHT}" />
+                                            <Button
+                                                Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                Margin="8"
+                                                HorizontalOptions="End" VerticalOptions="Start"
+                                                Text="&#xFA78;"
+                                                Clicked="NotificationUserRemotionButton_Clicked" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>

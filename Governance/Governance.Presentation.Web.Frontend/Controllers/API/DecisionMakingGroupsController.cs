@@ -1,68 +1,88 @@
 ﻿using Microsoft.Extensions.Logging;
+using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Governance.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using System.Linq;
 
-namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Governance.Presentation.Web.Frontend.Controllers.API;
+
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+[Microsoft.AspNetCore.Mvc.Route("api/fwrk/governance/[controller]")]
+[Microsoft.AspNetCore.Mvc.ApiController]
+public class DecisionMakingGroupsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<DecisionMakingGroup, System.Guid, DecisionMakingGroupInputModel, DecisionMakingGroupDisplayModel, DecisionMakingGroupFilterModel>
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/governance/[controller]")]
-    [Microsoft.AspNetCore.Mvc.ApiController]
-    public class DecisionMakingGroupsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<DecisionMakingGroup, System.Guid, DecisionMakingGroupInputModel, DecisionMakingGroupDisplayModel>
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
+
+    public DecisionMakingGroupsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IEntityRepository<DecisionMakingGroup, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<DecisionMakingGroupsController> localizer, ILogger<DecisionMakingGroupsController> logger) : base(repository, localizer, logger)
     {
-        public DecisionMakingGroupsController(IEntityRepository<DecisionMakingGroup, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<DecisionMakingGroupsController> localizer, ILogger<DecisionMakingGroupsController> logger) : base(repository, localizer, logger)
+        this.changeNotificationRepository = changeNotificationRepository;
+    }
+
+    protected override System.Linq.Expressions.Expression<System.Func<DecisionMakingGroup, bool>> GetGlobalSelector()
+    {
+        return entity => !entity.Archived;
+    }
+
+    protected override System.Func<DecisionMakingGroup, object> GetOrderSelector()
+    {
+        return entity => entity.Priority;
+    }
+
+    protected override DecisionMakingGroupDisplayModel EntityToDisplayModel(DecisionMakingGroup entity)
+    {
+        var model = base.EntityToDisplayModel(entity);
+
+        if (model.Leader.Identity.Image != null)
         {
+            model.Leader.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Leader.Identity.Image.ContentType);
         }
 
-        protected override System.Linq.Expressions.Expression<System.Func<DecisionMakingGroup, bool>> GetGlobalSelector()
+        model.Members = entity.EmployeeBridges.Select(bridge =>
         {
-            return entity => !entity.Archived;
-        }
+            var _model = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
 
-        protected override System.Func<DecisionMakingGroup, object> GetOrderSelector()
-        {
-            return entity => entity.Priority;
-        }
+            _model.Import(bridge.Stern);
 
-        protected override DecisionMakingGroupDisplayModel EntityToDisplayModel(DecisionMakingGroup entity)
-        {
-            var model = base.EntityToDisplayModel(entity);
-
-            if (model.Leader.Identity.Image != null)
+            if (bridge.Stern.Contact.Identity.Image != null)
             {
-                model.Leader.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Leader.Identity.Image.ContentType);
+                _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Contact.Identity.Image.ContentType);
             }
 
-            model.Members = entity.EmployeeBridges.Select(bridge =>
+            return _model;
+        }).ToArray();
+
+        model.Collaborators = entity.ContactBridges.Select(bridge =>
+        {
+            var _model = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
+
+            _model.Import(bridge.Stern);
+
+            if (bridge.Stern.Identity.Image != null)
             {
-                var _model = new Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel();
+                _model.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
+            }
 
-                _model.Import(bridge.Stern);
+            return _model;
+        }).ToArray();
 
-                if (bridge.Stern.Contact.Identity.Image != null)
-                {
-                    _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Contact.Identity.Image.ContentType);
-                }
+        return model;
+    }
 
-                return _model;
-            }).ToArray();
+    protected override void PostCreate(DecisionMakingGroup entity, DecisionMakingGroupInputModel model)
+    {
+        base.PostCreate(entity, model);
 
-            model.Collaborators = entity.ContactBridges.Select(bridge =>
-            {
-                var _model = new Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel();
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
 
-                _model.Import(bridge.Stern);
+    protected override void PostEdit(DecisionMakingGroup entity, DecisionMakingGroupInputModel model)
+    {
+        base.PostEdit(entity, model);
 
-                if (bridge.Stern.Identity.Image != null)
-                {
-                    _model.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
-                }
-
-                return _model;
-            }).ToArray();
-
-            return model;
-        }
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }
