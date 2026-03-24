@@ -142,13 +142,13 @@
 	  <MauiXaml Update="UI\Pages\QualityDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\SimplfiedFinancialDashboardPage.xaml">
+	  <MauiXaml Update="UI\Pages\SimplifiedFinancialDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\SimplfiedGovernanceDashboardPage.xaml">
+	  <MauiXaml Update="UI\Pages\SimplifiedGovernanceDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Pages\SimplfiedHumanResourcesDashboardPage.xaml">
+	  <MauiXaml Update="UI\Pages\SimplifiedHumanResourcesDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\SimplifiedCommercialDashboardPage.xaml">
@@ -191,6 +191,15 @@
 	  </Compile>
 	  <Compile Update="UI\Pages\Manage\OcupationsSimplifiedManagePage.xaml.cs">
 	    <DependentUpon>OcupationsSimplifiedManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SimplifiedFinancialDashboardPage.xaml.cs">
+	    <DependentUpon>SimplifiedFinancialDashboardPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SimplifiedGovernanceDashboardPage.xaml.cs">
+	    <DependentUpon>SimplifiedGovernanceDashboardPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SimplifiedHumanResourcesDashboardPage.xaml.cs">
+	    <DependentUpon>SimplifiedHumanResourcesDashboardPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Shells\GovernanceShell.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>

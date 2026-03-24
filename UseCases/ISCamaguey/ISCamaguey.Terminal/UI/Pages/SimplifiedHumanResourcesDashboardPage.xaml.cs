@@ -3,9 +3,9 @@ using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages;
 
-public partial class SimplfiedHumanResourcesDashboardPage : Framework.Caney.MVVM.Core.Pages.BindingContextedContentPage<Models.Page.SimplfiedHumanResourcesDashboardPageModel>
+public partial class SimplifiedHumanResourcesDashboardPage : Framework.Caney.MVVM.Core.Pages.BindingContextedContentPage<Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Dashboard.BaseHumanResourcesDashboardPageModel>
 {
-    public SimplfiedHumanResourcesDashboardPage() : base(new Models.Page.SimplfiedHumanResourcesDashboardPageModel())
+    public SimplifiedHumanResourcesDashboardPage() : base(new Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Dashboard.BaseHumanResourcesDashboardPageModel())
     {
         InitializeComponent();
     }

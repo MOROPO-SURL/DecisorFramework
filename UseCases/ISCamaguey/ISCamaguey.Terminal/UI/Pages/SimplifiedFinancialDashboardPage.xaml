@@ -2,16 +2,16 @@
 <caneyframework_mvvm_pages:BindingContextedContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.Models.Page"
     xmlns:fwrk_core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_dashboard_page_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Dashboard;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_mvvm_pages="clr-namespace:MOROPO.Framework.Caney.MVVM.Core.Pages;assembly=MOROPO.Framework.Caney.MVVM"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
-    x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages.SimplfiedGovernanceDashboardPage"
-    x:TypeArguments="local_page_models:SimplfiedGovernanceDashboardPageModel"
-    x:DataType="local_page_models:SimplfiedGovernanceDashboardPageModel"
-    Title="Panel de Control para Gobernanza">
+    x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages.SimplifiedFinancialDashboardPage"
+    x:TypeArguments="fwrk_core_dashboard_page_models:BaseFinancialDashboardPageModel"
+    x:DataType="fwrk_core_dashboard_page_models:BaseFinancialDashboardPageModel"
+    Title="Panel de Control para Finanzas">
     <ContentPage.Resources>
         <fwrk_core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
 
@@ -75,27 +75,27 @@
                                     HorizontalTextAlignment="Center"
                                     FontFamily="MaterialDesignIcons"
                                     FontSize="48"
-                                    Text="{StaticResource DecisionMakingGroupMaterialDesignGlyphIconId}" />
+                                    Text="{StaticResource BankAgencyMaterialDesignGlyphIconId}" />
                                 <Label
                                     HorizontalTextAlignment="Center"
                                     FontAttributes="Bold"
-                                    Text="Grupos Decisores" />
+                                    Text="Agencias Bancarias" />
                                 <Label
                                     HorizontalOptions="Center"
                                     Margin="0,8,0,0"
                                     FontFamily="MaterialDesignIcons"
                                     FontSize="36"
-                                    TextColor="{Binding HasAnyGroup, Converter={StaticResource BoolToColor}}"
-                                    Text="{Binding HasAnyGroup, Converter={StaticResource HasAnyToGlyph}}" />
+                                    TextColor="{Binding HasAnyBankAgency, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyBankAgency, Converter={StaticResource HasAnyToGlyph}}" />
                                 <Label
                                     HorizontalOptions="Center"
-                                    TextColor="{Binding HasAnyGroup, Converter={StaticResource BoolToColor}}"
-                                    Text="{Binding HasAnyGroup, Converter={StaticResource BoolToTitle}}" />
+                                    TextColor="{Binding HasAnyBankAgency, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyBankAgency, Converter={StaticResource BoolToTitle}}" />
                                 <Button
                                     HorizontalOptions="Center"
                                     Margin="0,8,0,0"
                                     Text="Gestionar"
-                                    Clicked="GoGroupsManageSiteButton_Clicked" />
+                                    Clicked="GoBankAgenciesManageSiteButton_Clicked" />
                             </VerticalStackLayout>
                             <VerticalStackLayout
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, SmallContainerColumn=6}}"
@@ -104,27 +104,27 @@
                                     HorizontalTextAlignment="Center"
                                     FontFamily="MaterialDesignIcons"
                                     FontSize="48"
-                                    Text="{StaticResource MeetingMaterialDesignGlyphIconId}" />
+                                    Text="{StaticResource BankBranchMaterialDesignGlyphIconId}" />
                                 <Label
                                     HorizontalTextAlignment="Center"
                                     FontAttributes="Bold"
-                                    Text="Reuniones" />
+                                    Text="Sucursales Bancarias" />
                                 <Label
                                     HorizontalOptions="Center"
                                     Margin="0,8,0,0"
                                     FontFamily="MaterialDesignIcons"
                                     FontSize="36"
-                                    TextColor="{Binding HasAnyMeeting, Converter={StaticResource BoolToColor}}"
-                                    Text="{Binding HasAnyMeeting, Converter={StaticResource HasAnyToGlyph}}" />
+                                    TextColor="{Binding HasAnyBankBrench, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyBankBrench, Converter={StaticResource HasAnyToGlyph}}" />
                                 <Label
                                     HorizontalOptions="Center"
-                                    TextColor="{Binding HasAnyMeeting, Converter={StaticResource BoolToColor}}"
-                                    Text="{Binding HasAnyMeeting, Converter={StaticResource BoolToTitle}}" />
+                                    TextColor="{Binding HasAnyBankBrench, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyBankBrench, Converter={StaticResource BoolToTitle}}" />
                                 <Button
                                     HorizontalOptions="Center"
                                     Margin="0,8,0,0"
                                     Text="Gestionar"
-                                    Clicked="GoMeetingsManageSiteButton_Clicked" />
+                                    Clicked="GoBankBrenchsManageSiteButton_Clicked" />
                             </VerticalStackLayout>
                             <VerticalStackLayout
                                 WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, SmallContainerColumn=6}}"
@@ -133,27 +133,27 @@
                                     HorizontalTextAlignment="Center"
                                     FontFamily="MaterialDesignIcons"
                                     FontSize="48"
-                                    Text="&#xFE71;" />
+                                    Text="{StaticResource CurrencyMaterialDesignGlyphIconId}" />
                                 <Label
                                     HorizontalTextAlignment="Center"
                                     FontAttributes="Bold"
-                                    Text="Acuerdos" />
+                                    Text="Monedas" />
                                 <Label
                                     HorizontalOptions="Center"
                                     Margin="0,8,0,0"
                                     FontFamily="MaterialDesignIcons"
                                     FontSize="36"
-                                    TextColor="{Binding HasAnyAgreement, Converter={StaticResource BoolToColor}}"
-                                    Text="{Binding HasAnyAgreement, Converter={StaticResource HasAnyToGlyph}}" />
+                                    TextColor="{Binding HasAnyCurrency, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyCurrency, Converter={StaticResource HasAnyToGlyph}}" />
                                 <Label
                                     HorizontalOptions="Center"
-                                    TextColor="{Binding HasAnyAgreement, Converter={StaticResource BoolToColor}}"
-                                    Text="{Binding HasAnyAgreement, Converter={StaticResource BoolToTitle}}" />
+                                    TextColor="{Binding HasAnyCurrency, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyCurrency, Converter={StaticResource BoolToTitle}}" />
                                 <Button
                                     HorizontalOptions="Center"
                                     Margin="0,8,0,0"
                                     Text="Gestionar"
-                                    Clicked="GoMeetingsManageSiteButton_Clicked" />
+                                    Clicked="GoCurrenciesManageSiteManagePageButton_Clicked" />
                             </VerticalStackLayout>
                         </FlexLayout>
                     </VerticalStackLayout>

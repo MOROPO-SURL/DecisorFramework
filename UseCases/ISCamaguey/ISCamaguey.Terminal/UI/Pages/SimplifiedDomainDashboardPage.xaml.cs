@@ -3,9 +3,9 @@ using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages;
 
-public partial class SimplifiedDomainDashboardPage : Framework.Caney.MVVM.Core.Pages.BindingContextedContentPage<Models.Page.SimplfiedDomainDashboardPageModel>
+public partial class SimplifiedDomainDashboardPage : Framework.Caney.MVVM.Core.Pages.BindingContextedContentPage<Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Dashboard.BaseDomainDashboardPageModel>
 {
-	public SimplifiedDomainDashboardPage() : base(new Models.Page.SimplfiedDomainDashboardPageModel())
+	public SimplifiedDomainDashboardPage() : base(new Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Dashboard.BaseDomainDashboardPageModel())
 	{
 		InitializeComponent();
     }

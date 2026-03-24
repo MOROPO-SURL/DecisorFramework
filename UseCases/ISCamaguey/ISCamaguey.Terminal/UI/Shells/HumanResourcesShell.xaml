@@ -41,7 +41,7 @@
     <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
     <ShellContent
         Title="Panel de Control"
-        ContentTemplate="{DataTemplate local_pages:SimplfiedHumanResourcesDashboardPage}">
+        ContentTemplate="{DataTemplate local_pages:SimplifiedHumanResourcesDashboardPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
