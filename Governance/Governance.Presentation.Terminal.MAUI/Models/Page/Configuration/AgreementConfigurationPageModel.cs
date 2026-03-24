@@ -2,6 +2,8 @@
 {
     public class AgreementConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.AgreementDisplayModel>
     {
+        public static string TitleValidableProperty => nameof(Title);
+
         private int index;
         private string title;
         private string description;

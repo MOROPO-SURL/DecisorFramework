@@ -1,51 +1,106 @@
-﻿using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;
+﻿using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
+using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Identity.Persistence.Entities;
 using MOROPO.Framework.Guama.Location.Persistence.Entities;
 
-namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controllers.API;
+
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+[Microsoft.AspNetCore.Mvc.Route("api/fwrk/financial/[controller]")]
+[Microsoft.AspNetCore.Mvc.ApiController]
+public class BankBranchesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<BankBranch, System.Guid, BankBranchInputModel, BankBranchDisplayModel, BankBranchFilterModel>
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/financial/[controller]")]
-    [Microsoft.AspNetCore.Mvc.ApiController]
-    public class BankBranchesController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<BankBranch, System.Guid, BankBranchInputModel, BankBranchDisplayModel>
+    private readonly IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository;
+    private readonly IEntityRepository<PostalContactItem, System.Guid> postalContactRepository;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
+
+    public BankBranchesController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<BankBranch, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<BankBranchesController> localizer, Microsoft.Extensions.Logging.ILogger<BankBranchesController> logger) : base(repository, localizer, logger)
     {
-        private readonly IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository;
-        private readonly IEntityRepository<PostalContactItem, System.Guid> postalContactRepository;
+        this.municipalityLocationRepository = municipalityLocationRepository;
+        this.postalContactRepository = postalContactRepository;
+        this.changeNotificationRepository = changeNotificationRepository;
+    }
 
-        public BankBranchesController(IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<BankBranch, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<BankBranchesController> localizer, Microsoft.Extensions.Logging.ILogger<BankBranchesController> logger) : base(repository, localizer, logger)
+    protected override System.Linq.Expressions.Expression<System.Func<BankBranch, bool>> GetGlobalSelector()
+    {
+        return entity => !entity.Archived && entity.Enabled;
+    }
+
+    public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
+    {
+        return NotFound();
+    }
+
+    protected override void PreCreate(BankBranch entity, BankBranchInputModel model)
+    {
+        base.PreCreate(entity, model);
+
+        if (model.LocationMunicipalityId != null && !string.IsNullOrEmpty(model.LocationAddress))
         {
-            this.municipalityLocationRepository = municipalityLocationRepository;
-            this.postalContactRepository = postalContactRepository;
-        }
+            var municipalityLocation = municipalityLocationRepository.FindOneBy(__entity => __entity.MunicipalityId == model.LocationMunicipalityId);
 
-        protected override System.Linq.Expressions.Expression<System.Func<BankBranch, bool>> GetGlobalSelector()
-        {
-            return entity => !entity.Archived && entity.Enabled;
-        }
-
-        public override Microsoft.AspNetCore.Mvc.ActionResult Delete(System.Guid key)
-        {
-            return NotFound();
-        }
-
-        protected override void PreCreate(BankBranch entity, BankBranchInputModel model)
-        {
-            base.PreCreate(entity, model);
-
-            if (model.LocationMunicipalityId != null && !string.IsNullOrEmpty(model.LocationAddress))
+            if (municipalityLocation == null)
             {
-                var municipalityLocation = municipalityLocationRepository.FindOneBy(__entity => __entity.MunicipalityId == model.LocationMunicipalityId);
-
-                if (municipalityLocation == null)
+                municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
                 {
-                    municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
-                    {
-                        MunicipalityId = model.LocationMunicipalityId
-                    }, User.Identity.Name, false);
-                }
+                    MunicipalityId = model.LocationMunicipalityId
+                }, User.Identity.Name, false);
+            }
 
+            entity.PostalContact = postalContactRepository.Add(new PostalContactItem
+            {
+                Address = model.LocationAddress,
+                ZipCode = model.LocationZipCode ?? 0,
+                Latitude = model.LocationLatitude ?? 0,
+                Longitude = model.LocationLongitude ?? 0,
+                LocationId = municipalityLocation.Id
+            }, User.Identity.Name, false);
+        }
+    }
+
+    protected override void PostCreate(BankBranch entity, BankBranchInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+    }
+
+    protected override void PreEdit(BankBranch entity, BankBranchInputModel model)
+    {
+        base.PreEdit(entity, model);
+
+        if (model.LocationMunicipalityId != null && !string.IsNullOrEmpty(model.LocationAddress))
+        {
+            var municipalityLocation = municipalityLocationRepository.FindOneBy(__entity => __entity.MunicipalityId == model.LocationMunicipalityId);
+
+            if (municipalityLocation == null)
+            {
+                municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
+                {
+                    MunicipalityId = model.LocationMunicipalityId
+                }, User.Identity.Name, false);
+            }
+
+            if (entity.PostalContact != null)
+            {
+                entity.PostalContact.Address = model.LocationAddress;
+                entity.PostalContact.ZipCode = model.LocationZipCode ?? 0;
+                entity.PostalContact.Latitude = model.LocationLatitude ?? 0;
+                entity.PostalContact.Longitude = model.LocationLongitude ?? 0;
+
+                if (entity.PostalContact.LocationId != municipalityLocation.Id)
+                {
+                    entity.PostalContact.Location = null;
+                    entity.PostalContact.LocationId = municipalityLocation.Id;
+                }
+            }
+            else
+            {
                 entity.PostalContact = postalContactRepository.Add(new PostalContactItem
                 {
                     Address = model.LocationAddress,
@@ -56,55 +111,19 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controlle
                 }, User.Identity.Name, false);
             }
         }
-
-        protected override void PreEdit(BankBranch entity, BankBranchInputModel model)
+        else
         {
-            base.PreEdit(entity, model);
+            postalContactRepository.Delete(entity.PostalContact, User.Identity.Name, false);
 
-            if (model.LocationMunicipalityId != null && !string.IsNullOrEmpty(model.LocationAddress))
-            {
-                var municipalityLocation = municipalityLocationRepository.FindOneBy(__entity => __entity.MunicipalityId == model.LocationMunicipalityId);
-
-                if (municipalityLocation == null)
-                {
-                    municipalityLocation = municipalityLocationRepository.Add(new MunicipalityLocation
-                    {
-                        MunicipalityId = model.LocationMunicipalityId
-                    }, User.Identity.Name, false);
-                }
-
-                if (entity.PostalContact != null)
-                {
-                    entity.PostalContact.Address = model.LocationAddress;
-                    entity.PostalContact.ZipCode = model.LocationZipCode ?? 0;
-                    entity.PostalContact.Latitude = model.LocationLatitude ?? 0;
-                    entity.PostalContact.Longitude = model.LocationLongitude ?? 0;
-
-                    if (entity.PostalContact.LocationId != municipalityLocation.Id)
-                    {
-                        entity.PostalContact.Location = null;
-                        entity.PostalContact.LocationId = municipalityLocation.Id;
-                    }
-                }
-                else
-                {
-                    entity.PostalContact = postalContactRepository.Add(new PostalContactItem
-                    {
-                        Address = model.LocationAddress,
-                        ZipCode = model.LocationZipCode ?? 0,
-                        Latitude = model.LocationLatitude ?? 0,
-                        Longitude = model.LocationLongitude ?? 0,
-                        LocationId = municipalityLocation.Id
-                    }, User.Identity.Name, false);
-                }
-            }
-            else
-            {
-                postalContactRepository.Delete(entity.PostalContact, User.Identity.Name, false);
-
-                entity.PostalContact = null;
-                entity.PostalContactId = null;
-            }
+            entity.PostalContact = null;
+            entity.PostalContactId = null;
         }
+    }
+
+    protected override void PostEdit(BankBranch entity, BankBranchInputModel model)
+    {
+        base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
     }
 }

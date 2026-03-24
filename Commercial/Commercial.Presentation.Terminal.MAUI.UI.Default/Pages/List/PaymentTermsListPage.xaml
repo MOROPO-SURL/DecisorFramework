@@ -30,7 +30,6 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Orientation="Vertical">
-                <SearchBar Margin="20,20,20,0" />
                 <Grid 
                     VerticalOptions="FillAndExpand"
                     SizeChanged="ItemsCollectionViewLayout_SizeChanged">

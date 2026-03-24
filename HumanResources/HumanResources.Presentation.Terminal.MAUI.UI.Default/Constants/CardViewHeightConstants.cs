@@ -2,6 +2,9 @@
 
 public static class CardViewHeightConstants
 {
+    public const double WORK_POSITION_KIND_DEFAULT_CARD_VIEW_HEIGHT = 128;
+    public const double WORK_POSITION_KIND_DEFAULT_CARD_VIEW_WIDTH = 280;
+
     public const double WORK_POSITION_DEFAULT_CARD_VIEW_HEIGHT = 140;
     public const double WORK_POSITION_DEFAULT_CARD_VIEW_WIDTH = 400;
 

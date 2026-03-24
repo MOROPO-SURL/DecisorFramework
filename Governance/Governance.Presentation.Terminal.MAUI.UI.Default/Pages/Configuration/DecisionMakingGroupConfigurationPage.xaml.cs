@@ -7,19 +7,19 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel, Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel, Models.Page.Configuration.DecisionMakingGroupConfigurationPageModel>
 {
-    public DecisionMakingGroupConfigurationPage(System.Action<Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel> successAction, Models.Page.Configuration.DecisionMakingGroupConfigurationPageModel model) : base(successAction, model, null)
+    public DecisionMakingGroupConfigurationPage(System.Action<Interop.API.Common.Models.Display.DecisionMakingGroupDisplayModel> successAction, Models.Page.Configuration.DecisionMakingGroupConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.DecisionMakingGroupConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 
-        if (model.Structure != null)
+        if (model.AdministrativeEntity != null)
         {
-            for (int i = 0; i < model.AvailableStructures.Length; i++)
+            for (int i = 0; i < model.AvailableAdministrativeEntities.Length; i++)
             {
-                var current = model.AvailableStructures[i];
+                var current = model.AvailableAdministrativeEntities[i];
 
-                if (model.Structure.Id != current.Id) continue;
+                if (model.AdministrativeEntity.Id != current.Id) continue;
 
-                StructurePicker.SelectedIndex = i;
+                AdministrativeEntityPicker.SelectedIndex = i;
 
                 break;
             }
@@ -38,10 +38,11 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
-            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
+            StructureId = ConcreteBindingContext.AdministrativeEntity.Id,
             LeaderId = ConcreteBindingContext.Leader.Id,
-            Members = ConcreteBindingContext.Members.ToList(),
-            Collaborators = ConcreteBindingContext.Collaborators.ToList()
+            Members = [.. ConcreteBindingContext.Members],
+            Collaborators = [.. ConcreteBindingContext.Collaborators],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -59,10 +60,11 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
             Name = ConcreteBindingContext.Name,
             Description = ConcreteBindingContext.Description,
             Priority = ConcreteBindingContext.Priority,
-            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
+            StructureId = ConcreteBindingContext.AdministrativeEntity.Id,
             LeaderId = ConcreteBindingContext.Leader.Id,
-            Members = ConcreteBindingContext.Members.ToList(),
-            Collaborators = ConcreteBindingContext.Collaborators.ToList()
+            Members = [.. ConcreteBindingContext.Members],
+            Collaborators = [.. ConcreteBindingContext.Collaborators],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -146,6 +148,33 @@ public partial class DecisionMakingGroupConfigurationPage : Core.Presentation.Te
                 hasChangesFlag = true;
             });
         });
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void LeaderPickComplete_Callback(Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel model)

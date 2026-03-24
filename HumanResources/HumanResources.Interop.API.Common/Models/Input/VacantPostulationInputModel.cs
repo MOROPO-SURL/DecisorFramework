@@ -4,10 +4,8 @@ using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input
 {
-    public class VacantPostulationInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.VacantPostulation, System.Guid>
+    public class VacantPostulationInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.VacantPostulation, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public System.DateTime At { get; set; }
 
         public System.Guid StaffId { get; set; }
@@ -57,7 +55,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
         public List<VacantPostulationOcupationInputModel> IncomingOcupations { get; set; } = new List<VacantPostulationOcupationInputModel>();
         public List<Display.VacantPostulationOcupationDisplayModel> OutgoingOcupations { get; set; } = new List<Display.VacantPostulationOcupationDisplayModel>();
 
-        public Persistence.Entities.VacantPostulation Export()
+        public override Persistence.Entities.VacantPostulation Export()
         {
             var entity = new Persistence.Entities.VacantPostulation { Id = Id };
 
@@ -66,12 +64,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
             return entity;
         }
 
-        public void Import(Persistence.Entities.VacantPostulation entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.VacantPostulation entity)
+        public override void Mergue(Persistence.Entities.VacantPostulation entity)
         {
             entity.At = At;
             entity.EducationLevel = EducationLevel;

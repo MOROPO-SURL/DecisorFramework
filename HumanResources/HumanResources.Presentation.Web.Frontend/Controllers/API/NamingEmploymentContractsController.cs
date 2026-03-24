@@ -4,6 +4,7 @@ using MOROPO.Framework.Decisor.HumanResources.Persistence.Entities;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Frontend.Controllers.API;
 
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
 [Microsoft.AspNetCore.Mvc.Route("api/fwrk/hhrr/[controller]")]
 [Microsoft.AspNetCore.Mvc.ApiController]
 public class NamingEmploymentContractsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIConsultFilteredController<NamingEmploymentContract, System.Guid, NamingEmploymentContractDisplayModel, NamingEmploymentContractFilterModel>

@@ -1,9 +1,7 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input
 {
-    public class AdmitionPropousalInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.AdmitionPropousal, System.Guid>
+    public class AdmitionPropousalInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.AdmitionPropousal, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public System.DateTime At { get; set; }
 
         public System.Guid CandidateId { get; set; }
@@ -12,7 +10,7 @@
 
         public string Argument { get; set; }
 
-        public Persistence.Entities.AdmitionPropousal Export()
+        public override Persistence.Entities.AdmitionPropousal Export()
         {
             var entity = new Persistence.Entities.AdmitionPropousal { Id = Id };
 
@@ -21,12 +19,7 @@
             return entity;
         }
 
-        public void Import(Persistence.Entities.AdmitionPropousal entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.AdmitionPropousal entity)
+        public override void Mergue(Persistence.Entities.AdmitionPropousal entity)
         {
             entity.At = At;
             entity.Argument = Argument;
