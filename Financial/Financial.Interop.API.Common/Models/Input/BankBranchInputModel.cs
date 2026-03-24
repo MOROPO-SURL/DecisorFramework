@@ -1,9 +1,7 @@
 ﻿namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Input
 {
-    public class BankBranchInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.BankBranch, System.Guid>
+    public class BankBranchInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.BankBranch, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public int Priority { get; set; }
 
         public System.Guid AgencyId { get; set; }
@@ -20,7 +18,7 @@
 
         public decimal? LocationLatitude { get; set; }
 
-        public Persistence.Entities.BankBranch Export()
+        public override Persistence.Entities.BankBranch Export()
         {
             var entity = new Persistence.Entities.BankBranch { Id = Id, Enabled = true };
 
@@ -29,12 +27,7 @@
             return entity;
         }
 
-        public void Import(Persistence.Entities.BankBranch entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.BankBranch entity)
+        public override void Mergue(Persistence.Entities.BankBranch entity)
         {
             entity.Priority = Priority;
             entity.Number = Number;

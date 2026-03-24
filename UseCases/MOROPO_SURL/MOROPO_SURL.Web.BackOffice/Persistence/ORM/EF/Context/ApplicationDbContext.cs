@@ -89,6 +89,8 @@ namespace MOROPO.Tool.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<OrganizationContact> OrganizationContacts { get; set; }
         public DbSet<PersonContact> PersonContacts { get; set; }
         public DbSet<KnowledgeArea> KnowledgeAreas { get; set; }
+        public DbSet<AcademicAchievement> AcademicAchievements { get; set; }
+        public DbSet<AcademicAchievementKnowledgeAreaBridge> AcademicAchievementKnowledgeAreaBridges { get; set; }
 
         public DbSet<PaymentTerm> PaymentTerms { get; set; }
         public DbSet<RequestableService> RequestableServices { get; set; }

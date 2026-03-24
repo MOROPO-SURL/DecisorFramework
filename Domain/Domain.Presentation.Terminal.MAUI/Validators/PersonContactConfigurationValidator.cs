@@ -6,7 +6,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Validators
     {
         public PersonContactConfigurationValidator()
         {
-            RuleFor(model => model.Name).NotNull();
+            RuleFor(model => model.Name)
+                .NotEmpty()
+                .WithName("Nombre");
         }
     }
 }

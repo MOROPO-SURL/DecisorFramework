@@ -7,4 +7,7 @@ public static class CardViewHeightConstants
 
     public static double ORGANIZATIONAL_UNIT_DEFAULT_CARD_VIEW_HEIGHT = 120;
     public static double ORGANIZATIONAL_UNIT_DEFAULT_CARD_VIEW_WIDTH = 384;
+
+    public static double KNOWLEDGE_AREA_DEFAULT_CARD_VIEW_HEIGHT = 128;
+    public static double KNOWLEDGE_AREA_DEFAULT_CARD_VIEW_WIDTH = 320;
 }

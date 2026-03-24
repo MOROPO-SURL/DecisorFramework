@@ -90,7 +90,7 @@
                                 Clicked="ConvertionBridgeAgregationButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Color="DimGray" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemsSource="{Binding ConvertionBridges}">
@@ -169,9 +169,9 @@
                     </Grid>
                 </FlexLayout>
                 <BoxView 
+                    Style="{StaticResource SeparatorBoxView}"
                     Margin="8,16,8,8"
-                    HeightRequest="1" 
-                    Color="DimGray" />                
+                    HeightRequest="1" />                
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
@@ -194,7 +194,7 @@
                                 Clicked="NotificationUserAgregationButton_Clicked" />
                             <BoxView
                                 Grid.ColumnSpan="2" Grid.Row="1"
-                                Color="{StaticResource Gray050}" />
+                                Color="DimGray" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 Margin="4"

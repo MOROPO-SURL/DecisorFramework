@@ -6,11 +6,9 @@ using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input.Contract
 {
-    public class AbstractNaturalRelationshipInputModel<TEntity> : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<TEntity, System.Guid>
+    public class AbstractNaturalRelationshipInputModel<TEntity> : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<TEntity, System.Guid>
         where TEntity : Persistence.Entities.Contract.AbstractNaturalRelationship, new()
     {
-        public System.Guid Id { get; set; }
-
         public int Priority { get; set; }
 
         public System.Guid ContactId { get; set; }
@@ -32,7 +30,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input.Co
         public List<DocumentInputModel> IncomingDocuments { get; set; } = new List<DocumentInputModel>();
         public List<DocumentDisplayModel> OutgoingDocuments { get; set; } = new List<DocumentDisplayModel>();
 
-        public TEntity Export()
+        public override TEntity Export()
         {
             var entity = new TEntity { Id = Id, Enabled = true };
 
@@ -41,12 +39,7 @@ namespace MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input.Co
             return entity;
         }
 
-        public void Import(TEntity entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public virtual void Mergue(TEntity entity)
+        public override void Mergue(TEntity entity)
         {
             entity.Priority = Priority;
 

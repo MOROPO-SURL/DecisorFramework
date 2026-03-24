@@ -5,19 +5,12 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class KnowledgeAreasManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel, Models.Page.Manage.KnowledgeAreasManagePageModel, Models.Page.Configuration.KnowledgeAreaConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 128;
-
     public KnowledgeAreasManagePage()
     {
         InitializeComponent();
     }
 
-    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
-    {
-        return ItemsCollectionView;
-    }
-
-    protected override double ItemViewRequestWidth => 320;
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.KNOWLEDGE_AREA_DEFAULT_CARD_VIEW_WIDTH;
 
     protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.KnowledgeAreaViewerPermission;
 
@@ -25,10 +18,9 @@ public partial class KnowledgeAreasManagePage : Core.Presentation.Terminal.MAUI.
 
     protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.KnowledgeAreaEditorPermission;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.KNOWLEDGE_AREA_DEFAULT_CARD_VIEW_HEIGHT;
+
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel>> FetchItemsAsync()
     {

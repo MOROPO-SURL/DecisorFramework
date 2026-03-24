@@ -1,9 +1,9 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display.Contract;
-using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 {
-    public class PersonContactDisplayModel : AbstractContactDisplayModel<PersonContact>
+    public class PersonContactDisplayModel : AbstractContactDisplayModel<Persistence.Entities.PersonContact>
     {
         public Core.Interop.API.Common.Models.Display.PersonIdentityDisplayModel Identity { get; set; }
 
@@ -17,12 +17,22 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 
         public Core.Interop.API.Common.Models.Display.PostalContactItemDisplayModel MainPostalContactItem { get; set; }
 
-        public override void Import(PersonContact entity)
+        public AcademicAchievementDisplayModel[] AcademicAchievements { get; set; }
+
+        public override void Import(Persistence.Entities.PersonContact entity)
         {
             base.Import(entity);
 
             PersonalIdentificationNumber = entity.PersonalIdentificationNumber;
             SkinKind = entity.SkinKind;
+            AcademicAchievements = entity.AcademicAchievements?.Select(_entity =>
+            {
+                var model = new AcademicAchievementDisplayModel();
+
+                model.Import(_entity);
+
+                return model;
+            }).ToArray();
 
             if (entity.Identity != null)
             {

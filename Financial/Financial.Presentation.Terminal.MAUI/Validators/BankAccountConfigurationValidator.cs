@@ -6,13 +6,22 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Validato
     {
         public BankAccountConfigurationValidator()
         {
-            RuleFor(model => model.Branch).NotNull();
+            RuleFor(model => model.Branch)
+                .NotNull()
+                .WithName("Sucursal");
 
-            RuleFor(model => model.Currency).NotNull();
+            RuleFor(model => model.Currency)
+                .NotNull()
+                .WithName("Moneda");
 
-            RuleFor(model => model.Number).NotNull().NotEmpty().Matches("^[0-9]+$");
+            RuleFor(model => model.Number)
+                .NotEmpty()
+                .Matches("^[0-9]+$")
+                .WithName("Número");
 
-            RuleFor(model => model.Holder).NotNull().NotEmpty();
+            RuleFor(model => model.Holder)
+                .NotEmpty()
+                .WithName("Titular");
         }
     }
 }

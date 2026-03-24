@@ -33,6 +33,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Common.Extensions
             services.AddScoped<IEntityRepository<UnitMeasurement, System.Guid>, UnitMeasurementRepository>();
             services.AddScoped<IBridgeRepository<UnitMeasurementConversionBridge, UnitMeasurement, System.Guid, UnitMeasurement, System.Guid>, UnitMeasurementConversionBridgeRepository>();
             services.AddScoped<IEntityRepository<KnowledgeArea, System.Guid>, KnowledgeAreaRepository>();
+            services.AddScoped<IEntityRepository<AcademicAchievement, System.Guid>, AcademicAchievementRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.DomainDbSchemaConfigurationProvider>();
 

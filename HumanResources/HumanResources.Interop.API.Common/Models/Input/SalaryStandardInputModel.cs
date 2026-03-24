@@ -1,9 +1,7 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input
 {
-    public class SalaryStandardInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.SalaryStandard, System.Guid>
+    public class SalaryStandardInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.SalaryStandard, System.Guid>
     {
-        public System.Guid Id { get; set; } = System.Guid.NewGuid();
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -11,7 +9,7 @@
 
         public float Fee { get; set; }
 
-        public Persistence.Entities.SalaryStandard Export()
+        public override Persistence.Entities.SalaryStandard Export()
         {
             var entity = new Persistence.Entities.SalaryStandard { Id = Id, Enabled = true };
 
@@ -20,12 +18,7 @@
             return entity;
         }
 
-        public void Import(Persistence.Entities.SalaryStandard entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.SalaryStandard entity)
+        public override void Mergue(Persistence.Entities.SalaryStandard entity)
         {
             entity.Name = Name;
             entity.Priority = Priority;

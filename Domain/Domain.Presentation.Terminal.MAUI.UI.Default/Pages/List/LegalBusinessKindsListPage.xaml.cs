@@ -27,11 +27,18 @@ public partial class LegalBusinessKindsListPage : Core.Presentation.Terminal.MAU
     {
         var apiConnectClient = new Interop.API.Connect.Clients.LegalBusinessKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.LegalBusinessKindFilterModel { Parameter = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
+
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
+        ConcreteBindingContext.SearchParameter = null;
+
         OnReload(sender, eventArgs);
     }
 
@@ -48,5 +55,10 @@ public partial class LegalBusinessKindsListPage : Core.Presentation.Terminal.MAU
     private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
     {
         OnItemsCollectionViewLayoutResize(sender, eventArgs);
+    }
+
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
     }
 }

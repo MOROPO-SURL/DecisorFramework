@@ -140,6 +140,7 @@
     </Style>
 
     <Style TargetType="BoxView">
+        <Setter Property="BackgroundColor" Value="Transparent" />
         <Setter Property="Color" Value="{AppThemeBinding Light={StaticResource Gray950}, Dark={StaticResource Gray200}}" />
     </Style>
 
@@ -691,6 +692,10 @@
 
     <Style TargetType="ContentView" x:Key="ModalFrameWrapContentViewStyle">
         <Setter Property="BackgroundColor" Value="{AppThemeBinding Light=#A9000000, Dark=#A9333333}" />
+    </Style>
+
+    <Style TargetType="BoxView" x:Key="SeparatorBoxView">
+        <Setter Property="Color" Value="DimGray" />
     </Style>
     
     <!--#endregion-->
