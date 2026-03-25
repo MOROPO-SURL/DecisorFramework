@@ -119,4 +119,9 @@ public partial class MainPage : Framework.Caney.MVVM.Core.Pages.BindingContexted
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List.ChangeNotificationsListPage()));
     }
+
+    private async void GoUserProfilePageButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        await Microsoft.Maui.ApplicationModel.Launcher.OpenAsync($"{Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>().HttpClientHelper.ClientBaseAddress}security/account");
+    }
 }
