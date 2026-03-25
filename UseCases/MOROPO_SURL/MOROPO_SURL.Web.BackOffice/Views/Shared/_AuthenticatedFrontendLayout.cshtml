@@ -1,0 +1,157 @@
+﻿@{
+    Layout = "_FrontendLayout";
+}
+
+@RenderSection("styles", false)
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div>
+
+        <div>
+
+            <!-- Main Content -->
+            <div id="content" class="container">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand topbar mb-4 static-top">
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                            <a class="btn btn-outline-secondary" href="#" data-toggle="modal" data-target="#logoutModal">
+                                <i class="mdi mdi-logout-variant"></i> Salir
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- End of Topbar -->
+                <!-- Begin Page Content -->
+                <div>
+                    @{
+                        var notificationEntries = TempData.Where(x => x.Key.EndsWith("-notification")).ToArray();
+
+                        foreach (var extraNotificationEntry in notificationEntries)
+                        {
+                            var notification = JsonConvert.DeserializeObject<NotificationViewModel>(extraNotificationEntry.Value.ToString());
+
+                            <div class="alert alert-dismissible fade show alert-@Html.Raw(notification.Type.ToString().ToLower())">
+                                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                                @if (notification.Title != null)
+                                {
+                                    <h4>@notification.Title</h4>
+                                }
+
+                                @if (notification.Message != null)
+                                {
+                                    @Html.Raw(notification.Message)
+                                    ;
+                                }
+
+                                @if (notification.Messages != null)
+                                {
+                                    <ul>
+                                        @foreach (var item in notification.Messages)
+                                        {
+                                            <li>@item</li>
+                                        }
+                                    </ul>
+                                }
+                            </div>
+                        }
+                    }
+
+                    @if (ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] != null)
+                    {
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb mb-5">
+                                @{
+                                    ICollection<BreadcrumbViewModel> breadcrumbs = ViewData[BreadcrumbViewModel.BREADCRUMBS_MAP_KEY] as ICollection<BreadcrumbViewModel>;
+
+                                    if (breadcrumbs != null)
+                                    {
+                                        var total = breadcrumbs.Count();
+                                        var count = 1;
+
+                                        foreach (var breadcrumb in breadcrumbs)
+                                        {
+                                            if (count < total)
+                                            {
+                                                <li class="breadcrumb-item"><a href="@breadcrumb.Url">@Html.Raw(breadcrumb.Caption)</a></li>
+                                            }
+                                            else
+                                            {
+                                                <li class="breadcrumb-item active">@Html.Raw(breadcrumb.Caption)</li>
+                                            }
+
+                                            count++;
+                                        }
+                                    }
+                                }
+                            </ol>
+                        </nav>
+                    }
+
+                    <!-- Page Heading -->
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">@ViewData["HEADER"]</h1>
+                    </div>
+
+                    @RenderBody()
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; MOROPO S.U.R.L. @System.DateTime.Now.Year</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="mdi mdi-chevron-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            @using (Html.BeginForm("logout", "account", new { Area = "security" }, FormMethod.Post, true, new { @class = "modal-content" }))
+            {
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Terminar la sesión?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">De click en "Salir" si está seguro que desea terminar la sesión.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancelar</button>
+                    <input class="btn btn-primary" type="submit" value="Salir" />
+                </div>
+            }
+        </div>
+    </div>
+
+    <!-- Core plugin JavaScript-->
+    <script src="/vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="/js/sb-admin-2.min.js"></script>
+
+    @RenderSection("scripts", false)
+
+</body>
