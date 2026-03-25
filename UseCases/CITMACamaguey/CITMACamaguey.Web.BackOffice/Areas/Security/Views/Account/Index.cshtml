@@ -1,4 +1,6 @@
-﻿@model MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Models.View.UserProfileViewModel
+﻿@using MOROPO.Framework.Guama.Core.Security.Common.Presentation.Web.Frontend.Extensions
+
+@model MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Models.View.UserProfileViewModel
 
 @{
     const string HEADING = "Perfil de Usuario";
@@ -11,16 +13,11 @@
     {
         new BreadcrumbViewModel
         {
-            Caption = "<span class=\"mdi mdi-desktop-mac-dashboard\" style=\"margin-right: 4px;\"></span> Panel de Control",
-            Url = Url.Action("Index", "Dashboard", new { Area = "management" })
-        },
-        new BreadcrumbViewModel
-        {
-            Caption = HEADING
+            Caption = $"<span class=\"mdi mdi-account-circle\" style=\"margin-right: 4px;\"></span> {HEADING}"
         }
     };
 
-    Layout = "_BackendLayout";
+    Layout = "_AuthenticatedFrontendLayout";
 }
 
 <h3>@HEADING</h3>
@@ -89,7 +86,13 @@
 
 <hr />
 
-<div class="actions">
-    <a asp-action="edit" class="btn btn-light"><span class="mdi mdi-square-edit-outline"></span> Modificar</a>
-    <a asp-action="password" class="btn btn-light"><span class="mdi mdi-key-change"></span> Cambiar Contraseña</a>
+<div class="btn-toolbar justify-content-between">
+    <div class="actions">
+        <a asp-action="edit" class="btn btn-outline-secondary"><span class="mdi mdi-square-edit-outline"></span> Modificar</a>
+        <a asp-action="password" class="btn btn-outline-secondary"><span class="mdi mdi-key-change"></span> Cambiar Contraseña</a>
+    </div>
+    @if (User.IsAuthorized(MOROPO.Framework.Guama.Core.Security.Presentation.Constants.Permissions.ShellManager, Context))
+    {
+        <a class="btn btn-primary" asp-action="index" asp-controller="dashboard" asp-area="management"><span class="mdi mdi-desktop-mac-dashboard" style="margin-right: 4px;"></span>Ir a la Administración</a>
+    }
 </div>

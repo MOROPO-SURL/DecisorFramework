@@ -74,7 +74,7 @@
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF014;"
+                Glyph="{StaticResource AdmisionMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
@@ -110,31 +110,34 @@
     <MenuFlyoutItem Text="Plantilla" />
     <ShellContent
         Title="Estructuras"
+        Route="WorkforcesManagePage"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkforcesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF645;"
+                Glyph="{StaticResource WorkforceMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
         Title="Configuraciones"
+        Route="StaffsManagePage"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:StaffsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF493;"
+                Glyph="{StaticResource StaffMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
         Title="Personal"
+        Route="OcupationsManagePage"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF002C;"
+                Glyph="{StaticResource OcupationMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -151,21 +154,23 @@
     <MenuFlyoutItem Text="Gestión" />
     <ShellContent
         Title="Plazas laborales"
+        Route="WorkPositionsManagePage"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:WorkPositionsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF631;"
+                Glyph="{StaticResource WorkPositionMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
         Title="Escalas salariales"
+        Route="SalaryStandardsManagePage"
         ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:SalaryStandardsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF00C2;"
+                Glyph="{StaticResource SalaryStandardMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -186,7 +191,7 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF017;"
+                Glyph="{StaticResource WorkPositionKindMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

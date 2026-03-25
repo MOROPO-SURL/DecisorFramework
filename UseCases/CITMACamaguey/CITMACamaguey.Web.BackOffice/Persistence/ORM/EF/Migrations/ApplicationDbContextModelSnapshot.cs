@@ -22,6 +22,70 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
 
             NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.AcademicAchievement", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<int>("AcademicLevel")
+                        .HasColumnType("integer")
+                        .HasColumnName("academiclevel");
+
+                    b.Property<DateTime?>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("ContactId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("contactid");
+
+                    b.Property<string>("Institution")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
+                        .HasColumnName("institution");
+
+                    b.Property<Guid>("MainKnowledgeAreaId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("mainknowledgeareaid");
+
+                    b.Property<string>("Title")
+                        .HasMaxLength(512)
+                        .HasColumnType("character varying(512)")
+                        .HasColumnName("title");
+
+                    b.HasKey("Id")
+                        .HasName("pk_academicachievements");
+
+                    b.HasIndex("ContactId")
+                        .HasDatabaseName("ix_academicachievements_contactid");
+
+                    b.HasIndex("MainKnowledgeAreaId")
+                        .HasDatabaseName("ix_academicachievements_mainknowledgeareaid");
+
+                    b.ToTable("academicachievements", "decisorframework_domain");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.AcademicAchievementKnowledgeAreaBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_academicachievementknowledgeareabridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_academicachievementknowledgeareabridges_sternid");
+
+                    b.ToTable("academicachievementknowledgeareabridges", "decisorframework_domain");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.AdministrativeEntity", b =>
                 {
                     b.Property<Guid>("Id")
@@ -2825,7 +2889,7 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                     b.HasKey("Id")
                         .HasName("pk_traces");
 
-                    b.ToTable("traces", (string)null);
+                    b.ToTable("traces");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Guama.Core.Security.Common.Persistence.Entities.Permission", b =>
@@ -3856,7 +3920,7 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                     b.HasIndex("VacantId")
                         .HasDatabaseName("ix_resolutions_vacantid");
 
-                    b.ToTable("resolutions", (string)null);
+                    b.ToTable("resolutions");
 
                     b.HasDiscriminator().HasValue("DesignationResolution");
                 });
@@ -3885,7 +3949,7 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                     b.HasIndex("AgreementId")
                         .HasDatabaseName("ix_resolutions_agreementid");
 
-                    b.ToTable("resolutions", (string)null);
+                    b.ToTable("resolutions");
 
                     b.HasDiscriminator().HasValue("NamingResolution");
                 });
@@ -3914,7 +3978,7 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                     b.HasIndex("OcupationId")
                         .HasDatabaseName("ix_resolutions_ocupationid");
 
-                    b.ToTable("resolutions", (string)null);
+                    b.ToTable("resolutions");
 
                     b.HasDiscriminator().HasValue("RemotionResolution");
                 });
@@ -3965,6 +4029,48 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                     b.ToTable("locations", "guamaframework_location");
 
                     b.HasDiscriminator().HasValue("StateLocation");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.AcademicAchievement", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", "Contact")
+                        .WithMany("AcademicAchievements")
+                        .HasForeignKey("ContactId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_academicachievements_personcontacts_contactid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.KnowledgeArea", "MainKnowledgeArea")
+                        .WithMany()
+                        .HasForeignKey("MainKnowledgeAreaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_academicachievements_knowledgeareas_mainknowledgeareaid");
+
+                    b.Navigation("Contact");
+
+                    b.Navigation("MainKnowledgeArea");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.AcademicAchievementKnowledgeAreaBridge", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.AcademicAchievement", "Prow")
+                        .WithMany("KnowledgeAreaBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_academicachievementknowledgeareabridges_academicachievement~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.KnowledgeArea", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_academicachievementknowledgeareabridges_knowledgeareas_ster~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.AdministrativeEntity", b =>
@@ -5637,9 +5743,19 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrati
                     b.Navigation("State");
                 });
 
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.AcademicAchievement", b =>
+                {
+                    b.Navigation("KnowledgeAreaBridges");
+                });
+
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.ChangeNotification", b =>
                 {
                     b.Navigation("UserBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.PersonContact", b =>
+                {
+                    b.Navigation("AcademicAchievements");
                 });
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Property", b =>

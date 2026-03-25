@@ -24,4 +24,15 @@
     <x:String x:Key="OrganizationalUnitDesignGlyphIconId">&#xF006B;</x:String>
     <x:String x:Key="UnitMeasurementMaterialDesignGlyphIconId">&#xF472;</x:String>
 
+    <x:String x:Key="WorkPositionKindMaterialDesignGlyphIconId">&#xF017;</x:String>
+    <x:String x:Key="SalaryStandardMaterialDesignGlyphIconId">&#xF00C2;</x:String>
+    <x:String x:Key="WorkPositionMaterialDesignGlyphIconId">&#xF631;</x:String>
+    <x:String x:Key="WorkforceMaterialDesignGlyphIconId">&#xF645;</x:String>
+    <x:String x:Key="StaffMaterialDesignGlyphIconId">&#xF493;</x:String>
+    <x:String x:Key="OcupationMaterialDesignGlyphIconId">&#xF002C;</x:String>
+    <x:String x:Key="AdmisionMaterialDesignGlyphIconId">&#xF014;</x:String>
+
+    <x:String x:Key="DecisionMakingGroupMaterialDesignGlyphIconId">&#xF848;</x:String>
+    <x:String x:Key="MeetingMaterialDesignGlyphIconId">&#xFA5D;</x:String>
+
 </ResourceDictionary>

@@ -53,4 +53,36 @@
 		<ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Backend\Legal.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\..\..\Legal\Legal.Presentation.Web.Frontend\Legal.Presentation.Web.Frontend.csproj" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Content Update="Areas\Security\Views\Account\Edit.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Areas\Security\Views\Account\Index.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Areas\Security\Views\Account\Password.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Views\Shared\_BackendLayout.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Views\Shared\_Layout.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Views\Shared\_AuthenticatedFrontendLayout.cshtml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Views\Shared\_AuthenticatedFrontendLayout.cshtml" />
+	  <_ContentIncludedByDefault Remove="Views\Shared\_FrontendLayout.cshtml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Views\Shared\_FrontendLayout.cshtml" />
+	</ItemGroup>
 </Project>

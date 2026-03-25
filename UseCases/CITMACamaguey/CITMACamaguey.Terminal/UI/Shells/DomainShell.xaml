@@ -2,6 +2,7 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_pages="clr-namespace:MOROPO.CITMACamaguey.Decisor.Terminal.UI.Pages"
     xmlns:decisorframework_domain_list_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.CITMACamaguey.Decisor.Terminal.UI.Shells.DomainShell">
@@ -34,9 +35,21 @@
             </Grid>
         </Grid>
     </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Inicio" />
+    <ShellContent
+        Title="Panel de control"
+        ContentTemplate="{DataTemplate local_pages:SimplifiedDomainDashboardPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Entidades Administrativas"
+        Route="AdministrativeEntitiesManagePage"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:AdministrativeEntitiesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -47,6 +60,7 @@
     </ShellContent>
     <ShellContent
         Title="Estructuras Organizacionales"
+        Route="OrganizationalStructuresManagePage"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationalStructuresManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -57,6 +71,7 @@
     </ShellContent>
     <ShellContent
         Title="Unidades Organizativas"
+        Route="OrganizationalUnitsManagePage"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationalUnitsManagePage}">
         <ShellContent.Icon>
             <FontImageSource

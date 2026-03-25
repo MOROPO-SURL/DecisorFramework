@@ -130,6 +130,8 @@ namespace MOROPO.CITMACamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<UnitMeasurement> UnitMeasurements { get; set; }
         public DbSet<UnitMeasurementConversionBridge> UnitMeasurementConversionBridges { get; set; }
         public DbSet<KnowledgeArea> KnowledgeAreas { get; set; }
+        public DbSet<AcademicAchievement> AcademicAchievements { get; set; }
+        public DbSet<AcademicAchievementKnowledgeAreaBridge> AcademicAchievementKnowledgeAreaBridges { get; set; }
     }
 }
 
