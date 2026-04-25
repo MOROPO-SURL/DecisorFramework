@@ -30,7 +30,7 @@
     <x:String x:Key="WorkforceMaterialDesignGlyphIconId">&#xF645;</x:String>
     <x:String x:Key="StaffMaterialDesignGlyphIconId">&#xF493;</x:String>
     <x:String x:Key="OcupationMaterialDesignGlyphIconId">&#xF002C;</x:String>
-    <x:String x:Key="AdmisionMaterialDesignGlyphIconId">&#xF002C;</x:String>
+    <x:String x:Key="AdmisionMaterialDesignGlyphIconId">&#xF014;</x:String>
 
     <x:String x:Key="DecisionMakingGroupMaterialDesignGlyphIconId">&#xF848;</x:String>
     <x:String x:Key="MeetingMaterialDesignGlyphIconId">&#xFA5D;</x:String>
