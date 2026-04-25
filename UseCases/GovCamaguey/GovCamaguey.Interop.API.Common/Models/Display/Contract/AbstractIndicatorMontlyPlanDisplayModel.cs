@@ -20,7 +20,7 @@
 
         public override string ToString()
         {
-            return $"{Constants.Globals.MONTHS[Month - 1]} / {Year} => {Amount:F2}";
+            return $"{Constants.Globals.MONTHS[Month - 1]} / {Year} => {Amount}";
         }
     }
 }

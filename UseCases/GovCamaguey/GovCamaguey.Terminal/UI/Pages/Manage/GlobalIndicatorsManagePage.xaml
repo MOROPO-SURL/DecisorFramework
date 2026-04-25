@@ -78,7 +78,7 @@
                                             FontAttributes="Bold" />
                                         <Label 
                                             Grid.Column="0" Grid.Row="2"
-                                            Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                            Text="{Binding Amount}" />
                                         <Label 
                                             Grid.Column="1" Grid.Row="2"
                                             Text="{Binding UnitMeasurement.Symbol}" />

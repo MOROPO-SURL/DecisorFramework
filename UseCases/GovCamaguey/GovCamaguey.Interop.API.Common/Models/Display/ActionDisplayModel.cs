@@ -50,7 +50,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
                 return model;
             }).ToArray();
 
-            Indicators = entity.Indicators.OrderBy(_entity => _entity.Priority).Select(_entity =>
+            Indicators = entity.Indicators.Where(_entity => !_entity.Archived).OrderBy(_entity => _entity.Priority).Select(_entity =>
             {
                 var model = new ActionIndicatorDisplayModel();
 

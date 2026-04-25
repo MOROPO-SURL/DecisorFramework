@@ -28,7 +28,7 @@ public class ObjectiveReportController : Framework.Guama.Core.Presentation.Web.C
     }
 
     [Route("summary/print")]
-    public async System.Threading.Tasks.Task<IActionResult> PrintSummary()
+    public async System.Threading.Tasks.Task<IActionResult> PrintSummarySync()
     {
         var htmlContent = await viewRenderService.RenderViewToStringAsync(
                 "~/Views/ObjectiveReport/Summary.cshtml",
@@ -58,11 +58,13 @@ public class ObjectiveReportController : Framework.Guama.Core.Presentation.Web.C
     }
 
     [Route("summary/{key}/print")]
-    public async System.Threading.Tasks.Task<IActionResult> PrintSummaryByObjective(System.Guid key)
+    public async System.Threading.Tasks.Task<IActionResult> PrintSummaryByObjectiveAsync(System.Guid key)
     {
+        var model = GetObjectiveSummaryModel(key);
+
         var htmlContent = await viewRenderService.RenderViewToStringAsync(
                 "~/Views/ObjectiveReport/SummaryByObjective.cshtml",
-                GetObjectiveSummaryModel(key)
+                model
             );
 
         // Opciones para el PDF
@@ -78,7 +80,7 @@ public class ObjectiveReportController : Framework.Guama.Core.Presentation.Web.C
         // Generar PDF
         var pdfBytes = await htmlToPdfService.GeneratePdfFromHtmlAsync(htmlContent, pdfOptions);
 
-        return File(pdfBytes, "application/pdf", $"Resumen de Objetivos - {System.DateTime.Now.Ticks}.pdf");
+        return File(pdfBytes, "application/pdf", $"Resumen de Objetivo {model.Index} - {System.DateTime.Now.Ticks}.pdf");
     }
 
     private Models.View.ObjectiveSummaryViewModel[] GetObjectivesSummaryModel()

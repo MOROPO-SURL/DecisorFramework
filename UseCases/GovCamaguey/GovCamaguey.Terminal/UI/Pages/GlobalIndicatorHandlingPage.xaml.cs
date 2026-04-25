@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
+using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Factories;
 using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages;
@@ -78,6 +80,52 @@ public partial class GlobalIndicatorHandlingPage : Microsoft.Maui.Controls.Conte
         });
     }
 
+    private void DownloadAllToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        if (ConcreteBindingContext.IsBusy) return;
+
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>();
+
+        ConcreteBindingContext.IsBusy = true;
+
+        var httpClient = new System.Net.Http.HttpClient(HttpClientHandlerFactory.Build())
+        {
+            Timeout = System.TimeSpan.FromSeconds(30.0)
+        };
+
+        System.DateTime now = System.DateTime.Now;
+
+        System.DateTime referenceAt = new System.DateTime(now.Year, now.Month, 1);
+
+        referenceAt.AddDays(-1);
+
+        httpClient.GetByteArrayAsync($"{httpClientHelperProvider.HttpClientHelper.ClientBaseAddress}report/indicators/stats/reference/{referenceAt.Ticks}/print").ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(async () =>
+            {
+                if (task.IsCanceled || task.Exception != null)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    var fileSaverResult = await CommunityToolkit.Maui.Storage.FileSaver.Default.SaveAsync($"Estado de Indicadores de Objetivos {now:dd-MM-yyyy}.pdf", new System.IO.MemoryStream(task.Result));
+
+                    if (fileSaverResult.IsSuccessful)
+                    {
+                        this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Archivo descargado con éxito.");
+                    }
+                    else if (fileSaverResult.FilePath != null)
+                    {
+                        this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Error, "No fue posible salvar el archivo.");
+                    }
+                }
+
+                ConcreteBindingContext.IsBusy = false;
+            });
+        });
+    }
+
     private void ResultUpgradeButton_Clicked(object sender, System.EventArgs e)
     {
         var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
@@ -91,7 +139,7 @@ public partial class GlobalIndicatorHandlingPage : Microsoft.Maui.Controls.Conte
 
         var senderBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.GlobalIndicatorDisplayModel;
 
-        Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayPromptAsync($"Actualizar indicador", $"Especifique el nuevo valor del indicador ¨{senderBindingContext.Name}¨. El valor no debe ser inferior a {senderBindingContext.Balance:F2} {senderBindingContext.UnitMeasurement.Name}.{System.Environment.NewLine}", "Aplicar", "Cancelar", null, keyboard: Microsoft.Maui.Keyboard.Numeric).ContinueWith(task =>
+        Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayPromptAsync($"Actualizar indicador", $"Especifique el nuevo valor del indicador \"{senderBindingContext.Name}\" expresado en {senderBindingContext.UnitMeasurement.Name}.{System.Environment.NewLine}", "Aplicar", "Cancelar", null, keyboard: Microsoft.Maui.Keyboard.Numeric).ContinueWith(task =>
         {
             Microsoft.Maui.Controls.Shell.Current.CurrentPage.Dispatcher.Dispatch(() =>
             {
@@ -100,13 +148,6 @@ public partial class GlobalIndicatorHandlingPage : Microsoft.Maui.Controls.Conte
                 if (!double.TryParse(task.Result, out double result))
                 {
                     Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayAlert("Aviso", "Dato no especificado en el formato adecuado.", "Aceptar");
-
-                    return;
-                }
-
-                if (result <= senderBindingContext.Balance)
-                {
-                    Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayAlert("Aviso", $"El valor especificado debe ser mayor al del estado actual ({senderBindingContext.Balance} {senderBindingContext.UnitMeasurement.Symbol}).", "Aceptar");
 
                     return;
                 }

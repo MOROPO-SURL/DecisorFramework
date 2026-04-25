@@ -36,7 +36,7 @@
                 <Label>
                     <Label.FormattedText>
                         <FormattedString>
-                            <Span x:Name="BalanceSpan" Text="{Binding Balance, StringFormat='{0:F2}', Mode=OneTime}" />
+                            <Span x:Name="BalanceSpan" Text="{Binding Balance, Mode=OneTime}" />
                             <Span Text=" " />
                             <Span Text="{Binding UnitMeasurement.Symbol}" />
                         </FormattedString>

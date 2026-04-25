@@ -53,4 +53,9 @@ public partial class BrandDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.
             });
         });
     }
+
+    private void DismissControl_Invoked(object sender, System.EventArgs e)
+    {
+
+    }
 }

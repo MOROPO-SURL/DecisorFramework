@@ -3,6 +3,7 @@
 public class GovernanceDashboardPageModel : Framework.Caney.MVVM.Core.Models.Page.BasePageModel
 {
     private View.ChartViewModel globalObjectivesStatusChart;
+    private View.ChartViewModel globalObjectivesProgressChart;
     private View.ChartViewModel monthlyObjectivesProgressChart;
     private int proyectionCount;
     private View.ChartViewModel proyectionDistributionChart;
@@ -12,6 +13,8 @@ public class GovernanceDashboardPageModel : Framework.Caney.MVVM.Core.Models.Pag
     private View.ChartViewModel indicatorDistributionChart;
 
     public View.ChartViewModel GlobalObjectivesStatusChart { get => globalObjectivesStatusChart; set => SetProperty(ref globalObjectivesStatusChart, value); }
+
+    public View.ChartViewModel GlobalObjectivesProgressChart { get => globalObjectivesProgressChart; set => SetProperty(ref globalObjectivesProgressChart, value); }
 
     public View.ChartViewModel MonthlyObjectivesProgressChart { get => monthlyObjectivesProgressChart; set => SetProperty(ref monthlyObjectivesProgressChart, value); }
 

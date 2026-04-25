@@ -6,7 +6,7 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<AssemblyName>MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice</AssemblyName>
 		<RootNamespace>MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice</RootNamespace>
-		<VersionPrefix>0.8.7</VersionPrefix>
+		<VersionPrefix>0.9.0</VersionPrefix>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="dpkeys\**" />

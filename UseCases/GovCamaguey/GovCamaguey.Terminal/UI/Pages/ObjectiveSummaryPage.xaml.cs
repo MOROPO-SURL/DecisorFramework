@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
+using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Factories;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages;
 
@@ -67,7 +68,7 @@ public partial class ObjectiveSummaryPage : Microsoft.Maui.Controls.ContentPage
 
         ConcreteBindingContext.IsBusy = true;
 
-        var httpClient = new System.Net.Http.HttpClient
+        var httpClient = new System.Net.Http.HttpClient(HttpClientHandlerFactory.Build())
         {
             Timeout = System.TimeSpan.FromSeconds(30.0)
         };
@@ -107,7 +108,7 @@ public partial class ObjectiveSummaryPage : Microsoft.Maui.Controls.ContentPage
 
         ConcreteBindingContext.IsBusy = true;
 
-        var httpClient = new System.Net.Http.HttpClient
+        var httpClient = new System.Net.Http.HttpClient(HttpClientHandlerFactory.Build())
         {
             Timeout = System.TimeSpan.FromSeconds(30.0)
         };

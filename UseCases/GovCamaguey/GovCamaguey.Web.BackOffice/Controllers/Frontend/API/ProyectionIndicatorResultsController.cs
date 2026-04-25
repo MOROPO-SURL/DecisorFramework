@@ -5,6 +5,7 @@ using MOROPO.Framework.Guama.Security.Personal.Persistence.Entities;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend.API;
 
@@ -23,6 +24,11 @@ public class ProyectionIndicatorResultsController : Framework.Guama.Core.Present
         this.indicatorRepository = indicatorRepository;
         this.objectiveUserBridgeRepository = objectiveUserBridgeRepository;
         this.proyectionUserBridgeRepository = proyectionUserBridgeRepository;
+    }
+
+    protected override Expression<System.Func<ProyectionIndicatorResult, bool>> GetGlobalSelector()
+    {
+        return entity => !entity.Indicator.Archived;
     }
 
     protected override System.Func<ProyectionIndicatorResult, object> GetOrderSelector()

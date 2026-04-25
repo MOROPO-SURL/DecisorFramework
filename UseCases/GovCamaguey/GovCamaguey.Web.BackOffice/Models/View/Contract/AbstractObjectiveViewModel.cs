@@ -1,4 +1,6 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Models.View.Contract;
+﻿using System.Linq;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Models.View.Contract;
 
 public abstract class AbstractObjectiveViewModel
 {
@@ -7,7 +9,7 @@ public abstract class AbstractObjectiveViewModel
         Id = entity.Id;
         Index = entity.Index;
         Name = entity.Name;
-        Indicators = [.. entity.Indicators];
+        Indicators = [.. entity.Indicators.Where(_entity => !_entity.Archived).OrderBy(_entity => _entity.Priority)];
     }
 
     public System.Guid Id { get; set; }

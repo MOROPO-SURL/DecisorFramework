@@ -42,7 +42,7 @@
                             <Label
                                 FontSize="Medium"
                                 FontAttributes="Bold"
-                                Text="Cumplimiento de Objetivos" />
+                                Text="Estado de Objetivos" />
                             <BoxView HeightRequest="2" Color="DimGray" />
                             <live_charts_controls:PieChart
                                 x:Name="GlobalObjectivesStatusPieChart"
@@ -55,91 +55,108 @@
                         </StackLayout>
                     </Frame>
                     <Frame 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=8, ExtraLargeContainerColumn=12}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=8, ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        HeightRequest="600"
                         Margin="4">
                         <StackLayout>
                             <Label
                                 FontSize="Medium"
                                 FontAttributes="Bold"
-                                Text="Resumen por Objetivo" />
-                            <BoxView HeightRequest="2" Color="DimGray" Margin="0,0,0,2" />
-                            <CollectionView
-                                ItemsSource="{Binding ObjectiveOverviews}">
-                                <CollectionView.Header>
-                                    <BoxView HeightRequest="16" Color="Transparent" />
-                                </CollectionView.Header>
-                                <CollectionView.ItemsLayout>
-                                    <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="6" VerticalItemSpacing="6" />
-                                </CollectionView.ItemsLayout>
-                                <CollectionView.EmptyView>
-                                    <Label Text="Sin elementos que mostrar" />
-                                </CollectionView.EmptyView>
-                                <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="local_view_models:ObjectiveOverviewViewModel">
-                                        <Grid 
-                                            BackgroundColor="{AppThemeBinding Light={StaticResource Gray050}, Dark={StaticResource Gray950}}"
-                                            ColumnSpacing="8">
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="4" />
-                                                <ColumnDefinition Width="48" />
-                                                <ColumnDefinition />
-                                                <ColumnDefinition Width="Auto" />
-                                            </Grid.ColumnDefinitions>
-                                            <BoxView
-                                                Grid.Column="0"
-                                                Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
-                                            <Label
-                                                Grid.Column="1"
-                                                HorizontalOptions="Center" VerticalOptions="Center"
-                                                FontSize="36"
-                                                FontAttributes="Bold"
-                                                Text="{Binding Index}" />
-                                            <StackLayout
-                                                Grid.Column="2"
-                                                HorizontalOptions="FillAndExpand"
-                                                Padding="0,12" 
-                                                Spacing="0">
-                                                <Label
-                                                    FontSize="21"
-                                                    FontAttributes="Bold"
-                                                    LineBreakMode="TailTruncation"
-                                                    MaxLines="1"
-                                                    Text="{Binding Title}" />
-                                                <Label
-                                                    FontSize="18"
-                                                    LineBreakMode="TailTruncation"
-                                                    MaxLines="1">
-                                                    <Label.FormattedText>
-                                                        <FormattedString>
-                                                            <Span FontAttributes="Bold" Text="Obj. Espec.:" />
-                                                            <Span Text=" " />
-                                                            <Span Text="{Binding ProyectionCount}" />
-                                                            <Span Text=", " />
-                                                            <Span FontAttributes="Bold" Text="Accio.:" />
-                                                            <Span Text=" " />
-                                                            <Span Text="{Binding ActionCount}" />
-                                                            <Span Text=", " />
-                                                            <Span FontAttributes="Bold" Text="Indic.:" />
-                                                            <Span Text=" " />
-                                                            <Span Text="{Binding IndicatorCount}" />
-                                                        </FormattedString>
-                                                    </Label.FormattedText>
-                                                </Label>
-                                            </StackLayout>
-                                            <!--<Label
-                                                Grid.Column="3"
-                                                Margin="12,0"
-                                                HorizontalTextAlignment="Center" VerticalOptions="Center"
-                                                FontFamily="MaterialDesignIcons"
-                                                FontSize="40"
-                                                Text="{Binding ProgressGlyph}" />-->
-                                        </Grid>
-                                    </DataTemplate>
-                                </CollectionView.ItemTemplate>
-                            </CollectionView>
+                                Text="Progresión de Objetivos" />
+                            <BoxView HeightRequest="2" Color="DimGray" />
+                            <live_charts_controls:CartesianChart
+                                x:Name="GlobalObjectivesProgressCartesianChart"
+                                Margin="0,16,0,0"
+                                VerticalOptions="FillAndExpand"
+                                YAxes="{Binding GlobalObjectivesProgressChart.YAxes}"
+                                Series="{Binding GlobalObjectivesProgressChart.Series}" />
                         </StackLayout>
                     </Frame>
                 </FlexLayout>
+                <Frame Margin="8">
+                    <StackLayout>
+                        <Label
+                            FontSize="Medium"
+                            FontAttributes="Bold"
+                            Text="Resumen por Objetivo" />
+                        <BoxView HeightRequest="2" Color="DimGray" Margin="0,0,0,2" />
+                        <CollectionView
+                            ItemsSource="{Binding ObjectiveOverviews}">
+                            <CollectionView.Header>
+                                <BoxView HeightRequest="16" Color="Transparent" />
+                            </CollectionView.Header>
+                            <CollectionView.ItemsLayout>
+                                <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="6" VerticalItemSpacing="6" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.EmptyView>
+                                <Label Text="Sin elementos que mostrar" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
+                                <DataTemplate x:DataType="local_view_models:ObjectiveOverviewViewModel">
+                                    <Grid 
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource Gray050}, Dark={StaticResource Gray950}}"
+                                        ColumnSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="4" />
+                                            <ColumnDefinition Width="48" />
+                                            <ColumnDefinition />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <BoxView
+                                            Grid.Column="0"
+                                            Color="{AppThemeBinding Light={StaticResource Primary}, Dark={StaticResource PrimaryDark}}" />
+                                        <Label
+                                            Grid.Column="1"
+                                            HorizontalOptions="Center" VerticalOptions="Center"
+                                            FontSize="36"
+                                            FontAttributes="Bold"
+                                            Text="{Binding Index}" />
+                                        <StackLayout
+                                            Grid.Column="2"
+                                            HorizontalOptions="FillAndExpand"
+                                            Padding="0,12" 
+                                            Spacing="0">
+                                            <Label
+                                                FontSize="21"
+                                                FontAttributes="Bold"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="1"
+                                                ToolTipProperties.Text="{Binding Title}"
+                                                Text="{Binding Title}" />
+                                            <Label
+                                                FontSize="18"
+                                                LineBreakMode="TailTruncation"
+                                                MaxLines="1">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span FontAttributes="Bold" Text="Obj. Espec.:" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding ProyectionCount}" />
+                                                        <Span Text=", " />
+                                                        <Span FontAttributes="Bold" Text="Accio.:" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding ActionCount}" />
+                                                        <Span Text=", " />
+                                                        <Span FontAttributes="Bold" Text="Indic.:" />
+                                                        <Span Text=" " />
+                                                        <Span Text="{Binding IndicatorCount}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                        <!--<Label
+                                            Grid.Column="3"
+                                            Margin="12,0"
+                                            HorizontalTextAlignment="Center" VerticalOptions="Center"
+                                            FontFamily="MaterialDesignIcons"
+                                            FontSize="40"
+                                            Text="{Binding ProgressGlyph}" />-->
+                                    </Grid>
+                                </DataTemplate>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
+                    </StackLayout>
+                </Frame>
                 <FlexLayout
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
@@ -151,7 +168,7 @@
                             <Label
                                 FontSize="Medium"
                                 FontAttributes="Bold"
-                                Text="Dist. Objetivos Específicos" />
+                                Text="Distribución Obj. Específicos" />
                             <BoxView HeightRequest="2" Color="DimGray" />
                             <live_charts_controls:PieChart 
                                 x:Name="ProyectionDistributionPieChart"

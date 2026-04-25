@@ -1,4 +1,6 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Models.View.Contract;
+﻿using System.Linq;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Models.View.Contract;
 
 public abstract class AbstractProyectionViewModel
 {
@@ -9,7 +11,7 @@ public abstract class AbstractProyectionViewModel
         Index = model.Index;
         Name = model.Name;
         Description = model.Description;
-        Indicators = [.. model.Indicators];
+        Indicators = [.. model.Indicators.Where(_entity => !_entity.Archived).OrderBy(_entity => _entity.Priority)];
 
         ObjectiveIndex = objectiveIndex;
     }

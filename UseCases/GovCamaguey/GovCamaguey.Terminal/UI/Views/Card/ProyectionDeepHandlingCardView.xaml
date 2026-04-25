@@ -5,7 +5,7 @@
     xmlns:local_view_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.View"
     xmlns:local_card_views="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card"
     x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card.ProyectionDeepHandlingCardView"
-    x:DataType="local_view_models:ProyectionSummaryViewModel">
+    x:DataType="local_view_models:ProyectionIndicatorHandlingViewModel">
     <Frame>
         <VerticalStackLayout>
             <Label FontSize="Medium">

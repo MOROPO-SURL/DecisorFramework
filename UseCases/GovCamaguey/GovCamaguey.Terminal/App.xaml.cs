@@ -1,4 +1,7 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal;
+﻿using LiveChartsCore.Drawing;
+using LiveChartsCore.Kernel;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal;
 
 public partial class App : Microsoft.Maui.Controls.Application
 {

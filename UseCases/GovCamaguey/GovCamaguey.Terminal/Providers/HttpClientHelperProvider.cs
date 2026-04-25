@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Factories;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Providers
 {
@@ -21,15 +22,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Providers
             var serverBaseUri = "https://cmi.gpcmg.co.cu";
 #endif
 
-            HttpClientHelper = new Framework.Guama.Core.Presentation.API.Connect.Helpers.HttpClientHelper(new System.Net.Http.HttpClientHandler
-            {
-                Proxy = !settingManager.UseProxyServer ? null : new System.Net.WebProxy
-                {
-                    Address = new System.Uri(settingManager.ProxyServerAddress),
-                    Credentials = !settingManager.UseProxyAuthentication ? null : new System.Net.NetworkCredential(settingManager.ProxyUsername, settingManager.ProxyPassword)
-                },
-                ServerCertificateCustomValidationCallback = (message, certificate, chain, errors) => true
-            }, serverBaseUri, GetAuthorizeHeader);
+            HttpClientHelper = new Framework.Guama.Core.Presentation.API.Connect.Helpers.HttpClientHelper(HttpClientHandlerFactory.Build(), serverBaseUri, GetAuthorizeHeader);
         }
 
         private System.Collections.Generic.KeyValuePair<string, string> GetAuthorizeHeader()

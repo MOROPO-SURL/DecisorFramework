@@ -211,14 +211,17 @@
                                                 </tbody>
                                             </table>
                                             <h5 class="h-seccion">Indicadores</h5>
-                                            @if (__item.Indicators.Count <= 0)
+                                            @{
+                                                var actionIndicators = __item.Indicators.Where(_entity => !_entity.Archived).OrderBy(_entity => _entity.Priority).ToArray();
+                                            }
+                                            @if (actionIndicators.Length <= 0)
                                             {
                                                 <div class="text-muted">@emptyMessage</div>
                                             }
                                             else
                                             {
                                                 <ul>
-                                                    @foreach (var ___item in __item.Indicators)
+                                                    @foreach (var ___item in actionIndicators)
                                                     {
                                                         <li class="li-indicator">
                                                             <div><span>@___item.Name</span></div>

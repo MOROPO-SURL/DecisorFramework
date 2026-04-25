@@ -62,7 +62,7 @@
                     Margin="4"
                     Spacing="6">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Meta" />
-                    <Entry Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                    <Entry Text="{Binding Amount}" />
                     <Label
                         IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:ActionIndicatorMontlyPlanConfigurationPageModel.AmountValidableProperty}}"
                         Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:ActionIndicatorMontlyPlanConfigurationPageModel.AmountValidableProperty}}"

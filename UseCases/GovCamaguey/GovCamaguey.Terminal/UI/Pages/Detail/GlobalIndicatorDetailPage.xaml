@@ -35,7 +35,7 @@
                                 Text="Meta" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                Text="{Binding Amount}" />
                             <Label
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Unidad de medida" />

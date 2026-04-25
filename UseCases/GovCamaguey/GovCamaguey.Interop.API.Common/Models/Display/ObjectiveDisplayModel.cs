@@ -34,7 +34,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
                 Responsible.Import(entity.Responsible);
             }
 
-            Indicators = entity.Indicators.OrderBy(_entity => _entity.Priority).Select(_entity =>
+            Indicators = entity.Indicators.Where(_entity => !_entity.Archived).OrderBy(_entity => _entity.Priority).Select(_entity =>
             {
                 var model = new ObjectiveIndicatorDisplayModel();
 

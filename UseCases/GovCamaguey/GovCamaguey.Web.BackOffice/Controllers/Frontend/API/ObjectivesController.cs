@@ -285,7 +285,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
             proyectionRepository.Add(_entity, User.Identity.Name, false);
 
-            proyectionUserBridgeRepository.Add(new ProyectionUserBridge { ProwId = entity.Id, SternId = User.Identity.Name, IsActionsIncluded = false }, User.Identity.Name, false);
+            proyectionUserBridgeRepository.Add(new ProyectionUserBridge { ProwId = _entity.Id, SternId = User.Identity.Name, IsActionsIncluded = false }, User.Identity.Name, false);
 
             ExtendCreate(_entity, _model);
         }
@@ -312,7 +312,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
             actionRepository.Add(_entity, User.Identity.Name, false);
 
-            actionUserBridgeRepository.Add(new ActionUserBridge { ProwId = entity.Id, SternId = User.Identity.Name }, User.Identity.Name, false);
+            actionUserBridgeRepository.Add(new ActionUserBridge { ProwId = _entity.Id, SternId = User.Identity.Name }, User.Identity.Name, false);
 
             ExtendCreate(_entity, _model);
         }

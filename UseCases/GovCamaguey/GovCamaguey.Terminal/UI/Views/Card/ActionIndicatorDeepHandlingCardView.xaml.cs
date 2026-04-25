@@ -23,7 +23,7 @@ public partial class ActionIndicatorDeepHandlingCardView : Microsoft.Maui.Contro
 
         var concreteBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.ActionIndicatorDisplayModel;
 
-        Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayPromptAsync($"Actualizar indicador", $"Especifique el nuevo valor del indicador ¨{concreteBindingContext.Name}¨. El valor no debe ser inferior a {concreteBindingContext.Balance:F2} {concreteBindingContext.UnitMeasurement.Name}.{System.Environment.NewLine}", "Aplicar", "Cancelar", null, keyboard: Microsoft.Maui.Keyboard.Numeric).ContinueWith(task =>
+        Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayPromptAsync($"Actualizar indicador", $"Especifique el nuevo valor del indicador \"{concreteBindingContext.Name}\" expresado en {concreteBindingContext.UnitMeasurement.Name}.{System.Environment.NewLine}", "Aplicar", "Cancelar", null, keyboard: Microsoft.Maui.Keyboard.Numeric).ContinueWith(task =>
         {
             Microsoft.Maui.Controls.Shell.Current.CurrentPage.Dispatcher.Dispatch(() =>
             {
@@ -34,13 +34,6 @@ public partial class ActionIndicatorDeepHandlingCardView : Microsoft.Maui.Contro
                 if (!double.TryParse(task.Result, out double result))
                 {
                     Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayAlert("Aviso", "Dato no especificado en el formato adecuado.", "Aceptar");
-
-                    return;
-                }
-
-                if (result <= concreteBindingContext.Balance)
-                {
-                    Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayAlert("Aviso", $"El valor especificado debe ser mayor al del estado actual ({concreteBindingContext.Balance} {concreteBindingContext.UnitMeasurement.Symbol}).", "Aceptar");
 
                     return;
                 }
@@ -61,7 +54,7 @@ public partial class ActionIndicatorDeepHandlingCardView : Microsoft.Maui.Contro
                         {
                             concreteBindingContext.Balance = result;
 
-                            BalanceSpan.Text = $"{result:F2}";
+                            BalanceSpan.Text = result.ToString();
 
                             Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayAlert("Aviso", "Cambios aplicados con éxito.", "Aceptar");
                         }
