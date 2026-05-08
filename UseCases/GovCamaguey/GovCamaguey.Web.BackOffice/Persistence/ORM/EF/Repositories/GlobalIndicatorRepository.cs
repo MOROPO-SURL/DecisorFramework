@@ -11,7 +11,7 @@ public class GlobalIndicatorRepository : Framework.Guama.Core.Persistence.ORM.EF
     protected override System.Linq.IQueryable<Prototype.Persistence.Entities.GlobalIndicator> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
-            .AsNoTracking()
+            //.AsNoTracking()
             .Include(entity => entity.UnitMeasurement)
             .Include(entity => entity.MontlyPlans);
     }

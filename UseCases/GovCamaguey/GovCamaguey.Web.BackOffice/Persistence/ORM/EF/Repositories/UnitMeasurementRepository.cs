@@ -10,8 +10,8 @@ public class UnitMeasurementRepository : Framework.Guama.Core.Persistence.ORM.EF
     {
     }
 
-    protected override IQueryable<UnitMeasurement> GetQueryableDbSet()
-    {
-        return base.GetQueryableDbSet().AsNoTracking();
-    }
+    //protected override IQueryable<UnitMeasurement> GetQueryableDbSet()
+    //{
+    //    return base.GetQueryableDbSet().AsNoTracking();
+    //}
 }

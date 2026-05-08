@@ -8,8 +8,8 @@ public class GuidelineRepository : Framework.Guama.Core.Persistence.ORM.EF.Repos
     {
     }
 
-    protected override System.Linq.IQueryable<Prototype.Persistence.Entities.Guideline> GetQueryableDbSet()
-    {
-        return base.GetQueryableDbSet().AsNoTracking();
-    }
+    //protected override System.Linq.IQueryable<Prototype.Persistence.Entities.Guideline> GetQueryableDbSet()
+    //{
+    //    return base.GetQueryableDbSet().AsNoTracking();
+    //}
 }

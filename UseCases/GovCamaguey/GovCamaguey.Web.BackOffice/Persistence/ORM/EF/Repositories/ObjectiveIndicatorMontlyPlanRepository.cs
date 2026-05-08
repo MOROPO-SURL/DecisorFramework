@@ -8,8 +8,8 @@ public class ObjectiveIndicatorMontlyPlanRepository : Framework.Guama.Core.Persi
     {
     }
 
-    protected override System.Linq.IQueryable<Prototype.Persistence.Entities.ObjectiveIndicatorMontlyPlan> GetQueryableDbSet()
-    {
-        return base.GetQueryableDbSet().AsNoTracking();
-    }
+    //protected override System.Linq.IQueryable<Prototype.Persistence.Entities.ObjectiveIndicatorMontlyPlan> GetQueryableDbSet()
+    //{
+    //    return base.GetQueryableDbSet().AsNoTracking();
+    //}
 }

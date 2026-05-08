@@ -8,8 +8,8 @@ public class GlobalIndicatorResultRepository : Framework.Guama.Core.Persistence.
     {
     }
 
-    protected override System.Linq.IQueryable<Prototype.Persistence.Entities.GlobalIndicatorResult> GetQueryableDbSet()
-    {
-        return base.GetQueryableDbSet().AsNoTracking();
-    }
+    //protected override System.Linq.IQueryable<Prototype.Persistence.Entities.GlobalIndicatorResult> GetQueryableDbSet()
+    //{
+    //    return base.GetQueryableDbSet().AsNoTracking();
+    //}
 }

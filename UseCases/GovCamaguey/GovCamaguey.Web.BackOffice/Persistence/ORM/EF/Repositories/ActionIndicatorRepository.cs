@@ -11,7 +11,7 @@ public class ActionIndicatorRepository : Framework.Guama.Core.Persistence.ORM.EF
     protected override System.Linq.IQueryable<Prototype.Persistence.Entities.ActionIndicator> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
-            .AsNoTracking()
+            //.AsNoTracking()
             .Include(entity => entity.UnitMeasurement)
             .Include(entity => entity.Action).ThenInclude(entity => entity.Proyection).ThenInclude(entity => entity.Objective);
     }

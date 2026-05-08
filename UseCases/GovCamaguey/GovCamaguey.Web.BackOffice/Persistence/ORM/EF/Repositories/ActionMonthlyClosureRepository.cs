@@ -8,8 +8,8 @@ public class ActionMonthlyClosureRepository : Framework.Guama.Core.Persistence.O
     {
     }
 
-    protected override System.Linq.IQueryable<Prototype.Persistence.Entities.ActionMonthlyClosure> GetQueryableDbSet()
-    {
-        return base.GetQueryableDbSet().AsNoTracking();
-    }
+    //protected override System.Linq.IQueryable<Prototype.Persistence.Entities.ActionMonthlyClosure> GetQueryableDbSet()
+    //{
+    //    return base.GetQueryableDbSet().AsNoTracking();
+    //}
 }

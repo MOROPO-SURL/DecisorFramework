@@ -11,9 +11,9 @@ public class ProyectionIndicatorResultRepository : Framework.Guama.Core.Persiste
     protected override System.Linq.IQueryable<Prototype.Persistence.Entities.ProyectionIndicatorResult> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
-            .AsNoTracking()
+            //.AsNoTracking()
+            .AsSplitQuery()
             .Include(entity => entity.Indicator).ThenInclude(entity => entity.UnitMeasurement)
-            .Include(entity => entity.Indicator).ThenInclude(entity => entity.Proyection).ThenInclude(entity => entity.Objective)
-            .AsSplitQuery();
+            .Include(entity => entity.Indicator).ThenInclude(entity => entity.Proyection).ThenInclude(entity => entity.Objective);
     }
 }

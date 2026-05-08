@@ -11,7 +11,7 @@ public class ObjectiveIndicatorRepository : Framework.Guama.Core.Persistence.ORM
     protected override System.Linq.IQueryable<Prototype.Persistence.Entities.ObjectiveIndicator> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
-            .AsNoTracking()
+            //.AsNoTracking()
             .Include(entity => entity.UnitMeasurement);
     }
 }

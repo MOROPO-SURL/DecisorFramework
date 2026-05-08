@@ -11,7 +11,7 @@ public class ActionRepository : Framework.Guama.Core.Persistence.ORM.EF.Reposito
     protected override System.Linq.IQueryable<Prototype.Persistence.Entities.Action> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
-            .AsNoTracking()
+            //.AsNoTracking()
             .Include(entity => entity.Proyection).ThenInclude(entity => entity.Objective);
     }
 }
