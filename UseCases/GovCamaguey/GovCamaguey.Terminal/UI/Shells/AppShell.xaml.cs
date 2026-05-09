@@ -27,7 +27,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Shells
 
             if (ConcretBindingContext.User == null)
             {
-                this.NavigationPushModalPageAsync(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.DefaultUserAuthenticationPage());
+                this.NavigationPushModalPageAsync(new Pages.UserAuthenticationPage());
             }
         }
 
@@ -43,7 +43,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Shells
 
                 await sessionManager.SignOutAsync();
 
-                Dispatcher.Dispatch(() => this.NavigationPushModalPageAsync(new Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Pages.DefaultUserAuthenticationPage()));
+                Dispatcher.Dispatch(() => this.NavigationPushModalPageAsync(new Pages.UserAuthenticationPage()));
             });
         }
     }

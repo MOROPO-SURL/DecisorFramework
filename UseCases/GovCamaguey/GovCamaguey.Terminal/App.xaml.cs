@@ -16,6 +16,6 @@ public partial class App : Microsoft.Maui.Controls.Application
     {
         base.OnStart();
 
-        Windows[0].Title = $"Gobierno de Camagüey - Decisor™ v{Microsoft.Maui.ApplicationModel.AppInfo.Current.VersionString}";
+        Windows[0].Title = $"SINERGIA GOB Camagüey v{Microsoft.Maui.ApplicationModel.AppInfo.Current.VersionString}";
     }
 }

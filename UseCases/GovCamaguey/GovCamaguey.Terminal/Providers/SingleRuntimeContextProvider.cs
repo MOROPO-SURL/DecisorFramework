@@ -4,7 +4,7 @@
     {
         internal static Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.View.OwnerInformationViewModel OWNER_INFORMATION = new Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.View.OwnerInformationViewModel
         {
-            Name = "Gobierno Provincial Camagüey",
+            Name = "SINERGIA GOB Camagüey",
             LogoImageViewStyle = (Microsoft.Maui.Controls.Style)Microsoft.Maui.Controls.Application.Current.Resources["LogoImageViewStyle"]
         };
 
