@@ -56,5 +56,9 @@ public class ProjectConfigurationValidator : AbstractValidator<Models.Page.Confi
         RuleFor(model => model.EndAt)
             .GreaterThan(model => model.StartAt)
             .WithName("Fecha de cierre");
+
+        RuleFor(model => model.Document)
+            .NotNull()
+            .WithName("Documento");
     }
 }

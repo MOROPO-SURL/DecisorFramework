@@ -1,4 +1,6 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
+﻿using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
+
+namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 {
     public class ProjectDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Project, System.Guid>
     {
@@ -40,7 +42,7 @@
 
         public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get; set; }
 
-        //public System.Collections.Generic.ICollection<ProjectSpecificObjective> SpecificObjectives { get; set; }
+        public System.Collections.Generic.List<ProjectSpecificObjectiveDisplayModel> SpecificObjectives { get; set; } = new System.Collections.Generic.List<ProjectSpecificObjectiveDisplayModel>();
 
         //public System.Collections.Generic.ICollection<ProjectBudgetFunancing> BudgetFunancings { get; set; }
 
@@ -92,6 +94,15 @@
                 Proposal = new ProjectProposalDisplayModel();
 
                 Proposal.Import(entity.Proposal);
+            }
+
+            foreach (ProjectSpecificObjective item in entity.SpecificObjectives)
+            {
+                ProjectSpecificObjectiveDisplayModel model = new ProjectSpecificObjectiveDisplayModel();
+
+                model.Import(item);
+
+                SpecificObjectives.Add(model);
             }
 
             if (entity.Document != null)

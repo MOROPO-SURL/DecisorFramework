@@ -23,6 +23,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IEntityRepository<ProjectProposal, System.Guid>, ProjectProposalRepository>();
         services.AddScoped<IEntityRepository<ProjectCategory, System.Guid>, ProjectCategoryRepository>();
         services.AddScoped<IEntityRepository<Project, System.Guid>, ProjectRepository>();
+        services.AddScoped<IEntityRepository<ProjectSpecificObjective, System.Guid>, ProjectSpecificObjectiveRepository>();
 
         services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.IDiDbSchemaConfigurationProvider>();
     }

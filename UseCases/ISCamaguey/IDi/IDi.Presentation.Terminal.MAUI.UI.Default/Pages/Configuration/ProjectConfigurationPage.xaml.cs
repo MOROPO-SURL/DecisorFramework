@@ -1,12 +1,17 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
 public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.ProjectDisplayModel, Interop.API.Common.Models.Display.ProjectDisplayModel, Models.Page.Configuration.ProjectConfigurationPageModel>
 {
     private Microsoft.Maui.Storage.FileResult documentFilePickResult;
+
+    private readonly List<Interop.API.Common.Models.Input.ProjectSpecificObjectiveInputModel> editionSpecificObjectives = [];
+    private readonly List<Interop.API.Common.Models.Input.ProjectSpecificObjectiveInputModel> incomingSpecificObjectives = [];
+    private readonly List<Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel> outgoingSpecificObjectives = [];
 
     public ProjectConfigurationPage(System.Action<Interop.API.Common.Models.Display.ProjectDisplayModel> successAction, Models.Page.Configuration.ProjectConfigurationPageModel model, Validators.ProjectConfigurationValidator validator) : base(successAction, model, validator)
     {
@@ -51,7 +56,8 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             ChiefId = ConcreteBindingContext.Chief.Id,
             ProgramId = ConcreteBindingContext.Program?.Id,
             ProposalId = ConcreteBindingContext.Proposal?.Id,
-            PredecessorId = ConcreteBindingContext.Predecessor?.Id
+            PredecessorId = ConcreteBindingContext.Predecessor?.Id,
+            IncomingSpecificObjectives = incomingSpecificObjectives
         };
 
         if (documentFilePickResult != null)
@@ -66,8 +72,10 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
                 ContentType = documentFilePickResult.ContentType
             };
 
-            await apiConnectClient.CreateAsync(model);
+            stream.Read(model.Document.ContentData, 0, (int)stream.Length);
         }
+
+        await apiConnectClient.CreateAsync(model);
 
         return await apiConnectClient.GetAsync(model.Id);
     }
@@ -94,7 +102,10 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             ChiefId = ConcreteBindingContext.Chief.Id,
             ProgramId = ConcreteBindingContext.Program?.Id,
             ProposalId = ConcreteBindingContext.Proposal?.Id,
-            PredecessorId = ConcreteBindingContext.Predecessor?.Id
+            PredecessorId = ConcreteBindingContext.Predecessor?.Id,
+            IncomingSpecificObjectives = incomingSpecificObjectives,
+            EditionSpecificObjectives = editionSpecificObjectives,
+            OutgoingSpecificObjectives = outgoingSpecificObjectives
         };
 
         if (documentFilePickResult != null)
@@ -137,6 +148,11 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ProgramPickPage(ProgramPickComplete_Callback)));
     }
 
+    private void ProjectProposalPickButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ProjectProposalPickPage(ProjectProposalPickComplete_Callback)));
+    }
+
     private void ChiefPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.InternalResearcherPickPage(ChiefPickComplete_Callback)));
@@ -177,9 +193,148 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
         });
     }
 
+    private void SpecificObjectiveAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new ProjectSpecificObjectiveConfigurationPage(SpecificObjectiveCreateSuccess_Callback, new Models.Page.Configuration.ProjectSpecificObjectiveConfigurationPageModel(null), new Validators.ProjectSpecificObjectiveConfigurationValidator()));
+    }
+
+    private void SpecificObjectiveEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new ProjectSpecificObjectiveConfigurationPage(SpecificObjectiveEditSuccess_Callback, new Models.Page.Configuration.ProjectSpecificObjectiveConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel), new Validators.ProjectSpecificObjectiveConfigurationValidator()));
+    }
+
+    private void SpecificObjectiveRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este objetivo específico?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingSpecificObjectives)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingSpecificObjectives.Remove(editionSpecificObjectives.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionSpecificObjectives)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionSpecificObjectives.Remove(editionSpecificObjectives.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingSpecificObjectives.Add(target);
+                }
+
+                ConcreteBindingContext.SpecificObjectives.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void SpecificObjectiveCreateSuccess_Callback(Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel model)
+    {
+        incomingSpecificObjectives.Add(new Interop.API.Common.Models.Input.ProjectSpecificObjectiveInputModel
+        {
+            Id = model.Id,
+            Name = model.Name,
+            Index = model.Index,
+            Description = model.Description
+        });
+
+        ConcreteBindingContext.SpecificObjectives.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void SpecificObjectiveEditSuccess_Callback(Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingSpecificObjectives)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.Name = model.Name;
+            item.Index = model.Index;
+            item.Description = model.Description;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionSpecificObjectives)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.Name = model.Name;
+                item.Index = model.Index;
+                item.Description = model.Description;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionSpecificObjectives.Add(new Interop.API.Common.Models.Input.ProjectSpecificObjectiveInputModel
+            {
+                Id = model.Id,
+                Index = model.Index,
+                Name = model.Name,
+                Description = model.Description
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.SpecificObjectives)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.SpecificObjectives[index] = model;
+
+            break;
+        }
+
+        hasChangesFlag = true;
+    }
+
     private void ProgramPickComplete_Callback(Interop.API.Common.Models.Display.ProgramDisplayModel model)
     {
         ConcreteBindingContext.Program = model;
+
+        hasChangesFlag = true;
+    }
+
+    private void ProjectProposalPickComplete_Callback(Interop.API.Common.Models.Display.ProjectProposalDisplayModel model)
+    {
+        ConcreteBindingContext.Proposal = model;
 
         hasChangesFlag = true;
     }

@@ -1,4 +1,6 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
+﻿using System.Collections.Generic;
+
+namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 {
     public class ProjectInputModel : Framework.Decisor.Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Project, System.Guid>
     {
@@ -34,6 +36,10 @@
         [System.ComponentModel.DataAnnotations.Required]
         [System.ComponentModel.DataAnnotations.MaxLength(360)]
         public string MainObjetive { get; set; }
+
+        public List<ProjectSpecificObjectiveInputModel> EditionSpecificObjectives { get; set; } = new List<ProjectSpecificObjectiveInputModel>();
+        public List<ProjectSpecificObjectiveInputModel> IncomingSpecificObjectives { get; set; } = new List<ProjectSpecificObjectiveInputModel>();
+        public List<Display.ProjectSpecificObjectiveDisplayModel> OutgoingSpecificObjectives { get; set; } = new List<Display.ProjectSpecificObjectiveDisplayModel>();
 
         public System.Guid CategoryId { get; set; }
 
@@ -104,8 +110,6 @@
                 entity.ChiefId = ChiefId;
             }
         }
-
-        //public System.Collections.Generic.ICollection<ProjectSpecificObjective> SpecificObjectives { get; set; }
 
         //public System.Collections.Generic.ICollection<ProjectBudgetFunancing> BudgetFunancings { get; set; }
 

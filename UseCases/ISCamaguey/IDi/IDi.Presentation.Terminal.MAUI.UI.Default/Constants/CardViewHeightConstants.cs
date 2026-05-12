@@ -25,4 +25,7 @@ public static class CardViewHeightConstants
 
     public static double PROJECT_DEFAULT_CARD_VIEW_HEIGHT = 152;
     public static double PROJECT_DEFAULT_CARD_VIEW_WIDTH = 400;
+
+    public static double PROJECT_PROPOUSAL_DEFAULT_CARD_VIEW_HEIGHT = 136;
+    public static double PROJECT_PROPOUSAL_DEFAULT_CARD_VIEW_WIDTH = 640;
 }

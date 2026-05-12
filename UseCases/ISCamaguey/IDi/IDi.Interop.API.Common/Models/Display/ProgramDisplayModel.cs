@@ -35,7 +35,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
             Code = entity.Code;
             Description = entity.Description;
             Priority = entity.Priority;
-            ExpectResults = entity.ExpectResults.Select(_entity =>
+            ExpectResults = entity.ExpectResults?.Select(_entity =>
             {
                 var model = new ProgramExpectResultDisplayModel();
 

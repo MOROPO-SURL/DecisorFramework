@@ -35,24 +35,30 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
 
     public ProjectConfigurationPageModel(Interop.API.Common.Models.Display.ProjectDisplayModel model) : base(model)
     {
-        if (model != null)
-        {
-            Id = model.Id;
-            name = model.Name;
-            alias = model.Alias;
-            code = model.Code;
-            category = model.Category;
-            summary = model.Summary;
-            problem = model.Problem;
-            context = model.Context;
-            beneficiary = model.Beneficiary;
-            mainObjetive = model.MainObjetive;
-            chief = model.Chief;
-            program = model.Program;
-            proposal = model.Proposal;
-            predecessor = model.Predecessor;
-            document = model.Document;
-        }
+        startAt = System.DateTime.Now;
+        endAt = startAt.AddYears(3);
+
+        if (model == null) return;
+
+        Id = model.Id;
+        name = model.Name;
+        alias = model.Alias;
+        code = model.Code;
+        category = model.Category;
+        startAt = model.StartAt;
+        endAt = model.EndAt;
+        summary = model.Summary;
+        problem = model.Problem;
+        context = model.Context;
+        beneficiary = model.Beneficiary;
+        mainObjetive = model.MainObjetive;
+        chief = model.Chief;
+        program = model.Program;
+        proposal = model.Proposal;
+        predecessor = model.Predecessor;
+        document = model.Document;
+
+        SpecificObjectives = [.. model.SpecificObjectives];
     }
 
     public System.Guid Id { get; set; }
@@ -90,6 +96,8 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
     public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get => document; set => SetProperty(ref document, value); }
 
     public int Priority { get => priority; set => SetProperty(ref priority, value); }
+
+    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel> SpecificObjectives { get; set; } = [];
 
     public Interop.API.Common.Models.Display.ProjectCategoryDisplayModel[] AvailableCategories { get; set; } = [];
 }

@@ -2,7 +2,7 @@
 <fwrk_core_ui_base_pages:ManageBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:local_constants="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Constants"
     xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI"
@@ -55,7 +55,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:ProjectProposalDisplayModel">
-                                <local_card_views:ProjectProposalDefaultCardView HeightRequest="{Static local:ProjectProposalsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                <local_card_views:ProjectProposalDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.PROJECT_PROPOUSAL_DEFAULT_CARD_VIEW_HEIGHT}">
                                     <local_card_views:ProjectProposalDefaultCardView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </local_card_views:ProjectProposalDefaultCardView.GestureRecognizers>

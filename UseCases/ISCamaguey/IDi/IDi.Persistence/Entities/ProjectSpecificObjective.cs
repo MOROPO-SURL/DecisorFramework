@@ -11,6 +11,8 @@
         [System.ComponentModel.DataAnnotations.MaxLength(255)]
         public string Name { get; set; }
 
+        public int Index { get; set; }
+
         [System.ComponentModel.DataAnnotations.MaxLength(2550)]
         public string Description { get; set; }
 

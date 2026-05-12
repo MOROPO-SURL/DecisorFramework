@@ -7281,6 +7281,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("character varying(2550)")
                         .HasColumnName("description");
 
+                    b.Property<int>("Index")
+                        .HasColumnType("integer")
+                        .HasColumnName("index");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(255)
