@@ -17,5 +17,17 @@
             Index = entity.Index;
             Description = entity.Description;
         }
+
+        public override int GetHashCode()
+        {
+            return Id.GetHashCode();
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (!(obj is ProgramExpectResultDisplayModel target)) return false;
+
+            return Id.Equals(target.Id);
+        }
     }
 }

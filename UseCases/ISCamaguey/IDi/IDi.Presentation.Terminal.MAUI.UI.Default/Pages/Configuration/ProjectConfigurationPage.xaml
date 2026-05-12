@@ -134,6 +134,73 @@
                             HorizontalOptions="Start"
                             Text="Seleccionar ..."
                             Clicked="ProgramPickButton_Clicked" />
+                    </VerticalStackLayout>                    
+                    <VerticalStackLayout
+                        IsVisible="{Binding Program, Converter={StaticResource IsNotNullConverter}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=8, ExtraLargeContainerColumn=7, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Resultados esperados del Programa" />                    
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="ProgramExpectResultAgregationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding ProgramExpectResults}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_display_models:ProgramExpectResultDisplayModel">
+                                            <Frame Padding="12,8,8,8">
+                                                <Grid ColumnSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackLayout 
+                                                        Grid.Column="0"
+                                                        VerticalOptions="Center"
+                                                        Orientation="Horizontal"
+                                                        Spacing="4">
+                                                        <Label Text="{Binding Index, StringFormat='No.{0}:'}" />
+                                                        <Label 
+                                                            HorizontalOptions="FillAndExpand"
+                                                            Text="{Binding Title}" />
+                                                    </StackLayout>
+                                                    <Button
+                                                        Grid.Column="2"
+                                                        VerticalOptions="Start"
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="ProgramExpectResultRemotionButton_Clicked" />
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
                     </VerticalStackLayout>
                     <VerticalStackLayout 
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=8, ExtraLargeContainerColumn=7, SmallContainerColumn=12}}"

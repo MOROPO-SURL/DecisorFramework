@@ -1,4 +1,6 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Configuration;
+﻿using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
+
+namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Configuration;
 
 public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ProjectDisplayModel>
 {
@@ -58,6 +60,7 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
         predecessor = model.Predecessor;
         document = model.Document;
 
+        ProgramExpectResults = [.. model.ProgramExpectResults];
         SpecificObjectives = [.. model.SpecificObjectives];
         ParticipatingOrganizations = [.. model.ParticipatingOrganizations];
     }
@@ -97,6 +100,8 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
     public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get => document; set => SetProperty(ref document, value); }
 
     public int Priority { get => priority; set => SetProperty(ref priority, value); }
+
+    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ProgramExpectResultDisplayModel> ProgramExpectResults { get; set; } = [];
 
     public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel> SpecificObjectives { get; set; } = [];
 

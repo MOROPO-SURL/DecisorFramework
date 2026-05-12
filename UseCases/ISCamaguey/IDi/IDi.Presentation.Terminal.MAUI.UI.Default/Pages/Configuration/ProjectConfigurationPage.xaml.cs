@@ -58,6 +58,7 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             ProposalId = ConcreteBindingContext.Proposal?.Id,
             PredecessorId = ConcreteBindingContext.Predecessor?.Id,
             ParticipatingOrganizations = [.. ConcreteBindingContext.ParticipatingOrganizations],
+            ProgramExpectResults = [.. ConcreteBindingContext.ProgramExpectResults],
             IncomingSpecificObjectives = incomingSpecificObjectives
         };
 
@@ -105,6 +106,7 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             ProposalId = ConcreteBindingContext.Proposal?.Id,
             PredecessorId = ConcreteBindingContext.Predecessor?.Id,
             ParticipatingOrganizations = [.. ConcreteBindingContext.ParticipatingOrganizations],
+            ProgramExpectResults = [.. ConcreteBindingContext.ProgramExpectResults],
             IncomingSpecificObjectives = incomingSpecificObjectives,
             EditionSpecificObjectives = editionSpecificObjectives,
             OutgoingSpecificObjectives = outgoingSpecificObjectives
@@ -176,6 +178,28 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
                 var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel;
 
                 ConcreteBindingContext.ParticipatingOrganizations.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void ProgramExpectResultAgregationButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ProgramExpectResultPickPage(ConcreteBindingContext.Program, ConcreteBindingContext.ProgramExpectResults, ProgramExpectResultPickComplete_Callback)));
+    }
+
+    private void ProgramExpectResultRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este resultado esperado de programa?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ProgramExpectResultDisplayModel;
+
+                ConcreteBindingContext.ProgramExpectResults.Remove(target);
 
                 hasChangesFlag = true;
             });
@@ -353,6 +377,8 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
     {
         ConcreteBindingContext.Program = model;
 
+        ConcreteBindingContext.ProgramExpectResults.Clear();
+
         hasChangesFlag = true;
     }
 
@@ -373,6 +399,13 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
     private void ParticipatingOrganizationPickComplete_Callback(Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel model)
     {
         ConcreteBindingContext.ParticipatingOrganizations.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void ProgramExpectResultPickComplete_Callback(Interop.API.Common.Models.Display.ProgramExpectResultDisplayModel model)
+    {
+        ConcreteBindingContext.ProgramExpectResults.Add(model);
 
         hasChangesFlag = true;
     }

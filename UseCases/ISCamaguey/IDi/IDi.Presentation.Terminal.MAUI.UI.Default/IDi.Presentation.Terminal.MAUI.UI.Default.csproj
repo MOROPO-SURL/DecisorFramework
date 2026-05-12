@@ -55,6 +55,9 @@
 	  <Compile Update="Pages\Pick\CallForProposalPickPage.xaml.cs">
 	    <DependentUpon>CallForProposalPickPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Pick\ProgramExpectResultPickPage.xaml.cs">
+	    <DependentUpon>ProgramExpectResultPickPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Card\CallForProposalDefaultCardView.xaml.cs">
 	    <DependentUpon>CallForProposalDefaultCardView.xaml</DependentUpon>
 	  </Compile>
@@ -184,6 +187,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\ParticipatingOrganizationPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\ProgramExpectResultPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\ProgramPickPage.xaml">

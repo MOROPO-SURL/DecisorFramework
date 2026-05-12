@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;
+using System.Collections.Generic;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 {
@@ -39,9 +40,11 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 
         public List<ProjectSpecificObjectiveInputModel> EditionSpecificObjectives { get; set; } = new List<ProjectSpecificObjectiveInputModel>();
         public List<ProjectSpecificObjectiveInputModel> IncomingSpecificObjectives { get; set; } = new List<ProjectSpecificObjectiveInputModel>();
-        public List<Display.ProjectSpecificObjectiveDisplayModel> OutgoingSpecificObjectives { get; set; } = new List<Display.ProjectSpecificObjectiveDisplayModel>();
+        public List<ProjectSpecificObjectiveDisplayModel> OutgoingSpecificObjectives { get; set; } = new List<ProjectSpecificObjectiveDisplayModel>();
 
-        public List<Display.ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = new List<Display.ParticipatingOrganizationDisplayModel>();
+        public List<ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = new List<ParticipatingOrganizationDisplayModel>();
+
+        public List<ProgramExpectResultDisplayModel> ProgramExpectResults { get; set; } = new List<ProgramExpectResultDisplayModel>();
 
         public System.Guid CategoryId { get; set; }
 
@@ -117,6 +120,13 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
             foreach (var item in ParticipatingOrganizations)
             {
                 entity.ParticipatingOrganizationBridges.Add(new Persistence.Entities.ProjectParticipatingOrganizationBridge { ProwId = entity.Id, SternId = item.Id });
+            }
+
+            entity.ProgramExpectResultBridges.Clear();
+
+            foreach (var item in ProgramExpectResults)
+            {
+                entity.ProgramExpectResultBridges.Add(new Persistence.Entities.ProjectProgramExpectResultBridge { ProwId = entity.Id, SternId = item.Id });
             }
         }
 

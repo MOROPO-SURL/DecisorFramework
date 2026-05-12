@@ -46,6 +46,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public List<ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = new List<ParticipatingOrganizationDisplayModel>();
 
+        public List<ProgramExpectResultDisplayModel> ProgramExpectResults { get; set; } = new List<ProgramExpectResultDisplayModel>();
+
         //public System.Collections.Generic.ICollection<ProjectBudgetFunancing> BudgetFunancings { get; set; }
 
         //public System.Collections.Generic.List<ProjectBudgetCurrencyBridge> BudgetCurrencyBridges { get; set; } = new System.Collections.Generic.List<ProjectBudgetCurrencyBridge>();
@@ -103,6 +105,15 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
                 model.Import(item);
 
                 SpecificObjectives.Add(model);
+            }
+
+            foreach (var bridge in entity.ProgramExpectResultBridges)
+            {
+                var model = new ProgramExpectResultDisplayModel();
+
+                model.Import(bridge.Stern);
+
+                ProgramExpectResults.Add(model);
             }
 
             if (entity.Document != null)

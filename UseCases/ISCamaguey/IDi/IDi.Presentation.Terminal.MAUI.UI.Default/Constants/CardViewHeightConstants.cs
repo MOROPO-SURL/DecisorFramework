@@ -31,4 +31,7 @@ public static class CardViewHeightConstants
 
     public static double PARTICIPATING_ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT = 144;
     public static double PARTICIPATING_ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH = 420;
+
+    public static double PROGRAM_EXPECT_RESULT_DEFAULT_CARD_VIEW_HEIGHT = 60;
+    public static double PROGRAM_EXPECT_RESULT_DEFAULT_CARD_VIEW_WIDTH = 640;
 }
