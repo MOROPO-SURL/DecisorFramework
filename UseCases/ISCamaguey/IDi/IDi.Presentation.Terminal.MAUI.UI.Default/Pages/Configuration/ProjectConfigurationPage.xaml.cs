@@ -57,6 +57,7 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             ProgramId = ConcreteBindingContext.Program?.Id,
             ProposalId = ConcreteBindingContext.Proposal?.Id,
             PredecessorId = ConcreteBindingContext.Predecessor?.Id,
+            ParticipatingOrganizations = [.. ConcreteBindingContext.ParticipatingOrganizations],
             IncomingSpecificObjectives = incomingSpecificObjectives
         };
 
@@ -103,6 +104,7 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             ProgramId = ConcreteBindingContext.Program?.Id,
             ProposalId = ConcreteBindingContext.Proposal?.Id,
             PredecessorId = ConcreteBindingContext.Predecessor?.Id,
+            ParticipatingOrganizations = [.. ConcreteBindingContext.ParticipatingOrganizations],
             IncomingSpecificObjectives = incomingSpecificObjectives,
             EditionSpecificObjectives = editionSpecificObjectives,
             OutgoingSpecificObjectives = outgoingSpecificObjectives
@@ -156,6 +158,28 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
     private void ChiefPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.InternalResearcherPickPage(ChiefPickComplete_Callback)));
+    }
+
+    private void ParticipatingOrganizationAgregationButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ParticipatingOrganizationPickPage(ParticipatingOrganizationPickComplete_Callback)));
+    }
+
+    private void ParticipatingOrganizationRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta entidad participante?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel;
+
+                ConcreteBindingContext.ParticipatingOrganizations.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
     }
 
     private void DocumentPickButton_Clicked(object sender, System.EventArgs e)
@@ -342,6 +366,13 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
     private void ChiefPickComplete_Callback(Interop.API.Common.Models.Display.InternalResearcherDisplayModel model)
     {
         ConcreteBindingContext.Chief = model;
+
+        hasChangesFlag = true;
+    }
+
+    private void ParticipatingOrganizationPickComplete_Callback(Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel model)
+    {
+        ConcreteBindingContext.ParticipatingOrganizations.Add(model);
 
         hasChangesFlag = true;
     }

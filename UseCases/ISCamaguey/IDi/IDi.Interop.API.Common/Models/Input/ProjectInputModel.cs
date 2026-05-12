@@ -41,6 +41,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
         public List<ProjectSpecificObjectiveInputModel> IncomingSpecificObjectives { get; set; } = new List<ProjectSpecificObjectiveInputModel>();
         public List<Display.ProjectSpecificObjectiveDisplayModel> OutgoingSpecificObjectives { get; set; } = new List<Display.ProjectSpecificObjectiveDisplayModel>();
 
+        public List<Display.ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = new List<Display.ParticipatingOrganizationDisplayModel>();
+
         public System.Guid CategoryId { get; set; }
 
         public System.Guid? ProgramId { get; set; }
@@ -109,13 +111,18 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
                 entity.Chief = null;
                 entity.ChiefId = ChiefId;
             }
+
+            entity.ParticipatingOrganizationBridges.Clear();
+
+            foreach (var item in ParticipatingOrganizations)
+            {
+                entity.ParticipatingOrganizationBridges.Add(new Persistence.Entities.ProjectParticipatingOrganizationBridge { ProwId = entity.Id, SternId = item.Id });
+            }
         }
 
         //public System.Collections.Generic.ICollection<ProjectBudgetFunancing> BudgetFunancings { get; set; }
 
         //public System.Collections.Generic.List<ProjectBudgetCurrencyBridge> BudgetCurrencyBridges { get; set; } = new System.Collections.Generic.List<ProjectBudgetCurrencyBridge>();
-
-        //public System.Collections.Generic.List<ProjectParticipatingOrganizationBridge> ParticipatingOrganizationBridges { get; set; } = new System.Collections.Generic.List<ProjectParticipatingOrganizationBridge>();
 
         //public System.Collections.Generic.List<ProjectResearcherBridge> ResearcherBridges { get; set; } = new System.Collections.Generic.List<ProjectResearcherBridge>();
     }

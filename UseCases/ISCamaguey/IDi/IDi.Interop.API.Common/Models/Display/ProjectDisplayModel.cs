@@ -1,4 +1,4 @@
-﻿using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
+﻿using System.Collections.Generic;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 {
@@ -42,13 +42,13 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get; set; }
 
-        public System.Collections.Generic.List<ProjectSpecificObjectiveDisplayModel> SpecificObjectives { get; set; } = new System.Collections.Generic.List<ProjectSpecificObjectiveDisplayModel>();
+        public List<ProjectSpecificObjectiveDisplayModel> SpecificObjectives { get; set; } = new List<ProjectSpecificObjectiveDisplayModel>();
+
+        public List<ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = new List<ParticipatingOrganizationDisplayModel>();
 
         //public System.Collections.Generic.ICollection<ProjectBudgetFunancing> BudgetFunancings { get; set; }
 
         //public System.Collections.Generic.List<ProjectBudgetCurrencyBridge> BudgetCurrencyBridges { get; set; } = new System.Collections.Generic.List<ProjectBudgetCurrencyBridge>();
-
-        //public System.Collections.Generic.List<ProjectParticipatingOrganizationBridge> ParticipatingOrganizationBridges { get; set; } = new System.Collections.Generic.List<ProjectParticipatingOrganizationBridge>();
 
         //public System.Collections.Generic.List<ProjectResearcherBridge> ResearcherBridges { get; set; } = new System.Collections.Generic.List<ProjectResearcherBridge>();
 
@@ -96,9 +96,9 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
                 Proposal.Import(entity.Proposal);
             }
 
-            foreach (ProjectSpecificObjective item in entity.SpecificObjectives)
+            foreach (var item in entity.SpecificObjectives)
             {
-                ProjectSpecificObjectiveDisplayModel model = new ProjectSpecificObjectiveDisplayModel();
+                var model = new ProjectSpecificObjectiveDisplayModel();
 
                 model.Import(item);
 

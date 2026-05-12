@@ -59,6 +59,7 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
         document = model.Document;
 
         SpecificObjectives = [.. model.SpecificObjectives];
+        ParticipatingOrganizations = [.. model.ParticipatingOrganizations];
     }
 
     public System.Guid Id { get; set; }
@@ -98,6 +99,12 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
     public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
     public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel> SpecificObjectives { get; set; } = [];
+
+    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = [];
+
+    //public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.InternalResearcherDisplayModel> InternalResearchers { get; set; } = [];
+
+    //public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ExternalResearcherDisplayModel> ExternalResearchers { get; set; } = [];
 
     public Interop.API.Common.Models.Display.ProjectCategoryDisplayModel[] AvailableCategories { get; set; } = [];
 }

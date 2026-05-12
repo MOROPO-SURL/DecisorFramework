@@ -28,4 +28,7 @@ public static class CardViewHeightConstants
 
     public static double PROJECT_PROPOUSAL_DEFAULT_CARD_VIEW_HEIGHT = 136;
     public static double PROJECT_PROPOUSAL_DEFAULT_CARD_VIEW_WIDTH = 640;
+
+    public static double PARTICIPATING_ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT = 144;
+    public static double PARTICIPATING_ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH = 420;
 }

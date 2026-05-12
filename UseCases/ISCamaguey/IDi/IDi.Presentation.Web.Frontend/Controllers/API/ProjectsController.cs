@@ -49,6 +49,20 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
             model.Chief.Employee.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Chief.Employee.Contact.Identity.Image.ContentType);
         }
 
+        foreach (var bridge in entity.ParticipatingOrganizationBridges)
+        {
+            ParticipatingOrganizationDisplayModel _model = new();
+
+            _model.Import(bridge.Stern);
+
+            if (_model.Contact.Identity.Image != null)
+            {
+                _model.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Contact.Identity.Image.ContentType);
+            }
+
+            model.ParticipatingOrganizations.Add(_model);
+        }
+
         if (entity.Document != null)
         {
             model.Document = new Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
