@@ -12,7 +12,7 @@ public class AcademicAchievementConfigurationValidator : AbstractValidator<Model
 
         RuleFor(model => model.Title)
             .MaximumLength(512)
-            .WithName("Titulación");
+            .WithName("Título del trabajo");
 
         RuleFor(model => model.Institution)
             .MaximumLength(512)

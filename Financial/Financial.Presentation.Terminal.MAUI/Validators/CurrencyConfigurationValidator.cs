@@ -6,9 +6,13 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Validato
     {
         public CurrencyConfigurationValidator()
         {
-            RuleFor(model => model.Name).NotNull().NotEmpty();
+            RuleFor(model => model.Name)
+                .NotEmpty()
+                .WithName("Nombre");
 
-            RuleFor(model => model.Symbol).NotNull().NotEmpty();
+            RuleFor(model => model.Symbol)
+                .NotEmpty()
+                .WithName("Símbolo");
         }
     }
 }

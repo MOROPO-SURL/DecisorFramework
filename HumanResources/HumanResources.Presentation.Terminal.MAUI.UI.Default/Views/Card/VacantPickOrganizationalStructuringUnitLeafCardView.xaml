@@ -45,24 +45,18 @@
                     </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="interop_common_display_models:VacantDisplayModel">
-                            <Frame Padding="0">
+                            <Frame Padding="12,8" HeightRequest="60">
                                 <Frame.GestureRecognizers>
                                     <TapGestureRecognizer Tapped="TapGestureRecognizer_Tapped" />
                                 </Frame.GestureRecognizers>
-                                <VerticalStackLayout Spacing="0">
-                                    <Image 
-                                        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
-                                        BackgroundColor="DimGray"
-                                        Source="default_person_picture.jpg" />
-                                    <VerticalStackLayout Margin="8,8,8,12" Spacing="8">
-                                        <Label
-                                            HorizontalOptions="Center"
-                                            ToolTipProperties.Text="{Binding WorkPosition.Name}"
-                                            Text="{Binding WorkPosition.Name}"
-                                            FontAttributes="Bold"
-                                            LineBreakMode="TailTruncation" />
-                                    </VerticalStackLayout>
-                                </VerticalStackLayout>
+                                <Grid>
+                                    <Label
+                                        MaxLines="2"
+                                        LineBreakMode="TailTruncation"
+                                        ToolTipProperties.Text="{Binding WorkPosition.Name}"
+                                        FontAttributes="Bold"
+                                        Text="{Binding WorkPosition.Name}" />
+                                </Grid>
                             </Frame>
                         </DataTemplate>
                     </CollectionView.ItemTemplate>

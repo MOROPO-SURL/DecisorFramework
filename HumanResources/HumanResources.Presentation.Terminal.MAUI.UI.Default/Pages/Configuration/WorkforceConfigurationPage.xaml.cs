@@ -40,7 +40,8 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
             At = ConcreteBindingContext.At,
             Priority = ConcreteBindingContext.Priority,
             OrganizationalStructureId = ConcreteBindingContext.OrganizationalStructure.Id,
-            IncomingOrganizationalUnits = ConcreteBindingContext.IncomingOrganizationalUnits
+            IncomingOrganizationalUnits = ConcreteBindingContext.IncomingOrganizationalUnits,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -61,7 +62,8 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
             OrganizationalStructureId = ConcreteBindingContext.OrganizationalStructure.Id,
             IncomingOrganizationalUnits = ConcreteBindingContext.IncomingOrganizationalUnits,
             EditionOrganizationalUnits = ConcreteBindingContext.EditionOrganizationalUnits,
-            OutgoingOrganizationalUnits = ConcreteBindingContext.OutgoingOrganizationalUnits
+            OutgoingOrganizationalUnits = ConcreteBindingContext.OutgoingOrganizationalUnits,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -269,6 +271,33 @@ public partial class WorkforceConfigurationPage : Core.Presentation.Terminal.MAU
                 hasChangesFlag = true;
             });
         });
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void ChiefVacantDefineSuccess_Callback(Models.View.WorkforceConfigurationVacantViewModel model)

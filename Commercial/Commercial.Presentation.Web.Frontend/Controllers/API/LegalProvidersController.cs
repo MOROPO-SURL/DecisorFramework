@@ -4,6 +4,7 @@ using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Location.Persistence.Entities;
@@ -22,14 +23,16 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
         private readonly IEntityRepository<OrganizationContact, System.Guid> organizationContactRepository; 
         private readonly IEntityRepository<Document, System.Guid> documentRepository;
         private readonly IDocumentFileManagerFacade documentFileManager;
+        private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-        public LegalProvidersController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<OrganizationContact, System.Guid> organizationContactRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<BankAccount, System.Guid> bankAccountRepository, IEntityRepository<LegalProvider, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalProvidersController> localizer, Microsoft.Extensions.Logging.ILogger<LegalProvidersController> logger) : base(repository, localizer, logger)
+        public LegalProvidersController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<OrganizationContact, System.Guid> organizationContactRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<BankAccount, System.Guid> bankAccountRepository, IEntityRepository<LegalProvider, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalProvidersController> localizer, Microsoft.Extensions.Logging.ILogger<LegalProvidersController> logger) : base(repository, localizer, logger)
         {
             this.bankAccountRepository = bankAccountRepository;
             this.municipalityRepository = municipalityRepository;
             this.organizationContactRepository = organizationContactRepository;
             this.documentRepository = documentRepository;
             this.documentFileManager = documentFileManager;
+            this.changeNotificationRepository = changeNotificationRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<LegalProvider, bool>> GetGlobalSelector()
@@ -141,6 +144,13 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
             }
         }
 
+        protected override void PostCreate(LegalProvider entity, LegalProviderInputModel model)
+        {
+            base.PostCreate(entity, model);
+
+            this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+        }
+
         protected override void PreEdit(LegalProvider entity, LegalProviderInputModel model)
         {
             base.PreEdit(entity, model);
@@ -231,6 +241,8 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
         protected override void PostEdit(LegalProvider entity, LegalProviderInputModel model)
         {
             base.PostEdit(entity, model);
+
+            this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
 
             foreach (var _model in model.OutgoingDocuments)
             {

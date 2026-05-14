@@ -4,10 +4,8 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Input
 {
-    public class MeetingInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Meeting, System.Guid>
+    public class MeetingInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Meeting, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public int Index { get; set; }
 
         public System.DateTime At { get; set; }
@@ -28,7 +26,7 @@ namespace MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Input
         public List<AgreementInputModel> IncomingAgreements { get; set; } = new List<AgreementInputModel>();
         public List<Display.AgreementDisplayModel> OutgoingAgreements { get; set; } = new List<Display.AgreementDisplayModel>();
 
-        public Persistence.Entities.Meeting Export()
+        public override Persistence.Entities.Meeting Export()
         {
             var entity = new Persistence.Entities.Meeting { Id = Id };
 
@@ -37,12 +35,7 @@ namespace MOROPO.Framework.Decisor.Governance.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Persistence.Entities.Meeting entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.Meeting entity)
+        public override void Mergue(Persistence.Entities.Meeting entity)
         {
             entity.Index = Index;
             entity.At = At;

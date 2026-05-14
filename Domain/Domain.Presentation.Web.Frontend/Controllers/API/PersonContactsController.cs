@@ -2,6 +2,7 @@
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Identity.Persistence.Entities;
 using MOROPO.Framework.Guama.Location.Persistence.Entities;
@@ -25,8 +26,9 @@ public class PersonContactsController : Guama.Core.Presentation.Web.API.Controll
     private readonly IEntityRepository<AcademicAchievement, System.Guid> academicAchievementRepository;
     private readonly IEntityRepository<Image, System.Guid> imageRepository;
     private readonly IImageFileManagerFacade imageFileManager;
+    private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-    public PersonContactsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<AcademicAchievement, System.Guid> academicAchievementRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<WebSiteContactItem, System.Guid> webSiteContactRepository, IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository, IEntityRepository<EmailContactItem, System.Guid> emailContactRepository, IEntityRepository<PersonContact, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PersonContactsController> localizer, Microsoft.Extensions.Logging.ILogger<PersonContactsController> logger) : base(repository, localizer, logger)
+    public PersonContactsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<AcademicAchievement, System.Guid> academicAchievementRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<WebSiteContactItem, System.Guid> webSiteContactRepository, IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository, IEntityRepository<EmailContactItem, System.Guid> emailContactRepository, IEntityRepository<PersonContact, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<PersonContactsController> localizer, Microsoft.Extensions.Logging.ILogger<PersonContactsController> logger) : base(repository, localizer, logger)
     {
         this.emailContactRepository = emailContactRepository;
         this.phoneContactRepository = phoneContactRepository;
@@ -37,6 +39,7 @@ public class PersonContactsController : Guama.Core.Presentation.Web.API.Controll
         this.academicAchievementRepository = academicAchievementRepository;
         this.imageRepository = imageRepository;
         this.imageFileManager = imageFileManager;
+        this.changeNotificationRepository = changeNotificationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<PersonContact, bool>> GetGlobalSelector()
@@ -185,6 +188,13 @@ public class PersonContactsController : Guama.Core.Presentation.Web.API.Controll
 
             academicAchievementRepository.Add(_entity, User.Identity.Name, false);
         }
+    }
+
+    protected override void PostCreate(PersonContact entity, PersonContactInputModel model)
+    {
+        base.PostCreate(entity, model);
+
+        this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
     }
 
     protected override void PreEdit(PersonContact entity, PersonContactInputModel model)
@@ -423,6 +433,8 @@ public class PersonContactsController : Guama.Core.Presentation.Web.API.Controll
     protected override void PostEdit(PersonContact entity, PersonContactInputModel model)
     {
         base.PostEdit(entity, model);
+
+        this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
 
         try
         {

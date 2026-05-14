@@ -1,75 +1,56 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.List;
 
-public partial class WorkPositionKindsListPage : Caney.MVVM.Core.Pages.ContentPage
+public partial class WorkPositionKindsListPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.WorkPositionKindDisplayModel, Models.Page.List.WorkPositionKindsListPageModel>
 {
     public WorkPositionKindsListPage()
     {
         InitializeComponent();
-
-        IsEnabled = false;
-
-        BindingContext = new Models.Page.List.WorkPositionKindsListPageModel();
     }
 
-    protected override void OnAppearing()
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
+
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.WORK_POSITION_KIND_DEFAULT_CARD_VIEW_WIDTH;
+
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.WORK_POSITION_KIND_DEFAULT_CARD_VIEW_HEIGHT;
+
+    protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.WorkPositionKindDisplayModel>> FetchItemsAsync()
     {
-        base.OnAppearing();
+        var apiConnectClient = new Interop.API.Connect.Clients.WorkPositionKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        if (IsEnabled) return;
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.WorkPositionKindFilterModel { Parameter = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
 
-        LoadItems();
-
-        IsEnabled = true;
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
-    private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    private void ReloadToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (((Models.Page.List.WorkPositionKindsListPageModel)BindingContext).IsBusy) return;
+        ConcreteBindingContext.SearchParameter = null;
 
-        LoadItems();
+        OnReload(sender, eventArgs);
+    }
+
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
     }
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        ((Models.Page.List.WorkPositionKindsListPageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.WorkPositionKindDisplayModel;
+        base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 
-    private void PresentedItemDismissButton_Clicked(object sender, System.EventArgs e)
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
     {
-        ((Models.Page.List.WorkPositionKindsListPageModel)BindingContext).PresentedItem = null;
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
     }
 
-    private void LoadItems()
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
     {
-        var concreteBindingContext = (Models.Page.List.WorkPositionKindsListPageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        concreteBindingContext.Items.Clear();
-
-        var apiConnectClient = new Interop.API.Connect.Clients.WorkPositionKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        apiConnectClient.GetAsync().ContinueWith(task =>
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                concreteBindingContext.IsBusy = false;
-
-                if (task.Exception != null || task.IsCanceled)
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                }
-                else
-                {
-                    foreach (var model in task.Result)
-                    {
-                        concreteBindingContext.Items.Add(model);
-                    }
-                }
-            });
-        });
+        OnReload(sender, eventArgs);
     }
 }

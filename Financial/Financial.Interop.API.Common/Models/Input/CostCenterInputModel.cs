@@ -1,9 +1,7 @@
 ﻿namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Input
 {
-    public class CostCenterInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.CostCenter, System.Guid>
+    public class CostCenterInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.CostCenter, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -15,7 +13,7 @@
 
         public System.Guid StructureId { get; set; }
 
-        public Persistence.Entities.CostCenter Export()
+        public override Persistence.Entities.CostCenter Export()
         {
             var entity = new Persistence.Entities.CostCenter { Id = Id, Enabled = true };
 
@@ -24,12 +22,7 @@
             return entity;
         }
 
-        public void Import(Persistence.Entities.CostCenter entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.CostCenter entity)
+        public override void Mergue(Persistence.Entities.CostCenter entity)
         {
             entity.Name = Name;
             entity.About = Description;
