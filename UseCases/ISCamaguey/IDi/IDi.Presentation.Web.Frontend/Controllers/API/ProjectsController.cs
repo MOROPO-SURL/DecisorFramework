@@ -63,6 +63,11 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
             model.ParticipatingOrganizations.Add(_model);
         }
 
+        foreach (var bridge in entity.ResearcherBridges)
+        {
+            // TODO Complete block !!!
+        }
+
         if (entity.Document != null)
         {
             model.Document = new Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel();

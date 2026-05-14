@@ -1,4 +1,5 @@
 ﻿using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;
+using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Shared.Bridge;
 using System.Collections.Generic;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
@@ -45,6 +46,10 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
         public List<ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = new List<ParticipatingOrganizationDisplayModel>();
 
         public List<ProgramExpectResultDisplayModel> ProgramExpectResults { get; set; } = new List<ProgramExpectResultDisplayModel>();
+
+        public List<ProjectInternalResearcherBridgeSharedModel> InternalResearcherBridges { get; set; } = new List<ProjectInternalResearcherBridgeSharedModel>();
+
+        public List<ProjectExternalResearcherBridgeSharedModel> ExternalResearcherBridges { get; set; } = new List<ProjectExternalResearcherBridgeSharedModel>();
 
         public System.Guid CategoryId { get; set; }
 

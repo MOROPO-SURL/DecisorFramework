@@ -63,6 +63,7 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
         ProgramExpectResults = [.. model.ProgramExpectResults];
         SpecificObjectives = [.. model.SpecificObjectives];
         ParticipatingOrganizations = [.. model.ParticipatingOrganizations];
+        InternalResearchers = [.. model.Inter];
     }
 
     public System.Guid Id { get; set; }
@@ -107,9 +108,9 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
 
     public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = [];
 
-    //public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.InternalResearcherDisplayModel> InternalResearchers { get; set; } = [];
+    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.InternalResearcherDisplayModel> InternalResearchers { get; set; } = [];
 
-    //public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ExternalResearcherDisplayModel> ExternalResearchers { get; set; } = [];
+    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ExternalResearcherDisplayModel> ExternalResearchers { get; set; } = [];
 
     public Interop.API.Common.Models.Display.ProjectCategoryDisplayModel[] AvailableCategories { get; set; } = [];
 }
