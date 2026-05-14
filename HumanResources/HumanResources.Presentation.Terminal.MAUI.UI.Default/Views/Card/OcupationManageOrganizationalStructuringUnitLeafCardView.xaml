@@ -56,9 +56,10 @@
                         <DataTemplate x:DataType="presentation_view_models:OcupationsManageVacantViewModel">
                             <Frame Padding="0">
                                 <VerticalStackLayout Spacing="0">
-                                    <Grid HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}">
+                                    <Grid HeightRequest="240">
                                         <Image 
                                             BackgroundColor="DimGray"
+                                            Aspect="AspectFill"
                                             Source="{Binding Ocupation.Employee.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_person_picture.jpg'}" />
                                         <Grid
                                             IsVisible="{Binding Ocupation, Converter={StaticResource IsNotNullConverter}}"
