@@ -36,6 +36,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice
 
             builder.Services.Configure<Framework.Guama.Media.Presentation.Web.Common.Options.RelativeMediaFileManagementOptions>(builder.Configuration.GetSection("FileManagement"));
             builder.Services.Configure<JwtOptions>(builder.Configuration.GetSection("JWT"));
+            builder.Services.Configure<Configurations.CurrentTerminalReleaseDetailConfiguration>(builder.Configuration.GetSection("CurrentTerminalReleaseDetail"));
 
             builder.Services.AddDbContext<Persistence.ORM.EF.Context.ApplicationDbContext>(options => options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 

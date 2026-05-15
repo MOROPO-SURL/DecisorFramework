@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Maui.ApplicationModel;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
@@ -13,6 +14,57 @@ public partial class UserAuthenticationPage : Framework.Caney.MVVM.Core.Pages.Bi
     })
     {
 		InitializeComponent();
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        BindingContextPageModel.IsBusy = true;
+        BindingContextPageModel.BusyProgressMessage = "Comprobando versión ...";
+
+        var apiConnectClient = new Interop.API.Connect.Clients.CurrentTerminalReleaseAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        apiConnectClient.GetDetailAsync().ContinueWith(async task =>
+        {
+            await System.Threading.Tasks.Task.Delay(1000);
+
+            Dispatcher.Dispatch(() =>
+            {
+                if (task.IsFaulted || task.IsCanceled)
+                {
+                    DisplayAlert("Aviso", "No fue posible comprobar la compatibilidad esta versión de la aplicación.", "Salir", "Continuar").ContinueWith(_task =>
+                    {
+                        if (_task.Result)
+                        {
+                            Dispatcher.Dispatch(Microsoft.Maui.Controls.Application.Current.Quit);
+                        }
+                    });
+                }
+                else if (AppInfo.Current.Version < task.Result.Version)
+                {
+                    DisplayAlert("Aviso", "Existe una nueva versión de la aplicación compatible con el sistema, por lo que es necesario obtener la nueva versión.", "Salir", "Descargar").ContinueWith(_task =>
+                    {
+                        if (_task.Result)
+                        {
+                            Dispatcher.Dispatch(Microsoft.Maui.Controls.Application.Current.Quit);
+                        }
+                        else
+                        {
+                            Dispatcher.Dispatch(() =>
+                            {
+                                Launcher.OpenAsync(task.Result.Uri).ContinueWith(_ => Dispatcher.Dispatch(Microsoft.Maui.Controls.Application.Current.Quit));
+                            });
+                        }
+                    });
+                }
+                else
+                {
+                    BindingContextPageModel.IsBusy = false;
+                    BindingContextPageModel.BusyProgressMessage = null;
+                }
+            });
+        });
     }
 
     protected override bool OnBackButtonPressed()
