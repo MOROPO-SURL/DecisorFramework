@@ -57,12 +57,12 @@ public partial class UserAuthenticationPage : Framework.Caney.MVVM.Core.Pages.Bi
                             });
                         }
                     });
+
+                    return;
                 }
-                else
-                {
-                    BindingContextPageModel.IsBusy = false;
-                    BindingContextPageModel.BusyProgressMessage = null;
-                }
+
+                BindingContextPageModel.IsBusy = false;
+                BindingContextPageModel.BusyProgressMessage = null;
             });
         });
     }
