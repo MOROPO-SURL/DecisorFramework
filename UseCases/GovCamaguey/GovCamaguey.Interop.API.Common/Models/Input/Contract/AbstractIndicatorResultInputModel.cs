@@ -5,7 +5,12 @@
     {
         public long Id { get; set; }
 
+        public System.DateTime At { get; set; }
+
         public double Amount { get; set; }
+
+        [System.ComponentModel.DataAnnotations.MaxLength(2048)]
+        public string Description { get; set; }
 
         public abstract TModel Export();
 
@@ -16,7 +21,9 @@
 
         public virtual void Mergue(TModel entity)
         {
+            entity.At = At;
             entity.Amount = Amount;
+            entity.Description = Description;
         }
     }
 }

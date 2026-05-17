@@ -6,9 +6,15 @@
     xmlns:interop_common_display_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;assembly=MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common"
     xmlns:fwrk_core_presentation_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.GlobalIndicatorHandlingPage"
     x:DataType="local_page_models:GlobalIndicatorHandlingPageModel"
     Title="Actualización de Indicadores Globales">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Actualizar"
@@ -39,6 +45,7 @@
                         <Grid ColumnSpacing="12">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
@@ -74,13 +81,18 @@
                                 </Label>
                             </VerticalStackLayout>
                             <Button
+                                Style="{StaticResource FontIconImageButtonStyle}"
                                 Grid.Column="2"
                                 VerticalOptions="Center"
-                                Padding="0"
-                                FontSize="21"
-                                FontFamily="MaterialDesignIcons" 
                                 Text="&#xF90B;"
                                 Clicked="ResultUpgradeButton_Clicked" />
+                            <Button
+                                Style="{StaticResource FontIconImageButtonStyle}"
+                                IsEnabled="{Binding ResultAt, Converter={StaticResource IsNotNullConverter}}"
+                                Grid.Column="3"
+                                VerticalOptions="Center"
+                                Text="&#xF2FD;"
+                                Clicked="LastResultDetailButton_Clicked" />
                         </Grid>
                     </Frame>
                 </DataTemplate>

@@ -9,11 +9,14 @@
 
         public double Amount { get; set; }
 
+        public string Description { get; set; }
+
         public virtual void Import(TModel entity)
         {
             Id = entity.Id;
             At = entity.At;
             Amount = entity.Amount;
+            Description = entity.Description;
         }
     }
 }

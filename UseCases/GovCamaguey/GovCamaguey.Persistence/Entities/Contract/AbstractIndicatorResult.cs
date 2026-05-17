@@ -1,4 +1,6 @@
-﻿namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Contract
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities.Contract
 {
     [System.ComponentModel.DataAnnotations.Schema.NotMapped]
     public abstract class AbstractIndicatorResult : Framework.Guama.Core.Persistence.Entities.Contract.IEntity<long>
@@ -6,8 +8,11 @@
         [System.ComponentModel.DataAnnotations.Key]
         public long Id { get; set; }
 
-        public System.DateTime At { get; private set; } = System.DateTime.Now;
+        public System.DateTime At { get; set; }
 
         public double Amount { get; set; }
+
+        [MaxLength(2048)]
+        public string Description { get; set; }
     }
 }

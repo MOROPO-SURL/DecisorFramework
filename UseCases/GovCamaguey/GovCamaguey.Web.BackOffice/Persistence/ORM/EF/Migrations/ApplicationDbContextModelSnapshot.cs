@@ -1155,6 +1155,11 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)")
+                        .HasColumnName("description");
+
                     b.Property<Guid>("IndicatorId")
                         .HasColumnType("uuid")
                         .HasColumnName("indicatorid");
@@ -1344,6 +1349,11 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.Property<DateTime>("At")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)")
+                        .HasColumnName("description");
 
                     b.Property<Guid>("IndicatorId")
                         .HasColumnType("uuid")
@@ -1547,6 +1557,11 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.Property<DateTime>("At")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)")
+                        .HasColumnName("description");
 
                     b.Property<Guid>("IndicatorId")
                         .HasColumnType("uuid")
@@ -1827,6 +1842,11 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Persistence.ORM.EF
                     b.Property<DateTime>("At")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
+
+                    b.Property<string>("Description")
+                        .HasMaxLength(2048)
+                        .HasColumnType("character varying(2048)")
+                        .HasColumnName("description");
 
                     b.Property<Guid>("IndicatorId")
                         .HasColumnType("uuid")

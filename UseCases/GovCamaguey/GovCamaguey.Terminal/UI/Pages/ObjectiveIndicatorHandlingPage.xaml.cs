@@ -229,6 +229,8 @@ public partial class ObjectiveIndicatorHandlingPage : Microsoft.Maui.Controls.Co
                             var target = objectiveIndicatorsResults.FirstOrDefault(_model => _model.IndicatorId == item.Id);
 
                             item.Balance = target?.Amount ?? 0;
+                            item.ResultAt = target?.At;
+                            item.Context = target?.Description;
                         }
 
                         foreach (var item in proyectionIndicators)
@@ -236,6 +238,8 @@ public partial class ObjectiveIndicatorHandlingPage : Microsoft.Maui.Controls.Co
                             var target = proyectionIndicatorResults.FirstOrDefault(_model => _model.IndicatorId == item.Id);
 
                             item.Balance = target?.Amount ?? 0;
+                            item.ResultAt = target?.At;
+                            item.Context = target?.Description;
                         }
 
                         foreach (var item in actionIndicators)
@@ -243,6 +247,8 @@ public partial class ObjectiveIndicatorHandlingPage : Microsoft.Maui.Controls.Co
                             var target = actionIndicatorResults.FirstOrDefault(_model => _model.IndicatorId == item.Id);
 
                             item.Balance = target?.Amount ?? 0;
+                            item.ResultAt = target?.At;
+                            item.Context = target?.Description;
                         }
 
                         ConcreteBindingContext.Objective = new Models.View.ObjectiveIndicatorHandlingViewModel(model);

@@ -1,7 +1,9 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Factories;
 using System.Linq;
+using static SkiaSharp.HarfBuzz.SKShaper;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages;
 
@@ -67,6 +69,8 @@ public partial class GlobalIndicatorHandlingPage : Microsoft.Maui.Controls.Conte
                                     var target = _task.Result.FirstOrDefault(_model => _model.IndicatorId == item.Id);
 
                                     item.Balance = target?.Amount ?? 0;
+                                    item.ResultAt = target?.At;
+                                    item.Context = target?.Description;
 
                                     ConcreteBindingContext.Indicators.Add(item);
                                 }
@@ -139,41 +143,40 @@ public partial class GlobalIndicatorHandlingPage : Microsoft.Maui.Controls.Conte
 
         var senderBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.GlobalIndicatorDisplayModel;
 
-        Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayPromptAsync($"Actualizar indicador", $"Especifique el nuevo valor del indicador \"{senderBindingContext.Name}\" expresado en {senderBindingContext.UnitMeasurement.Name}.{System.Environment.NewLine}", "Aplicar", "Cancelar", null, keyboard: Microsoft.Maui.Keyboard.Numeric).ContinueWith(task =>
+        this.NavigationPushModalPageAsync(new Configuration.CommonIndicatorResultConfigurationPage(new Models.Page.Configuration.CommonIndicatorResultConfigurationPageModel(senderBindingContext.Id, senderBindingContext.Name, senderBindingContext.UnitMeasurement), ResultConfigured_Callback));
+    }
+
+    private void LastResultDetailButton_Clicked(object sender, System.EventArgs e)
+    {
+        var senderBindingContext = (sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.GlobalIndicatorDisplayModel;
+
+        if (senderBindingContext.ResultAt == null) return;
+
+        this.NavigationPushModalPageAsync(new Detail.CommonIndicatorResultDetailPage(new Models.Data.CommonIndicatorResultDataModel(senderBindingContext.Id, senderBindingContext.Balance, senderBindingContext.ResultAt.Value, senderBindingContext.Context)));
+    }
+
+    private void ResultConfigured_Callback(Models.Data.CommonIndicatorResultDataModel model)
+    {
+        ConcreteBindingContext.IsBusy = true;
+
+        var apiConnectClient = new Interop.API.Connect.Clients.GlobalIndicatorResultsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        apiConnectClient.CreateAsync(new Interop.API.Common.Models.Input.GlobalIndicatorResultInputModel { Amount = model.Amount, IndicatorId = model.IndicatorId, At = model.At, Description = model.Description }).ContinueWith(_task =>
         {
-            Microsoft.Maui.Controls.Shell.Current.CurrentPage.Dispatcher.Dispatch(() =>
+            Dispatcher.Dispatch(() =>
             {
-                if (task.Result == null) return;
+                ConcreteBindingContext.IsBusy = false;
 
-                if (!double.TryParse(task.Result, out double result))
+                if (_task.Exception != null || _task.IsCanceled)
                 {
-                    Microsoft.Maui.Controls.Shell.Current.CurrentPage.DisplayAlert("Aviso", "Dato no especificado en el formato adecuado.", "Aceptar");
-
-                    return;
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(_task.Exception, Microsoft.Maui.Controls.Shell.Current.CurrentPage);
                 }
-
-                ConcreteBindingContext.IsBusy = true;
-
-                var apiConnectClient = new Interop.API.Connect.Clients.GlobalIndicatorResultsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
-
-                apiConnectClient.CreateAsync(new Interop.API.Common.Models.Input.GlobalIndicatorResultInputModel { Amount = result, IndicatorId = senderBindingContext.Id }).ContinueWith(_task =>
+                else
                 {
-                    Dispatcher.Dispatch(() =>
-                    {
-                        ConcreteBindingContext.IsBusy = false;
+                    DisplayAlert("Aviso", "Cambios aplicados con éxito.", "Aceptar");
 
-                        if (_task.Exception != null || _task.IsCanceled)
-                        {
-                            Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(_task.Exception, Microsoft.Maui.Controls.Shell.Current.CurrentPage);
-                        }
-                        else
-                        {
-                            DisplayAlert("Aviso", "Cambios aplicados con éxito.", "Aceptar");
-
-                            ReloadToolbarItem_Clicked(sender, System.EventArgs.Empty);
-                        }
-                    });
-                });
+                    ReloadToolbarItem_Clicked(this, System.EventArgs.Empty);
+                }
             });
         });
     }

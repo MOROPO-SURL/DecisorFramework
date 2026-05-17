@@ -19,6 +19,8 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
         public double Amount { get; set; }
 
         public double Balance { get; set; }
+        public System.DateTime? ResultAt { get; set; }
+        public string Context { get; set; }
 
         public virtual void Import(TEntity entity)
         {
