@@ -19,12 +19,25 @@
             background-color: transparent;
         }
 
+            table th.numeric {
+                width: 180px;
+            }
+
+            table th.name {
+                width: 35%;
+            }
+
+            table th.context {
+                width: 25%;
+            }
+
             table td {
                 text-align: left;
             }
 
                 table td.numeric {
                     text-align: right;
+                    vertical-align: central;
                 }
 
         h5.h-seccion {
@@ -66,14 +79,15 @@ else
     <table>
         <thead>
             <tr>
-                <th rowspan="2">Indicador</th>
+                <th class="name" rowspan="2">Indicador</th>
                 <th rowspan="2">UM</th>
-                <th rowspan="2">Meta</th>
+                <th class="numeric" rowspan="2">Meta</th>
                 <th colspan="2">Estado</th>
+                <th class="context" rowspan="2">Contexto</th>
             </tr>
             <tr>
-                <th>Referencia</th>
-                <th>Actual</th>
+                <th class="numeric">Referencia</th>
+                <th class="numeric">Actual</th>
             </tr>
         </thead>
         <tbody>
@@ -85,6 +99,7 @@ else
                     <td class="numeric">@_item.Amount</td>
                     <td class="numeric">@_item.ReferenceResult</td>
                     <td class="numeric">@_item.LastResult</td>
+                    <td>@_item.Context</td>
                 </tr>
             }
         </tbody>
@@ -112,14 +127,15 @@ else
                     <table>
                         <thead>
                             <tr>
-                                <th rowspan="2">Indicador</th>
+                                <th class="name" rowspan="2">Indicador</th>
                                 <th rowspan="2">UM</th>
-                                <th rowspan="2">Meta</th>
+                                <th class="numeric" rowspan="2">Meta</th>
                                 <th colspan="2">Estado</th>
+                                <th class="context" rowspan="2">Contexto</th>
                             </tr>
                             <tr>
-                                <th>Referencia</th>
-                                <th>Actual</th>
+                                <th class="numeric">Referencia</th>
+                                <th class="numeric">Actual</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -131,6 +147,7 @@ else
                                     <td class="numeric">@__item.Amount</td>
                                     <td class="numeric">@__item.ReferenceResult</td>
                                     <td class="numeric">@__item.LastResult</td>
+                                    <td>@__item.Context</td>
                                 </tr>
                             }
                         </tbody>
@@ -158,14 +175,15 @@ else
                                     <table>
                                         <thead>
                                             <tr>
-                                                <th rowspan="2">Indicador</th>
+                                                <th class="name" rowspan="2">Indicador</th>
                                                 <th rowspan="2">UM</th>
-                                                <th rowspan="2">Meta</th>
+                                                <th class="numeric" rowspan="2">Meta</th>
                                                 <th colspan="2">Estado</th>
+                                                <th class="context" rowspan="2">Contexto</th>
                                             </tr>
                                             <tr>
-                                                <th>Referencia</th>
-                                                <th>Actual</th>
+                                                <th class="numeric">Referencia</th>
+                                                <th class="numeric">Actual</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -177,6 +195,7 @@ else
                                                     <td class="numeric">@___item.Amount</td>
                                                     <td class="numeric">@___item.ReferenceResult</td>
                                                     <td class="numeric">@___item.LastResult</td>
+                                                    <td>@___item.Context</td>
                                                 </tr>
                                             }
                                         </tbody>

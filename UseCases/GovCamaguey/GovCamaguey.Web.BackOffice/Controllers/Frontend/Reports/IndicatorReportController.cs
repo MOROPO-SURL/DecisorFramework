@@ -143,7 +143,8 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                 Amount = indicator.Amount,
                 UnitMeasurement = indicator.UnitMeasurement,
                 ReferenceResult = referenceResult?.Amount ?? 0,
-                LastResult = lastResult?.Amount ?? 0
+                LastResult = lastResult?.Amount ?? referenceResult?.Amount ?? 0,
+                Context = lastResult?.Description
             });
         }
 
@@ -193,7 +194,8 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                 Amount = indicator.Amount,
                 UnitMeasurement = indicator.UnitMeasurement,
                 ReferenceResult = referenceResult?.Amount ?? 0,
-                LastResult = lastResult?.Amount ?? 0
+                LastResult = lastResult?.Amount ?? referenceResult?.Amount ?? 0,
+                Context = lastResult?.Description
             });
         }
 
@@ -235,7 +237,8 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                     Amount = indicator.Amount,
                     UnitMeasurement = indicator.UnitMeasurement,
                     ReferenceResult = referenceResult?.Amount ?? 0,
-                    LastResult = lastResult?.Amount ?? 0
+                    LastResult = lastResult?.Amount ?? referenceResult?.Amount ?? 0,
+                    Context = lastResult?.Description
                 });
             }
 
@@ -279,7 +282,8 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                         Amount = _indicator.Amount,
                         UnitMeasurement = _indicator.UnitMeasurement,
                         ReferenceResult = referenceResult?.Amount ?? 0,
-                        LastResult = lastResult?.Amount ?? 0
+                        LastResult = lastResult?.Amount ?? referenceResult?.Amount ?? 0,
+                        Context = lastResult?.Description
                     });
                 }
 

@@ -13,4 +13,6 @@ public class CommonIndicatorStatsViewModel
     public double ReferenceResult { get; set; }
 
     public double LastResult { get; set; }
+
+    public string Context { get; set; }
 }

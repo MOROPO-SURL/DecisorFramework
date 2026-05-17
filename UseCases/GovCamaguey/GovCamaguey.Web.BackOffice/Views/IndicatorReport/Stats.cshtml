@@ -19,13 +19,26 @@
             background-color: transparent;
         }
 
+            table th.numeric {
+                width: 180px;
+            }
+
+            table th.name {
+                width: 35%;
+            }
+
+            table th.context {
+                width: 25%;
+            }
+
             table td {
                 text-align: left;
             }
 
-            table td.numeric {
-                text-align: right;
-            }
+                table td.numeric {
+                    text-align: right;
+                    vertical-align: central;
+                }
 
         h5.h-seccion {
             font-style: italic; 
@@ -55,6 +68,48 @@
     <p><b>Fecha de referencia:</b> @Model.ReferenceAt.Date.ToShortDateString()</p>
 </div>
 
+<h1>Globales:</h1>
+
+<div style="margin-bottom: 30px;">
+    @if (Model.Indicators.Length <= 0)
+    {
+        <div class="text-muted">@emptyMessage</div>
+    }
+    else
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th class="name" rowspan="2">Indicador</th>
+                    <th rowspan="2">UM</th>
+                    <th class="numeric" rowspan="2">Meta</th>
+                    <th colspan="2">Estado</th>
+                    <th class="context" rowspan="2">Contexto</th>
+                </tr>
+                <tr>
+                    <th class="numeric">Referencia</th>
+                    <th class="numeric">Actual</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model.Indicators)
+                {
+                    <tr>
+                        <td>@item.Name</td>
+                        <td style="text-align: center;">@item.UnitMeasurement.Symbol</td>
+                        <td class="numeric">@item.Amount</td>
+                        <td class="numeric">@item.ReferenceResult</td>
+                        <td class="numeric">@item.LastResult</td>
+                        <td>@item.Context</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</div>
+
+<h1>Por objetivo:</h1>
+
 <ul>
     @foreach (var item in Model.Objectives)
     {
@@ -70,14 +125,15 @@
                 <table>
                     <thead>
                         <tr>
-                            <th rowspan="2">Indicador</th>
+                            <th class="name" rowspan="2">Indicador</th>
                             <th rowspan="2">UM</th>
-                            <th rowspan="2">Meta</th>
+                            <th class="numeric" rowspan="2">Meta</th>
                             <th colspan="2">Estado</th>
+                            <th class="context" rowspan="2">Contexto</th>
                         </tr>
                         <tr>
-                            <th>Referencia</th>
-                            <th>Actual</th>
+                            <th class="numeric">Referencia</th>
+                            <th class="numeric">Actual</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -89,6 +145,7 @@
                                 <td class="numeric">@_item.Amount</td>
                                 <td class="numeric">@_item.ReferenceResult</td>
                                 <td class="numeric">@_item.LastResult</td>
+                                <td>@_item.Context</td>
                             </tr>
                         }
                     </tbody>
@@ -116,14 +173,15 @@
                                 <table>
                                     <thead>
                                         <tr>
-                                            <th rowspan="2">Indicador</th>
+                                            <th class="name" rowspan="2">Indicador</th>
                                             <th rowspan="2">UM</th>
-                                            <th rowspan="2">Meta</th>
+                                            <th class="numeric" rowspan="2">Meta</th>
                                             <th colspan="2">Estado</th>
+                                            <th class="context" rowspan="2">Contexto</th>
                                         </tr>
                                         <tr>
-                                            <th>Referencia</th>
-                                            <th>Actual</th>
+                                            <th class="numeric">Referencia</th>
+                                            <th class="numeric">Actual</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -135,6 +193,7 @@
                                                 <td class="numeric">@__item.Amount</td>
                                                 <td class="numeric">@__item.ReferenceResult</td>
                                                 <td class="numeric">@__item.LastResult</td>
+                                                <td>@__item.Context</td>
                                             </tr>
                                         }
                                     </tbody>
@@ -162,14 +221,15 @@
                                                 <table>
                                                     <thead>
                                                         <tr>
-                                                            <th rowspan="2">Indicador</th>
+                                                            <th class="name" rowspan="2">Indicador</th>
                                                             <th rowspan="2">UM</th>
-                                                            <th rowspan="2">Meta</th>
+                                                            <th class="numeric" rowspan="2">Meta</th>
                                                             <th colspan="2">Estado</th>
+                                                            <th class="context" rowspan="2">Contexto</th>
                                                         </tr>
                                                         <tr>
-                                                            <th>Referencia</th>
-                                                            <th>Actual</th>
+                                                            <th class="numeric">Referencia</th>
+                                                            <th class="numeric">Actual</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -181,6 +241,7 @@
                                                                 <td class="numeric">@___item.Amount</td>
                                                                 <td class="numeric">@___item.ReferenceResult</td>
                                                                 <td class="numeric">@___item.LastResult</td>
+                                                                <td>@___item.Context</td>
                                                             </tr>
                                                         }
                                                     </tbody>
