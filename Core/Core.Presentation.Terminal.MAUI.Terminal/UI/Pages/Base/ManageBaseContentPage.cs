@@ -91,18 +91,15 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
             if (discriminator == null)
             {
-                if (EditorPermissionCode != null)
+                var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+                if (!IsAllowedForEdition(target, user))
                 {
-                    var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+                    DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
 
-                    if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == EditorPermissionCode)))
-                    {
-                        DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+                    ConcreteBindingContext.IsBusy = false;
 
-                        ConcreteBindingContext.IsBusy = false;
-
-                        return;
-                    }
+                    return;
                 }
 
                 System.Threading.Tasks.Task.Run(async () =>
@@ -132,6 +129,16 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 });
             }
             else OnActionDelegationRequest(target, discriminator.Value);
+        }
+
+        protected virtual bool IsAllowedForEdition(TModel target, Interop.API.Common.Models.Display.UserDisplayModel user)
+        {
+            if (EditorPermissionCode != null)
+            {
+                return user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == EditorPermissionCode));
+            }
+
+            return true;
         }
 
         protected virtual void OnActionDelegationRequest(TModel target, int discriminator) { }

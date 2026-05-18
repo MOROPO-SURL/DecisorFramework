@@ -63,6 +63,8 @@
                         <div class="row">
                             @foreach (var item in Model.UngroupedSelectablePermissions)
                             {
+                                if (item.Label == "licensing-manager") continue;
+
                                 <div class="col-md-6">
                                     @Html.EditorFor(model => item, "SelectionDescriptedIntIDItemInputViewModel", string.Format("UngroupedSelectablePermissions[{0}]", index++))
                                 </div>
@@ -72,7 +74,7 @@
                         foreach (var group in Model.GroupedSelectablePermissions)
                         {
                             <fieldset>
-                                <legend class="border-bottom">@group.Key</legend>
+                                <legend class="border-bottom">@GlobalViewLocalizationHelper.Localize(group.Key)</legend>
                                 <div class="row">
                                     @foreach (var item in group.Value)
                                     {

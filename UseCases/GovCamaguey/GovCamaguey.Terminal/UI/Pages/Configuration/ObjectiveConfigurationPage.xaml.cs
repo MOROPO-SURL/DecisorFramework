@@ -1,5 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using System.Collections.Generic;
@@ -23,6 +24,10 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
     }
 
     protected override string EntityTypeName => "Objetivo";
+
+    protected override string CreatorPermissionCode => Interop.API.Common.Constants.Security.Authorization.ObjectiveCreatorPermission;
+
+    protected override string EditorPermissionCode => Interop.API.Common.Constants.Security.Authorization.ObjectiveEditorPermission;
 
     protected override async System.Threading.Tasks.Task<ObjectiveDisplayModel> PerformCreationAsync()
     {
@@ -80,12 +85,34 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
 
     private void ResponsiblePickButton_Clicked(object sender, System.EventArgs e)
     {
+        if (ConcreteBindingContext.OnEditionMode)
+        {
+            var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+            if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == EditorPermissionCode)))
+            {
+                DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                return;
+            }
+        }
+
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.PersonPickPage(ResponsiblePickComplete_Callback)));
     }
 
     private void IndicatorAgregationButton_Clicked(object sender, System.EventArgs e)
     {
         var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (ConcreteBindingContext.OnEditionMode)
+        {
+            if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == EditorPermissionCode)))
+            {
+                DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                return;
+            }
+        }
 
         if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ObjectiveIndicatorCreatorPermission)))
         {
@@ -127,6 +154,16 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
     private void IndicatorEditionButton_Clicked(object sender, System.EventArgs e)
     {
         var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (ConcreteBindingContext.OnEditionMode)
+        {
+            if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == EditorPermissionCode)))
+            {
+                DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                return;
+            }
+        }
 
         if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ObjectiveIndicatorEditorPermission)))
         {
@@ -182,6 +219,16 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
     private void IndicatorRemotionButton_Clicked(object sender, System.EventArgs e)
     {
         var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (ConcreteBindingContext.OnEditionMode)
+        {
+            if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == EditorPermissionCode)))
+            {
+                DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                return;
+            }
+        }
 
         if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ObjectiveIndicatorRemoverPermission)))
         {
@@ -239,6 +286,16 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
     {
         var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
 
+        if (ConcreteBindingContext.OnEditionMode)
+        {
+            if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == EditorPermissionCode)))
+            {
+                DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                return;
+            }
+        }
+
         if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ProyectionCreatorPermission)))
         {
             DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
@@ -253,20 +310,23 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
     {
         var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
 
-        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ProyectionEditorPermission)))
-        {
-            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
-
-            return;
-        }
-
         var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as ProyectionDisplayModel;
 
-        if (!target.IsModerable)
+        if (!IsPermissionByPassForChildModeration(target, user))
         {
-            DisplayAlert("Aviso", "Su usuario no ha sido asiganado como moderador de este objetivo específico, por lo que no podrá realizar operaciones sobre el mismo. Contacte con los administradores del sistema ante cualquier inquietud al respecto.", "Aceptar");
+            if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ProyectionEditorPermission)))
+            {
+                DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados de este tipo. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
 
-            return;
+                return;
+            }
+
+            if (!target.IsModerable)
+            {
+                DisplayAlert("Aviso", "Su usuario no ha sido asiganado como moderador de este objetivo específico, por lo que no podrá realizar operaciones sobre el mismo. Contacte con los administradores del sistema ante cualquier inquietud al respecto.", "Aceptar");
+
+                return;
+            }
         }
 
         var model = incomingProyections.FirstOrDefault(_model => _model.Id == target.Id) ?? editionProyections.FirstOrDefault(_model => _model.Id == target.Id);
@@ -285,9 +345,26 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
         this.NavigationPushPageAsync(new ProyectionConfigurationPage(ProyectionEditSuccess_Callback, new Models.Page.Configuration.ProyectionConfigurationPageModel(model, target.Indicators, target.Actions), model.EditionIndicators, model.IncomingIndicators, model.OutgoingIndicators, model.EditionActions, model.IncomingActions, model.OutgoingActions));
     }
 
+    private bool IsPermissionByPassForChildModeration(ProyectionDisplayModel target, Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel user)
+    {
+        if (ConcreteBindingContext.OnEditionMode && target.Actions.Any(_item => _item.IsModerable) && (user.HasFullAccess || user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ActionEditorPermission)))) return true;
+
+        return false;
+    }
+
     private void ProyectionRemotionButton_Clicked(object sender, System.EventArgs e)
     {
         var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (ConcreteBindingContext.OnEditionMode)
+        {
+            if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == EditorPermissionCode)))
+            {
+                DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                return;
+            }
+        }
 
         if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ProyectionRemoverPermission)))
         {
@@ -350,7 +427,11 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
 
     private void ProyectionCreateSuccess_Callback(ProyectionInputModel model)
     {
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
         incomingProyections.Add(model);
+
+        hasChangesFlag = true;
 
         ConcreteBindingContext.Proyections.Add(new ProyectionDisplayModel
         {
@@ -363,34 +444,48 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
             ResponsabilityOrganizations = model.ResponsabilityOrganizations,
             ParticipationOrganizations = model.ParticipationOrganizations
         });
-
-        hasChangesFlag = true;
     }
 
     private void ProyectionEditSuccess_Callback(ProyectionInputModel model)
     {
-        var handled = false;
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
 
-        foreach (var item in incomingProyections)
+        if (ConcreteBindingContext.OnEditionMode && !user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ProyectionEditorPermission)))
         {
-            if (item.Id != model.Id) continue;
+            ConcreteBindingContext.IsBusy = true;
 
-            item.Index = model.Index;
-            item.Name = model.Name;
-            item.Description = model.Description;
-            item.Guidelines = model.Guidelines;
-            item.ResponsabilityOrganizations = model.ResponsabilityOrganizations;
-            item.ParticipationOrganizations = model.ParticipationOrganizations;
-            item.IncomingActions = model.IncomingActions;
+            var apiConnectClient = new Interop.API.Connect.Clients.ProyectionsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-            handled = true;
+            apiConnectClient.EditAsync(model).ContinueWith(task =>
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
 
-            break;
+                    if (task.IsFaulted || task.IsCanceled)
+                    {
+                        HandleException(task.Exception);
+                    }
+                    else
+                    {
+                        this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambio aplicado con éxito.");
+
+                        Navigation.PopToRootAsync().ContinueWith(_ =>
+                        {
+                            Microsoft.Maui.Controls.Application.Current.Dispatcher.Dispatch(() =>
+                            {
+                                ((Microsoft.Maui.Controls.Application.Current.MainPage as Microsoft.Maui.Controls.Shell).CurrentPage as Microsoft.Maui.Controls.ContentPage).PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambio aplicado con éxito.");
+                            });
+                        });
+                    }
+                });
+            });
         }
-
-        if (!handled)
+        else
         {
-            foreach (var item in editionProyections)
+            var handled = false;
+
+            foreach (var item in incomingProyections)
             {
                 if (item.Id != model.Id) continue;
 
@@ -401,18 +496,40 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
                 item.ResponsabilityOrganizations = model.ResponsabilityOrganizations;
                 item.ParticipationOrganizations = model.ParticipationOrganizations;
                 item.IncomingActions = model.IncomingActions;
-                item.EditionActions = model.EditionActions;
-                item.OutgoingActions = model.OutgoingActions;
 
                 handled = true;
 
                 break;
             }
-        }
 
-        if (!handled)
-        {
-            editionProyections.Add(model);
+            if (!handled)
+            {
+                foreach (var item in editionProyections)
+                {
+                    if (item.Id != model.Id) continue;
+
+                    item.Index = model.Index;
+                    item.Name = model.Name;
+                    item.Description = model.Description;
+                    item.Guidelines = model.Guidelines;
+                    item.ResponsabilityOrganizations = model.ResponsabilityOrganizations;
+                    item.ParticipationOrganizations = model.ParticipationOrganizations;
+                    item.IncomingActions = model.IncomingActions;
+                    item.EditionActions = model.EditionActions;
+                    item.OutgoingActions = model.OutgoingActions;
+
+                    handled = true;
+
+                    break;
+                }
+            }
+
+            if (!handled)
+            {
+                editionProyections.Add(model);
+            }
+
+            hasChangesFlag = true;
         }
 
         var index = -1;
@@ -437,8 +554,6 @@ public partial class ObjectiveConfigurationPage : Framework.Decisor.Core.Present
 
             break;
         }
-
-        hasChangesFlag = true;
     }
 
     private void ResponsiblePickComplete_Callback(PersonDisplayModel model)

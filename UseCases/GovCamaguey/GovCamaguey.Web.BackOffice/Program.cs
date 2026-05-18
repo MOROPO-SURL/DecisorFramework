@@ -127,7 +127,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice
 
             var defaultCulture = new System.Globalization.CultureInfo("es");
 
-            builder.Services.AddLocalization(options => options.ResourcesPath = "LocalizationResources");
+            builder.Services.AddLocalization(options => options.ResourcesPath = "Resources");
 
             builder.Services.Configure<RequestLocalizationOptions>(options =>
             {

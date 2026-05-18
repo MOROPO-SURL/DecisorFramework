@@ -8,7 +8,7 @@
     <div class="checkbox">
         <label class="h4">
             @Html.CheckBoxFor(model => model.Selected)
-            @Model.Label
+            @GlobalViewLocalizationHelper.Localize(Model.Label)
         </label>
         @if (string.IsNullOrEmpty(Model.Description))
         {
@@ -16,7 +16,7 @@
         }
         else
         {
-            <p class="text-muted">@Model.Description</p>
+            <p class="text-muted">@GlobalViewLocalizationHelper.Localize(Model.Description)</p>
         }
     </div>
 </div>

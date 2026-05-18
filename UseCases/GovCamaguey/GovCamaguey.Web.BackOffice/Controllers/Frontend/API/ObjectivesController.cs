@@ -87,6 +87,11 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
 
             item.IsModerable = IsProyectionModerable(entity.Id, proyection.Id);
 
+            if (item.IsModerable)
+            {
+                model.IsModerable = true;
+            }
+
             foreach (var bridge in proyection.OrganizationResponsabilityBridges)
             {
                 if (bridge.Stern.Identity.Image == null) continue;
@@ -110,6 +115,12 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
                 var _item = item.Actions.First(_model => _model.Id == action.Id);
 
                 _item.IsModerable = IsActionModerable(entity.Id, proyection.Id, action.Id);
+
+                if (_item.IsModerable)
+                {
+                    item.IsModerable = true;
+                    model.IsModerable = true;
+                }
 
                 foreach (var bridge in action.OrganizationResponsabilityBridges)
                 {

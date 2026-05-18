@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 {
@@ -40,6 +41,10 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected virtual string EntityTypeName { get; } = "Elemento";
 
+        protected virtual string CreatorPermissionCode => null;
+
+        protected virtual string EditorPermissionCode => null;
+
         public TConfigurationPageModel ConcreteBindingContext => (TConfigurationPageModel)BindingContext;
 
         protected virtual System.Threading.Tasks.Task<TOutModel> PerformCreationAsync() => throw new System.NotImplementedException();
@@ -58,6 +63,37 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
                 this.NavigationPopPageAsync();
 
                 return;
+            }
+
+            if (!ConcreteBindingContext.OnEditionMode)
+            {
+                if (CreatorPermissionCode != null)
+                {
+                    var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+                    if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == CreatorPermissionCode)))
+                    {
+                        DisplayAlert("Aviso", "Su usuario no cuenta con permisos para agregar nuevos elementos. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                        return;
+                    }
+                }
+            }
+            else
+            {
+                if (EditorPermissionCode != null)
+                {
+                    var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+                    if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == EditorPermissionCode)))
+                    {
+                        DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+                        ConcreteBindingContext.IsBusy = false;
+
+                        return;
+                    }
+                }
             }
 
             if (validator != null)

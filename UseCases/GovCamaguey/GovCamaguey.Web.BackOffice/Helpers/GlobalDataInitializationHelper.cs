@@ -67,6 +67,44 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Helpers
             }
             #endregion
 
+            #region Proyection
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProyectionViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.ProyectionViewerPermission.ToPermissionEntity(Authorization.ProyectionManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProyectionCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ProyectionCreatorPermission.ToPermissionEntity(Authorization.ProyectionManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProyectionEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ProyectionEditorPermission.ToPermissionEntity(Authorization.ProyectionManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProyectionRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.ProyectionRemoverPermission.ToPermissionEntity(Authorization.ProyectionManagementPermissionGroup));
+            }
+            #endregion
+
+            #region Proyection
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ActionViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.ActionViewerPermission.ToPermissionEntity(Authorization.ActionManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ActionCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ActionCreatorPermission.ToPermissionEntity(Authorization.ActionManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ActionEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ActionEditorPermission.ToPermissionEntity(Authorization.ActionManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ActionRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.ActionRemoverPermission.ToPermissionEntity(Authorization.ActionManagementPermissionGroup));
+            }
+            #endregion
+
             #region Guideline
             if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.GuidelineViewerPermission)))
             {
@@ -121,6 +159,63 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Helpers
             if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.GlobalIndicatorRemoverPermission)))
             {
                 permissionDbSet.Add(Authorization.GlobalIndicatorRemoverPermission.ToPermissionEntity(Authorization.GlobalIndicatorManagementPermissionGroup));
+            }
+            #endregion
+
+            #region ObjectiveIndicator
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ObjectiveIndicatorViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.ObjectiveIndicatorViewerPermission.ToPermissionEntity(Authorization.ObjectiveIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ObjectiveIndicatorCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ObjectiveIndicatorCreatorPermission.ToPermissionEntity(Authorization.ObjectiveIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ObjectiveIndicatorEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ObjectiveIndicatorEditorPermission.ToPermissionEntity(Authorization.ObjectiveIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ObjectiveIndicatorRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.ObjectiveIndicatorRemoverPermission.ToPermissionEntity(Authorization.ObjectiveIndicatorManagementPermissionGroup));
+            }
+            #endregion
+
+            #region ProyectionIndicator
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProyectionIndicatorViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.ProyectionIndicatorViewerPermission.ToPermissionEntity(Authorization.ProyectionIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProyectionIndicatorCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ProyectionIndicatorCreatorPermission.ToPermissionEntity(Authorization.ProyectionIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProyectionIndicatorEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ProyectionIndicatorEditorPermission.ToPermissionEntity(Authorization.ProyectionIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ProyectionIndicatorRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.ProyectionIndicatorRemoverPermission.ToPermissionEntity(Authorization.ProyectionIndicatorManagementPermissionGroup));
+            }
+            #endregion
+
+            #region ActionIndicator
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ActionIndicatorViewerPermission)))
+            {
+                permissionDbSet.Add(Authorization.ActionIndicatorViewerPermission.ToPermissionEntity(Authorization.ActionIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ActionIndicatorCreatorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ActionIndicatorCreatorPermission.ToPermissionEntity(Authorization.ActionIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ActionIndicatorEditorPermission)))
+            {
+                permissionDbSet.Add(Authorization.ActionIndicatorEditorPermission.ToPermissionEntity(Authorization.ActionIndicatorManagementPermissionGroup));
+            }
+            if (!permissionDbSet.Any(role => role.Code.Equals(Authorization.ActionIndicatorRemoverPermission)))
+            {
+                permissionDbSet.Add(Authorization.ActionIndicatorRemoverPermission.ToPermissionEntity(Authorization.ActionIndicatorManagementPermissionGroup));
             }
             #endregion
 

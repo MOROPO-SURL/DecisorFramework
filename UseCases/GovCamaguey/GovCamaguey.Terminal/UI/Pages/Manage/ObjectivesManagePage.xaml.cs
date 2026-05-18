@@ -1,4 +1,8 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;
+using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
+using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration;
+using System.Linq;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Manage;
 
@@ -9,6 +13,19 @@ public partial class ObjectivesManagePage : Framework.Decisor.Core.Presentation.
     public ObjectivesManagePage()
     {
         InitializeComponent();
+
+        IsEnabled = false;
+    }
+
+    protected override void OnAppearing()
+    {
+        base.OnAppearing();
+
+        if (IsEnabled) return;
+
+        IsEnabled = true;
+
+        LoadItems(true);
     }
 
     protected override string ViewerPermissionCode => Interop.API.Common.Constants.Security.Authorization.ObjectiveViewerPermission;
@@ -53,6 +70,15 @@ public partial class ObjectivesManagePage : Framework.Decisor.Core.Presentation.
         }
     }
 
+    protected override bool IsAllowedForEdition(Interop.API.Common.Models.Display.ObjectiveDisplayModel target, Framework.Decisor.Core.Interop.API.Common.Models.Display.UserDisplayModel user)
+    {
+        if (target.Proyections.Any(item => item.IsModerable) && (user.HasFullAccess || user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ProyectionEditorPermission)))) return true;
+
+        if (target.Proyections.Any(item => item.Actions.Any(_item => _item.IsModerable)) && (user.HasFullAccess || user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.ActionEditorPermission)))) return true;
+
+        return base.IsAllowedForEdition(target, user);
+    }
+
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs eventArgs)
     {
         AddItem(sender, eventArgs);
@@ -68,11 +94,6 @@ public partial class ObjectivesManagePage : Framework.Decisor.Core.Presentation.
         OnLoadMore(sender, eventArgs);
     }
 
-    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
-    {
-        OnItemsCollectionViewLayoutResize(sender, eventArgs);
-    }
-
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         if (!((sender as Microsoft.Maui.Controls.BindableObject).BindingContext as Interop.API.Common.Models.Display.ObjectiveDisplayModel).IsModerable)
@@ -83,5 +104,12 @@ public partial class ObjectivesManagePage : Framework.Decisor.Core.Presentation.
         }
 
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
+    }
+
+    protected override void ComplementConfigurationPage(ConfigurationBaseContentPage<ObjectiveDisplayModel, ObjectiveDisplayModel, ObjectiveConfigurationPageModel> page, ObjectiveDisplayModel model = null)
+    {
+        Dispatcher.Dispatch(() => IsEnabled = false);
+
+        base.ComplementConfigurationPage(page, model);
     }
 }

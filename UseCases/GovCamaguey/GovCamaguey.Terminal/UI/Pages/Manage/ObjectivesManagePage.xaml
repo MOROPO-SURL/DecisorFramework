@@ -39,9 +39,7 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Orientation="Vertical">
-                <Grid 
-                    VerticalOptions="FillAndExpand"
-                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
+                <Grid VerticalOptions="FillAndExpand">
                     <CollectionView
                         x:Name="ItemsCollectionView"
                         Margin="20"
