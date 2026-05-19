@@ -62,8 +62,22 @@
                 Glyph="&#xF535;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
-        <ShellContent Title="Globales" ContentTemplate="{DataTemplate local_pages:GlobalIndicatorHandlingPage}" />
-        <ShellContent Title="Objetivos" ContentTemplate="{DataTemplate local_pages:ObjectiveIndicatorHandlingPage}" />
+        <ShellContent Title="Globales" ContentTemplate="{DataTemplate local_pages:GlobalIndicatorHandlingPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="MaterialDesignIcons"
+                    Glyph="&#xF4C5;"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" />
+            </ShellContent.Icon>
+        </ShellContent>
+        <ShellContent Title="Objetivos" ContentTemplate="{DataTemplate local_pages:ObjectiveIndicatorHandlingPage}">
+            <ShellContent.Icon>
+                <FontImageSource
+                    FontFamily="MaterialDesignIcons"
+                    Glyph="&#xF790;"
+                    Color="{AppThemeBinding Light=Black, Dark=White}" />
+            </ShellContent.Icon>
+        </ShellContent>
     </FlyoutItem>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
