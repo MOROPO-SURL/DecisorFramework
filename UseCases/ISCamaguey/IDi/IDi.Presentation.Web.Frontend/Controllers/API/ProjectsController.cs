@@ -102,6 +102,11 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
 
             specificObjectiveRepository.Add(_entity, User.Identity.Name, false);
         }
+
+        foreach (var _model in model.IncomingInternalResearcherRelationships)
+        {
+            entity.ResearcherBridges.Add(new ProjectResearcherBridge { ProwId = entity.Id, SternId = _model.InternalResearcherId, TimeAvailability = _model.TimeAvailability });
+        }
     }
 
     protected override void PreEdit(Project entity, ProjectInputModel model)

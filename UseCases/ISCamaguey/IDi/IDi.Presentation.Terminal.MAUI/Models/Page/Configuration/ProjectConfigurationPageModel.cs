@@ -1,4 +1,4 @@
-﻿using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
+﻿using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display.Relationship;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Configuration;
 
@@ -63,7 +63,8 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
         ProgramExpectResults = [.. model.ProgramExpectResults];
         SpecificObjectives = [.. model.SpecificObjectives];
         ParticipatingOrganizations = [.. model.ParticipatingOrganizations];
-        InternalResearchers = [.. model.Inter];
+        InternalResearcherRelationships = [.. model.InternalResearcherRelationships];
+        ExternalResearcherRelationships = [.. model.ExternalResearcherRelationships];
     }
 
     public System.Guid Id { get; set; }
@@ -108,9 +109,9 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
 
     public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = [];
 
-    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.InternalResearcherDisplayModel> InternalResearchers { get; set; } = [];
+    public System.Collections.ObjectModel.ObservableCollection<ProjectInternalResearcherRelationshipDisplayModel> InternalResearcherRelationships { get; set; } = [];
 
-    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ExternalResearcherDisplayModel> ExternalResearchers { get; set; } = [];
+    public System.Collections.ObjectModel.ObservableCollection<ProjectExternalResearcherRelationshipDisplayModel> ExternalResearcherRelationships { get; set; } = [];
 
     public Interop.API.Common.Models.Display.ProjectCategoryDisplayModel[] AvailableCategories { get; set; } = [];
 }

@@ -2,6 +2,7 @@
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract
 {
+    [System.ComponentModel.DataAnnotations.Schema.NotMapped]
     public abstract class AbstractResearcher : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]

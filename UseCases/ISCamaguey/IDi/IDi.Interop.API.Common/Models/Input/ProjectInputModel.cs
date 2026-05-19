@@ -1,5 +1,6 @@
 ﻿using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;
-using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Shared.Bridge;
+using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display.Relationship;
+using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input.Relationship;
 using System.Collections.Generic;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
@@ -47,9 +48,13 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 
         public List<ProgramExpectResultDisplayModel> ProgramExpectResults { get; set; } = new List<ProgramExpectResultDisplayModel>();
 
-        public List<ProjectInternalResearcherBridgeSharedModel> InternalResearcherBridges { get; set; } = new List<ProjectInternalResearcherBridgeSharedModel>();
+        public List<ProjectInternalResearcherRelationshipInputModel> EditionInternalResearcherRelationships { get; set; } = new List<ProjectInternalResearcherRelationshipInputModel>();
+        public List<ProjectInternalResearcherRelationshipInputModel> IncomingInternalResearcherRelationships { get; set; } = new List<ProjectInternalResearcherRelationshipInputModel>();
+        public List<ProjectInternalResearcherRelationshipDisplayModel> OutgoingInternalResearcherRelationships { get; set; } = new List<ProjectInternalResearcherRelationshipDisplayModel>();
 
-        public List<ProjectExternalResearcherBridgeSharedModel> ExternalResearcherBridges { get; set; } = new List<ProjectExternalResearcherBridgeSharedModel>();
+        public List<ProjectExternalResearcherRelationshipInputModel> EditionExternalResearcherRelationships { get; set; } = new List<ProjectExternalResearcherRelationshipInputModel>();
+        public List<ProjectExternalResearcherRelationshipInputModel> IncomingExternalResearcherRelationships { get; set; } = new List<ProjectExternalResearcherRelationshipInputModel>();
+        public List<ProjectExternalResearcherRelationshipDisplayModel> OutgoingExternalResearcherRelationships { get; set; } = new List<ProjectExternalResearcherRelationshipDisplayModel>();
 
         public System.Guid CategoryId { get; set; }
 
@@ -138,7 +143,5 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
         //public System.Collections.Generic.ICollection<ProjectBudgetFunancing> BudgetFunancings { get; set; }
 
         //public System.Collections.Generic.List<ProjectBudgetCurrencyBridge> BudgetCurrencyBridges { get; set; } = new System.Collections.Generic.List<ProjectBudgetCurrencyBridge>();
-
-        //public System.Collections.Generic.List<ProjectResearcherBridge> ResearcherBridges { get; set; } = new System.Collections.Generic.List<ProjectResearcherBridge>();
     }
 }

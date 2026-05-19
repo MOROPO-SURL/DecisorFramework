@@ -1,5 +1,4 @@
-﻿using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Shared.Bridge;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 {
@@ -53,9 +52,9 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         //public System.Collections.Generic.List<ProjectBudgetCurrencyBridge> BudgetCurrencyBridges { get; set; } = new System.Collections.Generic.List<ProjectBudgetCurrencyBridge>();
 
-        public List<ProjectInternalResearcherBridgeSharedModel> InternalResearcherBridges { get; set; } = new List<ProjectInternalResearcherBridgeSharedModel>();
+        public List<Relationship.ProjectInternalResearcherRelationshipDisplayModel> InternalResearcherRelationships { get; set; } = new List<Relationship.ProjectInternalResearcherRelationshipDisplayModel>();
 
-        public List<ProjectExternalResearcherBridgeSharedModel> ExternalResearcherBridges { get; set; } = new List<ProjectExternalResearcherBridgeSharedModel>();
+        public List<Relationship.ProjectExternalResearcherRelationshipDisplayModel> ExternalResearcherRelationships { get; set; } = new List<Relationship.ProjectExternalResearcherRelationshipDisplayModel>();
 
         public void Import(Persistence.Entities.Project entity)
         {
