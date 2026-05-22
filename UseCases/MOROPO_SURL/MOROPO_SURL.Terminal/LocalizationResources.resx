@@ -135,6 +135,9 @@
   <data name="Divorced" xml:space="preserve">
     <value>Divorciado(a)</value>
   </data>
+  <data name="Doctorate" xml:space="preserve">
+    <value>Doctorado</value>
+  </data>
   <data name="Famale" xml:space="preserve">
     <value>Femenino</value>
   </data>
@@ -152,6 +155,9 @@
   </data>
   <data name="None" xml:space="preserve">
     <value>Ninguno</value>
+  </data>
+  <data name="Postgraduate" xml:space="preserve">
+    <value>Postgrado</value>
   </data>
   <data name="Primary" xml:space="preserve">
     <value>Primaria</value>

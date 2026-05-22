@@ -12,6 +12,8 @@ public class PersonContactRepository : Guama.Core.Persistence.ORM.EF.Repositorie
     protected override System.Linq.IQueryable<PersonContact> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
+            .AsNoTracking()
+            .AsSplitQuery()
             .Include(entity => entity.Identity).ThenInclude(entity => entity.Image)
             .Include(entity => entity.Identity).ThenInclude(entity => entity.PostalContactItemBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Location)
             .Include(entity => entity.Identity).ThenInclude(entity => entity.PhoneContactItemBridges).ThenInclude(bridge => bridge.Stern)
@@ -19,9 +21,8 @@ public class PersonContactRepository : Guama.Core.Persistence.ORM.EF.Repositorie
             .Include(entity => entity.Identity).ThenInclude(entity => entity.WebSiteContactItemBridges).ThenInclude(bridge => bridge.Stern)
             .Include(entity => entity.MainPostalContact).ThenInclude(entity => entity.Location)
             .Include(entity => entity.BusinessKind)
+            .Include(entity => entity.AcademicAchievements).ThenInclude(entity => entity.MainKnowledgeArea)
             .Include(entity => entity.AcademicAchievements).ThenInclude(entity => entity.KnowledgeAreaBridges).ThenInclude(bridge => bridge.Stern)
-            .Include(entity => entity.User).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
-            .AsNoTracking()
-            .AsSplitQuery();
+            .Include(entity => entity.User).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image);
     }
 }

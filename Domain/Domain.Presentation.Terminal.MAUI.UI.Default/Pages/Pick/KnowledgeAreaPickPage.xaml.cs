@@ -46,6 +46,37 @@ public partial class KnowledgeAreaPickPage : Core.Presentation.Terminal.MAUI.UI.
         OnReload(sender, eventArgs);
     }
 
+    private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
+    {
+        ConcreteBindingContext.IsBusy = true;
+
+        System.Threading.Tasks.Task.Run(async () =>
+        {
+            try
+            {
+                var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel, Models.Page.Configuration.KnowledgeAreaConfigurationPageModel>>();
+
+                var page = await factory.BuildAsync(ConfigurationSuccess_Callback, null);
+
+                Dispatcher.Dispatch(() =>
+                {
+                    ConcreteBindingContext.IsBusy = false;
+
+                    this.NavigationPushPageAsync(page);
+                });
+            }
+            catch (System.Exception exception)
+            {
+                Dispatcher.Dispatch(() =>
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(exception, this);
+
+                    ConcreteBindingContext.IsBusy = false;
+                });
+            }
+        });
+    }
+
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
@@ -71,5 +102,17 @@ public partial class KnowledgeAreaPickPage : Core.Presentation.Terminal.MAUI.UI.
     private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
     {
         OnReload(sender, eventArgs);
+    }
+
+    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel model)
+    {
+        Dispatcher.Dispatch(() =>
+        {
+            pickCompleteAction.Invoke(model);
+
+            pickCompleteAction = null;
+
+            (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+        });
     }
 }
