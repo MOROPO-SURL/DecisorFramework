@@ -115,6 +115,15 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Doctorado.
+        /// </summary>
+        internal static string Doctorate {
+            get {
+                return ResourceManager.GetString("Doctorate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Femenino.
         /// </summary>
         internal static string Famale {
@@ -165,6 +174,15 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal {
         internal static string None {
             get {
                 return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Postgrado.
+        /// </summary>
+        internal static string Postgraduate {
+            get {
+                return ResourceManager.GetString("Postgraduate", resourceCulture);
             }
         }
         
