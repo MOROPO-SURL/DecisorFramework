@@ -1,7 +1,4 @@
-﻿
-using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
-
-namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
+﻿namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 {
     public class KnowledgeAreaInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.KnowledgeArea, System.Guid>
     {
@@ -12,16 +9,16 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public int Priority { get; set; }
 
-        public override KnowledgeArea Export()
+        public override Persistence.Entities.KnowledgeArea Export()
         {
-            var entity = new KnowledgeArea { Id = Id, Enabled = true };
+            var entity = new Persistence.Entities.KnowledgeArea { Id = Id, Enabled = true };
 
             Mergue(entity);
 
             return entity;
         }
 
-        public override void Mergue(KnowledgeArea entity)
+        public override void Mergue(Persistence.Entities.KnowledgeArea entity)
         {
             entity.Name = Name;
             entity.Description = Description;

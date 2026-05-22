@@ -4,7 +4,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.
 
 public partial class AcademicAchievementConfigurationPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.AcademicAchievementDisplayModel, Interop.API.Common.Models.Display.AcademicAchievementDisplayModel, Models.Page.Configuration.AcademicAchievementConfigurationPageModel>
 {
-    public AcademicAchievementConfigurationPage(System.Action<Interop.API.Common.Models.Display.AcademicAchievementDisplayModel> successAction, Models.Page.Configuration.AcademicAchievementConfigurationPageModel model, Validators.AcademicAchievementConfigurationValidator validator) : base(successAction, model, validator)
+    public AcademicAchievementConfigurationPage(System.Action<Interop.API.Common.Models.Display.AcademicAchievementDisplayModel> successAction, Models.Page.Configuration.AcademicAchievementConfigurationPageModel model) : base(successAction, model, new Validators.AcademicAchievementConfigurationValidator())
     {
         InitializeComponent();
     }

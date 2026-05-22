@@ -3,6 +3,7 @@ using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,6 +28,10 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
     private readonly List<WebContactItemInputModel> editionWebContactItems = [];
     private readonly List<WebContactItemInputModel> incomingWebContactItems = [];
     private readonly List<WebContactItemDisplayModel> outgoingWebContactItems = [];
+
+    private readonly List<AcademicAchievementInputModel> editionAcademicAchievements = [];
+    private readonly List<AcademicAchievementInputModel> incomingAcademicAchievements = [];
+    private readonly List<AcademicAchievementDisplayModel> outgoingAcademicAchievements = [];
 
     public PersonContactConfigurationPage(System.Action<PersonContactDisplayModel> successAction, Models.Page.Configuration.PersonContactConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.PersonContactConfigurationPageModel> validator) : base(successAction, model, validator)
     {
@@ -93,7 +98,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
     {
         var apiConnectClient = new Interop.API.Connect.Clients.PersonContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var model = new Interop.API.Common.Models.Input.PersonContactInputModel
+        var model = new PersonContactInputModel
         {
             Id = System.Guid.NewGuid(),
             Name = ConcreteBindingContext.Name,
@@ -110,6 +115,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
             IncomingPhoneContactItems = incomingPhoneContactItems,
             IncomingEmailContactItems = incomingEmailContactItems,
             IncomingWebContactItems = incomingWebContactItems,
+            IncomingAcademicAchievements = incomingAcademicAchievements,
             NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
@@ -130,7 +136,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
     {
         var apiConnectClient = new Interop.API.Connect.Clients.PersonContactsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        var model = new Interop.API.Common.Models.Input.PersonContactInputModel
+        var model = new PersonContactInputModel
         {
             Id = ConcreteBindingContext.Id,
             Name = ConcreteBindingContext.Name,
@@ -155,6 +161,9 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
             EditionWebContactItems = editionWebContactItems,
             IncomingWebContactItems = incomingWebContactItems,
             OutgoingWebContactItems = outgoingWebContactItems,
+            EditionAcademicAchievements = editionAcademicAchievements,
+            IncomingAcademicAchievements = incomingAcademicAchievements,
+            OutgoingAcademicAchievements = outgoingAcademicAchievements,
             NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
@@ -189,6 +198,177 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
     private void ImageLayoutTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
         Core.Presentation.Terminal.MAUI.UI.Default.Presenters.ImagePickPresenter.Instance.BeginImagePickAsync(this, ImagePickSuccess_Callback);
+    }
+
+    private void DoctorateAcademicAchievementAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new AcademicAchievementConfigurationPage(DoctorateAcademicAchievementCreateSuccess_Callback, new Models.Page.Configuration.AcademicAchievementConfigurationPageModel(Persistence.Enumerations.AcademicLevel.Doctorate, null)));
+    }
+
+    private void MasterAcademicAchievementAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new AcademicAchievementConfigurationPage(MasterAcademicAchievementCreateSuccess_Callback, new Models.Page.Configuration.AcademicAchievementConfigurationPageModel(Persistence.Enumerations.AcademicLevel.Master, null)));
+    }
+
+    private void PostgraduateAcademicAchievementAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new AcademicAchievementConfigurationPage(PostgraduateAcademicAchievementCreateSuccess_Callback, new Models.Page.Configuration.AcademicAchievementConfigurationPageModel(Persistence.Enumerations.AcademicLevel.Postgraduate, null)));
+    }
+
+    private void DoctorateAcademicAchievementEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new AcademicAchievementConfigurationPage(DoctorateAcademicAchievementEditSuccess_Callback, new Models.Page.Configuration.AcademicAchievementConfigurationPageModel(Persistence.Enumerations.AcademicLevel.Doctorate, ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as AcademicAchievementDisplayModel)));
+    }
+
+    private void MasterAcademicAchievementEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new AcademicAchievementConfigurationPage(MasterAcademicAchievementEditSuccess_Callback, new Models.Page.Configuration.AcademicAchievementConfigurationPageModel(Persistence.Enumerations.AcademicLevel.Master, ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as AcademicAchievementDisplayModel)));
+    }
+
+    private void PostgraduateAcademicAchievementEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new AcademicAchievementConfigurationPage(PostgraduateAcademicAchievementEditSuccess_Callback, new Models.Page.Configuration.AcademicAchievementConfigurationPageModel(Persistence.Enumerations.AcademicLevel.Postgraduate, ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as AcademicAchievementDisplayModel)));
+    }
+
+    private void DoctorateAcademicAchievementRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este elemento?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as AcademicAchievementDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingAcademicAchievements)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingAcademicAchievements.Remove(incomingAcademicAchievements.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionAcademicAchievements)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionAcademicAchievements.Remove(editionAcademicAchievements.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingAcademicAchievements.Add(target);
+                }
+
+                ConcreteBindingContext.DoctorateAcademicAchievements.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void MasterAcademicAchievementRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este elemento?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as AcademicAchievementDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingAcademicAchievements)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingAcademicAchievements.Remove(incomingAcademicAchievements.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionAcademicAchievements)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionAcademicAchievements.Remove(editionAcademicAchievements.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingAcademicAchievements.Add(target);
+                }
+
+                ConcreteBindingContext.MasterAcademicAchievements.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void PostgraduateAcademicAchievementRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este elemento?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as AcademicAchievementDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingAcademicAchievements)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingAcademicAchievements.Remove(incomingAcademicAchievements.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionAcademicAchievements)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionAcademicAchievements.Remove(editionAcademicAchievements.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingAcademicAchievements.Add(target);
+                }
+
+                ConcreteBindingContext.PostgraduateAcademicAchievements.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
     }
 
     private void PostalContactItemAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
@@ -313,7 +493,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
                 {
                     if (item.Id != target.Id) continue;
 
-                    incomingPostalContactItems.Remove(editionPostalContactItems.First(model => model.Id == target.Id));
+                    incomingPostalContactItems.Remove(incomingPostalContactItems.First(model => model.Id == target.Id));
 
                     handled = true;
 
@@ -360,7 +540,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
                 {
                     if (item.Id != target.Id) continue;
 
-                    incomingPhoneContactItems.Remove(editionPhoneContactItems.First(model => model.Id == target.Id));
+                    incomingPhoneContactItems.Remove(incomingPhoneContactItems.First(model => model.Id == target.Id));
 
                     handled = true;
 
@@ -407,7 +587,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
                 {
                     if (item.Id != target.Id) continue;
 
-                    incomingEmailContactItems.Remove(editionEmailContactItems.First(model => model.Id == target.Id));
+                    incomingEmailContactItems.Remove(incomingEmailContactItems.First(model => model.Id == target.Id));
 
                     handled = true;
 
@@ -454,7 +634,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
                 {
                     if (item.Id != target.Id) continue;
 
-                    incomingWebContactItems.Remove(editionWebContactItems.First(model => model.Id == target.Id));
+                    incomingWebContactItems.Remove(incomingWebContactItems.First(model => model.Id == target.Id));
 
                     handled = true;
 
@@ -507,7 +687,7 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
         });
     }
 
-    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    private void NotificationUserPickComplete_Callback(UserDisplayModel model)
     {
         ConcreteBindingContext.NotificationUsers.Add(model);
     }
@@ -817,6 +997,261 @@ public partial class PersonContactConfigurationPage : Core.Presentation.Terminal
         imagePickedModel = model;
 
         ConcreteBindingContext.ImageSource = Microsoft.Maui.Controls.ImageSource.FromStream(() => new System.IO.MemoryStream(imagePickedModel.ContentData));
+
+        hasChangesFlag = true;
+    }
+
+    private void DoctorateAcademicAchievementCreateSuccess_Callback(AcademicAchievementDisplayModel model)
+    {
+        incomingAcademicAchievements.Add(new AcademicAchievementInputModel
+        {
+            Id = model.Id,
+            AcademicLevel = Persistence.Enumerations.AcademicLevel.Doctorate,
+            At = model.At,
+            Title = model.Title,
+            Institution = model.Institution,
+            MainKnowledgeAreaId = model.MainKnowledgeArea.Id,
+            ExtraKnowledgeAreas = model.ExtraKnowledgeAreas
+        });
+
+        ConcreteBindingContext.DoctorateAcademicAchievements.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void MasterAcademicAchievementCreateSuccess_Callback(AcademicAchievementDisplayModel model)
+    {
+        incomingAcademicAchievements.Add(new AcademicAchievementInputModel
+        {
+            Id = model.Id,
+            AcademicLevel = Persistence.Enumerations.AcademicLevel.Master,
+            At = model.At,
+            Title = model.Title,
+            Institution = model.Institution,
+            MainKnowledgeAreaId = model.MainKnowledgeArea.Id,
+            ExtraKnowledgeAreas = model.ExtraKnowledgeAreas
+        });
+
+        ConcreteBindingContext.MasterAcademicAchievements.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void PostgraduateAcademicAchievementCreateSuccess_Callback(AcademicAchievementDisplayModel model)
+    {
+        incomingAcademicAchievements.Add(new AcademicAchievementInputModel
+        {
+            Id = model.Id,
+            AcademicLevel = Persistence.Enumerations.AcademicLevel.Postgraduate,
+            At = model.At,
+            Title = model.Title,
+            Institution = model.Institution,
+            MainKnowledgeAreaId = model.MainKnowledgeArea.Id,
+            ExtraKnowledgeAreas = model.ExtraKnowledgeAreas
+        });
+
+        ConcreteBindingContext.PostgraduateAcademicAchievements.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void DoctorateAcademicAchievementEditSuccess_Callback(AcademicAchievementDisplayModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingAcademicAchievements)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.At = model.At;
+            item.Title = model.Title;
+            item.Institution = model.Institution;
+            item.MainKnowledgeAreaId = model.MainKnowledgeArea.Id;
+            item.ExtraKnowledgeAreas = model.ExtraKnowledgeAreas;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionAcademicAchievements)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.At = model.At;
+                item.Title = model.Title;
+                item.Institution = model.Institution;
+                item.MainKnowledgeAreaId = model.MainKnowledgeArea.Id;
+                item.ExtraKnowledgeAreas = model.ExtraKnowledgeAreas;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionAcademicAchievements.Add(new AcademicAchievementInputModel
+            {
+                Id = model.Id,
+                AcademicLevel = Persistence.Enumerations.AcademicLevel.Doctorate,
+                At = model.At,
+                Title = model.Title,
+                Institution = model.Institution,
+                MainKnowledgeAreaId = model.MainKnowledgeArea.Id,
+                ExtraKnowledgeAreas = model.ExtraKnowledgeAreas
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.DoctorateAcademicAchievements)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.DoctorateAcademicAchievements[index] = model;
+
+            break;
+        }
+
+        hasChangesFlag = true;
+    }
+
+    private void MasterAcademicAchievementEditSuccess_Callback(AcademicAchievementDisplayModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingAcademicAchievements)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.At = model.At;
+            item.Title = model.Title;
+            item.Institution = model.Institution;
+            item.MainKnowledgeAreaId = model.MainKnowledgeArea.Id;
+            item.ExtraKnowledgeAreas = model.ExtraKnowledgeAreas;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionAcademicAchievements)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.At = model.At;
+                item.Title = model.Title;
+                item.Institution = model.Institution;
+                item.MainKnowledgeAreaId = model.MainKnowledgeArea.Id;
+                item.ExtraKnowledgeAreas = model.ExtraKnowledgeAreas;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionAcademicAchievements.Add(new AcademicAchievementInputModel
+            {
+                Id = model.Id,
+                AcademicLevel = Persistence.Enumerations.AcademicLevel.Master,
+                At = model.At,
+                Title = model.Title,
+                Institution = model.Institution,
+                MainKnowledgeAreaId = model.MainKnowledgeArea.Id,
+                ExtraKnowledgeAreas = model.ExtraKnowledgeAreas
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.MasterAcademicAchievements)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.MasterAcademicAchievements[index] = model;
+
+            break;
+        }
+
+        hasChangesFlag = true;
+    }
+
+    private void PostgraduateAcademicAchievementEditSuccess_Callback(AcademicAchievementDisplayModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingAcademicAchievements)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.At = model.At;
+            item.Title = model.Title;
+            item.Institution = model.Institution;
+            item.MainKnowledgeAreaId = model.MainKnowledgeArea.Id;
+            item.ExtraKnowledgeAreas = model.ExtraKnowledgeAreas;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionAcademicAchievements)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.At = model.At;
+                item.Title = model.Title;
+                item.Institution = model.Institution;
+                item.MainKnowledgeAreaId = model.MainKnowledgeArea.Id;
+                item.ExtraKnowledgeAreas = model.ExtraKnowledgeAreas;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionAcademicAchievements.Add(new AcademicAchievementInputModel
+            {
+                Id = model.Id,
+                AcademicLevel = Persistence.Enumerations.AcademicLevel.Postgraduate,
+                At = model.At,
+                Title = model.Title,
+                Institution = model.Institution,
+                MainKnowledgeAreaId = model.MainKnowledgeArea.Id,
+                ExtraKnowledgeAreas = model.ExtraKnowledgeAreas
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.PostgraduateAcademicAchievements)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.PostgraduateAcademicAchievements[index] = model;
+
+            break;
+        }
 
         hasChangesFlag = true;
     }
