@@ -1,5 +1,6 @@
 ﻿namespace MOROPO.Framework.Decisor.Domain.Persistence.Entities
 {
+    // TODO DEPRECATED candidate !!
     public class PersonContactKnowledgeAreaBridge : Guama.Core.Persistence.Entities.Contract.IBridge<PersonContact, System.Guid, KnowledgeArea, System.Guid>
     {
         public System.Guid ProwId { get; set; }

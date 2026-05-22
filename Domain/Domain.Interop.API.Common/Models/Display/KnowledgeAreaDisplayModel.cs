@@ -1,5 +1,4 @@
-﻿
-namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
+﻿namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display
 {
     public class KnowledgeAreaDisplayModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.KnowledgeArea, System.Guid>
     {
