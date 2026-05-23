@@ -22,7 +22,7 @@
         public Financier Financier { get; set; }
         public System.Guid FinancierId { get; set; }
 
-        public System.Collections.Generic.List<CallForProposalResearchAreaBridge> ResearchAreaBridges { get; set; } = new System.Collections.Generic.List<CallForProposalResearchAreaBridge>();
+        public System.Collections.Generic.List<CallForProposalKnowledgeAreaBridge> KnowledgeAreaBridges { get; set; } = new System.Collections.Generic.List<CallForProposalKnowledgeAreaBridge>();
 
         public System.Collections.Generic.List<CallForProposalDocumentBridge> DocumentBridges { get; set; } = new System.Collections.Generic.List<CallForProposalDocumentBridge>();
     }

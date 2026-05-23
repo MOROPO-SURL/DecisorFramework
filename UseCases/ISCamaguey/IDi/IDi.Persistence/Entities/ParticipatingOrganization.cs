@@ -15,6 +15,6 @@
         public Framework.Decisor.Domain.Persistence.Entities.OrganizationContact Contact { get; set; }
         public System.Guid ContactId { get; set; }
 
-        public System.Collections.Generic.List<ParticipatingOrganizationResearchAreaBridge> ResearchAreaBridges { get; set; } = new System.Collections.Generic.List<ParticipatingOrganizationResearchAreaBridge>();
+        public System.Collections.Generic.List<ParticipatingOrganizationKnowledgeAreaBridge> KnowledgeAreaBridges { get; set; } = new System.Collections.Generic.List<ParticipatingOrganizationKnowledgeAreaBridge>();
     }
 }

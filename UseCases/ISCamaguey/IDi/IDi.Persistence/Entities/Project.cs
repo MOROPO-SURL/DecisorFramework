@@ -78,7 +78,9 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
 
         public List<ProjectParticipatingOrganizationBridge> ParticipatingOrganizationBridges { get; set; } = new List<ProjectParticipatingOrganizationBridge>();
 
-        public List<ProjectResearcherBridge> ResearcherBridges { get; set; } = new List<ProjectResearcherBridge>();
+        public List<ProjectInternalResearcherBridge> InternalResearcherBridges { get; set; } = new List<ProjectInternalResearcherBridge>();
+
+        public List<ProjectExternalResearcherBridge> ExternalResearcherBridges { get; set; } = new List<ProjectExternalResearcherBridge>();
 
         public ICollection<ProjectSpecificObjective> SpecificObjectives { get; set; }
 

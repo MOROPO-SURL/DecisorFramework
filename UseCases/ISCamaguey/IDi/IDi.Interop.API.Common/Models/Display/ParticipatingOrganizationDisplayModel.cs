@@ -12,16 +12,16 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public Framework.Decisor.Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel Contact { get; set; }
 
-        public ResearchAreaDisplayModel[] ResearchAreas { get; set; }
+        public Framework.Decisor.Domain.Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel[] KnowledgeAreas { get; set; }
 
         public void Import(Persistence.Entities.ParticipatingOrganization entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;
             Priority = entity.Priority;
-            ResearchAreas = entity.ResearchAreaBridges.OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
+            KnowledgeAreas = entity.KnowledgeAreaBridges.OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
             {
-                var model = new ResearchAreaDisplayModel();
+                var model = new Framework.Decisor.Domain.Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel();
 
                 model.Import(bridge.Stern);
 

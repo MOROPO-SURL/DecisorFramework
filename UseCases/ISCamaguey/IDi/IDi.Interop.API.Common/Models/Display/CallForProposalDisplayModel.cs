@@ -18,7 +18,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public FinancierDisplayModel Financier { get; set; }
 
-        public ResearchAreaDisplayModel[] ResearchAreas { get; set; }
+        public Framework.Decisor.Domain.Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel[] KnowledgeAreas { get; set; }
 
         public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel[] Documents { get; set; }
 
@@ -30,9 +30,9 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
             At = entity.At;
             StartAt = entity.StartAt;
             EndAt = entity.EndAt;
-            ResearchAreas = entity.ResearchAreaBridges.OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
+            KnowledgeAreas = entity.KnowledgeAreaBridges.OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
             {
-                var model = new ResearchAreaDisplayModel();
+                var model = new Framework.Decisor.Domain.Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel();
 
                 model.Import(bridge.Stern);
 

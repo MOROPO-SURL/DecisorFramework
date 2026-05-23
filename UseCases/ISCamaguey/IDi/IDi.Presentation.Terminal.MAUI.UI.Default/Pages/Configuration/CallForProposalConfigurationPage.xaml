@@ -9,6 +9,7 @@
     xmlns:fwrk_core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common"
     xmlns:fwrk_core_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Core.Interop.API.Common"
+    xmlns:fwrk_domain_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:fwrk_core_presentation_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
@@ -112,7 +113,7 @@
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Áreas de Investigación" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Áreas del conocimiento" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
                             <Grid.ColumnDefinitions>
@@ -128,14 +129,14 @@
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
                                 Text="Agregar"
-                                Clicked="ResearchAreaAgregationButton_Clicked" />
+                                Clicked="KnowledgeAreaAgregationButton_Clicked" />
                             <BoxView
                                 Style="{StaticResource SeparatorBoxView}"
                                 Grid.ColumnSpan="2" Grid.Row="1" />
                             <CollectionView
                                 Grid.ColumnSpan="2" Grid.Row="2"
                                 ItemSizingStrategy="MeasureAllItems"
-                                ItemsSource="{Binding ResearchAreas}">
+                                ItemsSource="{Binding KnowledgeAreas}">
                                 <CollectionView.ItemsLayout>
                                     <GridItemsLayout Orientation="Vertical" Span="1" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
                                 </CollectionView.ItemsLayout>
@@ -146,7 +147,7 @@
                                     <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
-                                    <DataTemplate x:DataType="interop_common_display_models:ResearchAreaDisplayModel">
+                                    <DataTemplate x:DataType="fwrk_domain_interop_common_display_models:KnowledgeAreaDisplayModel">
                                         <Frame 
                                             Padding="8" Margin="4" 
                                             HeightRequest="124">
@@ -185,14 +186,14 @@
                                                     FontSize="21"
                                                     FontFamily="MaterialDesignIcons"
                                                     Text="&#xF2FD;"
-                                                    Clicked="ResearchAreaDetailButton_Clicked" />
+                                                    Clicked="KnowledgeAreaDetailButton_Clicked" />
                                                 <Button
                                                     Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
                                                     Padding="0"
                                                     FontSize="21"
                                                     FontFamily="MaterialDesignIcons"
                                                     Text="&#xFA78;"
-                                                    Clicked="ResearchAreaRemotionButton_Clicked" />
+                                                    Clicked="KnowledgeAreaRemotionButton_Clicked" />
                                             </Grid>
                                         </Frame>
                                     </DataTemplate>

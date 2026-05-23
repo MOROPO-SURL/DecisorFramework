@@ -27,9 +27,6 @@
             timeAvailability = model.TimeAvailability;
             salary = model.Salary;
             priority = model.Priority;
-            SpecializationResearchAreas = [.. model.SpecializationResearchAreas];
-            MasteryResearchAreas = [.. model.MasteryResearchAreas];
-            DoctorateResearchAreas = [.. model.DoctorateResearchAreas];
         }
 
         public System.Guid Id { get; set; }
@@ -47,12 +44,6 @@
         public decimal Salary { get => salary; set => SetProperty(ref salary, value); }
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
-
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ResearchAreaDisplayModel> SpecializationResearchAreas { get; set; } = [];
-
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ResearchAreaDisplayModel> MasteryResearchAreas { get; set; } = [];
-
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ResearchAreaDisplayModel> DoctorateResearchAreas { get; set; } = [];
 
         public Interop.API.Common.Models.Display.ResearcherCategoryDisplayModel[] AvailableResearcherCategories { get; set; }
 

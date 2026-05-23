@@ -4,7 +4,7 @@ using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Configurators;
 
-public sealed class ProjectSpecificObjectiveEntityTypeCOnfigurator : AbstractEntityTypeConfigurator<ProjectSpecificObjective>
+public sealed class ProjectSpecificObjectiveEntityTypeConfigurator : AbstractEntityTypeConfigurator<ProjectSpecificObjective>
 {
     protected override void ApplayRules(EntityTypeBuilder<ProjectSpecificObjective> entityTypeBuilder)
     {

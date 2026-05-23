@@ -9,6 +9,7 @@
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:fwrk_core_constants="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Constants;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:fwrk_core_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Core.Interop.API.Common"
+    xmlns:fwrk_domain_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
     xmlns:fwrk_domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.FinancierDetailPage"
@@ -276,11 +277,11 @@
                                 <VerticalStackLayout 
                                     Margin="8"
                                     Spacing="6">
-                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Áreas de Investigación" />
+                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Áreas del conocimiento" />
                                     <BoxView Color="DimGray" HeightRequest="2" />
                                     <VerticalStackLayout
                                         Spacing="8"
-                                        BindableLayout.ItemsSource="{Binding ResearchAreas}">
+                                        BindableLayout.ItemsSource="{Binding KnowledgeAreas}">
                                         <BindableLayout.EmptyView>
                                             <Label
                                                 FontAttributes="Italic"
@@ -288,7 +289,7 @@
                                                 Text="Sin elementos que mostrar" />
                                         </BindableLayout.EmptyView>
                                         <BindableLayout.ItemTemplate>
-                                            <DataTemplate x:DataType="interop_common_display_models:ResearchAreaDisplayModel">
+                                            <DataTemplate x:DataType="fwrk_domain_interop_common_display_models:KnowledgeAreaDisplayModel">
                                                 <Grid ColumnSpacing="8">
                                                     <Grid.ColumnDefinitions>
                                                         <ColumnDefinition Width="4" />

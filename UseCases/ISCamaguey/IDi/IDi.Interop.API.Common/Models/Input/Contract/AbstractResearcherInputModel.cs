@@ -1,6 +1,4 @@
-﻿using System.Linq;
-
-namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input.Contract
+﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input.Contract
 {
     public abstract class AbstractResearcherInputModel<TEntity> : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractResearcher
     {
@@ -13,12 +11,6 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input.Contract
         public System.Guid? TeachingCategoryId { get; set; }
 
         public int TimeAvailability { get; set; }
-
-        public Display.ResearchAreaDisplayModel[] SpecializationResearchAreas { get; set; }
-
-        public Display.ResearchAreaDisplayModel[] MasteryResearchAreas { get; set; }
-
-        public Display.ResearchAreaDisplayModel[] DoctorateResearchAreas { get; set; }
 
         public abstract TEntity Export();
 
@@ -43,30 +35,6 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input.Contract
                 entity.TeachingCategory = null;
                 entity.TeachingCategoryId = TeachingCategoryId;
             }
-
-            entity.ResearchAreaSpecializationBridges.Clear();
-
-            entity.ResearchAreaSpecializationBridges = SpecializationResearchAreas.Select(model => new Persistence.Entities.ResearcherResearchAreaSpecializationBridge
-            {
-                ProwId = Id,
-                SternId = model.Id
-            }).ToList();
-
-            entity.ResearchAreaMasteryBridges.Clear();
-
-            entity.ResearchAreaMasteryBridges = MasteryResearchAreas.Select(model => new Persistence.Entities.ResearcherResearchAreaMasteryBridge
-            {
-                ProwId = Id,
-                SternId = model.Id
-            }).ToList();
-
-            entity.ResearchAreaDoctorateBridges.Clear();
-
-            entity.ResearchAreaDoctorateBridges = DoctorateResearchAreas.Select(model => new Persistence.Entities.ResearcherResearchAreaDoctorateBridge
-            {
-                ProwId = Id,
-                SternId = model.Id
-            }).ToList();
         }
     }
 }

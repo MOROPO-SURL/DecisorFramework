@@ -63,7 +63,7 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
             model.ParticipatingOrganizations.Add(_model);
         }
 
-        foreach (var bridge in entity.ResearcherBridges)
+        foreach (var bridge in entity.InternalResearcherBridges)
         {
             // TODO Complete block !!!
         }
@@ -105,7 +105,7 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
 
         foreach (var _model in model.IncomingInternalResearcherRelationships)
         {
-            entity.ResearcherBridges.Add(new ProjectResearcherBridge { ProwId = entity.Id, SternId = _model.InternalResearcherId, TimeAvailability = _model.TimeAvailability });
+            entity.InternalResearcherBridges.Add(new ProjectInternalResearcherBridge { ProwId = entity.Id, SternId = _model.InternalResearcherId, TimeAvailability = _model.TimeAvailability });
         }
     }
 

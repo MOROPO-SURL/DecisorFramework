@@ -13,7 +13,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Repositories
             return base.GetQueryableDbSet()
                 .Include(entity => entity.Financier).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.Financier).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.BusinessKind)
-                .Include(entity => entity.ResearchAreaBridges).ThenInclude(bridge => bridge.Stern)
+                .Include(entity => entity.KnowledgeAreaBridges).ThenInclude(bridge => bridge.Stern)
                 .Include(entity => entity.DocumentBridges).ThenInclude(bridge => bridge.Stern);
         }
     }

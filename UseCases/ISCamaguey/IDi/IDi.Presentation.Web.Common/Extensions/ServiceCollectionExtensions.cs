@@ -9,7 +9,6 @@ public static class ServiceCollectionExtensions
 {
     public static void AddISCamagueyDecisorIDiPresentationWebCommon(this IServiceCollection services)
     {
-        services.AddScoped<IEntityRepository<ResearchArea, System.Guid>, ResearchAreaRepository>();
         services.AddScoped<IEntityRepository<Program, System.Guid>, ProgramRepository>();
         services.AddScoped<IEntityRepository<ProgramKind, System.Guid>, ProgramKindRepository>();
         services.AddScoped<IEntityRepository<ProgramExpectResult, System.Guid>, ProgramExpectResultRepository>();

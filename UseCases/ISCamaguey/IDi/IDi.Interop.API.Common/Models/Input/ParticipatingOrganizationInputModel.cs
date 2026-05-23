@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
+using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 {
@@ -10,7 +11,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 
         public System.Guid ContactId { get; set; }
 
-        public System.Collections.Generic.List<Display.ResearchAreaDisplayModel> ResearchAreas { get; set; } = new System.Collections.Generic.List<Display.ResearchAreaDisplayModel>();
+        public System.Collections.Generic.List<KnowledgeAreaDisplayModel> KnowledgeAreas { get; set; } = new System.Collections.Generic.List<KnowledgeAreaDisplayModel>();
 
         public Persistence.Entities.ParticipatingOrganization Export()
         {
@@ -36,8 +37,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
                 entity.ContactId = ContactId;
             }
 
-            entity.ResearchAreaBridges.Clear();
-            entity.ResearchAreaBridges = ResearchAreas.Select(model => new Persistence.Entities.ParticipatingOrganizationResearchAreaBridge { ProwId = entity.Id, SternId = model.Id }).ToList();
+            entity.KnowledgeAreaBridges.Clear();
+            entity.KnowledgeAreaBridges = KnowledgeAreas.Select(model => new Persistence.Entities.ParticipatingOrganizationKnowledgeAreaBridge { ProwId = entity.Id, SternId = model.Id }).ToList();
         }
     }
 }
