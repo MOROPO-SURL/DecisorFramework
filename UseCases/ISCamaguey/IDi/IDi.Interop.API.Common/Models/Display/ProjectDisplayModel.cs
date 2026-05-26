@@ -52,9 +52,9 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         //public System.Collections.Generic.List<ProjectBudgetCurrencyBridge> BudgetCurrencyBridges { get; set; } = new System.Collections.Generic.List<ProjectBudgetCurrencyBridge>();
 
-        public List<Relationship.ProjectInternalResearcherRelationshipDisplayModel> InternalResearcherRelationships { get; set; } = new List<Relationship.ProjectInternalResearcherRelationshipDisplayModel>();
+        public List<InternalResearcherProjectParticipationDisplayModel> InternalResearcherProjectParticipations { get; set; } = new List<InternalResearcherProjectParticipationDisplayModel>();
 
-        public List<Relationship.ProjectExternalResearcherRelationshipDisplayModel> ExternalResearcherRelationships { get; set; } = new List<Relationship.ProjectExternalResearcherRelationshipDisplayModel>();
+        public List<ExternalResearcherProjectParticipationDisplayModel> ExternalResearcherProjectParticipations { get; set; } = new List<ExternalResearcherProjectParticipationDisplayModel>();
 
         public void Import(Persistence.Entities.Project entity)
         {

@@ -5,7 +5,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class InternalResearcherConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.InternalResearcherDisplayModel, Interop.API.Common.Models.Display.InternalResearcherDisplayModel, Models.Page.Configuration.InternalResearcherConfigurationPageModel>
 {
-    public InternalResearcherConfigurationPage(System.Action<Interop.API.Common.Models.Display.InternalResearcherDisplayModel> successAction, Models.Page.Configuration.InternalResearcherConfigurationPageModel model, Validators.InternalResearcherConfigurationValidator validator) : base(successAction, model, validator)
+    public InternalResearcherConfigurationPage(System.Action<Interop.API.Common.Models.Display.InternalResearcherDisplayModel> successAction, Models.Page.Configuration.InternalResearcherConfigurationPageModel model, Validators.InternalResearcherProjectParticipationConfigurationValidator validator) : base(successAction, model, validator)
     {
         InitializeComponent();
 

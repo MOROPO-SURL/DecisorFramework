@@ -14,7 +14,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Fa
             _model.AvailableResearcherCategories = await researcherCategoryAPIConnectClient.GetEnabledAsync();
             _model.AvailableTeachingCategories = await teachingCategoryAPIConnectClient.GetEnabledAsync();
 
-            return new Pages.Configuration.InternalResearcherConfigurationPage(configurationSuccessAction, _model, new Validators.InternalResearcherConfigurationValidator());
+            return new Pages.Configuration.InternalResearcherConfigurationPage(configurationSuccessAction, _model, new Validators.InternalResearcherProjectParticipationConfigurationValidator());
         }
     }
 }

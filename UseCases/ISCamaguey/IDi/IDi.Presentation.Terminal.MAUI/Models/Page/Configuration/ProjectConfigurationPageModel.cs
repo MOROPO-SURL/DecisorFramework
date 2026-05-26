@@ -1,4 +1,4 @@
-﻿using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display.Relationship;
+﻿using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Configuration;
 
@@ -27,15 +27,15 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
     private string mainObjetive;
     private System.DateTime startAt;
     private System.DateTime endAt;
-    private Interop.API.Common.Models.Display.ProjectCategoryDisplayModel category;
-    private Interop.API.Common.Models.Display.InternalResearcherDisplayModel chief;
-    private Interop.API.Common.Models.Display.ProgramDisplayModel program;
-    private Interop.API.Common.Models.Display.ProjectProposalDisplayModel proposal;
-    private Interop.API.Common.Models.Display.ProjectDisplayModel predecessor;
+    private ProjectCategoryDisplayModel category;
+    private InternalResearcherDisplayModel chief;
+    private ProgramDisplayModel program;
+    private ProjectProposalDisplayModel proposal;
+    private ProjectDisplayModel predecessor;
     private Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel document;
     private int priority = 1;
 
-    public ProjectConfigurationPageModel(Interop.API.Common.Models.Display.ProjectDisplayModel model) : base(model)
+    public ProjectConfigurationPageModel(ProjectDisplayModel model) : base(model)
     {
         startAt = System.DateTime.Now;
         endAt = startAt.AddYears(3);
@@ -63,8 +63,8 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
         ProgramExpectResults = [.. model.ProgramExpectResults];
         SpecificObjectives = [.. model.SpecificObjectives];
         ParticipatingOrganizations = [.. model.ParticipatingOrganizations];
-        InternalResearcherRelationships = [.. model.InternalResearcherRelationships];
-        ExternalResearcherRelationships = [.. model.ExternalResearcherRelationships];
+        InternalResearcherProjectParticipations = [.. model.InternalResearcherProjectParticipations];
+        ExternalResearcherProjectParticipations = [.. model.ExternalResearcherProjectParticipations];
     }
 
     public System.Guid Id { get; set; }
@@ -103,15 +103,15 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
 
     public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ProgramExpectResultDisplayModel> ProgramExpectResults { get; set; } = [];
+    public System.Collections.ObjectModel.ObservableCollection<ProgramExpectResultDisplayModel> ProgramExpectResults { get; set; } = [];
 
-    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel> SpecificObjectives { get; set; } = [];
+    public System.Collections.ObjectModel.ObservableCollection<ProjectSpecificObjectiveDisplayModel> SpecificObjectives { get; set; } = [];
 
-    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = [];
+    public System.Collections.ObjectModel.ObservableCollection<ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = [];
 
-    public System.Collections.ObjectModel.ObservableCollection<ProjectInternalResearcherRelationshipDisplayModel> InternalResearcherRelationships { get; set; } = [];
+    public System.Collections.ObjectModel.ObservableCollection<InternalResearcherProjectParticipationDisplayModel> InternalResearcherProjectParticipations { get; set; } = [];
 
-    public System.Collections.ObjectModel.ObservableCollection<ProjectExternalResearcherRelationshipDisplayModel> ExternalResearcherRelationships { get; set; } = [];
+    public System.Collections.ObjectModel.ObservableCollection<ExternalResearcherProjectParticipationDisplayModel> ExternalResearcherProjectParticipations { get; set; } = [];
 
     public Interop.API.Common.Models.Display.ProjectCategoryDisplayModel[] AvailableCategories { get; set; } = [];
 }

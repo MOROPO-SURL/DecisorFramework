@@ -29,8 +29,8 @@ public interface IIDiDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDom
     public DbSet<Entities.ProjectParticipatingOrganizationBridge> ProjectParticipatingOrganizationBridges { get; set; }
     public DbSet<Entities.ProjectProposal> ProjectProposals { get; set; }
     public DbSet<Entities.ProjectReport> ProjectReports { get; set; }
-    public DbSet<Entities.ProjectInternalResearcherBridge> ProjectInternalResearcherBridges { get; set; }
-    public DbSet<Entities.ProjectExternalResearcherBridge> ProjectExternalResearcherBridges { get; set; }
+    public DbSet<Entities.InternalResearcherProjectParticipation> InternalResearcherProjectParticipations { get; set; }
+    public DbSet<Entities.ExternalResearcherProjectParticipation> ExternalResearcherProjectParticipations { get; set; }
     public DbSet<Entities.ProjectSpecificObjective> ProjectSpecificObjectives { get; set; }
     public DbSet<Entities.PublicationResult> PublicationResults { get; set; }
     public DbSet<Entities.PublicationResultInternalResearcherBridge> PublicationResultInternalResearcherBridges { get; set; }

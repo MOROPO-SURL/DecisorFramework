@@ -1,6 +1,4 @@
 ﻿using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;
-using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display.Relationship;
-using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input.Relationship;
 using System.Collections.Generic;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
@@ -48,13 +46,13 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 
         public List<ProgramExpectResultDisplayModel> ProgramExpectResults { get; set; } = new List<ProgramExpectResultDisplayModel>();
 
-        public List<ProjectInternalResearcherRelationshipInputModel> EditionInternalResearcherRelationships { get; set; } = new List<ProjectInternalResearcherRelationshipInputModel>();
-        public List<ProjectInternalResearcherRelationshipInputModel> IncomingInternalResearcherRelationships { get; set; } = new List<ProjectInternalResearcherRelationshipInputModel>();
-        public List<ProjectInternalResearcherRelationshipDisplayModel> OutgoingInternalResearcherRelationships { get; set; } = new List<ProjectInternalResearcherRelationshipDisplayModel>();
+        public List<InternalResearcherProjectParticipationInputModel> EditionInternalResearcherProjectParticipations { get; set; } = new List<InternalResearcherProjectParticipationInputModel>();
+        public List<InternalResearcherProjectParticipationInputModel> IncomingInternalResearcherProjectParticipations { get; set; } = new List<InternalResearcherProjectParticipationInputModel>();
+        public List<InternalResearcherProjectParticipationDisplayModel> OutgoingInternalResearcherProjectParticipations { get; set; } = new List<InternalResearcherProjectParticipationDisplayModel>();
 
-        public List<ProjectExternalResearcherRelationshipInputModel> EditionExternalResearcherRelationships { get; set; } = new List<ProjectExternalResearcherRelationshipInputModel>();
-        public List<ProjectExternalResearcherRelationshipInputModel> IncomingExternalResearcherRelationships { get; set; } = new List<ProjectExternalResearcherRelationshipInputModel>();
-        public List<ProjectExternalResearcherRelationshipDisplayModel> OutgoingExternalResearcherRelationships { get; set; } = new List<ProjectExternalResearcherRelationshipDisplayModel>();
+        public List<ExternalResearcherProjectParticipationInputModel> EditionExternalResearcherProjectParticipations { get; set; } = new List<ExternalResearcherProjectParticipationInputModel>();
+        public List<ExternalResearcherProjectParticipationInputModel> IncomingExternalResearcherProjectParticipations { get; set; } = new List<ExternalResearcherProjectParticipationInputModel>();
+        public List<ExternalResearcherProjectParticipationDisplayModel> OutgoingExternalResearcherProjectParticipations { get; set; } = new List<ExternalResearcherProjectParticipationDisplayModel>();
 
         public System.Guid CategoryId { get; set; }
 

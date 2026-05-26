@@ -16,13 +16,17 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
     private readonly IEntityRepository<ProjectSpecificObjective, System.Guid> specificObjectiveRepository;
     private readonly IEntityRepository<Document, System.Guid> documentRepository;
     private readonly IDocumentFileManagerFacade documentFileManager;
+    private readonly IEntityRepository<InternalResearcherProjectParticipation, System.Guid> internalResearcherProjectParticipationRepository;
+    private readonly IEntityRepository<ExternalResearcherProjectParticipation, System.Guid> externalResearcherProjectParticipationRepository;
 
-    public ProjectsController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ProjectSpecificObjective, System.Guid> specificObjectiveRepository, IEntityRepository<Project, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProjectsController> localizer, Microsoft.Extensions.Logging.ILogger<ProjectsController> logger)
+    public ProjectsController(IEntityRepository<ExternalResearcherProjectParticipation, System.Guid> externalResearcherProjectParticipationRepository, IEntityRepository<InternalResearcherProjectParticipation, System.Guid> internalResearcherProjectParticipationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ProjectSpecificObjective, System.Guid> specificObjectiveRepository, IEntityRepository<Project, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProjectsController> localizer, Microsoft.Extensions.Logging.ILogger<ProjectsController> logger)
         : base(repository, localizer, logger)
     {
         this.specificObjectiveRepository = specificObjectiveRepository;
         this.documentRepository = documentRepository;
         this.documentFileManager = documentFileManager;
+        this.internalResearcherProjectParticipationRepository = internalResearcherProjectParticipationRepository;
+        this.externalResearcherProjectParticipationRepository = externalResearcherProjectParticipationRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<Project, bool>> GetGlobalSelector()
@@ -63,9 +67,32 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
             model.ParticipatingOrganizations.Add(_model);
         }
 
-        foreach (var bridge in entity.InternalResearcherBridges)
+        foreach (var _entity in entity.InternalResearcherParticipations)
         {
-            // TODO Complete block !!!
+            InternalResearcherProjectParticipationDisplayModel _model = new();
+
+            _model.Import(_entity);
+
+            if (_model.Researcher.Employee.Contact.Identity.Image != null)
+            {
+                _model.Researcher.Employee.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Researcher.Employee.Contact.Identity.Image.ContentType);
+            }
+
+            model.InternalResearcherProjectParticipations.Add(_model);
+        }
+
+        foreach (var _entity in entity.ExternalResearcherParticipations)
+        {
+            ExternalResearcherProjectParticipationDisplayModel _model = new();
+
+            _model.Import(_entity);
+
+            if (_model.Researcher.Contact.Identity.Image != null)
+            {
+                _model.Researcher.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Researcher.Contact.Identity.Image.ContentType);
+            }
+
+            model.ExternalResearcherProjectParticipations.Add(_model);
         }
 
         if (entity.Document != null)
@@ -103,9 +130,22 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
             specificObjectiveRepository.Add(_entity, User.Identity.Name, false);
         }
 
-        foreach (var _model in model.IncomingInternalResearcherRelationships)
+        foreach (var _model in model.IncomingInternalResearcherProjectParticipations)
         {
-            entity.InternalResearcherBridges.Add(new ProjectInternalResearcherBridge { ProwId = entity.Id, SternId = _model.InternalResearcherId, TimeAvailability = _model.TimeAvailability });
+            var _entity = _model.Export();
+
+            _entity.ProjectId = entity.Id;
+
+            internalResearcherProjectParticipationRepository.Add(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.IncomingExternalResearcherProjectParticipations)
+        {
+            var _entity = _model.Export();
+
+            _entity.ProjectId = entity.Id;
+
+            externalResearcherProjectParticipationRepository.Add(_entity, User.Identity.Name, false);
         }
     }
 
@@ -147,6 +187,52 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
             }, User.Identity.Name, false);
 
             documentFileManager.SaveDocumentFileContent(entity.Document.Id, model.Document.ContentData, model.Document.ContentType);
+        }
+
+        foreach (var _model in model.OutgoingInternalResearcherProjectParticipations)
+        {
+            internalResearcherProjectParticipationRepository.Delete(new InternalResearcherProjectParticipation { Id = _model.Id }, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.EditionInternalResearcherProjectParticipations)
+        {
+            var _entity = _model.Export();
+
+            _entity.ProjectId = entity.Id;
+
+            internalResearcherProjectParticipationRepository.Update(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.IncomingInternalResearcherProjectParticipations)
+        {
+            var _entity = _model.Export();
+
+            _entity.ProjectId = entity.Id;
+
+            internalResearcherProjectParticipationRepository.Add(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.OutgoingExternalResearcherProjectParticipations)
+        {
+            externalResearcherProjectParticipationRepository.Delete(new ExternalResearcherProjectParticipation { Id = _model.Id }, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.EditionExternalResearcherProjectParticipations)
+        {
+            var _entity = _model.Export();
+
+            _entity.ProjectId = entity.Id;
+
+            externalResearcherProjectParticipationRepository.Update(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.IncomingExternalResearcherProjectParticipations)
+        {
+            var _entity = _model.Export();
+
+            _entity.ProjectId = entity.Id;
+
+            externalResearcherProjectParticipationRepository.Add(_entity, User.Identity.Name, false);
         }
     }
 }

@@ -6445,6 +6445,45 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("externalresearchers", "decisoriscamaguey_idi");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ExternalResearcherProjectParticipation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("EndAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("endat");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("projectid");
+
+                    b.Property<Guid>("ResearcherId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("researcherid");
+
+                    b.Property<DateTime>("StartAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("startat");
+
+                    b.Property<int>("TimeAvailability")
+                        .HasColumnType("integer")
+                        .HasColumnName("timeavailability");
+
+                    b.HasKey("Id")
+                        .HasName("pk_externalresearcherprojectparticipations");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_externalresearcherprojectparticipations_projectid");
+
+                    b.HasIndex("ResearcherId")
+                        .HasDatabaseName("ix_externalresearcherprojectparticipations_researcherid");
+
+                    b.ToTable("externalresearcherprojectparticipations", "decisoriscamaguey_idi");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Financier", b =>
                 {
                     b.Property<Guid>("Id")
@@ -6601,6 +6640,45 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_internalresearchers_teachingcategoryid");
 
                     b.ToTable("internalresearchers", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.InternalResearcherProjectParticipation", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<DateTime>("EndAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("endat");
+
+                    b.Property<Guid>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("projectid");
+
+                    b.Property<Guid>("ResearcherId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("researcherid");
+
+                    b.Property<DateTime>("StartAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("startat");
+
+                    b.Property<int>("TimeAvailability")
+                        .HasColumnType("integer")
+                        .HasColumnName("timeavailability");
+
+                    b.HasKey("Id")
+                        .HasName("pk_internalresearcherprojectparticipations");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_internalresearcherprojectparticipations_projectid");
+
+                    b.HasIndex("ResearcherId")
+                        .HasDatabaseName("ix_internalresearcherprojectparticipations_researcherid");
+
+                    b.ToTable("internalresearcherprojectparticipations", "decisoriscamaguey_idi");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.NewTechniqueResult", b =>
@@ -7122,29 +7200,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("projectcategories", "decisoriscamaguey_idi");
                 });
 
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectExternalResearcherBridge", b =>
-                {
-                    b.Property<Guid>("ProwId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("prowid");
-
-                    b.Property<Guid>("SternId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sternid");
-
-                    b.Property<int>("TimeAvailability")
-                        .HasColumnType("integer")
-                        .HasColumnName("timeavailability");
-
-                    b.HasKey("ProwId", "SternId")
-                        .HasName("pk_projectexternalresearcherbridges");
-
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_projectexternalresearcherbridges_sternid");
-
-                    b.ToTable("projectexternalresearcherbridges", "decisoriscamaguey_idi");
-                });
-
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectImpact", b =>
                 {
                     b.Property<Guid>("Id")
@@ -7181,29 +7236,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_projectimpacts_projectid");
 
                     b.ToTable("projectimpacts", "decisoriscamaguey_idi");
-                });
-
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectInternalResearcherBridge", b =>
-                {
-                    b.Property<Guid>("ProwId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("prowid");
-
-                    b.Property<Guid>("SternId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sternid");
-
-                    b.Property<int>("TimeAvailability")
-                        .HasColumnType("integer")
-                        .HasColumnName("timeavailability");
-
-                    b.HasKey("ProwId", "SternId")
-                        .HasName("pk_projectinternalresearcherbridges");
-
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_projectinternalresearcherbridges_sternid");
-
-                    b.ToTable("projectinternalresearcherbridges", "decisoriscamaguey_idi");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectParticipatingOrganizationBridge", b =>
@@ -12441,6 +12473,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("TeachingCategory");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ExternalResearcherProjectParticipation", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
+                        .WithMany("ExternalResearcherParticipations")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_externalresearcherprojectparticipations_projects_projectid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ExternalResearcher", "Researcher")
+                        .WithMany()
+                        .HasForeignKey("ResearcherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_externalresearcherprojectparticipations_externalresearchers~");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Researcher");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Financier", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.OrganizationContact", "Contact")
@@ -12519,6 +12572,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Employee");
 
                     b.Navigation("TeachingCategory");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.InternalResearcherProjectParticipation", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
+                        .WithMany("InternalResearcherParticipations")
+                        .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_internalresearcherprojectparticipations_projects_projectid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.InternalResearcher", "Researcher")
+                        .WithMany()
+                        .HasForeignKey("ResearcherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_internalresearcherprojectparticipations_internalresearchers~");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Researcher");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.NewTechniqueResult", b =>
@@ -12741,27 +12815,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Financier");
                 });
 
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectExternalResearcherBridge", b =>
-                {
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Prow")
-                        .WithMany("ExternalResearcherBridges")
-                        .HasForeignKey("ProwId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_projectexternalresearcherbridges_projects_prowid");
-
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ExternalResearcher", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_projectexternalresearcherbridges_externalresearchers_sternid");
-
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
-                });
-
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectImpact", b =>
                 {
                     b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ImpactDimension", "Dimension")
@@ -12777,27 +12830,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_projectimpacts_projects_projectid");
 
                     b.Navigation("Dimension");
-                });
-
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectInternalResearcherBridge", b =>
-                {
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Prow")
-                        .WithMany("InternalResearcherBridges")
-                        .HasForeignKey("ProwId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_projectinternalresearcherbridges_projects_prowid");
-
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.InternalResearcher", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_projectinternalresearcherbridges_internalresearchers_sternid");
-
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectParticipatingOrganizationBridge", b =>
@@ -14330,11 +14362,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.Navigation("BudgetFunancings");
 
-                    b.Navigation("ExternalResearcherBridges");
+                    b.Navigation("ExternalResearcherParticipations");
 
                     b.Navigation("Impacts");
 
-                    b.Navigation("InternalResearcherBridges");
+                    b.Navigation("InternalResearcherParticipations");
 
                     b.Navigation("ParticipatingOrganizationBridges");
 

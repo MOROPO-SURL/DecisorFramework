@@ -253,8 +253,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ProjectParticipatingOrganizationBridge> ProjectParticipatingOrganizationBridges { get; set; }
         public DbSet<ProjectProposal> ProjectProposals { get; set; }
         public DbSet<ProjectReport> ProjectReports { get; set; }
-        public DbSet<ProjectInternalResearcherBridge> ProjectInternalResearcherBridges { get; set; }
-        public DbSet<ProjectExternalResearcherBridge> ProjectExternalResearcherBridges { get; set; }
+        public DbSet<InternalResearcherProjectParticipation> InternalResearcherProjectParticipations { get; set; }
+        public DbSet<ExternalResearcherProjectParticipation> ExternalResearcherProjectParticipations { get; set; }
         public DbSet<ProjectSpecificObjective> ProjectSpecificObjectives { get; set; }
         public DbSet<PublicationResult> PublicationResults { get; set; }
         public DbSet<PublicationResultInternalResearcherBridge> PublicationResultInternalResearcherBridges { get; set; }
