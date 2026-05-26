@@ -608,10 +608,7 @@
   </data>
 	<data name="action-viewer-permission-description" xml:space="preserve">
     <value>Usuarios que pueden visualizar acciones</value>
-  </data>
-	<data name="action-indicator-management-permission-group" xml:space="preserve">
-    <value>Gestionar Indicadores de Acción</value>
-  </data>
+  </data>	
 	<data name="action-indicator-management-permission-group" xml:space="preserve">
     <value>Gestionar Indicadores de Acción</value>
   </data>
@@ -719,5 +716,113 @@
   </data>
 	<data name="global-indicator-viewer-permission-description" xml:space="preserve">
     <value>Usuarios que pueden visualizar indicadores globales</value>
+  </data>	
+	<data name="action-indicator-result-management-permission-group" xml:space="preserve">
+    <value>Gestionar Estados de Indicador de Acción</value>
+  </data>
+	<data name="action-indicator-result-creator-permission" xml:space="preserve">
+    <value>Crear Estado de Indicador de Acción</value>
+  </data>
+	<data name="action-indicator-result-creator-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden crear estados de indicador de acción</value>
+  </data>
+	<data name="action-indicator-result-editor-permission" xml:space="preserve">
+    <value>Modificar Estado de Indicador de Acción</value>
+  </data>
+	<data name="action-indicator-result-editor-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar estados de indicador de acción</value>
+  </data>
+	<data name="action-indicator-result-remover-permission" xml:space="preserve">
+    <value>Eliminar Estado de Indicador de Acción</value>
+  </data>
+	<data name="action-indicator-result-remover-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden eliminar estados de indicador de acción</value>
+  </data>
+	<data name="action-indicator-result-viewer-permission" xml:space="preserve">
+    <value>Visualizar Estados de Indicador de Acción</value>
+  </data>
+	<data name="action-indicator-result-viewer-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar estados de indicador de acción</value>
+  </data>
+	<data name="proyection-indicator-result-management-permission-group" xml:space="preserve">
+    <value>Gestionar Estados de Indicador de Objetivo Específico</value>
+  </data>
+	<data name="proyection-indicator-result-creator-permission" xml:space="preserve">
+    <value>Crear Estado de Indicador de Objetivo Específico</value>
+  </data>
+	<data name="proyection-indicator-result-creator-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden crear estados de indicador de objetivo específico</value>
+  </data>
+	<data name="proyection-indicator-result-editor-permission" xml:space="preserve">
+    <value>Modificar Estado de Indicador de Objetivo Específico</value>
+  </data>
+	<data name="proyection-indicator-result-editor-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar estados de indicador de objetivo específico</value>
+  </data>
+	<data name="proyection-indicator-result-remover-permission" xml:space="preserve">
+    <value>Eliminar Estado de Indicador de Objetivo Específico</value>
+  </data>
+	<data name="proyection-indicator-result-remover-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden eliminar estados de indicador de objetivo específico</value>
+  </data>
+	<data name="proyection-indicator-result-viewer-permission" xml:space="preserve">
+    <value>Visualizar Estado de Indicador de Objetivo Específico</value>
+  </data>
+	<data name="proyection-indicator-result-viewer-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar estados de indicador de objetivo específico</value>
+  </data>
+	<data name="objective-indicator-result-management-permission-group" xml:space="preserve">
+    <value>Gestionar Estado de Indicador de Objetivo</value>
+  </data>
+	<data name="objective-indicator-result-creator-permission" xml:space="preserve">
+    <value>Crear Estado de Indicador de Objetivo</value>
+  </data>
+	<data name="objective-indicator-result-creator-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden crear estados de indicador de objetivo</value>
+  </data>
+	<data name="objective-indicator-result-editor-permission" xml:space="preserve">
+    <value>Modificar Estado de Indicador de Objetivo</value>
+  </data>
+	<data name="objective-indicator-result-editor-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar estados de indicador de objetivo</value>
+  </data>
+	<data name="objective-indicator-result-remover-permission" xml:space="preserve">
+    <value>Eliminar Estado de Indicador de Objetivo</value>
+  </data>
+	<data name="objective-indicator-result-remover-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden eliminar estados de indicador de objetivo</value>
+  </data>
+	<data name="objective-indicator-result-viewer-permission" xml:space="preserve">
+    <value>Visualizar Estados de Indicador de Objetivo</value>
+  </data>
+	<data name="objective-indicator-result-viewer-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar estados de indicador de objetivo</value>
+  </data>
+	<data name="global-indicator-result-management-permission-group" xml:space="preserve">
+    <value>Gestionar Estado de Indicador Global</value>
+  </data>
+	<data name="global-indicator-result-creator-permission" xml:space="preserve">
+    <value>Crear Estado de Indicador Global</value>
+  </data>
+	<data name="global-indicator-result-creator-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden crear estados de indicador global</value>
+  </data>
+	<data name="global-indicator-result-editor-permission" xml:space="preserve">
+    <value>Modificar Estado de Indicador Global</value>
+  </data>
+	<data name="global-indicator-result-editor-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden modificar estados de indicador global</value>
+  </data>
+	<data name="global-indicator-result-remover-permission" xml:space="preserve">
+    <value>Eliminar Estado de Indicador Global</value>
+  </data>
+	<data name="global-indicator-result-remover-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden eliminar estados de indicador global</value>
+  </data>
+	<data name="global-indicator-result-viewer-permission" xml:space="preserve">
+    <value>Visualizar Estado de Indicadores Global</value>
+  </data>
+	<data name="global-indicator-result-viewer-permission-description" xml:space="preserve">
+    <value>Usuarios que pueden visualizar estados de indicador global</value>
   </data>
 </root>
