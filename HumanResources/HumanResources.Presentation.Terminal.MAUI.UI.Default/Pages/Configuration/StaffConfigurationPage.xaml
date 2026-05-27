@@ -112,15 +112,25 @@
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tarifa por hora extra maestrías" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tarifa por hora extra (maestrías)" />
                         <Entry Text="{Binding MasteryExtraFeed}" />
+                        <Label TextColor="{AppThemeBinding Light={StaticResource DarkInfoBorder}, Dark={StaticResource LightInfoBorder}}">
+                            <Label.Behaviors>
+                                <core_ui_behaviors:DecimalSymbolIdicatotionLabelBehavior />
+                            </Label.Behaviors>
+                        </Label>
                     </VerticalStackLayout>
                     <VerticalStackLayout
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tarifa por hora extra maestrías" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tarifa por hora (doctorados)" />
                         <Entry Text="{Binding DoctorateExtraFeed}" />
+                        <Label TextColor="{AppThemeBinding Light={StaticResource DarkInfoBorder}, Dark={StaticResource LightInfoBorder}}">
+                            <Label.Behaviors>
+                                <core_ui_behaviors:DecimalSymbolIdicatotionLabelBehavior />
+                            </Label.Behaviors>
+                        </Label>
                     </VerticalStackLayout>
                 </FlexLayout>
                 <BoxView 
