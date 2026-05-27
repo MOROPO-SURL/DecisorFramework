@@ -22,7 +22,7 @@ public partial class CommonIndicatorResultConfigurationPage : Framework.Caney.MV
 
     private void ApplyButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        DisplayAlert("Confirmar", "Está seguro que desea aplicar estos cambios?", "Aplicar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmar", $"Está seguro que desea actualizar el estado del indicador al valor de {BindingContextPageModel.Amount} {BindingContextPageModel.IndicatorUnitMeasurement.Symbol}, junto al resto de los datos especificados?", "Aplicar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 

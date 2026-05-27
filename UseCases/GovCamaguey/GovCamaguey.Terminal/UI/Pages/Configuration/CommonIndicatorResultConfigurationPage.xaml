@@ -2,6 +2,7 @@
 <caneyframework_mvvm_pages:BindingContextedContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_behaviors="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Behaviors"
     xmlns:local_configuration_page_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
@@ -51,6 +52,13 @@
                                     IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static local_configuration_page_models:CommonIndicatorResultConfigurationPageModel.AmountValidableProperty}}"
                                     Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static local_configuration_page_models:CommonIndicatorResultConfigurationPageModel.AmountValidableProperty}}"
                                     TextColor="IndianRed" />
+                                <Label 
+                                    FontAttributes="Italic"
+                                    TextColor="{AppThemeBinding Dark={StaticResource LightInfoBorder}, Light={StaticResource DarkInfoBorder}}">
+                                    <Label.Behaviors>
+                                        <local_behaviors:DecimalSymbolIdicatotionLabelBehavior />
+                                    </Label.Behaviors>
+                                </Label>
                             </VerticalStackLayout>
                             <VerticalStackLayout Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha" />
