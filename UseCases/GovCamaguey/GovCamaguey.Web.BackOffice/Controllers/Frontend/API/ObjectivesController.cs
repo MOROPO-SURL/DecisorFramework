@@ -94,7 +94,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
                 model.IsModerable = true;
             }
 
-            var presentableOrganizationResponsabilityBridges = proyection.OrganizationResponsabilityBridges.Where(item => !item.Stern.Archived);
+            var presentableOrganizationResponsabilityBridges = proyection.OrganizationResponsabilityBridges.Where(bridge => !bridge.Stern.Archived).OrderBy(bridge => bridge.Stern.Priority);
 
             foreach (var bridge in presentableOrganizationResponsabilityBridges)
             {
@@ -105,7 +105,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
                 target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
             }
 
-            var presentableOrganizationParticipationBridges = proyection.OrganizationParticipationBridges.Where(item => !item.Stern.Archived);
+            var presentableOrganizationParticipationBridges = proyection.OrganizationParticipationBridges.Where(bridge => !bridge.Stern.Archived).OrderBy(bridge => bridge.Stern.Priority);
 
             foreach (var bridge in presentableOrganizationParticipationBridges)
             {
@@ -130,7 +130,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
                     model.IsModerable = true;
                 }
 
-                var _presentableOrganizationResponsabilityBridges = action.OrganizationResponsabilityBridges.Where(item => !item.Stern.Archived);
+                var _presentableOrganizationResponsabilityBridges = action.OrganizationResponsabilityBridges.Where(bridge => !bridge.Stern.Archived).OrderBy(bridge => bridge.Stern.Priority);
 
                 foreach (var bridge in _presentableOrganizationResponsabilityBridges)
                 {
@@ -141,7 +141,7 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
                     target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
                 }
 
-                var _presentableOrganizationParticipationBridges = action.OrganizationParticipationBridges.Where(item => !item.Stern.Archived);
+                var _presentableOrganizationParticipationBridges = action.OrganizationParticipationBridges.Where(bridge => !bridge.Stern.Archived).OrderBy(bridge => bridge.Stern.Priority);
 
                 foreach (var bridge in _presentableOrganizationParticipationBridges)
                 {
