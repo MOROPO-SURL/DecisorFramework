@@ -10,4 +10,6 @@ public static class CardViewHeightConstants
 
     public static double KNOWLEDGE_AREA_DEFAULT_CARD_VIEW_HEIGHT = 128;
     public static double KNOWLEDGE_AREA_DEFAULT_CARD_VIEW_WIDTH = 320;
+
+    public static double ACADEMIC_ACHIVEMENT_DEFAULT_CARD_VIEW_HEIGHT = 160;
 }

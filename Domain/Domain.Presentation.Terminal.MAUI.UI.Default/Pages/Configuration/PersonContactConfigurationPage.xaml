@@ -1,6 +1,8 @@
 <core_ui_base_pages:ConfigurationBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Constants"
+    xmlns:local_default_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
@@ -209,7 +211,7 @@
                                                         Clicked="PhoneContactItemEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        Style="{StaticResource FontIconImageButtonStyle}" 
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
                                                         Text="&#xFA78;"
                                                         Clicked="PhoneContactItemRemotionButton_Clicked" />
                                                 </StackLayout>
@@ -281,7 +283,7 @@
                                                         Clicked="EmailContactItemEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        Style="{StaticResource FontIconImageButtonStyle}" 
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
                                                         Text="&#xFA78;"
                                                         Clicked="EmailContactItemRemotionButton_Clicked" />
                                                 </StackLayout>
@@ -378,7 +380,7 @@
                                                             Clicked="PostalContactItemEditionButton_Clicked" />
                                                         <Button
                                                             VerticalOptions="Start"
-                                                            Style="{StaticResource FontIconImageButtonStyle}" 
+                                                            Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
                                                             Text="&#xFA78;"
                                                             Clicked="PostalContactItemRemotionButton_Clicked" />
                                                     </VerticalStackLayout>
@@ -450,7 +452,7 @@
                                                         Clicked="WebContactItemEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Center"
-                                                        Style="{StaticResource FontIconImageButtonStyle}" 
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
                                                         Text="&#xFA78;"
                                                         Clicked="WebContactItemRemotionButton_Clicked" />
                                                 </StackLayout>
@@ -468,6 +470,208 @@
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
                     <Editor Text="{Binding About}" HeightRequest="200" />
                 </VerticalStackLayout>
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Doctorados" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="DoctorateAcademicAchievementAgregationButton_Clicked" />
+                                <BoxView
+                                    Style="{StaticResource SeparatorBoxView}"
+                                    Grid.ColumnSpan="2" Grid.Row="1" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding DoctorateAcademicAchievements}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid 
+                                                ColumnSpacing="8" RowSpacing="8"
+                                                HeightRequest="{Static local_constants:CardViewHeightConstants.ACADEMIC_ACHIVEMENT_DEFAULT_CARD_VIEW_HEIGHT}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <local_default_card_views:AcademicAchievementDefaultCardView Grid.Column="0" Grid.RowSpan="3" />
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    Style="{StaticResource FontIconImageButtonStyle}" 
+                                                    Text="&#xF90B;"
+                                                    Clicked="DoctorateAcademicAchievementEditionButton_Clicked" />
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="1"
+                                                    VerticalOptions="Start"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                    Text="&#xFA78;"
+                                                    Clicked="DoctorateAcademicAchievementRemotionButton_Clicked" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Masters" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="MasterAcademicAchievementAgregationButton_Clicked" />
+                                <BoxView
+                                    Style="{StaticResource SeparatorBoxView}"
+                                    Grid.ColumnSpan="2" Grid.Row="1" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding MasterAcademicAchievements}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid 
+                                                ColumnSpacing="8" RowSpacing="8"
+                                                HeightRequest="{Static local_constants:CardViewHeightConstants.ACADEMIC_ACHIVEMENT_DEFAULT_CARD_VIEW_HEIGHT}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <local_default_card_views:AcademicAchievementDefaultCardView Grid.Column="0" Grid.RowSpan="3" />
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    Style="{StaticResource FontIconImageButtonStyle}" 
+                                                    Text="&#xF90B;"
+                                                    Clicked="MasterAcademicAchievementEditionButton_Clicked" />
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="1"
+                                                    VerticalOptions="Start"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                    Text="&#xFA78;"
+                                                    Clicked="MasterAcademicAchievementAgregationButton_Clicked" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=6, LargeContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Postgrados" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="PostgraduateAcademicAchievementAgregationButton_Clicked" />
+                                <BoxView
+                                    Style="{StaticResource SeparatorBoxView}"
+                                    Grid.ColumnSpan="2" Grid.Row="1" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding PostgraduateAcademicAchievements}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate>
+                                            <Grid 
+                                                ColumnSpacing="8" RowSpacing="8"
+                                                HeightRequest="{Static local_constants:CardViewHeightConstants.ACADEMIC_ACHIVEMENT_DEFAULT_CARD_VIEW_HEIGHT}">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition />
+                                                </Grid.RowDefinitions>
+                                                <local_default_card_views:AcademicAchievementDefaultCardView Grid.Column="0" Grid.RowSpan="3" />
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    Style="{StaticResource FontIconImageButtonStyle}" 
+                                                    Text="&#xF90B;"
+                                                    Clicked="PostgraduateAcademicAchievementEditionButton_Clicked" />
+                                                <Button
+                                                    Grid.Column="1" Grid.Row="1"
+                                                    VerticalOptions="Start"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                    Text="&#xFA78;"
+                                                    Clicked="PostgraduateAcademicAchievementRemotionButton_Clicked" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                </FlexLayout>
                 <BoxView 
                     Style="{StaticResource SeparatorBoxView}"
                     Margin="8,16,8,8"
