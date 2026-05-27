@@ -9,8 +9,8 @@ public class ProyectionSummaryViewModel : AbstractProyectionViewModel
     {
         Description = entity.Description;
         Guidelines = [.. entity.GuidelineBridges.Select(bridge => bridge.Stern)];
-        ResponsabilityOrganizations = [.. entity.OrganizationResponsabilityBridges.Select(bridge => bridge.Stern)];
-        ParticipationOrganizations = [.. entity.OrganizationParticipationBridges.Select(bridge => bridge.Stern)];
+        ResponsabilityOrganizations = [.. entity.OrganizationResponsabilityBridges.Where(bridge => !bridge.Stern.Archived).Select(bridge => bridge.Stern)];
+        ParticipationOrganizations = [.. entity.OrganizationParticipationBridges.Where(bridge => !bridge.Stern.Archived).Select(bridge => bridge.Stern)];
 
         ObjectiveIndex = objectiveIndex;
 

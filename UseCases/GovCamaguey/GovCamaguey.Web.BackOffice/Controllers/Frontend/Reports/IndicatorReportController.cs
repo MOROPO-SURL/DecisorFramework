@@ -6,6 +6,7 @@ using MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Enumerations;
 using MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Models.View;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Frontend.Reports;
 
@@ -128,7 +129,7 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
             GlobalIndicatorResult referenceResult = globalIndicatorResultRepository
                 .FindBy(_entity => _entity.IndicatorId == indicator.Id && _entity.At <= referenceAt)
                 .OrderByDescending(_entity => _entity.At)
-            .Take(1)
+                .Take(1)
                 .FirstOrDefault();
 
             GlobalIndicatorResult lastResult = globalIndicatorResultRepository
@@ -137,6 +138,10 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                 .Take(1)
                 .FirstOrDefault();
 
+            System.DateTime now = System.DateTime.Now;
+
+            GlobalIndicatorMontlyPlan plan = indicator.MontlyPlans.Where(item => item.Year == now.Year && item.Month >= now.Month).OrderBy(item => item.Month).FirstOrDefault();
+
             globalIndicatorStats.Add(new CommonIndicatorStatsViewModel
             {
                 Name = indicator.Name,
@@ -144,7 +149,13 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                 UnitMeasurement = indicator.UnitMeasurement,
                 ReferenceResult = referenceResult?.Amount ?? 0,
                 LastResult = lastResult?.Amount ?? referenceResult?.Amount ?? 0,
-                Context = lastResult?.Description
+                Context = lastResult?.Description,
+                Plan = plan == null ? null : new IndicatorPlanViewModel
+                {
+                    Month = plan.Month,
+                    Year = plan.Year,
+                    Amount = plan.Amount
+                }
             });
         }
 
@@ -160,6 +171,8 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
 
     private ObjectiveStatsViewModel GetObjectiveStatsModel(System.Guid key, System.DateTime referenceAt)
     {
+        System.DateTime now = System.DateTime.Now; 
+        
         Objective entity = objectiveRepository.Get(key);
 
         ObjectiveStatsViewModel model = new()
@@ -188,6 +201,8 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                 .Take(1)
                 .FirstOrDefault();
 
+            ObjectiveIndicatorMontlyPlan plan = indicator.MontlyPlans.Where(item => item.Year == now.Year && item.Month >= now.Month).OrderBy(item => item.Month).FirstOrDefault();
+
             objectiveIndicatorStats.Add(new CommonIndicatorStatsViewModel
             {
                 Name = indicator.Name,
@@ -195,7 +210,13 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                 UnitMeasurement = indicator.UnitMeasurement,
                 ReferenceResult = referenceResult?.Amount ?? 0,
                 LastResult = lastResult?.Amount ?? referenceResult?.Amount ?? 0,
-                Context = lastResult?.Description
+                Context = lastResult?.Description,
+                Plan = plan == null ? null : new IndicatorPlanViewModel
+                {
+                    Month = plan.Month,
+                    Year = plan.Year,
+                    Amount = plan.Amount
+                }
             });
         }
 
@@ -231,6 +252,8 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                     .Take(1)
                     .FirstOrDefault();
 
+                ProyectionIndicatorMontlyPlan _plan = indicator.MontlyPlans.Where(item => item.Year == now.Year && item.Month >= now.Month).OrderBy(item => item.Month).FirstOrDefault();
+
                 proyectionIndicatorStats.Add(new CommonIndicatorStatsViewModel
                 {
                     Name = indicator.Name,
@@ -238,7 +261,13 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                     UnitMeasurement = indicator.UnitMeasurement,
                     ReferenceResult = referenceResult?.Amount ?? 0,
                     LastResult = lastResult?.Amount ?? referenceResult?.Amount ?? 0,
-                    Context = lastResult?.Description
+                    Context = lastResult?.Description,
+                    Plan = _plan == null ? null : new IndicatorPlanViewModel
+                    {
+                        Month = _plan.Month,
+                        Year = _plan.Year,
+                        Amount = _plan.Amount
+                    }
                 });
             }
 
@@ -276,6 +305,8 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                         .Take(1)
                         .FirstOrDefault();
 
+                    ActionIndicatorMontlyPlan __plan = _indicator.MontlyPlans.Where(item => item.Year == now.Year && item.Month >= now.Month).OrderBy(item => item.Month).FirstOrDefault();
+
                     actionIndicatorStats.Add(new CommonIndicatorStatsViewModel
                     {
                         Name = _indicator.Name,
@@ -283,7 +314,13 @@ public class IndicatorReportController : Framework.Guama.Core.Presentation.Web.C
                         UnitMeasurement = _indicator.UnitMeasurement,
                         ReferenceResult = referenceResult?.Amount ?? 0,
                         LastResult = lastResult?.Amount ?? referenceResult?.Amount ?? 0,
-                        Context = lastResult?.Description
+                        Context = lastResult?.Description,
+                        Plan = __plan == null ? null : new IndicatorPlanViewModel
+                        {
+                            Month = __plan.Month,
+                            Year = __plan.Year,
+                            Amount = __plan.Amount
+                        }
                     });
                 }
 

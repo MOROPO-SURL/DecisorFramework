@@ -15,4 +15,6 @@ public class CommonIndicatorStatsViewModel
     public double LastResult { get; set; }
 
     public string Context { get; set; }
+
+    public IndicatorPlanViewModel? Plan { get; set; }
 }

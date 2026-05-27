@@ -81,7 +81,9 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
             model.Responsible.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Responsible.Identity.Image.ContentType);
         }
 
-        foreach (var proyection in entity.Proyections)
+        var presentableProyections = entity.Proyections.Where(item => !item.Archived);
+
+        foreach (var proyection in presentableProyections)
         {
             var item = model.Proyections.First(_model => _model.Id == proyection.Id);
 
@@ -92,7 +94,9 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
                 model.IsModerable = true;
             }
 
-            foreach (var bridge in proyection.OrganizationResponsabilityBridges)
+            var presentableOrganizationResponsabilityBridges = proyection.OrganizationResponsabilityBridges.Where(item => !item.Stern.Archived);
+
+            foreach (var bridge in presentableOrganizationResponsabilityBridges)
             {
                 if (bridge.Stern.Identity.Image == null) continue;
 
@@ -101,7 +105,9 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
                 target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
             }
 
-            foreach (var bridge in proyection.OrganizationParticipationBridges)
+            var presentableOrganizationParticipationBridges = proyection.OrganizationParticipationBridges.Where(item => !item.Stern.Archived);
+
+            foreach (var bridge in presentableOrganizationParticipationBridges)
             {
                 if (bridge.Stern.Identity.Image == null) continue;
 
@@ -110,7 +116,9 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
                 target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
             }
 
-            foreach (var action in proyection.Actions)
+            var presentableActions = proyection.Actions.Where(item => !item.Archived);
+
+            foreach (var action in presentableActions)
             {
                 var _item = item.Actions.First(_model => _model.Id == action.Id);
 
@@ -122,7 +130,9 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
                     model.IsModerable = true;
                 }
 
-                foreach (var bridge in action.OrganizationResponsabilityBridges)
+                var _presentableOrganizationResponsabilityBridges = action.OrganizationResponsabilityBridges.Where(item => !item.Stern.Archived);
+
+                foreach (var bridge in _presentableOrganizationResponsabilityBridges)
                 {
                     if (bridge.Stern.Identity.Image == null) continue;
 
@@ -131,7 +141,9 @@ public class ObjectivesController : Framework.Guama.Core.Presentation.Web.API.Co
                     target.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(bridge.Stern.Identity.Image.ContentType);
                 }
 
-                foreach (var bridge in action.OrganizationParticipationBridges)
+                var _presentableOrganizationParticipationBridges = action.OrganizationParticipationBridges.Where(item => !item.Stern.Archived);
+
+                foreach (var bridge in _presentableOrganizationParticipationBridges)
                 {
                     if (bridge.Stern.Identity.Image == null) continue;
 

@@ -173,34 +173,42 @@ else
                                         <tr>
                                             <td>
                                                 <h5 class="h-seccion">Responsables</h5>
-                                                @if (__item.OrganizationResponsabilityBridges.Count <= 0)
-                                                {
-                                                    <div class="text-muted">@emptyMessage</div>
-                                                }
-                                                else
-                                                {
-                                                    <ul>
-                                                        @foreach (var ___item in __item.OrganizationResponsabilityBridges)
-                                                        {
-                                                            <li>@___item.Stern.Identity.Name</li>
-                                                        }
-                                                    </ul>
+                                                @{
+                                                    var responsibleBridges = __item.OrganizationResponsabilityBridges.Where(bridge => !bridge.Stern.Archived).ToArray();
+
+                                                    if (responsibleBridges.Length <= 0)
+                                                    {
+                                                        <div class="text-muted">@emptyMessage</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <ul>
+                                                            @foreach (var ___item in responsibleBridges)
+                                                            {
+                                                                <li>@___item.Stern.Identity.Name</li>
+                                                            }
+                                                        </ul>
+                                                    }
                                                 }
                                             </td>
                                             <td>
                                                 <h5 class="h-seccion">Participantes</h5>
-                                                @if (__item.OrganizationParticipationBridges.Count <= 0)
-                                                {
-                                                    <div class="text-muted">@emptyMessage</div>
-                                                }
-                                                else
-                                                {
-                                                    <ul>
-                                                        @foreach (var ___item in __item.OrganizationParticipationBridges)
-                                                        {
-                                                            <li>@___item.Stern.Identity.Name</li>
-                                                        }
-                                                    </ul>
+                                                @{
+                                                    var participationBridges = __item.OrganizationParticipationBridges.Where(bridge => !bridge.Stern.Archived).ToArray();
+
+                                                    if (participationBridges.Length <= 0)
+                                                    {
+                                                        <div class="text-muted">@emptyMessage</div>
+                                                    }
+                                                    else
+                                                    {
+                                                        <ul>
+                                                            @foreach (var ___item in participationBridges)
+                                                            {
+                                                                <li>@___item.Stern.Identity.Name</li>
+                                                            }
+                                                        </ul>
+                                                    }
                                                 }
                                             </td>
                                         </tr>

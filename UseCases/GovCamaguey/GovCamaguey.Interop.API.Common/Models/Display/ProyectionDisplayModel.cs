@@ -34,7 +34,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
             Name = entity.Name;
             Description = entity.Description;
 
-            Guidelines = entity.GuidelineBridges.OrderBy(bridge => bridge.Stern.Index).Select(bridge =>
+            Guidelines = entity.GuidelineBridges.Where(bridge => !bridge.Stern.Archived).OrderBy(bridge => bridge.Stern.Index).Select(bridge =>
             {
                 var model = new GuidelineDisplayModel();
 
@@ -43,7 +43,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
                 return model;
             }).ToArray();
 
-            ResponsabilityOrganizations = entity.OrganizationResponsabilityBridges.OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
+            ResponsabilityOrganizations = entity.OrganizationResponsabilityBridges.Where(bridge => !bridge.Stern.Archived).OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
             {
                 var model = new OrganizationDisplayModel();
 
@@ -52,7 +52,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
                 return model;
             }).ToArray();
 
-            ParticipationOrganizations = entity.OrganizationParticipationBridges.OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
+            ParticipationOrganizations = entity.OrganizationParticipationBridges.Where(bridge => !bridge.Stern.Archived).OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
             {
                 var model = new OrganizationDisplayModel();
 
@@ -70,7 +70,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
                 return model;
             }).ToArray();
 
-            Actions = entity.Actions.OrderBy(_entity => _entity.Index).Select(_entity =>
+            Actions = entity.Actions.Where(_entity => !_entity.Archived).OrderBy(_entity => _entity.Index).Select(_entity =>
             {
                 var model = new ActionDisplayModel();
 

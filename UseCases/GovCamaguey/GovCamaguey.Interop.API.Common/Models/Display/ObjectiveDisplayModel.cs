@@ -43,7 +43,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
                 return model;
             }).ToArray();
 
-            Proyections = entity.Proyections.OrderBy(_entity => _entity.Index).Select(_entity =>
+            Proyections = entity.Proyections.Where(_entity => !_entity.Archived).OrderBy(_entity => _entity.Index).Select(_entity =>
             {
                 var model = new ProyectionDisplayModel();
 

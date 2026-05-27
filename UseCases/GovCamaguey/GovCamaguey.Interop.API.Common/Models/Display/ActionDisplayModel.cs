@@ -32,7 +32,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
             Name = entity.Name;
             Description = entity.Description;
 
-            ResponsabilityOrganizations = entity.OrganizationResponsabilityBridges.OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
+            ResponsabilityOrganizations = entity.OrganizationResponsabilityBridges.Where(bridge => !bridge.Stern.Archived).OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
             {
                 var model = new OrganizationDisplayModel();
 
@@ -41,7 +41,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display
                 return model;
             }).ToArray();
 
-            ParticipationOrganizations = entity.OrganizationParticipationBridges.OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
+            ParticipationOrganizations = entity.OrganizationParticipationBridges.Where(bridge => !bridge.Stern.Archived).OrderBy(bridge => bridge.Stern.Priority).Select(bridge =>
             {
                 var model = new OrganizationDisplayModel();
 

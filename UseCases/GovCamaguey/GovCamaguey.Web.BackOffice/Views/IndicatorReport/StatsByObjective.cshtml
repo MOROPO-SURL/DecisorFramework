@@ -40,6 +40,11 @@
                     vertical-align: central;
                 }
 
+                table td.datetime {
+                    text-align: center;
+                    vertical-align: central;
+                }
+
         h5.h-seccion {
             font-style: italic;
             text-decoration: underline;
@@ -82,10 +87,13 @@ else
                 <th class="name" rowspan="2">Indicador</th>
                 <th rowspan="2">UM</th>
                 <th class="numeric" rowspan="2">Meta</th>
+                <th colspan="2">Plan</th>
                 <th colspan="2">Estado</th>
                 <th class="context" rowspan="2">Contexto</th>
             </tr>
             <tr>
+                <th class="numeric">Período</th>
+                <th class="numeric">Meta</th>
                 <th class="numeric">Referencia</th>
                 <th class="numeric">Actual</th>
             </tr>
@@ -97,6 +105,8 @@ else
                     <td>@_item.Name</td>
                     <td style="text-align: center;">@_item.UnitMeasurement.Symbol</td>
                     <td class="numeric">@_item.Amount</td>
+                    <td class="datetime">@Html.Raw(_item.Plan == null ? "---" : $"{_item.Plan.Month}/{_item.Plan.Year}")</td>
+                    <td class="numeric">@Html.Raw(_item.Plan == null ? "-" : _item.Plan.Amount)</td>
                     <td class="numeric">@_item.ReferenceResult</td>
                     <td class="numeric">@_item.LastResult</td>
                     <td>@_item.Context</td>
@@ -130,10 +140,13 @@ else
                                 <th class="name" rowspan="2">Indicador</th>
                                 <th rowspan="2">UM</th>
                                 <th class="numeric" rowspan="2">Meta</th>
+                                <th colspan="2">Plan</th>
                                 <th colspan="2">Estado</th>
                                 <th class="context" rowspan="2">Contexto</th>
                             </tr>
                             <tr>
+                                <th class="numeric">Período</th>
+                                <th class="numeric">Meta</th>
                                 <th class="numeric">Referencia</th>
                                 <th class="numeric">Actual</th>
                             </tr>
@@ -145,6 +158,8 @@ else
                                     <td>@__item.Name</td>
                                     <td style="text-align: center;">@__item.UnitMeasurement.Symbol</td>
                                     <td class="numeric">@__item.Amount</td>
+                                    <td class="datetime">@Html.Raw(__item.Plan == null ? "---" : $"{__item.Plan.Month}/{__item.Plan.Year}")</td>
+                                    <td class="numeric">@Html.Raw(__item.Plan == null ? "-" : __item.Plan.Amount)</td>
                                     <td class="numeric">@__item.ReferenceResult</td>
                                     <td class="numeric">@__item.LastResult</td>
                                     <td>@__item.Context</td>
@@ -178,10 +193,13 @@ else
                                                 <th class="name" rowspan="2">Indicador</th>
                                                 <th rowspan="2">UM</th>
                                                 <th class="numeric" rowspan="2">Meta</th>
+                                                <th colspan="2">Plan</th>
                                                 <th colspan="2">Estado</th>
                                                 <th class="context" rowspan="2">Contexto</th>
                                             </tr>
                                             <tr>
+                                                <th class="numeric">Período</th>
+                                                <th class="numeric">Meta</th>
                                                 <th class="numeric">Referencia</th>
                                                 <th class="numeric">Actual</th>
                                             </tr>
@@ -193,6 +211,8 @@ else
                                                     <td>@___item.Name</td>
                                                     <td style="text-align: center;">@___item.UnitMeasurement.Symbol</td>
                                                     <td class="numeric">@___item.Amount</td>
+                                                    <td class="datetime">@Html.Raw(___item.Plan == null ? "---" : $"{___item.Plan.Month}/{___item.Plan.Year}")</td>
+                                                    <td class="numeric">@Html.Raw(___item.Plan == null ? "-" : ___item.Plan.Amount)</td>
                                                     <td class="numeric">@___item.ReferenceResult</td>
                                                     <td class="numeric">@___item.LastResult</td>
                                                     <td>@___item.Context</td>
