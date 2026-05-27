@@ -62,6 +62,11 @@
                         <Entry 
                             Placeholder="Ej. 12.463212"
                             Text="{Binding Fee}" />
+                        <Label TextColor="{AppThemeBinding Light={StaticResource DarkInfoBorder}, Dark={StaticResource LightInfoBorder}}">
+                            <Label.Behaviors>
+                                <core_ui_behaviors:DecimalSymbolIdicatotionLabelBehavior />
+                            </Label.Behaviors>
+                        </Label>
                     </VerticalStackLayout>
                 </FlexLayout>
                 <BoxView 
