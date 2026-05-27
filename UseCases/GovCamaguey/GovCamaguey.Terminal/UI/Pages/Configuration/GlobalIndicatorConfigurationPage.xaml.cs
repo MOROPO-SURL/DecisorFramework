@@ -97,7 +97,7 @@ public partial class GlobalIndicatorConfigurationPage : Framework.Decisor.Core.P
 
         var now = System.DateTime.Now;
 
-        for (int year = now.Year; year <= now.Year + 3; year++)
+        for (int year = now.Year; year <= now.Year + 1; year++)
         {
             for (int month = 1; month <= 12; month++)
             {
@@ -118,7 +118,7 @@ public partial class GlobalIndicatorConfigurationPage : Framework.Decisor.Core.P
 
         var now = System.DateTime.Now;
 
-        for (int year = now.Year; year <= now.Year + 3; year++)
+        for (int year = now.Year; year <= now.Year + 1; year++)
         {
             for (int month = 1; month <= 12; month++)
             {

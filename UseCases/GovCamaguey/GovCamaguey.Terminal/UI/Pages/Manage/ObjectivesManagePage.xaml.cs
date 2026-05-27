@@ -1,6 +1,5 @@
 using Microsoft.Extensions.DependencyInjection;
-using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;
-using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
+using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration;
 using System.Linq;
 
@@ -106,7 +105,12 @@ public partial class ObjectivesManagePage : Framework.Decisor.Core.Presentation.
         base.ItemDetailRequestControl_Invoked(sender, System.EventArgs.Empty);
     }
 
-    protected override void ComplementConfigurationPage(ConfigurationBaseContentPage<ObjectiveDisplayModel, ObjectiveDisplayModel, ObjectiveConfigurationPageModel> page, ObjectiveDisplayModel model = null)
+    protected override void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.ObjectiveDisplayModel model)
+    {
+        this.PresentToastNotification(Framework.Decisor.Core.Presentation.Terminal.MAUI.Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.", delay: System.TimeSpan.FromMilliseconds(500));
+    }
+
+    protected override void ComplementConfigurationPage(Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.ObjectiveDisplayModel, Interop.API.Common.Models.Display.ObjectiveDisplayModel, ObjectiveConfigurationPageModel> page, Interop.API.Common.Models.Display.ObjectiveDisplayModel model = null)
     {
         Dispatcher.Dispatch(() => IsEnabled = false);
 

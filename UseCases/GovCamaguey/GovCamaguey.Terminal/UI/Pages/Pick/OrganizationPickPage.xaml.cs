@@ -62,7 +62,7 @@ public partial class OrganizationPickPage : Framework.Caney.MVVM.Core.Pages.Cont
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }
 
-    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.OrganizationDisplayModel model)
+    private void ConfigurationSuccess_Callback(OrganizationDisplayModel model)
     {
         Dispatcher.Dispatch(() =>
         {

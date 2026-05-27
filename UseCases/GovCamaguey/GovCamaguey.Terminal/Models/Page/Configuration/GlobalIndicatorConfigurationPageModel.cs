@@ -18,7 +18,7 @@ public class GlobalIndicatorConfigurationPageModel : Framework.Decisor.Core.Pres
 
     public GlobalIndicatorConfigurationPageModel() : this(null) { }
 
-    public GlobalIndicatorConfigurationPageModel(Interop.API.Common.Models.Display.GlobalIndicatorDisplayModel model, Interop.API.Common.Models.Display.GlobalIndicatorMontlyPlanDisplayModel[] montlyPlans = null) : base(model)
+    public GlobalIndicatorConfigurationPageModel(Interop.API.Common.Models.Display.GlobalIndicatorDisplayModel model) : base(model)
     {
         if (model != null)
         {
@@ -28,11 +28,7 @@ public class GlobalIndicatorConfigurationPageModel : Framework.Decisor.Core.Pres
             Description = model.Description;
             Amount = model.Amount;
             UnitMeasurementId = model.UnitMeasurement.Id;
-
-            if (montlyPlans != null)
-            {
-                MontlyPlans = new ObservableCollection<Interop.API.Common.Models.Display.GlobalIndicatorMontlyPlanDisplayModel>(montlyPlans.OrderBy(_model => _model.Year * 100 + _model.Month));
-            }
+            MontlyPlans = new ObservableCollection<Interop.API.Common.Models.Display.GlobalIndicatorMontlyPlanDisplayModel>(model.MontlyPlans.OrderBy(_model => _model.Year * 100 + _model.Month));
         }
     }
 

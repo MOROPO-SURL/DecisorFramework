@@ -582,9 +582,6 @@
 	<data name="action-management-permission-group" xml:space="preserve">
     <value>Gestionar Acciones</value>
   </data>
-	<data name="action-management-permission-group" xml:space="preserve">
-    <value>Gestionar Acciones</value>
-  </data>
 	<data name="action-creator-permission" xml:space="preserve">
     <value>Crear Acción</value>
   </data>

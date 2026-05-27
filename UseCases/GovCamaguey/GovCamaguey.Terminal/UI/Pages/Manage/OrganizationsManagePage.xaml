@@ -1,7 +1,7 @@
 <core_ui_base_pages:ManageBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Manage"
+    xmlns:local_constants="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Constants"
     xmlns:local_card_views="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;assembly=MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common"
     xmlns:local_manage_page_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Manage"
@@ -50,7 +50,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <local_card_views:OrganizationDefaultCardView HeightRequest="{Static local:OrganizationsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                <local_card_views:OrganizationDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.ORGANIZATIONAL_DEFAULT_CARD_VIEW_HEIGHT}">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </ContentView.GestureRecognizers>

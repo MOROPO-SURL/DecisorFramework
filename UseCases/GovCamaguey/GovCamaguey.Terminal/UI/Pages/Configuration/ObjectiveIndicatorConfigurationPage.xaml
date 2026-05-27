@@ -2,6 +2,7 @@
 <core_ui_base_pages:ConfigurationBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_converters="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Converters"
     xmlns:local_configuration_page_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Configuration"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
@@ -18,6 +19,8 @@
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+
+            <local_converters:MonthToStringConverter x:Key="MonthToStringConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
@@ -96,7 +99,7 @@
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Planes Mensuales" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Planes" />
                     <Frame Padding="8">
                         <Grid RowSpacing="8">
                             <Grid.ColumnDefinitions>
@@ -124,34 +127,52 @@
                                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.EmptyView>
-                                    <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    <Label Margin="8" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="interop_common_display_models:ObjectiveIndicatorMontlyPlanDisplayModel">
-                                        <Frame 
-                                            Padding="8"
-                                            Margin="0,12,0,0">
-                                            <StackLayout Orientation="Horizontal" Spacing="8">
-                                                <Label
-                                                    Margin="8"
-                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center"
-                                                    LineBreakMode="TailTruncation"
-                                                    Text="{Binding .}" />
-                                                <Button
+                                        <Frame Padding="8">
+                                            <Grid ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="3*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="2*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <Label 
+                                                    Grid.Column="0"
                                                     VerticalOptions="Center"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons" 
+                                                    Margin="8,0">
+                                                    <Label.FormattedText>
+                                                        <FormattedString>
+                                                            <Span Text="{Binding Month, Converter={StaticResource MonthToStringConverter}}" />
+                                                            <Span Text="{Binding Year, StringFormat=' / {0}'}" />
+                                                        </FormattedString>
+                                                    </Label.FormattedText>
+                                                </Label>
+                                                <Label 
+                                                    Grid.Column="1"
+                                                    VerticalOptions="Center"
+                                                    Text="=>" />
+                                                <Label
+                                                    Grid.Column="2"
+                                                    Margin="0,0,8,0"
+                                                    HorizontalTextAlignment="End" VerticalOptions="Center"
+                                                    Text="{Binding Amount}" />
+                                                <Button
+                                                    Grid.Column="3"
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    VerticalOptions="Center"
                                                     Text="&#xF90B;"
                                                     Clicked="MontlyPlanEditionButton_Clicked" />
                                                 <Button
+                                                    Grid.Column="4"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                     VerticalOptions="Center"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons" 
                                                     Text="&#xFA78;"
                                                     Clicked="MontlyPlanRemotionButton_Clicked" />
-                                            </StackLayout>
+                                            </Grid>
                                         </Frame>
                                     </DataTemplate>
                                 </CollectionView.ItemTemplate>

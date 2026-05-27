@@ -22,26 +22,36 @@
                 Aspect="AspectFill"
                 WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
                 Source="{Binding Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
-            <StackLayout 
+            <Grid 
                 Grid.Column="1"
                 Padding="10">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="52*" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="48*" />
+                </Grid.RowDefinitions>
                 <Label 
+                    Grid.Row="0"
                     FontAttributes="Bold"
-                    FontSize="Medium"
                     LineBreakMode="TailTruncation"
-                    Text="{Binding Identity.Name}" />
+                    MaxLines="2"
+                    Text="{Binding Identity.Name}"
+                    ToolTipProperties.Text="{Binding Identity.Name}"/>
                 <Label 
-                    Margin="0,8,0,0"
+                    Grid.Row="1"
+                    Margin="0,4,0,0"
                     Text="Descripción"
                     TextColor="DimGray"
                     FontSize="Caption"
                     FontAttributes="Bold" />
                 <Label
+                    Grid.Row="2"
                     VerticalOptions="FillAndExpand"
                     LineBreakMode="TailTruncation"
                     MaxLines="2"
-                    Text="{Binding Identity.About, TargetNullValue='---'}" />
-            </StackLayout>
+                    TextColor="{AppThemeBinding Light={StaticResource OffBlack}, Dark={StaticResource OffWhite}}"
+                    Text="{Binding Identity.About, TargetNullValue='---', FallbackValue='---4577'}" />
+            </Grid>
         </Grid>
     </Frame>
 </ContentView>

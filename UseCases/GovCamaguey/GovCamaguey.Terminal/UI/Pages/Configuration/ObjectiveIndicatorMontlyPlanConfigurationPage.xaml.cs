@@ -9,7 +9,7 @@ public partial class ObjectiveIndicatorMontlyPlanConfigurationPage : Framework.D
         InitializeComponent();
     }
 
-    protected override string EntityTypeName => "Plan Mensual de Indicador";
+    protected override string EntityTypeName => "Plan de Indicador";
 
     protected override System.Threading.Tasks.Task<ObjectiveIndicatorMontlyPlanInputModel> PerformCreationAsync()
     {
