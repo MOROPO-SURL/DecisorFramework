@@ -12,7 +12,7 @@
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.VacantPostulationPickPage"
     x:TypeArguments="interop_common_display_models:VacantPostulationDisplayModel,presentation_pick_page_models:VacantPostulationPickPageModel"
     x:DataType="presentation_pick_page_models:VacantPostulationPickPageModel"
-    Title="Seleccionar Postulación a Vacante">
+    Title="Seleccionar Captación">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />

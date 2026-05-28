@@ -13,7 +13,7 @@ public partial class AdmitionPropousalConfigurationPage : Core.Presentation.Term
         InitializeComponent();
     }
 
-    protected override string EntityTypeName => "Propuesta de Admisión";
+    protected override string EntityTypeName => "Admisión";
 
     protected override async System.Threading.Tasks.Task<AdmitionPropousalDisplayModel> PerformCreationAsync()
     {

@@ -14,7 +14,7 @@
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.OcupationCandidatesManagePage"
     x:TypeArguments="interop_common_display_models:OcupationCandidateDisplayModel,presentation_manage_page_models:OcupationCandidatesManagePageModel,presentation_configuration_page_models:OcupationCandidateConfigurationPageModel"
     x:DataType="presentation_manage_page_models:OcupationCandidatesManagePageModel"
-    Title="Gestión de Candidatos a Admisión">
+    Title="Gestión de Selecciones">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
