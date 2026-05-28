@@ -5,7 +5,7 @@
 		<ImplicitUsings>disable</ImplicitUsings>
 		<AssemblyName>MOROPO.CITMACamaguey.Decisor.Web.BackOffice</AssemblyName>
 		<RootNamespace>MOROPO.CITMACamaguey.Decisor.Web.BackOffice</RootNamespace>
-		<VersionPrefix>0.5.0</VersionPrefix>
+		<VersionPrefix>0.7.0</VersionPrefix>
 	</PropertyGroup>
 	<ItemGroup>
 		<Compile Remove="dpkeys\**" />

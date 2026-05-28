@@ -78,13 +78,13 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </FlyoutItem.Icon>
         <ShellContent
-            Title="Postulaciones"
+            Title="Captaciones"
             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:VacantPostulationsManagePage}" />
         <ShellContent
-            Title="Candidatos"
+            Title="Selecciones"
             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:OcupationCandidatesManagePage}" />
         <ShellContent
-            Title="Propuestas"
+            Title="Admisiones"
             ContentTemplate="{DataTemplate decisorframework_humanresources_manage_pages:AdmitionPropousalsManagePage}" />
     </FlyoutItem>
     <ShellContent
