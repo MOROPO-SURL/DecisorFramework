@@ -12,7 +12,7 @@
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.AdmitionPropousalPickPage"
     x:TypeArguments="interop_common_display_models:AdmitionPropousalDisplayModel,presentation_pick_page_models:AdmitionPropousalPickPageModel"
     x:DataType="presentation_pick_page_models:AdmitionPropousalPickPageModel"
-    Title="Seleccionar Propuesta de Admisión">
+    Title="Seleccionar Admisión">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />

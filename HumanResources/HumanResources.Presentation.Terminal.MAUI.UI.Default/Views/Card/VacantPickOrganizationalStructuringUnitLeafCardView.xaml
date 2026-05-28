@@ -30,7 +30,7 @@
                 <Label 
                     Style="{StaticResource CaptionFieldLabelStyle}"
                     Margin="0,8"
-                    Text="Ocupaciones" />
+                    Text="Ocupaciones vacantes" />
                 <CollectionView 
                     x:Name="VacantsCollectionView"
                     ItemsSource="{Binding Vacants}">
@@ -56,7 +56,7 @@
                                     </Grid.ColumnDefinitions>
                                     <BoxView
                                         Grid.Column="0"
-                                        Color="{StaticResource PrimaryColor}" />
+                                        Color="DimGray" />
                                     <Label
                                         Grid.Column="1"
                                         Padding="8"

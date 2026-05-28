@@ -12,7 +12,7 @@
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OcupationCandidatePickPage"
     x:TypeArguments="interop_common_display_models:OcupationCandidateDisplayModel,presentation_pick_page_models:OcupationCandidatePickPageModel"
     x:DataType="presentation_pick_page_models:OcupationCandidatePickPageModel"
-    Title="Seleccionar Candidato a Admisión">
+    Title="Seleccionar Selección">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
