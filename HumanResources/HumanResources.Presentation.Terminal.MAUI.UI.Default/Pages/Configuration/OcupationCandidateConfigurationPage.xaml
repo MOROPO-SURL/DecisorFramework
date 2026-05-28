@@ -56,7 +56,7 @@
                         WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, LargeContainerColumn=5, MediumContainerColumn=6, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
-                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Postulación" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Captación" />
                         <ContentView
                             IsVisible="{Binding Postulation, Converter={StaticResource IsNotNullConverter}}"
                             HeightRequest="{Static local_constants:CardViewHeightConstants.VACANT_POSTULATION_DEFAULT_CARD_VIEW_HEIGHT}">

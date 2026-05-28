@@ -18,7 +18,7 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
         InitializeComponent();
     }
 
-    protected override string EntityTypeName => "Candidato a Admisión";
+    protected override string EntityTypeName => "Selección";
 
     protected override async System.Threading.Tasks.Task<OcupationCandidateDisplayModel> PerformCreationAsync()
     {
