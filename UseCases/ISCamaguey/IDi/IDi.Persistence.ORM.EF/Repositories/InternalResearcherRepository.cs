@@ -12,6 +12,7 @@ public class InternalResearcherRepository : Framework.Guama.Core.Persistence.ORM
     {
         return base.GetQueryableDbSet()
             .Include(entity => entity.Employee).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
-            .Include(entity => entity.Category);
+            .Include(entity => entity.Category)
+            .Include(entity => entity.TeachingCategory);
     }
 }

@@ -23,6 +23,9 @@ public static class CardViewHeightConstants
     public static double INTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_HEIGHT = 172;
     public static double INTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_WIDTH = 400;
 
+    public static double EXTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_HEIGHT = 172;
+    public static double EXTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_WIDTH = 400;
+
     public static double PROJECT_DEFAULT_CARD_VIEW_HEIGHT = 152;
     public static double PROJECT_DEFAULT_CARD_VIEW_WIDTH = 400;
 

@@ -13,6 +13,14 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
     private readonly List<Interop.API.Common.Models.Input.ProjectSpecificObjectiveInputModel> incomingSpecificObjectives = [];
     private readonly List<Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel> outgoingSpecificObjectives = [];
 
+    private readonly List<Interop.API.Common.Models.Input.InternalResearcherProjectParticipationInputModel> editionInternalResearcherProjectParticipations = [];
+    private readonly List<Interop.API.Common.Models.Input.InternalResearcherProjectParticipationInputModel> incomingInternalResearcherProjectParticipations = [];
+    private readonly List<Interop.API.Common.Models.Display.InternalResearcherProjectParticipationDisplayModel> outgoingInternalResearcherProjectParticipations = [];
+
+    private readonly List<Interop.API.Common.Models.Input.ExternalResearcherProjectParticipationInputModel> editionExternalResearcherProjectParticipations = [];
+    private readonly List<Interop.API.Common.Models.Input.ExternalResearcherProjectParticipationInputModel> incomingExternalResearcherProjectParticipations = [];
+    private readonly List<Interop.API.Common.Models.Display.ExternalResearcherProjectParticipationDisplayModel> outgoingExternalResearcherProjectParticipations = [];
+
     public ProjectConfigurationPage(System.Action<Interop.API.Common.Models.Display.ProjectDisplayModel> successAction, Models.Page.Configuration.ProjectConfigurationPageModel model, Validators.ProjectConfigurationValidator validator) : base(successAction, model, validator)
     {
         InitializeComponent();
@@ -59,7 +67,9 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             PredecessorId = ConcreteBindingContext.Predecessor?.Id,
             ParticipatingOrganizations = [.. ConcreteBindingContext.ParticipatingOrganizations],
             ProgramExpectResults = [.. ConcreteBindingContext.ProgramExpectResults],
-            IncomingSpecificObjectives = incomingSpecificObjectives
+            IncomingSpecificObjectives = incomingSpecificObjectives,
+            IncomingExternalResearcherProjectParticipations = incomingExternalResearcherProjectParticipations,
+            IncomingInternalResearcherProjectParticipations = incomingInternalResearcherProjectParticipations
         };
 
         if (documentFilePickResult != null)
@@ -109,7 +119,13 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             ProgramExpectResults = [.. ConcreteBindingContext.ProgramExpectResults],
             IncomingSpecificObjectives = incomingSpecificObjectives,
             EditionSpecificObjectives = editionSpecificObjectives,
-            OutgoingSpecificObjectives = outgoingSpecificObjectives
+            OutgoingSpecificObjectives = outgoingSpecificObjectives,
+            IncomingExternalResearcherProjectParticipations = incomingExternalResearcherProjectParticipations,
+            EditionExternalResearcherProjectParticipations = editionExternalResearcherProjectParticipations,
+            OutgoingExternalResearcherProjectParticipations = outgoingExternalResearcherProjectParticipations,
+            IncomingInternalResearcherProjectParticipations = incomingInternalResearcherProjectParticipations,
+            EditionInternalResearcherProjectParticipations = editionInternalResearcherProjectParticipations,
+            OutgoingInternalResearcherProjectParticipations = outgoingInternalResearcherProjectParticipations
         };
 
         if (documentFilePickResult != null)
@@ -212,7 +228,7 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
         {
             PickerTitle = "Seleccionar archivo",
             FileTypes = new Microsoft.Maui.Storage.FilePickerFileType(
-                new System.Collections.Generic.Dictionary<Microsoft.Maui.Devices.DevicePlatform, System.Collections.Generic.IEnumerable<string>>
+                new Dictionary<Microsoft.Maui.Devices.DevicePlatform, IEnumerable<string>>
                 {
                     { Microsoft.Maui.Devices.DevicePlatform.iOS, [ "public.my.comic.extension" ] }, // UTType values
                     { Microsoft.Maui.Devices.DevicePlatform.Android, [ "application/comics" ] }, // MIME type
@@ -298,6 +314,120 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
         });
     }
 
+    private void ExternalResearcherParticipationAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new ExternalResearcherProjectParticipationConfigurationPage(ExternalResearcherParticipationCreateSuccess_Callback, new Models.Page.Configuration.ExternalResearcherProjectParticipationConfigurationPageModel(null)));
+    }
+
+    private void ExternalResearcherParticipationEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new ExternalResearcherProjectParticipationConfigurationPage(ExternalResearcherParticipationEditSuccess_Callback, new Models.Page.Configuration.ExternalResearcherProjectParticipationConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ExternalResearcherProjectParticipationDisplayModel)));
+    }
+
+    private void ExternalResearcherParticipationRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta participación de investigador externo?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ExternalResearcherProjectParticipationDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingExternalResearcherProjectParticipations)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingExternalResearcherProjectParticipations.Remove(editionExternalResearcherProjectParticipations.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionExternalResearcherProjectParticipations)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionExternalResearcherProjectParticipations.Remove(editionExternalResearcherProjectParticipations.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingExternalResearcherProjectParticipations.Add(target);
+                }
+
+                ConcreteBindingContext.ExternalResearcherProjectParticipations.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void InternalResearcherParticipationAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new InternalResearcherProjectParticipationConfigurationPage(InternalResearcherParticipationCreateSuccess_Callback, new Models.Page.Configuration.InternalResearcherProjectParticipationConfigurationPageModel(null)));
+    }
+
+    private void InternalResearcherParticipationEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushPageAsync(new InternalResearcherProjectParticipationConfigurationPage(InternalResearcherParticipationEditSuccess_Callback, new Models.Page.Configuration.InternalResearcherProjectParticipationConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.InternalResearcherProjectParticipationDisplayModel)));
+    }
+
+    private void InternalResearcherParticipationRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar esta participación de investigador interno?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.InternalResearcherProjectParticipationDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingExternalResearcherProjectParticipations)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingInternalResearcherProjectParticipations.Remove(editionInternalResearcherProjectParticipations.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionExternalResearcherProjectParticipations)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionInternalResearcherProjectParticipations.Remove(editionInternalResearcherProjectParticipations.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingInternalResearcherProjectParticipations.Add(target);
+                }
+
+                ConcreteBindingContext.InternalResearcherProjectParticipations.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
     private void SpecificObjectiveCreateSuccess_Callback(Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel model)
     {
         incomingSpecificObjectives.Add(new Interop.API.Common.Models.Input.ProjectSpecificObjectiveInputModel
@@ -309,6 +439,38 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
         });
 
         ConcreteBindingContext.SpecificObjectives.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void ExternalResearcherParticipationCreateSuccess_Callback(Interop.API.Common.Models.Display.ExternalResearcherProjectParticipationDisplayModel model)
+    {
+        incomingExternalResearcherProjectParticipations.Add(new Interop.API.Common.Models.Input.ExternalResearcherProjectParticipationInputModel
+        {
+            Id = model.Id,
+            ResearcherId = model.Researcher.Id,
+            TimeAvailability = model.TimeAvailability,
+            StartAt = model.StartAt,
+            EndAt = model.EndAt
+        });
+
+        ConcreteBindingContext.ExternalResearcherProjectParticipations.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void InternalResearcherParticipationCreateSuccess_Callback(Interop.API.Common.Models.Display.InternalResearcherProjectParticipationDisplayModel model)
+    {
+        incomingInternalResearcherProjectParticipations.Add(new Interop.API.Common.Models.Input.InternalResearcherProjectParticipationInputModel
+        {
+            Id = model.Id,
+            ResearcherId = model.Researcher.Id,
+            TimeAvailability = model.TimeAvailability,
+            StartAt = model.StartAt,
+            EndAt = model.EndAt
+        });
+
+        ConcreteBindingContext.InternalResearcherProjectParticipations.Add(model);
 
         hasChangesFlag = true;
     }
@@ -366,6 +528,132 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             if (item.Id != model.Id) continue;
 
             ConcreteBindingContext.SpecificObjectives[index] = model;
+
+            break;
+        }
+
+        hasChangesFlag = true;
+    }
+
+    private void ExternalResearcherParticipationEditSuccess_Callback(Interop.API.Common.Models.Display.ExternalResearcherProjectParticipationDisplayModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingExternalResearcherProjectParticipations)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.ResearcherId = model.Researcher.Id;
+            item.TimeAvailability = model.TimeAvailability;
+            item.StartAt = model.StartAt;
+            item.EndAt = model.EndAt;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionExternalResearcherProjectParticipations)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.ResearcherId = model.Researcher.Id;
+                item.TimeAvailability = model.TimeAvailability;
+                item.StartAt = model.StartAt;
+                item.EndAt = model.EndAt;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionExternalResearcherProjectParticipations.Add(new Interop.API.Common.Models.Input.ExternalResearcherProjectParticipationInputModel
+            {
+                Id = model.Id,
+                ResearcherId = model.Researcher.Id,
+                TimeAvailability = model.TimeAvailability,
+                StartAt = model.StartAt,
+                EndAt = model.EndAt
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.ExternalResearcherProjectParticipations)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.ExternalResearcherProjectParticipations[index] = model;
+
+            break;
+        }
+
+        hasChangesFlag = true;
+    }
+
+    private void InternalResearcherParticipationEditSuccess_Callback(Interop.API.Common.Models.Display.InternalResearcherProjectParticipationDisplayModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingInternalResearcherProjectParticipations)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.ResearcherId = model.Researcher.Id;
+            item.TimeAvailability = model.TimeAvailability;
+            item.StartAt = model.StartAt;
+            item.EndAt = model.EndAt;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionInternalResearcherProjectParticipations)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.ResearcherId = model.Researcher.Id;
+                item.TimeAvailability = model.TimeAvailability;
+                item.StartAt = model.StartAt;
+                item.EndAt = model.EndAt;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionInternalResearcherProjectParticipations.Add(new Interop.API.Common.Models.Input.InternalResearcherProjectParticipationInputModel
+            {
+                Id = model.Id,
+                ResearcherId = model.Researcher.Id,
+                TimeAvailability = model.TimeAvailability,
+                StartAt = model.StartAt,
+                EndAt = model.EndAt
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.InternalResearcherProjectParticipations)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.InternalResearcherProjectParticipations[index] = model;
 
             break;
         }

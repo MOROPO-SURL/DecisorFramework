@@ -27,6 +27,10 @@ public class ProjectRepository : Framework.Guama.Core.Persistence.ORM.EF.Reposit
             .Include(entity => entity.ParticipatingOrganizationBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
             .Include(entity => entity.ParticipatingOrganizationBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.BusinessKind)
             .Include(entity => entity.InternalResearcherParticipations).ThenInclude(entity => entity.Researcher).ThenInclude(entity => entity.Employee).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
-            .Include(entity => entity.ExternalResearcherParticipations).ThenInclude(entity => entity.Researcher).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image);
+            .Include(entity => entity.InternalResearcherParticipations).ThenInclude(entity => entity.Researcher).ThenInclude(entity => entity.Category)
+            .Include(entity => entity.InternalResearcherParticipations).ThenInclude(entity => entity.Researcher).ThenInclude(entity => entity.TeachingCategory)
+            .Include(entity => entity.ExternalResearcherParticipations).ThenInclude(entity => entity.Researcher).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+            .Include(entity => entity.ExternalResearcherParticipations).ThenInclude(entity => entity.Researcher).ThenInclude(entity => entity.Category)
+            .Include(entity => entity.ExternalResearcherParticipations).ThenInclude(entity => entity.Researcher).ThenInclude(entity => entity.TeachingCategory);
     }
 }

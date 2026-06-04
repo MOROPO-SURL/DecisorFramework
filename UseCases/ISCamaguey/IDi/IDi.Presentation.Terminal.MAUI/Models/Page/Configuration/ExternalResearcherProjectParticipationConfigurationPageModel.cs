@@ -22,11 +22,15 @@ public sealed class ExternalResearcherProjectParticipationConfigurationPageModel
 
         if (model == null) return;
 
+        Id = model.Id;
+
         researcher = model.Researcher;
         timeAvailability = model.TimeAvailability;
         startAt = model.StartAt;
         endAt = model.EndAt;
     }
+
+    public System.Guid Id { get; set; }
 
     public ExternalResearcherDisplayModel Researcher { get => researcher; set => SetProperty(ref researcher, value); }
 
