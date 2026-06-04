@@ -74,8 +74,6 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities
 
         public List<ProjectProgramExpectResultBridge> ProgramExpectResultBridges { get; set; } = new List<ProjectProgramExpectResultBridge>();
 
-        public List<ProjectBudgetCurrencyBridge> BudgetCurrencyBridges { get; set; } = new List<ProjectBudgetCurrencyBridge>();
-
         public List<ProjectParticipatingOrganizationBridge> ParticipatingOrganizationBridges { get; set; } = new List<ProjectParticipatingOrganizationBridge>();
 
         public IReadOnlyCollection<InternalResearcherProjectParticipation> InternalResearcherParticipations { get; private set; }

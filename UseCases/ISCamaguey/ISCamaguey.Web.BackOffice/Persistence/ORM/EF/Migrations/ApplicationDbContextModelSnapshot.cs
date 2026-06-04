@@ -7100,29 +7100,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("projects", "decisoriscamaguey_idi");
                 });
 
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectBudgetCurrencyBridge", b =>
-                {
-                    b.Property<Guid>("ProwId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("prowid");
-
-                    b.Property<Guid>("SternId")
-                        .HasColumnType("uuid")
-                        .HasColumnName("sternid");
-
-                    b.Property<float>("Amount")
-                        .HasColumnType("real")
-                        .HasColumnName("amount");
-
-                    b.HasKey("ProwId", "SternId")
-                        .HasName("pk_projectbudgetcurrencybridges");
-
-                    b.HasIndex("SternId")
-                        .HasDatabaseName("ix_projectbudgetcurrencybridges_sternid");
-
-                    b.ToTable("projectbudgetcurrencybridges", "decisoriscamaguey_idi");
-                });
-
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectBudgetFunancing", b =>
                 {
                     b.Property<Guid>("Id")
@@ -12768,27 +12745,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Proposal");
                 });
 
-            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectBudgetCurrencyBridge", b =>
-                {
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Prow")
-                        .WithMany("BudgetCurrencyBridges")
-                        .HasForeignKey("ProwId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_projectbudgetcurrencybridges_projects_prowid");
-
-                    b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Currency", "Stern")
-                        .WithMany()
-                        .HasForeignKey("SternId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired()
-                        .HasConstraintName("fk_projectbudgetcurrencybridges_currencies_sternid");
-
-                    b.Navigation("Prow");
-
-                    b.Navigation("Stern");
-                });
-
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectBudgetFunancing", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Currency", "Currency")
@@ -14358,8 +14314,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", b =>
                 {
-                    b.Navigation("BudgetCurrencyBridges");
-
                     b.Navigation("BudgetFunancings");
 
                     b.Navigation("ExternalResearcherParticipations");

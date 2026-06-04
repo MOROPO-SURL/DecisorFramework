@@ -247,7 +247,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectProgramExpectResultBridge> ProjectProgramExpectResultBridges { get; set; }
         public DbSet<ProjectImpact> ProjectImpacts { get; set; }
-        public DbSet<ProjectBudgetCurrencyBridge> ProjectBudgetCurrencyBridges { get; set; }
         public DbSet<ProjectBudgetFunancing> ProjectBudgetFunancings { get; set; }
         public DbSet<ProjectCategory> ProjectCategories { get; set; }
         public DbSet<ProjectParticipatingOrganizationBridge> ProjectParticipatingOrganizationBridges { get; set; }

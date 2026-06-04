@@ -30,7 +30,6 @@ public class IDiDbSchemaConfigurationProvider : Framework.Guama.Core.Persistence
                 new BaseEntityTypeConfigurator<Entities.ProjectImpact>(),
                 new Configurators.ProjectProgramExpectResultBridgeEntityTypeConfigurator(),
                 new BaseEntityTypeConfigurator<Entities.ProjectBudgetFunancing>(),
-                new Configurators.ProjectBugetCurrencyBridgeEntityTypeConfigurator(),
                 new BaseEntityTypeConfigurator<Entities.ProjectCategory>(),
                 new Configurators.ProjectParticipatingOrganizationBridgeEntityTypeConfigurator(),
                 new BaseEntityTypeConfigurator<Entities.ProjectProposal>(),
