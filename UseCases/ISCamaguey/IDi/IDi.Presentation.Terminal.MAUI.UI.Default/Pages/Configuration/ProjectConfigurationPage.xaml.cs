@@ -13,6 +13,10 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
     private readonly List<Interop.API.Common.Models.Input.ProjectSpecificObjectiveInputModel> incomingSpecificObjectives = [];
     private readonly List<Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel> outgoingSpecificObjectives = [];
 
+    private readonly List<Interop.API.Common.Models.Input.ProjectBudgetFunancingInputModel> editionBudgetFunancings = [];
+    private readonly List<Interop.API.Common.Models.Input.ProjectBudgetFunancingInputModel> incomingBudgetFunancings = [];
+    private readonly List<Interop.API.Common.Models.Display.ProjectBudgetFunancingDisplayModel> outgoingBudgetFunancings = [];
+
     private readonly List<Interop.API.Common.Models.Input.InternalResearcherProjectParticipationInputModel> editionInternalResearcherProjectParticipations = [];
     private readonly List<Interop.API.Common.Models.Input.InternalResearcherProjectParticipationInputModel> incomingInternalResearcherProjectParticipations = [];
     private readonly List<Interop.API.Common.Models.Display.InternalResearcherProjectParticipationDisplayModel> outgoingInternalResearcherProjectParticipations = [];
@@ -68,6 +72,7 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             ParticipatingOrganizations = [.. ConcreteBindingContext.ParticipatingOrganizations],
             ProgramExpectResults = [.. ConcreteBindingContext.ProgramExpectResults],
             IncomingSpecificObjectives = incomingSpecificObjectives,
+            IncomingBudgetFunancings = incomingBudgetFunancings,
             IncomingExternalResearcherProjectParticipations = incomingExternalResearcherProjectParticipations,
             IncomingInternalResearcherProjectParticipations = incomingInternalResearcherProjectParticipations
         };
@@ -120,6 +125,9 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             IncomingSpecificObjectives = incomingSpecificObjectives,
             EditionSpecificObjectives = editionSpecificObjectives,
             OutgoingSpecificObjectives = outgoingSpecificObjectives,
+            IncomingBudgetFunancings = incomingBudgetFunancings,
+            EditionBudgetFunancings = editionBudgetFunancings,
+            OutgoingBudgetFunancings = outgoingBudgetFunancings,
             IncomingExternalResearcherProjectParticipations = incomingExternalResearcherProjectParticipations,
             EditionExternalResearcherProjectParticipations = editionExternalResearcherProjectParticipations,
             OutgoingExternalResearcherProjectParticipations = outgoingExternalResearcherProjectParticipations,
@@ -257,6 +265,8 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
         });
     }
 
+    #region SpecificObjective
+
     private void SpecificObjectiveAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         this.NavigationPushPageAsync(new ProjectSpecificObjectiveConfigurationPage(SpecificObjectiveCreateSuccess_Callback, new Models.Page.Configuration.ProjectSpecificObjectiveConfigurationPageModel(null), new Validators.ProjectSpecificObjectiveConfigurationValidator()));
@@ -313,6 +323,117 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             });
         });
     }
+
+    #endregion
+
+    #region BudgetFunancing
+
+    private void BudgetFunancingAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var apiClient = new Framework.Decisor.Financial.Interop.API.Connect.Clients.CurrenciesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        ConcreteBindingContext.IsBusy = true;
+
+        apiClient.GetAsync().ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                ConcreteBindingContext.IsBusy = false;
+
+                if (task.IsFaulted || task.IsCanceled) 
+                {
+                    HandleException(task.Exception);
+                }
+                else
+                {
+                    var model = new Models.Page.Configuration.ProjectBudgetFunancingConfigurationPageModel(null);
+
+                    model.PopulateAvailableCurrencies(task.Result);
+
+                    this.NavigationPushPageAsync(new ProjectBudgetFunancingConfigurationPage(BudgetFunancingCreateSuccess_Callback, model));
+                }
+            });
+        });
+    }
+
+    private void BudgetFunancingEditionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var apiClient = new Framework.Decisor.Financial.Interop.API.Connect.Clients.CurrenciesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        ConcreteBindingContext.IsBusy = true;
+
+        apiClient.GetAsync().ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                ConcreteBindingContext.IsBusy = false;
+
+                if (task.IsFaulted || task.IsCanceled)
+                {
+                    HandleException(task.Exception);
+                }
+                else
+                {
+                    var model = new Models.Page.Configuration.ProjectBudgetFunancingConfigurationPageModel(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ProjectBudgetFunancingDisplayModel);
+
+                    model.PopulateAvailableCurrencies(task.Result);
+
+                    this.NavigationPushPageAsync(new ProjectBudgetFunancingConfigurationPage(BudgetFunancingCreateSuccess_Callback, model));
+                }
+            });
+        });
+    }
+
+    private void BudgetFunancingRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este financiamiento?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ProjectBudgetFunancingDisplayModel;
+
+                var handled = false;
+
+                foreach (var item in incomingBudgetFunancings)
+                {
+                    if (item.Id != target.Id) continue;
+
+                    incomingBudgetFunancings.Remove(editionBudgetFunancings.First(model => model.Id == target.Id));
+
+                    handled = true;
+
+                    break;
+                }
+
+                if (!handled)
+                {
+                    foreach (var item in editionBudgetFunancings)
+                    {
+                        if (item.Id != target.Id) continue;
+
+                        editionBudgetFunancings.Remove(editionBudgetFunancings.First(model => model.Id == target.Id));
+
+                        break;
+                    }
+                }
+
+                if (!handled)
+                {
+                    outgoingBudgetFunancings.Add(target);
+                }
+
+                ConcreteBindingContext.BudgetFunancings.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    #endregion
+
+    #region ExternalResearcher
 
     private void ExternalResearcherParticipationAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
@@ -371,6 +492,10 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
         });
     }
 
+    #endregion
+
+    #region InternalResearcher
+
     private void InternalResearcherParticipationAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         this.NavigationPushPageAsync(new InternalResearcherProjectParticipationConfigurationPage(InternalResearcherParticipationCreateSuccess_Callback, new Models.Page.Configuration.InternalResearcherProjectParticipationConfigurationPageModel(null)));
@@ -428,6 +553,8 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
         });
     }
 
+    #endregion
+
     private void SpecificObjectiveCreateSuccess_Callback(Interop.API.Common.Models.Display.ProjectSpecificObjectiveDisplayModel model)
     {
         incomingSpecificObjectives.Add(new Interop.API.Common.Models.Input.ProjectSpecificObjectiveInputModel
@@ -439,6 +566,21 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
         });
 
         ConcreteBindingContext.SpecificObjectives.Add(model);
+
+        hasChangesFlag = true;
+    }
+
+    private void BudgetFunancingCreateSuccess_Callback(Interop.API.Common.Models.Display.ProjectBudgetFunancingDisplayModel model)
+    {
+        incomingBudgetFunancings.Add(new Interop.API.Common.Models.Input.ProjectBudgetFunancingInputModel
+        {
+            Id = model.Id,
+            FinancierId = model.Financier.Id,
+            CurrencyId = model.Currency.Id,
+            Amount = model.Amount
+        });
+
+        ConcreteBindingContext.BudgetFunancings.Add(model);
 
         hasChangesFlag = true;
     }
@@ -528,6 +670,66 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
             if (item.Id != model.Id) continue;
 
             ConcreteBindingContext.SpecificObjectives[index] = model;
+
+            break;
+        }
+
+        hasChangesFlag = true;
+    }
+
+    private void BudgetFunancingEditSuccess_Callback(Interop.API.Common.Models.Display.ProjectBudgetFunancingDisplayModel model)
+    {
+        var handled = false;
+
+        foreach (var item in incomingBudgetFunancings)
+        {
+            if (item.Id != model.Id) continue;
+
+            item.FinancierId = model.Financier.Id;
+            item.CurrencyId = model.Currency.Id;
+            item.Amount = model.Amount;
+
+            handled = true;
+
+            break;
+        }
+
+        if (!handled)
+        {
+            foreach (var item in editionBudgetFunancings)
+            {
+                if (item.Id != model.Id) continue;
+
+                item.FinancierId = model.Financier.Id;
+                item.CurrencyId = model.Currency.Id;
+                item.Amount = model.Amount;
+
+                handled = true;
+
+                break;
+            }
+        }
+
+        if (!handled)
+        {
+            editionBudgetFunancings.Add(new Interop.API.Common.Models.Input.ProjectBudgetFunancingInputModel
+            {
+                Id = model.Id,
+                FinancierId = model.Financier.Id,
+                CurrencyId = model.Currency.Id,
+                Amount = model.Amount
+            });
+        }
+
+        var index = -1;
+
+        foreach (var item in ConcreteBindingContext.BudgetFunancings)
+        {
+            index++;
+
+            if (item.Id != model.Id) continue;
+
+            ConcreteBindingContext.BudgetFunancings[index] = model;
 
             break;
         }

@@ -46,6 +46,10 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 
         public List<ProgramExpectResultDisplayModel> ProgramExpectResults { get; set; } = new List<ProgramExpectResultDisplayModel>();
 
+        public List<ProjectBudgetFunancingInputModel> EditionBudgetFunancings { get; set; } = new List<ProjectBudgetFunancingInputModel>();
+        public List<ProjectBudgetFunancingInputModel> IncomingBudgetFunancings { get; set; } = new List<ProjectBudgetFunancingInputModel>();
+        public List<ProjectBudgetFunancingDisplayModel> OutgoingBudgetFunancings { get; set; } = new List<ProjectBudgetFunancingDisplayModel>();
+
         public List<InternalResearcherProjectParticipationInputModel> EditionInternalResearcherProjectParticipations { get; set; } = new List<InternalResearcherProjectParticipationInputModel>();
         public List<InternalResearcherProjectParticipationInputModel> IncomingInternalResearcherProjectParticipations { get; set; } = new List<InternalResearcherProjectParticipationInputModel>();
         public List<InternalResearcherProjectParticipationDisplayModel> OutgoingInternalResearcherProjectParticipations { get; set; } = new List<InternalResearcherProjectParticipationDisplayModel>();
@@ -137,9 +141,5 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
                 entity.ProgramExpectResultBridges.Add(new Persistence.Entities.ProjectProgramExpectResultBridge { ProwId = entity.Id, SternId = item.Id });
             }
         }
-
-        //public System.Collections.Generic.ICollection<ProjectBudgetFunancing> BudgetFunancings { get; set; }
-
-        //public System.Collections.Generic.List<ProjectBudgetCurrencyBridge> BudgetCurrencyBridges { get; set; } = new System.Collections.Generic.List<ProjectBudgetCurrencyBridge>();
     }
 }

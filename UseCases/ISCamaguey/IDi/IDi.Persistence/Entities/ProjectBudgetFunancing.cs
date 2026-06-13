@@ -7,11 +7,15 @@
 
         public bool Archived { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProjectId))]
+        public Project Project { get; set; }
+        public System.Guid ProjectId { get; set; }
+
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(FinancierId))]
         public Financier Financier { get; set; }
         public System.Guid FinancierId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(FinancierId))]
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(CurrencyId))]
         public Framework.Decisor.Financial.Persistence.Entities.Currency Currency { get; set; }
         public System.Guid CurrencyId { get; set; }
 

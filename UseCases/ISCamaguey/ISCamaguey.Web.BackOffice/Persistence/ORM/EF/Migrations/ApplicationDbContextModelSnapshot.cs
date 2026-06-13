@@ -7123,12 +7123,15 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("financierid");
 
-                    b.Property<Guid?>("ProjectId")
+                    b.Property<Guid>("ProjectId")
                         .HasColumnType("uuid")
                         .HasColumnName("projectid");
 
                     b.HasKey("Id")
                         .HasName("pk_projectbudgetfunancings");
+
+                    b.HasIndex("CurrencyId")
+                        .HasDatabaseName("ix_projectbudgetfunancings_currencyid");
 
                     b.HasIndex("FinancierId")
                         .HasDatabaseName("ix_projectbudgetfunancings_financierid");
@@ -12749,10 +12752,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Financial.Persistence.Entities.Currency", "Currency")
                         .WithMany()
-                        .HasForeignKey("FinancierId")
+                        .HasForeignKey("CurrencyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_projectbudgetfunancings_currencies_financierid");
+                        .HasConstraintName("fk_projectbudgetfunancings_currencies_currencyid");
 
                     b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Financier", "Financier")
                         .WithMany()
@@ -12761,14 +12764,18 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_projectbudgetfunancings_financiers_financierid");
 
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", null)
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
                         .WithMany("BudgetFunancings")
                         .HasForeignKey("ProjectId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
                         .HasConstraintName("fk_projectbudgetfunancings_projects_projectid");
 
                     b.Navigation("Currency");
 
                     b.Navigation("Financier");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ProjectImpact", b =>

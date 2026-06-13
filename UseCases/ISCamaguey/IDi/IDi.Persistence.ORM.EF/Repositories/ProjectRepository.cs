@@ -24,6 +24,8 @@ public class ProjectRepository : Framework.Guama.Core.Persistence.ORM.EF.Reposit
             .Include(entity => entity.Program).ThenInclude(entity => entity.ExpectResults)
             .Include(entity => entity.ProgramExpectResultBridges).ThenInclude(entity => entity.Stern)
             .Include(entity => entity.SpecificObjectives)
+            .Include(entity => entity.BudgetFunancings).ThenInclude(entity => entity.Currency)
+            .Include(entity => entity.BudgetFunancings).ThenInclude(entity => entity.Financier).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
             .Include(entity => entity.ParticipatingOrganizationBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
             .Include(entity => entity.ParticipatingOrganizationBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.BusinessKind)
             .Include(entity => entity.InternalResearcherParticipations).ThenInclude(entity => entity.Researcher).ThenInclude(entity => entity.Employee).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)

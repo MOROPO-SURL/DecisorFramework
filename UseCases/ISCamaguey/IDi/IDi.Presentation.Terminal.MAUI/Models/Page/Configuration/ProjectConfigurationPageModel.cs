@@ -65,6 +65,7 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
         ParticipatingOrganizations = [.. model.ParticipatingOrganizations];
         InternalResearcherProjectParticipations = [.. model.InternalResearcherProjectParticipations];
         ExternalResearcherProjectParticipations = [.. model.ExternalResearcherProjectParticipations];
+        BudgetFunancings = [.. model.BudgetFunancings];
     }
 
     public System.Guid Id { get; set; }
@@ -89,15 +90,15 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
 
     public System.DateTime EndAt { get => endAt; set => SetProperty(ref endAt, value); }
 
-    public Interop.API.Common.Models.Display.ProjectCategoryDisplayModel Category { get => category; set => SetProperty(ref category, value); }
+    public ProjectCategoryDisplayModel Category { get => category; set => SetProperty(ref category, value); }
 
-    public Interop.API.Common.Models.Display.InternalResearcherDisplayModel Chief { get => chief; set => SetProperty(ref chief, value); }
+    public InternalResearcherDisplayModel Chief { get => chief; set => SetProperty(ref chief, value); }
 
-    public Interop.API.Common.Models.Display.ProgramDisplayModel Program { get => program; set => SetProperty(ref program, value); }
+    public ProgramDisplayModel Program { get => program; set => SetProperty(ref program, value); }
 
-    public Interop.API.Common.Models.Display.ProjectProposalDisplayModel Proposal { get => proposal; set => SetProperty(ref proposal, value); }
+    public ProjectProposalDisplayModel Proposal { get => proposal; set => SetProperty(ref proposal, value); }
 
-    public Interop.API.Common.Models.Display.ProjectDisplayModel Predecessor { get => predecessor; set => SetProperty(ref predecessor, value); }
+    public ProjectDisplayModel Predecessor { get => predecessor; set => SetProperty(ref predecessor, value); }
 
     public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get => document; set => SetProperty(ref document, value); }
 
@@ -109,9 +110,11 @@ public class ProjectConfigurationPageModel : Framework.Decisor.Core.Presentation
 
     public System.Collections.ObjectModel.ObservableCollection<ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = [];
 
+    public System.Collections.ObjectModel.ObservableCollection<ProjectBudgetFunancingDisplayModel> BudgetFunancings { get; set; } = [];
+
     public System.Collections.ObjectModel.ObservableCollection<InternalResearcherProjectParticipationDisplayModel> InternalResearcherProjectParticipations { get; set; } = [];
 
     public System.Collections.ObjectModel.ObservableCollection<ExternalResearcherProjectParticipationDisplayModel> ExternalResearcherProjectParticipations { get; set; } = [];
 
-    public Interop.API.Common.Models.Display.ProjectCategoryDisplayModel[] AvailableCategories { get; set; } = [];
+    public ProjectCategoryDisplayModel[] AvailableCategories { get; set; } = [];
 }

@@ -18,8 +18,9 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
     private readonly IDocumentFileManagerFacade documentFileManager;
     private readonly IEntityRepository<InternalResearcherProjectParticipation, System.Guid> internalResearcherProjectParticipationRepository;
     private readonly IEntityRepository<ExternalResearcherProjectParticipation, System.Guid> externalResearcherProjectParticipationRepository;
+    private readonly IEntityRepository<ProjectBudgetFunancing, System.Guid> bugetFunancingRepository;
 
-    public ProjectsController(IEntityRepository<ExternalResearcherProjectParticipation, System.Guid> externalResearcherProjectParticipationRepository, IEntityRepository<InternalResearcherProjectParticipation, System.Guid> internalResearcherProjectParticipationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ProjectSpecificObjective, System.Guid> specificObjectiveRepository, IEntityRepository<Project, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProjectsController> localizer, Microsoft.Extensions.Logging.ILogger<ProjectsController> logger)
+    public ProjectsController(IEntityRepository<ProjectBudgetFunancing, System.Guid> bugetFunancingRepository, IEntityRepository<ExternalResearcherProjectParticipation, System.Guid> externalResearcherProjectParticipationRepository, IEntityRepository<InternalResearcherProjectParticipation, System.Guid> internalResearcherProjectParticipationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<ProjectSpecificObjective, System.Guid> specificObjectiveRepository, IEntityRepository<Project, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<ProjectsController> localizer, Microsoft.Extensions.Logging.ILogger<ProjectsController> logger)
         : base(repository, localizer, logger)
     {
         this.specificObjectiveRepository = specificObjectiveRepository;
@@ -27,6 +28,7 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
         this.documentFileManager = documentFileManager;
         this.internalResearcherProjectParticipationRepository = internalResearcherProjectParticipationRepository;
         this.externalResearcherProjectParticipationRepository = externalResearcherProjectParticipationRepository;
+        this.bugetFunancingRepository = bugetFunancingRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<Project, bool>> GetGlobalSelector()
@@ -51,6 +53,18 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
         if (model.Chief.Employee.Contact.Identity.Image != null)
         {
             model.Chief.Employee.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(entity.Chief.Employee.Contact.Identity.Image.ContentType);
+        }
+
+        foreach (var _entity in entity.BudgetFunancings)
+        {
+            ProjectBudgetFunancingDisplayModel _model = new();
+
+            _model.Import(_entity);
+
+            if (_model.Financier.Contact.Identity.Image != null)
+            {
+                _model.Financier.Contact.Identity.Image.Extension = MimeTypes.MimeTypeMap.GetExtension(_entity.Financier.Contact.Identity.Image.ContentType);
+            }
         }
 
         foreach (var bridge in entity.ParticipatingOrganizationBridges)
@@ -130,6 +144,15 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
             specificObjectiveRepository.Add(_entity, User.Identity.Name, false);
         }
 
+        foreach (var _model in model.IncomingBudgetFunancings)
+        {
+            var _entity = _model.Export();
+
+            _entity.ProjectId = entity.Id;
+
+            bugetFunancingRepository.Add(_entity, User.Identity.Name, false);
+        }
+
         foreach (var _model in model.IncomingInternalResearcherProjectParticipations)
         {
             var _entity = _model.Export();
@@ -174,6 +197,29 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
             _entity.ProjectId = entity.Id;
 
             specificObjectiveRepository.Add(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.OutgoingBudgetFunancings)
+        {
+            bugetFunancingRepository.Delete(new ProjectBudgetFunancing { Id = _model.Id }, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.EditionBudgetFunancings)
+        {
+            var _entity = _model.Export();
+
+            _entity.ProjectId = entity.Id;
+
+            bugetFunancingRepository.Update(_entity, User.Identity.Name, false);
+        }
+
+        foreach (var _model in model.IncomingBudgetFunancings)
+        {
+            var _entity = _model.Export();
+
+            _entity.ProjectId = entity.Id;
+
+            bugetFunancingRepository.Add(_entity, User.Identity.Name, false);
         }
 
         if (model.Document != null)
