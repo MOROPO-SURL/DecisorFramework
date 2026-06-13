@@ -51,7 +51,7 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
         }
     }
 
-    protected override string EntityTypeName => "Postulación a Vacante";
+    protected override string EntityTypeName => "Captación";
 
     protected override async System.Threading.Tasks.Task<VacantPostulationDisplayModel> PerformCreationAsync()
     {

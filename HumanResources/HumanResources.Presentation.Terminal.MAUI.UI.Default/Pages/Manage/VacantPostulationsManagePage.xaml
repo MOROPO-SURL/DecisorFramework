@@ -14,7 +14,7 @@
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.VacantPostulationsManagePage"
     x:TypeArguments="interop_common_display_models:VacantPostulationDisplayModel,presentation_manage_page_models:VacantPostulationsManagePageModel,presentation_configuration_page_models:VacantPostulationConfigurationPageModel"
     x:DataType="presentation_manage_page_models:VacantPostulationsManagePageModel"
-    Title="Gestión de Postulaciones a Vacantes">
+    Title="Gestión de Captaciones">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
