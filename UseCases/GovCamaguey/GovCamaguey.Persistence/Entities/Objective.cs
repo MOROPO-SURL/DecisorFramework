@@ -21,7 +21,6 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities
         [System.ComponentModel.DataAnnotations.MaxLength(5120)]
         public string Description { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResponsibleId))]
         public Person Responsible { get; set; }
         public System.Guid ResponsibleId { get; set; }
 

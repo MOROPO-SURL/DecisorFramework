@@ -6,6 +6,8 @@
         {
             base.ApplayRules(entityTypeBuilder);
 
+            entityTypeBuilder.HasOne(entity => entity.Responsible).WithMany().HasForeignKey(entity => entity.ResponsibleId).OnDelete(Microsoft.EntityFrameworkCore.DeleteBehavior.Restrict);
+
             entityTypeBuilder.HasIndex(entity => entity.Index).IsUnique();
         }
     }

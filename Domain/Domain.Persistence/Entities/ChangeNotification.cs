@@ -7,13 +7,6 @@
 
         public Enumerations.NotificationKind Kind { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AuthorId))]
-        public Guama.Security.Personal.Persistence.Entities.User Author { get; set; }
-        [System.ComponentModel.DataAnnotations.Required]
-        public string AuthorId { get; set; }
-
-        public Enumerations.NotificationKind Kind { get; set; }
-
         public Enumerations.ChangeKind ChangeKind { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AuthorId))]

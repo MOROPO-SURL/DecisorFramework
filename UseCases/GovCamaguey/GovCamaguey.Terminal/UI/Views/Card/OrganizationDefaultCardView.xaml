@@ -2,6 +2,7 @@
 <ContentView 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Constants"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;assembly=MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common"
     x:Class="MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Views.Card.OrganizationDefaultCardView"
@@ -20,7 +21,7 @@
             <Image
                 Grid.Column="0"
                 Aspect="AspectFill"
-                WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                WidthRequest="{Static local_constants:CardViewHeightConstants.ORGANIZATIONAL_DEFAULT_CARD_VIEW_HEIGHT}"
                 Source="{Binding Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
             <Grid 
                 Grid.Column="1"

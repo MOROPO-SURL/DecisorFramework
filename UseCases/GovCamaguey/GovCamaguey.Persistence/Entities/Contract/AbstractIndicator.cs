@@ -22,7 +22,6 @@
 
         public int Priority { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(UnitMeasurementId))]
         public UnitMeasurement UnitMeasurement { get; set; }
         public System.Guid UnitMeasurementId { get; set; }
     }
