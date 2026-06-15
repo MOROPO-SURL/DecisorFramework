@@ -16,11 +16,11 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Providers
         {
             var settingManager = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Managers.Facade.ISettingManagerFacade>();
 
-//#if DEBUG
-//            var serverBaseUri = Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.Android ? "https://10.0.2.2:7208" : "https://localhost:7208";
-//#else
+#if DEBUG
+            var serverBaseUri = Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.Android ? "https://10.0.2.2:7208" : "https://localhost:7208";
+#else
             var serverBaseUri = "https://cmi.gpcmg.co.cu";
-//#endif
+#endif
 
             HttpClientHelper = new Framework.Guama.Core.Presentation.API.Connect.Helpers.HttpClientHelper(HttpClientHandlerFactory.Build(), serverBaseUri, GetAuthorizeHeader);
         }
