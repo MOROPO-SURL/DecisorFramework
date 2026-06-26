@@ -85,7 +85,7 @@ public class ObjectiveReportController : Framework.Guama.Core.Presentation.Web.C
 
     private Models.View.ObjectiveSummaryViewModel[] GetObjectivesSummaryModel()
     {
-        return objectiveRepository.GetAll().OrderBy(entity => entity.Index).ToArray().Select(entity => new Models.View.ObjectiveSummaryViewModel(entity)).ToArray();
+        return objectiveRepository.FindBy(entity => !entity.Archived).OrderBy(entity => entity.Index).ToArray().Select(entity => new Models.View.ObjectiveSummaryViewModel(entity)).ToArray();
     }
 
     private Models.View.ObjectiveSummaryViewModel GetObjectiveSummaryModel(System.Guid key)

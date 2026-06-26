@@ -8,13 +8,13 @@ public class ProyectionSummaryViewModel : AbstractProyectionViewModel
     public ProyectionSummaryViewModel(Prototype.Persistence.Entities.Proyection entity, int objectiveIndex) : base(entity, objectiveIndex)
     {
         Description = entity.Description;
-        Guidelines = [.. entity.GuidelineBridges.Select(bridge => bridge.Stern)];
+        Guidelines = [.. entity.GuidelineBridges.Where(bridge => !bridge.Stern.Archived).Select(bridge => bridge.Stern)];
         ResponsabilityOrganizations = [.. entity.OrganizationResponsabilityBridges.Where(bridge => !bridge.Stern.Archived).Select(bridge => bridge.Stern).OrderBy(item => item.Priority)];
         ParticipationOrganizations = [.. entity.OrganizationParticipationBridges.Where(bridge => !bridge.Stern.Archived).Select(bridge => bridge.Stern).OrderBy(item => item.Priority)];
 
         ObjectiveIndex = objectiveIndex;
 
-        Actions = [.. entity.Actions.OrderBy(entity => entity.Index)];
+        Actions = [.. entity.Actions.Where(entity => !entity.Archived).OrderBy(entity => entity.Index)];
     }
 
     public Prototype.Persistence.Entities.Guideline[] Guidelines { get; set; }

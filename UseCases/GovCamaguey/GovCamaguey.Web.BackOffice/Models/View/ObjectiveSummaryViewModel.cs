@@ -10,7 +10,7 @@ public class ObjectiveSummaryViewModel : AbstractObjectiveViewModel
         Description = entity.Description;
         Responsible = entity.Responsible;
 
-        Proyections = entity.Proyections.OrderBy(entity => entity.Index).Select(_model => new ProyectionSummaryViewModel(_model, entity.Index)).ToArray();
+        Proyections = entity.Proyections.Where(entity => !entity.Archived).OrderBy(entity => entity.Index).Select(_model => new ProyectionSummaryViewModel(_model, entity.Index)).ToArray();
     }
 
     public string Description { get; set; }
