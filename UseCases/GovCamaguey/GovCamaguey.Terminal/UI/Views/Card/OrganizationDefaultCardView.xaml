@@ -21,7 +21,7 @@
             <Image
                 Grid.Column="0"
                 Aspect="AspectFill"
-                WidthRequest="{Static local_constants:CardViewHeightConstants.ORGANIZATIONAL_DEFAULT_CARD_VIEW_HEIGHT}"
+                WidthRequest="{Static local_constants:CardViewHeightConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT}"
                 Source="{Binding Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
             <Grid 
                 Grid.Column="1"

@@ -16,9 +16,9 @@ public partial class OrganizationPickPage : Framework.Decisor.Core.Presentation.
         this.pickCompleteAction = pickCompleteAction;
     }
 
-    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.ORGANIZATIONAL_DEFAULT_CARD_VIEW_WIDTH;
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.ORGANIZATIONAL_DEFAULT_CARD_VIEW_HEIGHT;
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
@@ -33,11 +33,18 @@ public partial class OrganizationPickPage : Framework.Decisor.Core.Presentation.
     {
         var apiConnectClient = new Interop.API.Connect.Clients.OrganizationsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.OrganizationFilterModel { Name = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
+
         return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
+        ConcreteBindingContext.SearchParameter = null;
+
         OnReload(sender, eventArgs);
     }
 
@@ -78,5 +85,10 @@ public partial class OrganizationPickPage : Framework.Decisor.Core.Presentation.
 
             (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
         });
+    }
+
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
+    {
+        OnReload(sender, eventArgs);
     }
 }

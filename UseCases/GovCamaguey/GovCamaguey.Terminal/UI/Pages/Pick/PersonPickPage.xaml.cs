@@ -1,34 +1,26 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
-using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
+using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
+using MOROPO.GovCamaguey.Decisor.Prototype.Terminal.Models.Page.Pick;
 
 namespace MOROPO.GovCamaguey.Decisor.Prototype.Terminal.UI.Pages.Pick;
 
-public partial class PersonPickPage : Framework.Caney.MVVM.Core.Pages.ContentPage
+public partial class PersonPickPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<PersonDisplayModel, PersonPickPageModel>
 {
-    private System.Action<Interop.API.Common.Models.Display.PersonDisplayModel> pickCompleteAction;
+    private System.Action<PersonDisplayModel> pickCompleteAction;
 
-    public PersonPickPage(System.Action<Interop.API.Common.Models.Display.PersonDisplayModel> pickCompleteAction)
+    public PersonPickPage(System.Action<PersonDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-
-        IsEnabled = false;
-
-        BindingContext = new Models.Page.Pick.PersonPickPageModel();
     }
 
-    protected override void OnAppearing()
-    {
-        base.OnAppearing();
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.PERSON_DEFAULT_CARD_VIEW_WIDTH;
 
-        if (IsEnabled) return;
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.PERSON_DEFAULT_CARD_VIEW_HEIGHT;
 
-        LoadItems();
-
-        IsEnabled = true;
-    }
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
     protected override void DisposeUnmanagementResources()
     {
@@ -37,11 +29,23 @@ public partial class PersonPickPage : Framework.Caney.MVVM.Core.Pages.ContentPag
         pickCompleteAction = null;
     }
 
+    protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<PersonDisplayModel>> FetchItemsAsync()
+    {
+        var apiConnectClient = new Interop.API.Connect.Clients.PersonsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        if (!string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.SearchParameter))
+        {
+            return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.PersonFilterModel { Parameter = ConcreteBindingContext.SearchParameter }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        }
+
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
+    }
+
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (((Models.Page.Pick.PersonPickPageModel)BindingContext).IsBusy) return;
+        ConcreteBindingContext.SearchParameter = null;
 
-        LoadItems();
+        OnReload(sender, eventArgs);
     }
 
     protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
@@ -54,14 +58,24 @@ public partial class PersonPickPage : Framework.Caney.MVVM.Core.Pages.ContentPag
         this.NavigationPushPageAsync(new Configuration.PersonConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.PersonConfigurationPageModel(null)));
     }
 
+    private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        OnLoadMore(sender, eventArgs);
+    }
+
+    private void ItemsCollectionViewLayout_SizeChanged(object sender, System.EventArgs eventArgs)
+    {
+        OnItemsCollectionViewLayoutResize(sender, eventArgs);
+    }
+
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.PersonDisplayModel);
+        pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as PersonDisplayModel);
 
         (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }
 
-    private void ConfigurationSuccess_Callback(Interop.API.Common.Models.Display.PersonDisplayModel model)
+    private void ConfigurationSuccess_Callback(PersonDisplayModel model)
     {
         Dispatcher.Dispatch(() =>
         {
@@ -73,34 +87,8 @@ public partial class PersonPickPage : Framework.Caney.MVVM.Core.Pages.ContentPag
         });
     }
 
-    private void LoadItems()
+    private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)
     {
-        var concreteBindingContext = (Models.Page.Pick.PersonPickPageModel)BindingContext;
-
-        concreteBindingContext.IsBusy = true;
-
-        concreteBindingContext.Items.Clear();
-
-        var apiConnectClient = new Interop.API.Connect.Clients.PersonsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
-
-        apiConnectClient.GetAsync().ContinueWith(task =>
-        {
-            Dispatcher.Dispatch(() =>
-            {
-                concreteBindingContext.IsBusy = false;
-
-                if (task.Exception != null || task.IsCanceled)
-                {
-                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Decisor.Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
-                }
-                else
-                {
-                    foreach (var model in task.Result)
-                    {
-                        concreteBindingContext.Items.Add(model);
-                    }
-                }
-            });
-        });
+        OnReload(sender, eventArgs);
     }
 }

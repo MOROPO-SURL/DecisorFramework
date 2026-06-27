@@ -140,7 +140,7 @@
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 <local_card_views:OrganizationDefaultCardView 
-                                                    HeightRequest="{Static local_constants:CardViewHeightConstants.ORGANIZATIONAL_DEFAULT_CARD_VIEW_HEIGHT}"
+                                                    HeightRequest="{Static local_constants:CardViewHeightConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT}"
                                                     Grid.Column="0" />
                                                 <Button
                                                     Style="{StaticResource DangerKindFontIconImageButtonStyle}"
@@ -200,7 +200,7 @@
                                                     <ColumnDefinition Width="Auto" />
                                                 </Grid.ColumnDefinitions>
                                                 <local_card_views:OrganizationDefaultCardView 
-                                                    HeightRequest="{Static local_constants:CardViewHeightConstants.ORGANIZATIONAL_DEFAULT_CARD_VIEW_HEIGHT}"
+                                                    HeightRequest="{Static local_constants:CardViewHeightConstants.ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT}"
                                                     Grid.Column="0" />
                                                 <Button
                                                     Style="{StaticResource DangerKindFontIconImageButtonStyle}"

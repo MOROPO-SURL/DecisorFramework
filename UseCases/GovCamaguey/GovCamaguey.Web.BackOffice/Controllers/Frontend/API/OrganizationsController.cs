@@ -6,6 +6,7 @@ using MOROPO.Framework.Guama.Identity.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Display;
+using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Filter;
 using MOROPO.GovCamaguey.Decisor.Prototype.Interop.API.Common.Models.Input;
 using MOROPO.GovCamaguey.Decisor.Prototype.Persistence.Entities;
 using System.Linq;
@@ -15,7 +16,7 @@ namespace MOROPO.GovCamaguey.Decisor.Prototype.Web.BackOffice.Controllers.Fronte
     [Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
     [Route("api/governance/[controller]")]
     [ApiController]
-    public class OrganizationsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<Organization, System.Guid, OrganizationInputModel, OrganizationDisplayModel>
+    public class OrganizationsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<Organization, System.Guid, OrganizationInputModel, OrganizationDisplayModel, OrganizationFilterModel>
     {
         private readonly IEntityRepository<EmailContactItem, System.Guid> emailContactRepository;
         private readonly IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository;
