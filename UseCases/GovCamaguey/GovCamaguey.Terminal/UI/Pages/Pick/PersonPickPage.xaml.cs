@@ -55,6 +55,13 @@ public partial class PersonPickPage : Framework.Decisor.Core.Presentation.Termin
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
+        if (ConcreteBindingContext.Items.Count > 0 && string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter))
+        {
+            DisplayAlert("Aviso", "Realice una búsqueda de la persona deseada antes de agregarla al sistema, puede que ya exista.", "Aceptar");
+
+            return;
+        }
+
         this.NavigationPushPageAsync(new Configuration.PersonConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.PersonConfigurationPageModel(null)));
     }
 

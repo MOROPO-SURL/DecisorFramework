@@ -55,6 +55,13 @@ public partial class OrganizationPickPage : Framework.Decisor.Core.Presentation.
 
     private void AddToolbarItem_Clicked(object sender, System.EventArgs e)
     {
+        if (ConcreteBindingContext.Items.Count > 0 && string.IsNullOrEmpty(ConcreteBindingContext.SearchParameter))
+        {
+            DisplayAlert("Aviso", "Realice una búsqueda del organismo deseado antes de agregarlo al sistema, puede que ya exista.", "Aceptar");
+
+            return;
+        }
+
         this.NavigationPushPageAsync(new Configuration.OrganizationConfigurationPage(ConfigurationSuccess_Callback, new Models.Page.Configuration.OrganizationConfigurationPageModel(null)));
     }
 

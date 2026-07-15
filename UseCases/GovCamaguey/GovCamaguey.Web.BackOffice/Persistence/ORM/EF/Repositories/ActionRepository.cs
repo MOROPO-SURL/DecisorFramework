@@ -13,8 +13,8 @@ public class ActionRepository : Framework.Guama.Core.Persistence.ORM.EF.Reposito
         return base.GetQueryableDbSet()
             //.AsNoTracking()
             .Include(entity => entity.Proyection).ThenInclude(entity => entity.Objective)
-            .Include(entity => entity.OrganizationResponsabilityBridges)
-            .Include(entity => entity.OrganizationParticipationBridges)
+            .Include(entity => entity.OrganizationResponsabilityBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+            .Include(entity => entity.OrganizationParticipationBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
             .Include(entity => entity.MonthlyClosures)
             .Include(entity => entity.Indicators).ThenInclude(entity => entity.UnitMeasurement)
             .Include(entity => entity.Indicators).ThenInclude(entity => entity.MontlyPlans);
