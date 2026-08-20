@@ -18,6 +18,7 @@
         <ResourceDictionary>
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            <core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
@@ -76,7 +77,7 @@
                                         Text="Color de piel" />
                                     <Label 
                                         Style="{StaticResource ValuePropertyLabelStyle}"
-                                        Text="{Binding SkinKind}" />
+                                        Text="{Binding SkinKind, Converter={StaticResource StringToLocalizedStringConverter}}" />
                                 </VerticalStackLayout>
                                 <VerticalStackLayout 
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
@@ -87,7 +88,7 @@
                                         Text="Sexo" />
                                     <Label 
                                         Style="{StaticResource ValuePropertyLabelStyle}"
-                                        Text="{Binding Identity.Sex}" />
+                                        Text="{Binding Identity.Sex, Converter={StaticResource StringToLocalizedStringConverter}}" />
                                 </VerticalStackLayout>
                                 <VerticalStackLayout 
                                     WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=6}}"
@@ -98,7 +99,7 @@
                                         Text="Estado Civil" />
                                     <Label 
                                         Style="{StaticResource ValuePropertyLabelStyle}"
-                                        Text="{Binding Identity.CivilStatus}" />
+                                        Text="{Binding Identity.CivilStatus, Converter={StaticResource StringToLocalizedStringConverter}}" />
                                 </VerticalStackLayout>
                             </FlexLayout>
                             <FlexLayout
@@ -285,16 +286,73 @@
                                 </VerticalStackLayout>
                                 <Label 
                                     Style="{StaticResource CaptionPropertyLabelStyle}"
-                                    Text="Usuario" />
-                                <Label
-                                    Style="{StaticResource ValuePropertyLabelStyle}"
-                                    Text="{Binding User.Id, TargetNullValue='---', FallbackValue='---'}" />
-                                <Label 
-                                    Style="{StaticResource CaptionPropertyLabelStyle}"
                                     Text="Acerca de" />
                                 <Label
                                     Style="{StaticResource ValuePropertyLabelStyle}"
                                     Text="{Binding Identity.About, TargetNullValue='---'}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}" 
+                                    Text="Resultados académicos" />
+                                <BoxView Margin="0,6" Color="DimGray" HeightRequest="2" />
+                                <VerticalStackLayout
+                                    Margin="0,2,0,0"
+                                    Spacing="8"
+                                    BindableLayout.ItemsSource="{Binding AcademicAchievements}">
+                                    <BindableLayout.EmptyView>
+                                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </BindableLayout.EmptyView>
+                                    <BindableLayout.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_display_models:AcademicAchievementDisplayModel">
+                                            <Grid Margin="0,2" ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <Label
+                                                    Grid.Column="0" Grid.RowSpan="5"
+                                                    VerticalOptions="Center"
+                                                    FontAttributes="Bold"
+                                                    FontSize="Medium"
+                                                    Text="-" />
+                                                <Label
+                                                    Grid.Column="1" Grid.Row="0"
+                                                    FontAttributes="Bold"
+                                                    Text="{Binding AcademicLevel, Converter={StaticResource StringToLocalizedStringConverter}}" />
+                                                <Label
+                                                    Grid.Column="1" Grid.Row="1"
+                                                    Text="{Binding MainKnowledgeArea.Name}" />
+                                                <Label
+                                                    IsVisible="{Binding Institution, Converter={StaticResource IsNotNullConverter}}"
+                                                    Grid.Column="1" Grid.Row="2"
+                                                    FontAttributes="Bold,Italic"
+                                                    Text="{Binding Institution}" />
+                                                <Label
+                                                    IsVisible="{Binding Institution, Converter={StaticResource IsNotNullConverter}}"
+                                                    Grid.Column="1" Grid.Row="3"
+                                                    FontAttributes="Italic"
+                                                    Text="{Binding Title}" />
+                                                <Label
+                                                    IsVisible="{Binding At, Converter={StaticResource IsNotNullConverter}}"
+                                                    Grid.Column="1" Grid.Row="4"
+                                                    TextColor="DimGray"
+                                                    Text="{Binding At, StringFormat='d/MM/yyyy'}" />
+                                            </Grid>
+                                        </DataTemplate>
+                                    </BindableLayout.ItemTemplate>
+                                </VerticalStackLayout>
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Usuario" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding User.Id, TargetNullValue='---', FallbackValue='---'}" />
                                 <Label 
                                     Style="{StaticResource CaptionPropertyLabelStyle}"
                                     Text="Prioridad" />
@@ -313,6 +371,7 @@
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />
                             <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />

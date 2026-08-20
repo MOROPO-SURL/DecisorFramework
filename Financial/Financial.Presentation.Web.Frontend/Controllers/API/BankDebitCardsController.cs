@@ -3,22 +3,22 @@ using MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 
-namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controllers.API
+namespace MOROPO.Framework.Decisor.Financial.Presentation.Web.Frontend.Controllers.API;
+
+[Microsoft.AspNetCore.Authorization.Authorize(AuthenticationSchemes = Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerDefaults.AuthenticationScheme)]
+[Microsoft.AspNetCore.Mvc.Route("api/fwrk/financial/[controller]")]
+[Microsoft.AspNetCore.Mvc.ApiController]
+public class BankDebitCardsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<BankDebitCard, System.Guid, BankDebitCardInputModel, Interop.API.Common.Models.Display.BankDebitCardDisplayModel>
 {
-    [Microsoft.AspNetCore.Mvc.Route("api/fwrk/financial/[controller]")]
-    [Microsoft.AspNetCore.Mvc.ApiController]
-    public class BankDebitCardsController : Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementController<BankDebitCard, System.Guid, BankDebitCardInputModel, Interop.API.Common.Models.Display.BankDebitCardDisplayModel>
+    private readonly IEntityRepository<BankAccount, System.Guid> bankAccountRepository;
+
+    public BankDebitCardsController(IEntityRepository<BankAccount, System.Guid> bankAccountRepository, IEntityRepository<BankDebitCard, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<BankDebitCardsController> localizer, ILogger<BankDebitCardsController> logger) : base(repository, localizer, logger)
     {
-        private readonly IEntityRepository<BankAccount, System.Guid> bankAccountRepository;
+        this.bankAccountRepository = bankAccountRepository;
+    }
 
-        public BankDebitCardsController(IEntityRepository<BankAccount, System.Guid> bankAccountRepository, IEntityRepository<BankDebitCard, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<BankDebitCardsController> localizer, ILogger<BankDebitCardsController> logger) : base(repository, localizer, logger)
-        {
-            this.bankAccountRepository = bankAccountRepository;
-        }
-
-        protected override System.Linq.Expressions.Expression<System.Func<BankDebitCard, bool>> GetGlobalSelector()
-        {
-            return entity => !entity.Archived && entity.Enabled;
-        }
+    protected override System.Linq.Expressions.Expression<System.Func<BankDebitCard, bool>> GetGlobalSelector()
+    {
+        return entity => !entity.Archived && entity.Enabled;
     }
 }

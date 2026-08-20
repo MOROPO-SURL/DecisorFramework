@@ -4,6 +4,7 @@ using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Commercial.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Commercial.Persistence.Entities;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Decisor.Financial.Persistence.Entities;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Location.Persistence.Entities;
@@ -22,14 +23,16 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
         private readonly IEntityRepository<PersonContact, System.Guid> personContactRepository;
         private readonly IEntityRepository<Document, System.Guid> documentRepository;
         private readonly IDocumentFileManagerFacade documentFileManager;
+        private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-        public NaturalProvidersController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<PersonContact, System.Guid> personContactRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<BankAccount, System.Guid> bankAccountRepository, IEntityRepository<NaturalProvider, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<NaturalProvidersController> localizer, Microsoft.Extensions.Logging.ILogger<NaturalProvidersController> logger) : base(repository, localizer, logger)
+        public NaturalProvidersController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<PersonContact, System.Guid> personContactRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<BankAccount, System.Guid> bankAccountRepository, IEntityRepository<NaturalProvider, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<NaturalProvidersController> localizer, Microsoft.Extensions.Logging.ILogger<NaturalProvidersController> logger) : base(repository, localizer, logger)
         {
             this.bankAccountRepository = bankAccountRepository;
             this.municipalityRepository = municipalityRepository;
             this.personContactRepository = personContactRepository;
             this.documentRepository = documentRepository;
             this.documentFileManager = documentFileManager;
+            this.changeNotificationRepository = changeNotificationRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<NaturalProvider, bool>> GetGlobalSelector()
@@ -141,6 +144,13 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
             }
         }
 
+        protected override void PostCreate(NaturalProvider entity, NaturalProviderInputModel model)
+        {
+            base.PostCreate(entity, model);
+
+            this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
+        }
+
         protected override void PreEdit(NaturalProvider entity, NaturalProviderInputModel model)
         {
             base.PreEdit(entity, model);
@@ -231,6 +241,18 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Frontend.Controll
                 documentFileManager.SaveDocumentFileContent(_entity.Id, _model.ContentData, _entity.ContentType);
             }
             #endregion
+        }
+
+        protected override void PostEdit(NaturalProvider entity, NaturalProviderInputModel model)
+        {
+            base.PostEdit(entity, model);
+
+            this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
+
+            foreach (var _model in model.OutgoingDocuments)
+            {
+                documentFileManager.DeleteDocumentFile(new Document { Id = _model.Id, ContentType = MimeTypes.MimeTypeMap.GetMimeType(_model.Extension) });
+            }
         }
     }
 }

@@ -8,7 +8,7 @@
 
         public System.Linq.Expressions.Expression<System.Func<Persistence.Entities.NamingResolution, bool>> GetSelector()
         {
-            return entity => (entity.StaffId == StaffId && entity.Vacant.WorkPositionId == WorkPositionId) || (entity.Candidate.Postulation.StaffId == StaffId && entity.Candidate.Postulation.Vacant.WorkPositionId == WorkPositionId);
+            return entity => entity.AdmitionPropousal.OcupationCandidate.Postulation.StaffId == StaffId && entity.AdmitionPropousal.OcupationCandidate.Postulation.Vacant.WorkPositionId == WorkPositionId;
         }
     }
 }

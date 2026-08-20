@@ -5,24 +5,16 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class AdmitionPropousalsManagePage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel, Models.Page.Manage.AdmitionPropousalsManagePageModel, Models.Page.Configuration.AdmitionPropousalConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 236;
-
     public AdmitionPropousalsManagePage()
     {
         InitializeComponent();
     }
 
-    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
-    {
-        return ItemsCollectionView;
-    }
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth { get => 520; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.ADMITION_PROPOUSAL_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.ADMITION_PROPOUSAL_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.AdmitionPropousalDisplayModel>> FetchItemsAsync()
     {

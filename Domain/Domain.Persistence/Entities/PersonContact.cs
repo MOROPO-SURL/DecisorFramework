@@ -1,4 +1,6 @@
-﻿namespace MOROPO.Framework.Decisor.Domain.Persistence.Entities
+﻿using System.Collections.Generic;
+
+namespace MOROPO.Framework.Decisor.Domain.Persistence.Entities
 {
     public class PersonContact : Contract.AbstractContact
     {
@@ -16,5 +18,7 @@
         public System.Guid? BusinessKindId { get; set; }
 
         public Enumerations.PersonSkinKind SkinKind { get; set; }
+
+        public IReadOnlyCollection<AcademicAchievement> AcademicAchievements { get; private set; }
     }
 }

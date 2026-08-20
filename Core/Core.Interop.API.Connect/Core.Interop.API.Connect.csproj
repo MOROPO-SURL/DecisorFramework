@@ -6,7 +6,7 @@
 		<RootNamespace>MOROPO.Framework.Decisor.Core.Interop.API.Connect</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.2" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\Core.Interop.API.Common\Core.Interop.API.Common.csproj" />

@@ -9,13 +9,13 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extens
     {
         public static void AddDecisorHumanResourcesPresentationWebCommon(this IServiceCollection services)
         {
-            services.AddScoped<IEntityRepository<Schooling, System.Guid>, SchoolingRepository>();
             services.AddScoped<IEntityRepository<WorkPositionKind, System.Guid>, WorkPositionKindRepository>();
             services.AddScoped<IEntityRepository<WorkPosition, System.Guid>, WorkPositionRepository>();
             services.AddScoped<IEntityRepository<NamingResolution, System.Guid>, NamingResolutionRepository>();
+            services.AddScoped<IEntityRepository<DesignationResolution, System.Guid>, DesignationResolutionRepository>();
             services.AddScoped<IEntityRepository<SalaryStandard, System.Guid>, SalaryStandardRepository>();
             services.AddScoped<IEntityRepository<Workforce, System.Guid>, WorkforceRepository>();
-            services.AddScoped<IEntityRepository<WorkforceOrganizationalUnity, System.Guid>, WorkforceOrganizationalUnityRepository>();
+            services.AddScoped<IEntityRepository<WorkforceOrganizationalUnit, System.Guid>, WorkforceOrganizationalUnitRepository>();
             services.AddScoped<IEntityRepository<Staff, System.Guid>, StaffRepository>();
             services.AddScoped<IEntityRepository<Vacant, System.Guid>, VacantRepository>();
             services.AddScoped<IEntityRepository<Ocupation, System.Guid>, OcupationRepository>();
@@ -26,6 +26,7 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extens
             services.AddScoped<IEntityRepository<Persistence.Entities.Contract.AbstractEmploymentContract, System.Guid>, EmploymentContractRepository>();
             services.AddScoped<IEntityRepository<AdmitionEmploymentContract, System.Guid>, AdmitionEmploymentContractRepository>();
             services.AddScoped<IEntityRepository<NamingEmploymentContract, System.Guid>, NamingEmploymentContractRepository>();
+            services.AddScoped<IEntityRepository<DesignationEmploymentContract, System.Guid>, DesignationEmploymentContractRepository>();
             services.AddScoped<IEntityRepository<EmployeeDailyChecking, long>, EmployeeDailyCheckingRepository>();
 
             services.AddSingleton<Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.HumanResourcesDbSchemaConfigurationProvider>();

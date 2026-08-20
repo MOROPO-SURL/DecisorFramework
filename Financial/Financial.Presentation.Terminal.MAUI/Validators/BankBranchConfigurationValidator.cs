@@ -6,9 +6,13 @@ namespace MOROPO.Framework.Decisor.Financial.Presentation.Terminal.MAUI.Validato
     {
         public BankBranchConfigurationValidator()
         {
-            RuleFor(model => model.Number).NotNull().GreaterThan(0);
+            RuleFor(model => model.Number)
+                .NotNull().GreaterThan(0)
+                .WithName("Número");
 
-            RuleFor(model => model.Agency).NotNull();
+            RuleFor(model => model.Agency)
+                .NotNull()
+                .WithName("Agencia");
         }
     }
 }

@@ -3,7 +3,7 @@
     public enum VacantOcupationMode
     {
         Admision,
-        Hybrid,
+        Designation,
         Naming
     }
 }

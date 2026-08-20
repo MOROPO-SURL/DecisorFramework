@@ -35,7 +35,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
         private string bodyIdentifier;
         private int seatCount;
         private double loadCapacity;
-        private StructureParentalDisplayModel structure;
+        private AdministrativeEntityParentalDisplayModel structure;
         private string reference;
         private string operativeLicenceCode;
         private double technicalAvailabilityIndex = 100;
@@ -105,7 +105,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public VehicleKindDisplayModel Kind { get => kind; set => SetProperty(ref kind, value); }
 
-        public StructureParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
+        public AdministrativeEntityParentalDisplayModel Structure { get => structure; set => SetProperty(ref structure, value); }
 
         public string Reference { get => reference; set => SetProperty(ref reference, value); }
 
@@ -125,6 +125,6 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page
 
         public VehicleEngineKindDisplayModel[] AvailableEngineKinds { get; set; }
 
-        public StructureParentalDisplayModel[] AvailableStructures { get; set; }
+        public AdministrativeEntityParentalDisplayModel[] AvailableStructures { get; set; }
     }
 }

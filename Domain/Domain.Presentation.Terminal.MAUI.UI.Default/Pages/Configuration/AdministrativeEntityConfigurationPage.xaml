@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:core_ui_default_constants="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Constants;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:core_ui_default_card_views="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"    
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.AdministrativeEntityConfigurationPage"
+    x:TypeArguments="interop_common_display_models:AdministrativeEntityParentalDisplayModel,interop_common_display_models:AdministrativeEntityParentalDisplayModel,presentation_configuration_page_models:AdministrativeEntityConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:AdministrativeEntityConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="WrapFlexLayoutItemResponsiveWithConverter" WrapSpacing="4" SingleSpacing="0" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>    
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="0" Padding="8">
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource WrapFlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=9, LargeContainerColumn=8, MediumContainerColumn=12}}">
+                        <VerticalStackLayout 
+                            Margin="8"
+                            Spacing="6">
+                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                            <Entry Text="{Binding Name}" />
+                            <Label
+                                IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:AdministrativeEntityConfigurationPageModel.NameValidableProperty}}"
+                                Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:AdministrativeEntityConfigurationPageModel.NameValidableProperty}}"
+                                Style="{StaticResource ValidationMessageLabelStyle}" />
+                        </VerticalStackLayout>
+                        <FlexLayout 
+                            Wrap="Wrap"
+                            AlignItems="Start" AlignContent="Start">
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, SmallContainerColumn=6}}"
+                                Margin="4"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
+                                <Picker 
+                                    x:Name="KindPicker"
+                                    ItemsSource="{Binding AvailableKinds}"
+                                    ItemDisplayBinding="{Binding Path=Name}"
+                                    SelectedItem="{Binding Kind}"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                                <Label
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:AdministrativeEntityConfigurationPageModel.KindValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:AdministrativeEntityConfigurationPageModel.KindValidableProperty}}"
+                                    Style="{StaticResource ValidationMessageLabelStyle}" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout 
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=4, SmallContainerColumn=6}}"
+                                Margin="4"
+                                Spacing="6">
+                                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Estructura Organizacional" />
+                                <Picker 
+                                    x:Name="OrganizationalStructurePicker"
+                                    ItemsSource="{Binding AvailableOrganizationalStructures}"
+                                    ItemDisplayBinding="{Binding Path=Name}"
+                                    SelectedItem="{Binding OrganizationalStructure}"
+                                    SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                                <Label
+                                    IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:AdministrativeEntityConfigurationPageModel.OrganizationalStructureValidableProperty}}"
+                                    Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:AdministrativeEntityConfigurationPageModel.OrganizationalStructureValidableProperty}}"
+                                    Style="{StaticResource ValidationMessageLabelStyle}" />
+                            </VerticalStackLayout>
+                        </FlexLayout>
+                        <VerticalStackLayout 
+                            Margin="8"
+                            Spacing="6">
+                            <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición (Opcional)" />
+                            <Editor Text="{Binding About}" HeightRequest="180" />
+                        </VerticalStackLayout>
+                    </VerticalStackLayout>
+                    <Frame
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel ExtraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=6}}"
+                        HeightRequest="{Binding Source={RelativeSource Mode=Self}, Path=Width}"
+                        VerticalOptions="Start"
+                        Margin="4"
+                        Padding="0">
+                        <Grid>
+                            <Image Source="{Binding ImageSource, TargetNullValue='default_organization_picture.png'}" />
+                            <Grid BackgroundColor="#A7000000">
+                                <Grid.GestureRecognizers>
+                                    <TapGestureRecognizer Tapped="ImageLayoutTapGestureRecognizer_Tapped" />
+                                </Grid.GestureRecognizers>
+                                <Label
+                                    Text="&#xF8CB;"
+                                    TextColor="White"
+                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="96" />
+                            </Grid>
+                        </Grid>
+                    </Frame>                    
+                </FlexLayout>
+                <Grid 
+                    Margin="8"
+                    ColumnSpacing="6" RowSpacing="6">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Label 
+                        Grid.ColumnSpan="2" Grid.Row="0"
+                        Style="{StaticResource CaptionFieldLabelStyle}" 
+                        Text="Superior (Opcional)" />
+                    <Picker 
+                        x:Name="ParentPicker"
+                        Grid.Column="0" Grid.Row="1"
+                        VerticalOptions="Center"
+                        ItemsSource="{Binding AvailableParents}"
+                        ItemDisplayBinding="{Binding Path=TreeName}"
+                        SelectedItem="{Binding Parent}"
+                        SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    <Button
+                        Grid.Column="1" Grid.Row="1"
+                        VerticalOptions="Center"
+                        ToolTipProperties.Text="Eliminar selección"
+                        Style="{StaticResource FontIconImageButtonStyle}"
+                        Text="&#xF02C4;"
+                        Clicked="ClearParentButton_Clicked" />
+                </Grid>
+                <BoxView 
+                    Margin="8,16,8,8"
+                    HeightRequest="1" 
+                    Color="DimGray" />
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <Grid
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        ColumnSpacing="6" RowSpacing="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.Row="0"
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Entry
+                            Grid.Row="1"
+                            BackgroundColor="Transparent"
+                            IsReadOnly="True"
+                            Text="{Binding Priority}" />
+                        <Stepper
+                            Grid.Row="1"
+                            Margin="0,0,6,0"
+                            HorizontalOptions="End" VerticalOptions="Center"
+                            Minimum="1"
+                            Maximum="100"
+                            Value="{Binding Priority}" />
+                    </Grid>
+                </FlexLayout>
+                <BoxView 
+                    Margin="8,16,8,8"
+                    HeightRequest="1" 
+                    Color="DimGray" />
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Usuarios a notificar" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="NotificationUserAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="DimGray" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                Margin="4"
+                                ItemsSource="{Binding NotificationUsers}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="1" HorizontalItemSpacing="8" VerticalItemSpacing="8" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="{Static core_ui_default_constants:CardViewHeightConstants.USER_DEFAULT_CARD_VIEW_WIDTH}" ItemSpacing="8" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.EmptyView>
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid>
+                                            <core_ui_default_card_views:UserDefaultCardView HeightRequest="{Static core_ui_default_constants:CardViewHeightConstants.USER_DEFAULT_CARD_VIEW_HEIGHT}" />
+                                            <Button
+                                                Style="{StaticResource DangerKindFontIconImageButtonStyle}"
+                                                Margin="8"
+                                                HorizontalOptions="End" VerticalOptions="Start"
+                                                Text="&#xFA78;"
+                                                Clicked="NotificationUserRemotionButton_Clicked" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</core_ui_base_pages:ConfigurationBaseContentPage>

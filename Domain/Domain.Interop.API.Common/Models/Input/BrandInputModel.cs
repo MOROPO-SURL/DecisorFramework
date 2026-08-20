@@ -2,7 +2,7 @@
 
 namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 {
-    public class BrandInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Brand, System.Guid>
+    public class BrandInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Brand, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -13,7 +13,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 
         public int Priority { get; set; }
 
-        public Brand Export()
+        public override Brand Export()
         {
             var entity = new Brand { Id = Id, Enabled = true };
 
@@ -22,12 +22,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(Brand entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Brand entity)
+        public override void Mergue(Brand entity)
         {
             entity.Name = Name;
             entity.Description = Description;

@@ -2,9 +2,11 @@
 {
     public class SalaryStandardConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.SalaryStandardDisplayModel>
     {
+        public static string NameValidableProperty => nameof(Name);
+
         private string name;
         private int priority = 1;
-        private double fee;
+        private float fee;
 
         public SalaryStandardConfigurationPageModel(Interop.API.Common.Models.Display.SalaryStandardDisplayModel model) : base(model)
         {
@@ -23,6 +25,6 @@
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public double Fee { get => fee; set => SetProperty(ref fee, value); }
+        public float Fee { get => fee; set => SetProperty(ref fee, value); }
     }
 }

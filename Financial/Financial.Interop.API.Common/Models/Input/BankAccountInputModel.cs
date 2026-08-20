@@ -1,9 +1,7 @@
 ﻿namespace MOROPO.Framework.Decisor.Financial.Interop.API.Common.Models.Input
 {
-    public class BankAccountInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.BankAccount, System.Guid>
+    public class BankAccountInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.BankAccount, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public int Priority { get; set; }
 
         public System.Guid BranchId { get; set; }
@@ -19,7 +17,7 @@
 
         public bool IsExternal { get; set; }
 
-        public Persistence.Entities.BankAccount Export()
+        public override Persistence.Entities.BankAccount Export()
         {
             var entity = new Persistence.Entities.BankAccount { Id = Id, Enabled = true, External = IsExternal };
 
@@ -28,12 +26,7 @@
             return entity;
         }
 
-        public void Import(Persistence.Entities.BankAccount entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.BankAccount entity)
+        public override void Mergue(Persistence.Entities.BankAccount entity)
         {
             entity.Priority = Priority;
             entity.Number = Number;

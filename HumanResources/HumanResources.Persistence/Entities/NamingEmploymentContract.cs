@@ -2,15 +2,11 @@
 {
     public class NamingEmploymentContract : Contract.AbstractEmploymentContract
     {
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResolutionId))]
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(NamingResolutionId))]
         public NamingResolution Resolution { get; set; }
-        public System.Guid? ResolutionId { get; set; }
+        public System.Guid NamingResolutionId { get; set; }
 
         public System.DateTime? InterviewAt { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ResponsibleId))]
-        public Domain.Persistence.Entities.Employee Responsible { get; set; }
-        public System.Guid? ResponsibleId { get; set; }
 
         public string Description { get; set; }
     }

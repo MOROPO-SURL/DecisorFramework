@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentView 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card.OrganizationalStructuringUnitSingleCardView"
+    x:DataType="presentation_configuration_page_models:OrganizationalStructuringUnitConfigurationPageModel">
+    <Grid ColumnSpacing="0" RowSpacing="8">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition />
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Label
+            Grid.Column="0" Grid.RowSpan="3"
+            VerticalOptions="Center"
+            FontSize="Large"
+            FontFamily="MaterialDesignIcons"
+            Text="&#xF554;" />
+        <Frame 
+            Grid.Column="1" Grid.RowSpan="3"
+            Margin="8,0,0,0"
+            Padding="16">
+            <Grid ColumnSpacing="8" RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="Auto" />
+                </Grid.RowDefinitions>
+                <Label
+                    Grid.ColumnSpan="2" Grid.Row="0"
+                    FontSize="Medium"
+                    Text="{Binding OrganizationalUnit.Name}" />
+                <Label 
+                    Grid.ColumnSpan="2" Grid.Row="1"
+                    Margin="0,4,0,0"
+                    Text="Referencia"
+                    TextColor="DimGray"
+                    FontSize="Caption"
+                    FontAttributes="Bold" />
+                <Label 
+                    Grid.ColumnSpan="2" Grid.Row="2"
+                    Text="{Binding Reference, TargetNullValue='---'}" />
+            </Grid>
+        </Frame>
+        <Button
+            Style="{StaticResource FontIconImageButtonStyle}" 
+            Grid.Column="3" Grid.Row="0"
+            Margin="8,0,0,0"
+            Text="&#xF90B;"
+            Clicked="EditChildButton_Clicked" />
+        <Button
+            Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+            Grid.Column="3" Grid.Row="1"
+            Margin="8,0,0,0"
+            Text="&#xFA78;"
+            Clicked="RemoveChildButton_Clicked" />
+    </Grid>
+</ContentView>

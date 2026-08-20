@@ -2,20 +2,22 @@
 
 namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input
 {
-    public class StaffInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.Staff, System.Guid>
+    public class StaffInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.Staff, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public System.Guid StructureId { get; set; }
 
         public System.Guid MainWorkforceId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Range(1, 28)]
-        public int WorkingDayCount { get; set; } = 24;
+        [System.ComponentModel.DataAnnotations.Range(1, 44)]
+        public int WorkingWeekHourCount { get; set; } = 44;
+
+        public float DoctorateExtraFeed { get; set; }
+
+        public float MasteryExtraFeed { get; set; }
 
         public Bridge.AlternativeWorkforceBridgeModel[] AlternativeWorkforces { get; set; }
 
-        public Persistence.Entities.Staff Export()
+        public override Persistence.Entities.Staff Export()
         {
             var entity = new Persistence.Entities.Staff { Id = Id };
 
@@ -24,14 +26,11 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
             return entity;
         }
 
-        public void Import(Persistence.Entities.Staff entity)
+        public override void Mergue(Persistence.Entities.Staff entity)
         {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.Staff entity)
-        {
-            entity.WorkingDayCount = WorkingDayCount;
+            entity.WorkingWeekHourCount = WorkingWeekHourCount;
+            entity.DoctorateExtraFeed = DoctorateExtraFeed;
+            entity.MasteryExtraFeed = MasteryExtraFeed;
 
             entity.AlternativeWorkforceBridges = AlternativeWorkforces.Select(model => new Persistence.Entities.StaffWorkforceBridge
             {
@@ -41,10 +40,10 @@ namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Inpu
                 Description = model.Description
             }).ToList();
 
-            if (entity.StructureId != StructureId)
+            if (entity.AdministrativeEntityId != StructureId)
             {
-                entity.Structure = null;
-                entity.StructureId = StructureId;
+                entity.AdministrativeEntity = null;
+                entity.AdministrativeEntityId = StructureId;
             }
 
             if (entity.MainWorkforceId != MainWorkforceId)

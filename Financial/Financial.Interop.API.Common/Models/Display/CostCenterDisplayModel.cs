@@ -14,7 +14,7 @@
 
         public BankAccountDisplayModel DefaultBankAccount { get; set; }
 
-        public Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel Structure { get; set; }
+        public Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel Structure { get; set; }
 
         public void Import(Persistence.Entities.CostCenter entity)
         {
@@ -33,7 +33,7 @@
 
             if (entity.Structure != null)
             {
-                Structure = new Domain.Interop.API.Common.Models.Display.StructureParentalDisplayModel();
+                Structure = new Domain.Interop.API.Common.Models.Display.AdministrativeEntityParentalDisplayModel();
 
                 Structure.Import(entity.Structure);
             }

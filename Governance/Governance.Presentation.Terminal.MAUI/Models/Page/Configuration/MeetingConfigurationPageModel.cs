@@ -4,7 +4,11 @@ namespace MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.Models.
 {
     public class MeetingConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.MeetingDisplayModel>
     {
-        private int index;
+        public static string GroupValidableProperty => nameof(Group);
+        public static string AuthorValidableProperty => nameof(Author);
+        public static string AtDateValidableProperty => nameof(AtDate);
+
+        private int index = 1;
         private System.DateTime atDate;
         private System.TimeSpan atTime;
         private string summary;

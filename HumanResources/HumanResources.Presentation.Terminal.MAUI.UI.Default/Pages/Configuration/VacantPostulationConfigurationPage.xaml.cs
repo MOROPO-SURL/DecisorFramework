@@ -18,23 +18,9 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
     private readonly List<VacantPostulationOcupationInputModel> incomingOcupations = [];
     private readonly List<VacantPostulationOcupationDisplayModel> outgoingOcupations = [];
 
-    public VacantPostulationConfigurationPage(System.Action<VacantPostulationDisplayModel> successAction, Models.Page.Configuration.VacantPostulationConfigurationPageModel model) : base(successAction, model, null)
+    public VacantPostulationConfigurationPage(System.Action<VacantPostulationDisplayModel> successAction, Models.Page.Configuration.VacantPostulationConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.VacantPostulationConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
-
-        if (model.Schooling != null)
-        {
-            for (int i = 0; i < model.AvailableSchoolings.Length; i++)
-            {
-                var current = model.AvailableSchoolings[i];
-
-                if (model.Schooling.Id != current.Id) continue;
-
-                SchoolingPicker.SelectedIndex = i;
-
-                break;
-            }
-        }
 
         if (model.OfficialPostalContactItem != null) 
         {
@@ -65,7 +51,7 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
         }
     }
 
-    protected override string EntityTypeName => "Postulación a Vacante";
+    protected override string EntityTypeName => "Captación";
 
     protected override async System.Threading.Tasks.Task<VacantPostulationDisplayModel> PerformCreationAsync()
     {
@@ -78,17 +64,19 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
             StaffId = ConcreteBindingContext.Staff.Id,
             VacantId = ConcreteBindingContext.Vacant.Id,
             ContactId = ConcreteBindingContext.Contact.Id,
-            OfficialPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[MainPostalContactItemPicker.SelectedIndex].Id,
-            AlternativePostalContactItemId = AltPostalContactItemPicker.SelectedIndex >= 0 ? ConcreteBindingContext.Contact.Identity.PostalContacts[AltPostalContactItemPicker.SelectedIndex].Id : null,
-            SchoolingId = ConcreteBindingContext.AvailableSchoolings[SchoolingPicker.SelectedIndex].Id,
-            SchoolingComplement = ConcreteBindingContext.SchoolingComplement,
+            OfficialPostalContactItemId = ConcreteBindingContext.OfficialPostalContactItem.Id,
+            AlternativePostalContactItemId = ConcreteBindingContext.AlternativePostalContactItem?.Id,
+            EducationLevel = ConcreteBindingContext.EducationLevel,
+            UltimateEducationInstitution = ConcreteBindingContext.UltimateEducationInstitution,
+            TitulationTitle = ConcreteBindingContext.TitulationTitle,
             MaleParentName = ConcreteBindingContext.MaleParentName,
             FemaleParentName = ConcreteBindingContext.FemaleParentName,
             Alignment = ConcreteBindingContext.Alignment,
             ResponsabilityCommitment = ConcreteBindingContext.ResponsabilityCommitment,
-            PersonalIdentificationNumber = !string.IsNullOrEmpty(ConcreteBindingContext.PersonalIdentificationNumber) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.ResponsabilityCommitment) && ConcreteBindingContext.PersonalIdentificationNumber != ConcreteBindingContext.Contact.PersonalIdentificationNumber ? ConcreteBindingContext.PersonalIdentificationNumber : null,
+            PersonalIdentificationNumber = ConcreteBindingContext.PersonalIdentificationNumber,
             IncomingDocuments = incomingDocuments,
-            IncomingOcupations = incomingOcupations
+            IncomingOcupations = incomingOcupations,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -107,21 +95,23 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
             StaffId = ConcreteBindingContext.Staff.Id,
             VacantId = ConcreteBindingContext.Vacant.Id,
             ContactId = ConcreteBindingContext.Contact.Id,
-            OfficialPostalContactItemId = ConcreteBindingContext.Contact.Identity.PostalContacts[MainPostalContactItemPicker.SelectedIndex].Id,
-            AlternativePostalContactItemId = AltPostalContactItemPicker.SelectedIndex >= 0 ? ConcreteBindingContext.Contact.Identity.PostalContacts[AltPostalContactItemPicker.SelectedIndex].Id : null,
-            SchoolingId = ConcreteBindingContext.AvailableSchoolings[SchoolingPicker.SelectedIndex].Id,
-            SchoolingComplement = ConcreteBindingContext.SchoolingComplement,
+            OfficialPostalContactItemId = ConcreteBindingContext.OfficialPostalContactItem.Id,
+            AlternativePostalContactItemId = ConcreteBindingContext.AlternativePostalContactItem?.Id,
+            EducationLevel = ConcreteBindingContext.EducationLevel,
+            UltimateEducationInstitution = ConcreteBindingContext.UltimateEducationInstitution,
+            TitulationTitle = ConcreteBindingContext.TitulationTitle,
             MaleParentName = ConcreteBindingContext.MaleParentName,
             FemaleParentName = ConcreteBindingContext.FemaleParentName,
             Alignment = ConcreteBindingContext.Alignment,
             ResponsabilityCommitment = ConcreteBindingContext.ResponsabilityCommitment,
-            PersonalIdentificationNumber = !string.IsNullOrEmpty(ConcreteBindingContext.PersonalIdentificationNumber) && !string.IsNullOrWhiteSpace(ConcreteBindingContext.ResponsabilityCommitment) && ConcreteBindingContext.PersonalIdentificationNumber != ConcreteBindingContext.Contact.PersonalIdentificationNumber ? ConcreteBindingContext.PersonalIdentificationNumber : null,
+            PersonalIdentificationNumber = ConcreteBindingContext.PersonalIdentificationNumber,
             IncomingDocuments = incomingDocuments,
             EditionDocuments = editionDocuments,
             OutgoingDocuments = outgoingDocuments,
             IncomingOcupations = incomingOcupations,
             EditionOcupations = editionOcupations,
-            OutgoingOcupations = outgoingOcupations
+            OutgoingOcupations = outgoingOcupations,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -146,12 +136,36 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
 
     private void VacantPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPickPage([Persistence.Enumerations.VacantOcupationMode.Admision], VacantPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.VacantPickPage([Persistence.Enumerations.VacantOcupationMode.Admision, Persistence.Enumerations.VacantOcupationMode.Naming], VacantPickComplete_Callback)));
     }
 
     private void ContactPickButton_Clicked(object sender, System.EventArgs eventArgs)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback)));
+    }
+
+    private void ContactEditButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        var factory = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel, Domain.Presentation.Terminal.MAUI.Models.Page.Configuration.PersonContactConfigurationPageModel>>();
+
+        ConcreteBindingContext.IsBusy = true;
+
+        factory.BuildAsync(ContactPickComplete_Callback, ConcreteBindingContext.Contact).ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                if (task.Exception != null || task.IsCanceled)
+                {
+                    Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    this.NavigationPushPageAsync(task.Result);
+                }
+
+                ConcreteBindingContext.IsBusy = false;
+            });
+        });
     }
 
     private void DocumentAgregationButton_Clicked(object sender, System.EventArgs e)
@@ -367,6 +381,33 @@ public partial class VacantPostulationConfigurationPage : Core.Presentation.Term
                 hasChangesFlag = true;
             });
         });
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void OcupationCreateSuccess_Callback(VacantPostulationOcupationDisplayModel model)

@@ -2,7 +2,7 @@
 <core_ui_base_pages:ManageBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:local_constants="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Constants"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
@@ -14,7 +14,7 @@
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.VacantPostulationsManagePage"
     x:TypeArguments="interop_common_display_models:VacantPostulationDisplayModel,presentation_manage_page_models:VacantPostulationsManagePageModel,presentation_configuration_page_models:VacantPostulationConfigurationPageModel"
     x:DataType="presentation_manage_page_models:VacantPostulationsManagePageModel"
-    Title="Gestión de Postulaciones a Vacantes">
+    Title="Gestión de Captaciones">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
@@ -51,7 +51,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:VacantPostulationDisplayModel">
-                                <local_card_views:VacantPostulationDefaultCardView HeightRequest="{Static local:VacantPostulationsManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                <local_card_views:VacantPostulationDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.VACANT_POSTULATION_DEFAULT_CARD_VIEW_HEIGHT}">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </ContentView.GestureRecognizers>

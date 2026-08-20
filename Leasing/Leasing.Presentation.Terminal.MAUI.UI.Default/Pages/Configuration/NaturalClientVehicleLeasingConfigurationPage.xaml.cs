@@ -63,14 +63,22 @@ public partial class NaturalClientVehicleLeasingConfigurationPage : Core.Present
             AgreementId = ConcreteBindingContext.Agreement.Id,
             CostCenterId = ConcreteBindingContext.AvailableConstCenters[CostCenterPicker.SelectedIndex].Id,
             Priority = ConcreteBindingContext.Priority,
-            IncomingDriveLicences = [.. ConcreteBindingContext.DriveLicences.Select(item => new Interop.API.Common.Models.Input.DriveLicenceInputModel
+            IncomingDriveLicences = [.. ConcreteBindingContext.DriveLicences.Select(item => new DriveLicenceInputModel
             {
                 Id = item.Id,
                 ContactId = item.Contact.Id,
                 Code = item.Code,
                 Reference = item.Reference,
                 ReleasedAt = item.ReleasedAt,
-                ExpireAt = item.ExpireAt
+                ExpireAt = item.ExpireAt,
+                Limitation = item.Limitation,
+                VehicleKindBridges = item.VehicleKindBridges.Select(_item => new Interop.API.Common.Models.Bridge.Input.DriveLicenceVehicleKindBridgeInputModel
+                {
+                    SternId = _item.Stern.Id,
+                    Category = _item.Category,
+                    Specification = _item.Specification,
+                    AchievedAt = _item.AchievedAt
+                }).ToArray()
             })]
         };
 

@@ -87,8 +87,6 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         private void DetailActionDelegationRequest_Callback(TModel target, int? discriminator)
         {
-            var concreteBindingContext = (TManagePageModel)BindingContext;
-
             ConcreteBindingContext.IsBusy = ConfigurationRequiredAsyncWorkPresentation;
 
             if (discriminator == null)
@@ -138,7 +136,7 @@ namespace MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base
 
         protected virtual void OnActionDelegationRequest(TModel target, int discriminator) { }
 
-        protected void ConfigurationSuccess_Callback(TModel model)
+        protected virtual void ConfigurationSuccess_Callback(TModel model)
         {
             this.PresentToastNotification(Enumerations.NotificationKind.Success, "Cambios aplicados con éxito.", delay: System.TimeSpan.FromMilliseconds(500));
 

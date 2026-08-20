@@ -16,9 +16,9 @@ namespace MOROPO.Framework.Decisor.Governance.Persistence.Entities
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(StructureId))]
-        public Domain.Persistence.Entities.Structure Structure { get; set; }
-        public System.Guid StructureId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AdministrativeEntityId))]
+        public Domain.Persistence.Entities.AdministrativeEntity AdministrativeEntity { get; set; }
+        public System.Guid AdministrativeEntityId { get; set; }
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(LeaderId))]
         public Domain.Persistence.Entities.PersonContact Leader { get; set; }

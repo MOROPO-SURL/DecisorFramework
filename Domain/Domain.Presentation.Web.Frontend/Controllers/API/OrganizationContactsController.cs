@@ -2,6 +2,7 @@
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Filter;
 using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input;
 using MOROPO.Framework.Decisor.Domain.Persistence.Entities;
+using MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Identity.Persistence.Entities;
 using MOROPO.Framework.Guama.Location.Persistence.Entities;
@@ -23,8 +24,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
         private readonly IEntityRepository<Municipality, System.Guid> municipalityRepository;
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
         private readonly IImageFileManagerFacade imageFileManager;
+        private readonly IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository;
 
-        public OrganizationContactsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<WebSiteContactItem, System.Guid> webSiteContactRepository, IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository, IEntityRepository<EmailContactItem, System.Guid> emailContactRepository, IEntityRepository<OrganizationContact, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OrganizationContactsController> localizer, Microsoft.Extensions.Logging.ILogger<OrganizationContactsController> logger) : base(repository, localizer, logger)
+        public OrganizationContactsController(IEntityRepository<ChangeNotification, System.Guid> changeNotificationRepository, IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Municipality, System.Guid> municipalityRepository, IEntityRepository<MunicipalityLocation, System.Guid> municipalityLocationRepository, IEntityRepository<WebSiteContactItem, System.Guid> webSiteContactRepository, IEntityRepository<PostalContactItem, System.Guid> postalContactRepository, IEntityRepository<PhoneContactItem, System.Guid> phoneContactRepository, IEntityRepository<EmailContactItem, System.Guid> emailContactRepository, IEntityRepository<OrganizationContact, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OrganizationContactsController> localizer, Microsoft.Extensions.Logging.ILogger<OrganizationContactsController> logger) : base(repository, localizer, logger)
         {
             this.emailContactRepository = emailContactRepository;
             this.phoneContactRepository = phoneContactRepository;
@@ -34,6 +36,7 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
             this.municipalityRepository = municipalityRepository;
             this.imageRepository = imageRepository;
             this.imageFileManager = imageFileManager;
+            this.changeNotificationRepository = changeNotificationRepository;
         }
 
         protected override System.Linq.Expressions.Expression<System.Func<OrganizationContact, bool>> GetGlobalSelector()
@@ -178,6 +181,13 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
                     SternId = _entity.Id
                 });
             }
+        }
+
+        protected override void PostCreate(OrganizationContact entity, OrganizationContactInputModel model)
+        {
+            base.PostCreate(entity, model);
+
+            this.ChangeNotificationOnPostCreate(entity, model, changeNotificationRepository);
         }
 
         protected override void PreEdit(OrganizationContact entity, OrganizationContactInputModel model)
@@ -389,6 +399,8 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Web.Frontend.Controllers.
         protected override void PostEdit(OrganizationContact entity, OrganizationContactInputModel model)
         {
             base.PostEdit(entity, model);
+
+            this.ChangeNotificationOnPostEdit(entity, model, changeNotificationRepository);
 
             try
             {

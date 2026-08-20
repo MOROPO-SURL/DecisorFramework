@@ -49,6 +49,7 @@
                             IsPassword="true"
                             Completed="OnPasswordEnterPressed"/>
                         <Button
+                            Style="{StaticResource PrimaryKindButtonStyle}"
                             IsEnabled="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
                             HorizontalOptions="Center"
                             Text="Iniciar"

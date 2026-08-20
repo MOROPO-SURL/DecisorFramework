@@ -4,11 +4,11 @@ using System.Linq;
 
 namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 
-public partial class OrganizationalUnityDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel>
+public partial class OrganizationalUnityDetailPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel>
 {
-    private readonly System.Action<Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel, int?> delegationAction;
+    private readonly System.Action<Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel, int?> delegationAction;
 
-    public OrganizationalUnityDetailPage(Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel, int?> delegationAction) : base(bindingContextModel)
+    public OrganizationalUnityDetailPage(Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel, int?> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
@@ -19,7 +19,16 @@ public partial class OrganizationalUnityDetailPage : Core.Presentation.Terminal.
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        var model = BindingContext as Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel;
+        var user = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Managers.Facade.ISessionManagerFacade>().CurrentSession.User;
+
+        if (!user.HasFullAccess && !user.Roles.Any(item => item.Permissions.Any(_item => _item.Code == Interop.API.Common.Constants.Security.Authorization.OrganizationalUnityEditorPermission)))
+        {
+            DisplayAlert("Aviso", "Su usuario no cuenta con permisos para modificar elementos registrados. Póngase en contacto con los administradores del sistema para solicitar los permisos requeridos.", "Aceptar");
+
+            return;
+        }
+
+        var model = BindingContext as Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel;
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
@@ -43,7 +52,7 @@ public partial class OrganizationalUnityDetailPage : Core.Presentation.Terminal.
         {
             if (!task.Result) return;
 
-            var model = BindingContext as Interop.API.Common.Models.Display.OrganizationalUnityParentalDisplayModel;
+            var model = BindingContext as Interop.API.Common.Models.Display.OrganizationalUnitDisplayModel;
 
             Dispatcher.Dispatch(() =>
             {
