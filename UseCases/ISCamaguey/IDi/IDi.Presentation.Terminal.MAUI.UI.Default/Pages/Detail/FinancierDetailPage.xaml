@@ -290,28 +290,15 @@
                                         </BindableLayout.EmptyView>
                                         <BindableLayout.ItemTemplate>
                                             <DataTemplate x:DataType="fwrk_domain_interop_common_display_models:KnowledgeAreaDisplayModel">
-                                                <Grid ColumnSpacing="8">
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="4" />
-                                                        <ColumnDefinition />
-                                                    </Grid.ColumnDefinitions>
-                                                    <Grid.RowDefinitions>
-                                                        <RowDefinition Height="Auto" />
-                                                        <RowDefinition Height="Auto" />
-                                                    </Grid.RowDefinitions>
-                                                    <BoxView
-                                                        Grid.Column="0" Grid.RowSpan="2"
-                                                        Color="DimGray" />
-                                                    <Label         
-                                                        Grid.Column="1" Grid.Row="0"
+                                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                                    <Label
                                                         FontAttributes="Bold"
+                                                        Text="-" />
+                                                    <Label         
+                                                        HorizontalOptions="FillAndExpand"
                                                         LineBreakMode="TailTruncation"
                                                         Text="{Binding Name}" />
-                                                    <Label                                                    
-                                                        Grid.Column="1" Grid.Row="1"
-                                                        LineBreakMode="TailTruncation"
-                                                        Text="{Binding Description, FallbackValue='---', TargetNullValue='---'}" />
-                                                </Grid>
+                                                </StackLayout>
                                             </DataTemplate>
                                         </BindableLayout.ItemTemplate>
                                     </VerticalStackLayout>

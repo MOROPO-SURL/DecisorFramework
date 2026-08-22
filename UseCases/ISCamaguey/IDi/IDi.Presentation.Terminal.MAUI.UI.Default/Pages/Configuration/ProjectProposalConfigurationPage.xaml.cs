@@ -37,7 +37,7 @@ public partial class ProjectProposalConfigurationPage : Framework.Decisor.Core.P
                 Id = System.Guid.NewGuid(),
                 Name = documentFilePickResult.FileName,
                 ContentData = new byte[stream.Length],
-                ContentType = documentFilePickResult.ContentType
+                ContentType = MimeTypes.MimeTypeMap.GetMimeType(System.IO.Path.GetExtension(documentFilePickResult.FileName))
             };
 
             stream.Read(model.Document.ContentData, 0, (int)stream.Length);
@@ -71,7 +71,7 @@ public partial class ProjectProposalConfigurationPage : Framework.Decisor.Core.P
                 Id = model.Document?.Id ?? System.Guid.NewGuid(),
                 Name = documentFilePickResult.FileName,
                 ContentData = new byte[stream.Length],
-                ContentType = documentFilePickResult.ContentType
+                ContentType = MimeTypes.MimeTypeMap.GetMimeType(System.IO.Path.GetExtension(documentFilePickResult.FileName))
             };
 
             stream.Read(model.Document.ContentData, 0, (int)stream.Length);

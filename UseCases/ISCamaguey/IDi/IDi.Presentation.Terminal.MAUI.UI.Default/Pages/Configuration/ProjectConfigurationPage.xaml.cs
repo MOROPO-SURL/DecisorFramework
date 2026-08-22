@@ -86,7 +86,7 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
                 Id = System.Guid.NewGuid(),
                 Name = documentFilePickResult.FileName,
                 ContentData = new byte[stream.Length],
-                ContentType = documentFilePickResult.ContentType
+                ContentType = MimeTypes.MimeTypeMap.GetMimeType(System.IO.Path.GetExtension(documentFilePickResult.FileName))
             };
 
             stream.Read(model.Document.ContentData, 0, (int)stream.Length);
@@ -145,7 +145,7 @@ public partial class ProjectConfigurationPage : Framework.Decisor.Core.Presentat
                 Id = model.Document?.Id ?? System.Guid.NewGuid(),
                 Name = documentFilePickResult.FileName,
                 ContentData = new byte[stream.Length],
-                ContentType = documentFilePickResult.ContentType
+                ContentType = MimeTypes.MimeTypeMap.GetMimeType(System.IO.Path.GetExtension(documentFilePickResult.FileName))
             };
 
             stream.Read(model.Document.ContentData, 0, (int)stream.Length);

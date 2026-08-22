@@ -21,6 +21,8 @@ public partial class ProjectsManagePage : Framework.Decisor.Core.Presentation.Te
         return Constants.CardViewHeightConstants.PROJECT_DEFAULT_CARD_VIEW_HEIGHT;
     }
 
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
+
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ProjectDisplayModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.ProjectsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());

@@ -25,6 +25,7 @@
 		<MtouchLink>None</MtouchLink>
 	</PropertyGroup>
 	<ItemGroup>
+		<PackageReference Include="MediaTypeMap.Core" Version="2.3.3" />
 		<PackageReference Include="Microsoft.Maui.Controls" Version="8.0.100" />
 		<PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="8.0.100" />
 	</ItemGroup>
