@@ -60,8 +60,8 @@
             Title="Servicios"
             ContentTemplate="{DataTemplate lab_manage_pages:ServiceOrderSamplesManagePage}" />
         <ShellContent
-            Title="Investigaciones (%)"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            Title="Investigaciones"
+            ContentTemplate="{DataTemplate lab_manage_pages:ResearchSamplesManagePage}" />
         <ShellContent
             Title="Producciones (%)"
             ContentTemplate="{DataTemplate ContentPage}" />

@@ -98,31 +98,40 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
                 Proposal.Import(entity.Proposal);
             }
 
-            foreach (var item in entity.SpecificObjectives)
+            if (entity.SpecificObjectives != null)
             {
-                var model = new ProjectSpecificObjectiveDisplayModel();
+                foreach (var item in entity.SpecificObjectives)
+                {
+                    var model = new ProjectSpecificObjectiveDisplayModel();
 
-                model.Import(item);
+                    model.Import(item);
 
-                SpecificObjectives.Add(model);
+                    SpecificObjectives.Add(model);
+                }
             }
 
-            foreach (var item in entity.BudgetFunancings)
+            if (entity.BudgetFunancings != null)
             {
-                var model = new ProjectBudgetFunancingDisplayModel();
+                foreach (var item in entity.BudgetFunancings)
+                {
+                    var model = new ProjectBudgetFunancingDisplayModel();
 
-                model.Import(item);
+                    model.Import(item);
 
-                BudgetFunancings.Add(model);
+                    BudgetFunancings.Add(model);
+                }
             }
 
-            foreach (var bridge in entity.ProgramExpectResultBridges)
+            if (entity.ProgramExpectResultBridges != null)
             {
-                var model = new ProgramExpectResultDisplayModel();
+                foreach (var bridge in entity.ProgramExpectResultBridges)
+                {
+                    var model = new ProgramExpectResultDisplayModel();
 
-                model.Import(bridge.Stern);
+                    model.Import(bridge.Stern);
 
-                ProgramExpectResults.Add(model);
+                    ProgramExpectResults.Add(model);
+                }
             }
 
             if (entity.Document != null)
