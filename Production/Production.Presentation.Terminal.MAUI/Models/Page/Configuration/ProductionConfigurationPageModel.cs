@@ -4,7 +4,10 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 {
     public class ProductionConfigurationPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<Interop.API.Common.Models.Display.ProductionDisplayModel>
     {
-        // TODO Resposible?? !!!!!
+        public static string OrderValidableProperty => nameof(Order);
+        public static string AmountValidableProperty => nameof(Amount);
+        public static string UnitMeasurementValidableProperty => nameof(UnitMeasurement);
+
         private Interop.API.Common.Models.Display.ProductionOrderDisplayModel order;
         private decimal amount;
         private Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel unitMeasurement;
@@ -15,6 +18,9 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
             if (model != null)
             {
                 Id = model.Id;
+                Order = model.Order;
+                Amount = model.Amount;
+                UnitMeasurement = model.UnitMeasurement;
                 Description = model.Description;
 
                 foreach (var item in model.ProductBridges) ProductBridges.Add(new View.ProductionProductBridgeViewModel { Product = item.Product, Amount = item.Amount, UnitMeasurement = item.UnitMeasurement });
@@ -41,6 +47,6 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.
 
         public ObservableCollection<Interop.API.Common.Models.Bridge.ProductionColaboratorBridgeModel> ColaboratorBridges { get; set; } = [];
 
-        public Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel[] AvailableUnitMeasurements { get; set; } = [];
+        public ObservableCollection<Domain.Interop.API.Common.Models.Display.UnitMeasurementDisplayModel> AvailableUnitMeasurements { get; set; } = [];
     }
 }

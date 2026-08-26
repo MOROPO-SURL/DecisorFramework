@@ -8,7 +8,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public int Priority { get; set; }
 
-        public System.Guid PlanId { get; set; }
+        public System.Guid OrderId { get; set; }
 
         public decimal Amount { get; set; }
 
@@ -42,10 +42,10 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
             entity.Amount = Amount;
             entity.Description = Description;
 
-            if (entity.PlanId != PlanId)
+            if (entity.OrderId != OrderId)
             {
-                entity.Plan = null;
-                entity.PlanId = PlanId;
+                entity.Order = null;
+                entity.OrderId = OrderId;
             }
 
             if (entity.UnitMeasurementId != UnitMeasurementId)

@@ -15,10 +15,12 @@ namespace MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Defa
                 // DetailPage factory resgistration !!!
                 .AddSingleton<IDetailContentPageFactoryFacade<ProductionOrderDisplayModel>, ProductionOrderDetailPageFactory>()
                 .AddSingleton<IDetailContentPageFactoryFacade<ElaborationDisplayModel>, ElaborationDetailPageFactory>()
+                .AddSingleton<IDetailContentPageFactoryFacade<ProductionDisplayModel>, ProductionDetailPageFactory>()
 
                 // ConfigurationPage factory resgistration !!!
                 .AddSingleton<IConfigurationContentPageFactoryFacade<ProductionOrderDisplayModel, ProductionOrderConfigurationPageModel>, ProductionOrderConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<ElaborationDisplayModel, ElaborationConfigurationPageModel>, ElaborationConfigurationPageFactory>();
+                .AddSingleton<IConfigurationContentPageFactoryFacade<ElaborationDisplayModel, ElaborationConfigurationPageModel>, ElaborationConfigurationPageFactory>()
+                .AddSingleton<IConfigurationContentPageFactoryFacade<ProductionDisplayModel, ProductionConfigurationPageModel>, ProductionConfigurationPageFactory>();
 
             return builder;
         }
