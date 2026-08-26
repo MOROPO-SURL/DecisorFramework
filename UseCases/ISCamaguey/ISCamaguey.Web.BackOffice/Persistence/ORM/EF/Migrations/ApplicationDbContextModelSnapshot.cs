@@ -4918,9 +4918,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
-                    b.Property<Guid>("PlanId")
+                    b.Property<Guid>("OrderId")
                         .HasColumnType("uuid")
-                        .HasColumnName("planid");
+                        .HasColumnName("orderid");
 
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
@@ -4933,9 +4933,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasKey("Id")
                         .HasName("pk_productions");
 
-                    b.HasIndex("PlanId")
+                    b.HasIndex("OrderId")
                         .IsUnique()
-                        .HasDatabaseName("ix_productions_planid");
+                        .HasDatabaseName("ix_productions_orderid");
 
                     b.HasIndex("UnitMeasurementId")
                         .HasDatabaseName("ix_productions_unitmeasurementid");
@@ -11741,12 +11741,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", b =>
                 {
-                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", "Plan")
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.ProductionOrder", "Order")
                         .WithOne("Production")
-                        .HasForeignKey("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", "PlanId")
+                        .HasForeignKey("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", "OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_productions_productionorders_planid");
+                        .HasConstraintName("fk_productions_productionorders_orderid");
 
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.UnitMeasurement", "UnitMeasurement")
                         .WithMany()
@@ -11755,7 +11755,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_productions_unitmeasurements_unitmeasurementid");
 
-                    b.Navigation("Plan");
+                    b.Navigation("Order");
 
                     b.Navigation("UnitMeasurement");
                 });
