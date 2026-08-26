@@ -47,6 +47,9 @@
 	  <Compile Update="Pages\Manage\ProductionOrdersManagePage.xaml.cs">
 	    <DependentUpon>ProductionOrdersManagePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Pick\ProductionPickPage.xaml.cs">
+	    <DependentUpon>ProductionPickPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Pick\ProductionOrderPickPage.xaml.cs">
 	    <DependentUpon>ProductionOrderPickPage.xaml</DependentUpon>
 	  </Compile>
@@ -62,6 +65,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ProductionDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\ProductionPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
