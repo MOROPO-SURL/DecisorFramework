@@ -14,6 +14,8 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
 
         public System.Guid UnitMeasurementId { get; set; }
 
+        public System.DateTime At { get; set; }
+
         public string Description { get; set; }
 
         public System.Collections.Generic.List<Bridge.ProductionProductBridgeModel> ProductBridges { get; set; } = new System.Collections.Generic.List<Bridge.ProductionProductBridgeModel>();
@@ -40,6 +42,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Input
         {
             entity.Priority = Priority;
             entity.Amount = Amount;
+            entity.At = At;
             entity.Description = Description;
 
             if (entity.OrderId != OrderId)

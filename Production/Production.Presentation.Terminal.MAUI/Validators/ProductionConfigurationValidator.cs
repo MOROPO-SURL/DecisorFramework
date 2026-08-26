@@ -11,5 +11,7 @@ public class ProductionConfigurationValidator : AbstractValidator<Models.Page.Co
         RuleFor(model => model.UnitMeasurement).NotNull().WithName("Unidad de medida");
 
         RuleFor(model => model.Amount).GreaterThan(0).WithName("Cantidad");
+
+        RuleFor(model => model.At).LessThanOrEqualTo(System.DateTime.Now).WithName("Fecha");
     }
 }

@@ -86,6 +86,17 @@
                         IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionConfigurationPageModel.AmountValidableProperty}}"
                         Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionConfigurationPageModel.AmountValidableProperty}}"
                         Style="{StaticResource ValidationMessageLabelStyle}" />
+                    <Label 
+                        Style="{StaticResource CaptionFieldLabelStyle}"
+                        Margin="0,8,0,0"
+                        Text="Fecha" />
+                    <DatePicker 
+                        Format="dd/MM/yyyy"
+                        Date="{Binding At}" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionConfigurationPageModel.AtValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionConfigurationPageModel.AtValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="0" VerticalOptions="Start">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad de medida" />
@@ -93,6 +104,7 @@
                         x:Name="UnitMeasurementPicker"
                         ItemsSource="{Binding AvailableUnitMeasurements}"
                         ItemDisplayBinding="{Binding Name}"
+                        SelectedItem="{Binding UnitMeasurement}"
                         SelectedIndexChanged="Picker_SelectedIndexChanged" />
                     <Label
                         IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionConfigurationPageModel.UnitMeasurementValidableProperty}}"
