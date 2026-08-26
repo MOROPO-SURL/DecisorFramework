@@ -40,6 +40,7 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
             OrderId = ConcreteBindingContext.Order.Id,
             Amount = ConcreteBindingContext.Amount,
             UnitMeasurementId = ConcreteBindingContext.AvailableUnitMeasurements[UnitMeasurementPicker.SelectedIndex].Id,
+            At = ConcreteBindingContext.At,
             Description = ConcreteBindingContext.Description,
             ProductBridges = ConcreteBindingContext.ProductBridges.Select(_model => new Interop.API.Common.Models.Bridge.ProductionProductBridgeModel { Product = _model.Product, Amount = _model.Amount, UnitMeasurement = _model.UnitMeasurement }).ToList(),
             EmployeeBridges = ConcreteBindingContext.EmployeeBridges.ToList(),
@@ -57,10 +58,11 @@ public partial class ProductionConfigurationPage : Core.Presentation.Terminal.MA
 
         var model = new Interop.API.Common.Models.Input.ProductionInputModel
         {
-            Id = Id,
+            Id = ConcreteBindingContext.Id,
             OrderId = ConcreteBindingContext.Order.Id,
             Amount = ConcreteBindingContext.Amount,
             UnitMeasurementId = ConcreteBindingContext.AvailableUnitMeasurements[UnitMeasurementPicker.SelectedIndex].Id,
+            At = ConcreteBindingContext.At,
             Description = ConcreteBindingContext.Description,
             ProductBridges = ConcreteBindingContext.ProductBridges.Select(_model => new Interop.API.Common.Models.Bridge.ProductionProductBridgeModel { Product = _model.Product, Amount = _model.Amount, UnitMeasurement = _model.UnitMeasurement }).ToList(),
             EmployeeBridges = ConcreteBindingContext.EmployeeBridges.ToList(),

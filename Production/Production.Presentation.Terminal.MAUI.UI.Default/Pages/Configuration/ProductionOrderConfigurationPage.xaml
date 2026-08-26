@@ -186,7 +186,9 @@
                                 Margin="4"
                                 Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha Prevista" />
-                                <DatePicker Date="{Binding RequestedFor}" />
+                                <DatePicker 
+                                    Format="dd/MM/yyyy"
+                                    Date="{Binding RequestedFor}" />
                             </VerticalStackLayout>
                         </FlexLayout>
                     </VerticalStackLayout>
