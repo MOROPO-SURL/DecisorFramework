@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<core_ui_configuration_pages:BaseConfigurationContentPage 
+<core_ui_base_pages:ConfigurationBaseContentPage
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI"
     xmlns:presentation_view_models="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI"
-    xmlns:core_ui_configuration_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Configuration;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
     xmlns:interop_common_bridge_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Bridge;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ProductionConfigurationPage"
-    x:TypeArguments="interop_common_display_models:ProductionDisplayModel"
+    x:TypeArguments="interop_common_display_models:ProductionDisplayModel,interop_common_display_models:ProductionDisplayModel,presentation_configuration_page_models:ProductionConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:ProductionConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+            
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
         <ToolbarItem 
             Text="Aplicar"
-            Clicked="ApplyClickableControl_Clicked">
+            Clicked="ApplyToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
         </ToolbarItem>
         <ToolbarItem 
             Text="Cancelar"
-            Clicked="CancelClickableControl_Clicked">
+            Clicked="CancelToolbarItem_Clicked">
             <ToolbarItem.IconImageSource>
                 <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
             </ToolbarItem.IconImageSource>
@@ -60,12 +66,26 @@
                             Margin="0,0,0,10" />
                     </ContentView>
                     <Button
+                        HorizontalOptions="Start"
                         Text="Seleccionar ..."
                         Clicked="OrderPickButton_Clicked" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionConfigurationPageModel.OrderValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionConfigurationPageModel.OrderValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.Column="1" Grid.Row="0" VerticalOptions="Start">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Cantidad" />
-                    <Entry Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                    <Entry Text="{Binding Amount}" />
+                    <Label TextColor="{AppThemeBinding Light={StaticResource DarkInfoBorder}, Dark={StaticResource LightInfoBorder}}">
+                        <Label.Behaviors>
+                            <core_ui_behaviors:DecimalSymbolIdicatotionLabelBehavior />
+                        </Label.Behaviors>
+                    </Label>
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionConfigurationPageModel.AmountValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionConfigurationPageModel.AmountValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.Column="2" Grid.Row="0" VerticalOptions="Start">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Unidad de medida" />
@@ -74,6 +94,10 @@
                         ItemsSource="{Binding AvailableUnitMeasurements}"
                         ItemDisplayBinding="{Binding Name}"
                         SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionConfigurationPageModel.UnitMeasurementValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionConfigurationPageModel.UnitMeasurementValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="1">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Observaciones (Opcional)" />
@@ -81,11 +105,20 @@
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="2">
                     <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sub-Productos" />
-                    <Frame Padding="8">
-                        <VerticalStackLayout 
-                            Spacing="8"
-                            BindableLayout.ItemsSource="{Binding ProductBridges}">
-                            <BindableLayout.ItemTemplate>
+                    <Frame Padding="16,8">
+                        <CollectionView ItemsSource="{Binding ProductBridges}">
+                            <CollectionView.ItemsLayout>
+                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="8" />
+                            </CollectionView.ItemsLayout>
+                            <CollectionView.EmptyView>
+                                <Label
+                                    IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                                    Padding="10"
+                                    Text="Sin elementos que mostrar"
+                                    TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                    FontAttributes="Italic" />
+                            </CollectionView.EmptyView>
+                            <CollectionView.ItemTemplate>
                                 <DataTemplate x:DataType="presentation_view_models:ProductionProductBridgeViewModel">
                                     <Frame Padding="8">
                                         <Grid ColumnSpacing="8">
@@ -96,6 +129,7 @@
                                             </Grid.ColumnDefinitions>
                                             <Label
                                                 Grid.Column="0"
+                                                Margin="8,0,0,0"
                                                 VerticalOptions="Center"
                                                 Text="{Binding Product.Name}"
                                                 LineBreakMode="TailTruncation" />
@@ -110,8 +144,8 @@
                                         </Grid>
                                     </Frame>
                                 </DataTemplate>
-                            </BindableLayout.ItemTemplate>
-                        </VerticalStackLayout>
+                            </CollectionView.ItemTemplate>
+                        </CollectionView>
                     </Frame>
                 </VerticalStackLayout>
                 <VerticalStackLayout Spacing="6" Grid.ColumnSpan="3" Grid.Row="3">
@@ -142,13 +176,15 @@
                                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.EmptyView>
-                                    <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    <Label Padding="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="interop_common_bridge_models:ProductionEmployeeBridgeModel">
                                         <Frame Padding="8">
                                             <StackLayout Orientation="Horizontal">
-                                                <VerticalStackLayout HorizontalOptions="FillAndExpand" VerticalOptions="Center">
+                                                <VerticalStackLayout 
+                                                    Margin="8"
+                                                    HorizontalOptions="FillAndExpand" VerticalOptions="Center">
                                                     <Label
                                                         Text="{Binding Employee}"
                                                         LineBreakMode="TailTruncation"
@@ -172,12 +208,12 @@
                                                 </VerticalStackLayout>
                                                 <VerticalStackLayout Spacing="8">
                                                     <Button
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
                                                         Text="&#xF90B;"
                                                         Clicked="EditEmployeeBridgeButton_Clicked" />
                                                     <Button
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         VerticalOptions="Start"
-                                                        FontFamily="MaterialDesignIcons" 
                                                         Text="&#xFA78;"
                                                         Clicked="RemoveEmployeeBridgeButton_Clicked" />
                                                 </VerticalStackLayout>
@@ -193,4 +229,4 @@
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
     </Grid>
-</core_ui_configuration_pages:BaseConfigurationContentPage>
+</core_ui_base_pages:ConfigurationBaseContentPage>

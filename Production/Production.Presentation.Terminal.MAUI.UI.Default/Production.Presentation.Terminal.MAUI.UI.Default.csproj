@@ -38,6 +38,9 @@
 	  <Compile Update="Pages\Configuration\CommonElaborationProductBridgeConfigurationPage.xaml.cs">
 	    <DependentUpon>CommonElaborationProductBridgeConfigurationPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Detail\ProductionDetailPage.xaml.cs">
+	    <DependentUpon>ProductionDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\List\ProductionOrdersListPage.xaml.cs">
 	    <DependentUpon>ProductionOrdersListPage.xaml</DependentUpon>
 	  </Compile>
@@ -56,6 +59,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ElaborationDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\ProductionDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

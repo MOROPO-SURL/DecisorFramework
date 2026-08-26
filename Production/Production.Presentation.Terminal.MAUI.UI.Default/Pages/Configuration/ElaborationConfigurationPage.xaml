@@ -147,6 +147,14 @@
                                 <RowDefinition Height="2" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            <Label
+                                Grid.Column="0" Grid.Row="0"
+                                Margin="8,0,0,0"
+                                VerticalOptions="Center"
+                                IsVisible="{Binding Product, Converter={StaticResource IsNotNullConverter}}"
+                                FontAttributes="Italic"
+                                TextColor="{AppThemeBinding Light={StaticResource LightInfoBackground}, Dark={StaticResource DarkInfoBackground}}"
+                                Text="{Binding Product.DefaultUnitMeasurement.Name, StringFormat='Por cada {0} producida'}" />
                             <Button
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
@@ -242,6 +250,14 @@
                                 <RowDefinition Height="2" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            <Label
+                                Grid.Column="0" Grid.Row="0"
+                                Margin="8,0,0,0"
+                                VerticalOptions="Center"
+                                IsVisible="{Binding Product, Converter={StaticResource IsNotNullConverter}}"
+                                FontAttributes="Italic"
+                                TextColor="{AppThemeBinding Light={StaticResource LightInfoBackground}, Dark={StaticResource DarkInfoBackground}}"
+                                Text="{Binding Product.DefaultUnitMeasurement.Name, StringFormat='Por cada {0} producida'}" />
                             <Button
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
@@ -390,6 +406,10 @@
                             </CollectionView>
                         </Grid>
                     </Frame>
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.StepsValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.StepsValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8"
