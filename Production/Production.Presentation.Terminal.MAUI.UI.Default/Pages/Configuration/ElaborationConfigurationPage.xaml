@@ -147,6 +147,14 @@
                                 <RowDefinition Height="2" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            <Label
+                                Grid.Column="0" Grid.Row="0"
+                                Margin="8,0,0,0"
+                                VerticalOptions="Center"
+                                IsVisible="{Binding Product, Converter={StaticResource IsNotNullConverter}}"
+                                FontAttributes="Italic"
+                                TextColor="{AppThemeBinding Light={StaticResource LightInfoBackground}, Dark={StaticResource DarkInfoBackground}}"
+                                Text="{Binding Product.DefaultUnitMeasurement.Name, StringFormat='Por cada {0} producido(a)'}" />
                             <Button
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
@@ -162,7 +170,7 @@
                                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.EmptyView>
-                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Padding="8" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="interop_common_bridge_models:CommonElaborationProductBridgeModel">
@@ -214,7 +222,7 @@
                                                         Text="&#xF90B;"
                                                         Clicked="EditInputProductButton_Clicked" />
                                                     <Button
-                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         VerticalOptions="Start"
                                                         Text="&#xFA79;"
                                                         Clicked="InputProductRemoveButton_Clicked" />
@@ -242,6 +250,14 @@
                                 <RowDefinition Height="2" />
                                 <RowDefinition Height="Auto" />
                             </Grid.RowDefinitions>
+                            <Label
+                                Grid.Column="0" Grid.Row="0"
+                                Margin="8,0,0,0"
+                                VerticalOptions="Center"
+                                IsVisible="{Binding Product, Converter={StaticResource IsNotNullConverter}}"
+                                FontAttributes="Italic"
+                                TextColor="{AppThemeBinding Light={StaticResource LightInfoBackground}, Dark={StaticResource DarkInfoBackground}}"
+                                Text="{Binding Product.DefaultUnitMeasurement.Name, StringFormat='Por cada {0} producido(a)'}" />
                             <Button
                                 Grid.Column="1" Grid.Row="0"
                                 HorizontalOptions="End"
@@ -257,7 +273,7 @@
                                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.EmptyView>
-                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Padding="8" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="interop_common_bridge_models:CommonElaborationProductBridgeModel">
@@ -309,7 +325,7 @@
                                                         Text="&#xF90B;"
                                                         Clicked="EditOutputProductButton_Clicked"/>
                                                     <Button
-                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         VerticalOptions="Start"
                                                         Text="&#xFA79;"
                                                         Clicked="OutputProductRemoveButton_Clicked" />
@@ -352,7 +368,7 @@
                                     <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
                                 </CollectionView.ItemsLayout>
                                 <CollectionView.EmptyView>
-                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Margin="10" />
+                                    <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Padding="8" />
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="interop_common_display_models:ElaborationStepDisplayModel">
@@ -380,7 +396,7 @@
                                                     Clicked="EditStepButton_Clicked" />
                                                 <Button
                                                     VerticalOptions="Center"
-                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                     Text="&#xFA79;"
                                                     Clicked="RemoveStepButton_Clicked" />
                                             </StackLayout>
@@ -390,6 +406,10 @@
                             </CollectionView>
                         </Grid>
                     </Frame>
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.StepsValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ElaborationConfigurationPageModel.StepsValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
                 <VerticalStackLayout 
                     Margin="8"
@@ -474,16 +494,12 @@
                                                     Padding="8"
                                                     Spacing="8">
                                                     <Button
-                                                        Padding="0"
-                                                        FontSize="21"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xF90B;"
                                                         Clicked="DocumentEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Start"
-                                                        Padding="0"
-                                                        FontSize="21"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         Text="&#xFA78;"
                                                         Clicked="DocumentRemotionButton_Clicked" />
                                                 </VerticalStackLayout>

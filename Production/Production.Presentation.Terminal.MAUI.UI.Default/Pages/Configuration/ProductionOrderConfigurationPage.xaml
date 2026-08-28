@@ -7,6 +7,7 @@
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
     xmlns:domain_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
@@ -170,6 +171,11 @@
                                         Text="{Binding Elaboration.Product.DefaultUnitMeasurement.Symbol}"
                                         FontSize="Medium" />
                                 </StackLayout>
+                                <Label TextColor="{AppThemeBinding Light={StaticResource DarkInfoBorder}, Dark={StaticResource LightInfoBorder}}">
+                                    <Label.Behaviors>
+                                        <core_ui_behaviors:DecimalSymbolIdicatotionLabelBehavior />
+                                    </Label.Behaviors>
+                                </Label>
                                 <Label
                                     IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionOrderConfigurationPageModel.AmountValidableProperty}}"
                                     Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProductionOrderConfigurationPageModel.AmountValidableProperty}}"
@@ -180,7 +186,9 @@
                                 Margin="4"
                                 Spacing="6">
                                 <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha Prevista" />
-                                <DatePicker Date="{Binding RequestedFor}" />
+                                <DatePicker 
+                                    Format="dd/MM/yyyy"
+                                    Date="{Binding RequestedFor}" />
                             </VerticalStackLayout>
                         </FlexLayout>
                     </VerticalStackLayout>

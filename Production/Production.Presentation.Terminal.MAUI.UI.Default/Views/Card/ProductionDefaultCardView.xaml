@@ -5,13 +5,21 @@
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Production.Interop.API.Common"
     x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Views.Card.ProductionDefaultCardView"
     x:DataType="interop_common_display_models:ProductionDisplayModel">
-    <Frame Padding="10">
+    <Frame Padding="16">
         <StackLayout>
+            <Label>
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span FontAttributes="Bold" FontSize="Large" Text="{Binding Amount}" />
+                        <Span FontAttributes="Bold" FontSize="Medium" Text="{Binding UnitMeasurement.Symbol, StringFormat=' {0}'}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
             <Label 
-                FontAttributes="Bold"
-                FontSize="Medium"
-                Text="{Binding Path=At, StringFormat='{0:D}'}" />
-            <Label Text="{Binding Plan.Elaboration.Product.Name}" />
+                FontSize="Subtitle"
+                Text="{Binding Order.Elaboration.Product.Name}" />
+            <Label 
+                Text="{Binding Order.Elaboration.Name}" />
             <Label 
                 Margin="0,8,0,0"
                 Text="Responsable"
@@ -20,10 +28,10 @@
                 FontAttributes="Bold" />
             <Label
                 LineBreakMode="TailTruncation"
-                Text="{Binding Plan.Responsible}" />
+                Text="{Binding Order.Responsible}" />
             <Label 
                 Margin="0,8,0,0"
-                Text="Observaciones"
+                Text="Fecha"
                 TextColor="DimGray"
                 FontSize="Caption"
                 FontAttributes="Bold" />
@@ -31,7 +39,7 @@
                 VerticalOptions="FillAndExpand"
                 LineBreakMode="TailTruncation"
                 MaxLines="2"
-                Text="{Binding Description, TargetNullValue='---'}" />
+                Text="{Binding Path=At, StringFormat='{0:D}'}" />
         </StackLayout>
     </Frame>
 </ContentView>
