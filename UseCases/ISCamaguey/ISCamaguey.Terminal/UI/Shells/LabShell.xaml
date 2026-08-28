@@ -63,8 +63,8 @@
             Title="Investigaciones"
             ContentTemplate="{DataTemplate lab_manage_pages:ResearchSamplesManagePage}" />
         <ShellContent
-            Title="Producciones (%)"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            Title="Producciones"
+            ContentTemplate="{DataTemplate lab_manage_pages:ProductionSamplesManagePage}" />
     </FlyoutItem>
     <ShellContent
         Title="Procesamiento de Muestra (%)"

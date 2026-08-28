@@ -31,6 +31,7 @@
 	<ItemGroup>
 		<ProjectReference Include="..\..\..\..\Core\Core.Presentation.Terminal.MAUI.UI.Default\Core.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\..\..\Domain\Domain.Presentation.Terminal.MAUI.UI.Default\Domain.Presentation.Terminal.MAUI.UI.Default.csproj" />
+		<ProjectReference Include="..\..\..\..\Production\Production.Presentation.Terminal.MAUI.UI.Default\Production.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\Domain\Domain.Presentation.Terminal.MAUI.UI.Default\Domain.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\..\IDi\IDi.Presentation.Terminal.MAUI.UI.Default\IDi.Presentation.Terminal.MAUI.UI.Default.csproj" />
 		<ProjectReference Include="..\Lab.Presentation.Terminal.MAUI\Lab.Presentation.Terminal.MAUI.csproj" />
@@ -39,8 +40,14 @@
 	  <Compile Update="Pages\Configuration\ResearchSampleConfigurationPage.xaml.cs">
 	    <DependentUpon>ResearchSampleConfigurationPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Configuration\ProductionSampleConfigurationPage.xaml.cs">
+	    <DependentUpon>ProductionSampleConfigurationPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Detail\ResearchSampleDetailPage.xaml.cs">
 	    <DependentUpon>ResearchSampleDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\ProductionSampleDetailPage.xaml.cs">
+	    <DependentUpon>ProductionSampleDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Detail\ServiceOrderSampleDetailPage.xaml.cs">
 	    <DependentUpon>ServiceOrderSampleDetailPage.xaml</DependentUpon>
@@ -48,12 +55,21 @@
 	  <Compile Update="Pages\Manage\ResearchSamplesManagePage.xaml.cs">
 	    <DependentUpon>ResearchSamplesManagePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Manage\ProductionSamplesManagePage.xaml.cs">
+	    <DependentUpon>ProductionSamplesManagePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Views\Card\ResearchSampleDefaultCardView.xaml.cs">
 	    <DependentUpon>ResearchSampleDefaultCardView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\ProductionSampleDefaultCardView.xaml.cs">
+	    <DependentUpon>ProductionSampleDefaultCardView.xaml</DependentUpon>
 	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
 	  <MauiXaml Update="Pages\Configuration\ResearchSampleConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\ProductionSampleConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\ServiceOrderSampleConfigurationPage.xaml">
@@ -65,6 +81,9 @@
 	  <MauiXaml Update="Pages\Detail\ResearchSampleDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\ProductionSampleDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ServiceOrderSampleDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -72,6 +91,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\ResearchSamplesManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\ProductionSamplesManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\ServiceOrderSamplesManagePage.xaml">
@@ -84,6 +106,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\ResearchSampleDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\ProductionSampleDefaultCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\ServiceOrderSampleDefaultCardView.xaml">

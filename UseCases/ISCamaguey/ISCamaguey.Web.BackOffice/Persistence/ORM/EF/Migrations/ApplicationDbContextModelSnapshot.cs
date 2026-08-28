@@ -9370,6 +9370,22 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasDiscriminator().HasValue("StateLocation");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ProductionSample", b =>
+                {
+                    b.HasBaseType("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample");
+
+                    b.Property<Guid>("ProductionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("productionid");
+
+                    b.HasIndex("ProductionId")
+                        .HasDatabaseName("ix_samples_productionid");
+
+                    b.ToTable("samples", "decisoriscamaguey_lab");
+
+                    b.HasDiscriminator().HasValue("ProductionSample");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ResearchSample", b =>
                 {
                     b.HasBaseType("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample");
@@ -13883,6 +13899,18 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_locations_states_stateid");
 
                     b.Navigation("State");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ProductionSample", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", "Production")
+                        .WithMany()
+                        .HasForeignKey("ProductionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_samples_productions_productionid");
+
+                    b.Navigation("Production");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ResearchSample", b =>
