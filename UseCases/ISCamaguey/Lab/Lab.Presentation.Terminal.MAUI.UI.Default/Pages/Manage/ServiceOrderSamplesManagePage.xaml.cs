@@ -4,8 +4,6 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class ServiceOrderSamplesManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ServiceOrderSampleDisplayModel, Models.Page.Manage.ServiceOrderSamplesManagePageModel, Models.Page.Configuration.ServiceOrderSampleConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 180;
-
     public ServiceOrderSamplesManagePage()
     {
         InitializeComponent();
@@ -18,12 +16,9 @@ public partial class ServiceOrderSamplesManagePage : Framework.Decisor.Core.Pres
 
     protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
 
-    protected override double ItemViewRequestWidth { get => 360; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ServiceOrderSampleDisplayModel>> FetchItemsAsync()
     {

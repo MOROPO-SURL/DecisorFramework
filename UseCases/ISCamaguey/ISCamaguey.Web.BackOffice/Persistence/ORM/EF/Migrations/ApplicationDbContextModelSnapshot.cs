@@ -8015,6 +8015,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("featureimageid");
 
+                    b.Property<DateTime?>("HandledAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("handledat");
+
                     b.Property<int>("Index")
                         .HasColumnType("integer")
                         .HasColumnName("index");
@@ -8022,6 +8026,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<string>("Observation")
                         .HasColumnType("text")
                         .HasColumnName("observation");
+
+                    b.Property<DateTime?>("PickedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("pickedat");
 
                     b.Property<Guid>("SampleKindId")
                         .HasColumnType("uuid")
@@ -8081,14 +8089,74 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
 
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
+                    b.Property<Guid>("WorkingGroupId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("workinggroupid");
 
                     b.HasKey("Id")
                         .HasName("pk_workplans");
 
+                    b.HasIndex("WorkingGroupId")
+                        .HasDatabaseName("ix_workplans_workinggroupid");
+
                     b.ToTable("workplans", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlanProductionSampleBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_workplanproductionsamplebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_workplanproductionsamplebridges_sternid");
+
+                    b.ToTable("workplanproductionsamplebridges", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlanResearchSampleBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_workplanresearchsamplebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_workplanresearchsamplebridges_sternid");
+
+                    b.ToTable("workplanresearchsamplebridges", "decisoriscamaguey_lab");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlanServiceOrderSampleBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_workplanserviceordersamplebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_workplanserviceordersamplebridges_sternid");
+
+                    b.ToTable("workplanserviceordersamplebridges", "decisoriscamaguey_lab");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroup", b =>
@@ -13157,6 +13225,81 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("UnitMeasurement");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlan", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroup", "WorkingGroup")
+                        .WithMany()
+                        .HasForeignKey("WorkingGroupId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_workplans_workinggroups_workinggroupid");
+
+                    b.Navigation("WorkingGroup");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlanProductionSampleBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlan", "Prow")
+                        .WithMany("ProductionSampleBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workplanproductionsamplebridges_workplans_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ProductionSample", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workplanproductionsamplebridges_samples_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlanResearchSampleBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlan", "Prow")
+                        .WithMany("ResearchSampleBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workplanresearchsamplebridges_workplans_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ResearchSample", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workplanresearchsamplebridges_samples_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlanServiceOrderSampleBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlan", "Prow")
+                        .WithMany("ServiceOrderSampleBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workplanserviceordersamplebridges_workplans_prowid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ServiceOrderSample", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_workplanserviceordersamplebridges_samples_sternid");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroup", b =>
                 {
                     b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Chief")
@@ -14383,6 +14526,15 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("ExternalResearcherBridges");
 
                     b.Navigation("InternalResearcherBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlan", b =>
+                {
+                    b.Navigation("ProductionSampleBridges");
+
+                    b.Navigation("ResearchSampleBridges");
+
+                    b.Navigation("ServiceOrderSampleBridges");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkingGroup", b =>

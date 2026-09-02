@@ -98,8 +98,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Planes de Trabajo (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Planes de Trabajo"
+        ContentTemplate="{DataTemplate lab_manage_pages:WorkPlansManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

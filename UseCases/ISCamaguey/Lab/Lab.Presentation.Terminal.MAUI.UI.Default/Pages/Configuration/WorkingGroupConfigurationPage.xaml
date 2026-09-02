@@ -171,6 +171,7 @@
                                                         Text="Detalles"
                                                         Clicked="EmployeeDetailButton_Clicked" />
                                                     <Button
+                                                        Style="{StaticResource DangerKindButtonStyle}"
                                                         Grid.Column="1"
                                                         Text="Eliminar"
                                                         Clicked="EmployeeRemotionButton_Clicked" />
@@ -252,16 +253,12 @@
                                                 </StackLayout>
                                                 <Button
                                                     Grid.Column="1" Grid.Row="0"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons"
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
                                                     Text="&#xF2FD;"
                                                     Clicked="TechniqueDetailButton_Clicked" />
                                                 <Button
                                                     Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                     Text="&#xFA78;"
                                                     Clicked="TechniqueRemotionButton_Clicked" />
                                             </Grid>

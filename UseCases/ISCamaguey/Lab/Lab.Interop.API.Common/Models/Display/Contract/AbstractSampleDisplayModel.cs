@@ -12,6 +12,10 @@
 
         public System.DateTime At { get; set; }
 
+        public System.DateTime? PickedAt { get; set; }
+
+        public System.DateTime? HandledAt { get; set; }
+
         public string Observation { get; set; }
 
         public Framework.Decisor.Core.Interop.API.Common.Models.Display.ImageDisplayModel FeatureImage { get; set; }
@@ -29,6 +33,8 @@
             Index = entity.Index;
             Year = entity.Year;
             At = entity.At;
+            PickedAt = entity.PickedAt;
+            HandledAt = entity.HandledAt;
             Observation = entity.Observation;
             Amount = entity.Amount;
 

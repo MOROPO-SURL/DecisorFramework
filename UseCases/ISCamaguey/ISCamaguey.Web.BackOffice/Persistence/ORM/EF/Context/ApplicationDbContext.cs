@@ -286,6 +286,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<WorkingGroupEmployeeBridge> WorkingGroupEmployeeBridges { get; set; }
         public DbSet<WorkingGroupTechniqueBridge> WorkingGroupTechniqueBridges { get; set; }
         public DbSet<WorkPlan> WorkPlans { get; set; }
+        public DbSet<WorkPlanServiceOrderSampleBridge> WorkPlanServiceOrderSampleBridges { get; set; }
+        public DbSet<WorkPlanResearchSampleBridge> WorkPlanResearchSampleBridges { get; set; }
+        public DbSet<WorkPlanProductionSampleBridge> WorkPlanProductionSampleBridges { get; set; }
 
         public DbSet<Elaboration> Elaborations { get; set; }
         public DbSet<ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }

@@ -1,6 +1,5 @@
 ﻿using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;
-using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
 using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
@@ -11,7 +10,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 
         public PersonContactDisplayModel ResearcherContact { get; set; }
 
-        public override void Import(ResearchSample entity)
+        public override void Import(Persistence.Entities.ResearchSample entity)
         {
             base.Import(entity);
 

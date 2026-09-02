@@ -2,7 +2,7 @@
 <core_ui_base_pages:ManageBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Manage"
+    xmlns:local_constants="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Constants"
     xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
     xmlns:presentation_manage_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI"
@@ -17,6 +17,9 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
+            <communitytoolkit_converters:MathExpressionConverter x:Key="MathExpressionConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -49,12 +52,48 @@
                             <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <local_card_views:ServiceOrderSampleDefaultCardView HeightRequest="{Static local:ServiceOrderSamplesManagePage.ITEM_VIEW_REQUEST_HEIGHT}">
-                                    <ContentView.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </ContentView.GestureRecognizers>
-                                </local_card_views:ServiceOrderSampleDefaultCardView>
+                            <DataTemplate x:DataType="interop_common_display_models:ServiceOrderSampleDisplayModel">
+                                <Grid IsClippedToBounds="True">
+                                    <local_card_views:ServiceOrderSampleDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_HEIGHT}">
+                                        <ContentView.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                        </ContentView.GestureRecognizers>
+                                    </local_card_views:ServiceOrderSampleDefaultCardView>
+                                    <Grid 
+                                        InputTransparent="True"
+                                        IsVisible="{Binding HandledAt, Converter={StaticResource IsNullConverter}}">
+                                        <Grid
+                                            IsVisible="{Binding PickedAt, Converter={StaticResource IsNotNullConverter}}"
+                                            InputTransparent="True"
+                                            VerticalOptions="Center"
+                                            Padding="0,2"
+                                            Rotation="40"
+                                            TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
+                                            <Label                    
+                                                Padding="8"
+                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightInfoBorder}, Dark={StaticResource DarkInfoBorder}}"
+                                                HorizontalTextAlignment="Center"
+                                                FontAttributes="Bold"
+                                                TextColor="White"
+                                                Text="{Binding PickedAt, StringFormat='Planificada: {0:dd/MM/yyyy}'}" />
+                                        </Grid>
+                                    </Grid>
+                                    <Grid
+                                        IsVisible="{Binding HandledAt, Converter={StaticResource IsNotNullConverter}}"
+                                        InputTransparent="True"
+                                        VerticalOptions="Center"
+                                        Padding="0,2"
+                                        Rotation="40"
+                                        TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
+                                        <Label                    
+                                            Padding="8"
+                                            BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
+                                            HorizontalTextAlignment="Center"
+                                            FontAttributes="Bold"
+                                            TextColor="White"
+                                            Text="{Binding HandledAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                    </Grid>
+                                </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

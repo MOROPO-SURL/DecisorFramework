@@ -52,11 +52,32 @@
 	  <Compile Update="Pages\Detail\ServiceOrderSampleDetailPage.xaml.cs">
 	    <DependentUpon>ServiceOrderSampleDetailPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Detail\WorkPlanDetailPage.xaml.cs">
+	    <DependentUpon>WorkPlanDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Manage\ResearchSamplesManagePage.xaml.cs">
 	    <DependentUpon>ResearchSamplesManagePage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Manage\ProductionSamplesManagePage.xaml.cs">
 	    <DependentUpon>ProductionSamplesManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\WorkPlansManagePage.xaml.cs">
+	    <DependentUpon>WorkPlansManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\WorkPlanPickPage.xaml.cs">
+	    <DependentUpon>WorkPlanPickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\ProductionSamplePickPage.xaml.cs">
+	    <DependentUpon>ProductionSamplePickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\ResearchSamplePickPage.xaml.cs">
+	    <DependentUpon>ResearchSamplePickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\ServiceOrderSamplePickPage.xaml.cs">
+	    <DependentUpon>ServiceOrderSamplePickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\WorkPlanDefaultCardView.xaml.cs">
+	    <DependentUpon>WorkPlanDefaultCardView.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Card\ResearchSampleDefaultCardView.xaml.cs">
 	    <DependentUpon>ResearchSampleDefaultCardView.xaml</DependentUpon>
@@ -78,6 +99,9 @@
 	  <MauiXaml Update="Pages\Configuration\WorkingGroupConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\WorkPlanConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ResearchSampleDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -85,6 +109,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ServiceOrderSampleDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\WorkPlanDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\WorkingGroupDetailPage.xaml">
@@ -99,10 +126,28 @@
 	  <MauiXaml Update="Pages\Manage\ServiceOrderSamplesManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\WorkPlansManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\WorkingGroupsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\WorkPlanPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\ProductionSamplePickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\ResearchSamplePickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\ServiceOrderSamplePickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\SampleAnalysisServiceOrderPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\WorkPlanDefaultCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\ResearchSampleDefaultCardView.xaml">

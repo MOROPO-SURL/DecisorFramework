@@ -35,8 +35,15 @@
                 FontAttributes="Bold"
                 Text="Producción" />
             <Label
-                LineBreakMode="TailTruncation"
-                Text="{Binding Production.Order.Elaboration.Product.Name}" />
+                LineBreakMode="TailTruncation">
+                <Label.FormattedText>
+                    <FormattedString>
+                        <Span Text="{Binding Production.Order.Elaboration.Product.Name}" />
+                        <Span Text="{Binding Production.Amount, StringFormat=', {0:F2}'}" />
+                        <Span Text="{Binding Production.UnitMeasurement.Symbol, StringFormat=' {0}'}" />
+                    </FormattedString>
+                </Label.FormattedText>
+            </Label>
             <Label 
                 LineBreakMode="TailTruncation"
                 Text="{Binding Production.At, StringFormat='{0:D}'}" />

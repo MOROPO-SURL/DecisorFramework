@@ -5,24 +5,27 @@ using MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.Models.Page.Confi
 using MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Factories.Configuration;
 using MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Factories.Detail;
 
-namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Extensions
+namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Extensions;
+
+public static class MauiAppBuilderExtensions
 {
-    public static class MauiAppBuilderExtensions
+    public static Microsoft.Maui.Hosting.MauiAppBuilder UseDecisorUseCaseLab(this Microsoft.Maui.Hosting.MauiAppBuilder builder)
     {
-        public static Microsoft.Maui.Hosting.MauiAppBuilder UseDecisorUseCaseLab(this Microsoft.Maui.Hosting.MauiAppBuilder builder)
-        {
-            builder.Services
-                // DetailPage factory resgistration !!!
-                .AddSingleton<IDetailContentPageFactoryFacade<WorkingGroupDisplayModel>, WorkingGroupDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<ServiceOrderSampleDisplayModel>, ServiceOrderSampleDetailPageFactory>()
-                .AddSingleton<IDetailContentPageFactoryFacade<ResearchSampleDisplayModel>, ResearchSampleDetailPageFactory>()
+        builder.Services
+            // DetailPage factory resgistration !!!
+            .AddSingleton<IDetailContentPageFactoryFacade<WorkingGroupDisplayModel>, WorkingGroupDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<ServiceOrderSampleDisplayModel>, ServiceOrderSampleDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<ResearchSampleDisplayModel>, ResearchSampleDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<ProductionSampleDisplayModel>, ProductionSampleDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<WorkPlanDisplayModel>, WorkPlanDetailPageFactory>()
 
-                // ConfigurationPage factory resgistration !!!
-                .AddSingleton<IConfigurationContentPageFactoryFacade<WorkingGroupDisplayModel, WorkingGroupConfigurationPageModel>, WorkingGroupConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<ServiceOrderSampleDisplayModel, ServiceOrderSampleConfigurationPageModel>, ServiceOrderSampleConfigurationPageFactory>()
-                .AddSingleton<IConfigurationContentPageFactoryFacade<ResearchSampleDisplayModel, ResearchSampleConfigurationPageModel>, ResearchSampleConfigurationPageFactory>();
+            // ConfigurationPage factory resgistration !!!
+            .AddSingleton<IConfigurationContentPageFactoryFacade<WorkingGroupDisplayModel, WorkingGroupConfigurationPageModel>, WorkingGroupConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<ServiceOrderSampleDisplayModel, ServiceOrderSampleConfigurationPageModel>, ServiceOrderSampleConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<ResearchSampleDisplayModel, ResearchSampleConfigurationPageModel>, ResearchSampleConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<ProductionSampleDisplayModel, ProductionSampleConfigurationPageModel>, ProductionSampleConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<WorkPlanDisplayModel, WorkPlanConfigurationPageModel>, WorkPlanConfigurationPageFactory>();
 
-            return builder;
-        }
+        return builder;
     }
 }

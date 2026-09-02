@@ -14,5 +14,8 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.ORM.EF.Context.Contract
         public DbSet<Entities.WorkingGroupEmployeeBridge> WorkingGroupEmployeeBridges { get; set; }
         public DbSet<Entities.WorkingGroupTechniqueBridge> WorkingGroupTechniqueBridges { get; set; }
         public DbSet<Entities.WorkPlan> WorkPlans { get; set; }
+        public DbSet<Entities.WorkPlanServiceOrderSampleBridge> WorkPlanServiceOrderSampleBridges { get; set; }
+        public DbSet<Entities.WorkPlanResearchSampleBridge> WorkPlanResearchSampleBridges { get; set; }
+        public DbSet<Entities.WorkPlanProductionSampleBridge> WorkPlanProductionSampleBridges { get; set; }
     }
 }

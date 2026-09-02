@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.WorkPlanDetailPage"
+    x:TypeArguments="interop_common_display_models:WorkPlanDisplayModel"
+    x:DataType="interop_common_display_models:WorkPlanDisplayModel"
+    Title="Detalles de Técnica"
+    BackgroundColor="Transparent"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="400"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <StackLayout Margin="20" Spacing="20">
+                        <StackLayout>
+                            <Label 
+                                Margin="0,0,0,20"
+                                Text="Detalles"
+                                FontAttributes="Bold"
+                                FontSize="Medium" />
+                            <Label
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
+                                Text="Fecha" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding At, StringFormat='{0:D}'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Equipo" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding WorkingGroup.Name}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Muestras de Órdenes de servicio" />
+                            <CollectionView
+                                ItemsSource="{Binding ServiceOrderSamples}">
+                                <CollectionView.EmptyView>
+                                    <Label Text="---" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:ServiceOrderSampleDisplayModel">
+                                        <StackLayout Orientation="Horizontal" Spacing="4">
+                                            <Label 
+                                                Text="-" 
+                                                FontAttributes="Bold" />
+                                            <Label HorizontalOptions="FillAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Index}" />
+                                                        <Span Text="{Binding Year, StringFormat=' / {0}'}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Muestras de Investigación" />
+                            <CollectionView
+                                ItemsSource="{Binding ResearchSamples}">
+                                <CollectionView.EmptyView>
+                                    <Label Text="---" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:ResearchSampleDisplayModel">
+                                        <StackLayout Orientation="Horizontal" Spacing="4">
+                                            <Label 
+                                                Text="-" 
+                                                FontAttributes="Bold" />
+                                            <Label HorizontalOptions="FillAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Index}" />
+                                                        <Span Text="{Binding Year, StringFormat=' / {0}'}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Muestras de Producción" />
+                            <CollectionView
+                                ItemsSource="{Binding ProductionSamples}">
+                                <CollectionView.EmptyView>
+                                    <Label Text="---" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:ProductionSampleDisplayModel">
+                                        <StackLayout Orientation="Horizontal" Spacing="4">
+                                            <Label 
+                                                Text="-" 
+                                                FontAttributes="Bold" />
+                                            <Label HorizontalOptions="FillAndExpand">
+                                                <Label.FormattedText>
+                                                    <FormattedString>
+                                                        <Span Text="{Binding Index}" />
+                                                        <Span Text="{Binding Year, StringFormat=' / {0}'}" />
+                                                    </FormattedString>
+                                                </Label.FormattedText>
+                                            </Label>
+                                        </StackLayout>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Descripción" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Description, TargetNullValue='---'}" />
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Spacing="20">
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Modificar"
+                                Clicked="EditButton_Clicked" />
+                            <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Eliminar"
+                                Clicked="DeleteButton_Clicked" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

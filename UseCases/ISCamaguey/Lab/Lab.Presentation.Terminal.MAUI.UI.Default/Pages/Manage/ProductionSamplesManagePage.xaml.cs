@@ -4,8 +4,6 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class ProductionSamplesManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ProductionSampleDisplayModel, Models.Page.Manage.ProductionSamplesManagePageModel, Models.Page.Configuration.ProductionSampleConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 180;
-
     public ProductionSamplesManagePage()
     {
         InitializeComponent();
@@ -18,12 +16,9 @@ public partial class ProductionSamplesManagePage : Framework.Decisor.Core.Presen
 
     protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
 
-    protected override double ItemViewRequestWidth { get => 360; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.SAMPLE_PRODUCTION_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ProductionSampleDisplayModel>> FetchItemsAsync()
     {

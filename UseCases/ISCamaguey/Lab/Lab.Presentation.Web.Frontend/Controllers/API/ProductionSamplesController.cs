@@ -10,7 +10,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.AP
 
 [Route("api/lab/[controller]")]
 [ApiController]
-public class ProductionSamplesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<ProductionSample, System.Guid, ProductionSampleInputModel, ProductionSampleDisplayModel>
+public class ProductionSamplesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<ProductionSample, System.Guid, ProductionSampleInputModel, ProductionSampleDisplayModel, Interop.API.Common.Models.Filter.CommonSampleFilterModel<ProductionSampleDisplayModel, ProductionSample>>
 {
     private readonly IEntityRepository<Image, System.Guid> imageRepository;
     private readonly IImageFileManagerFacade imageFileManager;

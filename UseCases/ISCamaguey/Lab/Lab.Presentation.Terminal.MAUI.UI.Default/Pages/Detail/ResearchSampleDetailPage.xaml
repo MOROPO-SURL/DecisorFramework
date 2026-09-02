@@ -18,6 +18,7 @@
             <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
@@ -86,15 +87,34 @@
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Observation, TargetNullValue='---', FallbackValue='---'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Panificada" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="2"
+                                Text="{Binding PickedAt, TargetNullValue='---', FallbackValue='---', StringFormat='{0:D}'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Procesada" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="2"
+                                Text="{Binding HandledAt, TargetNullValue='---', FallbackValue='---', StringFormat='{0:D}'}" />
                         </StackLayout>
                         <StackLayout
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 
+                                IsEnabled="{Binding HandledAt, Converter={StaticResource IsNullConverter}}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />
                             <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
+                                IsEnabled="{Binding PickedAt, Converter={StaticResource IsNullConverter}}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />

@@ -18,9 +18,12 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.ResearchSample>(),
                     new BaseEntityTypeConfigurator<Entities.ServiceOrderSample>(),
                     new BaseEntityTypeConfigurator<Entities.WorkingGroup>(),
-                    new BaseEntityTypeConfigurator<Entities.WorkPlan>(),
                     new Configurators.WorkingGroupEmployeeBridgeEntityTypeConfigurator(),
-                    new Configurators.WorkingGroupTechniqueBridgeEntityTypeConfigurator()
+                    new Configurators.WorkingGroupTechniqueBridgeEntityTypeConfigurator(),
+                    new Configurators.WorkPlanEntityTypeConfigurator(),
+                    new Configurators.WorkPlanServiceOrderSampleBridgeEntityTypeConfigurator(),
+                    new Configurators.WorkPlanResearchSampleBridgeEntityTypeConfigurator(),
+                    new Configurators.WorkPlanProductionSampleBridgeEntityTypeConfigurator()
                 ];
             }
         }

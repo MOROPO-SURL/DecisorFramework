@@ -11,7 +11,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.AP
 
 [Route("api/lab/[controller]")]
 [ApiController]
-public class ResearchSamplesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<ResearchSample, System.Guid, ResearchSampleInputModel, ResearchSampleDisplayModel>
+public class ResearchSamplesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<ResearchSample, System.Guid, ResearchSampleInputModel, ResearchSampleDisplayModel, Interop.API.Common.Models.Filter.CommonSampleFilterModel<ResearchSampleDisplayModel, ResearchSample>>
 {
     private readonly IEntityRepository<Image, System.Guid> imageRepository;
     private readonly IImageFileManagerFacade imageFileManager;
