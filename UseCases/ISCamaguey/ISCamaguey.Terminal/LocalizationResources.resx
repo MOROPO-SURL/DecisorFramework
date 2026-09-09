@@ -162,8 +162,17 @@
   <data name="Primary" xml:space="preserve">
     <value>Primaria</value>
   </data>
+  <data name="Production" xml:space="preserve">
+    <value>Producción</value>
+  </data>
+  <data name="Research" xml:space="preserve">
+    <value>Investigación</value>
+  </data>
   <data name="Secondary" xml:space="preserve">
     <value>Secoundaria</value>
+  </data>
+  <data name="ServiceOrder" xml:space="preserve">
+    <value>Orden de Servicio</value>
   </data>
   <data name="Single" xml:space="preserve">
     <value>Soltero(a)</value>

@@ -11,4 +11,7 @@ public static class CardViewHeightConstants
 
     public static double WORK_PLAN_DEFAULT_CARD_VIEW_HEIGHT = 124;
     public static double WORK_PLAN_DEFAULT_CARD_VIEW_WIDTH = 480;
+
+    public static double ANALYSIS_DEFAULT_CARD_VIEW_HEIGHT = 144;
+    public static double ANALYSIS_DEFAULT_CARD_VIEW_WIDTH = 480;
 }

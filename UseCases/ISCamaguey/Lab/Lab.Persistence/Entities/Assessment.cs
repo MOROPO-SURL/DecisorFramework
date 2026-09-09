@@ -16,8 +16,12 @@
         [System.ComponentModel.DataAnnotations.Required]
         public string Description { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(TargetId))]
-        public Analysis Target { get; set; }
-        public System.Guid TargetId { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(SampleId))]
+        public Contract.AbstractSample Sample { get; set; }
+        public System.Guid SampleId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(AuthorId))]
+        public Framework.Decisor.Domain.Persistence.Entities.Employee Author { get; set; }
+        public System.Guid AuthorId { get; set; }
     }
 }

@@ -276,7 +276,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<SampleAnalysisReport> SampleAnalysisReports { get; set; }
         public DbSet<SampleAnalysisServiceReport> SampleAnalysisServiceReports { get; set; }
         public DbSet<Analysis> Analysises { get; set; }
-        public DbSet<AnalysisOrder> AnalysisOrders { get; set; }
         public DbSet<Assessment> Assessments { get; set; }
         public DbSet<SampleKind> SampleKinds { get; set; }
         public DbSet<ResearchSample> ResearchSamples { get; set; }

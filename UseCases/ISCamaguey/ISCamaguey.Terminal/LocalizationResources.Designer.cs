@@ -196,11 +196,38 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Producción.
+        /// </summary>
+        internal static string Production {
+            get {
+                return ResourceManager.GetString("Production", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Investigación.
+        /// </summary>
+        internal static string Research {
+            get {
+                return ResourceManager.GetString("Research", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Secoundaria.
         /// </summary>
         internal static string Secondary {
             get {
                 return ResourceManager.GetString("Secondary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Busca una cadena traducida similar a Orden de Servicio.
+        /// </summary>
+        internal static string ServiceOrder {
+            get {
+                return ResourceManager.GetString("ServiceOrder", resourceCulture);
             }
         }
         

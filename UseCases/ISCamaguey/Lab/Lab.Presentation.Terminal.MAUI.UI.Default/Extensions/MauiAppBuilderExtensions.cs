@@ -18,13 +18,15 @@ public static class MauiAppBuilderExtensions
             .AddSingleton<IDetailContentPageFactoryFacade<ResearchSampleDisplayModel>, ResearchSampleDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<ProductionSampleDisplayModel>, ProductionSampleDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<WorkPlanDisplayModel>, WorkPlanDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<AnalysisDisplayModel>, AnalysisDetailPageFactory>()
 
             // ConfigurationPage factory resgistration !!!
             .AddSingleton<IConfigurationContentPageFactoryFacade<WorkingGroupDisplayModel, WorkingGroupConfigurationPageModel>, WorkingGroupConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<ServiceOrderSampleDisplayModel, ServiceOrderSampleConfigurationPageModel>, ServiceOrderSampleConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<ResearchSampleDisplayModel, ResearchSampleConfigurationPageModel>, ResearchSampleConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<ProductionSampleDisplayModel, ProductionSampleConfigurationPageModel>, ProductionSampleConfigurationPageFactory>()
-            .AddSingleton<IConfigurationContentPageFactoryFacade<WorkPlanDisplayModel, WorkPlanConfigurationPageModel>, WorkPlanConfigurationPageFactory>();
+            .AddSingleton<IConfigurationContentPageFactoryFacade<WorkPlanDisplayModel, WorkPlanConfigurationPageModel>, WorkPlanConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<AnalysisDisplayModel, AnalysisConfigurationPageModel>, AnalysisConfigurationPageFactory>();
 
         return builder;
     }

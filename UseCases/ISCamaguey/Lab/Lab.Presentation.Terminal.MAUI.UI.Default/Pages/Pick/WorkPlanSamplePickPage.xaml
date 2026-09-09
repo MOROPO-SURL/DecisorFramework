@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Constants"
+    xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.WorkPlanSamplePickPage"
+    x:TypeArguments="interop_common_display_models:WorkPlanDisplayModel"
+    x:DataType="interop_common_display_models:WorkPlanDisplayModel"
+    Title="Seleccionar Muestra asociada a Plan de Trabajo">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:MathExpressionConverter x:Key="MathExpressionConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <VerticalStackLayout Spacing="4" Padding="8">
+            <FlexLayout 
+                Wrap="Wrap"
+                AlignItems="Start" AlignContent="Start">
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=8, SmallContainerColumn=10}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha" />
+                    <Label 
+                        LineBreakMode="TailTruncation"
+                        Text="{Binding At, StringFormat='{0:D}'}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=6, MediumContainerColumn=10, SmallContainerColumn=12}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Equipo" />
+                    <Label Text="{Binding WorkingGroup.Name}" />
+                </VerticalStackLayout>
+            </FlexLayout>
+            <VerticalStackLayout 
+                Margin="8"
+                Spacing="6">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Muestras de Órdenes de servicio" />
+                <BoxView Color="{StaticResource Gray050}" />
+                <CollectionView 
+                    Margin="4"
+                    ItemsSource="{Binding ServiceOrderSamples}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.Behaviors>
+                        <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="{Static local_constants:CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_WIDTH}" ItemSpacing="8" />
+                    </CollectionView.Behaviors>
+                    <CollectionView.EmptyView>
+                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Padding="4" />
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="interop_common_display_models:ServiceOrderSampleDisplayModel">
+                            <Grid>
+                                <local_card_views:ServiceOrderSampleDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_HEIGHT}">
+                                    <ContentView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ServiceOrderSampleViewTapGestureRecognizer_Tapped" />
+                                    </ContentView.GestureRecognizers>
+                                </local_card_views:ServiceOrderSampleDefaultCardView>
+                                <Grid
+                                    IsVisible="{Binding HandledAt, Converter={StaticResource IsNotNullConverter}}"
+                                    InputTransparent="True"
+                                    VerticalOptions="Center"
+                                    Padding="0,2"
+                                    Rotation="40"
+                                    TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
+                                    <Label                    
+                                        Padding="8"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Bold"
+                                        TextColor="White"
+                                        Text="{Binding HandledAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+            <VerticalStackLayout 
+                Margin="8"
+                Spacing="6">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Muestras de Investigación" />
+                <BoxView Color="{StaticResource Gray050}" />
+                <CollectionView
+                    Margin="4"
+                    ItemsSource="{Binding ResearchSamples}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.Behaviors>
+                        <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="{Static local_constants:CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_WIDTH}" ItemSpacing="8" />
+                    </CollectionView.Behaviors>
+                    <CollectionView.EmptyView>
+                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Padding="4" />
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="interop_common_display_models:ResearchSampleDisplayModel">
+                            <Grid>
+                                <local_card_views:ResearchSampleDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_RESEARCH_CARD_VIEW_HEIGHT}">
+                                    <ContentView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ResearchSampleViewTapGestureRecognizer_Tapped" />    
+                                    </ContentView.GestureRecognizers>
+                                </local_card_views:ResearchSampleDefaultCardView>                            
+                                <Grid
+                                    IsVisible="{Binding HandledAt, Converter={StaticResource IsNotNullConverter}}"
+                                    InputTransparent="True"
+                                    VerticalOptions="Center"
+                                    Padding="0,2"
+                                    Rotation="40"
+                                    TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
+                                    <Label                    
+                                        Padding="8"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Bold"
+                                        TextColor="White"
+                                        Text="{Binding HandledAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+            <VerticalStackLayout 
+                Margin="8"
+                Spacing="6">
+                <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Muestras de Producción" />
+                <BoxView Color="{StaticResource Gray050}" />
+                <CollectionView
+                    Margin="4"
+                    ItemsSource="{Binding ProductionSamples}">
+                    <CollectionView.ItemsLayout>
+                        <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                    </CollectionView.ItemsLayout>
+                    <CollectionView.Behaviors>
+                        <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="{Static local_constants:CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_WIDTH}" ItemSpacing="8" />
+                    </CollectionView.Behaviors>
+                    <CollectionView.EmptyView>
+                        <Label Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" Padding="4" />
+                    </CollectionView.EmptyView>
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="interop_common_display_models:ProductionSampleDisplayModel">
+                            <Grid>
+                                <local_card_views:ProductionSampleDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_PRODUCTION_CARD_VIEW_HEIGHT}">
+                                    <ContentView.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ProductionSampleViewTapGestureRecognizer_Tapped" />
+                                    </ContentView.GestureRecognizers>
+                                </local_card_views:ProductionSampleDefaultCardView>
+                                <Grid
+                                    IsVisible="{Binding HandledAt, Converter={StaticResource IsNotNullConverter}}"
+                                    InputTransparent="True"
+                                    VerticalOptions="Center"
+                                    Padding="0,2"
+                                    Rotation="40"
+                                    TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
+                                    <Label                    
+                                        Padding="8"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
+                                        HorizontalTextAlignment="Center"
+                                        FontAttributes="Bold"
+                                        TextColor="White"
+                                        Text="{Binding HandledAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+            </VerticalStackLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

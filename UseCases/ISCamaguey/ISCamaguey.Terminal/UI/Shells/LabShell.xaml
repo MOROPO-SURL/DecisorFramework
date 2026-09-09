@@ -67,8 +67,8 @@
             ContentTemplate="{DataTemplate lab_manage_pages:ProductionSamplesManagePage}" />
     </FlyoutItem>
     <ShellContent
-        Title="Procesamiento de Muestra (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Análisis de Muestra"
+        ContentTemplate="{DataTemplate lab_manage_pages:AnalysesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -83,6 +83,16 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF14C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Procesamiento de Muestra (%)"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0256;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
