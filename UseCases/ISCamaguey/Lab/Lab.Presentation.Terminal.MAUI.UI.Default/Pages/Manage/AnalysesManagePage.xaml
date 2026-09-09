@@ -18,6 +18,7 @@
         <ResourceDictionary>
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            <communitytoolkit_converters:MathExpressionConverter x:Key="MathExpressionConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ContentPage.ToolbarItems>
@@ -51,11 +52,28 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:AnalysisDisplayModel">
-                                <local_card_views:AnalysisDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.ANALYSIS_DEFAULT_CARD_VIEW_HEIGHT}">
-                                    <ContentView.GestureRecognizers>
-                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                    </ContentView.GestureRecognizers>
-                                </local_card_views:AnalysisDefaultCardView>
+                                <Grid IsClippedToBounds="True">
+                                    <local_card_views:AnalysisDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.ANALYSIS_DEFAULT_CARD_VIEW_HEIGHT}">
+                                        <ContentView.GestureRecognizers>
+                                            <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                        </ContentView.GestureRecognizers>
+                                    </local_card_views:AnalysisDefaultCardView>
+                                    <Grid
+                                        IsVisible="{Binding Sample.AssessmentAt, Converter={StaticResource IsNotNullConverter}}"
+                                        InputTransparent="True"
+                                        VerticalOptions="Center"
+                                        Padding="0,2"
+                                        Rotation="-45"
+                                        TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
+                                        <Label                    
+                                            Padding="8"
+                                            BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
+                                            HorizontalTextAlignment="Center"
+                                            FontAttributes="Bold"
+                                            TextColor="White"
+                                            Text="{Binding Sample.AssessmentAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                    </Grid>
+                                </Grid>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

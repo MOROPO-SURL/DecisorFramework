@@ -4,17 +4,23 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.AnalysisDetailPage"
     x:TypeArguments="interop_common_display_models:AnalysisDisplayModel"
     x:DataType="interop_common_display_models:AnalysisDisplayModel"
     Title="Detalles de Análisis de Muestra"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
         <Grid>
             <Grid
                 Padding="10"
-                MaximumWidthRequest="400"
+                MaximumWidthRequest="480"
                 VerticalOptions="Center">
                 <Frame Style="{StaticResource PopupFrameStyle}">
                     <StackLayout Margin="20" Spacing="20">
@@ -35,14 +41,26 @@
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Plan de trabajo" />
                             <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding WorkPlan.At}" />
+                                Style="{StaticResource ValuePropertyLabelStyle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding WorkPlan.At, StringFormat='{0:dd/MM/yyyy}'}" />
+                                        <Span Text="{Binding WorkPlan.WorkingGroup.Name, StringFormat=', {0}'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Muestra" />
                             <Label
-                                Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Sample.Index}" />
+                                Style="{StaticResource ValuePropertyLabelStyle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Sample.Index}" />
+                                        <Span Text="{Binding Sample.Year, StringFormat=' / {0}'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Técnica" />
@@ -51,19 +69,35 @@
                                 Text="{Binding Technique.Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Especialista" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Author.Contact}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Observaciones" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Description, TargetNullValue='---'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Muestra procesada" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="2"
+                                Text="{Binding Sample.AssessmentAt, TargetNullValue='---', FallbackValue='---', StringFormat='{0:D}'}" />
                         </StackLayout>
                         <StackLayout
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 
+                                IsEnabled="{Binding Sample.AssessmentAt, Converter={StaticResource IsNullConverter}}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />
                             <Button 
+                                IsEnabled="{Binding Sample.AssessmentAt, Converter={StaticResource IsNullConverter}}"
                                 Style="{StaticResource DangerKindButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"

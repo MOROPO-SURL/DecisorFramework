@@ -8,6 +8,10 @@
     <Frame>
         <VerticalStackLayout Spacing="0">
             <Label 
+                Margin="0,0,0,8"
+                LineBreakMode="TailTruncation"
+                Text="{Binding At, StringFormat='{0:D}'}" />
+            <Label 
                 LineBreakMode="TailTruncation"
                 FontSize="Large">
                 <Label.FormattedText>

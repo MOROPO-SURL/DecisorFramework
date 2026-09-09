@@ -97,12 +97,20 @@
                                 Text="{Binding PickedAt, TargetNullValue='---', FallbackValue='---', StringFormat='{0:D}'}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Procesada" />
+                                Text="Analizada" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 LineBreakMode="TailTruncation"
                                 MaxLines="2"
                                 Text="{Binding HandledAt, TargetNullValue='---', FallbackValue='---', StringFormat='{0:D}'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Procesada" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="2"
+                                Text="{Binding AssessmentAt, TargetNullValue='---', FallbackValue='---', StringFormat='{0:D}'}" />
                         </StackLayout>
                         <StackLayout
                             Orientation="Horizontal"

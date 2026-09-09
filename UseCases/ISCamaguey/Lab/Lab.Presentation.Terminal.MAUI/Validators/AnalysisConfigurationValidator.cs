@@ -13,6 +13,8 @@ public sealed class AnalysisConfigurationValidator : AbstractValidator<AnalysisC
 
         RuleFor(model => model.Technique).NotNull().WithName("Técnica");
 
+        RuleFor(model => model.Author).NotNull().WithName("Especialista");
+
         RuleFor(model => model.Description).NotEmpty().WithName("Observaciones");
     }
 }

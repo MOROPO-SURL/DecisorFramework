@@ -2,6 +2,7 @@
 using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
 using MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
+using System.Reflection;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 {
@@ -19,7 +20,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 
         public string Description { get; set; }
 
-        public System.Guid? PredecessorId { get; set; }
+        public EmployeeDisplayModel Author { get; set; }
 
         public void Import(Analysis entity)
         {
@@ -36,8 +37,32 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
                 Amount = entity.Sample.Amount,
                 At = entity.Sample.At,
                 Observation = entity.Sample.Observation,
-                UnitMeasurement = new UnitMeasurementDisplayModel()
+                UnitMeasurement = new UnitMeasurementDisplayModel(),
+                PickedAt = entity.Sample.PickedAt,
+                HandledAt = entity.Sample.HandledAt,
+                AssessmentAt = entity.Sample.AssessmentAt
             };
+            
+            if (entity.Author != null)
+            {
+                Author = new EmployeeDisplayModel();
+
+                Author.Import(entity.Author);
+            }
+
+            if (entity.Technique != null)
+            {
+                Technique = new TechniqueDisplayModel();
+
+                Technique.Import(entity.Technique);
+            }
+
+            if (entity.WorkPlan != null)
+            {
+                WorkPlan = new WorkPlanDisplayModel();
+
+                WorkPlan.Import(entity.WorkPlan);
+            }
 
             Sample.Kind.Import(entity.Sample.SampleKind);
             Sample.UnitMeasurement.Import(entity.Sample.UnitMeasurement);

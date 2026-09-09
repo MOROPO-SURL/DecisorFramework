@@ -1,9 +1,11 @@
 ﻿using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Display;
-using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models;
+using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.Models.Page.Configuration;
 
@@ -12,6 +14,7 @@ public sealed class AnalysisConfigurationPageModel : AbstractConfigurationPageMo
     public static string WorkPlanValidableProperty => nameof(WorkPlan);
     public static string SampleValidableProperty => nameof(Sample);
     public static string TechniqueValidableProperty => nameof(Technique);
+    public static string AuthorValidableProperty => nameof(Author);
     public static string DescriptionValidableProperty => nameof(Description);
 
     private System.DateTime at;
@@ -19,6 +22,7 @@ public sealed class AnalysisConfigurationPageModel : AbstractConfigurationPageMo
     private WorkPlanDisplayModel workPlan;
     private SampleOverviewModel sample;
     private TechniqueDisplayModel technique;
+    private EmployeeDisplayModel author;
 
     public AnalysisConfigurationPageModel(AnalysisDisplayModel model, IEnumerable<TechniqueDisplayModel> availableTechniques) : base(model)
     {
@@ -33,7 +37,8 @@ public sealed class AnalysisConfigurationPageModel : AbstractConfigurationPageMo
         description = model.Description;
         workPlan = model.WorkPlan;
         sample = model.Sample;
-        technique = model.Technique;
+        technique = AvailableTechniques.SingleOrDefault(item => item.Id == model.Technique.Id);
+        author = model.Author;
     }
 
     public System.Guid Id { get; init; }
@@ -47,6 +52,8 @@ public sealed class AnalysisConfigurationPageModel : AbstractConfigurationPageMo
     public SampleOverviewModel Sample { get => sample; set => SetProperty(ref sample, value); }
 
     public TechniqueDisplayModel Technique { get => technique; set => SetProperty(ref technique, value); }
+
+    public EmployeeDisplayModel Author { get => author; set => SetProperty(ref author, value); }
 
     public ObservableCollection<TechniqueDisplayModel> AvailableTechniques { get; init; }
 }

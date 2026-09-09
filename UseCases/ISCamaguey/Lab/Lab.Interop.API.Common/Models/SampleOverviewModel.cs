@@ -22,5 +22,11 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models
         public UnitMeasurementDisplayModel UnitMeasurement { get; set; }
 
         public string Observation { get; set; }
+
+        public System.DateTime? PickedAt { get; set; }
+
+        public System.DateTime? HandledAt { get; set; }
+
+        public System.DateTime? AssessmentAt { get; set; }
     }
 }

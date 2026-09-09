@@ -83,15 +83,15 @@
                                     InputTransparent="True"
                                     VerticalOptions="Center"
                                     Padding="0,2"
-                                    Rotation="40"
+                                    Rotation="45"
                                     TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
                                     <Label                    
                                         Padding="8"
-                                        BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource LightInfoBorder}, Dark={StaticResource DarkInfoBorder}}"
                                         HorizontalTextAlignment="Center"
                                         FontAttributes="Bold"
                                         TextColor="White"
-                                        Text="{Binding HandledAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                        Text="{Binding HandledAt, StringFormat='Analizada: {0:dd/MM/yyyy}'}" />
                                 </Grid>
                             </Grid>
                         </DataTemplate>
@@ -128,15 +128,15 @@
                                     InputTransparent="True"
                                     VerticalOptions="Center"
                                     Padding="0,2"
-                                    Rotation="40"
+                                    Rotation="45"
                                     TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
                                     <Label                    
                                         Padding="8"
-                                        BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource LightInfoBorder}, Dark={StaticResource DarkInfoBorder}}"
                                         HorizontalTextAlignment="Center"
                                         FontAttributes="Bold"
                                         TextColor="White"
-                                        Text="{Binding HandledAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                        Text="{Binding HandledAt, StringFormat='Analizada: {0:dd/MM/yyyy}'}" />
                                 </Grid>
                             </Grid>
                         </DataTemplate>
@@ -173,15 +173,15 @@
                                     InputTransparent="True"
                                     VerticalOptions="Center"
                                     Padding="0,2"
-                                    Rotation="40"
+                                    Rotation="45"
                                     TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
                                     <Label                    
                                         Padding="8"
-                                        BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
+                                        BackgroundColor="{AppThemeBinding Light={StaticResource LightInfoBorder}, Dark={StaticResource DarkInfoBorder}}"
                                         HorizontalTextAlignment="Center"
                                         FontAttributes="Bold"
                                         TextColor="White"
-                                        Text="{Binding HandledAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                        Text="{Binding HandledAt, StringFormat='Analizada: {0:dd/MM/yyyy}'}" />
                                 </Grid>
                             </Grid>
                         </DataTemplate>

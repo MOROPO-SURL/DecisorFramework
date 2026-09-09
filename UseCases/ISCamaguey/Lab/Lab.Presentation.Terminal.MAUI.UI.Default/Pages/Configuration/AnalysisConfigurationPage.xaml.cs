@@ -27,7 +27,8 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
             Description = ConcreteBindingContext.Description,
             WorkPlanId = ConcreteBindingContext.WorkPlan.Id,
             SampleId = ConcreteBindingContext.Sample.Id,
-            TechniqueId = ConcreteBindingContext.Technique.Id
+            TechniqueId = ConcreteBindingContext.Technique.Id,
+            AuthorId = ConcreteBindingContext.Author.Id
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -46,7 +47,8 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
             Description = ConcreteBindingContext.Description,
             WorkPlanId = ConcreteBindingContext.WorkPlan.Id,
             SampleId = ConcreteBindingContext.Sample.Id,
-            TechniqueId = ConcreteBindingContext.Technique.Id
+            TechniqueId = ConcreteBindingContext.Technique.Id,
+            AuthorId = ConcreteBindingContext.Author.Id
         };
 
         await apiConnectClient.EditAsync(model);
@@ -74,9 +76,21 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.WorkPlanPickPage(WorkPlanPicked_Callback)));
     }
 
+    private void AuthorPickButton_Clicked(object sender, System.EventArgs e)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(AuthorPickComplete_Callback)));
+    }
+
     private void SamplePickButton_Clicked(object sender, System.EventArgs args)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.WorkPlanSamplePickPage(ConcreteBindingContext.WorkPlan, ServiceOrderSamplePicked_Callback, ResearchSamplePicked_Callback, ProductionSamplePicked_Callback)));
+    }
+
+    private void AuthorPickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel model)
+    {
+        ConcreteBindingContext.Author = model;
+
+        hasChangesFlag = true;
     }
 
     private void WorkPlanPicked_Callback(WorkPlanDisplayModel model)
@@ -98,7 +112,10 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
             Amount = model.Amount,
             At = model.At,
             Observation = model.Observation,
-            UnitMeasurement = model.UnitMeasurement
+            UnitMeasurement = model.UnitMeasurement,
+            PickedAt = model.PickedAt,
+            HandledAt = model.HandledAt,
+            AssessmentAt = model.AssessmentAt
         };
 
         if (model.Order.RequestedTechnique != null)
@@ -121,7 +138,10 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
             Amount = model.Amount,
             At = model.At,
             Observation = model.Observation,
-            UnitMeasurement = model.UnitMeasurement
+            UnitMeasurement = model.UnitMeasurement,
+            PickedAt = model.PickedAt,
+            HandledAt = model.HandledAt,
+            AssessmentAt = model.AssessmentAt
         };
 
         hasChangesFlag = true;
@@ -139,7 +159,10 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
             Amount = model.Amount,
             At = model.At,
             Observation = model.Observation,
-            UnitMeasurement = model.UnitMeasurement
+            UnitMeasurement = model.UnitMeasurement,
+            PickedAt = model.PickedAt,
+            HandledAt = model.HandledAt,
+            AssessmentAt = model.AssessmentAt
         };
 
         hasChangesFlag = true;

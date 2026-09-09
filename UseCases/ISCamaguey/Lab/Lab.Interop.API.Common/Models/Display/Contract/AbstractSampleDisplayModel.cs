@@ -1,4 +1,6 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display.Contract
+﻿using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
+
+namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display.Contract
 {
     public abstract class AbstractSampleDisplayModel<TEntity> : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<TEntity, System.Guid> where TEntity : Persistence.Entities.Contract.AbstractSample
     {
@@ -15,6 +17,8 @@
         public System.DateTime? PickedAt { get; set; }
 
         public System.DateTime? HandledAt { get; set; }
+
+        public System.DateTime? AssessmentAt { get; set; }
 
         public string Observation { get; set; }
 
@@ -35,6 +39,7 @@
             At = entity.At;
             PickedAt = entity.PickedAt;
             HandledAt = entity.HandledAt;
+            AssessmentAt = entity.AssessmentAt;
             Observation = entity.Observation;
             Amount = entity.Amount;
 

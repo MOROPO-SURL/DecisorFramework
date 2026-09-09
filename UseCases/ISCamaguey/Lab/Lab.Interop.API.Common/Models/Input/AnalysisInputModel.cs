@@ -17,6 +17,8 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
 
         public System.Guid TechniqueId { get; set; }
 
+        public System.Guid AuthorId { get; set; }
+
         public Analysis Export()
         {
             Analysis entity = new Analysis() { Id = Id, Archived = false };
@@ -52,6 +54,12 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
             {
                 entity.Technique = null;
                 entity.TechniqueId = TechniqueId;
+            }
+
+            if (entity.AuthorId != AuthorId)
+            {
+                entity.Author = null;
+                entity.AuthorId = AuthorId;
             }
         }
     }

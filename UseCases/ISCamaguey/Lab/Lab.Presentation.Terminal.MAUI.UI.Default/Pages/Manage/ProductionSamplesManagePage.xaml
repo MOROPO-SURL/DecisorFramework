@@ -61,29 +61,48 @@
                                     </local_card_views:ProductionSampleDefaultCardView>
                                     <Grid 
                                         InputTransparent="True"
-                                        IsVisible="{Binding HandledAt, Converter={StaticResource IsNullConverter}}">
+                                        IsVisible="{Binding AssessmentAt, Converter={StaticResource IsNullConverter}}">
+                                        <Grid 
+                                            InputTransparent="True"
+                                            IsVisible="{Binding HandledAt, Converter={StaticResource IsNullConverter}}">
+                                            <Grid
+                                                IsVisible="{Binding PickedAt, Converter={StaticResource IsNotNullConverter}}"
+                                                InputTransparent="True"
+                                                VerticalOptions="Center"
+                                                Padding="0,2"
+                                                Rotation="45"
+                                                TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
+                                                <Label                    
+                                                    Padding="8"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightInfoBorder}, Dark={StaticResource DarkInfoBorder}}"
+                                                    HorizontalTextAlignment="Center"
+                                                    FontAttributes="Bold"
+                                                    TextColor="White"
+                                                    Text="{Binding PickedAt, StringFormat='Planificado: {0:dd/MM/yyyy}'}" />
+                                            </Grid>
+                                        </Grid>
                                         <Grid
-                                            IsVisible="{Binding PickedAt, Converter={StaticResource IsNotNullConverter}}"
+                                            IsVisible="{Binding HandledAt, Converter={StaticResource IsNotNullConverter}}"
                                             InputTransparent="True"
                                             VerticalOptions="Center"
                                             Padding="0,2"
-                                            Rotation="40"
+                                            Rotation="45"
                                             TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
                                             <Label                    
                                                 Padding="8"
-                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightInfoBorder}, Dark={StaticResource DarkInfoBorder}}"
+                                                BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
                                                 HorizontalTextAlignment="Center"
                                                 FontAttributes="Bold"
                                                 TextColor="White"
-                                                Text="{Binding PickedAt, StringFormat='Planificado: {0:dd/MM/yyyy}'}" />
+                                                Text="{Binding HandledAt, StringFormat='Analizada: {0:dd/MM/yyyy}'}" />
                                         </Grid>
                                     </Grid>
                                     <Grid
-                                        IsVisible="{Binding HandledAt, Converter={StaticResource IsNotNullConverter}}"
+                                        IsVisible="{Binding AssessmentAt, Converter={StaticResource IsNotNullConverter}}"
                                         InputTransparent="True"
                                         VerticalOptions="Center"
                                         Padding="0,2"
-                                        Rotation="40"
+                                        Rotation="45"
                                         TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
                                         <Label                    
                                             Padding="8"
@@ -91,7 +110,7 @@
                                             HorizontalTextAlignment="Center"
                                             FontAttributes="Bold"
                                             TextColor="White"
-                                            Text="{Binding HandledAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                            Text="{Binding AssessmentAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
                                     </Grid>
                                 </Grid>
                             </DataTemplate>

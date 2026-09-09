@@ -14,8 +14,8 @@ public sealed class AnalysisRepository : AbstractEntityRepository<Analysis, Syst
     protected override IQueryable<Analysis> GetQueryableDbSet()
     {
         return base.GetQueryableDbSet()
-            .Include(entity => entity.WorkPlan)
             .Include(entity => entity.Technique)
+            .Include(entity => entity.WorkPlan).ThenInclude(entity => entity.WorkingGroup)
             .Include(entity => entity.Author).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
             .Include(entity => entity.Sample).ThenInclude(entity => entity.SampleKind)
             .Include(entity => entity.Sample).ThenInclude(entity => entity.UnitMeasurement);

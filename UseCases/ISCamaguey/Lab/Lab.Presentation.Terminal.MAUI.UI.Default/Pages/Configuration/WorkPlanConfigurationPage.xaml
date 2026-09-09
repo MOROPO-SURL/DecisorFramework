@@ -116,7 +116,7 @@
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="interop_common_display_models:ServiceOrderSampleDisplayModel">
-                                        <Grid>
+                                        <Grid IsClippedToBounds="True">
                                             <local_card_views:ServiceOrderSampleDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_HEIGHT}" />
                                             <Button
                                                 Style="{StaticResource DangerKindFontIconImageButtonStyle}"
@@ -130,15 +130,15 @@
                                                 InputTransparent="True"
                                                 VerticalOptions="Center"
                                                 Padding="0,2"
-                                                Rotation="40"
+                                                Rotation="45"
                                                 TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
                                                 <Label                    
                                                     Padding="8"
-                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightInfoBorder}, Dark={StaticResource DarkInfoBorder}}"
                                                     HorizontalTextAlignment="Center"
                                                     FontAttributes="Bold"
                                                     TextColor="White"
-                                                    Text="{Binding HandledAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                                    Text="{Binding HandledAt, StringFormat='Analizada: {0:dd/MM/yyyy}'}" />
                                             </Grid>
                                         </Grid>
                                     </DataTemplate>
@@ -189,7 +189,7 @@
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="interop_common_display_models:ResearchSampleDisplayModel">
-                                        <Grid>
+                                        <Grid IsClippedToBounds="True">
                                             <local_card_views:ResearchSampleDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_RESEARCH_CARD_VIEW_HEIGHT}" />
                                             <Button
                                                 Style="{StaticResource DangerKindFontIconImageButtonStyle}"    
@@ -203,15 +203,15 @@
                                                 InputTransparent="True"
                                                 VerticalOptions="Center"
                                                 Padding="0,2"
-                                                Rotation="40"
+                                                Rotation="45"
                                                 TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
                                                 <Label                    
                                                     Padding="8"
-                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightInfoBorder}, Dark={StaticResource DarkInfoBorder}}"
                                                     HorizontalTextAlignment="Center"
                                                     FontAttributes="Bold"
                                                     TextColor="White"
-                                                    Text="{Binding HandledAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                                    Text="{Binding HandledAt, StringFormat='Analizada: {0:dd/MM/yyyy}'}" />
                                             </Grid>
                                         </Grid>
                                     </DataTemplate>
@@ -262,7 +262,7 @@
                                 </CollectionView.EmptyView>
                                 <CollectionView.ItemTemplate>
                                     <DataTemplate x:DataType="interop_common_display_models:ProductionSampleDisplayModel">
-                                        <Grid>
+                                        <Grid IsClippedToBounds="True">
                                             <local_card_views:ProductionSampleDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_PRODUCTION_CARD_VIEW_HEIGHT}" />
                                             <Button
                                                 Style="{StaticResource DangerKindFontIconImageButtonStyle}"   
@@ -276,15 +276,15 @@
                                                 InputTransparent="True"
                                                 VerticalOptions="Center"
                                                 Padding="0,2"
-                                                Rotation="40"
+                                                Rotation="45"
                                                 TranslationX="{Binding Source={RelativeSource Mode=Self}, Path=Width, Converter={StaticResource MathExpressionConverter}, ConverterParameter='X * 0.2'}">
                                                 <Label                    
                                                     Padding="8"
-                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightSuccessBorder}, Dark={StaticResource DarkSuccessBorder}}"
+                                                    BackgroundColor="{AppThemeBinding Light={StaticResource LightInfoBorder}, Dark={StaticResource DarkInfoBorder}}"
                                                     HorizontalTextAlignment="Center"
                                                     FontAttributes="Bold"
                                                     TextColor="White"
-                                                    Text="{Binding HandledAt, StringFormat='Procesada: {0:dd/MM/yyyy}'}" />
+                                                    Text="{Binding HandledAt, StringFormat='Analizada: {0:dd/MM/yyyy}'}" />
                                             </Grid>
                                         </Grid>
                                     </DataTemplate>
