@@ -98,7 +98,7 @@
 
             if (target.Controller == "costcenters") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-finance");
 
-            if (target.Controller == "structurekinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-graph-outline");
+            if (target.Controller == "administrativeentitykinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-office-building");
 
             if (target.Controller == "propertykinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-home-city-outline");
 
@@ -150,7 +150,7 @@
 
             if (target.Controller == "publishes") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-post");
 
-            if (target.Controller == "projects") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-folder-open");
+            if (target.Controller == "projects") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-folder-settings-variant");
 
             if (target.Controller == "ctihits") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-file-star");
 
@@ -160,7 +160,9 @@
 
             if (target.Controller == "sponsors") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-offer");
 
-            if (target.Controller == "programs") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-city-variant");
+            if (target.Controller == "programs") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-folder-table");
+
+            if (target.Controller == "programkinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-folder-table-outline");
 
             if (target.Controller == "researpartners") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-domain");
 
@@ -173,6 +175,8 @@
             if (target.Controller == "researchercategories") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-flask-outline");
 
             if (target.Controller == "teachingcategories") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-google-classroom");
+
+            if (target.Controller == "projectcategories") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-folder-settings-variant-outline");
 
             return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-toy-brick-outline");
         }

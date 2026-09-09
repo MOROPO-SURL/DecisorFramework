@@ -16,7 +16,6 @@
     Title="Gestión de Programas">
     <ContentPage.Resources>
         <ResourceDictionary>
-            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>

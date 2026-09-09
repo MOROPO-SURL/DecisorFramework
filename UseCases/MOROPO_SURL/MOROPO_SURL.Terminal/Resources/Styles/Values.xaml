@@ -18,5 +18,33 @@
         <x:Int32>11</x:Int32>
         <x:Int32>12</x:Int32>
     </Array>
-    
+
+    <x:String x:Key="AdministrativeEntityMaterialDesignGlyphIconId">&#xF990;</x:String>
+    <x:String x:Key="OrganizationalStructureMaterialDesignGlyphIconId">&#xF645;</x:String>
+    <x:String x:Key="OrganizationalUnitDesignGlyphIconId">&#xF006B;</x:String>
+    <x:String x:Key="UnitMeasurementMaterialDesignGlyphIconId">&#xF472;</x:String>
+
+    <x:String x:Key="WorkPositionKindMaterialDesignGlyphIconId">&#xF017;</x:String>
+    <x:String x:Key="SalaryStandardMaterialDesignGlyphIconId">&#xF00C2;</x:String>
+    <x:String x:Key="WorkPositionMaterialDesignGlyphIconId">&#xF631;</x:String>
+    <x:String x:Key="WorkforceMaterialDesignGlyphIconId">&#xF645;</x:String>
+    <x:String x:Key="StaffMaterialDesignGlyphIconId">&#xF493;</x:String>
+    <x:String x:Key="OcupationMaterialDesignGlyphIconId">&#xF002C;</x:String>
+    <x:String x:Key="AdmisionMaterialDesignGlyphIconId">&#xF014;</x:String>
+
+    <x:String x:Key="DecisionMakingGroupMaterialDesignGlyphIconId">&#xF848;</x:String>
+    <x:String x:Key="MeetingMaterialDesignGlyphIconId">&#xFA5D;</x:String>
+
+    <x:String x:Key="BankAgencyMaterialDesignGlyphIconId">&#xF070;</x:String>
+    <x:String x:Key="BankBranchMaterialDesignGlyphIconId">&#xFA26;</x:String>
+    <x:String x:Key="BankAccountMaterialDesignGlyphIconId">"&#xF02A8;</x:String>
+    <x:String x:Key="CurrencyMaterialDesignGlyphIconId">&#xF4CB;</x:String>
+
+    <x:String x:Key="ProviderMaterialDesignGlyphIconId">&#xF6D8;</x:String>
+    <x:String x:Key="ClientMaterialDesignGlyphIconId">&#xFAC0;</x:String>
+    <x:String x:Key="ContactMaterialDesignGlyphIconId">&#xF5D2;</x:String>
+    <x:String x:Key="LegalBusinessKindMaterialDesignGlyphIconId">&#xF070;</x:String>
+    <x:String x:Key="NaturalBusinessKindMaterialDesignGlyphIconId">&#xF00F5;</x:String>
+    <x:String x:Key="PaymentTermMaterialDesignGlyphIconId">&#xF0F0;</x:String>
+
 </ResourceDictionary>

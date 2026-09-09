@@ -16,7 +16,7 @@
                 Aspect="AspectFill"
                 Source="lab.jpg" />
             <BoxView
-                BackgroundColor="Black"
+                Color="Black"
                 Opacity="0.5" />
             <Grid
                 Padding="16">
@@ -60,15 +60,15 @@
             Title="Servicios"
             ContentTemplate="{DataTemplate lab_manage_pages:ServiceOrderSamplesManagePage}" />
         <ShellContent
-            Title="Investigaciones (%)"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            Title="Investigaciones"
+            ContentTemplate="{DataTemplate lab_manage_pages:ResearchSamplesManagePage}" />
         <ShellContent
-            Title="Producciones (%)"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            Title="Producciones"
+            ContentTemplate="{DataTemplate lab_manage_pages:ProductionSamplesManagePage}" />
     </FlyoutItem>
     <ShellContent
-        Title="Procesamiento de Muestra (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Análisis de Muestra"
+        ContentTemplate="{DataTemplate lab_manage_pages:AnalysesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -86,6 +86,16 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <ShellContent
+        Title="Procesamiento de Muestra (%)"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF0256;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Grupos de Trabajo"
@@ -98,8 +108,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Planes de Trabajo (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Planes de Trabajo"
+        ContentTemplate="{DataTemplate lab_manage_pages:WorkPlansManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

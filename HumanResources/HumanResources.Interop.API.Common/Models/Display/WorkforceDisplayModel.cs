@@ -13,7 +13,9 @@
 
         public System.DateTime At { get; set; }
 
-        public WorkforceOrganizationalUnityDisplayModel[] OrganizationalUnities { get; set; }
+        public Domain.Interop.API.Common.Models.Display.OrganizationalStructureDisplayModel OrganizationalStructure { get; set; }
+
+        public WorkforceOrganizationalUnitDisplayModel[] OrganizationalUnits { get; set; }
 
         public void Import(Persistence.Entities.Workforce entity)
         {
@@ -22,6 +24,13 @@
             Enabled = entity.Enabled;
             Priority = entity.Priority;
             At = entity.At;
+
+            if (entity.OrganizationalStructure != null)
+            {
+                OrganizationalStructure = new Domain.Interop.API.Common.Models.Display.OrganizationalStructureDisplayModel();
+
+                OrganizationalStructure.Import(entity.OrganizationalStructure);
+            }
         }
     }
 }

@@ -23,7 +23,7 @@
             startAt = model.StartAt;
             endAt = model.EndAt;
             financier = model.Financier;
-            ResearchAreas = [.. model.ResearchAreas];
+            KnowledgeAreas = [.. model.KnowledgeAreas];
             Documents = [.. model.Documents];
         }
 
@@ -39,7 +39,7 @@
 
         public Interop.API.Common.Models.Display.FinancierDisplayModel Financier { get => financier; set => SetProperty(ref financier, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ResearchAreaDisplayModel> ResearchAreas { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<Framework.Decisor.Domain.Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel> KnowledgeAreas { get; set; } = [];
 
         public System.Collections.ObjectModel.ObservableCollection<Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel> Documents { get; set; } = [];
     }

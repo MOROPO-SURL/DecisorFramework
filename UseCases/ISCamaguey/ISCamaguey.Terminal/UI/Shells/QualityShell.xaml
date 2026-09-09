@@ -14,7 +14,7 @@
                 Aspect="AspectFill"
                 Source="quality.jpg" />
             <BoxView
-                BackgroundColor="Black"
+                Color="Black"
                 Opacity="0.5" />
             <Grid
                 Padding="16">

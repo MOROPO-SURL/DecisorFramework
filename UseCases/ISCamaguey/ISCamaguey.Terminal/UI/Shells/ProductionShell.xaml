@@ -15,7 +15,7 @@
                 Aspect="AspectFill"
                 Source="production.jpg" />
             <BoxView
-                BackgroundColor="Black"
+                Color="Black"
                 Opacity="0.5" />
             <Grid
                 Padding="16">
@@ -64,8 +64,8 @@
             ContentTemplate="{DataTemplate frwk_production_list_pages:ProductionOrdersListPage}" />
     </FlyoutItem>
     <ShellContent
-        Title="Producciones (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Producciones"
+        ContentTemplate="{DataTemplate frwk_production_manage_pages:ProductionsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

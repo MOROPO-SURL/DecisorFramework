@@ -4,8 +4,6 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class ParticipatingOrganizationsManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel, Models.Page.Manage.ParticipatingOrganizationsManagePageModel, Models.Page.Configuration.ParticipatingOrganizationConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 144;
-
     public ParticipatingOrganizationsManagePage()
     {
         InitializeComponent();
@@ -16,12 +14,9 @@ public partial class ParticipatingOrganizationsManagePage : Framework.Decisor.Co
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 420; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.PARTICIPATING_ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.PARTICIPATING_ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel>> FetchItemsAsync()
     {

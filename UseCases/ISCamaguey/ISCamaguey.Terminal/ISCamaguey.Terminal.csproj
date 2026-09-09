@@ -127,6 +127,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <MauiXaml Update="UI\Pages\Configuration\SimplifiedStaffConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\Configuration\SimplifiedVacantConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -137,6 +140,21 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Pages\QualityDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SimplifiedFinancialDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SimplifiedGovernanceDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SimplifiedHumanResourcesDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SimplifiedCommercialDashboardPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Pages\SimplifiedDomainDashboardPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="UI\Shells\GovernanceShell.xaml">
@@ -154,21 +172,51 @@
 	  <MauiXaml Update="UI\Shells\ServicingShell.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
-	  <MauiXaml Update="UI\Views\Card\OcupationsSimplifiedManageOrganizationalUnityAndVacantsCardView.xaml">
+	  <MauiXaml Update="UI\Views\Card\OcupationSimplifiedManageOrganizationalStructuringUnitLeafCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="UI\Views\Card\OcupationSimplifiedManageOrganizationalStructuringUnitTreeCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
 
 	<ItemGroup>
+	  <Compile Update="LocalizationResources.Designer.cs">
+	    <DependentUpon>LocalizationResources.resx</DependentUpon>
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	  </Compile>
 	  <Compile Update="UI\Pages\ServicingDashboardPage.xaml.cs">
 	    <DependentUpon>ServicingDashboardPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="UI\Pages\Manage\OcupationsSimplifiedManagePage.xaml.cs">
 	    <DependentUpon>OcupationsSimplifiedManagePage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Pages\SimplifiedFinancialDashboardPage.xaml.cs">
+	    <DependentUpon>SimplifiedFinancialDashboardPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SimplifiedGovernanceDashboardPage.xaml.cs">
+	    <DependentUpon>SimplifiedGovernanceDashboardPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Pages\SimplifiedHumanResourcesDashboardPage.xaml.cs">
+	    <DependentUpon>SimplifiedHumanResourcesDashboardPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="UI\Shells\GovernanceShell.xaml.cs">
 	    <DependentUpon>%(Filename)</DependentUpon>
 	  </Compile>
+	  <Compile Update="UI\Views\Card\OcupationSimplifiedManageOrganizationalStructuringUnitLeafCardView.xaml.cs">
+	    <DependentUpon>OcupationSimplifiedManageOrganizationalStructuringUnitLeafCardView.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="UI\Views\Card\OcupationSimplifiedManageOrganizationalStructuringUnitTreeCardView.xaml.cs">
+	    <DependentUpon>OcupationSimplifiedManageOrganizationalStructuringUnitTreeCardView.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <EmbeddedResource Update="LocalizationResources.resx">
+	    <LastGenOutput>LocalizationResources.Designer.cs</LastGenOutput>
+	    <Generator>ResXFileCodeGenerator</Generator>
+	  </EmbeddedResource>
 	</ItemGroup>
 
 </Project>

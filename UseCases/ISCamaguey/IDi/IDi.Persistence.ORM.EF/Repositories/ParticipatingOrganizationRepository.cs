@@ -20,7 +20,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.ORM.EF.Repositories
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.WebSiteContactItemBridges).ThenInclude(bridge => bridge.Stern)
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.BusinessKind)
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.Representative).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
-                .Include(entity => entity.ResearchAreaBridges).ThenInclude(bridge => bridge.Stern);
+                .Include(entity => entity.KnowledgeAreaBridges).ThenInclude(bridge => bridge.Stern);
         }
     }
 }

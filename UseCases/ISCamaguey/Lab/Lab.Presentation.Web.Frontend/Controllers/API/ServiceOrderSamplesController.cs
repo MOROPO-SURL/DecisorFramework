@@ -10,7 +10,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.AP
 
 [Route("api/lab/[controller]")]
 [ApiController]
-public class ServiceOrderSamplesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementController<ServiceOrderSample, System.Guid, ServiceOrderSampleInputModel, ServiceOrderSampleDisplayModel>
+public class ServiceOrderSamplesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEnableableEntityAPIManagementFilteredController<ServiceOrderSample, System.Guid, ServiceOrderSampleInputModel, ServiceOrderSampleDisplayModel, Interop.API.Common.Models.Filter.CommonSampleFilterModel<ServiceOrderSampleDisplayModel, ServiceOrderSample>>
 {
     private readonly IEntityRepository<Servicing.Persistence.Entities.Contract.AbstractSampleAnalysisServiceOrder, long> orderRepository;
     private readonly IEntityRepository<Image, System.Guid> imageRepository;

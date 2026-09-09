@@ -12,11 +12,11 @@
 
         public System.Guid SalaryStandardId { get; set; }
 
-        public System.Guid WorkforceOrganizationalUnityId { get; set; }
+        public System.Guid? WorkforceOrganizationalUnitId { get; set; }
 
         public Persistence.Entities.Vacant Export()
         {
-            var entity = new Persistence.Entities.Vacant {Id = Id, Enabled = true, WorkforceOrganizationalUnityId = WorkforceOrganizationalUnityId };
+            var entity = new Persistence.Entities.Vacant {Id = Id, Enabled = true, WorkforceOrganizationalUnitId = WorkforceOrganizationalUnitId };
 
             Mergue(entity);
 

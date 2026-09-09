@@ -43,6 +43,11 @@ public partial class ProductionOrderPickPage : Core.Presentation.Terminal.MAUI.U
         OnReload(sender, eventArgs);
     }
 
+    protected void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
+    }
+
     private void LoadMoreBurron_Clicked(object sender, System.EventArgs eventArgs)
     {
         OnLoadMore(sender, eventArgs);
@@ -55,7 +60,9 @@ public partial class ProductionOrderPickPage : Core.Presentation.Terminal.MAUI.U
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync().ContinueWith(_ => Dispatcher.Dispatch(() => pickCompleteAction.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ProductionOrderDisplayModel)));
+        pickCompleteAction?.Invoke(((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ProductionOrderDisplayModel);
+
+        (Parent as Microsoft.Maui.Controls.NavigationPage).NavigationPopModalPageAsync();
     }
 
     private void SearchBar_SearchButtonPressed(object sender, System.EventArgs eventArgs)

@@ -19,6 +19,12 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract
 
         public string Observation {  get; set; }
 
+        public System.DateTime? PickedAt { get; set; }
+
+        public System.DateTime? HandledAt { get; set; }
+
+        public System.DateTime? AssessmentAt { get; set; }
+
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(FeatureImageId))]
         public Framework.Guama.Media.Persistence.Entities.Image FeatureImage { get; set; }
         public System.Guid? FeatureImageId { get; set; }

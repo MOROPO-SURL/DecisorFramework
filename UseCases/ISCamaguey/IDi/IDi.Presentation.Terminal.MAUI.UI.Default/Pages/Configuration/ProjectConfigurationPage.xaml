@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Constants"
+    xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI"
+    xmlns:domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common"
+    xmlns:domain_interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.Domain.Interop.API.Common"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:caneyframework_presentation_converters="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Converters;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.ProjectConfigurationPage"
+    x:TypeArguments="interop_common_display_models:ProjectDisplayModel,interop_common_display_models:ProjectDisplayModel,presentation_configuration_page_models:ProjectConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:ProjectConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+            <core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="4" Padding="8">
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                    <Entry Text="{Binding Name}" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.NameValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.NameValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
+                </VerticalStackLayout>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Categoría" />
+                        <Picker 
+                            x:Name="CategoryPicker"
+                            ItemsSource="{Binding AvailableCategories}"
+                            ItemDisplayBinding="{Binding Path=Name}"
+                            SelectedItem="{Binding Category}"
+                            SelectedIndexChanged="Picker_SelectedIndexChanged" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.CategoryValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.CategoryValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Código" />
+                        <Entry Text="{Binding Code}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.CodeValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.CodeValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=4, MediumContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Alias (opcional)" />
+                        <Entry Text="{Binding Alias}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.AliasValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.AliasValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Inicio" />
+                        <DatePicker Date="{Binding StartAt}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Final" />
+                        <DatePicker Date="{Binding EndAt}" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.EndAtValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.EndAtValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Resumen" />
+                    <Editor Text="{Binding Summary}" HeightRequest="120" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.SummaryValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.SummaryValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
+                </VerticalStackLayout>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=5, LargeContainerColumn=8, MediumContainerColumn=10, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Programa (opcional)" />
+                        <ContentView                        
+                            IsVisible="{Binding Program, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="{Static local_constants:CardViewHeightConstants.PROGRAM_DEFAULT_CARD_VIEW_HEIGHT}">
+                            <local_card_views:ProgramDefaultCardView BindingContext="{Binding Program}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="ProgramPickButton_Clicked" />
+                    </VerticalStackLayout>                    
+                    <VerticalStackLayout
+                        IsVisible="{Binding Program, Converter={StaticResource IsNotNullConverter}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=8, ExtraLargeContainerColumn=7, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Resultados esperados del Programa" />                    
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="ProgramExpectResultAgregationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding ProgramExpectResults}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_display_models:ProgramExpectResultDisplayModel">
+                                            <Frame Padding="12,8,8,8">
+                                                <Grid ColumnSpacing="8">
+                                                    <Grid.ColumnDefinitions>
+                                                        <ColumnDefinition />
+                                                        <ColumnDefinition Width="Auto" />
+                                                        <ColumnDefinition Width="Auto" />
+                                                    </Grid.ColumnDefinitions>
+                                                    <StackLayout 
+                                                        Grid.Column="0"
+                                                        VerticalOptions="Center"
+                                                        Orientation="Horizontal"
+                                                        Spacing="4">
+                                                        <Label Text="{Binding Index, StringFormat='No.{0}:'}" />
+                                                        <Label 
+                                                            HorizontalOptions="FillAndExpand"
+                                                            Text="{Binding Title}" />
+                                                    </StackLayout>
+                                                    <Button
+                                                        Grid.Column="2"
+                                                        VerticalOptions="Start"
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="ProgramExpectResultRemotionButton_Clicked" />
+                                                </Grid>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=8, ExtraLargeContainerColumn=7, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Financiamiento" />
+                        <Frame Padding="8">
+                            <Grid RowSpacing="8">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition />
+                                    <ColumnDefinition />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="2" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <Button
+                                    Grid.Column="1" Grid.Row="0"
+                                    HorizontalOptions="End"
+                                    Text="Agregar"
+                                    Clicked="BudgetFunancingAgregationButton_Clicked" />
+                                <BoxView
+                                    Grid.ColumnSpan="2" Grid.Row="1"
+                                    Color="{StaticResource Gray050}" />
+                                <CollectionView
+                                    Grid.ColumnSpan="2" Grid.Row="2"
+                                    ItemsSource="{Binding BudgetFunancings}">
+                                    <CollectionView.ItemsLayout>
+                                        <LinearItemsLayout Orientation="Vertical" ItemSpacing="4" />
+                                    </CollectionView.ItemsLayout>
+                                    <CollectionView.EmptyView>
+                                        <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                    </CollectionView.EmptyView>
+                                    <CollectionView.ItemTemplate>
+                                        <DataTemplate x:DataType="interop_common_display_models:ProjectBudgetFunancingDisplayModel">
+                                            <Frame Padding="8">
+                                                <StackLayout Orientation="Horizontal" Spacing="8">
+                                                    <Label
+                                                        Margin="8,0,0,0"
+                                                        HorizontalOptions="FillAndExpand" VerticalOptions="Center"
+                                                        Text="{Binding Financier.Contact.Identity.Name}" />
+                                                    <Label
+                                                        VerticalOptions="Center"
+                                                        Text="{Binding Amount, StringFormat='{0:F2}'}" />
+                                                    <Label
+                                                        VerticalOptions="Center"
+                                                        Text="{Binding Currency.Symbol}" />
+                                                    <Button
+                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Text="&#xF90B;"
+                                                        Clicked="BudgetFunancingEditionButton_Clicked" />
+                                                    <Button
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                        Text="&#xFA78;"
+                                                        Clicked="BudgetFunancingRemotionButton_Clicked" />
+                                                </StackLayout>
+                                            </Frame>
+                                        </DataTemplate>
+                                    </CollectionView.ItemTemplate>
+                                </CollectionView>
+                            </Grid>
+                        </Frame>
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=5, LargeContainerColumn=8, MediumContainerColumn=10, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Jefe" />
+                        <ContentView 
+                            IsVisible="{Binding Chief, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="{Static local_constants:CardViewHeightConstants.INTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_HEIGHT}">
+                            <local_card_views:InternalResearcherDefaultCardView BindingContext="{Binding Chief}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="ChiefPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.ChiefValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.ChiefValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout Margin="8" Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Entidades participantes" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="ParticipatingOrganizationAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding ParticipatingOrganizations}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="{Static local_constants:CardViewHeightConstants.PARTICIPATING_ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH}" ItemSpacing="8" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.EmptyView>
+                                    <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ColumnSpacing="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <local_card_views:ParticipatingOrganizationDefaultCardView
+                                                Grid.Column="0"
+                                                HeightRequest="{Static local_constants:CardViewHeightConstants.PARTICIPATING_ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT}" />
+                                            <Button
+                                                Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                Grid.Column="1"
+                                                VerticalOptions="Start"
+                                                Text="&#xFA78;"
+                                                Clicked="ParticipatingOrganizationRemotionButton_Clicked" />
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Problema" />
+                    <Editor Text="{Binding Problem}" HeightRequest="120" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.ProblemValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.ProblemValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Contexto" />
+                    <Editor Text="{Binding Context}" HeightRequest="240" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.ContextValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.ContextValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Beneficiarios" />
+                    <Editor Text="{Binding Beneficiary}" HeightRequest="180" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.BeneficiaryValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.BeneficiaryValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Objetivo general" />
+                    <Editor Text="{Binding MainObjetive}" HeightRequest="80" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.MainObjetiveValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.MainObjetiveValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout Margin="8" Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Objetivos específicos" />                    
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="SpecificObjectiveAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding SpecificObjectives}">
+                                <CollectionView.ItemsLayout>
+                                    <LinearItemsLayout ItemSpacing="4" Orientation="Vertical" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.EmptyView>
+                                    <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:ProjectSpecificObjectiveDisplayModel">
+                                        <Frame Padding="8">
+                                            <Grid ColumnSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition Width="Auto" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <StackLayout 
+                                                    Grid.Column="0"
+                                                    VerticalOptions="Center"
+                                                    Orientation="Horizontal"
+                                                    Spacing="4">
+                                                    <Label Text="{Binding Index, StringFormat='{0}.'}" />
+                                                    <Label 
+                                                        HorizontalOptions="FillAndExpand"
+                                                        Text="{Binding Name}" />
+                                                </StackLayout>
+                                                <Button
+                                                    Grid.Column="1"
+                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Text="&#xF90B;"
+                                                    Clicked="SpecificObjectiveEditionButton_Clicked" />
+                                                <Button
+                                                    Grid.Column="2"
+                                                    VerticalOptions="Start"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                    Text="&#xFA78;"
+                                                    Clicked="SpecificObjectiveRemotionButton_Clicked" />
+                                            </Grid>
+                                        </Frame>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Margin="8" Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Investigadores internos" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="InternalResearcherParticipationAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding InternalResearcherProjectParticipations}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="{Static local_constants:CardViewHeightConstants.INTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_WIDTH}" ItemSpacing="8" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.EmptyView>
+                                    <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:InternalResearcherProjectParticipationDisplayModel">
+                                        <Grid ColumnSpacing="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <local_card_views:InternalResearcherDefaultCardView
+                                                BindingContext="{Binding Researcher}"
+                                                Grid.Column="0"
+                                                HeightRequest="{Static local_constants:CardViewHeightConstants.INTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_HEIGHT}" />
+                                            <VerticalStackLayout
+                                                Grid.Column="1"
+                                                Spacing="8">
+                                                <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}" 
+                                                    Text="&#xF90B;"
+                                                    Clicked="InternalResearcherParticipationEditionButton_Clicked" />
+                                                <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                    Text="&#xFA78;"
+                                                    Clicked="InternalResearcherParticipationRemotionButton_Clicked" />
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <VerticalStackLayout Margin="8" Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Investigadores externos" />
+                    <Frame Padding="8">
+                        <Grid RowSpacing="8">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="2" />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <Button
+                                Grid.Column="1" Grid.Row="0"
+                                HorizontalOptions="End"
+                                Text="Agregar"
+                                Clicked="ExternalResearcherParticipationAgregationButton_Clicked" />
+                            <BoxView
+                                Grid.ColumnSpan="2" Grid.Row="1"
+                                Color="{StaticResource Gray050}" />
+                            <CollectionView
+                                Grid.ColumnSpan="2" Grid.Row="2"
+                                ItemsSource="{Binding ExternalResearcherProjectParticipations}">
+                                <CollectionView.ItemsLayout>
+                                    <GridItemsLayout Orientation="Vertical" Span="2" HorizontalItemSpacing="4" VerticalItemSpacing="4" />
+                                </CollectionView.ItemsLayout>
+                                <CollectionView.Behaviors>
+                                    <core_ui_behaviors:AdaptableGridItemLayoutCollectionViewBehavior ItemWidth="{Static local_constants:CardViewHeightConstants.EXTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_WIDTH}" ItemSpacing="8" />
+                                </CollectionView.Behaviors>
+                                <CollectionView.EmptyView>
+                                    <Label Margin="10" Text="Sin elementos que mostrar" FontAttributes="Italic" TextColor="DimGray" />
+                                </CollectionView.EmptyView>
+                                <CollectionView.ItemTemplate>
+                                    <DataTemplate x:DataType="interop_common_display_models:ExternalResearcherProjectParticipationDisplayModel">
+                                        <Grid ColumnSpacing="8" RowSpacing="8">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <local_card_views:ExternalResearcherDefaultCardView
+                                                BindingContext="{Binding Researcher}"
+                                                Grid.Column="0"
+                                                HeightRequest="{Static local_constants:CardViewHeightConstants.EXTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_HEIGHT}" />
+                                            <VerticalStackLayout
+                                                Grid.Column="1"
+                                                Spacing="8">
+                                                <Button
+                                                    Style="{StaticResource FontIconImageButtonStyle}" 
+                                                    Text="&#xF90B;"
+                                                    Clicked="ExternalResearcherParticipationEditionButton_Clicked" />
+                                                <Button
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
+                                                    Text="&#xFA78;"
+                                                    Clicked="ExternalResearcherParticipationRemotionButton_Clicked" />                                                
+                                            </VerticalStackLayout>
+                                        </Grid>
+                                    </DataTemplate>
+                                </CollectionView.ItemTemplate>
+                            </CollectionView>
+                        </Grid>
+                    </Frame>
+                </VerticalStackLayout>
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=6, LargeContainerColumn=8, MediumContainerColumn=10, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Documento" />
+                        <Frame 
+                            IsVisible="{Binding Document, Converter={StaticResource IsNotNullConverter}}"
+                            Padding="0">
+                            <StackLayout Orientation="Horizontal">
+                                <Grid
+                                    WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                                    BackgroundColor="DimGray">
+                                    <Label
+                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                        Text="{Binding Document, Converter={StaticResource DocumentDisplayModelToMaterialDesignFontIconTextConverter}}"
+                                        TextColor="White"
+                                        FontSize="80"
+                                        FontFamily="MaterialDesignIcons" />
+                                </Grid>
+                                <Grid 
+                                    HorizontalOptions="FillAndExpand"
+                                    Padding="16"
+                                    ColumnSpacing="8" RowSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <VerticalStackLayout
+                                        Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
+                                        Spacing="2">
+                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                                        <Label Text="{Binding Document.Name}" LineBreakMode="TailTruncation" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout
+                                        Grid.Column="0" Grid.Row="1"
+                                        Spacing="2">
+                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
+                                        <Label Text="{Binding Document.Extension}" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout
+                                        Grid.Column="1" Grid.Row="1"
+                                        Spacing="2">
+                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tamaño" />
+                                        <Label Text="{Binding Document.Length, StringFormat='{0} bytes'}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="DocumentPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.DocumentValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ProjectConfigurationPageModel.DocumentValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=8, ExtraLargeContainerColumn=10, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Idea (opcional)" />
+                        <ContentView                        
+                            IsVisible="{Binding Proposal, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="{Static local_constants:CardViewHeightConstants.PROJECT_PROPOUSAL_DEFAULT_CARD_VIEW_HEIGHT}">
+                            <local_card_views:ProjectProposalDefaultCardView BindingContext="{Binding Proposal}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="ProjectProposalPickButton_Clicked" />
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <BoxView 
+                    Style="{StaticResource SeparatorBoxView}"
+                    Margin="8,16,8,8"
+                    HeightRequest="1" />
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <Grid
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=1, ExtraLargeContainerColumn=2, LargeContainerColumn=3, MediumContainerColumn=4, SmallContainerColumn=6}}"
+                        Margin="4"
+                        ColumnSpacing="6" RowSpacing="6">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
+                        </Grid.RowDefinitions>
+                        <Label 
+                            Grid.Row="0"
+                            Style="{StaticResource CaptionFieldLabelStyle}" Text="Prioridad" />
+                        <Entry
+                            Grid.Row="1"
+                            BackgroundColor="Transparent"
+                            IsReadOnly="True"
+                            Text="{Binding Priority}" />
+                        <Stepper
+                            Grid.Row="1"
+                            Margin="0,0,6,0"
+                            HorizontalOptions="End" VerticalOptions="Center"
+                            Minimum="1"
+                            Maximum="100"
+                            Value="{Binding Priority}" />
+                    </Grid>
+                </FlexLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</core_ui_base_pages:ConfigurationBaseContentPage>

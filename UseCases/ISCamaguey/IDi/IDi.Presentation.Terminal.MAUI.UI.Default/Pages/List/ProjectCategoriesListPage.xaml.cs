@@ -4,24 +4,16 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class ProjectCategoriesListPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.ProjectCategoryDisplayModel, Models.Page.List.ProjectCategoriesListPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 136;
-
     public ProjectCategoriesListPage()
     {
         InitializeComponent();
     }
 
-    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
-    {
-        return ItemsCollectionView;
-    }
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth { get => 360; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.PROJECT_CATEGORY_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.PROJECT_CATEGORY_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ProjectCategoryDisplayModel>> FetchItemsAsync()
     {

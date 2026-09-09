@@ -11,9 +11,12 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
         protected override System.Linq.IQueryable<Entities.Workforce> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
-                .Include(entity => entity.OrganizationalUnities).ThenInclude(entity => entity.OrganizationalUnity)
-                .Include(entity => entity.OrganizationalUnities).ThenInclude(entity => entity.ChiefVacant).ThenInclude(entity => entity.WorkPosition)
-                .Include(entity => entity.OrganizationalUnities).ThenInclude(entity => entity.ChiefVacant).ThenInclude(entity => entity.SalaryStandard);
+                .AsNoTracking()
+                .Include(entity => entity.OrganizationalStructure).ThenInclude(entity => entity.RootStructuringUnit).ThenInclude(entity => entity.OrganizationalUnit)
+                .Include(entity => entity.OrganizationalUnits).ThenInclude(entity => entity.OrganizationalStructuringUnit).ThenInclude(entity => entity.OrganizationalUnit)
+                .Include(entity => entity.OrganizationalUnits).ThenInclude(entity => entity.ChiefVacant).ThenInclude(entity => entity.WorkPosition)
+                .Include(entity => entity.OrganizationalUnits).ThenInclude(entity => entity.ChiefVacant).ThenInclude(entity => entity.SalaryStandard)
+                .AsSplitQuery();
         }
     }
 }

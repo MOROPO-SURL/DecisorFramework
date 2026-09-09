@@ -16,6 +16,10 @@
 
         public System.DateTime At { get; set; }
 
-        public System.Collections.Generic.ICollection<WorkforceOrganizationalUnity> OrganizationalUnities { get; set; }
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(OrganizationalStructureId))]
+        public Domain.Persistence.Entities.OrganizationalStructure OrganizationalStructure { get; set; }
+        public System.Guid OrganizationalStructureId { get; set; }
+
+        public System.Collections.Generic.ICollection<WorkforceOrganizationalUnit> OrganizationalUnits { get; set; }
     }
 }

@@ -10,7 +10,7 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
 
         public System.DateTime At { get; set; }
 
-        public ProductionOrderDisplayModel Plan { get; set; }
+        public ProductionOrderDisplayModel Order { get; set; }
 
         public decimal Amount { get; set; }
 
@@ -76,11 +76,11 @@ namespace MOROPO.Framework.Decisor.Production.Interop.API.Common.Models.Display
                 return model;
             }).ToArray();
 
-            if (entity.Plan != null)
+            if (entity.Order != null)
             {
-                Plan = new ProductionOrderDisplayModel();
+                Order = new ProductionOrderDisplayModel();
 
-                Plan.Import(entity.Plan);
+                Order.Import(entity.Order);
             }
 
             if (entity.UnitMeasurement != null)

@@ -16,42 +16,12 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display.Contra
 
         public int TimeAvailability { get; set; }
 
-        public ResearchAreaDisplayModel[] SpecializationResearchAreas { get; set; }
-
-        public ResearchAreaDisplayModel[] MasteryResearchAreas { get; set; }
-
-        public ResearchAreaDisplayModel[] DoctorateResearchAreas { get; set; }
-
         public virtual void Import(TEntity entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;
             Priority = entity.Priority;
             TimeAvailability = entity.TimeAvailability;
-            SpecializationResearchAreas = entity.ResearchAreaSpecializationBridges.Select(bridge =>
-            {
-                var model = new ResearchAreaDisplayModel();
-
-                model.Import(bridge.Stern);
-
-                return model;
-            }).ToArray();
-            MasteryResearchAreas = entity.ResearchAreaMasteryBridges.Select(bridge =>
-            {
-                var model = new ResearchAreaDisplayModel();
-
-                model.Import(bridge.Stern);
-
-                return model;
-            }).ToArray();
-            DoctorateResearchAreas = entity.ResearchAreaDoctorateBridges.Select(bridge =>
-            {
-                var model = new ResearchAreaDisplayModel();
-
-                model.Import(bridge.Stern);
-
-                return model;
-            }).ToArray();
 
             if (entity.Category != null)
             {

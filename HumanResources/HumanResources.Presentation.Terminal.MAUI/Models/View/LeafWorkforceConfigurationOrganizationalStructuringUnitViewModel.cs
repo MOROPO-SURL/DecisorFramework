@@ -1,0 +1,5 @@
+﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.View;
+
+public sealed class LeafWorkforceConfigurationOrganizationalStructuringUnitViewModel : Contract.AbstractWorkforceConfigurationOrganizationalStructuringUnitViewModel
+{
+}

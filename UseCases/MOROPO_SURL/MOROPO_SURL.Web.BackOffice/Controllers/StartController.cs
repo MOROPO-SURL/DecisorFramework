@@ -1,10 +1,9 @@
-﻿namespace MOROPO.Tool.Decisor.Web.BackOffice.Controllers
+﻿namespace MOROPO.Tool.Decisor.Web.BackOffice.Controllers;
+
+public class StartController : Microsoft.AspNetCore.Mvc.Controller
 {
-    public class StartController : Microsoft.AspNetCore.Mvc.Controller
+    public Microsoft.AspNetCore.Mvc.IActionResult Index()
     {
-        public Microsoft.AspNetCore.Mvc.IActionResult Index()
-        {
-            return Redirect("management/dashboard");
-        }
+        return RedirectToAction("index", "account", new { Area = "security" });
     }
 }

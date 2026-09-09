@@ -2,6 +2,7 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages"
     xmlns:decisorframework_governance_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Governance.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.GovernanceShell">
     <Shell.FlyoutBehavior>
@@ -33,25 +34,38 @@
             </Grid>
         </Grid>
     </Shell.FlyoutHeader>
+    <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
+    <ShellContent
+        Title="Panel de Control"
+        ContentTemplate="{DataTemplate local_pages:SimplifiedGovernanceDashboardPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9E7;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <MenuFlyoutItem Text="Operaciones" />
     <ShellContent
         Title="Reuniones"
+        Route="MeetingsManagePage"
         ContentTemplate="{DataTemplate decisorframework_governance_manage_pages:MeetingsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xFA5D;"
+                Glyph="{StaticResource MeetingMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Grupos Decisores"
+        Route="DecisionMakingGroupsManagePage"
         ContentTemplate="{DataTemplate decisorframework_governance_manage_pages:DecisionMakingGroupsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF848;"
+                Glyph="{StaticResource DecisionMakingGroupMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

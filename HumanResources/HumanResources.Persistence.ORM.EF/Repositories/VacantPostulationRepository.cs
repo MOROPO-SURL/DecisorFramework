@@ -11,14 +11,16 @@ namespace MOROPO.Framework.Decisor.HumanResources.Persistence.ORM.EF.Repositorie
         protected override System.Linq.IQueryable<Entities.VacantPostulation> GetQueryableDbSet()
         {
             return base.GetQueryableDbSet()
-                .Include(entity => entity.Staff).ThenInclude(entity => entity.Structure).ThenInclude(entity => entity.Identity)
+                .Include(entity => entity.Staff).ThenInclude(entity => entity.AdministrativeEntity).ThenInclude(entity => entity.Identity)
                 .Include(entity => entity.Vacant).ThenInclude(entity => entity.WorkPosition)
+                .Include(entity => entity.Vacant).ThenInclude(entity => entity.WorkforceOrganizationalUnit).ThenInclude(entity => entity.OrganizationalStructuringUnit).ThenInclude(entity => entity.OrganizationalUnit)
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
                 .Include(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.PostalContactItemBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Location)
                 .Include(entity => entity.OfficialPostalContactItem).ThenInclude(entity => entity.Location)
                 .Include(entity => entity.AlternativePostalContactItem).ThenInclude(entity => entity.Location)
-                .Include(entity => entity.Schooling)
-                .Include(entity => entity.DocumentBridges).ThenInclude(bridge => bridge.Stern);
+                .Include(entity => entity.DocumentBridges).ThenInclude(bridge => bridge.Stern)
+                .AsNoTracking()
+                .AsSplitQuery();
         }
     }
 }

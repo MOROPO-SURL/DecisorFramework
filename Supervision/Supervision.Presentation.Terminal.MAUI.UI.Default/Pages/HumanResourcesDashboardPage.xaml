@@ -28,6 +28,27 @@
                 </communitytoolkit_converters:BoolToObjectConverter.FalseObject>
             </communitytoolkit_converters:BoolToObjectConverter>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+            
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="BoolToColor" 
+                TrueObject="#45A049"            
+                FalseObject="#E65100" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="IsModuleReadeyToGlyph" 
+                TrueObject="&#xF790;"
+                FalseObject="&#xFCC1;" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="HasAnyToGlyph" 
+                TrueObject="&#xFE70;"
+                FalseObject="&#xF026;" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="IsModuleReadeyToTitle" 
+                TrueObject="Configuración mínima del módulo completada"
+                FalseObject="Se requiere configuración mínima del módulo" />
+            <communitytoolkit_converters:BoolToObjectConverter 
+                x:Key="BoolToTitle" 
+                TrueObject="Al menos una definida"
+                FalseObject="0 definidas" />
 
             <Style x:Key="CardHeaderSeparatorBoxViewStyle" TargetType="BoxView">
                 <Setter Property="Color" Value="DimGray" />
@@ -48,6 +69,204 @@
     <Grid>
         <ScrollView Orientation="Vertical">
             <VerticalStackLayout Spacing="4" Margin="8">
+                <Frame Margin="8">
+                    <VerticalStackLayout>
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontFamily="MaterialDesignIcons"
+                            FontSize="96"
+                            TextColor="{Binding IsModuleReady, Converter={StaticResource BoolToColor}}"
+                            Text="{Binding IsModuleReady, Converter={StaticResource IsModuleReadeyToGlyph}}" />
+                        <Label
+                            HorizontalTextAlignment="Center"
+                            FontSize="Medium"
+                            TextColor="{Binding IsModuleReady, Converter={StaticResource BoolToColor}}"
+                            Text="{Binding IsModuleReady, Converter={StaticResource IsModuleReadeyToTitle}}" />
+                        <BoxView
+                            Style="{StaticResource SeparatorBoxView}"
+                            Margin="0,24"
+                            HeightRequest="2" />
+                        <FlexLayout
+                            Wrap="Wrap"
+                            AlignItems="Start" AlignContent="Start">
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource WorkPositionKindMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Categorías Ocupacionales" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyWorkPositionKind, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyWorkPositionKind, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyWorkPositionKind, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyWorkPositionKind, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Administrar"
+                                    Clicked="GoWorkPositionKindsAdminSiteButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource WorkPositionMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Plazas Laborales" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyWorkPosition, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyWorkPosition, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyWorkPosition, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyWorkPosition, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Gestionar"
+                                    Clicked="GoWorkPositionsManageSiteButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource SalaryStandardMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Escalas Salariales" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnySalaryStandard, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnySalaryStandard, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnySalaryStandard, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnySalaryStandard, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Gestionar"
+                                    Clicked="GoSalaryStandardsManageSiteButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource WorkforceMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Estructuras de Plantilla" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyWorkforce, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyWorkforce, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyWorkforce, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyWorkforce, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Gestionar"
+                                    Clicked="GoWorkforcesManageSiteButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource StaffMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Configuraciones de Plantilla" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyStaff, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyStaff, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyStaff, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyStaff, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Gestionar"
+                                    Clicked="GoStaffsManageSiteManagePageButton_Clicked" />
+                            </VerticalStackLayout>
+                            <VerticalStackLayout
+                                WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel LargeContainerColumn=3, SmallContainerColumn=6}}"
+                                Margin="4,8">
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="48"
+                                    Text="{StaticResource OcupationMaterialDesignGlyphIconId}" />
+                                <Label
+                                    HorizontalTextAlignment="Center"
+                                    FontAttributes="Bold"
+                                    Text="Personal en Plantilla" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    FontFamily="MaterialDesignIcons"
+                                    FontSize="36"
+                                    TextColor="{Binding HasAnyOcupation, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyOcupation, Converter={StaticResource HasAnyToGlyph}}" />
+                                <Label
+                                    HorizontalOptions="Center"
+                                    TextColor="{Binding HasAnyOcupation, Converter={StaticResource BoolToColor}}"
+                                    Text="{Binding HasAnyOcupation, Converter={StaticResource BoolToTitle}}" />
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="0,8,0,0"
+                                    Text="Gestionar"
+                                    Clicked="GoOcupationsManageSiteManagePageButton_Clicked" />
+                            </VerticalStackLayout>
+                        </FlexLayout>
+                    </VerticalStackLayout>
+                </Frame>
+                
                 <FlexLayout
                     Wrap="Wrap"
                     AlignItems="Start"

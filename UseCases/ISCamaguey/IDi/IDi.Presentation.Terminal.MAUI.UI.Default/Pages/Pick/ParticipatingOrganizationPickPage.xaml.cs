@@ -5,8 +5,6 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class ParticipatingOrganizationPickPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel, Models.Page.Pick.ParticipatingOrganizationPickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 144;
-
     private System.Action<Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel> pickCompleteAction;
 
     public ParticipatingOrganizationPickPage(System.Action<Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel> pickCompleteAction)
@@ -18,18 +16,15 @@ public partial class ParticipatingOrganizationPickPage : Framework.Decisor.Core.
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth => 420;
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.PARTICIPATING_ORGANIZATION_DEFAULT_CARD_VIEW_WIDTH;
+
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.PARTICIPATING_ORGANIZATION_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override void DisposeUnmanagementResources()
     {
         base.DisposeUnmanagementResources();
 
         pickCompleteAction = null;
-    }
-
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
     }
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel>> FetchItemsAsync()

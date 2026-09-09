@@ -8,14 +8,13 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
+                <fwrk_core_presentation_dictionary_resources:SharedStylesDictionary  x:Name="shared" />
+
+                <uraniumui_material:StyleResource ColorsOverride="{Reference shared}" BasedOn="{Reference shared}" />
+
                 <ResourceDictionary Source="Resources/Styles/Values.xaml" />
-                <ResourceDictionary x:Name="appColors" Source="Resources/Styles/Colors.xaml" />
-
-                <ResourceDictionary x:Name="appStyles" Source="Resources/Styles/Styles.xaml" />
-
-                <uraniumui_material:StyleResource ColorsOverride="{Reference appColors}" BasedOn="{Reference appStyles}" />
-
-                <fwrk_core_presentation_dictionary_resources:ExplicitStylesDictionary />
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
             </ResourceDictionary.MergedDictionaries>
 
             <Style x:Key="LogoImageViewStyle" TargetType="Image">

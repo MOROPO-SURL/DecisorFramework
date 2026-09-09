@@ -14,7 +14,7 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal.Providers
         public void Reset()
         {
 #if DEBUG
-            var baseUrl = Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.Android ? "https://192.168.64.21:7208" : "https://localhost:7208";
+            var baseUrl = Microsoft.Maui.Devices.DeviceInfo.Platform == Microsoft.Maui.Devices.DevicePlatform.Android ? "https://10.0.2.2:7208" : "https://localhost:7208";
 #else
             var baseUrl = "http://192.168.0.12";
 #endif

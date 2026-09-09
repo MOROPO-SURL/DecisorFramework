@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<fwrk_core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Constants"
+    xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common"
+    xmlns:fwrk_core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_ui_behaviors="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Behaviors;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.InternalResearcherProjectParticipationConfigurationPage"
+    x:TypeArguments="interop_common_display_models:InternalResearcherProjectParticipationDisplayModel,interop_common_display_models:InternalResearcherProjectParticipationDisplayModel,presentation_configuration_page_models:InternalResearcherProjectParticipationConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:InternalResearcherProjectParticipationConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <fwrk_core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <fwrk_core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <fwrk_core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+
+            <Array Type="{x:Type x:Int32}" x:Key="TimeAvailabilityValues">
+                <x:Int32>1</x:Int32>
+                <x:Int32>2</x:Int32>
+                <x:Int32>3</x:Int32>
+                <x:Int32>4</x:Int32>
+                <x:Int32>5</x:Int32>
+                <x:Int32>6</x:Int32>
+                <x:Int32>7</x:Int32>
+                <x:Int32>8</x:Int32>
+                <x:Int32>9</x:Int32>
+                <x:Int32>10</x:Int32>
+                <x:Int32>11</x:Int32>
+                <x:Int32>12</x:Int32>
+                <x:Int32>13</x:Int32>
+                <x:Int32>14</x:Int32>
+                <x:Int32>15</x:Int32>
+                <x:Int32>16</x:Int32>
+                <x:Int32>17</x:Int32>
+                <x:Int32>18</x:Int32>
+                <x:Int32>19</x:Int32>
+                <x:Int32>20</x:Int32>
+            </Array>
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ScrollView Orientation="Vertical">
+        <VerticalStackLayout Spacing="4" Padding="8">
+            <FlexLayout 
+                Wrap="Wrap"
+                AlignItems="Start" AlignContent="Start">
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=5, LargeContainerColumn=8, MediumContainerColumn=10, SmallContainerColumn=12}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Investigador" />
+                    <ContentView 
+                        IsVisible="{Binding Researcher, Converter={StaticResource IsNotNullConverter}}"
+                        HeightRequest="{Static local_constants:CardViewHeightConstants.INTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_HEIGHT}">
+                        <local_card_views:InternalResearcherDefaultCardView BindingContext="{Binding Researcher}" />
+                    </ContentView>
+                    <Button
+                        HorizontalOptions="Start"
+                        Text="Seleccionar ..."
+                        Clicked="ResearcherPickButton_Clicked" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:InternalResearcherProjectParticipationConfigurationPageModel.ResearcherValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:InternalResearcherProjectParticipationConfigurationPageModel.ResearcherValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2,ExtraLargeContainerColumn=3, LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=6}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha de inicio" />
+                    <DatePicker Date="{Binding StartAt}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2,ExtraLargeContainerColumn=3, LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=6}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha de fin" />
+                    <DatePicker Date="{Binding EndAt}" />
+                </VerticalStackLayout>
+                <VerticalStackLayout 
+                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2,ExtraLargeContainerColumn=3, LargeContainerColumn=3, MediumContainerColumn=6, SmallContainerColumn=6}}"
+                    Margin="4"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fondo de tiempo" />
+                    <StackLayout Orientation="Horizontal" Spacing="6">
+                        <Picker 
+                            HorizontalOptions="FillAndExpand"
+                            SelectedItem="{Binding TimeAvailability}" 
+                            ItemsSource="{StaticResource TimeAvailabilityValues}" />
+                        <Label 
+                            VerticalOptions="Center"
+                            Text="Horas" />
+                    </StackLayout>
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:ExternalResearcherProjectParticipationConfigurationPageModel.TimeAvailabilityValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:ExternalResearcherProjectParticipationConfigurationPageModel.TimeAvailabilityValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
+                </VerticalStackLayout>
+            </FlexLayout>
+        </VerticalStackLayout>
+    </ScrollView>
+</fwrk_core_ui_base_pages:ConfigurationBaseContentPage>

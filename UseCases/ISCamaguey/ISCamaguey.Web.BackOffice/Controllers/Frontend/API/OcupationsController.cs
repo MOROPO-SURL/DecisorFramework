@@ -12,16 +12,16 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
     [Microsoft.AspNetCore.Mvc.ApiController]
     public class OcupationsController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractEntityAPIManagementFilteredController<Ocupation, System.Guid, OcupationInputModel, OcupationDisplayModel, OcupationFilterModel>
     {
-        private readonly IEntityRepository<NamingResolution, System.Guid> namingResolutionRepository;
+        private readonly IEntityRepository<DesignationResolution, System.Guid> designationResolutionRepository;
         private readonly IEntityRepository<Employee, System.Guid> employeeRepository;
         private readonly IEntityRepository<DecisionMakingGroup, System.Guid> decisionMakingGroupRepository;
         private readonly IEntityRepository<Meeting, System.Guid> meetingRepository;
         private readonly IEntityRepository<Agreement, System.Guid> agreementRepository;
         private readonly IEntityRepository<Staff, System.Guid> staffRepository;
 
-        public OcupationsController(IEntityRepository<Staff, System.Guid> staffRepository, IEntityRepository<Agreement, System.Guid> agreementRepository, IEntityRepository<Meeting, System.Guid> meetingRepository, IEntityRepository<DecisionMakingGroup, System.Guid> decisionMakingGroupRepository, IEntityRepository<Employee, System.Guid> employeeRepository, IEntityRepository<NamingResolution, System.Guid> namingResolutionRepository, IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
+        public OcupationsController(IEntityRepository<Staff, System.Guid> staffRepository, IEntityRepository<Agreement, System.Guid> agreementRepository, IEntityRepository<Meeting, System.Guid> meetingRepository, IEntityRepository<DecisionMakingGroup, System.Guid> decisionMakingGroupRepository, IEntityRepository<Employee, System.Guid> employeeRepository, IEntityRepository<DesignationResolution, System.Guid> designationResolutionRepository, IEntityRepository<Ocupation, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<OcupationsController> localizer, Microsoft.Extensions.Logging.ILogger<OcupationsController> logger) : base(repository, localizer, logger)
         {
-            this.namingResolutionRepository = namingResolutionRepository;
+            this.designationResolutionRepository = designationResolutionRepository;
             this.employeeRepository = employeeRepository;
             this.decisionMakingGroupRepository = decisionMakingGroupRepository;
             this.meetingRepository = meetingRepository;
@@ -85,7 +85,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
                             Archived = true,
                             Name = "Comité Automático de Ocupación Simplificada de Plazas",
                             Priority = 100,
-                            StructureId = staff.StructureId,
+                            AdministrativeEntityId = staff.AdministrativeEntityId,
                             LeaderId = model.ContactId                            
                         }, User.Identity.Name, false);
                     }
@@ -111,34 +111,34 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Controllers.Frontend.API
                 }, User.Identity.Name, false);
             }
 
-            var namingResolutionIndex = namingResolutionRepository.Count() + 1;
+            var resolutionIndex = designationResolutionRepository.Count() + 1;
 
-            var namingResolution = namingResolutionRepository.Add(new NamingResolution
+            var resolution = designationResolutionRepository.Add(new DesignationResolution
             {
                 Id = System.Guid.NewGuid(),
                 AgreementId = agreement.Id,
                 ContactId = model.ContactId,
-                Index = namingResolutionIndex,
+                Index = resolutionIndex,
                 At = now,
                 Year = now.Year,
                 ConcretedAt = now,
                 StaffId = model.StaffId,
                 VacantId = model.VacantId,
-                Summary = "Resolución de nombramiento para la ocupación simplificada de plaza"
+                Summary = "Resolución de designación para la ocupación simplificada de plaza"
             }, User.Identity.Name, false);
 
-            var employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == namingResolution.ContactId.Value);
+            var employee = employeeRepository.FindOneBy(_entity => _entity.ContactId == resolution.ContactId);
 
             entity.StaffId = model.StaffId;
-            entity.Contract = new NamingEmploymentContract
+            entity.Contract = new DesignationEmploymentContract
             {
-                Index = namingResolutionIndex,
+                Index = resolutionIndex,
                 Year = now.Year,
                 StarAt = now,
-                Objective = $"Contratación generada a partir de la resolución de nombramiento \"{namingResolution.Id}/{namingResolution.Year}\"",
+                Objective = $"Contratación generada a partir de la resolución de nombramiento \"{resolution.Id}/{resolution.Year}\"",
                 StaffId = model.StaffId,
                 VacantId = model.VacantId,
-                ResolutionId = namingResolution.Id
+                DesignationResolutionId = resolution.Id
             };
 
             if (employee != null)

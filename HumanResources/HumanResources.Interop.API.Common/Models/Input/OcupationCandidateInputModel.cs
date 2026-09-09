@@ -1,9 +1,7 @@
 ﻿namespace MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input
 {
-    public class OcupationCandidateInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<Persistence.Entities.OcupationCandidate, System.Guid>
+    public class OcupationCandidateInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<Persistence.Entities.OcupationCandidate, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         public System.DateTime InterviewAt { get; set; }
 
         public System.Guid PostulationId { get; set; }
@@ -32,7 +30,7 @@
 
         public Core.Interop.API.Common.Models.Input.DocumentInputModel RawModelDocument { get; set; }
 
-        public Persistence.Entities.OcupationCandidate Export()
+        public override Persistence.Entities.OcupationCandidate Export()
         {
             var entity = new Persistence.Entities.OcupationCandidate { Id = Id };
 
@@ -41,12 +39,7 @@
             return entity;
         }
 
-        public void Import(Persistence.Entities.OcupationCandidate entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(Persistence.Entities.OcupationCandidate entity)
+        public override void Mergue(Persistence.Entities.OcupationCandidate entity)
         {
             entity.InterviewAt = InterviewAt;
             entity.Description = Description;

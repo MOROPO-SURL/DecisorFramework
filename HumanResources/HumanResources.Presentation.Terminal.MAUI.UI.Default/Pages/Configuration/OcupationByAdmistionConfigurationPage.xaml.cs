@@ -22,6 +22,7 @@ public partial class OcupationByAdmistionConfigurationPage : Core.Presentation.T
         var model = new OcupationInputModel
         {
             Id = System.Guid.NewGuid(),
+            OcupationMode = Persistence.Enumerations.VacantOcupationMode.Admision,
             AdmisionPropousalId = ConcreteBindingContext.AdmitionPropousal.Id,
             StarAt = ConcreteBindingContext.StartAt,
             DurationUnitCount = ConcreteBindingContext.IsDetermiteDuration ? ConcreteBindingContext.Duration : null,

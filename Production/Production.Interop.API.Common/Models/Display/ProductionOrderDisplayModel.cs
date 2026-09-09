@@ -20,7 +20,7 @@
 
         public ElaborationDisplayModel Elaboration { get; set; }
 
-        public ProductionDisplayModel Production { get; set; }
+        public System.DateTime? ProductionAt { get; set; }
 
         public virtual void Import(Persistence.Entities.ProductionOrder entity)
         {
@@ -50,6 +50,11 @@
                 Elaboration = new ElaborationDisplayModel();
 
                 Elaboration.Import(entity.Elaboration);
+            }
+
+            if (entity.Production != null)
+            {
+                ProductionAt = entity.Production.At;
             }
         }
     }

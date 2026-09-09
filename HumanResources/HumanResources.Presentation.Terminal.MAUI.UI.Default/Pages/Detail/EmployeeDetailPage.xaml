@@ -29,6 +29,111 @@
             </Style>
 
             <local_datatemplate_selectors:EmploymentContractTemplateSelector x:Key="EmploymentContractTemplateSelector">
+                <local_datatemplate_selectors:EmploymentContractTemplateSelector.DesignationContractDataTemplate>
+                    <DataTemplate x:DataType="interop_common_display_models:DesignationEmploymentContractDisplayModel">
+                        <Frame Style="{StaticResource OcupationOverviewFrameStyle}">
+                            <VerticalStackLayout Padding="8">
+                                <Label
+                                    ToolTipProperties.Text="{Binding Vacant.WorkPosition.Name}"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding Vacant.WorkPosition.Name}"
+                                    FontSize="Medium" />
+                                <Label
+                                    ToolTipProperties.Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}"
+                                    LineBreakMode="TailTruncation"
+                                    Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}" />
+                                <Label
+                                    ToolTipProperties.Text="{Binding Staff.AdministrativeEntity.Identity}"
+                                    LineBreakMode="TailTruncation"
+                                    FontAttributes="Bold"
+                                    Text="{Binding Staff.AdministrativeEntity.Identity}" />
+                                <Grid 
+                                    Margin="0,8,0,0"
+                                    ColumnSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition Width="Auto" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <BoxView 
+                                        Grid.Column="0"
+                                        VerticalOptions="Center"
+                                        HeightRequest="1" 
+                                        Color="DimGray" />
+                                    <Label
+                                        Grid.Column="1"
+                                        TextColor="DimGray"
+                                        Text="Información relativa a la contratación" />
+                                    <BoxView 
+                                        Grid.Column="2"
+                                        VerticalOptions="Center"
+                                        HeightRequest="1" 
+                                        Color="DimGray" />
+                                </Grid>
+                                <FlexLayout 
+                                    Wrap="Wrap"
+                                    AlignItems="Start" AlignContent="Start">
+                                    <VerticalStackLayout
+                                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=4}}"                        
+                                        Margin="4">
+                                        <Label
+                                            Margin="0"
+                                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                                            Text="Contracto" />
+                                        <Label
+                                            Style="{StaticResource ValuePropertyLabelStyle}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding Index}" />
+                                                    <Span Text=" / " />
+                                                    <Span Text="{Binding Year}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout
+                                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=4}}"                        
+                                        Margin="4">
+                                        <Label
+                                            Margin="0"
+                                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                                            Text="Inicio" />
+                                        <Label
+                                            Style="{StaticResource ValuePropertyLabelStyle}"
+                                            Text="{Binding StarAt, StringFormat='{0:dd MMM yyy}'}" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout
+                                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel SmallContainerColumn=4}}"                        
+                                        Margin="4">
+                                        <Label
+                                            Margin="0"
+                                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                                            Text="Duración" />
+                                        <Label
+                                            Style="{StaticResource ValuePropertyLabelStyle}">
+                                            <Label.FormattedText>
+                                                <FormattedString>
+                                                    <Span Text="{Binding DurationUnitCount, TargetNullValue='Indeterminada'}" />
+                                                    <Span Text=" " />
+                                                    <Span Text="{Binding DurationUnitMeasureKind}" />
+                                                </FormattedString>
+                                            </Label.FormattedText>
+                                        </Label>
+                                    </VerticalStackLayout>
+                                </FlexLayout>
+                                <VerticalStackLayout Margin="8">
+                                    <Label
+                                        Margin="0"
+                                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                                        Text="Objeto" />
+                                    <Label
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        Text="{Binding Objective}" />
+                                </VerticalStackLayout>                                
+                            </VerticalStackLayout>
+                        </Frame>
+                    </DataTemplate>
+                </local_datatemplate_selectors:EmploymentContractTemplateSelector.DesignationContractDataTemplate>
                 <local_datatemplate_selectors:EmploymentContractTemplateSelector.NamingContractDataTemplate>
                     <DataTemplate x:DataType="interop_common_display_models:NamingEmploymentContractDisplayModel">
                         <Frame Style="{StaticResource OcupationOverviewFrameStyle}">
@@ -39,14 +144,14 @@
                                     Text="{Binding Vacant.WorkPosition.Name}"
                                     FontSize="Medium" />
                                 <Label
-                                    ToolTipProperties.Text="{Binding WorkforceOrganizationalUnity.OrganizationalUnity.Name}"
+                                    ToolTipProperties.Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}"
                                     LineBreakMode="TailTruncation"
-                                    Text="{Binding WorkforceOrganizationalUnity.OrganizationalUnity.Name}" />
+                                    Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}" />
                                 <Label
-                                    ToolTipProperties.Text="{Binding Staff.Structure.Identity}"
+                                    ToolTipProperties.Text="{Binding Staff.AdministrativeEntity.Identity}"
                                     LineBreakMode="TailTruncation"
                                     FontAttributes="Bold"
-                                    Text="{Binding Staff.Structure.Identity}" />
+                                    Text="{Binding Staff.AdministrativeEntity.Identity}" />
                                 <Grid 
                                     Margin="0,8,0,0"
                                     ColumnSpacing="8">
@@ -144,14 +249,14 @@
                                     Text="{Binding Vacant.WorkPosition.Name}"
                                     FontSize="Medium" />
                                 <Label
-                                    ToolTipProperties.Text="{Binding WorkforceOrganizationalUnity.OrganizationalUnity.Name}"
+                                    ToolTipProperties.Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}"
                                     LineBreakMode="TailTruncation"
-                                    Text="{Binding WorkforceOrganizationalUnity.OrganizationalUnity.Name}" />
+                                    Text="{Binding WorkforceOrganizationalUnit.OrganizationalStructuringUnit.OrganizationalUnit.Name}" />
                                 <Label
-                                    ToolTipProperties.Text="{Binding Staff.Structure.Identity}"
+                                    ToolTipProperties.Text="{Binding Staff.AdministrativeEntity.Identity}"
                                     LineBreakMode="TailTruncation"
                                     FontAttributes="Bold"
-                                    Text="{Binding Staff.Structure.Identity}" />
+                                    Text="{Binding Staff.AdministrativeEntity.Identity}" />
                                 <Grid 
                                     Margin="0,8,0,0"
                                     ColumnSpacing="8">
@@ -189,7 +294,7 @@
                                             Style="{StaticResource ValuePropertyLabelStyle}">
                                             <Label.FormattedText>
                                                 <FormattedString>
-                                                    <Span Text="{Binding Id}" />
+                                                    <Span Text="{Binding Index}" />
                                                     <Span Text=" / " />
                                                     <Span Text="{Binding Year}" />
                                                 </FormattedString>

@@ -1,7 +1,10 @@
-﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Pick
+﻿namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Pick;
+
+public class VacantPickPageModel : Caney.MVVM.Core.Models.Page.BasePageModel
 {
-    public class VacantPickPageModel : Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractListEntityPageModel<View.VacantPickOrganizationalUnityViewModel>
-    {
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.StaffDisplayModel> AvailableStaffs { get; set; } = [];
-    }
+    private View.TreeVacantPickOrganizationalStructuringUnitViewModel rootTreeVacantPickOrganizationalStructuringUnitViewModel;
+
+    public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.StaffDisplayModel> AvailableStaffs { get; set; } = [];
+
+    public View.TreeVacantPickOrganizationalStructuringUnitViewModel RootTreeVacantPickOrganizationalStructuringUnitViewModel { get => rootTreeVacantPickOrganizationalStructuringUnitViewModel; set => SetProperty(ref rootTreeVacantPickOrganizationalStructuringUnitViewModel, value); }
 }

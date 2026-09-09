@@ -2,6 +2,7 @@
 <Shell 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:fwrk_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:idi_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default"
     xmlns:idi_list_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.IDiShell">
@@ -14,7 +15,7 @@
                 Aspect="AspectFill"
                 Source="research.jpg" />
             <BoxView
-                BackgroundColor="Black"
+                Color="Black"
                 Opacity="0.5" />
             <Grid
                 Padding="16">
@@ -48,8 +49,8 @@
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
-        Title="Áreas de Investigación"
-        ContentTemplate="{DataTemplate idi_manage_pages:ResearchAreasManagePage}">
+        Title="Áreas del conocimiento"
+        ContentTemplate="{DataTemplate fwrk_domain_manage_pages:KnowledgeAreasManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -68,12 +69,12 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Proyectos (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Proyectos"
+        ContentTemplate="{DataTemplate idi_manage_pages:ProjectsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF76F;"
+                Glyph="&#xF00AA;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -83,7 +84,7 @@
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF00AA;"
+                Glyph="&#xF030E;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -132,6 +133,26 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Configuración" IsEnabled="False" />
+    <ShellContent
+        Title="Tipos de Programa"
+        ContentTemplate="{DataTemplate idi_list_pages:ProgramKindsListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF030F;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Categorías de Proyecto"
+        ContentTemplate="{DataTemplate idi_list_pages:ProjectCategoriesListPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF00AB;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <ShellContent
         Title="Categorías Científicas"
         ContentTemplate="{DataTemplate idi_list_pages:ResearcherCategoriesListPage}">

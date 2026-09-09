@@ -6,9 +6,9 @@ namespace MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.Validators
     {
         public UnitMeasurementConfigurationValidator()
         {
-            RuleFor(model => model.Name).NotNull().NotEmpty();
+            RuleFor(model => model.Name).NotNull().NotEmpty().WithName("Nombre");
 
-            RuleFor(model => model.Symbol).NotNull().NotEmpty();
+            RuleFor(model => model.Symbol).NotNull().NotEmpty().WithName("Símbolo");
         }
     }
 }

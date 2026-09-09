@@ -1,5 +1,4 @@
-﻿
-namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
+﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 {
     public class ProjectCategoryDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.ProjectCategory, System.Guid>
     {
@@ -7,6 +6,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public bool Enabled { get; set; }
 
+        [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -15,8 +15,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public int Priority { get; set; }
 
-         public virtual void Import(Persistence.Entities.ProjectCategory entity)
-         {
+        public virtual void Import(Persistence.Entities.ProjectCategory entity)
+        {
             Id = entity.Id;
             Enabled = entity.Enabled;
             Name = entity.Name;
@@ -24,5 +24,5 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
             At = entity.At;
             Priority = entity.Priority;
         }
-}
+    }
 }

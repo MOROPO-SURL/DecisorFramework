@@ -5,11 +5,12 @@
         public System.Guid Id { get; set; }
 
         [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(512)]
         public string Title { get; set; }
 
         public int Index { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Required]
+        [System.ComponentModel.DataAnnotations.MaxLength(2048)]
         public string Description { get; set; }
 
         public Persistence.Entities.ProgramExpectResult Export()

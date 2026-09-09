@@ -2,7 +2,6 @@ using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
-using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
@@ -63,7 +62,7 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
         ConcreteBindingContext.IsBusy = true;
 
         ConcreteBindingContext.AvailableStaffs.Clear();
-        ConcreteBindingContext.Items.Clear();
+        ConcreteBindingContext.RootTreeVacantPickOrganizationalStructuringUnitViewModel = null;
 
         var apiConnectClient = new Interop.API.Connect.Clients.StaffsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
@@ -108,8 +107,6 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
 
         var staff = ConcreteBindingContext.AvailableStaffs[StaffPicker.SelectedIndex];
 
-        ConcreteBindingContext.Items.Clear();
-
         System.Threading.Tasks.Task.Run(async () =>
         {
             var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
@@ -121,12 +118,7 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
 
             var ocupations = new System.Collections.Generic.List<Interop.API.Common.Models.Display.OcupationDisplayModel>(await ocupationsAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.OcupationFilterModel { StaffId = staff.Id, WorkforceId = staff.MainWorkforce.Id }));
 
-            var _models = targetWorkforce.OrganizationalUnities.ToVacantPickOrganizationalUnityViewModelChildren(ocupations, vacantOcupationModes);
-
-            foreach (var _model in _models)
-            {
-                Dispatcher.Dispatch(() => ConcreteBindingContext.Items.Add(_model));
-            }
+            return targetWorkforce.OrganizationalStructure.RootStructuringUnit.ToConfigurationTreeViewModel([.. targetWorkforce.OrganizationalUnits], ocupations, vacantOcupationModes, null);
         }).ContinueWith(task =>
         {
             Dispatcher.Dispatch(() =>
@@ -134,6 +126,10 @@ public partial class VacantPickPage : Caney.MVVM.Core.Pages.ContentPage
                 if (task.Exception != null || task.IsCanceled)
                 {
                     Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Core.Presentation.Terminal.MAUI.Helpers.Facade.IExceptionHandlingHelperFacade>().HandleException(task.Exception, this);
+                }
+                else
+                {
+                    ConcreteBindingContext.RootTreeVacantPickOrganizationalStructuringUnitViewModel = task.Result;
                 }
 
                 ConcreteBindingContext.IsBusy = false;

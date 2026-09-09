@@ -12,5 +12,7 @@
         public bool OnEditionMode { get; private set; }
 
         public FluentValidation.Results.ValidationResult ValidationResult { get => validationResult; set => SetProperty(ref validationResult, value); }
+
+        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.UserDisplayModel> NotificationUsers { get; private set; } = [];
     }
 }

@@ -1,5 +1,6 @@
 ﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+using MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Display;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -13,7 +14,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
 
         public System.Guid ContactId { get; set; }
 
-        public List<Display.ResearchAreaDisplayModel> ResearchAreas { get; set; } = new List<Display.ResearchAreaDisplayModel>();
+        public List<KnowledgeAreaDisplayModel> KnowledgeAreas { get; set; } = new List<KnowledgeAreaDisplayModel>();
 
         public List<DocumentInputModel> EditionDocuments { get; set; } = new List<DocumentInputModel>();
         public List<DocumentInputModel> IncomingDocuments { get; set; } = new List<DocumentInputModel>();
@@ -43,8 +44,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
                 entity.ContactId = ContactId;
             }
 
-            entity.ResearchAreaBridges.Clear();
-            entity.ResearchAreaBridges = ResearchAreas.Select(model => new Persistence.Entities.FinancierResearchAreaBridge { ProwId = entity.Id, SternId = model.Id }).ToList();
+            entity.KnowledgeAreaBridges.Clear();
+            entity.KnowledgeAreaBridges = KnowledgeAreas.Select(model => new Persistence.Entities.FinancierKnowledgeAreaBridge { ProwId = entity.Id, SternId = model.Id }).ToList();
         }
     }
 }

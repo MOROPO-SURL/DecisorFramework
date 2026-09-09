@@ -5,22 +5,18 @@ namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.
 
 public partial class OcupationCandidatePickPage : Core.Presentation.Terminal.MAUI.UI.Pages.Base.ListBaseContentPage<Interop.API.Common.Models.Display.OcupationCandidateDisplayModel, Models.Page.Pick.OcupationCandidatePickPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 208;
-
     private System.Action<Interop.API.Common.Models.Display.OcupationCandidateDisplayModel> pickCompleteAction;
-    private readonly bool isForNamingResolution;
 
-    public OcupationCandidatePickPage(bool isForNamingResolution, System.Action<Interop.API.Common.Models.Display.OcupationCandidateDisplayModel> pickCompleteAction)
+    public OcupationCandidatePickPage(System.Action<Interop.API.Common.Models.Display.OcupationCandidateDisplayModel> pickCompleteAction)
     {
         InitializeComponent();
 
         this.pickCompleteAction = pickCompleteAction;
-        this.isForNamingResolution = isForNamingResolution;
     }
 
     protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth => 420;
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.OCUPATION_CANDIDATE_DEFAULT_CARD_VIEW_WIDTH;
 
     protected override void DisposeUnmanagementResources()
     {
@@ -29,16 +25,13 @@ public partial class OcupationCandidatePickPage : Core.Presentation.Terminal.MAU
         pickCompleteAction = null;
     }
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.OCUPATION_CANDIDATE_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.OcupationCandidateDisplayModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.OcupationCandidatesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
-        return apiConnectClient.FilterPaginateAsync(new Interop.API.Common.Models.Filter.OcupationCandidateFilterModel { VacantOcupationMode = isForNamingResolution ? Persistence.Enumerations.VacantOcupationMode.Hybrid : Persistence.Enumerations.VacantOcupationMode.Admision }, CurrentItemsPageNumber, CurrentItemsPageLimit);
+        return apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
     }
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)

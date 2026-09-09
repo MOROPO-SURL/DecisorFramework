@@ -6,7 +6,7 @@ public class StaffConfigurationValidator : AbstractValidator<Models.Page.Configu
 {
     public StaffConfigurationValidator()
     {
-        RuleFor(model => model.Structure)
+        RuleFor(model => model.AdministrativeEntity)
             .NotNull()
             .WithName("Entidad Administrativa");
 
@@ -14,8 +14,8 @@ public class StaffConfigurationValidator : AbstractValidator<Models.Page.Configu
             .NotNull()
             .WithName("Principal Estructura de Plantilla");
 
-        RuleFor(model => model.WorkingDayCount)
-            .InclusiveBetween(1, 28)
+        RuleFor(model => model.WorkingWeekHourCount)
+            .InclusiveBetween(1, 44)
             .WithName("Días laborables");
     }
 }

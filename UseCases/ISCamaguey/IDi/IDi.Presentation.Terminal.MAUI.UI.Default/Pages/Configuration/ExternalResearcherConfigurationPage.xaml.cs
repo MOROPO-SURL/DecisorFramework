@@ -52,11 +52,8 @@ public partial class ExternalResearcherConfigurationPage : Framework.Decisor.Cor
             Priority = ConcreteBindingContext.Priority,
             CategoryId = ConcreteBindingContext.Category?.Id,
             TeachingCategoryId = ConcreteBindingContext.TeachingCategory?.Id,
-            SpecializationResearchAreas = [.. ConcreteBindingContext.SpecializationResearchAreas],
             TimeAvailability = ConcreteBindingContext.TimeAvailability,
-            Salary = ConcreteBindingContext.Salary,
-            MasteryResearchAreas = [.. ConcreteBindingContext.MasteryResearchAreas],
-            DoctorateResearchAreas = [.. ConcreteBindingContext.DoctorateResearchAreas]
+            Salary = ConcreteBindingContext.Salary
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -77,10 +74,7 @@ public partial class ExternalResearcherConfigurationPage : Framework.Decisor.Cor
             CategoryId = ConcreteBindingContext.Category?.Id,
             TeachingCategoryId = ConcreteBindingContext.TeachingCategory?.Id,
             TimeAvailability = ConcreteBindingContext.TimeAvailability,
-            Salary = ConcreteBindingContext.Salary,
-            SpecializationResearchAreas = [.. ConcreteBindingContext.SpecializationResearchAreas],
-            MasteryResearchAreas = [.. ConcreteBindingContext.MasteryResearchAreas],
-            DoctorateResearchAreas = [.. ConcreteBindingContext.DoctorateResearchAreas]
+            Salary = ConcreteBindingContext.Salary
         };
 
         await apiConnectClient.EditAsync(model);
@@ -113,79 +107,6 @@ public partial class ExternalResearcherConfigurationPage : Framework.Decisor.Cor
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.PersonContactPickPage(ContactPickComplete_Callback)));
     }
 
-    private void ResearchAreaDetailButton_Clicked(object sender, System.EventArgs eventArgs)
-    {
-        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ResearchAreaDisplayModel;
-
-        this.NavigationPushModalPageAsync(new Detail.ResearchAreaDetailPage(target, null));
-    }
-
-    private void SpecializationResearchAreaAgregationButton_Clicked(object sender, System.EventArgs e)
-    {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ResearchAreaPickPage(SpecializationResearchAreaPickComplete_Callback)));
-    }
-
-    private void SpecializationResearchAreaRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
-    {
-        DisplayAlert("Confirmación", "Está seguro que desea retirar esta especialización en área de investigación?", "Confirmar", "Cancelar").ContinueWith(task =>
-        {
-            if (!task.Result) return;
-
-            Dispatcher.Dispatch(() =>
-            {
-                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ResearchAreaDisplayModel;
-
-                ConcreteBindingContext.SpecializationResearchAreas.Remove(target);
-
-                hasChangesFlag = true;
-            });
-        });
-    }
-
-    private void MasteryResearchAreaAgregationButton_Clicked(object sender, System.EventArgs e)
-    {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ResearchAreaPickPage(MasteryResearchAreaPickComplete_Callback)));
-    }
-
-    private void MasteryResearchAreaRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
-    {
-        DisplayAlert("Confirmación", "Está seguro que desea retirar este master en área de investigación?", "Confirmar", "Cancelar").ContinueWith(task =>
-        {
-            if (!task.Result) return;
-
-            Dispatcher.Dispatch(() =>
-            {
-                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ResearchAreaDisplayModel;
-
-                ConcreteBindingContext.MasteryResearchAreas.Remove(target);
-
-                hasChangesFlag = true;
-            });
-        });
-    }
-
-    private void DoctorateResearchAreaAgregationButton_Clicked(object sender, System.EventArgs e)
-    {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ResearchAreaPickPage(DoctorateResearchAreaPickComplete_Callback)));
-    }
-
-    private void DoctorateResearchAreaRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
-    {
-        DisplayAlert("Confirmación", "Está seguro que desea retirar este doctorado en área de investigación?", "Confirmar", "Cancelar").ContinueWith(task =>
-        {
-            if (!task.Result) return;
-
-            Dispatcher.Dispatch(() =>
-            {
-                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ResearchAreaDisplayModel;
-
-                ConcreteBindingContext.DoctorateResearchAreas.Remove(target);
-
-                hasChangesFlag = true;
-            });
-        });
-    }
-
     private void ParticipatingOrganizationPickComplete_Callback(Interop.API.Common.Models.Display.ParticipatingOrganizationDisplayModel model)
     {
         ConcreteBindingContext.ParticipatingOrganization = model;
@@ -198,26 +119,5 @@ public partial class ExternalResearcherConfigurationPage : Framework.Decisor.Cor
         ConcreteBindingContext.Contact = model;
 
         hasChangesFlag |= true;
-    }
-
-    private void SpecializationResearchAreaPickComplete_Callback(Interop.API.Common.Models.Display.ResearchAreaDisplayModel model)
-    {
-        ConcreteBindingContext.SpecializationResearchAreas.Add(model);
-
-        hasChangesFlag = true;
-    }
-
-    private void MasteryResearchAreaPickComplete_Callback(Interop.API.Common.Models.Display.ResearchAreaDisplayModel model)
-    {
-        ConcreteBindingContext.MasteryResearchAreas.Add(model);
-
-        hasChangesFlag = true;
-    }
-
-    private void DoctorateResearchAreaPickComplete_Callback(Interop.API.Common.Models.Display.ResearchAreaDisplayModel model)
-    {
-        ConcreteBindingContext.DoctorateResearchAreas.Add(model);
-
-        hasChangesFlag = true;
     }
 }

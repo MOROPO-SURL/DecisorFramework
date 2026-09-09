@@ -6,7 +6,7 @@
     x:Class="MOROPO.Framework.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.ProductionOrderDetailPage"
     x:TypeArguments="interop_common_display_models:ProductionOrderDisplayModel"
     x:DataType="interop_common_display_models:ProductionOrderDisplayModel"
-    Title="Detalles de Contacto (Persona)"
+    Title="Detalles de Orden de Producción"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
     <ScrollView Orientation="Vertical">
@@ -30,6 +30,21 @@
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Elaboration.Product.Name}" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Elaboration.Name}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Cantidad" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Amount}" />
+                                        <Span Text="{Binding Elaboration.Product.DefaultUnitMeasurement.Symbol, StringFormat=' {0}'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Fecha Esperada" />
@@ -38,16 +53,22 @@
                                 Text="{Binding RequestedFor}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Prioridad" />
+                                Text="Responsable" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Priority}" />
+                                Text="{Binding Responsible.Contact}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Descripción" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding Description, TargetNullValue='---'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Prioridad" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Priority}" />
                         </StackLayout>
                         <StackLayout
                             Orientation="Horizontal"
@@ -57,6 +78,7 @@
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />
                             <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />

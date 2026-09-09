@@ -13,8 +13,13 @@ namespace MOROPO.Framework.Decisor.Production.Persistence.ORM.EF.Repositories
             return base.GetQueryableDbSet()
                 .Include(entity => entity.Elaboration).ThenInclude(entity => entity.Product).ThenInclude(entity => entity.UnitMeasurement)
                 .Include(entity => entity.Elaboration).ThenInclude(entity => entity.Product).ThenInclude(entity => entity.FeatureImage)
-                .Include(entity => entity.Agreement).ThenInclude(entity => entity.Meeting).ThenInclude(entity => entity.DecisionMakingGroup).ThenInclude(entity => entity.Structure).ThenInclude(entity => entity.Identity)
-                .Include(entity => entity.Responsible).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image);
+                .Include(entity => entity.Elaboration).ThenInclude(entity => entity.OutputProductBridges).ThenInclude(bridge => bridge.Stern)
+                .Include(entity => entity.Elaboration).ThenInclude(entity => entity.OutputProductBridges).ThenInclude(bridge => bridge.UnitMeasurement)
+                .Include(entity => entity.Elaboration).ThenInclude(entity => entity.OutputProductClassificationBridges).ThenInclude(bridge => bridge.Stern).ThenInclude(entity => entity.Product)
+                .Include(entity => entity.Elaboration).ThenInclude(entity => entity.OutputProductClassificationBridges).ThenInclude(bridge => bridge.UnitMeasurement)
+                .Include(entity => entity.Agreement).ThenInclude(entity => entity.Meeting).ThenInclude(entity => entity.DecisionMakingGroup).ThenInclude(entity => entity.AdministrativeEntity).ThenInclude(entity => entity.Identity)
+                .Include(entity => entity.Responsible).ThenInclude(entity => entity.Contact).ThenInclude(entity => entity.Identity).ThenInclude(entity => entity.Image)
+                .Include(entity => entity.Production);
         }
     }
 }

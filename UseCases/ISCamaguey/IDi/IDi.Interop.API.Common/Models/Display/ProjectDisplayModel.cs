@@ -1,0 +1,147 @@
+﻿using System.Collections.Generic;
+
+namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
+{
+    public class ProjectDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.Project, System.Guid>
+    {
+        public System.Guid Id { get; set; }
+
+        public bool Enabled { get; set; }
+
+        public int Priority { get; set; }
+
+        public string Name { get; set; }
+
+        public string Alias { get; set; }
+
+        public string Code { get; set; }
+
+        public ProjectCategoryDisplayModel Category { get; set; }
+
+        public InternalResearcherDisplayModel Chief { get; set; }
+
+        public string Summary { get; set; }
+
+        public string Problem { get; set; }
+
+        public string Context { get; set; }
+
+        public string Beneficiary { get; set; }
+
+        public string MainObjetive { get; set; }
+
+        public ProgramDisplayModel Program { get; set; }
+
+        public ProjectProposalDisplayModel Proposal { get; set; }
+
+        public ProjectDisplayModel Predecessor { get; set; }
+
+        public System.DateTime StartAt { get; set; }
+
+        public System.DateTime EndAt { get; set; }
+
+        public Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel Document { get; set; }
+
+        public List<ProjectSpecificObjectiveDisplayModel> SpecificObjectives { get; set; } = new List<ProjectSpecificObjectiveDisplayModel>();
+
+        public List<ParticipatingOrganizationDisplayModel> ParticipatingOrganizations { get; set; } = new List<ParticipatingOrganizationDisplayModel>();
+
+        public List<ProgramExpectResultDisplayModel> ProgramExpectResults { get; set; } = new List<ProgramExpectResultDisplayModel>();
+
+        public List<ProjectBudgetFunancingDisplayModel> BudgetFunancings { get; set; } = new List<ProjectBudgetFunancingDisplayModel>();
+
+        public List<InternalResearcherProjectParticipationDisplayModel> InternalResearcherProjectParticipations { get; set; } = new List<InternalResearcherProjectParticipationDisplayModel>();
+
+        public List<ExternalResearcherProjectParticipationDisplayModel> ExternalResearcherProjectParticipations { get; set; } = new List<ExternalResearcherProjectParticipationDisplayModel>();
+
+        public void Import(Persistence.Entities.Project entity)
+        {
+            Id = entity.Id;
+            Enabled = entity.Enabled;
+            Priority = entity.Priority;
+            Name = entity.Name;
+            Alias = entity.Alias;
+            Code = entity.Code;
+            Summary = entity.Summary;
+            Problem = entity.Problem;
+            Context = entity.Context;
+            Beneficiary = entity.Beneficiary;
+            MainObjetive = entity.MainObjetive;
+            StartAt = entity.StartAt;
+            EndAt = entity.EndAt;
+
+            if (entity.Chief != null)
+            {
+                Chief = new InternalResearcherDisplayModel();
+
+                Chief.Import(entity.Chief);
+            }
+
+            if (entity.Category != null)
+            {
+                Category = new ProjectCategoryDisplayModel();
+
+                Category.Import(entity.Category);
+            }
+
+            if (entity.Program != null)
+            {
+                Program = new ProgramDisplayModel();
+
+                Program.Import(entity.Program);
+            }
+
+            if (entity.Proposal != null)
+            {
+                Proposal = new ProjectProposalDisplayModel();
+
+                Proposal.Import(entity.Proposal);
+            }
+
+            if (entity.SpecificObjectives != null)
+            {
+                foreach (var item in entity.SpecificObjectives)
+                {
+                    var model = new ProjectSpecificObjectiveDisplayModel();
+
+                    model.Import(item);
+
+                    SpecificObjectives.Add(model);
+                }
+            }
+
+            if (entity.BudgetFunancings != null)
+            {
+                foreach (var item in entity.BudgetFunancings)
+                {
+                    var model = new ProjectBudgetFunancingDisplayModel();
+
+                    model.Import(item);
+
+                    BudgetFunancings.Add(model);
+                }
+            }
+
+            if (entity.ProgramExpectResultBridges != null)
+            {
+                foreach (var bridge in entity.ProgramExpectResultBridges)
+                {
+                    var model = new ProgramExpectResultDisplayModel();
+
+                    model.Import(bridge.Stern);
+
+                    ProgramExpectResults.Add(model);
+                }
+            }
+
+            if (entity.Document != null)
+            {
+                Document = new Framework.Decisor.Core.Interop.API.Common.Models.Display.DocumentDisplayModel();
+
+                Document.Import(entity.Document);
+            }
+
+            // TDOD Predecesor most be inflated from control !!!
+        }
+    }
+}

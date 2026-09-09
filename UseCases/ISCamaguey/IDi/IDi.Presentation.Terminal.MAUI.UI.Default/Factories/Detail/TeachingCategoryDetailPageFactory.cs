@@ -1,10 +1,9 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Factories.Detail
+﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Factories.Detail;
+
+public class TeachingCategoryDetailPageFactory : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.TeachingCategoryDisplayModel>
 {
-    public class TeachingCategoryDetailPageFactory : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IDetailContentPageFactoryFacade<Interop.API.Common.Models.Display.TeachingCategoryDisplayModel>
+    public Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.TeachingCategoryDisplayModel> Build(Interop.API.Common.Models.Display.TeachingCategoryDisplayModel model, System.Action<Interop.API.Common.Models.Display.TeachingCategoryDisplayModel, int?> delegationAction = null)
     {
-        public Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.TeachingCategoryDisplayModel> Build(Interop.API.Common.Models.Display.TeachingCategoryDisplayModel model, System.Action<Interop.API.Common.Models.Display.TeachingCategoryDisplayModel, int?> delegationAction = null)
-        {
-            return new Pages.Detail.TeachingCategoryDetailPage(model, delegationAction);
-        }
+        return new Pages.Detail.TeachingCategoryDetailPage(model);
     }
 }

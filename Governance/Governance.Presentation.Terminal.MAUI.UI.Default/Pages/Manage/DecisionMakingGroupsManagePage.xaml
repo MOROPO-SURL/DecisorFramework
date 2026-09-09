@@ -38,7 +38,11 @@
     <ContentPage.Content>
         <Grid>
             <StackLayout Orientation="Vertical">
-                <SearchBar Margin="20,20,20,0" />
+                <SearchBar 
+                    Margin="20,20,20,0"
+                    Text="{Binding SearchParameter}"
+                    Placeholder="-- buscar por nombre o unidad administrativa --"
+                    SearchButtonPressed="SearchBar_SearchButtonPressed" />
                 <Grid 
                     VerticalOptions="FillAndExpand"
                     SizeChanged="ItemsCollectionViewLayout_SizeChanged">
@@ -58,7 +62,7 @@
                                     <StackLayout>
                                         <Label 
                                             LineBreakMode="TailTruncation"
-                                            Text="{Binding Structure.Identity.Name}" />
+                                            Text="{Binding AdministrativeEntity.Identity.Name}" />
                                         <Label 
                                             LineBreakMode="TailTruncation"
                                             FontSize="Medium"

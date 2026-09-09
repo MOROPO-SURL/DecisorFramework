@@ -2,14 +2,12 @@
 {
     public class PublicationResult : Contract.AbstractResult
     {
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(MainAuthorId))]
-        public Contract.AbstractResearcher MainAuthor { get; set; }
-        public System.Guid MainAuthorId { get; set; }
-
-        public System.Collections.Generic.List<PublicationResultResearcherBridge> ResearcherBridges { get; set; } = new System.Collections.Generic.List<PublicationResultResearcherBridge>();
-
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(Title))]
         public string Title { get; set; }
+
+        public System.Collections.Generic.List<PublicationResultInternalResearcherBridge> InternalResearcherBridges { get; set; } = new System.Collections.Generic.List<PublicationResultInternalResearcherBridge>();
+
+        public System.Collections.Generic.List<PublicationResultExternalResearcherBridge> ExternalResearcherBridges { get; set; } = new System.Collections.Generic.List<PublicationResultExternalResearcherBridge>();
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DocumentId))]
         public Framework.Guama.Media.Persistence.Entities.Document Document { get; set; }

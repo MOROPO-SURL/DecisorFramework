@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
+    xmlns:idi_ui_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.ResearchSampleDetailPage"
+    x:TypeArguments="interop_common_display_models:ResearchSampleDisplayModel"
+    x:DataType="interop_common_display_models:ResearchSampleDisplayModel"
+    Title="Detalles de Muestra para Investigación"
+    BackgroundColor="Transparent"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="560"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <StackLayout Margin="20" Spacing="20">
+                        <StackLayout>
+                            <Label 
+                                Margin="0,0,0,20"
+                                Text="Detalles"
+                                FontAttributes="Bold"
+                                FontSize="Large" />
+                            <Frame
+                                IsVisible="{Binding FeatureImage, Converter={StaticResource IsNotNullConverter}}"
+                                Margin="0,0,0,16" Padding="0"
+                                IsClippedToBounds="True">
+                                <Image Source="{Binding FeatureImage, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                            </Frame>
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Margin="0"
+                                Text="Consecutivo" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                FontSize="Large">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding Index}" />
+                                        <Span Text="{Binding Year, StringFormat=' / {0}'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Contenido" />
+                            <Label 
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                FontSize="Medium">
+                                <Label.FormattedText>
+                                    <FormattedString>
+                                        <Span Text="{Binding SampleKind.Name}" />
+                                        <Span Text="{Binding Amount, StringFormat=', {0:F2}'}" />
+                                        <Span Text="{Binding UnitMeasurement.Symbol, StringFormat=' {0}'}" />
+                                    </FormattedString>
+                                </Label.FormattedText>
+                            </Label>
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Proyecto" />
+                            <idi_ui_card_views:ProjectDefaultCardView 
+                                BindingContext="{Binding Project}"
+                                Margin="0,8,0,0" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Investigador" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding ResearcherContact}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Observaciones" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Observation, TargetNullValue='---', FallbackValue='---'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Panificada" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="2"
+                                Text="{Binding PickedAt, TargetNullValue='---', FallbackValue='---', StringFormat='{0:D}'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Procesada" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                LineBreakMode="TailTruncation"
+                                MaxLines="2"
+                                Text="{Binding HandledAt, TargetNullValue='---', FallbackValue='---', StringFormat='{0:D}'}" />
+                        </StackLayout>
+                        <StackLayout
+                            Orientation="Horizontal"
+                            Spacing="20">
+                            <Button 
+                                IsEnabled="{Binding HandledAt, Converter={StaticResource IsNullConverter}}"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Modificar"
+                                Clicked="EditButton_Clicked" />
+                            <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
+                                IsEnabled="{Binding PickedAt, Converter={StaticResource IsNullConverter}}"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Eliminar"
+                                Clicked="DeleteButton_Clicked" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

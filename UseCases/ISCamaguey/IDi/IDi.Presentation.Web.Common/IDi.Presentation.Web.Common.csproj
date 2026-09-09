@@ -6,9 +6,9 @@
 		<RootNamespace>MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Common</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Security.Common.Persistence.ORM.EF" Version="6.0.1" />
-		<PackageReference Include="GuamaFramework.Identity.Presentation.Web.Common" Version="6.0.1" />
-		<PackageReference Include="GuamaFramework.Core.Presentation.Web.Common" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Persistence.ORM.EF" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Identity.Presentation.Web.Common" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.Web.Common" Version="6.0.2" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\IDi.Persistence.ORM.EF\IDi.Persistence.ORM.EF.csproj" />

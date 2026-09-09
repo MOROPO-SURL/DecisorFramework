@@ -14,6 +14,8 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
         public string Code { get; set; }
 
+        public ProgramKindDisplayModel Kind { get; set; }
+
         public Framework.Decisor.Domain.Interop.API.Common.Models.Display.PersonContactDisplayModel Chief { get; set; }
 
         public Framework.Decisor.Domain.Interop.API.Common.Models.Display.OrganizationContactDisplayModel Manager { get; set; }
@@ -33,7 +35,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
             Code = entity.Code;
             Description = entity.Description;
             Priority = entity.Priority;
-            ExpectResults = entity.ExpectResults.Select(_entity =>
+            ExpectResults = entity.ExpectResults?.Select(_entity =>
             {
                 var model = new ProgramExpectResultDisplayModel();
 
@@ -41,6 +43,13 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display
 
                 return model;
             }).ToArray();
+
+            if (entity.Kind != null)
+            {
+                Kind = new ProgramKindDisplayModel();
+
+                Kind.Import(entity.Kind);
+            }
 
             if (entity.Chief != null)
             {

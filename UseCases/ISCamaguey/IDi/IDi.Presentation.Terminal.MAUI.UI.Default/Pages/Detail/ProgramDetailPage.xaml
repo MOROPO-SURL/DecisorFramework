@@ -45,7 +45,18 @@
                                 Wrap="Wrap"
                                 AlignItems="Start" AlignContent="Start">
                                 <VerticalStackLayout 
-                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=12}}"
+                                    Margin="4">
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                                        Margin="0,12,0,0"
+                                        Text="Tipo" />
+                                    <Label
+                                        Style="{StaticResource ValuePropertyLabelStyle}"
+                                        Text="{Binding Kind.Name}" />
+                                </VerticalStackLayout>
+                                <VerticalStackLayout 
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=12}}"
                                     Margin="4">
                                     <Label 
                                         Style="{StaticResource CaptionPropertyLabelStyle}"
@@ -56,7 +67,7 @@
                                         Text="{Binding Alias, TargetNullValue='---'}" />
                                 </VerticalStackLayout>
                                 <VerticalStackLayout 
-                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=6, SmallContainerColumn=12}}"
+                                    WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel MediumContainerColumn=4, SmallContainerColumn=12}}"
                                     Margin="4">
                                     <Label 
                                         Style="{StaticResource CaptionPropertyLabelStyle}"
@@ -154,12 +165,13 @@
                         </VerticalStackLayout>
                         <StackLayout
                             Orientation="Horizontal"
-                            Margin="20,0,20,20" Spacing="20">
+                            Margin="20" Spacing="20">
                             <Button 
                                 HorizontalOptions="FillAndExpand"
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />
                             <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />

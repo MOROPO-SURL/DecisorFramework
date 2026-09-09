@@ -10,7 +10,7 @@
 
         public System.Linq.Expressions.Expression<System.Func<Persistence.Entities.Ocupation, bool>> GetSelector()
         {
-            if (EmployeeId == null) return entity => entity.Contract.StaffId == StaffId && entity.Contract.Vacant.WorkforceOrganizationalUnity.WorkforceId == WorkforceId;
+            if (EmployeeId == null) return entity => entity.StaffId == StaffId && (entity.Vacant.WorkforceOrganizationalUnit.WorkforceId == WorkforceId || (entity.Staff.MainWorkforceId == WorkforceId));
             
             return entity => entity.Contract.EmployeeId == EmployeeId;
         }

@@ -6,7 +6,7 @@
 		<RootNamespace>MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Connect</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.API.Connect" Version="6.0.2" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\IDi.Interop.API.Common\IDi.Interop.API.Common.csproj" />

@@ -4,8 +4,6 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class ExternalResearchersManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.ExternalResearcherDisplayModel, Models.Page.Manage.ExternalResearchersManagePageModel, Models.Page.Configuration.ExternalResearcherConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 172;
-
     public ExternalResearchersManagePage()
     {
         InitializeComponent();
@@ -16,14 +14,11 @@ public partial class ExternalResearchersManagePage : Framework.Decisor.Core.Pres
         return ItemsCollectionView;
     }
 
-    protected override double ItemViewRequestWidth { get => 400; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.EXTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_WIDTH;
 
     protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.EXTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ExternalResearcherDisplayModel>> FetchItemsAsync()
     {

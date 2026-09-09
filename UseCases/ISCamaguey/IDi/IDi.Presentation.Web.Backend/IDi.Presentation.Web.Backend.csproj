@@ -6,7 +6,7 @@
 		<RootNamespace>MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Backend</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.2" />
 	</ItemGroup>
 	<ItemGroup>
 		<ProjectReference Include="..\IDi.Presentation.Web.Common\IDi.Presentation.Web.Common.csproj" />

@@ -1,4 +1,6 @@
 using Microsoft.Extensions.DependencyInjection;
+using MOROPO.Framework.Caney.MVVM.Core.Extensions;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
@@ -8,16 +10,15 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
     {
         InitializeComponent();
 
-        if (model.Structure != null)
+        if (model.AdministrativeEntity != null)
         {
-            for (int i = 0; i < model.AvailableStructures.Length; i++)
+            for (int i = 0; i < model.AvailableAdministrativeEntities.Length; i++)
             {
-                var current = model.AvailableStructures[i];
+                var current = model.AvailableAdministrativeEntities[i];
 
-                if (model.Structure.Id != current.Id) continue;
+                if (model.AdministrativeEntity.Id != current.Id) continue;
 
                 StructurePicker.SelectedIndex = i;
-                StructurePicker.SelectedItem = current;
 
                 break;
             }
@@ -32,14 +33,13 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
                 if (model.MainWorkforce.Id != current.Id) continue;
 
                 MainWorkforcePicker.SelectedIndex = i;
-                MainWorkforcePicker.SelectedItem = current;
 
                 break;
             }
         }
     }
 
-    protected override string EntityTypeName => "Asignación de Plantilla";
+    protected override string EntityTypeName => "Configuración de Plantilla";
 
     protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.StaffDisplayModel> PerformCreationAsync()
     {
@@ -48,10 +48,13 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
         var model = new Interop.API.Common.Models.Input.StaffInputModel
         {
             Id = System.Guid.NewGuid(),
-            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
-            MainWorkforceId = ConcreteBindingContext.AvailableWorkforces[MainWorkforcePicker.SelectedIndex].Id,
-            WorkingDayCount = ConcreteBindingContext.WorkingDayCount,
-            AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges]
+            StructureId = ConcreteBindingContext.AdministrativeEntity.Id,
+            MainWorkforceId = ConcreteBindingContext.MainWorkforce.Id,
+            WorkingWeekHourCount = ConcreteBindingContext.WorkingWeekHourCount,
+            DoctorateExtraFeed = ConcreteBindingContext.DoctorateExtraFeed,
+            MasteryExtraFeed = ConcreteBindingContext.MasteryExtraFeed,
+            AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -66,10 +69,13 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
         var model = new Interop.API.Common.Models.Input.StaffInputModel
         {
             Id = ConcreteBindingContext.Id,
-            StructureId = ConcreteBindingContext.AvailableStructures[StructurePicker.SelectedIndex].Id,
-            MainWorkforceId = ConcreteBindingContext.AvailableWorkforces[MainWorkforcePicker.SelectedIndex].Id,
-            WorkingDayCount = ConcreteBindingContext.WorkingDayCount,
-            AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges]
+            StructureId = ConcreteBindingContext.AdministrativeEntity.Id,
+            MainWorkforceId = ConcreteBindingContext.MainWorkforce.Id,
+            WorkingWeekHourCount = ConcreteBindingContext.WorkingWeekHourCount,
+            DoctorateExtraFeed = ConcreteBindingContext.DoctorateExtraFeed,
+            MasteryExtraFeed = ConcreteBindingContext.MasteryExtraFeed,
+            AlternativeWorkforces = [.. ConcreteBindingContext.AlternativeWorkforceBridges],
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -87,8 +93,68 @@ public partial class StaffConfigurationPage : Core.Presentation.Terminal.MAUI.UI
         OnCancel(sender, eventArgs);
     }
 
+    private void AdministrativeEntityPicker_SelectedIndexChanged(object sender, System.EventArgs e)
+    {
+        hasChangesFlag = true;
+
+        if (ConcreteBindingContext == null || ConcreteBindingContext.MainWorkforce != null) return;
+
+        ConcreteBindingContext.IsBusy = true;
+
+        var workforcesAPIConnectClient = new Interop.API.Connect.Clients.WorkforcesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+
+        workforcesAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.WorkforceFilterModel { OrganizationalStructure = ConcreteBindingContext.AdministrativeEntity.OrganizationalStructure }).ContinueWith(task =>
+        {
+            Dispatcher.Dispatch(() =>
+            {
+                if (task.Exception != null || task.IsCanceled)
+                {
+                    HandleException(task.Exception);
+                }
+                else
+                {
+                    ConcreteBindingContext.AvailableWorkforces.Clear();
+
+                    foreach (var item in task.Result)
+                    {
+                        ConcreteBindingContext.AvailableWorkforces.Add(item);
+                    }
+                }
+
+                ConcreteBindingContext.IsBusy = false;
+            });
+        });
+    }
+
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs e)
     {
         hasChangesFlag = true;
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 }

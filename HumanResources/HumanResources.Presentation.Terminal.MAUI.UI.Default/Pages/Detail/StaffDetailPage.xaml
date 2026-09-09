@@ -6,7 +6,7 @@
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.StaffDetailPage"
     x:TypeArguments="interop_common_display_models:StaffDisplayModel"
     x:DataType="interop_common_display_models:StaffDisplayModel"
-    Title="Detalles de Asignación de Plantilla"
+    Title="Detalles de Configuración de Plantilla"
     BackgroundColor="Transparent"
     Background="{StaticResource OverlayBackgroundBrush}">
     <ScrollView Orientation="Vertical">
@@ -29,7 +29,7 @@
                                 Text="Entidad Administrativa" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Structure.Identity.Name}" />
+                                Text="{Binding AdministrativeEntity.Identity.Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Principal Estructura de Plantilla" />
@@ -38,10 +38,22 @@
                                 Text="{Binding MainWorkforce.Name}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
-                                Text="Días laborables" />
+                                Text="Horas laborables por semana" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding WorkingDayCount}" />
+                                Text="{Binding WorkingWeekHourCount}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Tarifa por hora extra maestrías" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding MasteryExtraFeed}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Tarifa por hora extra maestrías" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding DoctorateExtraFeed}" />
                         </StackLayout>
                         <StackLayout
                             x:Name="OptionButtonsLayout"
@@ -52,6 +64,7 @@
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />
                             <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"
                                 Clicked="DeleteButton_Clicked" />

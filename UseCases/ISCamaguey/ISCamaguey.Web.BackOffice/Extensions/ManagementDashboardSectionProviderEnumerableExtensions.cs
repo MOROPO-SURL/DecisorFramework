@@ -76,8 +76,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
             #region Domain
             domainSection.Add(new ManagementDashboardSectionViewModel
             {
-                Title = "Tipos de Estructura",
-                Controller = "structurekinds",
+                Title = "Tipos de Ent. Admin.",
+                Controller = "administrativeentitykinds",
                 Action = "Index",
                 Area = "domain",
                 // TODO Set spected permission
@@ -110,14 +110,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
             #endregion
 
             #region HH.RR.
-            humanResourcesSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Niveles de Escolaridad",
-                Controller = "schoolings",
-                Action = "Index",
-                Area = "HHRR",
-                Role = Framework.Decisor.HumanResources.Interop.API.Common.Constants.Security.Authorization.SchoolingViewerPermission
-            });
             humanResourcesSection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Tipos de Plaza",
@@ -279,6 +271,24 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 Controller = "ctihitkinds",
                 Action = "Index",
                 Area = "resarch",
+                // TODO Set spected permission
+                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+            });
+            researchSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Tipos de Programa",
+                Controller = "programkinds",
+                Action = "Index",
+                Area = "IDi",
+                // TODO Set spected permission
+                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+            });
+            researchSection.Add(new ManagementDashboardSectionViewModel
+            {
+                Title = "Categorías de Projecto",
+                Controller = "projectcategories",
+                Action = "Index",
+                Area = "IDi",
                 // TODO Set spected permission
                 //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });

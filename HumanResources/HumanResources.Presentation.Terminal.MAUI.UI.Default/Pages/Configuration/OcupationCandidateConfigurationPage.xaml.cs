@@ -2,6 +2,7 @@ using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;
 using MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Input;
+using System.Linq;
 
 namespace MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
@@ -13,11 +14,11 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
     private Microsoft.Maui.Storage.FileResult rawResearchResultDocumentFilePickResult;
     private Microsoft.Maui.Storage.FileResult rawModelDocumentFilePickResult;
 
-    public OcupationCandidateConfigurationPage(System.Action<OcupationCandidateDisplayModel> successAction, Models.Page.Configuration.OcupationCandidateConfigurationPageModel model) : base(successAction, model, null)    {
+    public OcupationCandidateConfigurationPage(System.Action<OcupationCandidateDisplayModel> successAction, Models.Page.Configuration.OcupationCandidateConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.OcupationCandidateConfigurationPageModel> validator) : base(successAction, model, validator)    {
         InitializeComponent();
     }
 
-    protected override string EntityTypeName => "Candidato a Admisión";
+    protected override string EntityTypeName => "Selección";
 
     protected override async System.Threading.Tasks.Task<OcupationCandidateDisplayModel> PerformCreationAsync()
     {
@@ -34,7 +35,8 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
             PhysicologicalCheckAt = ConcreteBindingContext.PhysicologicalCheckAt,
             DefenseStatusCheckAt = ConcreteBindingContext.DefenseStatusCheckAt,
             ResearchRequestAt = ConcreteBindingContext.ResearchRequestAt,
-            ResearchResultAt = ConcreteBindingContext.ResearchResultAt
+            ResearchResultAt = ConcreteBindingContext.ResearchResultAt,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         if (rawMedicalCheckDocumentFilePickResult != null)
@@ -132,7 +134,8 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
             PhysicologicalCheckAt = ConcreteBindingContext.PhysicologicalCheckAt,
             DefenseStatusCheckAt = ConcreteBindingContext.DefenseStatusCheckAt,
             ResearchRequestAt = ConcreteBindingContext.ResearchRequestAt,
-            ResearchResultAt = ConcreteBindingContext.ResearchResultAt
+            ResearchResultAt = ConcreteBindingContext.ResearchResultAt,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         if (rawMedicalCheckDocumentFilePickResult != null)
@@ -408,6 +411,33 @@ public partial class OcupationCandidateConfigurationPage : Core.Presentation.Ter
     private void ResponsiblePickButton_Clicked(object sender, System.EventArgs e)
     {
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.EmployeePickPage(ResponsiblePickComplete_Callback)));
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void PostulationPickComplete_Callback(VacantPostulationDisplayModel model)

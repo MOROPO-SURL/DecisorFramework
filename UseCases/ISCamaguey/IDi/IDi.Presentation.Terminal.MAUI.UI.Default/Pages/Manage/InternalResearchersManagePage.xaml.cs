@@ -4,26 +4,18 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pa
 
 public partial class InternalResearchersManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.InternalResearcherDisplayModel, Models.Page.Manage.InternalResearchersManagePageModel, Models.Page.Configuration.InternalResearcherConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 172;
-
     public InternalResearchersManagePage()
     {
         InitializeComponent();
     }
 
-    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
-    {
-        return ItemsCollectionView;
-    }
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth { get => 400; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.INTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_WIDTH;
 
     protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.INTERNAL_RESEARCHER_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.InternalResearcherDisplayModel>> FetchItemsAsync()
     {

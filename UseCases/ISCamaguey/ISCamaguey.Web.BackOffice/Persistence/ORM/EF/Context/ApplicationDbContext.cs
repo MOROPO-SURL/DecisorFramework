@@ -141,20 +141,14 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<VehicleEngineKind> VehicleEngineKinds { get; set; }
         public DbSet<Vehicle> Vehicles { get; set; }
         public DbSet<VehicleImageBridge> VehicleImageBridges { get; set; }
-        public DbSet<StructureKind> StructureKinds { get; set; }
-        public DbSet<OrganizationalUnity> OrganizationalUnities { get; set; }
-        public DbSet<StructureOrganizationalUnityBridge> StructureOrganizationalUnityBridges { get; set; }
-        public DbSet<Structure> Structures { get; set; }
         public DbSet<Employee> Employees { get; set; }
         public DbSet<Colaborator> Colaborators { get; set; }
 
-        public DbSet<Schooling> Schoolings { get; set; }
         public DbSet<SalaryStandard> SalaryStandards { get; set; }
         public DbSet<WorkPositionKind> WorkPositionKinds { get; set; }
         public DbSet<WorkPosition> WorkPositions { get; set; }
         public DbSet<WorkPositionResponsability> WorkPositionResponsabilities { get; set; }
         public DbSet<Workforce> Workforces { get; set; }
-        public DbSet<WorkforceOrganizationalUnity> WorkforceOrganizationalUnities { get; set; }
         public DbSet<EmployeeDailyChecking> EmployeeDailyCheckings { get; set; }
         public DbSet<Vacant> Vacants { get; set; }
         public DbSet<VacantPostulation> VacantPostulations { get; set; }
@@ -239,55 +233,61 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<Extension> Extensions { get; set; }
         public DbSet<ExternalResearcher> ExternalResearchers { get; set; }
         public DbSet<Financier> Financiers { get; set; }
-        public DbSet<FinancierResearchAreaBridge> FinancierResearchAreaBridges { get; set; }
+        public DbSet<FinancierKnowledgeAreaBridge> FinancierKnowledgeAreaBridges { get; set; }
         public DbSet<FinancierDocumentBridge> FinancierDocumentBridges { get; set; }
         public DbSet<InternalResearcher> InternalResearchers { get; set; }
         public DbSet<NewTechniqueResult> NewTechniqueResults { get; set; }
         public DbSet<OppositionReport> OppositionReports { get; set; }
         public DbSet<ParticipatingOrganization> ParticipatingOrganizations { get; set; }
-        public DbSet<ParticipatingOrganizationResearchAreaBridge> ParticipatingOrganizationResearchAreaBridges { get; set; }
+        public DbSet<ParticipatingOrganizationKnowledgeAreaBridge> ParticipatingOrganizationKnowledgeAreaBridges { get; set; }
         public DbSet<IDi.Persistence.Entities.Program> Programs { get; set; }
+        public DbSet<IDi.Persistence.Entities.ProgramKind> ProgramKinds { get; set; }
         public DbSet<ProgramExpectResult> ProgramExpectResults { get; set; }
+        public DbSet<ImpactDimension> ImpactDimensions { get; set; }
         public DbSet<Project> Projects { get; set; }
-        public DbSet<ProjectBudgetCurrencyBridge> ProjectBudgetCurrencyBridges { get; set; }
+        public DbSet<ProjectProgramExpectResultBridge> ProjectProgramExpectResultBridges { get; set; }
+        public DbSet<ProjectImpact> ProjectImpacts { get; set; }
         public DbSet<ProjectBudgetFunancing> ProjectBudgetFunancings { get; set; }
         public DbSet<ProjectCategory> ProjectCategories { get; set; }
         public DbSet<ProjectParticipatingOrganizationBridge> ProjectParticipatingOrganizationBridges { get; set; }
         public DbSet<ProjectProposal> ProjectProposals { get; set; }
         public DbSet<ProjectReport> ProjectReports { get; set; }
-        public DbSet<ProjectResearcherBridge> ProjectResearcherBridges { get; set; }
+        public DbSet<InternalResearcherProjectParticipation> InternalResearcherProjectParticipations { get; set; }
+        public DbSet<ExternalResearcherProjectParticipation> ExternalResearcherProjectParticipations { get; set; }
         public DbSet<ProjectSpecificObjective> ProjectSpecificObjectives { get; set; }
         public DbSet<PublicationResult> PublicationResults { get; set; }
-        public DbSet<PublicationResultResearcherBridge> PublicationResultResearcherBridges { get; set; }
-        public DbSet<ResearchArea> ResearchAreas { get; set; }
+        public DbSet<PublicationResultInternalResearcherBridge> PublicationResultInternalResearcherBridges { get; set; }
+        public DbSet<PublicationResultExternalResearcherBridge> PublicationResultExternalResearcherBridges { get; set; }
         public DbSet<ResearcherCategory> ResearcherCategories { get; set; }
-        public DbSet<ResearcherResearchAreaDoctorateBridge> ResearcherResearchAreaDoctorateBridges { get; set; }
-        public DbSet<ResearcherResearchAreaMasteryBridge> ResearcherResearchAreaMasteryBridges { get; set; }
-        public DbSet<ResearcherResearchAreaSpecializationBridge> ResearcherResearchAreaSpecializationBridges { get; set; }
         public DbSet<ScientificTechnicalResult> ScientificTechnicalResults { get; set; }
         public DbSet<ScientificTechnicalResultIntroduction> ScientificTechnicalResultIntroductions { get; set; }
         public DbSet<ScientificTechnicalResultKind> ScientificTechnicalResultKinds { get; set; }
         public DbSet<TeachingCategory> TeachingCategories { get; set; }
         public DbSet<ThesisResult> ThesisResults { get; set; }
-        public DbSet<ThesisResultResearcherBridge> ThesisResultResearcherBridges { get; set; }
+        public DbSet<ThesisResultInternalResearcherBridge> ThesisResultInternalResearcherBridges { get; set; }
+        public DbSet<ThesisResultExternalResearcherBridge> ThesisResultExternalResearcherBridges { get; set; }
         public DbSet<TrainingResult> TrainingResults { get; set; }
-        public DbSet<TrainingResultResearcherBridge> TrainingResultResearcherBridges { get; set; }
+        public DbSet<TrainingResultInternalResearcherBridge> TrainingResultInternalResearcherBridges { get; set; }
+        public DbSet<TrainingResultExternalResearcherBridge> TrainingResultExternalResearcherBridges { get; set; }
         public DbSet<CallForProposal> CallForProposals { get; set; }
-        public DbSet<CallForProposalResearchAreaBridge> CallForProposalResearchAreaBridges { get; set; }
+        public DbSet<CallForProposalKnowledgeAreaBridge> CallForProposalKnowledgeAreaBridges { get; set; }
         public DbSet<CallForProposalDocumentBridge> CallForProposalDocumentBridges { get; set; }
 
         public DbSet<SampleAnalysisReport> SampleAnalysisReports { get; set; }
         public DbSet<SampleAnalysisServiceReport> SampleAnalysisServiceReports { get; set; }
         public DbSet<Analysis> Analysises { get; set; }
-        public DbSet<AnalysisOrder> AnalysisOrders { get; set; }
         public DbSet<Assessment> Assessments { get; set; }
-        public DbSet<ResearchSample> ResearchSamples { get; set; }
         public DbSet<SampleKind> SampleKinds { get; set; }
+        public DbSet<ResearchSample> ResearchSamples { get; set; }
         public DbSet<ServiceOrderSample> ServiceOrderSamples { get; set; }
+        public DbSet<ProductionSample> ProductionSamples { get; set; }
         public DbSet<WorkingGroup> WorkingGroups { get; set; }
         public DbSet<WorkingGroupEmployeeBridge> WorkingGroupEmployeeBridges { get; set; }
         public DbSet<WorkingGroupTechniqueBridge> WorkingGroupTechniqueBridges { get; set; }
         public DbSet<WorkPlan> WorkPlans { get; set; }
+        public DbSet<WorkPlanServiceOrderSampleBridge> WorkPlanServiceOrderSampleBridges { get; set; }
+        public DbSet<WorkPlanResearchSampleBridge> WorkPlanResearchSampleBridges { get; set; }
+        public DbSet<WorkPlanProductionSampleBridge> WorkPlanProductionSampleBridges { get; set; }
 
         public DbSet<Elaboration> Elaborations { get; set; }
         public DbSet<ElaborationInputProductBridge> ElaborationInputProductBridges { get; set; }
@@ -304,6 +304,19 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ProductionOrderDeparture> ProductionOrderDepartures { get; set; }
         public DbSet<ProductionProductBridge> ProductionProductBridges { get; set; }
         public DbSet<ProductionReception> ProductionReceptions { get; set; }
+        public DbSet<WorkforceOrganizationalUnit> WorkforceOrganizationalUnits { get; set; }
+        public DbSet<DesignationEmploymentContract> DesignationEmploymentContracts { get; set; }
+        public DbSet<DesignationResolution> DesignationResolutions { get; set; }
+        public DbSet<ChangeNotification> ChangeNotifications { get; set; }
+        public DbSet<ChangeNotificationUserBridge> ChangeNotificationUserBridges { get; set; }
+        public DbSet<AdministrativeEntityKind> AdministrativeEntityKinds { get; set; }
+        public DbSet<OrganizationalUnit> OrganizationalUnits { get; set; }
+        public DbSet<OrganizationalStructure> OrganizationalStructures { get; set; }
+        public DbSet<OrganizationalStructuringUnit> OrganizationalStructuringUnits { get; set; }
+        public DbSet<AdministrativeEntity> AdministrativeEntities { get; set; }
+        public DbSet<KnowledgeArea> KnowledgeAreas { get; set; }
+        public DbSet<AcademicAchievement> AcademicAchievements { get; set; }
+        public DbSet<AcademicAchievementKnowledgeAreaBridge> AcademicAchievementKnowledgeAreaBridges { get; set; }
     }
 }
 

@@ -27,7 +27,7 @@ public partial class FinancierConfigurationPage : Framework.Decisor.Core.Present
             Id = System.Guid.NewGuid(),
             ContactId = ConcreteBindingContext.Contact.Id,
             Priority = ConcreteBindingContext.Priority,
-            ResearchAreas = [.. ConcreteBindingContext.ResearchAreas],
+            KnowledgeAreas = [.. ConcreteBindingContext.KnowledgeAreas],
             IncomingDocuments = incomingDocuments
         };
 
@@ -45,7 +45,7 @@ public partial class FinancierConfigurationPage : Framework.Decisor.Core.Present
             Id = ConcreteBindingContext.Id,
             ContactId = ConcreteBindingContext.Contact.Id,
             Priority = ConcreteBindingContext.Priority,
-            ResearchAreas = [.. ConcreteBindingContext.ResearchAreas],
+            KnowledgeAreas = [.. ConcreteBindingContext.KnowledgeAreas],
             IncomingDocuments = incomingDocuments,
             EditionDocuments = editionDocuments,
             OutgoingDocuments = outgoingDocuments
@@ -71,29 +71,29 @@ public partial class FinancierConfigurationPage : Framework.Decisor.Core.Present
         this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.OrganizationContactPickPage(ContactPickComplete_Callback)));
     }
 
-    private void ResearchAreaAgregationButton_Clicked(object sender, System.EventArgs e)
+    private void KnowledgeAreaAgregationButton_Clicked(object sender, System.EventArgs e)
     {
-        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Pick.ResearchAreaPickPage(ResearchAreaPickComplete_Callback)));
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.KnowledgeAreaPickPage(KnowledgeAreaPickComplete_Callback)));
     }
 
-    private void ResearchAreaDetailButton_Clicked(object sender, System.EventArgs eventArgs)
+    private void KnowledgeAreaDetailButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ResearchAreaDisplayModel;
+        var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Framework.Decisor.Domain.Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel;
 
-        this.NavigationPushModalPageAsync(new Detail.ResearchAreaDetailPage(target, null));
+        this.NavigationPushModalPageAsync(new Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.KnowledgeAreaDetailPage(target, null));
     }
 
-    private void ResearchAreaRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    private void KnowledgeAreaRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        DisplayAlert("Confirmación", "Está seguro que desea retirar esta área de investigación?", "Confirmar", "Cancelar").ContinueWith(task =>
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este elemento?", "Confirmar", "Cancelar").ContinueWith(task =>
         {
             if (!task.Result) return;
 
             Dispatcher.Dispatch(() =>
             {
-                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.ResearchAreaDisplayModel;
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Framework.Decisor.Domain.Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel;
 
-                ConcreteBindingContext.ResearchAreas.Remove(target);
+                ConcreteBindingContext.KnowledgeAreas.Remove(target);
 
                 hasChangesFlag = true;
             });
@@ -211,9 +211,9 @@ public partial class FinancierConfigurationPage : Framework.Decisor.Core.Present
         ConcreteBindingContext.Contact = model;
     }
 
-    private void ResearchAreaPickComplete_Callback(Interop.API.Common.Models.Display.ResearchAreaDisplayModel model)
+    private void KnowledgeAreaPickComplete_Callback(Framework.Decisor.Domain.Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel model)
     {
-        ConcreteBindingContext.ResearchAreas.Add(model);
+        ConcreteBindingContext.KnowledgeAreas.Add(model);
 
         hasChangesFlag = true;
     }

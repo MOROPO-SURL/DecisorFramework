@@ -2,7 +2,7 @@
 <core_ui_base_pages:ListBaseContentPage 
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    xmlns:local="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick"
+    xmlns:local_constants="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Constants"
     xmlns:local_card_views="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Views.Card"
     xmlns:interop_common_display_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Interop.API.Common.Models.Display;assembly=MOROPO.Framework.Decisor.HumanResources.Interop.API.Common"
     xmlns:presentation_pick_page_models="clr-namespace:MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.Models.Page.Pick;assembly=MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI"
@@ -12,7 +12,7 @@
     x:Class="MOROPO.Framework.Decisor.HumanResources.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.AdmitionPropousalPickPage"
     x:TypeArguments="interop_common_display_models:AdmitionPropousalDisplayModel,presentation_pick_page_models:AdmitionPropousalPickPageModel"
     x:DataType="presentation_pick_page_models:AdmitionPropousalPickPageModel"
-    Title="Seleccionar Propuesta de Admisión">
+    Title="Seleccionar Admisión">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
@@ -50,7 +50,7 @@
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
                             <DataTemplate>
-                                <local_card_views:AdmitionPropousalDefaultCardView HeightRequest="{Static local:AdmitionPropousalPickPage.ITEM_VIEW_REQUEST_HEIGHT}">
+                                <local_card_views:AdmitionPropousalDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.ADMITION_PROPOUSAL_DEFAULT_CARD_VIEW_HEIGHT}">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </ContentView.GestureRecognizers>

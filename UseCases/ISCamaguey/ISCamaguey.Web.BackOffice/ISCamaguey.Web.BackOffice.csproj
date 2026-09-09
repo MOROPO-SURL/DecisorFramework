@@ -11,21 +11,25 @@
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' " />
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Staging' " />
 	<ItemGroup>
+		<Compile Remove="Areas\Lab\**" />
 		<Compile Remove="dpkeys\**" />
 		<Compile Remove="logs\**" />
 		<Compile Remove="wwwroot\documents\**" />
 		<Compile Remove="wwwroot\images\**" />
 		<Compile Remove="wwwroot\media\**" />
+		<Content Remove="Areas\Lab\**" />
 		<Content Remove="dpkeys\**" />
 		<Content Remove="logs\**" />
 		<Content Remove="wwwroot\documents\**" />
 		<Content Remove="wwwroot\images\**" />
 		<Content Remove="wwwroot\media\**" />
+		<EmbeddedResource Remove="Areas\Lab\**" />
 		<EmbeddedResource Remove="dpkeys\**" />
 		<EmbeddedResource Remove="logs\**" />
 		<EmbeddedResource Remove="wwwroot\documents\**" />
 		<EmbeddedResource Remove="wwwroot\images\**" />
 		<EmbeddedResource Remove="wwwroot\media\**" />
+		<None Remove="Areas\Lab\**" />
 		<None Remove="dpkeys\**" />
 		<None Remove="logs\**" />
 		<None Remove="wwwroot\documents\**" />
@@ -33,11 +37,11 @@
 		<None Remove="wwwroot\media\**" />
 	</ItemGroup>
 	<ItemGroup>
-		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.1.1" />
-		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.1" />
-		<PackageReference Include="GuamaFramework.Location.Presentation.Web.Backend" Version="6.0.1" />
-		<PackageReference Include="GuamaFramework.Media.Presentation.Web.Common" Version="6.0.1" />
-		<PackageReference Include="GuamaFramework.Security.Personal.Presentation.Web.Backend" Version="6.0.1" />
+		<PackageReference Include="GuamaFramework.Core.Presentation.Web.API" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Frontend" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Location.Presentation.Web.Backend" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Media.Presentation.Web.Common" Version="6.0.2" />
+		<PackageReference Include="GuamaFramework.Security.Personal.Presentation.Web.Backend" Version="6.0.2" />
 		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.14">
 			<PrivateAssets>all</PrivateAssets>
 			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -76,6 +80,32 @@
 		<ProjectReference Include="..\Servicing\Servicing.Presentation.Web.Frontend\Servicing.Presentation.Web.Frontend.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Content Update="Areas\Security\Views\Account\Edit.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Areas\Security\Views\Account\Index.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Areas\Security\Views\Account\Password.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Views\Shared\_BackendLayout.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Views\Shared\_FrontendLayout.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	  <Content Update="Views\Shared\_Layout.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+	<ItemGroup>
 	  <None Update="Properties\launchSettings.json">
 	    <CopyToOutputDirectory>Never</CopyToOutputDirectory>
 	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -83,6 +113,9 @@
 	  </None>
 	</ItemGroup>
 	<ItemGroup>
-	  <Folder Include="Areas\Lab\Views\" />
+	  <UpToDateCheckInput Remove="Views\Shared\_AuthenticatedFrontendLayout.cshtml" />
+	</ItemGroup>
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Views\Shared\_AuthenticatedFrontendLayout.cshtml" />
 	</ItemGroup>
 </Project>

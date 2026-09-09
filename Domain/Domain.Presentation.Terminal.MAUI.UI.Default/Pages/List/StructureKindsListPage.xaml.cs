@@ -12,7 +12,7 @@ public partial class StructureKindsListPage : Caney.MVVM.Core.Pages.ContentPage
 
         IsEnabled = false;
 
-        BindingContext = new Models.Page.List.StructureKindsListPageModel();
+        BindingContext = new Models.Page.List.AdministrativeEntityKindsListPageModel();
     }
 
     protected override void OnAppearing()
@@ -28,30 +28,30 @@ public partial class StructureKindsListPage : Caney.MVVM.Core.Pages.ContentPage
 
     private void ReloadToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
     {
-        if (((Models.Page.List.StructureKindsListPageModel)BindingContext).IsBusy) return;
+        if (((Models.Page.List.AdministrativeEntityKindsListPageModel)BindingContext).IsBusy) return;
 
         LoadItems();
     }
 
     private void ItemTapGestureRecognizer_Tapped(object sender, Microsoft.Maui.Controls.TappedEventArgs e)
     {
-        ((Models.Page.List.StructureKindsListPageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.StructureKindDisplayModel;
+        ((Models.Page.List.AdministrativeEntityKindsListPageModel)BindingContext).PresentedItem = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Interop.API.Common.Models.Display.AdministrativeEntityKindDisplayModel;
     }
 
     private void PresentedItemDismissButton_Clicked(object sender, System.EventArgs e)
     {
-        ((Models.Page.List.StructureKindsListPageModel)BindingContext).PresentedItem = null;
+        ((Models.Page.List.AdministrativeEntityKindsListPageModel)BindingContext).PresentedItem = null;
     }
 
     private void LoadItems()
     {
-        var concreteBindingContext = (Models.Page.List.StructureKindsListPageModel)BindingContext;
+        var concreteBindingContext = (Models.Page.List.AdministrativeEntityKindsListPageModel)BindingContext;
 
         concreteBindingContext.IsBusy = true;
 
         concreteBindingContext.Items.Clear();
 
-        var apiConnectClient = new Interop.API.Connect.Clients.StructureKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var apiConnectClient = new Interop.API.Connect.Clients.AdministrativeEntityKindsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
         apiConnectClient.GetAsync().ContinueWith(task =>
         {

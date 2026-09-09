@@ -5,10 +5,8 @@ using System.Collections.Generic;
 
 namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
 {
-    public class OrganizationContactInputModel : Guama.Core.Persistence.Presentation.Models.Contract.IEntityInputModel<OrganizationContact, System.Guid>
+    public class OrganizationContactInputModel : Core.Interop.API.Common.Models.Input.Contract.AbstractNotificableEntityInputModel<OrganizationContact, System.Guid>
     {
-        public System.Guid Id { get; set; }
-
         [System.ComponentModel.DataAnnotations.Required]
         public string Name { get; set; }
 
@@ -48,7 +46,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
         public List<WebContactItemInputModel> IncomingWebContactItems { get; set; } = new List<WebContactItemInputModel>();
         public List<WebContactItemDisplayModel> OutgoingWebContactItems { get; set; } = new List<WebContactItemDisplayModel>();
 
-        public OrganizationContact Export()
+        public override OrganizationContact Export()
         {
             var entity = new OrganizationContact { Id = Id, Enabled = true, Identity = new Guama.Identity.Persistence.Entities.OrganizationIdentity() };
 
@@ -57,12 +55,7 @@ namespace MOROPO.Framework.Decisor.Domain.Interop.API.Common.Models.Input
             return entity;
         }
 
-        public void Import(OrganizationContact entity)
-        {
-            throw new System.NotImplementedException();
-        }
-
-        public void Mergue(OrganizationContact entity)
+        public override void Mergue(OrganizationContact entity)
         {
             entity.Identity.Name = Name;
             entity.Identity.Alias = Alias;

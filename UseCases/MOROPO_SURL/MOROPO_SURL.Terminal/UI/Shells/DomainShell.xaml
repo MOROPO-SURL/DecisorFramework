@@ -4,6 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:decisorframework_domain_list_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.List;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:decisorframework_domain_manage_pages="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:decisorframework_supervision_pages="clr-namespace:MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default.Pages;assembly=MOROPO.Framework.Decisor.Supervision.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.Tool.Decisor.Terminal.UI.Shells.DomainShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -13,8 +14,7 @@
             <Image 
                 Aspect="AspectFill"
                 Source="domain.jpg" />
-            <BoxView
-                Color="#A7000000" />
+            <BoxView Color="#A7000000" />
             <Grid
                 Padding="16">
                 <Button
@@ -37,7 +37,7 @@
     <MenuFlyoutItem Text="Inicio" IsEnabled="False" />
     <ShellContent
         Title="Panel de Control"
-        ContentTemplate="{DataTemplate ContentPage}">
+        ContentTemplate="{DataTemplate decisorframework_supervision_pages:DomainDashboardPage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -46,30 +46,44 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
-    <MenuFlyoutItem Text="Estructural" IsEnabled="False" />
+    <MenuFlyoutItem Text="» Estructural «" IsEnabled="False" />
     <ShellContent
         Title="Entidades Administrativas"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:StructuresManagePage}">
+        Route="AdministrativeEntitiesManagePage"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:AdministrativeEntitiesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF006B;"
+                Glyph="{StaticResource AdministrativeEntityMaterialDesignGlyphIconId}"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Estructuras Organizacionales"
+        Route="OrganizationalStructuresManagePage"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationalStructuresManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="{StaticResource OrganizationalStructureMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
         Title="Unidades Organizativas"
-        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationalUnitiesManagePage}">
+        Route="OrganizationalUnitsManagePage"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:OrganizationalUnitsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF645;"
+                Glyph="{StaticResource OrganizationalUnitDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Activos" IsEnabled="False" />
+    <MenuFlyoutItem Text="» Activos «" IsEnabled="False" />
     <ShellContent
         Title="Inmuebles"
+        Route="PropertiesManagePage"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:PropertiesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -80,6 +94,7 @@
     </ShellContent>
     <ShellContent
         Title="Vehículos"
+        Route="VehiclesManagePage"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:VehiclesManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -88,9 +103,10 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
-    <MenuFlyoutItem Text="Complementarios" IsEnabled="False" />
+    <MenuFlyoutItem Text="» Complementarios «" IsEnabled="False" />
     <ShellContent
         Title="Organismos"
+        Route="CentralStateStructuresManagePage"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:CentralStateStructuresManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -101,6 +117,7 @@
     </ShellContent>
     <ShellContent
         Title="Marcas"
+        Route="BrandsManagePage"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:BrandsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
@@ -110,12 +127,24 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
+        Title="Áreas de Conocimiento"
+        Route="KnowledgeAreasManagePage"
+        ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:KnowledgeAreasManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF9D0;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
         Title="Unidades de Medida"
+        Route="UnitMeasurementsManagePage"
         ContentTemplate="{DataTemplate decisorframework_domain_manage_pages:UnitMeasurementsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
-                Glyph="&#xF472;"
+                Glyph="{StaticResource UnitMeasurementMaterialDesignGlyphIconId}"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

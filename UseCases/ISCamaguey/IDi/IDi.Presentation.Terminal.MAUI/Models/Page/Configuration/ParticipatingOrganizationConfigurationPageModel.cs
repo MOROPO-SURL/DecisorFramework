@@ -14,7 +14,7 @@
             Id = model.Id;
             contact = model.Contact;
             priority = model.Priority;
-            ResearchAreas = [.. model.ResearchAreas];
+            KnowledgeAreas = [.. model.KnowledgeAreas];
         }
 
         public System.Guid Id { get; set; }
@@ -23,6 +23,6 @@
 
         public int Priority { get => priority; set => SetProperty(ref priority, value); }
 
-        public System.Collections.ObjectModel.ObservableCollection<Interop.API.Common.Models.Display.ResearchAreaDisplayModel> ResearchAreas { get; set; } = [];
+        public System.Collections.ObjectModel.ObservableCollection<Framework.Decisor.Domain.Interop.API.Common.Models.Display.KnowledgeAreaDisplayModel> KnowledgeAreas { get; set; } = [];
     }
 }

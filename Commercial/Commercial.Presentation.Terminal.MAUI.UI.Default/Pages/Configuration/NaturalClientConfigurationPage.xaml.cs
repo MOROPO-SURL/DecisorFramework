@@ -70,7 +70,8 @@ public partial class NaturalClientConfigurationPage : Core.Presentation.Terminal
             DefaultPaymentTermId = ConcreteBindingContext.DefaultPaymentTerm.Id,
             Priority = ConcreteBindingContext.Priority,
             IncomingBankAccounts = incomingBankAccounts,
-            IncomingDocuments = incomingDocuments
+            IncomingDocuments = incomingDocuments,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.CreateAsync(model);
@@ -96,7 +97,8 @@ public partial class NaturalClientConfigurationPage : Core.Presentation.Terminal
             OutgoingBankAccounts = outgoingBankAccounts,
             IncomingDocuments = incomingDocuments,
             EditionDocuments = editionDocuments,
-            OutgoingDocuments = outgoingDocuments
+            OutgoingDocuments = outgoingDocuments,
+            NotificationUserIds = ConcreteBindingContext.NotificationUsers.Select(item => item.Id).ToArray()
         };
 
         await apiConnectClient.EditAsync(model);
@@ -193,7 +195,7 @@ public partial class NaturalClientConfigurationPage : Core.Presentation.Terminal
                     Id = System.Guid.NewGuid(),
                     Name = name,
                     ContentData = data,
-                    ContentType = filePickResult.ContentType
+                    ContentType = MimeTypes.MimeTypeMap.GetMimeType(System.IO.Path.GetExtension(filePickResult.FileName))
                 };
 
                 incomingDocuments.Add(model);
@@ -347,6 +349,33 @@ public partial class NaturalClientConfigurationPage : Core.Presentation.Terminal
                 hasChangesFlag = true;
             });
         });
+    }
+
+    protected void NotificationUserAgregationButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        this.NavigationPushModalPageAsync(new Microsoft.Maui.Controls.NavigationPage(new Core.Presentation.Terminal.MAUI.UI.Default.Pages.Pick.UserPickPage(NotificationUserPickComplete_Callback)));
+    }
+
+    private void NotificationUserRemotionButton_Clicked(object sender, System.EventArgs eventArgs)
+    {
+        DisplayAlert("Confirmación", "Está seguro que desea retirar este usuario de las notificaciones?", "Confirmar", "Cancelar").ContinueWith(task =>
+        {
+            if (!task.Result) return;
+
+            Dispatcher.Dispatch(() =>
+            {
+                var target = ((Microsoft.Maui.Controls.BindableObject)sender).BindingContext as Core.Interop.API.Common.Models.Display.UserDisplayModel;
+
+                ConcreteBindingContext.NotificationUsers.Remove(target);
+
+                hasChangesFlag = true;
+            });
+        });
+    }
+
+    private void NotificationUserPickComplete_Callback(Core.Interop.API.Common.Models.Display.UserDisplayModel model)
+    {
+        ConcreteBindingContext.NotificationUsers.Add(model);
     }
 
     private void ContactPickComplete_Callback(PersonContactDisplayModel model)

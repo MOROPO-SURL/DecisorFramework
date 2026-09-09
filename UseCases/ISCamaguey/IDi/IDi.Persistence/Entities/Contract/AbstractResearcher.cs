@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-
-namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract
+﻿namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract
 {
+    [System.ComponentModel.DataAnnotations.Schema.NotMapped]
     public abstract class AbstractResearcher : Framework.Decisor.Core.Persistence.Entities.Contract.IFullFeatureEntity<System.Guid>
     {
         [System.ComponentModel.DataAnnotations.Key]
@@ -22,11 +21,5 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract
         public System.Guid? TeachingCategoryId { get; set; }
 
         public int TimeAvailability { get; set; }
-
-        public List<ResearcherResearchAreaSpecializationBridge> ResearchAreaSpecializationBridges { get; set; } = new List<ResearcherResearchAreaSpecializationBridge>();
-
-        public List<ResearcherResearchAreaMasteryBridge> ResearchAreaMasteryBridges { get; set; } = new List<ResearcherResearchAreaMasteryBridge>();
-
-        public List<ResearcherResearchAreaDoctorateBridge> ResearchAreaDoctorateBridges { get; set; } = new List<ResearcherResearchAreaDoctorateBridge>();
     }
 }
