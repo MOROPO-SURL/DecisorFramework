@@ -72,7 +72,7 @@
                     </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="interop_common_display_models:ServiceOrderSampleDisplayModel">
-                            <Grid>
+                            <Grid IsClippedToBounds="True">
                                 <local_card_views:ServiceOrderSampleDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_HEIGHT}">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ServiceOrderSampleViewTapGestureRecognizer_Tapped" />
@@ -117,7 +117,7 @@
                     </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="interop_common_display_models:ResearchSampleDisplayModel">
-                            <Grid>
+                            <Grid IsClippedToBounds="True">
                                 <local_card_views:ResearchSampleDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_RESEARCH_CARD_VIEW_HEIGHT}">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ResearchSampleViewTapGestureRecognizer_Tapped" />    
@@ -162,7 +162,7 @@
                     </CollectionView.EmptyView>
                     <CollectionView.ItemTemplate>
                         <DataTemplate x:DataType="interop_common_display_models:ProductionSampleDisplayModel">
-                            <Grid>
+                            <Grid IsClippedToBounds="True"> 
                                 <local_card_views:ProductionSampleDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_PRODUCTION_CARD_VIEW_HEIGHT}">
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ProductionSampleViewTapGestureRecognizer_Tapped" />

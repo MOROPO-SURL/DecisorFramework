@@ -78,7 +78,7 @@
                                 Text="Observaciones" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Description, TargetNullValue='---'}" />
+                                Text="{Binding Description}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Muestra procesada" />

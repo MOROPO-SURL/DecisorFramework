@@ -87,8 +87,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Procesamiento de Muestra (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Procesamiento de Muestra"
+        ContentTemplate="{DataTemplate lab_manage_pages:AssessmentsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

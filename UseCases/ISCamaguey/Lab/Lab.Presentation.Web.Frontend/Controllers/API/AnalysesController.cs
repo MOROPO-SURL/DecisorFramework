@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;
+using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Filter;
 using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input;
 using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
 using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract;
@@ -9,7 +10,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.AP
 
 [Route("api/lab/[controller]")]
 [ApiController]
-public sealed class AnalysesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<Analysis, System.Guid, AnalysisInputModel, AnalysisDisplayModel>
+public sealed class AnalysesController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<Analysis, System.Guid, AnalysisInputModel, AnalysisDisplayModel, AnalysisFilterModel>
 {
     private readonly IEntityRepository<AbstractSample, System.Guid> sampleRepository;
 
@@ -23,10 +24,9 @@ public sealed class AnalysesController : Framework.Guama.Core.Presentation.Web.A
         return entity => !entity.Archived;
     }
 
-    protected override System.Func<Analysis, object> GetOrderSelector()
-    {
-        return entity => entity.At;
-    }
+    protected override System.Func<Analysis, object> GetOrderSelector() => entity => entity.At;
+
+    protected override bool IsOrderDescending() => true;
 
     public override ActionResult Delete(System.Guid key)
     {

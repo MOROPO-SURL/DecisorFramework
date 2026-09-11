@@ -14,6 +14,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Common.Extensions
             services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.ProductionSample, System.Guid>, Persistence.ORM.EF.Repositories.ProductionSampleRepository>();
             services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.WorkPlan, System.Guid>, Persistence.ORM.EF.Repositories.WorkPlanRepository>();
             services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Analysis, System.Guid>, Persistence.ORM.EF.Repositories.AnalysisRepository>();
+            services.AddScoped<Framework.Guama.Core.Persistence.Repositories.IEntityRepository<Persistence.Entities.Assessment, System.Guid>, Persistence.ORM.EF.Repositories.AssessmentRepository>();
 
             services.AddSingleton<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade, Persistence.ORM.EF.Providers.LabDbSchemaConfigurationProvider>();
         }

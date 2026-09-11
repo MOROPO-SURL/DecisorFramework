@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using MOROPO.Framework.Guama.Core.Persistence.Entities.Contract;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;

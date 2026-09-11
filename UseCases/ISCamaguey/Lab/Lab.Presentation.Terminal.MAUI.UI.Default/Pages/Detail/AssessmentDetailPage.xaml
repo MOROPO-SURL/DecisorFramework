@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.AssessmentDetailPage"
+    x:TypeArguments="interop_common_display_models:AssessmentDisplayModel"
+    x:DataType="interop_common_display_models:AssessmentDisplayModel"
+    Title="Detalles de Procesamiento de Muestra"
+    BackgroundColor="Transparent"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <fwrk_core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
+            
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="560"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <Grid>                        
+                        <StackLayout Margin="20" Spacing="20">
+                            <StackLayout>
+                                <Label 
+                                    Margin="0,0,0,20"
+                                    Text="Detalles"
+                                    FontAttributes="Bold"
+                                    FontSize="Medium" />
+                                <Label
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Margin="0"
+                                    Text="Fecha" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding At, StringFormat='{0:D}'}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Plan de trabajo" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding WorkPlan.At, StringFormat='{0:dd/MM/yyyy}'}" />
+                                            <Span Text="{Binding WorkPlan.WorkingGroup.Name, StringFormat=', {0}'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Muestra" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}">
+                                    <Label.FormattedText>
+                                        <FormattedString>
+                                            <Span Text="{Binding Sample.Index}" />
+                                            <Span Text="{Binding Sample.Year, StringFormat=' / {0}'}" />
+                                        </FormattedString>
+                                    </Label.FormattedText>
+                                </Label>
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Especialista" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Author.Contact}" />
+                                <Label 
+                                    Style="{StaticResource CaptionPropertyLabelStyle}"
+                                    Text="Conclusiones" />
+                                <Label
+                                    Style="{StaticResource ValuePropertyLabelStyle}"
+                                    Text="{Binding Description}" />
+                                <VerticalStackLayout>
+                                    <Label 
+                                        Style="{StaticResource CaptionPropertyLabelStyle}"
+                                        Margin="0,12,0,0"
+                                        Text="Documento" />
+                                    <Frame Padding="0">
+                                        <StackLayout Orientation="Horizontal">
+                                            <Grid
+                                                WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                                                BackgroundColor="DimGray">
+                                                <Label
+                                                    HorizontalOptions="Center" VerticalOptions="Center"
+                                                    Text="{Binding Document, Converter={StaticResource DocumentDisplayModelToMaterialDesignFontIconTextConverter}}"
+                                                    TextColor="White"
+                                                    FontSize="80"
+                                                    FontFamily="MaterialDesignIcons" />
+                                            </Grid>
+                                            <Grid 
+                                                HorizontalOptions="FillAndExpand"
+                                                Padding="16"
+                                                ColumnSpacing="8" RowSpacing="8">
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition />
+                                                    <ColumnDefinition />
+                                                </Grid.ColumnDefinitions>
+                                                <Grid.RowDefinitions>
+                                                    <RowDefinition Height="Auto" />
+                                                    <RowDefinition Height="Auto" />
+                                                </Grid.RowDefinitions>
+                                                <VerticalStackLayout
+                                                    Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
+                                                    Spacing="2">
+                                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                                                    <Label Text="{Binding Document.Name}" LineBreakMode="TailTruncation" />
+                                                </VerticalStackLayout>
+                                                <VerticalStackLayout
+                                                    Grid.Column="0" Grid.Row="1"
+                                                    Spacing="2">
+                                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
+                                                    <Label Text="{Binding Document.Extension}" />
+                                                </VerticalStackLayout>
+                                                <VerticalStackLayout
+                                                    Grid.Column="1" Grid.Row="1"
+                                                    Spacing="2">
+                                                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tamaño" />
+                                                    <Label Text="{Binding Document.Length, StringFormat='{0} bytes'}" />
+                                                </VerticalStackLayout>
+                                            </Grid>
+                                            <Button
+                                                VerticalOptions="Start"
+                                                Margin="8" Padding="0"
+                                                FontSize="21"
+                                                FontFamily="MaterialDesignIcons" 
+                                                Text="&#xF1DA;"
+                                                Clicked="DocumentDownloadButton_Clicked" />
+                                        </StackLayout>
+                                    </Frame>
+                                </VerticalStackLayout>
+                            </StackLayout>
+                            <StackLayout
+                                Orientation="Horizontal"
+                                Spacing="20">
+                                <Button 
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Modificar"
+                                    Clicked="EditButton_Clicked" />
+                                <Button 
+                                    Style="{StaticResource DangerKindButtonStyle}"
+                                    HorizontalOptions="FillAndExpand"
+                                    Text="Eliminar"
+                                    Clicked="DeleteButton_Clicked" />
+                            </StackLayout>
+                        </StackLayout>
+                        <Grid 
+                            x:Name="BusyIndicatorGrid" 
+                            IsVisible="False"
+                            BackgroundColor="{AppThemeBinding Light=#A7FFFFFF, Dark=#A7000000}">
+                            <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
+                                <ActivityIndicator 
+                                    WidthRequest="64.0" HeightRequest="64.0"
+                                    IsRunning="{Binding Source={RelativeSource AncestorType={Type Grid}}, Path=IsVisible}" />
+                            </VerticalStackLayout>
+                        </Grid>
+                    </Grid>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

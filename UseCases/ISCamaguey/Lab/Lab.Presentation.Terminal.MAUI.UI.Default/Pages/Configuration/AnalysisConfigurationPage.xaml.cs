@@ -56,14 +56,14 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
         return await apiConnectClient.GetAsync(model.Id);
     }
 
-    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    private void ApplyToolbarItem_Clicked(object sender, System.EventArgs args)
     {
-        OnApply(sender, eventArgs);
+        OnApply(sender, args);
     }
 
-    private void CancelToolbarItem_Clicked(object sender, System.EventArgs eventArgs)
+    private void CancelToolbarItem_Clicked(object sender, System.EventArgs args)
     {
-        OnCancel(sender, eventArgs);
+        OnCancel(sender, args);
     }
 
     private void Picker_SelectedIndexChanged(object sender, System.EventArgs args)

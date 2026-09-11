@@ -7919,17 +7919,17 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
+                    b.Property<Guid?>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
 
                     b.Property<Guid>("SampleId")
                         .HasColumnType("uuid")
                         .HasColumnName("sampleid");
+
+                    b.Property<Guid?>("WorkPlanId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("workplanid");
 
                     b.HasKey("Id")
                         .HasName("pk_assessments");
@@ -7937,8 +7937,14 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.HasIndex("AuthorId")
                         .HasDatabaseName("ix_assessments_authorid");
 
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_assessments_documentid");
+
                     b.HasIndex("SampleId")
                         .HasDatabaseName("ix_assessments_sampleid");
+
+                    b.HasIndex("WorkPlanId")
+                        .HasDatabaseName("ix_assessments_workplanid");
 
                     b.ToTable("assessments", "decisoriscamaguey_lab");
                 });
@@ -13139,6 +13145,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_assessments_employees_authorid");
 
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .HasConstraintName("fk_assessments_documents_documentid");
+
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", "Sample")
                         .WithMany()
                         .HasForeignKey("SampleId")
@@ -13146,9 +13157,18 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_assessments_samples_sampleid");
 
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.WorkPlan", "WorkPlan")
+                        .WithMany()
+                        .HasForeignKey("WorkPlanId")
+                        .HasConstraintName("fk_assessments_workplans_workplanid");
+
                     b.Navigation("Author");
 
+                    b.Navigation("Document");
+
                     b.Navigation("Sample");
+
+                    b.Navigation("WorkPlan");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", b =>

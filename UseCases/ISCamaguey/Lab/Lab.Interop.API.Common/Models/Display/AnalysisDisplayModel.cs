@@ -2,7 +2,6 @@
 using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
 using MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
-using System.Reflection;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 {
