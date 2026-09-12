@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;
 
-public partial class AssessmentsManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Models.View.AssessmentDetailViewModel, Models.Page.Manage.AssessmentsManagePageModel, Models.Page.Configuration.AssessmentConfigurationPageModel>
+public partial class AssessmentsManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<AssessmentDetailViewModel, Models.Page.Manage.AssessmentsManagePageModel, Models.Page.Configuration.AssessmentConfigurationPageModel>
 {
     public AssessmentsManagePage()
     {
@@ -23,24 +23,24 @@ public partial class AssessmentsManagePage : Framework.Decisor.Core.Presentation
 
     protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.ASSESSMENT_DEFAULT_CARD_VIEW_HEIGHT;
 
-    protected async override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Models.View.AssessmentDetailViewModel>> FetchItemsAsync()
+    protected async override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<AssessmentDetailViewModel>> FetchItemsAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.AssessmentsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
         var result = await apiConnectClient.GetPaginateAsync(CurrentItemsPageNumber, CurrentItemsPageLimit);
 
-        return new Framework.Guama.Core.Presentation.Models.PaginationModel<Models.View.AssessmentDetailViewModel>
+        return new Framework.Guama.Core.Presentation.Models.PaginationModel<AssessmentDetailViewModel>
         {
             Page = result.Page,
             HasNext = result.HasNext,
             HasPrevious = result.HasPrevious,
             Limit = result.Limit,
             MaxPageCount = result.MaxPageCount,
-            List = [.. result.List.Select(item => new Models.View.AssessmentDetailViewModel(item, []))]
+            List = [.. result.List.Select(item => new AssessmentDetailViewModel { Target = item, Analises = [] })]
         };
     }
 
-    protected override void OnActionDelegationRequest(Models.View.AssessmentDetailViewModel target, int discriminator)
+    protected override void OnActionDelegationRequest(AssessmentDetailViewModel target, int discriminator)
     {
         switch (discriminator)
         {
@@ -78,7 +78,7 @@ public partial class AssessmentsManagePage : Framework.Decisor.Core.Presentation
             }
         };
 
-        return new AssessmentDetailViewModel(model.Target, details);
+        return new AssessmentDetailViewModel { Target = model.Target, Analises = details };
     }
 
     private void AddItemToolbarItems_Clicked(object sender, System.EventArgs args)

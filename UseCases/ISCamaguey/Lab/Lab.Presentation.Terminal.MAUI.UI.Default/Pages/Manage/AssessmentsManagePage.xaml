@@ -49,12 +49,15 @@
                             <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
                         </CollectionView.ItemsLayout>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate>
-                                <local_card_views:AssessmentDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.ASSESSMENT_DEFAULT_CARD_VIEW_HEIGHT}">
+                            <DataTemplate x:DataType="presentation_view_models:AssessmentDetailViewModel">
+                                <ContentView>
                                     <ContentView.GestureRecognizers>
                                         <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
                                     </ContentView.GestureRecognizers>
-                                </local_card_views:AssessmentDefaultCardView>
+                                    <local_card_views:AssessmentDefaultCardView 
+                                        BindingContext="{Binding Target}"
+                                        HeightRequest="{Static local_constants:CardViewHeightConstants.ASSESSMENT_DEFAULT_CARD_VIEW_HEIGHT}" />
+                                </ContentView>
                             </DataTemplate>
                         </CollectionView.ItemTemplate>
                         <CollectionView.EmptyView>

@@ -50,7 +50,7 @@ public partial class AssessmentConfigurationPage : Framework.Decisor.Core.Presen
 
         await apiConnectClient.CreateAsync(model);
 
-        return new Models.View.AssessmentDetailViewModel(await apiConnectClient.GetAsync(model.Id), []);
+        return new Models.View.AssessmentDetailViewModel { Target = await apiConnectClient.GetAsync(model.Id), Analises = [] };
     }
 
     protected override async System.Threading.Tasks.Task<Models.View.AssessmentDetailViewModel> PerformEditionAsync()
@@ -84,7 +84,7 @@ public partial class AssessmentConfigurationPage : Framework.Decisor.Core.Presen
 
         await apiConnectClient.EditAsync(model);
 
-        return new Models.View.AssessmentDetailViewModel(await apiConnectClient.GetAsync(model.Id), []);
+        return new Models.View.AssessmentDetailViewModel { Target = await apiConnectClient.GetAsync(model.Id), Analises = [] };
     }
 
     private void ApplyToolbarItem_Clicked(object sender, System.EventArgs args)

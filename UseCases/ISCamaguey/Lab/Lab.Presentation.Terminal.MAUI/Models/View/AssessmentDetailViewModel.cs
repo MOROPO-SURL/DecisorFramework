@@ -3,4 +3,11 @@ using System.Collections.Generic;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.Models.View;
 
-public record AssessmentDetailViewModel(AssessmentDisplayModel Target, IEnumerable<AnalysisDetailViewModel> Analises);
+public partial class AssessmentDetailViewModel() : Framework.Caney.MVVM.Core.Models.BaseBindableModel
+{
+    private AssessmentDisplayModel target;
+
+    public AssessmentDisplayModel Target { get => target; set => SetProperty(ref target, value); }
+
+    public IEnumerable<AnalysisDetailViewModel> Analises { get; set; }
+}
