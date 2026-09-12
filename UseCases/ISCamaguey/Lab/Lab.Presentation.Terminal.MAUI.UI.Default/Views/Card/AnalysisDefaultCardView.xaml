@@ -10,7 +10,7 @@
             <Label 
                 Margin="0,0,0,8"
                 LineBreakMode="TailTruncation"
-                Text="{Binding At, StringFormat='{0:D}'}" />
+                Text="{Binding At, StringFormat='{0:D} - {0:hh:mm tt}'}" />
             <Label 
                 LineBreakMode="TailTruncation"
                 FontSize="Large">

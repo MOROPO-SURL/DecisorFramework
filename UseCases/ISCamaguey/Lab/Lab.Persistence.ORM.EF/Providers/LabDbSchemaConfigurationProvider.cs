@@ -14,6 +14,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.ORM.EF.Providers
                     new Configurators.AnalysisEntityTypeConfigurator(),
                     new Configurators.AnalysisQualityCheckEntityTypeConfigurator(),
                     new Configurators.AssessmentEntityTypeConfigurator(),
+                    new Configurators.AssessmentQualityCheckEntityTypeConfigurator(),
                     new BaseEntityTypeConfigurator<Entities.ProductionSample>(),
                     new BaseEntityTypeConfigurator<Entities.ResearchSample>(),
                     new BaseEntityTypeConfigurator<Entities.ServiceOrderSample>(),

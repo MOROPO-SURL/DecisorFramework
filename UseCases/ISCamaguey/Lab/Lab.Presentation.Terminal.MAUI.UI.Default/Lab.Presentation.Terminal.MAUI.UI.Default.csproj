@@ -37,18 +37,39 @@
 		<ProjectReference Include="..\Lab.Presentation.Terminal.MAUI\Lab.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\Configuration\AssessmentQualityCheckConfigurationPage.xaml.cs">
+	    <DependentUpon>AssessmentQualityCheckConfigurationPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Configuration\AnalysisQualityCheckConfigurationPage.xaml.cs">
 	    <DependentUpon>AnalysisQualityCheckConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\AssessmentQualityCheckDetailPage.xaml.cs">
+	    <DependentUpon>AssessmentQualityCheckDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Detail\AnalysisQualityCheckDetailPage.xaml.cs">
 	    <DependentUpon>AnalysisQualityCheckDetailPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Manage\AssessmentQualityChecksManagePage.xaml.cs">
+	    <DependentUpon>AssessmentQualityChecksManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\AssessmentPickPage.xaml.cs">
+	    <DependentUpon>AssessmentPickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\Card\AssessmentDefaultCardView.xaml.cs">
+	    <DependentUpon>AssessmentDefaultCardView.xaml</DependentUpon>
+	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\AssessmentQualityCheckConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\AnalysisQualityCheckConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\AssessmentConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\AssessmentQualityCheckDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\AnalysisQualityCheckDetailPage.xaml">
@@ -57,13 +78,22 @@
 	  <MauiXaml Update="Pages\Detail\AssessmentDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\AssessmentQualityChecksManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\AnalysisQualityChecksManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\AssessmentsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\AssessmentPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\AnalysisPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\AssessmentDefaultCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

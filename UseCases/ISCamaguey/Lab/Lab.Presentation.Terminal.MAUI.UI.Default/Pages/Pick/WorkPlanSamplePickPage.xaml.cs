@@ -1,6 +1,7 @@
 using Microsoft.Maui.Controls;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;
+using System.Reflection;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Pick;
 
@@ -37,6 +38,13 @@ public partial class WorkPlanSamplePickPage : Framework.Decisor.Core.Presentatio
     {
         ServiceOrderSampleDisplayModel target = (ServiceOrderSampleDisplayModel)(sender as BindableObject).BindingContext;
 
+        if (target.AssessmentAt != null)
+        {
+            DisplayAlert("Aviso", "No se puede seleccionar una muestra que ya ha sido procesada.", "Aceptar");
+
+            return;
+        }
+
         serviceOrderSamplePickedCallbackAction(target);
 
         this.NavigationPopModalPageAsync();
@@ -46,6 +54,13 @@ public partial class WorkPlanSamplePickPage : Framework.Decisor.Core.Presentatio
     {
         ResearchSampleDisplayModel target = (ResearchSampleDisplayModel)(sender as BindableObject).BindingContext;
 
+        if (target.AssessmentAt != null)
+        {
+            DisplayAlert("Aviso", "No se puede seleccionar una muestra que ya ha sido procesada.", "Aceptar");
+
+            return;
+        }
+
         researchSamplePickedCallbackAction(target);
 
         this.NavigationPopModalPageAsync();
@@ -54,6 +69,13 @@ public partial class WorkPlanSamplePickPage : Framework.Decisor.Core.Presentatio
     private void ProductionSampleViewTapGestureRecognizer_Tapped(object sender, TappedEventArgs args)
     {
         ProductionSampleDisplayModel target = (ProductionSampleDisplayModel)(sender as BindableObject).BindingContext;
+
+        if (target.AssessmentAt != null)
+        {
+            DisplayAlert("Aviso", "No se puede seleccionar una muestra que ya ha sido procesada.", "Aceptar");
+
+            return;
+        }
 
         productionSamplePickedCallbackAction(target);
 

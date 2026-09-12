@@ -7994,6 +7994,50 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("assessments", "decisoriscamaguey_lab");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AssessmentQualityCheck", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<Guid>("AssessmentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("assessmentid");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<double>("QualityPercent")
+                        .HasColumnType("double precision")
+                        .HasColumnName("qualitypercent");
+
+                    b.HasKey("Id")
+                        .HasName("pk_assessmentqualitychecks");
+
+                    b.HasIndex("AssessmentId")
+                        .HasDatabaseName("ix_assessmentqualitychecks_assessmentid");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_assessmentqualitychecks_authorid");
+
+                    b.ToTable("assessmentqualitychecks", "decisoriscamaguey_lab");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", b =>
                 {
                     b.Property<Guid>("Id")
@@ -13239,6 +13283,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Sample");
 
                     b.Navigation("WorkPlan");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.AssessmentQualityCheck", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Assessment", "Assessment")
+                        .WithMany()
+                        .HasForeignKey("AssessmentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_assessmentqualitychecks_assessments_assessmentid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired()
+                        .HasConstraintName("fk_assessmentqualitychecks_employees_authorid");
+
+                    b.Navigation("Assessment");
+
+                    b.Navigation("Author");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract.AbstractSample", b =>

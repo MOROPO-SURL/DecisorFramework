@@ -18,6 +18,7 @@ public sealed class AnalysisConfigurationPageModel : AbstractConfigurationPageMo
     public static string DescriptionValidableProperty => nameof(Description);
 
     private System.DateTime at;
+    private System.TimeSpan time;
     private string description;
     private WorkPlanDisplayModel workPlan;
     private SampleOverviewModel sample;
@@ -28,12 +29,14 @@ public sealed class AnalysisConfigurationPageModel : AbstractConfigurationPageMo
     {
         AvailableTechniques = [.. availableTechniques];
 
-        at = System.DateTime.Now;
+        at = System.DateTime.Today;
+        time = System.DateTime.Now.TimeOfDay;
 
         if (model == null) return;
 
         Id = model.Id;
         at = model.At;
+        time = model.At.TimeOfDay;
         description = model.Description;
         workPlan = model.WorkPlan;
         sample = model.Sample;
@@ -44,6 +47,8 @@ public sealed class AnalysisConfigurationPageModel : AbstractConfigurationPageMo
     public System.Guid Id { get; init; }
 
     public System.DateTime At { get => at; set => SetProperty(ref at, value); }
+
+    public System.TimeSpan Time { get => time; set => SetProperty(ref time, value); }
 
     public string Description { get => description; set => SetProperty(ref description, value); }
 

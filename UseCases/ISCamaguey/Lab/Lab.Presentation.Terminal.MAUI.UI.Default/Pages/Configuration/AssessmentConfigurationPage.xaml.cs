@@ -1,25 +1,25 @@
 using Microsoft.Extensions.DependencyInjection;
 using MOROPO.Framework.Caney.MVVM.Core.Extensions;
 using MOROPO.Framework.Guama.Core.Presentation.API.Connect.Providers.Facade;
-using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models;
-using System.Linq;
+using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class AssessmentConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<AssessmentDisplayModel, AssessmentDisplayModel, Models.Page.Configuration.AssessmentConfigurationPageModel>
+public partial class AssessmentConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Models.View.AssessmentDetailViewModel, Models.View.AssessmentDetailViewModel, Models.Page.Configuration.AssessmentConfigurationPageModel>
 {
     private Microsoft.Maui.Storage.FileResult documentFilePickResult;
 
-    public AssessmentConfigurationPage(System.Action<AssessmentDisplayModel> successAction, Models.Page.Configuration.AssessmentConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.AssessmentConfigurationPageModel> validator) : base(successAction, model, validator)
+    public AssessmentConfigurationPage(System.Action<Models.View.AssessmentDetailViewModel> successAction, Models.Page.Configuration.AssessmentConfigurationPageModel model, FluentValidation.AbstractValidator<Models.Page.Configuration.AssessmentConfigurationPageModel> validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }
 
     protected override string EntityTypeName => "Procesamiento de Muestra";
 
-    protected override async System.Threading.Tasks.Task<AssessmentDisplayModel> PerformCreationAsync()
+    protected override async System.Threading.Tasks.Task<Models.View.AssessmentDetailViewModel> PerformCreationAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.AssessmentsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
@@ -50,10 +50,10 @@ public partial class AssessmentConfigurationPage : Framework.Decisor.Core.Presen
 
         await apiConnectClient.CreateAsync(model);
 
-        return await apiConnectClient.GetAsync(model.Id);
+        return new Models.View.AssessmentDetailViewModel(await apiConnectClient.GetAsync(model.Id), []);
     }
 
-    protected override async System.Threading.Tasks.Task<AssessmentDisplayModel> PerformEditionAsync()
+    protected override async System.Threading.Tasks.Task<Models.View.AssessmentDetailViewModel> PerformEditionAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.AssessmentsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
 
@@ -84,7 +84,7 @@ public partial class AssessmentConfigurationPage : Framework.Decisor.Core.Presen
 
         await apiConnectClient.EditAsync(model);
 
-        return await apiConnectClient.GetAsync(model.Id);
+        return new Models.View.AssessmentDetailViewModel(await apiConnectClient.GetAsync(model.Id), []);
     }
 
     private void ApplyToolbarItem_Clicked(object sender, System.EventArgs args)
@@ -236,9 +236,12 @@ public partial class AssessmentConfigurationPage : Framework.Decisor.Core.Presen
 
         ConcreteBindingContext.IsBusy = true;
 
-        var apiConnectClient = new Interop.API.Connect.Clients.AnalysesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>());
+        var httpClientHelperProvider = Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<IHttpClientHelperProviderFacade>();
 
-        apiConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.AnalysisFilterModel { SampleId = sampleId }).ContinueWith(task =>
+        var analysesAPIConnectClient = new Interop.API.Connect.Clients.AnalysesAPIConnectClient(httpClientHelperProvider);
+        var analisisQualityCheckAPIConnectClient = new Interop.API.Connect.Clients.AnalysisQualityChecksAPIConnectClient(httpClientHelperProvider);
+
+        analysesAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.AnalysisFilterModel { SampleId = sampleId }).ContinueWith(task =>
         {
             Dispatcher.Dispatch(() =>
             {
@@ -255,7 +258,20 @@ public partial class AssessmentConfigurationPage : Framework.Decisor.Core.Presen
 
                 foreach (var item in orderedItems)
                 {
-                    ConcreteBindingContext.Analyses.Add(item);
+                    analisisQualityCheckAPIConnectClient.FilterAsync(new Interop.API.Common.Models.Filter.AnalysisQualityCheckFilterModel { AnalysisId = item.Id }).ContinueWith(_task =>
+                    {
+                        Dispatcher.Dispatch(() =>
+                        {
+                            if (!task.IsCompletedSuccessfully)
+                            {
+                                HandleException(_task.Exception);
+
+                                return;
+                            }
+
+                            ConcreteBindingContext.Analyses.Add(new Models.View.AnalysisDetailViewModel(item, _task.Result));
+                        });
+                    });
                 }
             });
         });

@@ -4,11 +4,11 @@ using MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Extensions;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Detail;
 
-public partial class AssessmentDetailPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Interop.API.Common.Models.Display.AssessmentDisplayModel>
+public partial class AssessmentDetailPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.DetailBaseContentPage<Models.View.AssessmentDetailViewModel>
 {
-    private readonly System.Action<Interop.API.Common.Models.Display.AssessmentDisplayModel, int?> delegationAction;
+    private readonly System.Action<Models.View.AssessmentDetailViewModel, int?> delegationAction;
 
-    public AssessmentDetailPage(Interop.API.Common.Models.Display.AssessmentDisplayModel bindingContextModel, System.Action<Interop.API.Common.Models.Display.AssessmentDisplayModel, int?> delegationAction) : base(bindingContextModel)
+    public AssessmentDetailPage(Models.View.AssessmentDetailViewModel bindingContextModel, System.Action<Models.View.AssessmentDetailViewModel, int?> delegationAction) : base(bindingContextModel)
     {
         InitializeComponent();
 
@@ -17,7 +17,7 @@ public partial class AssessmentDetailPage : Framework.Decisor.Core.Presentation.
 
     private void EditButton_Clicked(object sender, System.EventArgs eventArgs)
     {
-        var model = BindingContext as Interop.API.Common.Models.Display.AssessmentDisplayModel;
+        var model = BindingContext as Models.View.AssessmentDetailViewModel;
 
         this.NavigationPopModalPageAsync().ContinueWith(_ =>
         {
@@ -32,7 +32,7 @@ public partial class AssessmentDetailPage : Framework.Decisor.Core.Presentation.
         {
             if (!task.Result) return;
 
-            var model = BindingContext as Interop.API.Common.Models.Display.AssessmentDisplayModel;
+            var model = BindingContext as Models.View.AssessmentDetailViewModel;
 
             Dispatcher.Dispatch(() =>
             {

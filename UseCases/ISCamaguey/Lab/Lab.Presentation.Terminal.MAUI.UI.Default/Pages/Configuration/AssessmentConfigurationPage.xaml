@@ -4,7 +4,9 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_constants="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Constants"
     xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:local_converters="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Converters"
     xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI"
+    xmlns:presentation_view_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.Models.View;assembly=MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI"
     xmlns:fwrk_domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
     xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
     xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
@@ -13,10 +15,12 @@
     xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.AssessmentConfigurationPage"
-    x:TypeArguments="interop_common_display_models:AssessmentDisplayModel,interop_common_display_models:AssessmentDisplayModel,presentation_configuration_page_models:AssessmentConfigurationPageModel"
+    x:TypeArguments="presentation_view_models:AssessmentDetailViewModel,presentation_view_models:AssessmentDetailViewModel,presentation_configuration_page_models:AssessmentConfigurationPageModel"
     x:DataType="presentation_configuration_page_models:AssessmentConfigurationPageModel">
     <ContentPage.Resources>
         <ResourceDictionary>
+            <local_converters:QualityPercentDoubleToQualityStartSymbolGroupConverter x:Key="QualityPercentDoubleToQualityStartSymbolGroupConverter" />
+            
             <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
             <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
@@ -163,18 +167,25 @@
                         <CollectionView.EmptyView>
                             <Label
                                 Padding="5"
-                                Text="Sin elementos que mostrar"
+                                Text="Seleccione una muestra con análisis realizados"
                                 TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
                                 FontAttributes="Italic" />
                         </CollectionView.EmptyView>
                         <CollectionView.ItemTemplate>
-                            <DataTemplate x:DataType="interop_common_display_models:AnalysisDisplayModel">
+                            <DataTemplate x:DataType="presentation_view_models:AnalysisDetailViewModel">
                                 <Frame>
                                     <VerticalStackLayout>
                                         <Label 
-                                            Margin="0,0,0,8"
                                             LineBreakMode="TailTruncation"
-                                            Text="{Binding At, StringFormat='{0:D}'}" />
+                                            Text="{Binding Target.At, StringFormat='{0:D} - {0:hh:mm tt}'}" />
+                                        <Label 
+                                            Margin="0,12,0,0"
+                                            LineBreakMode="TailTruncation"
+                                            FontAttributes="Bold"
+                                            Text="Especialista" />
+                                        <Label 
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Target.Author.Contact}" />
                                         <Label 
                                             Margin="0,12,0,0"
                                             LineBreakMode="TailTruncation"
@@ -182,13 +193,64 @@
                                             Text="Técnica" />
                                         <Label 
                                             LineBreakMode="TailTruncation"
-                                            Text="{Binding Technique.Name}" />
+                                            Text="{Binding Target.Technique.Name}" />
                                         <Label 
                                             Margin="0,12,0,0"
                                             LineBreakMode="TailTruncation"
                                             FontAttributes="Bold"
                                             Text="Observaciones" />
-                                        <Label Text="{Binding Description}" />
+                                        <Label Text="{Binding Target.Description}" />
+                                        <Label 
+                                            Margin="0,12,0,0"
+                                            LineBreakMode="TailTruncation"
+                                            FontAttributes="Bold"
+                                            Text="Evaluaciones de Calidad" />
+                                        <BoxView HeightRequest="2" Style="{StaticResource SeparatorBoxView}" />
+                                        <CollectionView
+                                            ItemsSource="{Binding QualityChecks}">
+                                            <CollectionView.ItemsLayout>
+                                                <LinearItemsLayout Orientation="Vertical" ItemSpacing="10" />
+                                            </CollectionView.ItemsLayout>
+                                            <CollectionView.EmptyView>
+                                                <Label
+                                                    Padding="5"
+                                                    Text="Sin elementos que mostrar"
+                                                    TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                                    FontAttributes="Italic" />
+                                            </CollectionView.EmptyView>
+                                            <CollectionView.ItemTemplate>
+                                                <DataTemplate x:DataType="interop_common_display_models:AnalysisQualityCheckDisplayModel">
+                                                    <Frame>
+                                                        <VerticalStackLayout>
+                                                            <Label Text="{Binding At, StringFormat='{0:D} - {0:hh:mm tt}'}" />
+                                                            <StackLayout Orientation="Horizontal" Spacing="8">
+                                                                <Label 
+                                                                    FontFamily="MaterialDesignIcons"
+                                                                    FontSize="Medium"
+                                                                    Text="{Binding QualityPercent, Converter={StaticResource QualityPercentDoubleToQualityStartSymbolGroupConverter}}" />
+                                                                <Label
+                                                                    VerticalOptions="Center"
+                                                                    Text="{Binding QualityPercent, StringFormat='({0:F2}%)'}" />
+                                                            </StackLayout>
+                                                            <Label 
+                                                                Margin="0,8,0,0"
+                                                                LineBreakMode="TailTruncation"
+                                                                FontAttributes="Bold"
+                                                                Text="Especialista" />
+                                                            <Label 
+                                                                LineBreakMode="TailTruncation"
+                                                                Text="{Binding Author.Contact}" />
+                                                            <Label 
+                                                                Margin="0,8,0,0"
+                                                                LineBreakMode="TailTruncation"
+                                                                FontAttributes="Bold"
+                                                                Text="Conclusiones" />
+                                                            <Label Text="{Binding Description}" />
+                                                        </VerticalStackLayout>
+                                                    </Frame>
+                                                </DataTemplate>
+                                            </CollectionView.ItemTemplate>
+                                        </CollectionView>
                                     </VerticalStackLayout>
                                 </Frame>
                             </DataTemplate>

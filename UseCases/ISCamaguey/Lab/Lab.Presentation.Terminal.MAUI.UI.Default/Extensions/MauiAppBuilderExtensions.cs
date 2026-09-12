@@ -20,7 +20,8 @@ public static class MauiAppBuilderExtensions
             .AddSingleton<IDetailContentPageFactoryFacade<WorkPlanDisplayModel>, WorkPlanDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<AnalysisDisplayModel>, AnalysisDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<AnalysisQualityCheckDisplayModel>, AnalysisQualityCheckDetailPageFactory>()
-            .AddSingleton<IDetailContentPageFactoryFacade<AssessmentDisplayModel>, AssessmentDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<Models.View.AssessmentDetailViewModel>, AssessmentDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<AssessmentQualityCheckDisplayModel>, AssessmentQualityCheckDetailPageFactory>()
 
             // ConfigurationPage factory resgistration !!!
             .AddSingleton<IConfigurationContentPageFactoryFacade<WorkingGroupDisplayModel, WorkingGroupConfigurationPageModel>, WorkingGroupConfigurationPageFactory>()
@@ -30,7 +31,8 @@ public static class MauiAppBuilderExtensions
             .AddSingleton<IConfigurationContentPageFactoryFacade<WorkPlanDisplayModel, WorkPlanConfigurationPageModel>, WorkPlanConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<AnalysisDisplayModel, AnalysisConfigurationPageModel>, AnalysisConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<AnalysisQualityCheckDisplayModel, AnalysisQualityCheckConfigurationPageModel>, AnalysisQualityCheckConfigurationPageFactory>()
-            .AddSingleton<IConfigurationContentPageFactoryFacade<AssessmentDisplayModel, AssessmentConfigurationPageModel>, AssessmentConfigurationPageFactory>();
+            .AddSingleton<IConfigurationContentPageFactoryFacade<Models.View.AssessmentDetailViewModel, AssessmentConfigurationPageModel>, AssessmentConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<AssessmentQualityCheckDisplayModel, AssessmentQualityCheckConfigurationPageModel>, AssessmentQualityCheckConfigurationPageFactory>();
 
         return builder;
     }

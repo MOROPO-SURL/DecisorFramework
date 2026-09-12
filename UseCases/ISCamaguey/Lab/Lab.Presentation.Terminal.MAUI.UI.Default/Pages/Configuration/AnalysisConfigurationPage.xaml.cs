@@ -23,7 +23,7 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
         var model = new Interop.API.Common.Models.Input.AnalysisInputModel
         {
             Id = System.Guid.NewGuid(),
-            At = ConcreteBindingContext.At,
+            At = ConcreteBindingContext.At.Date.AddTicks(ConcreteBindingContext.Time.Ticks),
             Description = ConcreteBindingContext.Description,
             WorkPlanId = ConcreteBindingContext.WorkPlan.Id,
             SampleId = ConcreteBindingContext.Sample.Id,
@@ -43,7 +43,7 @@ public partial class AnalysisConfigurationPage : Framework.Decisor.Core.Presenta
         var model = new Interop.API.Common.Models.Input.AnalysisInputModel
         {
             Id = ConcreteBindingContext.Id,
-            At = ConcreteBindingContext.At,
+            At = ConcreteBindingContext.At.Date.AddTicks(ConcreteBindingContext.Time.Ticks),
             Description = ConcreteBindingContext.Description,
             WorkPlanId = ConcreteBindingContext.WorkPlan.Id,
             SampleId = ConcreteBindingContext.Sample.Id,

@@ -98,8 +98,8 @@
             Title="Análisis de Muestras"
             ContentTemplate="{DataTemplate lab_manage_pages:AnalysisQualityCheckQualityChecksManagePage}" />
         <ShellContent 
-            Title="Procesamientos de Muestra (%)"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            Title="Procesamientos de Muestra"
+            ContentTemplate="{DataTemplate lab_manage_pages:AssessmentQualityCheckQualityChecksManagePage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent

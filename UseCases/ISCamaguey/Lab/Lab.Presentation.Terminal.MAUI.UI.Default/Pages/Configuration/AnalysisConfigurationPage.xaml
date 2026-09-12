@@ -48,14 +48,20 @@
                     Wrap="Wrap"
                     AlignItems="Start" AlignContent="Start">
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=2, MediumContainerColumn=3, SmallContainerColumn=12}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, LargeContainerColumn=4, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha" />
-                        <DatePicker Date="{Binding At}" Format="dd/MM/yyyy" />
+                        <DatePicker 
+                            Date="{Binding At}" 
+                            Format="dd/MM/yyyy" />
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Hora" />
+                        <TimePicker 
+                            VerticalOptions="Center"
+                            Time="{Binding Time}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, LargeContainerColumn=10, MediumContainerColumn=9, SmallContainerColumn=12}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=5, ExtraLargeContainerColumn=6, LargeContainerColumn=8, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Plan de trabajo" />
@@ -146,7 +152,7 @@
                             Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 
-                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=5, SmallContainerColumn=12}}"
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=6, SmallContainerColumn=12}}"
                         Margin="4"
                         Spacing="6">
                         <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Técnica" />

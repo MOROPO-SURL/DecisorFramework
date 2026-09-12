@@ -6,7 +6,7 @@ using System.Collections.ObjectModel;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.Models.Page.Configuration;
 
-public sealed class AssessmentConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<AssessmentDisplayModel>
+public sealed class AssessmentConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<View.AssessmentDetailViewModel>
 {
     public static string WorkPlanValidableProperty => nameof(WorkPlan);
     public static string SampleValidableProperty => nameof(Sample);
@@ -22,19 +22,21 @@ public sealed class AssessmentConfigurationPageModel : Framework.Decisor.Core.Pr
     private EmployeeDisplayModel author;
     private DocumentDisplayModel document;
 
-    public AssessmentConfigurationPageModel(AssessmentDisplayModel model) : base(model)
+    public AssessmentConfigurationPageModel(View.AssessmentDetailViewModel model) : base(model)
     {
         at = System.DateTime.Now;
 
         if (model == null) return;
 
-        Id = model.Id;
-        at = model.At;
-        description = model.Description;
-        workPlan = model.WorkPlan;
-        sample = model.Sample;
-        author = model.Author;
-        document = model.Document;
+        Id = model.Target.Id;
+        at = model.Target.At;
+        description = model.Target.Description;
+        workPlan = model.Target.WorkPlan;
+        sample = model.Target.Sample;
+        author = model.Target.Author;
+        document = model.Target.Document;
+
+        Analyses = [.. model.Analises];
     }
 
     public System.Guid Id { get; init; }
@@ -51,5 +53,5 @@ public sealed class AssessmentConfigurationPageModel : Framework.Decisor.Core.Pr
 
     public DocumentDisplayModel Document { get => document; set => SetProperty(ref document, value); }
 
-    public ObservableCollection<AnalysisDisplayModel> Analyses { get; set; } = [];
+    public ObservableCollection<View.AnalysisDetailViewModel> Analyses { get; init; } = [];
 }
