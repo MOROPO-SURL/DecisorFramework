@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:local_converters="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Converters"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.AnalysisQualityCheckDetailPage"
+    x:TypeArguments="interop_common_display_models:AnalysisQualityCheckDisplayModel"
+    x:DataType="interop_common_display_models:AnalysisQualityCheckDisplayModel"
+    Title="Detalles de Evaluación de Calidad de Análisis de Muestra"
+    BackgroundColor="Transparent"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local_converters:QualityPercentDoubleToQualityStartSymbolGroupConverter x:Key="QualityPercentDoubleToQualityStartSymbolGroupConverter" />
+
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView Orientation="Vertical">
+        <Grid
+            Padding="10"
+            MaximumWidthRequest="480"
+            VerticalOptions="Center">
+            <Frame Style="{StaticResource PopupFrameStyle}">
+                <StackLayout Margin="20" Spacing="20">
+                    <StackLayout>
+                        <Label 
+                            Margin="0,0,0,20"
+                            Text="Detalles"
+                            FontAttributes="Bold"
+                            FontSize="Medium" />
+                        <Label
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Margin="0"
+                            Text="Fecha" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding At, StringFormat='{0:D}'}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Análisis de Muestra" />
+                        <local_card_views:AnalysisDefaultCardView 
+                            Margin="0,4,0,0"
+                            BindingContext="{Binding Analysis}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Especialista" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Author.Contact}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Evaluación" />
+                        <StackLayout Orientation="Horizontal" Spacing="8">
+                            <Label 
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Medium"
+                                Text="{Binding QualityPercent, Converter={StaticResource QualityPercentDoubleToQualityStartSymbolGroupConverter}}" />
+                            <Label
+                                VerticalOptions="Center"
+                                Text="{Binding QualityPercent, StringFormat='({0:F2}%)'}" />
+                        </StackLayout>
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Conclusiones" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Description}" />
+                    </StackLayout>
+                    <StackLayout
+                        Orientation="Horizontal"
+                        Spacing="20">
+                        <Button 
+                            HorizontalOptions="FillAndExpand"
+                            Text="Modificar"
+                            Clicked="EditButton_Clicked" />
+                        <Button 
+                            Style="{StaticResource DangerKindButtonStyle}"
+                            HorizontalOptions="FillAndExpand"
+                            Text="Eliminar"
+                            Clicked="DeleteButton_Clicked" />
+                    </StackLayout>
+                </StackLayout>
+            </Frame>
+            <Button
+                Style="{StaticResource DetailPageCloseButtonStyle}"
+                Clicked="DismissControl_Invoked" />
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

@@ -13,7 +13,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.AssessmentsManagePage"
     x:TypeArguments="interop_common_display_models:AssessmentDisplayModel,presentation_manage_page_models:AssessmentsManagePageModel,presentation_configuration_page_models:AssessmentConfigurationPageModel"
     x:DataType="presentation_manage_page_models:AssessmentsManagePageModel"
-    Title="Gestión de Procesamientos de Muestra">
+    Title="Registros de Procesamientos de Muestras">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />

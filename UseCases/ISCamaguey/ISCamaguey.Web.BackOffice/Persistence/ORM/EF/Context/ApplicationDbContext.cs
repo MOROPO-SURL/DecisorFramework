@@ -241,7 +241,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ParticipatingOrganization> ParticipatingOrganizations { get; set; }
         public DbSet<ParticipatingOrganizationKnowledgeAreaBridge> ParticipatingOrganizationKnowledgeAreaBridges { get; set; }
         public DbSet<IDi.Persistence.Entities.Program> Programs { get; set; }
-        public DbSet<IDi.Persistence.Entities.ProgramKind> ProgramKinds { get; set; }
+        public DbSet<ProgramKind> ProgramKinds { get; set; }
         public DbSet<ProgramExpectResult> ProgramExpectResults { get; set; }
         public DbSet<ImpactDimension> ImpactDimensions { get; set; }
         public DbSet<Project> Projects { get; set; }
@@ -275,7 +275,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
 
         public DbSet<SampleAnalysisReport> SampleAnalysisReports { get; set; }
         public DbSet<SampleAnalysisServiceReport> SampleAnalysisServiceReports { get; set; }
-        public DbSet<Analysis> Analysises { get; set; }
+        public DbSet<Analysis> Analyses { get; set; }
+        public DbSet<AnalysisQualityCheck> AnalysisQualityChecks { get; set; }
         public DbSet<Assessment> Assessments { get; set; }
         public DbSet<SampleKind> SampleKinds { get; set; }
         public DbSet<ResearchSample> ResearchSamples { get; set; }

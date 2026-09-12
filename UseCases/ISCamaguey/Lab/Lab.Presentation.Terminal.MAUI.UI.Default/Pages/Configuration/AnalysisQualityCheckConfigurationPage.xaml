@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ConfigurationBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Constants"
+    xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:local_converters="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Converters"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI"
+    xmlns:fwrk_domain_presentation_card_views="clr-namespace:MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default.Views.Card;assembly=MOROPO.Framework.Decisor.Domain.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_models="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.Models;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"    
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration.AnalysisQualityCheckConfigurationPage"
+    x:TypeArguments="interop_common_display_models:AnalysisQualityCheckDisplayModel,interop_common_display_models:AnalysisQualityCheckDisplayModel,presentation_configuration_page_models:AnalysisQualityCheckConfigurationPageModel"
+    x:DataType="presentation_configuration_page_models:AnalysisQualityCheckConfigurationPageModel">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local_converters:QualityPercentDoubleToQualityStartSymbolGroupConverter x:Key="QualityPercentDoubleToQualityStartSymbolGroupConverter" />
+
+            <core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
+            <core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
+
+            <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Aplicar"
+            Clicked="ApplyToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf12c;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Cancelar"
+            Clicked="CancelToolbarItem_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf156;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <Grid>
+        <ScrollView Orientation="Vertical">
+            <VerticalStackLayout Spacing="4" Padding="8">
+                <FlexLayout 
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=2, LargeContainerColumn=2, MediumContainerColumn=3, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Fecha" />
+                        <DatePicker Date="{Binding At}" Format="dd/MM/yyyy" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=6, LargeContainerColumn=10, MediumContainerColumn=9, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Análisis de Muestra" />
+                        <ContentView                        
+                            IsVisible="{Binding Analysis, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="{Static local_constants:CardViewHeightConstants.ANALYSIS_DEFAULT_CARD_VIEW_HEIGHT}">
+                            <local_card_views:AnalysisDefaultCardView
+                                BindingContext="{Binding Analysis}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="AnalysisPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:AnalysisQualityCheckConfigurationPageModel.AnalysisValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:AnalysisQualityCheckConfigurationPageModel.AnalysisValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, LargeContainerColumn=5, MediumContainerColumn=7, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Especialista de Calidad" />
+                        <ContentView                        
+                            IsVisible="{Binding Author, Converter={StaticResource IsNotNullConverter}}"
+                            HeightRequest="140">
+                            <fwrk_domain_presentation_card_views:EmployeeDefaultCardView
+                                BindingContext="{Binding Author}" />
+                        </ContentView>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="AuthorPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:AnalysisConfigurationPageModel.AuthorValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:AnalysisConfigurationPageModel.AuthorValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=3, LargeContainerColumn=4, MediumContainerColumn=5, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Evaluación de Calidad" />
+                        <Slider                        
+                            Minimum="0" Maximum="100"
+                            Value="{Binding QualityPercent}" />
+                        <StackLayout Orientation="Horizontal" Spacing="8">
+                            <Label 
+                                FontFamily="MaterialDesignIcons"
+                                FontSize="Medium"
+                                Text="{Binding QualityPercent, Converter={StaticResource QualityPercentDoubleToQualityStartSymbolGroupConverter}}" />
+                            <Label
+                                VerticalOptions="Center"
+                                Text="{Binding QualityPercent, StringFormat='({0:F2}%)'}" />
+                        </StackLayout>
+                    </VerticalStackLayout>
+                </FlexLayout>
+                <VerticalStackLayout 
+                    Margin="8"
+                    Spacing="6">
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Conclusiones" />
+                    <Editor Text="{Binding Description}" HeightRequest="240" />
+                    <Label
+                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:AnalysisQualityCheckConfigurationPageModel.DescriptionValidableProperty}}"
+                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:AnalysisQualityCheckConfigurationPageModel.DescriptionValidableProperty}}"
+                        Style="{StaticResource ValidationMessageLabelStyle}" />
+                </VerticalStackLayout>
+            </VerticalStackLayout>
+        </ScrollView>
+        <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</core_ui_base_pages:ConfigurationBaseContentPage>

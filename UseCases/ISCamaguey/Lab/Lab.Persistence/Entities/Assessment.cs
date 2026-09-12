@@ -28,6 +28,6 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities
 
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DocumentId))]
         public Document Document { get; set; }
-        public System.Guid? DocumentId { get; set; }
+        public System.Guid DocumentId { get; set; }
     }
 }

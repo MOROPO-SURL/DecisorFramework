@@ -37,13 +37,33 @@
 		<ProjectReference Include="..\Lab.Presentation.Terminal.MAUI\Lab.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\Configuration\AnalysisQualityCheckConfigurationPage.xaml.cs">
+	    <DependentUpon>AnalysisQualityCheckConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\AnalysisQualityCheckDetailPage.xaml.cs">
+	    <DependentUpon>AnalysisQualityCheckDetailPage.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\AnalysisQualityCheckConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\AssessmentConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\AnalysisQualityCheckDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\AssessmentDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\AnalysisQualityChecksManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\AssessmentsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\AnalysisPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

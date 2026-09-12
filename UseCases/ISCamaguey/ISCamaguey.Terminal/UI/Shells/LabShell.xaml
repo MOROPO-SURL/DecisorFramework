@@ -77,16 +77,6 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Revisiones de Calidad (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF14C;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
         Title="Procesamiento de Muestra"
         ContentTemplate="{DataTemplate lab_manage_pages:AssessmentsManagePage}">
         <ShellContent.Icon>
@@ -96,6 +86,21 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <FlyoutItem
+        Title="Evaluaciones de Calidad">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF14C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent 
+            Title="Análisis de Muestras"
+            ContentTemplate="{DataTemplate lab_manage_pages:AnalysisQualityCheckQualityChecksManagePage}" />
+        <ShellContent 
+            Title="Procesamientos de Muestra (%)"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
     <MenuFlyoutItem Text="Gestión" IsEnabled="False" />
     <ShellContent
         Title="Grupos de Trabajo"

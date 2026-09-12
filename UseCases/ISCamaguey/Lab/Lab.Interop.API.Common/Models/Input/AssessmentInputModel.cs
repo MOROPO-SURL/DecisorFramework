@@ -23,7 +23,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
 
         public Assessment Export()
         {
-            var entity = new Assessment { Id = Id, Archived = false };
+            var entity = new Assessment { Id = Id, Archived = false, WorkPlanId = WorkPlanId, SampleId = SampleId };
 
             Mergue(entity);
 
@@ -39,18 +39,6 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input
         {
             entity.At = At;
             entity.Description = Description;
-
-            if (entity.WorkPlanId != WorkPlanId)
-            {
-                entity.WorkPlan = null;
-                entity.WorkPlanId = WorkPlanId;
-            }
-
-            if (entity.SampleId != SampleId)
-            {
-                entity.Sample = null;
-                entity.SampleId = SampleId;
-            }
 
             if (entity.AuthorId != AuthorId)
             {

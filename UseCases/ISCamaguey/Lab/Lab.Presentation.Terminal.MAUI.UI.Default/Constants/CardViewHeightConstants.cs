@@ -15,6 +15,9 @@ public static class CardViewHeightConstants
     public static double ANALYSIS_DEFAULT_CARD_VIEW_HEIGHT = 208;
     public static double ANALYSIS_DEFAULT_CARD_VIEW_WIDTH = 480;
 
+    public static double ANALYSIS_QUALITY_CHECK_DEFAULT_CARD_VIEW_HEIGHT = 208;
+    public static double ANALYSIS_QUALITY_CHECK_DEFAULT_CARD_VIEW_WIDTH = 360;
+
     public static double ASSESSMENT_DEFAULT_CARD_VIEW_HEIGHT = 240;
     public static double ASSESSMENT_DEFAULT_CARD_VIEW_WIDTH = 480;
 }

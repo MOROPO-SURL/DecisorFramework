@@ -13,7 +13,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.AnalysesManagePage"
     x:TypeArguments="interop_common_display_models:AnalysisDisplayModel,presentation_manage_page_models:AnalysesManagePageModel,presentation_configuration_page_models:AnalysisConfigurationPageModel"
     x:DataType="presentation_manage_page_models:AnalysesManagePageModel"
-    Title="Gestión de Análisis de Muestras">
+    Title="Registro de Análisis de Muestras">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />

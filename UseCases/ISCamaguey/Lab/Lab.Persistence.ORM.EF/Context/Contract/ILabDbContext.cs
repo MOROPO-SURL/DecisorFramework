@@ -4,7 +4,8 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Persistence.ORM.EF.Context.Contract
 {
     public interface ILabDbContext : Servicing.Persistence.ORM.EF.Context.Contract.IServicingDbContext, IDi.Persistence.ORM.EF.Context.Contract.IIDiDbContext
     {
-        public DbSet<Entities.Analysis> Analysises { get; set; }
+        public DbSet<Entities.Analysis> Analyses { get; set; }
+        public DbSet<Entities.AnalysisQualityCheck> AnalysisQualityChecks { get; set; }
         public DbSet<Entities.Assessment> Assessments { get; set; }
         public DbSet<Entities.ProductionSample> ProductionSamples { get; set; }
         public DbSet<Entities.ResearchSample> ResearchSamples { get; set; }
