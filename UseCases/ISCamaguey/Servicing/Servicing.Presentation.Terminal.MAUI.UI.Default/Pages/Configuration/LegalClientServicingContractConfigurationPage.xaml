@@ -352,7 +352,7 @@
                                                         Clicked="TrainingServiceDetailButton_Clicked" />
                                                     <Button
                                                         Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
-                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         Text="&#xFA78;"
                                                         Clicked="TrainingServiceRemotionButton_Clicked" />
                                                 </Grid>
@@ -434,7 +434,7 @@
                                                         Clicked="SampleAnalysisServiceDetailButton_Clicked" />
                                                     <Button
                                                         Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
-                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         Text="&#xFA78;"
                                                         Clicked="SampleAnalysisServiceRemotionButton_Clicked" />
                                                 </Grid>
@@ -516,7 +516,7 @@
                                                         Clicked="GroundIntegralStudyServiceDetailButton_Clicked" />
                                                     <Button
                                                         Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
-                                                        Style="{StaticResource FontIconImageButtonStyle}"
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                         Text="&#xFA78;"
                                                         Clicked="GroundIntegralStudyServiceRemotionButton_Clicked" />
                                                 </Grid>

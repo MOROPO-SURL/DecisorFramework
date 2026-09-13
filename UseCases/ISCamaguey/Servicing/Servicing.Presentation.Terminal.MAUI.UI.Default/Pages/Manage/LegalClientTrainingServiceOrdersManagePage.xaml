@@ -14,7 +14,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.LegalClientTrainingServiceOrdersManagePage"
     x:TypeArguments="interop_common_display_models:LegalClientTrainingServiceOrderDisplayModel,presentation_manage_page_models:LegalClientTrainingServiceOrdersManagePageModel,presentation_configuration_page_models:LegalClientTrainingServiceOrderConfigurationPageModel"
     x:DataType="presentation_manage_page_models:LegalClientTrainingServiceOrdersManagePageModel"
-    Title="Gestión de Órdenes de Servicio para Clientes Jurídicos">
+    Title="Órdenes de Servicio de Capacitación (Clientes Jurídicos)">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />

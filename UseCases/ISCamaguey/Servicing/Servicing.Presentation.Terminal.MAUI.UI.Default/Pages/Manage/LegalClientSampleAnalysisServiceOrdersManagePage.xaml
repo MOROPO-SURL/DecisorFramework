@@ -14,7 +14,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.LegalClientSampleAnalysisServiceOrdersManagePage"
     x:TypeArguments="interop_common_display_models:LegalClientSampleAnalysisServiceOrderDisplayModel,presentation_manage_page_models:LegalClientSampleAnalysisServiceOrdersManagePageModel,presentation_configuration_page_models:LegalClientSampleAnalysisServiceOrderConfigurationPageModel"
     x:DataType="presentation_manage_page_models:LegalClientSampleAnalysisServiceOrdersManagePageModel"
-    Title="Gestión de Órdenes de Servicio para Clientes Jurídicos">
+    Title="Órdenes de Servicio de Análisis de Muestra (Clientes Jurídicos)">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />

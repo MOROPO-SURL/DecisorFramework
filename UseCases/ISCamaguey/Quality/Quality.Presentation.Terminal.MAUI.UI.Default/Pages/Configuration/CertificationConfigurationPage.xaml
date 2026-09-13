@@ -140,7 +140,7 @@
                                                     Clicked="CubanStandardDetailButton_Clicked" />
                                                 <Button
                                                     Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
-                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                     Text="&#xFA78;"
                                                     Clicked="CubanStandardRemotionButton_Clicked" />
                                             </Grid>
@@ -225,7 +225,7 @@
                                                     Clicked="IsoStandardDetailButton_Clicked" />
                                                 <Button
                                                     Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
-                                                    Style="{StaticResource FontIconImageButtonStyle}"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"
                                                     Text="&#xFA78;"
                                                     Clicked="IsoStandardRemotionButton_Clicked" />
                                             </Grid>

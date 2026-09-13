@@ -14,7 +14,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.NaturalClientSampleAnalysisServiceOrdersManagePage"
     x:TypeArguments="interop_common_display_models:NaturalClientSampleAnalysisServiceOrderDisplayModel,presentation_manage_page_models:NaturalClientSampleAnalysisServiceOrdersManagePageModel,presentation_configuration_page_models:NaturalClientSampleAnalysisServiceOrderConfigurationPageModel"
     x:DataType="presentation_manage_page_models:NaturalClientSampleAnalysisServiceOrdersManagePageModel"
-    Title="Gestión de Órdenes de Servicio para Clientes Naturales">
+    Title="Órdenes de Servicio de Análisis de Muestra (Clientes Naturales)">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />

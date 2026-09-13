@@ -175,6 +175,7 @@
                                                             Clicked="MemberDetailButton_Clicked" />
                                                         <Button
                                                             Grid.Column="1"
+                                                            Style="{StaticResource DangerKindButtonStyle}"
                                                             Text="Eliminar"
                                                             Clicked="MemberRemotionButton_Clicked" />
                                                     </Grid>
@@ -242,22 +243,16 @@
                                                     LineBreakMode="TailTruncation"
                                                     Text="{Binding Name}" />
                                                 <Button
-                                                    FontFamily="MaterialDesignIcons"
-                                                    Padding="0"
-                                                    FontSize="21"
+                                                    Style="{StaticResource FontIconImageButtonStyle}" 
                                                     Text="&#xF2FD;"
                                                     Clicked="StepDetailButton_Clicked" />
                                                 <Button
-                                                    FontFamily="MaterialDesignIcons" 
-                                                    Padding="0"
-                                                    FontSize="21"
+                                                    Style="{StaticResource FontIconImageButtonStyle}" 
                                                     Text="&#xF90B;"
                                                     Clicked="StepEditionButton_Clicked" />
                                                 <Button
                                                     VerticalOptions="Start"
-                                                    FontFamily="MaterialDesignIcons" 
-                                                    Padding="0"
-                                                    FontSize="21"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
                                                     Text="&#xFA78;"
                                                     Clicked="StepRemotionButton_Clicked" />
                                             </StackLayout>
@@ -351,16 +346,12 @@
                                                     Padding="8"
                                                     Spacing="8">
                                                     <Button
-                                                        Padding="0"
-                                                        FontSize="21"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource FontIconImageButtonStyle}" 
                                                         Text="&#xF90B;"
                                                         Clicked="DocumentEditionButton_Clicked" />
                                                     <Button
                                                         VerticalOptions="Start"
-                                                        Padding="0"
-                                                        FontSize="21"
-                                                        FontFamily="MaterialDesignIcons" 
+                                                        Style="{StaticResource DangerKindFontIconImageButtonStyle}" 
                                                         Text="&#xFA78;"
                                                         Clicked="DocumentRemotionButton_Clicked" />
                                                 </VerticalStackLayout>

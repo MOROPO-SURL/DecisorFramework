@@ -143,16 +143,12 @@
                                                 </StackLayout>
                                                 <Button
                                                     Grid.Column="1" Grid.Row="0"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons"
+                                                    Style="{StaticResource FontIconImageButtonStyle}" 
                                                     Text="&#xF2FD;"
                                                     Clicked="KnowledgeAreaDetailButton_Clicked" />
                                                 <Button
                                                     Grid.Column="1" Grid.Row="1" VerticalOptions="Start"
-                                                    Padding="0"
-                                                    FontSize="21"
-                                                    FontFamily="MaterialDesignIcons"
+                                                    Style="{StaticResource DangerKindFontIconImageButtonStyle}"                                                     
                                                     Text="&#xFA78;"
                                                     Clicked="KnowledgeAreaRemotionButton_Clicked" />
                                             </Grid>

@@ -13,7 +13,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.SampleAnalysisServicesManagePage"
     x:TypeArguments="interop_common_display_models:SampleAnalysisServiceDisplayModel,presentation_manage_page_models:SampleAnalysisServicesManagePageModel,presentation_configuration_page_models:SampleAnalysisServiceConfigurationPageModel"
     x:DataType="presentation_manage_page_models:SampleAnalysisServicesManagePageModel"
-    Title="Gestión de Servicios de Procesamiento de Muestras">
+    Title="Catálogo de Servicios de Procesamiento de Muestras">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />

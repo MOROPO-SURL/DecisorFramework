@@ -13,7 +13,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.GroundIntegralStudyServicesManagePage"
     x:TypeArguments="interop_common_display_models:GroundIntegralStudyServiceDisplayModel,presentation_manage_page_models:GroundIntegralStudyServicesManagePageModel,presentation_configuration_page_models:GroundIntegralStudyServiceConfigurationPageModel"
     x:DataType="presentation_manage_page_models:GroundIntegralStudyServicesManagePageModel"
-    Title="Gestión de Servicios de Estudio Integral de Suelo">
+    Title="Catálogo de Servicios de Estudio Integral de Suelo">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />

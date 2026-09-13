@@ -14,7 +14,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.LegalClientGroundIntegralStudyServiceOrdersManagePage"
     x:TypeArguments="interop_common_display_models:LegalClientGroundIntegralStudyServiceOrderDisplayModel,presentation_manage_page_models:LegalClientGroundIntegralStudyServiceOrdersManagePageModel,presentation_configuration_page_models:LegalClientGroundIntegralStudyServiceOrderConfigurationPageModel"
     x:DataType="presentation_manage_page_models:LegalClientGroundIntegralStudyServiceOrdersManagePageModel"
-    Title="Gestión de Órdenes de Servicio para Clientes Jurídicos">
+    Title="Órdenes de Servicio de Estudio Integral de Suelo (Clientes Jurídicos)">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />

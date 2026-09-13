@@ -14,7 +14,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.NaturalClientGroundIntegralStudyServiceOrdersManagePage"
     x:TypeArguments="interop_common_display_models:NaturalClientGroundIntegralStudyServiceOrderDisplayModel,presentation_manage_page_models:NaturalClientGroundIntegralStudyServiceOrdersManagePageModel,presentation_configuration_page_models:NaturalClientGroundIntegralStudyServiceOrderConfigurationPageModel"
     x:DataType="presentation_manage_page_models:NaturalClientGroundIntegralStudyServiceOrdersManagePageModel"
-    Title="Gestión de Órdenes de Servicio para Clientes Naturales">
+    Title="Órdenes de Servicio de Estudio Integral de Suelo (Clientes Naturales)">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />

@@ -92,7 +92,50 @@
             Title="Naturales"
             ContentTemplate="{DataTemplate servicing_manage_pages:NaturalClientGroundIntegralStudyServiceOrdersManagePage}" />
     </FlyoutItem>
-    <MenuFlyoutItem Text="Servicios" IsEnabled="False" />
+    <MenuFlyoutItem Text="Ejecusiones" IsEnabled="False" />
+    <FlyoutItem Title="Capacitación (%)">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF88F;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Procesamiento de Muestras (%)">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF025C;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
+    <FlyoutItem Title="Estudios Int. de Suelo (%)">
+        <FlyoutItem.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFE49;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Jurídicos"
+            ContentTemplate="{DataTemplate ContentPage}" />
+        <ShellContent
+            Title="Naturales"
+            ContentTemplate="{DataTemplate ContentPage}" />
+    </FlyoutItem>
+    <MenuFlyoutItem Text="Catálogo" IsEnabled="False" />
     <ShellContent
         Title="Capacitación"
         ContentTemplate="{DataTemplate servicing_manage_pages:TrainingServicesManagePage}">

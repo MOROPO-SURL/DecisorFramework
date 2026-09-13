@@ -14,7 +14,7 @@
     x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.NaturalClientTrainingServiceOrdersManagePage"
     x:TypeArguments="interop_common_display_models:NaturalClientTrainingServiceOrderDisplayModel,presentation_manage_page_models:NaturalClientTrainingServiceOrdersManagePageModel,presentation_configuration_page_models:NaturalClientTrainingServiceOrderConfigurationPageModel"
     x:DataType="presentation_manage_page_models:NaturalClientTrainingServiceOrdersManagePageModel"
-    Title="Gestión de Órdenes de Servicio para Clientes Naturales">
+    Title="Órdenes de Servicio de Capacitación (Clientes Naturales)">
     <ContentPage.Resources>
         <ResourceDictionary>
             <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
