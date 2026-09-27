@@ -11,25 +11,21 @@
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Development' " />
 	<PropertyGroup Condition=" '$(RunConfiguration)' == 'Staging' " />
 	<ItemGroup>
-		<Compile Remove="Areas\Lab\**" />
 		<Compile Remove="dpkeys\**" />
 		<Compile Remove="logs\**" />
 		<Compile Remove="wwwroot\documents\**" />
 		<Compile Remove="wwwroot\images\**" />
 		<Compile Remove="wwwroot\media\**" />
-		<Content Remove="Areas\Lab\**" />
 		<Content Remove="dpkeys\**" />
 		<Content Remove="logs\**" />
 		<Content Remove="wwwroot\documents\**" />
 		<Content Remove="wwwroot\images\**" />
 		<Content Remove="wwwroot\media\**" />
-		<EmbeddedResource Remove="Areas\Lab\**" />
 		<EmbeddedResource Remove="dpkeys\**" />
 		<EmbeddedResource Remove="logs\**" />
 		<EmbeddedResource Remove="wwwroot\documents\**" />
 		<EmbeddedResource Remove="wwwroot\images\**" />
 		<EmbeddedResource Remove="wwwroot\media\**" />
-		<None Remove="Areas\Lab\**" />
 		<None Remove="dpkeys\**" />
 		<None Remove="logs\**" />
 		<None Remove="wwwroot\documents\**" />
@@ -77,6 +73,7 @@
 		<ProjectReference Include="..\Lab\Lab.Presentation.Web.Frontend\Lab.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Quality\Quality.Presentation.Web.Frontend\Quality.Presentation.Web.Frontend.csproj" />
 		<ProjectReference Include="..\Reporting\Reporting.Presentation.Web.Frontend\Reporting.Presentation.Web.Frontend.csproj" />
+		<ProjectReference Include="..\Servicing\Servicing.Presentation.Web.Backend\Servicing.Presentation.Web.Backend.csproj" />
 		<ProjectReference Include="..\Servicing\Servicing.Presentation.Web.Frontend\Servicing.Presentation.Web.Frontend.csproj" />
 	</ItemGroup>
 	<ItemGroup>
