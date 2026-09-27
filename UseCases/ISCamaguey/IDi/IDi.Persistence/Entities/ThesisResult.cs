@@ -2,8 +2,12 @@
 {
     public class ThesisResult : Contract.AbstractResult
     {
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(Title))]
+        [System.ComponentModel.DataAnnotations.Required]
         public string Title { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProjectId))]
+        public Project Project { get; set; }
+        public System.Guid? ProjectId { get; set; }
 
         public System.Collections.Generic.List<ThesisResultInternalResearcherBridge> InternalResearcherBridges { get; set; } = new System.Collections.Generic.List<ThesisResultInternalResearcherBridge>();
 

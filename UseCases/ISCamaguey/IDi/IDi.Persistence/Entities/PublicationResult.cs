@@ -2,7 +2,7 @@
 {
     public class PublicationResult : Contract.AbstractResult
     {
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(Title))]
+        [System.ComponentModel.DataAnnotations.Required]
         public string Title { get; set; }
 
         public System.Collections.Generic.List<PublicationResultInternalResearcherBridge> InternalResearcherBridges { get; set; } = new System.Collections.Generic.List<PublicationResultInternalResearcherBridge>();
@@ -12,5 +12,9 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DocumentId))]
         public Framework.Guama.Media.Persistence.Entities.Document Document { get; set; }
         public System.Guid DocumentId { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProjectId))]
+        public Project Project { get; set; }
+        public System.Guid? ProjectId { get; set; }
     }
 }

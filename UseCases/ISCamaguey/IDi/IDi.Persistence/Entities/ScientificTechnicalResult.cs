@@ -6,9 +6,13 @@
         public ScientificTechnicalResultKind Kind { get; set; }
         public System.Guid KindId { get; set; }
 
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(Title))]
+        [System.ComponentModel.DataAnnotations.Required]
         public string Title { get; set; }
 
         public string RegistrationCode { get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProjectId))]
+        public Project Project { get; set; }
+        public System.Guid? ProjectId { get; set; }
     }
 }

@@ -34,7 +34,7 @@ public class ProjectsController : Framework.Guama.Core.Presentation.Web.API.Cont
 
     protected override System.Linq.Expressions.Expression<System.Func<Project, bool>> GetGlobalSelector()
     {
-        return entity => !entity.Archived && entity.Enabled;
+        return entity => !entity.Archived;
     }
 
     protected override System.Func<Project, object> GetOrderSelector()
