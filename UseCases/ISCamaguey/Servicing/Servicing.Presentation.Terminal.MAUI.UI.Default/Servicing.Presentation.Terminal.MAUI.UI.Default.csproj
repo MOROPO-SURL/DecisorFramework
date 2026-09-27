@@ -37,11 +37,68 @@
 		<ProjectReference Include="..\Servicing.Presentation.Terminal.MAUI\Servicing.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\Configuration\NaturalClientTrainingServiceExecutionConfigurationPage.xaml.cs">
+	    <DependentUpon>NaturalClientTrainingServiceExecutionConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\NaturalClientSampleAnalysisServiceExecutionConfigurationPage.xaml.cs">
+	    <DependentUpon>NaturalClientSampleAnalysisServiceExecutionConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\NaturalClientGroundIntegralStudyServiceExecutionConfigurationPage.xaml.cs">
+	    <DependentUpon>NaturalClientGroundIntegralStudyServiceExecutionConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\NaturalClientTrainingServiceExecutionDetailPage.xaml.cs">
+	    <DependentUpon>NaturalClientTrainingServiceExecutionDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\NaturalClientSampleAnalysisServiceExecutionDetailPage.xaml.cs">
+	    <DependentUpon>NaturalClientSampleAnalysisServiceExecutionDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\NaturalClientGroundIntegralStudyServiceExecutionDetailPage.xaml.cs">
+	    <DependentUpon>NaturalClientGroundIntegralStudyServiceExecutionDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\LegalClientGroundIntegralStudyServiceExecutionDetailPage.xaml.cs">
+	    <DependentUpon>LegalClientGroundIntegralStudyServiceExecutionDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Detail\LegalClientSampleAnalysisServiceOrderDetailPage.xaml.cs">
 	    <DependentUpon>LegalClientSampleAnalysisServiceOrderDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\List\LegalClientWidthContractingStatussesListPage.xaml.cs">
 	    <DependentUpon>LegalClientWidthContractingStatussesListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\NaturalClientTrainingServiceExecutionsManagePage.xaml.cs">
+	    <DependentUpon>NaturalClientTrainingServiceExecutionsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\NaturalClientSampleAnalysisServiceExecutionsManagePage.xaml.cs">
+	    <DependentUpon>NaturalClientSampleAnalysisServiceExecutionsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\NaturalClientGroundIntegralStudyServiceExecutionsManagePage.xaml.cs">
+	    <DependentUpon>NaturalClientGroundIntegralStudyServiceExecutionsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\LegalClientTrainingServiceExecutionsManagePage.xaml.cs">
+	    <DependentUpon>LegalClientTrainingServiceExecutionsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\LegalClientSampleAnalysisServiceExecutionsManagePage.xaml.cs">
+	    <DependentUpon>LegalClientSampleAnalysisServiceExecutionsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\LegalClientGroundIntegralStudyServiceExecutionsManagePage.xaml.cs">
+	    <DependentUpon>LegalClientGroundIntegralStudyServiceExecutionsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\NaturalClientTrainingServiceOrderPickPage.xaml.cs">
+	    <DependentUpon>NaturalClientTrainingServiceOrderPickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\NaturalClientSampleAnalysisServiceOrderPickPage.xaml.cs">
+	    <DependentUpon>NaturalClientSampleAnalysisServiceOrderPickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\NaturalClientGroundIntegralStudyServiceOrderPickPage.xaml.cs">
+	    <DependentUpon>NaturalClientGroundIntegralStudyServiceOrderPickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\LegalClientGroundIntegralStudyServiceOrderPickPage.xaml.cs">
+	    <DependentUpon>LegalClientGroundIntegralStudyServiceOrderPickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\LegalClientSampleAnalysisServiceOrderPickPage.xaml.cs">
+	    <DependentUpon>LegalClientSampleAnalysisServiceOrderPickPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Pick\LegalClientTrainingServiceOrderPickPage.xaml.cs">
+	    <DependentUpon>LegalClientTrainingServiceOrderPickPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Views\Card\LegalClientServicingContractContextedCardView.xaml.cs">
 	    <DependentUpon>LegalClientServicingContractContextedCardView.xaml</DependentUpon>
@@ -57,13 +114,31 @@
 	  <MauiXaml Update="Pages\Configuration\GroundIntegralStudyServiceStepConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\NaturalClientTrainingServiceExecutionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\NaturalClientSampleAnalysisServiceExecutionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\NaturalClientGroundIntegralStudyServiceExecutionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\LegalClientGroundIntegralStudyServiceExecutionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\LegalClientGroundIntegralStudyServiceOrderConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\LegalClientSampleAnalysisServiceExecutionConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\LegalClientSampleAnalysisServiceOrderConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\LegalClientServicingContractConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\LegalClientTrainingServiceExecutionConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\LegalClientTrainingServiceOrderConfigurationPage.xaml">
@@ -99,13 +174,31 @@
 	  <MauiXaml Update="Pages\Detail\GroundIntegralStudyServiceStepDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\NaturalClientTrainingServiceExecutionDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\NaturalClientSampleAnalysisServiceExecutionDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\NaturalClientGroundIntegralStudyServiceExecutionDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\LegalClientGroundIntegralStudyServiceOrderDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\LegalClientGroundIntegralStudyServiceExecutionDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\LegalClientSampleAnalysisServiceExecutionDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\LegalClientSampleAnalysisServiceOrderDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\LegalClientServicingContractDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\LegalClientTrainingServiceExecutionDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\LegalClientTrainingServiceOrderDetailPage.xaml">
@@ -144,6 +237,24 @@
 	  <MauiXaml Update="Pages\Manage\GroundIntegralStudyServicesManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\NaturalClientTrainingServiceExecutionsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\NaturalClientSampleAnalysisServiceExecutionsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\NaturalClientGroundIntegralStudyServiceExecutionsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\LegalClientTrainingServiceExecutionsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\LegalClientSampleAnalysisServiceExecutionsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\LegalClientGroundIntegralStudyServiceExecutionsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\LegalClientGroundIntegralStudyServiceOrdersManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -177,7 +288,25 @@
 	  <MauiXaml Update="Pages\Pick\GroundIntegralStudyServicePickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\NaturalClientTrainingServiceOrderPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\NaturalClientSampleAnalysisServiceOrderPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\NaturalClientGroundIntegralStudyServiceOrderPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\LegalClientGroundIntegralStudyServiceOrderPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\LegalClientSampleAnalysisServiceOrderPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\LegalClientServicingContractPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\LegalClientTrainingServiceOrderPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\NaturalClientServicingContractPickPage.xaml">

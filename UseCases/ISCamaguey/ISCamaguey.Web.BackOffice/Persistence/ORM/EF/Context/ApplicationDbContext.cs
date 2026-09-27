@@ -217,6 +217,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<NaturalClientSampleAnalysisServiceOrder> NaturalClientSampleAnalysisServiceOrders { get; set; }
         public DbSet<NaturalClientGroundIntegralStudyServiceOrder> NaturalClientGroundIntegralStudyServiceOrders { get; set; }
         public DbSet<ServiceOrderCollect> ServiceOrderCollects { get; set; }
+        public DbSet<NaturalClientTrainingServiceExecution> NaturalClientTrainingServiceExecutions { get; set; }
+        public DbSet<NaturalClientSampleAnalysisServiceExecution> NaturalClientSampleAnalysisServiceExecutions { get; set; }
+        public DbSet<NaturalClientGroundIntegralStudyServiceExecution> NaturalClientGroundIntegralStudyServiceExecutions { get; set; }
+        public DbSet<LegalClientTrainingServiceExecution> LegalClientTrainingServiceExecutions { get; set; }
+        public DbSet<LegalClientSampleAnalysisServiceExecution> LegalClientSampleAnalysisServiceExecutions { get; set; }
+        public DbSet<LegalClientGroundIntegralStudyServiceExecution> LegalClientGroundIntegralStudyServiceExecutions { get; set; }
 
         public DbSet<Technique> Techniques { get; set; }
         public DbSet<TechniqueCubanStandardBridge> TechniqueCubanStandardBridges { get; set; }

@@ -6,9 +6,16 @@
 
         public Domain.Interop.API.Common.Models.Display.TechniqueDisplayModel RequestedTechnique { get; set; }
 
+        public System.DateTime? SampleReceptionAt { get; set; }
+
+        public System.DateTime? HandledAt { get; set; }
+
         public override void Import(TEntity entity)
         {
             base.Import(entity);
+
+            SampleReceptionAt = entity.SampleReceptionAt;
+            HandledAt = entity.HandledAt;
 
             if (entity.Service != null)
             {

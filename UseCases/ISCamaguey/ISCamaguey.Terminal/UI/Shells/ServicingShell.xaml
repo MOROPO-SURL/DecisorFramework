@@ -93,7 +93,7 @@
             ContentTemplate="{DataTemplate servicing_manage_pages:NaturalClientGroundIntegralStudyServiceOrdersManagePage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Ejecusiones" IsEnabled="False" />
-    <FlyoutItem Title="Capacitación (%)">
+    <FlyoutItem Title="Capacitación">
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -102,12 +102,12 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Jurídicos"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_manage_pages:LegalClientTrainingServiceExecutionsManagePage}" />
         <ShellContent
             Title="Naturales"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_manage_pages:NaturalClientTrainingServiceExecutionsManagePage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Procesamiento de Muestras (%)">
+    <FlyoutItem Title="Procesamiento de Muestras">
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -116,12 +116,12 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Jurídicos"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_manage_pages:LegalClientSampleAnalysisServiceExecutionsManagePage}" />
         <ShellContent
             Title="Naturales"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_manage_pages:NaturalClientSampleAnalysisServiceExecutionsManagePage}" />
     </FlyoutItem>
-    <FlyoutItem Title="Estudios Int. de Suelo (%)">
+    <FlyoutItem Title="Estudios Int. de Suelo">
         <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -130,10 +130,10 @@
         </FlyoutItem.Icon>
         <ShellContent
             Title="Jurídicos"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_manage_pages:LegalClientGroundIntegralStudyServiceExecutionsManagePage}" />
         <ShellContent
             Title="Naturales"
-            ContentTemplate="{DataTemplate ContentPage}" />
+            ContentTemplate="{DataTemplate servicing_manage_pages:NaturalClientGroundIntegralStudyServiceExecutionsManagePage}" />
     </FlyoutItem>
     <MenuFlyoutItem Text="Catálogo" IsEnabled="False" />
     <ShellContent

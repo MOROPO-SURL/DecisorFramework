@@ -14,6 +14,8 @@
         
         public bool Enabled { get ; set ; }
         
-        public int Priority { get ; set ; }        
+        public int Priority { get ; set ; }
+
+        public System.DateTime? ExecutedAt { get; set; }
     }
 }

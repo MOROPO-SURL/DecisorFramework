@@ -54,10 +54,12 @@
                         <CollectionView.ItemTemplate>
                             <DataTemplate x:DataType="interop_common_display_models:ServiceOrderSampleDisplayModel">
                                 <Grid IsClippedToBounds="True">
-                                    <local_card_views:ServiceOrderSampleDefaultCardView HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_HEIGHT}">
-                                        <ContentView.GestureRecognizers>
-                                            <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
-                                        </ContentView.GestureRecognizers>
+                                    <Grid.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                    </Grid.GestureRecognizers>
+                                    <local_card_views:ServiceOrderSampleDefaultCardView 
+                                        InputTransparent="True"
+                                        HeightRequest="{Static local_constants:CardViewHeightConstants.SAMPLE_DEFAULT_CARD_VIEW_HEIGHT}">
                                     </local_card_views:ServiceOrderSampleDefaultCardView>                                    
                                     <Grid 
                                         InputTransparent="True"

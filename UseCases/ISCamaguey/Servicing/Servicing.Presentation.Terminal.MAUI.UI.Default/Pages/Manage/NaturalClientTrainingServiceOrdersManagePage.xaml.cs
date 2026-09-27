@@ -4,24 +4,16 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Defa
 
 public partial class NaturalClientTrainingServiceOrdersManagePage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ManageBaseContentPage<Interop.API.Common.Models.Display.NaturalClientTrainingServiceOrderDisplayModel, Models.Page.Manage.NaturalClientTrainingServiceOrdersManagePageModel, Models.Page.Configuration.NaturalClientTrainingServiceOrderConfigurationPageModel>
 {
-    public static double ITEM_VIEW_REQUEST_HEIGHT = 256;
-
     public NaturalClientTrainingServiceOrdersManagePage()
 	{
 		InitializeComponent();
 	}
 
-    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView()
-    {
-        return ItemsCollectionView;
-    }
+    protected override Microsoft.Maui.Controls.CollectionView GetItemsCollectionView() => ItemsCollectionView;
 
-    protected override double ItemViewRequestWidth { get => 400; }
+    protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.ORDER_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return ITEM_VIEW_REQUEST_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.ORDER_DEFAULT_CARD_VIEW_HEIGHT;
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.NaturalClientTrainingServiceOrderDisplayModel>> FetchItemsAsync()
     {

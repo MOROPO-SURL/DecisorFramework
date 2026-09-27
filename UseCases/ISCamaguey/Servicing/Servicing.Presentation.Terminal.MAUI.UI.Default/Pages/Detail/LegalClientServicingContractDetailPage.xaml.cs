@@ -49,9 +49,23 @@ public partial class LegalClientServicingContractDetailPage : Framework.Decisor.
 
     private void ExportButton_Clicked(object sender, System.EventArgs eventArgs)
     {
+
+/* Cambio no fusionado mediante combinación del proyecto 'Servicing.Presentation.Terminal.MAUI.UI.Default (net8.0-android)'
+Antes:
         DisplayActionSheet("Exportar", Contants.CommonConstants.CANCEL_OPTION, null, Contants.CommonConstants.TECH_PAPER_EXPORT_OPTION, Contants.CommonConstants.COST_PAPER_EXPORT_OPTION).ContinueWith(task =>
+Después:
+        DisplayActionSheet("Exportar", CommonConstants.CANCEL_OPTION, null, CommonConstants.TECH_PAPER_EXPORT_OPTION, CommonConstants.COST_PAPER_EXPORT_OPTION).ContinueWith(task =>
+*/
+        DisplayActionSheet("Exportar", Constants.CommonConstants.CANCEL_OPTION, null, Constants.CommonConstants.TECH_PAPER_EXPORT_OPTION, Constants.CommonConstants.COST_PAPER_EXPORT_OPTION).ContinueWith(task =>
         {
+
+/* Cambio no fusionado mediante combinación del proyecto 'Servicing.Presentation.Terminal.MAUI.UI.Default (net8.0-android)'
+Antes:
             if (task.IsCanceled || task.Result == null || task.Result == Contants.CommonConstants.CANCEL_OPTION) return;
+Después:
+            if (task.IsCanceled || task.Result == null || task.Result == CommonConstants.CANCEL_OPTION) return;
+*/
+            if (task.IsCanceled || task.Result == null || task.Result == Constants.CommonConstants.CANCEL_OPTION) return;
 
             Dispatcher.Dispatch(() => DisplayAlert("Aviso", "Funcionalidad en desarrollo.", "Aceptar"));
         });

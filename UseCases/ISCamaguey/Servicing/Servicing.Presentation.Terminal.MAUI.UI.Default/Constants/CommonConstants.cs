@@ -1,4 +1,4 @@
-﻿namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Contants
+﻿namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Constants
 {
     public static class CommonConstants
     {

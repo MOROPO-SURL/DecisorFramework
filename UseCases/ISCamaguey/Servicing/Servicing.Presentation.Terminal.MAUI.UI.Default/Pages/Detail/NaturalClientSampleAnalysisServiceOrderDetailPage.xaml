@@ -17,6 +17,7 @@
             <fwrk_core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
+            <communitytoolkit_converters:IsNullConverter x:Key="IsNullConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
@@ -99,10 +100,12 @@
                             Orientation="Horizontal"
                             Spacing="20">
                             <Button 
+                                IsEnabled="{Binding ExecutedAt, Converter={StaticResource IsNullConverter}}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Modificar"
                                 Clicked="EditButton_Clicked" />
                             <Button 
+                                IsEnabled="{Binding HandledAt, Converter={StaticResource IsNullConverter}}"
                                 Style="{StaticResource DangerKindButtonStyle}"
                                 HorizontalOptions="FillAndExpand"
                                 Text="Eliminar"

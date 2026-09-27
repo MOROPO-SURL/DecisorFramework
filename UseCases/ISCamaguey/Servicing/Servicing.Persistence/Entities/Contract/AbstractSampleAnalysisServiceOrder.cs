@@ -11,5 +11,7 @@
         public System.Guid? RequestedTechniqueId { get; set;}
 
         public System.DateTime? SampleReceptionAt { get; set; }
+
+        public System.DateTime? HandledAt { get; set; }
     }
 }

@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:ManageBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local_constants="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Constants"
+    xmlns:local_card_views="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Views.Card"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Interop.API.Common"
+    xmlns:presentation_manage_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.Models.Page.Manage;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI"
+    xmlns:presentation_configuration_page_models="clr-namespace:MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.Models.Page.Configuration;assembly=MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:caneyframework_presentation_views="clr-namespace:MOROPO.Framework.Caney.Presentation.UI.Views;assembly=MOROPO.Framework.Caney.Presentation"
+    xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
+    x:Class="MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.LegalClientTrainingServiceExecutionsManagePage"
+    x:TypeArguments="interop_common_display_models:LegalClientTrainingServiceExecutionDisplayModel,presentation_manage_page_models:LegalClientTrainingServiceExecutionsManagePageModel,presentation_configuration_page_models:LegalClientTrainingServiceExecutionConfigurationPageModel"
+    x:DataType="presentation_manage_page_models:LegalClientTrainingServiceExecutionsManagePageModel"
+    Title="Ejecuciones de Servicio de Capacitación (Clientes Jurídicos)">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
+            
+            <communitytoolkit_converters:InvertedBoolConverter x:Key="InvertedBoolConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem 
+            Text="Agregar"
+            Clicked="AddItemToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xf415;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+        <ToolbarItem 
+            Text="Actualizar"
+            Clicked="ReloadToolbarItems_Clicked">
+            <ToolbarItem.IconImageSource>
+                <FontImageSource FontFamily="MaterialDesignIcons" Glyph="&#xF450;" Color="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}" />
+            </ToolbarItem.IconImageSource>
+        </ToolbarItem>
+    </ContentPage.ToolbarItems>
+    <ContentPage.Content>
+        <Grid>
+            <StackLayout Orientation="Vertical">
+                <SearchBar 
+                    Margin="20,20,20,0"
+                    Text="{Binding SearchParameter}"
+                    Placeholder="-- buscar por No. de órden de servicio o por nombre del cliente --"
+                    SearchButtonPressed="SearchBar_SearchButtonPressed" />
+                <Grid 
+                    VerticalOptions="FillAndExpand"
+                    SizeChanged="ItemsCollectionViewLayout_SizeChanged">
+                    <CollectionView
+                        x:Name="ItemsCollectionView"
+                        Margin="10"
+                        ItemsSource="{Binding Items}">
+                        <CollectionView.ItemsLayout>
+                            <GridItemsLayout Orientation="Vertical" Span="5" HorizontalItemSpacing="10" VerticalItemSpacing="10" />
+                        </CollectionView.ItemsLayout>
+                        <CollectionView.ItemTemplate>
+                            <DataTemplate x:DataType="interop_common_display_models:LegalClientTrainingServiceExecutionDisplayModel">
+                                <Frame HeightRequest="{Static local_constants:CardViewHeightConstants.EXECUTION_DEFAULT_CARD_VIEW_HEIGHT}">
+                                    <Frame.GestureRecognizers>
+                                        <TapGestureRecognizer Tapped="ItemTapGestureRecognizer_Tapped" />
+                                    </Frame.GestureRecognizers>
+                                    <Grid ColumnSpacing="8">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="Auto" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <Label 
+                                            Grid.ColumnSpan="2" Grid.Row="0"
+                                            Text="{Binding At, StringFormat='{0:D}'}" />
+                                        <Label 
+                                            Grid.Column="0" Grid.Row="1"
+                                            Margin="0,8,0,0"
+                                            TextColor="DimGray"
+                                            Text="Órden"
+                                            FontSize="Caption"
+                                            FontAttributes="Bold" />
+                                        <Label 
+                                            Grid.Column="1" Grid.Row="1"
+                                            Margin="0,8,0,0"
+                                            TextColor="DimGray"
+                                            Text="Servicio"
+                                            FontSize="Caption"
+                                            FontAttributes="Bold" />
+                                        <Label
+                                            Grid.Column="0" Grid.Row="2"
+                                            Text="{Binding Order.Id, StringFormat='# {0}'}" />
+                                        <Label
+                                            Grid.Column="1" Grid.Row="2"
+                                            LineBreakMode="TailTruncation"
+                                            Text="{Binding Order.Service.Name}" />
+                                        <Label 
+                                            Grid.ColumnSpan="2" Grid.Row="3"
+                                            Margin="0,8,0,0"
+                                            TextColor="DimGray"
+                                            Text="Cliente"
+                                            FontSize="Caption"
+                                            FontAttributes="Bold" />
+                                        <Grid 
+                                            Grid.ColumnSpan="2" Grid.Row="4"
+                                            Margin="0,4,0,0">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="Auto" />
+                                                <ColumnDefinition />
+                                            </Grid.ColumnDefinitions>
+                                            <Border 
+                                                Grid.Column="0"
+                                                VerticalOptions="Center"
+                                                StrokeThickness="4"
+                                                StrokeLineJoin="Bevel">
+                                                <Border.StrokeShape>
+                                                    <RoundRectangle CornerRadius="4" />
+                                                </Border.StrokeShape>
+                                                <Image
+                                                    WidthRequest="64" HeightRequest="64"
+                                                    Source="{Binding Order.Contract.Client.Contact.Identity.Image, Converter={StaticResource ImageDisplayModelToImageSourceConverter}, TargetNullValue='default_organization_picture.png'}" />
+                                            </Border>
+                                            <StackLayout 
+                                                Grid.Column="1"
+                                                VerticalOptions="Center"
+                                                Padding="10,0">
+                                                <Label
+                                                    ToolTipProperties.Text="{Binding Order.Contract.Client.Contact.Identity.Name}"
+                                                    Text="{Binding Order.Contract.Client.Contact.Identity.Name}"
+                                                    FontSize="Medium"
+                                                    LineBreakMode="TailTruncation" />
+                                                <Label
+                                                    ToolTipProperties.Text="{Binding Order.Contract.Client.Contact.BusinessKind.Name}"
+                                                    Text="{Binding Order.Contract.Client.Contact.BusinessKind.Name}"
+                                                    LineBreakMode="TailTruncation" />
+                                            </StackLayout>
+                                        </Grid>
+                                    </Grid>
+                                </Frame>
+                            </DataTemplate>
+                        </CollectionView.ItemTemplate>
+                        <CollectionView.EmptyView>
+                            <Label
+                                IsVisible="{Binding IsBusy, Converter={StaticResource InvertedBoolConverter}}"
+                                HorizontalTextAlignment="Center"
+                                Margin="5"
+                                Text="Sin elementos que mostrar"
+                                TextColor="{AppThemeBinding Light=DimGray, Dark=Gray}"
+                                FontAttributes="Italic" />
+                        </CollectionView.EmptyView>
+                        <CollectionView.Footer>
+                            <StackLayout IsVisible="{Binding HasMoreItems}">
+                                <Button
+                                    HorizontalOptions="Center"
+                                    Margin="5"
+                                    Text="Mostrar más"
+                                    Clicked="LoadMoreBurron_Clicked" />
+                            </StackLayout>
+                        </CollectionView.Footer>
+                    </CollectionView>
+                </Grid>
+            </StackLayout>
+            <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>
+        </Grid>
+    </ContentPage.Content>
+</core_ui_base_pages:ManageBaseContentPage>

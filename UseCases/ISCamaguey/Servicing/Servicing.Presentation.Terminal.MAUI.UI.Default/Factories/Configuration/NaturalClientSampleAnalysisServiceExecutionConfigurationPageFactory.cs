@@ -1,0 +1,9 @@
+﻿namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Factories.Configuration;
+
+public class NaturalClientSampleAnalysisServiceExecutionConfigurationPageFactory : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.NaturalClientSampleAnalysisServiceExecutionDisplayModel, Models.Page.Configuration.NaturalClientSampleAnalysisServiceExecutionConfigurationPageModel>
+{
+    public async System.Threading.Tasks.Task<Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.NaturalClientSampleAnalysisServiceExecutionDisplayModel, Interop.API.Common.Models.Display.NaturalClientSampleAnalysisServiceExecutionDisplayModel, Models.Page.Configuration.NaturalClientSampleAnalysisServiceExecutionConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.NaturalClientSampleAnalysisServiceExecutionDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.NaturalClientSampleAnalysisServiceExecutionDisplayModel model)
+    {
+        return new Pages.Configuration.NaturalClientSampleAnalysisServiceExecutionConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.NaturalClientSampleAnalysisServiceExecutionConfigurationPageModel(model), new Validators.NaturalClientSampleAnalysisServiceExecutionConfigurationValidator());
+    }
+}

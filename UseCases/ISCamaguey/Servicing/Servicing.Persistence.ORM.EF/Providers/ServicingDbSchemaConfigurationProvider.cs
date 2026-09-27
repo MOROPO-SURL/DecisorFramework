@@ -37,7 +37,13 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Persistence.ORM.EF.Providers
                     new BaseEntityTypeConfigurator<Entities.LegalClientGroundIntegralStudyServiceOrder>(),
                     new BaseEntityTypeConfigurator<Entities.NaturalClientTrainingServiceOrder>(),
                     new BaseEntityTypeConfigurator<Entities.NaturalClientSampleAnalysisServiceOrder>(),
-                    new BaseEntityTypeConfigurator<Entities.NaturalClientGroundIntegralStudyServiceOrder>()
+                    new BaseEntityTypeConfigurator<Entities.NaturalClientGroundIntegralStudyServiceOrder>(),
+                    new BaseEntityTypeConfigurator<Entities.LegalClientTrainingServiceExecution>(),
+                    new BaseEntityTypeConfigurator<Entities.LegalClientSampleAnalysisServiceExecution>(),
+                    new BaseEntityTypeConfigurator<Entities.LegalClientGroundIntegralStudyServiceExecution>(),
+                    new BaseEntityTypeConfigurator<Entities.NaturalClientTrainingServiceExecution>(),
+                    new BaseEntityTypeConfigurator<Entities.NaturalClientSampleAnalysisServiceExecution>(),
+                    new BaseEntityTypeConfigurator<Entities.NaturalClientGroundIntegralStudyServiceExecution>()
                 ];
             }
         }

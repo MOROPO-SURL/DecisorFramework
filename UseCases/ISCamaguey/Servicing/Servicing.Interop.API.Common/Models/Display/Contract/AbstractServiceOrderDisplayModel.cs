@@ -12,6 +12,8 @@
 
         public int Priority { get; set; }
 
+        public System.DateTime? ExecutedAt { get; set; }
+
         public virtual void Import(TEntity entity)
         {
             Id = entity.Id;
@@ -19,6 +21,7 @@
             Description = entity.Description;
             Enabled = entity.Enabled;
             Priority = entity.Priority;
+            ExecutedAt = entity.ExecutedAt;
         }
     }
 }

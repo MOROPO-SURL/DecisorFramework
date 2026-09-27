@@ -1,0 +1,9 @@
+﻿namespace MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Factories.Configuration;
+
+public class LegalClientGroundIntegralStudyServiceExecutionConfigurationPageFactory : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Factories.Facade.IConfigurationContentPageFactoryFacade<Interop.API.Common.Models.Display.LegalClientGroundIntegralStudyServiceExecutionDisplayModel, Models.Page.Configuration.LegalClientGroundIntegralStudyServiceExecutionConfigurationPageModel>
+{
+    public async System.Threading.Tasks.Task<Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.LegalClientGroundIntegralStudyServiceExecutionDisplayModel, Interop.API.Common.Models.Display.LegalClientGroundIntegralStudyServiceExecutionDisplayModel, Models.Page.Configuration.LegalClientGroundIntegralStudyServiceExecutionConfigurationPageModel>> BuildAsync(System.Action<Interop.API.Common.Models.Display.LegalClientGroundIntegralStudyServiceExecutionDisplayModel> configurationSuccessAction, Interop.API.Common.Models.Display.LegalClientGroundIntegralStudyServiceExecutionDisplayModel model)
+    {
+        return new Pages.Configuration.LegalClientGroundIntegralStudyServiceExecutionConfigurationPage(configurationSuccessAction, new Models.Page.Configuration.LegalClientGroundIntegralStudyServiceExecutionConfigurationPageModel(model), new Validators.LegalClientGroundIntegralStudyServiceExecutionConfigurationValidator());
+    }
+}

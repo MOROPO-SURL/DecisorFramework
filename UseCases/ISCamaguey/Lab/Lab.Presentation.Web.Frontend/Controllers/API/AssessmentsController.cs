@@ -6,6 +6,7 @@ using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.Contract;
 using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Managers.Facade;
 using MOROPO.Framework.Guama.Media.Persistence.Entities;
+using MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.Contract;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.API;
 
@@ -16,12 +17,14 @@ public sealed class AssessmentsController : Framework.Guama.Core.Presentation.We
     private readonly IEntityRepository<AbstractSample, System.Guid> sampleRepository;
     private readonly IEntityRepository<Document, System.Guid> documentRepository;
     private readonly IDocumentFileManagerFacade documentFileManager;
+    private readonly IEntityRepository<AbstractServiceOrder, long> serviceOrderRepository;
 
-    public AssessmentsController(IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<AbstractSample, System.Guid> sampleRepository, IEntityRepository<Assessment, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<AssessmentsController> localizer, Microsoft.Extensions.Logging.ILogger<AssessmentsController> logger) : base(repository, localizer, logger)
+    public AssessmentsController(IEntityRepository<AbstractServiceOrder, long> serviceOrderRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<AbstractSample, System.Guid> sampleRepository, IEntityRepository<Assessment, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<AssessmentsController> localizer, Microsoft.Extensions.Logging.ILogger<AssessmentsController> logger) : base(repository, localizer, logger)
     {
         this.sampleRepository = sampleRepository;
         this.documentRepository = documentRepository;
         this.documentFileManager = documentFileManager;
+        this.serviceOrderRepository = serviceOrderRepository;
     }
 
     protected override System.Linq.Expressions.Expression<System.Func<Assessment, bool>> GetGlobalSelector()
@@ -66,6 +69,15 @@ public sealed class AssessmentsController : Framework.Guama.Core.Presentation.We
         AbstractSample sample = sampleRepository.Get(entity.SampleId);
 
         sample.AssessmentAt = System.DateTime.Now;
+
+        if (sample is ServiceOrderSample serviceOrderSample)
+        {
+            var serviceOrder = (AbstractSampleAnalysisServiceOrder)serviceOrderRepository.Get(serviceOrderSample.ServiceOrderId);
+
+            serviceOrder.HandledAt = System.DateTime.Now;
+
+            serviceOrderRepository.Update(serviceOrder, User.Identity.Name, false);
+        }
 
         sampleRepository.Update(sample, User.Identity.Name, false);
 

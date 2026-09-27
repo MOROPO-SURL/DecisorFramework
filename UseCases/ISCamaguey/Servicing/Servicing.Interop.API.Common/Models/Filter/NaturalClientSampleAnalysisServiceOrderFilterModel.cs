@@ -4,9 +4,18 @@
     {
         public string Name { get; set; }
 
+        public bool OnlyReadyForExecution { get; set; }
+
         public System.Linq.Expressions.Expression<System.Func<Persistence.Entities.NaturalClientSampleAnalysisServiceOrder, bool>> GetSelector()
         {
-            return entity => entity.Contract.Client.Contact.Identity.Name.ToLower().Contains(Name.ToLower());
+            if (OnlyReadyForExecution)
+            {
+                if (string.IsNullOrEmpty(Name)) return entity => entity.ExecutedAt == null && entity.ExecutedAt == null && entity.HandledAt != null;
+
+                return entity => entity.ExecutedAt == null && entity.Contract.Client.Contact.Identity.Name.ToLower().Contains(Name.ToLower()) && entity.ExecutedAt == null && entity.HandledAt != null;
+            }
+
+            return entity => entity.ExecutedAt == null && entity.Contract.Client.Contact.Identity.Name.ToLower().Contains(Name.ToLower());
         }
     }
 }

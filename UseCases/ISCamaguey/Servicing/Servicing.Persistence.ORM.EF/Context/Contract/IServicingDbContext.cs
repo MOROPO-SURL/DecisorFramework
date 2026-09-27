@@ -32,5 +32,11 @@ namespace MOROPO.ISCamaguey.Decisor.Servicing.Persistence.ORM.EF.Context.Contrac
         public DbSet<Entities.NaturalClientSampleAnalysisServiceOrder> NaturalClientSampleAnalysisServiceOrders { get; set; }
         public DbSet<Entities.NaturalClientGroundIntegralStudyServiceOrder> NaturalClientGroundIntegralStudyServiceOrders { get; set; }
         public DbSet<Entities.ServiceOrderCollect> ServiceOrderCollects { get; set; }
+        public DbSet<Entities.NaturalClientTrainingServiceExecution> NaturalClientTrainingServiceExecutions { get; set; }
+        public DbSet<Entities.NaturalClientSampleAnalysisServiceExecution> NaturalClientSampleAnalysisServiceExecutions { get; set; }
+        public DbSet<Entities.NaturalClientGroundIntegralStudyServiceExecution> NaturalClientGroundIntegralStudyServiceExecutions { get; set; }
+        public DbSet<Entities.LegalClientTrainingServiceExecution> LegalClientTrainingServiceExecutions { get; set; }
+        public DbSet<Entities.LegalClientSampleAnalysisServiceExecution> LegalClientSampleAnalysisServiceExecutions { get; set; }
+        public DbSet<Entities.LegalClientGroundIntegralStudyServiceExecution> LegalClientGroundIntegralStudyServiceExecutions { get; set; }
     }
 }
