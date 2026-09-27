@@ -22,7 +22,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 
         public Framework.Decisor.Domain.Interop.API.Common.Models.Display.EmployeeDisplayModel[] Employees { get; set; }
 
-        public void Import(Persistence.Entities.WorkingGroup entity)
+        public virtual void Import(Persistence.Entities.WorkingGroup entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;

@@ -3,7 +3,7 @@ using System.Linq;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 {
-    public sealed class WorkPlanDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.WorkPlan, System.Guid>
+    public class WorkPlanDisplayModel : Framework.Guama.Core.Persistence.Presentation.Models.Contract.IEntityDisplayModel<Persistence.Entities.WorkPlan, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -21,7 +21,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 
         public IEnumerable<ProductionSampleDisplayModel> ProductionSamples { get; set; }
 
-        public void Import(Persistence.Entities.WorkPlan entity)
+        public virtual void Import(Persistence.Entities.WorkPlan entity)
         {
             Id = entity.Id;
             Enabled = entity.Enabled;

@@ -17,11 +17,15 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Controlle
     {
         private readonly IEntityRepository<Image, System.Guid> imageRepository;
         private readonly IImageFileManagerFacade imageFileManager;
+        private readonly IEntityRepository<Document, System.Guid> documentRepository;
+        private readonly IDocumentFileManagerFacade documentFileManager;
 
-        public LegalClientsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IEntityRepository<Persistence.Entities.LegalClient, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientsController> localizer, ILogger<LegalClientsController> logger) : base(repository, localizer, logger)
+        public LegalClientsController(IImageFileManagerFacade imageFileManager, IEntityRepository<Image, System.Guid> imageRepository, IDocumentFileManagerFacade documentFileManager, IEntityRepository<Document, System.Guid> documentRepository, IEntityRepository<Persistence.Entities.LegalClient, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<LegalClientsController> localizer, ILogger<LegalClientsController> logger) : base(repository, localizer, logger)
         {
             this.imageRepository = imageRepository;
             this.imageFileManager = imageFileManager;
+            this.documentRepository = documentRepository;
+            this.documentFileManager = documentFileManager;
         }
 
         [RequirePermissions(Authorization.LegalClientViewerPermission)]
@@ -94,6 +98,12 @@ namespace MOROPO.Framework.Decisor.Commercial.Presentation.Web.Backend.Controlle
                 imageRepository.Delete(entity.Contact.Identity.Image, User.Identity.Name);
 
                 imageFileManager.DeleteImageFile(entity.Contact.Identity.Image);
+            }
+            foreach (var bridge in entity.DocumentBridges)
+            {
+                documentRepository.Delete(bridge.Stern, User.Identity.Name, false);
+
+                documentFileManager.DeleteDocumentFile(bridge.Stern);
             }
         }
     }

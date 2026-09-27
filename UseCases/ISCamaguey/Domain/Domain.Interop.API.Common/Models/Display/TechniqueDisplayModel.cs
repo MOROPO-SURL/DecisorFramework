@@ -18,7 +18,7 @@ namespace MOROPO.ISCamaguey.Decisor.Domain.Interop.API.Common.Models.Display
 
         public Quality.Interop.API.Common.Models.Display.IsoStandardDisplayModel[] IsoStandards { get; set; }
 
-        public void Import(Persistence.Entities.Technique entity)
+        public virtual void Import(Persistence.Entities.Technique entity)
         {
             Id = entity.Id;
             Name = entity.Name;

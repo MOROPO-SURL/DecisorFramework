@@ -1,6 +1,6 @@
 ﻿namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 {
-    public sealed class ServiceOrderSampleDisplayModel : Contract.AbstractSampleDisplayModel<Persistence.Entities.ServiceOrderSample>
+    public class ServiceOrderSampleDisplayModel : Contract.AbstractSampleDisplayModel<Persistence.Entities.ServiceOrderSample>
     {
         public CommonSampleAnalysisServiceOrderDisplayModel Order { get; set; }
 

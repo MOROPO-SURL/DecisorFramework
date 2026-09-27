@@ -108,9 +108,9 @@
 
             if (target.Controller == "paymentterms") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-calendar-clock");
 
-            if (target.Controller == "formingservices") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-teach");
+            if (target.Controller == "trainingservices") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-teach");
 
-            if (target.Controller == "plans") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-clipboard-text");
+            if (target.Controller == "workplans") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-clipboard-text");
 
             if (target.Controller == "elavorations") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-cogs");
 
@@ -118,15 +118,15 @@
 
             if (target.Controller == "certificates") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-certificate");
 
-            if (target.Controller == "floorstudyservices") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-sprout");
+            if (target.Controller == "groundintegralstudyservices") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-sprout");
 
-            if (target.Controller == "workgroups") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-account-supervisor-circle");
+            if (target.Controller == "workinggroups") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-account-supervisor-circle");
 
-            if (target.Controller == "testhandlings") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-check");
+            if (target.Controller == "assessments") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-check");
 
-            if (target.Controller == "testreceptions") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-alert");
+            if (target.Controller == "serviceordersamples") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-alert");
 
-            if (target.Controller == "technicals") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-microscope");
+            if (target.Controller == "techniques") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-microscope");
 
             if (target.Controller == "internationalnorms") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-check-decagram");
 
@@ -136,7 +136,7 @@
 
             if (target.Controller == "releases") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-file-chart");
 
-            if (target.Controller == "labtestservices") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-question");
+            if (target.Controller == "sampleanalysisservices") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-question");
 
             if (target.Controller == "propousals") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-lightbulb-on");
 
@@ -168,7 +168,7 @@
 
             if (target.Controller == "researchers") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-account-tie");
 
-            if (target.Controller == "serviceorders") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-layers-triple");
+            if (target.Controller == "naturalclienttrainingserviceorders") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-layers-triple");
 
             if (target.Controller == "samplekinds") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-beaker-outline");
 

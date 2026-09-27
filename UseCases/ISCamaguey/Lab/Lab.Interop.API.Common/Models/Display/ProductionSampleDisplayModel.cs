@@ -2,7 +2,7 @@
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 {
-    public sealed class ProductionSampleDisplayModel : Contract.AbstractSampleDisplayModel<Persistence.Entities.ProductionSample>
+    public class ProductionSampleDisplayModel : Contract.AbstractSampleDisplayModel<Persistence.Entities.ProductionSample>
     {
         public Framework.Decisor.Production.Interop.API.Common.Models.Display.ProductionDisplayModel Production { get; set; }
 
