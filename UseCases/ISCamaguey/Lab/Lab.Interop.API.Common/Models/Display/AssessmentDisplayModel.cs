@@ -22,7 +22,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 
         public DocumentDisplayModel Document { get; set; }
 
-        public void Import(Assessment entity)
+        public virtual void Import(Assessment entity)
         {
             Id = entity.Id;
             At = entity.At;

@@ -42,11 +42,17 @@
 	  <Compile Update="Pages\Configuration\InternalResearcherProjectParticipationConfigurationPage.xaml.cs">
 	    <DependentUpon>InternalResearcherProjectParticipationConfigurationPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Configuration\ThesisResultConfigurationPage.xaml.cs">
+	    <DependentUpon>ThesisResultConfigurationPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Detail\CallForProposalDetailPage.xaml.cs">
 	    <DependentUpon>CallForProposalDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Detail\ProjectDetailPage.xaml.cs">
 	    <DependentUpon>ProjectDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\ThesisResultDetailPage.xaml.cs">
+	    <DependentUpon>ThesisResultDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Detail\ResearcherCategoryDetailPage.xaml.cs">
 	    <DependentUpon>ResearcherCategoryDetailPage.xaml</DependentUpon>
@@ -56,6 +62,12 @@
 	  </Compile>
 	  <Compile Update="Pages\Manage\CallForProposalsManagePage.xaml.cs">
 	    <DependentUpon>CallForProposalsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\ThesisResultsManagePage.xaml.cs">
+	    <DependentUpon>ThesisResultsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\PublicationResultsManagePage.xaml.cs">
+	    <DependentUpon>PublicationResultsManagePage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Pick\CallForProposalPickPage.xaml.cs">
 	    <DependentUpon>CallForProposalPickPage.xaml</DependentUpon>
@@ -110,6 +122,9 @@
 	  <MauiXaml Update="Pages\Configuration\ProjectSpecificObjectiveConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\ThesisResultConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\PublicationResultConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -138,6 +153,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ProjectProposalDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\ThesisResultDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\PublicationResultDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ResearcherCategoryDetailPage.xaml">
@@ -180,6 +201,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\ProgramsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\ThesisResultsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\PublicationResultsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\ProjectProposalsManagePage.xaml">

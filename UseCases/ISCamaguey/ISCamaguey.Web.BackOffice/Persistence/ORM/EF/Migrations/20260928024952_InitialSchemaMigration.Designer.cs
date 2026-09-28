@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20260919180730_ExtendLab18SchemaMigration")]
-    partial class ExtendLab18SchemaMigration
+    [Migration("20260928024952_InitialSchemaMigration")]
+    partial class InitialSchemaMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -6242,17 +6242,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
                     b.Property<Guid>("KindId")
                         .HasColumnType("uuid")
                         .HasColumnName("kindid");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
 
                     b.HasKey("Id")
                         .HasName("pk_awardresults");
@@ -6703,17 +6695,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
                     b.Property<Guid?>("PredecessorTechniqueId")
                         .HasColumnType("uuid")
                         .HasColumnName("predecessortechniqueid");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
 
                     b.Property<Guid>("ResultingTechniqueId")
                         .HasColumnType("uuid")
@@ -7424,15 +7408,12 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("documentid");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("projectid");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("title");
 
@@ -7441,6 +7422,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("DocumentId")
                         .HasDatabaseName("ix_publicationresults_documentid");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_publicationresults_projectid");
 
                     b.ToTable("publicationresults", "decisoriscamaguey_idi");
                 });
@@ -7548,23 +7532,20 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
                     b.Property<Guid>("KindId")
                         .HasColumnType("uuid")
                         .HasColumnName("kindid");
 
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("projectid");
 
                     b.Property<string>("RegistrationCode")
                         .HasColumnType("text")
                         .HasColumnName("registrationcode");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("title");
 
@@ -7573,6 +7554,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("KindId")
                         .HasDatabaseName("ix_scientifictechnicalresults_kindid");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_scientifictechnicalresults_projectid");
 
                     b.ToTable("scientifictechnicalresults", "decisoriscamaguey_idi");
                 });
@@ -7709,20 +7693,31 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
 
-                    b.Property<int>("Priority")
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("projectid");
+
+                    b.Property<int>("ThesisKind")
                         .HasColumnType("integer")
-                        .HasColumnName("priority");
+                        .HasColumnName("thesiskind");
 
                     b.Property<string>("Title")
+                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("title");
 
                     b.HasKey("Id")
                         .HasName("pk_thesisresults");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_thesisresults_documentid");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_thesisresults_projectid");
 
                     b.ToTable("thesisresults", "decisoriscamaguey_idi");
                 });
@@ -7791,14 +7786,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
 
                     b.HasKey("Id")
                         .HasName("pk_trainingresults");
@@ -8581,10 +8568,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("archived");
 
-                    b.Property<DateTime?>("AssessmentAt")
-                        .HasColumnType("timestamp without time zone")
-                        .HasColumnName("assessmentat");
-
                     b.Property<DateTime>("At")
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
@@ -8602,6 +8585,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Property<bool>("Enabled")
                         .HasColumnType("boolean")
                         .HasColumnName("enabled");
+
+                    b.Property<DateTime?>("ExecutedAt")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("executedat");
 
                     b.Property<int>("Priority")
                         .HasColumnType("integer")
@@ -8851,6 +8838,288 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_groundintstudyservstepworkposbridges_sternid");
 
                     b.ToTable("groundintstudyservstepworkposbridges", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientGroundIntegralStudyServiceExecution", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("orderid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_legalclientgroundintegralstudyserviceexecutions");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_legalclientgroundintegralstudyserviceexecutions_authorid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_legalclientgroundintegralstudyserviceexecutions_documentid");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_legalclientgroundintegralstudyserviceexecutions_orderid");
+
+                    b.ToTable("legalclientgroundintegralstudyserviceexecutions", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientSampleAnalysisServiceExecution", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("orderid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_legalclientsampleanalysisserviceexecutions");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_legalclientsampleanalysisserviceexecutions_authorid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_legalclientsampleanalysisserviceexecutions_documentid");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_legalclientsampleanalysisserviceexecutions_orderid");
+
+                    b.ToTable("legalclientsampleanalysisserviceexecutions", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientTrainingServiceExecution", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("orderid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_legalclienttrainingserviceexecutions");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_legalclienttrainingserviceexecutions_authorid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_legalclienttrainingserviceexecutions_documentid");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_legalclienttrainingserviceexecutions_orderid");
+
+                    b.ToTable("legalclienttrainingserviceexecutions", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientGroundIntegralStudyServiceExecution", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("orderid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_naturalclientgroundintegralstudyserviceexecutions");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_naturalclientgroundintegralstudyserviceexecutions_authorid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_naturalclientgroundintegralstudyserviceexecutions_documentid");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_naturalclientgroundintegralstudyserviceexecutions_orderid");
+
+                    b.ToTable("naturalclientgroundintegralstudyserviceexecutions", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientSampleAnalysisServiceExecution", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("orderid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_naturalclientsampleanalysisserviceexecutions");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_naturalclientsampleanalysisserviceexecutions_authorid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_naturalclientsampleanalysisserviceexecutions_documentid");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_naturalclientsampleanalysisserviceexecutions_orderid");
+
+                    b.ToTable("naturalclientsampleanalysisserviceexecutions", "decisoriscamaguey_servicing");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientTrainingServiceExecution", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
+                    b.Property<long>("OrderId")
+                        .HasColumnType("bigint")
+                        .HasColumnName("orderid");
+
+                    b.HasKey("Id")
+                        .HasName("pk_naturalclienttrainingserviceexecutions");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_naturalclienttrainingserviceexecutions_authorid");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_naturalclienttrainingserviceexecutions_documentid");
+
+                    b.HasIndex("OrderId")
+                        .HasDatabaseName("ix_naturalclienttrainingserviceexecutions_orderid");
+
+                    b.ToTable("naturalclienttrainingserviceexecutions", "decisoriscamaguey_servicing");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", b =>
@@ -13046,7 +13315,14 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_publicationresults_documents_documentid");
 
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .HasConstraintName("fk_publicationresults_projects_projectid");
+
                     b.Navigation("Document");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.PublicationResultExternalResearcherBridge", b =>
@@ -13100,7 +13376,14 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .IsRequired()
                         .HasConstraintName("fk_scientifictechnicalresults_scientifictechnicalresultkinds_k~");
 
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .HasConstraintName("fk_scientifictechnicalresults_projects_projectid");
+
                     b.Navigation("Kind");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResultIntroduction", b =>
@@ -13113,6 +13396,25 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_scientifictechnicalresultintroductions_scientifictechnicalr~");
 
                     b.Navigation("Result");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ThesisResult", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_thesisresults_documents_documentid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .HasConstraintName("fk_thesisresults_projects_projectid");
+
+                    b.Navigation("Document");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ThesisResultExternalResearcherBridge", b =>
@@ -13710,6 +14012,186 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Prow");
 
                     b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientGroundIntegralStudyServiceExecution", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientgroundintegralstudyserviceexecutions_employees_a~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientgroundintegralstudyserviceexecutions_documents_d~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientGroundIntegralStudyServiceOrder", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientgroundintegralstudyserviceexecutions_serviceorde~");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Document");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientSampleAnalysisServiceExecution", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientsampleanalysisserviceexecutions_employees_author~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientsampleanalysisserviceexecutions_documents_docume~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientSampleAnalysisServiceOrder", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclientsampleanalysisserviceexecutions_serviceorders_or~");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Document");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientTrainingServiceExecution", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclienttrainingserviceexecutions_employees_authorid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclienttrainingserviceexecutions_documents_documentid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.LegalClientTrainingServiceOrder", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_legalclienttrainingserviceexecutions_serviceorders_orderid");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Document");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientGroundIntegralStudyServiceExecution", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientgroundintegralstudyserviceexecutions_employees~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientgroundintegralstudyserviceexecutions_documents~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientGroundIntegralStudyServiceOrder", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientgroundintegralstudyserviceexecutions_serviceor~");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Document");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientSampleAnalysisServiceExecution", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientsampleanalysisserviceexecutions_employees_auth~");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientsampleanalysisserviceexecutions_documents_docu~");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientSampleAnalysisServiceOrder", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclientsampleanalysisserviceexecutions_serviceorders_~");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Document");
+
+                    b.Navigation("Order");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientTrainingServiceExecution", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclienttrainingserviceexecutions_employees_authorid");
+
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclienttrainingserviceexecutions_documents_documentid");
+
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.NaturalClientTrainingServiceOrder", "Order")
+                        .WithMany()
+                        .HasForeignKey("OrderId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_naturalclienttrainingserviceexecutions_serviceorders_orderid");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Document");
+
+                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Servicing.Persistence.Entities.SampleAnalysisService", b =>

@@ -7,7 +7,6 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.Models.Page.C
 public sealed class PublicationResultConfigurationPageModel : Framework.Decisor.Core.Presentation.Terminal.MAUI.Models.Page.Contract.AbstractConfigurationPageModel<PublicationResultDisplayModel>
 {
     public static string TitleValidableProperty => nameof(Title);
-    public static string ProjectValidableProperty => nameof(Project);
     public static string DocumentValidableProperty => nameof(Document);
     public static string DescriptionValidableProperty => nameof(Description);
     public static string InternalResearchersValidableProperty => nameof(InternalResearchers);
@@ -46,7 +45,7 @@ public sealed class PublicationResultConfigurationPageModel : Framework.Decisor.
 
     public DocumentDisplayModel Document { get => document; set => SetProperty(ref document, value); }
 
-    public ObservableCollection<InternalResearcherDisplayModel> InternalResearchers { get; init; }
+    public ObservableCollection<InternalResearcherDisplayModel> InternalResearchers { get; init; } = [];
 
-    public ObservableCollection<ExternalResearcherDisplayModel> ExternalResearchers { get; init; }
+    public ObservableCollection<ExternalResearcherDisplayModel> ExternalResearchers { get; init; } = [];
 }

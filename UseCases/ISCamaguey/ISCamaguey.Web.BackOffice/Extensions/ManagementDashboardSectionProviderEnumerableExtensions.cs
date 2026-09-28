@@ -310,15 +310,6 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
                 // TODO Set spected permission
                 //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
             });
-            researchSection.Add(new ManagementDashboardSectionViewModel
-            {
-                Title = "Categorías de Proyectos",
-                Controller = "projectcategories",
-                Action = "Index",
-                Area = "IDi",
-                // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
-            });
 
             #endregion
 

@@ -79,6 +79,15 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Grado.
+        /// </summary>
+        internal static string Bachelored {
+            get {
+                return ResourceManager.GetString("Bachelored", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Negra.
         /// </summary>
         internal static string Black {

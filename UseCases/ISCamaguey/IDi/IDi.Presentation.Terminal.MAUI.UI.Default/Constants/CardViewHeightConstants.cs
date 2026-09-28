@@ -37,4 +37,10 @@ public static class CardViewHeightConstants
 
     public static double PROGRAM_EXPECT_RESULT_DEFAULT_CARD_VIEW_HEIGHT = 60;
     public static double PROGRAM_EXPECT_RESULT_DEFAULT_CARD_VIEW_WIDTH = 640;
+
+    public static double PUBLICATION_RESULT_DEFAULT_CARD_VIEW_HEIGHT = 136;
+    public static double PUBLICATION_RESULT_DEFAULT_CARD_VIEW_WIDTH = 400;
+
+    public static double THESIS_RESULT_DEFAULT_CARD_VIEW_HEIGHT = 136;
+    public static double THESIS_RESULT_DEFAULT_CARD_VIEW_WIDTH = 400;
 }

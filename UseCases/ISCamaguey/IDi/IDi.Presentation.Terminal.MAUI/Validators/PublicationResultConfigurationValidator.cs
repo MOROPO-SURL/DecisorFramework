@@ -9,15 +9,13 @@ public class PublicationResultConfigurationValidator : AbstractValidator<Models.
     {
         RuleFor(model => model.Title)
             .NotEmpty()
-            .MaximumLength(512);
+            .MaximumLength(512)
+            .WithName("Título");
 
         RuleFor(model => model.Description)
             .NotEmpty()
-            .MaximumLength(5100);
-
-        RuleFor(model => model.Project)
-            .NotNull()
-            .WithName("Proyecto");
+            .MaximumLength(5100)
+            .WithName("Sumario");
 
         RuleFor(model => model.Document)
             .NotNull()

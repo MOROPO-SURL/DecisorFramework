@@ -1,4 +1,5 @@
-﻿using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
+﻿using MOROPO.Framework.Decisor.Core.Interop.API.Common.Models.Input;
+using MOROPO.Framework.Guama.Core.Persistence.Presentation.Models.Contract;
 using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;
 using MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities;
 
@@ -15,11 +16,15 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
         [System.ComponentModel.DataAnnotations.Required]
         public string Title { get; set; }
 
+        public Persistence.Enumerations.ThesisKind ThesisKind { get; set; }
+
         public System.Guid? ProjectId { get; set; }
 
         public InternalResearcherDisplayModel[] InternalResearchers { get; set; }
 
         public ExternalResearcherDisplayModel[] ExternalResearchers { get; set; }
+
+        public DocumentInputModel Document { get; set; }
 
         public ThesisResult Export()
         {
@@ -40,6 +45,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Input
             entity.At = At;
             entity.Description = Description;
             entity.Title = Title;
+            entity.ThesisKind = ThesisKind;
             
             if (entity.ProjectId != ProjectId)
             {

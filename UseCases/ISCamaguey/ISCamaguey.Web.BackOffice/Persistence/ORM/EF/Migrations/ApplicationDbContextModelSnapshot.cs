@@ -7690,9 +7690,17 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
+                    b.Property<Guid>("DocumentId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("documentid");
+
                     b.Property<Guid?>("ProjectId")
                         .HasColumnType("uuid")
                         .HasColumnName("projectid");
+
+                    b.Property<int>("ThesisKind")
+                        .HasColumnType("integer")
+                        .HasColumnName("thesiskind");
 
                     b.Property<string>("Title")
                         .IsRequired()
@@ -7701,6 +7709,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasKey("Id")
                         .HasName("pk_thesisresults");
+
+                    b.HasIndex("DocumentId")
+                        .HasDatabaseName("ix_thesisresults_documentid");
 
                     b.HasIndex("ProjectId")
                         .HasDatabaseName("ix_thesisresults_projectid");
@@ -13386,10 +13397,19 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ThesisResult", b =>
                 {
+                    b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
+                        .WithMany()
+                        .HasForeignKey("DocumentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_thesisresults_documents_documentid");
+
                     b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
                         .WithMany()
                         .HasForeignKey("ProjectId")
                         .HasConstraintName("fk_thesisresults_projects_projectid");
+
+                    b.Navigation("Document");
 
                     b.Navigation("Project");
                 });

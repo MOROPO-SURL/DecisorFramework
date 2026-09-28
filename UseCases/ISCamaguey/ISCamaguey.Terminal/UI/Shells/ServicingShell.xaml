@@ -92,7 +92,7 @@
             Title="Naturales"
             ContentTemplate="{DataTemplate servicing_manage_pages:NaturalClientGroundIntegralStudyServiceOrdersManagePage}" />
     </FlyoutItem>
-    <MenuFlyoutItem Text="Ejecusiones" IsEnabled="False" />
+    <MenuFlyoutItem Text="Ejecuciones" IsEnabled="False" />
     <FlyoutItem Title="Capacitación">
         <FlyoutItem.Icon>
             <FontImageSource

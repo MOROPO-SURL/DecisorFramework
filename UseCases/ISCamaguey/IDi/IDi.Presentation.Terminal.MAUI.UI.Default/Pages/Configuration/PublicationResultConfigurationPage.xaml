@@ -19,9 +19,12 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <fwrk_core_ui_converters:FlexLayoutItemResponsiveWithConverter x:Key="FlexLayoutItemResponsiveWithConverter" WrapSpacing="8" SingleSpacing="4" />
+            <fwrk_core_ui_converters:ImageDisplayModelToImageSourceConverter x:Key="ImageDisplayModelToImageSourceConverter" />
             <fwrk_core_ui_converters:ValidationResultToTargetPropertyErrorMessageConverter x:Key="ValidationResultToTargetPropertyErrorMessageConverter" />
             <fwrk_core_ui_converters:ValidationResultToTargetPropertyHasErrorConverter x:Key="ValidationResultToTargetPropertyHasErrorConverter" />
             <fwrk_core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
+
+            <caneyframework_presentation_converters:ViewChildParentWidthToRelativeWidthConverter x:Key="ViewChildParentWidthToRelativeWidthConverter" ReferenceWidth="180" AbsoluteHorizontalSeparation="12" />
 
             <communitytoolkit_converters:IsNotNullConverter x:Key="IsNotNullConverter" />
         </ResourceDictionary>
@@ -82,17 +85,13 @@
                             HorizontalOptions="Start"
                             Text="Seleccionar ..."
                             Clicked="ProjectPickButton_Clicked" />
-                        <Label
-                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PublicationResultConfigurationPageModel.ProjectValidableProperty}}"
-                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PublicationResultConfigurationPageModel.ProjectValidableProperty}}"
-                            Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                 </FlexLayout>
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Descrición" />
-                    <Editor Text="{Binding Description}" HeightRequest="320" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sumario" />
+                    <Editor Text="{Binding Description}" HeightRequest="240" />
                     <Label
                         IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PublicationResultConfigurationPageModel.DescriptionValidableProperty}}"
                         Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PublicationResultConfigurationPageModel.DescriptionValidableProperty}}"
@@ -116,6 +115,8 @@
                             <Label
                                 Grid.Column="0" Grid.Row="0"
                                 VerticalOptions="Center"
+                                Margin="8,0,0,0"
+                                TextDecorations="Underline"
                                 Text="Investigadores internos" />
                             <Button
                                 Grid.Column="1" Grid.Row="0"
@@ -202,6 +203,8 @@
                             <Label
                                 Grid.Column="0" Grid.Row="0"
                                 VerticalOptions="Center"
+                                Margin="8,0,0,0"
+                                TextDecorations="Underline"
                                 Text="Investigadores externos" />
                             <Button
                                 Grid.Column="1" Grid.Row="0"
@@ -275,6 +278,71 @@
                         Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PublicationResultConfigurationPageModel.ExternalResearchersValidableProperty}}"
                         Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>
+                <FlexLayout
+                    Wrap="Wrap"
+                    AlignItems="Start" AlignContent="Start">
+                    <VerticalStackLayout 
+                        WidthRequest="{Binding Source={RelativeSource AncestorType={Type FlexLayout}}, Path=Width, Converter={StaticResource FlexLayoutItemResponsiveWithConverter}, ConverterParameter={fwrk_core_models:ResponsiveColumnConfigurationModel UltraLargeContainerColumn=4, ExtraLargeContainerColumn=6, LargeContainerColumn=8, MediumContainerColumn=10, SmallContainerColumn=12}}"
+                        Margin="4"
+                        Spacing="6">
+                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Documento" />
+                        <Frame 
+                            IsVisible="{Binding Document, Converter={StaticResource IsNotNullConverter}}"
+                            Padding="0">
+                            <StackLayout Orientation="Horizontal">
+                                <Grid
+                                    WidthRequest="{Binding Source={RelativeSource Mode=Self}, Path=Height}"
+                                    BackgroundColor="DimGray">
+                                    <Label
+                                        HorizontalOptions="Center" VerticalOptions="Center"
+                                        Text="{Binding Document, Converter={StaticResource DocumentDisplayModelToMaterialDesignFontIconTextConverter}}"
+                                        TextColor="White"
+                                        FontSize="80"
+                                        FontFamily="MaterialDesignIcons" />
+                                </Grid>
+                                <Grid 
+                                    HorizontalOptions="FillAndExpand"
+                                    Padding="16"
+                                    ColumnSpacing="8" RowSpacing="8">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <VerticalStackLayout
+                                        Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="0"
+                                        Spacing="2">
+                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Nombre" />
+                                        <Label Text="{Binding Document.Name}" LineBreakMode="TailTruncation" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout
+                                        Grid.Column="0" Grid.Row="1"
+                                        Spacing="2">
+                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tipo" />
+                                        <Label Text="{Binding Document.Extension}" />
+                                    </VerticalStackLayout>
+                                    <VerticalStackLayout
+                                        Grid.Column="1" Grid.Row="1"
+                                        Spacing="2">
+                                        <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Tamaño" />
+                                        <Label Text="{Binding Document.Length, StringFormat='{0} bytes'}" />
+                                    </VerticalStackLayout>
+                                </Grid>
+                            </StackLayout>
+                        </Frame>
+                        <Button
+                            HorizontalOptions="Start"
+                            Text="Seleccionar ..."
+                            Clicked="DocumentPickButton_Clicked" />
+                        <Label
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PublicationResultConfigurationPageModel.DocumentValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PublicationResultConfigurationPageModel.DocumentValidableProperty}}"
+                            Style="{StaticResource ValidationMessageLabelStyle}" />
+                    </VerticalStackLayout>
+                </FlexLayout>
             </VerticalStackLayout>
         </ScrollView>
         <caneyframework_presentation_views:BusyView IsVisible="{Binding IsBusy}"/>

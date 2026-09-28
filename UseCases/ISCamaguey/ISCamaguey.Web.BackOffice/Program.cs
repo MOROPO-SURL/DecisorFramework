@@ -12,12 +12,12 @@ using MOROPO.Framework.Decisor.Financial.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Governance.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.HumanResources.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Inventory.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Decisor.Production.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Decisor.Legal.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Decisor.Production.Presentation.Web.Common.Extensions;
+using MOROPO.Framework.Guama.Core.Security.Common.Persistence.Extensions;
 using MOROPO.Framework.Guama.Core.Security.Common.Presentation.Web.Frontend.Extensions;
 using MOROPO.Framework.Guama.Location.Presentation.Web.Common.Extensions;
 using MOROPO.Framework.Guama.Media.Presentation.Web.Common.Extensions;
-using MOROPO.Framework.Guama.Security.Personal.Persistence.ORM.EF.Extensions;
 using MOROPO.Framework.Guama.Security.Personal.Presentation.Web.Backend.Extensions;
 using MOROPO.ISCamaguey.Decisor.Domain.Presentation.Web.Common.Extensions;
 using MOROPO.ISCamaguey.Decisor.IDi.Presentation.Web.Common.Extensions;
@@ -164,12 +164,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice
 
                     if (!((ApplicationDbContext)dbContext).Users.Any())
                     {
-                        var defaultUserId = "admin";
-                        var k3y = new System.Guid(0x7c9294dd, 0x1e74, 0x45b2, 0xa8, 0x45, 0xaf, 0x6A, 0xe5, 0x2a, 0xf6, 0x19);
+                        var userId = builder.Configuration["DefaultUser:Id"];
 
-                        var protectedPassword = (dbContext as ApplicationDbContext).CreateSecureUser(k3y, defaultUserId, "system");
+                        var defaultUser = new Framework.Guama.Security.Personal.Persistence.Entities.User
+                        {
+                            Id = userId,
+                            Password = builder.Configuration["DefaultUser:Password"].ToHashedPassword(),
+                            Enabled = true,
+                            HasFullAccess = true,
+                            PasswordChangeRequired = true,
+                            Identity = new Framework.Guama.Identity.Persistence.Entities.PersonIdentity
+                            {
+                                Name = userId,
+                                Sex = Framework.Guama.Identity.Persistence.Enumerations.Sex.Unknown
+                            }
+                        };
 
-                        Log.Logger.Information(string.Format(">>>>>> Protected Password : '{0}' => '{1}'", defaultUserId, protectedPassword));
+                        defaultUser.Signature = Framework.Guama.Security.Personal.Persistence.ORM.EF.Helpers.Integrity.UserIntegrityHelper.GetSignature(defaultUser);
+
+                        dbContext.Set<Framework.Guama.Security.Personal.Persistence.Entities.User>().Add(defaultUser);
+
+                        (dbContext as Framework.Guama.Core.Persistence.ORM.EF.Context.Contract.AbstractTraceableDbContext).SaveChanges("system");
                     }
                 }
                 else

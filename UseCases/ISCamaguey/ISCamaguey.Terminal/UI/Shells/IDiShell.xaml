@@ -80,8 +80,8 @@
     </ShellContent>
     <MenuFlyoutItem Text="Resultados" IsEnabled="False" />
     <ShellContent
-        Title="Publicaciones (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Publicaciones"
+        ContentTemplate="{DataTemplate idi_manage_pages:PublicationResultsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -90,8 +90,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Tesis (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Tesis"
+        ContentTemplate="{DataTemplate idi_manage_pages:ThesisResultsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -223,16 +223,6 @@
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF2C0;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-    Title="Categorías de Proyectos"
-    ContentTemplate="{DataTemplate idi_list_pages:ProjectCategoriesListPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-            FontFamily="MaterialDesignIcons"
-            Glyph="&#xF2C0;"
-            Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
 </Shell>

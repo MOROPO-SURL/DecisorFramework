@@ -4,18 +4,18 @@ using MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;
 
 namespace MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Configuration;
 
-public partial class PublicationResultConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<Interop.API.Common.Models.Display.PublicationResultDisplayModel, Interop.API.Common.Models.Display.PublicationResultDisplayModel, Models.Page.Configuration.PublicationResultConfigurationPageModel>
+public partial class PublicationResultConfigurationPage : Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base.ConfigurationBaseContentPage<PublicationResultDisplayModel, PublicationResultDisplayModel, Models.Page.Configuration.PublicationResultConfigurationPageModel>
 {
     private Microsoft.Maui.Storage.FileResult documentFilePickResult;
 
-    public PublicationResultConfigurationPage(System.Action<Interop.API.Common.Models.Display.PublicationResultDisplayModel> successAction, Models.Page.Configuration.PublicationResultConfigurationPageModel model, Validators.PublicationResultConfigurationValidator validator) : base(successAction, model, validator)
+    public PublicationResultConfigurationPage(System.Action<PublicationResultDisplayModel> successAction, Models.Page.Configuration.PublicationResultConfigurationPageModel model, Validators.PublicationResultConfigurationValidator validator) : base(successAction, model, validator)
     {
         InitializeComponent();
     }
 
     protected override string EntityTypeName => "Publicación";
 
-    protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.PublicationResultDisplayModel> PerformCreationAsync()
+    protected override async System.Threading.Tasks.Task<PublicationResultDisplayModel> PerformCreationAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.PublicationResultsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
@@ -50,7 +50,7 @@ public partial class PublicationResultConfigurationPage : Framework.Decisor.Core
         return await apiConnectClient.GetAsync(model.Id);
     }
 
-    protected override async System.Threading.Tasks.Task<Interop.API.Common.Models.Display.PublicationResultDisplayModel> PerformEditionAsync()
+    protected override async System.Threading.Tasks.Task<PublicationResultDisplayModel> PerformEditionAsync()
     {
         var apiConnectClient = new Interop.API.Connect.Clients.PublicationResultsAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 

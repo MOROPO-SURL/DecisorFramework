@@ -47,7 +47,7 @@
                 <SearchBar 
                     Margin="20,20,20,0"
                     Text="{Binding SearchParameter}"
-                    Placeholder="-- buscar entidad participante por nombre --"
+                    Placeholder="-- buscar por nombre --"
                     SearchButtonPressed="SearchBar_SearchButtonPressed" />
                 <Grid 
                     VerticalOptions="FillAndExpand"

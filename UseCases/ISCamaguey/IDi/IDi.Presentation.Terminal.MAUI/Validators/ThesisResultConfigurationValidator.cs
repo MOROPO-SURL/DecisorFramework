@@ -11,13 +11,17 @@ public class ThesisResultConfigurationValidator : AbstractValidator<Models.Page.
             .NotEmpty()
             .MaximumLength(512);
 
+        RuleFor(model => model.ThesisKind)
+            .NotNull()
+            .WithName("Tipo");
+
         RuleFor(model => model.Description)
             .NotEmpty()
             .MaximumLength(5100);
 
-        RuleFor(model => model.Project)
+        RuleFor(model => model.Document)
             .NotNull()
-            .WithName("Proyecto");
+            .WithName("Documento");
 
         RuleFor(model => model.InternalResearchers)
             .Must((model, value) => model.InternalResearchers.Any() || model.ExternalResearchers.Any())

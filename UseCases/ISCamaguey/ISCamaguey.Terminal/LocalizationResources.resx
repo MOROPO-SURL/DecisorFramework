@@ -123,6 +123,9 @@
   <data name="Bachelor" xml:space="preserve">
     <value>Universitario</value>
   </data>
+  <data name="Bachelored" xml:space="preserve">
+    <value>Grado</value>
+  </data>
   <data name="Black" xml:space="preserve">
     <value>Negra</value>
   </data>

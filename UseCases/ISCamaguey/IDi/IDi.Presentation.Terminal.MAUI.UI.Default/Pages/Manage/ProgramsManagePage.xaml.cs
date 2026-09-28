@@ -16,10 +16,9 @@ public partial class ProgramsManagePage : Framework.Decisor.Core.Presentation.Te
 
     protected override double ItemViewRequestWidth => Constants.CardViewHeightConstants.PROGRAM_DEFAULT_CARD_VIEW_WIDTH;
 
-    protected override double MeasureCollectionViewCellHeight(double width)
-    {
-        return Constants.CardViewHeightConstants.PROGRAM_DEFAULT_CARD_VIEW_HEIGHT;
-    }
+    protected override double MeasureCollectionViewCellHeight(double width) => Constants.CardViewHeightConstants.PROGRAM_DEFAULT_CARD_VIEW_HEIGHT;
+
+    protected override bool ConfigurationRequiredAsyncWorkPresentation => true;
 
     protected override System.Threading.Tasks.Task<Framework.Guama.Core.Presentation.Models.PaginationModel<Interop.API.Common.Models.Display.ProgramDisplayModel>> FetchItemsAsync()
     {

@@ -41,7 +41,7 @@
                 <SearchBar 
                     Margin="20,20,20,0"
                     Text="{Binding SearchParameter}"
-                    Placeholder="-- buscar por nombre del programa --"
+                    Placeholder="-- buscar por nombre --"
                     SearchButtonPressed="SearchBar_SearchButtonPressed" />
                 <Grid 
                     VerticalOptions="FillAndExpand"
