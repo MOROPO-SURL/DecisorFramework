@@ -26,6 +26,7 @@ public static class MauiAppBuilderExtensions
             .AddSingleton<IDetailContentPageFactoryFacade<ProjectCategoryDisplayModel>, ProjectCategoryDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<ProgramKindDisplayModel>, ProgramKindDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<PublicationResultDisplayModel>, PublicationResultDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<ThesisResultDisplayModel>, ThesisResultDetailPageFactory>()
 
             // ConfigurationPage factory resgistration !!!
             .AddSingleton<IConfigurationContentPageFactoryFacade<ProgramDisplayModel, ProgramConfigurationPageModel>, ProgramConfigurationPageFactory>()
@@ -36,7 +37,8 @@ public static class MauiAppBuilderExtensions
             .AddSingleton<IConfigurationContentPageFactoryFacade<CallForProposalDisplayModel, CallForProposalConfigurationPageModel>, CallForProposalConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<ProjectDisplayModel, ProjectConfigurationPageModel>, ProjectConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<ProjectProposalDisplayModel, ProjectProposalConfigurationPageModel>, ProjectProposalConfigurationPageFactory>()
-            .AddSingleton<IConfigurationContentPageFactoryFacade<PublicationResultDisplayModel, PublicationResultConfigurationPageModel>, PublicationResultConfigurationPageFactory>();
+            .AddSingleton<IConfigurationContentPageFactoryFacade<PublicationResultDisplayModel, PublicationResultConfigurationPageModel>, PublicationResultConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<ThesisResultDisplayModel, ThesisResultConfigurationPageModel>, ThesisResultConfigurationPageFactory>();
 
         return builder;
     }

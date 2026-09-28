@@ -14,6 +14,7 @@
     <ContentPage.Resources>
         <ResourceDictionary>
             <fwrk_core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
+            <fwrk_core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
         </ResourceDictionary>
     </ContentPage.Resources>
     <ScrollView Orientation="Vertical">
@@ -37,6 +38,12 @@
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
                                 Text="{Binding At, StringFormat='{0:D}'}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
+                                Text="Tipo" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding ThesisKind, Converter={StaticResource StringToLocalizedStringConverter}}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Proyecto" />

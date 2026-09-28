@@ -52,7 +52,7 @@ public sealed class ThesisResultConfigurationPageModel : Framework.Decisor.Core.
 
     public ProjectDisplayModel Project { get => project; set => SetProperty(ref project, value); }
 
-    public ObservableCollection<InternalResearcherDisplayModel> InternalResearchers { get; init; }
+    public ObservableCollection<InternalResearcherDisplayModel> InternalResearchers { get; init; } = [];
 
-    public ObservableCollection<ExternalResearcherDisplayModel> ExternalResearchers { get; init; }
+    public ObservableCollection<ExternalResearcherDisplayModel> ExternalResearchers { get; init; } = [];
 }
