@@ -29,6 +29,8 @@ public static class MauiAppBuilderExtensions
             .AddSingleton<IDetailContentPageFactoryFacade<ThesisResultDisplayModel>, ThesisResultDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<AwardKindDisplayModel>, AwardKindDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<AwardResultDisplayModel>, AwardResultDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<ScientificTechnicalResultKindDisplayModel>, ScientificTechnicalResultKindDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<ScientificTechnicalResultDisplayModel>, ScientificTechnicalResultDetailPageFactory>()
 
             // ConfigurationPage factory resgistration !!!
             .AddSingleton<IConfigurationContentPageFactoryFacade<ProgramDisplayModel, ProgramConfigurationPageModel>, ProgramConfigurationPageFactory>()
@@ -42,7 +44,9 @@ public static class MauiAppBuilderExtensions
             .AddSingleton<IConfigurationContentPageFactoryFacade<PublicationResultDisplayModel, PublicationResultConfigurationPageModel>, PublicationResultConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<ThesisResultDisplayModel, ThesisResultConfigurationPageModel>, ThesisResultConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<AwardKindDisplayModel, AwardKindConfigurationPageModel>, AwardKindConfigurationPageFactory>()
-            .AddSingleton<IConfigurationContentPageFactoryFacade<AwardResultDisplayModel, AwardResultConfigurationPageModel>, AwardResultConfigurationPageFactory>();
+            .AddSingleton<IConfigurationContentPageFactoryFacade<AwardResultDisplayModel, AwardResultConfigurationPageModel>, AwardResultConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<ScientificTechnicalResultKindDisplayModel, ScientificTechnicalResultKindConfigurationPageModel>, ScientificTechnicalResultKindConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<ScientificTechnicalResultDisplayModel, ScientificTechnicalResultConfigurationPageModel>, ScientificTechnicalResultConfigurationPageFactory>();
 
         return builder;
     }

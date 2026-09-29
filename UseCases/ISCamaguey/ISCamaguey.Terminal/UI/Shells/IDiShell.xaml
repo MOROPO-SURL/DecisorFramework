@@ -120,8 +120,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Resultados CTI (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Resultados CTI"
+        ContentTemplate="{DataTemplate idi_manage_pages:ScientificTechnicalResultsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -191,6 +191,16 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF4D2;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tipos de Resultados CTI"
+        ContentTemplate="{DataTemplate idi_manage_pages:ScientificTechnicalResultKindsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xFDCE;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

@@ -7567,9 +7567,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("projectid");
 
-                    b.Property<string>("RegistrationCode")
+                    b.Property<string>("Reference")
                         .HasColumnType("text")
-                        .HasColumnName("registrationcode");
+                        .HasColumnName("reference");
 
                     b.Property<string>("Title")
                         .IsRequired()

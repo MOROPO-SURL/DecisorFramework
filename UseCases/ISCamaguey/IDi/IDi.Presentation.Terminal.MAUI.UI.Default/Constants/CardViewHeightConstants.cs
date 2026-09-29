@@ -49,4 +49,10 @@ public static class CardViewHeightConstants
 
     public static double AWARD_RESULT_DEFAULT_CARD_VIEW_HEIGHT = 176;
     public static double AWARD_RESULT_DEFAULT_CARD_VIEW_WIDTH = 400;
+
+    public static double SCIENTIFIC_TECHNICAL_RESULT_KIND_DEFAULT_CARD_VIEW_HEIGHT = 136;
+    public static double SCIENTIFIC_TECHNICAL_RESULT_KIND_DEFAULT_CARD_VIEW_WIDTH = 360;
+
+    public static double SCIENTIFIC_TECHNICAL_RESULT_DEFAULT_CARD_VIEW_HEIGHT = 176;
+    public static double SCIENTIFIC_TECHNICAL_RESULT_DEFAULT_CARD_VIEW_WIDTH = 400;
 }

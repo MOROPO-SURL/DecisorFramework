@@ -36,11 +36,23 @@
 		<ProjectReference Include="..\IDi.Presentation.Terminal.MAUI\IDi.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\Configuration\ScientificTechnicalResultConfigurationPage.xaml.cs">
+	    <DependentUpon>ScientificTechnicalResultConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\ScientificTechnicalResultKindConfigurationPage.xaml.cs">
+	    <DependentUpon>ScientificTechnicalResultKindConfigurationPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Configuration\AwardKindConfigurationPage.xaml.cs">
 	    <DependentUpon>AwardKindConfigurationPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Configuration\AwardResultConfigurationPage.xaml.cs">
 	    <DependentUpon>AwardResultConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\ScientificTechnicalResultDetailPage.xaml.cs">
+	    <DependentUpon>ScientificTechnicalResultDetailPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\ScientificTechnicalResultKindDetailPage.xaml.cs">
+	    <DependentUpon>ScientificTechnicalResultKindDetailPage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Detail\AwardKindDetailPage.xaml.cs">
 	    <DependentUpon>AwardKindDetailPage.xaml</DependentUpon>
@@ -72,6 +84,12 @@
 	  <Compile Update="Pages\List\ResearcherCategoriesListPage.xaml.cs">
 	    <DependentUpon>ResearcherCategoriesListPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Manage\ScientificTechnicalResultsManagePage.xaml.cs">
+	    <DependentUpon>ScientificTechnicalResultsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\ScientificTechnicalResultKindsManagePage.xaml.cs">
+	    <DependentUpon>ScientificTechnicalResultKindsManagePage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Manage\CallForProposalsManagePage.xaml.cs">
 	    <DependentUpon>CallForProposalsManagePage.xaml</DependentUpon>
 	  </Compile>
@@ -101,10 +119,22 @@
 	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\ScientificTechnicalResultConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\ScientificTechnicalResultKindConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\AwardKindConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\AwardResultConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\ScientificTechnicalResultDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\ScientificTechnicalResultKindDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\AwardKindDetailPage.xaml">
@@ -215,6 +245,12 @@
 	  <MauiXaml Update="Pages\List\TeachingCategoriesListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\ScientificTechnicalResultsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\ScientificTechnicalResultKindsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\CallForProposalsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -300,6 +336,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\ProjectProposalDefaultCardView.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Card\ScientificTechnicalResultDefaultCardView.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>
