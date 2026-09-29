@@ -36,6 +36,15 @@
 		<ProjectReference Include="..\IDi.Presentation.Terminal.MAUI\IDi.Presentation.Terminal.MAUI.csproj" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Compile Update="Pages\Configuration\AwardKindConfigurationPage.xaml.cs">
+	    <DependentUpon>AwardKindConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Configuration\AwardResultConfigurationPage.xaml.cs">
+	    <DependentUpon>AwardResultConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\AwardKindDetailPage.xaml.cs">
+	    <DependentUpon>AwardKindDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Configuration\CallForProposalConfigurationPage.xaml.cs">
 	    <DependentUpon>CallForProposalConfigurationPage.xaml</DependentUpon>
 	  </Compile>
@@ -51,6 +60,9 @@
 	  <Compile Update="Pages\Detail\ProjectDetailPage.xaml.cs">
 	    <DependentUpon>ProjectDetailPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Detail\AwardResultDetailPage.xaml.cs">
+	    <DependentUpon>AwardResultDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Detail\ThesisResultDetailPage.xaml.cs">
 	    <DependentUpon>ThesisResultDetailPage.xaml</DependentUpon>
 	  </Compile>
@@ -62,6 +74,12 @@
 	  </Compile>
 	  <Compile Update="Pages\Manage\CallForProposalsManagePage.xaml.cs">
 	    <DependentUpon>CallForProposalsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\AwardKindsManagePage.xaml.cs">
+	    <DependentUpon>AwardKindsManagePage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\AwardResultsManagePage.xaml.cs">
+	    <DependentUpon>AwardResultsManagePage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Manage\ThesisResultsManagePage.xaml.cs">
 	    <DependentUpon>ThesisResultsManagePage.xaml</DependentUpon>
@@ -83,6 +101,15 @@
 	  </Compile>
 	</ItemGroup>
 	<ItemGroup>
+	  <MauiXaml Update="Pages\Configuration\AwardKindConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\AwardResultConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\AwardKindDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\CallForProposalConfigurationPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -155,6 +182,9 @@
 	  <MauiXaml Update="Pages\Detail\ProjectProposalDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\AwardResultDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ThesisResultDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -201,6 +231,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\ProgramsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\AwardKindsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\AwardResultsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\ThesisResultsManagePage.xaml">

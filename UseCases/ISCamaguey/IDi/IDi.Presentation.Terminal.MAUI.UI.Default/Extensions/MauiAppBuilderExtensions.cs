@@ -27,6 +27,8 @@ public static class MauiAppBuilderExtensions
             .AddSingleton<IDetailContentPageFactoryFacade<ProgramKindDisplayModel>, ProgramKindDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<PublicationResultDisplayModel>, PublicationResultDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<ThesisResultDisplayModel>, ThesisResultDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<AwardKindDisplayModel>, AwardKindDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<AwardResultDisplayModel>, AwardResultDetailPageFactory>()
 
             // ConfigurationPage factory resgistration !!!
             .AddSingleton<IConfigurationContentPageFactoryFacade<ProgramDisplayModel, ProgramConfigurationPageModel>, ProgramConfigurationPageFactory>()
@@ -38,7 +40,9 @@ public static class MauiAppBuilderExtensions
             .AddSingleton<IConfigurationContentPageFactoryFacade<ProjectDisplayModel, ProjectConfigurationPageModel>, ProjectConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<ProjectProposalDisplayModel, ProjectProposalConfigurationPageModel>, ProjectProposalConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<PublicationResultDisplayModel, PublicationResultConfigurationPageModel>, PublicationResultConfigurationPageFactory>()
-            .AddSingleton<IConfigurationContentPageFactoryFacade<ThesisResultDisplayModel, ThesisResultConfigurationPageModel>, ThesisResultConfigurationPageFactory>();
+            .AddSingleton<IConfigurationContentPageFactoryFacade<ThesisResultDisplayModel, ThesisResultConfigurationPageModel>, ThesisResultConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<AwardKindDisplayModel, AwardKindConfigurationPageModel>, AwardKindConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<AwardResultDisplayModel, AwardResultConfigurationPageModel>, AwardResultConfigurationPageFactory>();
 
         return builder;
     }

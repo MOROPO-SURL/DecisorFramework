@@ -6235,19 +6235,42 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("timestamp without time zone")
                         .HasColumnName("at");
 
+                    b.Property<Guid>("AwardKindId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("awardkindid");
+
+                    b.Property<int>("AwardModality")
+                        .HasColumnType("integer")
+                        .HasColumnName("awardmodality");
+
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
 
-                    b.Property<Guid>("KindId")
+                    b.Property<Guid?>("ProjectId")
                         .HasColumnType("uuid")
-                        .HasColumnName("kindid");
+                        .HasColumnName("projectid");
+
+                    b.Property<Guid>("ReceptorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("receptorid");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("title");
 
                     b.HasKey("Id")
                         .HasName("pk_awardresults");
 
-                    b.HasIndex("KindId")
-                        .HasDatabaseName("ix_awardresults_kindid");
+                    b.HasIndex("AwardKindId")
+                        .HasDatabaseName("ix_awardresults_awardkindid");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_awardresults_projectid");
+
+                    b.HasIndex("ReceptorId")
+                        .HasDatabaseName("ix_awardresults_receptorid");
 
                     b.ToTable("awardresults", "decisoriscamaguey_idi");
                 });
@@ -6696,6 +6719,10 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("uuid")
                         .HasColumnName("predecessortechniqueid");
 
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("projectid");
+
                     b.Property<Guid>("ResultingTechniqueId")
                         .HasColumnType("uuid")
                         .HasColumnName("resultingtechniqueid");
@@ -6705,6 +6732,9 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
                     b.HasIndex("PredecessorTechniqueId")
                         .HasDatabaseName("ix_newtechniqueresults_predecessortechniqueid");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_newtechniqueresults_projectid");
 
                     b.HasIndex("ResultingTechniqueId")
                         .HasDatabaseName("ix_newtechniqueresults_resultingtechniqueid");
@@ -7784,8 +7814,15 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("text")
                         .HasColumnName("description");
 
+                    b.Property<Guid?>("ProjectId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("projectid");
+
                     b.HasKey("Id")
                         .HasName("pk_trainingresults");
+
+                    b.HasIndex("ProjectId")
+                        .HasDatabaseName("ix_trainingresults_projectid");
 
                     b.ToTable("trainingresults", "decisoriscamaguey_idi");
                 });
@@ -12762,14 +12799,30 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.AwardResult", b =>
                 {
-                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.AwardKind", "Kind")
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.AwardKind", "AwardKind")
                         .WithMany()
-                        .HasForeignKey("KindId")
+                        .HasForeignKey("AwardKindId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_awardresults_awardkinds_kindid");
+                        .HasConstraintName("fk_awardresults_awardkinds_awardkindid");
 
-                    b.Navigation("Kind");
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .HasConstraintName("fk_awardresults_projects_projectid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Receptor")
+                        .WithMany()
+                        .HasForeignKey("ReceptorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_awardresults_employees_receptorid");
+
+                    b.Navigation("AwardKind");
+
+                    b.Navigation("Project");
+
+                    b.Navigation("Receptor");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.CallForProposal", b =>
@@ -13002,6 +13055,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasForeignKey("PredecessorTechniqueId")
                         .HasConstraintName("fk_newtechniqueresults_techniques_predecessortechniqueid");
 
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .HasConstraintName("fk_newtechniqueresults_projects_projectid");
+
                     b.HasOne("MOROPO.ISCamaguey.Decisor.Domain.Persistence.Entities.Technique", "ResultingTechnique")
                         .WithMany()
                         .HasForeignKey("ResultingTechniqueId")
@@ -13010,6 +13068,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasConstraintName("fk_newtechniqueresults_techniques_resultingtechniqueid");
 
                     b.Navigation("PredecessorTechnique");
+
+                    b.Navigation("Project");
 
                     b.Navigation("ResultingTechnique");
                 });
@@ -13454,6 +13514,16 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Prow");
 
                     b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.TrainingResult", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Project", "Project")
+                        .WithMany()
+                        .HasForeignKey("ProjectId")
+                        .HasConstraintName("fk_trainingresults_projects_projectid");
+
+                    b.Navigation("Project");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.TrainingResultExternalResearcherBridge", b =>

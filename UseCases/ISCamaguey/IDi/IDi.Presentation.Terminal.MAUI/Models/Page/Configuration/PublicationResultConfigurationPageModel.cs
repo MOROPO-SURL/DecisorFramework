@@ -8,7 +8,6 @@ public sealed class PublicationResultConfigurationPageModel : Framework.Decisor.
 {
     public static string TitleValidableProperty => nameof(Title);
     public static string DocumentValidableProperty => nameof(Document);
-    public static string DescriptionValidableProperty => nameof(Description);
     public static string InternalResearchersValidableProperty => nameof(InternalResearchers);
     public static string ExternalResearchersValidableProperty => nameof(ExternalResearchers);
 

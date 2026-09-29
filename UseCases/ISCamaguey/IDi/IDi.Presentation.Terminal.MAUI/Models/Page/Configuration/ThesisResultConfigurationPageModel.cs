@@ -11,7 +11,6 @@ public sealed class ThesisResultConfigurationPageModel : Framework.Decisor.Core.
     public static string TitleValidableProperty => nameof(Title);
     public static string DocumentValidableProperty => nameof(Document);
     public static string ThesisKindValidableProperty => nameof(ThesisKind);
-    public static string DescriptionValidableProperty => nameof(Description);
     public static string InternalResearchersValidableProperty => nameof(InternalResearchers);
     public static string ExternalResearchersValidableProperty => nameof(ExternalResearchers);
 

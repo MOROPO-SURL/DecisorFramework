@@ -147,6 +147,9 @@
   <data name="HighSchool" xml:space="preserve">
     <value>Bachillerato</value>
   </data>
+  <data name="Institutional" xml:space="preserve">
+    <value>Institucional</value>
+  </data>
   <data name="Male" xml:space="preserve">
     <value>Masculino</value>
   </data>

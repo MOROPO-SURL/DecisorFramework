@@ -78,6 +78,16 @@
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
+    <ShellContent
+        Title="Introducción de Resultados (%)"
+        ContentTemplate="{DataTemplate ContentPage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF4CF;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
     <MenuFlyoutItem Text="Resultados" IsEnabled="False" />
     <ShellContent
         Title="Publicaciones"
@@ -100,8 +110,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Logros Científicos (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Logros Científicos"
+        ContentTemplate="{DataTemplate idi_manage_pages:AwardResultsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
@@ -116,16 +126,6 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF005C;"
-                Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
-    <ShellContent
-        Title="Introducción de Resultados (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
-            <FontImageSource
-                FontFamily="MaterialDesignIcons"
-                Glyph="&#xF4CF;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>
@@ -181,6 +181,16 @@
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF0246;"
+                Color="{AppThemeBinding Light=Black, Dark=White}" />
+        </ShellContent.Icon>
+    </ShellContent>
+    <ShellContent
+        Title="Tipos de Logro Científico"
+        ContentTemplate="{DataTemplate idi_manage_pages:AwardKindsManagePage}">
+        <ShellContent.Icon>
+            <FontImageSource
+                FontFamily="MaterialDesignIcons"
+                Glyph="&#xF4D2;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
         </ShellContent.Icon>
     </ShellContent>

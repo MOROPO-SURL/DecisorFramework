@@ -34,6 +34,12 @@
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Margin="0"
+                                Text="Título" />
+                            <Label
+                                Style="{StaticResource ValuePropertyLabelStyle}"
+                                Text="{Binding Title}" />
+                            <Label 
+                                Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Fecha" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
@@ -55,7 +61,7 @@
                                 Text="Sumario" />
                             <Label
                                 Style="{StaticResource ValuePropertyLabelStyle}"
-                                Text="{Binding Description}" />
+                                Text="{Binding Description, TargetNullValue='---'}" />
                             <Label 
                                 Style="{StaticResource CaptionPropertyLabelStyle}"
                                 Text="Autores" />

@@ -12,9 +12,5 @@
         [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(DocumentId))]
         public Framework.Guama.Media.Persistence.Entities.Document Document { get; set; }
         public System.Guid DocumentId { get; set; }
-
-        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProjectId))]
-        public Project Project { get; set; }
-        public System.Guid? ProjectId { get; set; }
     }
 }

@@ -13,5 +13,9 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.Contract
         public bool Archived { get ; set ; }
 
         public System.DateTime At {  get; set; }
+
+        [System.ComponentModel.DataAnnotations.Schema.ForeignKey(nameof(ProjectId))]
+        public Project Project { get; set; }
+        public System.Guid? ProjectId { get; set; }
     }
 }

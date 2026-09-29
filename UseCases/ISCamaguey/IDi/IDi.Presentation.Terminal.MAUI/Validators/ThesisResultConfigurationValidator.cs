@@ -15,10 +15,6 @@ public class ThesisResultConfigurationValidator : AbstractValidator<Models.Page.
             .NotNull()
             .WithName("Tipo");
 
-        RuleFor(model => model.Description)
-            .NotEmpty()
-            .MaximumLength(5100);
-
         RuleFor(model => model.Document)
             .NotNull()
             .WithName("Documento");

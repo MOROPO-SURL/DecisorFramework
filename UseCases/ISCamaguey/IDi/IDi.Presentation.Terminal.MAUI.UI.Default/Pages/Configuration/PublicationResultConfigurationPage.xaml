@@ -90,12 +90,8 @@
                 <VerticalStackLayout 
                     Margin="8"
                     Spacing="6">
-                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sumario" />
+                    <Label Style="{StaticResource CaptionFieldLabelStyle}" Text="Sumario (opcional)" />
                     <Editor Text="{Binding Description}" HeightRequest="240" />
-                    <Label
-                        IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:PublicationResultConfigurationPageModel.DescriptionValidableProperty}}"
-                        Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:PublicationResultConfigurationPageModel.DescriptionValidableProperty}}"
-                        Style="{StaticResource ValidationMessageLabelStyle}" />
                 </VerticalStackLayout>                    
                 <VerticalStackLayout 
                     Margin="8"

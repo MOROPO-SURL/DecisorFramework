@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<core_ui_base_pages:DetailBaseContentPage 
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:interop_common_display_models="clr-namespace:MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Display;assembly=MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common"
+    xmlns:core_ui_base_pages="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Pages.Base;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    xmlns:fwrk_core_ui_converters="clr-namespace:MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI.UI.Converters;assembly=MOROPO.Framework.Decisor.Core.Presentation.Terminal.MAUI"
+    x:Class="MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Pages.Detail.AwardResultDetailPage"
+    x:TypeArguments="interop_common_display_models:AwardResultDisplayModel"
+    x:DataType="interop_common_display_models:AwardResultDisplayModel"
+    Title="Detalles de Logro Científico"
+    BackgroundColor="Transparent"
+    Background="{StaticResource OverlayBackgroundBrush}">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <fwrk_core_ui_converters:DocumentDisplayModelToMaterialDesignFontIconTextConverter x:Key="DocumentDisplayModelToMaterialDesignFontIconTextConverter" />
+            <fwrk_core_ui_converters:StringToLocalizedStringConverter x:Key="StringToLocalizedStringConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    <ScrollView Orientation="Vertical">
+        <Grid>
+            <Grid
+                Padding="10"
+                MaximumWidthRequest="600"
+                VerticalOptions="Center">
+                <Frame Style="{StaticResource PopupFrameStyle}">
+                    <StackLayout Margin="20">
+                        <Label 
+                            Margin="0,0,0,20"
+                            Text="Detalles"
+                            FontAttributes="Bold"
+                            FontSize="Medium" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Margin="0"
+                            Text="Título" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Title}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Fecha" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding At, StringFormat='{0:D}'}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Tipo" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding AwardKind.Name}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Modalidad" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding AwardModality, Converter={StaticResource StringToLocalizedStringConverter}}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Recibe" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Receptor.Contact.Identity}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Proyecto" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Project.Name, TargetNullValue='---', FallbackValue='---'}" />
+                        <Label 
+                            Style="{StaticResource CaptionPropertyLabelStyle}"
+                            Text="Descripción" />
+                        <Label
+                            Style="{StaticResource ValuePropertyLabelStyle}"
+                            Text="{Binding Description, TargetNullValue='---'}" />
+                        <StackLayout
+                            x:Name="OptionButtonsLayout"
+                            Margin="0,20,0,0"
+                            Orientation="Horizontal"
+                            Spacing="20">
+                            <Button 
+                                HorizontalOptions="FillAndExpand"
+                                Text="Modificar"
+                                Clicked="EditButton_Clicked" />
+                            <Button 
+                                Style="{StaticResource DangerKindButtonStyle}"
+                                HorizontalOptions="FillAndExpand"
+                                Text="Eliminar"
+                                Clicked="DeleteButton_Clicked" />
+                        </StackLayout>
+                    </StackLayout>
+                </Frame>
+                <Button
+                    Style="{StaticResource DetailPageCloseButtonStyle}"
+                    Clicked="DismissControl_Invoked" />
+            </Grid>
+        </Grid>
+    </ScrollView>
+</core_ui_base_pages:DetailBaseContentPage>

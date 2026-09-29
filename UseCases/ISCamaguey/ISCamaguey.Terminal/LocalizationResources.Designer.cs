@@ -151,6 +151,15 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal {
         }
         
         /// <summary>
+        ///   Busca una cadena traducida similar a Institucional.
+        /// </summary>
+        internal static string Institutional {
+            get {
+                return ResourceManager.GetString("Institutional", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Busca una cadena traducida similar a Masculino.
         /// </summary>
         internal static string Male {
