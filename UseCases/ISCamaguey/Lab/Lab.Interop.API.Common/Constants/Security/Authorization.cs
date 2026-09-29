@@ -16,6 +16,26 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Constants.Security
         #endregion
 
 
+        #region AssessmentQualityCheck
+        public const string AssessmentQualityCheckManagementPermissionGroup = "assessment-quality-check-management-permission-group";
+
+        public const string AssessmentQualityCheckViewerPermission = "assessment-quality-check-viewer-permission";
+        public const string AssessmentQualityCheckCreatorPermission = "assessment-quality-check-creator-permission";
+        public const string AssessmentQualityCheckEditorPermission = "assessment-quality-check-editor-permission";
+        public const string AssessmentQualityCheckRemoverPermission = "assessment-quality-check-remover-permission";
+        #endregion
+
+
+        #region AnalysisQualityCheck
+        public const string AnalysisQualityCheckManagementPermissionGroup = "analysis-quality-check-management-permission-group";
+
+        public const string AnalysisQualityCheckViewerPermission = "analysis-quality-check-viewer-permission";
+        public const string AnalysisQualityCheckCreatorPermission = "analysis-quality-check-creator-permission";
+        public const string AnalysisQualityCheckEditorPermission = "analysis-quality-check-editor-permission";
+        public const string AnalysisQualityCheckRemoverPermission = "analysis-quality-check-remover-permission";
+        #endregion
+
+
         #region ProductionSample
         public const string ProductionSampleManagementPermissionGroup = "production-sample-management-permission-group";
 

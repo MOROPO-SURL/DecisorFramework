@@ -114,9 +114,9 @@
 
             if (target.Controller == "elavorations") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-cogs");
 
-            if (target.Controller == "nationalnorms") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-octagram");
+            if (target.Controller == "cubanstandards") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-octagram");
 
-            if (target.Controller == "certificates") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-certificate");
+            if (target.Controller == "certifications") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-certificate");
 
             if (target.Controller == "groundintegralstudyservices") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-sprout");
 
@@ -128,9 +128,9 @@
 
             if (target.Controller == "techniques") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-microscope");
 
-            if (target.Controller == "internationalnorms") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-check-decagram");
+            if (target.Controller == "isostandards") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-check-decagram");
 
-            if (target.Controller == "qualitychecks") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-clipboard-check");
+            if (target.Controller == "analysisqualitychecks") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-clipboard-check");
 
             if (target.Controller == "categories") return new Microsoft.AspNetCore.Html.HtmlString("mdi mdi-star-four-points");
 

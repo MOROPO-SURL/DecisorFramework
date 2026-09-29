@@ -10,17 +10,17 @@
 
         public string Description { get; set; }
 
-        public bool Enable { get; set; }
+        public bool Enabled { get; set; }
 
         public int Priority { get; set; }
 
-        public void Import(Persistence.Entities.IsoStandard entity)
+        public virtual void Import(Persistence.Entities.IsoStandard entity)
         {
             Id = entity.Id;
             Name = entity.Name;
             Index = entity.Index;
             Description = entity.Description;
-            Enable = entity.Enabled;
+            Enabled = entity.Enabled;
             Priority = entity.Priority;
         }
     }

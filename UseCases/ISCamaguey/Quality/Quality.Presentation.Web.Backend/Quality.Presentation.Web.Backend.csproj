@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project Sdk="Microsoft.NET.Sdk">
+	<PropertyGroup>
+		<TargetFramework>net8</TargetFramework>
+		<AssemblyName>MOROPO.ISCamaguey.Decisor.Quality.Presentation.Web.Backend</AssemblyName>
+		<RootNamespace>MOROPO.ISCamaguey.Decisor.Quality.Presentation.Web.Backend</RootNamespace>
+	</PropertyGroup>
+	<ItemGroup>
+		<PackageReference Include="GuamaFramework.Core.Security.Common.Presentation.Web.Backend" Version="6.0.2" />
+	</ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\Quality.Interop.API.Common\Quality.Interop.API.Common.csproj" />
+		<ProjectReference Include="..\Quality.Persistence\Quality.Persistence.csproj" />
+		<ProjectReference Include="..\Quality.Presentation.Web.Common\Quality.Presentation.Web.Common.csproj" />
+	</ItemGroup>
+</Project>
