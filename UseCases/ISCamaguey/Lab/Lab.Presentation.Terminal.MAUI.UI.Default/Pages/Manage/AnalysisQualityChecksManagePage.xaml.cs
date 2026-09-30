@@ -32,7 +32,7 @@ public partial class AnalysisQualityCheckQualityChecksManagePage : Framework.Dec
         switch (discriminator)
         {
             case 0:
-                var apiConnectClient = new Interop.API.Connect.Clients.AnalysesAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
+                var apiConnectClient = new Interop.API.Connect.Clients.AnalysisQualityChecksAPIConnectClient(Microsoft.Maui.IPlatformApplication.Current.Services.GetRequiredService<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade>());
 
                 apiConnectClient.ArchiveAsync(target.Id).ContinueWith(task =>
                 {

@@ -92,8 +92,8 @@
                             Text="Seleccionar ..."
                             Clicked="AuthorPickButton_Clicked" />
                         <Label
-                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:AnalysisConfigurationPageModel.AuthorValidableProperty}}"
-                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:AnalysisConfigurationPageModel.AuthorValidableProperty}}"
+                            IsVisible="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyHasErrorConverter}, ConverterParameter={Static presentation_configuration_page_models:AnalysisQualityCheckConfigurationPageModel.AuthorValidableProperty}}"
+                            Text="{Binding ValidationResult, Converter={StaticResource ValidationResultToTargetPropertyErrorMessageConverter}, ConverterParameter={Static presentation_configuration_page_models:AnalysisQualityCheckConfigurationPageModel.AuthorValidableProperty}}"
                             Style="{StaticResource ValidationMessageLabelStyle}" />
                     </VerticalStackLayout>
                     <VerticalStackLayout 

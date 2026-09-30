@@ -17,6 +17,7 @@ using MOROPO.ISCamaguey.Decisor.IDi.Presentation.Terminal.MAUI.UI.Default.Extens
 using MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using MOROPO.ISCamaguey.Decisor.Servicing.Presentation.Terminal.MAUI.UI.Default.Extensions;
+using MOROPO.ISCamaguey.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Extensions;
 using SkiaSharp.Views.Maui.Controls.Hosting;
 using UraniumUI;
 
@@ -54,6 +55,7 @@ namespace MOROPO.ISCamaguey.Decisor.Terminal
                 .UseDecisorUseCaseLab()
                 .UseDecisorUseCaseIDi()
                 .UseDecisorUseCaseServicing()
+                .UseDecisorUseCaseProduction()
                 .Services
                     .AddSingleton<Framework.Guama.Core.Presentation.API.Connect.Providers.Facade.IHttpClientHelperProviderFacade, Providers.HttpClientHelperProvider>()
                     .AddSingleton<Framework.Decisor.Core.Presentation.Terminal.MAUI.Providers.Facade.IRuntimeContextProviderFacade, Providers.SingleRuntimeContextProvider>()

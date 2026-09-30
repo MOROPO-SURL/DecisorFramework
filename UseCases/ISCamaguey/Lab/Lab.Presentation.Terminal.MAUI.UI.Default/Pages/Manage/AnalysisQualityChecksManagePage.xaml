@@ -13,8 +13,8 @@
     xmlns:communitytoolkit_converters="clr-namespace:CommunityToolkit.Maui.Converters;assembly=CommunityToolkit.Maui"
     x:Class="MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Manage.AnalysisQualityCheckQualityChecksManagePage"
     x:TypeArguments="interop_common_display_models:AnalysisQualityCheckDisplayModel,presentation_manage_page_models:AnalysisQualityChecksManagePageModel,presentation_configuration_page_models:AnalysisQualityCheckConfigurationPageModel"
-    x:DataType="presentation_manage_page_models:AnalysesManagePageModel"
-    Title="Registro de Evaluaciones de Calidad (Análisis de Muestras)">
+    x:DataType="presentation_manage_page_models:AnalysisQualityChecksManagePageModel"
+    Title="Evaluaciones de Calidad (Análisis de Muestras)">
     <ContentPage.Resources>
         <ResourceDictionary>
             <local_converters:QualityPercentDoubleToQualityStartSymbolGroupConverter x:Key="QualityPercentDoubleToQualityStartSymbolGroupConverter" />

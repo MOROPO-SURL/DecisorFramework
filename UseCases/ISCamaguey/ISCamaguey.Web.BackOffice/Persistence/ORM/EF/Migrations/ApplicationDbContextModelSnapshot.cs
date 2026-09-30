@@ -8343,6 +8343,50 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.ToTable("workinggrouptechniquebridges", "decisoriscamaguey_lab");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Production.Persistence.Entities.ProductionQualityCheck", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid")
+                        .HasColumnName("id");
+
+                    b.Property<bool>("Archived")
+                        .HasColumnType("boolean")
+                        .HasColumnName("archived");
+
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
+                    b.Property<Guid>("AuthorId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("authorid");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("text")
+                        .HasColumnName("description");
+
+                    b.Property<Guid>("ProductionId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("productionid");
+
+                    b.Property<double>("QualityPercent")
+                        .HasColumnType("double precision")
+                        .HasColumnName("qualitypercent");
+
+                    b.HasKey("Id")
+                        .HasName("pk_productionqualitychecks");
+
+                    b.HasIndex("AuthorId")
+                        .HasDatabaseName("ix_productionqualitychecks_authorid");
+
+                    b.HasIndex("ProductionId")
+                        .HasDatabaseName("ix_productionqualitychecks_productionid");
+
+                    b.ToTable("productionqualitychecks", "decisoriscamaguey_production");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.Certification", b =>
                 {
                     b.Property<Guid>("Id")
@@ -13886,6 +13930,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Prow");
 
                     b.Navigation("Stern");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Production.Persistence.Entities.ProductionQualityCheck", b =>
+                {
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Author")
+                        .WithMany()
+                        .HasForeignKey("AuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productionqualitychecks_employees_authorid");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Production.Persistence.Entities.Production", "Production")
+                        .WithMany()
+                        .HasForeignKey("ProductionId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_productionqualitychecks_productions_productionid");
+
+                    b.Navigation("Author");
+
+                    b.Navigation("Production");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.Quality.Persistence.Entities.CertificationCubanStandardBridge", b =>

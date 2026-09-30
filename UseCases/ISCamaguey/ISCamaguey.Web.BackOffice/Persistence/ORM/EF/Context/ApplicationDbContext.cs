@@ -31,7 +31,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         Framework.Guama.Security.Personal.Persistence.ORM.EF.Contract.IPersistenceDbContext,
         Framework.Decisor.HumanResources.Persistence.ORM.EF.Context.Contract.IHumanResourcesDbContext,
         Framework.Decisor.Commercial.Persistence.ORM.EF.Context.Contract.ICommercialDbContext,
-        Framework.Decisor.Production.Persistence.ORM.EF.Context.Contract.IProductionDbContext,
+        Production.Persistence.ORM.EF.Context.IProductionDbContext,
         Reporting.Persistence.ORM.EF.Context.Contract.IReportingDbContext
     {
         public ApplicationDbContext(System.Collections.Generic.IEnumerable<Framework.Guama.Core.Persistence.ORM.EF.Providers.Facade.IDbSchemaConfigurationProviderFacade> dbSchemaConfigurationProviders, DbContextOptions options) : base(dbSchemaConfigurationProviders, options)
@@ -306,7 +306,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ElaborationDocumentBridge> ElaborationDocumentBridges { get; set; }
         public DbSet<ElaborationStep> ElaborationSteps { get; set; }
         public DbSet<ElaborationStepWorkPositionBridge> ElaborationStepWorkPositionBridges { get; set; }
-        public DbSet<Production> Productions { get; set; }
+        public DbSet<Framework.Decisor.Production.Persistence.Entities.Production> Productions { get; set; }
         public DbSet<ProductionColaboratorBridge> ProductionColaboratorBridges { get; set; }
         public DbSet<ProductionEmployeeBridge> ProductionEmployeeBridges { get; set; }
         public DbSet<ProductionOrder> ProductionOrders { get; set; }
@@ -326,6 +326,8 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<KnowledgeArea> KnowledgeAreas { get; set; }
         public DbSet<AcademicAchievement> AcademicAchievements { get; set; }
         public DbSet<AcademicAchievementKnowledgeAreaBridge> AcademicAchievementKnowledgeAreaBridges { get; set; }
+
+        public DbSet<Production.Persistence.Entities.ProductionQualityCheck> ProductionQualityChecks { get; set; }
     }
 }
 
