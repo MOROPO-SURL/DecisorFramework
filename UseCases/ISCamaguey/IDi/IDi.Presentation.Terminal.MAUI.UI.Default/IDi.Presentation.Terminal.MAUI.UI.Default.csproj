@@ -48,6 +48,12 @@
 	  <Compile Update="Pages\Configuration\AwardResultConfigurationPage.xaml.cs">
 	    <DependentUpon>AwardResultConfigurationPage.xaml</DependentUpon>
 	  </Compile>
+	  <Compile Update="Pages\Configuration\ScientificTechnicalResultIntroductionConfigurationPage.xaml.cs">
+	    <DependentUpon>ScientificTechnicalResultIntroductionConfigurationPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Detail\ScientificTechnicalResultIntroductionDetailPage.xaml.cs">
+	    <DependentUpon>ScientificTechnicalResultIntroductionDetailPage.xaml</DependentUpon>
+	  </Compile>
 	  <Compile Update="Pages\Detail\ScientificTechnicalResultDetailPage.xaml.cs">
 	    <DependentUpon>ScientificTechnicalResultDetailPage.xaml</DependentUpon>
 	  </Compile>
@@ -83,6 +89,9 @@
 	  </Compile>
 	  <Compile Update="Pages\List\ResearcherCategoriesListPage.xaml.cs">
 	    <DependentUpon>ResearcherCategoriesListPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Pages\Manage\ScientificTechnicalResultIntroductionsManagePage.xaml.cs">
+	    <DependentUpon>ScientificTechnicalResultIntroductionsManagePage.xaml</DependentUpon>
 	  </Compile>
 	  <Compile Update="Pages\Manage\ScientificTechnicalResultsManagePage.xaml.cs">
 	    <DependentUpon>ScientificTechnicalResultsManagePage.xaml</DependentUpon>
@@ -129,6 +138,12 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Configuration\AwardResultConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Configuration\ScientificTechnicalResultIntroductionConfigurationPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Detail\ScientificTechnicalResultIntroductionDetailPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Detail\ScientificTechnicalResultDetailPage.xaml">
@@ -245,6 +260,9 @@
 	  <MauiXaml Update="Pages\List\TeachingCategoriesListPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="Pages\Manage\ScientificTechnicalResultIntroductionsManagePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="Pages\Manage\ScientificTechnicalResultsManagePage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
@@ -312,6 +330,9 @@
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Pages\Pick\ProjectProposalPickPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Pages\Pick\ScientificTechnicalResultPickPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	  <MauiXaml Update="Views\Card\CallForProposalDefaultCardView.xaml">

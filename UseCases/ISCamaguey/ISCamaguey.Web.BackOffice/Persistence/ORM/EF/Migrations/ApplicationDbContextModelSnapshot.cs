@@ -7599,17 +7599,13 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasColumnType("boolean")
                         .HasColumnName("archived");
 
+                    b.Property<DateTime>("At")
+                        .HasColumnType("timestamp without time zone")
+                        .HasColumnName("at");
+
                     b.Property<string>("Description")
                         .HasColumnType("text")
                         .HasColumnName("description");
-
-                    b.Property<bool>("Enabled")
-                        .HasColumnType("boolean")
-                        .HasColumnName("enabled");
-
-                    b.Property<int>("Priority")
-                        .HasColumnType("integer")
-                        .HasColumnName("priority");
 
                     b.Property<Guid>("ResultId")
                         .HasColumnType("uuid")
@@ -7627,6 +7623,25 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                         .HasDatabaseName("ix_scientifictechnicalresultintroductions_resultid");
 
                     b.ToTable("scientifictechnicalresultintroductions", "decisoriscamaguey_idi");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResultIntroductionEmployeeBridge", b =>
+                {
+                    b.Property<Guid>("ProwId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("prowid");
+
+                    b.Property<Guid>("SternId")
+                        .HasColumnType("uuid")
+                        .HasColumnName("sternid");
+
+                    b.HasKey("ProwId", "SternId")
+                        .HasName("pk_scientifictechnicalresultintroductionemployeebridges");
+
+                    b.HasIndex("SternId")
+                        .HasDatabaseName("ix_scientifictechnicalresultintroductionemployeebridges_sternid");
+
+                    b.ToTable("scientifictechnicalresultintroductionemployeebridges", "decisoriscamaguey_idi");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResultKind", b =>
@@ -13455,6 +13470,27 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("Result");
                 });
 
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResultIntroductionEmployeeBridge", b =>
+                {
+                    b.HasOne("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResultIntroduction", "Prow")
+                        .WithMany("EmployeeBridges")
+                        .HasForeignKey("ProwId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_scientifictechnicalresultintroductionemployeebridges_scient~");
+
+                    b.HasOne("MOROPO.Framework.Decisor.Domain.Persistence.Entities.Employee", "Stern")
+                        .WithMany()
+                        .HasForeignKey("SternId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired()
+                        .HasConstraintName("fk_scientifictechnicalresultintroductionemployeebridges_employ~");
+
+                    b.Navigation("Prow");
+
+                    b.Navigation("Stern");
+                });
+
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ThesisResult", b =>
                 {
                     b.HasOne("MOROPO.Framework.Guama.Media.Persistence.Entities.Document", "Document")
@@ -15181,6 +15217,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Migrations
                     b.Navigation("ExternalResearcherBridges");
 
                     b.Navigation("InternalResearcherBridges");
+                });
+
+            modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ScientificTechnicalResultIntroduction", b =>
+                {
+                    b.Navigation("EmployeeBridges");
                 });
 
             modelBuilder.Entity("MOROPO.ISCamaguey.Decisor.IDi.Persistence.Entities.ThesisResult", b =>

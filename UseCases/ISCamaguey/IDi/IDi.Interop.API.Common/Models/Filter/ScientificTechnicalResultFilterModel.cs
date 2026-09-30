@@ -9,7 +9,7 @@ namespace MOROPO.ISCamaguey.Decisor.IDi.Interop.API.Common.Models.Filter
 
         public System.Linq.Expressions.Expression<System.Func<ScientificTechnicalResult, bool>> GetSelector()
         {
-            return entity => entity.Title.ToLower().Contains(Parameter) || entity.Reference.ToLower().Contains(Parameter) || entity.Kind.Name.ToLower().Contains(Parameter);
+            return entity => entity.Title.ToLower().Contains(Parameter.ToLower()) || entity.Reference.ToLower().Contains(Parameter.ToLower()) || entity.Kind.Name.ToLower().Contains(Parameter.ToLower());
         }
     }
 }

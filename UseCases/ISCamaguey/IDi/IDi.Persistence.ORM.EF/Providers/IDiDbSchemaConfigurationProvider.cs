@@ -43,6 +43,7 @@ public class IDiDbSchemaConfigurationProvider : Framework.Guama.Core.Persistence
                 new BaseEntityTypeConfigurator<Entities.ResearcherCategory>(),
                 new BaseEntityTypeConfigurator<Entities.ScientificTechnicalResult>(),
                 new BaseEntityTypeConfigurator<Entities.ScientificTechnicalResultIntroduction>(),
+                new Configurators.ScientificTechnicalResultIntroductionEmployeeBridgeEntityTypeConfigurator(),
                 new BaseEntityTypeConfigurator<Entities.ScientificTechnicalResultKind>(),
                 new BaseEntityTypeConfigurator<Entities.TeachingCategory>(),
                 new BaseEntityTypeConfigurator<Entities.ThesisResult>(),

@@ -79,8 +79,8 @@
         </ShellContent.Icon>
     </ShellContent>
     <ShellContent
-        Title="Introducción de Resultados (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
+        Title="Introducción de Resultados"
+        ContentTemplate="{DataTemplate idi_manage_pages:ScientificTechnicalResultIntroductionsManagePage}">
         <ShellContent.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"

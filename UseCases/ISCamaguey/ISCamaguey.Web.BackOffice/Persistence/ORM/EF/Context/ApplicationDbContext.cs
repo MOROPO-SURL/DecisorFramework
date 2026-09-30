@@ -267,6 +267,7 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Persistence.ORM.EF.Context
         public DbSet<ResearcherCategory> ResearcherCategories { get; set; }
         public DbSet<ScientificTechnicalResult> ScientificTechnicalResults { get; set; }
         public DbSet<ScientificTechnicalResultIntroduction> ScientificTechnicalResultIntroductions { get; set; }
+        public DbSet<ScientificTechnicalResultIntroductionEmployeeBridge> ScientificTechnicalResultIntroductionEmployeeBridges { get; set; }
         public DbSet<ScientificTechnicalResultKind> ScientificTechnicalResultKinds { get; set; }
         public DbSet<TeachingCategory> TeachingCategories { get; set; }
         public DbSet<ThesisResult> ThesisResults { get; set; }

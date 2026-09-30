@@ -37,6 +37,7 @@ public interface IIDiDbContext : Domain.Persistence.ORM.EF.Context.Contract.IDom
     public DbSet<Entities.ResearcherCategory> ResearcherCategories { get; set; }
     public DbSet<Entities.ScientificTechnicalResult> ScientificTechnicalResults { get; set; }
     public DbSet<Entities.ScientificTechnicalResultIntroduction> ScientificTechnicalResultIntroductions { get; set; }
+    public DbSet<Entities.ScientificTechnicalResultIntroductionEmployeeBridge> ScientificTechnicalResultIntroductionEmployeeBridges { get; set; }
     public DbSet<Entities.ScientificTechnicalResultKind> ScientificTechnicalResultKinds { get; set; }
     public DbSet<Entities.TeachingCategory> TeachingCategories { get; set; }
     public DbSet<Entities.ThesisResult> ThesisResults { get; set; }

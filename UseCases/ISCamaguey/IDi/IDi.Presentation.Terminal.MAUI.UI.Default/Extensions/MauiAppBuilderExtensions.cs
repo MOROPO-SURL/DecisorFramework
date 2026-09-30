@@ -31,6 +31,7 @@ public static class MauiAppBuilderExtensions
             .AddSingleton<IDetailContentPageFactoryFacade<AwardResultDisplayModel>, AwardResultDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<ScientificTechnicalResultKindDisplayModel>, ScientificTechnicalResultKindDetailPageFactory>()
             .AddSingleton<IDetailContentPageFactoryFacade<ScientificTechnicalResultDisplayModel>, ScientificTechnicalResultDetailPageFactory>()
+            .AddSingleton<IDetailContentPageFactoryFacade<ScientificTechnicalResultIntroductionDisplayModel>, ScientificTechnicalResultIntroductionDetailPageFactory>()
 
             // ConfigurationPage factory resgistration !!!
             .AddSingleton<IConfigurationContentPageFactoryFacade<ProgramDisplayModel, ProgramConfigurationPageModel>, ProgramConfigurationPageFactory>()
@@ -46,7 +47,8 @@ public static class MauiAppBuilderExtensions
             .AddSingleton<IConfigurationContentPageFactoryFacade<AwardKindDisplayModel, AwardKindConfigurationPageModel>, AwardKindConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<AwardResultDisplayModel, AwardResultConfigurationPageModel>, AwardResultConfigurationPageFactory>()
             .AddSingleton<IConfigurationContentPageFactoryFacade<ScientificTechnicalResultKindDisplayModel, ScientificTechnicalResultKindConfigurationPageModel>, ScientificTechnicalResultKindConfigurationPageFactory>()
-            .AddSingleton<IConfigurationContentPageFactoryFacade<ScientificTechnicalResultDisplayModel, ScientificTechnicalResultConfigurationPageModel>, ScientificTechnicalResultConfigurationPageFactory>();
+            .AddSingleton<IConfigurationContentPageFactoryFacade<ScientificTechnicalResultDisplayModel, ScientificTechnicalResultConfigurationPageModel>, ScientificTechnicalResultConfigurationPageFactory>()
+            .AddSingleton<IConfigurationContentPageFactoryFacade<ScientificTechnicalResultIntroductionDisplayModel, ScientificTechnicalResultIntroductionConfigurationPageModel>, ScientificTechnicalResultIntroductionConfigurationPageFactory>();
 
         return builder;
     }
