@@ -4,7 +4,7 @@ using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
 
 namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 {
-    public sealed class AssessmentQualityCheckDisplayModel : IEntityDisplayModel<AssessmentQualityCheck, System.Guid>
+    public class AssessmentQualityCheckDisplayModel : IEntityDisplayModel<AssessmentQualityCheck, System.Guid>
     {
         public System.Guid Id { get; set; }
 
@@ -18,7 +18,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display
 
         public string Description { get; set; }
 
-        public void Import(AssessmentQualityCheck entity)
+        public virtual void Import(AssessmentQualityCheck entity)
         {
             Id = entity.Id;
             At = entity.At;

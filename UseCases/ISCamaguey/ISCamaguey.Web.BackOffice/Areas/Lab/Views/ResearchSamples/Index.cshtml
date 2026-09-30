@@ -1,7 +1,7 @@
 ﻿@model MOROPO.Framework.Guama.Core.Presentation.Web.Frontend.Models.View.PaginationViewModel<MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities.ResearchSample, System.Guid, MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Backend.Models.View.Display.ResearchSampleDisplayViewModel>
 
 @{
-    const string HEADER = "Administración de Procesamiento de Investigación de Muestra";
+    const string HEADER = "Administración de Recepciones de Muestra";
 
     ViewData["TITLE"] = ViewData["HEADER"] = HEADER;
 
@@ -33,13 +33,13 @@
 
 <ul class="nav nav-tabs mb-4 nav-fill">
     <li class="nav-item">
-        <a class="nav-link" asp-action="Index" asp-controller="ResearchSamples">Orden de Servicio de Muestra</a>
+        <a class="nav-link" asp-action="Index" asp-controller="ResearchSamples">Orden de Servicio</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" href="#">Investigación de Muestra</a>
+        <a class="nav-link active" href="#">Investigación</a>
     </li>
     <li class="nav-item">
-        <a class="nav-link" asp-action="Index" asp-controller="ProductionSamples">Producción de Muestra</a>
+        <a class="nav-link" asp-action="Index" asp-controller="ProductionSamples">Producción</a>
     </li>
 </ul>
 

@@ -463,11 +463,11 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
             laboratorySection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Revisiones de Calidad",
-                Controller = "qualitychecks",
+                Controller = "analysisqualitychecks",
                 Action = "Index",
                 Area = "lab",
                 // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = Lab.Interop.API.Common.Constants.Security.Authorization.AnalysisQualityCheckViewerPermission
             });
 
             #endregion
@@ -491,29 +491,29 @@ namespace MOROPO.ISCamaguey.Decisor.Web.BackOffice.Extensions
             qualitySection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Normas Cubanas",
-                Controller = "nationalnorms",
+                Controller = "cubanstandards",
                 Action = "Index",
                 Area = "quality",
                 // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = Quality.Interop.API.Common.Constants.Security.Authorization.CubanStandardViewerPermission
             });
             qualitySection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Normas ISO",
-                Controller = "internationalnorms",
+                Controller = "isostandards",
                 Action = "Index",
                 Area = "quality",
                 // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = Quality.Interop.API.Common.Constants.Security.Authorization.IsoStandardViewerPermission
             });
             qualitySection.Add(new ManagementDashboardSectionViewModel
             {
                 Title = "Certificaciones",
-                Controller = "certificates",
+                Controller = "certifications",
                 Action = "Index",
                 Area = "quality",
                 // TODO Set spected permission
-                //Role = Financial.Presentation.Web.Backend.Constants.Security.Authorization Constants.Security.Authorization.LegalProviderViewerPermission
+                Role = Quality.Interop.API.Common.Constants.Security.Authorization.CertificationViewerPermission
             });
 
             #endregion

@@ -15,7 +15,7 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Display
 
         public DateTime Created { get; set; }
 
-        public bool Enable { get; set; }
+        public bool Enabled { get; set; }
 
         public int Priority { get; set; }
 
@@ -23,13 +23,13 @@ namespace MOROPO.ISCamaguey.Decisor.Quality.Interop.API.Common.Models.Display
 
         public IsoStandardDisplayModel[] IsoStandards { get; set; }
 
-        public void Import(Certification entity)
+        public virtual void Import(Certification entity)
         {
             Id = entity.Id;
             Name = entity.Name;
             Description = entity.Description;
             Created = entity.Created;
-            Enable = entity.Enabled;
+            Enabled = entity.Enabled;
             Priority = entity.Priority;
             CubanStandards = entity.CubanStandardBridges.Select(bridge =>
             {
