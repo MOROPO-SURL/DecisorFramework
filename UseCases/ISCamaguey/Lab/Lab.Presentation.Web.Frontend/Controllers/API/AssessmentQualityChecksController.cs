@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MOROPO.Framework.Guama.Core.Persistence.Repositories;
 using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Display;
+using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Filter;
 using MOROPO.ISCamaguey.Decisor.Lab.Interop.API.Common.Models.Input;
 using MOROPO.ISCamaguey.Decisor.Lab.Persistence.Entities;
 
@@ -8,7 +9,7 @@ namespace MOROPO.ISCamaguey.Decisor.Lab.Presentation.Web.Frontend.Controllers.AP
 
 [Route("api/lab/[controller]")]
 [ApiController]
-public sealed class AssessmentQualityChecksController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementController<AssessmentQualityCheck, System.Guid, AssessmentQualityCheckInputModel, AssessmentQualityCheckDisplayModel>
+public sealed class AssessmentQualityChecksController : Framework.Guama.Core.Presentation.Web.API.Controllers.Contract.AbstractArchivableEntityAPIManagementFilteredController<AssessmentQualityCheck, System.Guid, AssessmentQualityCheckInputModel, AssessmentQualityCheckDisplayModel, AssessmentQualityCheckFilterModel>
 {
     public AssessmentQualityChecksController(IEntityRepository<AssessmentQualityCheck, System.Guid> repository, Microsoft.Extensions.Localization.IStringLocalizer<AssessmentQualityChecksController> localizer, Microsoft.Extensions.Logging.ILogger<AssessmentQualityChecksController> logger) : base(repository, localizer, logger)
     {

@@ -4,6 +4,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:local_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Terminal.UI.Pages"
     xmlns:quality_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.Quality.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:lab_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.Lab.Presentation.Terminal.MAUI.UI.Default"
+    xmlns:production_manage_pages="clr-namespace:MOROPO.ISCamaguey.Decisor.Production.Presentation.Terminal.MAUI.UI.Default.Pages.Manage;assembly=MOROPO.ISCamaguey.Decisor.Production.Presentation.Terminal.MAUI.UI.Default"
     x:Class="MOROPO.ISCamaguey.Decisor.Terminal.UI.Shells.QualityShell">
     <Shell.FlyoutBehavior>
         <OnIdiom Default="Flyout" Desktop="Locked" />
@@ -47,16 +49,24 @@
         </ShellContent.Icon>
     </ShellContent>
     <MenuFlyoutItem Text="Operaciones" IsEnabled="False" />
-    <ShellContent
-        Title="Revisiones de Calidad (%)"
-        ContentTemplate="{DataTemplate ContentPage}">
-        <ShellContent.Icon>
+    <FlyoutItem
+        Title="Evaluaciones de Calidad">
+        <FlyoutItem.Icon>
             <FontImageSource
                 FontFamily="MaterialDesignIcons"
                 Glyph="&#xF14C;"
                 Color="{AppThemeBinding Light=Black, Dark=White}" />
-        </ShellContent.Icon>
-    </ShellContent>
+        </FlyoutItem.Icon>
+        <ShellContent
+            Title="Producciones"
+            ContentTemplate="{DataTemplate production_manage_pages:ProductionQualityCheckQualityChecksManagePage}" />
+        <ShellContent 
+            Title="Análisis de Muestras"
+            ContentTemplate="{DataTemplate lab_manage_pages:AnalysisQualityCheckQualityChecksManagePage}" />
+        <ShellContent 
+            Title="Procesamientos de Muestra"
+            ContentTemplate="{DataTemplate lab_manage_pages:AssessmentQualityCheckQualityChecksManagePage}" />
+    </FlyoutItem>
     <ShellContent
         Title="Certificaciones"
         ContentTemplate="{DataTemplate quality_manage_pages:CertificationManagePage}">
