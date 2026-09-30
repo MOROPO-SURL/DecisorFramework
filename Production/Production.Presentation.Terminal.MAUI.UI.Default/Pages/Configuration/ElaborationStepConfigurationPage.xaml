@@ -139,9 +139,8 @@
                                                         <Label.FormattedText>
                                                             <FormattedString>
                                                                 <Span Text="Remuneración: " FontAttributes="Bold" TextColor="DimGray" />
-                                                                <Span Text="{Binding Participation}" />
-                                                                <Span Text=" " />
-                                                                <Span Text="{Binding Relative, Converter={StaticResource LinkedToObjectConverter}}" />
+                                                                <Span Text="{Binding Participation, StringFormat='{0:F2}', TargetNullValue='---'}" />
+                                                                <Span Text="{Binding Relative, Converter={StaticResource LinkedToObjectConverter}, StringFormat=' {0}'}" />
                                                             </FormattedString>
                                                         </Label.FormattedText>
                                                     </Label>
@@ -150,9 +149,7 @@
                                                         FontSize="Caption"
                                                         Margin="0,8,0,0"
                                                         Text="Descripción" />
-                                                    <Label
-                                                        Style="{StaticResource ValueFieldLabelStyle}"
-                                                        Text="{Binding Description, TargetNullValue='---'}" />
+                                                    <Label Text="{Binding Description}" />
                                                 </VerticalStackLayout>
                                                 <VerticalStackLayout Grid.Column="1" Spacing="8">
                                                     <Button
@@ -161,7 +158,7 @@
                                                         Clicked="EditRoleButton_Clicked" />
                                                     <Button
                                                         Style="{StaticResource DangerKindFontIconImageButtonStyle}"
-                                                        Text="&#xf1c0;"
+                                                        Text="&#xFA79;"
                                                         Clicked="RoleRemoveButton_Clicked" />
                                                 </VerticalStackLayout>
                                             </Grid>
